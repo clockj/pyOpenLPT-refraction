@@ -30,7 +30,15 @@ void bind_Camera(py::module_& m) {
           [](Camera& c, double v) { c.max_intensity = v; })
       .def("getNRow", &Camera::getNRow)
       .def("getNCol", &Camera::getNCol)
-      .def("saveParameters", &Camera::saveParameters, py::arg("file_name"))
+      // Status is not a registered pybind type, so raise instead of returning it.
+      .def(
+          "saveParameters",
+          [](const Camera& c, const std::string& file_name) {
+            auto st = c.saveParameters(file_name);
+            if (!st) throw std::runtime_error(st.err.toString());
+          },
+          py::arg("file_name"))
+      .def("type", &Camera::type)
       .def(
           "project",
           [](const Camera& c, const Pt3D& pt_world, bool is_print_detail) {
@@ -40,6 +48,32 @@ void bind_Camera(py::module_& m) {
             return st.value();
           },
           py::arg("pt_world"), py::arg("is_print_detail") = false)
+      .def(
+          "projectAll",
+          [](const Camera& c, const Pt3D& pt_world) {
+            // Curved ports are multi-valued: a point can have no image, one or
+            // several. `coverage` distinguishes "no image" from "not searched".
+            ProjectionCoverage cov;
+            auto st = c.projectAll(pt_world, &cov);
+            if (!st)
+              throw std::runtime_error(st.status().err.toString());
+            py::list rays;
+            for (const ImageRay& r : st.value()) {
+              py::dict d;
+              d["pt"] = r.pt_img_dist;
+              d["is_far"] = r.is_far;
+              d["lambda"] = r.lambda;
+              d["c_z"] = r.c_z;
+              d["is_ring"] = r.is_ring;
+              rays.append(d);
+            }
+            py::dict coverage;
+            coverage["near_branch"] = cov.near_branch;
+            coverage["far_branch"] = cov.far_branch;
+            return py::make_tuple(rays, coverage);
+          },
+          py::arg("pt_world"),
+          "Every image of a world point, as (rays, coverage).")
       .def(
           "lineOfSight",
           [](const Camera& c, const Pt2D& pt_img_dist) {
@@ -94,6 +128,67 @@ void bind_Camera(py::module_& m) {
       m, "RefractionPinholeCameraModel")
       .def(py::init<>());
 
+  // Curved refractive ports. The setters are shared, so they are registered on
+  // the common base and inherited by both concrete models.
+  py::class_<RefractionCurvedCamera, Camera,
+             std::shared_ptr<RefractionCurvedCamera>>(
+      m, "RefractionCurvedCameraModel")
+      .def(
+          "setImageSize",
+          [](RefractionCurvedCamera& c, int n_row, int n_col) {
+            auto st = c.setImageSize(n_row, n_col);
+            if (!st) throw std::runtime_error(st.err.toString());
+          },
+          py::arg("n_row"), py::arg("n_col"))
+      .def(
+          "setIntrinsics",
+          [](RefractionCurvedCamera& c, double fx, double fy, double cx, double cy,
+             const std::vector<double>& dist_coeff) {
+            auto st = c.setIntrinsics(fx, fy, cx, cy, dist_coeff);
+            if (!st) throw std::runtime_error(st.err.toString());
+          },
+          py::arg("fx"), py::arg("fy"), py::arg("cx"), py::arg("cy"),
+          py::arg("dist_coeff"))
+      .def(
+          "setExtrinsics",
+          [](RefractionCurvedCamera& c, const Pt3D& rvec, const Pt3D& tvec) {
+            auto st = c.setExtrinsics(rvec, tvec);
+            if (!st) throw std::runtime_error(st.err.toString());
+          },
+          py::arg("rvec"), py::arg("tvec"))
+      .def(
+          "setRefraction",
+          [](RefractionCurvedCamera& c, const Pt3D& center, const Pt3D& axis,
+             const std::vector<double>& refract_array,
+             const std::vector<double>& radius_array) {
+            auto st = c.setRefraction(center, axis, refract_array, radius_array);
+            if (!st) throw std::runtime_error(st.err.toString());
+          },
+          py::arg("center"), py::arg("axis"), py::arg("refract_array"),
+          py::arg("radius_array"),
+          "refract_array is n_1..n_N with the pinhole's medium first; "
+          "radius_array is R_1..R_{N-1}, strictly decreasing.")
+      .def(
+          "setSolverOptions",
+          [](RefractionCurvedCamera& c, double proj_tol, int proj_nmax) {
+            auto st = c.setSolverOptions(proj_tol, proj_nmax);
+            if (!st) throw std::runtime_error(st.err.toString());
+          },
+          py::arg("proj_tol"), py::arg("proj_nmax"))
+      .def("commitUpdate", [](RefractionCurvedCamera& c) {
+        auto st = c.commitUpdate();
+        if (!st) throw std::runtime_error(st.err.toString());
+      });
+
+  py::class_<RefractionCylinderCamera, RefractionCurvedCamera,
+             std::shared_ptr<RefractionCylinderCamera>>(
+      m, "RefractionCylinderCameraModel")
+      .def(py::init<>());
+  py::class_<RefractionSphereCamera, RefractionCurvedCamera,
+             std::shared_ptr<RefractionSphereCamera>>(
+      m, "RefractionSphereCameraModel")
+      .def(py::init<>());
+
   m.def(
       "loadCameraModel",
       [](const std::string& file_name) {
@@ -109,6 +204,8 @@ void bind_Camera(py::module_& m) {
       .value("PINHOLE", CameraType::Pinhole)
       .value("POLYNOMIAL", CameraType::Polynomial)
       .value("PINPLATE", CameraType::RefractionPinhole)
+      .value("PINCYL", CameraType::RefractionCylinder)
+      .value("PINSPH", CameraType::RefractionSphere)
       .export_values();
 
   py::enum_<RefPlane>(m, "RefPlane")

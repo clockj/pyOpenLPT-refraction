@@ -131,12 +131,19 @@ target_link_libraries(ImageIO
 
 openlpt_apply_warnings(ImageIO)
 
+# RefractCurved (cylindrical / spherical ports; depends on nothing but the STL)
+add_library(RefractCurved STATIC
+  "${PROJECT_SOURCE_DIR}/src/srcMath/RefractCurved.cpp"
+)
+openlpt_public_includes(RefractCurved)
+openlpt_apply_warnings(RefractCurved)
+
 # Camera
 add_library(Camera STATIC
   "${PROJECT_SOURCE_DIR}/src/srcMath/Camera.cpp"
 )
 openlpt_public_includes(Camera)
-target_link_libraries(Camera PUBLIC myMath Matrix)
+target_link_libraries(Camera PUBLIC myMath Matrix RefractCurved)
 openlpt_apply_warnings(Camera)
 
 # ---- Object modules --------------------------------------------------

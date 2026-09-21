@@ -10,6 +10,7 @@
 #include <stdexcept>
 
 #include "myMATH.h"
+#include "RefractCurved.h"
 
 // Convert Rodrigues rotation vector to rotation matrix.
 // Input: rotation vector (axis * angle).
@@ -1744,6 +1745,505 @@ Status PolynomialCamera::commitUpdate() {
 // Load camera model from legacy text format.
 // Input: camera parameter file path.
 // Output: typed camera model with parameters populated.
+// ===========================================================================
+// Curved refractive ports (cylinder, sphere)
+// ===========================================================================
+
+// Single-valued models inherit this, so callers can use projectAll() uniformly.
+StatusOr<std::vector<ImageRay>> Camera::projectAll(
+    const Pt3D& pt_world, ProjectionCoverage* coverage) const {
+    if (coverage) {
+        coverage->near_branch = true;
+        coverage->far_branch = true;
+    }
+    auto pt = project(pt_world);
+    if (!pt) {
+        return STATUS_OR_ERR(std::vector<ImageRay>, pt.status().err.code,
+                             pt.status().err.message);
+    }
+    ImageRay ray;
+    ray.pt_img_dist = pt.value();
+    return std::vector<ImageRay>{ray};
+}
+
+namespace {
+namespace refraction_curved {
+
+// The core works in a frame whose axis is z through the origin; this is the
+// change of basis into it. For a sphere the rotation is the identity, because
+// projectSphere() builds its own ray plane.
+struct PortFrame {
+    Pt3D origin;
+    double u[3] = {1.0, 0.0, 0.0};
+    double v[3] = {0.0, 1.0, 0.0};
+    double w[3] = {0.0, 0.0, 1.0};
+};
+
+PortFrame buildFrame(const PinCurvedParam& p, bool is_sphere) {
+    PortFrame f;
+    f.origin = p.center;
+    if (is_sphere) {
+        return f;
+    }
+    Pt3D axis_copy = p.axis; // Matrix::norm() is non-const
+    const double len = axis_copy.norm();
+    if (len < SMALLNUMBER) {
+        return f; // caller validates; fall back to the world axes
+    }
+    for (int i = 0; i < 3; ++i) {
+        f.w[i] = p.axis[i] / len;
+    }
+    // Any vector not parallel to w gives a usable first tangent.
+    const double trial[3] = {std::abs(f.w[0]) < 0.9 ? 1.0 : 0.0,
+                             std::abs(f.w[0]) < 0.9 ? 0.0 : 1.0, 0.0};
+    const double dotw = trial[0] * f.w[0] + trial[1] * f.w[1] + trial[2] * f.w[2];
+    double u[3];
+    for (int i = 0; i < 3; ++i) {
+        u[i] = trial[i] - dotw * f.w[i];
+    }
+    const double nu = std::sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+    for (int i = 0; i < 3; ++i) {
+        f.u[i] = u[i] / nu;
+    }
+    f.v[0] = f.w[1] * f.u[2] - f.w[2] * f.u[1];
+    f.v[1] = f.w[2] * f.u[0] - f.w[0] * f.u[2];
+    f.v[2] = f.w[0] * f.u[1] - f.w[1] * f.u[0];
+    return f;
+}
+
+void toLocal(const PortFrame& f, const Pt3D& world, double out[3]) {
+    const double d[3] = {world[0] - f.origin[0], world[1] - f.origin[1],
+                         world[2] - f.origin[2]};
+    out[0] = d[0] * f.u[0] + d[1] * f.u[1] + d[2] * f.u[2];
+    out[1] = d[0] * f.v[0] + d[1] * f.v[1] + d[2] * f.v[2];
+    out[2] = d[0] * f.w[0] + d[1] * f.w[1] + d[2] * f.w[2];
+}
+
+void dirToLocal(const PortFrame& f, const Pt3D& world, double out[3]) {
+    out[0] = world[0] * f.u[0] + world[1] * f.u[1] + world[2] * f.u[2];
+    out[1] = world[0] * f.v[0] + world[1] * f.v[1] + world[2] * f.v[2];
+    out[2] = world[0] * f.w[0] + world[1] * f.w[1] + world[2] * f.w[2];
+}
+
+Pt3D dirToWorld(const PortFrame& f, const double local[3]) {
+    return Pt3D(local[0] * f.u[0] + local[1] * f.v[0] + local[2] * f.w[0],
+                local[0] * f.u[1] + local[1] * f.v[1] + local[2] * f.w[1],
+                local[0] * f.u[2] + local[1] * f.v[2] + local[2] * f.w[2]);
+}
+
+Pt3D pointToWorld(const PortFrame& f, const double local[3]) {
+    const Pt3D d = dirToWorld(f, local);
+    return Pt3D(d[0] + f.origin[0], d[1] + f.origin[1], d[2] + f.origin[2]);
+}
+
+/** @brief Build the RefractCurved stack from the stored parameters. */
+::refract_curved::Stack toStack(const PinCurvedParam& p) {
+    ::refract_curved::Stack s;
+    s.n = p.refract_array;
+    s.R = p.radius_array;
+    return s;
+}
+
+/**
+  * @brief Nearest positive intersection of a ray with the quadric of radius R.
+  *
+  * The ray travels inward, so the smaller positive root is the entry point.
+  */
+bool hitRadius(const double p[3], const double d[3], double R, bool is_sphere,
+               double& t_out) {
+    const double a = is_sphere ? (d[0] * d[0] + d[1] * d[1] + d[2] * d[2])
+                               : (d[0] * d[0] + d[1] * d[1]);
+    if (a <= 0.0) {
+        return false;
+    }
+    const double b = is_sphere ? 2.0 * (p[0] * d[0] + p[1] * d[1] + p[2] * d[2])
+                               : 2.0 * (p[0] * d[0] + p[1] * d[1]);
+    const double c = (is_sphere ? (p[0] * p[0] + p[1] * p[1] + p[2] * p[2])
+                                : (p[0] * p[0] + p[1] * p[1])) -
+                     R * R;
+    const double disc = b * b - 4.0 * a * c;
+    if (disc < 0.0) {
+        return false;
+    }
+    const double sq = std::sqrt(disc);
+    const double t1 = (-b - sq) / (2.0 * a);
+    const double t2 = (-b + sq) / (2.0 * a);
+    const double eps = 1e-12;
+    if (t1 > eps) {
+        t_out = t1;
+    } else if (t2 > eps) {
+        t_out = t2;
+    } else {
+        return false;
+    }
+    return true;
+}
+
+/** @brief Vector Snell's law at an outward normal; false on total internal reflection. */
+bool refractAt(double d[3], const double nrm[3], double n_from, double n_to) {
+    const double eta = n_from / n_to;
+    const double cosi = -(nrm[0] * d[0] + nrm[1] * d[1] + nrm[2] * d[2]);
+    const double k = 1.0 - eta * eta * (1.0 - cosi * cosi);
+    if (k < 0.0) {
+        return false;
+    }
+    const double f = eta * cosi - std::sqrt(k);
+    for (int i = 0; i < 3; ++i) {
+        d[i] = eta * d[i] + f * nrm[i];
+    }
+    const double len = std::sqrt(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
+    if (!(len > 0.0)) {
+        return false;
+    }
+    for (int i = 0; i < 3; ++i) {
+        d[i] /= len;
+    }
+    return true;
+}
+
+} // namespace refraction_curved
+} // namespace
+
+int RefractionCurvedCamera::getNRow() const { return _param.n_row; }
+int RefractionCurvedCamera::getNCol() const { return _param.n_col; }
+
+StatusOr<std::vector<ImageRay>> RefractionCurvedCamera::projectAll(
+    const Pt3D& pt_world, ProjectionCoverage* coverage) const {
+    using namespace refraction_curved;
+    try {
+        const bool sphere = isSphere();
+        if (coverage) {
+            // The sphere searches both branches and every wrapped target; the
+            // cylinder's far-branch box search is not ported yet.
+            coverage->near_branch = true;
+            coverage->far_branch = sphere;
+        }
+        const PortFrame frame = buildFrame(_param, sphere);
+        const ::refract_curved::Stack stack = toStack(_param);
+
+        double pinhole_local[3], point_local[3];
+        toLocal(frame, _param.t_vec_inv, pinhole_local);
+        toLocal(frame, pt_world, point_local);
+
+        std::vector<::refract_curved::Ray> rays;
+        if (sphere) {
+            const double centre_local[3] = {0.0, 0.0, 0.0};
+            rays = ::refract_curved::projectSphere(stack, centre_local, pinhole_local,
+                                                   point_local, _param.proj_tol);
+        } else {
+            ::refract_curved::CylinderCoverage cov;
+            rays = ::refract_curved::projectCylinder(stack, pinhole_local,
+                                                     point_local, &cov,
+                                                     _param.proj_tol);
+            if (coverage) {
+                coverage->near_branch = cov.near_branch;
+                coverage->far_branch = cov.far_branch;
+            }
+        }
+
+        std::vector<ImageRay> out;
+        out.reserve(rays.size());
+        for (const ::refract_curved::Ray& r : rays) {
+            ImageRay img;
+            img.is_far = (r.branch == ::refract_curved::Branch::Far);
+            img.lambda = r.lambda;
+            img.c_z = r.c_z;
+            img.is_ring = r.is_ring;
+            if (r.is_ring) {
+                // A ring is a set of rays, not one; it carries no single pixel.
+                out.push_back(img);
+                continue;
+            }
+            // Projection is central at the pinhole, so a point one unit along the
+            // ray lands on the same pixel as the ray itself.
+            const Pt3D dir_world = dirToWorld(frame, r.dir);
+            const Pt3D along(_param.t_vec_inv[0] + dir_world[0],
+                             _param.t_vec_inv[1] + dir_world[1],
+                             _param.t_vec_inv[2] + dir_world[2]);
+            img.pt_img_dist = RefractionCurvedCamera::distort(
+                RefractionCurvedCamera::worldToUndistImg(along, _param), _param);
+            out.push_back(img);
+        }
+        return out;
+    } catch (const std::exception& e) {
+        Status st = mapExceptionToStatus(e, "RefractionCurvedCamera::projectAll");
+        return STATUS_OR_ERR_CTX(std::vector<ImageRay>, st.err.code, st.err.message,
+                                 st.err.context);
+    }
+}
+
+// The primary image: the near-branch ray when there is one, else the first
+// returned. Callers that need the whole census use projectAll().
+StatusOr<Pt2D> RefractionCurvedCamera::project(const Pt3D& pt_world,
+                                               bool is_print_detail) const {
+    auto all = projectAll(pt_world, nullptr);
+    if (!all) {
+        return STATUS_OR_ERR(Pt2D, all.status().err.code, all.status().err.message);
+    }
+    const std::vector<ImageRay>& rays = all.value();
+    if (is_print_detail) {
+        std::cout << "RefractionCurvedCamera::project found " << rays.size()
+                  << " image(s)" << std::endl;
+    }
+    // The primary image must be picked by a property of the ray, not by the
+    // order the search happened to find it in. A point can have two images on
+    // the SAME branch; taking "the first" then makes the answer depend on the
+    // enumeration order of the targets, so two nearly identical cameras can
+    // return the two images in opposite order and appear to disagree by hundreds
+    // of pixels while actually agreeing. Prefer the near branch, then the
+    // smallest |Lambda| -- the most direct ray, which is geometric and stable.
+    const ImageRay* best = nullptr;
+    for (const ImageRay& r : rays) {
+        if (r.is_ring) {
+            continue;
+        }
+        if (best == nullptr) {
+            best = &r;
+            continue;
+        }
+        if (best->is_far != r.is_far) {
+            if (best->is_far) {
+                best = &r; // a near-branch image always wins
+            }
+            continue;
+        }
+        if (std::abs(r.lambda) < std::abs(best->lambda)) {
+            best = &r;
+        }
+    }
+    if (best == nullptr) {
+        // No image: return the sentinel normalizeProjectResult() reports as failure.
+        const double value = std::numeric_limits<double>::lowest();
+        return normalizeProjectResult(Pt2D(value, value));
+    }
+    return normalizeProjectResult(best->pt_img_dist);
+}
+
+StatusOr<Line3D> RefractionCurvedCamera::lineOfSight(const Pt2D& pt_img_dist) const {
+    using namespace refraction_curved;
+    try {
+        // Step 1: the straight ray leaving the pinhole, in world coordinates.
+        Pt2D pt_img_undist =
+            RefractionCurvedCamera::undistort(pt_img_dist, _param);
+        Pt3D pt_world(pt_img_undist[0], pt_img_undist[1], 1.0);
+        pt_world = _param.r_mtx_inv * pt_world + _param.t_vec_inv;
+
+        const bool sphere = isSphere();
+        const PortFrame frame = buildFrame(_param, sphere);
+
+        double p[3], d[3];
+        toLocal(frame, _param.t_vec_inv, p);
+        const Pt3D dir_world = myMATH::createUnitVector(_param.t_vec_inv, pt_world);
+        dirToLocal(frame, dir_world, d);
+
+        // Step 2: cross each interface in turn, outermost first. Unlike the
+        // forward direction this is single-valued and needs no solve.
+        for (std::size_t k = 0; k < _param.radius_array.size(); ++k) {
+            double t = 0.0;
+            if (!hitRadius(p, d, _param.radius_array[k], sphere, t)) {
+                throw std::runtime_error("ray misses a refractive interface");
+            }
+            for (int i = 0; i < 3; ++i) {
+                p[i] += t * d[i];
+            }
+            const double r = sphere ? std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2])
+                                    : std::hypot(p[0], p[1]);
+            if (!(r > 0.0)) {
+                throw std::runtime_error("degenerate interface crossing");
+            }
+            const double nrm[3] = {p[0] / r, p[1] / r, sphere ? p[2] / r : 0.0};
+            if (!refractAt(d, nrm, _param.refract_array[k],
+                           _param.refract_array[k + 1])) {
+                throw std::runtime_error("total internal reflection");
+            }
+        }
+
+        // Step 3: inside the innermost medium there is no further interface, so
+        // the ray is straight and this segment is the whole line of sight.
+        Line3D line;
+        line.pt = pointToWorld(frame, p);
+        line.unit_vector = dirToWorld(frame, d);
+        return line;
+    } catch (const std::exception& e) {
+        Status st = mapExceptionToStatus(e, "RefractionCurvedCamera::lineOfSight");
+        return STATUS_OR_ERR_CTX(Line3D, st.err.code, st.err.message, st.err.context);
+    }
+}
+
+Status RefractionCurvedCamera::setImageSize(int n_row, int n_col) {
+    REQUIRE(n_row > 0 && n_col > 0, ErrorCode::InvalidArgument,
+            "RefractionCurvedCamera::setImageSize invalid image size");
+    _param.n_row = n_row;
+    _param.n_col = n_col;
+    return Status::OK();
+}
+
+Status RefractionCurvedCamera::setIntrinsics(double fx, double fy, double cx,
+                                             double cy,
+                                             const std::vector<double>& dist_coeff) {
+    REQUIRE(fx > 0 && fy > 0, ErrorCode::InvalidArgument,
+            "RefractionCurvedCamera::setIntrinsics invalid focal length");
+    _param.cam_mtx = Matrix<double>(3, 3, 0.0);
+    _param.cam_mtx(0, 0) = fx;
+    _param.cam_mtx(1, 1) = fy;
+    _param.cam_mtx(0, 2) = cx;
+    _param.cam_mtx(1, 2) = cy;
+    _param.cam_mtx(2, 2) = 1.0;
+    _param.dist_coeff = dist_coeff;
+    _param.n_dist_coeff = static_cast<int>(dist_coeff.size());
+    _param.is_distorted = false;
+    for (double v : dist_coeff) {
+        if (std::abs(v) > SMALLNUMBER) {
+            _param.is_distorted = true;
+            break;
+        }
+    }
+    return Status::OK();
+}
+
+Status RefractionCurvedCamera::setExtrinsics(const Pt3D& rvec, const Pt3D& tvec) {
+    _param.r_mtx = Rodrigues(rvec);
+    _param.t_vec = tvec;
+    _param.r_mtx_inv = myMATH::inverse(_param.r_mtx);
+    _param.t_vec_inv = (_param.r_mtx_inv * _param.t_vec) * -1.0;
+    return Status::OK();
+}
+
+Status RefractionCurvedCamera::setRefraction(const Pt3D& center, const Pt3D& axis,
+                                             const std::vector<double>& refract_array,
+                                             const std::vector<double>& radius_array) {
+    REQUIRE(refract_array.size() >= 2, ErrorCode::InvalidArgument,
+            "RefractionCurvedCamera::setRefraction needs at least two media");
+    REQUIRE(radius_array.size() + 1 == refract_array.size(),
+            ErrorCode::InvalidArgument,
+            "RefractionCurvedCamera::setRefraction needs one radius fewer than media");
+    for (double n : refract_array) {
+        REQUIRE(n > 0.0, ErrorCode::InvalidArgument,
+                "RefractionCurvedCamera::setRefraction non-positive refractive index");
+    }
+    for (std::size_t k = 0; k < radius_array.size(); ++k) {
+        REQUIRE(radius_array[k] > 0.0, ErrorCode::InvalidArgument,
+                "RefractionCurvedCamera::setRefraction non-positive radius");
+        REQUIRE(k == 0 || radius_array[k - 1] > radius_array[k],
+                ErrorCode::InvalidArgument,
+                "RefractionCurvedCamera::setRefraction radii must strictly decrease");
+    }
+    Pt3D axis_copy = axis; // Matrix::norm() is non-const
+    const double axis_len = axis_copy.norm();
+    if (!isSphere()) {
+        REQUIRE(axis_len > SMALLNUMBER, ErrorCode::InvalidArgument,
+                "RefractionCurvedCamera::setRefraction axis is near zero");
+    }
+    _param.center = center;
+    _param.axis = axis;
+    if (axis_len > SMALLNUMBER) {
+        _param.axis /= axis_len;
+    }
+    _param.refract_array = refract_array;
+    _param.radius_array = radius_array;
+    return Status::OK();
+}
+
+Status RefractionCurvedCamera::setSolverOptions(double proj_tol, int proj_nmax) {
+    REQUIRE(proj_tol > 0, ErrorCode::InvalidArgument,
+            "RefractionCurvedCamera::setSolverOptions invalid proj_tol");
+    REQUIRE(proj_nmax > 0, ErrorCode::InvalidArgument,
+            "RefractionCurvedCamera::setSolverOptions invalid proj_nmax");
+    _param.proj_tol = proj_tol;
+    _param.proj_nmax = proj_nmax;
+    return Status::OK();
+}
+
+Status RefractionCurvedCamera::commitUpdate() {
+    _param.r_mtx_inv = myMATH::inverse(_param.r_mtx);
+    _param.t_vec_inv = (_param.r_mtx_inv * _param.t_vec) * -1.0;
+    const double axis_len = _param.axis.norm();
+    if (axis_len > SMALLNUMBER) {
+        _param.axis /= axis_len;
+    }
+    return Status::OK();
+}
+
+Status RefractionCurvedCamera::saveCurvedParameters(
+    const std::string& file_name) const {
+    try {
+        std::ofstream outfile(file_name.c_str(), std::ios::out);
+        outfile << "# Camera Model: (PINHOLE/POLYNOMIAL/PINPLATE/PINCYL/PINSPH)"
+                << std::endl;
+        outfile << typeToken() << std::endl;
+        outfile << "# Camera Calibration Error: \nNone\n# Pose Calibration Error: \nNone"
+                << std::endl;
+        outfile << "# Image Size: (n_row,n_col)" << std::endl;
+        outfile << _param.n_row << "," << _param.n_col << std::endl;
+        outfile << "# Camera Matrix: " << std::endl;
+        auto cam_mtx = _param.cam_mtx;
+        cam_mtx.write(outfile);
+        outfile << "# Distortion Coefficients: " << std::endl;
+        saveDistCoeffLine(outfile, _param);
+        outfile << "# Rotation Vector: " << std::endl;
+        auto r_vec_t = rmtxTorvec(_param.r_mtx).transpose();
+        r_vec_t.write(outfile);
+        outfile << "# Rotation Matrix: " << std::endl;
+        auto r_mtx = _param.r_mtx;
+        r_mtx.write(outfile);
+        outfile << "# Inverse of Rotation Matrix: " << std::endl;
+        auto r_mtx_inv = _param.r_mtx_inv;
+        r_mtx_inv.write(outfile);
+        // Matrix::transpose() is non-const, so each vector is copied first.
+        outfile << "# Translation Vector: " << std::endl;
+        Pt3D t_vec_copy = _param.t_vec;
+        auto t_vec_t = t_vec_copy.transpose();
+        t_vec_t.write(outfile);
+        outfile << "# Inverse of Translation Vector: " << std::endl;
+        Pt3D t_vec_inv_copy = _param.t_vec_inv;
+        auto t_vec_inv_t = t_vec_inv_copy.transpose();
+        t_vec_inv_t.write(outfile);
+        outfile << "# Port Center (axis point for a cylinder, centre for a sphere): "
+                << std::endl;
+        Pt3D center_copy = _param.center;
+        auto center_t = center_copy.transpose();
+        center_t.write(outfile);
+        outfile << "# Port Axis (unit; unused by a sphere): " << std::endl;
+        Pt3D axis_copy = _param.axis;
+        auto axis_t = axis_copy.transpose();
+        axis_t.write(outfile);
+        outfile << "# Refractive Index Array: (pinhole medium first)" << std::endl;
+        for (std::size_t i = 0; i + 1 < _param.refract_array.size(); ++i) {
+            outfile << _param.refract_array[i] << ",";
+        }
+        outfile << _param.refract_array.back() << std::endl;
+        outfile << "# Interface Radii: (strictly decreasing)" << std::endl;
+        for (std::size_t i = 0; i + 1 < _param.radius_array.size(); ++i) {
+            outfile << _param.radius_array[i] << ",";
+        }
+        outfile << _param.radius_array.back() << std::endl;
+        outfile << "# Projection Tolerance: " << std::endl;
+        outfile << _param.proj_tol << std::endl;
+        outfile << "# Maximum Number of Iterations for Projection: " << std::endl;
+        outfile << _param.proj_nmax << std::endl;
+        return Status::OK();
+    } catch (const std::exception& e) {
+        return STATUS_ERR_CTX(ErrorCode::IOfailure,
+                              "RefractionCurvedCamera::saveParameters", e.what());
+    }
+}
+
+Status RefractionCylinderCamera::saveParameters(const std::string& file_name) const {
+    return saveCurvedParameters(file_name);
+}
+
+std::shared_ptr<Camera> RefractionCylinderCamera::clone() const {
+    return std::make_shared<RefractionCylinderCamera>(*this);
+}
+
+Status RefractionSphereCamera::saveParameters(const std::string& file_name) const {
+    return saveCurvedParameters(file_name);
+}
+
+std::shared_ptr<Camera> RefractionSphereCamera::clone() const {
+    return std::make_shared<RefractionSphereCamera>(*this);
+}
+
 StatusOr<std::shared_ptr<Camera>> CameraFactory::loadFromFile(
         const std::string& file_name) {
     try {
@@ -1920,6 +2420,89 @@ StatusOr<std::shared_ptr<Camera>> CameraFactory::loadFromFile(
                                      st.err.message);
             }
 
+            return std::static_pointer_cast<Camera>(cam);
+        }
+
+        if (type_name == "PINCYL" || type_name == "PINSPH") {
+            std::shared_ptr<RefractionCurvedCamera> cam;
+            if (type_name == "PINCYL") {
+                cam = std::make_shared<RefractionCylinderCamera>();
+            } else {
+                cam = std::make_shared<RefractionSphereCamera>();
+            }
+            // Same header layout as PINPLATE: two calibration-error tokens.
+            std::string useless;
+            file_content >> useless;
+            file_content >> useless;
+
+            std::string img_size_str;
+            file_content >> img_size_str;
+            std::stringstream img_size_stream(img_size_str);
+            std::string temp;
+            std::getline(img_size_stream, temp, ',');
+            cam->param().n_row = std::stoi(temp);
+            std::getline(img_size_stream, temp, ',');
+            cam->param().n_col = std::stoi(temp);
+
+            cam->param().cam_mtx = Matrix<double>(3, 3, file_content);
+            std::string dist_coeff_str;
+            file_content >> dist_coeff_str;
+            loadDistCoeff(dist_coeff_str, cam->param());
+
+            file_content >> useless; // rvec, ignored for compatibility
+            cam->param().r_mtx = Matrix<double>(3, 3, file_content);
+            cam->param().r_mtx_inv = Matrix<double>(3, 3, file_content);
+            cam->param().t_vec = Pt3D(file_content);
+            cam->param().t_vec_inv = Pt3D(file_content);
+
+            cam->param().center = Pt3D(file_content);
+            cam->param().axis = Pt3D(file_content);
+
+            auto read_csv = [&file_content](std::vector<double>& out) {
+                std::string line;
+                file_content >> line;
+                std::stringstream ss(line);
+                double v;
+                while (ss >> v) {
+                    out.push_back(v);
+                    if (ss.peek() == ',') {
+                        ss.ignore();
+                    }
+                }
+            };
+            read_csv(cam->param().refract_array);
+            read_csv(cam->param().radius_array);
+
+            if (cam->param().refract_array.size() < 2 ||
+                cam->param().radius_array.size() + 1 !=
+                    cam->param().refract_array.size()) {
+                return STATUS_OR_ERR(
+                    std::shared_ptr<Camera>, ErrorCode::InvalidArgument,
+                    "number of refractive indices and radii is not consistent");
+            }
+            for (std::size_t k = 1; k < cam->param().radius_array.size(); ++k) {
+                if (!(cam->param().radius_array[k - 1] > cam->param().radius_array[k])) {
+                    return STATUS_OR_ERR(std::shared_ptr<Camera>,
+                                         ErrorCode::InvalidArgument,
+                                         "interface radii must strictly decrease");
+                }
+            }
+            if (type_name == "PINCYL" && cam->param().axis.norm() < SMALLNUMBER) {
+                return STATUS_OR_ERR(std::shared_ptr<Camera>,
+                                     ErrorCode::InvalidArgument,
+                                     "cylinder axis is near zero");
+            }
+
+            file_content >> cam->param().proj_tol;
+            if (!(file_content >> cam->param().proj_nmax)) {
+                cam->param().proj_nmax = 80;
+            }
+
+            auto st = cam->commitUpdate();
+            if (!st) {
+                return STATUS_OR_ERR(std::shared_ptr<Camera>, st.err.code,
+                                     st.err.message);
+            }
             return std::static_pointer_cast<Camera>(cam);
         }
 

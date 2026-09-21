@@ -70,10 +70,59 @@ struct PinPlateParam : public PinholeParam {
     Pt3D u_axis, v_axis;
 };
 
+/**
+  * @brief Parameters shared by the curved refractive ports.
+  *
+  * Index order follows doc/refract_curved.tex: `refract_array[0]` is the medium
+  * holding the PINHOLE and the last entry the medium holding the object point,
+  * which is the opposite of PinPlateParam's farthest-to-nearest ordering.
+  * `radius_array` holds the N-1 interface radii, strictly decreasing.
+  */
+struct PinCurvedParam : public PinholeParam {
+    Pt3D center; // Point on the axis (cylinder) or the centre (sphere).
+    Pt3D axis;   // Unit axis direction; ignored by the sphere.
+    std::vector<double> refract_array; // n_1..n_N, pinhole side first.
+    std::vector<double> radius_array;  // R_1..R_{N-1}, strictly decreasing.
+    double proj_tol = 1e-9; // Projection solver tolerance.
+    int proj_nmax = 80;     // Projection solver max iterations.
+};
+
+struct PinCylinderParam : public PinCurvedParam {};
+struct PinSphereParam : public PinCurvedParam {};
+
 enum class CameraType {
     Pinhole,
     Polynomial,
     RefractionPinhole,
+    RefractionCylinder,
+    RefractionSphere,
+};
+
+/**
+  * @brief One image of a world point, for models whose projection is multi-valued.
+  *
+  * A curved port can send several rays from the pinhole to the same point, so
+  * `projectAll()` returns a list of these rather than a single Pt2D. `branch`
+  * and `sense` identify which ray made the image, and `is_ring` marks the
+  * spherical degeneracy where the image is a whole circle, not a point.
+  */
+struct ImageRay {
+    Pt2D pt_img_dist;      // Distorted image point in pixels.
+    bool is_far = false;   // True on the far branch (past the closest approach).
+    double lambda = 0.0;   // Azimuthal invariant; its sign is the sense of rotation.
+    double c_z = 0.0;      // Axial invariant; always 0 for a sphere.
+    bool is_ring = false;  // Sphere only: a circle of images (Section ring).
+};
+
+/**
+  * @brief What a multi-valued projection actually searched.
+  *
+  * Without this an empty image list is ambiguous between "the point is invisible"
+  * and "that branch was not looked for".
+  */
+struct ProjectionCoverage {
+    bool near_branch = true;
+    bool far_branch = true;
 };
 
 class Camera {
@@ -96,6 +145,21 @@ public:
       * @return World-space ray as a line.
       */
     virtual StatusOr<Line3D> lineOfSight(const Pt2D& pt_img_dist) const = 0;
+
+    /**
+      * @brief Every image of a world point, for models whose projection is
+      *        multi-valued.
+      *
+      * Single-valued models inherit this default, which wraps `project()` in a
+      * one-element list, so callers can use it uniformly. Curved refractive
+      * ports override it; `project()` then returns only the primary image.
+      * @param pt_world World point in physical units.
+      * @param coverage Optional: filled with which branches were searched.
+      * @return All images on success; an empty list means no image exists
+      *         within whatever `coverage` reports as searched.
+      */
+    virtual StatusOr<std::vector<ImageRay>> projectAll(
+        const Pt3D& pt_world, ProjectionCoverage* coverage = nullptr) const;
 
     /** @brief Image height in pixels. */
     virtual int getNRow() const = 0;
@@ -287,6 +351,81 @@ private:
     solveProjectionBySnell1D(const Pt3D& pt_world, const PinPlateParam& pin);
 
     PinPlateParam _param;
+};
+
+/**
+  * @brief Shared behaviour of the cylindrical and spherical refractive ports.
+  *
+  * Both reduce to the same closed forms in the invariant variables of
+  * doc/refract_curved.tex (see RefractCurved.h); they differ only in how world
+  * coordinates reduce to the port frame and in which projector is called. The
+  * projection is multi-valued, so `projectAll()` is the real interface and
+  * `project()` returns the primary image.
+  */
+class RefractionCurvedCamera : public Camera {
+public:
+    StatusOr<Pt2D> project(const Pt3D& pt_world,
+                           bool is_print_detail = false) const override;
+    StatusOr<std::vector<ImageRay>> projectAll(
+        const Pt3D& pt_world, ProjectionCoverage* coverage = nullptr) const override;
+    /** @brief Back-project by tracing the pixel ray through the quadrics; single-valued. */
+    StatusOr<Line3D> lineOfSight(const Pt2D& pt_img_dist) const override;
+    int getNRow() const override;
+    int getNCol() const override;
+
+    Status setImageSize(int n_row, int n_col);
+    Status setIntrinsics(double fx, double fy, double cx, double cy,
+                         const std::vector<double>& dist_coeff);
+    Status setExtrinsics(const Pt3D& rvec, const Pt3D& tvec);
+    /**
+      * @brief Configure the port.
+      * @param center Point on the axis (cylinder) or the centre (sphere).
+      * @param axis Axis direction; ignored by the sphere, normalised here.
+      * @param refract_array n_1..n_N, the pinhole's medium first.
+      * @param radius_array R_1..R_{N-1}, strictly decreasing.
+      */
+    Status setRefraction(const Pt3D& center, const Pt3D& axis,
+                         const std::vector<double>& refract_array,
+                         const std::vector<double>& radius_array);
+    Status setSolverOptions(double proj_tol, int proj_nmax);
+    Status commitUpdate();
+
+    const PinCurvedParam& param() const { return _param; }
+    PinCurvedParam& param() { return _param; }
+
+protected:
+    /** @brief True when this port is a sphere, so the axis is unused. */
+    virtual bool isSphere() const = 0;
+    /** @brief Token written by saveParameters and matched by the loader. */
+    virtual const char* typeToken() const = 0;
+    /** @brief Common body of saveParameters, given the type token. */
+    Status saveCurvedParameters(const std::string& file_name) const;
+
+    PinCurvedParam _param;
+};
+
+class RefractionCylinderCamera final : public RefractionCurvedCamera {
+public:
+    RefractionCylinderCamera() = default;
+    CameraType type() const override { return CameraType::RefractionCylinder; }
+    Status saveParameters(const std::string& file_name) const override;
+    std::shared_ptr<Camera> clone() const override;
+
+protected:
+    bool isSphere() const override { return false; }
+    const char* typeToken() const override { return "PINCYL"; }
+};
+
+class RefractionSphereCamera final : public RefractionCurvedCamera {
+public:
+    RefractionSphereCamera() = default;
+    CameraType type() const override { return CameraType::RefractionSphere; }
+    Status saveParameters(const std::string& file_name) const override;
+    std::shared_ptr<Camera> clone() const override;
+
+protected:
+    bool isSphere() const override { return true; }
+    const char* typeToken() const override { return "PINSPH"; }
 };
 
 class PolynomialCamera final : public Camera {

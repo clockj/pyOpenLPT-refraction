@@ -10,6 +10,7 @@ namespace py = pybind11;
 void bind_Matrix(py::module_&);
 void bind_ImageIO(py::module_&);
 void bind_Camera(py::module_&);
+void bind_RefractCurved(py::module_&);
 void bind_ObjectInfo(py::module_&);
 void bind_Config(py::module_&);
 void bind_IPR(py::module_&);
@@ -65,6 +66,7 @@ PYBIND11_MODULE(pyopenlpt, m) {
     bind_Matrix(m);
     bind_ImageIO(m);
     bind_Camera(m);
+    bind_RefractCurved(m);
     bind_ObjectInfo(m);
     bind_IPR(m);
     bind_Shake(m);

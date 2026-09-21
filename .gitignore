@@ -70,7 +70,16 @@ test/
 
 scripts/
 artifacts/
-tests/
+
+# tests/ is scratch by default, but the curved-port validation suite is part of
+# the source. Written as tests/** rather than tests/ so the negations below can
+# re-include: git cannot re-include a file whose parent directory is excluded.
+tests/**
+!tests/test_refract_oracles.py
+!tests/test_refract_curved_cpp.py
+!tests/test_refract_curved_camera.py
+!tests/test_refract_calibration.py
+
 test/inputs/test_LPTNetBenchmark
 docs/
 
