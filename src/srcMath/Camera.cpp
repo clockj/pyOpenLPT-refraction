@@ -342,6 +342,23 @@ void loadFileToStream(const std::string& file_name, std::stringstream& out) {
     }
 }
 
+// distort() reads 4, 5, 8 or 12 coefficients, so a vector of another length up to
+// 12 is padded with zeros to the next of those; without this it read past the end.
+// A longer vector (OpenCV's 14) is kept: distort() reads its first 12.
+std::vector<double> paddedDistCoeff(const std::vector<double>& dist_coeff) {
+    std::vector<double> out = dist_coeff;
+    if (out.empty()) {
+        return out;
+    }
+    for (std::size_t len : {std::size_t(4), std::size_t(5), std::size_t(8), std::size_t(12)}) {
+        if (out.size() <= len) {
+            out.resize(len, 0.0);
+            break;
+        }
+    }
+    return out;
+}
+
 // Parse distortion coefficients from one comma-separated field.
 void loadDistCoeff(const std::string& dist_coeff_str, PinholeParam& p) {
     p.dist_coeff.clear();
@@ -354,7 +371,8 @@ void loadDistCoeff(const std::string& dist_coeff_str, PinholeParam& p) {
     while (dist_coeff_stream >> dist_coeff) {
         p.dist_coeff.push_back(dist_coeff);
         id++;
-        if (dist_coeff > SMALLNUMBER) {
+        // A negative coefficient distorts too (k1 < 0 is barrel distortion).
+        if (std::abs(dist_coeff) > SMALLNUMBER) {
             p.is_distorted = true;
         }
         if (dist_coeff_stream.peek() == ',') {
@@ -495,8 +513,8 @@ Status PinholeCamera::setIntrinsics(double fx, double fy, double cx, double cy,
     _param.cam_mtx(0, 2) = cx;
     _param.cam_mtx(1, 2) = cy;
     _param.cam_mtx(2, 2) = 1.0;
-    _param.dist_coeff = dist_coeff;
-    _param.n_dist_coeff = static_cast<int>(dist_coeff.size());
+    _param.dist_coeff = paddedDistCoeff(dist_coeff);
+    _param.n_dist_coeff = static_cast<int>(_param.dist_coeff.size());
     _param.is_distorted = false;
     for (double v : dist_coeff) {
         if (std::abs(v) > SMALLNUMBER) {
@@ -1393,8 +1411,8 @@ Status RefractionPinholeCamera::setIntrinsics(double fx, double fy, double cx,
     _param.cam_mtx(0, 2) = cx;
     _param.cam_mtx(1, 2) = cy;
     _param.cam_mtx(2, 2) = 1.0;
-    _param.dist_coeff = dist_coeff;
-    _param.n_dist_coeff = static_cast<int>(dist_coeff.size());
+    _param.dist_coeff = paddedDistCoeff(dist_coeff);
+    _param.n_dist_coeff = static_cast<int>(_param.dist_coeff.size());
     _param.is_distorted = false;
     for (double v : dist_coeff) {
         if (std::abs(v) > SMALLNUMBER) {
@@ -1844,6 +1862,12 @@ Pt3D pointToWorld(const PortFrame& f, const double local[3]) {
     return s;
 }
 
+/** @brief Distance of a port-frame point from the axis (cylinder) or the centre (sphere). */
+double portRadius(const double p[3], bool is_sphere) {
+    return is_sphere ? std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2])
+                     : std::hypot(p[0], p[1]);
+}
+
 /**
   * @brief Nearest positive intersection of a ray with the quadric of radius R.
   *
@@ -1912,12 +1936,6 @@ StatusOr<std::vector<ImageRay>> RefractionCurvedCamera::projectAll(
     using namespace refraction_curved;
     try {
         const bool sphere = isSphere();
-        if (coverage) {
-            // The sphere searches both branches and every wrapped target; the
-            // cylinder's far-branch box search is not ported yet.
-            coverage->near_branch = true;
-            coverage->far_branch = sphere;
-        }
         const PortFrame frame = buildFrame(_param, sphere);
         const ::refract_curved::Stack stack = toStack(_param);
 
@@ -1925,20 +1943,39 @@ StatusOr<std::vector<ImageRay>> RefractionCurvedCamera::projectAll(
         toLocal(frame, _param.t_vec_inv, pinhole_local);
         toLocal(frame, pt_world, point_local);
 
+        // The model holds only for a pinhole outside the outermost interface; a
+        // camera inside the port is a configuration error, not a missing image.
+        if (!stack.R.empty() && !(portRadius(pinhole_local, sphere) > stack.R.front())) {
+            return STATUS_OR_ERR(std::vector<ImageRay>, ErrorCode::InvalidArgument,
+                                 "RefractionCurvedCamera::projectAll: the pinhole is "
+                                 "not outside the outermost interface");
+        }
+
+        // Both searches take proj_tol as a dimensionless tolerance (lengths in
+        // units of 2^floor(log2 r_P)) and proj_nmax as their iteration cap.
         std::vector<::refract_curved::Ray> rays;
+        ::refract_curved::CylinderCoverage cov;
         if (sphere) {
             const double centre_local[3] = {0.0, 0.0, 0.0};
             rays = ::refract_curved::projectSphere(stack, centre_local, pinhole_local,
-                                                   point_local, _param.proj_tol);
+                                                   point_local, _param.proj_tol,
+                                                   _param.proj_nmax);
+            // A point not strictly inside the innermost sphere is outside the
+            // model: not searched, rather than certified invisible.
+            const bool inside = stack.isValid() &&
+                                (stack.R.empty() ||
+                                 portRadius(point_local, true) < stack.R.back());
+            cov.near_branch = inside;
+            cov.far_branch = inside;
         } else {
-            ::refract_curved::CylinderCoverage cov;
             rays = ::refract_curved::projectCylinder(stack, pinhole_local,
                                                      point_local, &cov,
-                                                     _param.proj_tol);
-            if (coverage) {
-                coverage->near_branch = cov.near_branch;
-                coverage->far_branch = cov.far_branch;
-            }
+                                                     _param.proj_tol,
+                                                     _param.proj_nmax);
+        }
+        if (coverage) {
+            coverage->near_branch = cov.near_branch;
+            coverage->far_branch = cov.far_branch;
         }
 
         std::vector<ImageRay> out;
@@ -1957,6 +1994,14 @@ StatusOr<std::vector<ImageRay>> RefractionCurvedCamera::projectAll(
             // Projection is central at the pinhole, so a point one unit along the
             // ray lands on the same pixel as the ray itself.
             const Pt3D dir_world = dirToWorld(frame, r.dir);
+            // A ray that leaves the pinhole away from the viewing direction
+            // (depth <= 0 in the camera frame) forms no image.
+            const double depth = _param.r_mtx(2, 0) * dir_world[0] +
+                                 _param.r_mtx(2, 1) * dir_world[1] +
+                                 _param.r_mtx(2, 2) * dir_world[2];
+            if (!(depth > 0.0)) {
+                continue;
+            }
             const Pt3D along(_param.t_vec_inv[0] + dir_world[0],
                              _param.t_vec_inv[1] + dir_world[1],
                              _param.t_vec_inv[2] + dir_world[2]);
@@ -2033,6 +2078,14 @@ StatusOr<Line3D> RefractionCurvedCamera::lineOfSight(const Pt2D& pt_img_dist) co
 
         double p[3], d[3];
         toLocal(frame, _param.t_vec_inv, p);
+        // As in projectAll(): the interfaces are crossed from outside in, which
+        // needs the pinhole outside the outermost one.
+        if (!_param.radius_array.empty() &&
+            !(portRadius(p, sphere) > _param.radius_array.front())) {
+            return STATUS_OR_ERR(Line3D, ErrorCode::InvalidArgument,
+                                 "RefractionCurvedCamera::lineOfSight: the pinhole is "
+                                 "not outside the outermost interface");
+        }
         const Pt3D dir_world = myMATH::createUnitVector(_param.t_vec_inv, pt_world);
         dirToLocal(frame, dir_world, d);
 
@@ -2089,8 +2142,8 @@ Status RefractionCurvedCamera::setIntrinsics(double fx, double fy, double cx,
     _param.cam_mtx(0, 2) = cx;
     _param.cam_mtx(1, 2) = cy;
     _param.cam_mtx(2, 2) = 1.0;
-    _param.dist_coeff = dist_coeff;
-    _param.n_dist_coeff = static_cast<int>(dist_coeff.size());
+    _param.dist_coeff = paddedDistCoeff(dist_coeff);
+    _param.n_dist_coeff = static_cast<int>(_param.dist_coeff.size());
     _param.is_distorted = false;
     for (double v : dist_coeff) {
         if (std::abs(v) > SMALLNUMBER) {
@@ -2480,6 +2533,21 @@ StatusOr<std::shared_ptr<Camera>> CameraFactory::loadFromFile(
                     std::shared_ptr<Camera>, ErrorCode::InvalidArgument,
                     "number of refractive indices and radii is not consistent");
             }
+            // The same checks as setRefraction().
+            for (double n : cam->param().refract_array) {
+                if (!(n > 0.0) || !std::isfinite(n)) {
+                    return STATUS_OR_ERR(std::shared_ptr<Camera>,
+                                         ErrorCode::InvalidArgument,
+                                         "refractive indices must be positive and finite");
+                }
+            }
+            for (double R : cam->param().radius_array) {
+                if (!(R > 0.0) || !std::isfinite(R)) {
+                    return STATUS_OR_ERR(std::shared_ptr<Camera>,
+                                         ErrorCode::InvalidArgument,
+                                         "interface radii must be positive and finite");
+                }
+            }
             for (std::size_t k = 1; k < cam->param().radius_array.size(); ++k) {
                 if (!(cam->param().radius_array[k - 1] > cam->param().radius_array[k])) {
                     return STATUS_OR_ERR(std::shared_ptr<Camera>,
@@ -2496,6 +2564,11 @@ StatusOr<std::shared_ptr<Camera>> CameraFactory::loadFromFile(
             file_content >> cam->param().proj_tol;
             if (!(file_content >> cam->param().proj_nmax)) {
                 cam->param().proj_nmax = 80;
+            }
+            // The same checks as setSolverOptions().
+            if (!(cam->param().proj_tol > 0.0) || cam->param().proj_nmax <= 0) {
+                return STATUS_OR_ERR(std::shared_ptr<Camera>, ErrorCode::InvalidArgument,
+                                     "invalid proj_tol or proj_nmax");
             }
 
             auto st = cam->commitUpdate();

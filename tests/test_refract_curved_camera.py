@@ -45,7 +45,7 @@ def _look_at_origin_from(centre):
     up = np.array([0.0, 0.0, 1.0])
     if abs(np.dot(up, z_cam)) > 0.9:
         up = np.array([0.0, 1.0, 0.0])
-    x_cam = np.cross(up, z_cam)
+    x_cam = np.cross(z_cam, up)  # right = forward x up (up x forward rolled the image 180 deg)
     x_cam /= np.linalg.norm(x_cam)
     y_cam = np.cross(z_cam, x_cam)
     rmtx = np.vstack([x_cam, y_cam, z_cam])

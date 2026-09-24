@@ -34,10 +34,24 @@ void bind_MatrixT(py::module_ &m, const char* py_name) {
     //    .def("typeToInt",    &Mat::typeToInt);
 
     // 索引（A[i,j] / A[i]）
-    cls.def("__getitem__", [](const Mat& self, std::pair<int,int> ij){ return self(ij.first, ij.second); })
-       .def("__setitem__", [](Mat& self, std::pair<int,int> ij, const T& v){ self(ij.first, ij.second) = v; })
-       .def("__getitem__", [](const Mat& self, int k){ return self[k]; })
-       .def("__setitem__", [](Mat& self, int k, const T& v){ self[k] = v; });
+    // Out-of-range indices raise IndexError. Unchecked, they read and wrote past
+    // the storage, and list(Pt2D(1, 2)) crashed the interpreter, because Python
+    // iterates by __getitem__ until IndexError (audit B7).
+    auto at_ij = [](const Mat& self, std::pair<int,int> ij) {
+        if (ij.first < 0 || ij.first >= self.getDimRow() ||
+            ij.second < 0 || ij.second >= self.getDimCol()) {
+            throw py::index_error("matrix index out of range");
+        }
+    };
+    auto at_k = [](const Mat& self, int k) {
+        if (k < 0 || k >= self.getDimRow() * self.getDimCol()) {
+            throw py::index_error("matrix index out of range");
+        }
+    };
+    cls.def("__getitem__", [at_ij](const Mat& self, std::pair<int,int> ij){ at_ij(self, ij); return self(ij.first, ij.second); })
+       .def("__setitem__", [at_ij](Mat& self, std::pair<int,int> ij, const T& v){ at_ij(self, ij); self(ij.first, ij.second) = v; })
+       .def("__getitem__", [at_k](const Mat& self, int k){ at_k(self, k); return self[k]; })
+       .def("__setitem__", [at_k](Mat& self, int k, const T& v){ at_k(self, k); self[k] = v; });
 
     // 写文件（只保留文件名版本；避免 ostream& 重载引发模板匹配混乱）
     cls.def("write", [](Mat& self, const std::string& path){ self.write(path); }, py::arg("file_name"));

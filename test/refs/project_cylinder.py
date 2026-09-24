@@ -22,6 +22,8 @@ ray lands from the point it was supposed to reach.
                                           a census of traced rays, and the maps of Figure imgmap
     python project_cylinder.py sampling   what step (3) of the algorithm can miss (Section cylalg of the notes)
 """
+import math
+
 import numpy as np
 
 rng = np.random.default_rng(2718)
@@ -29,6 +31,9 @@ P = lambda *a: print(*a, flush=True)
 
 nus = lambda n, Cz: np.sqrt(np.asarray(n, float) ** 2 - Cz ** 2)
 q = lambda a, L: 1.0 / np.sqrt(a * a - L * L)
+# At Lambda = Lmax the binding medium's impact parameter b = Lambda/nu equals its radius, but rounding can put it a few
+# ulp above; such a b is the grazing ray, not a ray that misses, so it is clamped to the radius (see Phi_Z).
+_GRAZE = 8 * np.finfo(float).eps
 
 
 # ------------------------------------------------------------ closed forms
@@ -45,7 +50,9 @@ def Phi_Z(Lam, Cz, n, R, rP, rX, far=False):
     for k in range(len(n)):
         b = Lam / nu[k]
         if b > Rin[k]:
-            return None
+            if b > Rin[k] * (1 + _GRAZE):
+                return None
+            b = Rin[k]                            # Lambda = Lmax to rounding: the grazing ray of this medium
         a1 = np.arcsin(np.clip(b / Rin[k], -1, 1))
         a2 = np.arcsin(np.clip(b / Rout[k], -1, 1))
         s1 = np.sqrt(max(Rout[k] ** 2 - b * b, 0.0))
@@ -68,7 +75,9 @@ def W_closed(Lam, Cz, n, R, rP, rX, far=False):
     for k in range(len(n)):
         b = Lam / nu[k]
         if b > Rin[k]:
-            return None
+            if b > Rin[k] * (1 + _GRAZE):
+                return None
+            b = Rin[k]                            # as in Phi_Z
         if far and k == len(n) - 1:
             tot += (F(Rout[k], b, nu[k]) - F(b, b, nu[k])) + (F(Rin[k], b, nu[k]) - F(b, b, nu[k]))
         else:
@@ -93,9 +102,16 @@ def dPhi_dCz(Lam, Cz, n, R, rP, rX, far=False):
 
 
 def dZ_dCz(Lam, Cz, n, R, rP, rX, far=False, h=1e-7):
+    """Central difference; one-sided where Lambda is so close to Lmax that one side leaves the domain (the tilt that
+    lowers nu_k lowers Lmax), None only if both sides do."""
     a = Phi_Z(Lam, Cz + h, n, R, rP, rX, far)
     b = Phi_Z(Lam, Cz - h, n, R, rP, rX, far)
-    return None if (a is None or b is None) else (a[1] - b[1]) / (2 * h)
+    if a is not None and b is not None:
+        return (a[1] - b[1]) / (2 * h)
+    c = Phi_Z(Lam, Cz, n, R, rP, rX, far)
+    if c is None or (a is None and b is None):
+        return None
+    return (a[1] - c[1]) / h if a is not None else (c[1] - b[1]) / h
 
 
 def in_domain(Lam, Cz, n, R, rX):
@@ -126,13 +142,13 @@ def solve(n, R, rP, rX, dphi, dz, Lam0, Cz0, far=False, itmax=80, tol=1e-10):
         j11 = dPhi_dLam(L, C, n, R, rP, rX, far)
         j12 = dPhi_dCz(L, C, n, R, rP, rX, far)
         j22 = dZ_dCz(L, C, n, R, rP, rX, far)
-        if j22 is None:
-            return None, it, np.linalg.norm(g)
+        if j22 is None:                           # no Newton step: the caller judges the iterate by its residual
+            return (L, C), it, np.linalg.norm(g)
         J = np.array([[j11, j12], [j12, j22]])
         try:
             p = -np.linalg.solve(J, g)
         except np.linalg.LinAlgError:
-            return None, it, np.linalg.norm(g)
+            return (L, C), it, np.linalg.norm(g)
         g0 = G(L, C)
         slope = np.dot(p, g)
         # G is stationary at the solution, so its value saturates while |g| is
@@ -258,19 +274,24 @@ def direction_from_invariants(P0, Lam, Cz, n1, nu1):
 def lam_at(Cz, n, R, rP, rX, dphi, iters=90):
     """Bisection for Phi_near(Lambda; Cz) = dphi.  None if out of reach at this Cz.
 
-    Relies only on Property convexnear: Phi_near is strictly increasing in Lambda."""
+    Relies only on Property convexnear: Phi_near is strictly increasing in Lambda.  The reach is taken at Lmax itself,
+    and the bisection runs in s with Lambda = Lmax (1 - s^2).  Phi_near has a square-root edge at Lmax, so a margin of
+    m in Lambda would cost about sqrt(m) in Phi (4.5e-7 rad for m = 1e-13 at the reference port) and hide every tilt
+    whose reach exceeds dphi by less; in s the edge is regular.  The result stays strictly below Lmax, inside the domain
+    of solve()."""
     if abs(Cz) >= min(n):
         return None
     Lm, _ = Lmax_kstar(n, R, rX, Cz)
-    top = Phi_Z(Lm * (1 - 1e-13), Cz, n, R, rP, rX)
+    top = Phi_Z(Lm, Cz, n, R, rP, rX)
     if top is None or top[0] < dphi:
         return None
-    lo, hi = 0.0, Lm * (1 - 1e-14)
+    lo, hi = 0.0, 1.0                             # s; Phi_near falls as s grows, from the reach at s = 0
     for _ in range(iters):
         m = 0.5 * (lo + hi)
-        v = Phi_Z(m, Cz, n, R, rP, rX)
-        lo, hi = (m, hi) if (v is not None and v[0] < dphi) else (lo, m)
-    return 0.5 * (lo + hi)
+        v = Phi_Z(Lm * (1 - m * m), Cz, n, R, rP, rX)
+        lo, hi = (lo, m) if (v is not None and v[0] < dphi) else (m, hi)
+    s = 0.5 * (lo + hi)
+    return min(Lm * (1 - s * s), np.nextafter(Lm, 0.0))
 
 
 def switch_tilts(n, R, rX, chi):
@@ -333,23 +354,34 @@ def classify(n, R, rP, rX, dphi, dz, iters=60):
 
     zeta(Cz) = Z(Lambda(Cz), Cz) is strictly increasing on each component
     (Property zeta: zeta' = det J / Phi_Lambda > 0), so one bisection per component
-    is both sound and complete there.  Endpoints are approached from inside:
-    exactly at a component edge Lambda -> Lambda_max and the inner bisection for
-    Lambda(Cz) becomes marginal."""
+    is both sound and complete there.  At a component end where the reach is dphi,
+    Lambda(Cz) = Lmax: the ray is the grazing ray, and zeta there is its axial offset
+    Z(Lmax, Cz) in closed form.  The bisection therefore brackets the whole component.
+    (Approaching the ends from inside instead lost the rays of tilts next to an end,
+    within about 1e-10 of grazing: evidence E1 of the paper, and the tests in
+    code/tests/classify_grazing/.)"""
     sgn = 1.0 if dz >= 0 else -1.0                # zeta is odd in C_z
     target = abs(dz)
 
-    def zin(c0, c1):
-        """First finite zeta walking from c0 towards c1.
+    def zeta(c):
+        """zeta at c; at a tilt whose reach is dphi to rounding, the grazing ray's Z(Lmax, c)."""
+        v = zeta_at(c, n, R, rP, rX, dphi)
+        if v is None:
+            pz = Phi_Z(Lmax_kstar(n, R, rX, c)[0], c, n, R, rP, rX)
+            if pz is not None and pz[0] >= dphi - 1e-9:
+                v = pz[1]
+        return v
 
-        C_z = 0 is a regular point with zeta(0) = 0, so it is used as it stands;
-        only a genuine reach boundary has to be approached from inside."""
+    def zin(c0, c1):
+        """First finite zeta walking from c0 towards c1: the fallback for an end where zeta() has no value.
+
+        C_z = 0 is a regular point with zeta(0) = 0, so it is used as it stands."""
         steps = (1e-12, 1e-10, 1e-8, 1e-6, 1e-4, 1e-3, 1e-2, 3e-2, 1e-1)
         if c0 == 0.0:
             steps = (0.0,) + steps
         for t in steps:
             c = c0 + t * (c1 - c0)
-            v = zeta_at(c, n, R, rP, rX, dphi)
+            v = zeta(c)
             if v is not None:
                 return c, v
         return None, None
@@ -357,22 +389,31 @@ def classify(n, R, rP, rX, dphi, dz, iters=60):
     for (c1, c2) in components(n, R, rP, rX, dphi):
         if c2 <= c1:
             continue
-        a, za = zin(c1, c2)
-        b, zb = zin(c2, c1)
+        a, za = c1, zeta(c1)
+        if za is None:
+            a, za = zin(c1, c2)
+        b, zb = c2, zeta(c2)
+        if zb is None:
+            b, zb = zin(c2, c1)
         if a is None or b is None or b <= a:
             continue
         if not (min(za, zb) <= target <= max(za, zb)):
             continue
         for _ in range(iters):
             mm = 0.5 * (a + b)
-            v = zeta_at(mm, n, R, rP, rX, dphi)
+            v = zeta(mm)
             if v is None:
                 break
             a, b = (mm, b) if (v - target) * (za - target) > 0 else (a, mm)
         c = 0.5 * (a + b)
         L = lam_at(c, n, R, rP, rX, dphi)
-        if L is not None:
-            return L, sgn * c
+        if L is None:                             # c is within rounding of the end: the grazing ray
+            Lm = Lmax_kstar(n, R, rX, c)[0]
+            pz = Phi_Z(Lm, c, n, R, rP, rX)
+            if pz is None or pz[0] < dphi - 1e-9:
+                continue
+            L = np.nextafter(Lm, 0.0)
+        return L, sgn * c
     return None
 
 
@@ -462,8 +503,9 @@ def far_roots(Cz, n, R, rP, rX, target):
 
     [0, Lmax) is split at the turning points of Phi_far, all of them located by far_turns(); an arc whose end
     values bracket the target holds exactly one root.  A root exactly at an end of an arc, such as Lambda = 0 at
-    target pi, is counted once, as the root of the arc it starts."""
-    Lm = Lmax_kstar(n, R, rX, Cz)[0] * (1 - 1e-13)
+    target pi, is counted once, as the root of the arc it starts.  The last arc ends at Lmax itself: a margin of m
+    there would drop the roots of the targets within about sqrt(m) of Phi_far(Lmax), as in lam_at()."""
+    Lm = Lmax_kstar(n, R, rX, Cz)[0]
     cuts = [0.0] + [L for L in far_turns(Cz, n, R, rP, rX) if 0.0 < L < Lm] + [Lm]
     phi = lambda L: Phi_Z(L, Cz, n, R, rP, rX, far=True)[0]
     out = []
@@ -876,8 +918,18 @@ def project(n, R, P0, X, tol=1e-9):
     A point opposite the pinhole, Delta phi = pi, is reached by the radial ray of the far branch, Lambda = 0, which
     sweeps pi at every tilt.  Its root lies on the edge Lambda = 0 of the far search for both senses, where the
     rounding of pi alone can put it just outside for both or just inside for both, so it is added here, once.  The
-    targets pi and 2 pi - pi coincide there, so each is searched once and every other ray is returned in both senses."""
+    targets pi and 2 pi - pi coincide there, so each is searched once and every other ray is returned in both senses.
+
+    Every length is divided on entry by u = 2^floor(log2 r_P), the power of two in (r_P/2, r_P], and Lambda is
+    multiplied by u on exit.  The tolerances, tol here and those of the solvers, act on (Delta phi, Delta z), so they
+    then act on Delta z / u, and a rig gives the same rays in metres and in millimetres.  In millimetres a tolerance
+    on Delta z itself would be 1000 times stricter than in metres, beyond what the closed forms resolve next to
+    grazing.  Dividing by a power of two is exact, so the problem solved is the one given to the last bit; dividing
+    by r_P itself would round every length, and next to grazing that rounding alone costs about eps/sqrt(delta) in
+    Phi (audit A1, code/tests/openlpt_audit/)."""
     P0, X = np.asarray(P0, float), np.asarray(X, float)
+    unit = math.ldexp(1.0, math.frexp(np.hypot(P0[0], P0[1]))[1] - 1)     # u = 2^floor(log2 r_P), exact scaling
+    R, P0, X = [float(r) / unit for r in R], P0 / unit, X / unit
     rP, rX = np.hypot(P0[0], P0[1]), np.hypot(X[0], X[1])
     dz = X[2] - P0[2]
     if rX < 1e-15:                                   # step (1): the radial ray
@@ -910,7 +962,7 @@ def project(n, R, P0, X, tol=1e-9):
                         continue                     # the radial ray, already added
                     rays += [("far", turn * s * sol[0], sol[1]) for s in (senses or (sense,))]
         m += 1
-    return [(b, L, C, direction_from_invariants(P0, L, C, n[0], nus(n, C)[0])) for b, L, C in rays]
+    return [(b, L * unit, C, direction_from_invariants(P0, L, C, n[0], nus(n, C)[0])) for b, L, C in rays]
 
 
 # ==================================================================== self-test

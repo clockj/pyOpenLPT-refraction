@@ -99,7 +99,9 @@ def look_at(center, target, up=(0.0, 0.0, 1.0), **kwargs) -> CameraSpec:
     up = np.asarray(up, float)
     if abs(float(np.dot(up, z_cam))) > 0.95:  # degenerate: pick another up
         up = np.array([0.0, 1.0, 0.0])
-    x_cam = np.cross(up, z_cam)
+    # Right is forward x up, and down is forward x right. (up x forward, used
+    # before, gave x left and y up: the image rolled by 180 degrees.)
+    x_cam = np.cross(z_cam, up)
     x_cam /= np.linalg.norm(x_cam)
     y_cam = np.cross(z_cam, x_cam)
     rmtx = np.vstack([x_cam, y_cam, z_cam])

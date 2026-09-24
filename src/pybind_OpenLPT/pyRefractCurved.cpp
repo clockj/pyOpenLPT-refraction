@@ -226,13 +226,13 @@ void bind_RefractCurved(py::module_& m) {
         "project_sphere",
         [](const std::vector<double>& n, const std::vector<double>& R,
            const std::vector<double>& centre, const std::vector<double>& pinhole,
-           const std::vector<double>& point, double tol) {
+           const std::vector<double>& point, double tol, int itmax) {
             const auto c = toArray3(centre, "centre");
             const auto p = toArray3(pinhole, "pinhole");
             const auto x = toArray3(point, "point");
             py::list out;
             for (const Ray& r : projectSphere(makeStack(n, R), c.data(), p.data(),
-                                              x.data(), tol)) {
+                                              x.data(), tol, itmax)) {
                 out.append(py::make_tuple(
                     r.is_ring ? "ring" : (r.branch == Branch::Far ? "far" : "near"),
                     r.lambda, std::vector<double>(r.dir, r.dir + 3)));
@@ -240,8 +240,10 @@ void bind_RefractCurved(py::module_& m) {
             return out;
         },
         py::arg("n"), py::arg("R"), py::arg("centre"), py::arg("pinhole"),
-        py::arg("point"), py::arg("tol") = 1e-9,
-        "Section spherealg: every image, as (branch, Lambda, direction).");
+        py::arg("point"), py::arg("tol") = 1e-9, py::arg("itmax") = -1,
+        "Section spherealg: every image, as (branch, Lambda, direction). Lengths "
+        "are scaled by 2^floor(log2 r_P) inside, so tol is dimensionless; itmax caps the Newton "
+        "polish (-1: 30). No ray when the model does not apply.");
 
     sub.def(
         "solve_cylinder",
@@ -313,23 +315,26 @@ void bind_RefractCurved(py::module_& m) {
     sub.def(
         "classify_far",
         [](const std::vector<double>& n, const std::vector<double>& R, double r_p,
-           double r_x, double dphi, double dz, double tol) {
+           double r_x, double dphi, double dz, double tol, int maxboxes) {
             FarSearchStats stats;
             py::list seeds;
             for (const Seed& sd : classifyFar(makeStack(n, R), r_p, r_x, dphi, dz,
-                                              tol, &stats)) {
+                                              tol, &stats, maxboxes)) {
                 seeds.append(py::make_tuple(sd.lambda, sd.c_z));
             }
             py::dict st;
             st["boxes"] = stats.boxes;
+            st["precise"] = stats.precise;
             st["undecided"] = stats.undecided;
             st["from_undecided"] = stats.from_undecided;
+            st["capped"] = stats.capped;
             return py::make_tuple(seeds, st);
         },
         py::arg("n"), py::arg("R"), py::arg("r_p"), py::arg("r_x"), py::arg("dphi"),
-        py::arg("dz"), py::arg("tol") = 1e-13,
+        py::arg("dz"), py::arg("tol") = 1e-13, py::arg("maxboxes") = 200000,
         "Steps (3)-(4), far branch: ((Lambda, C_z) seeds, stats). Certified by "
-        "Krawczyk's test; nothing is sampled.");
+        "Krawczyk's test; nothing is sampled. stats['capped'] is True when the "
+        "search reached maxboxes, and the result is then not certified.");
 
     sub.def(
         "solve_far",
@@ -347,13 +352,13 @@ void bind_RefractCurved(py::module_& m) {
         "project_cylinder",
         [](const std::vector<double>& n, const std::vector<double>& R,
            const std::vector<double>& pinhole, const std::vector<double>& point,
-           double tol) {
+           double tol, int itmax) {
             const auto p = toArray3(pinhole, "pinhole");
             const auto x = toArray3(point, "point");
             CylinderCoverage cov;
             py::list rays;
             for (const Ray& r : projectCylinder(makeStack(n, R), p.data(), x.data(),
-                                                &cov, tol)) {
+                                                &cov, tol, itmax)) {
                 rays.append(py::make_tuple(r.branch == Branch::Far ? "far" : "near",
                                            r.lambda, r.c_z,
                                            std::vector<double>(r.dir, r.dir + 3)));
@@ -364,9 +369,12 @@ void bind_RefractCurved(py::module_& m) {
             return py::make_tuple(rays, coverage);
         },
         py::arg("n"), py::arg("R"), py::arg("pinhole"), py::arg("point"),
-        py::arg("tol") = 1e-9,
+        py::arg("tol") = 1e-9, py::arg("itmax") = -1,
         "Section cylalg, both branches and the wrapped targets. Returns "
-        "(rays, coverage).");
+        "(rays, coverage). Lengths are scaled by 2^floor(log2 r_P) inside, so tol is "
+        "dimensionless; itmax caps the step-(4) solvers (-1: 80 near, 40 far). "
+        "Coverage is false where the model does not apply or the box search "
+        "reached its cap.");
 
     sub.def(
         "direction_from_invariants",

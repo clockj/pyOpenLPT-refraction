@@ -16,6 +16,11 @@ namespace {
 
 constexpr double kPi = 3.14159265358979323846;
 
+/** @brief At Lambda = Lmax the binding medium's b = Lambda/nu equals its radius,
+  *        but rounding can put it a few ulp above; such a b is the grazing ray,
+  *        not a ray that misses, so it is clamped to the radius. */
+constexpr double kGraze = 8.0 * std::numeric_limits<double>::epsilon();
+
 /** @brief Clamp to [-1, 1] before asin/acos, where rounding can push just past. */
 inline double clamp1(double x) { return std::clamp(x, -1.0, 1.0); }
 
@@ -103,9 +108,12 @@ std::optional<PhiZ> phiZ(double lam, double c_z, const Stack& s, double r_p,
         }
         const double ro = rOut(s, r_p, k);
         const double ri = rIn(s, r_x, k);
-        const double bb = lam / nu[k];
+        double bb = lam / nu[k];
         if (bb > ri) {
-            return std::nullopt; // the ray turns before reaching this interface
+            if (bb > ri * (1.0 + kGraze)) {
+                return std::nullopt; // the ray turns before reaching this interface
+            }
+            bb = ri; // Lambda = Lmax to rounding: the grazing ray of this medium
         }
         const double a1 = std::asin(clamp1(bb / ri));
         const double a2 = std::asin(clamp1(bb / ro));
@@ -138,9 +146,12 @@ std::optional<double> radialAction(double lam, double c_z, const Stack& s,
         }
         const double ro = rOut(s, r_p, k);
         const double ri = rIn(s, r_x, k);
-        const double bb = lam / nu[k];
+        double bb = lam / nu[k];
         if (bb > ri) {
-            return std::nullopt;
+            if (bb > ri * (1.0 + kGraze)) {
+                return std::nullopt;
+            }
+            bb = ri; // as in phiZ
         }
         if (b == Branch::Far && k + 1 == N) {
             // Both legs of the turning point, each measured from r = b.
@@ -186,10 +197,16 @@ std::optional<double> dZDCz(double lam, double c_z, const Stack& s, double r_p,
                             double r_x, Branch b, double h) {
     const auto up = phiZ(lam, c_z + h, s, r_p, r_x, b);
     const auto dn = phiZ(lam, c_z - h, s, r_p, r_x, b);
-    if (!up || !dn) {
+    if (up && dn) {
+        return (up->z - dn->z) / (2.0 * h);
+    }
+    // So close to Lmax one side leaves the domain (the tilt that lowers nu_k
+    // lowers Lmax): a one-sided difference, None only if both sides do.
+    const auto mid = phiZ(lam, c_z, s, r_p, r_x, b);
+    if (!mid || (!up && !dn)) {
         return std::nullopt;
     }
-    return (up->z - dn->z) / (2.0 * h);
+    return up ? (up->z - mid->z) / h : (mid->z - dn->z) / h;
 }
 
 double z0(double c_z, const Stack& s, double r_p, double r_x) {
@@ -221,21 +238,28 @@ std::optional<double> lamAt(double c_z, const Stack& s, double r_p, double r_x,
         return std::nullopt;
     }
     const double l_max = lmaxKstar(s, r_x, c_z).lmax;
-    const auto top = phiZ(l_max * (1 - 1e-13), c_z, s, r_p, r_x, Branch::Near);
+    // The reach is taken at Lmax itself, and the bisection runs in s with
+    // Lambda = Lmax (1 - s^2). Phi_near has a square-root edge at Lmax, so a
+    // margin m in Lambda would cost about sqrt(m) in Phi and hide every tilt
+    // whose reach exceeds the target by less; in s the edge is regular.
+    const auto top = phiZ(l_max, c_z, s, r_p, r_x, Branch::Near);
     if (!top || top->phi < target) {
         return std::nullopt; // out of reach at this tilt
     }
-    double lo = 0.0, hi = l_max * (1 - 1e-14);
+    double lo = 0.0, hi = 1.0; // s: Phi_near falls as s grows
     for (int i = 0; i < iters; ++i) {
         const double mid = 0.5 * (lo + hi);
-        const auto v = phiZ(mid, c_z, s, r_p, r_x, Branch::Near);
+        const auto v =
+            phiZ(l_max * (1.0 - mid * mid), c_z, s, r_p, r_x, Branch::Near);
         if (v && v->phi < target) {
-            lo = mid;
-        } else {
             hi = mid;
+        } else {
+            lo = mid;
         }
     }
-    return 0.5 * (lo + hi);
+    const double sm = 0.5 * (lo + hi);
+    // Strictly below Lmax, inside the domain of solveCylinder.
+    return std::min(l_max * (1.0 - sm * sm), std::nextafter(l_max, 0.0));
 }
 
 double polish(double lam, double c_z, const Stack& s, double r_p, double r_x,
@@ -435,7 +459,9 @@ double bisect(F&& f, double lo, double hi, int it = 70) {
 
 std::vector<FarRoot> farRoots(double c_z, const Stack& s, double r_p, double r_x,
                               double target) {
-    const double l_max = lmaxKstar(s, r_x, c_z).lmax * (1 - 1e-13);
+    // The last arc ends at Lmax itself: a margin m there would drop the roots
+    // of the targets within about sqrt(m) of Phi_far(Lmax), as in lamAt.
+    const double l_max = lmaxKstar(s, r_x, c_z).lmax;
     if (!(l_max > 0.0)) {
         return {};
     }
@@ -533,7 +559,7 @@ double chordBound(const Stack& s, double r_p) {
 
 Sweeps sweeps(const Stack& s, double r_p, double r_x) {
     const double l_max = lmaxKstar(s, r_x, 0.0).lmax;
-    const double edge = l_max * (1 - 1e-13);
+    const double edge = l_max; // the reach at Lmax itself (phiZ clamps the grazing medium)
     Sweeps out;
     if (const auto near = phiZ(edge, 0.0, s, r_p, r_x, Branch::Near)) {
         out.near_reach = near->phi;
@@ -598,18 +624,19 @@ void sphereDirection(double lam, double n1, double r_p, const RayPlane& rp,
     }
 }
 
-} // namespace
-
-std::vector<Ray> projectSphere(const Stack& s, const double centre[3],
-                               const double pinhole[3], const double point[3],
-                               double tol) {
+/** @brief projectSphere() on a valid input centred at the origin, every length
+  *        in units of 2^floor(log2 r_P). */
+std::vector<Ray> projectSphereUnit(const Stack& s, const double pinhole[3],
+                                   const double point[3], double tol, int itmax) {
     std::vector<Ray> out;
+    const double centre[3] = {0.0, 0.0, 0.0};
     const auto rp_opt = rayPlane(centre, pinhole, point);
-    if (!rp_opt || !s.isValid()) {
+    if (!rp_opt) {
         return out;
     }
     const RayPlane& rp = *rp_opt;
     const double eps = 8.0 * std::numeric_limits<double>::epsilon();
+    const int it_polish = itmax >= 0 ? itmax : 30;
 
     auto emit = [&](Branch b, double lam_signed, bool ring_flag) {
         Ray r;
@@ -621,12 +648,15 @@ std::vector<Ray> projectSphere(const Stack& s, const double centre[3],
         out.push_back(r);
     };
 
+    // The point must lie strictly inside the innermost interface. This comes
+    // before the axial shortcuts, which would otherwise send the radial ray
+    // towards a point beyond the pinhole or in the port wall.
+    if (!s.R.empty() && !(s.R.back() > rp.r_x)) {
+        return out;
+    }
     if (rp.r_x <= 0.0 || (rp.axial && rp.dphi <= eps)) {
         emit(Branch::Near, 0.0, false); // the radial ray, straight in
         return out;
-    }
-    if (!s.R.empty() && !(s.R.back() > rp.r_x)) {
-        return out; // the point is not inside the innermost interface
     }
     if (rp.axial) { // Delta phi = pi: through the centre, plus possibly a ring
         emit(Branch::Far, 0.0, false);
@@ -643,8 +673,8 @@ std::vector<Ray> projectSphere(const Stack& s, const double centre[3],
     for (const auto& [target, sense] : sphereTargets(rp.dphi, s, rp.r_p, rp.r_x)) {
         if (target <= near_reach) {
             if (const auto L0 = lamAt(0.0, s, rp.r_p, rp.r_x, target)) {
-                const double L =
-                    polish(*L0, 0.0, s, rp.r_p, rp.r_x, target, Branch::Near);
+                const double L = polish(*L0, 0.0, s, rp.r_p, rp.r_x, target,
+                                        Branch::Near, it_polish);
                 const auto v = phiZ(L, 0.0, s, rp.r_p, rp.r_x, Branch::Near);
                 if (v && std::abs(v->phi - target) < tol) {
                     emit(Branch::Near, sense * L, false);
@@ -652,13 +682,43 @@ std::vector<Ray> projectSphere(const Stack& s, const double centre[3],
             }
         }
         for (const FarRoot& fr : farRoots(0.0, s, rp.r_p, rp.r_x, target)) {
-            const double L =
-                polish(fr.lambda, 0.0, s, rp.r_p, rp.r_x, target, Branch::Far);
+            const double L = polish(fr.lambda, 0.0, s, rp.r_p, rp.r_x, target,
+                                    Branch::Far, it_polish);
             const auto v = phiZ(L, 0.0, s, rp.r_p, rp.r_x, Branch::Far);
             if (v && std::abs(v->phi - target) < tol) {
                 emit(Branch::Far, sense * L, false);
             }
         }
+    }
+    return out;
+}
+
+} // namespace
+
+std::vector<Ray> projectSphere(const Stack& s, const double centre[3],
+                               const double pinhole[3], const double point[3],
+                               double tol, int itmax) {
+    const double u[3] = {pinhole[0] - centre[0], pinhole[1] - centre[1],
+                         pinhole[2] - centre[2]};
+    const double r_p = norm3(u);
+    // The model needs the pinhole outside the outermost interface.
+    if (!s.isValid() || !(r_p > 0.0) || !std::isfinite(r_p) ||
+        !(s.R.empty() || r_p > s.R.front())) {
+        return {};
+    }
+    // Lengths in units of 2^floor(log2 r_P), as in projectCylinder(): exact, and
+    // every tolerance is then dimensionless.
+    const double w = std::ldexp(1.0, std::ilogb(r_p));
+    Stack unit = s;
+    for (double& R : unit.R) {
+        R /= w;
+    }
+    const double p[3] = {u[0] / w, u[1] / w, u[2] / w};
+    const double x[3] = {(point[0] - centre[0]) / w, (point[1] - centre[1]) / w,
+                         (point[2] - centre[2]) / w};
+    std::vector<Ray> out = projectSphereUnit(unit, p, x, tol, itmax);
+    for (Ray& r : out) {
+        r.lambda *= w;
     }
     return out;
 }
@@ -792,14 +852,31 @@ std::optional<Seed> classifyNear(const Stack& s, double r_p, double r_x,
     const double sgn = dz >= 0.0 ? 1.0 : -1.0; // zeta is odd in C_z
     const double target = std::abs(dz);
 
-    // First finite zeta walking from c0 towards c1: C_z = 0 is a regular point,
-    // but a genuine reach boundary has to be approached from inside.
+    // zeta at c. At an end of a component where the reach is dphi, Lambda =
+    // Lmax: the ray is the grazing ray and zeta is its Z(Lmax, C_z) in closed
+    // form, so the bisection brackets the whole component. (Approaching the
+    // ends from inside lost the rays of the tilts next to an end, within about
+    // 1e-10 of grazing.) The same value serves at any tilt within rounding of
+    // such an end, where lamAt finds the reach a hair below dphi.
+    auto zeta = [&](double c) -> std::optional<double> {
+        if (const auto v = zetaAt(c, s, r_p, r_x, dphi)) {
+            return v;
+        }
+        const auto pz =
+            phiZ(lmaxKstar(s, r_x, c).lmax, c, s, r_p, r_x, Branch::Near);
+        if (pz && pz->phi >= dphi - 1e-9) {
+            return pz->z;
+        }
+        return std::nullopt;
+    };
+    // First finite zeta walking from c0 towards c1: the fallback for an end
+    // where zeta() has no value. C_z = 0 is a regular point, used as it stands.
     auto zin = [&](double c0, double c1, double& c_out,
                    double& z_out) -> bool {
         static const double kSteps[] = {1e-12, 1e-10, 1e-8, 1e-6, 1e-4,
                                         1e-3,  1e-2,  3e-2, 1e-1};
         if (c0 == 0.0) {
-            if (const auto v = zetaAt(0.0, s, r_p, r_x, dphi)) {
+            if (const auto v = zeta(0.0)) {
                 c_out = 0.0;
                 z_out = *v;
                 return true;
@@ -807,7 +884,7 @@ std::optional<Seed> classifyNear(const Stack& s, double r_p, double r_x,
         }
         for (double t : kSteps) {
             const double c = c0 + t * (c1 - c0);
-            if (const auto v = zetaAt(c, s, r_p, r_x, dphi)) {
+            if (const auto v = zeta(c)) {
                 c_out = c;
                 z_out = *v;
                 return true;
@@ -820,8 +897,15 @@ std::optional<Seed> classifyNear(const Stack& s, double r_p, double r_x,
         if (comp.hi <= comp.lo) {
             continue;
         }
-        double a = 0.0, za = 0.0, b = 0.0, zb = 0.0;
-        if (!zin(comp.lo, comp.hi, a, za) || !zin(comp.hi, comp.lo, b, zb)) {
+        double a = comp.lo, za = 0.0, b = comp.hi, zb = 0.0;
+        if (const auto v = zeta(a)) {
+            za = *v;
+        } else if (!zin(comp.lo, comp.hi, a, za)) {
+            continue;
+        }
+        if (const auto v = zeta(b)) {
+            zb = *v;
+        } else if (!zin(comp.hi, comp.lo, b, zb)) {
             continue;
         }
         if (b <= a) {
@@ -832,7 +916,7 @@ std::optional<Seed> classifyNear(const Stack& s, double r_p, double r_x,
         }
         for (int i = 0; i < iters; ++i) {
             const double mm = 0.5 * (a + b);
-            const auto v = zetaAt(mm, s, r_p, r_x, dphi);
+            const auto v = zeta(mm);
             if (!v) {
                 break;
             }
@@ -846,6 +930,13 @@ std::optional<Seed> classifyNear(const Stack& s, double r_p, double r_x,
         if (const auto L = lamAt(c, s, r_p, r_x, dphi)) {
             return Seed{*L, sgn * c};
         }
+        // c is within rounding of the end: the grazing ray.
+        const double l_max = lmaxKstar(s, r_x, c).lmax;
+        const auto pz = phiZ(l_max, c, s, r_p, r_x, Branch::Near);
+        if (!pz || pz->phi < dphi - 1e-9) {
+            continue;
+        }
+        return Seed{std::nextafter(l_max, 0.0), sgn * c};
     }
     return std::nullopt;
 }
@@ -1197,6 +1288,161 @@ NewtonOut farNewton(const FarStack& st, double th, double c, int ks, double dphi
     return NewtonOut{x0, x1, std::abs(f0), std::abs(f1), e0, e1};
 }
 
+// ------------------------------------------------ double-double arithmetic
+// A value is an unevaluated sum hi + lo of two doubles, about 32 significant
+// digits (Dekker 1971; Hida, Li and Bailey's QD library). Each operation below
+// has a relative error of a few 2^-104 (4.9e-32).
+
+struct DD {
+    double hi = 0.0;
+    double lo = 0.0;
+};
+
+inline DD twoSum(double a, double b) {
+    const double s = a + b;
+    const double bb = s - a;
+    return DD{s, (a - (s - bb)) + (b - bb)};
+}
+
+inline DD fastTwoSum(double a, double b) { // requires |a| >= |b|
+    const double s = a + b;
+    return DD{s, b - (s - a)};
+}
+
+inline DD twoProd(double a, double b) {
+    const double p = a * b;
+    return DD{p, std::fma(a, b, -p)};
+}
+
+inline DD operator+(DD a, DD b) {
+    DD s = twoSum(a.hi, b.hi);
+    const DD t = twoSum(a.lo, b.lo);
+    s.lo += t.hi;
+    s = fastTwoSum(s.hi, s.lo);
+    s.lo += t.lo;
+    return fastTwoSum(s.hi, s.lo);
+}
+
+inline DD operator-(DD a) { return DD{-a.hi, -a.lo}; }
+
+inline DD operator-(DD a, DD b) { return a + (-b); }
+
+inline DD operator*(DD a, DD b) {
+    DD p = twoProd(a.hi, b.hi);
+    p.lo += a.hi * b.lo + a.lo * b.hi;
+    return fastTwoSum(p.hi, p.lo);
+}
+
+inline DD operator*(DD a, double b) {
+    DD p = twoProd(a.hi, b);
+    p.lo += a.lo * b;
+    return fastTwoSum(p.hi, p.lo);
+}
+
+inline DD operator/(DD a, DD b) {
+    const double q1 = a.hi / b.hi;
+    DD r = a - b * q1;
+    const double q2 = r.hi / b.hi;
+    r = r - b * q2;
+    const double q3 = r.hi / b.hi;
+    return fastTwoSum(q1, q2) + DD{q3, 0.0};
+}
+
+/** @brief sqrt of a non-negative value; 0 for a value rounding made negative. */
+DD ddSqrt(DD a) {
+    if (!(a.hi > 0.0)) {
+        return DD{};
+    }
+    const double x = 1.0 / std::sqrt(a.hi);
+    const double ax = a.hi * x;
+    return twoSum(ax, (a - twoProd(ax, ax)).hi * (0.5 * x));
+}
+
+/** @brief sin and cos of a double with |t| <= pi/2, by their Taylor series. */
+void ddSinCos(double t, DD& s, DD& c) {
+    const DD t2 = twoProd(t, t);
+    DD st{t, 0.0}, ct{1.0, 0.0}; // t^(2k+1)/(2k+1)! and t^(2k)/(2k)!
+    s = st;
+    c = ct;
+    for (int k = 1; k <= 24; ++k) {
+        ct = ct * t2 / DD{static_cast<double>((2 * k - 1) * (2 * k)), 0.0};
+        st = st * t2 / DD{static_cast<double>((2 * k) * (2 * k + 1)), 0.0};
+        s = (k % 2) ? s - st : s + st;
+        c = (k % 2) ? c - ct : c + ct;
+        if (std::abs(ct.hi) < 1e-36) {
+            break;
+        }
+    }
+}
+
+/** @brief asin of |x| <= 1/2: one Newton step on sin from the double-precision value. */
+DD ddAsinSmall(DD x) {
+    const double a0 = std::asin(x.hi);
+    DD s, c;
+    ddSinCos(a0, s, c);
+    return DD{a0, 0.0} - (s - x) / c;
+}
+
+/** @brief asin of x in [0, 1]; above 1/2 through asin x = pi/2 - 2 asin sqrt((1 - x)/2),
+  *        which stays accurate where asin is steep (a grazing ray). */
+DD ddAsin(DD x) {
+    if (x.hi <= 0.5) {
+        return ddAsinSmall(x);
+    }
+    const DD half_pi{1.5707963267948966, 6.123233995736766e-17};
+    return half_pi - ddAsinSmall(ddSqrt((DD{1.0, 0.0} - x) * 0.5)) * 2.0;
+}
+
+/**
+  * @brief (Phi_far - dphi, Z_far - dz) at one point in double-double, and a bound
+  *        on the error of each, as the reference's _far_residual_mp computes the
+  *        residual in 34 digits.
+  *
+  * The inputs are doubles and exact; each of the 2N terms passes through at most
+  * about a dozen operations, so every value is within 16 (2N + 2) 2^-104 times
+  * the sum of the magnitudes of its terms.
+  */
+void farResidualDD(const FarStack& st, double th, double C, int ks, double dphi,
+                   double dz, DD F[2], double bound[2]) {
+    const std::size_t N = st.nMed(), T = st.nTerms();
+    std::vector<DD> nu(N);
+    const DD C2 = twoProd(C, C);
+    for (std::size_t k = 0; k < N; ++k) {
+        nu[k] = ddSqrt(twoProd(st.n[k], st.n[k]) - C2);
+    }
+    const DD lam_edge = nu[ks] * st.Rin[ks];
+    DD sth, cth;
+    ddSinCos(th, sth, cth);
+
+    DD phi{3.141592653589793, 1.2246467991473532e-16}, z{};
+    double sum_phi = kPi, sum_z = 0.0;
+    for (std::size_t j = 0; j < T; ++j) {
+        const int m = st.med[j];
+        DD a, root;
+        if (m == ks && j % 2 == 0) { // the grazing term, written in theta* as in farPoint
+            a = DD{th, 0.0};
+            root = cth;
+        } else {
+            DD x = lam_edge * sth / (nu[m] * st.rad[j]);
+            if (x.hi > 1.0 || (x.hi == 1.0 && x.lo > 0.0)) {
+                x = DD{1.0, 0.0};
+            }
+            a = ddAsin(x);
+            root = ddSqrt(DD{1.0, 0.0} - x * x);
+        }
+        const DD zj = (DD{C, 0.0} / nu[m]) * root * (st.sig[j] * st.rad[j]);
+        phi = phi + a * st.sig[j];
+        z = z - zj;
+        sum_phi += std::abs(a.hi);
+        sum_z += std::abs(zj.hi);
+    }
+    F[0] = phi - DD{dphi, 0.0};
+    F[1] = z - DD{dz, 0.0};
+    const double rel = 16.0 * static_cast<double>(T + 2) * 4.93e-32;
+    bound[0] = rel * (sum_phi + std::abs(dphi));
+    bound[1] = rel * (sum_z + std::abs(dz));
+}
+
 } // namespace
 
 std::vector<Seed> classifyFar(const Stack& s, double r_p, double r_x, double dphi,
@@ -1266,7 +1512,8 @@ std::vector<Seed> classifyFar(const Stack& s, double r_p, double r_x, double dph
     };
     std::vector<Found> found;
     std::vector<Loose> loose;
-    int examined = 0;
+    int examined = 0, precise = 0;
+    bool capped = false;
 
     while (!work.empty()) {
         examined += static_cast<int>(work.size());
@@ -1275,6 +1522,7 @@ std::vector<Seed> classifyFar(const Stack& s, double r_p, double r_x, double dph
                 loose.push_back(Loose{0.5 * (b.ta + b.tb), 0.5 * (b.ca + b.cb), b.pa,
                                       b.pb, b.ks});
             }
+            capped = true;
             break;
         }
 
@@ -1316,6 +1564,22 @@ std::vector<Seed> classifyFar(const Stack& s, double r_p, double r_x, double dph
             for (int r = 0; r < 2; ++r) {
                 v[r] = -(Y[r][0] * F[0] + Y[r][1] * F[1]);
                 err[r] = std::abs(Y[r][0]) * fp.ephi + std::abs(Y[r][1]) * fp.ez;
+            }
+            // Next to a caustic Y is large, and the rounding of the residual can
+            // swamp the box: recompute the residual in double-double there, as
+            // the reference does in 34 digits.
+            if (std::isfinite(det) && det != 0.0 &&
+                (err[0] > 0.125 * 0.5 * (Tb - Ta) || err[1] > 0.125 * 0.5 * (Cb - Ca))) {
+                DD Fd[2];
+                double eF[2];
+                farResidualDD(st, tm, cm, b.ks, dphi, dz, Fd, eF);
+                const double x_mid[2] = {tm, cm};
+                for (int r = 0; r < 2; ++r) {
+                    v[r] = -(Fd[0] * Y[r][0] + Fd[1] * Y[r][1]).hi;
+                    err[r] = 4.0 * kEps * (std::abs(v[r]) + std::abs(x_mid[r])) +
+                             std::abs(Y[r][0]) * eF[0] + std::abs(Y[r][1]) * eF[1];
+                }
+                ++precise;
             }
 
             // Krawczyk's test, eq. (krawczyk).
@@ -1454,8 +1718,10 @@ std::vector<Seed> classifyFar(const Stack& s, double r_p, double r_x, double dph
 
     if (stats) {
         stats->boxes = examined;
+        stats->precise = precise;
         stats->undecided = static_cast<int>(loose.size());
         stats->from_undecided = extra;
+        stats->capped = capped;
     }
 
     for (const RayBox& r : rays) {
@@ -1486,6 +1752,8 @@ SolveResult solveFar(const Stack& s, double r_p, double r_x, double dphi, double
         if (!have) {
             res.iters = it;
             res.residual = kInf;
+            res.lambda = L;
+            res.c_z = C;
             return res;
         }
         const double gn = std::hypot(g0, g1);
@@ -1534,25 +1802,21 @@ SolveResult solveFar(const Stack& s, double r_p, double r_x, double dphi, double
     return res;
 }
 
-std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
-                                 const double point[3],
-                                 CylinderCoverage* coverage, double tol) {
-    if (coverage) {
-        coverage->near_branch = true;
-        coverage->far_branch = true;
-    }
+namespace {
+
+/** @brief projectCylinder() on a valid input, every length in units of 2^floor(log2 r_P). */
+std::vector<Ray> projectCylinderUnit(const Stack& s, const double pinhole[3],
+                                     const double point[3], CylinderCoverage& cov,
+                                     double tol, int itmax) {
     std::vector<Ray> out;
-    if (!s.isValid()) {
-        return out;
-    }
     const double r_p = std::hypot(pinhole[0], pinhole[1]);
     const double r_x = std::hypot(point[0], point[1]);
     const double dz = point[2] - pinhole[2];
-    if (!(r_p > 0.0)) {
-        return out;
-    }
+    // Step (4) converges to the projection's tolerance when that is the stricter.
+    const double stol = std::min(1e-10, tol);
+    const int it_near = itmax >= 0 ? itmax : 80;
+    const int it_far = itmax >= 0 ? itmax : 40;
 
-    const std::vector<double> nu1v = nus(s.n, 0.0);
     auto emit = [&](Branch b, double lam, double c_z) {
         Ray r;
         r.branch = b;
@@ -1570,9 +1834,6 @@ std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
             n_min * (1 - 1e-15), 200);
         emit(Branch::Near, 0.0, (dz >= 0.0 ? 1.0 : -1.0) * c);
         return out;
-    }
-    if (!s.R.empty() && !(s.R.back() > r_x)) {
-        return out; // the point is not inside the innermost interface
     }
 
     // Step (1): the signed azimuth from the pinhole to the point.
@@ -1621,9 +1882,13 @@ std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
             }
 
             if (const auto seed = classifyNear(s, r_p, r_x, target, dz)) {
-                const SolveResult sol = solveCylinder(
-                    s, r_p, r_x, target, dz, seed->lambda, seed->c_z, Branch::Near);
-                if (sol.ok && sol.residual < tol) {
+                const SolveResult sol =
+                    solveCylinder(s, r_p, r_x, target, dz, seed->lambda, seed->c_z,
+                                  Branch::Near, it_near, stol);
+                // As the Python reference: an iterate is judged by its residual,
+                // converged to the solver's own tolerance or not (next to
+                // grazing no Newton step may be possible, yet the seed is good).
+                if (sol.residual < tol && inDomain(sol.lambda, sol.c_z, s, r_x)) {
                     if (opposite) {
                         for (double sg : senses_both) {
                             emit(Branch::Near, turn * sg * sol.lambda, sol.c_z);
@@ -1634,10 +1899,12 @@ std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
                 }
             }
 
-            for (const Seed& sd : classifyFar(s, r_p, r_x, target, dz)) {
-                const SolveResult sol =
-                    solveFar(s, r_p, r_x, target, dz, sd.lambda, sd.c_z);
-                if (!sol.ok || sol.residual >= tol) {
+            FarSearchStats fst;
+            for (const Seed& sd : classifyFar(s, r_p, r_x, target, dz, 1e-13, &fst)) {
+                const SolveResult sol = solveFar(s, r_p, r_x, target, dz, sd.lambda,
+                                                 sd.c_z, it_far, stol);
+                // As the Python reference: judged by its residual (audit A2).
+                if (!(sol.residual < tol) || !inDomain(sol.lambda, sol.c_z, s, r_x)) {
                     continue;
                 }
                 if (opposite &&
@@ -1653,9 +1920,52 @@ std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
                     emit(Branch::Far, turn * sense * sol.lambda, sol.c_z);
                 }
             }
+            if (fst.capped) {
+                cov.far_branch = false; // not certified: a ray may be missing
+            }
         }
     }
-    (void)nu1v;
+    return out;
+}
+
+} // namespace
+
+std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
+                                 const double point[3],
+                                 CylinderCoverage* coverage, double tol, int itmax) {
+    CylinderCoverage cov; // both false: "not searched" until the model applies
+    std::vector<Ray> out;
+    const double r_p = std::hypot(pinhole[0], pinhole[1]);
+    const double r_x = std::hypot(point[0], point[1]);
+    // The model needs the pinhole outside the outermost interface and the point
+    // strictly inside the innermost one. Otherwise nothing is searched, and the
+    // coverage says so rather than certifying "no image".
+    const bool applies =
+        s.isValid() && r_p > 0.0 && std::isfinite(r_p) && std::isfinite(r_x) &&
+        std::isfinite(point[2]) && std::isfinite(pinhole[2]) &&
+        (s.R.empty() || (r_p > s.R.front() && r_x < s.R.back()));
+    if (applies) {
+        // Lengths in units of u = 2^floor(log2 r_P), so that every tolerance is
+        // dimensionless. Dividing by a power of two is exact: the problem solved
+        // is the one given to the last bit. (Dividing by r_P itself would round
+        // every length, and next to grazing that alone costs ~eps/sqrt(delta) in Phi.)
+        const double u = std::ldexp(1.0, std::ilogb(r_p));
+        Stack unit = s;
+        for (double& R : unit.R) {
+            R /= u;
+        }
+        const double p[3] = {pinhole[0] / u, pinhole[1] / u, pinhole[2] / u};
+        const double x[3] = {point[0] / u, point[1] / u, point[2] / u};
+        cov.near_branch = true;
+        cov.far_branch = true;
+        out = projectCylinderUnit(unit, p, x, cov, tol, itmax);
+        for (Ray& r : out) {
+            r.lambda *= u;
+        }
+    }
+    if (coverage) {
+        *coverage = cov;
+    }
     return out;
 }
 
@@ -1710,9 +2020,11 @@ SolveResult solveCylinder(const Stack& s, double r_p, double r_x, double dphi,
         const double j11 = dPhiDLam(L, C, s, r_p, r_x, b);
         const double j12 = dPhiDCz(L, C, s, r_p, r_x, b); // = dZ/dLambda, Property symmetry
         const auto j22o = dZDCz(L, C, s, r_p, r_x, b);
-        if (!j22o) {
+        if (!j22o) { // no Newton step: the caller judges the iterate by its residual
             res.iters = it;
             res.residual = gnorm;
+            res.lambda = L;
+            res.c_z = C;
             return res;
         }
         const double j22 = *j22o;
@@ -1720,6 +2032,8 @@ SolveResult solveCylinder(const Stack& s, double r_p, double r_x, double dphi,
         if (!std::isfinite(det) || det == 0.0) {
             res.iters = it;
             res.residual = gnorm;
+            res.lambda = L;
+            res.c_z = C;
             return res;
         }
         const double p0 = -(j22 * g0v - j12 * g1v) / det;
@@ -1729,6 +2043,8 @@ SolveResult solveCylinder(const Stack& s, double r_p, double r_x, double dphi,
         if (!gcur) {
             res.iters = it;
             res.residual = gnorm;
+            res.lambda = L;
+            res.c_z = C;
             return res;
         }
         const double slope = p0 * g0v + p1 * g1v;

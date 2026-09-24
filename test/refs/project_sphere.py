@@ -19,6 +19,8 @@ the sense of rotation in the ray plane, towards +e2 when positive.
 
     python project_sphere.py        self-test against a brute-force ray tracer
 """
+import math
+
 import numpy as np
 
 from project_cylinder import (
@@ -89,7 +91,7 @@ def sweeps(n, R, rP, rX):
     M(0) is the larger of that and the near-branch reach.
     """
     Lm = Lmax_kstar(n, R, rX, 0.0)[0]
-    edge = Lm * (1 - 1e-13)
+    edge = Lm                                      # at Lmax itself: Phi_Z clamps the grazing medium's rounding
     near = Phi_Z(edge, 0.0, n, R, rP, rX)
     near = 0.0 if near is None else near[0]
     vals = [np.pi, Phi_Z(edge, 0.0, n, R, rP, rX, far=True)[0]]
@@ -150,13 +152,29 @@ def project(n, R, O, P0, X, tol=1e-9):
     On the axial line the answer is Section ring's: the radial ray at Delta phi =
     0, or the central ray plus possibly a ring at Delta phi = pi.  A ring is
     returned as ("ring", Lambda, None), since it is a set of rays, not one.
+
+    Every length is divided by u = 2^floor(log2 r_P) on entry and Lambda is
+    multiplied by u on exit, as in project_cylinder.project(), so the
+    tolerances are dimensionless and a rig gives the same rays in metres and in
+    millimetres. The division by a power of two is exact.
     """
-    n, R = list(map(float, n)), list(map(float, R))
-    rP, rX, dphi, e1, e2 = ray_plane(O, P0, X)
+    O, P0, X = (np.asarray(v, float) for v in (O, P0, X))
+    rP = float(np.linalg.norm(P0 - O))
+    unit = math.ldexp(1.0, math.frexp(rP)[1] - 1) if rP > 0 else 1.0   # ray_plane() rejects r_P = 0
+    out = _project_unit(list(map(float, n)), [float(r) / unit for r in R],
+                        (P0 - O) / unit, (X - O) / unit, tol)
+    return [(b, L * unit, d) for b, L, d in out]
+
+
+def _project_unit(n, R, P0, X, tol):
+    """project() with the centre at the origin and every length in units of u = 2^floor(log2 r_P)."""
+    rP, rX, dphi, e1, e2 = ray_plane(np.zeros(3), P0, X)
+    if R and not (rP > R[0]):
+        raise ValueError("the pinhole is not outside the outermost interface")
     if rX <= 0.0:                                          # X at the centre
         return [("near", 0.0, direction_at_pinhole(0.0, n[0], rP, e1, e2))]
     if R and not (R[-1] > rX):
-        raise ValueError(f"r_X = {rX:g} is not inside the innermost interface R = {R[-1]:g}")
+        raise ValueError(f"the point is not inside the innermost interface (r_X / R = {rX / R[-1]:.9g})")
 
     out = []
     axial = e2 is None

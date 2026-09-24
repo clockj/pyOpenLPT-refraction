@@ -83,8 +83,12 @@ struct PinCurvedParam : public PinholeParam {
     Pt3D axis;   // Unit axis direction; ignored by the sphere.
     std::vector<double> refract_array; // n_1..n_N, pinhole side first.
     std::vector<double> radius_array;  // R_1..R_{N-1}, strictly decreasing.
-    double proj_tol = 1e-9; // Projection solver tolerance.
-    int proj_nmax = 80;     // Projection solver max iterations.
+    // Tolerance on each ray's residual hypot(Phi - dphi, (Z - dz) / u), with u
+    // the power of two in (r_P/2, r_P] and r_P the pinhole's distance from the
+    // axis or centre: dimensionless, so the same in any length unit. The solvers
+    // converge to min(1e-10, proj_tol).
+    double proj_tol = 1e-9;
+    int proj_nmax = 80; // Iteration cap of each Newton solve of the projection.
 };
 
 struct PinCylinderParam : public PinCurvedParam {};
@@ -366,9 +370,19 @@ class RefractionCurvedCamera : public Camera {
 public:
     StatusOr<Pt2D> project(const Pt3D& pt_world,
                            bool is_print_detail = false) const override;
+    /**
+      * @brief Every image of a point.
+      *
+      * An InvalidArgument error when the pinhole is not outside the outermost
+      * interface. No image, with coverage false, when the point is not strictly
+      * inside the innermost one (outside the model), or when the cylinder's box
+      * search reached its cap. Rays leaving the pinhole away from the viewing
+      * direction form no image and are dropped.
+      */
     StatusOr<std::vector<ImageRay>> projectAll(
         const Pt3D& pt_world, ProjectionCoverage* coverage = nullptr) const override;
-    /** @brief Back-project by tracing the pixel ray through the quadrics; single-valued. */
+    /** @brief Back-project by tracing the pixel ray through the quadrics; single-valued.
+      *        An InvalidArgument error when the pinhole is not outside the outermost interface. */
     StatusOr<Line3D> lineOfSight(const Pt2D& pt_img_dist) const override;
     int getNRow() const override;
     int getNCol() const override;

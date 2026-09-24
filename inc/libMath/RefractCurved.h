@@ -193,10 +193,19 @@ double chordBound(const Stack& s, double r_p);
   * far-branch root on its own monotone arc, and the same again for each wrapped
   * target that M(0) allows. On the axial line the answer is Section ring's: the
   * radial or central ray, plus a ring when eq. (ring) holds.
+  *
+  * Every length is divided on entry by u = 2^floor(log2 r_P), the power of two
+  * in (r_P/2, r_P], and Lambda is multiplied by u on exit, so `tol` (on the
+  * sweep residual) and the internal tolerances are dimensionless and a rig gives
+  * the same rays in any length unit. The division is exact. `itmax` caps the
+  * Newton polish of each root (-1: its default, 30).
+  *
+  * Returns no ray when the model does not apply: an invalid stack, a pinhole not
+  * outside the outermost interface, or a point not strictly inside the innermost.
   */
 std::vector<Ray> projectSphere(const Stack& s, const double centre[3],
                                const double pinhole[3], const double point[3],
-                               double tol = 1e-9);
+                               double tol = 1e-9, int itmax = -1);
 
 // ------------------------------------------------------------------ cylinders
 
@@ -244,8 +253,10 @@ std::optional<Seed> classifyNear(const Stack& s, double r_p, double r_x,
 /** @brief What the far-branch box search did, for diagnostics and tests. */
 struct FarSearchStats {
     int boxes = 0;          ///< Boxes examined.
+    int precise = 0;        ///< Residuals recomputed in double-double next to a caustic.
     int undecided = 0;      ///< Boxes still undecided at the width limit.
     int from_undecided = 0; ///< Rays recovered by Newton from those.
+    bool capped = false;    ///< The search reached `maxboxes`; its result is not certified.
 };
 
 /**
@@ -259,11 +270,16 @@ struct FarSearchStats {
   * exactly one. Otherwise it is halved, and a box still undecided at `tol` is
   * kept and polished by Newton. **Nothing is sampled**, so no ray is lost.
   *
-  * Deviation from the reference implementation: where the reference recomputes
-  * the residual in 34-digit arithmetic to sharpen Krawczyk's test next to a
-  * caustic, this uses double precision throughout. That only ever makes the test
-  * more conservative -- a box that would have been certified becomes undecided
-  * and is resolved by Newton instead -- so it cannot drop a box that holds a ray.
+  * Next to a caustic the inverse Jacobian is large and the rounding of the
+  * residual at a box's centre can swamp the box. There the residual is
+  * recomputed in double-double arithmetic (about 32 digits), where the reference
+  * uses 34-digit mpmath. Without it the boxes next to a fold are halved to `tol`
+  * and Newton from each lands at a different point of the flat valley, which
+  * returned copies of one ray (audit A3).
+  *
+  * If more than `maxboxes` boxes are examined, the remaining ones are polished
+  * as undecided boxes and `stats->capped` is set: the result is then not
+  * certified.
   */
 std::vector<Seed> classifyFar(const Stack& s, double r_p, double r_x, double dphi,
                               double dz, double tol = 1e-13,
@@ -305,7 +321,11 @@ void directionFromInvariants(const double pinhole[3], double lam, double c_z,
                              double n1, double nu1, double out[3]);
 
 /** @brief What `projectCylinder` searched, so a caller can tell a real
-  *        "no image" from "not looked for". Both are true now.
+  *        "no image" from "not looked for".
+  *
+  * Both are false when the model does not apply (an invalid stack, a pinhole not
+  * outside the outermost interface, or a point not strictly inside the
+  * innermost), and `far_branch` is false when the box search reached its cap.
   */
 struct CylinderCoverage {
     bool near_branch = false;
@@ -329,10 +349,22 @@ struct CylinderCoverage {
   *
   * The axis is aligned with z and passes through the origin; callers transform
   * into that frame first.
+  *
+  * Every length is divided on entry by u = 2^floor(log2 r_P), the power of two
+  * in (r_P/2, r_P], and Lambda is multiplied by u on exit. `tol` bounds the
+  * residual hypot(Phi - dphi, (Z - dz) / u) of each ray, so it is dimensionless
+  * and a rig gives the same rays in any length unit; in millimetres a bound on
+  * Z - dz itself would be 1000 times stricter than in metres, beyond what the
+  * closed forms resolve next to grazing (audit A1). Dividing by a power of two
+  * is exact, so the problem solved is the one given to the last bit; dividing by
+  * r_P would round every length, which next to grazing costs about
+  * eps/sqrt(1 - Lambda/Lmax) in Phi. The step-(4) solvers converge to
+  * min(1e-10, tol), and `itmax` caps their iterations (-1: their defaults, 80
+  * near and 40 far).
   */
 std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
                                  const double point[3],
                                  CylinderCoverage* coverage = nullptr,
-                                 double tol = 1e-9);
+                                 double tol = 1e-9, int itmax = -1);
 
 } // namespace refract_curved
