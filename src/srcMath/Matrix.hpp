@@ -279,9 +279,12 @@ template <class T> void Matrix<T>::write(std::string file_name) {
 }
 
 template <class T> void Matrix<T>::write(std::ostream &os) {
+  write(os, SAVEPRECISION);
+}
+
+template <class T> void Matrix<T>::write(std::ostream &os, int precision) {
   os.setf(std::ios_base::scientific);
-  os.precision(SAVEPRECISION);
-  // os.precision(std::numeric_limits<double>::max_digits10);
+  os.precision(precision);
 
   for (int i = 0; i < _dim_row; i++) {
     for (int j = 0; j < _dim_col - 1; j++) {

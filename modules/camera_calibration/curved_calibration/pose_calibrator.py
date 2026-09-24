@@ -150,6 +150,15 @@ class PoseFitConfig:
     retry_rot_deg: float = 6.0     # spread of the retry starts
     retry_trans_mm: float = 30.0
     retry_seed: int = 20260918
+    # A wand fit can stall the same way, but it is one joint fit: a stalled
+    # camera drags the triangulated points, so every camera's residual rises
+    # with it (all within 1.7x of each other in the stall of the synthetic tests)
+    # and no camera stands out. So a wand fit whose rms stays above this is
+    # rerun from retry_starts perturbed starts instead. Its rms mixes ray
+    # residuals in px with wand-length residuals in units of wand_sigma_mm; a
+    # converged fit sits near 0.6x the pixel noise (0.11-0.15 at 0.2 px), and the
+    # stalls seen had 7.6 and 8.2.
+    wand_retry_rms: float = 1.0
     verbosity: int = 0
 
 
@@ -387,9 +396,11 @@ class PoseCalibrator:
         `J = U S V^T`. Each observation then enters the cost with unit variance in
         every direction, which is what least squares assumes.
 
-        Measured once per camera from the anchor pose: the geometry barely moves
-        during a fit, so re-measuring each iteration would cost a great deal and
-        change very little.
+        Measured at the pose each outer round starts from, and held fixed within
+        the round, so least_squares sees one cost. Measured once, at a start a few
+        degrees off, the weights made the answer depend on the start: two starts
+        of the same data ended 0.014 deg and 0.25 mm apart (D3 of the synthetic
+        tests), more than the unweighted fit's spread.
         """
         cam = self.make_camera(pose)
         centre = pose.center()
@@ -567,10 +578,10 @@ class PoseCalibrator:
             pts3d = np.asarray(obs_by_cam[cid][0], float)
             uvs = np.asarray(obs_by_cam[cid][1], float)
             anchor = self.poses[cid]
-            weights = (self._whitening_matrices(anchor, pts3d, uvs)
-                       if self.cfg.weight_by_sensitivity else None)
             rounds = []
             for outer in range(self.cfg.max_outer):
+                weights = (self._whitening_matrices(anchor, pts3d, uvs)
+                           if self.cfg.weight_by_sensitivity else None)
                 res = least_squares(
                     self._residuals_one_cam, np.zeros(self._n_par),
                     args=(anchor, pts3d, uvs, weights), method="trf",
@@ -618,8 +629,6 @@ class PoseCalibrator:
         for cid, (pts3d, uvs, rms) in sorted(fitted.items()):
             if rms <= cutoff:
                 continue
-            weights = (self._whitening_matrices(self.poses[cid], pts3d, uvs)
-                       if self.cfg.weight_by_sensitivity else None)
             best_pose, best_rms = self.poses[cid], rms
             for _ in range(self.cfg.retry_starts):
                 axis = rng.normal(size=3)
@@ -629,6 +638,8 @@ class PoseCalibrator:
                     rng.normal(size=3) * self.cfg.retry_trans_mm)
                 anchor = start
                 for _ in range(self.cfg.max_outer):
+                    weights = (self._whitening_matrices(anchor, pts3d, uvs)
+                               if self.cfg.weight_by_sensitivity else None)
                     res = least_squares(
                         self._residuals_one_cam, np.zeros(self._n_par),
                         args=(anchor, pts3d, uvs, weights), method="trf",
@@ -652,10 +663,69 @@ class PoseCalibrator:
         return retried
 
     def fit_wand(self, frames: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Fit to wand frames: two endpoints a known distance apart, positions unknown."""
+        """Fit to wand frames: two endpoints a known distance apart, positions unknown.
+
+        A fit whose rms stays above `wand_retry_rms` is rerun from perturbed
+        starts and the best answer is kept (see `_retry_wand`).
+        """
         layout = self._wand_layout(frames, set(self.poses))
-        return self._solve(
-            lambda x, anchors: self._residuals_wand(x, anchors, frames, layout), "wand")
+        residual_fn = lambda x, anchors: self._residuals_wand(x, anchors, frames, layout)
+        start = dict(self.poses)
+        out = self._solve(residual_fn, "wand")
+        out["retried"] = self._retry_wand(residual_fn, out, start)
+        return out
+
+    def _retry_wand(self, residual_fn, out, start):
+        """Rerun a stalled wand fit from perturbed starts; keep the best answer.
+
+        A wand fit can stop at a local minimum degrees from the truth: in the
+        synthetic tests one noise-free fit ended 6.8 deg and 42 mm out with rms
+        8.2, where the same frames fitted from other starts reach 3e-11.
+
+        Up to `retry_starts` restarts perturb every free camera about the fit's
+        own `start`; if none succeeds, as many more perturb them about the
+        stalled answer, as `_retry_outliers` does for one camera. On four stalls
+        of the synthetic tests the first kind succeeded at 10 of 24 restarts and
+        recovered every stall by its third, the second at 4 of 24 and missed one
+        stall (the notes repository's code/tests/openlpt_followup/, D4). The
+        first restart that brings the rms below `wand_retry_rms` ends the
+        search. `out` is updated in place.
+        """
+        was = out["rms"]
+        if (self.cfg.retry_starts <= 0 or not self.free_ids
+                or not (was > self.cfg.wand_retry_rms)):
+            return []
+        stalled = dict(self.poses)
+        best = (was, stalled, out["history"])
+        tried = 0
+        for centre in (start, stalled):
+            rng = np.random.default_rng(self.cfg.retry_seed)
+            for _ in range(self.cfg.retry_starts):
+                trial = dict(centre)
+                for cid in self.free_ids:
+                    axis = rng.normal(size=3)
+                    axis /= np.linalg.norm(axis)
+                    trial[cid] = centre[cid].retract(
+                        axis * np.radians(self.cfg.retry_rot_deg),
+                        rng.normal(size=3) * self.cfg.retry_trans_mm)
+                self.poses = trial
+                got = self._solve(residual_fn, f"wand retry {tried}")
+                tried += 1
+                if got["rms"] < best[0]:
+                    best = (got["rms"], dict(self.poses), got["history"])
+                if best[0] <= self.cfg.wand_retry_rms:
+                    break
+            if best[0] <= self.cfg.wand_retry_rms:
+                break
+        self.poses = best[1]
+        if best[0] >= was:
+            return []
+        history = best[2] + [{"outer": "retry", "rms": best[0], "was": was,
+                              "starts": tried}]
+        out.update(poses=self.poses, history=history, rms=best[0])
+        if self.cfg.verbosity:
+            print(f"  [wand] retried: rms {was:.4f} -> {best[0]:.4f} ({tried} starts)")
+        return [{"rms_before": was, "rms_after": best[0], "starts": tried}]
 
     # -- diagnostics -----------------------------------------------------
     def reprojection_rmse(self, observations: List[Dict[str, Any]]) -> float:

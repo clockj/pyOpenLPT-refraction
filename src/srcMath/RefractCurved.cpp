@@ -134,10 +134,12 @@ std::optional<double> radialAction(double lam, double c_z, const Stack& s,
                                    double r_p, double r_x, Branch b) {
     const std::vector<double> nu = nus(s.n, c_z);
     const std::size_t N = s.nMedia();
-    // The elementary antiderivative of eq. (W).
+    // The elementary antiderivative of eq. (W). At bb = 0 the second term is 0,
+    // its limit, also at r = 0, where bb / r would be 0/0: the far branch's
+    // turning point at Lambda = 0 (the radial ray).
     auto F = [](double r, double bb, double v) {
-        return v * (std::sqrt(std::max(r * r - bb * bb, 0.0)) -
-                    bb * std::acos(clamp1(bb / r)));
+        const double turn = bb == 0.0 ? 0.0 : bb * std::acos(clamp1(bb / r));
+        return v * (std::sqrt(std::max(r * r - bb * bb, 0.0)) - turn);
     };
     double tot = 0.0;
     for (std::size_t k = 0; k < N; ++k) {
@@ -654,16 +656,31 @@ std::vector<Ray> projectSphereUnit(const Stack& s, const double pinhole[3],
     if (!s.R.empty() && !(s.R.back() > rp.r_x)) {
         return out;
     }
-    if (rp.r_x <= 0.0 || (rp.axial && rp.dphi <= eps)) {
-        emit(Branch::Near, 0.0, false); // the radial ray, straight in
+    if (rp.r_x <= 0.0) {
+        emit(Branch::Near, 0.0, false); // the point at the centre: the radial ray
         return out;
     }
-    if (rp.axial) { // Delta phi = pi: through the centre, plus possibly a ring
-        emit(Branch::Far, 0.0, false);
-        for (const FarRoot& fr : farRoots(0.0, s, rp.r_p, rp.r_x, kPi)) {
-            if (fr.lambda > 1e-12) {
-                emit(Branch::Far, fr.lambda, true);
-                break;
+    if (rp.axial) {
+        // Section ring: every plane through the axial line holds both points. The
+        // radial ray (Delta phi = 0) or the ray through the centre (Delta phi = pi)
+        // reaches the point in all of them at once, and so does a cone of rays for
+        // each root Lambda > 0 of Phi = t, for every target t of step (3) on either
+        // branch; each cone images as a ring. A single sphere has at most one ring;
+        // nothing bounds a shell, so every root is returned (audit C5).
+        emit(rp.dphi <= eps ? Branch::Near : Branch::Far, 0.0, false);
+        const double near_reach = sweeps(s, rp.r_p, rp.r_x).near_reach;
+        for (const auto& target_sense : sphereTargets(rp.dphi, s, rp.r_p, rp.r_x)) {
+            const double target = target_sense.first;
+            if (target <= near_reach) {
+                const auto L = lamAt(0.0, s, rp.r_p, rp.r_x, target);
+                if (L && *L > 1e-12) {
+                    emit(Branch::Near, *L, true);
+                }
+            }
+            for (const FarRoot& fr : farRoots(0.0, s, rp.r_p, rp.r_x, target)) {
+                if (fr.lambda > 1e-12) {
+                    emit(Branch::Far, fr.lambda, true);
+                }
             }
         }
         return out;
@@ -1748,7 +1765,8 @@ SolveResult solveFar(const Stack& s, double r_p, double r_x, double dphi, double
 
     double g0 = 0.0, g1 = 0.0;
     bool have = residual(L, C, g0, g1);
-    for (int it = 0; it < itmax; ++it) {
+    int it = 0; // the iterations taken, also after an early break
+    for (; it < itmax; ++it) {
         if (!have) {
             res.iters = it;
             res.residual = kInf;
@@ -1796,7 +1814,7 @@ SolveResult solveFar(const Stack& s, double r_p, double r_x, double dphi, double
     }
     res.lambda = L;
     res.c_z = C;
-    res.iters = itmax;
+    res.iters = it;
     res.residual = have ? std::hypot(g0, g1) : kInf;
     res.ok = res.residual < tol;
     return res;
@@ -1827,19 +1845,23 @@ std::vector<Ray> projectCylinderUnit(const Stack& s, const double pinhole[3],
         out.push_back(r);
     };
 
+    // Step (1): the signed azimuth from the pinhole to the point.
+    const double d = std::remainder(std::atan2(point[1], point[0]) -
+                                        std::atan2(pinhole[1], pinhole[0]),
+                                    2.0 * kPi);
+
     if (r_x < 1e-15) { // step (1): on the axis, the answer is the radial ray
         const double n_min = *std::min_element(s.n.begin(), s.n.end());
         const double c = bisect(
             [&](double cc) { return z0(cc, s, r_p, r_x) - std::abs(dz); }, 0.0,
             n_min * (1 - 1e-15), 200);
-        emit(Branch::Near, 0.0, (dz >= 0.0 ? 1.0 : -1.0) * c);
+        // Its branch is the limit r_X -> 0 of the general case: far when the
+        // point lies beyond the axis as seen from the pinhole. Exactly on the
+        // axis the azimuth is undefined and either label holds.
+        const bool beyond = (point[0] != 0.0 || point[1] != 0.0) && std::abs(d) > 0.5 * kPi;
+        emit(beyond ? Branch::Far : Branch::Near, 0.0, (dz >= 0.0 ? 1.0 : -1.0) * c);
         return out;
     }
-
-    // Step (1): the signed azimuth from the pinhole to the point.
-    const double d = std::remainder(std::atan2(point[1], point[0]) -
-                                        std::atan2(pinhole[1], pinhole[0]),
-                                    2.0 * kPi);
     const double turn = d >= 0.0 ? 1.0 : -1.0;
     double dphi = std::abs(d);
 

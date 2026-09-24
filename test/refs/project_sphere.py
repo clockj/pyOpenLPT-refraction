@@ -139,6 +139,25 @@ def ring(n, R, rP, rX, tol=1e-12):
     return float(roots[0]) if roots else None
 
 
+def ring_roots(n, R, rP, rX, behind=True, tol=1e-12):
+    """Every ring on the axial line, as (branch, Lambda): all roots Lambda > tol of Phi = t.
+
+    The targets t are those of step (3) at Delta phi = pi when X lies beyond the centre (pi, 3 pi, ...) or at
+    Delta phi = 0 when it lies in front of it (2 pi, 4 pi, ...), on either branch, while they are within reach.  A
+    single sphere has at most one ring, the root of ring(); nothing bounds a shell, so all of them are returned
+    (audit C5).
+    """
+    near_reach, _ = sweeps(n, R, rP, rX)
+    out = []
+    for t, _sense in _targets(np.pi if behind else 0.0, n, R, rP, rX):
+        if t <= near_reach:
+            L = lam_at(0.0, n, R, rP, rX, t)
+            if L is not None and L > tol:
+                out.append(("near", float(L)))
+        out += [("far", float(L)) for L, _, _ in far_roots(0.0, n, R, rP, rX, t) if L > tol]
+    return out
+
+
 # -------------------------------------------------------------- the projector
 def project(n, R, O, P0, X, tol=1e-9):
     """Steps (1)-(4): every ray from the pinhole P0 to X, as (branch, Lambda, direction).
@@ -150,8 +169,9 @@ def project(n, R, O, P0, X, tol=1e-9):
     monotone arc.  Both are solved for every target of _targets().
 
     On the axial line the answer is Section ring's: the radial ray at Delta phi =
-    0, or the central ray plus possibly a ring at Delta phi = pi.  A ring is
-    returned as ("ring", Lambda, None), since it is a set of rays, not one.
+    0, or the central ray at Delta phi = pi, plus a ring for every root of
+    ring_roots().  A ring is returned as ("ring", Lambda, None), since it is a
+    set of rays, not one.
 
     Every length is divided by u = 2^floor(log2 r_P) on entry and Lambda is
     multiplied by u on exit, as in project_cylinder.project(), so the
@@ -178,13 +198,10 @@ def _project_unit(n, R, P0, X, tol):
 
     out = []
     axial = e2 is None
-    if axial and dphi <= 8 * _EPS:                         # X between O and P_0
-        return [("near", 0.0, direction_at_pinhole(0.0, n[0], rP, e1, e2))]
-    if axial:                                              # X beyond O: through the centre
-        out.append(("far", 0.0, direction_at_pinhole(0.0, n[0], rP, e1, e2)))
-        Lr = ring(n, R, rP, rX)
-        if Lr is not None:
-            out.append(("ring", Lr, None))
+    if axial:                                              # Section ring
+        behind = dphi > 8 * _EPS                           # X beyond O: the ray through the centre; else the radial ray
+        out.append(("far" if behind else "near", 0.0, direction_at_pinhole(0.0, n[0], rP, e1, e2)))
+        out += [("ring", L, None) for _branch, L in ring_roots(n, R, rP, rX, behind)]
         return out
 
     near_reach, _ = sweeps(n, R, rP, rX)

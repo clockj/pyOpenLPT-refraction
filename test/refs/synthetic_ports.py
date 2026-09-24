@@ -495,11 +495,18 @@ def heldout_projection_error(cams_fit: Dict[int, Any], cams_true: Dict[int, Any]
 
 
 def pose_error(est: CameraSpec, truth: CameraSpec) -> Tuple[float, float]:
-    """(rotation error in degrees, centre error in the same units as tvec)."""
+    """(rotation error in degrees, centre error in the same units as tvec).
+
+    The rotation error is the angle of R_est R_true^T, as atan2(|axial part|,
+    (trace - 1)/2), which resolves small angles down to round-off. The arccos of
+    (trace - 1)/2 cannot: the largest double below 1 already gives 8.5e-7 deg.
+    """
     r_est = cv2.Rodrigues(np.asarray(est.rvec, float).reshape(3, 1))[0]
     r_true = cv2.Rodrigues(np.asarray(truth.rvec, float).reshape(3, 1))[0]
-    cos = (np.trace(r_est @ r_true.T) - 1.0) / 2.0
-    ang = float(np.degrees(np.arccos(np.clip(cos, -1.0, 1.0))))
+    m = r_est @ r_true.T
+    sin = 0.5 * np.sqrt((m[2, 1] - m[1, 2]) ** 2 + (m[0, 2] - m[2, 0]) ** 2
+                        + (m[1, 0] - m[0, 1]) ** 2)
+    ang = float(np.degrees(np.arctan2(sin, 0.5 * (np.trace(m) - 1.0))))
     return ang, float(np.linalg.norm(est.center() - truth.center()))
 
 

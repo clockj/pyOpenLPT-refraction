@@ -79,6 +79,7 @@ tests/**
 !tests/test_refract_curved_cpp.py
 !tests/test_refract_curved_camera.py
 !tests/test_refract_calibration.py
+!tests/test_refract_curved_audit.py
 
 test/inputs/test_LPTNetBenchmark
 docs/

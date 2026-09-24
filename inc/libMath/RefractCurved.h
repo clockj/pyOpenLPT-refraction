@@ -135,11 +135,13 @@ double polish(double lam, double c_z, const Stack& s, double r_p, double r_x,
 // -------------------------------------------------------------- the far branch
 
 /**
-  * @brief Every turning point of Phi_far on (0, Lmax), none missed.
+  * @brief Every turning point of Phi_far on (0, Lmax).
   *
   * With t = Lambda^2, Phi_far' is a sum of terms each increasing in t
   * (eq. intervalbound), so a cell whose end values exclude zero holds no turning
-  * point and subdivision brackets every sign change. Nothing is sampled.
+  * point and subdivision brackets every sign change. Nothing is sampled; the
+  * signs of the end values are taken as computed, not padded for rounding (as in
+  * the reference), so a turning point within rounding of zero can be missed.
   */
 std::vector<double> farTurns(double c_z, const Stack& s, double r_p, double r_x,
                              double tol = 1e-14);
@@ -192,7 +194,9 @@ double chordBound(const Stack& s, double r_p);
   * Returns the near-branch ray when the target is within reach, every
   * far-branch root on its own monotone arc, and the same again for each wrapped
   * target that M(0) allows. On the axial line the answer is Section ring's: the
-  * radial or central ray, plus a ring when eq. (ring) holds.
+  * radial or central ray, plus a ring (`is_ring`) for every root Lambda > 0 of
+  * Phi = t on either branch, for each of those targets t. A single sphere has at
+  * most one, when eq. (ring) holds; a shell is not bounded, so all are returned.
   *
   * Every length is divided on entry by u = 2^floor(log2 r_P), the power of two
   * in (r_P/2, r_P], and Lambda is multiplied by u on exit, so `tol` (on the
@@ -226,7 +230,8 @@ struct Component {
   *
   * The range is cut where k* can switch; on each piece every term of the reach is
   * monotone in C_z, so end values bound it and subdivision decides each interval.
-  * Nothing is sampled, so no component is lost.
+  * Nothing is sampled, so no component is lost to sampling; the end values are
+  * compared as computed, not padded for rounding.
   */
 std::vector<Component> components(const Stack& s, double r_p, double r_x,
                                   double dphi, double chi = -1.0,
@@ -268,7 +273,11 @@ struct FarSearchStats {
   * eq. (farbox) exclude the target, or when Krawczyk's test on the box grown by
   * 10% shows it holds no ray; it yields a ray when the test shows it holds
   * exactly one. Otherwise it is halved, and a box still undecided at `tol` is
-  * kept and polished by Newton. **Nothing is sampled**, so no ray is lost.
+  * kept and polished by Newton. **Nothing is sampled**, so no ray is lost to
+  * sampling. Rounding remains: the bounds' sign decisions are not padded (the
+  * reference's are not either, audit C4), and within about 5e-14 of grazing
+  * Phi cannot be evaluated to the projection's tolerance, so such a ray can be
+  * missed. A capped search (below) is not certified at all.
   *
   * Next to a caustic the inverse Jacobian is large and the rounding of the
   * residual at a box's centre can swamp the box. There the residual is

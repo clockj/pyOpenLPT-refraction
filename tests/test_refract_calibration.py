@@ -292,10 +292,13 @@ def test_a_camera_stuck_in_a_local_minimum_is_detected_and_retried():
 
     It stalls at a residual tens of times its siblings', which is what makes it
     detectable. Measured frequency on this layout: about 1 start in 25 with the old,
-    rolled look_at, and 2 in seeds 0-16 with the corrected one. The guard must
-    notice and re-fit rather than return the stuck pose.
+    rolled look_at, and 2 in seeds 0-16 with the corrected one (4 and 16). Since
+    the whitening is measured at each round's pose, fewer starts stall: seed 4 no
+    longer does, 16 still does (code/tests/openlpt_followup/d2_out_*.txt in the
+    notes repository). The guard must notice and re-fit rather than return the
+    stuck pose.
     """
-    rng = np.random.default_rng(4)  # a start that stalls; seed 5 did with the rolled look_at
+    rng = np.random.default_rng(16)  # a start that stalls; seeds 5 and 4 did before
     port, specs = _port("cylinder"), _rig("cylinder")
     cams = {i: sp.build_camera(s, port) for i, s in specs.items()}
     points = _plane_stack(port, [-60.0, 0.0, 60.0], (9, 9))
@@ -317,6 +320,120 @@ def test_a_camera_stuck_in_a_local_minimum_is_detected_and_retried():
     assert fixed["rms"] < 0.5, f"after retry the residual is still {fixed['rms']:.3f} px"
     rot, cen = _worst(fixed["poses"], specs)
     assert rot < 0.05 and cen < 0.3, f"after retry: {rot:.4f} deg, {cen:.4f} mm"
+
+
+def test_wand_retry_guard_reruns_a_stalled_fit_and_keeps_the_best():
+    """fit_wand's guard. A wand fit is one joint fit, so no camera stands out when it stalls; the guard
+    looks at the fit's rms against wand_retry_rms instead.
+
+    _solve is replaced by a stub returning set rms values, so this checks the guard's logic alone; the
+    notes repository's code/tests/openlpt_followup/f4_wand_guard.py runs it on a real stall.
+    """
+    poses = {c: Pose(np.array([0.0, 0.1 * c, 0.0]), np.array([0.0, 0.0, 300.0 + c]), FOCAL, 640.0, 512.0)
+             for c in range(3)}
+    cal = PoseCalibrator(lambda p: None, dict(poses), PoseFitConfig(retry_starts=4), fixed_cameras={0})
+    rms_of_start = iter([5.0, 0.2, 7.0, 0.1])
+    starts = []
+
+    def solve(fn, hint):
+        starts.append(dict(cal.poses))
+        r = next(rms_of_start)
+        return {"poses": dict(cal.poses), "history": [{"outer": 0, "rms": r, "status": 1}], "rms": r,
+                "success": True}
+
+    cal._solve = solve
+    stalled = {"poses": dict(poses), "history": [{"outer": 0, "rms": 8.0, "status": 3}], "rms": 8.0,
+               "success": True}
+    assert cal._retry_wand(None, stalled, dict(poses)) == [{"rms_before": 8.0, "rms_after": 0.2, "starts": 2}]
+    assert len(starts) == 2                             # a start below wand_retry_rms ends the search
+    assert all(s[0] is poses[0] for s in starts)        # the held camera never moves
+    assert all(s[1] is not poses[1] and s[2] is not poses[2] for s in starts)
+    assert stalled["rms"] == 0.2 and stalled["history"][-1]["outer"] == "retry"
+    assert cal.poses[1] is starts[1][1]
+
+    converged = {"poses": dict(poses), "history": [], "rms": 0.3, "success": True}
+    assert cal._retry_wand(None, converged, dict(poses)) == [] and len(starts) == 2
+
+    # The restarts are centred on the fit's own start first; when none of them succeeds, as many more are
+    # centred on the stalled answer.
+    far = {c: Pose(p.rvec, p.tvec + np.array([0.0, 0.0, 1000.0]), p.f, p.cx, p.cy) for c, p in poses.items()}
+    cal = PoseCalibrator(lambda p: None, dict(far), PoseFitConfig(retry_starts=2), fixed_cameras={0})
+    cal._solve = solve
+    starts.clear()
+    rms_of_start = iter([9.0, 7.0, 6.0, 0.3])
+    stalled = {"poses": dict(far), "history": [], "rms": 8.0, "success": True}
+    assert cal._retry_wand(None, stalled, dict(poses)) == [{"rms_before": 8.0, "rms_after": 0.3, "starts": 4}]
+    dist = [float(np.linalg.norm(s[1].tvec - poses[1].tvec)) for s in starts]
+    assert max(dist[:2]) < 200.0 and min(dist[2:]) > 800.0   # about the start, then about the stalled answer
+
+
+@pytest.mark.slow
+def test_a_stalled_wand_fit_is_restarted_and_recovered():
+    """fit_wand's guard on a real stall. Noise-free sphere wand frames, camera 0
+    held, seed 5: the fit stalls at its first start (6.8 deg, 42 mm, rms 8.2),
+    and the guard's restarts about that start recover it at the third. This is
+    the stalled fit of the paper's synthetic tests; it is also why the wand tests
+    above use seed 6 (see the notes repository's code/tests/openlpt_followup/, D3
+    and D4)."""
+    rng = np.random.default_rng(5)
+    port, specs = _port("sphere"), _rig("sphere")
+    cams = {i: sp.build_camera(s, port) for i, s in specs.items()}
+    frames = sp.make_wand_observations(cams, 50, 60.0, _bounds("sphere"), rng, port=port)
+    init = _perturbed(specs, 3.0, 15.0, rng)
+    init[0] = _as_pose(specs[0])
+
+    stuck = PoseCalibrator(_factory(port), dict(init), PoseFitConfig(retry_starts=0),
+                           fixed_cameras={0}).fit_wand(frames)
+    assert stuck["rms"] > 1.0, (
+        "this start no longer stalls; if the solver was improved, update this test "
+        "rather than deleting it"
+    )
+    fixed = PoseCalibrator(_factory(port), dict(init), PoseFitConfig(),
+                           fixed_cameras={0}).fit_wand(frames)
+    assert fixed["retried"], "the guard did not fire on a stalled wand fit"
+    assert fixed["rms"] < 1e-6, f"after the restarts the rms is still {fixed['rms']:.3g}"
+    rot, cen = _worst(fixed["poses"], specs)
+    assert rot < 1e-6 and cen < 1e-5, f"after the restarts: {rot:.3g} deg, {cen:.3g} mm"
+
+
+def test_whitening_is_measured_at_each_round_s_pose(monkeypatch):
+    """The 2x2 weights come from the pose each outer round starts at. Measured once, at the start pose,
+    they made the answer depend on the start (code/tests/openlpt_followup/f5_whitening_starts.py)."""
+    import types
+    import modules.camera_calibration.curved_calibration.pose_calibrator as pcal
+
+    seen = []
+
+    def whitening(self, pose, pts3d, uvs):
+        seen.append(pose)
+        return np.tile(np.eye(2), (len(uvs), 1, 1))
+
+    step = np.array([1e-3, 0.0, 0.0, 0.5, 0.0, 0.0])
+    monkeypatch.setattr(PoseCalibrator, "_whitening_matrices", whitening)
+    monkeypatch.setattr(pcal, "least_squares", lambda *a, **k: types.SimpleNamespace(
+        x=step, cost=0.5, fun=np.zeros(4), nfev=1, status=2))
+    start = Pose(np.zeros(3), np.array([0.0, 0.0, 300.0]), FOCAL, 640.0, 512.0)
+    cal = PoseCalibrator(lambda p: None, {0: start}, PoseFitConfig(max_outer=3))
+    cal.fit_3d2d([{"X_world": [0.0, 0.0, 0.0], "uv_by_cam": {0: [640.0, 512.0]}},
+                  {"X_world": [10.0, 0.0, 0.0], "uv_by_cam": {0: [700.0, 512.0]}}])
+    want = [start]
+    for _ in range(2):
+        want.append(want[-1].retract(step[:3], step[3:]))
+    assert len(seen) == 3
+    for got, w in zip(seen, want):
+        assert np.allclose(got.rvec, w.rvec) and np.allclose(got.tvec, w.tvec)
+
+
+def test_pose_error_resolves_small_angles():
+    """synthetic_ports.pose_error takes the atan2 form; the arccos form cannot go below 8.5e-7 deg."""
+    truth = sp.CameraSpec(np.array([0.1, -0.2, 0.3]), np.array([10.0, 20.0, 300.0]), FOCAL)
+    r_true = cv2.Rodrigues(truth.rvec.reshape(3, 1))[0]
+    axis = np.array([1.0, 2.0, 2.0]) / 3.0
+    for ang in (1e-10, 1e-8, 1e-5, 1e-2):
+        r = cv2.Rodrigues((axis * ang).reshape(3, 1))[0] @ r_true
+        est = sp.CameraSpec(cv2.Rodrigues(r)[0].ravel(), truth.tvec, FOCAL)
+        got, _cen = sp.pose_error(est, truth)
+        assert got == pytest.approx(math.degrees(ang), rel=1e-5), ang
 
 
 @pytest.mark.parametrize("kind", ["sphere", "cylinder"])

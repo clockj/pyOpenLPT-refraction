@@ -90,6 +90,8 @@ public:
   // Matrix output
   void write(std::string file_name);
   void write(std::ostream &os);
+  // precision: digits after the point (scientific); max_digits10 - 1 is exact.
+  void write(std::ostream &os, int precision);
 
   // Scalar operations
   double norm(); // sqrt(sum( xi^2 )) for all i

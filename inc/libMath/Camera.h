@@ -111,7 +111,7 @@ enum class CameraType {
   * spherical degeneracy where the image is a whole circle, not a point.
   */
 struct ImageRay {
-    Pt2D pt_img_dist;      // Distorted image point in pixels.
+    Pt2D pt_img_dist;      // Distorted image point in pixels; NaN for a ring.
     bool is_far = false;   // True on the far branch (past the closest approach).
     double lambda = 0.0;   // Azimuthal invariant; its sign is the sense of rotation.
     double c_z = 0.0;      // Axial invariant; always 0 for a sphere.
@@ -368,6 +368,15 @@ private:
   */
 class RefractionCurvedCamera : public Camera {
 public:
+    /**
+      * @brief The primary image of a point.
+      *
+      * Among the images on the sensor (0 <= u < n_col, 0 <= v < n_row), the
+      * near-branch one, else the one of smallest |Lambda|; when none is on the
+      * sensor, the same rule over every image, so the pixel may lie off the
+      * sensor. Rings carry no pixel and are skipped. A GeometryFailure error when
+      * the point has no image, or only a ring.
+      */
     StatusOr<Pt2D> project(const Pt3D& pt_world,
                            bool is_print_detail = false) const override;
     /**

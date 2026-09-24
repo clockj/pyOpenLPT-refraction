@@ -70,7 +70,9 @@ def W_closed(Lam, Cz, n, R, rP, rX, far=False):
     """Radial action in elementary form."""
     nu = nus(n, Cz)
     Rout, Rin = [rP] + list(R), list(R) + [rX]
-    F = lambda r, b, v: v * (np.sqrt(max(r * r - b * b, 0.0)) - b * np.arccos(np.clip(b / r, -1, 1)))
+    # At b = 0 the arccos term is 0, its limit, also at r = b = 0 (the far turning point of the radial ray), where
+    # b / r would be 0/0.
+    F = lambda r, b, v: v * (np.sqrt(max(r * r - b * b, 0.0)) - (b * np.arccos(np.clip(b / r, -1, 1)) if b else 0.0))
     tot = 0.0
     for k in range(len(n)):
         b = Lam / nu[k]
@@ -932,10 +934,15 @@ def project(n, R, P0, X, tol=1e-9):
     R, P0, X = [float(r) / unit for r in R], P0 / unit, X / unit
     rP, rX = np.hypot(P0[0], P0[1]), np.hypot(X[0], X[1])
     dz = X[2] - P0[2]
+    # Step (1): the signed azimuth, reduced by the IEEE remainder as in the C++ port; (d + pi) % 2 pi - pi rounds twice
+    # and flushes |d| below about 4e-16 to 0.
+    d = math.remainder(float(np.arctan2(X[1], X[0]) - np.arctan2(P0[1], P0[0])), 2 * math.pi)
     if rX < 1e-15:                                   # step (1): the radial ray
         C = np.sign(dz) * _bisect(lambda c: Z0(c, n, R, rP, rX) - abs(dz), 0.0, min(n) * (1 - 1e-15), it=200)
-        return [("near", 0.0, C, direction_from_invariants(P0, 0.0, C, n[0], nus(n, C)[0]))]
-    d = (np.arctan2(X[1], X[0]) - np.arctan2(P0[1], P0[0]) + np.pi) % (2 * np.pi) - np.pi
+        # Its branch is the limit r_X -> 0 of the general case: far when X lies beyond the axis as seen from the
+        # pinhole.  Exactly on the axis the azimuth is undefined and either label holds.
+        beyond = (X[0] != 0.0 or X[1] != 0.0) and abs(d) > 0.5 * np.pi
+        return [("far" if beyond else "near", 0.0, C, direction_from_invariants(P0, 0.0, C, n[0], nus(n, C)[0]))]
     turn, dphi = (1.0 if d >= 0 else -1.0), abs(d)
     opposite = abs(dphi - np.pi) <= 8 * _EPS                 # within 4 ulp of pi, the rounding of the azimuths
     top = sum(np.arccos(ri / ro) for ro, ri in zip([rP] + list(R[:-1]), R)) + np.pi

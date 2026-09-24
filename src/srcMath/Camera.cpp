@@ -388,6 +388,16 @@ void loadDistCoeff(const std::string& dist_coeff_str, PinholeParam& p) {
     }
 }
 
+// Camera files carry every double exactly: max_digits10 significant digits,
+// i.e. max_digits10 - 1 after the point in scientific notation. At
+// SAVEPRECISION (8) a save and load moved a projection by up to 1.7e-6 px.
+constexpr int kSaveDigits = std::numeric_limits<double>::max_digits10 - 1;
+
+void setSavePrecision(std::ofstream& outfile) {
+    outfile.setf(std::ios_base::scientific);
+    outfile.precision(kSaveDigits);
+}
+
 template <typename Param>
 void saveDistCoeffLine(std::ofstream& outfile, const Param& p) {
     int size = static_cast<int>(p.dist_coeff.size());
@@ -452,6 +462,7 @@ int PinholeCamera::getNCol() const { return _param.n_col; }
 Status PinholeCamera::saveParameters(const std::string& file_name) const {
     try {
         std::ofstream outfile(file_name.c_str(), std::ios::out);
+        setSavePrecision(outfile);
         outfile << "# Camera Model: (PINHOLE/POLYNOMIAL)" << std::endl;
         outfile << "PINHOLE" << std::endl;
         outfile << "# Camera Calibration Error: \nNone\n# Pose Calibration Error: \nNone"
@@ -460,27 +471,27 @@ Status PinholeCamera::saveParameters(const std::string& file_name) const {
         outfile << _param.n_row << "," << _param.n_col << std::endl;
         outfile << "# Camera Matrix: " << std::endl;
         auto cam_mtx = _param.cam_mtx;
-        cam_mtx.write(outfile);
+        cam_mtx.write(outfile, kSaveDigits);
         outfile << "# Distortion Coefficients: " << std::endl;
         saveDistCoeffLine(outfile, _param);
         outfile << "# Rotation Vector: " << std::endl;
         auto r_vec = rmtxTorvec(_param.r_mtx);
         auto r_vec_t = r_vec.transpose();
-        r_vec_t.write(outfile);
+        r_vec_t.write(outfile, kSaveDigits);
         outfile << "# Rotation Matrix: " << std::endl;
         auto r_mtx = _param.r_mtx;
-        r_mtx.write(outfile);
+        r_mtx.write(outfile, kSaveDigits);
         outfile << "# Inverse of Rotation Matrix: " << std::endl;
         auto r_mtx_inv = _param.r_mtx_inv;
-        r_mtx_inv.write(outfile);
+        r_mtx_inv.write(outfile, kSaveDigits);
         outfile << "# Translation Vector: " << std::endl;
         auto t_vec = _param.t_vec;
         auto t_vec_t = t_vec.transpose();
-        t_vec_t.write(outfile);
+        t_vec_t.write(outfile, kSaveDigits);
         outfile << "# Inverse of Translation Vector: " << std::endl;
         auto t_vec_inv = _param.t_vec_inv;
         auto t_vec_inv_t = t_vec_inv.transpose();
-        t_vec_inv_t.write(outfile);
+        t_vec_inv_t.write(outfile, kSaveDigits);
         return Status::OK();
     } catch (const std::exception& e) {
         return STATUS_ERR_CTX(ErrorCode::IOfailure, "PinholeCamera::saveParameters", e.what());
@@ -1323,6 +1334,7 @@ int RefractionPinholeCamera::getNCol() const { return _param.n_col; }
 Status RefractionPinholeCamera::saveParameters(const std::string& file_name) const {
     try {
         std::ofstream outfile(file_name.c_str(), std::ios::out);
+        setSavePrecision(outfile);
         outfile << "# Camera Model: (PINHOLE/POLYNOMIAL/PINPLATE)" << std::endl;
         outfile << "PINPLATE" << std::endl;
         outfile << "# Camera Calibration Error: \nNone\n# Pose Calibration Error: \nNone"
@@ -1331,35 +1343,35 @@ Status RefractionPinholeCamera::saveParameters(const std::string& file_name) con
         outfile << _param.n_row << "," << _param.n_col << std::endl;
         outfile << "# Camera Matrix: " << std::endl;
         auto cam_mtx = _param.cam_mtx;
-        cam_mtx.write(outfile);
+        cam_mtx.write(outfile, kSaveDigits);
         outfile << "# Distortion Coefficients: " << std::endl;
         saveDistCoeffLine(outfile, _param);
         outfile << "# Rotation Vector: " << std::endl;
         auto r_vec = rmtxTorvec(_param.r_mtx);
         auto r_vec_t = r_vec.transpose();
-        r_vec_t.write(outfile);
+        r_vec_t.write(outfile, kSaveDigits);
         outfile << "# Rotation Matrix: " << std::endl;
         auto r_mtx = _param.r_mtx;
-        r_mtx.write(outfile);
+        r_mtx.write(outfile, kSaveDigits);
         outfile << "# Inverse of Rotation Matrix: " << std::endl;
         auto r_mtx_inv = _param.r_mtx_inv;
-        r_mtx_inv.write(outfile);
+        r_mtx_inv.write(outfile, kSaveDigits);
         outfile << "# Translation Vector: " << std::endl;
         auto t_vec = _param.t_vec;
         auto t_vec_t = t_vec.transpose();
-        t_vec_t.write(outfile);
+        t_vec_t.write(outfile, kSaveDigits);
         outfile << "# Inverse of Translation Vector: " << std::endl;
         auto t_vec_inv = _param.t_vec_inv;
         auto t_vec_inv_t = t_vec_inv.transpose();
-        t_vec_inv_t.write(outfile);
+        t_vec_inv_t.write(outfile, kSaveDigits);
         outfile << "# Reference Point of Refractive Plate: " << std::endl;
         auto plane_pt = _param.plane.pt;
         auto plane_pt_t = plane_pt.transpose();
-        plane_pt_t.write(outfile);
+        plane_pt_t.write(outfile, kSaveDigits);
         outfile << "# Normal Vector of Refractive Plate: " << std::endl;
         auto plane_norm = _param.plane.norm_vector;
         auto plane_norm_t = plane_norm.transpose();
-        plane_norm_t.write(outfile);
+        plane_norm_t.write(outfile, kSaveDigits);
         outfile << "# Refractive Index Array: " << std::endl;
         for (int i = 0; i < _param.n_plate + 1; i++) {
             outfile << _param.refract_array[i] << ",";
@@ -1690,6 +1702,7 @@ int PolynomialCamera::getNCol() const { return _param.n_col; }
 Status PolynomialCamera::saveParameters(const std::string& file_name) const {
     try {
         std::ofstream outfile(file_name.c_str(), std::ios::out);
+        setSavePrecision(outfile);
         outfile << "# Camera Model: (PINHOLE/POLYNOMIAL)" << std::endl;
         outfile << "POLYNOMIAL" << std::endl;
         outfile << "# Camera Calibration Error: \nNone" << std::endl;
@@ -1709,10 +1722,10 @@ Status PolynomialCamera::saveParameters(const std::string& file_name) const {
         outfile << _param.n_coeff << std::endl;
         outfile << "# U_Coeff,X_Power,Y_Power,Z_Power" << std::endl;
         auto u_coeffs = _param.u_coeffs;
-        u_coeffs.write(outfile);
+        u_coeffs.write(outfile, kSaveDigits);
         outfile << "# V_Coeff,X_Power,Y_Power,Z_Power" << std::endl;
         auto v_coeffs = _param.v_coeffs;
-        v_coeffs.write(outfile);
+        v_coeffs.write(outfile, kSaveDigits);
         return Status::OK();
     } catch (const std::exception& e) {
         return STATUS_ERR_CTX(ErrorCode::IOfailure,
@@ -1988,6 +2001,9 @@ StatusOr<std::vector<ImageRay>> RefractionCurvedCamera::projectAll(
             img.is_ring = r.is_ring;
             if (r.is_ring) {
                 // A ring is a set of rays, not one; it carries no single pixel.
+                // NaN, not (0, 0), which is a real pixel on the sensor's corner.
+                const double nan = std::numeric_limits<double>::quiet_NaN();
+                img.pt_img_dist = Pt2D(nan, nan);
                 out.push_back(img);
                 continue;
             }
@@ -2017,8 +2033,9 @@ StatusOr<std::vector<ImageRay>> RefractionCurvedCamera::projectAll(
     }
 }
 
-// The primary image: the near-branch ray when there is one, else the first
-// returned. Callers that need the whole census use projectAll().
+// The primary image: among the images on the sensor, the near-branch one, else
+// the smallest |Lambda|; with none on the sensor, the same rule over them all.
+// Callers that need the whole census use projectAll().
 StatusOr<Pt2D> RefractionCurvedCamera::project(const Pt3D& pt_world,
                                                bool is_print_detail) const {
     auto all = projectAll(pt_world, nullptr);
@@ -2037,29 +2054,43 @@ StatusOr<Pt2D> RefractionCurvedCamera::project(const Pt3D& pt_world,
     // return the two images in opposite order and appear to disagree by hundreds
     // of pixels while actually agreeing. Prefer the near branch, then the
     // smallest |Lambda| -- the most direct ray, which is geometric and stable.
+    //
+    // An image on the sensor comes first: next to a caustic the preferred image
+    // can fall off the sensor while the other is on it, and a caller testing the
+    // pixel would then take a visible point for an unseen one (audit C3). The
+    // answer changes only there.
+    auto on_sensor = [&](const ImageRay& r) {
+        const double u = r.pt_img_dist[0], v = r.pt_img_dist[1];
+        return u >= 0.0 && u < _param.n_col && v >= 0.0 && v < _param.n_row;
+    };
+    auto preferred = [](const ImageRay& a, const ImageRay& b) {
+        if (a.is_far != b.is_far) {
+            return !a.is_far; // a near-branch image always wins
+        }
+        return std::abs(a.lambda) < std::abs(b.lambda);
+    };
     const ImageRay* best = nullptr;
+    bool best_on = false;
+    bool ring = false;
     for (const ImageRay& r : rays) {
         if (r.is_ring) {
+            ring = true;
             continue;
         }
-        if (best == nullptr) {
+        const bool on = on_sensor(r);
+        if (best == nullptr || (on && !best_on) ||
+            (on == best_on && preferred(r, *best))) {
             best = &r;
-            continue;
-        }
-        if (best->is_far != r.is_far) {
-            if (best->is_far) {
-                best = &r; // a near-branch image always wins
-            }
-            continue;
-        }
-        if (std::abs(r.lambda) < std::abs(best->lambda)) {
-            best = &r;
+            best_on = on;
         }
     }
     if (best == nullptr) {
-        // No image: return the sentinel normalizeProjectResult() reports as failure.
-        const double value = std::numeric_limits<double>::lowest();
-        return normalizeProjectResult(Pt2D(value, value));
+        return STATUS_OR_ERR(
+            Pt2D, ErrorCode::GeometryFailure,
+            ring ? "project failed: the point's only image is a ring (the axial line "
+                   "of a sphere); use projectAll()"
+                 : "project failed: the point has no image (no ray reaches it, or "
+                   "every ray leaves behind the camera)");
     }
     return normalizeProjectResult(best->pt_img_dist);
 }
@@ -2221,6 +2252,7 @@ Status RefractionCurvedCamera::saveCurvedParameters(
     const std::string& file_name) const {
     try {
         std::ofstream outfile(file_name.c_str(), std::ios::out);
+        setSavePrecision(outfile);
         outfile << "# Camera Model: (PINHOLE/POLYNOMIAL/PINPLATE/PINCYL/PINSPH)"
                 << std::endl;
         outfile << typeToken() << std::endl;
@@ -2230,36 +2262,36 @@ Status RefractionCurvedCamera::saveCurvedParameters(
         outfile << _param.n_row << "," << _param.n_col << std::endl;
         outfile << "# Camera Matrix: " << std::endl;
         auto cam_mtx = _param.cam_mtx;
-        cam_mtx.write(outfile);
+        cam_mtx.write(outfile, kSaveDigits);
         outfile << "# Distortion Coefficients: " << std::endl;
         saveDistCoeffLine(outfile, _param);
         outfile << "# Rotation Vector: " << std::endl;
         auto r_vec_t = rmtxTorvec(_param.r_mtx).transpose();
-        r_vec_t.write(outfile);
+        r_vec_t.write(outfile, kSaveDigits);
         outfile << "# Rotation Matrix: " << std::endl;
         auto r_mtx = _param.r_mtx;
-        r_mtx.write(outfile);
+        r_mtx.write(outfile, kSaveDigits);
         outfile << "# Inverse of Rotation Matrix: " << std::endl;
         auto r_mtx_inv = _param.r_mtx_inv;
-        r_mtx_inv.write(outfile);
+        r_mtx_inv.write(outfile, kSaveDigits);
         // Matrix::transpose() is non-const, so each vector is copied first.
         outfile << "# Translation Vector: " << std::endl;
         Pt3D t_vec_copy = _param.t_vec;
         auto t_vec_t = t_vec_copy.transpose();
-        t_vec_t.write(outfile);
+        t_vec_t.write(outfile, kSaveDigits);
         outfile << "# Inverse of Translation Vector: " << std::endl;
         Pt3D t_vec_inv_copy = _param.t_vec_inv;
         auto t_vec_inv_t = t_vec_inv_copy.transpose();
-        t_vec_inv_t.write(outfile);
+        t_vec_inv_t.write(outfile, kSaveDigits);
         outfile << "# Port Center (axis point for a cylinder, centre for a sphere): "
                 << std::endl;
         Pt3D center_copy = _param.center;
         auto center_t = center_copy.transpose();
-        center_t.write(outfile);
+        center_t.write(outfile, kSaveDigits);
         outfile << "# Port Axis (unit; unused by a sphere): " << std::endl;
         Pt3D axis_copy = _param.axis;
         auto axis_t = axis_copy.transpose();
-        axis_t.write(outfile);
+        axis_t.write(outfile, kSaveDigits);
         outfile << "# Refractive Index Array: (pinhole medium first)" << std::endl;
         for (std::size_t i = 0; i + 1 < _param.refract_array.size(); ++i) {
             outfile << _param.refract_array[i] << ",";
