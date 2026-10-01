@@ -1,0 +1,9 @@
+T0 fast numpy projection vs pyOpenLPT C++, 96 rigs x 1029 points
+  back-projection: max |origin difference| 2.46e-07 mm, max |direction difference| 4.72e-10
+  forward: 98784 point-rig pairs compared, max |pixel difference| 1.02e-05 px; images found C++ 98784, fast 98784
+    start       : origin 2.28e-11 mm, direction 1.39e-13, pixel 1.02e-05 px
+    tilted axis : origin 2.28e-11 mm, direction 1.39e-13, pixel 1.02e-05 px
+    k1 = 5      : origin 2.46e-07 mm, direction 4.72e-10, pixel 1.02e-05 px
+  time per rig: C++ projection 0.308 s, fast 0.0077 s
+  with the C++ projection tolerance at 1e-14 instead of 1e-10: max |pixel difference| 7.68e-08 px
+RESULT: PASS

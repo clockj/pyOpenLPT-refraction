@@ -1,0 +1,29 @@
+T3 synthetic end-to-end recovery; truth = the calibrated rig (model M1bx), 1027 dots, noise sigma (0.176, 0.085) px
+
+seed 11: fit rms 0.1908 px, 0 outliers dropped, 41 s
+  errors: f +74.93 px (sigma 67.17); camera centre [-0.172 -0.385  1.913] mm (sigma [0.36  0.537 1.735]); rotation 0.02738 deg
+  axis at Y=0 [-0.0844  0.     -0.0099] mm (sigma X,Z [0.1322 0.0134]); tilt +0.0090 deg, lean -0.0659 deg (sigma [0.0099 0.0919])
+  plane shifts: error rms (0.36, 0.25) um against true rms (4.0, 3.2) um; z-scores rms 0.77, max |z| 2.79
+  board corrections: error rms (0.69, 0.54) um against true rms (22.7, 9.9) um
+  z-scores: f +1.12, C [-0.48 -0.72  1.1 ], axis X -0.64 Z -0.74 tilt +0.92 lean -0.72
+  held-out (3927 fresh points at z = 1.27 ... 46.99 between the planes and -2.00, 50.26 beyond): rms 0.0176 px, max 0.0840 px
+
+seed 12: fit rms 0.1807 px, 0 outliers dropped, 41 s
+  errors: f -44.49 px (sigma 63.86); camera centre [ 0.439 -0.06  -1.168] mm (sigma [0.333 0.497 1.65 ]); rotation 0.02912 deg
+  axis at Y=0 [ 0.1488  0.     -0.0026] mm (sigma X,Z [0.1236 0.0126]); tilt +0.0015 deg, lean -0.0099 deg (sigma [0.0094 0.0852])
+  plane shifts: error rms (0.48, 0.28) um against true rms (4.0, 3.2) um; z-scores rms 1.06, max |z| 2.61
+  board corrections: error rms (0.85, 0.47) um against true rms (22.7, 9.9) um
+  z-scores: f -0.70, C [ 1.32 -0.12 -0.71], axis X +1.20 Z -0.20 tilt +0.15 lean -0.12
+  held-out (3927 fresh points at z = 1.27 ... 46.99 between the planes and -2.00, 50.26 beyond): rms 0.0125 px, max 0.0311 px
+
+seed 13: fit rms 0.1854 px, 0 outliers dropped, 40 s
+  errors: f +31.78 px (sigma 65.35); camera centre [-0.061  0.268  0.802] mm (sigma [0.348 0.519 1.688]); rotation 0.01652 deg
+  axis at Y=0 [-0.0308  0.     -0.008 ] mm (sigma X,Z [0.1282 0.0128]); tilt -0.0065 deg, lean +0.0462 deg (sigma [0.0096 0.0889])
+  plane shifts: error rms (0.53, 0.30) um against true rms (4.0, 3.2) um; z-scores rms 1.12, max |z| 2.68
+  board corrections: error rms (0.80, 0.53) um against true rms (22.7, 9.9) um
+  z-scores: f +0.49, C [-0.17  0.52  0.48], axis X -0.24 Z -0.62 tilt -0.67 lean +0.52
+  held-out (3927 fresh points at z = 1.27 ... 46.99 between the planes and -2.00, 50.26 beyond): rms 0.0159 px, max 0.0457 px
+
+camera and port z-scores: n 24, rms 0.70, max 1.32, beyond 3: 0
+plane-shift z-scores: n 120, rms 1.00, max 2.79, beyond 3: 0
+RESULT: PASS

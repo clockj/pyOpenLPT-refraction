@@ -1,0 +1,19 @@
+T5 model comparison (calibration model M2b); rms in px; train = even planes, test = odd planes
+(616 s)
+
+model                        fit   train test nom-z test own-z   parameters (all planes)
+pinhole fx=fy            44.0827 44.7277    50.7654    43.7863   fx 112723058, fy 112723058 px, camera [7.759200e+03 1.951000e+02 2.453985e+06] mm
+pinhole fx,fy            11.3930 11.4302   431.5678    11.4641   fx 4290090, fy 3151371 px, camera [30762.2   784.6 74494.9] mm
+M1 (nominal z)            0.8633  0.8811     8.9267     0.8522   f 42291 px, camera-axis 1113.4 mm, axis X,Z [ 2.263 13.392], tilt 0.353, lean 2.311 deg
+M2                        0.8591  0.8775     8.9562     0.8526   f 42319 px, camera-axis 1114.1 mm, axis X,Z [ 2.336 13.364], tilt 0.351, lean 2.310 deg
+M2b (delivered)           0.2523  0.2477     8.9054     0.2780   f 41416 px, camera-axis 1093.2 mm, axis X,Z [19.252 13.296], tilt -0.023, lean 0.055 deg
+M2b + traverse tilt      44.9061 70.7107    70.7107    70.7107   f 53962 px, camera-axis 1200.1 mm, axis X,Z [ 26.279 -74.585], tilt -0.206, lean 31.632 deg, tau [-0.04207 -0.72879]
+M2b + k1                  0.2349  0.2289     9.3235     0.2630   f 42812 px, camera-axis 1121.3 mm, axis X,Z [12.67  14.333], tilt -0.001, lean 1.237 deg
+M2b, f = 9000 px          3.5333  3.5416    45.1791     3.5469   f 9000 px, camera-axis 242.2 mm, axis X,Z [-52.498   9.045], tilt -0.189, lean -0.142 deg
+M2b, iso centres          0.2814  0.2822     9.0811     0.3002   f 41290 px, camera-axis 1089.9 mm, axis X,Z [18.351 13.413], tilt -0.000, lean -0.093 deg
+M2b, gradient centres     0.4036  0.3894     8.8139     0.4375   f 41439 px, camera-axis 1093.5 mm, axis X,Z [21.256 13.153], tilt -0.052, lean 0.297 deg
+M2bw (+ wall field)       0.2016  0.1971     9.1863     0.2328   f 41814 px, camera-axis 1100.6 mm, axis X,Z [ 9.938 12.759], tilt 0.143, lean 3.074 deg
+
+models with a lower held-out (own z) error than the delivered M2b: M2b + k1, M2bw (+ wall field)
+traverse tilt: tau = [-0.042072 -0.72879 ] mm per mm of z
+lens distortion: k1 = -52.0149 (normalised coordinates; at the image corner -12.1649 px)

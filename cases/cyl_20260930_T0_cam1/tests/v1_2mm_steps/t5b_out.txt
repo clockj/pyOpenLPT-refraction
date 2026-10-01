@@ -1,0 +1,2 @@
+T5b model comparison, M2c (rms in px; train = even planes, test = odd planes)
+M2c (column/row board)   fit 0.4842  train 0.4849  test nom-z 9.2843  test own-z 0.4964   f 42155 px, camera-axis 1110.0 mm, axis X,Z [13.425 13.122], tilt -0.009, lean 2.572 deg

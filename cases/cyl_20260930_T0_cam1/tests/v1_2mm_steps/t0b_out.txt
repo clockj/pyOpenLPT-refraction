@@ -1,0 +1,3 @@
+T0b: B-spline basis: max |sum - 1| = 2.2e-16; max |vectorised - piecewise| = 1.0e-14
+  Jacobian (2058, 148): grouped vs brute force, max difference / max entry: all 8.9e-13, board block 8.9e-13, plane offsets 0.0e+00
+RESULT: PASS
