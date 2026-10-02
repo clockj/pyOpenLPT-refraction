@@ -1,0 +1,9 @@
+Cylinder wand calibration (PINCYL), 3 cameras
+tube: radii [100.80625, 97.63125] mm, n [1.0, 1.49, 1.333]; wand 10.0000 mm
+frames 300, observations 1800 active of 1800; reprojection RMS 0.1053 px (2-D), sigma 0.0980 px per coordinate
+wand length, free triangulation: mean error +0.02 um, RMS 2.31 um over 300 frames
+frame: tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height (slid +0.455 mm)
+
+cam1: f 41497.3 px (829.947 mm) +- 0.083 %; distance from the axis 1095.15 mm +- 0.896; azimuth 0.000 deg; height -0.455 mm; reprojection RMS 0.1006 px (600/600 active); camFile camFile\cam1.txt
+cam2: f 41409.0 px (828.180 mm) +- 0.077 %; distance from the axis 1092.85 mm +- 0.824; azimuth 44.996 deg; height -0.508 mm; reprojection RMS 0.1120 px (600/600 active); camFile camFile\cam2.txt
+cam3: f 41504.0 px (830.080 mm) +- 0.082 %; distance from the axis 1095.33 mm +- 0.881; azimuth 89.996 deg; height -0.445 mm; reprojection RMS 0.1031 px (600/600 active); camFile camFile\cam3.txt

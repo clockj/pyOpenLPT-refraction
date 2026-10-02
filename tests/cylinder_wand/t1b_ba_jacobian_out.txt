@@ -1,0 +1,5 @@
+reference rig (3 cams, L free): 240 observations, 20 free global parameters; worst 6.45e-09
+   cam1.w1:5e-12 cam1.w2:5e-12 cam1.w3:2e-10 cam1.C3:4e-10 cam1.logf:2e-10 cam2.w1:9e-11 cam2.w2:7e-11 cam2.w3:7e-11 cam2.C1:8e-11 cam2.C2:5e-11 cam2.C3:7e-11 cam2.logf:3e-09 cam3.w1:2e-10 cam3.w2:3e-12 cam3.w3:5e-12 cam3.C1:7e-10 cam3.C2:5e-12 cam3.C3:4e-12 cam3.logf:2e-10 L:6e-11 frame.m1:4e-10 frame.m2:2e-10 frame.m3:3e-10 frame.a:6e-09 frame.b:6e-09
+irregular 4-camera rig (L free, k1 free): 320 observations, 31 free global parameters; worst 9.39e-08
+   cam1.w1:6e-12 cam1.w2:6e-12 cam1.w3:3e-10 cam1.C3:5e-10 cam1.logf:3e-10 cam1.k1:1e-08 cam2.w1:1e-10 cam2.w2:5e-11 cam2.w3:4e-11 cam2.C1:9e-11 cam2.C2:3e-11 cam2.C3:3e-11 cam2.logf:1e-09 cam2.k1:2e-08 cam3.w1:4e-11 cam3.w2:5e-11 cam3.w3:9e-11 cam3.C1:5e-11 cam3.C2:4e-11 cam3.C3:2e-10 cam3.logf:2e-09 cam3.k1:9e-08 cam4.w1:1e-10 cam4.w2:4e-11 cam4.w3:4e-11 cam4.C1:7e-11 cam4.C2:2e-11 cam4.C3:3e-11 cam4.logf:1e-09 cam4.k1:8e-09 L:3e-11 frame.m1:2e-10 frame.m2:2e-10 frame.m3:2e-10 frame.a:3e-09 frame.b:4e-09
+  PASS  bundle-adjustment Jacobian agrees with central differences to 1e-6 (worst 9.39e-08)

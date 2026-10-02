@@ -1,0 +1,52 @@
+{
+ "unseen": {
+  "fixed": {
+   "realised_rms_px": 3.303688004622156,
+   "predicted_rms_px": 4.229100394604194,
+   "ratio": 0.7811798482810319
+  },
+  "stabiliser": {
+   "realised_rms_px": 0.6230378901819592,
+   "predicted_rms_px": 0.6277132766231523,
+   "ratio": 0.9925517164996973
+  },
+  "retriangulated": {
+   "realised_rms_px": 0.007870844567956928,
+   "predicted_rms_px": 0.007704299976933474,
+   "ratio": 1.021617095845448
+  }
+ },
+ "heldout_frames": [
+  {
+   "seed": 0,
+   "heldout_reproj_rms_px": 0.10140719615640473,
+   "heldout_reproj_pred_px": 0.09996663886479307,
+   "reproj_ratio": 1.0144103803826,
+   "length_mean_mm": 2.5029731833100753e-05,
+   "length_rms_mm": 0.002400680005230249,
+   "length_pred_mm": 0.002332816808688818,
+   "length_ratio": 1.0290906668233304,
+   "insample_rms_px": 0.10875737874388336
+  },
+  {
+   "seed": 1,
+   "heldout_reproj_rms_px": 0.1011503043278361,
+   "heldout_reproj_pred_px": 0.10000000000000003,
+   "reproj_ratio": 1.0115030432783607,
+   "length_mean_mm": 4.8868727070328075e-08,
+   "length_rms_mm": 0.0023732893516761663,
+   "length_pred_mm": 0.002318154300710111,
+   "length_ratio": 1.023784029798692,
+   "insample_rms_px": 0.10865673207127606
+  }
+ ],
+ "seconds": 25.386008262634277,
+ "gated_ratios": [
+  1.021617095845448,
+  1.0144103803826,
+  1.0290906668233304,
+  1.0115030432783607,
+  1.023784029798692
+ ],
+ "pass": true
+}

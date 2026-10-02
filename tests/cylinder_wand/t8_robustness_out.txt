@@ -1,0 +1,4 @@
+(a) 50 gross outliers, 8 swapped detections, 300 missing: left active 0; 230 clean observations went with 51 frames left with an end in fewer than two cameras; rms 0.1035 px (clean 0.1075); vs the clean fit 0.78 sigma; vs the truth 1.42 sigma (clean fit 1.66) | PASS
+(b) near-wall candidates: 44 of 40000 points have two images within 30 px in some camera
+(b) 30 frames with a close double image + 30 other near-wall frames + 400 ordinary: 15 observations have a second image within 30 px, left active 0 (guard dropped 12, multi-image observations 22); rms 0.1065 px; vs the truth 2.01 sigma | PASS
+  PASS  robustness

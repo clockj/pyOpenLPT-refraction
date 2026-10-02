@@ -1,0 +1,29 @@
+== reference rig and one-factor variations (Cramer-Rao, 0.1 px noise) ==
+reference                    cams 3 sp  45.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.064 % | dist   0.685 mm | az 0.0038 deg | h 0.1477 mm | unseen: fixed 4.186, stab 0.6204, retri 0.0077 px | extent 2977x1877 px
+cams=2                       cams 2 sp  45.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.114 % | dist   1.222 mm | az 0.0033 deg | h 0.1058 mm | unseen: fixed 6.629, stab 1.2190, retri 0.0062 px | extent 2977x1868 px
+cams=4                       cams 4 sp  45.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.056 % | dist   0.600 mm | az 0.0035 deg | h 0.1604 mm | unseen: fixed 3.423, stab 0.4851, retri 0.0083 px | extent 3016x1877 px
+spacing=30                   cams 3 sp  30.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.081 % | dist   0.867 mm | az 0.0033 deg | h 0.1088 mm | unseen: fixed 5.073, stab 0.8093, retri 0.0075 px | extent 2953x1872 px
+spacing=60                   cams 3 sp  60.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.067 % | dist   0.713 mm | az 0.0042 deg | h 0.1817 mm | unseen: fixed 4.219, stab 0.6124, retri 0.0078 px | extent 2944x1878 px
+spacing=90                   cams 3 sp  90.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.087 % | dist   0.934 mm | az 0.0035 deg | h 0.2041 mm | unseen: fixed 4.019, stab 0.6185, retri 0.0079 px | extent 2508x1877 px
+spacing=120                  cams 3 sp 120.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.068 % | dist   0.730 mm | az 0.0011 deg | h 0.2100 mm | unseen: fixed 4.716, stab 0.4516, retri 0.0077 px | extent 2944x1878 px
+D=500 (f scaled)             cams 3 sp  45.0 D    500 f   18946 half   20 frames  500 | sigma f/f max  0.028 % | dist   0.139 mm | az 0.0025 deg | h 0.0729 mm | unseen: fixed 2.269, stab 0.7176, retri 0.0077 px | extent 2980x1953 px
+half=10                      cams 3 sp  45.0 D   1094 f   41459 half   10 frames  500 | sigma f/f max  0.164 % | dist   1.766 mm | az 0.0044 deg | h 0.1808 mm | unseen: fixed 5.278, stab 0.9216, retri 0.0067 px | extent 1717x1116 px
+half=40                      cams 3 sp  45.0 D   1094 f   41459 half   40 frames  500 | sigma f/f max  0.020 % | dist   0.219 mm | az 0.0021 deg | h 0.0586 mm | unseen: fixed 1.613, stab 0.2786, retri 0.0091 px | extent 5482x3427 px
+frames=200                   cams 3 sp  45.0 D   1094 f   41459 half   20 frames  200 | sigma f/f max  0.101 % | dist   1.087 mm | az 0.0057 deg | h 0.2343 mm | unseen: fixed 6.671, stab 0.9846, retri 0.0121 px | extent 2861x1807 px
+frames=2000                  cams 3 sp  45.0 D   1094 f   41459 half   20 frames 2000 | sigma f/f max  0.032 % | dist   0.348 mm | az 0.0018 deg | h 0.0740 mm | unseen: fixed 2.131, stab 0.3101, retri 0.0038 px | extent 3049x1911 px
+4 cams at 90                 cams 4 sp  90.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.073 % | dist   0.783 mm | az 0.0022 deg | h 0.1624 mm | unseen: fixed 3.179, stab 0.3070, retri 0.0084 px | extent 2508x1877 px
+3 cams at 90, D=500          cams 3 sp  90.0 D    500 f   18946 half   20 frames  500 | sigma f/f max  0.041 % | dist   0.200 mm | az 0.0025 deg | h 0.0997 mm | unseen: fixed 2.140, stab 0.7748, retri 0.0078 px | extent 2471x1953 px
+2 cams at 90                 cams 2 sp  90.0 D   1094 f   41459 half   20 frames  500 | sigma f/f max  0.101 % | dist   1.084 mm | az 0.0049 deg | h 0.1865 mm | unseen: fixed 5.519, stab 0.9621, retri 0.0061 px | extent 2440x1877 px
+3 cams at 60, half=10        cams 3 sp  60.0 D   1094 f   41459 half   10 frames  500 | sigma f/f max  0.166 % | dist   1.783 mm | az 0.0049 deg | h 0.2257 mm | unseen: fixed 5.141, stab 0.8853, retri 0.0067 px | extent 1697x1115 px
+cam1 sensor-like: half=8     cams 3 sp  45.0 D   1094 f   41459 half    8 frames  500 | sigma f/f max  0.219 % | dist   2.353 mm | az 0.0048 deg | h 0.1832 mm | unseen: fixed 5.407, stab 1.1180, retri 0.0063 px | extent 1470x968 px
+2 cams at 45, half=10        cams 2 sp  45.0 D   1094 f   41459 half   10 frames  500 | sigma f/f max  0.278 % | dist   2.987 mm | az 0.0037 deg | h 0.1248 mm | unseen: fixed 8.352, stab 2.1456, retri 0.0051 px | extent 1717x1114 px
+
+== model error of the plate pipeline's starts, reference rig (true 3-D points, exact images) ==
+  camera 1: best pinhole fx = fy    99.48 px RMS (f 15245188031, at 338323422 mm); fx != fy    15.79 px RMS (fx 751626778139, fy 576976538236, at 14881423600 mm); affine    15.78 px RMS
+  camera 2: best pinhole fx = fy    99.71 px RMS (f 67945743352, at 1505172470 mm); fx != fy    10.74 px RMS (fx 113099653494, fy 86703276862, at 2236188209 mm); affine    10.73 px RMS
+  camera 3: best pinhole fx = fy    96.25 px RMS (f 10178643948, at 227587274 mm); fx != fy    15.76 px RMS (fx 312390486610, fy 240406643687, at 6198556255 mm); affine    15.75 px RMS
+
+GATE (gauge-free, re-triangulated): the reference rig adds 0.0077 px RMS on unseen points (limit 0.05): GO
+  literal reading, tube frame modulo the stabiliser: 0.620 px (FAILS the 0.05 px limit; dominated by the tube's position across the axis, see t2b); in the camera-1 gauge: 4.186 px (the unobservable slide)
+f target: sigma(f)/f = 0.064 % (target 0.5 %): met
+time 22 s

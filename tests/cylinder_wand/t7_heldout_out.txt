@@ -1,0 +1,27 @@
+  seed  0: realised fixed 0.604, stabiliser 0.2512, retri 0.00751 px | predicted 4.204, 0.6430, 0.00780
+  seed  1: realised fixed 3.156, stabiliser 0.8241, retri 0.00932 px | predicted 4.173, 0.6285, 0.00758
+  seed  2: realised fixed 1.558, stabiliser 0.7756, retri 0.00785 px | predicted 4.077, 0.6068, 0.00759
+  seed  3: realised fixed 0.979, stabiliser 0.1621, retri 0.00772 px | predicted 4.258, 0.6323, 0.00771
+  seed  4: realised fixed 0.258, stabiliser 0.0645, retri 0.00624 px | predicted 4.300, 0.6175, 0.00768
+  seed  5: realised fixed 0.814, stabiliser 0.3228, retri 0.00545 px | predicted 4.236, 0.6269, 0.00769
+  seed  6: realised fixed 4.915, stabiliser 0.5470, retri 0.00872 px | predicted 4.277, 0.6293, 0.00779
+  seed  7: realised fixed 1.001, stabiliser 0.5914, retri 0.00748 px | predicted 4.053, 0.6340, 0.00769
+  seed  8: realised fixed 2.523, stabiliser 0.5785, retri 0.00476 px | predicted 4.336, 0.6267, 0.00776
+  seed  9: realised fixed 1.062, stabiliser 0.5547, retri 0.00686 px | predicted 4.185, 0.6282, 0.00764
+  seed 10: realised fixed 0.285, stabiliser 0.1833, retri 0.00833 px | predicted 4.277, 0.6183, 0.00771
+  seed 11: realised fixed 2.558, stabiliser 1.1829, retri 0.00916 px | predicted 4.301, 0.6235, 0.00776
+  seed 12: realised fixed 6.594, stabiliser 0.7074, retri 0.00816 px | predicted 4.233, 0.6467, 0.00774
+  seed 13: realised fixed 9.087, stabiliser 0.6718, retri 0.00871 px | predicted 4.262, 0.6299, 0.00768
+  seed 14: realised fixed 3.388, stabiliser 0.8458, retri 0.00592 px | predicted 4.233, 0.6276, 0.00775
+  seed 15: realised fixed 0.797, stabiliser 0.4940, retri 0.00711 px | predicted 4.306, 0.6270, 0.00782
+  seed 16: realised fixed 3.705, stabiliser 0.9162, retri 0.00951 px | predicted 4.178, 0.6254, 0.00758
+  seed 17: realised fixed 1.427, stabiliser 0.5020, retri 0.00759 px | predicted 4.145, 0.6242, 0.00763
+  seed 18: realised fixed 2.140, stabiliser 0.1746, retri 0.00937 px | predicted 4.194, 0.6365, 0.00773
+  seed 19: realised fixed 2.461, stabiliser 0.7265, retri 0.00933 px | predicted 4.338, 0.6209, 0.00775
+(a) unseen points, fixed         : realised 3.30369 px, predicted 4.22910 px, ratio 0.781
+(a) unseen points, stabiliser    : realised 0.62304 px, predicted 0.62771 px, ratio 0.993
+(a) unseen points, retriangulated: realised 0.00787 px, predicted 0.00770 px, ratio 1.022
+(b) seed 0: held-out reprojection 0.1014 px (predicted 0.1000, ratio 1.014); wand length +0.03 um mean, 2.40 um RMS (predicted 2.33, ratio 1.029); in-sample 2-D rms 0.1088 px
+(b) seed 1: held-out reprojection 0.1012 px (predicted 0.1000, ratio 1.012); wand length +0.00 um mean, 2.37 um RMS (predicted 2.32, ratio 1.024); in-sample 2-D rms 0.1087 px
+  PASS  gauge-free and held-out errors within 0.8-1.2x the prediction (1.022, 1.014, 1.029, 1.012, 1.024)
+time 25 s

@@ -80,6 +80,12 @@ tests/**
 !tests/test_refract_curved_camera.py
 !tests/test_refract_calibration.py
 !tests/test_refract_curved_audit.py
+# wand calibration through a cylindrical port: the pytest subset, and the test campaign (plan, scripts,
+# results, report) under tests/cylinder_wand/
+!tests/test_cylinder_wand.py
+!tests/cylinder_wand/
+!tests/cylinder_wand/**
+tests/cylinder_wand/**/__pycache__/
 
 test/inputs/test_LPTNetBenchmark
 docs/
