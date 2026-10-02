@@ -1,0 +1,2 @@
+n_final 2: rms 5.4202 px (truth start 5.3922), max diff 7.7 sigma -> wrong minimum (34 s)
+n_final 6: rms 5.3922 px (truth start 5.3922), max diff 2.2e-08 sigma -> global minimum (80 s)

@@ -17,6 +17,9 @@
   --data: #2a78d6;
   --data-fov: rgba(42, 120, 214, 0.22);
   --data-line: rgba(42, 120, 214, 0.55);
+  --data-2: #eb6834;
+  --good: #0ca30c;
+  --bad: #d03b3b;
   --wall: #cde4ea;
   --water: #e8f2f5;
   --wall-line: #8db1bb;
@@ -46,6 +49,7 @@
     --data: #3987e5;
     --data-fov: rgba(57, 135, 229, 0.30);
     --data-line: rgba(57, 135, 229, 0.65);
+    --data-2: #d95926;
     --wall: #1e3c45;
     --water: #15252a;
     --wall-line: #4c7c89;
@@ -72,6 +76,7 @@
   --data: #3987e5;
   --data-fov: rgba(57, 135, 229, 0.30);
   --data-line: rgba(57, 135, 229, 0.65);
+  --data-2: #d95926;
   --wall: #1e3c45;
   --water: #15252a;
   --wall-line: #4c7c89;
@@ -190,6 +195,22 @@ table.data tr.ref td { background: var(--hilite); }
 .track .z { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1px solid var(--axis); }
 .track .bd { position: absolute; top: 0; bottom: 0; background: var(--band); }
 
+.panels.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
+table.data tr.notes td { padding-top: 0; color: var(--ink-2); font-size: 0.84rem; border-bottom: 1px solid var(--grid); }
+table.data tr.main td { border-bottom: none; }
+.line-s1 { fill: none; stroke: var(--data); stroke-width: 2; stroke-linejoin: round; }
+.line-s2 { fill: none; stroke: var(--data-2); stroke-width: 2; stroke-linejoin: round; }
+.line-pred { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+.dot.s2 { fill: var(--data-2); }
+.dotk.s2 { background: var(--data-2); }
+.ln.s1 { border-top: 2px solid var(--data); }
+.ln.s2 { border-top: 2px solid var(--data-2); }
+.ln.pred { border-top: 1.5px solid var(--ink-2); }
+.st { font-weight: 600; }
+.st.ok { color: var(--good); }
+.st.no { color: var(--bad); }
+.st.na { color: var(--muted); font-weight: 400; }
+table.data td.c, table.data th.c { text-align: center; }
 details.more { font-size: 0.9rem; }
 details.more > summary { cursor: pointer; width: fit-content; font-weight: 600; color: var(--accent); }
 details.more[open] > summary { margin-bottom: 10px; }
@@ -284,7 +305,7 @@ footer { margin-top: 64px; padding-top: 18px; display: grid; gap: 6px; border-to
           <li><b>σ(distance):</b> the uncertainty of each camera's distance from the axis.</li>
           <li><b>Added error on unseen points:</b> project points the wand never visited (a 7 × 7 × 7 grid over the cloud) through the calibrated cameras, re-triangulate them, and take the RMS of how far the cameras disagree. This is the error particle tracking would see.</li>
         </ul>
-        All designs meet the plan's 0.5 % target for f by a wide margin. Read the last column within one camera count: with two cameras a re-triangulated point has one degree of freedom left to disagree on, so the column reads lower there even though the calibration itself is less precise (first two columns). The grid also grows with the cloud.</figcaption>
+        All designs meet the plan's 0.5 % target for f by a wide margin at 0.1 px. Every value grows in proportion to the noise (T11a, section 07), so the last column gives the detection noise at which &sigma;(f)/f would reach 0.5 %. Read the unseen-points column within one camera count: with two cameras a re-triangulated point has one degree of freedom left to disagree on, so the column reads lower there even though the calibration itself is less precise (first two columns). The grid also grows with the cloud.</figcaption>
     </figure>
   </section>
 
@@ -338,8 +359,67 @@ footer { margin-top: 64px; padding-top: 18px; display: grid; gap: 6px; border-to
     </figure>
   </section>
 
+  <section id="noise">
+    <h2><span class="num">07</span>Detection noise (T11)</h2>
+    <p>Every test above used 0.1 px of Gaussian noise. T11 varies the noise in four ways:</p>
+    <ul>
+      <li><b>T11a:</b> 40 data sets at each of seven noise levels on the reference rig, each fitted from a start near the truth.</li>
+      <li><b>T11b:</b> calibration from nothing at up to 5 px.</li>
+      <li><b>T11c and T11d:</b> noise that is not uniform Gaussian, either a camera or wand end noisier than the rest, or occasional large errors.</li>
+      <li><b>T11e:</b> a fixed error pattern on each image, of the kind your real cam1 case showed.</li>
+    </ul>
+    <p>The short answer: every error grows in proportion to the noise, the error bars stay honest at every level, and the start from nothing holds up to 2 px on every rig tried. The one serious risk is a fixed pattern on the images, not random noise.</p>
+    <figure class="fig">
+      <div class="panels two">
+        <div class="panel"><p class="panel-title">(a) Focal length</p><p class="panel-sub">RMS error of the worst camera (%)</p><div class="chart" id="n-f"></div></div>
+        <div class="panel"><p class="panel-title">(b) Camera distance from the axis</p><p class="panel-sub">RMS error of the worst camera (mm)</p><div class="chart" id="n-d"></div></div>
+        <div class="panel"><p class="panel-title">(c) 3-D position of points the wand never visited</p><p class="panel-sub">RMS error (&micro;m)</p><div class="chart" id="n-x"></div></div>
+        <div class="panel"><p class="panel-title">(d) Wand length on frames left out of the fit</p><p class="panel-sub">RMS error (&micro;m)</p><div class="chart" id="n-l"></div></div>
+      </div>
+      <figcaption><b>Fig. 9</b> T11a, reference rig, 40 data sets per noise level. The measured errors lie on the Cram&eacute;r&ndash;Rao prediction, and f reaches the plan's 0.5 % at about 0.7 px.
+        <ul>
+          <li><b>(c)</b> The error relative to the tube comes mostly from where the tube sits relative to the rig, which the wand pins down only loosely. Distances and velocities feel only the shape-and-scale part, about 25 times smaller.</li>
+          <li><b>(d)</b> The wand length you would measure on new frames is dominated by those frames' own detection noise. The calibration contributes about a tenth of it.</li>
+        </ul>
+        Hover over a point for its value.</figcaption>
+      <div class="table-wrap" id="n-table"></div>
+      <p class="panel-sub">&dagger; At 0.2 px the camera heights came out at 0.71 of the Cram&eacute;r&ndash;Rao &sigma; (the criterion's limit is 0.8). Reruns with two further sets of 80 data sets each gave 0.80 and 0.99, and over every level the heights sit at 0.95. The two heights move together, so each level is effectively one set of draws of a single mode, and 0.71 is a chance low draw. Every other criterion passes at every level up to 1 px.</p>
+    </figure>
+    <figure class="fig">
+      <div class="table-wrap" id="n-scratch"></div>
+      <figcaption><b>Fig. 10</b> T11b: calibration from nothing, compared with the same calibration started at the truth. &check; means the same answer.
+        <ul>
+          <li>The reference rig succeeds in all 5 data sets at every level up to 5 px.</li>
+          <li>T5's first ten random rigs succeed 10 of 10 up to 2 px, and 9 of 10 at 5 px.</li>
+          <li><b>Rig 7 at 5 px</b> ended in a near-telecentric wrong minimum: cam3's f came out 37 % too long and the camera 360 mm too far away, yet the RMS was only 0.03 px higher. The right start was fourth on the bootstrap's short list, but the calibration carries only the best two forward. Calling <code>calibrate(&hellip;, n_final=6)</code> finds it; since T12 this happens automatically (Fig. 12). Hover over a cell for its run time.</li>
+        </ul></figcaption>
+    </figure>
+    <figure class="fig">
+      <div class="table-wrap" id="n-other"></div>
+      <figcaption><b>Fig. 11</b> T11c&ndash;e on the reference rig, fitted from a start near the truth: 40 data sets per case, 20 for T11e.
+        <ul>
+          <li><b>z RMS 1</b> means honest error bars.</li>
+          <li><b>&ldquo;f error vs the best possible&rdquo;</b> compares with the best any calibration could do: a weighted fit (c), one that knows which detections are bad (d), or the noise-only limit (e).</li>
+          <li><b>One camera at 5&times; the noise (c1):</b> almost nothing is rejected and the error bars stay roughly honest. But weighting every detection alike costs every camera a factor of 1.7&ndash;2.1 in &sigma;, because the noisy camera degrades the others through the shared wand positions. The per-camera weights of Fig. 12 recover it.</li>
+          <li><b>Occasional large errors (d1, d2):</b> the error bars stay honest, and the 5&sigma; rejection recovers part of what an ideal fit could.</li>
+          <li><b>A fixed image pattern (e1, e2) is the dangerous case.</b> About 60 % of it is absorbed into the camera parameters, biasing f by 0.2&ndash;0.5 %. Only the rest shows in the residuals, and the fit's error bars come out 3&ndash;4&times; too small. The free-wand-length check flags it in 7 and 12 of 20 data sets.</li>
+        </ul></figcaption>
+    </figure>
+    <figure class="fig">
+      <div class="table-wrap" id="n-weights"></div>
+      <p class="panel-sub" id="n-weights-note"></p>
+      <figcaption><b>Fig. 12</b> T12: each camera's noise level estimated from the residuals and used as a weight. This is now the default; equal weights stay available as <code>noise_weights="none"</code>.
+        <ul>
+          <li><b>Accuracy</b> is the realised error over the best possible (the correctly weighted Cram&eacute;r&ndash;Rao bound), per camera.</li>
+          <li><b>Error bars</b> are the z RMS against the fit's own covariance, per camera; 1 is honest.</li>
+          <li><b>When the data cannot tell the cameras apart</b> (sometimes with two cameras), the weights stay equal. So the change never makes a fit worse.</li>
+          <li><b>With noisy data</b> (stage-3 RMS above 1 px) every short-listed start is now carried forward. That fixed the 5 px miss of Fig. 10.</li>
+        </ul></figcaption>
+    </figure>
+  </section>
+
   <footer>
-    <div>Drawn from the saved test results by <code>tests/cylinder_wand/make_figures.py</code> (<span id="gen"></span>); nothing was re-fitted. Full report: <code>tests/cylinder_wand/2026-10-01-report.md</code>.</div>
+    <div>Drawn from the saved test results by <code>tests/cylinder_wand/make_figures.py</code> (<span id="gen"></span>); nothing was re-fitted. Reports: <code>tests/cylinder_wand/2026-10-01-report.md</code> (sections 01&ndash;06), <code>2026-10-01-noise-report.md</code> (T11) and <code>2026-10-02-weights-report.md</code> (T12).</div>
     <div>Rig layouts are rebuilt from each test's seeds. The ray traces in Fig. 1c use vector Snell's law in the plane through the axis. Run time is measured on this PC.</div>
   </footer>
 </div>
@@ -665,14 +745,16 @@ window.addEventListener('error', function (e) {
     h('th', { scope: 'col' }, hr, 'Design');
     h('th', { scope: 'col', class: 'num' }, hr, 'Cams');
     for (const c of cols) h('th', { scope: 'col' }, hr, c[1]);
+    h('th', { scope: 'col', class: 'num' }, hr, 'f reaches 0.5 % at');
     const tb = h('tbody', null, t);
     let last = null;
     for (const r of rows) {
-      if (r.group !== last) { last = r.group; const g = h('tr', { class: 'group' }, tb); h('td', { colspan: 5 }, g, groups[r.group]); }
+      if (r.group !== last) { last = r.group; const g = h('tr', { class: 'group' }, tb); h('td', { colspan: 6 }, g, groups[r.group]); }
       const tr = h('tr', { class: r.group === 'Reference' ? 'ref' : '' }, tb);
       h('td', null, tr, r.label);
       h('td', { class: 'num' }, tr, String(r.n));
       for (const c of cols) barCell(h('td', null, tr), r[c[0]], max[c[0]], num(r[c[0]], c[3]) + c[2], ref[c[0]]);
+      h('td', { class: 'num' }, tr, num(0.05 / r.f_pct, 2) + ' px');
     }
   }
   function t9Table(root) {
@@ -833,6 +915,173 @@ window.addEventListener('error', function (e) {
     table(root, ['Test', 'What it checks', 'Rigs', 'Cameras per rig', 'Notes'], D.counts.map(r => [r.test, r.what, r.rigs, r.cams, r.note]), [3], true);
   }
 
+  // ---------------------------------------------------------------- T11 noise
+  const sig3 = v => v >= 100 ? num(v, 0) : v >= 10 ? num(v, 1) : v >= 1 ? num(v, 2) : v >= 0.1 ? num(v, 3) : num(v, 4);
+  function logTicks(lo, hi, maxN) {
+    const out = [];
+    for (let e = Math.floor(Math.log10(lo)); e <= Math.ceil(Math.log10(hi)); e++) {
+      for (const m of [1, 2, 5]) { const v = m * Math.pow(10, e); if (v >= lo && v <= hi) out.push(+v.toPrecision(3)); }
+    }
+    return out.length > maxN ? out.filter(v => Math.abs(Math.log10(v) - Math.round(Math.log10(v))) < 1e-9) : out;
+  }
+  const tickText = v => v >= 1 ? num(v, 0) : String(+v.toPrecision(1));
+  function logLog(cfg) {
+    return (el, w) => {
+      const ht = Math.round(Math.max(190, Math.min(240, w * 0.6))), top = 12, bottom = 36, left = 46, right = 12;
+      const svg = svgFor(el, w, ht, cfg.aria);
+      const x = logS(0.015, 2.7, left, w - right);
+      let lo = Infinity, hi = 0;
+      for (const sr of cfg.series) for (const p of sr.pts) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); }
+      if (cfg.ref) { lo = Math.min(lo, cfg.ref[0]); hi = Math.max(hi, cfg.ref[0]); }
+      lo /= 1.5; hi *= 1.5;
+      const y = logS(lo, hi, ht - bottom, top);
+      for (const t of logTicks(lo, hi, 6)) {
+        s('line', { x1: left, x2: w - right, y1: y(t), y2: y(t), class: 'grid' }, svg);
+        txt(svg, left - 6, y(t) + 4, tickText(t), { 'text-anchor': 'end' });
+      }
+      for (const t of [0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]) {
+        s('line', { x1: x(t), x2: x(t), y1: top, y2: ht - bottom, class: 'grid' }, svg);
+        if (w >= 330 || [0.02, 0.1, 0.5, 2].indexOf(t) >= 0) txt(svg, x(t), ht - bottom + 15, tickText(t), { 'text-anchor': 'middle' });
+      }
+      s('line', { x1: left, x2: w - right, y1: ht - bottom, y2: ht - bottom, class: 'axis' }, svg);
+      txt(svg, (left + w - right) / 2, ht - 4, 'detection noise \u03c3 (px)', { 'text-anchor': 'middle', class: 't-ink' });
+      if (cfg.ref) {
+        s('line', { x1: left, x2: w - right, y1: y(cfg.ref[0]), y2: y(cfg.ref[0]), class: 'refline' }, svg);
+        txt(svg, left + 6, y(cfg.ref[0]) - 5, cfg.ref[1], { class: 't-ink halo' });
+      }
+      for (const sr of cfg.series) {
+        if (sr.kind !== 'dots') s('path', { d: sr.pts.map((p, i) => (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ',' + y(p[1]).toFixed(1)).join(''), class: 'line-' + sr.cls }, svg);
+      }
+      for (const sr of cfg.series) {
+        if (sr.kind === 'line') continue;
+        for (const p of sr.pts) {
+          const g = s('g', null, svg);
+          s('circle', { cx: x(p[0]), cy: y(p[1]), r: 4.5, class: 'dot ' + (sr.cls === 's2' ? 's2' : '') }, g);
+          s('circle', { cx: x(p[0]), cy: y(p[1]), r: 11, class: 'hit' }, g);
+          hover(g, e => tipShow(e, sr.name, [[sig3(p[1]) + ' ' + cfg.unit, 'at \u03c3 = ' + num(p[0], 2) + ' px']].concat(
+            cfg.series.filter(o => o !== sr).map(o => { const q = o.pts.find(z => z[0] === p[0]); return q ? [sig3(q[1]) + ' ' + cfg.unit, o.name] : null; }).filter(Boolean))));
+        }
+      }
+      const lg = h('div', { class: 'legend' }, el);
+      for (const sr of cfg.series) {
+        const k = h('span', { class: 'k' }, lg);
+        if (sr.kind !== 'line') h('span', { class: 'dotk ' + (sr.cls === 's2' ? 's2' : '') }, k);
+        if (sr.kind !== 'dots') h('span', { class: 'ln ' + sr.cls }, k);
+        k.appendChild(document.createTextNode(sr.name));
+      }
+    };
+  }
+  function noiseCharts() {
+    const S = D.t11.sweep, P = (key) => S.map(s => [s.sigma, s[key]]);
+    responsive(document.getElementById('n-f'), logLog({ aria: 'Focal-length error against detection noise', unit: '%',
+      series: [{ name: 'measured', kind: 'dots', cls: 's1', pts: P('f_pct') }, { name: 'Cram\u00e9r\u2013Rao prediction', kind: 'line', cls: 'pred', pts: P('f_pred_pct') }],
+      ref: [0.5, 'plan\u2019s target 0.5 %'] }));
+    responsive(document.getElementById('n-d'), logLog({ aria: 'Camera distance error against detection noise', unit: 'mm',
+      series: [{ name: 'measured', kind: 'dots', cls: 's1', pts: P('dist_mm') }, { name: 'Cram\u00e9r\u2013Rao prediction', kind: 'line', cls: 'pred', pts: P('dist_pred_mm') }] }));
+    responsive(document.getElementById('n-x'), logLog({ aria: '3-D error of unseen points against detection noise', unit: '\u00b5m',
+      series: [{ name: 'relative to the tube', kind: 'dotsline', cls: 's1', pts: P('tube_um') }, { name: 'shape and scale (after a rigid motion)', kind: 'dotsline', cls: 's2', pts: P('rigid_um') }] }));
+    responsive(document.getElementById('n-l'), logLog({ aria: 'Wand-length error against detection noise', unit: '\u00b5m',
+      series: [{ name: 'as measured (noisy held-out frames)', kind: 'dotsline', cls: 's1', pts: P('held_noisy_um') }, { name: 'the calibration\u2019s share', kind: 'dotsline', cls: 's2', pts: P('held_exact_um') }] }));
+  }
+  function noiseTable(root) {
+    const rows = D.t11.sweep.map(s => [num(s.sigma, 2), sig3(s.f_pct) + ' %', sig3(s.dist_mm) + ' mm', sig3(s.tube_um), sig3(s.rigid_um),
+      sig3(s.held_noisy_um), sig3(s.held_exact_um), num(s.z_fit_std, 2), num(s.sigma_ratio, 3), String(Math.round(s.rejected * s.n)),
+      s.gated ? (s.pass ? 'pass' : 'fail \u2020') : 'reported']);
+    table(root, ['Noise (px)', 'f error', 'Distance', '3-D vs tube (\u00b5m)', '3-D shape (\u00b5m)', 'Wand length (\u00b5m)',
+      'calibration\u2019s share (\u00b5m)', 'z std', 'Fit \u03c3 / \u03c3', 'Rejected', 'Criteria'],
+      rows, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], true);
+  }
+  function stCell(td, ok, text, title) {
+    const sp = h('span', { class: 'st ' + (ok === true ? 'ok' : ok === false ? 'no' : 'na'), title: title || '' }, td, text);
+    return sp;
+  }
+  function scratchMatrix(root) {
+    const S = D.t11.scratch, levels = S.ref.map(r => r.sigma);
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    h('th', { scope: 'col' }, hr, 'Rig');
+    h('th', { scope: 'col', class: 'c' }, hr, 'Cameras');
+    for (const L of levels) h('th', { scope: 'col', class: 'c' }, hr, num(L, L < 0.1 ? 2 : L < 1 ? 1 : 0) + ' px');
+    const tb = h('tbody', null, t);
+    const r0 = h('tr', null, tb);
+    h('td', null, r0, 'Reference rig (5 data sets per level)');
+    h('td', { class: 'c' }, r0, '3');
+    for (const r of S.ref) stCell(h('td', { class: 'c' }, r0), r.ok === r.n, (r.ok === r.n ? '\u2713 ' : '\u2717 ') + r.ok + '/' + r.n, 'median ' + num(r.median_seconds) + ' s');
+    for (const m of S.matrix) {
+      const tr = h('tr', null, tb);
+      h('td', null, tr, 'T5 rig ' + m.index);
+      h('td', { class: 'c' }, tr, String(m.n_cams));
+      for (const L of levels) {
+        const c = m.cells[String(L)];
+        const td = h('td', { class: 'c' }, tr);
+        if (c) stCell(td, c.ok, c.ok ? '\u2713' : '\u2717', (c.ok ? 'reached the global minimum' : 'did not') + (c.seconds ? ', ' + num(c.seconds) + ' s' : ''));
+        else if (Math.abs(L - 0.1) < 1e-9) stCell(td, true, '\u2713 T5', 'T5, 0.1 px');
+        else stCell(td, null, '\u00b7', 'not run');
+      }
+    }
+  }
+  function otherTable(root) {
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    const heads = ['Case', 'Noise RMS (px)', 'Rejected', 'Fit \u03c3 (px)', 'z RMS, fit\u2019s own \u03c3', 'f error vs the best possible', '3-D shape (\u00b5m)', 'Wand length (\u00b5m)'];
+    heads.forEach((c, i) => h('th', { scope: 'col', class: i ? 'num' : '' }, hr, c));
+    const tb = h('tbody', null, t);
+    for (const r of D.t11.other) {
+      let note = '';
+      if (r.kind === 'c') note = 'Rejected per camera ' + r.rejected_per_cam_pct.map(v => num(v, 1)).join(' / ') + ' %, per end ' + r.rejected_per_end_pct.map(v => num(v, 1)).join(' / ') +
+        ' %. z RMS per camera ' + r.z_fit_per_cam.map(v => num(v, 2)).join(' / ') + ' against the fit\u2019s \u03c3, ' + r.z_sand_per_cam.map(v => num(v, 2)).join(' / ') +
+        ' against least squares\u2019 true \u03c3. Equal weights cost \u00d7' + r.weights_cost_per_cam.map(v => num(v, 2)).join(' / ') + ' in \u03c3 per camera. From scratch ' + r.scratch_ok + '/' + r.scratch_n + '.';
+      if (r.kind === 'd') note = (r.wide_rejected_pct != null ? 'Wide detections rejected: ' + num(r.wide_rejected_pct, 0) + ' %; others ' + num(r.narrow_rejected_pct, 1) + ' %, 97 % of them with whole frames left with an end in one camera (t11d_rejection_split). ' : '') +
+        'f error \u00d7' + num(r.f_vs_ls, 2) + ' of least squares keeping everything, \u00d7' + num(r.f_vs_oracle, 2) + ' of the best possible. From scratch ' + r.scratch_ok + '/' + r.scratch_n + '.';
+      if (r.kind === 'e') note = 'Pattern ' + num(r.pattern_rms_px, 3) + ' px RMS at the detections; ' + num(r.absorbed_pct, 0) + ' % of it is absorbed into the parameters, ' + num(r.pattern_left_px, 3) +
+        ' px is left in the residuals. The free wand length flags it in ' + r.L_flagged + ' of ' + r.L_n + ' data sets (offset RMS ' + num(r.L_offset_sigma_rms, 1) + ' \u03c3).';
+      const best = r.kind === 'd' ? r.f_vs_oracle : r.f_ratio;
+      const tr = h('tr', { class: 'main' }, tb);
+      [r.name, num(r.noise_rms_px, 3), num(r.rejected_pct, 2) + ' %', num(r.sigma_fit_px, 3), num(r.z_fit_rms, 2), '\u00d7' + num(best, 2), sig3(r.rigid_um), sig3(r.held_noisy_um)]
+        .forEach((c, i) => h('td', { class: i ? 'num' : '' }, tr, c));
+      h('td', { colspan: heads.length }, h('tr', { class: 'notes' }, tb), note);
+    }
+  }
+
+  function weightsTable(root, note) {
+    const T = D.t12, f2 = v => num(v, 2);
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    ['Case', 'Accuracy vs the best possible: equal weights \u2192 with weights', 'Error bars (z RMS): before \u2192 after',
+      'Noise estimate, RMS error', 'Rejected', 'Criteria'].forEach(c => h('th', { scope: 'col' }, hr, c));
+    const tb = h('tbody', null, t);
+    for (const r of T.rows) {
+      const tr = h('tr', null, tb);
+      h('td', null, tr, r.name);
+      if (r.kind === 'unequal') {
+        h('td', null, tr, r.acc_before.map(f2).join(' / ') + ' \u2192 ' + r.acc_after.map(f2).join(' / '));
+        h('td', null, tr, r.bars_before.map(f2).join(' / ') + ' \u2192 ' + r.bars_after.map(f2).join(' / '));
+        h('td', null, tr, num(Math.max.apply(null, r.sigma_err_pct), 1) + ' % (worst group)');
+        h('td', null, tr, (r.rejected_before != null ? r.rejected_before + ' \u2192 ' : '') + r.rejected_after + ' of ' + r.obs.toLocaleString('en-US'));
+      } else if (r.kind === 'equal') {
+        h('td', null, tr, 'unchanged: \u00d7' + num(r.loss, 3) + ' (the estimates moved ' + num(r.moved_sigma, 2) + ' \u03c3)');
+        h('td', null, tr, '\u2014');
+        h('td', null, tr, num(Math.max.apply(null, r.sigma_err_pct), 1) + ' %');
+        h('td', null, tr, '\u2014');
+      } else {
+        h('td', null, tr, '\u00d7' + num(r.acc_ratio, 2) + ' of equal weights; weights used in ' + r.used + ' of ' + r.n);
+        h('td', null, tr, '\u2014');
+        h('td', null, tr, '\u2014');
+        h('td', null, tr, '\u2014');
+      }
+      stCell(h('td', null, tr), r.pass, r.pass ? '\u2713 pass' : '\u2717 fail \u2021');
+    }
+    const S = T.scratch;
+    const failed = T.rows.filter(r => !r.pass && r.kind === 'unequal');
+    const foot = failed.map(r => '\u2021 ' + r.name.split(':')[0] + ' failed only its ' + r.failed.join(', ') +
+      ' criterion: the worst of its noise groups scattered ' + num(Math.max.apply(null, r.sigma_err_pct), 1) +
+      ' % RMS against a 5 % limit, while the estimator\u2019s own predicted error for these groups of about 500 detections is ' +
+      num(Math.max.apply(null, r.sigma_pred_pct), 1) + ' %. The limit sat at the estimator\u2019s precision; accuracy and error bars pass. ').join('');
+    note.textContent = foot + 'From scratch with the new defaults: T5\u2019s 50 rigs at 0.1 px ' + S.t5_ok + '/' + S.t5_n +
+      '; the ten rigs at 5 px ' + S.px5_ok + '/' + S.px5_n + ' (T11b: ' + S.px5_t11b_ok + '/10).' +
+      (T.time_ratio ? ' A calibration from scratch takes \u00d7' + num(T.time_ratio, 2) + ' the time it took before (like for like, T12d timing).' : '');
+  }
+
   // ---------------------------------------------------------------- build
   const ok = D.t5.filter(r => r.result.ok).length;
   document.getElementById('fact-t5').textContent = ok + ' of ' + D.t5.length;
@@ -872,5 +1121,12 @@ window.addEventListener('error', function (e) {
   responsive(document.getElementById('t7-ratio'), ratios);
   t8(document.getElementById('t8-table'), document.getElementById('t8-outcome'));
   t9Table(document.getElementById('t9-table'));
+  if (D.t11) {
+    noiseCharts();
+    noiseTable(document.getElementById('n-table'));
+    if (D.t11.scratch) scratchMatrix(document.getElementById('n-scratch'));
+    if (D.t11.other && D.t11.other.length) otherTable(document.getElementById('n-other'));
+  }
+  if (D.t12) weightsTable(document.getElementById('n-weights'), document.getElementById('n-weights-note'));
 })();
 </script>

@@ -262,6 +262,121 @@ def t9_rows(t9):
     return out
 
 
+def t11_data():
+    """The noise tests (T11, 2026-10-01-noise-plan.md): the sweep, the starts from scratch, and the other noise."""
+    if not (HERE / "t11a_noise_sweep.json").exists():
+        return None
+    a = load("t11a_noise_sweep.json")
+    sweep = []
+    for s in a["levels"]:
+        ph = s["phys"]
+        sweep.append({"sigma": s["sigma"],
+                      "f_pct": 100 * max(ph["f_rel"]["rms_per_cam"]), "f_pred_pct": 100 * max(ph["f_rel"]["pred_per_cam"]),
+                      "dist_mm": max(ph["distance_mm"]["rms_per_cam"]),
+                      "dist_pred_mm": max(ph["distance_mm"]["pred_per_cam"]),
+                      "ratios": {k: ph[k]["ratio"] for k in ("f_rel", "distance_mm", "azimuth_deg", "height_mm")},
+                      "z_crb_mean": s["z_crb"]["mean"], "z_crb_std": s["z_crb"]["std"],
+                      "z_fit_mean": s["z_fit"]["mean"], "z_fit_std": s["z_fit"]["std"],
+                      "sigma_ratio": s["sigma_fit_px"] / s["sigma"], "rejected": s["rejected"],
+                      "tube_um": s["unseen_stab_um"], "rigid_um": s["unseen_rigid_um"], "raw_um": s["unseen_raw_um"],
+                      "held_noisy_um": s["held_noisy_rms_um"], "held_exact_um": s["held_exact_rms_um"],
+                      "pass": s["criteria"]["pass"], "gated": s["sigma"] <= 1.0, "n": s["n"]})
+    out = {"sweep": sweep, "n_sets": a["n_sets"]}
+    if (HERE / "t11a_recheck.json").exists() and (HERE / "t11a_recheck_levels.json").exists():
+        r1 = load("t11a_recheck.json")
+        r2 = load("t11a_recheck_levels.json")
+        out["recheck"] = {"first": {"n": r1["summary"]["n"], "height_ratio": r1["summary"]["phys"]["height_mm"]["ratio"]},
+                          "levels": [{"sigma": L["sigma"], "n": L["n"], "height_ratio": L["ratios"]["height_mm"],
+                                      "z_groups": L["z_groups"]} for L in r2["levels"]]}
+    if (HERE / "t11b_noise_scratch.json").exists():
+        b = load("t11b_noise_scratch.json")
+        cells = {}
+        for r in b["runs"]:
+            if r.get("kind") != "rig":
+                continue
+            cells.setdefault(r["index"], {"n_cams": r.get("n_cams"), "cells": {}})
+            cells[r["index"]]["cells"][f"{r['sigma']:g}"] = {"ok": bool(r.get("ok")), "seconds": r.get("seconds"),
+                                                          "max_diff_sigma": r.get("max_diff_sigma"),
+                                                          "error": r.get("error")}
+        out["scratch"] = {"ref": b["ref"], "rigs": b["rigs"],
+                          "matrix": [{"index": k, **v} for k, v in sorted(cells.items())]}
+    other = []
+    for fn, kind in (("t11c_unequal_noise.json", "c"), ("t11d_heavy_tails.json", "d"), ("t11e_systematic.json", "e")):
+        if not (HERE / fn).exists():
+            continue
+        for v in load(fn)["variants"]:
+            s = v["summary"]
+            row = {"kind": kind, "name": v["name"], "spec": v["spec"], "rms_px": s["rms_px"],
+                   "sigma_fit_px": s["sigma_fit_px"], "noise_rms_px": s["noise_rms_px"],
+                   "rejected_pct": 100 * s["rejected"] / (sum(s["obs_per_cam"]) / s["n"]),
+                   "z_fit_rms": s["z_fit"]["rms"], "z_crb_rms": s["z_crb"]["rms"],
+                   "f_ratio": s["phys"]["f_rel"]["ratio"], "f_pct": 100 * max(s["phys"]["f_rel"]["rms_per_cam"]),
+                   "tube_um": s["unseen_stab_um"], "rigid_um": s["unseen_rigid_um"],
+                   "held_noisy_um": s["held_noisy_rms_um"], "held_exact_um": s["held_exact_rms_um"]}
+            if kind == "c":
+                row.update({"rejected_per_cam_pct": [100 * x for x in v["rejected_fraction_per_cam"]],
+                            "rejected_per_end_pct": [100 * x for x in v["rejected_fraction_per_end"]],
+                            "z_fit_per_cam": v["z_rms_per_cam"]["z_fit"], "z_sand_per_cam": v["z_rms_per_cam"]["z_sand"],
+                            "weights_cost_per_cam": v["sand_over_crb_per_cam"],
+                            "scratch_ok": v["scratch_ok"], "scratch_n": len(v["scratch"])})
+            if kind == "d":
+                row.update({"wide_rejected_pct": None if v["wide_rejected_fraction"] is None
+                            else 100 * v["wide_rejected_fraction"],
+                            "narrow_rejected_pct": None if v["narrow_rejected_fraction"] is None
+                            else 100 * v["narrow_rejected_fraction"],
+                            "f_vs_ls": v["accuracy"]["f_rel"]["vs_ls"], "f_vs_oracle": v["accuracy"]["f_rel"]["vs_oracle"],
+                            "oracle_over_ls": v["accuracy"]["f_rel"]["oracle_over_ls"],
+                            "scratch_ok": v["scratch_ok"], "scratch_n": len(v["scratch"])})
+            if kind == "e":
+                row["name"] = (f"{v['name'][:2]}: pattern {v['pattern_rms_px']:.2f} px at the detections + noise "
+                               f"{v['spec']['sigma']:g} px")
+                row.update({"pattern_rms_px": v["pattern_rms_px"], "pattern_left_px": v["pattern_left_px"],
+                            "absorbed_pct": 100 * v["absorbed_fraction_mean"],
+                            "L_offset_sigma_rms": v["L_offset_sigma_rms"], "L_flagged": v["L_flagged_3sigma"],
+                            "L_n": len(v["runs"]), "held_exact_mean_um": s["held_exact_mean_um"]})
+            other.append(row)
+    out["other"] = other
+    return out
+
+
+def t12_data():
+    """The noise weights (T12, 2026-10-02-weights-plan.md): before (T11, equal weights) and after, per case."""
+    need = ("t12a_weights_unequal.json", "t12b_weights_equal.json", "t12c_two_cameras.json", "t12d_scratch_t5.json",
+            "t12e_scratch_5px.json")
+    if not all((HERE / n).exists() for n in need):
+        return None
+    a, b, c, d, e = (load(n) for n in need)
+    rows = []
+    for v in a["variants"]:
+        s, old = v["summary"], None
+        rows.append({"kind": "unequal", "name": v["name"], "mode": v["mode"],
+                     "acc_before": v["t11c_z_crb_per_cam"], "acc_after": [x[0] for x in v["z_crb_per_cam"]],
+                     "bars_before": v["t11c_z_fit_per_cam"], "bars_after": [x[0] for x in v["z_fit_per_cam"]],
+                     "sigma_err_pct": [100 * x for x in v["sigma_rel_rms"]], "rejected_after": sum(s["rejected_per_cam"]),
+                     "obs": sum(s["obs_per_cam"]), "rigid_um": s["unseen_rigid_um"], "pass": v["criteria"]["pass"],
+                     "failed": [k for k, ok in v["criteria"].items() if k != "pass" and not ok],
+                     "sigma_pred_pct": [100 * float(x) for x in np.sqrt(np.mean(np.square(
+                         [r["rel_se"] for r in v["runs"] if r.get("rel_se")]), axis=0))]})
+    old_c = {vv["name"]: vv for vv in load("t11c_unequal_noise.json")["variants"]}
+    for row in rows:
+        oc = old_c.get(row["name"])
+        if oc:
+            row["rejected_before"] = sum(oc["summary"]["rejected_per_cam"])
+            row["rigid_before_um"] = oc["summary"]["unseen_rigid_um"]
+    for L in b["levels"]:
+        rows.append({"kind": "equal", "name": f"equal noise, {L['sigma']:g} px", "loss": L["loss"],
+                     "moved_sigma": L["moved_sigma"], "sigma_err_pct": [100 * x for x in L["sigma_rel_rms"]],
+                     "pass": L["criteria"]["pass"]})
+    for cc in c["cases"]:
+        rows.append({"kind": "two", "name": f"two cameras {cc['name']}", "used": cc["weights_used"], "n": cc["n"],
+                     "acc_ratio": cc["accuracy_ratio"], "pass": cc["criteria"]["pass"]})
+    timing = load("t12d_timing.json") if (HERE / "t12d_timing.json").exists() else None
+    return {"rows": rows,
+            "scratch": {"t5_ok": d["n_ok"], "t5_n": d["n"], "px5_ok": e["n_ok"], "px5_n": e["n"],
+                        "px5_t11b_ok": 9, "t5_median_s": d["median_seconds"], "px5_median_s": e["median_seconds"]},
+            "time_ratio": None if timing is None else timing["median_ratio"]}
+
+
 def build_pages(text, fragment_path=None):
     """Fill the template's data block; write the standalone page (and the bare fragment if asked)."""
     page = TEMPLATE.read_text(encoding="utf-8")
@@ -324,6 +439,8 @@ def main(fragment_path=None):
         "t3": [{"rig": r["rig"], "final_rms_px": r["final_rms_px"], "max_rot_deg": r["max_rot_deg"],
                 "max_centre_mm": r["max_centre_mm"], "max_f_rel": r["max_f_rel"]} for r in t3["runs"]],
         "t4": t4, "t7": t7_rows(t7), "t8": t8, "t9": t9_rows(t9),
+        "t11": t11_data(),
+        "t12": t12_data(),
     }
     data = sig(data)
     FIG.mkdir(exist_ok=True)

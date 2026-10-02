@@ -1,0 +1,20 @@
+rig 7: 3 cameras at azimuths 0, 82, 200 deg, distances 428, 622, 962 mm, f 20952, 23206, 49499 px; cloud +-12.7 mm; noise 5 px
+started at the truth: rms 5.3922 px, active 3000/3000
+from scratch (calibrate): rms 5.4202 px, max diff 7.70 sigma (T11b found 5.4202 px, 7.7 sigma)
+    candidate mirror True p (+18.3, +36.6) mm: cost as placed 4.67e+04, after a quick fit 1.58e+03, after a short fit 2.6e+03
+    candidate mirror True p (+18.3, +18.3) mm: cost as placed 4.98e+04, after a quick fit 1.64e+03, after a short fit 2.59e+03
+    candidate mirror True p (+0.0, -18.3) mm: cost as placed 5.13e+04, after a quick fit 1.65e+03, after a short fit 3.18e+03
+    candidate mirror True p (+0.0, +18.3) mm: cost as placed 4.28e+04, after a quick fit 1.79e+03, after a short fit 2.59e+03
+    candidate mirror True p (+0.0, -36.6) mm: cost as placed 6.25e+04, after a quick fit 1.97e+03, after a short fit 3.25e+03
+    candidate mirror False p (+0.0, +0.0) mm: cost as placed 4.58e+04, after a quick fit 2.1e+03, after a short fit 5.04e+03
+bootstrap: affine 6.98 px over 500 frames, 98 candidates, best mirror True at [0.0, 18.28401564319263]
+  start 0: bootstrap cost 2590 -> stage 3 5.044 px -> stage 4 5.4202 px, active 3000 | vs truth-start: 7.7 sigma, f diff -5.77, +1.89, +37.29 %, distance diff -24.3, +12.3, +360.4 mm  <- kept by calibrate (n_final = 2)
+  start 1: bootstrap cost 2592 -> stage 3 5.047 px -> stage 4 5.4276 px, active 3000 | vs truth-start: 9.2 sigma, f diff -6.49, +2.07, +44.45 %, distance diff -27.4, +13.5, +429.6 mm  <- kept by calibrate (n_final = 2)
+  start 2: bootstrap cost 2603 -> stage 3 5.056 px -> stage 4 5.4725 px, active 3000 | vs truth-start: 19 sigma, f diff -9.83, +2.76, +94.02 %, distance diff -41.6, +18.0, +907.7 mm
+  start 3: bootstrap cost 3180 -> stage 3 4.860 px -> stage 4 5.3922 px, active 3000 | vs truth-start: 2.2e-08 sigma, f diff -0.00, +0.00, +0.00 %, distance diff -0.0, +0.0, +0.0 mm
+  start 4: bootstrap cost 3254 -> stage 3 4.860 px -> stage 4 5.3922 px, active 3000 | vs truth-start: 2.4e-08 sigma, f diff -0.00, +0.00, +0.00 %, distance diff -0.0, +0.0, +0.0 mm
+  start 5: bootstrap cost 5041 -> stage 3 9.843 px -> stage 4 10.3097 px, active 2980 | vs truth-start: 1.4e+03 sigma, f diff +200.12, +1373.55, -61.69 %, distance diff +797.3, +8637.4, -607.6 mm
+
+the wrong minimum vs the global one: f -5.77, +1.89, +37.29 %, distance -24.3, +12.3, +360.4 mm, azimuth +0.00, -0.03, +0.11 deg; rms higher by 28.1 mpx
+global minimum reached by any of the six starts: True (in the top two: False); the start calibrate's rule would pick from all six: 3
+time 129 s

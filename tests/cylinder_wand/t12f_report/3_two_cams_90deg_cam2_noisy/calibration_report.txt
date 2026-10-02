@@ -1,0 +1,22 @@
+Cylinder wand calibration (PINCYL), 2 cameras
+tube: radii [100.80625, 97.63125] mm, n [1.0, 1.49, 1.333]; wand 10.0000 mm
+frames 500, observations 1996 active of 2000; reprojection RMS 0.4062 px (2-D), sigma 0.4717 px per coordinate
+wand length, free triangulation: mean error -0.36 um, RMS 9.98 um over 499 frames
+frame: tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height (slid -0.328 mm)
+
+cam1: f 41375.6 px +- 0.226 %; distance from the axis 1091.98 mm +- 2.418; azimuth 0.000 deg; height 0.328 mm; reprojection RMS 0.0385 px (998/1000 active); camFile camFile\cam1.txt
+cam2: f 41461.1 px +- 0.383 %; distance from the axis 1094.22 mm +- 4.117; azimuth 90.005 deg; height 0.718 mm; reprojection RMS 0.5731 px (998/1000 active); camFile camFile\cam2.txt
+
+Noise levels and weights (noise_weights='camera')
+  weights APPLIED: estimated from the residuals; each detection weighted by 1 / sigma^2 of its group
+  group          noise sigma  +- rel. SE    used / total  not used  residual RMS  outlier scale
+                        (px)                                         (px/coord.)           (px)
+  cam1                0.0949       8.0 %     998 / 1000          2        0.0272         0.0898
+  cam2                0.4959       2.1 %     998 / 1000          2        0.4053         0.4989
+  pooled sigma 0.4717 px per coordinate (unweighted); variance factor 1.011 (about 1 when the weights match the data); 9 rounds; noisiest / quietest group 5.22x
+  noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.
+  residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera
+    next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).
+  not used: rejected as outliers, or dropped with their frame when an end was left in fewer than two cameras.
+  outlier scale: the robust scale each detection was judged against (rejected beyond 5 of it).
+  starts: 2 of 6 short-listed bootstrap starts carried through stages 3-4; stage-3 RMS 0.293, 0.293 px

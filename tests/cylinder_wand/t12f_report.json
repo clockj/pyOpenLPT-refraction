@@ -1,0 +1,367 @@
+{
+ "cases": [
+  {
+   "case": "1_three_cams_cam2_noisy",
+   "noise": {
+    "mode": "camera",
+    "given": false,
+    "weights_used": true,
+    "why": "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group",
+    "groups": [
+     {
+      "group": "cam1",
+      "sigma_px": 0.09795499840226678,
+      "sigma_estimate_px": 0.09795500708199525,
+      "rel_se": 0.037525312974350994,
+      "n_total": 1000,
+      "n_used": 1000,
+      "n_not_used": 0,
+      "residual_rms_px": 0.08446502231512257,
+      "residual_rms_px_per_coordinate": 0.05972579005209623,
+      "rejection_scale_px": 0.09772963359762914
+     },
+     {
+      "group": "cam2",
+      "sigma_px": 0.49299679744096525,
+      "sigma_estimate_px": 0.4929969621291219,
+      "rel_se": 0.016231527544878704,
+      "n_total": 1000,
+      "n_used": 1000,
+      "n_not_used": 0,
+      "residual_rms_px": 0.688238346890041,
+      "residual_rms_px_per_coordinate": 0.48665800215856747,
+      "rejection_scale_px": 0.49102719550498775
+     },
+     {
+      "group": "cam3",
+      "sigma_px": 0.10418711736222573,
+      "sigma_estimate_px": 0.10418702487074288,
+      "rel_se": 0.035217157763218175,
+      "n_total": 1000,
+      "n_used": 1000,
+      "n_not_used": 0,
+      "residual_rms_px": 0.09362744346818754,
+      "residual_rms_px_per_coordinate": 0.06620460018151553,
+      "rejection_scale_px": 0.10223157886353182
+     }
+    ],
+    "pooled_sigma_px": 0.37502176908757917,
+    "variance_factor": 1.0054582016726423,
+    "rounds": 5,
+    "noisiest_over_quietest": 5.032890669002929,
+    "max_rel_se": 0.1,
+    "starts": {
+     "short_listed": 6,
+     "tried": 2,
+     "extra_starts": false,
+     "more_starts_px": 1.0,
+     "stage3_rms_px": [
+      0.29665042686869947,
+      0.2966504195162488
+     ],
+     "start_given": false
+    }
+   },
+   "checks": {
+    "section": true,
+    "counts": true,
+    "sigma_within_4_se": true
+   },
+   "pass": true,
+   "seconds": 31.369930744171143
+  },
+  {
+   "case": "2_three_cams_equal",
+   "noise": {
+    "mode": "camera",
+    "given": false,
+    "weights_used": true,
+    "why": "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group",
+    "groups": [
+     {
+      "group": "cam1",
+      "sigma_px": 0.10176671842913876,
+      "sigma_estimate_px": 0.10176665637779077,
+      "rel_se": 0.027031200413425067,
+      "n_total": 1000,
+      "n_used": 1000,
+      "n_not_used": 0,
+      "residual_rms_px": 0.10800106187787735,
+      "residual_rms_px_per_coordinate": 0.076368283229195,
+      "rejection_scale_px": 0.1005992717014891
+     },
+     {
+      "group": "cam2",
+      "sigma_px": 0.09982764654239179,
+      "sigma_estimate_px": 0.09982771340953119,
+      "rel_se": 0.02543549392910196,
+      "n_total": 1000,
+      "n_used": 1000,
+      "n_not_used": 0,
+      "residual_rms_px": 0.11322997939315568,
+      "residual_rms_px_per_coordinate": 0.08006568626251342,
+      "rejection_scale_px": 0.0996774187398722
+     },
+     {
+      "group": "cam3",
+      "sigma_px": 0.09827877931781447,
+      "sigma_estimate_px": 0.09827876349770878,
+      "rel_se": 0.027854845720507195,
+      "n_total": 1000,
+      "n_used": 1000,
+      "n_not_used": 0,
+      "residual_rms_px": 0.10247376411234092,
+      "residual_rms_px_per_coordinate": 0.07245989349754695,
+      "rejection_scale_px": 0.09896045313832275
+     }
+    ],
+    "pooled_sigma_px": 0.10025266834234486,
+    "variance_factor": 1.005458201671837,
+    "rounds": 4,
+    "noisiest_over_quietest": 1.0354902567526298,
+    "max_rel_se": 0.1,
+    "starts": {
+     "short_listed": 6,
+     "tried": 2,
+     "extra_starts": false,
+     "more_starts_px": 1.0,
+     "stage3_rms_px": [
+      0.09749433222018439,
+      0.09749433008237741
+     ],
+     "start_given": false
+    }
+   },
+   "checks": {
+    "section": true,
+    "counts": true,
+    "sigma_within_4_se": true
+   },
+   "pass": true,
+   "seconds": 30.775681495666504
+  },
+  {
+   "case": "3_two_cams_90deg_cam2_noisy",
+   "noise": {
+    "mode": "camera",
+    "given": false,
+    "weights_used": true,
+    "why": "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group",
+    "groups": [
+     {
+      "group": "cam1",
+      "sigma_px": 0.09491290895091507,
+      "sigma_estimate_px": 0.09491289660015852,
+      "rel_se": 0.07976108960017173,
+      "n_total": 1000,
+      "n_used": 998,
+      "n_not_used": 2,
+      "residual_rms_px": 0.038458621919651166,
+      "residual_rms_px_per_coordinate": 0.027194352354474937,
+      "rejection_scale_px": 0.08976939270659985
+     },
+     {
+      "group": "cam2",
+      "sigma_px": 0.49586941571294485,
+      "sigma_estimate_px": 0.49586942364392955,
+      "rel_se": 0.020617094039810373,
+      "n_total": 1000,
+      "n_used": 998,
+      "n_not_used": 2,
+      "residual_rms_px": 0.5731130164793287,
+      "residual_rms_px_per_coordinate": 0.40525210033881087,
+      "rejection_scale_px": 0.4988936361011243
+     }
+    ],
+    "pooled_sigma_px": 0.4716830991158567,
+    "variance_factor": 1.011486486486519,
+    "rounds": 9,
+    "noisiest_over_quietest": 5.224467579740786,
+    "max_rel_se": 0.1,
+    "starts": {
+     "short_listed": 6,
+     "tried": 2,
+     "extra_starts": false,
+     "more_starts_px": 1.0,
+     "stage3_rms_px": [
+      0.29296799275377566,
+      0.29296798871465163
+     ],
+     "start_given": false
+    }
+   },
+   "checks": {
+    "section": true,
+    "counts": true,
+    "sigma_within_4_se": true
+   },
+   "pass": true,
+   "seconds": 20.64495086669922
+  },
+  {
+   "case": "4_two_cams_45deg_cam2_noisy_150_frames",
+   "noise": {
+    "mode": "camera",
+    "given": false,
+    "weights_used": false,
+    "why": "the data could not separate the groups' noise (largest relative standard error 15.7 %, limit 10 %): equal weights, as without the weighting",
+    "groups": [
+     {
+      "group": "cam1",
+      "sigma_px": null,
+      "sigma_estimate_px": 0.11196544575389768,
+      "rel_se": 0.15730832247808169,
+      "n_total": 300,
+      "n_used": 300,
+      "n_not_used": 0,
+      "residual_rms_px": 0.27354884821134384,
+      "residual_rms_px_per_coordinate": 0.19342824555601082,
+      "rejection_scale_px": 0.33518005101138065
+     },
+     {
+      "group": "cam2",
+      "sigma_px": null,
+      "sigma_estimate_px": 0.4990645338016333,
+      "rel_se": 0.03847473229475838,
+      "n_total": 300,
+      "n_used": 300,
+      "n_not_used": 0,
+      "residual_rms_px": 0.34749988768010537,
+      "residual_rms_px_per_coordinate": 0.2457195270401661,
+      "rejection_scale_px": 0.33518005101138065
+     }
+    ],
+    "pooled_sigma_px": 0.3660087807684613,
+    "variance_factor": null,
+    "rounds": 8,
+    "noisiest_over_quietest": null,
+    "max_rel_se": 0.1,
+    "starts": {
+     "short_listed": 6,
+     "tried": 2,
+     "extra_starts": false,
+     "more_starts_px": 1.0,
+     "stage3_rms_px": [
+      0.3086761978916176,
+      0.3086761997254283
+     ],
+     "start_given": false
+    }
+   },
+   "checks": {
+    "section": true,
+    "counts": true,
+    "says_why": true
+   },
+   "pass": true,
+   "seconds": 15.666468143463135
+  },
+  {
+   "case": "5_three_cams_end_A_noisy",
+   "noise": {
+    "mode": "camera_end",
+    "given": false,
+    "weights_used": true,
+    "why": "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group",
+    "groups": [
+     {
+      "group": "cam1 end A",
+      "sigma_px": 0.1834044451426077,
+      "sigma_estimate_px": 0.18340446064800217,
+      "rel_se": 0.036908653186273004,
+      "n_total": 500,
+      "n_used": 500,
+      "n_not_used": 0,
+      "residual_rms_px": 0.19837824493095768,
+      "residual_rms_px_per_coordinate": 0.140274602230566,
+      "rejection_scale_px": 0.19277283053961844
+     },
+     {
+      "group": "cam1 end B",
+      "sigma_px": 0.10734151940014278,
+      "sigma_estimate_px": 0.10734148943716075,
+      "rel_se": 0.041245080747675265,
+      "n_total": 500,
+      "n_used": 500,
+      "n_not_used": 0,
+      "residual_rms_px": 0.11191700213421114,
+      "residual_rms_px_per_coordinate": 0.07913727113917,
+      "rejection_scale_px": 0.10752458593155209
+     },
+     {
+      "group": "cam2 end A",
+      "sigma_px": 0.1892277787637804,
+      "sigma_estimate_px": 0.18922775172632364,
+      "rel_se": 0.03359249394745636,
+      "n_total": 500,
+      "n_used": 499,
+      "n_not_used": 1,
+      "residual_rms_px": 0.22005759568563243,
+      "residual_rms_px_per_coordinate": 0.15560421816091824,
+      "rejection_scale_px": 0.18782191363337836
+     },
+     {
+      "group": "cam2 end B",
+      "sigma_px": 0.09612741701890958,
+      "sigma_estimate_px": 0.09612744354333969,
+      "rel_se": 0.04162194944111515,
+      "n_total": 500,
+      "n_used": 500,
+      "n_not_used": 0,
+      "residual_rms_px": 0.10399253925755017,
+      "residual_rms_px_per_coordinate": 0.07353382970182198,
+      "rejection_scale_px": 0.09689594837269232
+     },
+     {
+      "group": "cam3 end A",
+      "sigma_px": 0.19957966782099448,
+      "sigma_estimate_px": 0.1995796954166566,
+      "rel_se": 0.034516310603403495,
+      "n_total": 500,
+      "n_used": 500,
+      "n_not_used": 0,
+      "residual_rms_px": 0.22404518684056487,
+      "residual_rms_px_per_coordinate": 0.15842387090717047,
+      "rejection_scale_px": 0.19740227835106403
+     },
+     {
+      "group": "cam3 end B",
+      "sigma_px": 0.0960460098813921,
+      "sigma_estimate_px": 0.09604599988375684,
+      "rel_se": 0.04688220489651459,
+      "n_total": 500,
+      "n_used": 500,
+      "n_not_used": 0,
+      "residual_rms_px": 0.09404465838191657,
+      "residual_rms_px_per_coordinate": 0.06649961567622549,
+      "rejection_scale_px": 0.09437189570833257
+     }
+    ],
+    "pooled_sigma_px": 0.15633730324192155,
+    "variance_factor": 1.0054613394649834,
+    "rounds": 7,
+    "noisiest_over_quietest": 2.0779589705752155,
+    "max_rel_se": 0.1,
+    "starts": {
+     "short_listed": 6,
+     "tried": 2,
+     "extra_starts": false,
+     "more_starts_px": 1.0,
+     "stage3_rms_px": [
+      0.14836479348490947,
+      0.14836479346855508
+     ],
+     "start_given": false
+    }
+   },
+   "checks": {
+    "section": true,
+    "counts": true,
+    "sigma_within_4_se": true
+   },
+   "pass": true,
+   "seconds": 33.28083920478821
+  }
+ ],
+ "pass": true
+}

@@ -201,6 +201,11 @@ def test_export_roundtrip(tmp_path):
         assert ok.sum() > 150
         assert np.max(np.abs(a[ok] - b[ok])) <= 1e-9
     assert (tmp_path / "calibration_result.json").exists() and (tmp_path / "calibration_report.txt").exists()
+    # the report says what the noise weighting did (T12): one row per camera, with the detections accounted for
+    nz = res["noise"]
+    assert nz["mode"] == "camera" and len(nz["groups"]) == len(truth)
+    assert all(g["n_used"] + g["n_not_used"] == g["n_total"] for g in nz["groups"])
+    assert "Noise levels and weights" in (tmp_path / "calibration_report.txt").read_text(encoding="utf-8")
     # the rig configuration round-trips
     cfg = cio.RigConfig(radii=list(TUBE.radii), n=list(TUBE.n), wand_length_mm=10.0,
                         cameras=[{"name": f"cam{c + 1}", "width": cam.width, "height": cam.height, "pixel_mm": 0.02}

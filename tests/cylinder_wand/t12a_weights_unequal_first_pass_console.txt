@@ -1,0 +1,118 @@
+T12a: 2 cases x (40 near-truth fits + 5 from scratch), with noise weights
+  [  1/90    10 s] c1 local    0: sigma per group 0.0981, 0.4888, 0.1041 px (used True), rejected [0, 0, 0], |z crb| max 2.55, |z fit| max 2.55, rounds 3
+  [  2/90    10 s] c1 local   14: sigma per group 0.1003, 0.4945, 0.0991 px (used True), rejected [0, 0, 0], |z crb| max 1.32, |z fit| max 1.31, rounds 3
+  [  3/90    11 s] c1 local    4: sigma per group 0.0991, 0.5015, 0.0978 px (used True), rejected [0, 0, 0], |z crb| max 1.19, |z fit| max 1.20, rounds 3
+  [  4/90    11 s] c1 local   11: sigma per group 0.0988, 0.5026, 0.0980 px (used True), rejected [0, 0, 0], |z crb| max 2.74, |z fit| max 2.78, rounds 3
+  [  5/90    11 s] c1 local    5: sigma per group 0.0963, 0.4970, 0.1037 px (used True), rejected [0, 0, 0], |z crb| max 2.12, |z fit| max 2.10, rounds 3
+  [  6/90    11 s] c1 local   15: sigma per group 0.0975, 0.4921, 0.1006 px (used True), rejected [0, 1, 0], |z crb| max 1.66, |z fit| max 1.67, rounds 3
+  [  7/90    11 s] c1 local    6: sigma per group 0.0956, 0.4984, 0.1051 px (used True), rejected [0, 0, 0], |z crb| max 1.72, |z fit| max 1.72, rounds 3
+  [  8/90    11 s] c1 local    8: sigma per group 0.0882, 0.4959, 0.0975 px (used True), rejected [0, 2, 0], |z crb| max 1.97, |z fit| max 2.07, rounds 3
+  [  9/90    11 s] c1 local    1: sigma per group 0.1069, 0.4971, 0.1013 px (used True), rejected [0, 1, 0], |z crb| max 1.31, |z fit| max 1.26, rounds 3
+  [ 10/90    11 s] c1 local    9: sigma per group 0.1003, 0.4824, 0.0965 px (used True), rejected [0, 2, 0], |z crb| max 1.90, |z fit| max 1.92, rounds 3
+  [ 11/90    12 s] c1 local   13: sigma per group 0.1031, 0.4775, 0.0975 px (used True), rejected [0, 0, 0], |z crb| max 1.51, |z fit| max 1.56, rounds 3
+  [ 12/90    12 s] c1 local    3: sigma per group 0.0957, 0.4954, 0.1069 px (used True), rejected [0, 0, 0], |z crb| max 2.34, |z fit| max 2.33, rounds 4
+  [ 13/90    12 s] c1 local    2: sigma per group 0.1026, 0.5036, 0.0950 px (used True), rejected [0, 0, 0], |z crb| max 2.32, |z fit| max 2.32, rounds 4
+  [ 14/90    12 s] c1 local   12: sigma per group 0.0953, 0.5051, 0.1020 px (used True), rejected [0, 0, 0], |z crb| max 2.10, |z fit| max 2.13, rounds 4
+  [ 15/90    13 s] c1 local    7: sigma per group 0.0960, 0.4771, 0.0974 px (used True), rejected [0, 2, 0], |z crb| max 1.88, |z fit| max 1.94, rounds 5
+  [ 16/90    13 s] c1 local   10: sigma per group 0.0951, 0.5054, 0.1002 px (used True), rejected [0, 0, 0], |z crb| max 1.99, |z fit| max 2.04, rounds 4
+  [ 17/90    20 s] c1 local   18: sigma per group 0.0891, 0.4872, 0.1051 px (used True), rejected [0, 0, 0], |z crb| max 2.29, |z fit| max 2.32, rounds 3
+  [ 18/90    20 s] c1 local   22: sigma per group 0.0924, 0.4916, 0.1070 px (used True), rejected [0, 0, 0], |z crb| max 2.02, |z fit| max 2.04, rounds 3
+  [ 19/90    20 s] c1 local   21: sigma per group 0.1086, 0.4989, 0.0946 px (used True), rejected [0, 0, 0], |z crb| max 1.52, |z fit| max 1.48, rounds 3
+  [ 20/90    20 s] c1 local   24: sigma per group 0.1012, 0.4921, 0.0960 px (used True), rejected [0, 0, 0], |z crb| max 2.35, |z fit| max 2.35, rounds 3
+  [ 21/90    21 s] c1 local   19: sigma per group 0.0931, 0.4878, 0.1037 px (used True), rejected [0, 0, 0], |z crb| max 1.36, |z fit| max 1.40, rounds 3
+  [ 22/90    21 s] c1 local   17: sigma per group 0.1040, 0.4913, 0.1002 px (used True), rejected [0, 1, 0], |z crb| max 0.83, |z fit| max 0.80, rounds 3
+  [ 23/90    21 s] c1 local   26: sigma per group 0.0956, 0.5078, 0.1049 px (used True), rejected [0, 0, 0], |z crb| max 2.50, |z fit| max 2.49, rounds 3
+  [ 24/90    21 s] c1 local   20: sigma per group 0.1029, 0.4977, 0.0965 px (used True), rejected [1, 0, 0], |z crb| max 2.06, |z fit| max 2.06, rounds 4
+  [ 25/90    21 s] c1 local   23: sigma per group 0.0925, 0.5129, 0.1045 px (used True), rejected [0, 0, 0], |z crb| max 1.76, |z fit| max 1.79, rounds 3
+  [ 26/90    21 s] c1 local   29: sigma per group 0.1056, 0.4933, 0.0953 px (used True), rejected [0, 0, 0], |z crb| max 1.25, |z fit| max 1.23, rounds 3
+  [ 27/90    21 s] c1 local   28: sigma per group 0.1028, 0.4873, 0.0970 px (used True), rejected [0, 1, 0], |z crb| max 1.34, |z fit| max 1.34, rounds 3
+  [ 28/90    21 s] c1 local   31: sigma per group 0.0949, 0.5186, 0.0996 px (used True), rejected [0, 0, 0], |z crb| max 1.19, |z fit| max 1.21, rounds 3
+  [ 29/90    22 s] c1 local   16: sigma per group 0.0968, 0.4987, 0.1001 px (used True), rejected [0, 0, 0], |z crb| max 2.05, |z fit| max 2.08, rounds 4
+  [ 30/90    22 s] c1 local   25: sigma per group 0.0974, 0.4919, 0.1011 px (used True), rejected [0, 0, 0], |z crb| max 1.90, |z fit| max 1.93, rounds 4
+  [ 31/90    22 s] c1 local   27: sigma per group 0.0982, 0.5005, 0.0998 px (used True), rejected [0, 0, 0], |z crb| max 2.84, |z fit| max 2.86, rounds 4
+  [ 32/90    23 s] c1 local   30: sigma per group 0.1043, 0.5120, 0.1033 px (used True), rejected [0, 0, 0], |z crb| max 2.11, |z fit| max 2.03, rounds 4
+  [ 33/90    28 s] c1 local   33: sigma per group 0.1040, 0.4898, 0.0944 px (used True), rejected [0, 1, 0], |z crb| max 1.63, |z fit| max 1.62, rounds 3
+  [ 34/90    28 s] c1 local   32: sigma per group 0.1025, 0.5054, 0.0910 px (used True), rejected [0, 1, 0], |z crb| max 3.33, |z fit| max 3.44, rounds 3
+  [ 35/90    29 s] c1 local   34: sigma per group 0.0992, 0.4917, 0.0979 px (used True), rejected [0, 0, 0], |z crb| max 2.26, |z fit| max 2.29, rounds 3
+  [ 36/90    29 s] c1 local   36: sigma per group 0.0991, 0.4974, 0.1017 px (used True), rejected [0, 0, 0], |z crb| max 2.56, |z fit| max 2.53, rounds 3
+  [ 37/90    29 s] c1 local   35: sigma per group 0.0886, 0.5068, 0.1042 px (used True), rejected [0, 0, 0], |z crb| max 2.38, |z fit| max 2.34, rounds 3
+  [ 38/90    29 s] c1 local   38: sigma per group 0.1014, 0.5102, 0.0974 px (used True), rejected [0, 1, 0], |z crb| max 1.45, |z fit| max 1.45, rounds 3
+  [ 39/90    30 s] c2 local    4: sigma per group 0.1917, 0.1056, 0.2067, 0.0940, 0.1931, 0.1061 px (used True), rejected [1, 0, 0], |z crb| max 2.43, |z fit| max 2.43, rounds 3
+  [ 40/90    31 s] c2 local    6: sigma per group 0.1960, 0.0987, 0.2035, 0.1010, 0.1996, 0.0975 px (used True), rejected [0, 0, 0], |z crb| max 1.43, |z fit| max 1.43, rounds 3
+  [ 41/90    31 s] c1 local   39: sigma per group 0.0981, 0.4994, 0.0985 px (used True), rejected [0, 0, 0], |z crb| max 1.88, |z fit| max 1.87, rounds 3
+  [ 42/90    31 s] c1 local   37: sigma per group 0.1022, 0.4880, 0.0959 px (used True), rejected [0, 0, 0], |z crb| max 1.27, |z fit| max 1.26, rounds 3
+  [ 43/90    31 s] c2 local    1: sigma per group 0.1925, 0.1076, 0.2032, 0.0982, 0.1974, 0.0993 px (used True), rejected [0, 0, 0], |z crb| max 1.60, |z fit| max 1.59, rounds 3
+  [ 44/90    32 s] c2 local    2: sigma per group 0.2016, 0.1037, 0.1966, 0.0970, 0.1980, 0.0907 px (used True), rejected [0, 0, 0], |z crb| max 1.94, |z fit| max 1.95, rounds 3
+  [ 45/90    32 s] c2 local    3: sigma per group 0.1893, 0.1033, 0.1958, 0.0972, 0.2008, 0.1057 px (used True), rejected [0, 0, 0], |z crb| max 1.68, |z fit| max 1.67, rounds 4
+  [ 46/90    32 s] c2 local    0: sigma per group 0.1834, 0.1073, 0.1893, 0.0961, 0.1996, 0.0961 px (used True), rejected [0, 1, 0], |z crb| max 1.39, |z fit| max 1.43, rounds 4
+  [ 47/90    32 s] c2 local    5: sigma per group 0.1962, 0.1073, 0.1832, 0.0960, 0.1955, 0.1053 px (used True), rejected [0, 0, 1], |z crb| max 1.15, |z fit| max 1.16, rounds 4
+  [ 48/90    33 s] c2 local    7: sigma per group 0.1970, 0.0998, 0.2040, 0.1014, 0.2119, 0.0990 px (used True), rejected [1, 0, 0], |z crb| max 1.76, |z fit| max 1.74, rounds 5
+  [ 49/90    38 s] c2 local   13: sigma per group 0.2080, 0.1005, 0.1996, 0.1042, 0.1845, 0.0931 px (used True), rejected [1, 0, 0], |z crb| max 1.61, |z fit| max 1.64, rounds 3
+  [ 50/90    38 s] c2 local   10: sigma per group 0.1930, 0.0983, 0.1883, 0.0973, 0.1996, 0.0963 px (used True), rejected [0, 0, 1], |z crb| max 2.03, |z fit| max 2.08, rounds 3
+  [ 51/90    38 s] c2 local   11: sigma per group 0.2052, 0.1045, 0.2103, 0.0955, 0.1975, 0.0936 px (used True), rejected [0, 0, 0], |z crb| max 1.86, |z fit| max 1.87, rounds 3
+  [ 52/90    38 s] c2 local    8: sigma per group 0.1894, 0.1016, 0.2014, 0.1012, 0.1947, 0.0928 px (used True), rejected [0, 0, 0], |z crb| max 3.38, |z fit| max 3.46, rounds 4
+  [ 53/90    39 s] c2 local    9: sigma per group 0.1957, 0.1040, 0.2004, 0.0955, 0.2078, 0.0999 px (used True), rejected [0, 0, 0], |z crb| max 2.14, |z fit| max 2.14, rounds 4
+  [ 54/90    39 s] c2 local   14: sigma per group 0.1877, 0.0994, 0.2141, 0.0991, 0.1904, 0.0971 px (used True), rejected [0, 0, 0], |z crb| max 2.26, |z fit| max 2.29, rounds 3
+  [ 55/90    40 s] c2 local   15: sigma per group 0.1985, 0.1001, 0.2019, 0.1030, 0.1991, 0.0953 px (used True), rejected [0, 0, 0], |z crb| max 1.90, |z fit| max 1.90, rounds 3
+  [ 56/90    40 s] c2 local   17: sigma per group 0.2041, 0.0999, 0.1895, 0.1023, 0.1994, 0.1043 px (used True), rejected [0, 0, 0], |z crb| max 1.03, |z fit| max 1.03, rounds 3
+  [ 57/90    41 s] c2 local   16: sigma per group 0.1952, 0.0977, 0.2035, 0.1019, 0.2032, 0.1016 px (used True), rejected [0, 0, 0], |z crb| max 1.37, |z fit| max 1.36, rounds 3
+  [ 58/90    41 s] c2 local   12: sigma per group 0.1984, 0.0945, 0.2157, 0.0930, 0.1919, 0.1066 px (used True), rejected [0, 0, 0], |z crb| max 2.19, |z fit| max 2.23, rounds 4
+  [ 59/90    42 s] c2 local   22: sigma per group 0.2006, 0.0984, 0.1943, 0.1083, 0.1965, 0.0951 px (used True), rejected [0, 0, 0], |z crb| max 1.99, |z fit| max 1.99, rounds 3
+  [ 60/90    42 s] c2 local   18: sigma per group 0.1916, 0.1066, 0.1887, 0.1028, 0.2039, 0.0973 px (used True), rejected [0, 0, 0], |z crb| max 2.43, |z fit| max 2.46, rounds 3
+  [ 61/90    42 s] c2 local   23: sigma per group 0.1938, 0.1057, 0.1951, 0.0968, 0.2003, 0.1031 px (used True), rejected [0, 0, 0], |z crb| max 1.31, |z fit| max 1.31, rounds 3
+  [ 62/90    43 s] c2 local   19: sigma per group 0.2038, 0.0999, 0.2013, 0.0977, 0.1899, 0.1054 px (used True), rejected [1, 0, 0], |z crb| max 1.64, |z fit| max 1.64, rounds 4
+  [ 63/90    43 s] c2 local   21: sigma per group 0.2125, 0.0984, 0.1890, 0.1013, 0.1914, 0.0927 px (used True), rejected [0, 0, 0], |z crb| max 1.77, |z fit| max 1.78, rounds 4
+  [ 64/90    45 s] c2 local   20: sigma per group 0.1975, 0.0964, 0.1979, 0.1047, 0.2091, 0.1099 px (used True), rejected [0, 0, 0], |z crb| max 1.60, |z fit| max 1.55, rounds 5
+  [ 65/90    47 s] c2 local   24: sigma per group 0.1961, 0.0972, 0.2003, 0.0969, 0.1905, 0.1039 px (used True), rejected [0, 0, 0], |z crb| max 2.29, |z fit| max 2.33, rounds 3
+  [ 66/90    48 s] c2 local   26: sigma per group 0.2073, 0.0998, 0.2030, 0.0945, 0.1875, 0.1058 px (used True), rejected [0, 0, 0], |z crb| max 1.81, |z fit| max 1.83, rounds 3
+  [ 67/90    48 s] c2 local   29: sigma per group 0.1981, 0.0943, 0.2116, 0.0932, 0.1897, 0.1048 px (used True), rejected [0, 1, 0], |z crb| max 3.20, |z fit| max 3.26, rounds 3
+  [ 68/90    48 s] c2 local   25: sigma per group 0.2012, 0.0962, 0.1947, 0.1041, 0.1982, 0.0997 px (used True), rejected [0, 0, 0], |z crb| max 2.23, |z fit| max 2.23, rounds 3
+  [ 69/90    49 s] c2 local   27: sigma per group 0.1949, 0.1066, 0.2121, 0.0978, 0.1769, 0.0908 px (used True), rejected [0, 0, 0], |z crb| max 1.73, |z fit| max 1.76, rounds 3
+  [ 70/90    49 s] c2 local   28: sigma per group 0.1988, 0.1004, 0.2031, 0.1026, 0.1895, 0.0940 px (used True), rejected [1, 0, 0], |z crb| max 2.09, |z fit| max 2.12, rounds 4
+  [ 71/90    50 s] c2 local   32: sigma per group 0.1878, 0.0994, 0.1952, 0.1004, 0.2067, 0.1009 px (used True), rejected [0, 0, 1], |z crb| max 1.50, |z fit| max 1.50, rounds 3
+  [ 72/90    51 s] c2 local   31: sigma per group 0.2073, 0.1041, 0.1988, 0.0927, 0.1946, 0.1005 px (used True), rejected [0, 0, 2], |z crb| max 1.70, |z fit| max 1.69, rounds 4
+  [ 73/90    51 s] c2 local   35: sigma per group 0.1848, 0.0968, 0.1906, 0.1032, 0.1932, 0.1028 px (used True), rejected [1, 0, 0], |z crb| max 1.58, |z fit| max 1.63, rounds 3
+  [ 74/90    51 s] c2 local   30: sigma per group 0.1955, 0.0981, 0.2076, 0.1005, 0.1974, 0.0991 px (used True), rejected [0, 0, 0], |z crb| max 0.80, |z fit| max 0.80, rounds 4
+  [ 75/90    51 s] c2 local   34: sigma per group 0.1986, 0.1082, 0.1984, 0.0991, 0.1990, 0.0927 px (used True), rejected [0, 0, 0], |z crb| max 0.98, |z fit| max 0.98, rounds 3
+  [ 76/90    51 s] c2 local   33: sigma per group 0.2006, 0.1017, 0.2033, 0.1046, 0.1992, 0.1001 px (used True), rejected [0, 0, 0], |z crb| max 1.51, |z fit| max 1.48, rounds 3
+  [ 77/90    51 s] c2 local   38: sigma per group 0.2043, 0.1007, 0.2101, 0.1016, 0.2014, 0.0961 px (used True), rejected [1, 0, 0], |z crb| max 1.09, |z fit| max 1.08, rounds 3
+  [ 78/90    53 s] c2 local   37: sigma per group 0.1961, 0.1035, 0.2079, 0.0966, 0.1909, 0.1035 px (used True), rejected [0, 0, 0], |z crb| max 2.23, |z fit| max 2.23, rounds 4
+  [ 79/90    54 s] c2 local   36: sigma per group 0.1941, 0.0998, 0.1993, 0.1026, 0.2139, 0.0954 px (used True), rejected [0, 0, 0], |z crb| max 2.09, |z fit| max 2.08, rounds 4
+  [ 80/90    54 s] c2 local   39: sigma per group 0.2057, 0.0984, 0.1899, 0.1021, 0.1836, 0.0974 px (used True), rejected [0, 1, 0], |z crb| max 2.13, |z fit| max 2.18, rounds 4
+  [ 81/90    92 s] c1 scratch  2: OK   from scratch: max diff 1.2e-09 sigma, active 3000/3000/3000 (37 s)
+  [ 82/90    92 s] c1 scratch  0: OK   from scratch: max diff 3.4e-08 sigma, active 2999/2999/3000 (39 s)
+  [ 83/90    92 s] c2 scratch  1: OK   from scratch: max diff 6.2e-07 sigma, active 3000/3000/3000 (35 s)
+  [ 84/90    93 s] c1 scratch  3: OK   from scratch: max diff 1.7e-06 sigma, active 2996/2996/2998 (38 s)
+  [ 85/90    94 s] c1 scratch  1: OK   from scratch: max diff 7.5e-09 sigma, active 3000/3000/3000 (40 s)
+  [ 86/90    94 s] c1 scratch  4: OK   from scratch: max diff 2.6e-06 sigma, active 2998/2998/2998 (37 s)
+  [ 87/90    96 s] c2 scratch  0: OK   from scratch: max diff 1.3e-08 sigma, active 3000/3000/3000 (39 s)
+  [ 88/90    97 s] c2 scratch  2: OK   from scratch: max diff 2.2e-07 sigma, active 2996/2996/2996 (39 s)
+  [ 89/90    97 s] c2 scratch  4: OK   from scratch: max diff 3.5e-08 sigma, active 3000/3000/3000 (39 s)
+  [ 90/90    98 s] c2 scratch  3: OK   from scratch: max diff 5.0e-06 sigma, active 2996/2996/2998 (38 s)
+
+== c1: cam2 at 0.5 px, others 0.1 px (noise_weights camera; 40 near-truth fits, weights used in 40) ==
+  estimated sigma per group: RMS error 5.0, 1.9, 3.8 %, mean -1.4, -0.6, -0.2 % (truth [0.1, 0.5, 0.1])
+  realised / weighted bound per camera: 1.00 +- 0.06, 1.05 +- 0.06, 1.05 +- 0.07   (T11c, equal weights: 1.99, 1.76, 2.24)
+  z against the fit's own covariance per camera: 1.01 +- 0.06, 1.06 +- 0.06, 1.06 +- 0.07   (T11c: 0.87, 1.09, 0.95)
+  rejected per camera [1, 13, 0] of [40000, 39982, 40000] (T11c: [0, 89, 0]); variance factor and rounds in the runs
+  f_rel        realised RMS per camera 0.0009162, 0.00183, 0.001017 | weighted bound 0.0009231, 0.001739, 0.0009186 | T11c 0.001578, 0.002533, 0.001894
+  distance_mm  realised RMS per camera 0.9828, 1.969, 1.093 | weighted bound 0.9912, 1.871, 0.9865 | T11c 1.687, 2.714, 2.029
+  azimuth_deg  realised RMS per camera 0, 0.003485, 0.003937 | weighted bound 0, 0.003287, 0.004674 | T11c 0, 0.00662, 0.01173
+  height_mm    realised RMS per camera 0, 0.1125, 0.2047 | weighted bound 0, 0.1137, 0.1857 | T11c 0, 0.225, 0.4174
+  unseen 3-D: 23.01 um relative to the tube, 1.02 um shape (T11c 50.60 / 2.09); wand length 5.8 um (T11c 5.9)
+  from scratch: 5/5
+  PASS  {'bound': True, 'fit_bars': True, 'sigma': True, 'rejections': True, 'scratch': True, 'weights_used': True, 'errors': True, 'pass': True}
+
+== c2: end A at 0.2 px, end B 0.1 px (noise_weights camera_end; 40 near-truth fits, weights used in 40) ==
+  estimated sigma per group: RMS error 3.5, 3.9, 3.9, 3.8, 4.1, 5.0 %, mean -1.3, +1.1, -0.0, -0.5, -1.7, -0.7 % (truth [0.2, 0.1, 0.2, 0.1, 0.2, 0.1])
+  realised / weighted bound per camera: 0.96 +- 0.07, 0.99 +- 0.05, 1.03 +- 0.05   (T11c, equal weights: 1.22, 1.20, 1.19)
+  z against the fit's own covariance per camera: 0.97 +- 0.07, 1.00 +- 0.05, 1.04 +- 0.05   (T11c: 1.09, 1.06, 1.10)
+  rejected per camera [7, 3, 5] of [40000, 39988, 39998] (T11c: [22, 26, 24]); variance factor and rounds in the runs
+  f_rel        realised RMS per camera 0.0008722, 0.0007888, 0.0009013 | weighted bound 0.0008758, 0.0008091, 0.0008755 | T11c 0.001255, 0.001055, 0.001124
+  distance_mm  realised RMS per camera 0.9409, 0.8449, 0.9735 | weighted bound 0.9433, 0.8641, 0.9428 | T11c 1.352, 1.131, 1.213
+  azimuth_deg  realised RMS per camera 0, 0.004529, 0.006699 | weighted bound 0, 0.003719, 0.005731 | T11c 0, 0.004538, 0.007078
+  height_mm    realised RMS per camera 0, 0.1009, 0.1921 | weighted bound 0, 0.1183, 0.2153 | T11c 0, 0.1141, 0.2231
+  unseen 3-D: 29.07 um relative to the tube, 1.21 um shape (T11c 30.04 / 1.30); wand length 3.7 um (T11c 3.7)
+  from scratch: 5/5
+  PASS  {'bound': True, 'fit_bars': True, 'sigma': True, 'rejections': True, 'scratch': True, 'weights_used': True, 'errors': True, 'pass': True}
+time 98 s

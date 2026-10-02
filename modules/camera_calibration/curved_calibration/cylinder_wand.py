@@ -22,7 +22,11 @@ wand's mean height (`relabel`), which changes no residual.
      magnification ratios, f from the scale along the axis (`place`, `bootstrap`);
   3  coarse fit: back-projection residual with the points triangulated (`coarse_fit`), always defined;
   4  maximum likelihood: the reprojection error in pixels with explicit wand frames, outlier rejection and the
-     multi-image guard (`bundle_adjust`, `refine`);
+     multi-image guard (`bundle_adjust`, `refine`).  Each camera's noise level is estimated from the residuals
+     and weights its detections (`variance_components`; noise_weights "camera" by default, "camera_end" for wand
+     balls of different sizes, "none" for equal weights, or given as sigma_cam_px); when the data cannot separate
+     the cameras the weights stay equal.  With noisy data (stage-3 RMS above 1 px) every short-listed start is
+     carried through stages 3-4 (`calibrate`'s more_starts_px);
   5  covariance and checks (`covariance`, `camera_sigmas`, `predicted_projection_error`, `wand_lengths`; the
      files: cylinder_wand_io).
 
@@ -313,6 +317,7 @@ class Solution:
     cov: Optional[np.ndarray] = None
     sigma_px: float = float("nan")
     info: Dict = field(default_factory=dict)
+    weights: Optional[np.ndarray] = None          # per observation, 1 / sigma^2 (px^-2); None: equal weights
 
 
 def cost_of(ev: Eval, rows_mask: np.ndarray = None) -> float:
@@ -322,24 +327,30 @@ def cost_of(ev: Eval, rows_mask: np.ndarray = None) -> float:
 
 def bundle_adjust(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layout,
                   max_iter: int = 100, tol: float = 1e-10, lam0: float = 1e-3, verbose: bool = False,
-                  log=print) -> Solution:
+                  log=print, weights: np.ndarray = None) -> Solution:
     """Levenberg-Marquardt on the manifold over the active observations, frames eliminated (Schur).
 
     Stops when the largest step (in units of each parameter's own scale: rad, mm per |C|, log f, mm per 10 mm for
     the frames) falls below `tol`, or when no step lowers the cost.  A trial step that makes a projection fail is
-    rejected like one that raises the cost."""
+    rejected like one that raises the cost.  With `weights` (per observation, 1 / sigma^2) the cost is
+    sum w |r|^2; the reported RMS stays the unweighted one, in pixels."""
     cams = [c.copy() for c in cams]
     frames = frames.copy()
     rows = np.flatnonzero(obs.active)
+    wr = None if weights is None else np.asarray(weights, float)[rows]
+
+    def wcost(e, g):
+        return cost_of(e, g) if wr is None else float(np.sum(wr[g][:, None] * e.r[g] ** 2))
+
     hist = []
     ev = evaluate(cams, tube, frames, L, obs, layout, rows)
     good = ev.ok.copy()
-    cost = cost_of(ev, good)
+    cost = wcost(ev, good)
     lam, nu = lam0, 2.0
     t0 = time.time()
     for it in range(max_iter):
         fr = obs.frame[rows]
-        V, gV, U, gU, W = normal_blocks(Eval(ev.r, good, ev.Jg, ev.Jf), fr, obs.n_frames)
+        V, gV, U, gU, W = normal_blocks(Eval(ev.r, good, ev.Jg, ev.Jf), fr, obs.n_frames, weights=wr)
         accepted = False
         for _inner in range(12):
             try:
@@ -352,7 +363,7 @@ def bundle_adjust(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layou
             lin = np.where(good[:, None], ev.r, 0.0) + np.einsum("nai,i->na", np.where(good[:, None, None], ev.Jg, 0),
                                                                   dc) + np.einsum("nai,ni->na", np.where(
                                                                       good[:, None, None], ev.Jf, 0), df[fr])
-            pred = cost - float(np.sum(lin ** 2))
+            pred = cost - float(np.sum(lin ** 2) if wr is None else np.sum(wr[:, None] * lin ** 2))
             cams_t, L_t = layout.apply(cams, L, dc)
             frames_t = frames.retract(df)
             ev_t = evaluate(cams_t, tube, frames_t, L_t, obs, layout, rows)
@@ -360,14 +371,14 @@ def bundle_adjust(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layou
                 lam *= nu
                 nu *= 2
                 continue
-            cost_t = cost_of(ev_t, good)
+            cost_t = wcost(ev_t, good)
             rho = (cost - cost_t) / pred if pred > 0 else -1.0
             if rho > 0:
                 step_rel = _step_size(dc, df, cams, frames, layout)
                 cams, frames, L = cams_t, frames_t, L_t
                 ev = ev_t
                 good = good | ev.ok                  # rows whose projection now succeeds join the cost
-                cost = cost_of(ev, good)
+                cost = wcost(ev, good)
                 lam *= max(1.0 / 3.0, 1.0 - (2.0 * rho - 1.0) ** 3)
                 nu = 2.0
                 accepted = True
@@ -375,7 +386,7 @@ def bundle_adjust(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layou
             lam *= nu
             nu *= 2
         n_good = int(good.sum())
-        rms = math.sqrt(cost / max(n_good, 1))
+        rms = math.sqrt(cost_of(ev, good) / max(n_good, 1))
         hist.append({"iter": it, "rms_px": rms, "lambda": lam, "accepted": accepted,
                      "seconds": time.time() - t0})
         if verbose:
@@ -386,9 +397,10 @@ def bundle_adjust(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layou
         # relative decrease of 1e-14 still leaves the estimate 1e-5 sigma short (T6)
         if step_rel < tol or cost == 0.0:
             break
-    sol = Solution(cams, tube, frames, L, obs, layout, rms=math.sqrt(cost / max(int(good.sum()), 1)),
-                   history=hist)
+    sol = Solution(cams, tube, frames, L, obs, layout, rms=math.sqrt(cost_of(ev, good) / max(int(good.sum()), 1)),
+                   history=hist, weights=None if weights is None else np.asarray(weights, float))
     sol.info["n_fail"] = int((~good).sum())
+    sol.info["weighted_cost"] = cost
     return sol
 
 
@@ -413,47 +425,208 @@ def _step_size(dc, df, cams, frames, layout) -> float:
 
 # ------------------------------------------------------------------ stage 4 with outlier rejection
 def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layout, k_sigma: float = 5.0,
-           max_rounds: int = 10, guard_px: float = 30.0, max_iter: int = 100, sigma_floor_px: float = 1e-3,
-           verbose: bool = False, log=print) -> Solution:
+           max_rounds: int = 20, guard_px: float = 30.0, max_iter: int = 100, sigma_floor_px: float = 1e-3,
+           verbose: bool = False, log=print, noise_weights: str = "camera", sigma_cam_px=None,
+           min_group: int = 200, max_rel_se: float = 0.10, max_ratio: float = 10.0,
+           sigma_tol: float = 1e-6) -> Solution:
     """Stage 4: bundle adjustment, then a new active set chosen from every usable observation (those active on
-    entry): residual within k_sigma robust sigmas (Mahalanobis, `_update_active`), and no frame left with an end seen by fewer than two
-    cameras.
+    entry): residual within k_sigma robust sigmas (Mahalanobis, `_update_active`), and no frame left with an end
+    seen by fewer than two cameras.
     Repeat until the set no longer changes.  Rejections are not final: an observation rejected while the fit was
     still poor comes back once it fits (T5 found a start that lost 50 good observations to a one-way rejection).
     Then the multi-image guard (an observation whose point has another image on the sensor within guard_px of the
-    detection is dropped), a last adjustment and the covariance.  `obs.active` is updated in place."""
+    detection is dropped), a last adjustment and the covariance.  `obs.active` is updated in place.
+
+    Noise weights (tests/cylinder_wand T11c, T12): with noise_weights "camera" (or "camera_end": per camera and
+    wand end) every round also estimates each group's noise from the residuals (`variance_components`) and the next
+    adjustment weights each detection by 1 / sigma_g^2; outliers are judged against their own group's robust scale,
+    and the covariance uses the weights.  A camera 5x noisier than the others otherwise costs every camera 1.7-2.1x
+    in sigma.  When the data cannot separate the groups (a sigma's relative standard error above max_rel_se, as
+    can happen with two cameras, where each point's residual shows only the two cameras' combined noise) the fit is
+    redone with equal weights: the behaviour of noise_weights "none".  That is judged once the weights have
+    converged, because the standard errors mean something only when the weights are about right: from the first,
+    equal-weight fit a quiet camera next to a noisy one can even get a negative variance estimate (T12, two-camera
+    rigs), which the iteration clamps and then corrects.  sigma_cam_px (px per camera) fixes the weights instead of
+    estimating them.  The rounds go on until both the active set and every sigma (to sigma_tol, relative) are
+    steady: a looser tolerance leaves runs from different starts on slightly different weights (1 %: 1e-3 sigma
+    apart, 1e-4: 2e-4 sigma, on T12e's rig 7 at 5 px, whose far camera is nearly telecentric)."""
     sol = None
     t0 = time.time()
     usable = obs.active.copy()
-    changed = False
+    if noise_weights not in NOISE_MODES:
+        raise ValueError(f"noise_weights must be one of {NOISE_MODES}")
+    groups = noise_groups(obs, "camera" if sigma_cam_px is not None else noise_weights)
+    n_groups = int(groups.max()) + 1 if len(groups) else 1
+    estimate = sigma_cam_px is None and noise_weights != "none"
+    sig2 = None                               # per group, px^2; None: equal weights
+    if sigma_cam_px is not None:
+        sig2 = np.asarray(sigma_cam_px, float) ** 2
+        if sig2.shape != (obs.n_cams,) or not np.all(sig2 > 0):
+            raise ValueError("sigma_cam_px needs one positive value per camera")
+    vc = {}
+    fallback = False                          # estimated, but not separable at convergence: equal weights
+    converged = True
+    changed = sig_changed = False
+    rnd = 0
     for rnd in range(max_rounds):
-        sol = bundle_adjust(cams, tube, frames, L, obs, layout, max_iter=max_iter, verbose=verbose, log=log)
+        weights = None if sig2 is None else 1.0 / sig2[groups]
+        sol = bundle_adjust(cams, tube, frames, L, obs, layout, max_iter=max_iter, verbose=verbose, log=log,
+                            weights=weights)
         cams, frames, L = sol.cams, sol.frames, sol.L
-        changed, n_out, n_back = _update_active(sol, usable, k_sigma, sigma_floor_px)
+        sig_fit = sig2                            # the variances this adjustment used
+        sig_changed = False
+        if estimate and not fallback:
+            cur = np.ones(n_groups) if sig2 is None else sig2
+            new, vc = variance_components(sol, groups, cur, min_group=min_group, max_rel_se=max_rel_se,
+                                          max_ratio=max_ratio, floor_px=sigma_floor_px)
+            sig_changed = sig2 is None or float(np.max(np.abs(np.sqrt(new / sig2) - 1.0))) > sigma_tol
+            if sig_changed:                       # else keep the weights the last adjustment used
+                sig2 = new
+        # the rejection is judged with the weights of the fit it looks at; the new variances weight the next round
+        sig_obs = None if sig_fit is None else np.sqrt(sig_fit[groups])
+        changed, n_out, n_back = _update_active(sol, usable, k_sigma, sigma_floor_px, sig_obs=sig_obs,
+                                                groups=None if sig_fit is None else groups)
         frames = sol.frames
         if verbose:
             log(f"  round {rnd}: rms {sol.rms:.5f} px, {len(sol.history)} LM iterations, rejected {n_out}, "
-                f"re-admitted {n_back}")
-        if not changed:
+                f"re-admitted {n_back}" + ("" if sig2 is None else ", sigma per group " +
+                                           ", ".join(f"{v:.4f}" for v in np.sqrt(sig2)) + " px"))
+        if not changed and not sig_changed:
+            if estimate and not fallback and sig2 is not None and not vc.get("separable", False):
+                fallback, sig2 = True, None       # not separable even with converged weights: equal weights again
+                continue
             break
-    if changed:                                  # the round limit was hit: fit the last set
-        sol = bundle_adjust(cams, tube, frames, L, obs, layout, max_iter=max_iter, verbose=verbose, log=log)
+    else:
+        converged = False
+        if estimate and not fallback and sig2 is not None and not vc.get("separable", False):
+            fallback, sig2 = True, None
+    weights = None if sig2 is None else 1.0 / sig2[groups]
+    if changed or sig_changed or not converged:  # the round limit was hit: fit the last set
+        sol = bundle_adjust(cams, tube, frames, L, obs, layout, max_iter=max_iter, verbose=verbose, log=log,
+                            weights=weights)
         cams, frames, L = sol.cams, sol.frames, sol.L
     n_guard = multi_image_guard(sol, guard_px) if guard_px else 0
     if n_guard:
         kept = dict(sol.info)
-        sol = bundle_adjust(cams, tube, frames, L, obs, layout, max_iter=max_iter, verbose=verbose, log=log)
+        sol = bundle_adjust(cams, tube, frames, L, obs, layout, max_iter=max_iter, verbose=verbose, log=log,
+                            weights=weights)
         sol.info = {**kept, **sol.info}
     sol.info["guard_dropped"] = int(n_guard)
     sol.info["rounds"] = rnd + 1
     sol.info["seconds"] = time.time() - t0
-    return covariance(sol)
+    sol.info["noise_weights"] = {"mode": noise_weights, "given": sigma_cam_px is not None, "estimated": estimate,
+                                 "used": sig2 is not None, "fallback": fallback, "converged": converged,
+                                 "sigma_group_px": None if sig2 is None else np.sqrt(sig2).tolist(), **vc}
+    return covariance(sol, weights=weights)
 
 
-def _update_active(sol: Solution, usable: np.ndarray, k_sigma: float, sigma_floor_px: float = 1e-3):
+# ------------------------------------------------------------------ noise weights (variance components)
+NOISE_MODES = ("none", "camera", "camera_end")
+
+
+def noise_groups(obs: Obs, mode: str) -> np.ndarray:
+    """Each observation's noise group: one for all ("none"), per camera ("camera"), or per camera and wand end
+    ("camera_end": balls of different sizes)."""
+    if mode == "none":
+        return np.zeros(len(obs), int)
+    if mode == "camera":
+        return obs.cam.astype(int)
+    if mode == "camera_end":
+        return (2 * obs.cam + obs.end).astype(int)
+    raise ValueError(f"noise_weights must be one of {NOISE_MODES}")
+
+
+def variance_components(sol: Solution, groups: np.ndarray, sig2: np.ndarray, min_group: int = 200,
+                        max_rel_se: float = 0.10, max_ratio: float = 10.0, floor_px: float = 1e-3):
+    """Each noise group's variance from the fitted residuals (MINQUE, iterated by `refine`), and how well it is
+    determined.
+
+    With weights w = 1 / sigma_g^2 (sig2: the current variances, px^2) a frame's whitened residuals are
+    r~ = R~ e~, R~ = I - W^1/2 J (J^T W J)^-1 J^T W^1/2 symmetric and idempotent (J: the frame's 5 columns; the
+    camera parameters' leverage, from thousands of observations, is neglected).  If the true variances are
+    tau_h sig2_h, then E[q_g] = sum_h M_gh tau_h, with q_g the group's whitened squared residuals and
+    M_gh = trace(D_g R~ D_h R~) summed over the frames; so tau = M^-1 q.  For Gaussian noise at tau = 1,
+    Cov(q) = 2 M, so Cov(tau) = 2 M^-1 and a sigma's relative standard error is sqrt((M^-1)_gg / 2) (SymPy:
+    tests/cylinder_wand/p12_sympy_noise_weights.py).  Groups with fewer than min_group active observations share
+    one variance.  "separable" is False when a group's relative standard error exceeds max_rel_se or an estimate is
+    not positive: with two cameras each point's residual shows only their combined noise, and only the wand's length
+    separates them.  The standard errors assume the current weights are about right, so `refine` judges "separable"
+    only once the weights have converged.  The new sigmas (the separate estimates whenever M can be inverted, a
+    non-positive one clamped) keep within max_ratio of each other and above floor_px.
+    Returns (new variances per group, info)."""
+    obs = sol.obs
+    G = len(sig2)
+    ev = evaluate(sol.cams, sol.tube, sol.frames, sol.L, obs, Layout(obs.n_cams))
+    act = obs.active & ev.ok
+    cnt = np.bincount(groups[act], minlength=G)
+    eff = np.where(cnt >= min_group, np.arange(G), G)            # small groups share one id
+    _u, inv = np.unique(eff, return_inverse=True)
+    E = len(_u)
+    w = 1.0 / sig2[groups]
+    q = np.zeros(E)
+    M = np.zeros((E, E))
+    rows = np.flatnonzero(act)
+    if rows.size == 0:
+        return np.asarray(sig2, float), {"groups": G, "separable": False, "counts": cnt.tolist()}
+    rows = rows[np.argsort(obs.frame[rows], kind="stable")]
+    fr = obs.frame[rows]
+    cut = np.flatnonzero(np.r_[True, fr[1:] != fr[:-1], True])
+    redund = 0.0
+    for a, b in zip(cut[:-1], cut[1:]):
+        idx = rows[a:b]
+        sw = np.sqrt(np.repeat(w[idx], 2))
+        A = sw[:, None] * ev.Jf[idx].reshape(-1, 5)
+        try:
+            Hh = A @ np.linalg.solve(A.T @ A, A.T)
+        except np.linalg.LinAlgError:
+            continue
+        R = np.eye(len(sw)) - Hh
+        g = np.repeat(inv[groups[idx]], 2)
+        Gm = np.zeros((len(g), E))
+        Gm[np.arange(len(g)), g] = 1.0
+        np.add.at(q, g, (sw * ev.r[idx].reshape(-1)) ** 2)
+        M += Gm.T @ (R * R) @ Gm
+        redund += float(np.trace(R))
+    old_eff = np.array([np.mean(sig2[inv == e]) for e in range(E)])
+    info = {"groups": G, "pooled_groups": int(np.sum(cnt < min_group)), "counts": cnt.tolist(),
+            "max_rel_se": max_rel_se}
+    separable = E >= 2
+    tau = None
+    if separable:
+        try:
+            Minv = np.linalg.inv(M)
+            tau = Minv @ q
+            rel_se = np.sqrt(np.maximum(np.diag(Minv), 0.0) / 2.0)
+            info["rel_se"] = rel_se.tolist()
+            # per original group, and the separate estimates even when they are not used (for the report: what the
+            # data suggested, and how well it was determined)
+            info["rel_se_group"] = [float(rel_se[inv[g]]) for g in range(G)]
+            info["sigma_px_separate"] = [float(math.sqrt(tau[inv[g]] * old_eff[inv[g]])) if tau[inv[g]] > 0 else None
+                                         for g in range(G)]
+            separable = bool(np.all(tau > 0) and np.max(rel_se) <= max_rel_se)
+        except np.linalg.LinAlgError:
+            separable = False
+    info["separable"] = bool(separable)
+    if tau is not None:
+        new_eff = tau * old_eff               # a non-positive estimate is clamped below; refine decides on separable
+    else:                                     # one pooled variance (equal weights)
+        r2 = np.sum(ev.r[act] ** 2)
+        dof = max(2 * int(act.sum()) - 5 * len(cut[:-1]), 1)
+        new_eff = np.full(E, r2 / dof)
+    new_eff = np.maximum(new_eff, floor_px ** 2)
+    new_eff = np.maximum(new_eff, np.max(new_eff) / max_ratio ** 2)
+    new = new_eff[inv]
+    info["sigma_px"] = np.sqrt(new).tolist()
+    return new, info
+
+
+def _update_active(sol: Solution, usable: np.ndarray, k_sigma: float, sigma_floor_px: float = 1e-3,
+                   sig_obs: np.ndarray = None, groups: np.ndarray = None):
     """Choose the active set afresh from the usable observations at the current solution.  Frames with no active
     observation were not adjusted, so they are first re-triangulated from all their usable rays with the current
-    cameras.  Returns (changed, number newly rejected, number re-admitted)."""
+    cameras.  With noise weights (sig_obs: each observation's sigma, px; groups: its noise group) the leverage is
+    the weighted one and each observation is judged against its own group's robust scale.  Returns (changed,
+    number newly rejected, number re-admitted)."""
     obs = sol.obs
     act_frame = np.zeros(obs.n_frames, bool)
     act_frame[obs.frame[obs.active]] = True
@@ -461,7 +634,8 @@ def _update_active(sol: Solution, usable: np.ndarray, k_sigma: float, sigma_floo
     if stale.any():
         rows = np.flatnonzero(usable & stale[obs.frame])
         if rows.size:
-            XA, XB, cnt = triangulate(sol.cams, sol.tube, obs, rows)
+            XA, XB, cnt = triangulate(sol.cams, sol.tube, obs, rows,
+                                      row_weights=None if sig_obs is None else 1.0 / np.asarray(sig_obs, float) ** 2)
             ok = stale & np.all(cnt >= 2, axis=1) & np.all(np.isfinite(XA), axis=1) & np.all(np.isfinite(XB), axis=1)
             if ok.any():
                 fr = frames_from_ends(XA[ok], XB[ok])
@@ -478,13 +652,18 @@ def _update_active(sol: Solution, usable: np.ndarray, k_sigma: float, sigma_floo
     # rig.  The plain |r| is not: with two cameras a frame has 3 residual dof over 8 coordinates, each residual is
     # nearly one-dimensional and shrunk to ~0.6 sigma, and a 5-sigma Rayleigh cut on |r| rejected ~0.4 % of good
     # observations (T5, 2-camera rigs).
+    # with weights w = 1 / sigma^2 the same holds with P = w J_f U_f^-1 J_f^T, U_f = sum w J_f^T J_f: Cov(r) =
+    # sigma^2 (I -/+ P) (SymPy: tests/cylinder_wand/p12_sympy_noise_weights.py, 4f-4g)
     Jf = np.where(ev.ok[:, None, None], ev.Jf, 0.0)
+    wv = np.ones(len(obs)) if sig_obs is None else 1.0 / np.asarray(sig_obs, float) ** 2
     U = np.zeros((obs.n_frames, 5, 5))
-    np.add.at(U, obs.frame[act], np.einsum("nai,naj->nij", Jf[act], Jf[act]))
+    np.add.at(U, obs.frame[act], np.einsum("nai,naj->nij", Jf[act], Jf[act]) * wv[act][:, None, None])
     Uinv = np.zeros_like(U)
     good_f = np.linalg.det(U) > 0
     Uinv[good_f] = np.linalg.inv(U[good_f])
     Pm = np.einsum("nai,nij,nbj->nab", Jf, Uinv[obs.frame], Jf)
+    if sig_obs is not None:
+        Pm = Pm * wv[:, None, None]
     M = np.eye(2)[None] + np.where(obs.active, -1.0, 1.0)[:, None, None] * Pm
     lam, V = np.linalg.eigh(M)
     lam = np.maximum(lam, 1e-3)                    # an observation that alone fixes a direction of its frame
@@ -493,7 +672,22 @@ def _update_active(sol: Solution, usable: np.ndarray, k_sigma: float, sigma_floo
     d = np.sqrt(np.sum(proj ** 2 / lam, axis=1))
     d[~ev.ok] = np.inf
     sigma = float(np.median(d[act])) / math.sqrt(2.0 * math.log(2.0))   # median of a Rayleigh(sigma)
-    lim = k_sigma * max(sigma, sigma_floor_px)     # the floor keeps noise-free data from rejecting itself
+    if sig_obs is None:
+        lim = k_sigma * max(sigma, sigma_floor_px)     # the floor keeps noise-free data from rejecting itself
+    else:
+        # each group's robust scale in its own sigma units (~1 when the variances are right; the median is not
+        # inflated by outliers the way the variance estimate is), then the limit in px per observation
+        s_i = np.asarray(sig_obs, float)
+        z = d / s_i
+        c_obs = np.full(len(obs), float(np.median(z[act])) / math.sqrt(2.0 * math.log(2.0)))
+        if groups is not None:
+            for g in np.unique(groups[act]):
+                sel = act & (groups == g)
+                if sel.sum() >= 30:
+                    c_obs[groups == g] = float(np.median(z[sel])) / math.sqrt(2.0 * math.log(2.0))
+        lim = k_sigma * np.maximum(c_obs * s_i, sigma_floor_px)
+        sol.info["robust_sigma_group_px"] = {int(g): float(np.median((c_obs * s_i)[groups == g]))
+                                             for g in np.unique(groups)} if groups is not None else {}
     # hysteresis: a rejected observation comes back only well inside the limit, so the set cannot oscillate
     new = usable & ev.ok & np.where(obs.active, d <= lim, d <= 0.8 * lim)
     probe = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, new)
@@ -645,25 +839,37 @@ def initial_frames(cams, tube: cm.Tube, obs: Obs, L: float) -> Frames:
 
 
 # ------------------------------------------------------------------ covariance and reports
-def information(cams, tube, frames, L, obs: Obs, layout: Layout, rows=None, sigma_px: float = 1.0):
+def information(cams, tube, frames, L, obs: Obs, layout: Layout, rows=None, sigma_px: float = 1.0,
+                weights: np.ndarray = None):
     """Fisher information of the free camera parameters, the frames marginalised (Schur), for i.i.d. Gaussian
-    pixel noise of `sigma_px`; and the evaluation used."""
+    pixel noise of `sigma_px` (or, with `weights` per observation, of variance sigma_px^2 / w); and the evaluation
+    used."""
     rows = np.flatnonzero(obs.active) if rows is None else rows
     ev = evaluate(cams, tube, frames, L, obs, layout, rows)
-    V, gV, U, gU, W = normal_blocks(ev, obs.frame[rows], obs.n_frames)
+    V, gV, U, gU, W = normal_blocks(ev, obs.frame[rows], obs.n_frames,
+                                    weights=None if weights is None else np.asarray(weights, float)[rows])
     S, _rhs, _Ui, _WUi = reduced_system(V, gV, U, gU, W, 0.0)
     return S / sigma_px ** 2, ev
 
 
-def covariance(sol: Solution, sigma_px: float = None) -> Solution:
+def covariance(sol: Solution, sigma_px: float = None, weights: np.ndarray = None) -> Solution:
     """Covariance of the free camera parameters, sigma^2 S^-1 with S the reduced (Schur) normal matrix.  With
-    sigma_px None, sigma is estimated from the residuals with the degrees of freedom of the full problem."""
+    sigma_px None, sigma is estimated from the residuals with the degrees of freedom of the full problem.  With
+    `weights` (per observation, 1 / sigma^2) it is s0^2 S_w^-1, S_w the weighted normal matrix and s0^2 the
+    variance factor (about 1 when the weights are right; fixed at 1 if sigma_px is given); sigma_px then still
+    reports the unweighted pooled sigma."""
     rows = np.flatnonzero(sol.obs.active)
-    info1, ev = information(sol.cams, sol.tube, sol.frames, sol.L, sol.obs, sol.layout, rows, 1.0)
+    info1, ev = information(sol.cams, sol.tube, sol.frames, sol.L, sol.obs, sol.layout, rows, 1.0, weights=weights)
     n_res = 2 * int(ev.ok.sum())
     dof = max(n_res - sol.layout.P - 5 * sol.obs.n_frames, 1)
     s2 = float(np.sum(ev.r[ev.ok] ** 2)) / dof if sigma_px is None else sigma_px ** 2
-    sol.cov = s2 * np.linalg.inv(info1)
+    if weights is None:
+        sol.cov = s2 * np.linalg.inv(info1)
+    else:
+        wr = np.asarray(weights, float)[rows]
+        s02 = float(np.sum(wr[ev.ok][:, None] * ev.r[ev.ok] ** 2)) / dof if sigma_px is None else 1.0
+        sol.cov = s02 * np.linalg.inv(info1)
+        sol.info["variance_factor"] = s02
     sol.sigma_px = math.sqrt(s2)
     sol.info["dof"] = dof
     sol.info["cond_S"] = float(np.linalg.cond(info1))
@@ -776,9 +982,10 @@ def relabel(cams, frames: Frames = None):
     return out, Frames(frames.m - np.array([0.0, y0, 0.0]), frames.w.copy()), y0
 
 
-def triangulate(cams, tube, obs: Obs, rows=None, n_frames: int = None):
+def triangulate(cams, tube, obs: Obs, rows=None, n_frames: int = None, row_weights: np.ndarray = None):
     """Each frame's ends from the back-projected rays of their detections (least squares of the offsets, weighted
-    to pixels by f / path).  Returns XA, XB (F, 3) and how many rays each end had."""
+    to pixels by f / path, and by row_weights (per observation, 1 / sigma^2) when given).  Returns XA, XB (F, 3) and
+    how many rays each end had."""
     rows = np.flatnonzero(obs.active) if rows is None else rows
     F = obs.n_frames if n_frames is None else n_frames
     rw = cm.rows(cams, obs.cam[rows])
@@ -786,6 +993,8 @@ def triangulate(cams, tube, obs: Obs, rows=None, n_frames: int = None):
     o, d, ok, _, _ = cm.trace(rw, xy, tube)
     path = np.linalg.norm(o - rw.C, axis=1) + 50.0
     wgt = np.where(ok, (rw.f / path) ** 2, 0.0)
+    if row_weights is not None:
+        wgt = wgt * np.asarray(row_weights, float)[rows]
     P = np.eye(3)[None] - d[:, :, None] * d[:, None, :]
     A = wgt[:, None, None] * P
     b = np.einsum("nij,nj->ni", A, o)
@@ -1180,12 +1389,16 @@ def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict =
 
 def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit_k1: bool = False,
               fit_L: bool = False, k_sigma: float = 5.0, guard_px: float = 30.0, n_final: int = 2,
-              verbose: bool = False, log=print) -> Solution:
+              verbose: bool = False, log=print, noise_weights: str = "camera", sigma_cam_px=None,
+              more_starts_px: float = 1.0) -> Solution:
     """Stages 0-5: from the detections to the cameras, with no camera input (or from `start`, cameras in the
-    gauge).  The best `n_final` bootstrap candidates are carried through stages 3 and 4; the answer keeping the
-    most observations, then with the lowest cost, wins.  With fit_L the wand length is estimated too (stages 1-3
-    use the nominal data.L): the tube's radii fix the scale, so the fitted L against the nominal checks the tube's
-    constants (tests/cylinder_wand T9)."""
+    gauge).  The best `n_final` bootstrap candidates are carried through stages 3 and 4; when the best of them
+    still has a stage-3 RMS above more_starts_px (noisy data), every short-listed candidate is (T11b: at 5 px one rig
+    in ten took the wrong minimum from the top two, while the fourth start reached the right one).  The answer
+    keeping the most observations, then with the highest likelihood (the lowest sum over noise groups of n_g log of
+    the mean squared residual: the lowest RMS for a single group), wins.  noise_weights and sigma_cam_px: see
+    `refine`.  With fit_L the wand length is estimated too (stages 1-3 use the nominal data.L): the tube's radii fix
+    the scale, so the fitted L against the nominal checks the tube's constants (tests/cylinder_wand T9)."""
     obs = observations(data)
     layout = Layout(data.n_cams, fit_k1=fit_k1, fit_L=fit_L)
     t0 = time.time()
@@ -1194,26 +1407,49 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
         starts = [start]
     else:
         ranked, binfo = bootstrap(obs, tube, data.L, data.sizes, hints=hints, verbose=verbose, log=log)
-        starts = [c for _cost, c in ranked[:n_final]]
+        starts = [c for _cost, c in ranked]
     best = None
     active0 = obs.active.copy()
+    tried, stage3 = 0, []
     for k, cams0 in enumerate(starts):
+        if k >= n_final and min(stage3, default=0.0) <= more_starts_px:
+            break
         o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
         cams3, info3 = coarse_fit(cams0, tube, o, data.L, layout)
+        stage3.append(info3["rms_px"])
         sol = refine(cams3, tube, initial_frames(cams3, tube, o, data.L), data.L, o, layout, k_sigma=k_sigma,
-                     guard_px=guard_px)
+                     guard_px=guard_px, noise_weights=noise_weights, sigma_cam_px=sigma_cam_px)
         sol.info["stage3"] = info3
+        tried += 1
         n_act = int(o.active.sum())
+        key = (-n_act, _log_likelihood_key(sol, noise_weights))
         if verbose:
             log(f"  start {k}: stage 3 rms {info3['rms_px']:.3f} px -> stage 4 rms {sol.rms:.5f} px, active "
                 f"{n_act}/{len(o)}")
-        key = (-n_act, sol.rms)
         if best is None or key < best[0]:
             best = (key, sol)
     sol = best[1]
     sol.cams, sol.frames, flipped = canonical(sol.cams, sol.frames)
     if flipped:
-        sol = covariance(sol)            # the same covariance in the flipped coordinates
+        sol = covariance(sol, weights=sol.weights)   # the same covariance in the flipped coordinates
     sol.info["bootstrap"] = binfo
+    sol.info["starts_tried"] = tried
+    sol.info["starts"] = {"short_listed": len(starts), "tried": tried, "n_final": n_final,
+                          "more_starts_px": more_starts_px, "extra_starts": tried > min(n_final, len(starts)),
+                          "stage3_rms_px": stage3, "start_given": start is not None}
     sol.info["total_seconds"] = time.time() - t0
     return sol
+
+
+def _log_likelihood_key(sol: Solution, noise_weights: str) -> float:
+    """sum over noise groups of n_g log(mean squared residual of the group): smaller is more likely (the profile
+    likelihood with each group's variance estimated); for one group, the RMS order."""
+    obs = sol.obs
+    ev = evaluate(sol.cams, sol.tube, sol.frames, sol.L, obs)
+    act = obs.active & ev.ok
+    groups = noise_groups(obs, "none" if noise_weights == "none" else noise_weights)
+    key = 0.0
+    for g in np.unique(groups[act]):
+        sel = act & (groups == g)
+        key += int(sel.sum()) * math.log(max(float(np.mean(np.sum(ev.r[sel] ** 2, axis=1))), 1e-300))
+    return key

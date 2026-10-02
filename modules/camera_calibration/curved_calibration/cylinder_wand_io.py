@@ -7,6 +7,10 @@ as the existing wand calibrator does: "Camera Calibration Error" = mean,std of t
 Euclidean, active observations) and "Pose Calibration Error" = mean,std of the wand-length error of a free
 triangulation (mm, all frames).
 
+The report also says what the noise weighting did (`noise_summary`): each camera's (or camera and wand end's)
+estimated noise level and how well it is determined, the detections used and not used, the residuals, whether the
+weights were applied and why not if they were not, and how many bootstrap starts were tried.
+
 Frame of the outputs: the tube frame (axis = Y through the origin, Z towards camera 1), with the origin slid along
 the axis to the wand's mean height (`cylinder_wand.relabel`); the camera files carry that frame's axis
 (center (0, 0, 0), axis (0, 1, 0)).  The sigmas are those of the fit's gauge (camera 1 at X = Y = 0): the slide
@@ -111,6 +115,69 @@ def statistics(sol: cw.Solution) -> Dict:
     return {"per_camera": per_cam, "wand_length_free_triangulation": wand}
 
 
+def noise_summary(sol: cw.Solution, names: Sequence[str] = None) -> Dict:
+    """What the noise weighting did (cylinder_wand.refine, tests/cylinder_wand T12), for the report: per noise group
+    (camera, or camera and wand end) the estimated noise sigma (px per coordinate) with its relative standard error,
+    the detections used and not used (rejected, or dropped with their frame), the residual RMS (px, 2-D) and the
+    scale outliers were judged against; whether the weights were applied, and if not, why; the pooled sigma, the
+    variance factor and the number of rounds; and the bootstrap starts tried."""
+    nw = sol.info.get("noise_weights") or {}
+    obs = sol.obs
+    n = len(sol.cams)
+    names = list(names) if names is not None else [f"cam{c + 1}" for c in range(n)]
+    mode = nw.get("mode", "none")
+    given = bool(nw.get("given"))
+    gmode = "camera" if given else mode
+    groups = cw.noise_groups(obs, gmode if gmode in cw.NOISE_MODES else "none")
+    if gmode == "camera":
+        labels = list(names)
+    elif gmode == "camera_end":
+        labels = [f"{names[g // 2]} end {'AB'[g % 2]}" for g in range(2 * n)]
+    else:
+        labels = ["all cameras"]
+    used = bool(nw.get("used"))
+    if given:
+        why = "given by the user (sigma_cam_px); not estimated"
+    elif mode == "none":
+        why = "equal weights requested (noise_weights='none')"
+    elif used:
+        why = "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group"
+    else:
+        rs = [x for x in (nw.get("rel_se_group") or []) if x is not None]
+        why = ("the data could not separate the groups' noise (largest relative standard error "
+               + (f"{100 * max(rs):.1f} %" if rs else "unknown")
+               + f", limit {100 * nw.get('max_rel_se', 0.10):.0f} %): equal weights, as without the weighting")
+    ev = cw.evaluate(sol.cams, sol.tube, sol.frames, sol.L, obs)
+    rn = np.linalg.norm(np.where(ev.ok[:, None], ev.r, np.nan), axis=1)
+    sig_used = nw.get("sigma_group_px")
+    sig_sep = nw.get("sigma_px_separate")
+    rel_se = nw.get("rel_se_group")
+    robust = sol.info.get("robust_sigma_group_px") or {}
+    rows = []
+    for g, lab in enumerate(labels):
+        sel = groups == g
+        act = sel & obs.active & ev.ok
+        v = rn[act]
+        rows.append({"group": lab,
+                     "sigma_px": (sig_used[g] if used and sig_used and g < len(sig_used) else None),
+                     "sigma_estimate_px": (sig_sep[g] if sig_sep and g < len(sig_sep) else None),
+                     "rel_se": (rel_se[g] if rel_se and g < len(rel_se) else None),
+                     "n_total": int(sel.sum()), "n_used": int(act.sum()), "n_not_used": int(sel.sum() - act.sum()),
+                     "residual_rms_px": float(np.sqrt(np.mean(v ** 2))) if v.size else None,
+                     "residual_rms_px_per_coordinate": float(np.sqrt(np.mean(v ** 2) / 2.0)) if v.size else None,
+                     "rejection_scale_px": robust.get(g) if used else sol.info.get("robust_sigma_px")})
+    st = sol.info.get("starts") or {}
+    sig_list = [r["sigma_px"] for r in rows if r["sigma_px"]]
+    return {"mode": mode, "given": given, "weights_used": used, "why": why, "groups": rows,
+            "pooled_sigma_px": sol.sigma_px, "variance_factor": sol.info.get("variance_factor"),
+            "rounds": sol.info.get("rounds"),
+            "noisiest_over_quietest": (max(sig_list) / min(sig_list)) if len(sig_list) >= 2 else None,
+            "max_rel_se": nw.get("max_rel_se"),
+            "starts": {"short_listed": st.get("short_listed"), "tried": st.get("tried"),
+                       "extra_starts": st.get("extra_starts"), "more_starts_px": st.get("more_starts_px"),
+                       "stage3_rms_px": st.get("stage3_rms_px"), "start_given": st.get("start_given")}}
+
+
 def write_result(sol: cw.Solution, folder: str, names: Sequence[str] = None, pixel_mm: Sequence[float] = None,
                  extra: Dict = None) -> Dict:
     """camFile/<name>.txt for every camera, calibration_result.json and calibration_report.txt in `folder`.
@@ -144,7 +211,7 @@ def write_result(sol: cw.Solution, folder: str, names: Sequence[str] = None, pix
         "gauge": "camera 1's centre at X = 0, Y = 0 during the fit (sigmas are in that gauge)",
         "rms_px": sol.rms, "sigma_px": sol.sigma_px, "frames": int(sol.obs.n_frames),
         "observations": int(len(sol.obs)), "active": int(sol.obs.active.sum()), "cameras": cams_json,
-        "wand_length_free_triangulation": wand,
+        "wand_length_free_triangulation": wand, "noise": noise_summary(sol, names),
         "info": {k: v for k, v in sol.info.items() if _jsonable(v)}}
     if sol.layout.fit_L and sol.cov is not None:
         result["L_sigma_mm"] = math.sqrt(sol.cov[sol.layout.L_index, sol.layout.L_index])
@@ -185,4 +252,48 @@ def report_text(res: Dict) -> str:
                    + f"; azimuth {c['azimuth_deg']:.3f} deg; height {c['height_mm']:.3f} mm; reprojection RMS "
                    f"{c['residuals']['rms_px']:.4f} px ({c['residuals']['n_active']}/{c['residuals']['n_total']} "
                    f"active); camFile {c['camfile']}")
+    if res.get("noise"):
+        out += [""] + noise_text(res["noise"])
     return "\n".join(out) + "\n"
+
+
+def noise_text(nz: Dict) -> List[str]:
+    """The report's section on the noise levels and weights (see `noise_summary`)."""
+    w = max([14] + [len(r["group"]) + 1 for r in nz["groups"]])
+    out = ["Noise levels and weights (noise_weights=" + repr(nz["mode"]) + ("; given by the user" if nz["given"] else "")
+           + ")",
+           f"  weights {'APPLIED' if nz['weights_used'] else 'NOT applied'}: {nz['why']}",
+           f"  {'group':<{w}s} {'noise sigma':>11s} {'+- rel. SE':>11s} {'used / total':>15s} {'not used':>9s} "
+           f"{'residual RMS':>13s} {'outlier scale':>14s}",
+           f"  {'':<{w}s} {'(px)':>11s} {'':>11s} {'':>15s} {'':>9s} {'(px/coord.)':>13s} {'(px)':>14s}"]
+    for r in nz["groups"]:
+        sig = r["sigma_px"] if r["sigma_px"] is not None else r["sigma_estimate_px"]
+        res = r.get("residual_rms_px_per_coordinate")
+        out.append(f"  {r['group']:<{w}s} "
+                   + (f"{sig:>11.4f} " if sig is not None else f"{'-':>11s} ")
+                   + (f"{100 * r['rel_se']:>9.1f} % " if r["rel_se"] is not None else f"{'-':>11s} ")
+                   + f"{r['n_used']:>7d} / {r['n_total']:<5d} {r['n_not_used']:>9d} "
+                   + (f"{res:>13.4f} " if res is not None else f"{'-':>13s} ")
+                   + (f"{r['rejection_scale_px']:>14.4f}" if r["rejection_scale_px"] is not None else f"{'-':>14s}")
+                   + ("   (estimate, not used)" if r["sigma_px"] is None and sig is not None else ""))
+    vf = nz.get("variance_factor")
+    out.append(f"  pooled sigma {nz['pooled_sigma_px']:.4f} px per coordinate (unweighted)"
+               + (f"; variance factor {vf:.3f} (about 1 when the weights match the data)" if vf is not None else "")
+               + f"; {nz['rounds']} rounds"
+               + (f"; noisiest / quietest group {nz['noisiest_over_quietest']:.2f}x"
+                  if nz.get("noisiest_over_quietest") else ""))
+    out += ["  noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.",
+            "  residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera",
+            "    next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).",
+            "  not used: rejected as outliers, or dropped with their frame when an end was left in fewer than two cameras.",
+            "  outlier scale: the robust scale each detection was judged against (rejected beyond 5 of it)."]
+    st = nz.get("starts") or {}
+    if st.get("start_given"):
+        out.append("  starts: the calibration was started from given cameras (no bootstrap)")
+    elif st.get("short_listed"):
+        s3 = st.get("stage3_rms_px") or []
+        out.append(f"  starts: {st['tried']} of {st['short_listed']} short-listed bootstrap starts carried through stages 3-4"
+                   + (f" (extra starts: the best stage-3 RMS of the first ones exceeded {st['more_starts_px']:g} px)"
+                      if st.get("extra_starts") else "")
+                   + (f"; stage-3 RMS {', '.join(f'{x:.3f}' for x in s3)} px" if s3 else ""))
+    return out
