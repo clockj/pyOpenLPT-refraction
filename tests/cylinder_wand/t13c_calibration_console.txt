@@ -1,0 +1,357 @@
+T13c: what each ball detector does to the calibration (cam1-like rig, 1280 x 800 px, best focus)
+  8 data sets x (500 + 100 held-out) frames; detectors pyopenlpt_fast, blob, blob_open, ellipse, ellipse_rodmask; lightings backlit, even, side, highlight; baseline: exact centres + 0.02 px noise
+
+Phase 1: render and detect
+  [  1/96   644 s] set 1 chunk 1: data set 1, frames 50-99
+  [  2/96   644 s] set 0 chunk 4: data set 0, frames 200-249
+  [  3/96   654 s] set 0 chunk 11: data set 0, frames 550-599
+  [  4/96   659 s] set 0 chunk 5: data set 0, frames 250-299
+  [  5/96   662 s] set 0 chunk 10: data set 0, frames 500-549
+  [  6/96   665 s] set 0 chunk 1: data set 0, frames 50-99
+  [  7/96   667 s] set 0 chunk 2: data set 0, frames 100-149
+  [  8/96   671 s] set 1 chunk 0: data set 1, frames 0-49
+  [  9/96   672 s] set 0 chunk 6: data set 0, frames 300-349
+  [ 10/96   674 s] set 0 chunk 9: data set 0, frames 450-499
+  [ 11/96   675 s] set 0 chunk 0: data set 0, frames 0-49
+  [ 12/96   677 s] set 0 chunk 3: data set 0, frames 150-199
+  [ 13/96   677 s] set 0 chunk 8: data set 0, frames 400-449
+  [ 14/96   679 s] set 1 chunk 3: data set 1, frames 150-199
+  [ 15/96   682 s] set 1 chunk 2: data set 1, frames 100-149
+  [ 16/96   693 s] set 0 chunk 7: data set 0, frames 350-399
+  [ 17/96  1104 s] set 1 chunk 4: data set 1, frames 200-249
+  [ 18/96  1123 s] set 1 chunk 7: data set 1, frames 350-399
+  [ 19/96  1127 s] set 1 chunk 6: data set 1, frames 300-349
+  [ 20/96  1128 s] set 1 chunk 8: data set 1, frames 400-449
+  [ 21/96  1129 s] set 1 chunk 5: data set 1, frames 250-299
+  [ 22/96  1130 s] set 1 chunk 10: data set 1, frames 500-549
+  [ 23/96  1138 s] set 1 chunk 9: data set 1, frames 450-499
+  [ 24/96  1138 s] set 2 chunk 0: data set 2, frames 0-49
+  [ 25/96  1138 s] set 2 chunk 4: data set 2, frames 200-249
+  [ 26/96  1142 s] set 1 chunk 11: data set 1, frames 550-599
+  [ 27/96  1146 s] set 2 chunk 1: data set 2, frames 50-99
+  [ 28/96  1148 s] set 2 chunk 2: data set 2, frames 100-149
+  [ 29/96  1148 s] set 2 chunk 7: data set 2, frames 350-399
+  [ 30/96  1150 s] set 2 chunk 5: data set 2, frames 250-299
+  [ 31/96  1150 s] set 2 chunk 6: data set 2, frames 300-349
+  [ 32/96  1152 s] set 2 chunk 3: data set 2, frames 150-199
+  [ 33/96  1508 s] set 2 chunk 8: data set 2, frames 400-449
+  [ 34/96  1526 s] set 2 chunk 11: data set 2, frames 550-599
+  [ 35/96  1527 s] set 2 chunk 9: data set 2, frames 450-499
+  [ 36/96  1528 s] set 3 chunk 1: data set 3, frames 50-99
+  [ 37/96  1535 s] set 3 chunk 0: data set 3, frames 0-49
+  [ 38/96  1539 s] set 3 chunk 2: data set 3, frames 100-149
+  [ 39/96  1541 s] set 2 chunk 10: data set 2, frames 500-549
+  [ 40/96  1542 s] set 3 chunk 8: data set 3, frames 400-449
+  [ 41/96  1545 s] set 3 chunk 6: data set 3, frames 300-349
+  [ 42/96  1545 s] set 3 chunk 3: data set 3, frames 150-199
+  [ 43/96  1553 s] set 3 chunk 7: data set 3, frames 350-399
+  [ 44/96  1555 s] set 3 chunk 5: data set 3, frames 250-299
+  [ 45/96  1555 s] set 3 chunk 4: data set 3, frames 200-249
+  [ 46/96  1555 s] set 3 chunk 10: data set 3, frames 500-549
+  [ 47/96  1555 s] set 3 chunk 11: data set 3, frames 550-599
+  [ 48/96  1559 s] set 3 chunk 9: data set 3, frames 450-499
+  [ 49/96  1901 s] set 4 chunk 0: data set 4, frames 0-49
+  [ 50/96  1907 s] set 4 chunk 3: data set 4, frames 150-199
+  [ 51/96  1909 s] set 4 chunk 1: data set 4, frames 50-99
+  [ 52/96  1915 s] set 4 chunk 2: data set 4, frames 100-149
+  [ 53/96  1919 s] set 4 chunk 8: data set 4, frames 400-449
+  [ 54/96  1925 s] set 4 chunk 4: data set 4, frames 200-249
+  [ 55/96  1928 s] set 4 chunk 5: data set 4, frames 250-299
+  [ 56/96  1930 s] set 4 chunk 6: data set 4, frames 300-349
+  [ 57/96  1930 s] set 4 chunk 7: data set 4, frames 350-399
+  [ 58/96  1931 s] set 4 chunk 9: data set 4, frames 450-499
+  [ 59/96  1933 s] set 5 chunk 1: data set 5, frames 50-99
+  [ 60/96  1936 s] set 4 chunk 10: data set 4, frames 500-549
+  [ 61/96  1938 s] set 5 chunk 0: data set 5, frames 0-49
+  [ 62/96  1942 s] set 5 chunk 2: data set 5, frames 100-149
+  [ 63/96  1944 s] set 4 chunk 11: data set 4, frames 550-599
+  [ 64/96  1947 s] set 5 chunk 3: data set 5, frames 150-199
+  [ 65/96  2286 s] set 5 chunk 4: data set 5, frames 200-249
+  [ 66/96  2290 s] set 5 chunk 5: data set 5, frames 250-299
+  [ 67/96  2296 s] set 5 chunk 6: data set 5, frames 300-349
+  [ 68/96  2303 s] set 5 chunk 7: data set 5, frames 350-399
+  [ 69/96  2306 s] set 5 chunk 8: data set 5, frames 400-449
+  [ 70/96  2308 s] set 5 chunk 10: data set 5, frames 500-549
+  [ 71/96  2308 s] set 5 chunk 9: data set 5, frames 450-499
+  [ 72/96  2311 s] set 5 chunk 11: data set 5, frames 550-599
+  [ 73/96  2312 s] set 6 chunk 2: data set 6, frames 100-149
+  [ 74/96  2312 s] set 6 chunk 1: data set 6, frames 50-99
+  [ 75/96  2312 s] set 6 chunk 0: data set 6, frames 0-49
+  [ 76/96  2315 s] set 6 chunk 5: data set 6, frames 250-299
+  [ 77/96  2318 s] set 6 chunk 3: data set 6, frames 150-199
+  [ 78/96  2318 s] set 6 chunk 4: data set 6, frames 200-249
+  [ 79/96  2321 s] set 6 chunk 7: data set 6, frames 350-399
+  [ 80/96  2324 s] set 6 chunk 6: data set 6, frames 300-349
+  [ 81/96  2659 s] set 6 chunk 8: data set 6, frames 400-449
+  [ 82/96  2663 s] set 6 chunk 9: data set 6, frames 450-499
+  [ 83/96  2667 s] set 6 chunk 10: data set 6, frames 500-549
+  [ 84/96  2671 s] set 6 chunk 11: data set 6, frames 550-599
+  [ 85/96  2677 s] set 7 chunk 1: data set 7, frames 50-99
+  [ 86/96  2678 s] set 7 chunk 0: data set 7, frames 0-49
+  [ 87/96  2678 s] set 7 chunk 6: data set 7, frames 300-349
+  [ 88/96  2678 s] set 7 chunk 9: data set 7, frames 450-499
+  [ 89/96  2679 s] set 7 chunk 3: data set 7, frames 150-199
+  [ 90/96  2680 s] set 7 chunk 5: data set 7, frames 250-299
+  [ 91/96  2680 s] set 7 chunk 2: data set 7, frames 100-149
+  [ 92/96  2680 s] set 7 chunk 4: data set 7, frames 200-249
+  [ 93/96  2682 s] set 7 chunk 7: data set 7, frames 350-399
+  [ 94/96  2683 s] set 7 chunk 8: data set 7, frames 400-449
+  [ 95/96  2685 s] set 7 chunk 10: data set 7, frames 500-549
+  [ 96/96  2687 s] set 7 chunk 11: data set 7, frames 550-599
+
+Detections delivered to the calibration (training frames, all data sets): share of the visible balls measured, and of those the share more than 1 px / 5 px from the truth
+  pyopenlpt_fast|backlit         measured 23312/23314 (100.0 %), > 1 px 93.45 %, > 5 px 56.60 %
+  pyopenlpt_fast|even            measured 23314/23314 (100.0 %), > 1 px 86.43 %, > 5 px 64.57 %
+  pyopenlpt_fast|side            measured 23312/23314 (100.0 %), > 1 px 86.35 %, > 5 px 64.66 %
+  pyopenlpt_fast|highlight       measured 23314/23314 (100.0 %), > 1 px 86.02 %, > 5 px 64.70 %
+  blob|backlit                   measured 0/23314 (0.0 %), > 1 px 0.00 %, > 5 px 0.00 %
+  blob|even                      measured 23096/23314 (99.1 %), > 1 px 26.48 %, > 5 px 0.00 %
+  blob|side                      measured 23096/23314 (99.1 %), > 1 px 27.56 %, > 5 px 0.00 %
+  blob|highlight                 measured 23096/23314 (99.1 %), > 1 px 26.55 %, > 5 px 0.00 %
+  blob_open|backlit              measured 23036/23314 (98.8 %), > 1 px 0.00 %, > 5 px 0.00 %
+  blob_open|even                 measured 22470/23314 (96.4 %), > 1 px 31.65 %, > 5 px 8.47 %
+  blob_open|side                 measured 22440/23314 (96.3 %), > 1 px 32.44 %, > 5 px 8.31 %
+  blob_open|highlight            measured 22452/23314 (96.3 %), > 1 px 31.66 %, > 5 px 8.41 %
+  ellipse|backlit                measured 23042/23314 (98.8 %), > 1 px 0.00 %, > 5 px 0.00 %
+  ellipse|even                   measured 22274/23314 (95.5 %), > 1 px 0.75 %, > 5 px 0.60 %
+  ellipse|side                   measured 22320/23314 (95.7 %), > 1 px 0.76 %, > 5 px 0.57 %
+  ellipse|highlight              measured 22344/23314 (95.8 %), > 1 px 1.00 %, > 5 px 0.60 %
+  ellipse_rodmask|backlit        measured 23042/23314 (98.8 %), > 1 px 0.00 %, > 5 px 0.00 %
+  ellipse_rodmask|even           measured 22350/23314 (95.9 %), > 1 px 0.01 %, > 5 px 0.01 %
+  ellipse_rodmask|side           measured 22392/23314 (96.0 %), > 1 px 0.02 %, > 5 px 0.01 %
+  ellipse_rodmask|highlight      measured 22374/23314 (96.0 %), > 1 px 0.02 %, > 5 px 0.01 %
+
+Phase 2: calibrate from scratch and measure
+  [  1/176     0 s] set 0 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [  2/176     9 s] set 0 ideal_truth: f -0.106, -0.118, -0.024 %, shape 0.08 um, held -0.09 um, z 1.59, rms 0.021 px, rejected 0
+  [  3/176    41 s] set 0 ideal: f -0.106, -0.118, -0.024 %, shape 0.08 um, held -0.09 um, z 1.59, rms 0.021 px, rejected 0
+  [  4/176    54 s] set 0 blob_open|backlit: f +1.222, +0.477, +0.813 %, shape 20.85 um, held -0.17 um, z 8.90, rms 0.146 px, rejected 0
+  [  5/176    69 s] set 0 ellipse|even: f -0.090, +0.131, -0.233 %, shape 1.23 um, held +4.75 um, z 3.40, rms 0.023 px, rejected 491
+  [  6/176    70 s] set 0 ellipse|side: f -0.090, +0.154, -0.285 %, shape 1.40 um, held +4.74 um, z 3.72, rms 0.028 px, rejected 463
+  [  7/176    72 s] set 0 blob|highlight: f +4.094, -1.460, +6.731 %, shape 23.02 um, held +5.91 um, z 2.64, rms 0.379 px, rejected 348
+  [  8/176    76 s] set 0 ellipse|backlit: f +0.452, +0.185, +0.291 %, shape 2.94 um, held -0.09 um, z 8.59, rms 0.028 px, rejected 92
+  [  9/176    77 s] set 0 blob|even: f +4.278, -1.190, +7.352 %, shape 23.30 um, held +5.68 um, z 2.73, rms 0.383 px, rejected 337
+  [ 10/176    79 s] set 0 blob|side: f +3.382, -2.026, +6.298 %, shape 22.16 um, held +6.25 um, z 2.52, rms 0.371 px, rejected 395
+  [ 11/176    81 s] set 1 ideal_truth: f -0.020, -0.021, +0.049 %, shape 0.03 um, held -0.04 um, z 0.56, rms 0.021 px, rejected 0
+  [ 12/176    88 s] set 0 ellipse|highlight: f +0.211, +0.100, -0.035 %, shape 3.61 um, held +3.40 um, z 6.41, rms 0.077 px, rejected 206
+  [ 13/176   117 s] set 1 ideal: f -0.020, -0.021, +0.049 %, shape 0.03 um, held -0.04 um, z 0.56, rms 0.021 px, rejected 0
+  [ 14/176   117 s] set 1 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [ 15/176   117 s] set 0 ellipse_rodmask|backlit: f +0.013, +0.012, +0.001 %, shape 0.12 um, held +0.06 um, z 1.29, rms 0.016 px, rejected 38
+  [ 16/176   130 s] set 0 ellipse_rodmask|even: f +0.062, +0.031, -0.013 %, shape 0.14 um, held -0.00 um, z 1.25, rms 0.017 px, rejected 63
+  [ 17/176   134 s] set 0 ellipse_rodmask|highlight: f +0.036, +0.461, +0.654 %, shape 1.14 um, held -0.09 um, z 3.00, rms 0.157 px, rejected 7
+  [ 18/176   146 s] set 0 ellipse_rodmask|side: f +0.140, +0.075, -0.100 %, shape 0.35 um, held +0.08 um, z 2.34, rms 0.029 px, rejected 101
+  [ 19/176   193 s] set 1 blob_open|backlit: f +0.570, +0.100, +1.028 %, shape 20.68 um, held -0.30 um, z 9.27, rms 0.148 px, rejected 0
+  [ 20/176   198 s] set 1 blob|side: f +6.094, -0.870, +5.269 %, shape 22.10 um, held +2.43 um, z 2.48, rms 0.381 px, rejected 273
+  [ 21/176   207 s] set 1 blob|even: f +5.015, -1.399, +5.154 %, shape 22.25 um, held +2.45 um, z 2.34, rms 0.385 px, rejected 246
+  [ 22/176   208 s] set 1 blob|highlight: f +5.354, -1.052, +4.946 %, shape 22.00 um, held +2.57 um, z 2.33, rms 0.380 px, rejected 257
+  [ 23/176   211 s] set 0 pyopenlpt_fast|even: f +34.351, +4.358, -0.677 %, shape 92.85 um, held +19.55 um, z 1.80, rms 4.817 px, rejected 70
+  [ 24/176   215 s] set 0 pyopenlpt_fast|highlight: f -70.119, -69.846, -70.228 %, shape 10583.21 um, held +56.05 um, z 473.01, rms 4.927 px, rejected 72
+  [ 25/176   226 s] set 0 blob_open|highlight: f -67.559, -68.226, -68.367 %, shape 10617.90 um, held +14.33 um, z 994.49, rms 2.140 px, rejected 244
+  [ 26/176   246 s] set 0 blob_open|side: f -66.955, -68.022, -67.884 %, shape 10616.06 um, held +16.38 um, z 995.29, rms 2.137 px, rejected 246
+  [ 27/176   249 s] set 0 blob_open|even: f -67.644, -68.310, -68.449 %, shape 10618.27 um, held +17.47 um, z 984.20, rms 2.169 px, rejected 229
+  [ 28/176   249 s] set 0 pyopenlpt_fast|backlit: f -60.792, -62.750, -63.688 %, shape 10559.30 um, held +27.04 um, z 335.92, rms 3.749 px, rejected 29
+  [ 29/176   253 s] set 0 pyopenlpt_fast|side: f +45.535, +18.742, +24.241 %, shape 109.84 um, held -32.71 um, z 1.54, rms 4.611 px, rejected 86
+  [ 30/176   272 s] set 1 ellipse|even: f -0.138, +0.187, -0.193 %, shape 1.19 um, held +0.79 um, z 3.47, rms 0.022 px, rejected 464
+  [ 31/176   279 s] set 2 ideal_truth: f -0.045, -0.050, +0.017 %, shape 0.04 um, held +0.06 um, z 0.69, rms 0.021 px, rejected 0
+  [ 32/176   281 s] set 1 ellipse|side: f -0.080, +0.104, -0.179 %, shape 1.17 um, held +0.77 um, z 3.00, rms 0.024 px, rejected 616
+  [ 33/176   290 s] set 1 ellipse|backlit: f +0.257, -0.005, +0.245 %, shape 2.90 um, held -0.09 um, z 9.22, rms 0.025 px, rejected 109
+  [ 34/176   291 s] set 1 pyopenlpt_fast|backlit: f -63.648, -63.938, -63.340 %, shape 10569.10 um, held -7.73 um, z 637.45, rms 3.646 px, rejected 28
+  [ 35/176   293 s] set 1 ellipse|highlight: f +0.386, +0.357, +0.376 %, shape 3.74 um, held +0.82 um, z 6.71, rms 0.073 px, rejected 237
+  [ 36/176   293 s] set 2 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [ 37/176   297 s] set 2 ideal: f -0.045, -0.050, +0.017 %, shape 0.04 um, held +0.06 um, z 0.69, rms 0.021 px, rejected 0
+  [ 38/176   302 s] set 1 ellipse_rodmask|side: f +0.120, -0.009, -0.143 %, shape 0.40 um, held -0.09 um, z 2.66, rms 0.030 px, rejected 74
+  [ 39/176   302 s] set 1 ellipse_rodmask|backlit: f +0.091, +0.078, +0.063 %, shape 0.14 um, held -0.05 um, z 1.71, rms 0.017 px, rejected 37
+  [ 40/176   311 s] set 1 ellipse_rodmask|highlight: f -0.065, +0.282, +0.486 %, shape 0.97 um, held +0.10 um, z 2.42, rms 0.162 px, rejected 5
+  [ 41/176   316 s] set 1 pyopenlpt_fast|even: f -71.458, -70.188, -70.429 %, shape 10575.20 um, held -24.61 um, z 448.12, rms 4.873 px, rejected 68
+  [ 42/176   317 s] set 1 ellipse_rodmask|even: f +0.220, +0.149, +0.057 %, shape 0.15 um, held +0.06 um, z 2.28, rms 0.018 px, rejected 37
+  [ 43/176   341 s] set 1 pyopenlpt_fast|highlight: f -69.810, -69.375, -69.502 %, shape 10590.36 um, held -12.04 um, z 450.06, rms 4.893 px, rejected 72
+  [ 44/176   357 s] set 2 blob_open|backlit: f +1.138, +0.523, +1.043 %, shape 20.70 um, held -0.14 um, z 9.12, rms 0.144 px, rejected 0
+  [ 45/176   362 s] set 1 blob_open|even: f -70.313, -69.741, -70.152 %, shape 10624.93 um, held +2.56 um, z 1118.19, rms 2.423 px, rejected 148
+  [ 46/176   373 s] set 2 blob|even: f +7.065, -0.452, +4.785 %, shape 23.08 um, held +2.33 um, z 2.81, rms 0.383 px, rejected 287
+  [ 47/176   376 s] set 1 pyopenlpt_fast|side: f -70.293, -70.305, -69.089 %, shape 10569.17 um, held -32.74 um, z 459.96, rms 4.753 px, rejected 56
+  [ 48/176   377 s] set 2 blob|side: f +7.237, -0.421, +4.864 %, shape 22.98 um, held +2.12 um, z 2.79, rms 0.385 px, rejected 301
+  [ 49/176   385 s] set 2 blob|highlight: f +6.856, -0.388, +5.184 %, shape 22.99 um, held +2.45 um, z 2.80, rms 0.381 px, rejected 298
+  [ 50/176   402 s] set 2 ellipse|backlit: f +0.199, -0.040, +0.221 %, shape 2.85 um, held -0.13 um, z 9.67, rms 0.024 px, rejected 145
+  [ 51/176   414 s] set 1 blob_open|highlight: f -69.457, -69.202, -69.204 %, shape 10625.82 um, held -0.11 um, z 1019.34, rms 2.259 px, rejected 146
+  [ 52/176   422 s] set 1 blob_open|side: f -70.844, -70.051, -71.091 %, shape 10631.76 um, held +2.29 um, z 1090.81, rms 3.049 px, rejected 141
+  [ 53/176   427 s] set 3 ideal_truth: f +0.068, -0.016, -0.066 %, shape 0.07 um, held +0.06 um, z 1.36, rms 0.021 px, rejected 0
+  [ 54/176   429 s] set 2 ellipse_rodmask|backlit: f +0.004, -0.010, +0.028 %, shape 0.11 um, held +0.10 um, z 0.72, rms 0.017 px, rejected 41
+  [ 55/176   436 s] set 2 ellipse|even: f -0.271, +0.076, -0.194 %, shape 1.24 um, held +0.58 um, z 3.70, rms 0.023 px, rejected 512
+  [ 56/176   440 s] set 2 ellipse|side: f -0.047, +0.197, -0.313 %, shape 1.43 um, held +0.18 um, z 4.66, rms 0.029 px, rejected 437
+  [ 57/176   446 s] set 2 ellipse_rodmask|side: f +0.089, -0.128, -0.159 %, shape 0.42 um, held -0.10 um, z 3.12, rms 0.029 px, rejected 83
+  [ 58/176   446 s] set 3 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [ 59/176   454 s] set 2 ellipse|highlight: f -0.091, +0.180, +0.700 %, shape 3.46 um, held +0.53 um, z 6.69, rms 0.073 px, rejected 196
+  [ 60/176   458 s] set 2 ellipse_rodmask|even: f +0.005, +0.119, +0.105 %, shape 0.13 um, held -0.06 um, z 1.80, rms 0.018 px, rejected 58
+  [ 61/176   461 s] set 3 ideal: f +0.068, -0.016, -0.066 %, shape 0.07 um, held +0.06 um, z 1.36, rms 0.021 px, rejected 0
+  [ 62/176   471 s] set 2 ellipse_rodmask|highlight: f +0.279, +0.534, +0.402 %, shape 0.98 um, held +0.11 um, z 2.34, rms 0.154 px, rejected 11
+  [ 63/176   502 s] set 2 pyopenlpt_fast|even: f +47.098, +23.850, +11.914 %, shape 100.32 um, held -26.85 um, z 1.89, rms 4.758 px, rejected 61
+  [ 64/176   526 s] set 2 pyopenlpt_fast|highlight: f +53.329, +40.810, +41.500 %, shape 98.05 um, held -22.11 um, z 2.34, rms 4.813 px, rejected 85
+  [ 65/176   527 s] set 3 blob_open|backlit: f +0.282, +0.070, +0.329 %, shape 20.69 um, held -0.32 um, z 10.81, rms 0.141 px, rejected 1
+  [ 66/176   528 s] set 2 pyopenlpt_fast|backlit: f -61.027, -62.364, -61.731 %, shape 10554.34 um, held +3.35 um, z 335.81, rms 3.625 px, rejected 33
+  [ 67/176   532 s] set 3 blob|even: f +5.858, -0.123, +7.494 %, shape 22.77 um, held +4.00 um, z 3.02, rms 0.371 px, rejected 279
+  [ 68/176   537 s] set 2 pyopenlpt_fast|side: f +40.302, +28.648, +54.640 %, shape 108.45 um, held -1.32 um, z 2.71, rms 4.687 px, rejected 72
+  [ 69/176   542 s] set 3 blob|side: f +6.296, -0.228, +7.330 %, shape 23.20 um, held +3.54 um, z 2.99, rms 0.380 px, rejected 282
+  [ 70/176   546 s] set 3 blob|highlight: f +6.032, -0.009, +7.215 %, shape 22.91 um, held +3.77 um, z 2.97, rms 0.377 px, rejected 268
+  [ 71/176   556 s] set 2 blob_open|even: f -67.049, -67.665, -67.767 %, shape 10610.32 um, held -3.90 um, z 1003.88, rms 2.147 px, rejected 238
+  [ 72/176   565 s] set 2 blob_open|highlight: f -67.205, -67.780, -67.992 %, shape 10611.48 um, held -3.35 um, z 999.30, rms 2.169 px, rejected 215
+  [ 73/176   572 s] set 2 blob_open|side: f -67.049, -67.780, -67.934 %, shape 10612.66 um, held -2.38 um, z 1003.11, rms 2.148 px, rejected 224
+  [ 74/176   581 s] set 3 ellipse|backlit: f +0.197, +0.070, +0.331 %, shape 2.83 um, held -0.08 um, z 8.71, rms 0.026 px, rejected 80
+  [ 75/176   588 s] set 4 ideal_truth: f +0.096, +0.014, -0.067 %, shape 0.06 um, held -0.09 um, z 1.20, rms 0.021 px, rejected 0
+  [ 76/176   604 s] set 3 ellipse|even: f -0.159, +0.142, -0.243 %, shape 1.23 um, held +0.88 um, z 3.74, rms 0.023 px, rejected 503
+  [ 77/176   608 s] set 3 ellipse|side: f -0.011, +0.205, -0.280 %, shape 1.43 um, held +0.50 um, z 4.78, rms 0.028 px, rejected 507
+  [ 78/176   616 s] set 4 ideal: f +0.096, +0.014, -0.067 %, shape 0.06 um, held -0.09 um, z 1.20, rms 0.021 px, rejected 0
+  [ 79/176   617 s] set 3 ellipse|highlight: f +0.246, +0.240, +0.119 %, shape 3.36 um, held +0.48 um, z 6.59, rms 0.069 px, rejected 279
+  [ 80/176   617 s] set 4 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [ 81/176   627 s] set 3 ellipse_rodmask|backlit: f +0.079, +0.122, +0.128 %, shape 0.13 um, held -0.06 um, z 2.01, rms 0.017 px, rejected 43
+  [ 82/176   627 s] set 3 ellipse_rodmask|even: f -0.047, -0.007, -0.012 %, shape 0.10 um, held -0.06 um, z 1.19, rms 0.018 px, rejected 41
+  [ 83/176   632 s] set 3 ellipse_rodmask|highlight: f +0.294, +0.468, +0.582 %, shape 0.95 um, held -0.21 um, z 2.59, rms 0.162 px, rejected 8
+  [ 84/176   635 s] set 3 ellipse_rodmask|side: f +0.049, -0.015, -0.122 %, shape 0.31 um, held +0.06 um, z 1.95, rms 0.027 px, rejected 97
+  [ 85/176   649 s] set 3 pyopenlpt_fast|highlight: f +35.329, -7.063, -3.022 %, shape 101.92 um, held -9.28 um, z 1.37, rms 4.916 px, rejected 84
+  [ 86/176   653 s] set 3 pyopenlpt_fast|side: f +88.283, +8.487, +4.242 %, shape 108.91 um, held +1.73 um, z 2.19, rms 4.710 px, rejected 54
+  [ 87/176   664 s] set 3 pyopenlpt_fast|even: f -70.255, -69.596, -66.816 %, shape 10570.01 um, held -22.77 um, z 487.50, rms 4.819 px, rejected 57
+  [ 88/176   668 s] set 3 pyopenlpt_fast|backlit: f -64.503, -64.546, -63.317 %, shape 10553.16 um, held +3.47 um, z 665.76, rms 3.807 px, rejected 27
+  [ 89/176   695 s] set 4 blob_open|backlit: f +1.014, +0.149, +0.313 %, shape 20.63 um, held -0.77 um, z 9.50, rms 0.145 px, rejected 0
+  [ 90/176   706 s] set 4 blob|even: f +7.703, -0.232, +4.357 %, shape 22.10 um, held +6.15 um, z 2.74, rms 0.381 px, rejected 327
+  [ 91/176   706 s] set 3 blob_open|even: f -66.771, -67.396, -66.776 %, shape 10635.88 um, held -16.84 um, z 1036.04, rms 2.081 px, rejected 253
+  [ 92/176   712 s] set 3 blob_open|side: f -68.536, -68.507, -68.193 %, shape 10632.75 um, held -9.60 um, z 1148.46, rms 2.114 px, rejected 185
+  [ 93/176   714 s] set 4 blob|highlight: f +6.998, -0.456, +4.598 %, shape 21.87 um, held +6.32 um, z 2.61, rms 0.383 px, rejected 345
+  [ 94/176   714 s] set 4 blob|side: f +7.831, -0.440, +4.078 %, shape 21.82 um, held +6.32 um, z 2.81, rms 0.382 px, rejected 295
+  [ 95/176   731 s] set 3 blob_open|highlight: f -68.401, -68.417, -67.941 %, shape 10631.35 um, held -11.00 um, z 1149.03, rms 2.114 px, rejected 187
+  [ 96/176   746 s] set 4 ellipse|even: f -0.251, +0.081, -0.236 %, shape 1.35 um, held +2.27 um, z 4.18, rms 0.022 px, rejected 483
+  [ 97/176   747 s] set 4 ellipse|backlit: f +0.340, +0.014, +0.166 %, shape 2.83 um, held -0.20 um, z 8.38, rms 0.027 px, rejected 100
+  [ 98/176   753 s] set 5 ideal_truth: f -0.005, +0.054, +0.070 %, shape 0.06 um, held +0.01 um, z 1.20, rms 0.021 px, rejected 1
+  [ 99/176   771 s] set 4 ellipse|highlight: f +0.407, +0.057, -0.075 %, shape 3.48 um, held +2.02 um, z 6.20, rms 0.074 px, rejected 188
+  [100/176   772 s] set 4 ellipse|side: f +0.105, +0.421, -0.084 %, shape 1.41 um, held +1.74 um, z 5.15, rms 0.026 px, rejected 464
+  [101/176   781 s] set 5 ideal: f -0.005, +0.054, +0.070 %, shape 0.06 um, held +0.01 um, z 1.20, rms 0.021 px, rejected 1
+  [102/176   781 s] set 5 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [103/176   786 s] set 4 ellipse_rodmask|highlight: f -0.157, +0.297, +0.324 %, shape 0.83 um, held -0.24 um, z 1.95, rms 0.161 px, rejected 3
+  [104/176   791 s] set 4 ellipse_rodmask|backlit: f +0.095, +0.015, +0.024 %, shape 0.17 um, held -0.09 um, z 1.66, rms 0.017 px, rejected 50
+  [105/176   793 s] set 4 ellipse_rodmask|even: f +0.105, +0.099, -0.007 %, shape 0.14 um, held -0.17 um, z 1.89, rms 0.017 px, rejected 43
+  [106/176   795 s] set 4 ellipse_rodmask|side: f +0.005, -0.012, +0.005 %, shape 0.43 um, held -0.11 um, z 3.18, rms 0.028 px, rejected 83
+  [107/176   814 s] set 4 pyopenlpt_fast|even: f +92.451, +18.862, +1.365 %, shape 94.48 um, held +18.07 um, z 1.84, rms 4.699 px, rejected 80
+  [108/176   840 s] set 4 pyopenlpt_fast|highlight: f -70.390, -69.804, -68.869 %, shape 10567.00 um, held +3.57 um, z 479.75, rms 4.840 px, rejected 61
+  [109/176   848 s] set 4 pyopenlpt_fast|backlit: f -65.058, -63.644, -64.757 %, shape 10565.03 um, held -0.31 um, z 657.01, rms 3.727 px, rejected 44
+  [110/176   853 s] set 5 blob_open|backlit: f +0.391, +0.585, +1.642 %, shape 20.64 um, held +0.13 um, z 9.15, rms 0.144 px, rejected 1
+  [111/176   865 s] set 5 blob|even: f +6.398, -1.374, +4.146 %, shape 21.83 um, held +1.69 um, z 2.54, rms 0.380 px, rejected 336
+  [112/176   875 s] set 5 blob|side: f +6.746, -1.497, +4.102 %, shape 21.75 um, held +1.70 um, z 2.62, rms 0.380 px, rejected 318
+  [113/176   878 s] set 5 blob|highlight: f +6.464, -1.496, +4.206 %, shape 21.66 um, held +1.77 um, z 2.61, rms 0.377 px, rejected 307
+  [114/176   898 s] set 4 blob_open|even: f -66.528, -67.341, -66.243 %, shape 10617.47 um, held +9.61 um, z 1004.52, rms 2.114 px, rejected 221
+  [115/176   900 s] set 4 blob_open|side: f -66.325, -67.266, -66.214 %, shape 10623.16 um, held +10.59 um, z 993.60, rms 2.107 px, rejected 278
+  [116/176   907 s] set 4 blob_open|highlight: f -66.187, -67.169, -66.026 %, shape 10618.99 um, held +9.82 um, z 1006.50, rms 2.112 px, rejected 230
+  [117/176   910 s] set 5 ellipse|backlit: f +0.107, +0.104, +0.408 %, shape 2.87 um, held -0.08 um, z 8.66, rms 0.027 px, rejected 91
+  [118/176   934 s] set 5 ellipse|even: f -0.001, +0.215, -0.216 %, shape 1.30 um, held -0.01 um, z 4.58, rms 0.026 px, rejected 348
+  [119/176   941 s] set 6 ideal_truth: f +0.027, +0.015, -0.051 %, shape 0.11 um, held +0.07 um, z 0.81, rms 0.022 px, rejected 0
+  [120/176   943 s] set 5 ellipse|side: f +0.182, +0.382, -0.066 %, shape 1.43 um, held +0.14 um, z 6.07, rms 0.029 px, rejected 460
+  [121/176   945 s] set 4 pyopenlpt_fast|side: f -70.179, -69.716, -68.419 %, shape 10551.51 um, held +15.59 um, z 491.03, rms 4.737 px, rejected 28
+  [122/176   956 s] set 5 ellipse|highlight: f +0.927, +0.983, +0.814 %, shape 3.56 um, held +1.16 um, z 8.18, rms 0.068 px, rejected 269
+  [123/176   960 s] set 6 ideal: f +0.027, +0.015, -0.051 %, shape 0.11 um, held +0.07 um, z 0.81, rms 0.022 px, rejected 0
+  [124/176   960 s] set 6 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [125/176   960 s] set 5 ellipse_rodmask|backlit: f +0.026, +0.022, +0.032 %, shape 0.13 um, held +0.00 um, z 1.47, rms 0.016 px, rejected 51
+  [126/176   970 s] set 5 pyopenlpt_fast|highlight: f -69.189, -68.874, -65.457 %, shape 10551.71 um, held -29.64 um, z 492.76, rms 4.766 px, rejected 89
+  [127/176   975 s] set 5 ellipse_rodmask|highlight: f -0.091, +0.600, +0.845 %, shape 0.99 um, held +0.28 um, z 2.81, rms 0.155 px, rejected 12
+  [128/176   977 s] set 5 pyopenlpt_fast|backlit: f -62.170, -62.254, -62.730 %, shape 10555.84 um, held +0.42 um, z 673.19, rms 3.761 px, rejected 40
+  [129/176   981 s] set 5 pyopenlpt_fast|side: f +25.860, +0.575, +10.033 %, shape 107.47 um, held -43.58 um, z 0.99, rms 4.572 px, rejected 84
+  [130/176   983 s] set 5 ellipse_rodmask|side: f -0.078, -0.074, -0.100 %, shape 0.42 um, held +0.13 um, z 2.93, rms 0.028 px, rejected 77
+  [131/176   984 s] set 5 pyopenlpt_fast|even: f +63.484, +11.135, -0.134 %, shape 105.44 um, held -54.22 um, z 1.55, rms 4.699 px, rejected 52
+  [132/176   986 s] set 5 ellipse_rodmask|even: f -0.003, +0.017, +0.031 %, shape 0.11 um, held -0.04 um, z 1.10, rms 0.017 px, rejected 68
+  [133/176  1016 s] set 5 blob_open|even: f -67.056, -67.320, -66.405 %, shape 10627.35 um, held +5.35 um, z 1032.39, rms 2.102 px, rejected 236
+  [134/176  1040 s] set 6 blob_open|backlit: f +1.041, +0.664, +1.076 %, shape 20.86 um, held -0.57 um, z 8.38, rms 0.145 px, rejected 0
+  [135/176  1042 s] set 6 blob|even: f +6.921, -0.156, +4.409 %, shape 22.44 um, held +4.68 um, z 2.37, rms 0.395 px, rejected 341
+  [136/176  1043 s] set 6 blob|side: f +7.391, -0.263, +4.015 %, shape 22.20 um, held +4.44 um, z 2.37, rms 0.400 px, rejected 341
+  [137/176  1056 s] set 6 blob|highlight: f +7.270, -0.106, +4.377 %, shape 22.50 um, held +4.53 um, z 2.42, rms 0.395 px, rejected 361
+  [138/176  1061 s] set 5 blob_open|highlight: f -67.093, -67.326, -66.372 %, shape 10626.17 um, held +4.98 um, z 1036.09, rms 2.098 px, rejected 227
+  [139/176  1063 s] set 6 ellipse|even: f -0.323, +0.119, -0.218 %, shape 1.39 um, held +0.86 um, z 4.03, rms 0.025 px, rejected 475
+  [140/176  1068 s] set 6 ellipse|backlit: f +0.249, +0.027, +0.264 %, shape 2.86 um, held -0.24 um, z 8.67, rms 0.026 px, rejected 133
+  [141/176  1069 s] set 5 blob_open|side: f -67.416, -67.484, -66.698 %, shape 10622.95 um, held +2.26 um, z 1042.41, rms 2.115 px, rejected 162
+  [142/176  1075 s] set 7 ideal_truth: f +0.011, -0.045, -0.080 %, shape 0.06 um, held +0.01 um, z 1.06, rms 0.021 px, rejected 0
+  [143/176  1093 s] set 6 ellipse|side: f -0.043, +0.268, -0.127 %, shape 1.52 um, held +1.20 um, z 5.01, rms 0.027 px, rejected 498
+  [144/176  1111 s] set 7 ideal: f +0.011, -0.045, -0.080 %, shape 0.06 um, held +0.01 um, z 1.06, rms 0.021 px, rejected 0
+  [145/176  1120 s] set 6 ellipse_rodmask|even: f +0.029, +0.086, +0.089 %, shape 0.09 um, held -0.09 um, z 1.27, rms 0.017 px, rejected 48
+  [146/176  1120 s] set 7 blob|backlit: FAILED ValueError('only 0 frames are seen whole by every camera; the affine start needs
+  [147/176  1121 s] set 6 ellipse|highlight: f +0.059, +0.680, +0.532 %, shape 3.44 um, held +0.37 um, z 6.36, rms 0.077 px, rejected 211
+  [148/176  1124 s] set 6 ellipse_rodmask|backlit: f +0.086, +0.044, +0.070 %, shape 0.15 um, held -0.03 um, z 1.37, rms 0.017 px, rejected 56
+  [149/176  1134 s] set 6 ellipse_rodmask|highlight: f +0.157, +0.971, +0.487 %, shape 0.84 um, held -0.04 um, z 1.77, rms 0.147 px, rejected 13
+  [150/176  1137 s] set 6 ellipse_rodmask|side: f +0.068, -0.093, -0.075 %, shape 0.37 um, held +0.17 um, z 2.71, rms 0.027 px, rejected 67
+  [151/176  1190 s] set 6 blob_open|side: f -68.795, -68.677, -69.016 %, shape 10617.58 um, held +12.75 um, z 1100.79, rms 2.134 px, rejected 180
+  [152/176  1191 s] set 6 pyopenlpt_fast|backlit: f -62.878, -63.003, -62.542 %, shape 10552.27 um, held -21.49 um, z 311.13, rms 3.515 px, rejected 31
+  [153/176  1192 s] set 6 blob_open|even: f -69.255, -68.822, -69.317 %, shape 10618.04 um, held +12.36 um, z 1106.20, rms 2.143 px, rejected 176
+  [154/176  1196 s] set 7 blob_open|backlit: f +0.481, +0.492, +1.603 %, shape 20.79 um, held +0.12 um, z 8.93, rms 0.147 px, rejected 0
+  [155/176  1199 s] set 6 blob_open|highlight: f -69.471, -69.076, -69.670 %, shape 10613.09 um, held +11.10 um, z 1132.00, rms 2.191 px, rejected 184
+  [156/176  1203 s] set 7 blob|side: f +9.184, +0.604, +4.418 %, shape 22.29 um, held +4.59 um, z 2.99, rms 0.380 px, rejected 448
+  [157/176  1204 s] set 7 blob|even: f +8.260, +0.750, +5.110 %, shape 22.24 um, held +4.70 um, z 2.85, rms 0.377 px, rejected 473
+  [158/176  1204 s] set 7 blob|highlight: f +8.503, +0.614, +5.184 %, shape 22.28 um, held +4.75 um, z 2.94, rms 0.372 px, rejected 480
+  [159/176  1257 s] set 6 pyopenlpt_fast|even: f +33.108, +30.808, +27.128 %, shape 110.71 um, held -32.35 um, z 1.49, rms 5.025 px, rejected 54
+  [160/176  1257 s] set 7 ellipse_rodmask|even: f +0.070, +0.040, -0.005 %, shape 0.12 um, held -0.04 um, z 1.70, rms 0.017 px, rejected 41
+  [161/176  1258 s] set 7 ellipse_rodmask|backlit: f -0.012, -0.023, -0.012 %, shape 0.11 um, held +0.03 um, z 1.50, rms 0.017 px, rejected 48
+  [162/176  1270 s] set 6 pyopenlpt_fast|side: f +56.258, +27.622, +13.550 %, shape 106.27 um, held -53.40 um, z 1.56, rms 4.825 px, rejected 64
+  [163/176  1273 s] set 7 ellipse|side: f -0.047, +0.278, -0.225 %, shape 1.56 um, held +1.03 um, z 4.79, rms 0.029 px, rejected 426
+  [164/176  1274 s] set 7 ellipse|even: f -0.164, +0.156, -0.277 %, shape 1.51 um, held +0.67 um, z 4.64, rms 0.026 px, rejected 354
+  [165/176  1274 s] set 7 ellipse|backlit: f +0.223, +0.130, +0.338 %, shape 2.89 um, held -0.13 um, z 8.27, rms 0.028 px, rejected 86
+  [166/176  1276 s] set 6 pyopenlpt_fast|highlight: f +67.737, +48.769, +26.962 %, shape 101.97 um, held -47.61 um, z 1.89, rms 4.958 px, rejected 52
+  [167/176  1279 s] set 7 ellipse|highlight: f +0.133, +0.029, +0.169 %, shape 3.44 um, held +1.04 um, z 5.38, rms 0.073 px, rejected 251
+  [168/176  1307 s] set 7 ellipse_rodmask|highlight: f +0.343, +0.841, +0.605 %, shape 0.86 um, held -0.62 um, z 2.47, rms 0.156 px, rejected 13
+  [169/176  1315 s] set 7 ellipse_rodmask|side: f +0.073, -0.127, -0.147 %, shape 0.40 um, held +0.06 um, z 3.03, rms 0.029 px, rejected 65
+  [170/176  1323 s] set 7 pyopenlpt_fast|backlit: f -61.926, -63.094, -62.888 %, shape 10558.26 um, held -10.93 um, z 660.88, rms 3.743 px, rejected 26
+  [171/176  1329 s] set 7 pyopenlpt_fast|even: f +107.385, +67.710, +16.670 %, shape 93.24 um, held +28.84 um, z 2.32, rms 4.581 px, rejected 44
+  [172/176  1346 s] set 7 pyopenlpt_fast|side: f +188.214, +54.482, +6.536 %, shape 99.61 um, held +8.07 um, z 2.33, rms 4.588 px, rejected 105
+  [173/176  1348 s] set 7 pyopenlpt_fast|highlight: f +64.145, +50.210, +11.731 %, shape 91.37 um, held +13.59 um, z 1.61, rms 4.898 px, rejected 61
+  [174/176  1350 s] set 7 blob_open|even: f -67.915, -68.014, -67.579 %, shape 10613.03 um, held +4.03 um, z 1030.10, rms 2.128 px, rejected 199
+  [175/176  1373 s] set 7 blob_open|side: f -67.925, -68.051, -67.578 %, shape 10612.98 um, held +5.07 um, z 1034.72, rms 2.118 px, rejected 197
+  [176/176  1377 s] set 7 blob_open|highlight: f -67.952, -68.119, -67.531 %, shape 10609.31 um, held +1.16 um, z 1030.99, rms 2.132 px, rejected 193
+
+Global minimum on this rig (ideal data, from scratch vs started at the truth):
+  set 0: RMS difference 1.7e-09 px, largest f difference 7.4e-08 -> same minimum
+  set 1: RMS difference 4.5e-12 px, largest f difference 1.3e-08 -> same minimum
+  set 2: RMS difference 3.0e-11 px, largest f difference 1.3e-08 -> same minimum
+  set 3: RMS difference 5.5e-11 px, largest f difference 9.1e-10 -> same minimum
+  set 4: RMS difference 4.0e-11 px, largest f difference 1.4e-08 -> same minimum
+  set 5: RMS difference 4.7e-13 px, largest f difference 6.0e-09 -> same minimum
+  set 6: RMS difference 1.0e-11 px, largest f difference 4.3e-08 -> same minimum
+  set 7: RMS difference 1.0e-10 px, largest f difference 4.4e-10 -> same minimum
+
+Results over the data sets (f: mean and RMS of the relative error per camera, with the mean's t; held-out wand length from the detector's centres: mean, t, RMS; from exact centres: RMS; 3-D shape and relative to the tube: RMS; z RMS; fit RMS; rejected)
+  ideal                          ok 8/8  f mean +0.003, -0.021, -0.019 % (t +0.1, -1.1, -0.9), RMS 0.060, 0.053, 0.057 % | held -0.00 um (t -0.0), RMS 0.50; exact 0.06 | shape 0.07, tube 9.4 um | z 1.11 | fit 0.021 px, rejected 0.0 %
+  pyopenlpt_fast|backlit         ok 8/8  f mean -62.750, -63.199, -63.124 % (t -113.8, -225.4, -200.3), RMS 62.767, 63.203, 63.130 % | held -0.77 um (t -0.2), RMS 144.95; exact 178.05 | shape 10558.41, tube 37287.9 um | z 558.30 | fit 3.697 px, rejected 1.1 %
+  pyopenlpt_fast|even            ok 8/8  f mean +29.520, +2.117, -10.122 % (t +1.2, +0.1, -0.8), RMS 69.503, 45.237, 36.371 % | held -11.79 um (t -1.1), RMS 198.23; exact 118.32 | shape 5287.01, tube 19774.8 um | z 234.12 | fit 4.784 px, rejected 2.1 %
+  pyopenlpt_fast|side            ok 8/8  f mean +37.997, -0.183, -3.033 % (t +1.3, -0.0, -0.2), RMS 87.046, 42.981, 40.885 % | held -17.29 um (t -1.9), RMS 223.24; exact 119.63 | shape 5280.98, tube 19759.5 um | z 237.88 | fit 4.685 px, rejected 2.4 %
+  pyopenlpt_fast|highlight       ok 8/8  f mean -7.371, -18.147, -24.611 % (t -0.3, -0.9, -1.4), RMS 63.568, 56.924, 51.704 % | held -5.93 um (t -0.5), RMS 209.93; exact 118.06 | shape 7476.62, tube 27721.9 um | z 335.28 | fit 4.876 px, rejected 2.5 %
+  blob|backlit                   all 8 calibrations failed: ValueError('only 0 frames are seen whole by every camera; the affine start needs 12')
+  blob|even                      ok 8/8  f mean +6.437, -0.522, +5.351 % (t +13.6, -2.0, +11.4), RMS 6.558, 0.875, 5.493 % | held +3.96 um (t +6.8), RMS 14.02; exact 23.45 | shape 22.50, tube 376.3 um | z 2.69 | fit 0.382 px, rejected 11.4 %
+  blob|side                      ok 8/8  f mean +6.770, -0.643, +5.047 % (t +11.4, -2.2, +11.9), RMS 6.950, 0.997, 5.171 % | held +3.92 um (t +6.2), RMS 14.04; exact 23.27 | shape 22.32, tube 378.5 um | z 2.71 | fit 0.382 px, rejected 11.5 %
+  blob|highlight                 ok 8/8  f mean +6.446, -0.544, +5.305 % (t +13.8, -2.1, +13.7), RMS 6.564, 0.882, 5.403 % | held +4.01 um (t +6.8), RMS 14.07; exact 23.38 | shape 22.41, tube 366.5 um | z 2.68 | fit 0.380 px, rejected 11.5 %
+  blob_open|backlit              ok 8/8  f mean +0.767, +0.382, +0.981 % (t +5.8, +4.6, +5.6), RMS 0.843, 0.442, 1.086 % | held -0.25 um (t -2.3), RMS 4.00; exact 20.55 | shape 20.73, tube 659.8 um | z 9.28 | fit 0.145 px, rejected 0.0 %
+  blob_open|even                 ok 8/8  f mean -67.816, -68.076, -67.836 % (t -144.9, -224.9, -137.1), RMS 67.828, 68.081, 67.848 % | held +3.83 um (t +1.0), RMS 96.87; exact 100.89 | shape 10620.66, tube 37711.0 um | z 1040.42 | fit 2.164 px, rejected 7.6 %
+  blob_open|side                 ok 8/8  f mean -67.981, -68.230, -68.076 % (t -135.2, -220.6, -128.7), RMS 67.994, 68.235, 68.090 % | held +4.67 um (t +1.6), RMS 96.10; exact 99.77 | shape 10621.24, tube 37906.5 um | z 1052.49 | fit 2.240 px, rejected 7.2 %
+  blob_open|highlight            ok 8/8  f mean -67.916, -68.164, -67.888 % (t -166.4, -261.0, -152.9), RMS 67.924, 68.168, 67.898 % | held +3.36 um (t +1.1), RMS 95.73; exact 100.75 | shape 10619.27, tube 37812.5 um | z 1047.49 | fit 2.152 px, rejected 7.3 %
+  ellipse|backlit                ok 8/8  f mean +0.253, +0.061, +0.283 % (t +6.9, +2.3, +10.6), RMS 0.271, 0.093, 0.292 % | held -0.13 um (t -6.2), RMS 0.71; exact 2.64 | shape 2.87, tube 129.0 um | z 8.78 | fit 0.026 px, rejected 3.6 %
+  ellipse|even                   ok 8/8  f mean -0.174, +0.138, -0.226 % (t -4.7, +8.2, -23.4), RMS 0.200, 0.145, 0.228 % | held +1.35 um (t +2.5), RMS 9.86; exact 1.05 | shape 1.31, tube 78.5 um | z 3.99 | fit 0.024 px, rejected 16.4 %
+  ellipse|side                   ok 8/8  f mean -0.004, +0.251, -0.195 % (t -0.1, +6.5, -5.8), RMS 0.090, 0.271, 0.214 % | held +1.29 um (t +2.4), RMS 9.75; exact 1.18 | shape 1.42, tube 92.8 um | z 4.73 | fit 0.028 px, rejected 17.4 %
+  ellipse|highlight              ok 8/8  f mean +0.285, +0.328, +0.325 % (t +2.6, +2.7, +2.7), RMS 0.405, 0.456, 0.451 % | held +1.23 um (t +3.4), RMS 10.64; exact 3.11 | shape 3.51, tube 194.2 um | z 6.60 | fit 0.073 px, rejected 8.3 %
+  ellipse_rodmask|backlit        ok 8/8  f mean +0.048, +0.032, +0.042 % (t +3.1, +1.9, +2.7), RMS 0.063, 0.055, 0.059 % | held -0.01 um (t -0.2), RMS 0.64; exact 0.10 | shape 0.13, tube 8.0 um | z 1.51 | fit 0.017 px, rejected 1.6 %
+  ellipse_rodmask|even           ok 8/8  f mean +0.055, +0.067, +0.031 % (t +1.9, +3.5, +1.8), RMS 0.094, 0.084, 0.054 % | held -0.05 um (t -2.1), RMS 0.67; exact 0.09 | shape 0.12, tube 10.3 um | z 1.61 | fit 0.017 px, rejected 1.8 %
+  ellipse_rodmask|side           ok 8/8  f mean +0.058, -0.048, -0.105 % (t +2.4, -1.9, -5.6), RMS 0.087, 0.081, 0.116 % | held +0.02 um (t +0.6), RMS 1.12; exact 0.26 | shape 0.39, tube 16.9 um | z 2.77 | fit 0.028 px, rejected 2.9 %
+  ellipse_rodmask|highlight      ok 8/8  f mean +0.100, +0.557, +0.548 % (t +1.4, +6.5, +9.6), RMS 0.208, 0.602, 0.569 % | held -0.09 um (t -0.9), RMS 2.66; exact 0.68 | shape 0.95, tube 75.2 um | z 2.45 | fit 0.157 px, rejected 0.3 %
+
+Criteria: |t| <= 3 for every camera's f and for the held-out wand length; z RMS <= 1.2
+  pyopenlpt_fast|backlit         fail
+  pyopenlpt_fast|even            fail
+  pyopenlpt_fast|side            fail
+  pyopenlpt_fast|highlight       fail
+  blob|backlit                   fail
+  blob|even                      fail
+  blob|side                      fail
+  blob|highlight                 fail
+  blob_open|backlit              fail
+  blob_open|even                 fail
+  blob_open|side                 fail
+  blob_open|highlight            fail
+  ellipse|backlit                fail
+  ellipse|even                   fail
+  ellipse|side                   fail
+  ellipse|highlight              fail
+  ellipse_rodmask|backlit        fail
+  ellipse_rodmask|even           fail
+  ellipse_rodmask|side           fail
+  ellipse_rodmask|highlight      fail
+
+done in 4102 s
