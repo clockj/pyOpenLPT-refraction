@@ -1,8 +1,15 @@
 # Wand calibration through flat windows (PINPLATE): report
 
-Date: 2026-10-02. Plan: `2026-10-02-plate-wand-plan.md` (approved 2026-10-02, the six inputs at their defaults).
-Working design, checklist and every deviation from the plan with its evidence: `2026-10-02-plate-wand-implementation.md`
-(sections 9–10). Summary and file index: `README.md`. Synthetic data only.
+Date: 2026-10-02; updated 2026-10-03.
+- **The update adds:**
+  - the restarts perturbed about the answer, with their own report `2026-10-03-perturbed-starts-report.md`;
+  - the W5 results with the restarts;
+  - a section on running a real experiment (section 6).
+- **Plan:** `2026-10-02-plate-wand-plan.md`, approved 2026-10-02 with the six inputs at their defaults.
+- **Working design, checklist and every deviation from the plan with its evidence:**
+  `2026-10-02-plate-wand-implementation.md`, sections 9–10.
+- **Summary and file index:** `README.md`.
+- **Synthetic data only.**
 
 **Your request:** "can you also try to improve the currect wand calibration algorithm for refractive plates? i think
 the previous gui calibration is slow and not very robust. are you able to develop a new algorithm for that? use your
@@ -10,7 +17,24 @@ successful experience on cylinder calibration"
 
 ## 1. Summary
 
-**Yes, for the rigs a flat-window experiment normally uses; not yet for two-camera rigs with long lenses.**
+**The conclusion, as of 3 Oct:**
+- **It is ready for a first real data set** on the rigs a flat-window experiment normally uses:
+  - one window, with any number of cameras;
+  - several windows, each seen by two or more cameras.
+- **It is not yet reliable** when a window is seen only by one or two long-lens cameras (f above about 13,000 px).
+- The evidence:
+  - **One window:** 37 of 37 random rigs reach the global minimum from scratch, at 0.1 and 1 px.
+  - **Several windows, each with two or more cameras:** 68 of 72 cases reach the global minimum, and 71 an equivalent
+    answer. These are W5's 12 such rigs, and R4's 30 new rigs at 0.5 and 1 px.
+  - **Every answer is as precise as the data allow** (W3), with honest error bars.
+  - **Against the GUI's calibration:** 63× faster, and more accurate on random rigs.
+  - **The one weak case:** all 4 wrong answers left in W5 have a window seen only by one or two long-lens cameras.
+    - Seeds 1001 and 1045 have a single camera of 24,000–29,000 px; seeds 1031 and 1034 a pair of 13,500–37,000 px.
+    - Such a window does not always fail: seed 1032, with a single camera of 35,600 px behind one window, reached the
+      global minimum.
+- What to do in a real experiment is in section 6.
+
+The details:
 - **What was built:** a calibration from wand data alone. It needs only:
   - the detections;
   - the wand length;
@@ -27,21 +51,39 @@ successful experience on cylinder calibration"
 - **From scratch:**
   - every one-window rig in W5 reached the global minimum: 37/37, at 0.1 and 1 px;
   - a median 35 s for 4 cameras and 1,000 frames, measured with the machine fully loaded;
-  - rigs with several windows: 11/13 with two or more cameras per window group, 1/3 with one camera per window at
-    0.1 px.
+  - **rigs with several windows** (W5, with the restarts):
+    - at 0.1 px, 11/13 with two or more cameras per window group and 1/3 with one camera per window;
+    - at 1 px, 7/10 in all, with 10/10 equivalent;
+    - about 2 minutes.
+  - **Rigs whose every window has two or more cameras:** 68 of 72 cases reach the global minimum (R4 adds 30 new rigs
+    at 0.5 and 1 px).
+- **A failure mode found and handled (3 Oct): answers pinned against a window.**
+  - On a multi-window rig, the final fit could stop with a wand end exactly on a window's water-side surface. It
+    rejects every step that would take a wand end out of the water.
+  - **How often:** 8 of the 14 multi-window misses in W5 and R4 were pinned, 6 of them at 1 px. None of the 69 answers
+    at the global minimum was.
+  - **The fix:** `calibrate` now restarts from four perturbations of its answer, and keeps a restart that is better on
+    the same terms.
+  - **Of the 8:** 3 reach the global minimum, 2 more an equivalent answer, and 2 that were already equivalent improved.
+    W5 seed 1034 improved, from 1.84 to 0.18 px, but is still wrong.
+  - **Cost:** a median 9–14 % more time. Nothing got worse in the 89 cases with restarts.
 - **Against the GUI's calibration on the same data (W6, 18 cases):**
   - 7–112x faster (median 63x): 38 s against 29 min (medians);
   - no failures, where the GUI failed both square-on cases;
   - the same accuracy on the reference rigs, although the GUI was handed the true focal lengths;
   - on the random rigs a 3-D shape error of 1.5 µm against 59 µm (medians), better on 9 of 10.
 - **What it does not solve:**
-  - **Two-camera configurations with long lenses:** a window seen by one or two narrow-view cameras. 4 of 60 W5 rigs
-    end in a wrong minimum, and 1 in a minimum 3.9 σ from the global one. All five have a window seen by at most two
-    cameras. Four of them have a camera with f of 24,000–37,000 px. The fifth (seed 2000) has two two-camera groups at
-    1 px noise.
+  - **A window seen only by one or two long-lens cameras:** W5 seeds 1001, 1031, 1034 and 1045, all at 0.1 px.
+    - Seeds 1001 and 1045 have a single camera of 24,000–29,000 px behind a window; 1031 and 1034 a pair of
+      13,500–37,000 px.
+    - Their costs have several wide minima, which the restarts do not leave.
+    - With moderate lenses a single camera behind a window was fine: the 5 W5 rigs with a single-camera window whose
+      lenses were all under 11,000 px reached the global minimum or an equivalent answer.
+    - Seed 2000, the fifth miss in the first run, was a pinned answer and is fixed.
   - **The free wand length is not identifiable through flat windows (W8).** The constants check that worked through
     the tube does not exist here.
-- **The plan's W5 target was not met:** 46/50 and 5/10 against ≥ 49/50 and 10/10. Section 5 says what would close it.
+- **The plan's W5 target is still not met:** 46/50 and 7/10 (10/10 equivalent), against ≥ 49/50 and 10/10. It was
+  5/10 at 1 px before the restarts. Section 5 says what would close it.
 
 ## 2. What was built
 
@@ -109,6 +151,12 @@ plate_wand_io.write_result(sol, folder)
    - Per-camera noise weights, except with two cameras (section 4).
    - Several starts when the first ones disagree. The answer is chosen among those within 1.5x the best RMS: most
      observations kept, then the likelihood.
+   - **Restarts about the answer** (rigs with several windows; added 3 Oct; `perturbed_restart`, `capped_cost`):
+     - four draws from the answer's covariance at 2σ;
+     - each screened by one bundle adjustment on the answer's observations and weights;
+     - the cheapest refitted, and kept when its cost is lower. That cost counts every usable observation, each capped
+       at the 5σ rejection limit;
+     - a second round follows when the restart is kept.
 5. **Output.**
    - The covariance, in the gauge where camera 1's pose is held.
    - Per-camera and per-window σ.
@@ -200,26 +248,38 @@ The stage-3 spacing follows: a 9° grid on a 50° cap and 3 offsets.
 `calibrate` gets placeholder window planes. Success means reaching the minimum of the fit started from the truth on the
 same data: every parameter within 0.01 σ, the same active set, and the RMS within 1e-6.
 
+With the restarts (W5 rerun on 3 Oct; the first run in brackets):
+
 | rig kind | 0.1 px: same minimum | 1 px: same / equivalent | time (median) |
 |---|---|---|---|
 | one window | 34/34 | 3/3 / 3/3 | 35 s for 4 cameras (20–79 s, 2–6 cameras) |
-| several windows, camera groups | 11/13 | 2/4 / 3/4 | 121 s |
-| several windows, one camera each | 1/3 | 0/3 / 3/3 | 121 s |
-| all | **46/50** | **5/10 / 9/10** | |
+| several windows, camera groups | 11/13 | 3/4 / 4/4 (2/4 / 3/4) | 121 s, + 8 s for the restarts |
+| several windows, one camera each | 1/3 | 1/3 / 3/3 (0/3 / 3/3) | 121 s, + 8 s |
+| all | **46/50** | **7/10 / 10/10** (5/10 / 9/10) | |
 
 "Equivalent" means every parameter within 3 σ of the reference and the RMS within 2 %, or a lower RMS.
 
-The timings were taken with 16 W5 processes and the GUI runs of W6 sharing 32 cores.
+The first run's timings were taken with 16 W5 processes and the GUI runs of W6 sharing 32 cores. The restarts' time is
+measured within the rerun.
 
 **The misses** (`w5_from_scratch_out.txt`). All have a window seen by at most two cameras, and most have long lenses:
 
 | seed | cameras per window | f (px) | result |
 |---|---|---|---|
-| 1001 | 1, 1 (9° and 44°) | 12,300 and 24,500 | a nearby minimum, RMS +2 %. Window 2 is barely determined even at the truth (σ 2.1°, 438 mm) |
+| 1001 | 1, 1 (9° and 44°) | 12,300 and 24,500 | a nearby minimum, RMS +2 % (the restarts: +1.8 %). Window 2 is barely determined even at the truth (σ 2.1°, 438 mm) |
 | 1045 | 1, 1 (33° and 37°) | 12,700 and 29,100 | RMS 0.35 against 0.086 px |
-| 1031 | 2, 1 | 6,400–31,700 | the two-camera group (13,500 and 31,700 px) cannot be calibrated on its own; 5.3 px |
-| 1034 | 2, 1, 1 | 4,400–37,200 | 1.8 px |
-| 2000 (1 px) | 2, 2 | 2,000–11,000 | 3.9 σ from the global minimum, RMS +0.3 % |
+| 1031 | 2, 1 | 6,400–31,700 | the two-camera group (13,500 and 31,700 px) cannot be calibrated on its own; 5.3 px (the restarts: 3.6 px) |
+| 1034 | 2, 1, 1 | 4,400–37,200 | 1.8 px, pinned against window 1 (the restarts free it into another wrong minimum: 0.18 px against 0.12) |
+| 2000 (1 px) | 2, 2 | 2,000–11,000 | 3.9 σ from the global minimum, RMS +0.3 %: pinned against window 1. **Fixed by the restarts** |
+
+- **The restarts on 30 new rigs with two or more cameras on every window** (R4: 0.5 and 1 px, 60 cases):
+  - 57 reach the global minimum (55 without the restarts), and 59 an equivalent answer;
+  - the one wrong answer, seed 3110 at 1 px, was not pinned.
+- **A pinned answer has a wand end exactly on a window's water-side surface,** at a depth of 3e-13 to 9e-10 mm. The
+  final fit rejects any step that would take a wand end out of the water, so it stops there.
+  - Pinning marked 8 of the 14 multi-window misses, and none of the 69 answers at the global minimum.
+  - 6 of the 8 were at 1 px.
+- The details: `2026-10-03-perturbed-starts-report.md`.
 
 ### 3.6 Against the GUI's calibration (W6)
 
@@ -364,26 +424,108 @@ Each item is detailed with its evidence in the implementation doc, section 10. T
 
   The last two also apply to `cylinder_wand.refine`, which was not changed. They are logged in
   `tests/cylinder_wand/README.md`, open item 7.
+- **After this report (3 Oct): restarts perturbed about the answer** on rigs with several windows.
+  - Their plan is `2026-10-02-perturbed-starts-plan.md` and their report `2026-10-03-perturbed-starts-report.md`.
+  - A restart is kept when its cost over every observation, capped at the 5σ rejection limit, is lower. It is not
+    judged by the choice among starts, which blocked a found fix (R4 seed 3111).
 
 ## 5. Limitations and what would close them
 
-1. **Two-camera configurations with long lenses (W5's misses).**
-   - With one or two narrow-view cameras behind a window, the window's tilt changes the images only weakly. The cost
-     then has several minima, and even the right one can be poorly determined (seed 1001: σ 2.1° and 438 mm).
+1. **A window seen only by one or two long-lens cameras (W5's remaining misses: 1001, 1031, 1034, 1045).**
+   - With only narrow-view cameras behind a window, the window's tilt changes the images only weakly. The cost then has
+     several wide minima, and even the right one can be poorly determined (seed 1001: σ 2.1° and 438 mm).
+   - The restarts do not leave these minima: their draws, at 2σ of a wrong answer's covariance, return to it.
    - What would help, in order of cost:
      - a rough hint: the window's normal within about 20°, or a camera's distance within about 50%. W4 shows the final
        fit then converges;
-     - a third camera behind the window;
+     - another camera behind the window;
      - a pairwise start built for this case.
    - The error bars already warn: a weak window shows a large σ.
-2. **No constants check through flat windows** (W8). A wand of independently measured length is the only check of the
+2. **Pinned answers: handled, at a cost.** The restarts fix most of them (section 3.5).
+   - **What remains:**
+     - one pinned miss, W5 seed 1034, freed into another wrong minimum;
+     - on large rigs, two rounds of restarts can cost as much as the rest of the calibration (R4 seed 3111: 194 s);
+       capping the screens' iterations would reduce that;
+     - a warning in the report when a wand end lies on a window's surface is not written yet.
+   - Rigs with two cameras at 1 px (W5 seeds 2004 and 2005) can stay pinned at their best fit. They end at or below
+     the truth-started fit's RMS, so the data themselves hold the window only loosely.
+3. **No constants check through flat windows** (W8). A wand of independently measured length is the only check of the
    scale.
-3. **Synthetic only.** Real detections bring patterns fixed to each image (the cylinder's T11e), blob-centre biases and
+4. **Synthetic only.** Real detections bring patterns fixed to each image (the cylinder's T11e), blob-centre biases and
    wand bending, none of which was tested.
-4. **The GUI integration is not done.** It is a separate step for your approval. `view.py`'s refractive path would call
+5. **The GUI integration is not done.** It is a separate step for your approval. `view.py`'s refractive path would call
    `plate_wand.calibrate` and write the camFiles where the GUI expects them, with the current path kept as an option.
 
-## 6. Reproducing
+## 6. For a real experiment
+
+**How to run it today.** The GUI does not call it yet.
+1. Export the wand detections from the GUI (its wand CSV).
+2. Write a rig file, with:
+   - each window's plate thicknesses and indices, from the camera side;
+   - which camera looks through which window;
+   - each camera's image size;
+   - the wand length.
+
+   The format is in `README.md`, section 2.
+3. Run `plate_wand_io.calibrate_csv("wand.csv", "rig.json", "out")`.
+   - It writes PINPLATE camFiles, which pyOpenLPT's C++ camera loads (W9).
+   - It also writes `calibration_result.json` and `calibration_report.txt`.
+
+**The rig**
+- **Measure the wand length independently, to 0.1 % or better.** It is the only scale, and nothing in the wand data
+  checks it (W8).
+- **Enter the windows' thicknesses and indices as well as you know them.** They are not critical: a plate 10 % too thick
+  or a water index 0.002 off moved the 3-D shape error by at most 1 µm (W8).
+- **Put two or more cameras behind every window, and do not leave a window to long lenses alone.**
+  - Rigs with two or more cameras on every window reached the global minimum in 68 of 72 cases, and an equivalent
+    answer in 71 (W5, R4).
+  - Every wrong answer left in W5 has a window seen only by one or two cameras of 13,500–37,000 px.
+  - If a window must have a single camera, keep the lenses moderate. The 5 W5 rigs with a single-camera window whose
+    lenses were all under 11,000 px reached the global minimum or an equivalent answer.
+- **Spread the cameras' lines of sight: 20° or more apart, 35–40° better.**
+  - Cameras 5° apart give 2× the f error and 3.5× the 3-D error of cameras 20° apart (`p_mixed_views.py`).
+  - A camera looking straight through the window costs nothing, and steep views up to 45° are fine.
+  - Views through two perpendicular walls give the best shape (W2, rig B).
+- **If the lenses may distort, fit k1** (`fit_k1=True`). An unmodelled k1 barely raises the residual RMS (+0.3–0.4 %),
+  but raises the 3-D error 1.3–1.9× (W8).
+- **Make the wand's two ends distinguishable,** for example by ball size. Occasional swaps are rejected (W7).
+
+**The recording**
+- **Move the wand through the whole volume you will measure in,** over its full depth from each camera. The shape error
+  doubles at twice the calibrated volume (W2).
+- **Record about 1,000 frames** with both ends seen by at least two cameras; the tests used 500–1,500.
+  - The start needs at least 12 frames that show the whole wand in two or more cameras.
+  - With several windows, include frames seen through two windows at once: the window groups are joined on them, and
+    need at least 3.
+- **Keep the detection noise low, ideally near 0.1 px:** sharp focus, short exposure, well-lit balls.
+  - Every error scales with the noise (W3).
+  - The multi-window failures cluster at high noise. 6 of the 8 pinned answers came at 1 px, and at 0.1 px every W5 rig
+    with two or more cameras on every window reached the global minimum (8 of 8).
+- **Synchronise the cameras,** or move the wand slowly.
+
+**Checking the result** (`calibration_report.txt`; the RMS alone can hide a model error)
+- **Each camera's noise** should match the detector's, measured on a still wand over many frames. Clearly more points
+  to model error, motion or synchronisation.
+- **The windows' and cameras' σ:** a normal uncertain by degrees, or a distance by tens of mm, marks a weakly held
+  window. Add a camera behind it, or record more depth.
+- **The restarts line, with several windows.**
+  - "IMPROVED" means the first answer was a wrong minimum; the answer written is the improved one.
+  - Each window's nearest wand end before each round is in `calibration_result.json`
+    (`info.starts.perturbed.rounds[k].min_depth_mm`).
+  - A value near 0 that remains, with a large σ for that window, means the data hold that window loosely. More cameras
+    behind it or less detection noise would help.
+- **Validate the scale on something of known size,** such as a second wand of measured length or a dot target. The
+  report's free-triangulation wand length checks only the frames' internal consistency, and `fit_L` is no check (W8).
+- **Plot each camera's residuals over the image.** A pattern fixed to the image hides in the RMS (cylinder T11e).
+- **For the first data set** (W10, not yet run): run this calibration and the GUI's on the same wand CSV, and compare:
+  - each camera's noise;
+  - the free-triangulation wand length;
+  - a known target.
+
+  Calibrating each half of the frames on its own and comparing the cameras within their σ is a further check. It is
+  not part of these tests.
+
+## 7. Reproducing
 
 ```
 python tests/plate_wand/w0_sympy_derivations.py                          # base python (sympy)
@@ -391,7 +533,9 @@ C:\Users\zcloc\.conda\envs\refract\python.exe tests/plate_wand/w0_model_vs_cpp.p
                                     # w2_observability, w3_noise_free, w9_files: seconds each
 ... w3_monte_carlo.py, w4_basin.py, w5_from_scratch.py, w7_bad_data.py, w8_constants.py   # parallel: 2-10 min each
 ... w6_vs_gui.py prepare | run | evaluate                                 # run: about an hour (the GUI's runs)
-pytest tests/test_plate_wand.py                                           # 6 fast checks; -m slow: one from scratch
+... r1_sizing.py, r2_draws.py, r4_group_rigs.py (10 min); r3_compare.py, r5_compare.py and r7_acceptance.py after
+    w5_from_scratch.py and w7_bad_data.py                                 # the restarts (3 Oct)
+pytest tests/test_plate_wand.py                                           # 8 fast checks; -m slow: two from scratch
 ```
 
 `PLATE_WORKERS` sets the parallel scripts' process count (default 32).

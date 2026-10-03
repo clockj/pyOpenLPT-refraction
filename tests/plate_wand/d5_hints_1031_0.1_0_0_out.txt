@@ -1,0 +1,169 @@
+D5 seed 1031 (0.1 px), hints off by 0 deg, draw 0: 3 cameras, windows [0, 1, 0], f 13526, 6388, 31672 px, incidence 6, 41, 45 deg; truth-started fit rms 0.10921 px
+
+1. Hints in the search's frame (pinhole starts aligned to the truth by their wand points)
+  whole-rig pinhole start (mirror True, rms 12.675 px, alignment 1.26 mm): cam 1: hint 4.0 deg, default guess 3.8 deg; cam 2: hint 2.0 deg, default guess 28.4 deg; cam 3: hint 3.1 deg, default guess 32.9 deg
+  window 1 group [1, 3] pinhole start (mirror False, rms 3.578 px, alignment 2.15 mm): cam 1: hint 6.5 deg, default guess 2.6 deg; cam 3: hint 5.3 deg, default guess 37.1 deg; the window's hinted normal 5.9 deg
+
+2. The bootstrap (its log), then every start and where stage 4 takes it
+  -- search length
+        LM   0: rms 3.750516 px, lambda 3.3e-04, ok
+        LM   1: rms 3.701323 px, lambda 1.1e-04, ok
+        LM   2: rms 3.686703 px, lambda 3.7e-05, ok
+        LM   3: rms 3.682604 px, lambda 1.2e-05, ok
+        LM   4: rms 3.677911 px, lambda 1.1e-05, ok
+        LM   5: rms 3.672160 px, lambda 9.6e-06, ok
+        LM   6: rms 3.667040 px, lambda 9.0e-06, ok
+        LM   7: rms 3.661950 px, lambda 8.1e-06, ok
+        LM   8: rms 3.657690 px, lambda 7.6e-06, ok
+        LM   9: rms 3.653822 px, lambda 7.0e-06, ok
+        LM  10: rms 3.650588 px, lambda 6.5e-06, ok
+        LM  11: rms 3.647755 px, lambda 5.9e-06, ok
+        LM  12: rms 3.645354 px, lambda 5.4e-06, ok
+        LM  13: rms 3.643244 px, lambda 4.8e-06, ok
+        LM  14: rms 3.641387 px, lambda 4.3e-06, ok
+        LM  15: rms 3.639680 px, lambda 3.7e-06, ok
+        LM  16: rms 3.638058 px, lambda 3.1e-06, ok
+        LM  17: rms 3.636414 px, lambda 2.5e-06, ok
+        LM  18: rms 3.634640 px, lambda 1.9e-06, ok
+        LM  19: rms 3.632552 px, lambda 1.4e-06, ok
+        LM  20: rms 3.629857 px, lambda 8.7e-07, ok
+        LM  21: rms 3.625970 px, lambda 4.7e-07, ok
+        LM  22: rms 3.619805 px, lambda 2.5e-07, ok
+        LM  23: rms 3.612215 px, lambda 2.3e-07, ok
+        LM  24: rms 3.603429 px, lambda 2.0e-07, ok
+        LM  25: rms 3.596486 px, lambda 1.8e-07, ok
+        LM  26: rms 3.589940 px, lambda 1.6e-07, ok
+        LM  27: rms 3.585320 px, lambda 1.5e-07, ok
+        LM  28: rms 3.581869 px, lambda 1.2e-07, ok
+        LM  29: rms 3.579814 px, lambda 9.5e-08, ok
+        LM  30: rms 3.578649 px, lambda 6.2e-08, ok
+        LM  31: rms 3.578163 px, lambda 3.5e-08, ok
+        LM  32: rms 3.578013 px, lambda 1.2e-08, ok
+        LM  33: rms 3.577993 px, lambda 3.9e-09, ok
+        LM  34: rms 3.577992 px, lambda 1.3e-09, ok
+        LM  35: rms 3.577992 px, lambda 4.3e-10, ok
+        LM  36: rms 3.577992 px, lambda 1.4e-10, ok
+        LM  37: rms 3.577992 px, lambda 4.8e-11, ok
+        LM  38: rms 3.577992 px, lambda 1.6e-11, ok
+        LM  39: rms 3.577992 px, lambda 5.3e-12, ok
+        LM  40: rms 3.577992 px, lambda 1.8e-12, ok
+        LM  41: rms 3.577992 px, lambda 5.9e-13, ok
+        LM  42: rms 3.577992 px, lambda 2.0e-13, ok
+        LM  43: rms 3.577992 px, lambda 6.6e-14, ok
+        LM  44: rms 3.577992 px, lambda 2.2e-14, ok
+        LM  45: rms 3.577992 px, lambda 7.3e-15, ok
+        LM  46: rms 3.577992 px, lambda 2.4e-15, ok
+        LM  47: rms 3.577992 px, lambda 8.1e-16, ok
+        LM  48: rms 3.577992 px, lambda 2.8e-13, ok
+        LM  49: rms 3.577992 px, lambda 4.1e-07, ok
+        LM  50: rms 3.577992 px, lambda 1.4e-07, ok
+        LM  51: rms 3.577992 px, lambda 4.1e+16, stuck
+      round 0: rms 3.57799 px, 52 LM iterations, rejected 0, re-admitted 0
+      pinhole start, mirror False: rms 3.578 px, active 1200/1200
+        coarse round 0: rms 3.2097 px, nfev 28, step 7.2e-07
+        coarse round 1: rms 3.2097 px, nfev 17, step 7.1e-07
+        coarse round 2: rms 3.2097 px, nfev 13, step 9.4e-05
+        coarse round 3: rms 3.2097 px, nfev 21, step 1.1e-14
+      start (mirror False, combination [0]): coarse rms 3.2097 px
+        coarse round 0: rms 3.2095 px, nfev 23, step 6.5e-16
+      start (mirror False, combination [1]): coarse rms 3.2095 px
+        coarse round 0: rms 3.2098 px, nfev 40, step 3.7e-02
+        coarse round 1: rms 3.2098 px, nfev 20, step 5.7e-06
+        coarse round 2: rms 3.2098 px, nfev 16, step 2.6e-06
+        coarse round 3: rms 3.2098 px, nfev 14, step 3.3e-06
+      start (mirror False, combination [2]): coarse rms 3.2098 px
+      window 1 group [1, 3]: rms 2.8672 px
+    3 starts; info: {"method": "window groups", "search": "length", "groups": {"0": {"cameras": [0, 2], "rms_px": 2.867231512964271, "bootstrap_seconds": {"pinhole": 0.2360830307006836, "window_search": 26.3692524433136, "coarse_fit": 0.9315476417541504, "total": 27.536883115768433}, "hint_won": [true]}, "single_cam2": {"window": 1, "scores": [1686.8601128551768, 1686.8604569596914, 1686.8605483252231, 1904.4609279948484], "hint": true, "best_from_hint": false}}, "reference_window": 0, "starts": 3, "seconds": {"total": 48.740641593933105}}
+  -- search fixed
+        LM   0: rms 3.750516 px, lambda 3.3e-04, ok
+        LM   1: rms 3.701323 px, lambda 1.1e-04, ok
+        LM   2: rms 3.686703 px, lambda 3.7e-05, ok
+        LM   3: rms 3.682604 px, lambda 1.2e-05, ok
+        LM   4: rms 3.677911 px, lambda 1.1e-05, ok
+        LM   5: rms 3.672160 px, lambda 9.6e-06, ok
+        LM   6: rms 3.667040 px, lambda 9.0e-06, ok
+        LM   7: rms 3.661950 px, lambda 8.1e-06, ok
+        LM   8: rms 3.657690 px, lambda 7.6e-06, ok
+        LM   9: rms 3.653822 px, lambda 7.0e-06, ok
+        LM  10: rms 3.650588 px, lambda 6.5e-06, ok
+        LM  11: rms 3.647755 px, lambda 5.9e-06, ok
+        LM  12: rms 3.645354 px, lambda 5.4e-06, ok
+        LM  13: rms 3.643244 px, lambda 4.8e-06, ok
+        LM  14: rms 3.641387 px, lambda 4.3e-06, ok
+        LM  15: rms 3.639680 px, lambda 3.7e-06, ok
+        LM  16: rms 3.638058 px, lambda 3.1e-06, ok
+        LM  17: rms 3.636414 px, lambda 2.5e-06, ok
+        LM  18: rms 3.634640 px, lambda 1.9e-06, ok
+        LM  19: rms 3.632552 px, lambda 1.4e-06, ok
+        LM  20: rms 3.629857 px, lambda 8.7e-07, ok
+        LM  21: rms 3.625970 px, lambda 4.7e-07, ok
+        LM  22: rms 3.619805 px, lambda 2.5e-07, ok
+        LM  23: rms 3.612215 px, lambda 2.3e-07, ok
+        LM  24: rms 3.603429 px, lambda 2.0e-07, ok
+        LM  25: rms 3.596486 px, lambda 1.8e-07, ok
+        LM  26: rms 3.589940 px, lambda 1.6e-07, ok
+        LM  27: rms 3.585320 px, lambda 1.5e-07, ok
+        LM  28: rms 3.581869 px, lambda 1.2e-07, ok
+        LM  29: rms 3.579814 px, lambda 9.5e-08, ok
+        LM  30: rms 3.578649 px, lambda 6.2e-08, ok
+        LM  31: rms 3.578163 px, lambda 3.5e-08, ok
+        LM  32: rms 3.578013 px, lambda 1.2e-08, ok
+        LM  33: rms 3.577993 px, lambda 3.9e-09, ok
+        LM  34: rms 3.577992 px, lambda 1.3e-09, ok
+        LM  35: rms 3.577992 px, lambda 4.3e-10, ok
+        LM  36: rms 3.577992 px, lambda 1.4e-10, ok
+        LM  37: rms 3.577992 px, lambda 4.8e-11, ok
+        LM  38: rms 3.577992 px, lambda 1.6e-11, ok
+        LM  39: rms 3.577992 px, lambda 5.3e-12, ok
+        LM  40: rms 3.577992 px, lambda 1.8e-12, ok
+        LM  41: rms 3.577992 px, lambda 5.9e-13, ok
+        LM  42: rms 3.577992 px, lambda 2.0e-13, ok
+        LM  43: rms 3.577992 px, lambda 6.6e-14, ok
+        LM  44: rms 3.577992 px, lambda 2.2e-14, ok
+        LM  45: rms 3.577992 px, lambda 7.3e-15, ok
+        LM  46: rms 3.577992 px, lambda 2.4e-15, ok
+        LM  47: rms 3.577992 px, lambda 8.1e-16, ok
+        LM  48: rms 3.577992 px, lambda 2.8e-13, ok
+        LM  49: rms 3.577992 px, lambda 4.1e-07, ok
+        LM  50: rms 3.577992 px, lambda 1.4e-07, ok
+        LM  51: rms 3.577992 px, lambda 4.1e+16, stuck
+      round 0: rms 3.57799 px, 52 LM iterations, rejected 0, re-admitted 0
+      pinhole start, mirror False: rms 3.578 px, active 1200/1200
+        window 1 candidate: 0.8 deg from the guess, d -656.5: quick 500.2, full 7.378
+        window 1 candidate: 8.8 deg from the guess, d -620.9: quick 470, full 15.09
+        window 1 candidate: 5.1 deg from the guess, d -656.3: quick 475.6, full 19.31
+        window 1 candidate: 15.7 deg from the guess, d -655.2: quick 466.5, full 7.695
+        window 1 candidate: 18.5 deg from the guess, d -648.2: quick 436.6, full 7.71
+        window 1 candidate: 17.5 deg from the guess, d -653.3: quick 455.1, full 14.66
+        coarse round 0: rms 4.0486 px, nfev 40, step 4.5e-01
+        coarse round 1: rms 4.0486 px, nfev 40, step 2.7e-08
+        coarse round 2: rms 4.0486 px, nfev 25, step 1.2e-16
+      start (mirror False, combination [0]): coarse rms 4.0486 px
+        coarse round 0: rms 3.9213 px, nfev 40, step 4.4e-01
+        coarse round 1: rms 3.9213 px, nfev 34, step 3.4e-08
+        coarse round 2: rms 3.9213 px, nfev 20, step 1.6e-11
+      start (mirror False, combination [1]): coarse rms 3.9213 px
+        coarse round 0: rms 3.2097 px, nfev 40, step 2.8e-01
+        coarse round 1: rms 3.2097 px, nfev 21, step 6.8e-05
+        coarse round 2: rms 3.2097 px, nfev 14, step 1.1e-05
+        coarse round 3: rms 3.2097 px, nfev 22, step 3.7e-06
+      start (mirror False, combination [2]): coarse rms 3.2097 px
+      window 1 group [1, 3]: rms 2.8673 px
+        window 2 candidate: 38.2 deg from the guess, d -466.6: quick 1618, full 1068
+        window 2 candidate: 38.2 deg from the guess, d -466.6: quick 1314, full 1068
+        window 2 candidate: 36.1 deg from the guess, d -120.1: quick 1483, full 1089
+        window 2 candidate: 12.8 deg from the guess, d -122.0: quick 1269, full 1093
+        window 2 candidate: 12.7 deg from the guess, d -118.5: quick 748.7, full 1094
+        window 2 candidate: 12.9 deg from the guess, d -126.4: quick 1265, full 1099
+    3 starts; info: {"method": "window groups", "search": "fixed", "groups": {"0": {"cameras": [0, 2], "rms_px": 2.8673028032492622, "bootstrap_seconds": {"pinhole": 0.2646510601043701, "window_search": 5.457953214645386, "coarse_fit": 1.6034986972808838, "total": 7.32610297203064}, "hint_won": [false]}, "single_cam2": {"window": 1, "scores": [1068.319521445343, 1068.3195233634476, 1089.3669414486594], "hint": true, "best_from_hint": false}}, "reference_window": 0, "starts": 3, "seconds": {"total": 13.426949739456177}}
+  bootstrap 62 s, 6 starts (the searches' starts taken in turn)
+  start 0 (length): coarse cost 1687, rms 3.829 px; windows 21.9, 38.7 deg off, cameras' f -26, +6, +5 %, rotations 0.0, 17.6, 2.8 deg -> stage 4 rms 3.616413 (different, max |z| 1.7e+03 win2.a), windows 21.92, 38.56 deg off, active 3557/3588
+  start 1 (fixed): coarse cost 1735, rms 3.908 px; windows 21.9, 37.3 deg off, cameras' f -26, +16, +5 %, rotations 0.0, 16.5, 2.8 deg -> stage 4 rms 3.926645 (different, max |z| 1.6e+03 win2.a), windows 21.93, 37.42 deg off, active 3537/3588
+  start 2 (length): coarse cost 1687, rms 3.829 px; windows 21.9, 38.7 deg off, cameras' f -26, +6, +5 %, rotations 0.0, 17.6, 2.8 deg -> stage 4 rms 3.616410 (different, max |z| 1.7e+03 win2.a), windows 21.92, 38.56 deg off, active 3557/3588
+  start 3 (fixed): coarse cost 1735, rms 3.908 px; windows 21.9, 37.3 deg off, cameras' f -26, +16, +5 %, rotations 0.0, 16.5, 2.8 deg -> stage 4 rms 3.922103 (different, max |z| 1.6e+03 win2.a), windows 21.93, 37.42 deg off, active 3536/3588
+  start 4 (length): coarse cost 1687, rms 3.829 px; windows 21.9, 38.7 deg off, cameras' f -26, +6, +5 %, rotations 0.0, 17.6, 2.8 deg -> stage 4 rms 3.616409 (different, max |z| 1.7e+03 win2.a), windows 21.92, 38.56 deg off, active 3557/3588
+  start 5 (fixed): coarse cost 2035, rms 4.474 px; windows 21.9, 13.4 deg off, cameras' f -26, +82, +5 %, rotations 0.0, 7.0, 2.8 deg -> stage 4 rms 5.645903 (different, max |z| 1.9e+03 cam2.C2), windows 22.39, 10.26 deg off, active 3488/3588
+
+3. calibrate fits starts [0, 1, 2, 3, 4, 5]; it chooses start 4 (rms 3.616409, a different minimum) before the restarts
+   starts whose stage 4 reaches the truth-started fit's minimum: none
+total 122 s

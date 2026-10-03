@@ -1,0 +1,47 @@
+D6: the final fit's basin on the failed cases: one weak window's normal tilted (2, 5, 10, 20) deg from the truth (4 directions each), then coarse_fit and solve
+seed 1001 (0.1 px), window 1 (cameras [1], f 12323 px):
+  tilt  2 deg: 0/4 the same minimum: equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg)
+  tilt  5 deg: 0/4 the same minimum: equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg)
+  tilt 10 deg: 0/4 the same minimum: equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg)
+  tilt 20 deg: 0/4 the same minimum: equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg); equiv. (0.08595, w1 0.07 deg)
+seed 1001 (0.1 px), window 2 (cameras [2], f 24485 px):
+  tilt  2 deg: 0/4 the same minimum: equiv. (0.08595, w2 0.25 deg); equiv. (0.08595, w2 0.25 deg); equiv. (0.08595, w2 0.21 deg); equiv. (0.08595, w2 0.21 deg)
+  tilt  5 deg: 0/4 the same minimum: equiv. (0.08595, w2 0.21 deg); equiv. (0.08595, w2 0.38 deg); equiv. (0.08595, w2 0.18 deg); equiv. (0.08595, w2 0.40 deg)
+  tilt 10 deg: 0/4 the same minimum: equiv. (0.08595, w2 0.23 deg); equiv. (0.08595, w2 0.36 deg); equiv. (0.08595, w2 0.42 deg); equiv. (0.08595, w2 0.52 deg)
+  tilt 20 deg: 0/4 the same minimum: equiv. (0.08595, w2 0.61 deg); equiv. (0.08605, w2 0.65 deg); equiv. (0.08595, w2 0.41 deg); equiv. (0.08595, w2 0.34 deg)
+seed 1031 (0.1 px), window 1 (cameras [1, 3], f 13526, 31672 px):
+  tilt  2 deg: 4/4 the same minimum: same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg)
+  tilt  5 deg: 4/4 the same minimum: same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg)
+  tilt 10 deg: 4/4 the same minimum: same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg)
+  tilt 20 deg: 4/4 the same minimum: same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg); same (0.10921, w1 0.10 deg)
+seed 1031 (0.1 px), window 2 (cameras [2], f 6388 px):
+  tilt  2 deg: 4/4 the same minimum: same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg)
+  tilt  5 deg: 4/4 the same minimum: same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg)
+  tilt 10 deg: 4/4 the same minimum: same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg)
+  tilt 20 deg: 4/4 the same minimum: same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg); same (0.10921, w2 0.02 deg)
+seed 1034 (0.1 px), window 1 (cameras [1, 4], f 28170, 37170 px):
+  tilt  2 deg: 4/4 the same minimum: same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg)
+  tilt  5 deg: 4/4 the same minimum: same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg)
+  tilt 10 deg: 4/4 the same minimum: same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg)
+  tilt 20 deg: 4/4 the same minimum: same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg); same (0.11751, w1 0.02 deg)
+seed 1034 (0.1 px), window 3 (cameras [3], f 23266 px):
+  tilt  2 deg: 4/4 the same minimum: same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg)
+  tilt  5 deg: 4/4 the same minimum: same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg)
+  tilt 10 deg: 4/4 the same minimum: same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg)
+  tilt 20 deg: 4/4 the same minimum: same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg); same (0.11751, w3 0.31 deg)
+seed 1045 (0.1 px), window 1 (cameras [1], f 29095 px):
+  tilt  2 deg: 4/4 the same minimum: same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg)
+  tilt  5 deg: 4/4 the same minimum: same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg)
+  tilt 10 deg: 4/4 the same minimum: same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg)
+  tilt 20 deg: 3/4 the same minimum: same (0.08615, w1 0.17 deg); equiv. (0.08615, w1 0.30 deg); same (0.08615, w1 0.17 deg); same (0.08615, w1 0.17 deg)
+seed 1045 (0.1 px), window 2 (cameras [2], f 12698 px):
+  tilt  2 deg: 4/4 the same minimum: same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg)
+  tilt  5 deg: 4/4 the same minimum: same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg)
+  tilt 10 deg: 4/4 the same minimum: same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg)
+  tilt 20 deg: 4/4 the same minimum: same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg); same (0.08615, w2 0.07 deg)
+seed 3110 (1 px), window 1 (cameras [1, 4], f 20682, 16353 px):
+  tilt  2 deg: 4/4 the same minimum: same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg)
+  tilt  5 deg: 4/4 the same minimum: same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg)
+  tilt 10 deg: 4/4 the same minimum: same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg)
+  tilt 20 deg: 4/4 the same minimum: same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg); same (1.25515, w1 1.76 deg)
+wall time 170 s

@@ -15,6 +15,11 @@ error of a free triangulation (mm).
 Frame of the outputs: plate_wand.to_output_frame's (Z along window 1's normal, camera -> water; Y along n1 x n2 with two
 windows, else camera 1's image up in the window's plane; the origin at the wand's mean position).  The sigmas are those
 of the fit's gauge (camera 1's pose held).
+
+**Warnings** (`assess`): the result's "warnings" and the report's WARNINGS block name what the tests associate with a
+wrong or a weak answer -- a window seen only by one or two narrow-view cameras, an answer pinned against a window, a
+hint far from the answer, cameras that all look the same way, high noise on a multi-window rig, few frames, a fitted
+wand length -- each with its evidence and what to do (tests/plate_wand/2026-10-03-angles-and-hints-report.md).
 """
 from __future__ import annotations
 
@@ -124,7 +129,9 @@ def write_gui_csv(path: str, uv: np.ndarray, radii=(4.0, 6.0), frame_ids=None, c
 class RigConfig:
     """windows: [{"name": "front", "thickness_mm": [12.7], "n": [1.0, 1.49, 1.333]}] (indices camera side first);
     cam_to_window: per camera the window index (-1: none); cameras: [{"name", "width", "height", "pixel_mm"}];
-    hints (optional): {"f": [px per camera or null], "f_prior_rel": sigma}."""
+    hints (optional): {"f": [px per camera or null], "f_prior_rel": sigma, "normals": [per camera null or the normal
+    of its window in the camera's own frame (x along the image rows, y down, z along the optical axis), e.g.
+    [0.5, 0, 0.866] for a camera turned 30 deg to the left of square-on; a rough guess is enough]}."""
 
     windows: List[Dict]
     cam_to_window: List[int]
@@ -193,6 +200,85 @@ def load_camfile(path: str) -> Tuple[pm.Camera, pm.Window]:
     """(Camera, Window) of a PINPLATE camFile, through the C++ loader."""
     lpt = pm.import_lpt()
     return pm.from_cpp(lpt.Camera(path))
+
+
+# ------------------------------------------------------------------ warnings: when to doubt the answer
+WEAK_VIEW_DEG = pw.WEAK_VIEW_DEG   # a window whose one or two cameras all see the wand under less than this
+PINNED_MM = 1e-6             # a wand end this close to a window's water-side surface: the answer may be pinned
+HINT_FAR_DEG = 15.0          # a hinted normal this far from the answer's
+SAME_WAY_DEG = 10.0          # every two cameras' lines of sight closer than this (rig C: 5 deg)
+NOISY_PX = 0.5               # noise per coordinate above which multi-window rigs went wrong more often
+FEW_FRAMES = 300             # active frames below this (the tests used 500-1,500)
+
+
+def view_angles_deg(sol: pw.Solution) -> List[Optional[float]]:
+    """Per camera, the angle under which it sees the wand (plate_wand.view_angles_deg)."""
+    return pw.view_angles_deg(sol.cams, sol.obs)
+
+
+def assess(sol: pw.Solution, names: Sequence[str] = None) -> List[Dict]:
+    """What the tests associate with a wrong or weak answer, found in this one: [{"code", "text", ...}], empty when
+    nothing is.  Each text gives the evidence (tests/plate_wand/) and what to do.  Codes: weak_window, pinned,
+    hint_far, same_way, noisy, few_frames, wand_length_fitted."""
+    n = len(sol.cams)
+    names = list(names) if names is not None else [f"cam{c + 1}" for c in range(n)]
+    out = []
+    ang = view_angles_deg(sol)
+    used = [w for w in range(len(sol.rig.windows)) if sol.rig.cams_of(w)]
+    scanned = {s["window"]: s for s in ((sol.info.get("scan") or {}).get("windows") or [])}
+    for w in pw.weak_windows(sol.cams, sol.rig, sol.obs):
+        cs = sol.rig.cams_of(w)
+        a = [ang[c] for c in cs]
+        sc = scanned.get(w)
+        done = ("" if sc is None else " The calibration scanned this window's normal" + (
+            " and found a better answer (used)." if sc.get("accepted") else " and found nothing better."))
+        out.append({"code": "weak_window", "window": w, "cameras": cs, "view_deg": a, "text": (
+            f"window {w + 1} is seen only by {' and '.join(names[c] for c in cs)}, which see the wand under "
+            f"{' and '.join(f'{x:.1f}' for x in a)} deg (a long lens or a far camera): its tilt shows only weakly, and "
+            f"the cost can have several minima. Every wrong answer in the tests had such a window (W5 and R4: 5 of the "
+            f"22 cases with one, none of the 98 without).{done} Check this window's sigma below. The remedy is a camera "
+            f"with a wider view behind it; window-normal hints help when accurate.")})
+    depths = pw.window_depths(sol.cams, sol.rig, sol.frames, sol.L, sol.obs)
+    for w, d in enumerate(depths):
+        if d is not None and d < PINNED_MM:
+            out.append({"code": "pinned", "window": w, "min_depth_mm": d, "text": (
+                f"a wand end lies on window {w + 1}'s water-side surface ({d:.1e} mm deep): the fit may be pinned "
+                f"against the window rather than at a minimum. 8 of the 14 wrong multi-window answers in the tests "
+                f"were, none of the 69 right ones. Less detection noise or more cameras behind the window help.")})
+    off = (sol.info.get("hints") or {}).get("normals_off_deg") or []
+    far = [(c, a) for c, a in enumerate(off) if a is not None and a > HINT_FAR_DEG]
+    if far:
+        out.append({"code": "hint_far", "cameras": [c for c, _a in far], "off_deg": [a for _c, a in far], "text": (
+            "the answer's window normal is " + ", ".join(f"{a:.1f} deg from {names[c]}'s hint" for c, a in far)
+            + ": either the hint is off by that much, or the answer is wrong. If you trust the hint to better than "
+              "that, doubt the answer.")})
+    if n >= 2:
+        axes = [cam.R[2] for cam in sol.cams]
+        spread = max(math.degrees(math.acos(min(1.0, abs(float(a @ b))))) for i, a in enumerate(axes)
+                     for b in axes[i + 1:])
+        if spread < SAME_WAY_DEG:
+            out.append({"code": "same_way", "spread_deg": spread, "text": (
+                f"every camera's line of sight is within {spread:.1f} deg of the others (as lines): the cameras see "
+                f"the wand from nearly one direction, so f, the distances and the 3-D shape are poorly determined "
+                f"(rig C, 5 deg apart: 3-9x worse than lines of sight 20-40 deg apart). Spread the cameras.")})
+    if len(used) >= 2 and sol.sigma_px > NOISY_PX:
+        out.append({"code": "noisy", "sigma_px": sol.sigma_px, "text": (
+            f"the residuals are {sol.sigma_px:.2f} px per coordinate on a rig with several windows. If your detections "
+            f"are that noisy: in the tests, answers pinned against a window came mostly at 1 px (6 of 8), and so did "
+            f"R4's one wrong answer left; aim for about 0.1 px (sharp focus, short exposure, bright balls). If they are "
+            f"much less noisy (a still wand imaged over many frames shows it), the answer itself is probably wrong: a "
+            f"wrong minimum leaves large residuals (W5 seed 1031 without hints: 3.6 px RMS from 0.1 px detections).")})
+    act = np.zeros(sol.obs.n_frames, bool)
+    act[sol.obs.frame[sol.obs.active]] = True
+    if int(act.sum()) < FEW_FRAMES:
+        out.append({"code": "few_frames", "frames": int(act.sum()), "text": (
+            f"only {int(act.sum())} frames used: the tests used 500-1,500. Record about 1,000 frames over the whole "
+            f"volume.")})
+    if sol.layout.fit_L:
+        out.append({"code": "wand_length_fitted", "text": (
+            "the wand length was fitted: through flat windows it is not identifiable (W8: 9-91 mm for a 25 mm wand), "
+            "so the scale is not checked. Give the measured length.")})
+    return out
 
 
 # ------------------------------------------------------------------ result
@@ -349,7 +435,7 @@ def write_result(sol: pw.Solution, folder: str, names: Sequence[str] = None, pix
         "frames_dropped": stats["frames_dropped"],
         "frames_with_rejected_detections": stats["frames_with_rejected_detections"],
         "noise": noise_summary(sol, names), "predicted": predicted_precision(sol),
-        "info": {k: v for k, v in sol.info.items() if _jsonable(v)}}
+        "warnings": assess(sol, names), "info": {k: v for k, v in sol.info.items() if _jsonable(v)}}
     if sol.layout.fit_L and sol.cov is not None:
         result["L_sigma_mm"] = math.sqrt(sol.cov[sol.layout.L_index, sol.layout.L_index])
     if extra:
@@ -369,6 +455,23 @@ def _jsonable(v) -> bool:
         return False
 
 
+def _perturbed_line(pt: Dict) -> str:
+    """The report's line on the restarts perturbed about the answer (plate_wand.perturbed_restart)."""
+    rounds = pt.get("rounds") or []
+    n = sum(r.get("screened", 0) for r in rounds)
+    head = f"restarts perturbed about the answer: {n} draws at {pt['scale']:g} sigma in {len(rounds)} round(s); "
+    if any(r.get("skipped") for r in rounds):
+        return head + "skipped (" + "; ".join(r["skipped"] for r in rounds if r.get("skipped")) + ")"
+    if pt.get("improved"):
+        return head + (f"the answer IMPROVED, rms {pt['rms_before_px']:.5f} -> {pt['rms_px']:.5f} px (its start had "
+                       f"ended in a wrong minimum)")
+    lost = [r for r in rounds if r.get("rms_after_px") is not None]
+    if lost:
+        return head + (f"a restart refitted to rms {lost[0]['rms_after_px']:.5f} px was not better on the same terms "
+                       f"(capped cost {lost[0].get('capped_rel', float('nan')):+.1e}); the answer stands")
+    return head + "none lowered the cost; the answer stands"
+
+
 def report_text(res: Dict) -> str:
     wl = res["wand_length_free_triangulation"]
     out = [f"Flat-window wand calibration (PINPLATE), {len(res['cameras'])} cameras, {len(res['windows'])} window(s)",
@@ -379,8 +482,50 @@ def report_text(res: Dict) -> str:
            f"wand length, free triangulation: mean error {wl['mean_mm'] * 1e3:+.2f} um, RMS {wl['rms_mm'] * 1e3:.2f} um "
            f"over {wl['frames']} frames",
            f"frames dropped: {len(res['frames_dropped'])}; frames with some detections rejected: "
-           f"{len(res['frames_with_rejected_detections'])}",
-           f"frame: {res['frame']}", f"gauge: {res['gauge']}", ""]
+           f"{len(res['frames_with_rejected_detections'])}"]
+    warns = res.get("warnings")
+    if warns is not None:
+        out.append(f"WARNINGS ({len(warns)}):" if warns else "warnings: none (nothing the tests associate with a wrong "
+                                                             "or weak answer)")
+        out += [f"  - {x['text']}" for x in warns]
+    pt = ((res.get("info") or {}).get("starts") or {}).get("perturbed")
+    if pt:
+        out.append(_perturbed_line(pt))
+    hh = (res.get("info") or {}).get("hints") or {}
+    off = hh.get("normals_off_deg")
+    if off and any(a is not None for a in off):
+        line = ("window-normal hints: the answer's normals are " + ", ".join(f"{a:.1f}" for a in off if a is not None)
+                + f" deg from them (cameras {', '.join(str(c + 1) for c, a in enumerate(off) if a is not None)}; a "
+                  "large angle means a rough hint or a wrong answer)")
+        names = {"default": "the start without hints", "held": "the hint-held start",
+                 "searched": "the hint-searched start"}
+        for nm, p in (hh.get("paths") or {}).items():
+            lab = names.get(nm, nm)
+            if p.get("error"):
+                line += f"; {lab} failed ({p['error']})"
+            elif p.get("same_as"):
+                line += f"; {lab} reached the same minimum as {names.get(p['same_as'], p['same_as'])}"
+            elif p.get("rms_px") is not None:
+                line += (f"; {lab} ended at rms {p['rms_px']:.5f} px"
+                         + (f" (capped cost {p['capped_rel']:+.1e} relative to the answer without hints)"
+                            if p.get("capped_rel") is not None else ""))
+        if hh.get("chosen"):
+            line += f"; the answer is from {names.get(hh['chosen'], hh['chosen'])}"
+        out.append(line)
+    sc = (res.get("info") or {}).get("scan")
+    if sc:
+        parts = []
+        for s in sc.get("windows") or []:
+            p = f"window {s['window'] + 1}: "
+            if s.get("skipped"):
+                p += f"skipped ({s['skipped']})"
+            else:
+                p += (f"{s.get('fitted', 0)} of {s.get('points', 0)} normals fitted, {len(s.get('released') or [])} "
+                      f"released, " + (f"the answer IMPROVED to rms {s['rms_px']:.5f} px" if s.get("accepted")
+                                       else "nothing better"))
+            parts.append(p)
+        out.append(f"scan of the weakly seen windows' normals ({sc['seconds']:.0f} s): " + "; ".join(parts))
+    out += [f"frame: {res['frame']}", f"gauge: {res['gauge']}", ""]
     for k, w in enumerate(res["windows"]):
         s = w["sigma"] or {}
         out.append(f"window {k + 1} ({w['name'] or 'unnamed'}): normal ({w['normal'][0]:+.6f}, {w['normal'][1]:+.6f}, "

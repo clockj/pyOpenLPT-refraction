@@ -179,6 +179,12 @@ def w5_records(w5):
                                      "ref_rms_px", "max_abs_z", "worst", "active", "active_ref", "ok", "equivalent")}
         rec["bootstrap_s"] = (r.get("timing") or {}).get("bootstrap", {}).get("total")
         rec["stage4_s"] = (r.get("timing") or {}).get("stage4")
+        pt = (r.get("starts") or {}).get("perturbed")
+        if pt:                                    # the restarts perturbed about the answer (rigs with several walls)
+            rnds = pt.get("rounds") or []
+            dep = [x for x in (rnds[0].get("min_depth_mm") or []) if x is not None] if rnds else []
+            rec["restarts"] = {"improved": bool(pt.get("improved")), "rms_before": pt.get("rms_before_px"),
+                               "seconds": pt.get("seconds"), "pinned": bool(dep and min(dep) < 0.1)}
         rec["geo"] = geo
         out.append(rec)
     return out

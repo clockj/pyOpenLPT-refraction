@@ -6,7 +6,15 @@ of its checks (`-m "not slow"` skips the calibration from scratch):
   * its derivatives, and the bundle adjustment's Jacobian, against central differences (W1);
   * noiseless recovery from the truth and from a perturbed start (W3);
   * the camFile and CSV round trips (W9);
-  * slow: a calibration from scratch reaches the same minimum as one started at the truth (W5, rig D).
+  * the perturbed restarts' draws: deterministic, camera 1's pose held, every observation projecting, their spread
+    (R2 of tests/plate_wand/2026-10-02-perturbed-starts-plan.md);
+  * the window-normal hints: their conversion into a pinhole camera's frame, a held normal in the fit, the
+    hint-searched start's merge and how far apart two answers are (`answers_apart`); slow: a calibration with hints
+    10 deg off runs the hinted start paths and reaches the global minimum (2026-10-03-angles-and-hints-plan.md);
+  * weakly seen windows: the rule, the tilt the scan uses, and the report's warnings; slow: the scan of a weak
+    window's normal brings W5 seed 1001 to the global minimum without hints (H4);
+  * slow: a calibration from scratch reaches the same minimum as one started at the truth (W5, rig D), and the
+    perturbed restarts free W5 seed 2000's answer, pinned against a window (R6).
 The modules are imported from their folder directly, so the GUI package (Qt) is not loaded.
 """
 import math
@@ -161,6 +169,259 @@ def test_files_roundtrip(tmp_path):
     pio.write_gui_csv(str(tmp_path / "wand.csv"), wand.uv)
     back = pio.read_gui_csv(str(tmp_path / "wand.csv"))
     assert np.nanmax(np.abs(back.uv - wand.uv)) < 1e-6
+
+
+def test_perturbed_draws():
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 150, np.random.default_rng(8), noise_px=0.3)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    sol = pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win))
+    seed = pw._perturb_seed(data)
+    assert seed == pw._perturb_seed(pw.WandData(wand.uv.copy(), wand.L, rig_t.sizes))
+    draws, left_out = pw.perturbed_draws(sol, sol.obs, 400, 2.0, np.random.default_rng(seed))
+    again, _ = pw.perturbed_draws(sol, sol.obs, 5, 2.0, np.random.default_rng(seed))
+    assert left_out == 0 and len(draws) == 400
+    assert all(np.array_equal(a["dx"], b["dx"]) for a, b in zip(draws, again))
+    rows = np.flatnonzero(sol.obs.active)
+    for d in draws[:20]:
+        assert np.array_equal(d["cams"][0].R, sol.cams[0].R) and np.array_equal(d["cams"][0].C, sol.cams[0].C)
+        assert pw.evaluate(d["cams"], d["rig"], d["frames"], d["L"], sol.obs, rows=rows).ok.all()
+    ratio = np.std([d["dx"] for d in draws], axis=0, ddof=1) / (2.0 * np.sqrt(np.diag(sol.cov)))
+    assert np.all(np.abs(ratio - 1.0) < 0.2), ratio
+
+
+def test_capped_cost():
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 150, np.random.default_rng(8), noise_px=0.3)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    sol = pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win),
+                   noise_weights="none")
+    obs = sol.obs
+    r2 = np.sum(pw.evaluate(sol.cams, sol.rig, sol.frames, sol.L, obs).r ** 2, axis=1)
+    s02 = sol.sigma_px ** 2
+    cap = 25.0 * s02
+    assert r2.max() < cap                                       # nothing near the cap: the plain sum
+    assert pw.capped_cost(sol, obs, None, s02) == pytest.approx(float(r2.sum()), rel=1e-12)
+    out = pw.Obs(obs.frame, obs.cam, obs.end, obs.uv.copy(), obs.n_frames, obs.n_cams, obs.frame_ids, obs.active)
+    out.uv[0] += 100.0                                          # an outlier counts the cap
+    assert pw.capped_cost(sol, out, None, s02) == pytest.approx(float(r2.sum() - r2[0] + cap), rel=1e-12)
+    w0 = sol.rig.windows[0]                                     # window 1 moved behind its cameras: none projects
+    d_bad = min(float(w0.n @ sol.cams[c].C) for c in sol.rig.cams_of(0)) - 1.0
+    rig2 = pw.Rig([pm.Window(w0.n, d_bad, w0.t, w0.idx)] + [w.copy() for w in sol.rig.windows[1:]], sol.rig.cam_win)
+    bad = np.isin(obs.cam, sol.rig.cams_of(0))
+    sol2 = pw.Solution(sol.cams, rig2, sol.frames, sol.L, obs, sol.layout)
+    assert pw.capped_cost(sol2, obs, None, s02) == pytest.approx(float(r2[~bad].sum() + cap * bad.sum()), rel=1e-12)
+
+
+def test_window_normal_hints():
+    """A hinted normal (in its camera's frame) turned into its pinhole camera's frame is the inverse of
+    small_angle_camera, for either sign; several cameras' hints average; a camera turned 30 deg to the left sees
+    (sin 30, 0, cos 30) (the docstrings' example); a held normal (a hint-held start) stays put in the fit while its
+    window's offset moves, and the other window stays free."""
+    rng = np.random.default_rng(11)
+    for _ in range(20):
+        n = rng.normal(size=3)
+        win = pm.Window(n, float(rng.uniform(-50, 50)), (12.7,), (1.0, 1.49, 1.333))
+        cams_p = []
+        for _k in range(2):
+            e = np.cross(win.n, rng.normal(size=3))
+            e /= np.linalg.norm(e)
+            th = math.radians(rng.uniform(2.0, 40.0))            # the chief ray in the water, from the normal
+            dw = math.cos(th) * win.n + math.sin(th) * e
+            cam_p = pm.Camera(prigs.look_dir(dw, roll_deg=float(rng.uniform(-180, 180))), win.d * win.n - 600.0 * dw,
+                              3000.0, 639.5, 399.5, 1280, 800)
+            c = pw.small_angle_camera(cam_p, win)
+            v = c.R @ win.n
+            assert np.allclose(pw.hint_to_frame(v, cam_p, win), win.n, atol=1e-12)
+            assert np.allclose(pw.hint_to_frame(-3.0 * v, cam_p, win), win.n, atol=1e-12)
+            cams_p.append((cam_p, v))
+        hints = {"normals": [cams_p[0][1], None, cams_p[1][1]]}
+        got = pw.hinted_normal(hints, [0, 2], {0: cams_p[0][0], 2: cams_p[1][0]}, win)
+        assert np.allclose(got, win.n, atol=1e-12)
+        assert pw.hinted_normal(hints, [1], {1: cams_p[0][0]}, win) is None
+        assert pw.hinted_normal({}, [0], {0: cams_p[0][0]}, win) is None
+    a = math.radians(30.0)
+    assert prigs.look_dir([0.0, 0.0, 1.0])[0][0] < 0             # looking along +Z, the image's left is +X ...
+    R = prigs.look_dir([math.sin(a), 0.0, math.cos(a)])          # ... so this camera is turned 30 deg to the left
+    assert np.allclose(R @ np.array([0.0, 0.0, 1.0]), [0.5, 0.0, math.cos(a)], atol=1e-12)
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 150, np.random.default_rng(8), noise_px=0.1)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    w0, w1 = rig_t.wins
+    n_held = pm.retract_normal(w0.n, (0.01, -0.02))                # 1.3 deg off, as a rough hint
+    w1_off = pm.Window(pm.retract_normal(w1.n, (0.005, 0.0)), w1.d, w1.t, w1.idx)
+    start = pw.Rig([pm.Window(n_held, w0.d + 2.0, w0.t, w0.idx), w1_off], rig_t.cam_win)
+    sol = pw.solve(data, [c.copy() for c in rig_t.cams], start, held_normals=(0,), noise_weights="none")
+    assert np.allclose(sol.rig.windows[0].n, n_held, atol=1e-14)    # held
+    assert abs(sol.rig.windows[0].d - (w0.d + 2.0)) > 0.1            # its offset was fitted
+    assert pw.Layout(4, 2, held_normals=(0,)).wpos[0].tolist()[:2] == [-1, -1]
+    ws = pw.window_sigmas(sol.cams, sol.rig, sol.layout, sol.cov)
+    assert ws[0].get("normal_held") and ws[0]["offset_mm"] > 0 and ws[1]["normal_deg"] > 0
+    assert prigs.compare_wins([sol.rig.windows[1]], [w1_off])[0]["normal_deg"] > 0.05    # the other one is free
+
+
+def test_hint_paths_helpers():
+    """The hint-searched start's merge keeps every default candidate, by score, and drops a hint candidate that
+    repeats one (normal within 1 deg, plane within 5 % of the camera's distance); `answers_apart` is 0 for one answer,
+    tiny for the same minimum reached from another start, and large for another state of the rig."""
+    win = pm.Window([0.0, 0.0, 1.0], 100.0, (12.7,), (1.0, 1.49, 1.333))
+    cam = pm.Camera(np.eye(3), np.array([0.0, 0.0, -400.0]), 3000.0, 639.5, 399.5, 1280, 800)
+    tilted = pm.Window(pm.retract_normal(win.n, (0.2, 0.0)), 100.0, win.t, win.idx)
+    base = [(1.0, win, {0: cam}), (3.0, tilted, {0: cam})]
+    repeat = (0.5, pm.Window(pm.retract_normal(win.n, (0.01, 0.0)), 101.0, win.t, win.idx), {0: cam})  # 0.6 deg, 1 mm
+    other = pm.Window(pm.retract_normal(win.n, (0.0, 0.1)), 100.0, win.t, win.idx)                     # 5.7 deg
+    merged, from_hint = pw._merge_hinted(base, [repeat, (2.0, other, {0: cam})])
+    assert [m[0] for m in merged] == [1.0, 2.0, 3.0] and merged[1][1] is other and not from_hint
+    merged, from_hint = pw._merge_hinted(base, [(0.5, other, {0: cam})])
+    assert [m[0] for m in merged] == [0.5, 1.0, 3.0] and from_hint
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 150, np.random.default_rng(8), noise_px=0.3)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    sol = pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win),
+                   noise_weights="none")
+    s02 = sol.sigma_px ** 2
+    assert pw.answers_apart(sol, sol, sol.obs, None, s02) == 0.0
+    cams2 = [c.copy() for c in rig_t.cams]
+    cams2[1].f *= 1.01
+    cams2[2].C = cams2[2].C + np.array([1.0, -1.0, 0.5])
+    sol2 = pw.solve(data, cams2, pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win), noise_weights="none")
+    assert pw.answers_apart(sol, sol2, sol.obs, None, s02) < 1e-2                  # the same minimum
+    w0 = sol.rig.windows[0]
+    moved = pw.Rig([pm.Window(pm.retract_normal(w0.n, (0.01, 0.0)), w0.d, w0.t, w0.idx)] + sol.rig.windows[1:],
+                   sol.rig.cam_win)
+    sol3 = pw.Solution(sol.cams, moved, sol.frames, sol.L, sol.obs, sol.layout)
+    assert pw.answers_apart(sol, sol3, sol.obs, None, s02) > 100.0                # window 1 turned 0.6 deg
+
+
+def _truth_solution(rig_t, n_frames, seed, sigma_px=0.1):
+    """A Solution at the truth, not fitted: the true cameras, windows and wand frames, every observation active."""
+    wand = prigs.make_wand(rig_t, n_frames, np.random.default_rng(seed), noise_px=0.1)
+    obs = pw.observations(pw.WandData(wand.uv, wand.L, rig_t.sizes))
+    rig = pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win)
+    sol = pw.Solution([c.copy() for c in rig_t.cams], rig, pw.frames_from_ends(wand.XA[obs.frame_ids],
+                                                                                 wand.XB[obs.frame_ids]),
+                      wand.L, obs, pw.Layout(len(rig_t.cams), len(rig.windows)))
+    sol.sigma_px = sigma_px
+    return sol
+
+
+def test_warnings(tmp_path):
+    """Each warning of the report (plate_wand_io.assess) on a case built for it, none on a sound rig, and the WARNINGS
+    block in calibration_report.txt."""
+    def codes(s):
+        return [x["code"] for x in pio.assess(s)]
+    sol = _truth_solution(prigs.rig_B(), 400, 8)
+    assert codes(sol) == []                                         # two windows, two moderate lenses each
+    sol.sigma_px = 1.0
+    assert codes(sol) == ["noisy"]
+    sol.sigma_px = 0.1
+    sol.info["hints"] = {"normals_off_deg": [20.0, 2.0, None, 1.0]}
+    w = pio.assess(sol)
+    assert [x["code"] for x in w] == ["hint_far"] and w[0]["cameras"] == [0]
+    sol.info = {}
+    d0 = pw.window_depths(sol.cams, sol.rig, sol.frames, sol.L, sol.obs)[0]
+    w0 = sol.rig.windows[0]                                         # window 1 moved onto its nearest wand end
+    sol.rig = pw.Rig([pm.Window(w0.n, w0.d + d0, w0.t, w0.idx)] + sol.rig.windows[1:], sol.rig.cam_win)
+    w = pio.assess(sol)
+    assert [x["code"] for x in w] == ["pinned"] and w[0]["window"] == 0
+    assert codes(_truth_solution(prigs.rig_C(), 400, 8)) == ["same_way"]          # three cameras 5 deg apart
+    weak = pio.assess(_truth_solution(prigs.random_rig(np.random.default_rng(1001)), 400, 8))
+    assert {x["code"] for x in weak} == {"weak_window"}                  # W5 seed 1001: one camera per window ...
+    assert any(x["window"] == 1 and x["view_deg"][0] < 3.0 for x in weak)  # ... window 2's of 24,500 px
+    sol = _truth_solution(prigs.rig_A(), 150, 8)
+    sol.layout = pw.Layout(len(sol.cams), 1, fit_L=True)
+    assert codes(sol) == ["few_frames", "wand_length_fitted"]
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 150, np.random.default_rng(8), noise_px=0.1)
+    fit = pw.solve(pw.WandData(wand.uv, wand.L, rig_t.sizes), [c.copy() for c in rig_t.cams],
+                   pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win))
+    res = pio.write_result(fit, str(tmp_path))
+    assert [x["code"] for x in res["warnings"]] == ["few_frames"]
+    text = (tmp_path / "calibration_report.txt").read_text(encoding="utf-8")
+    assert "WARNINGS (1):" in text and "frames used" in text
+
+
+def test_weak_windows_and_tilt():
+    """The weak-window rule (one or two cameras that all see the wand under less than 6 deg): none on rig B, window 2
+    of W5 seed 1001's rig (one camera of 24,500 px); a window tilted for the scan keeps every active wand end at least
+    as deep in the water as before, its plane turned about the anchor otherwise."""
+    sol = _truth_solution(prigs.rig_B(), 400, 8)
+    assert pw.weak_windows(sol.cams, sol.rig, sol.obs) == []
+    assert all(4.0 < a < 60.0 for a in pw.view_angles_deg(sol.cams, sol.obs))
+    s1001 = _truth_solution(prigs.random_rig(np.random.default_rng(1001)), 400, 8)
+    assert pw.weak_windows(s1001.cams, s1001.rig, s1001.obs) == [1]
+    for w in (0, 1):
+        win = sol.rig.windows[w]
+        sel = sol.obs.active & np.isin(sol.obs.cam, sol.rig.cams_of(w))
+        XA, XB = sol.frames.ends(sol.L)
+        X = np.where((sol.obs.end[sel] == 0)[:, None], XA[sol.obs.frame[sel]], XB[sol.obs.frame[sel]])
+        d0 = float(np.min(win.depth(X)))
+        for ab in ((0.05, 0.0), (-0.05, 0.03), (0.0, -0.1)):
+            n_new = pm.retract_normal(win.n, ab)
+            rg = pw._tilted(sol.cams, sol.rig, sol.frames, sol.L, sol.obs, w, n_new)
+            wn = rg.windows[w]
+            assert np.allclose(wn.n, n_new, atol=1e-15) and rg.windows[1 - w] is not sol.rig.windows[1 - w]
+            assert float(np.min(wn.depth(X))) >= d0 - 1e-9
+            A = pw.anchors_for(sol.cams, sol.rig)[w]
+            pivot = float(n_new @ A) + (win.d - float(win.n @ A))
+            assert wn.d <= pivot + 1e-12                              # moved only towards the cameras, if at all
+
+
+@pytest.mark.slow
+def test_scan_fixes_a_weak_window():
+    """W5 seed 1001 (one camera per window; window 2's of 24,500 px sees the wand under 1.4 deg), without hints: the
+    start ends 11 deg off in window 2's normal; the scan of that normal finds the global minimum (D8, H4)."""
+    from h1_hints import case
+    rig_t, data = case(1001, 0.1)
+    sol = pw.calibrate(data, pw.Rig([pm.Window([0, 0, 1], 0.0, w.t, w.idx, w.name) for w in rig_t.wins],
+                                    rig_t.cam_win))
+    assert sol.info["scan"]["improved"] and [s["window"] for s in sol.info["scan"]["windows"]] == [1]
+    ref = pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win))
+    cmp = prigs.same_minimum(sol, ref)
+    assert cmp["same"] or sol.rms < ref.rms or (cmp["max_abs_z"] <= 3.0 and sol.rms <= 1.02 * ref.rms), cmp
+
+
+@pytest.mark.slow
+def test_restarts_free_a_pinned_answer():
+    """W5 seed 2000 (two windows, two cameras each, 1 px): its start ends pinned against window 1, a wand end on its
+    water-side surface; the perturbed restarts reach the global minimum."""
+    rng = np.random.default_rng(2000)
+    rig_t = prigs.random_rig(rng)
+    wand = prigs.make_wand(rig_t, int(rng.integers(500, 1501)), rng, noise_px=1.0)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    sol = pw.calibrate(data, pw.Rig([pm.Window([0, 0, 1], 0.0, w.t, w.idx, w.name) for w in rig_t.wins],
+                                    rig_t.cam_win))
+    ref = pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win))
+    assert sol.info["starts"]["perturbed"]["improved"]
+    cmp = prigs.same_minimum(sol, ref)
+    assert cmp["same"], cmp
+
+
+@pytest.mark.slow
+def test_hint_paths():
+    """Window-normal hints 10 deg off on rig B (two windows, two cameras each): the hint-held and hint-searched starts
+    are built and fitted beside the default one, the answer is the global minimum, and each hint's angle from it is
+    reported (about 10 deg)."""
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 400, np.random.default_rng(21), noise_px=0.1)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    rng = np.random.default_rng(5)
+    normals = []
+    for c, cam in enumerate(rig_t.cams):
+        v = cam.R @ rig_t.win_of(c).n
+        e = np.cross(v, rng.normal(size=3))
+        e /= np.linalg.norm(e)
+        normals.append((math.cos(math.radians(10.0)) * v + math.sin(math.radians(10.0)) * e).tolist())
+    sol = pw.calibrate(data, pw.Rig([pm.Window([0, 0, 1], 0.0, w.t, w.idx, w.name) for w in rig_t.wins],
+                                    rig_t.cam_win), hints={"normals": normals})
+    hi = sol.info["hints"]
+    assert set(hi["paths"]) == {"held", "searched"} and hi["chosen"] in ("default", "held", "searched"), hi
+    for p in hi["paths"].values():
+        assert "error" not in p and p["tried"] >= 1 and p["rms_px"] > 0, p
+    assert all(abs(a - 10.0) < 1.0 for a in hi["normals_off_deg"])
+    ref = pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win))
+    cmp = prigs.same_minimum(sol, ref)
+    assert cmp["same"], cmp
 
 
 @pytest.mark.slow

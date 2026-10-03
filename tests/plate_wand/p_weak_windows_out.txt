@@ -1,0 +1,181 @@
+W5 and R4: 120 cases on 90 rigs (the stored answers without hints)
+
+The wrong answers (DIFFERENT) and their windows:
+  W5 seed 1001 (0.1 px): window 1: 1 cam(s), f 12323 px, cloud 7.1 deg, image 6.2 deg; window 2: 1 cam(s), f 24485 px, cloud 1.5 deg, image 1.4 deg
+  W5 seed 1031 (0.1 px): window 1: 2 cam(s), f 13526, 31672 px, cloud 5.8, 3.1 deg, image 5.7, 2.7 deg; window 2: 1 cam(s), f 6388 px, cloud 13.5 deg, image 12.3 deg
+  W5 seed 1034 (0.1 px): window 1: 2 cam(s), f 28170, 37170 px, cloud 3.2, 2.5 deg, image 2.5, 2.0 deg; window 2: 1 cam(s), f 4361 px, cloud 14.9 deg, image 14.6 deg; window 3: 1 cam(s), f 23266 px, cloud 3.4 deg, image 2.8 deg
+  W5 seed 1045 (0.1 px): window 1: 1 cam(s), f 29095 px, cloud 3.3 deg, image 2.8 deg; window 2: 1 cam(s), f 12698 px, cloud 8.3 deg, image 7.2 deg
+  R4 seed 3110 (1 px): window 1: 2 cam(s), f 20682, 16353 px, cloud 4.3, 1.9 deg, image 4.1, 2.0 deg; window 2: 2 cam(s), f 34482, 4851 px, cloud 2.3, 9.3 deg, image 2.0, 8.8 deg; window 3: 2 cam(s), f 8035, 11066 px, cloud 4.7, 9.9 deg, image 3.9, 8.9 deg
+
+Rules on the rig (flagged: wrong answers flagged of all wrong; right answers flagged of all right):
+  a window with <= 1 cameras: wrong 4/5, right 7/115 (W5 1032 0.1 px same, W5 1033 0.1 px same, W5 1039 0.1 px same, W5 1048 0.1 px same, W5 2004 1 px equivalent, W5 2005 1 px equivalent, W5 2008 1 px same)
+  a window with <= 1 cameras, all f >= 8000: wrong 3/5, right 4/115 (W5 1032 0.1 px same, W5 2004 1 px equivalent, W5 2005 1 px equivalent, W5 2008 1 px same)
+  a window with <= 1 cameras, all f >= 10000: wrong 3/5, right 3/115 (W5 1032 0.1 px same, W5 2005 1 px equivalent, W5 2008 1 px same)
+  a window with <= 1 cameras, all f >= 12000: wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all f >= 13000: wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the cloud under < 4 deg: wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the cloud under < 5 deg: wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the cloud under < 6 deg: wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the cloud under < 8 deg: wrong 3/5, right 2/115 (W5 1032 0.1 px same, W5 2008 1 px same)
+  a window with <= 1 cameras, all seeing the cloud under < 10 deg: wrong 3/5, right 3/115 (W5 1032 0.1 px same, W5 2005 1 px equivalent, W5 2008 1 px same)
+  a window with <= 1 cameras, all seeing the wand under < 3 deg (image): wrong 3/5, right 0/115
+  a window with <= 1 cameras, all seeing the wand under < 4 deg (image): wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the wand under < 5 deg (image): wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the wand under < 6 deg (image): wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the wand under < 7 deg (image): wrong 3/5, right 1/115 (W5 1032 0.1 px same)
+  a window with <= 1 cameras, all seeing the wand under < 8 deg (image): wrong 3/5, right 2/115 (W5 1032 0.1 px same, W5 2008 1 px same)
+  a window with <= 2 cameras: wrong 5/5, right 77/115
+  a window with <= 2 cameras, all f >= 8000: wrong 5/5, right 33/115
+  a window with <= 2 cameras, all f >= 10000: wrong 5/5, right 20/115
+  a window with <= 2 cameras, all f >= 12000: wrong 5/5, right 15/115
+  a window with <= 2 cameras, all f >= 13000: wrong 5/5, right 13/115
+  a window with <= 2 cameras, all seeing the cloud under < 4 deg: wrong 3/5, right 6/115 (W5 1020 0.1 px same, W5 1032 0.1 px same, R4 3044 0.5 px same, R4 3044 1 px same, R4 3029 0.5 px same, R4 3029 1 px same)
+  a window with <= 2 cameras, all seeing the cloud under < 5 deg: wrong 4/5, right 13/115
+  a window with <= 2 cameras, all seeing the cloud under < 6 deg: wrong 5/5, right 17/115
+  a window with <= 2 cameras, all seeing the cloud under < 8 deg: wrong 5/5, right 32/115
+  a window with <= 2 cameras, all seeing the cloud under < 10 deg: wrong 5/5, right 46/115
+  a window with <= 2 cameras, all seeing the wand under < 3 deg (image): wrong 3/5, right 5/115 (W5 1020 0.1 px same, R4 3044 0.5 px same, R4 3044 1 px same, R4 3029 0.5 px same, R4 3029 1 px same)
+  a window with <= 2 cameras, all seeing the wand under < 4 deg (image): wrong 3/5, right 6/115 (W5 1020 0.1 px same, W5 1032 0.1 px same, R4 3044 0.5 px same, R4 3044 1 px same, R4 3029 0.5 px same, R4 3029 1 px same)
+  a window with <= 2 cameras, all seeing the wand under < 5 deg (image): wrong 4/5, right 13/115
+  a window with <= 2 cameras, all seeing the wand under < 6 deg (image): wrong 5/5, right 17/115
+  a window with <= 2 cameras, all seeing the wand under < 7 deg (image): wrong 5/5, right 29/115
+  a window with <= 2 cameras, all seeing the wand under < 8 deg (image): wrong 5/5, right 33/115
+
+Every window with one or two cameras, by its widest view of the wand in the image (verdict of its case):
+  image   1.4 deg (cloud   1.5), f >=  24485 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1001 (0.1 px) window 2: DIFFERENT
+  image   2.4 deg (cloud   2.7), f >=  12780 px, 2 cam(s), axes 20.0 deg apart: R4 seed 3044 (0.5 px) window 2: same
+  image   2.4 deg (cloud   2.7), f >=  12780 px, 2 cam(s), axes 20.0 deg apart: R4 seed 3044 (1 px) window 2: same
+  image   2.5 deg (cloud   3.2), f >=  28170 px, 2 cam(s), axes 12.7 deg apart: W5 seed 1034 (0.1 px) window 1: DIFFERENT
+  image   2.8 deg (cloud   3.0), f >=  25913 px, 2 cam(s), axes 36.1 deg apart: W5 seed 1020 (0.1 px) window 2: same
+  image   2.8 deg (cloud   3.3), f >=  29095 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1045 (0.1 px) window 1: DIFFERENT
+  image   2.8 deg (cloud   3.2), f >=  28705 px, 2 cam(s), axes 19.0 deg apart: R4 seed 3029 (0.5 px) window 2: same
+  image   2.8 deg (cloud   3.2), f >=  28705 px, 2 cam(s), axes 19.0 deg apart: R4 seed 3029 (1 px) window 2: same
+  image   2.8 deg (cloud   3.4), f >=  23266 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1034 (0.1 px) window 3: DIFFERENT
+  image   3.0 deg (cloud   3.7), f >=  25035 px, 2 cam(s), axes 40.8 deg apart: W5 seed 1032 (0.1 px) window 2: same
+  image   3.1 deg (cloud   3.3), f >=  35622 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1032 (0.1 px) window 3: same
+  image   4.1 deg (cloud   4.3), f >=  16353 px, 2 cam(s), axes 17.9 deg apart: R4 seed 3110 (0.5 px) window 1: same
+  image   4.1 deg (cloud   4.3), f >=  16353 px, 2 cam(s), axes 17.9 deg apart: R4 seed 3110 (1 px) window 1: DIFFERENT
+  image   4.3 deg (cloud   4.3), f >=  18229 px, 2 cam(s), axes 29.6 deg apart: R4 seed 3070 (0.5 px) window 2: same
+  image   4.3 deg (cloud   4.3), f >=  18229 px, 2 cam(s), axes 29.6 deg apart: R4 seed 3070 (1 px) window 2: same
+  image   4.6 deg (cloud   4.8), f >=   8526 px, 2 cam(s), axes 13.7 deg apart: R4 seed 3008 (0.5 px) window 2: same
+  image   4.6 deg (cloud   4.8), f >=   8526 px, 2 cam(s), axes 13.7 deg apart: R4 seed 3008 (1 px) window 2: same
+  image   4.7 deg (cloud   4.8), f >=  20144 px, 2 cam(s), axes 13.3 deg apart: R4 seed 3100 (0.5 px) window 3: same
+  image   4.7 deg (cloud   4.8), f >=  20144 px, 2 cam(s), axes 13.3 deg apart: R4 seed 3100 (1 px) window 3: same
+  image   5.3 deg (cloud   6.0), f >=   8619 px, 2 cam(s), axes 18.6 deg apart: R4 seed 3054 (0.5 px) window 2: same
+  image   5.3 deg (cloud   6.0), f >=   8619 px, 2 cam(s), axes 18.6 deg apart: R4 seed 3054 (1 px) window 2: same
+  image   5.3 deg (cloud   5.8), f >=  11264 px, 2 cam(s), axes 57.2 deg apart: R4 seed 3108 (0.5 px) window 1: same
+  image   5.3 deg (cloud   5.8), f >=  11264 px, 2 cam(s), axes 57.2 deg apart: R4 seed 3108 (1 px) window 1: same
+  image   5.3 deg (cloud   6.0), f >=  16733 px, 2 cam(s), axes 42.8 deg apart: R4 seed 3100 (0.5 px) window 2: same
+  image   5.3 deg (cloud   6.0), f >=  16733 px, 2 cam(s), axes 42.8 deg apart: R4 seed 3100 (1 px) window 2: same
+  image   5.7 deg (cloud   6.4), f >=  13211 px, 2 cam(s), axes 42.9 deg apart: R4 seed 3070 (0.5 px) window 1: same
+  image   5.7 deg (cloud   6.4), f >=  13211 px, 2 cam(s), axes 42.9 deg apart: R4 seed 3070 (1 px) window 1: same
+  image   5.7 deg (cloud   5.8), f >=  13526 px, 2 cam(s), axes 50.6 deg apart: W5 seed 1031 (0.1 px) window 1: DIFFERENT
+  image   5.9 deg (cloud   5.6), f >=   5644 px, 2 cam(s), axes 16.5 deg apart: R4 seed 3029 (0.5 px) window 1: same
+  image   5.9 deg (cloud   5.6), f >=   5644 px, 2 cam(s), axes 16.5 deg apart: R4 seed 3029 (1 px) window 1: same
+  image   6.0 deg (cloud   6.5), f >=  15246 px, 2 cam(s), axes 25.3 deg apart: W5 seed 1030 (0.1 px) window 1: same
+  image   6.1 deg (cloud   7.1), f >=   6570 px, 2 cam(s), axes 56.6 deg apart: R4 seed 3069 (0.5 px) window 1: same
+  image   6.1 deg (cloud   7.1), f >=   6570 px, 2 cam(s), axes 56.6 deg apart: R4 seed 3069 (1 px) window 1: same
+  image   6.2 deg (cloud   7.1), f >=  12323 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1001 (0.1 px) window 1: DIFFERENT
+  image   6.3 deg (cloud   6.9), f >=  13077 px, 2 cam(s), axes 29.7 deg apart: R4 seed 3026 (0.5 px) window 2: same
+  image   6.3 deg (cloud   6.9), f >=  13077 px, 2 cam(s), axes 29.7 deg apart: R4 seed 3026 (1 px) window 2: same
+  image   6.4 deg (cloud   7.0), f >=   5112 px, 2 cam(s), axes 46.3 deg apart: R4 seed 3123 (0.5 px) window 2: same
+  image   6.4 deg (cloud   7.0), f >=   5112 px, 2 cam(s), axes 46.3 deg apart: R4 seed 3123 (1 px) window 2: same
+  image   6.7 deg (cloud   7.5), f >=   9675 px, 2 cam(s), axes 31.4 deg apart: R4 seed 3036 (0.5 px) window 2: same
+  image   6.7 deg (cloud   7.5), f >=   9675 px, 2 cam(s), axes 31.4 deg apart: R4 seed 3036 (1 px) window 2: same
+  image   6.8 deg (cloud   7.4), f >=  14014 px, 2 cam(s), axes 33.1 deg apart: W5 seed 1028 (0.1 px) window 2: same
+  image   7.0 deg (cloud   7.2), f >=   9982 px, 2 cam(s), axes 43.3 deg apart: R4 seed 3067 (0.5 px) window 2: same
+  image   7.0 deg (cloud   7.2), f >=   9982 px, 2 cam(s), axes 43.3 deg apart: R4 seed 3067 (1 px) window 2: same
+  image   7.2 deg (cloud   8.3), f >=  12698 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1045 (0.1 px) window 2: DIFFERENT
+  image   7.4 deg (cloud   8.0), f >=   6061 px, 2 cam(s), axes 11.7 deg apart: W5 seed 1032 (0.1 px) window 1: same
+  image   7.5 deg (cloud   7.7), f >=   8757 px, 2 cam(s), axes 45.9 deg apart: R4 seed 3032 (0.5 px) window 2: same
+  image   7.5 deg (cloud   7.7), f >=   8757 px, 2 cam(s), axes 45.9 deg apart: R4 seed 3032 (1 px) window 2: same
+  image   7.6 deg (cloud   7.6), f >=  10819 px, 1 cam(s), axes  0.0 deg apart: W5 seed 2008 (1 px) window 1: same
+  image   7.7 deg (cloud   8.2), f >=  11419 px, 2 cam(s), axes 40.5 deg apart: W5 seed 1013 (0.1 px) window 2: same
+  image   8.0 deg (cloud   8.8), f >=   6842 px, 2 cam(s), axes 25.6 deg apart: W5 seed 1018 (0.1 px) window 1: same
+  image   8.3 deg (cloud   8.7), f >=   7689 px, 2 cam(s), axes  5.5 deg apart: R4 seed 3111 (0.5 px) window 2: equivalent
+  image   8.3 deg (cloud   8.7), f >=   7689 px, 2 cam(s), axes  5.5 deg apart: R4 seed 3111 (1 px) window 2: equivalent
+  image   8.3 deg (cloud   9.5), f >=   5591 px, 2 cam(s), axes 63.7 deg apart: R4 seed 3092 (0.5 px) window 2: same
+  image   8.3 deg (cloud   9.5), f >=   5591 px, 2 cam(s), axes 63.7 deg apart: R4 seed 3092 (1 px) window 2: same
+  image   8.4 deg (cloud   9.4), f >=   9930 px, 2 cam(s), axes 30.0 deg apart: W5 seed 1047 (0.1 px) window 2: same
+  image   8.6 deg (cloud   9.0), f >=   4829 px, 2 cam(s), axes 45.9 deg apart: W5 seed 1039 (0.1 px) window 1: same
+  image   8.6 deg (cloud   9.2), f >=  10664 px, 1 cam(s), axes  0.0 deg apart: W5 seed 2005 (1 px) window 1: equivalent
+  image   8.7 deg (cloud   9.2), f >=   9019 px, 2 cam(s), axes 38.6 deg apart: W5 seed 2006 (1 px) window 1: same
+  image   8.8 deg (cloud   9.3), f >=   4851 px, 2 cam(s), axes 25.1 deg apart: R4 seed 3110 (0.5 px) window 2: same
+  image   8.8 deg (cloud   9.3), f >=   4851 px, 2 cam(s), axes 25.1 deg apart: R4 seed 3110 (1 px) window 2: DIFFERENT
+  image   8.8 deg (cloud   9.1), f >=   6186 px, 2 cam(s), axes 16.7 deg apart: W5 seed 2006 (1 px) window 3: same
+  image   8.9 deg (cloud   9.9), f >=   8035 px, 2 cam(s), axes 24.0 deg apart: R4 seed 3110 (0.5 px) window 3: same
+  image   8.9 deg (cloud   9.9), f >=   8035 px, 2 cam(s), axes 24.0 deg apart: R4 seed 3110 (1 px) window 3: DIFFERENT
+  image   9.0 deg (cloud   9.1), f >=   6008 px, 2 cam(s), axes 26.6 deg apart: R4 seed 3083 (0.5 px) window 2: same
+  image   9.0 deg (cloud   9.1), f >=   6008 px, 2 cam(s), axes 26.6 deg apart: R4 seed 3083 (1 px) window 2: same
+  image   9.2 deg (cloud   9.2), f >=   6624 px, 2 cam(s), axes 27.0 deg apart: R4 seed 3096 (0.5 px) window 2: same
+  image   9.2 deg (cloud   9.2), f >=   6624 px, 2 cam(s), axes 27.0 deg apart: R4 seed 3096 (1 px) window 2: same
+  image   9.3 deg (cloud   9.7), f >=   6110 px, 1 cam(s), axes  0.0 deg apart: W5 seed 2005 (1 px) window 2: equivalent
+  image   9.4 deg (cloud  10.2), f >=   3526 px, 2 cam(s), axes 40.9 deg apart: R4 seed 3078 (0.5 px) window 1: same
+  image   9.4 deg (cloud  10.2), f >=   3526 px, 2 cam(s), axes 40.9 deg apart: R4 seed 3078 (1 px) window 1: same
+  image   9.7 deg (cloud  11.2), f >=   5220 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1039 (0.1 px) window 3: same
+  image   9.8 deg (cloud  10.5), f >=   6308 px, 2 cam(s), axes 52.8 deg apart: R4 seed 3096 (0.5 px) window 1: same
+  image   9.8 deg (cloud  10.5), f >=   6308 px, 2 cam(s), axes 52.8 deg apart: R4 seed 3096 (1 px) window 1: same
+  image   9.8 deg (cloud  10.8), f >=   5581 px, 2 cam(s), axes 33.7 deg apart: W5 seed 1009 (0.1 px) window 1: same
+  image  10.0 deg (cloud   9.7), f >=   4212 px, 2 cam(s), axes 34.6 deg apart: R4 seed 3032 (0.5 px) window 1: same
+  image  10.0 deg (cloud   9.7), f >=   4212 px, 2 cam(s), axes 34.6 deg apart: R4 seed 3032 (1 px) window 1: same
+  image  10.4 deg (cloud  10.9), f >=   3940 px, 2 cam(s), axes 34.6 deg apart: R4 seed 3083 (0.5 px) window 3: same
+  image  10.4 deg (cloud  10.9), f >=   3940 px, 2 cam(s), axes 34.6 deg apart: R4 seed 3083 (1 px) window 3: same
+  image  10.5 deg (cloud  11.2), f >=   8149 px, 1 cam(s), axes  0.0 deg apart: W5 seed 2004 (1 px) window 2: equivalent
+  image  10.6 deg (cloud  11.1), f >=   3920 px, 2 cam(s), axes 58.5 deg apart: R4 seed 3067 (0.5 px) window 1: same
+  image  10.6 deg (cloud  11.1), f >=   3920 px, 2 cam(s), axes 58.5 deg apart: R4 seed 3067 (1 px) window 1: same
+  image  10.8 deg (cloud  11.8), f >=   3352 px, 2 cam(s), axes  9.3 deg apart: R4 seed 3083 (0.5 px) window 1: same
+  image  10.8 deg (cloud  11.8), f >=   3352 px, 2 cam(s), axes  9.3 deg apart: R4 seed 3083 (1 px) window 1: same
+  image  11.5 deg (cloud  11.9), f >=   7515 px, 2 cam(s), axes 36.7 deg apart: R4 seed 3021 (0.5 px) window 2: same
+  image  11.5 deg (cloud  11.9), f >=   7515 px, 2 cam(s), axes 36.7 deg apart: R4 seed 3021 (1 px) window 2: same
+  image  11.8 deg (cloud  12.7), f >=   2039 px, 2 cam(s), axes 41.4 deg apart: R4 seed 3108 (0.5 px) window 2: same
+  image  11.8 deg (cloud  12.7), f >=   2039 px, 2 cam(s), axes 41.4 deg apart: R4 seed 3108 (1 px) window 2: same
+  image  12.0 deg (cloud  12.9), f >=   5735 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1048 (0.1 px) window 1: same
+  image  12.3 deg (cloud  13.5), f >=   6388 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1031 (0.1 px) window 2: DIFFERENT
+  image  12.3 deg (cloud  12.9), f >=   2529 px, 2 cam(s), axes 28.2 deg apart: W5 seed 2000 (1 px) window 1: same
+  image  13.3 deg (cloud  13.7), f >=   6829 px, 2 cam(s), axes 17.2 deg apart: R4 seed 3100 (0.5 px) window 1: same
+  image  13.3 deg (cloud  13.7), f >=   6829 px, 2 cam(s), axes 17.2 deg apart: R4 seed 3100 (1 px) window 1: same
+  image  13.4 deg (cloud  14.7), f >=   3724 px, 2 cam(s), axes 20.3 deg apart: W5 seed 1018 (0.1 px) window 2: same
+  image  13.4 deg (cloud  14.8), f >=   6457 px, 2 cam(s), axes 19.7 deg apart: W5 seed 2006 (1 px) window 2: same
+  image  13.5 deg (cloud  14.2), f >=   4979 px, 2 cam(s), axes 31.2 deg apart: R4 seed 3069 (0.5 px) window 2: same
+  image  13.5 deg (cloud  14.2), f >=   4979 px, 2 cam(s), axes 31.2 deg apart: R4 seed 3069 (1 px) window 2: same
+  image  14.2 deg (cloud  13.9), f >=   5499 px, 2 cam(s), axes 10.7 deg apart: W5 seed 1041 (0.1 px) window 2: same
+  image  14.6 deg (cloud  14.9), f >=   4361 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1034 (0.1 px) window 2: DIFFERENT
+  image  14.7 deg (cloud  15.6), f >=   2134 px, 2 cam(s), axes  8.5 deg apart: R4 seed 3084 (0.5 px) window 2: same
+  image  14.7 deg (cloud  15.6), f >=   2134 px, 2 cam(s), axes  8.5 deg apart: R4 seed 3084 (1 px) window 2: same
+  image  15.1 deg (cloud  15.2), f >=   1539 px, 2 cam(s), axes 44.6 deg apart: W5 seed 2007 (1 px) window 2: same
+  image  15.3 deg (cloud  16.7), f >=   5685 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1048 (0.1 px) window 2: same
+  image  15.9 deg (cloud  17.6), f >=   2122 px, 2 cam(s), axes 28.8 deg apart: R4 seed 3016 (0.5 px) window 2: same
+  image  15.9 deg (cloud  17.6), f >=   2122 px, 2 cam(s), axes 28.8 deg apart: R4 seed 3016 (1 px) window 2: same
+  image  16.0 deg (cloud  14.7), f >=   4960 px, 2 cam(s), axes 27.7 deg apart: W5 seed 1027 (0.1 px) window 1: same
+  image  16.4 deg (cloud  15.6), f >=   2772 px, 2 cam(s), axes 34.4 deg apart: R4 seed 3081 (0.5 px) window 2: same
+  image  16.4 deg (cloud  15.6), f >=   2772 px, 2 cam(s), axes 34.4 deg apart: R4 seed 3081 (1 px) window 2: same
+  image  16.4 deg (cloud  18.2), f >=   2813 px, 1 cam(s), axes  0.0 deg apart: W5 seed 2004 (1 px) window 1: equivalent
+  image  16.4 deg (cloud  16.4), f >=   7043 px, 2 cam(s), axes 17.2 deg apart: R4 seed 3099 (0.5 px) window 1: same
+  image  16.4 deg (cloud  16.4), f >=   7043 px, 2 cam(s), axes 17.2 deg apart: R4 seed 3099 (1 px) window 1: same
+  image  16.5 deg (cloud  16.4), f >=   4736 px, 2 cam(s), axes 29.8 deg apart: R4 seed 3079 (0.5 px) window 2: same
+  image  16.5 deg (cloud  16.4), f >=   4736 px, 2 cam(s), axes 29.8 deg apart: R4 seed 3079 (1 px) window 2: same
+  image  16.7 deg (cloud  17.7), f >=   4708 px, 2 cam(s), axes 49.9 deg apart: W5 seed 1041 (0.1 px) window 1: same
+  image  17.3 deg (cloud  18.0), f >=   4149 px, 2 cam(s), axes 11.1 deg apart: W5 seed 1040 (0.1 px) window 2: same
+  image  17.4 deg (cloud  17.4), f >=   2252 px, 2 cam(s), axes 55.2 deg apart: W5 seed 1041 (0.1 px) window 3: same
+  image  17.4 deg (cloud  17.0), f >=   1988 px, 2 cam(s), axes 41.1 deg apart: W5 seed 2000 (1 px) window 2: same
+  image  17.5 deg (cloud  16.5), f >=   3566 px, 2 cam(s), axes 27.0 deg apart: R4 seed 3079 (0.5 px) window 1: same
+  image  17.5 deg (cloud  16.5), f >=   3566 px, 2 cam(s), axes 27.0 deg apart: R4 seed 3079 (1 px) window 1: same
+  image  18.3 deg (cloud  18.9), f >=   3424 px, 2 cam(s), axes 16.4 deg apart: W5 seed 1040 (0.1 px) window 1: same
+  image  20.3 deg (cloud  21.8), f >=   1825 px, 2 cam(s), axes 32.6 deg apart: R4 seed 3080 (0.5 px) window 2: same
+  image  20.3 deg (cloud  21.8), f >=   1825 px, 2 cam(s), axes 32.6 deg apart: R4 seed 3080 (1 px) window 2: same
+  image  20.9 deg (cloud  21.0), f >=   1908 px, 2 cam(s), axes 41.2 deg apart: W5 seed 1039 (0.1 px) window 2: same
+  image  21.0 deg (cloud  24.0), f >=   2277 px, 2 cam(s), axes 22.8 deg apart: W5 seed 2002 (1 px) window 3: equivalent
+  image  21.7 deg (cloud  22.8), f >=   2246 px, 2 cam(s), axes 25.5 deg apart: W5 seed 1000 (0.1 px) window 2: same
+  image  22.4 deg (cloud  21.4), f >=   2593 px, 2 cam(s), axes 42.3 deg apart: W5 seed 1010 (0.1 px) window 1: same
+  image  23.2 deg (cloud  22.5), f >=   2707 px, 2 cam(s), axes 29.0 deg apart: R4 seed 3078 (0.5 px) window 2: same
+  image  23.2 deg (cloud  22.5), f >=   2707 px, 2 cam(s), axes 29.0 deg apart: R4 seed 3078 (1 px) window 2: same
+  image  24.4 deg (cloud  25.6), f >=   3016 px, 2 cam(s), axes 70.2 deg apart: R4 seed 3135 (0.5 px) window 2: same
+  image  24.4 deg (cloud  25.6), f >=   3016 px, 2 cam(s), axes 70.2 deg apart: R4 seed 3135 (1 px) window 2: same
+  image  26.8 deg (cloud  26.8), f >=   1653 px, 2 cam(s), axes 18.8 deg apart: W5 seed 1033 (0.1 px) window 1: same
+  image  27.6 deg (cloud  29.9), f >=   2913 px, 2 cam(s), axes  7.0 deg apart: R4 seed 3099 (0.5 px) window 2: same
+  image  27.6 deg (cloud  29.9), f >=   2913 px, 2 cam(s), axes  7.0 deg apart: R4 seed 3099 (1 px) window 2: same
+  image  28.1 deg (cloud  28.4), f >=   2742 px, 1 cam(s), axes  0.0 deg apart: W5 seed 2008 (1 px) window 2: same
+  image  33.1 deg (cloud  34.3), f >=   2726 px, 1 cam(s), axes  0.0 deg apart: W5 seed 1033 (0.1 px) window 2: same
+  image  39.5 deg (cloud  38.4), f >=   2526 px, 2 cam(s), axes 38.7 deg apart: W5 seed 1022 (0.1 px) window 1: same
+  image  41.1 deg (cloud  47.2), f >=   2206 px, 2 cam(s), axes  6.4 deg apart: W5 seed 2002 (1 px) window 1: equivalent
+  image  51.4 deg (cloud  57.1), f >=   1723 px, 2 cam(s), axes  4.0 deg apart: W5 seed 2002 (1 px) window 2: equivalent

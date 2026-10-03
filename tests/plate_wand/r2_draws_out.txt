@@ -1,0 +1,9 @@
+R2: draws about rig B's answer (fit from the truth: rms 0.11743 px, 28 free parameters), 2000 draws at s = 2
+  2000 draws kept, 0 left out, 0 redraws, 23 s (11 ms a draw)
+  sample sigma / (s sigma): 0.964 to 1.030 (worst win2.delta); the sampling error of a sigma from 2000 draws is 1.6 %; within 5 %: yes
+  correlations: largest difference from the covariance's 0.081 (sampling error about 0.022)
+  each draw re-expressed through the log maps equals its dx to 5.7e-14 (first 200; tolerance 1e-9): yes; camera 1's pose untouched in every draw: yes
+  determinism: the same detections give seed 2452947407 twice and the same 20 draws: yes; one detection moved by 1e-9 px gives seed 2060943507 and other draws: yes
+seed 2000 without restarts (perturb_starts=0): rms 1.158848 px (R1: 1.158848), its wand ends' smallest depth per window 3.47e-12, 2.68e+02 mm; 47 s
+  200 draws at s = 2: 200 kept, 0 left out; every kept draw has its cameras on the air side and every active observation projecting: yes; a try is kept 200/382 = 0.52 of the time (109 draws on their first try); 4 s
+R2: PASS; 78 s

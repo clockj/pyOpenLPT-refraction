@@ -1,0 +1,644 @@
+[
+ {
+  "seed": 1034,
+  "noise_px": 0.1,
+  "delta_deg": 10.0,
+  "draw": 1,
+  "h2a": "accepted, worse",
+  "ref_rms_px": 0.11751060124159259,
+  "default": {
+   "rms_px": 1.8416849408014464,
+   "sigma_px": 1.5761677253331714,
+   "active": 4610,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 1.852972685831741,
+     "active": 1156
+    },
+    {
+     "cam": 2,
+     "rms_px": 2.3238449602164244,
+     "active": 1141
+    },
+    {
+     "cam": 3,
+     "rms_px": 0.8828317501891183,
+     "active": 1158
+    },
+    {
+     "cam": 4,
+     "rms_px": 1.9962847645722264,
+     "active": 1155
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 14.672500364584865,
+   "max_abs_z": 1793.7717595497131,
+   "worst": "cam3.w3",
+   "active_ref": 4632,
+   "same": false
+  },
+  "held": {
+   "rms_px": 0.45345728016355685,
+   "sigma_px": 0.4126279129624926,
+   "active": 3693,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 0.30889733660977914,
+     "active": 1156
+    },
+    {
+     "cam": 2,
+     "rms_px": 0.522624969258307,
+     "active": 1087
+    },
+    {
+     "cam": 3,
+     "rms_px": 0.8676476509486593,
+     "active": 292
+    },
+    {
+     "cam": 4,
+     "rms_px": 0.33806303334995197,
+     "active": 1158
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 2.85886273555255,
+   "max_abs_z": 148.4115029017591,
+   "worst": "cam3.w3",
+   "active_ref": 4632,
+   "same": false
+  },
+  "rules": {
+   "default_weights": {
+    "default": 16329.350234332753,
+    "held": 12242.363268576846,
+    "held_rel": -0.25028472701644566
+   },
+   "held_weights": {
+    "default": 9027.171417514812,
+    "held": 4630.409057969717,
+    "held_rel": -0.487058698255619
+   },
+   "equal_weights": {
+    "default": 9027.171417514812,
+    "held": 4630.409057969717,
+    "held_rel": -0.487058698255619
+   }
+  },
+  "seconds": 260.7644085884094
+ },
+ {
+  "seed": 1034,
+  "noise_px": 0.1,
+  "delta_deg": 20.0,
+  "draw": 1,
+  "h2a": "accepted, worse",
+  "ref_rms_px": 0.11751060124159259,
+  "default": {
+   "rms_px": 1.8416849408014464,
+   "sigma_px": 1.5761677253331714,
+   "active": 4610,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 1.852972685831741,
+     "active": 1156
+    },
+    {
+     "cam": 2,
+     "rms_px": 2.3238449602164244,
+     "active": 1141
+    },
+    {
+     "cam": 3,
+     "rms_px": 0.8828317501891183,
+     "active": 1158
+    },
+    {
+     "cam": 4,
+     "rms_px": 1.9962847645722264,
+     "active": 1155
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 14.672500364584865,
+   "max_abs_z": 1793.7717595497131,
+   "worst": "cam3.w3",
+   "active_ref": 4632,
+   "same": false
+  },
+  "held": {
+   "rms_px": 0.6415902251139498,
+   "sigma_px": 0.5493414732033091,
+   "active": 4601,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 0.6084625579257465,
+     "active": 1158
+    },
+    {
+     "cam": 2,
+     "rms_px": 0.7733056605978547,
+     "active": 1145
+    },
+    {
+     "cam": 3,
+     "rms_px": 0.5288224487696349,
+     "active": 1141
+    },
+    {
+     "cam": 4,
+     "rms_px": 0.6315172571294426,
+     "active": 1157
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 4.459849735556118,
+   "max_abs_z": 385.37123859308366,
+   "worst": "cam2.w1",
+   "active_ref": 4632,
+   "same": false
+  },
+  "rules": {
+   "default_weights": {
+    "default": 16329.350234332753,
+    "held": 2023.187964313248,
+    "held_rel": -0.8761011347494122
+   },
+   "held_weights": {
+    "default": 11985.169827944272,
+    "held": 2009.9654486791671,
+    "held_rel": -0.8322956222119782
+   },
+   "equal_weights": {
+    "default": 11985.169827944272,
+    "held": 2009.9654486791671,
+    "held_rel": -0.8322956222119782
+   }
+  },
+  "seconds": 269.84116888046265
+ },
+ {
+  "seed": 1031,
+  "noise_px": 0.1,
+  "delta_deg": 30.0,
+  "draw": 2,
+  "h2a": "accepted, worse",
+  "ref_rms_px": 0.109214984686449,
+  "default": {
+   "rms_px": 5.292114739533604,
+   "sigma_px": 4.920858967505961,
+   "active": 3570,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 3.2527854330064945,
+     "active": 1195
+    },
+    {
+     "cam": 2,
+     "rms_px": 3.400076734321346,
+     "active": 1191
+    },
+    {
+     "cam": 3,
+     "rms_px": 7.882729682512986,
+     "active": 1184
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 47.45593994933032,
+   "max_abs_z": 1822.6918022108196,
+   "worst": "cam2.C2",
+   "active_ref": 3588,
+   "same": false
+  },
+  "held": {
+   "rms_px": 3.7815685749462995,
+   "sigma_px": 3.51234990279425,
+   "active": 3581,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 2.5946393790362827,
+     "active": 1195
+    },
+    {
+     "cam": 2,
+     "rms_px": 4.413036198687013,
+     "active": 1195
+    },
+    {
+     "cam": 3,
+     "rms_px": 4.086781033769628,
+     "active": 1191
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 33.62499752944161,
+   "max_abs_z": 2335.017279185667,
+   "worst": "cam2.C2",
+   "active_ref": 3588,
+   "same": false
+  },
+  "rules": {
+   "default_weights": {
+    "default": 106360.05227466972,
+    "held": 53436.364160417084,
+    "held_rel": -0.4975899031863933
+   },
+   "held_weights": {
+    "default": 103980.56406601613,
+    "held": 52922.954554365744,
+    "held_rel": -0.4910303186971987
+   },
+   "equal_weights": {
+    "default": 103980.56406601613,
+    "held": 52922.954554365744,
+    "held_rel": -0.4910303186971987
+   }
+  },
+  "seconds": 174.3655445575714
+ },
+ {
+  "seed": 3110,
+  "noise_px": 1.0,
+  "delta_deg": 0.0,
+  "draw": 0,
+  "h2a": "accepted, right",
+  "ref_rms_px": 1.2551486707339248,
+  "default": {
+   "rms_px": 1.266171886538345,
+   "sigma_px": 1.0071471794964997,
+   "active": 15984,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 1.2284674944555058,
+     "active": 2664
+    },
+    {
+     "cam": 2,
+     "rms_px": 1.2043028337120847,
+     "active": 2664
+    },
+    {
+     "cam": 3,
+     "rms_px": 1.3495288040649631,
+     "active": 2664
+    },
+    {
+     "cam": 4,
+     "rms_px": 1.3793050156464997,
+     "active": 2664
+    },
+    {
+     "cam": 5,
+     "rms_px": 1.316216723739351,
+     "active": 2664
+    },
+    {
+     "cam": 6,
+     "rms_px": 1.0970565137220292,
+     "active": 2664
+    }
+   ],
+   "variance_factor": 1.0017812611331163,
+   "has_weights": true,
+   "camera_sigma": null,
+   "rms_rel_diff": 0.00878239850102737,
+   "max_abs_z": 47.07824530296337,
+   "worst": "cam6.C1",
+   "active_ref": 15984,
+   "same": false
+  },
+  "held": {
+   "rms_px": 1.2551486717662637,
+   "sigma_px": 0.9983790179342981,
+   "active": 15984,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 1.148609618089075,
+     "active": 2664
+    },
+    {
+     "cam": 2,
+     "rms_px": 1.2023323190877866,
+     "active": 2664
+    },
+    {
+     "cam": 3,
+     "rms_px": 1.348718801392795,
+     "active": 2664
+    },
+    {
+     "cam": 4,
+     "rms_px": 1.3810580290105443,
+     "active": 2664
+    },
+    {
+     "cam": 5,
+     "rms_px": 1.3178833053475323,
+     "active": 2664
+    },
+    {
+     "cam": 6,
+     "rms_px": 1.106481801879862,
+     "active": 2664
+    }
+   ],
+   "variance_factor": 1.0017812611332122,
+   "has_weights": true,
+   "camera_sigma": null,
+   "rms_rel_diff": 8.224833480822766e-10,
+   "max_abs_z": 1.3013094908744572e-05,
+   "worst": "cam6.w3",
+   "active_ref": 15984,
+   "same": true
+  },
+  "rules": {
+   "default_weights": {
+    "default": 25308.00000000592,
+    "held": 24925.944488289162,
+    "held_rel": -0.015096234855250024
+   },
+   "held_weights": {
+    "default": 25738.15714808915,
+    "held": 25308.00000000834,
+    "held_rel": -0.016712818466599
+   },
+   "equal_weights": {
+    "default": 25625.40888022098,
+    "held": 25181.16464077407,
+    "held_rel": -0.01733608394400299
+   }
+  },
+  "seconds": 224.2016258239746
+ },
+ {
+  "seed": 1031,
+  "noise_px": 0.1,
+  "delta_deg": 20.0,
+  "draw": 1,
+  "h2a": "accepted, then the restarts reached the global minimum",
+  "ref_rms_px": 0.109214984686449,
+  "default": {
+   "rms_px": 5.292114739533604,
+   "sigma_px": 4.920858967505961,
+   "active": 3570,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 3.2527854330064945,
+     "active": 1195
+    },
+    {
+     "cam": 2,
+     "rms_px": 3.400076734321346,
+     "active": 1191
+    },
+    {
+     "cam": 3,
+     "rms_px": 7.882729682512986,
+     "active": 1184
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 47.45593994933032,
+   "max_abs_z": 1822.6918022108196,
+   "worst": "cam2.C2",
+   "active_ref": 3588,
+   "same": false
+  },
+  "held": {
+   "rms_px": 2.894336460628832,
+   "sigma_px": 2.6988005201208676,
+   "active": 3543,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 2.548020729204883,
+     "active": 1179
+    },
+    {
+     "cam": 2,
+     "rms_px": 3.435387483362299,
+     "active": 1174
+    },
+    {
+     "cam": 3,
+     "rms_px": 2.6202820458812313,
+     "active": 1190
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 25.50127607432564,
+   "max_abs_z": 498.16227046732615,
+   "worst": "cam2.logf",
+   "active_ref": 3588,
+   "same": false
+  },
+  "rules": {
+   "default_weights": {
+    "default": 106360.05227466972,
+    "held": 41387.52698666145,
+    "held_rel": -0.6108733861865717
+   },
+   "held_weights": {
+    "default": 100051.33508100142,
+    "held": 36236.18737815076,
+    "held_rel": -0.6378240495360308
+   },
+   "equal_weights": {
+    "default": 100051.33508100142,
+    "held": 36236.18737815076,
+    "held_rel": -0.6378240495360308
+   }
+  },
+  "seconds": 157.89695072174072
+ },
+ {
+  "seed": 1045,
+  "noise_px": 0.1,
+  "delta_deg": 5.0,
+  "draw": 1,
+  "h2a": "accepted, then the restarts reached the global minimum",
+  "ref_rms_px": 0.08615099445094065,
+  "default": {
+   "rms_px": 0.3488172763255675,
+   "sigma_px": 0.4040150195998139,
+   "active": 5240,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 0.40145807258812616,
+     "active": 2620
+    },
+    {
+     "cam": 2,
+     "rms_px": 0.28666775277348777,
+     "active": 2620
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 3.048905976636221,
+   "max_abs_z": 998.7711111102597,
+   "worst": "cam2.C2",
+   "active_ref": 5248,
+   "same": false
+  },
+  "held": {
+   "rms_px": 0.08743435515391482,
+   "sigma_px": 0.10114053111506276,
+   "active": 5248,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 0.08952274519736854,
+     "active": 2624
+    },
+    {
+     "cam": 2,
+     "rms_px": 0.08529484752720326,
+     "active": 2624
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 0.014896644097416449,
+   "max_abs_z": 9.73258696364123,
+   "worst": "cam2.C1",
+   "active_ref": 5248,
+   "same": false
+  },
+  "rules": {
+   "default_weights": {
+    "default": 670.2147266715492,
+    "held": 40.11973438827742,
+    "held_rel": -0.9401389841319634
+   },
+   "held_weights": {
+    "default": 453.9694416479815,
+    "held": 40.11973438827742,
+    "held_rel": -0.9116245925218306
+   },
+   "equal_weights": {
+    "default": 453.9694416479815,
+    "held": 40.11973438827742,
+    "held_rel": -0.9116245925218306
+   }
+  },
+  "seconds": 211.38954949378967
+ },
+ {
+  "seed": 1031,
+  "noise_px": 0.1,
+  "delta_deg": 0.0,
+  "draw": 0,
+  "h2a": "accepted, right",
+  "ref_rms_px": 0.109214984686449,
+  "default": {
+   "rms_px": 5.292114739533604,
+   "sigma_px": 4.920858967505961,
+   "active": 3570,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 3.2527854330064945,
+     "active": 1195
+    },
+    {
+     "cam": 2,
+     "rms_px": 3.400076734321346,
+     "active": 1191
+    },
+    {
+     "cam": 3,
+     "rms_px": 7.882729682512986,
+     "active": 1184
+    }
+   ],
+   "variance_factor": null,
+   "has_weights": false,
+   "camera_sigma": null,
+   "rms_rel_diff": 47.45593994933032,
+   "max_abs_z": 1822.6918022108196,
+   "worst": "cam2.C2",
+   "active_ref": 3588,
+   "same": false
+  },
+  "held": {
+   "rms_px": 0.10921498468534425,
+   "sigma_px": 0.10136801531490164,
+   "active": 3588,
+   "per_camera": [
+    {
+     "cam": 1,
+     "rms_px": 0.10706698223997925,
+     "active": 1196
+    },
+    {
+     "cam": 2,
+     "rms_px": 0.10654833106903512,
+     "active": 1196
+    },
+    {
+     "cam": 3,
+     "rms_px": 0.11387648176812976,
+     "active": 1196
+    }
+   ],
+   "variance_factor": 1.0050420168073446,
+   "has_weights": true,
+   "camera_sigma": null,
+   "rms_rel_diff": 1.0115290512677627e-11,
+   "max_abs_z": 7.765317606543474e-07,
+   "worst": "win2.b",
+   "active_ref": 3588,
+   "same": true
+  },
+  "rules": {
+   "default_weights": {
+    "default": 106360.05227466972,
+    "held": 42.797351412794086,
+    "held_rel": -0.9995976181799697
+   },
+   "held_weights": {
+    "default": 89401.59242899073,
+    "held": 4186.00000000259,
+    "held_rel": -0.9531775678008485
+   },
+   "equal_weights": {
+    "default": 914.0420342981015,
+    "held": 42.797351412794086,
+    "held_rel": -0.9531779176373891
+   }
+  },
+  "seconds": 118.89578652381897
+ }
+]

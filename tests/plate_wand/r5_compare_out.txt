@@ -1,0 +1,14 @@
+R5: W7 on the code with the perturbed restarts, against runs_v4/w7_bad_data_v2.json
+  A_clean    : at its data's minimum True -> True; z vs the clean fit RMS 0.000 -> 0.000, max 0.000 -> 0.000; rms 0.117299 -> 0.117299, active 8000 -> 8000; identical; W7 verdict True -> True; no restarts
+  A_outliers : at its data's minimum True -> True; z vs the clean fit RMS 0.155 -> 0.155, max 0.288 -> 0.288; rms 0.116717 -> 0.116717, active 7834 -> 7834; identical; W7 verdict True -> True; no restarts
+  A_swapped  : at its data's minimum True -> True; z vs the clean fit RMS 0.082 -> 0.082, max 0.159 -> 0.159; rms 0.117158 -> 0.117158, active 7920 -> 7920; identical; W7 verdict True -> True; no restarts
+  A_missing  : at its data's minimum True -> True; z vs the clean fit RMS 0.392 -> 0.392, max 0.684 -> 0.684; rms 0.114572 -> 0.114572, active 7180 -> 7180; identical; W7 verdict True -> True; no restarts
+  A_noisy    : at its data's minimum True -> True; z vs the clean fit RMS 0.781 -> 0.781, max 2.725 -> 2.725; rms 0.364182 -> 0.364182, active 7999 -> 7999; identical; W7 verdict True -> True; no restarts
+  A_partial  : at its data's minimum True -> True; z vs the clean fit RMS 0.356 -> 0.356, max 0.739 -> 0.739; rms 0.107184 -> 0.107184, active 6000 -> 6000; identical; W7 verdict True -> True; no restarts
+  B_clean    : at its data's minimum True -> True; z vs the clean fit RMS 0.000 -> 0.000, max 0.000 -> 0.000; rms 0.117433 -> 0.117433, active 8000 -> 8000; identical; W7 verdict True -> True; restarts: 1 round(s), no change, 4 s of 64 s
+  B_outliers : at its data's minimum True -> True; z vs the clean fit RMS 0.175 -> 0.175, max 0.468 -> 0.468; rms 0.116767 -> 0.116767, active 7840 -> 7840; identical; W7 verdict True -> True; restarts: 1 round(s), no change, 4 s of 100 s
+  B_swapped  : at its data's minimum True -> True; z vs the clean fit RMS 0.106 -> 0.106, max 0.217 -> 0.217; rms 0.117278 -> 0.117278, active 7920 -> 7920; identical; W7 verdict True -> True; restarts: 1 round(s), no change, 4 s of 94 s
+  B_missing  : at its data's minimum True -> True; z vs the clean fit RMS 0.359 -> 0.359, max 0.836 -> 0.836; rms 0.114712 -> 0.114712, active 7180 -> 7180; identical; W7 verdict True -> True; restarts: 1 round(s), no change, 4 s of 61 s
+  B_noisy    : at its data's minimum True -> True; z vs the clean fit RMS 0.467 -> 0.467, max 1.150 -> 1.150; rms 0.364137 -> 0.364137, active 7999 -> 7999; identical; W7 verdict True -> True; restarts: 1 round(s), no change, 3 s of 67 s
+  B_partial  : at its data's minimum True -> True; z vs the clean fit RMS 1.107 -> 1.107, max 2.638 -> 2.638; rms 0.107362 -> 0.107362, active 5999 -> 5999; identical; W7 verdict False -> False; restarts: 1 round(s), no change, 3 s of 117 s
+R5: PASS

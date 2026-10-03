@@ -1,0 +1,9 @@
+R1b: seed 2000, the answer from scratch: rms 1.158848 px (as R1)
+  the answer: each window's nearest wand end to its water side: window 1 0.0 mm, window 2 268.3 mm; sigma of the windows' offsets at their anchors: 19.2 mm, 2.5 mm
+  the answer, window 1: the wand ends' depths in the water, smallest five 3.47e-12, 0.582, 0.826, 0.942, 1.22 mm; within 0.01 / 0.1 / 1 mm of the surface: 1 / 1 / 4 of 1538
+  the answer, window 2: the wand ends' depths in the water, smallest five 268, 268, 268, 268, 268 mm; within 0.01 / 0.1 / 1 mm of the surface: 0 / 0 / 0 of 1538
+  the global minimum, window 1: the wand ends' depths in the water, smallest five 19.7, 20, 20.4, 20.5, 20.9 mm; within 0.01 / 0.1 / 1 mm of the surface: 0 / 0 / 0 of 1538
+  the global minimum, window 2: the wand ends' depths in the water, smallest five 270, 270, 270, 270, 270 mm; within 0.01 / 0.1 / 1 mm of the surface: 0 / 0 / 0 of 1538
+  the truth: the wand box's nearest corner to each window's water side window 1 55.7 mm, window 2 274.5 mm
+  the answer's last bundle adjustment: 1 iterations, the last accepted; stage 4: 5 rounds, 58 LM iterations
+scale s = 1 (the first z of each draw, as R1 used: R1 had no redraws)

@@ -1,0 +1,32 @@
+{
+ "rig_B": {
+  "kept": 2000,
+  "left_out": 0,
+  "redraws": 0,
+  "sigma_ratio_min": 0.9640056304779178,
+  "sigma_ratio_max": 1.0299934784753808,
+  "corr_max_diff": 0.08141964307873478,
+  "roundtrip": 5.6815663285192386e-14,
+  "camera1_untouched": true,
+  "ms_per_draw": 11.27549922466278
+ },
+ "determinism": {
+  "seed": 2452947407,
+  "same": true,
+  "seed_moved": 2060943507,
+  "differ": true
+ },
+ "seed2000": {
+  "rms_pinned": 1.1588482091375132,
+  "min_depth_mm": [
+   3.467448550509289e-12,
+   268.2608259348192
+  ],
+  "kept": 200,
+  "left_out": 0,
+  "valid": true,
+  "first_try": 109,
+  "tries": 382
+ },
+ "pass": true
+}

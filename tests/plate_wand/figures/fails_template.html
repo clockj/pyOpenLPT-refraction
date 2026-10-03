@@ -1,0 +1,735 @@
+<title>Flat-Window Calibration Limits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: a lab report on a cool optical-bench ground. One reading column (about 70ch); the two figures and the wide
+   tables run to the full 1080px frame. Section labels in condensed caps; numbers only where the order is real. */
+:root {
+  --bg: #f2f5f6;
+  --surface: #ffffff;
+  --ink: #142029;
+  --muted: #55636f;
+  --rule: #d4dde3;
+  --accent: #0c6a8a;
+  --accent-soft: #e0eef3;
+  --right: #13875c;
+  --right-soft: #dcf1e7;
+  --fixed: #2f6fd0;
+  --fixed-soft: #e2ebfa;
+  --wrong: #d1452b;
+  --wrong-soft: #fbe5df;
+  --band: #fbefeb;
+  --code-bg: #e8eff2;
+  --on-mark: #ffffff;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151b; --surface: #151f28; --ink: #e3eaef; --muted: #9babb8; --rule: #2a3845;
+    --accent: #5db7d5; --accent-soft: #12303d;
+    --right: #2fa676; --right-soft: #113628; --fixed: #4f86e0; --fixed-soft: #162845;
+    --wrong: #e0553a; --wrong-soft: #421d16; --band: #2a1a17; --code-bg: #1b2833; --on-mark: #0e151b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151b; --surface: #151f28; --ink: #e3eaef; --muted: #9babb8; --rule: #2a3845;
+  --accent: #5db7d5; --accent-soft: #12303d;
+  --right: #2fa676; --right-soft: #113628; --fixed: #4f86e0; --fixed-soft: #162845;
+  --wrong: #e0553a; --wrong-soft: #421d16; --band: #2a1a17; --code-bg: #1b2833; --on-mark: #0e151b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.page { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 44px 80px; display: grid; gap: 64px; }
+.prose { max-width: 70ch; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; text-wrap: balance; color: var(--ink); }
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.25rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 2.6vw, 1.85rem); font-weight: 600; }
+h3 { font-size: 1.08rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+code { font: 500 0.88em/1 var(--mono); background: var(--code-bg); padding: 0.12em 0.36em; border-radius: 4px; overflow-wrap: anywhere; }
+.eyebrow { font: 600 0.76rem/1.3 var(--display); letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+section { display: grid; gap: 22px; scroll-margin-top: 16px; }
+section > .prose { display: grid; gap: 12px; }
+.muted { color: var(--muted); }
+
+/* masthead */
+.masthead { display: grid; gap: 16px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+.lede { font-size: 1.12rem; max-width: 66ch; }
+.request { color: var(--muted); font-style: italic; max-width: 70ch; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 8px; }
+.stat { display: grid; gap: 6px; align-content: start; padding: 14px 16px; background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 8px; }
+.stat b { font: 700 1.7rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.9rem; color: var(--muted); line-height: 1.45; }
+.stat.bad b { color: var(--wrong); }
+.stat.good b { color: var(--right); }
+.terms { font-size: 0.9rem; color: var(--muted); max-width: 78ch; }
+.terms i { color: var(--ink); font-style: normal; font-weight: 600; }
+
+/* key list */
+.keys { margin: 0; padding-left: 1.4em; display: grid; gap: 12px; }
+.keys li::marker { font: 700 1rem var(--display); color: var(--accent); }
+.keys b { font-weight: 600; }
+
+/* figures */
+.fig { margin: 0; display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 10px; padding: 18px 18px 16px; }
+.fig figcaption { font-size: 0.92rem; color: var(--muted); max-width: 90ch; }
+.fig figcaption b { color: var(--ink); }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#fig-weak svg { display: block; width: 100%; min-width: 620px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.88rem; color: var(--ink); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend svg { width: 16px; height: 16px; flex: none; }
+.note { font-size: 0.92rem; }
+svg text { fill: var(--ink); font-family: var(--body); }
+svg .tick { font: 400 12px var(--mono); fill: var(--muted); }
+svg .axis-title { font-size: 12px; fill: var(--muted); }
+svg .row-label { font: 600 13px var(--display); fill: var(--ink); }
+svg .row-sub { font-size: 11.5px; fill: var(--muted); }
+svg .mark-label { font: 500 11.5px var(--mono); fill: var(--ink); }
+svg .band { fill: var(--band); }
+svg .row-rule { stroke: var(--rule); stroke-width: 1; }
+svg .grid-line { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 4; }
+svg .threshold { stroke: var(--wrong); stroke-width: 1.5; stroke-dasharray: 5 4; }
+svg .threshold-label { font: 600 12px var(--display); fill: var(--wrong); }
+svg .band-label { font: 600 11px var(--display); fill: var(--wrong); letter-spacing: 0.08em; }
+svg .m { cursor: pointer; outline: none; }
+svg .m:focus-visible .hit, svg .m:hover .hit { stroke: var(--ink); stroke-width: 1.5; }
+svg .hit { fill: transparent; stroke: none; }
+.m-right { fill: var(--right); stroke: var(--surface); stroke-width: 1; }
+.m-fixed { fill: var(--fixed); stroke: var(--surface); stroke-width: 1; }
+.m-wrong { stroke: var(--wrong); stroke-width: 3; stroke-linecap: round; fill: none; }
+details { font-size: 0.92rem; }
+summary { cursor: pointer; color: var(--accent); font-weight: 500; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* hint grid */
+.hint-grid { border-collapse: separate; border-spacing: 4px; font-size: 0.86rem; min-width: 640px; }
+.hint-grid th { font: 600 0.82rem/1.2 var(--display); color: var(--muted); text-align: center; padding: 2px 4px;
+  letter-spacing: 0.04em; }
+.hint-grid th.rowhead { text-align: left; color: var(--ink); font-size: 0.95rem; padding-right: 14px; white-space: nowrap; }
+.hint-grid th.rowhead span { display: block; font: 400 0.8rem/1.3 var(--body); color: var(--muted); }
+.hint-grid td { padding: 0; }
+.hint-grid td.gap { width: 10px; }
+.cell { width: 30px; height: 30px; border-radius: 5px; border: 1.5px solid transparent; font: 600 15px/1 var(--mono);
+  display: grid; place-items: center; cursor: pointer; padding: 0; }
+.cell:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cell.same { background: var(--right); color: var(--on-mark); }
+.cell.equivalent { background: var(--right-soft); border-color: var(--right); color: var(--right); }
+.cell.wrong { background: var(--wrong); color: var(--on-mark); }
+.swatch { width: 16px; height: 16px; border-radius: 4px; display: inline-grid; place-items: center;
+  font: 600 11px/1 var(--mono); border: 1.5px solid transparent; }
+.swatch.same { background: var(--right); color: var(--on-mark); }
+.swatch.equivalent { background: var(--right-soft); border-color: var(--right); color: var(--right); }
+.swatch.wrong { background: var(--wrong); color: var(--on-mark); }
+
+/* tables */
+table.data { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 0.9rem; line-height: 1.5;
+  background: var(--surface); }
+table.data th, table.data td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+table.data thead th { font: 600 0.78rem/1.3 var(--display); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 2px solid var(--rule); background: var(--surface); }
+table.data tbody th { font-weight: 600; min-width: 13em; }
+table.data td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.table-frame { border: 1px solid var(--rule); border-radius: 10px; overflow-x: auto; background: var(--surface); }
+.table-frame table { border: 0; }
+.table-frame tbody tr:last-child > * { border-bottom: 0; }
+.tag { display: inline-block; font: 600 0.72rem/1.2 var(--display); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 999px; white-space: nowrap; }
+.tag.bad { background: var(--wrong-soft); color: var(--wrong); }
+.tag.info { background: var(--accent-soft); color: var(--accent); }
+table.small td.num { min-width: 4em; }
+
+/* two columns, checklist */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px 32px; }
+.cols > div { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.cols ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+.checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.step { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px;
+  display: grid; gap: 10px; align-content: start; min-width: 0; }
+.step h3 { display: flex; gap: 10px; align-items: baseline; }
+.step h3 small { font: 700 0.85rem var(--mono); color: var(--accent); }
+.step ol { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; font-size: 0.93rem; }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; max-width: 72ch; }
+.callout.bad { border-color: var(--wrong); }
+pre { margin: 0; font: 400 0.86rem/1.5 var(--mono); background: var(--code-bg); padding: 12px 14px; border-radius: 8px;
+  overflow-x: auto; }
+dl { margin: 0; display: grid; gap: 14px; }
+dt { font: 600 1rem var(--display); }
+dd { margin: 4px 0 0; }
+
+footer { border-top: 1px solid var(--rule); padding-top: 22px; font-size: 0.88rem; color: var(--muted); display: grid; gap: 10px; }
+footer code { font-size: 0.86em; }
+
+/* tooltip */
+#tip { position: fixed; z-index: 10; max-width: min(360px, calc(100vw - 32px)); background: var(--surface);
+  color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; font-size: 0.84rem;
+  line-height: 1.45; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18); pointer-events: none; }
+#tip b { font-weight: 600; }
+
+@media (max-width: 560px) {
+  body { font-size: 15px; }
+  .page { gap: 48px; padding-block: 28px 60px; }
+  .fig { padding: 14px 12px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+<!--BODY-->
+<main class="page">
+
+<header class="masthead">
+  <p class="eyebrow">pyOpenLPT · PINPLATE wand calibration · synthetic tests · 3 Oct 2026</p>
+  <h1>When the flat-window calibration cannot work</h1>
+  <p class="lede">What to watch in a real experiment. From every test of <code>plate_wand.calibrate</code>: when its
+    answer can be wrong, when it is right but imprecise, what does not matter, and what was never tested. For each,
+    the evidence, how <code>calibration_report.txt</code> shows it, and what to do.</p>
+  <p class="request">Your request: “go ahead to try to fix it as much as possible. in the end, report when the
+    calibration cannot work so that i can pay attention to in the real experiments”.</p>
+  <div class="stats" aria-label="Results at a glance">
+    <div class="stat bad"><b>3 of 120</b><span>W5 and R4 test cases still wrong without hints. All three have a window
+      seen only by one or two narrow-view cameras.</span></div>
+    <div class="stat good"><b>0 of 98</b><span>wrong among the cases without such a window.</span></div>
+    <div class="stat good"><b>120 of 120</b><span>right with every camera's window-normal hint 0–10° off. None was
+      worse than without hints.</span></div>
+    <div class="stat good"><b>3 of 3</b><span>wrong answers at 0.1 px that the report's warnings flagged. 3 of the 47
+      right answers were flagged too.</span></div>
+  </div>
+  <p class="terms"><i>Terms.</i> Each answer is compared with the fit started from the truth on the same data.
+    <i>The same minimum</i>: every parameter within 0.01σ of it, the same detections kept. <i>Equivalent</i>: every
+    parameter within 3σ and the RMS within 2 %, or a lower RMS. <i>Right</i> means at least equivalent, <i>wrong</i>
+    neither. All data are synthetic: detections from pyOpenLPT's C++ camera model with Gaussian noise. No real wand data
+    have been calibrated yet.</p>
+</header>
+
+<section id="short">
+  <div class="prose">
+    <p class="eyebrow">In short</p>
+    <h2>Seven things to watch, most important first</h2>
+    <ol class="keys">
+      <li><b>Wrong answers come from one rig feature: a window seen only by one or two cameras with narrow views.</b>
+        Narrow means each sees the wand under less than about 6°: a long lens, or a camera far from the wand's volume.
+        The calibration now scans such a window's normal itself, which fixed 2 of the 5 known wrong answers. The worst
+        rig tested has two cameras, each alone behind its own window with a long lens (seed 1045).</li>
+      <li><b>Window-normal hints help, and never made an answer worse.</b> Within 20° of the truth they gave a right
+        answer in 45 of 50 runs on the five hardest cases, every miss on seed 1045. Over W5 and R4 with hints 0–10° off,
+        none of 120 cases was worse, and the three still wrong without hints were right.</li>
+      <li><b>Detection noise near 1 px on a rig with several windows</b> lets the fit stop pinned against a window
+        (6 of the 8 pinned answers came at 1 px). The restarts fix most of them. Aim for about 0.1 px.</li>
+      <li><b>The wand length is the only scale.</b> Measure it to 0.1 % or better: the data cannot check it.</li>
+      <li><b>An unmodelled lens distortion hides in the residuals.</b> If the lens may distort, fit k1.</li>
+      <li><b>Calibrate over the whole measurement volume.</b> The error grows outside it, 2× at twice the volume.</li>
+      <li><b>Read the WARNINGS block of <code>calibration_report.txt</code> first.</b> At 0.1 px every wrong answer in
+        the tests had a warning.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="wrong">
+  <div class="prose">
+    <p class="eyebrow">When the answer can be wrong</p>
+    <h2>Every wrong answer had a weakly seen window</h2>
+    <p>A window's tilt changes a narrow-view camera's images only slightly, so the cost has several minima. The truth's
+      valley is a few degrees wide, and a wrong answer 10–50° away is a separate minimum behind a ridge. Restarts that
+      perturb the answer by its own error bars do not leave it (diagnosis D8). Since 3 Oct the calibration scans the
+      normal of every such window, and keeps what it finds only when it fits the data better.</p>
+  </div>
+  <figure class="fig" aria-labelledby="fig-weak-cap">
+    <figcaption id="fig-weak-cap"><b>Figure 1. The weak-window rule on W5 and R4.</b> Each mark is one test case that
+      has a window seen by only one or two cameras. It sits at the widest view among that window's cameras, for the
+      case's narrowest such window. Left of the dashed line the report now warns.</figcaption>
+    <div class="legend" aria-hidden="true">
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" class="m-right"/></svg>Right</span>
+      <span><svg viewBox="0 0 16 16"><path d="M8 2 L14 8 L8 14 L2 8 Z" class="m-fixed"/></svg>Wrong before, fixed by the
+        scan</span>
+      <span><svg viewBox="0 0 16 16"><path d="M3.5 3.5 L12.5 12.5 M12.5 3.5 L3.5 12.5" class="m-wrong"/></svg>Still
+        wrong without hints</span>
+    </div>
+    <div class="scroll"><div id="fig-weak"></div></div>
+    <p class="note" id="fig-weak-note"></p>
+    <details>
+      <summary>The cases as a table</summary>
+      <div class="scroll"><table class="data small" id="weak-table">
+        <thead><tr><th scope="col">case</th><th scope="col">cameras per window</th><th scope="col">its narrowest
+          window</th><th scope="col">view</th><th scope="col">before the scan</th><th scope="col">now</th><th
+          scope="col">with hints</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </details>
+  </figure>
+
+  <div class="table-frame">
+    <table class="data">
+      <thead><tr><th scope="col">Condition</th><th scope="col">What goes wrong</th><th scope="col">Evidence</th>
+        <th scope="col">How the report shows it</th><th scope="col">What to do</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">A window seen only by one or two cameras that all see the wand under less than 6°</th>
+          <td>Its tilt shows only weakly. The cost has several minima: the truth's valley is a few degrees wide, and a
+            wrong answer 10–50° away is a separate minimum.</td>
+          <td>Every wrong answer of W5 and R4 had one: 5 of the 22 such cases, none of the 98 others. D8 mapped the
+            minima.</td>
+          <td><code>weak_window</code>, with whether the scan found a better answer. A large σ on that window (seed 1001
+            at the truth: 2.1°, 438 mm).</td>
+          <td>A second camera with a wider view behind that window. Failing that, window-normal hints.</td></tr>
+        <tr><th scope="row">Two such windows wrong at once, or one camera per window</th>
+          <td>A scan of one window's normal cannot leave the minimum. Seed 1045 (two cameras, one per window, 29,100 and
+            12,700 px) stays wrong without hints and with most hints 10° or more off.</td>
+          <td>Still wrong without hints: W5 1031, 1034 and 1045. 1045 wrong in 8 of 13 hinted runs (H4b).</td>
+          <td>The same warning on each window; often large residuals (next rows).</td>
+          <td>Do not build a rig with one camera per window and long lenses.</td></tr>
+        <tr><th scope="row">A wrong answer with large residuals</th>
+          <td>A wrong minimum fits the data badly: W5 1031 without hints ends at 3.6 px RMS from 0.1 px detections.</td>
+          <td>W5, H5a.</td>
+          <td><code>noisy</code>: “the residuals are X px per coordinate”. The noise section shows every camera far
+            noisier than the detector.</td>
+          <td>Image a still wand over many frames: if its noise is much smaller, the answer is wrong.</td></tr>
+        <tr><th scope="row">Detection noise near 1 px on a rig with several windows</th>
+          <td>The fit can stop pinned against a window: a wand end exactly on its water-side surface.</td>
+          <td>6 of the 8 pinned answers came at 1 px; the restarts fixed most. R4 3110 at 1 px was R4's one wrong answer
+            left; the scan now fixes it.</td>
+          <td><code>noisy</code>; <code>pinned</code>; the restarts' line “IMPROVED”.</td>
+          <td>Sharper detections: focus, short exposure, bright balls. More cameras per window.</td></tr>
+        <tr><th scope="row">A window-normal hint far from the truth</th>
+          <td>Nothing: a hinted answer is kept only when it fits better than the answer without hints.</td>
+          <td>0 of 65 hinted runs worse on the hard cases (H4b), 0 of 120 on W5 and R4 (H1b).</td>
+          <td><code>hint_far</code>: “the answer's window normal is X° from camN's hint”.</td>
+          <td>If you trust the hint to better than X°, doubt the answer.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="hints">
+  <div class="prose">
+    <p class="eyebrow">Window-normal hints</p>
+    <h2>A rough hint is enough, except with one long-lens camera per window</h2>
+    <p>A hint is a rough guess of each window's normal, as each camera sees it. The calibration builds its start three
+      ways (without the hints, with each hinted normal held, and with a second search about each hint), refits each
+      with its own restarts, and keeps a hinted answer only when it fits the data better. The final fit estimates every
+      normal from the data: the hint only steers the start.</p>
+  </div>
+  <figure class="fig" aria-labelledby="fig-hints-cap">
+    <figcaption id="fig-hints-cap"><b>Figure 2. The five hard cases, without and with hints.</b> The cases the
+      calibration got wrong before 3 Oct, calibrated without hints and with every camera's hint off by 0–30° in random
+      directions: three draws per error above 0° (H4b, the final code). Hover over or tab to a cell for the run.</figcaption>
+    <div class="legend" aria-hidden="true">
+      <span><span class="swatch same">=</span>The same minimum</span>
+      <span><span class="swatch equivalent">≈</span>Equivalent</span>
+      <span><span class="swatch wrong">✕</span>Wrong</span>
+    </div>
+    <div class="scroll"><table class="hint-grid" id="fig-hints"></table></div>
+  </figure>
+  <div class="prose">
+    <dl>
+      <div><dt>When to give them</dt>
+        <dd>For a window seen only by one or two narrow-view cameras. A first calibration's WARNINGS block names such
+          windows.</dd></div>
+      <div><dt>What to give</dt>
+        <dd>Per camera, the normal of its window in the camera's own frame: x along the image rows, y down the image,
+          z along the optical axis, either sign. A camera turned 30° to the left of square-on, about its vertical
+          axis, sees (sin 30°, 0, cos 30°). In the rig file, <code>null</code> for a camera without a hint:
+          <pre>"hints": {"normals": [[0.5, 0, 0.866], null, [0, -0.17, 0.98], null]}</pre></dd></div>
+      <div><dt>How accurate</dt>
+        <dd>Windows with two cameras: up to 20° was always enough (3110, 1031); at 30°, 3 of 3 runs on 3110 and 2 of
+          3 on 1031. A two-camera window with two single long-lens windows (1034): up to 30°, all 13 runs right. One
+          camera per window with long lenses (1045): right with an exact hint and in 2 of 3 runs at 5°, mostly wrong
+          beyond.</dd></div>
+      <div><dt>Never worse</dt>
+        <dd>None of the 65 hinted runs on the hard cases, and none of the 120 W5 and R4 cases hinted 0–10° off, was
+          worse than without hints. The three cases still wrong without hints were right with them; their hints
+          happened to be within 1–10°, 1045's within 1°.</dd></div>
+      <div><dt>What the report says</dt>
+        <dd>Each hint's angle from the answer. A large angle means a rough hint or a wrong answer.</dd></div>
+      <div><dt>Cost</dt>
+        <dd>With hints a calibration takes a median 2.55× as long (1.2–3.4×).</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="imprecise">
+  <div class="prose">
+    <p class="eyebrow">When the answer is right but imprecise</p>
+    <h2>Geometry sets the precision</h2>
+  </div>
+  <div class="table-frame">
+    <table class="data">
+      <thead><tr><th scope="col">Condition</th><th scope="col">Effect</th><th scope="col">Evidence</th>
+        <th scope="col">What to do</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Cameras' lines of sight within about 5° of each other</th>
+          <td>f, the distances and the 3-D shape 3–9× worse than with lines 20–40° apart. The GUI's current calibration
+            failed on this layout.</td>
+          <td>W2 rig C, <code>p_mixed_views.py</code>, W6</td>
+          <td>Spread the cameras: 20° or more between lines of sight, 35–40° better.</td></tr>
+        <tr><th scope="row">Two windows facing each other (180°)</th>
+          <td>3-D shape 2.2× worse than through perpendicular walls.</td>
+          <td>A1</td>
+          <td>Prefer perpendicular windows.</td></tr>
+        <tr><th scope="row">Long lenses (f ≈ 40,000 px)</th>
+          <td>f and the camera's distance trade: σ(f) 0.6 %, distance 6.7 mm. The 3-D shape is still the best
+            (0.6 µm).</td>
+          <td>W2 rig E</td>
+          <td>Nothing, if only shapes and distances matter.</td></tr>
+        <tr><th scope="row">The scene's position along the viewing direction</th>
+          <td>Known to 0.4–7 mm relative to camera 1; shapes to 0.6–26 µm.</td>
+          <td>W2</td>
+          <td>Measure distances and shapes inside the volume, not positions relative to the cameras.</td></tr>
+        <tr><th scope="row">Points outside the calibrated volume</th>
+          <td>The shape error grows about linearly: 2× at twice the volume.</td>
+          <td>W2</td>
+          <td>Move the wand through the whole volume, its full depth included.</td></tr>
+        <tr><th scope="row">Detection noise</th>
+          <td>Every error scales with it (0.02–2 px tested).</td>
+          <td>W3</td>
+          <td>About 0.1 px.</td></tr>
+        <tr><th scope="row">Fewer frames</th>
+          <td>Errors expected to grow as 1/√frames (the Cramér–Rao bound; not swept in the tests, which used
+            500–1,500).</td>
+          <td>W2 (1,000 frames), W5</td>
+          <td>About 1,000 frames with both ends seen by two or more cameras.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="scope">
+  <div class="cols">
+    <div>
+      <p class="eyebrow">Tested, and it does not matter</p>
+      <ul>
+        <li><b>The window constants:</b> a plate 10 % too thick, or a water index 0.002 off, left the 3-D shape error
+          within 1 µm (W8).</li>
+        <li><b>The angle between windows:</b> 30°–180° all reach the global minimum (A1: 56 of 56).</li>
+        <li><b>A camera looking straight through its window:</b> no loss, also next to angled cameras.</li>
+        <li><b>Steep views,</b> up to 45° incidence (W2 rig D).</li>
+        <li><b>Bad detections:</b> 2 % gross outliers, 1 % swapped ends, a camera missing from 40 % of the frames,
+          one camera five times noisier (W7).</li>
+        <li><b>No frame seen by every camera</b> (W7).</li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Never tested</p>
+      <ul>
+        <li><b>Real data</b> (W10).</li>
+        <li><b>Lens distortion fitted from scratch:</b> k1 was fitted only from the truth (W8).</li>
+        <li><b>Windows of two or more plates</b> in a calibration. The model handles them (W0).</li>
+        <li><b>Other window angles with a single camera or long lenses:</b> A1 used two moderate-lens cameras per
+          window.</li>
+        <li><b>More than 3 windows or 6 cameras; cameras without a window.</b></li>
+        <li><b>Ball-centre bias through a window:</b> elliptical images, as the tube's T13 found.</li>
+        <li><b>Image-fixed patterns, noise varying with depth, a bending wand, unsynchronised cameras.</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="warnings">
+  <div class="prose">
+    <p class="eyebrow">The report's warnings</p>
+    <h2>What <code>calibration_report.txt</code> flags</h2>
+    <p>The report opens with a WARNINGS block; <code>calibration_result.json</code> has the same list under
+      <code>"warnings"</code>, each with a code. Each warning gives its evidence and what to do. Below, how often each
+      fired in H5a: the 120 W5 and R4 cases rerun without hints on the final code (3 wrong, 117 right).</p>
+  </div>
+  <div class="table-frame">
+    <table class="data">
+      <thead><tr><th scope="col">Code</th><th scope="col">When</th><th scope="col">What it means</th>
+        <th scope="col">Wrong answers</th><th scope="col">Right answers</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>weak_window</code></th>
+          <td>A window seen only by one or two cameras that all see the wand under less than 6°.</td>
+          <td>Its tilt shows only weakly; the answer may be one of several minima. The line says whether the scan of its
+            normal found a better answer.</td>
+          <td class="num">2 of 3</td><td class="num">19 of 117</td></tr>
+        <tr><th scope="row"><code>pinned</code></th>
+          <td>An active wand end within 1e-6 mm of a window's water-side surface.</td>
+          <td>The fit may be held against the window rather than at a minimum. Before the restarts, 8 of the 14 wrong
+            multi-window answers were pinned, none of the 69 right ones.</td>
+          <td class="num">1 of 3</td><td class="num">5 of 117</td></tr>
+        <tr><th scope="row"><code>noisy</code></th>
+          <td>Residuals above 0.5 px per coordinate on a rig with several windows.</td>
+          <td>Either the detections are that noisy, or the answer is wrong. A still wand imaged over many frames tells
+            them apart.</td>
+          <td class="num">1 of 3</td><td class="num">56 of 117, all at 0.5–1 px</td></tr>
+        <tr><th scope="row"><code>hint_far</code></th>
+          <td>A hinted normal more than 15° from the answer's.</td>
+          <td>The hint was off by that much, or the answer is wrong. Right answers lie about as far from each hint as
+            the hint is off; wrong ones lay up to 70° away.</td>
+          <td class="num" colspan="2">not raised: no hints in H5a</td></tr>
+        <tr><th scope="row"><code>same_way</code></th>
+          <td>Every camera's line of sight within 10° of the others.</td>
+          <td>f, the distances and the 3-D shape are poorly determined (rig C: 3–9× worse).</td>
+          <td class="num" colspan="2">not in W5 or R4</td></tr>
+        <tr><th scope="row"><code>few_frames</code></th>
+          <td>Fewer than 300 frames used.</td>
+          <td>Outside the tested range (500–1,500).</td>
+          <td class="num" colspan="2">not in W5 or R4</td></tr>
+        <tr><th scope="row"><code>wand_length_fitted</code></th>
+          <td>The wand length was fitted (<code>fit_L=True</code>).</td>
+          <td>Not identifiable through flat windows, so the scale is unchecked (W8).</td>
+          <td class="num" colspan="2">not in W5 or R4</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="callout">At 0.1 px every wrong answer had a warning (3 of 3) and only 3 of the 47 right answers did. At
+    0.5–1 px almost every multi-window case gets <code>noisy</code>, as it should. No warning does not prove the
+    answer right: it means none of the conditions the tests linked to wrong or weak answers is present.</p>
+</section>
+
+<section id="checklist">
+  <div class="prose">
+    <p class="eyebrow">Checklist</p>
+    <h2>For the experiment, in order</h2>
+  </div>
+  <div class="checklist">
+    <div class="step"><h3><small>1</small>Design the rig</h3>
+      <ol>
+        <li><b>Every window: two or more cameras, one with a wide enough view.</b> The wand's positions should span
+          about f/9 pixels of that camera's image diagonal or more, a view of 6°. With f = 20,000 px that is about
+          2,100 px; a 100 mm cloud seen from 1 m spans 5.7°, just too narrow.</li>
+        <li><b>Never one camera per window with long lenses</b> (seed 1045's rig).</li>
+        <li>If a window must have only narrow-view cameras, plan window-normal hints for them: within about 5° for a
+          window with a single camera.</li>
+        <li>Lines of sight 20° or more apart, 35–40° better. Perpendicular windows give the best shape.</li>
+        <li>Synchronise the cameras, or move the wand slowly.</li>
+      </ol></div>
+    <div class="step"><h3><small>2</small>Before recording</h3>
+      <ol>
+        <li>Measure the wand length to 0.1 % or better (25 µm on 25 mm).</li>
+        <li>Enter the windows' plate thicknesses and indices from the camera side. They are not critical.</li>
+        <li>Make the two ends distinguishable, for example with two ball sizes.</li>
+        <li>If the lens may distort, plan to fit k1 (<code>fit_k1=True</code>).</li>
+      </ol></div>
+    <div class="step"><h3><small>3</small>While recording</h3>
+      <ol>
+        <li>About 1,000 frames with both ends seen by two or more cameras.</li>
+        <li>The wand through the whole volume, its full depth included.</li>
+        <li>Sharp, well-lit detections: about 0.1 px.</li>
+        <li>Frames shared between the cameras of different windows: at least 3 per pair of window groups, ideally
+          many.</li>
+      </ol></div>
+    <div class="step"><h3><small>4</small>After calibrating</h3>
+      <ol>
+        <li>Read the WARNINGS block first. <code>weak_window</code> or <code>noisy</code> on a rig with several
+          windows is the main sign of a possibly wrong answer.</li>
+        <li>Read each window's and camera's σ. Degrees on a normal, or tens of mm on a distance, mean the data hold it
+          loosely.</li>
+        <li>Compare the fit's noise with a still wand's. It should not be clearly larger.</li>
+        <li>Validate on something of known size: a second wand, or a dot target triangulated through the window.</li>
+        <li>Plot each camera's residuals over the image. A pattern fixed to the image hides in the RMS.</li>
+      </ol></div>
+  </div>
+</section>
+
+<section id="changes">
+  <div class="prose">
+    <p class="eyebrow">What changed on 3 Oct</p>
+    <h2>Fixed as far as the tests reach</h2>
+    <p>All in <code>plate_wand.py</code> and <code>plate_wand_io.py</code>. Without hints, a rig with no weak window
+      gives exactly the answer it gave before: in H5a, 118 of the 120 W5 and R4 answers are unchanged, and the other 2
+      are better.</p>
+    <ul class="keys">
+      <li><b>Hints run three start paths,</b> each with its own restarts (H3). A hinted answer replaces the default one
+        only when its capped cost is lower and it is another minimum, or keeps the same observations.</li>
+      <li><b>A weak window's normal is scanned</b> (H4): a 30°-wide grid of fits with that normal held, 3° apart, then the
+        best minima released and kept on the same terms. Without hints it fixes R4 3110 and W5 1001, and adds about
+        2–13 min to a rig with weak windows (32 calibrations at once; less on a machine running one).</li>
+      <li><b>The report warns</b> (H5): seven warnings, each with its evidence and what to do.</li>
+      <li><b>Tests:</b> H3a, D8, H4a, H4b, H5a and H1b, and pytest: 12 fast checks and 4 slow, all passing. Nothing is
+        committed.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Sources, in <code>pyOpenLPT/tests/plate_wand/</code>: <code>2026-10-03-when-calibration-fails.md</code> (this
+    report as text), <code>2026-10-03-angles-and-hints-report.md</code> (sections 6c–6g: the tests behind it),
+    <code>2026-10-03-angles-and-hints-plan.md</code> (section 7), and the README's section 7 for every test.</p>
+  <p>The figures are drawn from saved results by <code>make_fails_page.py</code>: <code>p_weak_windows.json</code>,
+    <code>h5a_warnings.json</code>, <code>h1b_hints_regression.json</code> and <code>h4b_scan.json</code>. Nothing is
+    re-fitted.</p>
+</footer>
+</main>
+
+<div id="tip" role="tooltip" hidden></div>
+<script type="application/json" id="fig-data">__FIG_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  const DATA = JSON.parse(document.getElementById("fig-data").textContent);
+  const NS = "http://www.w3.org/2000/svg";
+  const tip = document.getElementById("tip");
+  const fmtInt = n => n.toLocaleString("en-US");
+  const say = { same: "the same minimum", equivalent: "equivalent", wrong: "wrong" };
+
+  function el(tag, attrs, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function showTip(html, x, y) {
+    tip.innerHTML = html;
+    tip.hidden = false;
+    const r = tip.getBoundingClientRect();
+    let left = x + 14, top = y + 14;
+    if (left + r.width > window.innerWidth - 8) left = Math.max(8, x - r.width - 14);
+    if (top + r.height > window.innerHeight - 8) top = Math.max(8, y - r.height - 14);
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+  }
+  function hideTip() { tip.hidden = true; }
+  function bindTip(node, html) {
+    node.addEventListener("mousemove", e => showTip(html, e.clientX, e.clientY));
+    node.addEventListener("mouseleave", hideTip);
+    node.addEventListener("focus", () => { const r = node.getBoundingClientRect(); showTip(html, r.right, r.bottom); });
+    node.addEventListener("blur", hideTip);
+  }
+  function jitter(n) { const s = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return s - Math.floor(s); }
+
+  /* Figure 1: the weak-window rule */
+  (function () {
+    const host = document.getElementById("fig-weak");
+    const W = 760, L = 178, R = 26, T = 40, B = 50;
+    const rows = [
+      { key: "wrong", label: "Still wrong", sub: "without hints", h: 50 },
+      { key: "fixed", label: "Fixed by", sub: "the scan", h: 50 },
+      { key: "right", label: "Right", sub: "", h: 150 },
+    ];
+    let y = T;
+    rows.forEach(r => { r.y = y; y += r.h; });
+    const bottom = y, H = bottom + B;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+      "aria-label": "Test cases by the widest view of their weakest window: every wrong answer lies below 6 degrees" }, host);
+    const lo = Math.log(1), hi = Math.log(45);
+    const x = v => L + (Math.log(v) - lo) / (hi - lo) * (W - L - R);
+    el("rect", { x: x(1), y: T, width: x(6) - x(1), height: bottom - T, class: "band" }, svg);
+    el("text", { x: (x(1) + x(6)) / 2, y: T - 12, "text-anchor": "middle", class: "band-label" }, svg, "NARROW VIEWS");
+    [1, 2, 3, 4, 6, 10, 20, 40].forEach(v => {
+      el("line", { x1: x(v), x2: x(v), y1: T, y2: bottom, class: "grid-line" }, svg);
+      el("text", { x: x(v), y: bottom + 18, "text-anchor": "middle", class: "tick" }, svg, v + "°");
+    });
+    el("text", { x: (L + W - R) / 2, y: bottom + 40, "text-anchor": "middle", class: "axis-title" }, svg,
+      "widest view among the cameras of the case's narrowest one- or two-camera window (log scale)");
+    rows.forEach(r => {
+      el("line", { x1: L - 8, x2: W - R, y1: r.y + r.h, y2: r.y + r.h, class: "row-rule" }, svg);
+      const cy = r.y + r.h / 2;
+      el("text", { x: L - 14, y: r.sub ? cy - 4 : cy + 4, "text-anchor": "end", class: "row-label" }, svg, r.label);
+      if (r.sub) el("text", { x: L - 14, y: cy + 13, "text-anchor": "end", class: "row-sub" }, svg, r.sub);
+      const n = DATA.weak.filter(c => c.cat === r.key).length;
+      el("text", { x: L - 14, y: r.sub ? cy + 29 : cy + 21, "text-anchor": "end", class: "row-sub" }, svg,
+        n + (n === 1 ? " case" : " cases"));
+    });
+    el("line", { x1: x(6), x2: x(6), y1: T - 4, y2: bottom, class: "threshold" }, svg);
+    el("text", { x: x(6) + 6, y: T - 12, class: "threshold-label" }, svg, "6°: the report warns below");
+
+    // the few marks in the upper rows alternate above and below their row's centre, so close ones keep their labels
+    const stagger = {};
+    rows.filter(r => r.key !== "right").forEach(r => {
+      DATA.weak.filter(c => c.cat === r.key).sort((a, b) => a.angle - b.angle)
+        .forEach((c, i) => { stagger[c.set + c.seed + c.noise] = i % 2 ? 11 : -11; });
+    });
+    const marks = DATA.weak.slice().sort((a, b) => (a.cat === "right") - (b.cat === "right"));
+    marks.slice().reverse().forEach(c => {
+      const r = rows.find(q => q.key === c.cat);
+      const j = jitter(c.seed * 7 + Math.round(c.noise * 10));
+      const cx = x(c.angle);
+      const cy = r.y + r.h / 2 + (r.key === "right" ? (j - 0.5) * (r.h - 22) : stagger[c.set + c.seed + c.noise]);
+      const g = el("g", { class: "m", role: "img", tabindex: c.cat === "right" ? "-1" : "0" }, svg);
+      el("circle", { cx, cy, r: 9, class: "hit" }, g);
+      if (c.cat === "right") el("circle", { cx, cy, r: 4.6, class: "m-right" }, g);
+      else if (c.cat === "fixed") el("path", { d: `M${cx} ${cy - 7} L${cx + 7} ${cy} L${cx} ${cy + 7} L${cx - 7} ${cy} Z`,
+        class: "m-fixed" }, g);
+      else el("path", { d: `M${cx - 5.5} ${cy - 5.5} L${cx + 5.5} ${cy + 5.5} M${cx + 5.5} ${cy - 5.5} L${cx - 5.5} ${cy + 5.5}`,
+        class: "m-wrong" }, g);
+      if (c.cat !== "right") el("text", { x: cx + 11, y: cy + 4, class: "mark-label" }, g,
+        c.set + " " + c.seed + (c.noise !== 0.1 ? " (" + c.noise + " px)" : ""));
+      const cams = c.cams === 1 ? "one camera" : "two cameras";
+      const views = c.views.map(a => a.toFixed(1) + "°").join(" and ");
+      const html = `<b>${c.set} seed ${c.seed}</b>, ${c.noise} px; cameras per window ${c.per_window.join(" · ")}<br>` +
+        `Narrowest window: window ${c.window}, ${cams} (f ${c.f.map(fmtInt).join(" and ")} px) seeing the wand under ${views}<br>` +
+        `Without hints: ${say[c.before]} before the scan, ${say[c.after]} now. With hints 0–10° off: ${say[c.hinted]}.`;
+      g.setAttribute("aria-label", html.replace(/<[^>]+>/g, " "));
+      bindTip(g, html);
+    });
+
+    const left = DATA.weak.filter(c => c.angle < 6), right = DATA.weak.filter(c => c.angle >= 6);
+    const wrongBefore = a => a.filter(c => c.before === "wrong").length;
+    const wrongNow = a => a.filter(c => c.after === "wrong").length;
+    document.getElementById("fig-weak-note").textContent =
+      `Below 6°: ${left.length} cases; ${wrongBefore(left)} were wrong before the scan, ${wrongNow(left)} are wrong now. ` +
+      `At 6° or more: ${right.length} cases, ${wrongNow(right)} wrong. ${DATA.others} more cases have three or more ` +
+      `cameras behind every window; ${DATA.others_wrong} of them wrong.`;
+
+    const tb = document.querySelector("#weak-table tbody");
+    DATA.weak.slice().sort((a, b) => a.angle - b.angle).forEach(c => {
+      const tr = document.createElement("tr");
+      const cells = [`${c.set} ${c.seed} (${c.noise} px)`, c.per_window.join(" · "),
+        `window ${c.window}, ${c.cams === 1 ? "one camera" : "two cameras"}`, c.angle.toFixed(1) + "°",
+        say[c.before], say[c.after], say[c.hinted]];
+      cells.forEach((t, i) => { const td = document.createElement("td"); td.textContent = t;
+        if (i === 3) td.className = "num"; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  })();
+
+  /* Figure 2: the hard cases with hints */
+  (function () {
+    const table = document.getElementById("fig-hints");
+    const glyph = { same: "=", equivalent: "≈", wrong: "✕" };
+    const pathName = { default: "the start without hints", held: "the hint-held start", searched: "the hint-searched start" };
+    const thead = document.createElement("thead");
+    const h = document.createElement("tr");
+    const add = (tr, tag, text, attrs) => { const c = document.createElement(tag); c.textContent = text;
+      for (const k in (attrs || {})) c.setAttribute(k, attrs[k]); tr.appendChild(c); return c; };
+    add(h, "th", "", { scope: "col" });
+    add(h, "th", "no hints", { scope: "col" });
+    add(h, "td", "", { class: "gap" });
+    add(h, "th", "exact", { scope: "col" });
+    [5, 10, 20, 30].forEach(d => { add(h, "td", "", { class: "gap" }); add(h, "th", d + "° off", { scope: "colgroup", colspan: "3" }); });
+    thead.appendChild(h);
+    table.appendChild(thead);
+    const tbody = document.createElement("tbody");
+    DATA.hints.forEach(row => {
+      const tr = document.createElement("tr");
+      const th = add(tr, "th", "", { scope: "row", class: "rowhead" });
+      th.textContent = `${row.set} ${row.seed}` + (row.noise !== 0.1 ? ` · ${row.noise} px` : " · 0.1 px");
+      const sub = document.createElement("span");
+      sub.textContent = `${row.per_window.reduce((a, b) => a + b, 0)} cameras: ${row.per_window.join(" + ")} per window`;
+      th.appendChild(sub);
+      let last = "start";
+      row.cells.forEach(c => {
+        const group = c.delta === null ? "none" : String(c.delta);
+        if (group !== last) { if (last !== "start") add(tr, "td", "", { class: "gap" }); last = group; }
+        const td = document.createElement("td");
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "cell " + c.v;
+        b.textContent = glyph[c.v];
+        const what = c.delta === null ? "without hints" : c.delta === 0 ? "exact hints"
+          : `hints ${c.delta}° off, draw ${c.draw + 1}`;
+        const normals = c.normals.map(a => a.toFixed(2) + "°").join(", ");
+        const html = `<b>${row.set} ${row.seed}, ${what}: ${say[c.v]}</b><br>RMS ${c.rms.toFixed(6)} px; ` +
+          `the fit from the truth ${c.ref.toFixed(6)} px; largest |z| ${c.z < 0.01 ? c.z.toExponential(1) : c.z.toFixed(2)}<br>` +
+          `windows' normals off by ${normals}<br>answer from ${pathName[c.path] || c.path}` +
+          (c.scan ? "; the scan of a weak window improved it" : "");
+        b.setAttribute("aria-label", html.replace(/<[^>]+>/g, " "));
+        bindTip(b, html);
+        td.appendChild(b);
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+  })();
+})();
+</script>

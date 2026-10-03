@@ -91,7 +91,8 @@ def run_one(task):
                 "good_rejected": int(np.sum(~is_bad & ~obs.active)),
                 "subset": sol.info["bootstrap"].get("subset"),
                 "added_by_dlt": [m.get("added_by_dlt") for m in sol.info["bootstrap"].get("mirrors", [])],
-                "noise": sol.info.get("noise_weights", {}).get("sigma_group_px")})
+                "noise": sol.info.get("noise_weights", {}).get("sigma_group_px"),
+                "perturbed": sol.info["starts"].get("perturbed")})
     # the solution and the truth-started reference, for the comparisons in main()
     ref_truth = pw.solve(pw.WandData(uv, wand.L, rig_t.sizes), [c.copy() for c in rig_t.cams],
                          pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win))
@@ -151,8 +152,8 @@ def main():
             sd = np.sqrt(np.diag(np.array(r["cov"])))
             z_clean = (d_s - d_clean) / sd
             z_truth = d_s / sd
-            rec = {k: r[k] for k in ("rms_px", "rows", "active", "bad_rows", "bad_rejected", "good_rejected",
-                                     "seconds", "subset", "added_by_dlt", "noise")}
+            rec = {k: r.get(k) for k in ("rms_px", "rows", "active", "bad_rows", "bad_rejected", "good_rejected",
+                                         "seconds", "subset", "added_by_dlt", "noise", "perturbed")}
             nested = r["scenario"] != "noisy"
             exp_z = float(np.sqrt(np.mean(np.maximum(1.0 - (sd_clean / sd) ** 2, 0.0)))) if nested else None
             rec.update({"z_vs_clean_rms": float(np.sqrt(np.mean(z_clean ** 2))),
@@ -175,7 +176,9 @@ def main():
                 f"{r['seconds']:.0f} s" + (f"; stage-1 subset {r['subset']}, added by DLT {r['added_by_dlt']}"
                                            if r['scenario'] == 'partial' else "")
                 + (f"; noise per camera {', '.join(f'{v:.3f}' for v in r['noise'])} px" if r['noise'] and
-                   r['scenario'] == 'noisy' else "") + ("" if good else "   <-- FAIL"))
+                   r['scenario'] == 'noisy' else "")
+                + ("; the perturbed restarts improved it" if (r.get("perturbed") or {}).get("improved") else "")
+                + ("" if good else "   <-- FAIL"))
     out["pass"] = bool(ok_all)
     log("W7: " + ("PASS" if ok_all else "FAIL"))
     (HERE / "w7_bad_data.json").write_text(json.dumps(out, indent=1, default=float), encoding="utf-8")

@@ -34,7 +34,10 @@ in the gauge of the fit (camera 1 held).
      the others' points (`bootstrap_groups`); with one camera per window, by alternating placements
      (`bootstrap_singles`).  Design and evidence: tests/plate_wand/2026-10-02-plate-wand-implementation.md, section 10;
   4  maximum likelihood: the reprojection error in pixels with explicit wand frames, outlier rejection and per-camera
-     noise weights (`bundle_adjust`, `refine`);
+     noise weights (`bundle_adjust`, `refine`); on a rig that uses several windows, a few restarts perturbed about the
+     answer, the cheapest refitted if it lowers the cost (`perturbed_restart`): a start can end pinned against a
+     window, a wand end on its water-side surface; and a scan of each weakly seen window's normal (`weak_windows`,
+     `scan_window_normal`): its true normal can lie in a narrow valley, tens of degrees from a wrong answer's;
   5  covariance and checks (`covariance`, `camera_sigmas`, `window_sigmas`, `predicted_projection_error`,
      `wand_lengths`; the files: plate_wand_io).
 
@@ -48,6 +51,8 @@ from __future__ import annotations
 import itertools
 import math
 import time
+import zlib
+from collections import deque
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Sequence, Tuple
 
@@ -180,16 +185,18 @@ def anchors_for(cams, rig: Rig) -> List[Optional[np.ndarray]]:
 
 class Layout:
     """The free parameters: per camera the columns of CAM_COLS (+ k1), camera 1 without its pose (the gauge); per
-    window not in fixed_windows its (a, b, delta) about its anchor; optionally L.  `cams_free` limits the free cameras
-    (e.g. a resection).  Optional priors (`add_prior`) add residual rows on log f or on a camera's distance to its
-    window."""
+    window not in fixed_windows its (a, b, delta) about its anchor -- only delta for a window in held_normals, whose
+    normal is held (a hint-held start) --; optionally L.  `cams_free` limits the free cameras (e.g. a resection).
+    Optional priors (`add_prior`) add residual rows on log f or on a camera's distance to its window."""
 
     def __init__(self, n_cams: int, n_wins: int = 0, fit_k1: bool = False, fit_L: bool = False, gauge: bool = True,
-                 fixed_windows: Sequence[int] = (), anchors=None, cams_free: Sequence[int] = None):
+                 fixed_windows: Sequence[int] = (), anchors=None, cams_free: Sequence[int] = None,
+                 held_normals: Sequence[int] = ()):
         self.cols = list(CAM_COLS) + (["k1"] if fit_k1 else [])
         self.model_idx = [cm.CAM_PARAMS.index(c) for c in self.cols]
         self.n_cams, self.n_wins, self.fit_k1, self.fit_L, self.gauge = n_cams, n_wins, fit_k1, fit_L, gauge
         self.fixed_windows = tuple(int(w) for w in fixed_windows)
+        self.held_normals = tuple(int(w) for w in held_normals)
         self.anchors = list(anchors) if anchors is not None else [None] * n_wins
         self.pos = np.full((n_cams, len(self.cols)), -1, int)
         self.names: List[str] = []
@@ -208,6 +215,8 @@ class Layout:
             if w in self.fixed_windows:
                 continue
             for j, name in enumerate(WIN_COLS):
+                if j < 2 and w in self.held_normals:
+                    continue
                 self.wpos[w, j] = k
                 self.names.append(f"win{w + 1}.{name}")
                 k += 1
@@ -240,10 +249,10 @@ class Layout:
             out.append(k)
         wins = []
         for w, win in enumerate(rig.windows):
-            if w >= self.n_wins or self.wpos[w, 0] < 0:
+            if w >= self.n_wins or np.all(self.wpos[w] < 0):
                 wins.append(win.copy())
                 continue
-            a, b, dl = (float(dx[g]) for g in self.wpos[w])
+            a, b, dl = (float(dx[g]) if g >= 0 else 0.0 for g in self.wpos[w])          # held: a = b = 0
             A = self.anchors[w] if self.anchors[w] is not None else win.d * win.n
             n_new = pm.retract_normal(win.n, (a, b))
             wins.append(pm.Window(n_new, float(n_new @ A) + (win.d - float(win.n @ A)) + dl, win.t, win.idx,
@@ -272,12 +281,13 @@ def prior_terms(cams, rig: Rig, layout: Layout):
                 g = layout.pos[c, 3 + j]
                 if g >= 0:
                     J[i, g] = -win.n[j] / pr["sigma"]
-            if w < layout.n_wins and layout.wpos[w, 0] >= 0:
+            if w < layout.n_wins and np.any(layout.wpos[w] >= 0):
                 A = layout.anchors[w] if layout.anchors[w] is not None else win.d * win.n
                 t1, t2 = pm.tangent_basis(win.n)
-                J[i, layout.wpos[w, 0]] = float((A - cams[c].C) @ t1[0]) / pr["sigma"]
-                J[i, layout.wpos[w, 1]] = float((A - cams[c].C) @ t2[0]) / pr["sigma"]
-                J[i, layout.wpos[w, 2]] = 1.0 / pr["sigma"]
+                dv = (float((A - cams[c].C) @ t1[0]), float((A - cams[c].C) @ t2[0]), 1.0)
+                for j in range(3):
+                    if layout.wpos[w, j] >= 0:
+                        J[i, layout.wpos[w, j]] = dv[j] / pr["sigma"]
     return r, J
 
 
@@ -448,9 +458,10 @@ def _step_size(dc, df, cams, rig: Rig, layout: Layout) -> float:
                 v /= max(float(np.linalg.norm(cams[c].C)), 1.0)
             s = max(s, v)
     for w in range(layout.n_wins):
-        if layout.wpos[w, 0] < 0:
+        if layout.wpos[w, 0] >= 0:
+            s = max(s, abs(dc[layout.wpos[w, 0]]), abs(dc[layout.wpos[w, 1]]))
+        if layout.wpos[w, 2] < 0:
             continue
-        s = max(s, abs(dc[layout.wpos[w, 0]]), abs(dc[layout.wpos[w, 1]]))
         A = layout.anchors[w] if layout.anchors[w] is not None else rig.windows[w].d * rig.windows[w].n
         cs = [cams[c].C for c in rig.cams_of(w)] or [np.zeros(3)]
         scale = max(float(np.linalg.norm(A - np.mean(cs, axis=0))), 1.0)
@@ -827,12 +838,13 @@ def _distance_grad(cams, rig: Rig, layout: Layout, c: int) -> np.ndarray:
         k = layout.pos[c, 3 + j]
         if k >= 0:
             g[k] = -win.n[j]
-    if w < layout.n_wins and layout.wpos[w, 0] >= 0:
+    if w < layout.n_wins and np.any(layout.wpos[w] >= 0):
         A = layout.anchors[w] if layout.anchors[w] is not None else win.d * win.n
         t1, t2 = pm.tangent_basis(win.n)
-        g[layout.wpos[w, 0]] = float((A - cams[c].C) @ t1[0])
-        g[layout.wpos[w, 1]] = float((A - cams[c].C) @ t2[0])
-        g[layout.wpos[w, 2]] = 1.0
+        dv = (float((A - cams[c].C) @ t1[0]), float((A - cams[c].C) @ t2[0]), 1.0)
+        for j in range(3):
+            if layout.wpos[w, j] >= 0:
+                g[layout.wpos[w, j]] = dv[j]
     return g
 
 
@@ -846,10 +858,13 @@ def window_sigmas(cams, rig: Rig, layout: Layout, cov: np.ndarray) -> List[dict]
     (mm), and of each of its cameras' distance to it (mm)."""
     out = []
     for w, win in enumerate(rig.windows):
-        d = {"fixed": bool(w >= layout.n_wins or layout.wpos[w, 0] < 0)}
-        if not d["fixed"]:
-            g = layout.wpos[w]
+        g = layout.wpos[w] if w < layout.n_wins else np.full(3, -1)
+        d = {"fixed": bool(np.all(g < 0))}
+        if g[0] >= 0:
             d["normal_deg"] = math.degrees(math.sqrt(max(cov[g[0], g[0]] + cov[g[1], g[1]], 0.0)))
+        elif g[2] >= 0:
+            d["normal_held"] = True
+        if g[2] >= 0:
             d["offset_mm"] = math.sqrt(max(cov[g[2], g[2]], 0.0))
         d["camera_distance_mm"] = {int(c + 1): math.sqrt(max(_distance_var(cams, rig, layout, cov, c), 0.0))
                                    for c in rig.cams_of(w)}
@@ -1033,12 +1048,13 @@ def triangulate_ml(cams, rig: Rig, cam_idx: np.ndarray, uv: np.ndarray, point_id
 def solve(data: WandData, cams, rig: Rig, fit_k1: bool = False, fit_L: bool = False, k_sigma: float = 5.0,
           noise_weights: str = "camera", sigma_cam_px=None, fixed_windows: Sequence[int] = (), obs: Obs = None,
           frames: Frames = None, verbose: bool = False, log=print, priors: Sequence[dict] = (),
-          prior_scale: float = 1.0) -> Solution:
+          prior_scale: float = 1.0, held_normals: Sequence[int] = ()) -> Solution:
     """Stage 4-5 from given cameras and windows (in the gauge: camera 1's pose is held): frames triangulated, then
-    `refine`.  Used by `calibrate` and by the tests that start from the truth."""
+    `refine`.  Used by `calibrate` and by the tests that start from the truth.  held_normals: windows whose normal is
+    held (their offset is fitted)."""
     obs = observations(data) if obs is None else obs
     layout = Layout(obs.n_cams, len(rig.windows), fit_k1=fit_k1, fit_L=fit_L, fixed_windows=fixed_windows,
-                    anchors=anchors_for(cams, rig))
+                    anchors=anchors_for(cams, rig), held_normals=held_normals)
     for p in priors:
         layout.add_prior(p["kind"], p["cam"], p["mean"], p["sigma"])
     if frames is None:
@@ -1105,7 +1121,8 @@ def coarse_fit(cams, rig: Rig, obs: Obs, L: float, layout: Layout, max_outer: in
     hist = []
     for outer in range(max_outer):
         lay = Layout(layout.n_cams, layout.n_wins, fit_k1=layout.fit_k1, fit_L=False, gauge=layout.gauge,
-                     fixed_windows=layout.fixed_windows, anchors=anchors_for(anc_c, anc_r))
+                     fixed_windows=layout.fixed_windows, anchors=anchors_for(anc_c, anc_r),
+                     held_normals=layout.held_normals)
 
         def fun(x, anc_c=anc_c, anc_r=anc_r, lay=lay):
             cs, rg, _ = lay.apply(anc_c, anc_r, L, x)
@@ -1209,16 +1226,18 @@ def resect(cams: List[pm.Camera], wins: List[Optional[pm.Window]], X: List[np.nd
 
 
 def resect_window(cams: List[pm.Camera], win: pm.Window, X: List[np.ndarray], uv: List[np.ndarray],
-                  iters: int = 30, f_scale: float = 2.0, penalty: float = 30.0, lam0: float = 1e-2):
+                  iters: int = 30, f_scale: float = 2.0, penalty: float = 30.0, lam0: float = 1e-2,
+                  hold_normal: bool = False):
     """The cameras behind one window and the window itself -- each camera's (w, C, logf) and the window's (a, b,
-    delta) about the cameras' mean chief-ray crossing -- with the points X[k] fixed: Levenberg-Marquardt on the soft-L1
-    cost at f_scale px (IRLS), exact derivatives.  Returns (cameras, window, robust cost per camera)."""
+    delta) about the cameras' mean chief-ray crossing, only delta with hold_normal -- with the points X[k] fixed:
+    Levenberg-Marquardt on the soft-L1 cost at f_scale px (IRLS), exact derivatives.  Returns (cameras, window, robust
+    cost per camera)."""
     K = len(cams)
     cam_of = np.concatenate([np.full(len(x), k, int) for k, x in enumerate(X)])
     Xall = np.vstack(X)
     Uall = np.vstack(uv)
     pen = _robust_rho(penalty ** 2, f_scale)
-    P = 7 * K + 3
+    P = 7 * K + (1 if hold_normal else 3)
 
     def run(cs, wn, A):
         rw = cm.rows(cs, cam_of)
@@ -1241,7 +1260,8 @@ def resect_window(cams: List[pm.Camera], win: pm.Window, X: List[np.ndarray], uv
         for k in range(K):
             sel = cam_of == k
             J[sel, :, 7 * k:7 * k + 7] = Jc[sel]
-        J[:, :, 7 * K:] = np.where(pr.ok[:, None, None], np.nan_to_num(pr.J_win), 0.0)
+        Jw = np.where(pr.ok[:, None, None], np.nan_to_num(pr.J_win), 0.0)
+        J[:, :, 7 * K:] = Jw[:, :, 2:3] if hold_normal else Jw
         rr = np.where(pr.ok[:, None], np.nan_to_num(r), 0.0)
         J2 = (J * np.sqrt(wts)[:, None, None]).reshape(-1, P)
         H = J2.T @ J2
@@ -1263,8 +1283,8 @@ def resect_window(cams: List[pm.Camera], win: pm.Window, X: List[np.ndarray], uv
                 c.C = cs[k].C + v[3:6]
                 c.f = cs[k].f * math.exp(float(np.clip(v[6], -1.0, 1.0)))
                 ct.append(c)
-            a, b, dl = dx[7 * K:]
-            n_new = pm.retract_normal(wn.n, (a, b))
+            a, b, dl = (0.0, 0.0, dx[7 * K]) if hold_normal else dx[7 * K:]
+            n_new = wn.n if hold_normal else pm.retract_normal(wn.n, (a, b))
             wt = pm.Window(n_new, float(n_new @ A) + (wn.d - float(wn.n @ A)) + dl, wn.t, wn.idx, wn.name)
             pr_t, r_t, r2_t, cost_t, per_t = run(ct, wt, A)
             if cost_t < cost:
@@ -1604,11 +1624,76 @@ def small_angle_camera(cam_p: pm.Camera, win: pm.Window) -> pm.Camera:
     return c
 
 
+def hint_to_frame(v, cam_p: pm.Camera, win: pm.Window) -> np.ndarray:
+    """A camera's hinted window normal v -- in the camera's own frame (x along the image rows, y down, z along the
+    optical axis), either sign -- in the frame of its pinhole camera cam_p.  A pinhole camera looks along the chief ray
+    in the object medium (`small_angle_camera`), so the hint's angle theta from the camera's axis becomes theta_w,
+    sin(theta_w) = (n_cam / n_obj) sin(theta), at the same azimuth about the axis: the inverse of
+    `small_angle_camera` (tests/test_plate_wand.py)."""
+    v = np.asarray(v, float)
+    v = v / np.linalg.norm(v)
+    if v[2] < 0:
+        v = -v
+    st = math.hypot(float(v[0]), float(v[1]))
+    if st < 1e-12:
+        q = np.array([0.0, 0.0, 1.0])
+    else:
+        sw = min(win.idx[0] / win.idx[-1] * st, 1.0)
+        q = np.array([v[0] / st * sw, v[1] / st * sw, math.sqrt(1.0 - sw * sw)])
+    return cam_p.R.T @ q
+
+
+def hinted_normal(hints: dict, cams_w: Sequence[int], cams_pin: Dict[int, pm.Camera], win: pm.Window):
+    """A window's normal from hints["normals"] (one entry per camera: None, or the normal of the camera's window in
+    its own frame, `hint_to_frame`) of its cameras cams_w, in the frame of their pinhole cameras cams_pin: the mean
+    over the hinted ones.  None without a hint."""
+    hn = (hints or {}).get("normals")
+    if not hn:
+        return None
+    acc, k = np.zeros(3), 0
+    for c in cams_w:
+        if c >= len(hn) or hn[c] is None or c not in cams_pin:
+            continue
+        acc += hint_to_frame(hn[c], cams_pin[c], win)
+        k += 1
+    nrm = float(np.linalg.norm(acc))
+    return acc / nrm if k and nrm > 1e-12 else None
+
+
+def _cam_hint(hints: dict, c: int):
+    """Camera c's hinted window normal (hints["normals"][c]) or None."""
+    hn = (hints or {}).get("normals") or []
+    return hn[c] if c < len(hn) else None
+
+
+HINT_CAP_DEG = 20.0                    # the hint-searched start: a second window search about a hinted normal, its cap
+HINT_STEP_DEG = 4.0                    # ... and its normals' spacing (a candidate within ~2.3 deg of any normal in it)
+
+
+def _merge_hinted(base, extra, tol_deg: float = 1.0, tol_rel: float = 0.05):
+    """The default window search's candidates [(score, window, {camera: Camera})] and those of the search about a hint,
+    by score (the hint-searched start).  Every default candidate is kept.  A hint candidate is dropped when one already
+    there has its normal within tol_deg and its plane, at the candidate's cameras, within tol_rel of their distance to
+    the window: it would only repeat a start.  Returns (merged, whether the best came from the hint search)."""
+    out = [(s, wn, cs, False) for s, wn, cs in base]
+    for s, wn, cs in extra:
+        dup = False
+        if cs:
+            Cm = np.mean([cam.C for cam in cs.values()], axis=0)
+            h1 = max(abs(wn.distance(Cm)), 1e-9)
+            dup = any(math.degrees(math.acos(min(1.0, float(wn.n @ w2.n)))) <= tol_deg
+                      and abs(wn.distance(Cm) - w2.distance(Cm)) <= tol_rel * h1 for _s, w2, _c, _f in out)
+        if not dup:
+            out.append((s, wn, cs, True))
+    out.sort(key=lambda x: x[0])
+    return [(s, wn, cs) for s, wn, cs, _f in out], bool(out and out[0][3])
+
+
 def window_search(sol_p: Solution, rig: Rig, w: int, theta_cap: float = 50.0, dtheta: float = 9.0,
                   phis=(0.2, 0.5, 0.8), n_quick_frames: int = 60, quick_iters: int = 4,
                   n_full_frames: int = 200, full_iters: int = 20, n_full: int = 8, n_keep: int = 3,
                   points=None, base_rig: Rig = None, n_guess=None, tri_cams=None, keep_h1: bool = True,
-                  retriangulate: bool = True, verbose: bool = False, log=print):
+                  retriangulate: bool = True, hold_normal: bool = False, verbose: bool = False, log=print):
     """Stage 3 for window w: candidate normals on a cap about a guess (default: the window's cameras' mean viewing
     direction, the dominant eigenvector of sum z z^T, sign-free, turned towards the wand cloud), candidate offsets
     across the gap between the cameras and the cloud (the final fit recovers a normal 30 deg off and any offset across
@@ -1618,7 +1703,9 @@ def window_search(sol_p: Solution, rig: Rig, w: int, theta_cap: float = 50.0, dt
     window's cameras refractive (the other cameras as in base_rig, default pinholes; only the cameras in tri_cams, default
     all) and a second resection (not with retriangulate False: points known to be accurate stay fixed, and a camera
     must not pull them towards itself).  The resections keep each camera's distance to the candidate window
-    (`resect`'s keep_h1).  Returns the best n_keep as (score, window, {camera: Camera}) and info."""
+    (`resect`'s keep_h1).  With hold_normal the window's normal is held at n_guess (a hint-held start): only the
+    offsets are tried, and the resections fit only the window's offset.  Returns the best n_keep as (score, window,
+    {camera: Camera}) and info."""
     obs = sol_p.obs
     L = sol_p.L
     cams_w = rig.cams_of(w)
@@ -1634,7 +1721,7 @@ def window_search(sol_p: Solution, rig: Rig, w: int, theta_cap: float = 50.0, dt
         if float(n_guess @ (pts.mean(axis=0) - cbar)) < 0:
             n_guess = -n_guess
     n_guess = np.asarray(n_guess, float) / np.linalg.norm(n_guess)
-    normals = fibonacci_cap(n_guess, theta_cap, dtheta)
+    normals = n_guess[None] if hold_normal else fibonacci_cap(n_guess, theta_cap, dtheta)
     quick_rows = _subset_rows(obs, n_quick_frames)
     full_rows = _subset_rows(obs, n_full_frames)
 
@@ -1672,7 +1759,7 @@ def window_search(sol_p: Solution, rig: Rig, w: int, theta_cap: float = 50.0, dt
     for score_q, win, cs in cands[:n_full]:
         cs, cost = resect(cs, [win] * len(cs), Xf, Uf, iters=full_iters, keep_h1=keep_h1)
         if not retriangulate:
-            cs, win, cost = resect_window(cs, win, Xf, Uf, iters=full_iters)
+            cs, win, cost = resect_window(cs, win, Xf, Uf, iters=full_iters, hold_normal=hold_normal)
             full.append((float(np.sum(cost)), win, {c: cs[k] for k, c in enumerate(cams_w)}, score_q))
             continue
         cams_all = [c.copy() for c in sol_p.cams]
@@ -1694,7 +1781,7 @@ def window_search(sol_p: Solution, rig: Rig, w: int, theta_cap: float = 50.0, dt
         XA3, XB3 = XA.copy(), XB.copy()
         XA3[fine], XB3[fine] = XA2[fine], XB2[fine]
         Xf2, Uf2 = cam_data(full_rows, XA3, XB3)
-        cs, win, cost = resect_window(cs, win, Xf2, Uf2, iters=full_iters)
+        cs, win, cost = resect_window(cs, win, Xf2, Uf2, iters=full_iters, hold_normal=hold_normal)
         full.append((float(np.sum(cost)), win, {c: cs[k] for k, c in enumerate(cams_w)}, score_q))
     full.sort(key=lambda c: c[0])
     if verbose:
@@ -1732,7 +1819,7 @@ def _assemble(base_cams, rig: Rig, per_win, cmb):
 
 def bootstrap(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cxcy=None, theta_cap: float = 50.0,
               dtheta: float = 9.0, n_coarse_frames: int = 150, max_combos: int = 3, passes: int = None,
-              search: str = "length", verbose: bool = False, log=print):
+              search: str = "length", hold: bool = False, widen: bool = False, verbose: bool = False, log=print):
     """Stages 1-3 on the whole rig at once, from the pinhole start: each window's best three candidates
     (`window_search`) are combined (every window's best; then the next ones, cheapest first, up to max_combos), and
     each combination gets the joint coarse fit (`coarse_fit`) on n_coarse_frames frames, which ranks them.  With
@@ -1742,7 +1829,11 @@ def bootstrap(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cxcy=None
     search: how a window with one or two cameras is searched -- "length" scores each candidate by the wand-length
     constrained back-projection residual (`place_window_vp`), "fixed" by resections against fixed points
     (`window_search`); neither is right on every rig (W5), so `calibrate` pools the starts of both on rigs with such
-    windows.  Windows with three or more cameras always use "fixed"."""
+    windows.  Windows with three or more cameras always use "fixed".
+    hold: a hint-held start -- every window with a hinted camera (hints["normals"], `hinted_normal`) has its normal
+    held at the hint through the search and the coarse fit.  widen: a hint-searched start -- every such window is
+    searched a second time about its hint (HINT_CAP_DEG, HINT_STEP_DEG), the candidates merged with the default
+    search's (`_merge_hinted`)."""
     hints = hints or {}
     t0 = time.time()
     cxcy = cxcy or [((w - 1) / 2.0, (h - 1) / 2.0) for (w, h) in sizes]
@@ -1759,25 +1850,46 @@ def bootstrap(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cxcy=None
         prev = None
         points = None
         base = None
+        # a hint-held or hint-searched start: the hinted normals (hints["normals"]) in this pinhole start's frame
+        n_hint = [hinted_normal(hints, rig.cams_of(w), {c: sol_p.cams[c] for c in rig.cams_of(w)}, rig.windows[w])
+                  if (hold or widen) else None for w in range(len(rig.windows))]
+        held = [w for w in range(len(rig.windows)) if hold and n_hint[w] is not None]
         for ps in range(passes):
             per_win = []
             for w in range(len(rig.windows)):
                 if not rig.cams_of(w):
                     per_win.append([(0.0, rig.windows[w].copy(), {})])
                     continue
+                hw = w in held
+                wide = widen and n_hint[w] is not None
+                hint_inf = {"held": True} if hw else {}
                 if search == "length" and len(rig.cams_of(w)) <= 2:
                     # one or two cameras: their own points cannot judge a window, the wand length must
                     cams_cur, rig_c = (sol_p.cams, Rig(list(rig.windows), [-1] * obs.n_cams)) if base is None \
                         else (_assemble(sol_p.cams, rig, prev, [0] * len(prev))[0], base)
-                    best = place_window_vp(rig.cams_of(w), w, {c: sol_p.cams[c] for c in rig.cams_of(w)}, cams_cur,
-                                           rig_c, rig, sol_p.obs, L, theta_cap=theta_cap, dtheta=dtheta)
+                    pins_w = {c: sol_p.cams[c] for c in rig.cams_of(w)}
+                    best = place_window_vp(rig.cams_of(w), w, pins_w, cams_cur, rig_c, rig, sol_p.obs, L,
+                                           theta_cap=theta_cap, dtheta=dtheta, n_guess=n_hint[w] if hw else None,
+                                           hold_normal=hw)
+                    if wide:
+                        # the search again about the hinted normal: a wrong hint only adds candidates that lose
+                        extra = place_window_vp(rig.cams_of(w), w, pins_w, cams_cur, rig_c, rig, sol_p.obs, L,
+                                                theta_cap=HINT_CAP_DEG, dtheta=HINT_STEP_DEG, n_guess=n_hint[w])
+                        best, hint_inf["best_from_hint"] = _merge_hinted(best, extra)
                     per_win.append(best)
-                    winfo.append({"mirror": sol_p.info.get("mirror"), "window": w, "pass": ps, "method": "wand length"})
+                    winfo.append({"mirror": sol_p.info.get("mirror"), "window": w, "pass": ps, "method": "wand length",
+                                  **hint_inf})
                     continue
                 best, inf = window_search(sol_p, rig, w, theta_cap=theta_cap, dtheta=dtheta, points=points,
-                                          base_rig=base, verbose=verbose, log=log)
+                                          base_rig=base, n_guess=n_hint[w] if hw else None, hold_normal=hw,
+                                          verbose=verbose, log=log)
+                if wide:
+                    extra, _inf = window_search(sol_p, rig, w, theta_cap=HINT_CAP_DEG, dtheta=HINT_STEP_DEG,
+                                                points=points, base_rig=base, n_guess=n_hint[w], verbose=verbose,
+                                                log=log)
+                    best, hint_inf["best_from_hint"] = _merge_hinted(best, extra)
                 per_win.append(best)
-                winfo.append({"mirror": sol_p.info.get("mirror"), "window": w, "pass": ps, **inf})
+                winfo.append({"mirror": sol_p.info.get("mirror"), "window": w, "pass": ps, **inf, **hint_inf})
             prev = per_win
             if ps + 1 < passes:
                 cams1, rig1 = _assemble(sol_p.cams, rig, per_win, [0] * len(per_win))
@@ -1789,7 +1901,7 @@ def bootstrap(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cxcy=None
         t2 = time.time()
         for cmb in _combos(per_win, max_combos):
             cams, rg = _assemble(sol_p.cams, rig, per_win, cmb)
-            layout = Layout(obs.n_cams, len(rg.windows))
+            layout = Layout(obs.n_cams, len(rg.windows), held_normals=held)
             cs3, rg3, inf3 = coarse_fit(cams, rg, obs, L, layout, rows=rows, verbose=verbose, log=log)
             r = backprojection_residual(cs3, rg3, obs, L, rows)
             starts.append((_robust_cost(r), inf3["rms_px"], cs3, rg3))
@@ -1834,17 +1946,21 @@ def solve_obs(obs: Obs, L: float, cams, rig: Rig, **kw) -> Solution:
     """`solve` on given observations (e.g. a camera subset): frames triangulated, then `refine`."""
     fit_k1 = kw.pop("fit_k1", False)
     layout = Layout(obs.n_cams, len(rig.windows), fit_k1=fit_k1, fit_L=kw.pop("fit_L", False),
-                    fixed_windows=kw.pop("fixed_windows", ()), anchors=anchors_for(cams, rig))
+                    fixed_windows=kw.pop("fixed_windows", ()), anchors=anchors_for(cams, rig),
+                    held_normals=kw.pop("held_normals", ()))
     frames = initial_frames(cams, rig, obs, L)
     return refine(cams, rig, frames, L, obs, layout, **kw)
 
 
 def place_single_window(c: int, w: int, cams, rig: Rig, obs: Obs, L: float, XA, XB, cxcy, size,
-                        theta_cap: float = 50.0, dtheta: float = 9.0, tri_cams=None, verbose: bool = False,
-                        log=print):
+                        theta_cap: float = 50.0, dtheta: float = 9.0, tri_cams=None, hint=None, widen: bool = False,
+                        verbose: bool = False, log=print):
     """A camera alone behind its window, placed against points the other (calibrated) cameras triangulate: its
     pinhole start by DLT, then `window_search` with those points fixed (they are accurate, so the resection sees
-    the window's refraction).  Returns window_search's candidates."""
+    the window's refraction).  With a hint (the window's normal in the camera's own frame, `hint_to_frame`) the
+    window's normal is held at it and only its offsets are searched (a hint-held start); with widen, the search runs
+    instead a second time about the hint and the candidates are merged (`_merge_hinted`, a hint-searched start).
+    Returns window_search's candidates and info."""
     rows = np.flatnonzero(obs.active & (obs.cam == c))
     Xr = np.where((obs.end[rows] == 0)[:, None], XA[obs.frame[rows]], XB[obs.frame[rows]])
     fine = np.all(np.isfinite(Xr), axis=1)
@@ -1857,13 +1973,23 @@ def place_single_window(c: int, w: int, cams, rig: Rig, obs: Obs, L: float, XA, 
     pseudo = Solution(cams_p, rig, fr, L, obs, Layout(obs.n_cams))
     base = rig.copy()
     base.cam_win = [k if q != c else -1 for q, k in enumerate(rig.cam_win)]
-    return window_search(pseudo, rig, w, theta_cap=theta_cap, dtheta=dtheta, points=(XA, XB), base_rig=base,
-                         n_guess=cam_p.R[2], tri_cams=tri_cams, retriangulate=False, verbose=verbose, log=log)
+    n_hint = None if hint is None else hint_to_frame(hint, cam_p, rig.windows[w])
+    hold = n_hint is not None and not widen
+    cands, info = window_search(pseudo, rig, w, theta_cap=theta_cap, dtheta=dtheta, points=(XA, XB), base_rig=base,
+                                n_guess=n_hint if hold else cam_p.R[2], tri_cams=tri_cams, retriangulate=False,
+                                hold_normal=hold, verbose=verbose, log=log)
+    if widen and n_hint is not None:
+        extra, _inf = window_search(pseudo, rig, w, theta_cap=HINT_CAP_DEG, dtheta=HINT_STEP_DEG, points=(XA, XB),
+                                    base_rig=base, n_guess=n_hint, tri_cams=tri_cams, retriangulate=False,
+                                    verbose=verbose, log=log)
+        cands, from_hint = _merge_hinted(cands, extra)
+        info = {**info, "best_from_hint": from_hint}
+    return cands, info
 
 
 def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cxcy=None, theta_cap: float = 50.0,
                      dtheta: float = 9.0, max_combos: int = 3, search: str = "length", cache: dict = None,
-                     verbose: bool = False, log=print):
+                     hold: bool = False, widen: bool = False, verbose: bool = False, log=print):
     """Stages 1-3 for a rig whose windows have two or more cameras each (or some do): each such window's cameras are
     calibrated on their own as a one-window rig (`bootstrap` and stage 4 on their observations), the groups are put
     into one frame by the rigid motion that best maps their common wand positions onto each other (the wand length
@@ -1873,7 +1999,11 @@ def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cx
     search: how a window with one or two cameras is searched -- "length" scores each candidate by the wand-length
     constrained back-projection residual (`place_window_vp`), "fixed" by resections against fixed points
     (`window_search`); neither is right on every rig (W5), so `calibrate` pools the starts of both on rigs with such
-    windows.  Windows with three or more cameras always use "fixed"."""
+    windows.  Windows with three or more cameras always use "fixed".
+    hold: a hint-held start -- every window with a hinted camera (hints["normals"]) has its normal held at the hint in
+    its group's own calibration (search and stage 4) or in its single camera's placement.  widen: a hint-searched start
+    -- every such window is also searched about its hint, in its group's own calibration or in its single camera's
+    placement (`bootstrap`'s widen)."""
     t0 = time.time()
     hints = hints or {}
     cxcy = cxcy or [((w_ - 1) / 2.0, (h - 1) / 2.0) for (w_, h) in sizes]
@@ -1891,13 +2021,18 @@ def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cx
         sub_h = {}
         if hints.get("f") is not None:
             sub_h["f"] = [hints["f"][c] for c in cs]
+        hinted_w = any(_cam_hint(hints, c) is not None for c in cs)
+        held_w, wide_w = hold and hinted_w, widen and hinted_w
+        if held_w or wide_w:
+            sub_h["normals"] = [_cam_hint(hints, c) for c in cs]
         st_w, inf_w = bootstrap(o_w, rig_w, L, [sizes[c] for c in cs], hints=sub_h, cxcy=[cxcy[c] for c in cs],
-                                theta_cap=theta_cap, dtheta=dtheta, search=search, verbose=verbose, log=log)
+                                theta_cap=theta_cap, dtheta=dtheta, search=search, hold=held_w, widen=wide_w,
+                                verbose=verbose, log=log)
         best = None
         for k, (_cost, rms3, c0, r0) in enumerate(st_w[:2]):
             o = Obs(o_w.frame, o_w.cam, o_w.end, o_w.uv, o_w.n_frames, o_w.n_cams, o_w.frame_ids, o_w.active.copy())
             try:
-                sol = solve_obs(o, L, c0, r0, noise_weights="none")
+                sol = solve_obs(o, L, c0, r0, noise_weights="none", held_normals=(0,) if held_w else ())
             except (np.linalg.LinAlgError, ValueError):
                 continue
             key = (sol.rms, -int(o.active.sum()))
@@ -1907,6 +2042,8 @@ def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cx
             raise ValueError(f"window {w + 1}: its cameras could not be calibrated on their own")
         sols[w] = best[1]
         ginfo[w] = {"cameras": cs, "rms_px": best[1].rms, "bootstrap_seconds": inf_w["seconds"]}
+        if held_w or wide_w:
+            ginfo[w]["held" if held_w else "widened"] = True
         if cache is not None and len(cs) >= 3:
             cache[w] = (sols[w], ginfo[w])
         if verbose:
@@ -1972,12 +2109,15 @@ def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cx
                 fine = np.all(np.isfinite(Xr), axis=1)
                 cams[c] = _camera_from_dlt(Xr[fine], obs.uv[rows[fine]], cxcy[c], sizes[c])
                 continue
+            hint_c = _cam_hint(hints, c) if (hold or widen) else None
             if search == "fixed":
                 cands, inf = place_single_window(c, w, tmp_cams, Rig(wins, rig.cam_win), obs, L, XAj, XBj, cxcy[c],
                                                  sizes[c], theta_cap=theta_cap, dtheta=dtheta, tri_cams=joined,
-                                                 verbose=verbose, log=log)
+                                                 hint=hint_c, widen=widen, verbose=verbose, log=log)
                 placed[c] = cands
-                ginfo[f"single_cam{c + 1}"] = {"window": w, "scores": [x[0] for x in cands]}
+                ginfo[f"single_cam{c + 1}"] = {"window": w, "scores": [x[0] for x in cands],
+                                               **({"held": True} if hold and hint_c is not None else {}),
+                                               **{k: inf[k] for k in ("best_from_hint",) if k in inf}}
                 continue
             rows_c = np.flatnonzero(obs.active & (obs.cam == c))
             Xr = np.where((obs.end[rows_c] == 0)[:, None], XAj[obs.frame[rows_c]], XBj[obs.frame[rows_c]])
@@ -1993,11 +2133,20 @@ def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cx
             cams_sub[sub.index(c)] = cam_p
             rig_sub = Rig(wins, [cw_cur[q] for q in sub])
             rig_full_sub = Rig(wins, [rig.cam_win[q] for q in sub])
+            n_h = None if hint_c is None else hint_to_frame(hint_c, cam_p, rig.windows[w])
+            hc = hold and n_h is not None
             cands_s = place_window_vp([sub.index(c)], w, {sub.index(c): cam_p}, cams_sub, rig_sub, rig_full_sub, o_c,
-                                      L, theta_cap=theta_cap, dtheta=dtheta)
+                                      L, theta_cap=theta_cap, dtheta=dtheta, n_guess=n_h if hc else None,
+                                      hold_normal=hc)
+            hint_inf = {"held": True} if hc else {}
+            if widen and n_h is not None:
+                # the search again about the hinted normal: a wrong hint only adds candidates that lose
+                extra = place_window_vp([sub.index(c)], w, {sub.index(c): cam_p}, cams_sub, rig_sub, rig_full_sub,
+                                        o_c, L, theta_cap=HINT_CAP_DEG, dtheta=HINT_STEP_DEG, n_guess=n_h)
+                cands_s, hint_inf["best_from_hint"] = _merge_hinted(cands_s, extra)
             cands = [(sc, wn, {c: cd[sub.index(c)]}) for sc, wn, cd in cands_s]
             placed[c] = cands
-            ginfo[f"single_cam{c + 1}"] = {"window": w, "scores": [x[0] for x in cands]}
+            ginfo[f"single_cam{c + 1}"] = {"window": w, "scores": [x[0] for x in cands], **hint_inf}
     # starts: every single window's best candidate, then the next ones (cheapest first)
     singles = sorted(placed)
     per = [placed[c] for c in singles]
@@ -2023,15 +2172,16 @@ def bootstrap_groups(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cx
 def place_window_vp(cams_w: Sequence[int], w: int, cams_pin: Dict[int, pm.Camera], cams, rig_cur: Rig, rig: Rig,
                     obs: Obs, L: float, theta_cap: float = 50.0, dtheta: float = 9.0, phis=(0.2, 0.5, 0.8),
                     n_guess=None, n_quick_frames: int = 60, quick_nfev: int = 6, n_full: int = 6,
-                    n_full_frames: int = 150, full_nfev: int = 40, n_keep: int = 3):
+                    n_full_frames: int = 150, full_nfev: int = 40, n_keep: int = 3, hold_normal: bool = False):
     """The camera(s) behind window w (one or two), placed with the other cameras held as they are: each candidate
     window (normals on a cap about a guess -- default the cameras' mean viewing direction --, offsets across the
     camera-cloud gap) gets its cameras from their pinhole starts (`small_angle_camera`) and a short least-squares fit
     of them (rotation, slide parallel to the window, f) on the back-projection residual, which re-triangulates the
     wand with every camera and sets its ends L apart.  So the wand's length -- the only metric in the data -- judges
     the candidate; a fit to fixed points would not, because with one or two cameras the points carry the placed
-    cameras' own earlier state (W5 seeds 1045, 1048).  The best n_full are refined with their window free.  Returns
-    [(cost, window, {camera: Camera})] best first."""
+    cameras' own earlier state (W5 seeds 1045, 1048).  The best n_full are refined with their window free.  With
+    hold_normal the window's normal is held at n_guess (a hint-held start): only the offsets are tried, and the
+    refinement frees only the window's offset.  Returns [(cost, window, {camera: Camera})] best first."""
     from scipy.optimize import least_squares
     cams_w = list(cams_w)
     k = len(cams_w)
@@ -2056,6 +2206,7 @@ def place_window_vp(cams_w: Sequence[int], w: int, cams_pin: Dict[int, pm.Camera
         T = np.column_stack([t1[0], t2[0]])
         A = np.mean([cm_.C + win.distance(cm_.C) * win.n for cm_ in cams0], axis=0)
         per = 7 if free_window else 6
+        n_w = 0 if not free_window else (1 if free_window == "offset" else 3)    # the window's free parameters
 
         def build(x):
             out = []
@@ -2067,10 +2218,12 @@ def place_window_vp(cams_w: Sequence[int], w: int, cams_pin: Dict[int, pm.Camera
                 kk.f = cam0.f * math.exp(float(np.clip(v[5], -2.0, 2.0)))
                 out.append(kk)
             wn = win
-            if free_window:
+            if n_w == 3:
                 a, b, dl = x[per * k:per * k + 3]
                 nn = pm.retract_normal(win.n, (a, b))
                 wn = pm.Window(nn, float(nn @ A) + win.d - float(win.n @ A) + dl, win.t, win.idx, win.name)
+            elif n_w == 1:
+                wn = pm.Window(win.n, win.d + float(x[per * k]), win.t, win.idx, win.name)
             return out, wn
 
         def fun(x):
@@ -2084,14 +2237,14 @@ def place_window_vp(cams_w: Sequence[int], w: int, cams_pin: Dict[int, pm.Camera
             ws[w] = wn
             return backprojection_residual(cs, Rig(ws, cw_), obs, L, rows).ravel()
 
-        n_x = per * k + (3 if free_window else 0)
+        n_x = per * k + n_w
         res = least_squares(fun, np.zeros(n_x), method="trf", x_scale="jac", loss="soft_l1", f_scale=2.0,
                             max_nfev=nfev, ftol=1e-10, xtol=1e-10, gtol=1e-10)
         ks, wn = build(res.x)
         return _robust_cost(res.fun.reshape(-1, 2)), wn, {c: ks[j] for j, c in enumerate(cams_w)}
 
     cands = []
-    for n in fibonacci_cap(n_guess, theta_cap, dtheta):
+    for n in ([n_guess] if hold_normal else fibonacci_cap(n_guess, theta_cap, dtheta)):
         lo = max(float(n @ cams_pin[c].C) for c in cams_w)
         hi = float(np.min(pts @ n)) - win0.T if len(pts) else lo
         if not hi > lo:
@@ -2107,14 +2260,15 @@ def place_window_vp(cams_w: Sequence[int], w: int, cams_pin: Dict[int, pm.Camera
     cands.sort(key=lambda x: x[0][0])
     out = []
     for (_cost, win, cd), _c0 in cands[:n_full]:
-        out.append(fit([cd[c] for c in cams_w], win, full, full_nfev, True))
+        out.append(fit([cd[c] for c in cams_w], win, full, full_nfev, "offset" if hold_normal else True))
     out.sort(key=lambda x: x[0])
     return out[:n_keep]
 
 
 def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, cxcy=None, theta_cap: float = 50.0,
                       dtheta: float = 9.0, passes: int = 3, n_coarse_frames: int = 150, max_combos: int = 4,
-                      search: str = "length", verbose: bool = False, log=print):
+                      search: str = "length", hold: bool = False, widen: bool = False, verbose: bool = False,
+                      log=print):
     """Stages 1-3 for a rig whose windows have one camera each (e.g. two cameras through two walls): from the pinhole
     start, each camera's window is placed in turn with the other cameras as they are (pinholes at first, then
     refractive), scored by the wand-length-constrained back-projection residual (`place_window_vp`).  Later passes
@@ -2125,7 +2279,10 @@ def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, c
     search: how a window with one or two cameras is searched -- "length" scores each candidate by the wand-length
     constrained back-projection residual (`place_window_vp`), "fixed" by resections against fixed points
     (`window_search`); neither is right on every rig (W5), so `calibrate` pools the starts of both on rigs with such
-    windows.  Windows with three or more cameras always use "fixed"."""
+    windows.  Windows with three or more cameras always use "fixed".
+    hold: a hint-held start -- a window whose camera is hinted (hints["normals"]) has its normal held at the hint in
+    every pass and in the coarse fit.  widen: a hint-searched start -- such a window is searched a second time about
+    its hint in every pass, the candidates merged (`_merge_hinted`)."""
     hints = hints or {}
     t0 = time.time()
     cxcy = cxcy or [((w_ - 1) / 2.0, (h - 1) / 2.0) for (w_, h) in sizes]
@@ -2140,6 +2297,10 @@ def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, c
         cam_win = [-1] * obs.n_cams
         found = {}
         last = {}
+        n_hint = {w: hinted_normal(hints, rig.cams_of(w)[:1], {rig.cams_of(w)[0]: sol_p.cams[rig.cams_of(w)[0]]},
+                                   rig.windows[w])
+                  for w in range(len(rig.windows)) if (hold or widen) and rig.cams_of(w)}
+        held = [w for w, n in n_hint.items() if hold and n is not None]
         for ps in range(passes):
             for w in range(len(rig.windows)):
                 cs_w = rig.cams_of(w)
@@ -2147,12 +2308,21 @@ def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, c
                     continue
                 c = cs_w[0]
                 cur = Rig(wins, cam_win)
-                guess = found[w].n if w in found else None
+                hw = w in held
+                guess = n_hint[w] if hw else found[w].n if w in found else None
                 cap = theta_cap if w not in found else min(theta_cap, 20.0)
                 step = dtheta if w not in found else min(dtheta, 5.0)
+                from_hint = None
+                wide = widen and n_hint.get(w) is not None
                 if search == "length":
                     best = place_window_vp([c], w, {c: sol_p.cams[c]}, cams, cur, rig, o, L, theta_cap=cap,
-                                           dtheta=step, n_guess=guess)
+                                           dtheta=step, n_guess=guess, hold_normal=hw)
+                    if wide:
+                        # the search again about the hinted normal (every pass): a wrong hint only adds candidates
+                        # that lose
+                        extra = place_window_vp([c], w, {c: sol_p.cams[c]}, cams, cur, rig, o, L,
+                                                theta_cap=HINT_CAP_DEG, dtheta=HINT_STEP_DEG, n_guess=n_hint[w])
+                        best, from_hint = _merge_hinted(best, extra)
                 else:
                     XA, XB, cnt = triangulate(cams, cur, o)
                     okf = np.all(cnt >= 2, axis=1)
@@ -2163,15 +2333,22 @@ def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, c
                                 np.tile([0.0, 0.0, 1.0], (len(XA), 1)))
                     pseudo = Solution(pseudo_cams, rig, fr, L, o, Layout(obs.n_cams))
                     best, _inf = window_search(pseudo, rig, w, theta_cap=cap, dtheta=step, points=(XA, XB),
-                                               base_rig=cur, n_guess=guess, retriangulate=False, verbose=verbose,
-                                               log=log)
+                                               base_rig=cur, n_guess=guess, retriangulate=False, hold_normal=hw,
+                                               verbose=verbose, log=log)
+                    if wide:
+                        extra, _inf = window_search(pseudo, rig, w, theta_cap=HINT_CAP_DEG, dtheta=HINT_STEP_DEG,
+                                                    points=(XA, XB), base_rig=cur, n_guess=n_hint[w],
+                                                    retriangulate=False, verbose=verbose, log=log)
+                        best, from_hint = _merge_hinted(best, extra)
                 score, win, cd = best[0]
                 found[w] = win
                 last[w] = best
                 wins[w] = win.copy()
                 cams[c] = cd[c].copy()
                 cam_win[c] = w
-                hist.append({"mirror": sol_p.info.get("mirror"), "pass": ps, "window": w, "score": score})
+                hist.append({"mirror": sol_p.info.get("mirror"), "pass": ps, "window": w, "score": score,
+                             **({"held": True} if hw else {}),
+                             **({} if from_hint is None else {"best_from_hint": from_hint})})
                 if verbose:
                     log(f"  pass {ps}, window {w + 1}: score {score:.4g}")
         # a weakly seen window (e.g. a camera nearly square-on with a long lens) can leave several minima: the last
@@ -2187,8 +2364,8 @@ def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, c
                 for c, cam in cd.items():
                     cs_c[c] = cam.copy()
             rg = Rig(wn_c, rig.cam_win)
-            cs3, rg3, inf3 = coarse_fit(cs_c, rg, obs, L, Layout(obs.n_cams, len(rg.windows)), rows=rows,
-                                        verbose=verbose, log=log)
+            cs3, rg3, inf3 = coarse_fit(cs_c, rg, obs, L, Layout(obs.n_cams, len(rg.windows), held_normals=held),
+                                        rows=rows, verbose=verbose, log=log)
             r = backprojection_residual(cs3, rg3, obs, L, rows)
             starts.append((_robust_cost(r), inf3["rms_px"], cs3, rg3))
     starts.sort(key=lambda s_: s_[0])
@@ -2196,6 +2373,307 @@ def bootstrap_singles(obs: Obs, rig: Rig, L: float, sizes, hints: dict = None, c
             "starts": len(starts),
             "seconds": {"total": time.time() - t0}}
     return starts, info
+
+
+# ------------------------------------------------------------------ perturbed restarts of the final fit
+PERTURB_ROUNDS = 2                     # rounds of restarts at most: a second only about an answer the first improved
+
+
+def _perturb_seed(data: WandData) -> int:
+    """The restarts' seed, from the detections (CRC32 of their bytes): a rerun on the same data draws the same."""
+    return zlib.crc32(np.ascontiguousarray(data.uv, dtype=float).tobytes())
+
+
+def window_depths(cams, rig: Rig, frames: Frames, L: float, obs: Obs) -> List[Optional[float]]:
+    """Per window, the smallest depth in the water (mm) of the active wand ends seen through it (None: none).  Near 0,
+    the fit may be pinned against that window: every step that would lower the cost takes a wand end out of the
+    water."""
+    XA, XB = frames.ends(L)
+    out = []
+    for w, win in enumerate(rig.windows):
+        sel = obs.active & np.isin(obs.cam, rig.cams_of(w))
+        if not sel.any():
+            out.append(None)
+            continue
+        X = np.where((obs.end[sel] == 0)[:, None], XA[obs.frame[sel]], XB[obs.frame[sel]])
+        out.append(float(np.min(win.depth(X))))
+    return out
+
+
+def perturbed_draws(sol: Solution, obs: Obs, n: int, scale: float, rng, max_redraw: int = 10):
+    """n perturbations of a stage-4 answer's cameras and windows: dx = scale L z with sol.cov = L L^T (camera 1's pose
+    held, as in the fit) and z ~ N(0, I), applied as stage 4 applies a step, the frames re-triangulated.  A draw is
+    drawn again (up to max_redraw times, then left out) when a camera is no longer on the air side of its window or an
+    observation active in `obs` no longer projects (a wand end out of the water): its cost would leave that
+    observation out.  Returns ([{"cams", "rig", "L", "frames", "dx", "redraws"}], the number left out)."""
+    cov = 0.5 * (sol.cov + sol.cov.T)
+    try:
+        Lc = np.linalg.cholesky(cov)
+    except np.linalg.LinAlgError:
+        ev, V = np.linalg.eigh(cov)
+        Lc = V * np.sqrt(np.maximum(ev, 0.0))
+    rows = np.flatnonzero(obs.active)
+    out, left_out = [], 0
+    for _ in range(n):
+        for k in range(max_redraw + 1):
+            dx = scale * (Lc @ rng.standard_normal(sol.layout.P))
+            cams, rig, L = sol.layout.apply(sol.cams, sol.rig, sol.L, dx)
+            if any(rig.windows[w].distance(cams[c].C) <= 0 for c, w in enumerate(rig.cam_win) if w >= 0):
+                continue
+            frames = initial_frames(cams, rig, obs, L)
+            if not evaluate(cams, rig, frames, L, obs, rows=rows).ok.all():
+                continue
+            out.append({"cams": cams, "rig": rig, "L": L, "frames": frames, "dx": dx, "redraws": k})
+            break
+        else:
+            left_out += 1
+    return out, left_out
+
+
+def capped_cost(sol: Solution, obs: Obs, weights, s02: float, k_sigma: float = 5.0, prior_scale: float = 1.0) -> float:
+    """Every observation's weighted squared residual at sol (with its own frames), capped at k_sigma^2 s02, the
+    rejection limit; an observation that does not project counts the cap; priors as in `bundle_adjust`.  Two answers
+    whose active sets differ compare on the same terms this way: an outlier counts the same in both, and an answer
+    pays for every good observation it rejects.  weights: per observation (None: equal); s02: the variance per
+    coordinate in the weighted metric."""
+    ev = evaluate(sol.cams, sol.rig, sol.frames, sol.L, obs)
+    w = np.ones(len(obs)) if weights is None else np.asarray(weights, float)
+    e = np.where(ev.ok, w * np.sum(np.where(ev.ok[:, None], ev.r, 0.0) ** 2, axis=1), np.inf)
+    c = float(np.sum(np.minimum(e, k_sigma ** 2 * s02)))
+    if sol.layout.priors:
+        rp, _ = prior_terms(sol.cams, sol.rig, sol.layout)
+        ps = 1.0 if weights is not None else float(prior_scale)
+        c += ps * ps * float(rp @ rp)
+    return c
+
+
+SAME_MINIMUM_CHI2 = 9.0                # `answers_apart` below this: the same minimum (every parameter within 3 sigma)
+
+
+def answers_apart(a: Solution, b: Solution, obs: Obs, weights, s02: float) -> float:
+    """How far apart two answers are, in the data: their residuals' weighted squared differences, summed over the
+    observations both keep and divided by s02.  Gauge-free (image residuals), and about the squared Mahalanobis
+    distance between them (dr ~ J dp), which bounds every parameter's z^2: below 9, every parameter is within 3 sigma
+    (`calibrate`: the same minimum).  weights: per observation (None: equal); s02: the variance per coordinate in the
+    weighted metric."""
+    rows = np.flatnonzero(a.obs.active & b.obs.active)
+    ea = evaluate(a.cams, a.rig, a.frames, a.L, obs, rows=rows)
+    eb = evaluate(b.cams, b.rig, b.frames, b.L, obs, rows=rows)
+    ok = ea.ok & eb.ok
+    w = np.ones(len(rows)) if weights is None else np.asarray(weights, float)[rows]
+    d2 = np.sum((ea.r - eb.r) ** 2, axis=1)
+    return float(np.sum(w[ok] * d2[ok]) / s02)
+
+
+def replaces(new: Solution, old: Solution, obs: Obs, weights, s02: float, k_sigma: float = 5.0, c_old: float = None):
+    """Whether `new` replaces `old` as the answer: a `capped_cost` lower by more than 1e-6 relative, and either another
+    minimum (`answers_apart` >= SAME_MINIMUM_CHI2) or exactly the same observations kept.  With the same observations a
+    lower cost is simply a better fit of the same data; two answers at one minimum that keep different observations
+    are left as they are.  (A weakly determined window can hold two minima only chi^2 = 5 apart: W5 seed 1001, H4a.)
+    weights, s02: the terms they are compared on (`calibrate`: the current answer's).  Returns (replaces, the capped
+    cost relative to old's, answers_apart)."""
+    c_old = capped_cost(old, obs, weights, s02, k_sigma) if c_old is None else c_old
+    c_new = capped_cost(new, obs, weights, s02, k_sigma)
+    apart = answers_apart(new, old, obs, weights, s02)
+    kept_same = bool(np.array_equal(new.obs.active, old.obs.active))
+    return bool(c_new < (1.0 - 1e-6) * c_old and (apart >= SAME_MINIMUM_CHI2 or kept_same)), c_new / c_old - 1.0, apart
+
+
+def perturbed_restart(sol: Solution, data: WandData, obs: Obs, active0: np.ndarray, n_draws: int, scale: float, rng,
+                      solve_kw: dict, rel_gain: float = 1e-6, verbose: bool = False, log=print):
+    """One round of restarts perturbed about a stage-4 answer.  A start can end pinned against a window: a wand end on
+    its water-side surface, where every step that would lower the cost takes a wand end out of the water and is
+    rejected (W5 seed 2000: tests/plate_wand/2026-10-03-perturbed-starts-report.md).  Each draw (`perturbed_draws`) is
+    screened by one bundle adjustment at the answer's active observations and noise weights, so that its cost compares
+    with the answer's on the same terms; the cheapest draw, if it lowers that cost by more than rel_gain (relative),
+    then goes through the whole of stage 4 (`solve` on fresh observations, as a start does).  That fit is accepted
+    (info["accepted"]) when its `capped_cost` is lower than the answer's by more than rel_gain, both with the answer's
+    weights and scale: their active sets can differ, and the right minimum can reject an observation or two whose wand
+    end lies just outside the water at its windows (R4 seed 3111), which the starts' rule (`_choose`, the most
+    observations kept) would hold against it.  Returns (that fit or None, info)."""
+    t0 = time.time()
+    info = {"draws": int(n_draws), "scale": float(scale), "rms_before_px": sol.rms,
+            "min_depth_mm": window_depths(sol.cams, sol.rig, sol.frames, sol.L, sol.obs)}
+    if sol.cov is None or not np.all(np.isfinite(sol.cov)):
+        info.update(skipped="no covariance", seconds=time.time() - t0)
+        return None, info
+    o_a = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, sol.obs.active.copy())
+    # the answer's own cost on these terms (bundle_adjust's cost, no iteration)
+    cost0 = float(bundle_adjust(sol.cams, sol.rig, sol.frames, sol.L, o_a, sol.layout, max_iter=0,
+                                weights=sol.weights).info["weighted_cost"])
+    draws, left_out = perturbed_draws(sol, o_a, n_draws, scale, rng)
+    info.update(screened=len(draws), left_out=left_out, redraws=[d["redraws"] for d in draws])
+    costs, best = [], None
+    for d in draws:
+        try:
+            b = bundle_adjust(d["cams"], d["rig"], d["frames"], d["L"], o_a, sol.layout, weights=sol.weights)
+        except (np.linalg.LinAlgError, ValueError):
+            costs.append(float("inf"))
+            continue
+        c = float(b.info["weighted_cost"]) if b.info["n_fail"] == 0 else float("inf")
+        costs.append(c)
+        if np.isfinite(c) and (best is None or c < best[0]):
+            best = (c, b)
+    info["cost_rel"] = [c / cost0 - 1.0 if np.isfinite(c) else None for c in costs]
+    info["screen_seconds"] = time.time() - t0
+    new = None
+    if best is not None and best[0] < (1.0 - rel_gain) * cost0:
+        b = best[1]
+        o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
+        d_b = data if b.L == data.L else WandData(data.uv, b.L, data.sizes)
+        try:
+            new = solve(d_b, b.cams, b.rig, obs=o, **solve_kw)
+        except (np.linalg.LinAlgError, ValueError) as exc:
+            info["fit_error"] = repr(exc)
+    info["accepted"] = False
+    if new is not None:
+        s02 = float(sol.info.get("variance_factor", 1.0)) if sol.weights is not None else sol.sigma_px ** 2
+        k = float(solve_kw.get("k_sigma", 5.0))
+        c_old = capped_cost(sol, obs, sol.weights, s02, k)
+        c_new = capped_cost(new, obs, sol.weights, s02, k)
+        info["capped_rel"] = c_new / c_old - 1.0
+        info["accepted"] = bool(c_new < (1.0 - rel_gain) * c_old)
+    info["rms_after_px"] = None if new is None else new.rms
+    info["seconds"] = time.time() - t0
+    if verbose:
+        log(f"  perturbed restarts: {len(draws)} draws at {scale:g} sigma ({left_out} left out), screened costs "
+            "relative to the answer's " + ", ".join("-" if v is None else f"{v:+.1e}" for v in info["cost_rel"])
+            + (f"; the cheapest refitted: rms {sol.rms:.5f} -> {new.rms:.5f} px, capped cost "
+               f"{info['capped_rel']:+.1e}: {'accepted' if info['accepted'] else 'not accepted'}" if new is not None
+               else "; none lower"))
+    return new, info
+
+
+# ------------------------------------------------------------------ weakly seen windows: the scan of the normal
+WEAK_VIEW_DEG = 6.0          # a window whose one or two cameras all see the wand under less than this is weak
+SCAN_RADIUS_DEG = 30.0       # the scan of a weak window's normal: its grid's half-width ...
+SCAN_STEP_DEG = 3.0          # ... and spacing (D8: 1001's true valley found from an answer 11 deg away)
+SCAN_RELEASE = 3             # at most this many of the grid's minima released
+SCAN_FRAMES = 300            # the scan's held fits use at most this many frames (the release uses all)
+
+
+def view_angles_deg(cams, obs: Obs) -> List[Optional[float]]:
+    """Per camera, the angle under which it sees the wand: the diagonal of the box holding the 1st to 99th percentile
+    of its active detections, through the lens (2 atan(diagonal / 2f)).  None with fewer than 10 detections."""
+    out = []
+    for c, cam in enumerate(cams):
+        uv = obs.uv[obs.active & (obs.cam == c)]
+        if len(uv) < 10:
+            out.append(None)
+            continue
+        lo, hi = np.percentile(uv, [1.0, 99.0], axis=0)
+        out.append(math.degrees(2.0 * math.atan(math.hypot(*(hi - lo)) / (2.0 * cam.f))))
+    return out
+
+
+def weak_windows(cams, rig: Rig, obs: Obs) -> List[int]:
+    """The windows seen only by one or two cameras that all see the wand under less than WEAK_VIEW_DEG.  Every wrong
+    answer of W5 and R4 had one (5 of the 22 cases with one, none of the 98 without: tests/plate_wand/
+    p_weak_windows.py): such a window's tilt shows only weakly, and the cost has several minima."""
+    ang = view_angles_deg(cams, obs)
+    return [w for w in range(len(rig.windows)) if 1 <= len(rig.cams_of(w)) <= 2
+            and all(ang[c] is not None and ang[c] < WEAK_VIEW_DEG for c in rig.cams_of(w))]
+
+
+def _tilted(cams, rig: Rig, frames: Frames, L: float, obs: Obs, w: int, n_new) -> Rig:
+    """rig with window w's normal set to n_new, its plane turned about its anchor and, when that brings the active wand
+    ends seen through it nearer its water-side surface than before, moved back towards the cameras by the difference
+    (a start must not begin with wand ends out of the water)."""
+    win = rig.windows[w]
+    A = anchors_for(cams, rig)[w]
+    n_new = np.asarray(n_new, float) / np.linalg.norm(n_new)
+    wn = pm.Window(n_new, float(n_new @ A) + (win.d - float(win.n @ A)), win.t, win.idx, win.name)
+    sel = obs.active & np.isin(obs.cam, rig.cams_of(w))
+    if sel.any():
+        XA, XB = frames.ends(L)
+        X = np.where((obs.end[sel] == 0)[:, None], XA[obs.frame[sel]], XB[obs.frame[sel]])
+        lost = float(np.min(win.depth(X))) - float(np.min(wn.depth(X)))
+        if lost > 0:
+            wn = pm.Window(n_new, wn.d - lost, win.t, win.idx, win.name)
+    return Rig([wn if k == w else x.copy() for k, x in enumerate(rig.windows)], list(rig.cam_win))
+
+
+def scan_window_normal(sol: Solution, data: WandData, obs: Obs, active0: np.ndarray, w: int, solve_kw: dict,
+                       radius: float = SCAN_RADIUS_DEG, step: float = SCAN_STEP_DEG, n_release: int = SCAN_RELEASE,
+                       max_frames: int = SCAN_FRAMES, max_iter: int = 60, verbose: bool = False, log=print):
+    """The scan of a weak window's normal (tests/plate_wand/2026-10-03-angles-and-hints-plan.md, 7.3a; D8).  With a
+    window seen only weakly, a start can end in a wrong minimum while the true normal lies in a narrow valley tens of
+    degrees away, behind a ridge (W5 seed 1001: 11 deg).  Window w's normal is set on a grid about the answer's
+    (`radius`, `step` apart; the plane turned about its anchor, `_tilted`) and held, and one bundle adjustment fits
+    everything else on the answer's active observations with its weights, on at most max_frames frames evenly spread
+    over them (None: all); each grid point starts from a neighbour already fitted, outwards from the answer.  The
+    grid's local minima cheaper than the answer's own point (at most n_release, cheapest first) are then released:
+    stage 4 on fresh observations of every frame, as a start (`solve`).  Returns (the released answers, info)."""
+    t0 = time.time()
+    o_a = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, sol.obs.active.copy())
+    weights, frames0 = sol.weights, sol.frames
+    act = np.zeros(obs.n_frames, bool)
+    act[o_a.frame[o_a.active]] = True
+    idx = np.flatnonzero(act)
+    if max_frames and len(idx) > max_frames:
+        keep = np.zeros(obs.n_frames, bool)
+        keep[idx[np.linspace(0, len(idx) - 1, max_frames).round().astype(int)]] = True
+        rows = keep[o_a.frame]
+        weights = None if weights is None else np.asarray(weights, float)[rows]
+        o_a = o_a.subset_frames(keep)
+        frames0 = Frames(sol.frames.m[keep], sol.frames.w[keep])
+    n0 = sol.rig.windows[w].n.copy()
+
+    def held(cams, rig, frames, L, n_new):
+        rg = _tilted(cams, rig, frames, L, o_a, w, n_new)
+        lay = Layout(obs.n_cams, len(rg.windows), fit_k1=sol.layout.fit_k1, fit_L=sol.layout.fit_L,
+                     anchors=anchors_for(cams, rg), held_normals=(w,))
+        for pr in sol.layout.priors:
+            lay.add_prior(pr["kind"], pr["cam"], pr["mean"], pr["sigma"])
+        try:
+            b = bundle_adjust(cams, rg, frames, L, o_a, lay, max_iter=max_iter, weights=weights)
+        except (np.linalg.LinAlgError, ValueError):
+            return None
+        return b if b.info["n_fail"] == 0 else None
+
+    info = {"window": int(w), "radius_deg": float(radius), "step_deg": float(step), "frames": int(o_a.n_frames)}
+    centre = held(sol.cams, sol.rig, frames0, sol.L, n0)
+    if centre is None:
+        info.update(skipped="the answer's own normal held did not fit", seconds=time.time() - t0)
+        return [], info
+    kmax = int(round(radius / step))
+    pts = {(i, j) for i in range(-kmax, kmax + 1) for j in range(-kmax, kmax + 1) if i * i + j * j <= kmax * kmax}
+    st = math.radians(step)
+    fits, cost = {(0, 0): centre}, {(0, 0): float(centre.info["weighted_cost"])}
+    queue, seen = deque([(0, 0)]), {(0, 0)}
+    while queue:
+        ij = queue.popleft()
+        for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nb = (ij[0] + di, ij[1] + dj)
+            if nb in seen or nb not in pts:
+                continue
+            seen.add(nb)
+            f = fits[ij]
+            b = held(f.cams, f.rig, f.frames, f.L, pm.retract_normal(n0, (nb[0] * st, nb[1] * st)))
+            if b is not None:
+                fits[nb], cost[nb] = b, float(b.info["weighted_cost"])
+                queue.append(nb)
+    c0 = cost[(0, 0)]
+    minima = sorted((k for k in cost if k != (0, 0) and cost[k] < (1.0 - 1e-6) * c0
+                     and all(cost[k] < cost[(k[0] + a, k[1] + b)] for a in (-1, 0, 1) for b in (-1, 0, 1)
+                             if (a, b) != (0, 0) and (k[0] + a, k[1] + b) in cost)), key=lambda k: cost[k])
+    info.update(points=len(pts), fitted=len(fits),
+                minima=[{"deg": math.hypot(*k) * step, "cost_rel": cost[k] / c0 - 1.0} for k in minima[:10]])
+    released = []
+    for k in minima[:n_release]:
+        f = fits[k]
+        o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
+        d_b = data if f.L == data.L else WandData(data.uv, f.L, data.sizes)
+        try:
+            released.append(solve(d_b, f.cams, f.rig, obs=o, **solve_kw))
+        except (np.linalg.LinAlgError, ValueError):
+            continue
+    info.update(released_rms_px=[s.rms for s in released], seconds=time.time() - t0)
+    if verbose:
+        log(f"  scan of window {w + 1}'s normal: {len(fits)} of {len(pts)} grid points fitted, {len(minima)} minima "
+            f"below the answer's; released: " + (", ".join(f"rms {x:.5f}" for x in info["released_rms_px"]) or "none")
+            + f" ({info['seconds']:.0f} s)")
+    return released, info
 
 
 # ------------------------------------------------------------------ the output frame
@@ -2242,10 +2720,19 @@ def to_output_frame(sol: Solution) -> Solution:
 
 
 # ------------------------------------------------------------------ the whole calibration
+def _choose(results: List[Solution], noise_weights: str) -> Solution:
+    """The answer among stage-4 results: of those whose RMS is within 1.5x of the best, the one that keeps the most
+    observations, then the most likely; the first of equals."""
+    best_rms = min(s.rms for s in results)
+    pool = [s for s in results if s.rms <= 1.5 * best_rms]
+    return min(pool, key=lambda s: (-int(s.obs.active.sum()), _log_likelihood_key(s, noise_weights)))
+
+
 def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: bool = False, fit_L: bool = False,
               k_sigma: float = 5.0, n_final: int = 2, noise_weights: str = "camera", sigma_cam_px=None,
               more_starts_px: float = 1.0, theta_cap: float = 50.0, dtheta: float = 9.0, output_frame: bool = True,
-              max_starts: int = 6, verbose: bool = False, log=print) -> Solution:
+              max_starts: int = 6, perturb_starts: int = 4, perturb_scale: float = 2.0, perturb_all: bool = False,
+              scan_weak: bool = True, verbose: bool = False, log=print) -> Solution:
     """Stages 0-5: from the detections to the cameras and windows, with no camera or window input (or from `start`,
     cameras in the frame of rig.windows, which are then taken as given).  A rig with one window is started whole
     (`bootstrap`); one with several windows of which some have two or more cameras window by window
@@ -2253,95 +2740,271 @@ def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: 
     starts are carried through stage 4; when the best of them has a coarse-fit RMS above more_starts_px (noisy data), or
     when they end in different minima (RMS apart by more than 0.1 %), every start is, up to max_starts.  The answer is chosen among those whose RMS is within 1.5x of the best (a start stuck in a wrong
     minimum fits badly, and its inflated noise estimate rejects little, so it must not win on the count): most
-    observations kept, then the highest likelihood.
+    observations kept, then the highest likelihood (`_choose`).
+    On a rig that uses several windows, perturb_starts restarts are then drawn about the answer from its covariance
+    scaled by perturb_scale and screened, the cheapest refitted if it lowers the cost (`perturbed_restart`); the refit
+    replaces the answer when it is better on the same terms (`capped_cost`), and a second round follows.  A start can
+    end pinned against a window (W5 seed 2000).  perturb_starts=0 turns this off; perturb_all=True applies it to every rig and to a given
+    start.  The draws' seed comes from the detections, so the same data give the same answer.
+    On a rig that uses several windows, each weakly seen window (`weak_windows`) then has its normal scanned
+    (`scan_window_normal`; scan_weak=False turns this off): a released fit replaces the answer, after its restarts,
+    by `replaces` (as a hinted path's answer below).  info["scan"] reports it.
     hints (optional): {"f": [px per camera or None]: the lenses' focal lengths, used for the pinhole start's distances;
-    "f_prior_rel": sigma: also a soft prior on log f in stage 4}.  With fit_L the wand length is estimated too: only
-    the plates' thickness then fixes the scale, weakly."""
+    "f_prior_rel": sigma: also a soft prior on log f in stage 4; "normals": [per camera None or the normal of its
+    window in the camera's own frame -- x along the image rows, y down, z along the optical axis, either sign --, e.g.
+    (sin 30 deg, 0, cos 30 deg) for a camera turned 30 deg to the left of square-on; a rough guess]: two more start
+    paths then run beside the default one, which ignores the hints: "held", every hinted window's normal held at its
+    hint (`hinted_normal`) while the start is built (the window search tries only its offsets; the window groups' own
+    fits and the coarse fit hold it too) and freed in stage 4; "searched", every hinted window searched a second time
+    about its hint, the candidates merged with the default search's (`_merge_hinted`).  Each path's answer gets its
+    own restarts from the same seed, so the default path gives exactly the answer without hints; a path whose stage-4
+    answer is the same minimum as one already found (`answers_apart` below SAME_MINIMUM_CHI2) skips its restarts.  A
+    hinted path's answer replaces the default one only by `replaces` (a lower `capped_cost` with the default answer's
+    weights, and another minimum or the same observations kept): a rough or wrong hint costs time, not the answer, and
+    the answer's normals come from the data.  No prior.  info["hints"] holds each hint's angle from the answer, every
+    path's outcome and the path chosen; info["starts"] and info["bootstrap"] describe the default path}.  With fit_L
+    the wand length is estimated too: only the plates' thickness then fixes the scale, weakly."""
     hints = hints or {}
     obs = observations(data)
     t0 = time.time()
-    binfo = {}
-    if start is not None:
-        starts = [(0.0, float("nan"), [c.copy() for c in start], rig.copy())]
-    else:
-        multi = sum(1 for w in range(len(rig.windows)) if len(rig.cams_of(w)) >= 2)
-        used = sum(1 for w in range(len(rig.windows)) if rig.cams_of(w))
-        few = any(1 <= len(rig.cams_of(w)) <= 2 for w in range(len(rig.windows)))
-        searches = ("length", "fixed") if few else ("fixed",)
+    multi = sum(1 for w in range(len(rig.windows)) if len(rig.cams_of(w)) >= 2)
+    used = sum(1 for w in range(len(rig.windows)) if rig.cams_of(w))
+    few = any(1 <= len(rig.cams_of(w)) <= 2 for w in range(len(rig.windows)))
+    searches = ("length", "fixed") if few else ("fixed",)
+
+    def make_starts(hold: bool = False, widen: bool = False):
+        """Stages 1-3 (hold: the hint-held start; widen: the hint-searched start)."""
         if used > 1:
             # several windows: each search's starts are pooled (neither is right on every rig with a window of one or
             # two cameras; the final costs decide)
-            per_search, binfo, cache = [], {}, {}
+            per_search, binfo_, cache = [], {}, {}
             for sr in searches:
                 try:
                     if multi >= 1:
                         st, inf = bootstrap_groups(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
-                                                   dtheta=dtheta, search=sr, cache=cache, verbose=verbose, log=log)
+                                                   dtheta=dtheta, search=sr, cache=cache, hold=hold, widen=widen,
+                                                   verbose=verbose, log=log)
                     else:
                         st, inf = bootstrap_singles(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
-                                                    dtheta=dtheta, search=sr, verbose=verbose, log=log)
+                                                    dtheta=dtheta, search=sr, hold=hold, widen=widen,
+                                                    verbose=verbose, log=log)
                 except (ValueError, np.linalg.LinAlgError) as exc:
                     # e.g. a window's cameras that never see the same frames cannot be calibrated as a group
                     t_f = time.time()
                     st, inf = bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
-                                        dtheta=dtheta, search=sr, verbose=verbose, log=log)
+                                        dtheta=dtheta, search=sr, hold=hold, widen=widen, verbose=verbose, log=log)
                     inf = {**inf, "fallback_from": repr(exc)}
                     inf["seconds"]["total"] = inf["seconds"].get("total", time.time() - t_f)
                 per_search.append(sorted(st, key=lambda s_: s_[0]))
-                binfo[sr] = inf
+                binfo_[sr] = inf
             # the searches' starts taken in turn, each search's best first: their costs are not comparable enough to
             # rank one search's starts behind the other's (W5 seed 1031: the right start ranked seventh)
-            starts = [x for tup in itertools.zip_longest(*per_search) for x in tup if x is not None]
-            binfo["seconds"] = {"total": sum(v["seconds"]["total"] for v in binfo.values())}
-        else:
-            starts, binfo = bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap, dtheta=dtheta,
-                                      verbose=verbose, log=log)
+            starts_ = [x for tup in itertools.zip_longest(*per_search) for x in tup if x is not None]
+            binfo_["seconds"] = {"total": sum(v["seconds"]["total"] for v in binfo_.values())}
+            return starts_, binfo_
+        return bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap, dtheta=dtheta, hold=hold,
+                         widen=widen, verbose=verbose, log=log)
+
+    binfo = {}
+    if start is not None:
+        starts = [(0.0, float("nan"), [c.copy() for c in start], rig.copy())]
+    else:
+        starts, binfo = make_starts()
     priors = []
     if hints.get("f") is not None and hints.get("f_prior_rel"):
         for c, fv in enumerate(hints["f"]):
             if fv:
                 priors.append({"kind": "logf", "cam": c, "mean": math.log(float(fv)),
                                "sigma": float(hints["f_prior_rel"])})
-    results = []
+    solve_kw = dict(fit_k1=fit_k1, fit_L=fit_L, k_sigma=k_sigma, noise_weights=noise_weights,
+                    sigma_cam_px=sigma_cam_px, priors=priors, verbose=False, log=log)
     active0 = obs.active.copy()
-    tried, stage3 = 0, []
-    t4 = time.time()
-    for k, (_cost, rms3, cams0, rig0) in enumerate(starts):
-        if k >= max(n_final, max_starts):
-            break
-        if k >= n_final and min(stage3, default=0.0) <= more_starts_px:
-            rr = [x.rms for x in results]
-            # starts that ended in different minima (RMS apart by more than 0.1 %): the landscape has several, so
-            # every start is tried
-            if not rr or max(rr) <= (1.0 + 1e-3) * min(rr):
+
+    def fit_starts(starts_):
+        """Stage 4 from the starts; returns (the answer by `_choose`, every result, starts fitted, their coarse
+        RMS)."""
+        results_, stage3_, tried_ = [], [], 0
+        for k, (_cost, rms3, cams0, rig0) in enumerate(starts_):
+            if k >= max(n_final, max_starts):
                 break
-        o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
-        stage3.append(rms3 if np.isfinite(rms3) else 0.0)
-        try:
-            sol = solve(data, cams0, rig0, fit_k1=fit_k1, fit_L=fit_L, k_sigma=k_sigma, noise_weights=noise_weights,
-                        sigma_cam_px=sigma_cam_px, obs=o, priors=priors, verbose=False, log=log)
-        except (np.linalg.LinAlgError, ValueError) as exc:
+            if k >= n_final and min(stage3_, default=0.0) <= more_starts_px:
+                rr = [x.rms for x in results_]
+                # starts that ended in different minima (RMS apart by more than 0.1 %): the landscape has several, so
+                # every start is tried
+                if not rr or max(rr) <= (1.0 + 1e-3) * min(rr):
+                    break
+            o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
+            stage3_.append(rms3 if np.isfinite(rms3) else 0.0)
+            try:
+                s_ = solve(data, cams0, rig0, obs=o, **solve_kw)
+            except (np.linalg.LinAlgError, ValueError) as exc:
+                if verbose:
+                    log(f"  start {k}: failed ({exc})")
+                continue
+            tried_ += 1
+            results_.append(s_)
             if verbose:
-                log(f"  start {k}: failed ({exc})")
-            continue
-        tried += 1
-        results.append(sol)
-        if verbose:
-            log(f"  start {k}: coarse rms {rms3:.3f} px -> stage 4 rms {sol.rms:.5f} px, active "
-                f"{int(o.active.sum())}/{len(o)}")
-    if not results:
-        raise ValueError("no start converged")
-    best_rms = min(s.rms for s in results)
-    pool = [s for s in results if s.rms <= 1.5 * best_rms]
-    sol = min(pool, key=lambda s: (-int(s.obs.active.sum()), _log_likelihood_key(s, noise_weights)))
+                log(f"  start {k}: coarse rms {rms3:.3f} px -> stage 4 rms {s_.rms:.5f} px, active "
+                    f"{int(o.active.sum())}/{len(o)}")
+        if not results_:
+            raise ValueError("no start converged")
+        return _choose(results_, noise_weights), results_, tried_, stage3_
+
+    # restarts perturbed about an answer: rigs that use several windows (every rig with perturb_all)
+    used_wins = sum(1 for w in range(len(rig.windows)) if rig.cams_of(w))
+    do_pert = perturb_starts > 0 and (perturb_all or (start is None and used_wins > 1))
+
+    def restarts(sol_):
+        """The restarts about an answer, from the restarts' seed; returns (the answer, their info or None)."""
+        if not do_pert:
+            return sol_, None
+        t_p = time.time()
+        rng = np.random.default_rng(_perturb_seed(data))
+        pert_ = {"draws": int(perturb_starts), "scale": float(perturb_scale), "rms_before_px": sol_.rms, "rounds": [],
+                 "improved": False}
+        for _round in range(PERTURB_ROUNDS):
+            new, pinf = perturbed_restart(sol_, data, obs, active0, perturb_starts, perturb_scale, rng, solve_kw,
+                                          verbose=verbose, log=log)
+            pert_["rounds"].append(pinf)
+            if new is None or not pinf["accepted"]:
+                break
+            sol_ = new
+            pert_["improved"] = True
+        pert_["rms_px"] = sol_.rms
+        pert_["seconds"] = time.time() - t_p
+        return sol_, pert_
+
+    def terms(s_):
+        """An answer's weights and variance per coordinate in their metric: the terms answers are compared on."""
+        return s_.weights, (float(s_.info.get("variance_factor", 1.0)) if s_.weights is not None else s_.sigma_px ** 2)
+
+    hinted = start is None and any(_cam_hint(hints, c) is not None for c in range(obs.n_cams))
+    t4 = time.time()
+    try:
+        sol, results, tried, stage3 = fit_starts(starts)
+    except ValueError:
+        if not hinted:
+            raise
+        sol, results, tried, stage3 = None, [], 0, []
     t_ml = time.time() - t4
+    pert = None
+    found = []                                  # (path, its stage-4 answer, its answer after the restarts)
+    if sol is not None:
+        sol4 = sol
+        sol, pert = restarts(sol)
+        found.append(("default", sol4, sol))
+    # window-normal hints: two more paths, the hint-held start and the hint-searched start, each with its own restarts;
+    # a hinted answer replaces the default one only when it is another minimum with a lower capped cost
+    paths, chosen = None, "default"
+    if hinted:
+        paths = {}
+        for name, kw_ in (("held", {"hold": True}), ("searched", {"widen": True})):
+            t_h = time.time()
+            p = {}
+            try:
+                starts_h, binfo_h = make_starts(**kw_)
+                sol_h, results_h, tried_h, _st3 = fit_starts(starts_h)
+            except (ValueError, np.linalg.LinAlgError) as exc:
+                p["error"] = repr(exc)
+            else:
+                p.update(available=len(starts_h), tried=tried_h, stage4_rms_px=[s.rms for s in results_h],
+                         stage4_answer_rms_px=sol_h.rms, bootstrap=binfo_h)
+                same = None
+                if found:
+                    wts, s02 = terms(found[0][2])
+                    same = next((nm for nm, s4, sf in found
+                                 if min(answers_apart(sol_h, s4, obs, wts, s02),
+                                        answers_apart(sol_h, sf, obs, wts, s02)) < SAME_MINIMUM_CHI2), None)
+                if same is not None:
+                    p["same_as"] = same                 # its restarts would repeat that answer's; still a candidate
+                    found.append((name, sol_h, sol_h))
+                else:
+                    sol4_h = sol_h
+                    sol_h, pert_h = restarts(sol_h)
+                    p["perturbed"] = None if pert_h is None else {
+                        k: pert_h[k] for k in ("improved", "rms_before_px", "rms_px", "seconds")}
+                    found.append((name, sol4_h, sol_h))
+                p["rms_px"] = sol_h.rms
+            p["seconds"] = time.time() - t_h
+            paths[name] = p
+            if verbose:
+                if "error" in p:
+                    msg = p["error"]
+                elif "same_as" in p:
+                    msg = (f"stage 4 rms {p['stage4_answer_rms_px']:.5f} px, the same minimum as the {p['same_as']} "
+                           "path's")
+                else:
+                    msg = f"stage 4 rms {p['stage4_answer_rms_px']:.5f} px, after the restarts {p['rms_px']:.5f} px"
+                log(f"  hint path {name}: {msg}")
+        if not found:
+            raise ValueError("no start converged")
+        base_name, _b4, base = found[0]
+        wts, s02 = terms(base)
+        c_base = capped_cost(base, obs, wts, s02, k_sigma)
+        best = (c_base, base_name, base)
+        for nm, _s4, sf in found[1:]:
+            ok, crel, apart = replaces(sf, base, obs, wts, s02, k_sigma, c_base)
+            paths[nm].update(capped_rel=crel, apart_chi2=apart, replaces=ok)
+            if ok and (1.0 + crel) * c_base < best[0]:
+                best = ((1.0 + crel) * c_base, nm, sf)
+        chosen, sol = best[1], best[2]
+        if verbose:
+            log(f"  the answer: the {chosen} path's, rms {sol.rms:.5f} px")
+    # weakly seen windows: the scan of each one's normal; a released fit replaces the answer on the same terms
+    scan = None
+    if scan_weak and start is None and used_wins > 1:
+        weak = weak_windows(sol.cams, sol.rig, sol.obs)
+        if weak:
+            t_s = time.time()
+            scan = {"windows": [], "improved": False, "rms_before_px": sol.rms}
+            for w in weak:
+                fits_r, sinf = scan_window_normal(sol, data, obs, active0, w, solve_kw, verbose=verbose, log=log)
+                wts, s02 = terms(sol)
+                c_sol = capped_cost(sol, obs, wts, s02, k_sigma)
+                best_s, sinf["released"] = None, []
+                for s_ in fits_r:
+                    ok, crel, apart = replaces(s_, sol, obs, wts, s02, k_sigma, c_sol)
+                    sinf["released"].append({"rms_px": s_.rms, "capped_rel": crel, "apart_chi2": apart,
+                                             "replaces": ok})
+                    if ok and (best_s is None or crel < best_s[0]):
+                        best_s = (crel, s_)
+                sinf["accepted"] = False
+                if best_s is not None:
+                    new, _pert_s = restarts(best_s[1])
+                    ok, crel, _apart = replaces(new, sol, obs, wts, s02, k_sigma, c_sol)
+                    if ok:
+                        sinf.update(accepted=True, rms_px=new.rms, capped_rel=crel)
+                        sol = new
+                        scan["improved"] = True
+                scan["windows"].append(sinf)
+                if verbose:
+                    log(f"  scan of window {w + 1}: " + (f"the answer IMPROVED, rms {sol.rms:.5f} px" if sinf["accepted"]
+                                                         else "nothing better"))
+            scan["rms_px"] = sol.rms
+            scan["seconds"] = time.time() - t_s
     sol.info["sigmas_fit_frame"] = {"cameras": camera_sigmas(sol.cams, sol.rig, sol.layout, sol.cov),
                                     "windows": window_sigmas(sol.cams, sol.rig, sol.layout, sol.cov)}
+    if hinted:
+        # each hint's angle from the answer's normal, in its camera's frame (a frame change leaves it unchanged)
+        off = []
+        for c in range(obs.n_cams):
+            v, w = _cam_hint(hints, c), sol.rig.cam_win[c]
+            if v is None or w < 0:
+                off.append(None)
+                continue
+            v = np.asarray(v, float)
+            m = sol.cams[c].R @ sol.rig.windows[w].n
+            off.append(math.degrees(math.acos(min(1.0, abs(float(v @ m)) / float(np.linalg.norm(v))))))
+        sol.info["hints"] = {"normals_off_deg": off, "paths": paths, "chosen": chosen}
+    sol.info["scan"] = scan
     if output_frame:
         sol = to_output_frame(sol)
     sol.info["bootstrap"] = binfo
     sol.info["starts"] = {"available": len(starts), "tried": tried, "n_final": n_final,
                           "more_starts_px": more_starts_px, "stage3_rms_px": stage3, "start_given": start is not None,
-                          "stage4_rms_px": [s.rms for s in results]}
-    sol.info["timing_s"] = {"bootstrap": binfo.get("seconds", {}), "stage4": t_ml, "total": time.time() - t0}
+                          "stage4_rms_px": [s.rms for s in results], "perturbed": pert}
+    sol.info["timing_s"] = {"bootstrap": binfo.get("seconds", {}), "stage4": t_ml,
+                            "perturbed": None if pert is None else pert["seconds"],
+                            "hint_paths": None if paths is None else {k: v["seconds"] for k, v in paths.items()},
+                            "scan": None if scan is None else scan["seconds"], "total": time.time() - t0}
     return sol
