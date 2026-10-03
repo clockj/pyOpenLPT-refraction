@@ -152,8 +152,9 @@ final fit 11 s (two starts).
 - **Shape against position.** The shape of what the cameras measure is known 100–10,000 times better than its position
   relative to camera 1. The scene, the window and f can slide together along the viewing direction: 0.43–0.48 mm on
   A, B and D, 1.6 mm on C, 7.3 mm on E (W2's `gauge_mm`).
-- **The square-on rig C** is 3–9x weaker than rig A on every measure, as expected. Its window's distance is barely
-  visible.
+- **Rig C** is 3–9x weaker than rig A on every measure. The cause is its cameras' small angle to each other (5°), not
+  their view straight through the window: the same layout moved to 18–25° incidence is as weak (`p_mixed_views.py`,
+  added later; README section 3, item 6).
 - **Points outside the calibrated volume:** the shape error grows about linearly with the distance (2x at twice the
   volume).
 

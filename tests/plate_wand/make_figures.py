@@ -122,7 +122,7 @@ def rig_record(name, rig_t, n_rays=5, wands=0, seed=0, labels=None):
 
 DESIGN = {"A": [(-18, -12), (18, -12), (-18, 12), (18, 12)], "B": [(-15, 0), (15, 0), (0, -15), (0, 15)],
           "C": [(0, 0), (5, 0), (-2.5, 4.33)], "D": [(35, 0), (-40, 0), (0, 45)], "E": [(-15, 0), (15, 0), (0, 15)]}
-RIG_TEXT = {"A": "one wall, 4 cameras", "B": "two walls, 2 + 2 cameras", "C": "square-on, 3 cameras within 5°",
+RIG_TEXT = {"A": "one wall, 4 cameras", "B": "two walls, 2 + 2 cameras", "C": "3 cameras 5° apart, straight through",
             "D": "steep, 3 cameras at 35–45°", "E": "macro, f 40 000 px, 16 mm cloud"}
 
 

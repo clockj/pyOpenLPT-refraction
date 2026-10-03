@@ -296,7 +296,7 @@ table.data.compact .barcell { grid-template-columns: 4.6em minmax(36px, 1fr); mi
         <ul>
           <li><b>A</b> is a typical rig: four cameras about 21° off the wall's normal.</li>
           <li><b>B</b> looks through two perpendicular walls of a tank, two cameras through each.</li>
-          <li><b>C</b> is square-on, where a window's distance is nearly invisible; <b>D</b> is steep, where refraction is strongest; <b>E</b> is a macro rig with long lenses.</li>
+          <li><b>C</b> has three cameras only 5° apart, looking straight through the wall; <b>D</b> is steep, where refraction is strongest; <b>E</b> is a macro rig with long lenses.</li>
         </ul>
         Hover over a camera for its numbers.</figcaption>
       <details class="more"><summary>Camera table</summary><div class="table-wrap" id="cam-table"></div></details>
@@ -336,7 +336,7 @@ table.data.compact .barcell { grid-template-columns: 4.6em minmax(36px, 1fr); mi
       <figcaption><b>Fig. 4</b> One row per data set.
         <ul>
           <li><b>Time:</b> the new calibration takes 21–153 s; the GUI, where it succeeds, takes 11–70 min.</li>
-          <li><b>Failures:</b> the GUI failed on both square-on cases (rig C). At 0.1 px its pinhole start collapsed the scale; at 0.5 px it found no usable camera pair.</li>
+          <li><b>Failures:</b> the GUI failed on both cases of rig C, whose cameras are only 5° apart. At 0.1 px its pinhole start collapsed the scale; at 0.5 px it found no usable camera pair.</li>
           <li><b>Rigs A, B, D:</b> the two are comparable, both near the Cramér–Rao bound.</li>
           <li><b>Random rigs:</b> the new calibration is better on 9 of 10, by up to 400 times. The GUI's focal lengths are held within ±5 % of the true values it was given, and two of its runs ended on that bound.</li>
         </ul>
@@ -354,7 +354,7 @@ table.data.compact .barcell { grid-template-columns: 4.6em minmax(36px, 1fr); mi
         <ul>
           <li><b>3-D shape error:</b> the error the calibration adds to the shape of unseen points, after the best rigid motion. Their position relative to camera 1 is known far less well: 0.43–0.48 mm on rigs A, B and D, 1.6 mm on C and 7.3 mm on E. The scene, the walls and f can slide together along the viewing direction, which changes no shape measured inside the volume.</li>
           <li><b>Wand length:</b> a new 25 mm wand (10 mm on E) measured with the calibration. The bar is the calibration's own share; the last column adds the new detections' noise.</li>
-          <li><b>The square-on rig C</b> is 3–9 times weaker than rig A on every measure, as expected: at normal incidence a wall's distance barely changes the images.</li>
+          <li><b>Rig C</b> is 3–9 times weaker than rig A on every measure, because its cameras are only 5° apart. Looking straight through the wall is not the cause: the same layout at 18–25° incidence is as weak (<code>p_mixed_views.py</code>).</li>
         </ul></figcaption>
     </figure>
     <figure class="fig">
