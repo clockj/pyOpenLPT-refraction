@@ -1,0 +1,36 @@
+A_0.1px          gui:    1742 s; f err max 0.064 %; 3-D shape     5.19 um; wand    -0.32 um mean,     1.58 um RMS; reprojection 0.0200 px
+A_0.1px          new:      34 s; f err max 0.100 %; 3-D shape     6.58 um; wand    -0.14 um mean,     2.08 um RMS; reprojection 0.0247 px
+A_0.5px          gui:    1373 s; f err max 0.283 %; 3-D shape    19.87 um; wand    -3.64 um mean,     6.72 um RMS; reprojection 0.0801 px
+A_0.5px          new:      30 s; f err max 0.552 %; 3-D shape    10.33 um; wand    +0.50 um mean,     3.59 um RMS; reprojection 0.0453 px
+B_0.1px          gui:    1271 s; f err max 0.035 %; 3-D shape     1.38 um; wand    +0.03 um mean,     0.45 um RMS; reprojection 0.0085 px
+B_0.1px          new:      94 s; f err max 0.052 %; 3-D shape     2.09 um; wand    +0.07 um mean,     0.67 um RMS; reprojection 0.0108 px
+B_0.5px          gui:    1353 s; f err max 0.218 %; 3-D shape     7.48 um; wand    -2.99 um mean,     3.40 um RMS; reprojection 0.0482 px
+B_0.5px          new:      97 s; f err max 0.349 %; 3-D shape     5.46 um; wand    -0.25 um mean,     2.04 um RMS; reprojection 0.0426 px
+C_0.1px          gui: FAILED (RuntimeError('[ABORT] Scale sanity failed: median=3.11mm, target=25.00mm.')) after 171 s
+C_0.1px          new:      30 s; f err max 0.057 %; 3-D shape    33.08 um; wand    -5.36 um mean,    10.91 um RMS; reprojection 0.1227 px
+C_0.5px          gui: FAILED (P0FailureError('[BOOT] No geometry-valid camera pair found during precalibration')) after 6 s
+C_0.5px          new:     153 s; f err max 0.642 %; 3-D shape   162.96 um; wand    -6.86 um mean,    51.99 um RMS; reprojection 0.6397 px
+D_0.1px          gui:    1541 s; f err max 0.051 %; 3-D shape     6.38 um; wand    +0.07 um mean,     1.94 um RMS; reprojection 0.0245 px
+D_0.1px          new:      24 s; f err max 0.076 %; 3-D shape     5.81 um; wand    +0.18 um mean,     1.78 um RMS; reprojection 0.0219 px
+D_0.5px          gui:    1461 s; f err max 0.315 %; 3-D shape    23.52 um; wand    -9.17 um mean,    10.29 um RMS; reprojection 0.0961 px
+D_0.5px          new:      24 s; f err max 0.716 %; 3-D shape    25.15 um; wand    -6.27 um mean,     9.38 um RMS; reprojection 0.0884 px
+rand1000_0.1px   gui:    4185 s; f err max 2.417 %; 3-D shape   530.52 um; wand   -34.85 um mean,   245.26 um RMS; reprojection 1.9773 px
+rand1000_0.1px   new:      65 s; f err max 0.046 %; 3-D shape     1.62 um; wand    +0.46 um mean,     0.84 um RMS; reprojection 0.0083 px
+rand1001_0.1px   gui:     951 s; f err max 2.441 %; 3-D shape    28.58 um; wand    -0.36 um mean,     9.58 um RMS; reprojection 0.5828 px
+rand1001_0.1px   new:     140 s; f err max 1.292 %; 3-D shape     3.78 um; wand    -0.14 um mean,     1.95 um RMS; reprojection 0.0599 px
+rand1002_0.1px   gui:    2886 s; f err max 2.931 %; 3-D shape     5.29 um; wand    -0.68 um mean,     3.51 um RMS; reprojection 0.0563 px
+rand1002_0.1px   new:      52 s; f err max 0.145 %; 3-D shape     0.68 um; wand    +0.10 um mean,     0.40 um RMS; reprojection 0.0092 px
+rand1003_0.1px   gui:    3723 s; f err max 4.914 %; 3-D shape   140.74 um; wand   +30.70 um mean,    54.32 um RMS; reprojection 1.3378 px
+rand1003_0.1px   new:      54 s; f err max 0.106 %; 3-D shape     0.34 um; wand    +0.06 um mean,     0.17 um RMS; reprojection 0.0068 px
+rand1004_0.1px   gui:    1698 s; f err max 2.295 %; 3-D shape     3.29 um; wand    +0.29 um mean,     2.42 um RMS; reprojection 0.0555 px
+rand1004_0.1px   new:      26 s; f err max 0.143 %; 3-D shape     0.64 um; wand    +0.08 um mean,     0.35 um RMS; reprojection 0.0123 px
+rand1005_0.1px   gui:    4222 s; f err max 6.624 %; 3-D shape   939.39 um; wand    +8.19 um mean,   295.23 um RMS; reprojection 2.0797 px
+rand1005_0.1px   new:      38 s; f err max 0.016 %; 3-D shape    13.62 um; wand    +4.51 um mean,     5.09 um RMS; reprojection 0.0188 px
+rand1006_0.1px   gui:    3459 s; f err max 0.708 %; 3-D shape     8.96 um; wand    +0.09 um mean,     5.11 um RMS; reprojection 0.0310 px
+rand1006_0.1px   new:      38 s; f err max 0.185 %; 3-D shape     2.62 um; wand    +0.51 um mean,     1.34 um RMS; reprojection 0.0114 px
+rand1007_0.1px   gui:    1782 s; f err max 5.001 %; 3-D shape    88.88 um; wand    -4.88 um mean,    57.99 um RMS; reprojection 0.4960 px
+rand1007_0.1px   new:      21 s; f err max 0.058 %; 3-D shape     1.43 um; wand    -0.43 um mean,     0.83 um RMS; reprojection 0.0080 px
+rand1008_0.1px   gui:    4050 s; f err max 5.000 %; 3-D shape   214.68 um; wand   +15.82 um mean,    65.92 um RMS; reprojection 1.9876 px
+rand1008_0.1px   new:      47 s; f err max 0.075 %; 3-D shape     1.16 um; wand    -0.30 um mean,     0.42 um RMS; reprojection 0.0167 px
+rand1009_0.1px   gui:     685 s; f err max 0.134 %; 3-D shape     3.75 um; wand    -0.60 um mean,     1.69 um RMS; reprojection 0.0253 px
+rand1009_0.1px   new:      30 s; f err max 0.224 %; 3-D shape     4.69 um; wand    -0.31 um mean,     2.01 um RMS; reprojection 0.0315 px

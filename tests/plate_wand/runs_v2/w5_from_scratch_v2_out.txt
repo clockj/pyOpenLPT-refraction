@@ -1,0 +1,65 @@
+W5: 50 random rigs at 0.1 px, 10 at 1 px
+  seed 1000 (0.1 px): 5 cams, 2 win, incidence 7-30 deg, f 1884-3296, 903 frames: same minimum (rms 0.12219 vs 0.12219, max |z| 9.4e-07 cam4.C3, active 9030/9030), 39.5 s
+  seed 1001 (0.1 px): 2 cams, 2 win, incidence 9-44 deg, f 12323-24485, 612 frames: DIFFERENT (rms 0.08749 vs 0.08599, max |z| 4.5e+01 win2.a, active 2448/2448), 79.5 s
+  seed 1002 (0.1 px): 6 cams, 1 win, incidence 7-34 deg, f 2740-18656, 1293 frames: same minimum (rms 0.12609 vs 0.12609, max |z| 9.6e-06 cam3.C3, active 15516/15516), 84.0 s
+  seed 1003 (0.1 px): 6 cams, 1 win, incidence 7-44 deg, f 2979-29098, 1406 frames: same minimum (rms 0.12609 vs 0.12609, max |z| 5.7e-06 cam6.C1, active 16871/16871), 109.2 s
+  seed 1004 (0.1 px): 3 cams, 1 win, incidence 2-36 deg, f 10136-19291, 713 frames: same minimum (rms 0.10828 vs 0.10828, max |z| 2.7e-06 cam2.C1, active 4278/4278), 29.5 s
+  seed 1005 (0.1 px): 5 cams, 1 win, incidence 10-30 deg, f 1808-4433, 882 frames: same minimum (rms 0.12090 vs 0.12090, max |z| 2.6e-06 cam4.w2, active 8820/8820), 49.8 s
+  seed 1006 (0.1 px): 5 cams, 1 win, incidence 4-42 deg, f 1592-9404, 782 frames: same minimum (rms 0.12291 vs 0.12291, max |z| 3.5e-06 win1.b, active 7820/7820), 45.4 s
+  seed 1007 (0.1 px): 3 cams, 1 win, incidence 20-36 deg, f 5401-12295, 629 frames: same minimum (rms 0.10664 vs 0.10664, max |z| 3.9e-06 cam3.logf, active 3774/3774), 24.1 s
+  seed 1008 (0.1 px): 6 cams, 1 win, incidence 2-39 deg, f 4638-19170, 638 frames: same minimum (rms 0.12545 vs 0.12545, max |z| 8.3e-07 cam5.w1, active 7656/7656), 58.3 s
+  seed 1009 (0.1 px): 2 cams, 1 win, incidence 1-34 deg, f 5581-8812, 1256 frames: same minimum (rms 0.08773 vs 0.08773, max |z| 1.3e-05 cam2.logf, active 5024/5024), 27.2 s
+  seed 1010 (0.1 px): 2 cams, 1 win, incidence 2-44 deg, f 2593-8617, 1412 frames: same minimum (rms 0.08535 vs 0.08535, max |z| 8.6e-06 cam1.logf, active 5648/5648), 179.2 s
+  seed 1011 (0.1 px): 6 cams, 1 win, incidence 1-40 deg, f 2421-20190, 1325 frames: same minimum (rms 0.12573 vs 0.12573, max |z| 1.6e-06 win1.b, active 15900/15900), 84.2 s
+  seed 1012 (0.1 px): 4 cams, 1 win, incidence 0-29 deg, f 2203-10921, 1014 frames: same minimum (rms 0.11733 vs 0.11733, max |z| 2.4e-06 cam2.C3, active 8112/8112), 46.8 s
+  seed 1013 (0.1 px): 5 cams, 2 win, incidence 4-32 deg, f 3677-31591, 1221 frames: same minimum (rms 0.12213 vs 0.12213, max |z| 1.5e-04 cam2.C3, active 12210/12210), 53.0 s
+  seed 1014 (0.1 px): 4 cams, 1 win, incidence 12-45 deg, f 1615-7661, 1059 frames: same minimum (rms 0.11696 vs 0.11696, max |z| 2.7e-06 cam1.logf, active 8472/8472), 46.7 s
+  seed 1015 (0.1 px): 3 cams, 1 win, incidence 28-42 deg, f 4228-19125, 1296 frames: same minimum (rms 0.10670 vs 0.10670, max |z| 1.3e-05 cam1.logf, active 7776/7776), 38.5 s
+  seed 1016 (0.1 px): 5 cams, 1 win, incidence 7-35 deg, f 3059-24982, 1132 frames: same minimum (rms 0.12320 vs 0.12320, max |z| 5.7e-06 cam3.w2, active 11320/11320), 62.9 s
+  seed 1017 (0.1 px): 6 cams, 1 win, incidence 8-43 deg, f 6670-29540, 1363 frames: same minimum (rms 0.12653 vs 0.12653, max |z| 2.1e-05 cam5.C3, active 16356/16356), 91.9 s
+  seed 1018 (0.1 px): 4 cams, 2 win, incidence 5-30 deg, f 3724-13264, 630 frames: same minimum (rms 0.11737 vs 0.11737, max |z| 1.1e-05 cam2.logf, active 5040/5040), 29.0 s
+  seed 1019 (0.1 px): 4 cams, 1 win, incidence 10-44 deg, f 5646-29897, 861 frames: same minimum (rms 0.11698 vs 0.11698, max |z| 6.5e-07 cam3.C1, active 6888/6888), 47.0 s
+  seed 1020 (0.1 px): 5 cams, 2 win, incidence 9-43 deg, f 8962-38175, 1106 frames: same minimum (rms 0.12183 vs 0.12183, max |z| 1.7e-06 cam5.logf, active 11060/11060), 56.5 s
+  seed 1021 (0.1 px): 4 cams, 1 win, incidence 12-44 deg, f 11632-18646, 1100 frames: same minimum (rms 0.11827 vs 0.11827, max |z| 1.7e-05 cam4.w2, active 8800/8800), 56.2 s
+  seed 1022 (0.1 px): 2 cams, 1 win, incidence 0-39 deg, f 2526-5836, 1394 frames: same minimum (rms 0.08814 vs 0.08814, max |z| 1.9e-07 cam2.C3, active 5576/5576), 21.3 s
+  seed 1023 (0.1 px): 5 cams, 1 win, incidence 26-41 deg, f 2291-11473, 1228 frames: same minimum (rms 0.12208 vs 0.12208, max |z| 1.0e-05 win1.delta, active 12279/12279), 65.3 s
+  seed 1024 (0.1 px): 5 cams, 1 win, incidence 8-45 deg, f 5344-25758, 687 frames: same minimum (rms 0.12354 vs 0.12354, max |z| 3.6e-06 cam3.w1, active 6870/6870), 68.6 s
+  seed 1025 (0.1 px): 6 cams, 1 win, incidence 6-27 deg, f 1661-10791, 579 frames: same minimum (rms 0.12571 vs 0.12571, max |z| 4.5e-06 cam6.logf, active 6948/6948), 55.9 s
+  seed 1026 (0.1 px): 5 cams, 1 win, incidence 11-42 deg, f 2090-8828, 908 frames: same minimum (rms 0.12203 vs 0.12203, max |z| 1.1e-05 cam3.C3, active 9080/9080), 53.6 s
+  seed 1027 (0.1 px): 2 cams, 1 win, incidence 8-23 deg, f 4960-7830, 1122 frames: same minimum (rms 0.08520 vs 0.08520, max |z| 9.6e-05 win1.b, active 4488/4488), 22.6 s
+  seed 1028 (0.1 px): 5 cams, 2 win, incidence 4-44 deg, f 9126-24887, 1185 frames: same minimum (rms 0.12186 vs 0.12186, max |z| 1.3e-06 win1.b, active 11850/11850), 52.2 s
+  seed 1029 (0.1 px): 6 cams, 1 win, incidence 2-42 deg, f 5248-26429, 914 frames: same minimum (rms 0.12616 vs 0.12616, max |z| 1.9e-05 cam6.logf, active 10968/10968), 94.9 s
+  seed 1030 (0.1 px): 2 cams, 1 win, incidence 13-23 deg, f 15246-34474, 1296 frames: same minimum (rms 0.08812 vs 0.08812, max |z| 3.6e-06 cam1.logf, active 5184/5184), 23.8 s
+  seed 1031 (0.1 px): 3 cams, 2 win, incidence 6-45 deg, f 6388-31672, 598 frames: same minimum (rms 0.10921 vs 0.10921, max |z| 4.1e-05 win2.delta, active 3588/3588), 143.4 s
+  seed 1032 (0.1 px): 5 cams, 3 win, incidence 5-40 deg, f 6061-35622, 800 frames: same minimum (rms 0.12207 vs 0.12207, max |z| 7.3e-05 win3.b, active 8000/8000), 121.4 s
+  seed 1033 (0.1 px): 3 cams, 2 win, incidence 13-41 deg, f 1653-6587, 1251 frames: same minimum (rms 0.10874 vs 0.10874, max |z| 3.1e-06 win1.b, active 7506/7506), 42.4 s
+  seed 1034 (0.1 px): 4 cams, 3 win, incidence 14-43 deg, f 4361-37170, 579 frames: DIFFERENT (rms 1.70278 vs 0.11751, max |z| 1.1e+03 cam3.w3, active 4601/4632), 96.3 s
+  seed 1035 (0.1 px): 5 cams, 1 win, incidence 12-44 deg, f 2007-9237, 1026 frames: same minimum (rms 0.12136 vs 0.12136, max |z| 2.2e-05 cam3.logf, active 10260/10260), 59.5 s
+  seed 1036 (0.1 px): 6 cams, 1 win, incidence 8-41 deg, f 3615-36055, 1374 frames: same minimum (rms 0.12569 vs 0.12569, max |z| 2.4e-06 cam6.logf, active 16488/16488), 99.3 s
+  seed 1037 (0.1 px): 3 cams, 1 win, incidence 25-41 deg, f 9335-16665, 1311 frames: same minimum (rms 0.10738 vs 0.10738, max |z| 1.5e-05 cam3.w2, active 7866/7866), 34.6 s
+  seed 1038 (0.1 px): 6 cams, 1 win, incidence 6-39 deg, f 12048-30353, 921 frames: same minimum (rms 0.12496 vs 0.12496, max |z| 1.2e-05 cam6.C2, active 11052/11052), 71.4 s
+  seed 1039 (0.1 px): 5 cams, 3 win, incidence 13-43 deg, f 1908-22443, 745 frames: same minimum (rms 0.12187 vs 0.12187, max |z| 2.4e-06 win3.a, active 7450/7450), 54.6 s
+  seed 1040 (0.1 px): 4 cams, 2 win, incidence 10-26 deg, f 3424-7167, 559 frames: same minimum (rms 0.11751 vs 0.11751, max |z| 2.1e-06 win1.a, active 4472/4472), 27.2 s
+  seed 1041 (0.1 px): 6 cams, 3 win, incidence 24-40 deg, f 2252-14779, 570 frames: same minimum (rms 0.12587 vs 0.12587, max |z| 1.9e-05 cam6.C3, active 6840/6840), 56.5 s
+  seed 1042 (0.1 px): 3 cams, 1 win, incidence 31-40 deg, f 4360-12937, 1408 frames: same minimum (rms 0.10794 vs 0.10794, max |z| 5.5e-06 win1.delta, active 8448/8448), 36.3 s
+  seed 1043 (0.1 px): 3 cams, 1 win, incidence 12-44 deg, f 8698-31778, 663 frames: same minimum (rms 0.10817 vs 0.10817, max |z| 3.4e-06 cam2.C1, active 3978/3978), 27.1 s
+  seed 1044 (0.1 px): 6 cams, 1 win, incidence 3-44 deg, f 1539-9930, 1247 frames: same minimum (rms 0.12543 vs 0.12543, max |z| 3.4e-06 cam3.C1, active 14964/14964), 73.9 s
+  seed 1045 (0.1 px): 2 cams, 2 win, incidence 33-37 deg, f 12698-29095, 1312 frames: DIFFERENT (rms 0.47086 vs 0.08619, max |z| 1.1e+03 cam2.C2, active 5212/5248), 133.5 s
+  seed 1046 (0.1 px): 5 cams, 1 win, incidence 9-40 deg, f 2054-8823, 607 frames: same minimum (rms 0.12227 vs 0.12227, max |z| 3.9e-06 win1.a, active 6070/6070), 47.6 s
+  seed 1047 (0.1 px): 5 cams, 2 win, incidence 4-38 deg, f 4362-15503, 1084 frames: same minimum (rms 0.12236 vs 0.12236, max |z| 1.3e-05 win2.delta, active 10840/10840), 50.3 s
+  seed 1048 (0.1 px): 2 cams, 2 win, incidence 24-25 deg, f 5685-5735, 606 frames: DIFFERENT (rms 0.74648 vs 0.08603, max |z| 1.3e+02 cam2.w3, active 1772/2424), 62.5 s
+  seed 1049 (0.1 px): 5 cams, 1 win, incidence 12-43 deg, f 1851-9848, 1256 frames: same minimum (rms 0.12317 vs 0.12317, max |z| 1.4e-05 cam5.C1, active 12560/12560), 62.8 s
+  seed 2000 (1.0 px): 4 cams, 2 win, incidence 7-35 deg, f 1988-11018, 769 frames: DIFFERENT (rms 1.29417 vs 1.15535, max |z| 3.2e+00 cam3.C1, active 5992/6152), 56.8 s
+  seed 2001 (1.0 px): 3 cams, 1 win, incidence 5-32 deg, f 5450-20828, 655 frames: same minimum (rms 1.09123 vs 1.09123, max |z| 4.6e-06 cam2.w1, active 3930/3930), 35.7 s
+  seed 2002 (1.0 px): 6 cams, 3 win, incidence 2-26 deg, f 1723-4659, 970 frames: DIFFERENT (rms 18.14458 vs 1.25813, max |z| 7.5e+04 cam2.C1, active 11356/11640), 98.7 s
+  seed 2003 (1.0 px): 3 cams, 1 win, incidence 14-39 deg, f 6317-16049, 1373 frames: same minimum (rms 1.06579 vs 1.06579, max |z| 6.2e-07 cam3.logf, active 8238/8238), 50.0 s
+  seed 2004 (1.0 px): 2 cams, 2 win, incidence 24-32 deg, f 2813-8149, 883 frames: DIFFERENT (rms 0.86463 vs 0.88460, max |z| 1.6e+00 cam2.C2, active 3516/3532), 125.5 s
+  seed 2005 (1.0 px): 2 cams, 2 win, incidence 7-21 deg, f 6110-10664, 1221 frames: DIFFERENT (rms 0.81651 vs 1.11077, max |z| 6.5e-01 cam2.w1, active 4412/4328), 111.2 s
+  seed 2006 (1.0 px): 6 cams, 3 win, incidence 2-36 deg, f 6186-23884, 1208 frames: same minimum (rms 1.25540 vs 1.25540, max |z| 1.8e-05 win2.delta, active 14496/14496), 60.6 s
+  seed 2007 (1.0 px): 5 cams, 2 win, incidence 8-41 deg, f 1539-11484, 644 frames: same minimum (rms 1.22971 vs 1.22971, max |z| 1.1e-06 win1.a, active 6440/6440), 36.4 s
+  seed 2008 (1.0 px): 2 cams, 2 win, incidence 2-37 deg, f 2742-10819, 1215 frames: DIFFERENT (rms 0.87755 vs 0.87755, max |z| 1.9e-02 win2.b, active 4860/4860), 79.6 s
+  seed 2009 (1.0 px): 5 cams, 1 win, incidence 10-35 deg, f 1551-6411, 1164 frames: same minimum (rms 1.23051 vs 1.23051, max |z| 3.1e-06 win1.b, active 11639/11639), 54.8 s
+0.1 px: 46/50 reached the same minimum as the truth-started fit; time median 55.2 s, max 179.2 s
+1.0 px: 5/10 reached the same minimum as the truth-started fit; time median 58.7 s, max 125.5 s
+wall time 220 s
+W5: FAIL (see the runs marked DIFFERENT / ERROR)

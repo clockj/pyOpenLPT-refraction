@@ -21,6 +21,34 @@ experiment.
 ## 1. Progress log
 
 **2026-10-02**
+- **Two weaknesses of `cylinder_wand.refine`, found by the flat-window calibration's tests** (`tests/plate_wand/`,
+  which copies this machinery; fixed there, not here: the cylinder code is unchanged).
+  - **A gross outlier costs its whole frame.** A frame left with no active observation is re-triangulated from all its
+    rays, the outlier included, so its good rays never fit well enough to come back. Flat-window W7 (2 % outliers of
+    20–200 px): 160 outliers rejected, and with them 1,001 good detections. The plate code now drops a frame's worst ray
+    while it is far off before re-triangulating (0–6 good detections lost). The cylinder's T8 and T11d used smaller
+    or fewer outliers and did not show it.
+  - **With two cameras the per-camera noise weights can drift.** Each wand position's residual can move from one camera
+    to the other, and the estimate feeds on it. Flat-window W5 seed 2005 (1 px): 0.95, 1.00 px became 0.14, 1.35 px over
+    16 rounds, then 11 % of good data were rejected (RMS 1.11 against 0.85 with equal weights). The plate code uses
+    equal weights with two cameras and falls back when the weights do not settle. The cylinder's two-camera rigs
+    (T12) have not shown it, but nothing stops it.
+  - Both are open item 7.
+- **A latent rotation bug in `cyl_model.py`, found while planning the flat-window calibration**
+  (`tests/plate_wand/2026-10-02-plate-wand-plan.md`, section 3.3; `tests/plate_wand/p_logmap_check.py`).
+  - **`log_so3` is wrong near a half-turn.** For every rotation within 0.14 rad of one, its half-turn branch does not
+    normalise the axis, and returns a rotation 1.3 rad off.
+    - The calibration uses it only as `rvec_of`'s fallback when OpenCV is missing, and in one test helper's error
+      metric (`rigs.py:206`, small angles only).
+    - No reported result depends on it.
+  - **`rvec_of` uses `cv2.Rodrigues`, which loses up to 2e-5 rad** within about 1e-4 rad of a half-turn.
+    - That reaches `to_cpp`: the C++ cameras of the T0/T10 checks and of the double-image guard.
+    - The camFiles are not affected: the C++ reads the matrix and ignores the vector on load.
+  - **Fixed the same day (two lines, approved with the flat-window plan):** `log_so3` now normalises the axis, and
+    `rvec_of` uses `log_so3` instead of `cv2.Rodrigues`.
+    - The round trip is now within 1.7e-15 rad at every angle, half-turns included
+      (`tests/plate_wand/w0_logmap.py`, 36,000 rotations); `cv2.Rodrigues` loses 2.0e-5 rad on the same rotations.
+    - `pytest tests/test_cylinder_wand.py`: 7 passed (40 s), as before.
 - **T13 done: measuring the wand balls' centres through the tube** (`2026-10-02-ball-centres-report.md`).
   - **What was run:** wand images rendered exactly through the tube, with the plate case's astigmatic blur, four
     lightings and the rod. Six detectors were scored against the truth, and their centres were fed to the
@@ -301,10 +329,14 @@ None of these is started; each needs your go-ahead.
 4. **GUI:** the wand CSV reader and the integration.
 5. **The untested options:** k1 in a full calibration; 5 or more cameras; a pairwise start for rigs with little common
    view.
-6. **Housekeeping:** `tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo` fails
-   (checked 2026-10-02).
-   - The cause is that `D:\Refraction\code\project_cylinder.py` was edited on 2026-10-02, outside this work.
-   - Re-copy it to `test/refs/project_cylinder.py` once that edit is final. It is your file, so it was left alone.
+6. **Housekeeping:**
+   - `tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo` fails (checked 2026-10-02).
+     - The cause is that `D:\Refraction\code\project_cylinder.py` was edited on 2026-10-02, outside this work.
+     - Re-copy it to `test/refs/project_cylinder.py` once that edit is final. It is your file, so it was left alone.
+   - The `cyl_model.py` rotation fix (progress log, 2026-10-02): applied 2026-10-02.
+7. **Port the flat-window calibration's two `refine` fixes** (progress log, 2026-10-02): the robust re-triangulation
+   of a frame before re-admission, and the two-camera noise weights. Each is a few lines in `cylinder_wand.py`, with
+   T8/T11d/T12 rerun.
 
 ## 7. Files
 

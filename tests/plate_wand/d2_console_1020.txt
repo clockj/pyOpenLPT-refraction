@@ -1,0 +1,10 @@
+seed 1020: windows [0, 1, 0, 1, 0], incidence [34, 14, 34, 43, 9], h1 [961, 1251, 783, 985, 317], f [38175, 31426, 8962, 25913, 11348]
+  group window 1 cams [0, 2, 4]: start 0 coarse 0.123 -> rms 0.1080, active 6636/6636; normal err 0.004 deg, d err +0.72 mm; cams: rot 0.004 deg, centre 0.75 mm, f 0.07 %
+  group window 1 cams [0, 2, 4]: start 1 coarse 0.123 -> rms 0.1080, active 6636/6636; normal err 0.004 deg, d err +0.72 mm; cams: rot 0.004 deg, centre 0.75 mm, f 0.07 %
+  group window 1 cams [0, 2, 4]: start 2 coarse 0.123 -> rms 0.1080, active 6636/6636; normal err 0.004 deg, d err +0.72 mm; cams: rot 0.004 deg, centre 0.75 mm, f 0.07 %
+  group window 2 cams [1, 3]: start 0 coarse 8.323 -> rms 8.7760, active 4336/4424; normal err 35.097 deg, d err -1093.24 mm; cams: rot 3.081 deg, centre 305.52 mm, f 25.80 %
+  group window 2 cams [1, 3]: start 1 coarse 9.618 -> rms 5.4656, active 4424/4424; normal err 27.719 deg, d err -1205.56 mm; cams: rot 2.640 deg, centre 662.16 mm, f 29.01 %
+  group window 2 cams [1, 3]: start 2 coarse 9.756 -> rms 5.5293, active 4424/4424; normal err 27.671 deg, d err -1206.54 mm; cams: rot 2.671 deg, centre 533.58 mm, f 18.72 %
+whole bootstrap_groups:
+  info: {'0': {'cameras': [0, 2, 4], 'rms_px': 0.10800823162915599, 'bootstrap_seconds': {'pinhole': 0.3032996654510498, 'window_search': 5.501822471618652, 'coarse_fit': 4.202757358551025, 'total': 10.007879495620728}}, '1': {'cameras': [1, 3], 'rms_px': 5.465613644972106, 'bootstrap_seconds': {'pinhole': 0.2898266315460205, 'window_search': 4.611509799957275, 'coarse_fit': 1.4528381824493408, 'total': 6.354174613952637}, 'joined_on_frames': 1106}}
+  start 0: back-projection rms 24.635; normal errors [0.004, 27.723] deg; d err [0.72, -1176.23]; cam rot err [0.0, 2.052, 0.004, 3.127, 0.002], centre [0.0, 133.8, 0.7, 636.0, 0.8], f % [0.07, -29.01, 0.03, 16.39, 0.03]

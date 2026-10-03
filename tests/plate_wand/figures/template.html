@@ -1,0 +1,1126 @@
+<title>Flat-Window Wand Calibration Tests</title>
+<meta name="description" content="Figures of the synthetic tests of pyOpenLPT's new wand calibration through flat windows: rigs, calibration from scratch, comparison with the GUI's calibration, precision, bad data and wrong constants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<style>
+:root {
+  --page: #f2f5f6;
+  --surface: #fcfdfd;
+  --ink: #0f1619;
+  --ink-2: #435057;
+  --muted: #5d6a71;
+  --grid: #e3e9eb;
+  --axis: #b6c2c7;
+  --rule: #d4dcdf;
+  --accent: #0b6b84;
+  --data: #2a78d6;
+  --data-fov: rgba(42, 120, 214, 0.22);
+  --data-line: rgba(42, 120, 214, 0.55);
+  --data-2: #eb6834;
+  --good: #0ca30c;
+  --bad: #d03b3b;
+  --warn: #a8650b;
+  --wall: #cde4ea;
+  --water: #e8f2f5;
+  --wall-line: #8db1bb;
+  --fold: #6f98a4;
+  --wand: rgba(15, 22, 25, 0.42);
+  --band: rgba(15, 22, 25, 0.06);
+  --hilite: rgba(11, 107, 132, 0.075);
+  --tip-bg: #10181b;
+  --tip-ink: #f2f5f6;
+  --tip-ink-2: #a8b5bb;
+  --font-sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "Source Code Pro", ui-monospace, Consolas, "Courier New", monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0b1012;
+    --surface: #131a1d;
+    --ink: #eef3f5;
+    --ink-2: #b6c2c8;
+    --muted: #93a0a7;
+    --grid: #222c31;
+    --axis: #3d4a51;
+    --rule: #263136;
+    --accent: #6cc3da;
+    --data: #3987e5;
+    --data-fov: rgba(57, 135, 229, 0.30);
+    --data-line: rgba(57, 135, 229, 0.65);
+    --data-2: #d95926;
+    --wall: #1e3c45;
+    --water: #15252a;
+    --wall-line: #4c7c89;
+    --fold: #6b9caa;
+    --wand: rgba(238, 243, 245, 0.45);
+    --band: rgba(238, 243, 245, 0.07);
+    --hilite: rgba(108, 195, 218, 0.09);
+    --warn: #e2a443;
+    --tip-bg: #e9eff1;
+    --tip-ink: #0f1619;
+    --tip-ink-2: #4a575e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0b1012;
+  --surface: #131a1d;
+  --ink: #eef3f5;
+  --ink-2: #b6c2c8;
+  --muted: #93a0a7;
+  --grid: #222c31;
+  --axis: #3d4a51;
+  --rule: #263136;
+  --accent: #6cc3da;
+  --data: #3987e5;
+  --data-fov: rgba(57, 135, 229, 0.30);
+  --data-line: rgba(57, 135, 229, 0.65);
+  --data-2: #d95926;
+  --wall: #1e3c45;
+  --water: #15252a;
+  --wall-line: #4c7c89;
+  --fold: #6b9caa;
+  --wand: rgba(238, 243, 245, 0.45);
+  --band: rgba(238, 243, 245, 0.07);
+  --hilite: rgba(108, 195, 218, 0.09);
+  --warn: #e2a443;
+  --tip-bg: #e9eff1;
+  --tip-ink: #0f1619;
+  --tip-ink-2: #4a575e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 16px/1.55 var(--font-sans); }
+[hidden] { display: none !important; }
+.wrap { max-width: 1060px; margin-inline: auto; padding-inline: 20px; padding-block: 40px 72px; }
+
+header.top { display: grid; gap: 14px; }
+.eyebrow { margin: 0; font: 500 0.76rem/1.4 var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 0; font: 600 clamp(1.8rem, 1.2rem + 2.2vw, 2.5rem)/1.15 var(--font-serif); letter-spacing: -0.01em; text-wrap: balance; }
+.lede { margin: 0; max-width: 72ch; font-size: 1.05rem; color: var(--ink-2); }
+.facts { margin: 10px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-block: 1px solid var(--rule); }
+.facts > div { display: flex; flex-direction: column; gap: 2px; padding: 14px 18px 14px 0; }
+.facts dd { margin: 0; order: -1; font: 600 1.6rem/1.15 var(--font-sans); }
+.facts dt { font-size: 0.86rem; line-height: 1.35; color: var(--ink-2); }
+
+section { margin-top: 60px; display: grid; gap: 18px; min-width: 0; }
+h2 { margin: 0; display: flex; align-items: baseline; gap: 12px; font: 600 1.5rem/1.2 var(--font-serif); text-wrap: balance; }
+h2 .num { font: 500 0.82rem var(--font-mono); color: var(--accent); }
+section > p { margin: 0; max-width: 72ch; }
+section > ul { margin: 0; padding-left: 1.3em; max-width: 72ch; display: grid; gap: 4px; }
+figcaption ul { margin: 6px 0; padding-left: 1.2em; display: grid; gap: 3px; }
+p { margin: 0; }
+.mono, code { font-family: var(--font-mono); font-size: 0.88em; }
+
+figure.fig { margin: 0; min-width: 0; display: grid; gap: 14px; padding: 18px 18px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; }
+figcaption { max-width: 80ch; font-size: 0.9rem; line-height: 1.5; color: var(--ink-2); }
+figcaption b { color: var(--ink); font-weight: 600; }
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.panels.three { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.panel { min-width: 0; display: grid; gap: 4px; align-content: start; }
+.panel-title { margin: 0; font: 600 0.93rem/1.3 var(--font-sans); }
+.panel-sub { margin: 0; font-size: 0.82rem; color: var(--muted); }
+.chart { width: 100%; min-width: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.84rem; color: var(--ink-2); }
+.legend .k { display: inline-flex; align-items: center; gap: 7px; }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--data); }
+.sw.fov { background: var(--data-fov); }
+.ln { display: inline-block; width: 18px; border-top: 2px solid var(--ink); }
+.ln.data { border-top: 1.5px solid var(--data); }
+.ln.wand { border-top: 2px solid var(--wand); }
+.ln.dash { border-top: 1.5px dashed var(--fold); }
+.box { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--ink-2); opacity: 0.6; }
+.dotk { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--data); }
+
+svg { display: block; overflow: visible; }
+svg text { font-family: var(--font-sans); font-size: 12px; fill: var(--muted); }
+svg .t-ink { fill: var(--ink-2); }
+svg .t-strong { fill: var(--ink); font-weight: 600; }
+svg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 3.5px; stroke-linejoin: round; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.axis { stroke: var(--axis); stroke-width: 1; }
+.ring { fill: none; stroke: var(--axis); stroke-width: 1; opacity: 0.7; }
+.wall { fill: var(--wall); stroke: var(--wall-line); stroke-width: 1; }
+.water { fill: var(--water); stroke: var(--wall-line); stroke-width: 0.75; }
+.fold { fill: none; stroke: var(--fold); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.fov { fill: var(--data-fov); }
+.optax { stroke: var(--data-line); stroke-width: 1; }
+.cam { fill: var(--data); stroke: var(--surface); stroke-width: 2; }
+.ray { fill: none; stroke: var(--data); stroke-width: 1; opacity: 0.75; }
+.wand { stroke: var(--wand); stroke-width: 1.3; stroke-linecap: round; }
+.cloud { fill: none; stroke: var(--ink-2); stroke-width: 1; opacity: 0.55; }
+.hit { fill: transparent; }
+.dot { fill: var(--data); stroke: var(--surface); stroke-width: 2; }
+.bar { fill: var(--data); }
+.ebar { stroke: var(--data); stroke-width: 2; stroke-linecap: round; opacity: 0.55; }
+.curve { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.refline { stroke: var(--ink-2); stroke-width: 1; }
+.median { stroke: var(--ink); stroke-width: 2; }
+.band { fill: var(--band); }
+.hot .dot, .hot .cam { stroke: var(--ink); stroke-width: 1.5; }
+.hot.bar, .hot .bar { opacity: 0.8; }
+.hot .ebar { opacity: 1; }
+[tabindex]:focus { outline: none; }
+[tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.g-wrap { display: grid; gap: 16px; }
+.g-group { display: grid; gap: 6px; }
+.g-head { margin: 0; font: 600 0.9rem/1.3 var(--font-sans); }
+.g-head span { font-weight: 400; color: var(--muted); }
+.g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
+.tile { display: grid; gap: 1px; padding: 3px 3px 5px; border-radius: 8px; }
+.tile:hover, .tile.hot { background: var(--hilite); }
+.tile svg { width: 100%; height: auto; aspect-ratio: 1; }
+.tile-cap { display: flex; justify-content: space-between; padding-inline: 4px; font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.table-wrap { min-width: 0; overflow-x: auto; }
+table.data { width: 100%; border-collapse: collapse; font-size: 0.89rem; font-variant-numeric: tabular-nums; }
+table.data th { padding: 8px 10px; text-align: left; vertical-align: bottom; font: 600 0.8rem/1.3 var(--font-sans); color: var(--muted); border-bottom: 1px solid var(--axis); }
+table.data td { padding: 7px 10px; vertical-align: top; border-bottom: 1px solid var(--grid); }
+table.data td.num, table.data th.num { text-align: right; white-space: nowrap; }
+table.data td.note { color: var(--ink-2); }
+table.data.wide { min-width: 680px; }
+table.data.wide td:first-child { min-width: 9em; }
+table.data tr.group td { padding-top: 16px; font: 600 0.82rem/1.3 var(--font-sans); color: var(--accent); border-bottom: none; }
+table.data tr.ref td { background: var(--hilite); }
+.sub { display: block; font-size: 0.78rem; color: var(--muted); }
+.barcell { display: grid; grid-template-columns: 5.2em minmax(70px, 1fr); align-items: center; gap: 8px; min-width: 150px; }
+.barcell .v { text-align: right; white-space: nowrap; }
+.track { position: relative; height: 12px; }
+.track .b { position: absolute; top: 2px; height: 8px; background: var(--data); }
+.track .b.pos { border-radius: 0 3px 3px 0; }
+.track .b.neg { border-radius: 3px 0 0 3px; }
+.track .m { position: absolute; top: -2px; bottom: -2px; width: 0; border-left: 1.5px solid var(--ink); }
+.track .z { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1px solid var(--axis); }
+.track .bd { position: absolute; top: 0; bottom: 0; background: var(--band); }
+
+.panels.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
+table.data tr.notes td { padding-top: 0; color: var(--ink-2); font-size: 0.84rem; border-bottom: 1px solid var(--grid); }
+table.data tr.main td { border-bottom: none; }
+.line-s1 { fill: none; stroke: var(--data); stroke-width: 2; stroke-linejoin: round; }
+.line-s2 { fill: none; stroke: var(--data-2); stroke-width: 2; stroke-linejoin: round; }
+.line-pred { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+.dot.s2 { fill: var(--data-2); }
+.dotk.s2 { background: var(--data-2); }
+.ln.s1 { border-top: 2px solid var(--data); }
+.ln.s2 { border-top: 2px solid var(--data-2); }
+.ln.pred { border-top: 1.5px solid var(--ink-2); }
+.st { font-weight: 600; }
+.st.ok { color: var(--good); }
+.st.no { color: var(--bad); }
+.st.na { color: var(--muted); font-weight: 400; }
+table.data td.c, table.data th.c { text-align: center; }
+details.more { font-size: 0.9rem; }
+details.more > summary { cursor: pointer; width: fit-content; font-weight: 600; color: var(--accent); }
+details.more[open] > summary { margin-bottom: 10px; }
+
+.outcome { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 24px; margin: 0; }
+.outcome > div { display: flex; flex-direction: column; gap: 1px; padding-left: 12px; border-left: 2px solid var(--rule); }
+.outcome dt { font-size: 0.84rem; color: var(--ink-2); }
+.outcome dd { margin: 0; order: -1; font-weight: 600; font-size: 1.12rem; }
+
+#tip { position: fixed; z-index: 20; display: grid; gap: 3px; max-width: min(330px, calc(100vw - 24px)); padding: 9px 11px; border-radius: 8px; background: var(--tip-bg); color: var(--tip-ink); font-size: 0.82rem; line-height: 1.35; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2); pointer-events: none; }
+#tip .tt { margin-bottom: 2px; font-weight: 600; }
+#tip .tr { display: flex; gap: 8px; align-items: baseline; }
+#tip .tr b { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+#tip .tr span { color: var(--tip-ink-2); }
+#err { white-space: pre-wrap; padding: 12px; border: 1px solid var(--rule); border-radius: 8px; color: var(--ink); background: var(--surface); }
+
+footer { margin-top: 64px; padding-top: 18px; display: grid; gap: 6px; border-top: 1px solid var(--rule); font-size: 0.86rem; color: var(--ink-2); }
+@media (max-width: 560px) {
+  .wrap { padding-inline: 16px; padding-block: 28px 56px; }
+  figure.fig { padding: 14px 12px 12px; }
+  .facts dd { font-size: 1.4rem; }
+}
+/* plate page */
+.slab { fill: var(--wall); fill-opacity: 0.6; stroke: var(--wall-line); stroke-width: 1; stroke-linejoin: round; }
+.slab-edge { stroke: var(--wall-line); stroke-width: 1; }
+.sw.slabk { background: var(--wall); border: 1px solid var(--wall-line); }
+.ray.thin { stroke-width: 0.9; opacity: 0.85; }
+.leader { stroke: var(--muted); stroke-width: 0.75; }
+.triad { stroke: var(--ink-2); stroke-width: 1.2; stroke-linecap: round; }
+.triad-head { fill: var(--ink-2); }
+.db { stroke: var(--axis); stroke-width: 2; stroke-linecap: round; }
+svg .fail { fill: var(--bad); font-weight: 600; }
+.st.warn { color: var(--warn); }
+.mark { font-weight: 600; }
+.mark.ok { color: var(--good); }
+.mark.eq { color: var(--warn); }
+.mark.no { color: var(--bad); }
+.tk { display: inline-block; width: 0; height: 13px; border-left: 1.5px solid var(--ink); }
+.rig-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; align-items: start; }
+.keycell { align-self: center; gap: 10px; padding: 6px 0 6px 18px; border-left: 2px solid var(--rule); }
+.legend.col { flex-direction: column; flex-wrap: nowrap; gap: 8px; }
+@media (max-width: 640px) { .rig-grid { grid-template-columns: minmax(0, 1fr); } }
+.tile svg { aspect-ratio: 5 / 4; }
+table.data.compact .barcell { grid-template-columns: 4.6em minmax(36px, 1fr); min-width: 116px; gap: 6px; }
+.st.full { color: var(--ink-2); font-weight: 400; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">pyOpenLPT · wand calibration through flat windows · synthetic tests · 2 Oct 2026</p>
+    <h1>What the flat-window wand-calibration tests show</h1>
+    <p class="lede">Every number below comes from synthetic data. Wand detections were generated by pyOpenLPT's C++ flat-window camera (PINPLATE): air, a 12.7 mm acrylic wall (n 1.49), water (n 1.333), with 0.1 px of noise per coordinate unless stated. The calibration receives only the detections, the wand length, the image sizes, each window's thickness and indices, and which camera looks through which window. It gets no camera positions, no focal lengths and no window positions or orientations.</p>
+    <dl class="facts">
+      <div><dt>one-window rigs calibrated from scratch to the global minimum (W5)</dt><dd id="fact-w5">–</dd></div>
+      <div><dt>faster than the GUI's current calibration on the same data, median (W6)</dt><dd id="fact-speed">–</dd></div>
+      <div><dt>3-D error of unseen points on random rigs, new vs GUI, medians (W6)</dt><dd id="fact-acc">–</dd></div>
+      <div><dt>errors over the Cramér–Rao bound, five rigs, 40 data sets each (W3)</dt><dd id="fact-crb">–</dd></div>
+    </dl>
+  </header>
+  <pre id="err" hidden></pre>
+
+  <section id="tests">
+    <h2><span class="num">01</span>The tests and the rigs</h2>
+    <p>Twelve checks, from the camera model to calibrations from scratch, and a thirteenth on real data still to come. Most use five reference rigs, A to E, each built around a 100 mm cube of wand positions centred 150 mm behind a 12.7 mm acrylic wall (rig E: a 16 mm cube, 100 mm behind). W5 adds 60 random rigs, and W6 runs the GUI's current calibration on the same data.</p>
+    <div class="table-wrap" id="tests-table"></div>
+    <figure class="fig">
+      <div class="rig-grid" id="rig-panels">
+        <div class="panel keycell">
+          <p class="panel-title">Key</p>
+          <div class="legend col">
+            <span class="k"><span class="dotk"></span>camera</span>
+            <span class="k"><span class="ln data"></span>rays across the sensor's centre row, through the wall into the water</span>
+            <span class="k"><span class="sw slabk"></span>acrylic wall, 12.7 mm</span>
+            <span class="k"><span class="box"></span>the cube the wand moves in</span>
+            <span class="k"><span class="ln wand"></span>60 of the wand positions</span>
+          </div>
+        </div>
+      </div>
+      <figcaption><b>Fig. 1</b> The reference rigs, to scale in an oblique view: the arrows are 100 mm along x, y (up) and z (into the water). Each camera sits 600 mm from the wall along its centre ray (rig E: 1,100 mm), and that ray, refracted, passes through the cloud's centre. The rays bend twice: into the acrylic and into the water. The view from inside the water is about 1.33 times narrower than in air.
+        <ul>
+          <li><b>A</b> is a typical rig: four cameras about 21° off the wall's normal.</li>
+          <li><b>B</b> looks through two perpendicular walls of a tank, two cameras through each.</li>
+          <li><b>C</b> is square-on, where a window's distance is nearly invisible; <b>D</b> is steep, where refraction is strongest; <b>E</b> is a macro rig with long lenses.</li>
+        </ul>
+        Hover over a camera for its numbers.</figcaption>
+      <details class="more"><summary>Camera table</summary><div class="table-wrap" id="cam-table"></div></details>
+    </figure>
+  </section>
+
+  <section id="scratch">
+    <h2><span class="num">02</span>Calibration from scratch (W5)</h2>
+    <p>Sixty random rigs: 2–6 cameras, 1–3 walls of a box tank, acrylic 6–25.4 mm thick, incidence 0–45°, 150–1,500 mm from the wall, focal lengths 1,500–40,000 px, wand clouds 30–300 mm. Fifty have 0.1 px of noise and ten have 1 px. Each rig was calibrated twice: from nothing, and once started at the true cameras and windows, which finds the best answer the data allow. A run from nothing passes when it reaches that same answer: every parameter within 0.01 σ, the same detections kept, and the same RMS.</p>
+    <figure class="fig">
+      <div class="g-wrap" id="gallery"></div>
+      <div class="legend">
+        <span class="k"><span class="mark ok">✓</span>same answer as the fit from the truth</span>
+        <span class="k"><span class="mark eq">≈</span>an equivalent answer: every parameter within 3 σ and the RMS within 2 %, or a lower RMS</span>
+        <span class="k"><span class="mark no">✗</span>a different answer</span>
+      </div>
+      <figcaption><b>Fig. 2</b> The 60 random rigs, grouped by how their cameras share the walls, all in the same oblique view as Fig. 1 but each scaled to fit its tile. Each camera's centre ray is drawn. Seeds 1000–1049 have 0.1 px of noise, seeds 2000–2009 1 px. Every rig with one wall reached the global minimum. Every miss has walls seen by only one or two cameras. The four different answers at 0.1 px all include lenses longer than 10,000 px: a narrow view sees a wall's tilt only weakly. Hover over a rig for its cameras, result and run time.</figcaption>
+    </figure>
+    <figure class="fig">
+      <div class="panel"><p class="panel-title">(a) Largest parameter difference from the fit started at the truth</p><p class="panel-sub">in units of that parameter's σ; log scale</p><div class="chart" id="w5-agree"></div></div>
+      <div class="panel"><p class="panel-title">(b) Run time per rig</p><p class="panel-sub">whole calibration, from detections to cameras and windows; black tick: median</p><div class="chart" id="w5-time"></div></div>
+      <div class="legend"><span class="k"><span class="dotk"></span>0.1 px noise</span><span class="k"><span class="dotk s2"></span>1 px noise</span></div>
+      <figcaption><b>Fig. 3</b> One dot per rig. All 37 one-wall rigs agree with the fit from the truth to better than 10⁻⁴ σ. Multi-wall rigs take longer because each wall's cameras are first calibrated as a group, and a wall with one or two cameras is searched in two ways. The times were measured with the machine fully loaded (16 such runs at once, beside the GUI runs of W6).</figcaption>
+      <details class="more"><summary>Table of the 60 rigs</summary><div class="table-wrap" id="w5-table"></div></details>
+    </figure>
+  </section>
+
+  <section id="gui">
+    <h2><span class="num">03</span>Against the GUI's calibration (W6)</h2>
+    <p>The GUI's current refractive calibration and the new one were run on the same data: rigs A–D at 0.1 and 0.5 px, and the first ten W5 rigs at 0.1 px, 1,000 frames each, every frame seen by every camera. The GUI was given the true focal lengths in its camera table; the new calibration got none. Each answer is judged by its exported camera files, loaded through the C++: 500 unseen points in the cloud, with exact pixels, are triangulated with it and fitted to the truth by the best rigid motion.</p>
+    <figure class="fig">
+      <div class="panels two">
+        <div class="panel"><p class="panel-title">(a) Run time</p><p class="panel-sub">seconds, log scale</p><div class="chart" id="w6-time"></div></div>
+        <div class="panel"><p class="panel-title">(b) 3-D shape error of unseen points</p><p class="panel-sub">µm, log scale</p><div class="chart" id="w6-err"></div></div>
+      </div>
+      <div class="legend"><span class="k"><span class="dotk s2"></span>GUI's current calibration</span><span class="k"><span class="dotk"></span>new calibration</span><span class="k"><span class="mark no">✗</span>GUI failed</span></div>
+      <figcaption><b>Fig. 4</b> One row per data set.
+        <ul>
+          <li><b>Time:</b> the new calibration takes 21–153 s; the GUI, where it succeeds, takes 11–70 min.</li>
+          <li><b>Failures:</b> the GUI failed on both square-on cases (rig C). At 0.1 px its pinhole start collapsed the scale; at 0.5 px it found no usable camera pair.</li>
+          <li><b>Rigs A, B, D:</b> the two are comparable, both near the Cramér–Rao bound.</li>
+          <li><b>Random rigs:</b> the new calibration is better on 9 of 10, by up to 400 times. The GUI's focal lengths are held within ±5 % of the true values it was given, and two of its runs ended on that bound.</li>
+        </ul>
+        Hover over a row for both calibrations' numbers.</figcaption>
+      <details class="more"><summary>Full table</summary><div class="table-wrap" id="w6-table"></div></details>
+    </figure>
+  </section>
+
+  <section id="precision">
+    <h2><span class="num">04</span>Precision and error bars (W2, W3)</h2>
+    <p>First what the data can determine, computed from the information matrix at the truth without fitting (the Cramér–Rao bound, 0.1 px, 1,000 frames). Then whether real fits reach it: 40 noisy data sets per rig, each fitted from the truth, with every error compared to the σ the bound predicts and to the σ the fit itself reports.</p>
+    <figure class="fig">
+      <div class="table-wrap" id="w2-table"></div>
+      <figcaption><b>Fig. 5</b> Largest value over the rig's cameras and walls.
+        <ul>
+          <li><b>3-D shape error:</b> the error the calibration adds to the shape of unseen points, after the best rigid motion. Their position relative to camera 1 is known far less well: 0.43–0.48 mm on rigs A, B and D, 1.6 mm on C and 7.3 mm on E. The scene, the walls and f can slide together along the viewing direction, which changes no shape measured inside the volume.</li>
+          <li><b>Wand length:</b> a new 25 mm wand (10 mm on E) measured with the calibration. The bar is the calibration's own share; the last column adds the new detections' noise.</li>
+          <li><b>The square-on rig C</b> is 3–9 times weaker than rig A on every measure, as expected: at normal incidence a wall's distance barely changes the images.</li>
+        </ul></figcaption>
+    </figure>
+    <figure class="fig">
+      <div class="panel"><p class="panel-title">(a) z = (estimate − truth) / σ the fit reports, every parameter of every fit</p><p class="panel-sub" id="w3-sub"></p><div class="chart" id="w3-hist"></div></div>
+      <div class="legend"><span class="k"><span class="sw"></span>fits</span><span class="k"><span class="ln"></span>standard normal, expected counts</span></div>
+      <div class="panels two">
+        <div class="panel"><p class="panel-title">(b) RMS error over the Cramér–Rao σ, per parameter</p><p class="panel-sub">1 means the fit is as precise as any could be. Black tick: the rig's pooled value; band: the test's limits for it, 0.8–1.25. With 40 data sets a single parameter scatters by about 11 %.</p><div class="chart" id="w3-eff"></div></div>
+        <div class="panel"><p class="panel-title">(c) Focal-length error against detection noise</p><p class="panel-sub">rig A, 10 data sets per level; RMS over the four cameras (%)</p><div class="chart" id="w3-sweep"></div></div>
+      </div>
+      <figcaption><b>Fig. 6</b> The error bars are honest and the fit reaches the bound on every rig. No parameter is biased beyond 2.4 standard errors. In (c) the errors grow in proportion to the noise, as the Cramér–Rao bound predicts, from 0.02 to 2 px. Hover over a bar, a dot or a point for its numbers.</figcaption>
+    </figure>
+  </section>
+
+  <section id="basin">
+    <h2><span class="num">05</span>How close the start must be (W4)</h2>
+    <p>The final fit was started from the truth with one thing wrong, ten times per level with random directions, and passes when it reaches the fit started from the truth. This sets how coarse the start's search may be.</p>
+    <figure class="fig">
+      <div class="table-wrap" id="w4-table"></div>
+      <figcaption><b>Fig. 7</b> Runs that reached the right answer, of 10.
+        <ul>
+          <li><b>Wall normal:</b> recovered from 60° off on every rig but the steep rig D, which needs it within 30° (8 of 10 at 45°). The start searches a 50° cap at 9° spacing.</li>
+          <li><b>Wall distance:</b> recovered from anywhere between the cameras and the cloud.</li>
+          <li><b>f and camera rotations</b> are the sensitive ones, f only on the macro rig E, where focal length and distance trade almost freely. The start therefore takes each camera's rotation from the wand data (about 1° off) before searching for the walls.</li>
+        </ul></figcaption>
+    </figure>
+  </section>
+
+  <section id="bad-data">
+    <h2><span class="num">06</span>Bad data (W7)</h2>
+    <p>Rigs A and B were calibrated from scratch with the data spoiled one way at a time, then compared with the answer from the clean data.</p>
+    <figure class="fig">
+      <div class="table-wrap" id="w7-table"></div>
+      <figcaption><b>Fig. 8</b> Every planted bad detection was rejected, and every answer reached its own data's global minimum.
+        <ul>
+          <li><b>Moved from the clean answer:</b> z RMS over all parameters, in the spoiled fit's σ. Where data are lost, the answer should move by the amount the expected column gives.</li>
+          <li><b>Rig B, no common frames</b> (two cameras each missing a different half): 1.11 against 0.72 expected, a marginal miss of the 1.5× limit. It still sits at its own data's minimum.</li>
+          <li><b>A camera 5× noisier:</b> its noise was estimated at 0.503 px against the true 0.5 px, and it was weighted accordingly.</li>
+        </ul></figcaption>
+    </figure>
+  </section>
+
+  <section id="constants">
+    <h2><span class="num">07</span>Wrong constants (W8)</h2>
+    <p>The data were made with the true rig, and the calibration was given one constant wrong. The residuals cannot reveal a wrong plate thickness or water index, and neither matters much. The wand length is the scale, so its error passes straight through. Unlike through the tube, letting the wand length float is no check here: only the 12.7 mm plate carries any scale.</p>
+    <figure class="fig">
+      <div class="table-wrap" id="w8-table"></div>
+      <div class="legend"><span class="k"><span class="sw"></span>value</span><span class="k"><span class="tk"></span>with the correct constants</span><span class="k"><span class="sw" style="background: var(--band); border: 1px solid var(--axis)"></span>within ±3σ</span></div>
+      <figcaption><b>Fig. 9</b> Fit from the truth, 1,000 frames at 0.1 px. With the wand length free, the fit returns 9–91 mm for a 25 mm wand, with σ of 5–18 mm: the length is not identifiable through flat windows. An unmodelled k1 of 0.05 raises the RMS by only 0.3–0.4 % but the 3-D error 1.3–1.9 times; fitting k1 recovers it (0.043–0.058).</figcaption>
+    </figure>
+  </section>
+
+  <footer>
+    <div>Drawn from the saved test results by <code>tests/plate_wand/make_figures.py</code> (<span id="gen"></span>); nothing was re-fitted. Report: <code>tests/plate_wand/2026-10-02-plate-wand-report.md</code>; summary: <code>tests/plate_wand/README.md</code>.</div>
+    <div>Rig layouts are rebuilt from each test's seeds, and the rays are traced through the walls with the new camera model, which agrees with pyOpenLPT's C++ camera to 10⁻¹⁰ px. Run times were measured on the PC that ran the tests.</div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+window.addEventListener('error', function (e) {
+  var p = document.getElementById('err');
+  if (p) { p.hidden = false; p.textContent += 'Page error: ' + (e.message || e) + '\n'; }
+});
+</script>
+<script id="fig-data" type="application/json">{}</script>
+<script>
+(() => {
+  'use strict';
+  const D = JSON.parse(document.getElementById('fig-data').textContent);
+  const NS = 'http://www.w3.org/2000/svg';
+  const MINUS = '−';
+
+  // ---------------------------------------------------------------- helpers (as the cylinder page's)
+  function s(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, text, attrs) {
+    const t = s('text', Object.assign({ x: x, y: y }, attrs || {}), parent);
+    t.textContent = text;
+    return t;
+  }
+  function h(tag, attrs, parent, text) {
+    const e = document.createElement(tag);
+    if (attrs) for (const k in attrs) {
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'style') e.style.cssText = attrs[k];
+      else e.setAttribute(k, attrs[k]);
+    }
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  const num = (v, d) => {   // SI style: no grouping up to 4 digits, then a narrow space every three
+    const parts = Math.abs(v).toFixed(d || 0).split('.');
+    const ip = parts[0].length > 4 ? parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : parts[0];
+    const t = parts.length > 1 ? ip + '.' + parts[1] : ip;
+    return (v < 0 && /[1-9]/.test(t) ? MINUS : '') + t;
+  };
+  const SUP = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
+  const pow10 = e => '10' + String(e).split('').map(c => SUP[c]).join('');
+  function sci(v, d) {
+    d = d == null ? 1 : d;
+    if (v === 0) return '0';
+    let e = Math.floor(Math.log10(Math.abs(v)));
+    let m = v / Math.pow(10, e);
+    if (Math.abs(+m.toFixed(d)) >= 10) { e += 1; m /= 10; }
+    return num(m, d) + '×' + pow10(e);
+  }
+  const lin = (d0, d1, r0, r1) => v => r0 + (v - d0) / (d1 - d0) * (r1 - r0);
+  const logS = (d0, d1, r0, r1) => {
+    const a = Math.log10(d0), b = Math.log10(d1);
+    return v => r0 + (Math.log10(v) - a) / (b - a) * (r1 - r0);
+  };
+  function nice(min, max, n) {
+    const step0 = (max - min) / Math.max(1, n);
+    const mag = Math.pow(10, Math.floor(Math.log10(step0)));
+    const r = step0 / mag;
+    const step = (r >= 7.5 ? 10 : r >= 3.5 ? 5 : r >= 1.5 ? 2 : 1) * mag;
+    const out = [];
+    for (let i = Math.ceil(min / step - 1e-9); i * step <= max + step * 1e-9; i++) out.push(+(i * step).toPrecision(12));
+    return out;
+  }
+  const median = a => { const b = a.slice().sort((x, y) => x - y); const m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; };
+  const pts = arr => arr.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+  const sig3 = v => v >= 100 ? num(v, 0) : v >= 10 ? num(v, 1) : v >= 1 ? num(v, 2) : v >= 0.1 ? num(v, 3) : num(v, 4);
+
+  // ---------------------------------------------------------------- tooltip
+  const tip = document.getElementById('tip');
+  function tipMove(e) {
+    let x, y;
+    if (e && e.type && e.type.indexOf('pointer') === 0 && e.clientX != null) { x = e.clientX; y = e.clientY; }
+    else { const b = e.currentTarget.getBoundingClientRect(); x = b.right; y = b.top + b.height / 2; }
+    const w = tip.offsetWidth, ht = tip.offsetHeight, pad = 10;
+    let left = x + 14, top = y + 14;
+    if (left + w + pad > window.innerWidth) left = x - w - 14;
+    if (top + ht + pad > window.innerHeight) top = y - ht - 14;
+    tip.style.left = Math.max(pad, left) + 'px';
+    tip.style.top = Math.max(pad, top) + 'px';
+  }
+  function tipShow(e, title, rows) {
+    tip.replaceChildren();
+    if (title) h('div', { class: 'tt' }, tip, title);
+    for (const r of rows) { const d = h('div', { class: 'tr' }, tip); h('b', null, d, r[0]); h('span', null, d, r[1]); }
+    tip.hidden = false;
+    tipMove(e);
+  }
+  function hover(node, fn) {
+    node.setAttribute('tabindex', '0');
+    const on = e => { node.classList.add('hot'); fn(e); };
+    const off = () => { node.classList.remove('hot'); tip.hidden = true; };
+    node.addEventListener('pointerenter', on);
+    node.addEventListener('pointermove', tipMove);
+    node.addEventListener('pointerleave', off);
+    node.addEventListener('focus', on);
+    node.addEventListener('blur', off);
+  }
+  function responsive(el, draw) {
+    const run = () => {
+      const w = Math.floor(el.clientWidth);
+      if (!w || w === el._w) return;
+      el._w = w;
+      el.replaceChildren();
+      draw(el, w);
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(run)).observe(el);
+    run();
+  }
+  function svgFor(el, w, ht, label) {
+    return s('svg', { width: w, height: ht, viewBox: '0 0 ' + w + ' ' + ht, role: 'img', 'aria-label': label }, el);
+  }
+  function table(root, head, rows, numCols, wide) {
+    const t = h('table', { class: wide ? 'data wide' : 'data' }, root);
+    const tr = h('tr', null, h('thead', null, t));
+    head.forEach((c, i) => h('th', { scope: 'col', class: numCols && numCols.indexOf(i) >= 0 ? 'num' : '' }, tr, c));
+    const tb = h('tbody', null, t);
+    for (const r of rows) {
+      const row = h('tr', null, tb);
+      r.forEach((c, i) => h('td', { class: numCols && numCols.indexOf(i) >= 0 ? 'num' : '' }, row, c));
+    }
+    return t;
+  }
+  function barCell(td, v, max, text, refv, log) {
+    const cell = h('div', { class: 'barcell' }, td);
+    h('span', { class: 'v' }, cell, text);
+    const tr = h('span', { class: 'track' }, cell);
+    const f = log ? u => Math.max(0, Math.log10(u / log) / Math.log10(max / log)) : u => u / max;
+    h('span', { class: 'b pos', style: 'left:0;width:' + Math.max(0.5, Math.min(100, 100 * f(v))).toFixed(2) + '%' }, tr);
+    if (refv != null) h('span', { class: 'm', style: 'left:' + Math.min(100, 100 * f(refv)).toFixed(2) + '%' }, tr);
+  }
+  function divCell(td, v, lim, text, sub) {
+    const cell = h('div', { class: 'barcell' }, td);
+    const vv = h('span', { class: 'v' }, cell, text);
+    if (sub) h('span', { class: 'sub' }, vv, sub);
+    const tr = h('span', { class: 'track' }, cell);
+    const p = u => 50 + 50 * Math.max(-1, Math.min(1, u / lim));
+    h('span', { class: 'bd', style: 'left:' + p(-3).toFixed(2) + '%;width:' + (p(3) - p(-3)).toFixed(2) + '%' }, tr);
+    const a = p(Math.min(0, v)), b = p(Math.max(0, v));
+    h('span', { class: 'b ' + (v < 0 ? 'neg' : 'pos'), style: 'left:' + a.toFixed(2) + '%;width:' + Math.max(0.4, b - a).toFixed(2) + '%' }, tr);
+    h('span', { class: 'z', style: 'left:50%' }, tr);
+  }
+  function stCell(td, cls, text, title) { return h('span', { class: 'st ' + cls, title: title || '' }, td, text); }
+  function erf(x) {   // Abramowitz-Stegun 7.1.26, |error| < 1.5e-7
+    const s1 = x < 0 ? -1 : 1; x = Math.abs(x);
+    const t = 1 / (1 + 0.3275911 * x);
+    const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+    return s1 * y;
+  }
+  const cdf = t => 0.5 * (1 + erf(t / Math.SQRT2));
+  function logTicks(lo, hi, maxN) {
+    const out = [];
+    for (let e = Math.floor(Math.log10(lo)); e <= Math.ceil(Math.log10(hi)); e++) {
+      for (const m of [1, 2, 5]) { const v = m * Math.pow(10, e); if (v >= lo && v <= hi) out.push(+v.toPrecision(3)); }
+    }
+    return out.length > maxN ? out.filter(v => Math.abs(Math.log10(v) - Math.round(Math.log10(v))) < 1e-9) : out;
+  }
+  const tickText = v => v >= 1 ? num(v, 0) : String(+v.toPrecision(1));
+
+  // ---------------------------------------------------------------- the rigs, in an oblique view (x right, y up, z into the water)
+  const PSI = 32 * Math.PI / 180, EPS = 20 * Math.PI / 180;
+  const cP = Math.cos(PSI), sP = Math.sin(PSI), cE = Math.cos(EPS), sE = Math.sin(EPS);
+  const axo = p => { const u = p[2] * cP - p[0] * sP, w = p[2] * sP + p[0] * cP; return [u, p[1] * cE + w * sE]; };
+  function boxCorners(c, hf) {
+    const out = [];
+    for (const a of [-1, 1]) for (const b of [-1, 1]) for (const g of [-1, 1]) out.push([c[0] + a * hf[0], c[1] + b * hf[1], c[2] + g * hf[2]]);
+    return out;
+  }
+  const EDGES = [[0, 1], [0, 2], [0, 4], [1, 3], [1, 5], [2, 3], [2, 6], [3, 7], [4, 5], [4, 6], [5, 7], [6, 7]];
+  function rigPoints(rig) {
+    const p = rig.cams.map(c => c.C);
+    for (const wn of rig.wins) p.push.apply(p, wn.patch[0].concat(wn.patch[1]));
+    p.push.apply(p, boxCorners(rig.centre, rig.half));
+    for (const c of rig.cams) for (const r of c.rays) p.push(r[3]);
+    return p;
+  }
+  function fitter(points, w, ht, padL, padR, padT, padB) {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    for (const p of points) { const q = axo(p); x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]); }
+    const k = Math.min((w - padL - padR) / (x1 - x0), (ht - padT - padB) / (y1 - y0));
+    const ox = padL + ((w - padL - padR) - k * (x1 - x0)) / 2 - k * x0;
+    const oy = padT + ((ht - padT - padB) - k * (y1 - y0)) / 2 + k * y1;
+    const f = p => { const q = axo(p); return [ox + k * q[0], oy - k * q[1]]; };
+    f.k = k;
+    return f;
+  }
+  function camRows(c, rig) {
+    const wn = rig.wins[c.win];
+    const rows = [[num(c.inc, 1) + '°', 'incidence on ' + (wn.name || 'its wall')], [num(c.h1) + ' mm', 'distance to the wall (along its normal)'],
+      [num(c.f) + ' px', 'focal length']];
+    if (c.w) rows.push([c.w + ' × ' + c.hgt + ' px', 'sensor']);
+    if (c.design) rows.push([num(c.design[0], 1) + '°, ' + num(c.design[1], 1) + '°', 'aimed sideways, upwards']);
+    return rows;
+  }
+  function drawRig(svg, rig, P, o) {
+    for (const wn of rig.wins) {
+      const near = wn.patch[0].map(P), far = wn.patch[1].map(P);
+      s('polygon', { points: pts(far), class: 'slab' }, svg);
+      for (let i = 0; i < 4; i++) s('line', { x1: near[i][0], y1: near[i][1], x2: far[i][0], y2: far[i][1], class: 'slab-edge' }, svg);
+      s('polygon', { points: pts(near), class: 'slab' }, svg);
+    }
+    const cc = boxCorners(rig.centre, rig.half).map(P);
+    for (const e of EDGES) s('line', { x1: cc[e[0]][0], y1: cc[e[0]][1], x2: cc[e[1]][0], y2: cc[e[1]][1], class: 'cloud' }, svg);
+    if (o.wands && rig.segments) for (const q of rig.segments) { const a = P(q[0]), b = P(q[1]); s('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: 'wand' }, svg); }
+    for (const c of rig.cams) for (const r of c.rays) s('polyline', { points: pts(r.map(P)), class: o.thin ? 'ray thin' : 'ray' }, svg);
+    const labels = [];
+    rig.cams.forEach((c, i) => {
+      const g = s('g', null, svg);
+      const p = P(c.C);
+      s('circle', { cx: p[0], cy: p[1], r: o.dot, class: 'cam' }, g);
+      if (o.labels) labels.push({ p: p, i: i, g: g });
+      if (o.tips) {
+        s('circle', { cx: p[0], cy: p[1], r: 12, class: 'hit' }, g);
+        hover(g, e => tipShow(e, rig.name + ', cam' + (i + 1), camRows(c, rig)));
+      }
+    });
+    if (o.labels) {   // left of the leftmost camera nearby, stacked where they would overlap, with a leader when moved
+      labels.sort((a, b) => a.p[1] - b.p[1]);
+      let last = -Infinity;
+      for (const L of labels) {
+        const near = labels.filter(M => Math.abs(M.p[1] - L.p[1]) < 30 && Math.abs(M.p[0] - L.p[0]) < 60);
+        const x = Math.min.apply(null, near.map(M => M.p[0])) - o.dot - 5;
+        const y = Math.max(L.p[1] + 4, last + 13);
+        last = y;
+        if (Math.abs(y - (L.p[1] + 4)) > 2 || x < L.p[0] - o.dot - 6) s('line', { x1: x + 2, y1: y - 4, x2: L.p[0] - o.dot, y2: L.p[1], class: 'leader' }, L.g);
+        txt(L.g, x, y, 'cam' + (L.i + 1), { 'text-anchor': 'end', class: 't-strong halo' });
+      }
+    }
+  }
+  function occupied(rig, P) {   // screen points the drawing covers: cameras, their labels, and along every ray
+    const occ = [];
+    for (const c of rig.cams) {
+      const p = P(c.C);
+      occ.push(p, [p[0] - 12, p[1]], [p[0] - 26, p[1]], [p[0] - 40, p[1]]);
+      for (const r of c.rays) for (let i = 0; i + 1 < r.length; i++) {
+        const a = P(r[i]), b = P(r[i + 1]);
+        for (let t = 0; t <= 1.0001; t += 0.04) occ.push([a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])]);
+      }
+    }
+    return occ;
+  }
+  function triad(svg, P, w, ht, occ) {   // 100 mm along x, y and z, in the bottom corner the drawing leaves free
+    const o = P([0, 0, 0]);
+    const axes = [['x', [100, 0, 0]], ['y', [0, 100, 0]], ['z', [0, 0, 100]]];
+    let bx0 = -6, bx1 = 6, by0 = -6, by1 = 6;
+    for (const a of axes) {
+      const q = P(a[1]), dx = q[0] - o[0], dy = q[1] - o[1], L = Math.hypot(dx, dy) || 1;
+      const lx = dx + 8 * dx / L, ly = dy + 8 * dy / L;
+      bx0 = Math.min(bx0, dx, lx - 6); bx1 = Math.max(bx1, dx, lx + 6); by0 = Math.min(by0, dy, ly - 8); by1 = Math.max(by1, dy, ly + 5);
+    }
+    const corners = [[6 - bx0, ht - 4 - by1], [w - 6 - bx1, ht - 4 - by1]];
+    const score = c => occ.filter(p => p[0] > c[0] + bx0 - 8 && p[0] < c[0] + bx1 + 8 && p[1] > c[1] + by0 - 8 && p[1] < c[1] + by1 + 8).length;
+    const x0 = (score(corners[0]) <= score(corners[1]) ? corners[0] : corners[1])[0], y0 = corners[0][1];
+    for (const a of axes) {
+      const q = P(a[1]), dx = q[0] - o[0], dy = q[1] - o[1];
+      const L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L;
+      s('line', { x1: x0, y1: y0, x2: x0 + dx - 4 * ux, y2: y0 + dy - 4 * uy, class: 'triad' }, svg);
+      const tx = x0 + dx, ty = y0 + dy;
+      s('polygon', { points: pts([[tx, ty], [tx - 6 * ux - 3 * uy, ty - 6 * uy + 3 * ux], [tx - 6 * ux + 3 * uy, ty - 6 * uy - 3 * ux]]), class: 'triad-head' }, svg);
+      txt(svg, tx + 8 * ux, ty + 8 * uy + 4, a[0], { 'text-anchor': 'middle', class: 't-ink' });
+    }
+  }
+  function extent(points) {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    for (const p of points) { const q = axo(p); x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]); }
+    return (y1 - y0) / (x1 - x0);
+  }
+  function rigPanel(rig) {
+    return (el, w) => {
+      const padL = 46, padR = 10, padT = 12, padB = 34, pts3 = rigPoints(rig);
+      const ht = Math.round(Math.max(0.36 * w, Math.min(0.7 * w, (w - padL - padR) * extent(pts3))) + padT + padB);
+      const svg = svgFor(el, w, ht, rig.name + ', oblique view to scale');
+      const P = fitter(pts3, w, ht, padL, padR, padT, padB);
+      drawRig(svg, rig, P, { dot: 4.5, labels: true, tips: true, wands: true });
+      triad(svg, P, w, ht, occupied(rig, P));
+    };
+  }
+  function rigGrid(root) {
+    const key = root.querySelector('.keycell');
+    for (const rig of D.rigs) {
+      const pnl = h('div', { class: 'panel' });
+      root.insertBefore(pnl, key);
+      h('p', { class: 'panel-title' }, pnl, 'Rig ' + rig.key);
+      h('p', { class: 'panel-sub' }, pnl, rig.text);
+      const ch = h('div', { class: 'chart' }, pnl);
+      responsive(ch, rigPanel(rig));
+    }
+  }
+  function camTable(root) {
+    const rows = [];
+    for (const rig of D.rigs) rig.cams.forEach((c, i) => rows.push([rig.key, 'cam' + (i + 1), rig.wins[c.win].name, num(c.inc, 1), num(c.h1), num(c.f), c.w + ' × ' + c.hgt]));
+    table(root, ['Rig', 'Camera', 'Wall', 'Incidence (°)', 'To the wall (mm)', 'f (px)', 'Sensor (px)'], rows, [3, 4, 5], true);
+  }
+  function testsTable(root) {
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    ['Test', 'What it checks', 'Rigs', 'Result', ''].forEach(c => h('th', { scope: 'col' }, hr, c));
+    const tb = h('tbody', null, t);
+    const lab = { pass: ['ok', '✓ pass'], fail: ['no', '✗ below target'], partial: ['warn', '≈ 11 of 12'], reported: ['na', 'reported'], na: ['na', 'not run'] };
+    for (const r of D.tests) {
+      const tr = h('tr', null, tb);
+      h('td', null, tr, r.test);
+      h('td', null, tr, r.what);
+      h('td', null, tr, r.rigs);
+      h('td', { class: 'note' }, tr, r.result);
+      const l = lab[r.status];
+      stCell(h('td', null, tr), l[0], l[1]);
+    }
+  }
+
+  // ---------------------------------------------------------------- W5
+  const KINDS = [['one window', 'One wall'], ['groups', 'Several walls, at least one with two or more cameras'], ['one camera per window', 'Several walls, one camera behind each']];
+  const mark = r => r.ok ? ['ok', '✓'] : r.equivalent ? ['eq', '≈'] : ['no', '✗'];
+  function w5Rows(r) {
+    const m = r.ok ? 'same answer as the fit from the truth' : r.equivalent ? 'an equivalent answer' : 'a different answer';
+    return [
+      [m.charAt(0).toUpperCase() + m.slice(1), 'largest difference ' + sci(Math.max(r.max_abs_z, 1e-12)) + ' σ (' + r.worst + ')'],
+      [num(r.rms_px, 4) + ' px', 'final RMS (fit from the truth: ' + num(r.ref_rms_px, 4) + ' px)'],
+      [num(r.seconds) + ' s', 'run time (start ' + num(r.bootstrap_s) + ' s)'],
+      [r.cams_per_window.join(' + ') + ' cameras', r.n_windows + (r.n_windows > 1 ? ' walls' : ' wall') + ', noise ' + num(r.noise_px, 1) + ' px'],
+      [r.incidence_deg.map(v => num(v)).join(', ') + '°', 'incidence'],
+      [r.f_px.map(v => num(v / 1000, 1) + 'k').join(', ') + ' px', 'focal lengths'],
+      [num(r.cloud_mm) + ' mm, ' + num(r.frames) + ' frames', 'wand cloud; wand ' + num(r.L, 1) + ' mm'],
+    ];
+  }
+  function gallery(root) {
+    for (const k of KINDS) {
+      const list = D.w5.filter(r => r.kind === k[0]);
+      const grp = h('div', { class: 'g-group' }, root);
+      const head = h('p', { class: 'g-head' }, grp, k[1] + ' ');
+      h('span', null, head, '· ' + list.length + ' rigs, ' + list.filter(r => r.ok).length + ' same, ' + list.filter(r => !r.ok && r.equivalent).length + ' equivalent');
+      const grid = h('div', { class: 'g-grid' }, grp);
+      for (const r of list) {
+        const tile = h('div', { class: 'tile', 'aria-label': 'Seed ' + r.seed + ', ' + k[1] }, grid);
+        const svg = s('svg', { viewBox: '0 0 120 96', 'aria-hidden': 'true' }, tile);
+        const P = fitter(rigPoints(r.geo), 120, 96, 7, 7, 7, 7);
+        drawRig(svg, r.geo, P, { dot: 3, thin: true });
+        const cap = h('div', { class: 'tile-cap' }, tile);
+        const m = mark(r);
+        const left = h('span', null, cap);
+        h('span', { class: 'mark ' + m[0] }, left, m[1] + ' ');
+        left.appendChild(document.createTextNode('#' + r.seed));
+        h('span', null, cap, num(r.seconds) + ' s');
+        hover(tile, e => tipShow(e, 'Seed ' + r.seed + ' · ' + k[1].toLowerCase(), w5Rows(r)));
+      }
+    }
+  }
+  function strip(cfg) {
+    return (el, w) => {
+      const narrow = w < 520, rowH = narrow ? 56 : 44, top = 30, bottom = 42, right = 14, rdot = narrow ? 3.8 : 4.5;
+      const left = narrow ? 92 : 210;
+      const ht = top + KINDS.length * rowH + bottom, y0 = top + KINDS.length * rowH;
+      const svg = svgFor(el, w, ht, cfg.aria);
+      const x = cfg.log ? logS(cfg.domain[0], cfg.domain[1], left, w - right) : lin(cfg.domain[0], cfg.domain[1], left, w - right);
+      for (const t of cfg.ticks(w - left - right)) {
+        s('line', { x1: x(t[0]), x2: x(t[0]), y1: top - 4, y2: y0, class: 'grid' }, svg);
+        if (t[1]) txt(svg, x(t[0]), y0 + 16, t[1], { 'text-anchor': 'middle' });
+      }
+      s('line', { x1: left, x2: w - right, y1: y0, y2: y0, class: 'axis' }, svg);
+      txt(svg, (left + w - right) / 2, y0 + 34, cfg.xlabel, { 'text-anchor': 'middle', class: 't-ink' });
+      for (const ref of cfg.refs || []) {
+        const xr = x(ref[0]);
+        s('line', { x1: xr, x2: xr, y1: top - 12, y2: y0, class: 'refline' }, svg);
+        txt(svg, xr + (ref[2] || -5), top - 16, ref[1], { 'text-anchor': ref[2] ? 'start' : 'end', class: 't-ink' });
+      }
+      KINDS.forEach((k, i) => {
+        const yc = top + i * rowH + rowH / 2;
+        const list = D.w5.filter(r => r.kind === k[0]);
+        const lab = narrow ? ['one wall', 'groups', 'one each'][i] : ['one wall', 'several walls, groups', 'one camera per wall'][i];
+        const m = cfg.median ? median(list.map(cfg.value)) : null;
+        txt(svg, left - 12, yc + 4, lab + (m != null && !narrow ? ' · ' + num(m) + ' s' : ''), { 'text-anchor': 'end', class: 't-ink' });
+        if (m != null) s('line', { x1: x(m), x2: x(m), y1: yc - rowH / 2 + 3, y2: yc + rowH / 2 - 3, class: 'median' }, svg);
+        const placed = [];
+        list.map(r => ({ r: r, px: x(cfg.value(r)) })).sort((a, b) => a.px - b.px).forEach(p => {
+          for (const off of [0, -8, 8, -16, 16, -24, 24]) {
+            if (Math.abs(off) > rowH / 2 - 1) continue;
+            if (placed.every(q => Math.hypot(q.px - p.px, q.py - (yc + off)) > 2 * rdot + 0.8)) { p.py = yc + off; break; }
+          }
+          if (p.py == null) p.py = yc;
+          placed.push(p);
+        });
+        for (const p of placed) {
+          const g = s('g', null, svg);
+          s('circle', { cx: p.px, cy: p.py, r: rdot, class: 'dot' + (p.r.noise_px > 0.5 ? ' s2' : '') }, g);
+          s('circle', { cx: p.px, cy: p.py, r: 11, class: 'hit' }, g);
+          hover(g, e => tipShow(e, 'Seed ' + p.r.seed + ' · ' + k[1].toLowerCase(), w5Rows(p.r)));
+        }
+      });
+    };
+  }
+  function decadeTicks(lo, hi) {
+    return width => {
+      const n = Math.round(Math.log10(hi) - Math.log10(lo));
+      const every = Math.max(1, Math.ceil(44 / (width / n)));
+      const out = [];
+      for (let e = Math.log10(lo); e <= Math.log10(hi) + 1e-9; e++) out.push([Math.pow(10, e), (Math.round(e) % every === 0) ? (e === 0 ? '1' : pow10(Math.round(e))) : '']);
+      return out;
+    };
+  }
+  function w5Table(root) {
+    const rows = D.w5.map(r => [String(r.seed), num(r.noise_px, 1), r.cams_per_window.join('+'), r.incidence_deg.map(v => num(v)).join(', '),
+      r.f_px.map(v => num(v)).join(', '), num(r.rms_px, 4), sci(Math.max(r.max_abs_z, 1e-12)), mark(r)[1], num(r.seconds)]);
+    table(root, ['Seed', 'Noise (px)', 'Cameras per wall', 'Incidence (°)', 'f (px)', 'RMS (px)', 'Largest diff (σ)', 'Result', 'Time (s)'], rows, [0, 1, 5, 6, 8], true);
+  }
+
+  // ---------------------------------------------------------------- W6
+  const caseLabel = r => r.rig.startsWith('rand') ? r.rig.replace('rand', 'random ') : 'rig ' + r.rig + ' · ' + num(r.noise, 1) + ' px';
+  function w6Rows(r) {
+    const g = r.gui, n = r.new;
+    const gtxt = g.shape_rms_mm != null ? num(1e3 * g.shape_rms_mm, 1) + ' µm' : 'failed';
+    return [
+      [num(n.seconds) + ' s', 'new calibration, run time'],
+      [num(1e3 * n.shape_rms_mm, 1) + ' µm', 'new: 3-D shape error'],
+      [num(100 * n.f_err_max, 2) + ' %', 'new: largest f error'],
+      [num(n.reproj_rms_px, 3) + ' px', 'new: unseen points reprojected'],
+      [num(g.seconds) + ' s', 'GUI, run time' + (g.shape_rms_mm == null ? ' (failed: ' + String(g.error || '').replace(/^\w+\('/, '').replace(/'\)$/, '') + ')' : '')],
+      [gtxt, 'GUI: 3-D shape error'],
+    ].concat(g.shape_rms_mm != null ? [[num(100 * g.f_err_max, 2) + ' %', 'GUI: largest f error'], [num(g.reproj_rms_px, 3) + ' px', 'GUI: unseen points reprojected']] : []);
+  }
+  function dumbbell(cfg) {
+    return (el, w) => {
+      const rows = D.w6, rowH = 22, top = 8, bottom = 40, left = w < 420 ? 86 : 118, right = 14;
+      const ht = top + rows.length * rowH + bottom, y0 = top + rows.length * rowH;
+      const svg = svgFor(el, w, ht, cfg.aria);
+      const x = logS(cfg.domain[0], cfg.domain[1], left, w - right);
+      for (const t of logTicks(cfg.domain[0], cfg.domain[1], w < 420 ? 4 : 7)) {
+        s('line', { x1: x(t), x2: x(t), y1: top, y2: y0, class: 'grid' }, svg);
+        txt(svg, x(t), y0 + 15, tickText(t), { 'text-anchor': 'middle' });
+      }
+      s('line', { x1: left, x2: w - right, y1: y0, y2: y0, class: 'axis' }, svg);
+      txt(svg, (left + w - right) / 2, ht - 6, cfg.xlabel, { 'text-anchor': 'middle', class: 't-ink' });
+      rows.forEach((r, i) => {
+        const yc = top + i * rowH + rowH / 2;
+        if (i % 2 === 0) s('rect', { x: 0, y: yc - rowH / 2, width: w, height: rowH, class: 'band' }, svg);
+        txt(svg, left - 10, yc + 4, w < 420 ? caseLabel(r).replace('random ', 'rnd ').replace(' · ', ' ') : caseLabel(r), { 'text-anchor': 'end', class: 't-ink' });
+        const g = s('g', null, svg);
+        const vn = cfg.value(r.new), vg = cfg.value(r.gui);
+        const clamp = v => Math.max(cfg.domain[0], Math.min(cfg.domain[1], v));
+        if (vg != null) {
+          s('line', { x1: x(clamp(vn)), x2: x(clamp(vg)), y1: yc, y2: yc, class: 'db' }, g);
+          s('circle', { cx: x(clamp(vg)), cy: yc, r: 4.5, class: 'dot s2' }, g);
+        } else if (cfg.failAt) {
+          const xf = x(clamp(cfg.failAt(r.gui)));
+          s('line', { x1: x(clamp(vn)), x2: xf, y1: yc, y2: yc, class: 'db' }, g);
+          txt(g, xf, yc + 4, '✗', { 'text-anchor': 'middle', class: 'fail' });
+        } else {   // beside the new calibration's dot, on whichever side has room
+          const xn = x(clamp(vn));
+          if (w - right - xn >= 84) txt(g, xn + 9, yc + 4, '✗ GUI failed', { 'text-anchor': 'start', class: 'fail' });
+          else txt(g, xn - 9, yc + 4, '✗ GUI failed', { 'text-anchor': 'end', class: 'fail' });
+        }
+        s('circle', { cx: x(clamp(vn)), cy: yc, r: 4.5, class: 'dot' }, g);
+        s('rect', { x: left, y: yc - rowH / 2, width: w - left, height: rowH, class: 'hit' }, g);
+        hover(g, e => tipShow(e, caseLabel(r).charAt(0).toUpperCase() + caseLabel(r).slice(1), w6Rows(r)));
+      });
+    };
+  }
+  function w6Table(root) {
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    ['Data set', 'Calibration', 'Time', 'Largest f error', '3-D shape error (µm)', 'Wand error, mean / RMS (µm)', 'Unseen points reprojected (px)'].forEach((c, i) => h('th', { scope: 'col', class: i > 1 ? 'num' : '' }, hr, c));
+    const tb = h('tbody', null, t);
+    for (const r of D.w6) for (const m of ['gui', 'new']) {
+      const q = r[m], tr = h('tr', null, tb);
+      h('td', null, tr, m === 'gui' ? caseLabel(r) : '');
+      h('td', null, tr, m === 'gui' ? 'GUI' : 'new');
+      if (q.shape_rms_mm == null) {
+        h('td', { class: 'num' }, tr, num(q.seconds) + ' s');
+        h('td', { colspan: 4, class: 'note' }, tr, 'failed: ' + String(q.error || '').replace(/^\w+\('/, '').replace(/'\)$/, ''));
+        continue;
+      }
+      [num(q.seconds) + ' s', num(100 * q.f_err_max, 2) + ' %', num(1e3 * q.shape_rms_mm, 1),
+        (q.wand_mean_mm > 0 ? '+' : '') + num(1e3 * q.wand_mean_mm, 1) + ' / ' + num(1e3 * q.wand_rms_mm, 1), num(q.reproj_rms_px, 3)].forEach(c => h('td', { class: 'num' }, tr, c));
+    }
+  }
+
+  // ---------------------------------------------------------------- W2 / W3
+  function w2Table(root) {
+    const rows = D.w2;
+    const cols = [['f_pct', 'σ(f)/f', ' %', 3], ['normal_deg', 'σ(wall normal)', '°', 3], ['dist_mm', 'σ(camera to wall)', ' mm', 2],
+      ['shape_um', '3-D shape error', ' µm', 1], ['wand_cal_um', 'Wand length: calibration', ' µm', 1]];
+    const max = {};
+    for (const c of cols) max[c[0]] = Math.max.apply(null, rows.map(r => r[c[0]]));
+    const t = h('table', { class: 'data wide compact' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    h('th', { scope: 'col' }, hr, 'Rig');
+    for (const c of cols) h('th', { scope: 'col' }, hr, c[1]);
+    h('th', { scope: 'col', class: 'num' }, hr, 'with detection noise');
+    const tb = h('tbody', null, t);
+    for (const r of rows) {
+      const tr = h('tr', null, tb);
+      const td = h('td', null, tr, r.rig + ' ');
+      h('span', { class: 'sub' }, td, r.text);
+      for (const c of cols) barCell(h('td', null, tr), r[c[0]], max[c[0]], num(r[c[0]], c[3]) + c[2]);
+      h('td', { class: 'num' }, tr, num(r.wand_tot_um, 0) + ' µm');
+    }
+  }
+  function hist(el, w) {
+    const z = D.w3.z, bw = 0.5, lo = -4, hi = 4, nb = Math.round((hi - lo) / bw), N = z.length;
+    const counts = new Array(nb).fill(0);
+    for (const v of z) counts[Math.min(nb - 1, Math.max(0, Math.floor((v - lo) / bw)))]++;
+    const phi = t => Math.exp(-t * t / 2) / Math.sqrt(2 * Math.PI);
+    const ht = 250, top = 14, bottom = 44, left = 46, right = 10;
+    const ymax = Math.max(Math.max.apply(null, counts), N * bw * phi(0)) * 1.1;
+    const x = lin(lo, hi, left, w - right), y = lin(0, ymax, ht - bottom, top);
+    const svg = svgFor(el, w, ht, 'Histogram of the z-scores of all fits against the standard normal');
+    for (const t of nice(0, ymax, 4)) {
+      s('line', { x1: left, x2: w - right, y1: y(t), y2: y(t), class: 'grid' }, svg);
+      txt(svg, left - 6, y(t) + 4, num(t), { 'text-anchor': 'end' });
+    }
+    counts.forEach((c, i) => {
+      const a = lo + i * bw, x0 = x(a) + 1, x1 = x(a + bw) - 1, yt = y(c), yb = y(0);
+      const g = s('g', null, svg);
+      if (c > 0) {
+        const r = Math.min(4, (x1 - x0) / 2, yb - yt);
+        s('path', { d: 'M' + x0 + ',' + yb + 'V' + (yt + r) + 'Q' + x0 + ',' + yt + ' ' + (x0 + r) + ',' + yt + 'H' + (x1 - r) + 'Q' + x1 + ',' + yt + ' ' + x1 + ',' + (yt + r) + 'V' + yb + 'Z', class: 'bar' }, g);
+      }
+      s('rect', { x: x0, y: top, width: Math.max(1, x1 - x0), height: yb - top, class: 'hit' }, g);
+      const ex = N * (cdf(a + bw) - cdf(a));
+      hover(g, e => tipShow(e, 'z from ' + num(a, 1) + ' to ' + num(a + bw, 1), [[num(c) + ' of ' + num(N), 'z-scores'], [num(ex, 1), 'expected from a standard normal']]));
+    });
+    const path = [];
+    for (let t = lo; t <= hi + 1e-9; t += 0.05) path.push((path.length ? 'L' : 'M') + x(t).toFixed(1) + ',' + y(N * bw * phi(t)).toFixed(1));
+    s('path', { d: path.join(''), class: 'curve' }, svg);
+    s('line', { x1: left, x2: w - right, y1: y(0), y2: y(0), class: 'axis' }, svg);
+    for (let t = lo; t <= hi; t++) txt(svg, x(t), ht - bottom + 16, t < 0 ? MINUS + Math.abs(t) : String(t), { 'text-anchor': 'middle' });
+    txt(svg, (left + w - right) / 2, ht - 8, 'z-score', { 'text-anchor': 'middle', class: 't-ink' });
+  }
+  function effStrip(el, w) {
+    const keys = 'ABCDE'.split(''), rowH = 34, top = 18, bottom = 40, left = 44, right = 12, rdot = 3.6;
+    const ht = top + keys.length * rowH + bottom, y0 = top + keys.length * rowH;
+    const svg = svgFor(el, w, ht, 'RMS error over the Cramér–Rao sigma per parameter, rigs A to E');
+    const x = lin(0.5, 1.5, left, w - right);
+    s('rect', { x: x(0.8), y: top - 6, width: x(1.25) - x(0.8), height: y0 - top + 6, class: 'band' }, svg);
+    for (const t of [0.5, 0.75, 1, 1.25, 1.5]) {
+      s('line', { x1: x(t), x2: x(t), y1: top - 6, y2: y0, class: t === 1 ? 'refline' : 'grid' }, svg);
+      txt(svg, x(t), y0 + 16, num(t, 2), { 'text-anchor': 'middle' });
+    }
+    s('line', { x1: left, x2: w - right, y1: y0, y2: y0, class: 'axis' }, svg);
+    txt(svg, (left + w - right) / 2, y0 + 34, 'RMS error ÷ Cramér–Rao σ', { 'text-anchor': 'middle', class: 't-ink' });
+    keys.forEach((k, i) => {
+      const R = D.w3.rigs[k], yc = top + i * rowH + rowH / 2;
+      txt(svg, left - 10, yc + 4, k, { 'text-anchor': 'end', class: 't-strong' });
+      s('line', { x1: x(R.pooled), x2: x(R.pooled), y1: yc - rowH / 2 + 3, y2: yc + rowH / 2 - 3, class: 'median' }, svg);
+      const placed = [];
+      R.eff.map((v, j) => ({ v: v, j: j, px: x(Math.max(0.5, Math.min(1.5, v))) })).sort((a, b) => a.px - b.px).forEach(p => {
+        for (const off of [0, -7, 7, -14, 14]) {
+          if (placed.every(q => Math.hypot(q.px - p.px, q.py - (yc + off)) > 2 * rdot + 0.6)) { p.py = yc + off; break; }
+        }
+        if (p.py == null) p.py = yc;
+        placed.push(p);
+      });
+      for (const p of placed) {
+        const g = s('g', null, svg);
+        s('circle', { cx: p.px, cy: p.py, r: rdot, class: 'dot' }, g);
+        s('circle', { cx: p.px, cy: p.py, r: 9, class: 'hit' }, g);
+        const nm = R.names[p.j].replace('logf', 'log f').replace(/\.w(\d)/, ' rotation $1').replace(/\.C(\d)/, ' centre $1').replace('win1.', 'wall 1 ').replace('win2.', 'wall 2 ');
+        hover(g, e => tipShow(e, 'Rig ' + k + ', ' + nm, [[num(p.v, 3), 'RMS error ÷ Cramér–Rao σ, 40 fits'], [num(R.bias[p.j], 2) + ' SE', 'bias'], [num(R.pooled, 3), 'rig, pooled over ' + R.params + ' parameters']]));
+      }
+    });
+  }
+  function sweepChart(el, w) {
+    const S = D.w3.sweep, ht = Math.round(Math.max(190, Math.min(240, w * 0.6))), top = 12, bottom = 36, left = 50, right = 12;
+    const svg = svgFor(el, w, ht, 'Focal-length error against detection noise, rig A');
+    const x = logS(0.015, 2.7, left, w - right);
+    let lo = Infinity, hi = 0;
+    for (const p of S) { lo = Math.min(lo, p.f_pct, p.f_crb_pct); hi = Math.max(hi, p.f_pct, p.f_crb_pct); }
+    lo /= 1.6; hi *= 1.6;
+    const y = logS(lo, hi, ht - bottom, top);
+    for (const t of logTicks(lo, hi, 6)) {
+      s('line', { x1: left, x2: w - right, y1: y(t), y2: y(t), class: 'grid' }, svg);
+      txt(svg, left - 6, y(t) + 4, String(+t.toPrecision(2)), { 'text-anchor': 'end' });
+    }
+    for (const t of [0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]) {
+      s('line', { x1: x(t), x2: x(t), y1: top, y2: ht - bottom, class: 'grid' }, svg);
+      if (w >= 330 || [0.02, 0.1, 0.5, 2].indexOf(t) >= 0) txt(svg, x(t), ht - bottom + 15, tickText(t), { 'text-anchor': 'middle' });
+    }
+    s('line', { x1: left, x2: w - right, y1: ht - bottom, y2: ht - bottom, class: 'axis' }, svg);
+    txt(svg, (left + w - right) / 2, ht - 4, 'detection noise σ (px)', { 'text-anchor': 'middle', class: 't-ink' });
+    s('path', { d: S.map((p, i) => (i ? 'L' : 'M') + x(p.sigma).toFixed(1) + ',' + y(p.f_crb_pct).toFixed(1)).join(''), class: 'line-pred' }, svg);
+    for (const p of S) {
+      const g = s('g', null, svg);
+      s('circle', { cx: x(p.sigma), cy: y(p.f_pct), r: 4.5, class: 'dot' }, g);
+      s('circle', { cx: x(p.sigma), cy: y(p.f_pct), r: 11, class: 'hit' }, g);
+      hover(g, e => tipShow(e, 'σ = ' + num(p.sigma, 2) + ' px', [[sig3(p.f_pct) + ' %', 'f error, RMS over 10 data sets'], [sig3(p.f_crb_pct) + ' %', 'Cramér–Rao prediction'],
+        [num(p.eff, 2), 'all parameters: RMS error ÷ prediction'], [num(p.z_sd, 2), 'z standard deviation']]));
+    }
+    const lg = h('div', { class: 'legend' }, el);
+    let k = h('span', { class: 'k' }, lg); h('span', { class: 'dotk' }, k); k.appendChild(document.createTextNode('measured'));
+    k = h('span', { class: 'k' }, lg); h('span', { class: 'ln pred' }, k); k.appendChild(document.createTextNode('Cramér–Rao prediction'));
+  }
+
+  // ---------------------------------------------------------------- W4 / W7 / W8
+  function w4Table(root) {
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    h('th', { scope: 'col' }, hr, 'Started with');
+    for (const k of 'ABCDE') h('th', { scope: 'col', class: 'c' }, hr, 'Rig ' + k);
+    const tb = h('tbody', null, t);
+    const name = { normal: 'Wall normal tilted', distance: 'Wall moved', f: 'Every f scaled', rotation: 'Every camera turned' };
+    const lev = (f, v) => f === 'normal' || f === 'rotation' ? num(v) + '°' : f === 'f' ? '±' + num(100 * v) + ' %' :
+      (v < 0 ? num(-100 * v) + ' % towards the cameras' : num(100 * v) + ' % towards the cloud');
+    let last = null;
+    for (const r of D.w4) {
+      if (r.factor !== last) { last = r.factor; h('td', { colspan: 6 }, h('tr', { class: 'group' }, tb), name[r.factor]); }
+      const tr = h('tr', null, tb);
+      h('td', null, tr, lev(r.factor, r.level));
+      for (const k of 'ABCDE') {
+        const c = r.cells[k];
+        const cls = c[0] === c[1] ? 'full' : c[0] === 0 ? 'no' : 'warn';
+        stCell(h('td', { class: 'c' }, tr), cls, c[0] + '/' + c[1]);
+      }
+    }
+  }
+  function w7Table(root) {
+    const name = { clean: 'Clean data', outliers: '2 % gross outliers, 20–200 px', swapped: '1 % of camera-frames with the ends swapped',
+      missing: 'Camera 2 missing from 40 % of the frames', noisy: 'Camera 3 with 5× the noise', partial: 'Cameras 1 and 2 each missing a different half' };
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    ['Data', 'Rig', 'Bad detections rejected', 'Good ones lost', 'Moved from the clean answer (z RMS)', 'expected', 'At its data’s minimum'].forEach((c, i) => h('th', { scope: 'col', class: i > 1 ? 'num' : '' }, hr, c));
+    const tb = h('tbody', null, t);
+    const order = ['clean', 'outliers', 'swapped', 'missing', 'noisy', 'partial'];
+    const rows = D.w7.slice().sort((a, b) => order.indexOf(a.scenario) - order.indexOf(b.scenario) || a.rig.localeCompare(b.rig));
+    let last = null;
+    for (const r of rows) {
+      const tr = h('tr', null, tb);
+      h('td', null, tr, r.scenario !== last ? name[r.scenario] : '');
+      last = r.scenario;
+      h('td', null, tr, r.rig);
+      h('td', { class: 'num' }, tr, r.bad_rows ? r.bad_rejected + ' of ' + r.bad_rows : '—');
+      h('td', { class: 'num' }, tr, num(r.good_rejected) + ' of ' + num(r.rows - r.bad_rows));
+      const zc = h('td', { class: 'num' }, tr);
+      if (r.scenario === 'clean') zc.textContent = '—';
+      else if (r.pass) zc.textContent = num(r.z_vs_clean_rms, 2);
+      else stCell(zc, 'warn', num(r.z_vs_clean_rms, 2), 'more than 1.5 times the expected value');
+      h('td', { class: 'num' }, tr, r.z_expected_rms != null && r.scenario !== 'clean' ? num(r.z_expected_rms, 2) : '—');
+      stCell(h('td', { class: 'num' }, tr), r.same_as_truth_start ? 'ok' : 'no', r.same_as_truth_start ? '✓' : '✗');
+    }
+  }
+  function w8Table(root) {
+    const name = { clean: 'Correct constants', thickness: 'Plate 10 % thicker', water: 'Water index +0.002', wand: 'Wand 0.1 % longer',
+      k1: 'Unmodelled k1 = 0.05', k1_fitted: 'k1 = 0.05, fitted' };
+    const rows = D.w8.filter(r => !r.fit_L);
+    const free = {};
+    for (const r of D.w8) if (r.fit_L) free[r.rig + '|' + r.case] = r;
+    const maxS = Math.max.apply(null, rows.map(r => 1e3 * r.shape_mm));
+    const t = h('table', { class: 'data wide' }, root);
+    const hr = h('tr', null, h('thead', null, t));
+    ['Given to the fit', 'Residual RMS', '3-D shape error (log)', 'Wand length error', 'With the wand length free: fitted L'].forEach(c => h('th', { scope: 'col' }, hr, c));
+    const tb = h('tbody', null, t);
+    for (const rig of ['A', 'D']) {
+      h('td', { colspan: 5 }, h('tr', { class: 'group' }, tb), 'Rig ' + rig);
+      const clean = rows.find(r => r.rig === rig && r.case === 'clean');
+      for (const r of rows.filter(q => q.rig === rig)) {
+        const tr = h('tr', { class: r.case === 'clean' ? 'ref' : '' }, tb);
+        h('td', null, tr, name[r.case] || r.case);
+        h('td', { class: 'num' }, tr, num(r.rms_px, 4) + ' px (×' + num(r.rms_px / clean.rms_px, 3) + ')');
+        barCell(h('td', null, tr), 1e3 * r.shape_mm, maxS * 1.5, num(1e3 * r.shape_mm, 1) + ' µm', 1e3 * clean.shape_mm, 1);
+        h('td', { class: 'num' }, tr, (r.wand_mean_mm > 0 ? '+' : '') + num(1e3 * r.wand_mean_mm, 1) + ' µm');
+        const f = free[r.rig + '|' + r.case];
+        if (f && f.L_sigma) {
+          const zz = (f.L_fit - f.L_true) / f.L_sigma;
+          divCell(h('td', null, tr), zz, 6, (zz > 0 ? '+' : '') + num(zz, 1) + ' σ', num(f.L_fit, 1) + ' ± ' + num(f.L_sigma, 1) + ' mm');
+        } else h('td', null, tr, '—');
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------- build
+  const w5one = D.w5.filter(r => r.kind === 'one window');
+  document.getElementById('fact-w5').textContent = w5one.filter(r => r.ok).length + ' of ' + w5one.length;
+  const ratios = D.w6.filter(r => r.gui.shape_rms_mm != null).map(r => r.gui.seconds / r.new.seconds);
+  document.getElementById('fact-speed').textContent = num(median(ratios)) + '×';
+  const rnd = D.w6.filter(r => r.rig.startsWith('rand'));
+  document.getElementById('fact-acc').textContent = num(1e3 * median(rnd.map(r => r.new.shape_rms_mm)), 1) + ' vs ' + num(1e3 * median(rnd.filter(r => r.gui.shape_rms_mm != null).map(r => r.gui.shape_rms_mm)), 0) + ' µm';
+  const pooled = 'ABCDE'.split('').map(k => D.w3.rigs[k].pooled);
+  document.getElementById('fact-crb').textContent = num(Math.min.apply(null, pooled), 2) + '–' + num(Math.max.apply(null, pooled), 2);
+  document.getElementById('gen').textContent = 'built ' + D.meta.generated;
+  const zs = D.w3.z, zm = zs.reduce((a, b) => a + b, 0) / zs.length, zsd = Math.sqrt(zs.reduce((a, b) => a + (b - zm) * (b - zm), 0) / (zs.length - 1));
+  document.getElementById('w3-sub').textContent = num(zs.length) + ' values from 200 fits on rigs A–E: mean ' + num(zm, 3) + ', standard deviation ' + num(zsd, 3) + ' (ideal: 0 and 1)';
+
+  testsTable(document.getElementById('tests-table'));
+  rigGrid(document.getElementById('rig-panels'));
+  camTable(document.getElementById('cam-table'));
+  gallery(document.getElementById('gallery'));
+  responsive(document.getElementById('w5-agree'), strip({
+    aria: 'Largest parameter difference from the truth-started fit, per rig', log: true, domain: [1e-8, 1e4],
+    ticks: decadeTicks(1e-8, 1e4), xlabel: 'largest |difference| / σ', value: r => Math.min(1e4, Math.max(1e-8, r.max_abs_z)),
+    refs: [[0.01, 'pass: 0.01 σ'], [3, '3 σ', 5]],
+  }));
+  responsive(document.getElementById('w5-time'), strip({
+    aria: 'Run time per rig', log: false, domain: [0, 360], median: true,
+    ticks: width => nice(0, 360, width < 400 ? 4 : 6).map(t => [t, num(t)]), xlabel: 'seconds', value: r => r.seconds,
+  }));
+  w5Table(document.getElementById('w5-table'));
+  responsive(document.getElementById('w6-time'), dumbbell({ aria: 'Run time of both calibrations per data set', domain: [5, 6000], xlabel: 'seconds',
+    value: q => q.shape_rms_mm != null ? q.seconds : null, failAt: q => q.seconds }));
+  responsive(document.getElementById('w6-err'), dumbbell({ aria: '3-D shape error of unseen points, both calibrations', domain: [0.2, 2000], xlabel: '3-D shape error (µm)',
+    value: q => q.shape_rms_mm != null ? 1e3 * q.shape_rms_mm : null }));
+  w6Table(document.getElementById('w6-table'));
+  w2Table(document.getElementById('w2-table'));
+  responsive(document.getElementById('w3-hist'), hist);
+  responsive(document.getElementById('w3-eff'), effStrip);
+  responsive(document.getElementById('w3-sweep'), sweepChart);
+  w4Table(document.getElementById('w4-table'));
+  w7Table(document.getElementById('w7-table'));
+  w8Table(document.getElementById('w8-table'));
+})();
+</script>

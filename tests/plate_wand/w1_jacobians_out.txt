@@ -1,0 +1,27 @@
+block 1: 300 camera/window/point sets, 20 points each (0 rows not projected)
+  cam w1    : worst relative error 4.73e-10
+  cam w2    : worst relative error 4.85e-10
+  cam w3    : worst relative error 2.55e-10
+  cam C1    : worst relative error 4.31e-09
+  cam C2    : worst relative error 3.95e-09
+  cam C3    : worst relative error 5.32e-09
+  cam logf  : worst relative error 1.97e-09
+  cam cx    : worst relative error 2.53e-08
+  cam cy    : worst relative error 2.53e-08
+  cam k1    : worst relative error 7.20e-10
+  cam k2    : worst relative error 5.22e-09
+  cam p1    : worst relative error 1.55e-10
+  cam p2    : worst relative error 1.68e-10
+  cam k3    : worst relative error 1.74e-08
+  win a     : worst relative error 3.07e-08
+  win b     : worst relative error 3.20e-08
+  win delta : worst relative error 1.34e-07
+  X   X1    : worst relative error 5.03e-08
+  X   X2    : worst relative error 3.54e-08
+  X   X3    : worst relative error 6.51e-08
+block 2: plate_wand.evaluate against differences of the whole residual
+  rig B (two windows), k1 and L free: 33 global columns, worst relative error 2.95e-07 (cam1.k1); frame columns 4.34e-08
+  rig A as pinhole cameras: 22 global columns, worst relative error 7.44e-09 (cam4.C3); frame columns 3.27e-08
+  rig D, window fixed: 15 global columns, worst relative error 1.07e-08 (cam3.C3); frame columns 7.51e-08
+  block 2 worst 2.95e-07: PASS
+W1: PASS

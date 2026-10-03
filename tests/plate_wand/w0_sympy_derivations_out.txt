@@ -1,0 +1,86 @@
+-- block 1: the implicit derivatives of the camera-side ray q (n = e_z, e = e_x)
+PROVED     1.0 rho = r at the special point (e = e_x)      cancel; 40 samples
+PROVED     1.1 Phi_tau = F'(tau) = h1 + t g'(tau; n2) + hW g'(tau; n3)  cancel; 40 samples
+PROVED     1.2 J_qX[0,0] (d q_1 / d X1)                    cancel; 40 samples
+PROVED     1.2 J_qX[1,0] (d q_2 / d X1)                    cancel; 40 samples
+PROVED     1.2 J_qX[2,0] (d q_3 / d X1)                    cancel; 40 samples
+PROVED     1.2 J_qX[0,1] (d q_1 / d X2)                    cancel; 40 samples
+PROVED     1.2 J_qX[1,1] (d q_2 / d X2)                    cancel; 40 samples
+PROVED     1.2 J_qX[2,1] (d q_3 / d X2)                    cancel; 40 samples
+PROVED     1.2 J_qX[0,2] (d q_1 / d X3)                    cancel; 40 samples
+PROVED     1.2 J_qX[1,2] (d q_2 / d X3)                    cancel; 40 samples
+PROVED     1.2 J_qX[2,2] (d q_3 / d X3)                    cancel; 40 samples
+PROVED     1.3 J_qC[0,0] (d q_1 / d C1)                    cancel; 40 samples
+PROVED     1.3 J_qC[1,0] (d q_2 / d C1)                    cancel; 40 samples
+PROVED     1.3 J_qC[2,0] (d q_3 / d C1)                    cancel; 40 samples
+PROVED     1.3 J_qC[0,1] (d q_1 / d C2)                    cancel; 40 samples
+PROVED     1.3 J_qC[1,1] (d q_2 / d C2)                    cancel; 40 samples
+PROVED     1.3 J_qC[2,1] (d q_3 / d C2)                    cancel; 40 samples
+PROVED     1.3 J_qC[0,2] (d q_1 / d C3)                    cancel; 40 samples
+PROVED     1.3 J_qC[1,2] (d q_2 / d C3)                    cancel; 40 samples
+PROVED     1.3 J_qC[2,2] (d q_3 / d C3)                    cancel; 40 samples
+PROVED     1.4 J_qdelta[0]                                 cancel; 40 samples
+PROVED     1.4 J_qdelta[1]                                 cancel; 40 samples
+PROVED     1.4 J_qdelta[2]                                 cancel; 40 samples
+PROVED     1.5 J_qn[0,0] (d q_1 / d alpha (t1), the surface pivoting about A)  cancel; 40 samples
+PROVED     1.5 J_qn[1,0] (d q_2 / d alpha (t1), the surface pivoting about A)  cancel; 40 samples
+PROVED     1.5 J_qn[2,0] (d q_3 / d alpha (t1), the surface pivoting about A)  cancel; 40 samples
+PROVED     1.5 J_qn[0,1] (d q_1 / d beta (t2), the surface pivoting about A)  cancel; 40 samples
+PROVED     1.5 J_qn[1,1] (d q_2 / d beta (t2), the surface pivoting about A)  cancel; 40 samples
+PROVED     1.5 J_qn[2,1] (d q_3 / d beta (t2), the surface pivoting about A)  cancel; 40 samples
+-- block 2: the limits at rho -> 0 (the point on the camera's normal line)
+PROVED     2.1 F'(0) = h1 + t n0/n2 + hW n0/n3             cancel; 40 samples
+PROVED     2.2 dtau/drho = -Phi_rho / Phi_tau = 1 / F'(tau) (so tau/rho -> 1/F'(0) as rho -> 0)  cancel; 40 samples
+SKIPPED    2.2b tau/rho -> 1/F'(0) as rho -> 0             follows from 2.2 and tau(0) = 0 by l'Hopital; plate_model uses ratio = 1/F'(0) when rho == 0 and checks it against central differences in W1
+PROVED     2.3 g(0; n3) = 0                                cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [0,0]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [0,1]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [0,2]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [1,0]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [1,1]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [1,2]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [2,0]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [2,1]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = e_x, [2,2]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = e_x, [0,0]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = e_x, [0,1]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = e_x, [1,0]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = e_x, [1,1]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = e_x, [2,0]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = e_x, [2,1]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [0,0]  simplify; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [0,1]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [0,2]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [1,0]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [1,1]  simplify; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [1,2]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [2,0]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [2,1]  cancel; 40 samples
+PROVED     2.4 J_qX -> (I - n n^T)/F'(0) at rho = 0, e = (cos phi, sin phi, 0), [2,2]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = (cos phi, sin phi, 0), [0,0]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = (cos phi, sin phi, 0), [0,1]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = (cos phi, sin phi, 0), [1,0]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = (cos phi, sin phi, 0), [1,1]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = (cos phi, sin phi, 0), [2,0]  cancel; 40 samples
+PROVED     2.5 J_qn -> (1 - a/F'(0)) [t1 t2] at rho = 0, e = (cos phi, sin phi, 0), [2,1]  cancel; 40 samples
+SKIPPED    2.6 the (A - C) and (X - A) terms of J_qn at rho = 0  they are multiplied by tau and g_W, both 0 at rho = 0
+-- block 3: the rotation and the pinhole
+PROVED     3.1 d(exp([w]x) q)/dw1 = -[q]x e1, row 0        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw1 = -[q]x e1, row 1        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw1 = -[q]x e1, row 2        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw2 = -[q]x e2, row 0        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw2 = -[q]x e2, row 1        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw2 = -[q]x e2, row 2        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw3 = -[q]x e3, row 0        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw3 = -[q]x e3, row 1        cancel; 40 samples
+PROVED     3.1 d(exp([w]x) q)/dw3 = -[q]x e3, row 2        cancel; 40 samples
+PROVED     3.2 dx/dp1 = 1/p3                               cancel; 40 samples
+PROVED     3.3 dx/dp3 = -x/p3                              cancel; 40 samples
+-- block 4: the vector Snell step of trace (q unit, n = e_z)
+PROVED     4.1 |q_new|^2 = 1                               cancel; 40 samples
+PROVED     4.2 n.q_new = c_t (the ray keeps going into the window)  cancel; 40 samples
+PROVED     4.3 tangential part scales by mu = n_old/n_new (n sin(theta) conserved), x  cancel; 40 samples
+PROVED     4.3 tangential part scales by mu, y             cancel; 40 samples
+
+
+79 checks: 77 PROVED, 2 SKIPPED

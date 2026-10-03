@@ -1,0 +1,16 @@
+PROVED     A  h tan(theta_i) with sin(theta_i) = n1 sin(theta_1)/n_i, tau = tan(theta_1)  cancel of the squares; 40 samples
+PROVED     B1 g'(tau) = n1 n_i^2 / (n_i^2 + (n_i^2 - n1^2) tau^2)^(3/2)  cancel; 40 samples
+PROVED     B2 g'(tau) > 0 for n_i = n1 sqrt(1 + k^2) > n1  assumptions; 40 samples
+PROVED     B3 -g''(tau) > 0 (concave) for n_i = n1 sqrt(1 + k^2) > n1, tau > 0  assumptions; 40 samples
+PROVED     B4 g''(tau) = -3 n1 n_i^2 (n_i^2 - n1^2) tau / (n_i^2 + (n_i^2 - n1^2) tau^2)^(5/2)  cancel; 40 samples
+PROVED     B5 g(tau) -> n1 / sqrt(n_i^2 - n1^2) as tau -> oo (each lower layer's travel per unit h is bounded)  sp.limit; 40 samples
+PROVED     C1 F(0) = 0                                     cancel; 40 samples
+PROVED     C2 F'(0) = h1 + t n1/n2 + Z n1/n3               cancel; 40 samples
+SKIPPED    D  Newton from tau_p = rho/F'(0) increases monotonically to the root  argument, not algebra: F concave increasing with F(0) = 0 (B3, C1) gives F(tau_p) <= F'(0) tau_p = rho, so tau_p <= root; from any tau_k <= root concavity gives F(root) <= F(tau_k) + F'(tau_k)(root - tau_k), so tau_k <= tau_{k+1} <= root; a bounded monotone sequence converges, to a fixed point, where F = rho
+PROVED     E  normal view, paraxial: refractive du/drho = pinhole with f' = f n3/n1 at depth -n3 (h1/n1 + t/n2)  cancel; 40 samples
+PROVED     F1 dtau/dh1 = -G_h1 / G_tau = -tau / F'(tau)    cancel; 40 samples
+PROVED     F2 dtau/drho = -G_rho / G_tau = 1 / F'(tau)     cancel; 40 samples
+PROVED     G1 F(tau; s h1, s t, s Z) - s rho = s (F(tau; h1, t, Z) - rho)  cancel; 40 samples
+PROVED     G2 with t held: F(tau; s h1, t, s Z) - s rho = s (F - rho) - (s - 1) t g_2(tau)  cancel; 40 samples
+
+14 checks: 13 PROVED, 1 SKIPPED

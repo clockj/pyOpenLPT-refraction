@@ -82,17 +82,16 @@ def log_so3(R: np.ndarray) -> np.ndarray:
     # near pi: the axis from the symmetric part
     B = 0.5 * (R + R.T) - c * np.eye(3)
     k = int(np.argmax(np.diag(B)))
-    axis = B[:, k] / math.sqrt(max(B[k, k], 1e-300))
+    axis = B[:, k] / max(float(np.linalg.norm(B[:, k])), 1e-300)
     if axis @ v < 0:
         axis = -axis
     return axis * th
 
 
 def rvec_of(R: np.ndarray) -> np.ndarray:
-    """OpenCV rotation vector of R."""
-    if cv2 is not None:
-        return cv2.Rodrigues(np.asarray(R, float))[0].ravel()
-    return log_so3(R)
+    """OpenCV rotation vector of R.  `log_so3`, not `cv2.Rodrigues`, which loses up to 2e-5 rad within about 1e-4 rad
+    of a half-turn (tests/plate_wand/p_logmap_check.py)."""
+    return log_so3(np.asarray(R, float))
 
 
 def rot_of(rvec) -> np.ndarray:

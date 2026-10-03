@@ -1,0 +1,10 @@
+seed 1039 camera 3: window 3, incidence 42.5 deg, f 5220, h1 376 mm, sensor 2560x1600
+  candidate: score 72.74; normal error 2.29 deg, camera rotation 1.23 deg, centre 122.2 mm, f +19.84 %, h1 526 mm
+  candidate: score 81.76; normal error 2.66 deg, camera rotation 1.58 deg, centre 188.0 mm, f +23.45 %, h1 387 mm
+  candidate: score 88.13; normal error 1.01 deg, camera rotation 0.56 deg, centre 159.5 mm, f +23.42 %, h1 497 mm
+  the truth resected: score 1.893 (at the truth itself, before resection: 1.917)
+  t = 0.00: normal 0.0 deg from the truth -> resected score 1.893
+  t = 0.25: normal 0.6 deg from the truth -> resected score 3.398
+  t = 0.50: normal 1.1 deg from the truth -> resected score 8.752
+  t = 0.75: normal 1.7 deg from the truth -> resected score 19.24
+  t = 1.00: normal 2.3 deg from the truth -> resected score 36.07

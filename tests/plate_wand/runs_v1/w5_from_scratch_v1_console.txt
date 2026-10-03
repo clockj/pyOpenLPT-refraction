@@ -1,0 +1,65 @@
+W5: 50 random rigs at 0.1 px, 10 at 1 px
+  seed 1000 (0.1 px): 5 cams, 2 win, incidence 7-30 deg, f 1884-3296, 903 frames: same minimum (rms 0.12219 vs 0.12219, max |z| 8.2e-06 cam2.logf, active 9030/9030), 88.5 s
+  seed 1001 (0.1 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 1002 (0.1 px): 6 cams, 1 win, incidence 7-34 deg, f 2740-18656, 1293 frames: same minimum (rms 0.12609 vs 0.12609, max |z| 2.7e-06 cam6.w2, active 15516/15516), 160.5 s
+  seed 1003 (0.1 px): 6 cams, 1 win, incidence 7-44 deg, f 2979-29098, 1406 frames: same minimum (rms 0.12609 vs 0.12609, max |z| 3.6e-06 cam6.w3, active 16871/16871), 159.6 s
+  seed 1004 (0.1 px): 3 cams, 1 win, incidence 2-36 deg, f 10136-19291, 713 frames: same minimum (rms 0.10828 vs 0.10828, max |z| 1.1e-05 cam2.C1, active 4278/4278), 36.8 s
+  seed 1005 (0.1 px): 5 cams, 1 win, incidence 10-30 deg, f 1808-4433, 882 frames: same minimum (rms 0.12090 vs 0.12090, max |z| 4.7e-06 cam3.C1, active 8820/8820), 76.0 s
+  seed 1006 (0.1 px): 5 cams, 1 win, incidence 4-42 deg, f 1592-9404, 782 frames: same minimum (rms 0.12291 vs 0.12291, max |z| 1.0e-05 cam1.logf, active 7820/7820), 79.4 s
+  seed 1007 (0.1 px): 3 cams, 1 win, incidence 20-36 deg, f 5401-12295, 629 frames: same minimum (rms 0.10664 vs 0.10664, max |z| 1.1e-06 cam3.logf, active 3774/3774), 33.5 s
+  seed 1008 (0.1 px): 6 cams, 1 win, incidence 2-39 deg, f 4638-19170, 638 frames: same minimum (rms 0.12545 vs 0.12545, max |z| 3.8e-06 cam5.logf, active 7656/7656), 77.0 s
+  seed 1009 (0.1 px): 2 cams, 1 win, incidence 1-34 deg, f 5581-8812, 1256 frames: DIFFERENT (rms 0.08773 vs 0.08773, max |z| 1.5e-05 cam2.C2, active 5024/5024), 40.6 s
+  seed 1010 (0.1 px): 2 cams, 1 win, incidence 2-44 deg, f 2593-8617, 1412 frames: same minimum (rms 0.08535 vs 0.08535, max |z| 3.4e-06 win1.delta, active 5648/5648), 34.6 s
+  seed 1011 (0.1 px): 6 cams, 1 win, incidence 1-40 deg, f 2421-20190, 1325 frames: same minimum (rms 0.12573 vs 0.12573, max |z| 4.2e-06 win1.b, active 15900/15900), 151.8 s
+  seed 1012 (0.1 px): 4 cams, 1 win, incidence 0-29 deg, f 2203-10921, 1014 frames: same minimum (rms 0.11733 vs 0.11733, max |z| 1.6e-05 cam2.C3, active 8112/8112), 71.2 s
+  seed 1013 (0.1 px): 5 cams, 2 win, incidence 4-32 deg, f 3677-31591, 1221 frames: same minimum (rms 0.12213 vs 0.12213, max |z| 1.2e-04 cam5.C1, active 12210/12210), 340.9 s
+  seed 1014 (0.1 px): 4 cams, 1 win, incidence 12-45 deg, f 1615-7661, 1059 frames: same minimum (rms 0.11696 vs 0.11696, max |z| 1.1e-05 cam2.w1, active 8472/8472), 72.8 s
+  seed 1015 (0.1 px): 3 cams, 1 win, incidence 28-42 deg, f 4228-19125, 1296 frames: same minimum (rms 0.10670 vs 0.10670, max |z| 2.6e-05 cam1.logf, active 7776/7776), 48.2 s
+  seed 1016 (0.1 px): 5 cams, 1 win, incidence 7-35 deg, f 3059-24982, 1132 frames: same minimum (rms 0.12320 vs 0.12320, max |z| 1.3e-05 win1.delta, active 11320/11320), 97.1 s
+  seed 1017 (0.1 px): 6 cams, 1 win, incidence 8-43 deg, f 6670-29540, 1363 frames: same minimum (rms 0.12653 vs 0.12653, max |z| 2.0e-05 cam5.logf, active 16356/16356), 138.4 s
+  seed 1018 (0.1 px): 4 cams, 2 win, incidence 5-30 deg, f 3724-13264, 630 frames: same minimum (rms 0.11737 vs 0.11737, max |z| 4.6e-06 win2.delta, active 5040/5040), 173.5 s
+  seed 1019 (0.1 px): 4 cams, 1 win, incidence 10-44 deg, f 5646-29897, 861 frames: same minimum (rms 0.11698 vs 0.11698, max |z| 1.3e-05 win1.delta, active 6888/6888), 61.7 s
+  seed 1020 (0.1 px): 5 cams, 2 win, incidence 9-43 deg, f 8962-38175, 1106 frames: DIFFERENT (rms 0.12183 vs 0.12183, max |z| 3.1e-04 win2.delta, active 11060/11060), 263.9 s
+  seed 1021 (0.1 px): 4 cams, 1 win, incidence 12-44 deg, f 11632-18646, 1100 frames: same minimum (rms 0.11827 vs 0.11827, max |z| 1.7e-06 cam3.C2, active 8800/8800), 77.6 s
+  seed 1022 (0.1 px): 2 cams, 1 win, incidence 0-39 deg, f 2526-5836, 1394 frames: same minimum (rms 0.08814 vs 0.08814, max |z| 6.2e-07 cam2.C3, active 5576/5576), 42.7 s
+  seed 1023 (0.1 px): 5 cams, 1 win, incidence 26-41 deg, f 2291-11473, 1228 frames: same minimum (rms 0.12208 vs 0.12208, max |z| 1.1e-05 cam1.logf, active 12279/12279), 101.5 s
+  seed 1024 (0.1 px): 5 cams, 1 win, incidence 8-45 deg, f 5344-25758, 687 frames: same minimum (rms 0.12354 vs 0.12354, max |z| 7.7e-06 cam3.w1, active 6870/6870), 94.2 s
+  seed 1025 (0.1 px): 6 cams, 1 win, incidence 6-27 deg, f 1661-10791, 579 frames: same minimum (rms 0.12571 vs 0.12571, max |z| 1.4e-06 win1.b, active 6948/6948), 79.9 s
+  seed 1026 (0.1 px): 5 cams, 1 win, incidence 11-42 deg, f 2090-8828, 908 frames: same minimum (rms 0.12203 vs 0.12203, max |z| 3.4e-06 win1.a, active 9080/9080), 79.7 s
+  seed 1027 (0.1 px): 2 cams, 1 win, incidence 8-23 deg, f 4960-7830, 1122 frames: DIFFERENT (rms 0.08520 vs 0.08520, max |z| 8.7e-05 win1.b, active 4488/4488), 33.5 s
+  seed 1028 (0.1 px): 5 cams, 2 win, incidence 4-44 deg, f 9126-24887, 1185 frames: DIFFERENT (rms 0.12186 vs 0.12186, max |z| 8.2e-05 win2.delta, active 11850/11850), 363.9 s
+  seed 1029 (0.1 px): 6 cams, 1 win, incidence 2-42 deg, f 5248-26429, 914 frames: same minimum (rms 0.12616 vs 0.12616, max |z| 1.3e-05 cam6.logf, active 10968/10968), 145.4 s
+  seed 1030 (0.1 px): 2 cams, 1 win, incidence 13-23 deg, f 15246-34474, 1296 frames: same minimum (rms 0.08812 vs 0.08812, max |z| 1.8e-05 cam1.logf, active 5184/5184), 32.0 s
+  seed 1031 (0.1 px): 3 cams, 2 win, incidence 6-45 deg, f 6388-31672, 598 frames: DIFFERENT (rms 8.50812 vs 0.10921, max |z| 4.0e+03 cam3.w3, active 3485/3588), 189.5 s
+  seed 1032 (0.1 px): 5 cams, 3 win, incidence 5-40 deg, f 6061-35622, 800 frames: DIFFERENT (rms 11.72994 vs 0.12207, max |z| 4.4e+03 win2.a, active 7993/8000), 306.9 s
+  seed 1033 (0.1 px): 3 cams, 2 win, incidence 13-41 deg, f 1653-6587, 1251 frames: same minimum (rms 0.10874 vs 0.10874, max |z| 4.9e-06 cam1.logf, active 7506/7506), 81.3 s
+  seed 1034 (0.1 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 1035 (0.1 px): 5 cams, 1 win, incidence 12-44 deg, f 2007-9237, 1026 frames: same minimum (rms 0.12136 vs 0.12136, max |z| 3.8e-06 cam3.C2, active 10260/10260), 94.5 s
+  seed 1036 (0.1 px): 6 cams, 1 win, incidence 8-41 deg, f 3615-36055, 1374 frames: same minimum (rms 0.12569 vs 0.12569, max |z| 2.2e-05 cam3.logf, active 16488/16488), 157.4 s
+  seed 1037 (0.1 px): 3 cams, 1 win, incidence 25-41 deg, f 9335-16665, 1311 frames: same minimum (rms 0.10738 vs 0.10738, max |z| 6.4e-05 cam1.logf, active 7866/7866), 35.9 s
+  seed 1038 (0.1 px): 6 cams, 1 win, incidence 6-39 deg, f 12048-30353, 921 frames: same minimum (rms 0.12496 vs 0.12496, max |z| 1.7e-06 cam6.logf, active 11052/11052), 106.3 s
+  seed 1039 (0.1 px): 5 cams, 3 win, incidence 13-43 deg, f 1908-22443, 745 frames: DIFFERENT (rms 0.87064 vs 0.12187, max |z| 2.0e+03 cam4.w3, active 7358/7450), 278.2 s
+  seed 1040 (0.1 px): 4 cams, 2 win, incidence 10-26 deg, f 3424-7167, 559 frames: same minimum (rms 0.11751 vs 0.11751, max |z| 3.1e-06 win1.a, active 4472/4472), 142.9 s
+  seed 1041 (0.1 px): 6 cams, 3 win, incidence 24-40 deg, f 2252-14779, 570 frames: DIFFERENT (rms 0.12647 vs 0.12587, max |z| 2.3e+06 win2.delta, active 4560/6840), 346.1 s
+  seed 1042 (0.1 px): 3 cams, 1 win, incidence 31-40 deg, f 4360-12937, 1408 frames: same minimum (rms 0.10794 vs 0.10794, max |z| 6.6e-07 cam3.C1, active 8448/8448), 200.6 s
+  seed 1043 (0.1 px): 3 cams, 1 win, incidence 12-44 deg, f 8698-31778, 663 frames: same minimum (rms 0.10817 vs 0.10817, max |z| 1.2e-05 cam2.C3, active 3978/3978), 33.6 s
+  seed 1044 (0.1 px): 6 cams, 1 win, incidence 3-44 deg, f 1539-9930, 1247 frames: same minimum (rms 0.12543 vs 0.12543, max |z| 1.2e-05 cam1.logf, active 14964/14964), 110.9 s
+  seed 1045 (0.1 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 1046 (0.1 px): 5 cams, 1 win, incidence 9-40 deg, f 2054-8823, 607 frames: DIFFERENT (rms 0.12227 vs 0.12227, max |z| 5.4e-05 cam2.C3, active 6070/6070), 69.6 s
+  seed 1047 (0.1 px): 5 cams, 2 win, incidence 4-38 deg, f 4362-15503, 1084 frames: same minimum (rms 0.12236 vs 0.12236, max |z| 1.5e-05 cam4.C3, active 10840/10840), 137.8 s
+  seed 1048 (0.1 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 1049 (0.1 px): 5 cams, 1 win, incidence 12-43 deg, f 1851-9848, 1256 frames: same minimum (rms 0.12317 vs 0.12317, max |z| 9.6e-06 cam2.C3, active 12560/12560), 96.4 s
+  seed 2000 (1.0 px): 4 cams, 2 win, incidence 7-35 deg, f 1988-11018, 769 frames: same minimum (rms 1.15535 vs 1.15535, max |z| 6.9e-07 cam4.C2, active 6152/6152), 105.8 s
+  seed 2001 (1.0 px): 3 cams, 1 win, incidence 5-32 deg, f 5450-20828, 655 frames: same minimum (rms 1.09123 vs 1.09123, max |z| 2.1e-06 cam1.logf, active 3930/3930), 42.7 s
+  seed 2002 (1.0 px): 6 cams, 3 win, incidence 2-26 deg, f 1723-4659, 970 frames: same minimum (rms 1.25813 vs 1.25813, max |z| 3.6e-07 cam2.C3, active 11640/11640), 162.5 s
+  seed 2003 (1.0 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 2004 (1.0 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 2005 (1.0 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 2006 (1.0 px): 6 cams, 3 win, incidence 2-36 deg, f 6186-23884, 1208 frames: same minimum (rms 1.25540 vs 1.25540, max |z| 3.1e-06 cam2.w2, active 14496/14496), 226.9 s
+  seed 2007 (1.0 px): 5 cams, 2 win, incidence 8-41 deg, f 1539-11484, 644 frames: same minimum (rms 1.22971 vs 1.22971, max |z| 1.6e-06 win1.a, active 6440/6440), 100.2 s
+  seed 2008 (1.0 px): ERROR TypeError("'NoneType' object is not subscriptable")
+  seed 2009 (1.0 px): 5 cams, 1 win, incidence 10-35 deg, f 1551-6411, 1164 frames: same minimum (rms 1.23051 vs 1.23051, max |z| 1.7e-06 cam5.logf, active 11639/11639), 72.1 s
+0.1 px: 37/50 reached the same minimum as the truth-started fit; time median 84.9 s, max 363.9 s
+1.0 px: 6/10 reached the same minimum as the truth-started fit; time median 61.5 s, max 226.9 s
+wall time 411 s
+W5: FAIL (see the runs marked DIFFERENT / ERROR)

@@ -1,0 +1,66 @@
+W4: 1000 runs (rigs A-E; 10 trials per level)
+normal:
+      5: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+     10: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+     20: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+     30: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+     45: A 10/10  B 10/10  C 10/10  D 8/10  E 10/10
+     60: A 10/10  B 10/10  C 10/10  D 0/10  E 10/10
+distance:
+   -0.9: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+   -0.6: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+   -0.3: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+   -0.1: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+    0.1: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+    0.3: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+    0.6: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+    0.9: A 10/10  B 10/10  C 10/10  D 10/10  E 10/10
+f:
+    0.1: A 10/10  B 10/10  C 10/10  D 10/10  E 9/10
+    0.2: A 10/10  B 10/10  C 10/10  D 10/10  E 7/10
+    0.4: A 10/10  B 10/10  C 9/10  D 10/10  E 4/10
+rotation:
+      5: A 8/10  B 10/10  C 10/10  D 10/10  E 6/10
+     10: A 7/10  B 10/10  C 5/10  D 9/10  E 1/10
+     20: A 7/10  B 6/10  C 3/10  D 7/10  E 0/10
+  not converged: rig A rotation 5 trial 4: rms diff 5.3e+00, max |z| 6.81e+03 (cam2.w3), active 3824/8000, coarse 30.006 px
+  not converged: rig A rotation 5 trial 6: rms diff 5.2e+00, max |z| 2.64e+03 (cam2.w1), active 3828/8000, coarse 30.005 px
+  not converged: rig A rotation 10 trial 4: rms diff 5.1e+00, max |z| 6.51e+03 (cam4.w3), active 3936/8000, coarse 30.004 px
+  not converged: rig A rotation 10 trial 5: rms diff 1.0e+00, max |z| 4.37e+03 (cam3.w3), active 8000/8000, coarse 42.426 px
+  not converged: rig A rotation 10 trial 7: rms diff 1.0e+00, max |z| 9.39e+03 (cam3.w3), active 8000/8000, coarse 42.426 px
+  not converged: rig A rotation 20 trial 3: rms diff 4.1e-02, max |z| 1.03e+05 (cam4.w3), active 6000/8000, coarse 21.213 px
+  not converged: rig A rotation 20 trial 5: rms diff 1.0e+00, max |z| 1.31e+04 (cam4.w3), active 8000/8000, coarse 42.426 px
+  not converged: rig A rotation 20 trial 6: rms diff 7.7e-02, max |z| 5.88e+04 (cam3.w2), active 6001/8000, coarse 14.731 px
+  not converged: rig B rotation 20 trial 0: rms diff 4.0e+01, max |z| 1.24e+04 (cam2.w3), active 5998/8000, coarse 21.615 px
+  not converged: rig B rotation 20 trial 5: OverflowError('math range error')
+  not converged: rig B rotation 20 trial 6: OverflowError('math range error')
+  not converged: rig B rotation 20 trial 7: rms diff 9.9e+00, max |z| 2.42e+03 (cam4.w3), active 7870/8000, coarse 1.348 px
+  not converged: rig C f 0.4 trial 1: rms diff 2.2e+02, max |z| 2.47e+02 (cam1.logf), active 5963/6000, coarse 23.548 px
+  not converged: rig C rotation 10 trial 1: rms diff 1.0e+00, max |z| 1.88e+04 (cam3.w3), active 6000/6000, coarse 42.426 px
+  not converged: rig C rotation 10 trial 3: rms diff 1.0e+00, max |z| 1.97e+04 (cam3.w3), active 6000/6000, coarse 5136.310 px
+  not converged: rig C rotation 10 trial 4: rms diff 1.0e+00, max |z| 6.15e+03 (cam2.w1), active 6000/6000, coarse 42.426 px
+  not converged: rig C rotation 10 trial 5: rms diff 1.0e+00, max |z| 1.32e+04 (cam3.w3), active 6000/6000, coarse 42.426 px
+  not converged: rig C rotation 10 trial 7: rms diff 1.0e+00, max |z| 2.17e+04 (cam2.w3), active 0/6000, coarse 42.426 px
+  not converged: rig C rotation 20 trial 0: rms diff 1.0e+00, max |z| 5.20e+04 (cam3.w3), active 6000/6000, coarse 42.426 px
+  not converged: rig C rotation 20 trial 1: rms diff 2.6e+00, max |z| 1.30e+03 (cam2.C1), active 5785/6000, coarse 1.573 px
+  not converged: rig C rotation 20 trial 2: rms diff 1.0e+00, max |z| 4.55e+04 (cam2.w3), active 6000/6000, coarse 42.426 px
+  not converged: rig C rotation 20 trial 4: OverflowError('math range error')
+  not converged: rig C rotation 20 trial 6: rms diff 1.0e+00, max |z| 2.66e+04 (cam2.w1), active 0/6000, coarse 42.426 px
+  not converged: rig C rotation 20 trial 7: OverflowError('math range error')
+  not converged: rig C rotation 20 trial 8: rms diff 1.0e+00, max |z| 5.37e+04 (cam2.w3), active 6000/6000, coarse 42.426 px
+  not converged: rig D normal 45 trial 3: rms diff 1.7e+02, max |z| 4.14e+03 (win1.b), active 3988/6000, coarse 29.040 px
+  not converged: rig D normal 45 trial 7: rms diff 1.8e+01, max |z| 8.19e+03 (cam2.w3), active 3844/6000, coarse 24.550 px
+  not converged: rig D normal 60 trial 0: rms diff 1.2e+01, max |z| 8.64e+05 (cam2.logf), active 3780/6000, coarse 24.521 px
+  not converged: rig D normal 60 trial 1: rms diff 1.0e+00, max |z| 4.13e+03 (win1.b), active 6000/6000, coarse 42.426 px
+  not converged: rig D normal 60 trial 2: rms diff 1.0e+00, max |z| 4.45e+03 (win1.a), active 6000/6000, coarse 42.426 px
+  not converged: rig D normal 60 trial 3: rms diff 7.4e+01, max |z| 3.93e+03 (win1.a), active 3964/6000, coarse 25.508 px
+  not converged: rig D normal 60 trial 4: rms diff 4.6e+02, max |z| 4.90e+03 (cam2.w1), active 3396/6000, coarse 61.736 px
+  not converged: rig D normal 60 trial 5: rms diff 1.2e+01, max |z| 1.21e+06 (cam2.logf), active 3780/6000, coarse 24.521 px
+  not converged: rig D normal 60 trial 6: rms diff 1.0e+00, max |z| 4.78e+03 (win1.b), active 6000/6000, coarse 42.426 px
+  not converged: rig D normal 60 trial 7: rms diff 1.0e+00, max |z| 4.39e+03 (win1.b), active 6000/6000, coarse 42.426 px
+  not converged: rig D normal 60 trial 8: rms diff 1.0e+00, max |z| 4.71e+03 (win1.b), active 6000/6000, coarse 42.426 px
+  not converged: rig D normal 60 trial 9: rms diff 1.0e+00, max |z| 4.89e+03 (win1.a), active 6000/6000, coarse 42.426 px
+  not converged: rig D rotation 10 trial 3: rms diff 1.0e+00, max |z| 6.06e+03 (cam3.w3), active 6000/6000, coarse 42.426 px
+  not converged: rig D rotation 20 trial 3: rms diff 5.6e+02, max |z| 1.64e+04 (cam2.w1), active 3980/6000, coarse 53.953 px
+  not converged: rig D rotation 20 trial 4: rms diff 1.0e+00, max |z| 1.97e+04 (cam3.w3), active 6000/6000, coarse 42.426 px
+time per run: median 12.3 s, max 176.3 s; wall 598 s

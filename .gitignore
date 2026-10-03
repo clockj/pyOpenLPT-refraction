@@ -86,6 +86,13 @@ tests/**
 !tests/cylinder_wand/
 !tests/cylinder_wand/**
 tests/cylinder_wand/**/__pycache__/
+# wand calibration through flat windows: the pytest subset, and the test campaign under tests/plate_wand/ (the W6
+# case folders hold regenerable data and the GUI's working files: w6_vs_gui.py prepare/run rebuilds them)
+!tests/test_plate_wand.py
+!tests/plate_wand/
+!tests/plate_wand/**
+tests/plate_wand/**/__pycache__/
+tests/plate_wand/w6_cases/
 
 test/inputs/test_LPTNetBenchmark
 docs/

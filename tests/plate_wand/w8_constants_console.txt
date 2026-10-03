@@ -1,0 +1,34 @@
+W8: 30 fits in 37 s wall
+rig A: clean fit rms 0.1184 px; 3-D shape 4.34 um, wand +0.60 um
+  clean     L fixed        : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 4.3 um, wand +0.6 um mean, 1.4 um RMS
+  clean     L free         : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 29297.6 um, wand -14805.9 um mean, 14805.9 um RMS; L fitted 10.1939 mm (true 25.0000) +- 13.1700: -1.1 sigma
+  thickness L fixed        : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 4.3 um, wand +0.6 um mean, 1.4 um RMS
+  thickness L free         : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 27280.3 um, wand -13786.4 um mean, 13786.4 um RMS; L fitted 11.2133 mm (true 25.0000) +- 13.7146: -1.0 sigma
+  water     L fixed        : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 5.4 um, wand +0.7 um mean, 2.1 um RMS
+  water     L free         : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 114061.6 um, wand +57642.7 um mean, 57642.7 um RMS; L fitted 82.6404 mm (true 25.0000) +- 17.7882: +3.2 sigma
+  wand      L fixed        : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 50.8 um, wand +25.6 um mean, 25.6 um RMS
+  wand      L free         : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 29297.9 um, wand -14806.0 um mean, 14806.0 um RMS; L fitted 10.1937 mm (true 25.0000) +- 13.1613: -1.1 sigma
+  k1        L fixed        : rms 0.1187 px (x1.003), noise per camera 0.101, 0.100, 0.103, 0.101 px, active 8000/8000; 3-D shape 8.3 um, wand +1.1 um mean, 5.1 um RMS
+  k1        L free         : rms 0.1187 px (x1.003), noise per camera 0.101, 0.100, 0.103, 0.101 px, active 8000/8000; 3-D shape 129849.9 um, wand +65622.6 um mean, 65622.6 um RMS; L fitted 90.6188 mm (true 25.0000) +- 17.8508: +3.7 sigma
+  k1_fitted L fixed        : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 4.3 um, wand +0.6 um mean, 1.5 um RMS; k1 fitted 0.0513, 0.0469, 0.0584, 0.0542
+  k1_fitted L free         : rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 31171.3 um, wand -15752.8 um mean, 15752.8 um RMS; L fitted 9.2470 mm (true 25.0000) +- 12.0075: -1.3 sigma; k1 fitted 0.0517, 0.0472, 0.0587, 0.0545
+  thickness L fixed scratch: rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 4.3 um, wand +0.6 um mean, 1.4 um RMS
+  water     L fixed scratch: rms 0.1184 px (x1.000), noise per camera 0.101, 0.099, 0.102, 0.101 px, active 8000/8000; 3-D shape 5.4 um, wand +0.7 um mean, 2.1 um RMS
+  k1        L fixed scratch: rms 0.1187 px (x1.003), noise per camera 0.101, 0.100, 0.103, 0.101 px, active 8000/8000; 3-D shape 8.3 um, wand +1.1 um mean, 5.1 um RMS
+rig D: clean fit rms 0.1102 px; 3-D shape 5.44 um, wand -0.42 um
+  clean     L fixed        : rms 0.1102 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 5.4 um, wand -0.4 um mean, 1.8 um RMS
+  clean     L free         : rms 0.1101 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 20396.3 um, wand -10307.6 um mean, 10307.6 um RMS; L fitted 14.6926 mm (true 25.0000) +- 4.9810: -2.1 sigma
+  thickness L fixed        : rms 0.1102 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 5.3 um, wand -0.4 um mean, 1.8 um RMS
+  thickness L free         : rms 0.1101 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 17489.0 um, wand -8838.3 um mean, 8838.3 um RMS; L fitted 16.1619 mm (true 25.0000) +- 5.4469: -1.6 sigma
+  water     L fixed        : rms 0.1101 px (x1.000), noise per camera 0.103, 0.101, 0.101 px, active 6000/6000; 3-D shape 5.3 um, wand -0.3 um mean, 2.4 um RMS
+  water     L free         : rms 0.1101 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 13741.6 um, wand +6944.5 um mean, 6944.5 um RMS; L fitted 31.9449 mm (true 25.0000) +- 15.8199: +0.4 sigma
+  wand      L fixed        : rms 0.1102 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 49.1 um, wand +24.6 um mean, 24.6 um RMS
+  wand      L free         : rms 0.1101 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 20396.3 um, wand -10307.6 um mean, 10307.6 um RMS; L fitted 14.6926 mm (true 25.0000) +- 4.9813: -2.1 sigma
+  k1        L fixed        : rms 0.1106 px (x1.004), noise per camera 0.104, 0.102, 0.101 px, active 6000/6000; 3-D shape 7.3 um, wand -0.0 um mean, 4.4 um RMS
+  k1        L free         : rms 0.1106 px (x1.004), noise per camera 0.104, 0.102, 0.101 px, active 6000/6000; 3-D shape 17421.3 um, wand -8803.8 um mean, 8803.8 um RMS; L fitted 16.1962 mm (true 25.0000) +- 5.9931: -1.5 sigma
+  k1_fitted L fixed        : rms 0.1101 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 5.5 um, wand -0.4 um mean, 1.8 um RMS; k1 fitted 0.0542, 0.0429, 0.0573
+  k1_fitted L free         : rms 0.1101 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 20396.6 um, wand -10307.7 um mean, 10307.7 um RMS; L fitted 14.6925 mm (true 25.0000) +- 4.9827: -2.1 sigma; k1 fitted 0.0544, 0.0432, 0.0576
+  thickness L fixed scratch: rms 0.1102 px (x1.000), noise per camera 0.104, 0.101, 0.101 px, active 6000/6000; 3-D shape 5.3 um, wand -0.4 um mean, 1.8 um RMS
+  water     L fixed scratch: rms 0.1101 px (x1.000), noise per camera 0.103, 0.101, 0.101 px, active 6000/6000; 3-D shape 5.3 um, wand -0.3 um mean, 2.4 um RMS
+  k1        L fixed scratch: rms 0.1106 px (x1.004), noise per camera 0.104, 0.102, 0.101 px, active 6000/6000; 3-D shape 7.3 um, wand -0.0 um mean, 4.4 um RMS
+W8 done (a study: what each wrong constant does; no pass/fail criterion)

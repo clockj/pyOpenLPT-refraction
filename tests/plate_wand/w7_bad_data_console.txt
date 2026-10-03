@@ -1,0 +1,14 @@
+W7: 12 calibrations from scratch in 180 s wall
+rig A, clean   : rms 0.1173 px, 8000/8000 active; spoiled 0 rejected 0, good rejected 0; vs the clean fit: z RMS 0.00 (expected 0.00), max 0.00; vs the truth: z RMS 1.50; same minimum as from the truth: True; 28 s
+rig A, outliers: rms 0.1167 px, 7834/8000 active; spoiled 160 rejected 160, good rejected 6; vs the clean fit: z RMS 0.16 (expected 0.17), max 0.29; vs the truth: z RMS 1.52; same minimum as from the truth: True; 67 s
+rig A, swapped : rms 0.1172 px, 7920/8000 active; spoiled 80 rejected 80, good rejected 0; vs the clean fit: z RMS 0.08 (expected 0.13), max 0.16; vs the truth: z RMS 1.49; same minimum as from the truth: True; 42 s
+rig A, missing : rms 0.1146 px, 7180/7180 active; spoiled 0 rejected 0, good rejected 0; vs the clean fit: z RMS 0.39 (expected 0.39), max 0.68; vs the truth: z RMS 1.30; same minimum as from the truth: True; 26 s
+rig A, noisy   : rms 0.3642 px, 7999/8000 active; spoiled 0 rejected 0, good rejected 1; vs the clean fit: z RMS 0.78 (expected -), max 2.73; vs the truth: z RMS 1.51; same minimum as from the truth: True; 36 s; noise per camera 0.099, 0.099, 0.503, 0.102 px
+rig A, partial : rms 0.1072 px, 6000/6000 active; spoiled 0 rejected 0, good rejected 0; vs the clean fit: z RMS 0.36 (expected 0.67), max 0.74; vs the truth: z RMS 1.33; same minimum as from the truth: True; 25 s; stage-1 subset [1, 2, 3], added by DLT [[0]]
+rig B, clean   : rms 0.1174 px, 8000/8000 active; spoiled 0 rejected 0, good rejected 0; vs the clean fit: z RMS 0.00 (expected 0.00), max 0.00; vs the truth: z RMS 1.07; same minimum as from the truth: True; 86 s
+rig B, outliers: rms 0.1168 px, 7840/8000 active; spoiled 160 rejected 160, good rejected 0; vs the clean fit: z RMS 0.17 (expected 0.16), max 0.47; vs the truth: z RMS 1.09; same minimum as from the truth: True; 139 s
+rig B, swapped : rms 0.1173 px, 7920/8000 active; spoiled 80 rejected 80, good rejected 0; vs the clean fit: z RMS 0.11 (expected 0.13), max 0.22; vs the truth: z RMS 1.04; same minimum as from the truth: True; 131 s
+rig B, missing : rms 0.1147 px, 7180/7180 active; spoiled 0 rejected 0, good rejected 0; vs the clean fit: z RMS 0.36 (expected 0.44), max 0.84; vs the truth: z RMS 0.97; same minimum as from the truth: True; 82 s
+rig B, noisy   : rms 0.3641 px, 7999/8000 active; spoiled 0 rejected 0, good rejected 1; vs the clean fit: z RMS 0.47 (expected -), max 1.15; vs the truth: z RMS 0.79; same minimum as from the truth: True; 92 s; noise per camera 0.102, 0.097, 0.502, 0.103 px
+rig B, partial : rms 0.1074 px, 5999/6000 active; spoiled 0 rejected 0, good rejected 1; vs the clean fit: z RMS 1.11 (expected 0.72), max 2.64; vs the truth: z RMS 1.24; same minimum as from the truth: True; 173 s; stage-1 subset None, added by DLT []   <-- FAIL
+W7: FAIL
