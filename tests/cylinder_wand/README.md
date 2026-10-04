@@ -21,6 +21,31 @@ experiment.
 ## 1. Progress log
 
 **2026-10-04**
+- **Double images during the fit (your question for the paper's §9.1).** You keep the calibration to observations in
+  the single-image region. No code was changed, by your decision. The plan of the paper's variant
+  (`cases/cyl_wand_paper/2026-10-03-plan.md`) was amended instead; its section 7 has the details.
+  - **The library's guard has a gap,** found on 3 Oct and not fixed (section 6, item 8).
+    - `multi_image_guard` checks only points beyond r_c at zero tilt, and drops an observation only for a second
+      image on the sensor within 30 px.
+    - r_c shrinks for tilted rays: 75.62 mm at C_z = 0, 74.04 at 0.3, 70.65 at 0.5 (checked with SymPy).
+    - No wand rig so far is affected. C_z ≈ 0.02 leaves a 7 µm band, and the reference rig's wand ends stay within
+      31 mm of the axis.
+  - **What a fit does when a wand end leaves the region mid-way** (scratch probe: cam1 of the reference rig, 85 mm from
+    the axis):
+    - **In a two-image band** it keeps following its image. The new image appears about 1,400 px away.
+    - **In a no-image band** the projection fails and the fit refuses the step, as the flat-wall fit does at a wall.
+      The band's edge images at the tube's outline, at u ≈ 5,135 px, far off the 2,600 px sensor. A fit would need a
+      huge residual to get there.
+    - **Beyond the inner wall** `cyl_model.project` continues the ray, but the C++ projection does not look outside
+      the water. The paper's variant would therefore refuse steps that the library accepts.
+  - **The amended plan:**
+    - the single-image rule runs once, since a census repeated inside the iterations could walk the fit away from the
+      data;
+    - a recount after the last adjustment warns on drops;
+    - the residual falls back to the library's Newton where the C++ finds no image;
+    - P0 tests starts across the wall and the bands.
+
+    It still waits for your approval.
 - **An illustrated guide to both wand calibrations, tube and flat walls:**
   `modules/camera_calibration/curved_calibration/guide/WAND_CALIBRATION_GUIDE.html`, also at
   https://claude.ai/artifact/BR616e7TfeF63xsX4rrA46 (private until you share it).
@@ -32,7 +57,8 @@ experiment.
     - **Start search:** its replay of `bootstrap`'s placement search matches the library.
     - **The stretch ratio** puts the start's cameras 20–40 % too far away, even with the axis in its true place.
       The ratio-against-distance curve flattens with distance, and stages 3–4 then correct it.
-- **The flat-wall calibration's "pinned" failure cannot happen through a tube** (checked for your question).
+- **The flat-wall calibration's "pinned" failure cannot happen at the tube's wall** (checked for your question). A
+  no-image band can still stop a step, and the paper's variant differs at the wall: see the entry above.
   - On the plate, a fit can freeze with a wand end on a wall's water side: the model refuses that point, so the fit
     refuses every step.
   - `cyl_model.project` refuses no point at the tube's wall. Points up to 102 mm from the axis still project; the
@@ -229,7 +255,8 @@ The output frame is the tube frame:
 
 5. **Bad data are handled** (T8, T11d).
    - Gross outliers and swapped A/B ends were all rejected. The answer stayed within 0.8σ of the clean-data fit.
-   - Points with a second image within 30 px (near the wall) are dropped.
+   - Points with a second image within 30 px (near the wall) are dropped. Only points beyond r_c at zero tilt are
+     checked (section 6, item 8).
    - With occasional large errors the error bars stay honest.
 6. **A noisier camera is handled automatically since T12.**
    - Before T12, one camera at 5× the noise cost every camera 1.7–2.1× in precision, because the cameras share the
@@ -367,6 +394,10 @@ None of these is started; each needs your go-ahead.
 7. **Port the flat-window calibration's two `refine` fixes** (progress log, 2026-10-02): the robust re-triangulation
    of a frame before re-admission, and the two-camera noise weights. Each is a few lines in `cylinder_wand.py`, with
    T8/T11d/T12 rerun.
+8. **The double-image guard's gap** (progress log, 2026-10-04; `cases/cyl_wand_paper/README.md`).
+   - `multi_image_guard` checks only points beyond r_c at zero tilt. The fix is to take the census of every
+     observation, as the paper's variant will: a few seconds per round.
+   - Not urgent: no wand rig so far is affected. On 4 Oct you chose to leave the code as it is for now.
 
 ## 7. Files
 
