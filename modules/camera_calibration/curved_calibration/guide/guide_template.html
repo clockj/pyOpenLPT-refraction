@@ -1,0 +1,1628 @@
+<title>Refractive Wand Calibration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: the lab-report look of the T0 case page, on the same cool optical-bench ground. One reading column (about
+   70ch); figures run to the full 1080px frame. Flat walls are blue, the tube amber, shared stages neutral. */
+:root {
+  --bg: #f2f5f6;
+  --surface: #ffffff;
+  --sunk: #f6f8f9;
+  --ink: #142029;
+  --muted: #55636f;
+  --rule: #d4dde3;
+  --accent: #0c6a8a;
+  --accent-soft: #e0eef3;
+  --plate: #2f6fd0;
+  --plate-soft: #e6eefb;
+  --tube: #b45f06;
+  --tube-soft: #f9eddf;
+  --right: #13875c;
+  --right-soft: #dcf1e7;
+  --wrong: #d1452b;
+  --wrong-soft: #fbe5df;
+  --water: #e3f0f5;
+  --wall: #b9c9d3;
+  --code-bg: #e8eff2;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151b; --surface: #151f28; --sunk: #111a22; --ink: #e3eaef; --muted: #9babb8; --rule: #2a3845;
+    --accent: #5db7d5; --accent-soft: #12303d; --plate: #6f9ff0; --plate-soft: #16253f; --tube: #e39a4f;
+    --tube-soft: #33230f; --right: #2fa676; --right-soft: #113628; --wrong: #e0553a; --wrong-soft: #421d16;
+    --water: #10283a; --wall: #3c5263; --code-bg: #1b2833;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151b; --surface: #151f28; --sunk: #111a22; --ink: #e3eaef; --muted: #9babb8; --rule: #2a3845;
+  --accent: #5db7d5; --accent-soft: #12303d; --plate: #6f9ff0; --plate-soft: #16253f; --tube: #e39a4f;
+  --tube-soft: #33230f; --right: #2fa676; --right-soft: #113628; --wrong: #e0553a; --wrong-soft: #421d16;
+  --water: #10283a; --wall: #3c5263; --code-bg: #1b2833;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.page { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 44px 80px; display: grid; gap: 68px; }
+.prose { max-width: 70ch; display: grid; gap: 12px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; text-wrap: balance; color: var(--ink); }
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 2.6vw, 1.85rem); font-weight: 600; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+code { font: 500 0.86em/1 var(--mono); background: var(--code-bg); padding: 0.14em 0.36em; border-radius: 4px; overflow-wrap: anywhere; }
+b, strong { font-weight: 600; }
+.eyebrow { font: 600 0.76rem/1.3 var(--display); letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+section { display: grid; gap: 22px; scroll-margin-top: 16px; }
+.prose ul, .prose ol { margin: 0; padding-left: 1.25em; display: grid; gap: 8px; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* masthead */
+.masthead { display: grid; gap: 18px; padding-bottom: 30px; border-bottom: 1px solid var(--rule); }
+.lede { font-size: 1.13rem; max-width: 68ch; }
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 28px; margin-top: 6px; }
+.glance > div { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.glance h3 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.glance p { font-size: 0.95rem; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+nav.toc a { font: 500 0.84rem/1.2 var(--body); color: var(--ink); text-decoration: none; background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; }
+nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+nav.toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+nav.toc a .no { font-family: var(--mono); color: var(--muted); margin-right: 4px; }
+
+/* lanes */
+.lane { display: inline-flex; align-items: center; gap: 6px; font: 600 0.72rem/1.2 var(--display); letter-spacing: 0.07em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.lane.both { background: var(--code-bg); color: var(--muted); }
+.lane.plate { background: var(--plate-soft); color: var(--plate); }
+.lane.tube { background: var(--tube-soft); color: var(--tube); }
+.sec-head { display: grid; gap: 10px; }
+.sec-head .tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* figures */
+.fig { margin: 0; display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 10px; padding: 18px 18px 16px; min-width: 0; }
+.fig figcaption { font-size: 0.92rem; color: var(--muted); max-width: 92ch; }
+.fig figcaption b { color: var(--ink); }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.fig svg { display: block; width: 100%; height: auto; }
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 18px 26px; }
+.panels > div { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.panel-title { font: 600 0.95rem/1.3 var(--display); letter-spacing: 0.02em; }
+.wide-svg svg { min-width: 560px; }
+.mid-svg svg { min-width: 330px; }
+.readout { font-size: 0.9rem; color: var(--ink); min-height: 2.9em; }
+.readout b { font-variant-numeric: tabular-nums; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.controls label { font-size: 0.88rem; color: var(--muted); display: inline-flex; align-items: center; gap: 10px; }
+input[type="range"] { accent-color: var(--accent); width: min(260px, 60vw); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+button.chip { font: 500 0.84rem/1.2 var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+button.chip:hover { border-color: var(--accent); }
+button.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.86rem; color: var(--ink); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend svg { width: 26px; height: 12px; flex: none; }
+.fig-error { color: var(--wrong); font-size: 0.9rem; }
+
+/* svg drawing */
+svg text { fill: var(--ink); font-family: var(--body); font-size: 12px; }
+svg .tick { font: 400 11.5px var(--mono); fill: var(--muted); }
+svg .axis-title { font-size: 12px; fill: var(--muted); }
+svg .lbl { font: 600 12.5px var(--display); fill: var(--ink); letter-spacing: 0.02em; }
+svg .lbl-m { font: 500 11.5px var(--body); fill: var(--muted); }
+svg .lbl-s { font: 500 11px var(--mono); fill: var(--muted); }
+svg .grid-line { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 4; }
+svg .axis { stroke: var(--muted); stroke-width: 1; }
+svg .curve { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+svg .thin { stroke-width: 1.4; }
+svg .dashed { stroke-dasharray: 6 4; }
+svg .c-plate { stroke: var(--plate); }
+svg .c-tube { stroke: var(--tube); }
+svg .c-ink { stroke: var(--ink); }
+svg .c-muted { stroke: var(--muted); }
+svg .c-accent { stroke: var(--accent); }
+svg .c-right { stroke: var(--right); }
+svg .c-wrong { stroke: var(--wrong); }
+svg .f-plate { fill: var(--plate); }
+svg .f-tube { fill: var(--tube); }
+svg .f-ink { fill: var(--ink); }
+svg .f-muted { fill: var(--muted); }
+svg .f-accent { fill: var(--accent); }
+svg .f-right { fill: var(--right); }
+svg .f-wrong { fill: var(--wrong); }
+svg .f-surface { fill: var(--surface); }
+svg .ring { stroke: var(--surface); stroke-width: 1.5; }
+svg .water { fill: var(--water); }
+svg .wall { fill: var(--wall); }
+svg .air { fill: var(--surface); }
+svg .ghost { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; }
+svg .soft-plate { fill: var(--plate-soft); }
+svg .soft-tube { fill: var(--tube-soft); }
+svg .soft-accent { fill: var(--accent-soft); }
+svg .cell { stroke: var(--surface); stroke-width: 1; }
+svg .pick { cursor: pointer; outline: none; }
+svg .pick:focus-visible circle, svg .pick:hover circle { stroke: var(--ink); stroke-width: 2; }
+svg .sel-ring { fill: none; stroke: var(--ink); stroke-width: 2; }
+svg .pt-plate { fill: var(--plate); fill-opacity: 0.32; }
+svg .on-dark { fill: var(--surface); }
+svg .op { font: 600 22px var(--display); fill: var(--muted); }
+svg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+svg .hollow-accent { fill: var(--surface); stroke: var(--accent); stroke-width: 1.8; }
+svg .hollow-plate { fill: var(--surface); stroke: var(--plate); stroke-width: 1.8; }
+
+/* the flow chart */
+.flow { display: grid; justify-items: stretch; }
+.flow .row { display: grid; gap: 14px; }
+.flow .row.split { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+.flow .arrow { height: 30px; position: relative; }
+.flow .arrow::before { content: ""; position: absolute; left: 50%; top: 4px; bottom: 9px; width: 2px; margin-left: -1px;
+  background: var(--muted); }
+.flow .arrow::after { content: ""; position: absolute; left: 50%; bottom: 2px; margin-left: -6px; border: 6px solid transparent;
+  border-top: 8px solid var(--muted); border-bottom: 0; }
+.flow .within { font: 600 0.72rem/1.2 var(--display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  padding: 10px 0 6px; text-align: center; }
+.node { display: grid; gap: 6px; align-content: start; text-decoration: none; color: var(--ink); background: var(--sunk);
+  border: 1px solid var(--rule); border-top: 4px solid var(--muted); border-radius: 8px; padding: 12px 15px; min-width: 0; }
+a.node:hover { border-color: var(--accent); }
+a.node:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.node .head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.node .no { font: 700 0.95rem/1 var(--mono); color: var(--muted); }
+.node .title { font: 600 1.06rem/1.25 var(--display); }
+.node .what { font-size: 0.92rem; line-height: 1.5; }
+.node .fn { font-size: 0.82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 8px; }
+.node.input { border-top-color: var(--accent); background: var(--accent-soft); }
+.node.plate { border-top-color: var(--plate); background: var(--plate-soft); }
+.node.tube { border-top-color: var(--tube); background: var(--tube-soft); }
+.node.extra { border-style: dashed; border-top-style: solid; }
+.node .lane { justify-self: start; }
+
+/* the 3-D view */
+.rig3d { position: relative; width: 100%; height: 560px; border-radius: 8px; overflow: hidden; background: var(--surface);
+  border: 1px solid var(--rule); touch-action: none; cursor: grab; }
+.rig3d:active { cursor: grabbing; }
+.rig3d canvas { display: block; width: 100%; height: 100%; }
+.labels3d { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.label3d { position: absolute; left: 0; top: 0; font: 600 13px/1 var(--display); color: var(--ink); white-space: nowrap;
+  text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 0 3px var(--surface); }
+.label3d.dim { color: var(--muted); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* tables */
+.table-frame { border: 1px solid var(--rule); border-radius: 10px; overflow-x: auto; background: var(--surface); }
+table.data { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 0.9rem; line-height: 1.5; }
+table.data th, table.data td { text-align: left; vertical-align: top; padding: 10px 13px; border-bottom: 1px solid var(--rule); }
+table.data thead th { font: 600 0.78rem/1.3 var(--display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  border-bottom: 2px solid var(--rule); }
+table.data thead th.plate { color: var(--plate); }
+table.data thead th.tube { color: var(--tube); }
+table.data thead th code { text-transform: none; letter-spacing: 0; }
+table.data tbody th { font-weight: 600; min-width: 11em; }
+table.data td.num, table.data th.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+table.data tbody tr:last-child > * { border-bottom: 0; }
+table.data code { font-size: 0.82em; }
+.tag { display: inline-block; font: 600 0.72rem/1.2 var(--display); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 999px; white-space: nowrap; }
+.tag.good { background: var(--right-soft); color: var(--right); }
+.tag.bad { background: var(--wrong-soft); color: var(--wrong); }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; max-width: 72ch; display: grid; gap: 8px; }
+.callout.plate { border-color: var(--plate); }
+.callout.tube { border-color: var(--tube); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px 34px; }
+.cols > div { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.cols ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+footer { border-top: 1px solid var(--rule); padding-top: 22px; font-size: 0.88rem; color: var(--muted); display: grid; gap: 10px; }
+
+@media (max-width: 560px) {
+  body { font-size: 15px; }
+  .page { gap: 52px; padding-block: 28px 60px; padding-inline: 16px; }
+  .fig { padding: 14px 12px; }
+  .rig3d { height: 420px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+<!--BODY-->
+<main class="page">
+
+<header class="masthead">
+  <p class="eyebrow">pyOpenLPT · camera_calibration/curved_calibration · plate_wand.py and cylinder_wand.py</p>
+  <h1>How the wand calibration sees through a wall or a tube</h1>
+  <p class="lede">pyOpenLPT can calibrate cameras that look into water through a flat wall (the PINPLATE camera model)
+    or through a water-filled tube (PINCYL) from a wand alone: two balls a known distance apart, waved through the
+    volume. Nothing about the cameras is entered, not where they are, where they point or their focal lengths. This
+    page follows both calibrations from the ball detections to the cameras, stage by stage. The flat-wall examples come
+    from the real tank run 20260727/T0; the tube examples are a synthetic three-camera rig around the 20260930 tube.</p>
+  <div class="glance">
+    <div><h3>What goes in</h3><p>The centres of the two balls in every camera and frame, the wand's length, each
+      image's size, and the window: for flat walls the plate's thickness and refractive indices and which camera
+      looks through which wall; for a tube its radii and indices.</p></div>
+    <div><h3>What comes out</h3><p>Each camera's position, orientation, focal length and lens distortion (k1); for
+      flat walls also each wall's position and angle; error bars; pyOpenLPT camera files (PINPLATE or PINCYL) and a
+      report.</p></div>
+    <div><h3>How</h3><p>A rough start by linear algebra, then a refractive start that is different for walls and
+      tubes, then one least-squares fit of every detection in pixels.</p></div>
+  </div>
+  <nav class="toc" aria-label="Sections">
+    <a href="#flow">Pipeline</a><a href="#rigs">The rigs in 3-D</a><a href="#windows">Wall or tube</a>
+    <a href="#stage0"><span class="no">0</span>Data</a><a href="#stage1"><span class="no">1</span>Affine start</a>
+    <a href="#stage2"><span class="no">2</span>Refractive start</a><a href="#stage3"><span class="no">3</span>Coarse fit</a>
+    <a href="#stage4"><span class="no">4</span>Final fit</a><a href="#stage5"><span class="no">5</span>Output</a>
+    <a href="#differences">Differences</a><a href="#code">In the code</a>
+  </nav>
+</header>
+
+<section id="flow">
+  <div class="sec-head">
+    <h2>The pipeline</h2>
+  </div>
+  <div class="prose">
+    <p>Both calibrations run the same six stages with the same machinery. They differ where the window enters: how
+      the start places the cameras behind it (stage 2), and a few safeguards in the final fit (stage 4).</p>
+  </div>
+  <figure class="fig">
+    <div class="flow" role="list" aria-label="The calibration's stages">
+      <div class="row" role="listitem"><div class="node input">
+        <div class="head"><span class="title">The input</span></div>
+        <span class="what">Both balls' centres in every camera and frame · the wand's length · image sizes · the
+          window: plate thickness and indices, or tube radii and indices. No camera data.</span>
+      </div></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="row" role="listitem"><a class="node" href="#stage0">
+        <div class="head"><span class="no">0</span><span class="title">Data</span></div>
+        <span class="what">Keep the frames whose two balls are each seen by at least two cameras.</span>
+        <span class="fn"><code>observations</code></span>
+      </a></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="row" role="listitem"><a class="node" href="#stage1">
+        <div class="head"><span class="no">1</span><span class="title">Affine start</span></div>
+        <span class="what">Treat every camera as a parallel projection. One singular value decomposition of all
+          detections gives rough cameras and 3-D wand positions together; the wand's length makes them metric. Keep
+          both mirror images.</span>
+        <span class="fn"><code>affine_factorization</code></span>
+      </a></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="row split" role="listitem">
+        <a class="node plate" href="#stage2-plate">
+          <span class="lane plate">flat walls</span>
+          <div class="head"><span class="no">2</span><span class="title">Pinholes, then the walls</span></div>
+          <span class="what">Behind a flat wall a camera acts almost like a pinhole camera. Get each camera's
+            distance from perspective, fit pinholes, then search each wall's angle and position.</span>
+          <span class="fn"><code>pinhole_start</code><code>window_search</code><code>bootstrap_groups</code></span>
+        </a>
+        <a class="node tube" href="#stage2-tube">
+          <span class="lane tube">tube</span>
+          <div class="head"><span class="no">2</span><span class="title">The axis, then the distances</span></div>
+          <span class="what">The tube stretches images about 1.3× across its axis, which gives the axis direction. Try
+            about 100 axis positions; at each, the stretch gives every camera's distance and focal length.</span>
+          <span class="fn"><code>orient</code><code>place</code><code>bootstrap</code></span>
+        </a>
+      </div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="row" role="listitem"><a class="node" href="#stage3">
+        <div class="head"><span class="no">3</span><span class="title">Coarse fit</span></div>
+        <span class="what">Adjust the cameras until the rays from each ball's detections meet, with the two balls held
+          a wand length apart. This cost is defined even for a rough start.</span>
+        <span class="fn"><code>coarse_fit</code><code>backprojection_residual</code></span>
+      </a></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="row" role="listitem"><a class="node" href="#stage4">
+        <div class="head"><span class="no">4</span><span class="title">Final fit</span></div>
+        <span class="what">Levenberg–Marquardt on every detection's error in pixels, with every wand position an
+          unknown. Outliers are rejected and each camera is weighted by its own noise.</span>
+        <span class="fn"><code>bundle_adjust</code><code>refine</code></span>
+      </a></div>
+      <p class="within">within stage 4</p>
+      <div class="row split" role="listitem">
+        <a class="node plate extra" href="#stage4">
+          <span class="lane plate">flat walls only</span>
+          <span class="what">Restarts from perturbed answers, because a fit can freeze with a ball against a wall; a
+            scan of weakly seen walls' angles; optional held facts (the channel, where cameras aim) and lens terms.</span>
+          <span class="fn"><code>perturbed_restart</code><code>scan_window_normal</code><code>constraints</code></span>
+        </a>
+        <a class="node tube extra" href="#stage4">
+          <span class="lane tube">tube only</span>
+          <span class="what">Drops balls that the tube shows twice within 30 px of each other; carries more starts
+            through when the data are noisy.</span>
+          <span class="fn"><code>multi_image_guard</code><code>more_starts_px</code></span>
+        </a>
+      </div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="row" role="listitem"><a class="node" href="#stage5">
+        <div class="head"><span class="no">5</span><span class="title">Output</span></div>
+        <span class="what">Error bars from the fit's covariance; camera files, a result file and a report.</span>
+        <span class="fn"><code>covariance</code><code>write_result</code></span>
+      </a></div>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><svg viewBox="0 0 26 12"><rect x="1" y="1" width="24" height="10" rx="2" style="fill:var(--sunk);stroke:var(--muted)"></rect></svg>both calibrations</span>
+      <span><svg viewBox="0 0 26 12"><rect x="1" y="1" width="24" height="10" rx="2" style="fill:var(--plate-soft);stroke:var(--plate)"></rect></svg>flat walls only, <code>plate_wand.py</code></span>
+      <span><svg viewBox="0 0 26 12"><rect x="1" y="1" width="24" height="10" rx="2" style="fill:var(--tube-soft);stroke:var(--tube)"></rect></svg>tube only, <code>cylinder_wand.py</code></span>
+    </div>
+    <figcaption><b>Figure 1. The calibration's stages.</b> Each box links to its section below. Stages 1–3 build a
+      start from the data alone; stage 4 is the answer.</figcaption>
+  </figure>
+</section>
+
+<section id="rigs">
+  <div class="sec-head"><h2>The two rigs in 3-D</h2></div>
+  <div class="prose">
+    <p>The two examples used throughout the page, as calibrated. <b>Flat walls:</b> run 20260727/T0, four cameras
+      through two perpendicular acrylic walls of a 150 × 100 mm channel, C1 and C2 on the long side
+      (<code>calib_plate_wand_ref_centre</code>). <b>Tube:</b> the 20260930 tube, 201.6 mm across with a 3.2 mm acrylic
+      wall, and three copies of its camera 45° apart, 1.09 m from the axis, with a synthetic wand cloud of ±20 mm
+      about the axis.</p>
+  </div>
+  <figure class="fig">
+    <div class="controls">
+      <div class="chips" id="scene-chips" role="group" aria-label="Rig"></div>
+      <div class="chips" id="view-chips" role="group" aria-label="View"></div>
+    </div>
+    <div class="rig3d" id="rig3d"><div class="labels3d"></div></div>
+    <p class="note" id="rig3d-note" hidden>The 3-D view needs WebGL and the three.js library, which did not load here.</p>
+    <figcaption><b>Figure 2. The rigs as the calibration sees them.</b> Drag to turn, scroll or pinch to zoom,
+      right-drag or drag with two fingers to pan. Each camera's lines are the edges of its field of view, bent where
+      they cross into the water. Dark lines: every camera's ray to the same two balls, the triangulation the fit
+      relies on. Grey segments: 160 wand positions. For the walls, the two far walls are drawn faint at the channel's
+      size; the fit knows only the two the cameras look through.</figcaption>
+  </figure>
+</section>
+
+<section id="windows">
+  <div class="sec-head"><h2>What a wall and a tube do to an image</h2></div>
+  <div class="prose">
+    <p>Both windows bend every ray, but in different ways, and that difference shapes everything the two calibrations
+      do differently.</p>
+  </div>
+  <figure class="fig">
+    <div class="panels">
+      <div>
+        <p class="panel-title"><span class="lane plate">flat wall</span></p>
+        <div class="mid-svg scroll" id="wall-diagram"></div>
+        <div class="controls"><label for="wall-tilt">Camera's angle to the wall
+          <input type="range" id="wall-tilt" min="0" max="30" step="0.5" value="16.5"></label></div>
+        <div class="legend" id="wall-legend"></div>
+        <div class="mid-svg scroll" id="wall-plot"></div>
+        <p class="readout" id="wall-readout"></p>
+      </div>
+      <div>
+        <p class="panel-title"><span class="lane tube">tube</span></p>
+        <div class="mid-svg scroll" id="tube-xsec"></div>
+        <div class="mid-svg scroll" id="tube-ball"></div>
+        <p class="readout" id="tube-readout"></p>
+      </div>
+    </div>
+    <figcaption><b>Figure 3. Left: a flat wall barely shows where it is.</b> The camera is like T0's C1: f
+      <span data-v="plate.wall_move.f" data-d="0"></span> px, <span data-v="plate.wall_move.h_mm" data-d="0"></span> mm
+      from a 12.7 mm acrylic wall. The wall moves <span data-v="plate.wall_move.move_mm" data-d="0"></span> mm away
+      and the wand (n<sub>water</sub> − 1) × 10 = 3.3 mm towards the camera, and the plot shows how far the image
+      moves. Blue: what is left after the best slight turn of the camera and the best change of scale (focal length,
+      distance), which the fit makes freely; dots: T0's four cameras. The sketch is not to scale and draws the field
+      wider than the real ±<span data-v="plate.wall_move.half_field_deg" data-d="1"></span>°.
+      <b>Right: a tube is a strong lens across its axis.</b> Rays from camera 1, 1.09 m away, drawn to scale in the
+      tube's cross-section. Pick a position to see a 2 mm ball's exact image through the tube (outline) against a
+      circle of its height (dashed).</figcaption>
+  </figure>
+  <div class="cols">
+    <div class="callout plate">
+      <p><b>A flat wall</b> shifts and slightly stretches the picture, but a ball still looks round: at most 2.4 %
+        longer one way on T0 (test D4). A camera behind it acts almost exactly like a pinhole camera placed farther
+        back with a focal length 1.333× longer, the water's index. The wall's own position barely shows. For a camera
+        looking straight through, moving the wall 10 mm, with the wand moved 3.3 mm to compensate, changes the image
+        by at most
+        <b id="wall-sq-across"></b> px, and only <b id="wall-sq-left"></b> px of that cannot be absorbed by the
+        camera's other parameters. Only oblique cameras see it, and little: <b id="wall-c3-left"></b> px for C3 at
+        <span id="wall-c3-angle"></span>°. That is why a wall's position is weakly fixed, the root of most trouble on
+        T0.</p>
+    </div>
+    <div class="callout tube">
+      <p><b>A tube</b> bends rays only across its axis, so a ball looks like an ellipse, wider than tall. The stretch
+        depends on where the ball is: for a 2 mm ball it runs from <b id="ball-hi"></b> on the far side of the axis to
+        <b id="ball-lo"></b> on the near side. That dependence tells the calibration where the tube sits relative to
+        the cameras, to about 13 µm at 0.1 px of noise in the tests (<code>tests/cylinder_wand</code>). The tube's radii are known, so
+        nothing about it needs fitting. The shape does not move a ball's centre (at most
+        <b id="ball-off"></b> px), but a circle no longer fits its outline: use an ellipse detector.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stage0">
+  <div class="sec-head">
+    <div class="tags"><span class="eyebrow">Stage 0</span><span class="lane both">both</span></div>
+    <h2>Data</h2>
+  </div>
+  <div class="prose">
+    <p>A ball seen by only one camera cannot be placed in 3-D, so a frame is kept only when each of its two balls is
+      seen by at least two cameras. Each kept detection is one row of the data: frame, camera, ball (A or B), pixel
+      position. On T0 every one of the <span class="num" data-v="plate.n_frames" data-d="0"></span> frames qualifies,
+      <span class="num" data-v="plate.result.detections" data-d="0"></span> detections in all. The automatic start of
+      stage 1 also needs at least 12 frames in which every camera sees both balls.</p>
+  </div>
+</section>
+
+<section id="stage1">
+  <div class="sec-head">
+    <div class="tags"><span class="eyebrow">Stage 1</span><span class="lane both">both</span></div>
+    <h2>An affine start, by linear algebra</h2>
+  </div>
+  <div class="prose">
+    <p>Nothing is known about the cameras, so the start has to come from the detections alone, without a guess that
+      could lead a search astray. Stage 1 gets it by pretending every camera is an <b>affine camera</b>, a parallel
+      projection with scaling:</p>
+    <p><code>u = M<sub>c</sub> X + t<sub>c</sub></code>, a 2 × 3 matrix and a shift per camera.</p>
+    <p>A real camera divides by depth, but when the wand's cloud is shallow compared with the camera's distance that
+      division hardly changes across it. On T0 the cloud's RMS radius is
+      <span data-v="plate.affine.cloud_rms_radius_mm" data-d="0"></span> mm and the cameras are about a metre away. A
+      wall's or a tube's refraction over so small a cloud is nearly linear too, and goes into M<sub>c</sub>.</p>
+    <ol>
+      <li><b>One matrix of everything.</b> The detections of the frames that every camera sees go into one matrix:
+        two rows (u, v) per camera, two columns (balls A and B) per frame. Subtracting each row's mean removes every
+        shift t<sub>c</sub>, because a linear camera maps the cloud's centroid to the detections' centroid.</li>
+      <li><b>It has rank 3.</b> What is left is a product, <code>W = M S</code>: M stacks the cameras' 2 × 3 matrices
+        and S holds every ball's x, y, z. A product through a middle dimension of 3 has rank at most 3, so the
+        singular value decomposition's three largest terms give M and S at once (Tomasi–Kanade factorisation). Frames
+        that do not fit, with a wrong detection or swapped balls, are dropped and the decomposition redone.</li>
+      <li><b>The wand makes it metric.</b> The factorisation is fixed only up to an unknown 3 × 3 matrix A,
+        <code>M S = (M A⁻¹)(A S)</code>: the cloud could be stretched or sheared and the cameras would compensate.
+        Every frame's segment d between its two balls must be one wand length long, <code>dᵀ Q d = L²</code> with
+        <code>Q = AᵀA</code>. That is one linear equation per frame in Q's six entries; least squares over all frames
+        gives Q, and <code>A = Q<sup>1/2</sup></code>. It assumes nothing about the cameras, so it also works when a
+        tube makes a camera magnify differently in two directions. The wand must point in many directions for this.</li>
+      <li><b>A mirror image stays open.</b> Q<sup>1/2</sup> fixes A only up to a rotation, which merely chooses the
+        world's axes, or a reflection. In parallel projection a scene and its mirror image give exactly the same
+        pictures: you cannot tell which end of a wand is nearer. Both go on to stage 2, where perspective decides.</li>
+    </ol>
+  </div>
+  <figure class="fig">
+    <div class="wide-svg scroll" id="aff-matrix"></div>
+    <div class="panels">
+      <div><p class="panel-title">The singular values on T0</p><div class="mid-svg scroll" id="aff-sv"></div></div>
+      <div><p class="panel-title">Why a mirror image survives</p><div class="mid-svg scroll" id="aff-mirror"></div></div>
+    </div>
+    <figcaption><b>Figure 4. Stage 1 on T0.</b> Top: the factorisation. Left: the centred matrix's singular values,
+      log scale; the first three carry the cameras and the cloud. Right: a near wand and a far one of the same length (solid), and the same
+      two swapped in depth as in the mirror image (dashed). Beside the image line, each wand's picture (bar) and the
+      swapped scene's (pale bar). In parallel projection (top) the two pictures are the same. Through a pinhole
+      (bottom) the near wand looks longer, and the swapped scene would give a different picture, so perspective tells
+      the two apart.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>On T0 the step takes <span data-v="plate.affine.seconds" data-d="2"></span> s.
+      <span class="num" data-v="plate.affine.frames_kept" data-d="0"></span> of the
+      <span class="num" data-v="plate.affine.frames_whole" data-d="0"></span> frames are kept, a matrix of
+      <span data-v="plate.affine.rows" data-d="0"></span> × <span class="num" data-v="plate.affine.cols_kept" data-d="0"></span>.
+      The fourth singular value is <b id="aff-ratio"></b> % of the third. What a linear camera cannot describe leaves
+      <b><span data-v="plate.affine.rms_px" data-d="1"></span> px</b> per detection, against
+      <span data-v="plate.result.rms_px" data-d="2"></span> px for the final calibration, and the wand lengths after
+      the metric step scatter by about <b id="aff-len"></b> %. Even so the start is close:</p>
+  </div>
+  <div class="table-frame">
+    <table class="data" id="aff-table">
+      <thead><tr><th>T0's affine start, against the delivered calibration</th><th class="num">ball positions, RMS apart</th>
+        <th class="num">scale</th><th class="num">C1</th><th class="num">C2</th><th class="num">C3</th><th class="num">C4</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p class="muted">The cameras' columns give how far each camera's orientation is from the delivered one. A
+      camera's two magnifications, the singular values of M<sub>c</sub>, also come out within 0.7 % of the final
+      model's at the cloud's centre (C3: <span data-v="plate.affine.magnifications.2.affine.0" data-d="2"></span> and
+      <span data-v="plate.affine.magnifications.2.affine.1" data-d="2"></span> px/mm against
+      <span data-v="plate.affine.magnifications.2.final.0" data-d="2"></span> and
+      <span data-v="plate.affine.magnifications.2.final.1" data-d="2"></span>). What a linear camera cannot give is its
+      distance and focal length separately, only their ratio.</p>
+  </div>
+</section>
+
+<section id="stage2">
+  <div class="sec-head">
+    <div class="tags"><span class="eyebrow">Stage 2</span><span class="lane plate">flat walls</span><span class="lane tube">tube</span></div>
+    <h2>From parallel projection to the window</h2>
+  </div>
+  <div class="prose">
+    <p>Stage 2 turns each linear camera into a real camera behind its window. Each linear camera already gives an
+      orientation, its line of sight and its magnification. The camera's distance along that line is missing, and so
+      is where the window is. The two calibrations find them differently.</p>
+  </div>
+
+  <h3 id="stage2-plate" style="scroll-margin-top:16px"><span class="lane plate">flat walls</span>&nbsp; Pinholes first, then the walls</h3>
+  <div class="prose">
+    <ol>
+      <li><b>Distance from perspective.</b> A wand nearer the camera looks longer: its image length per millimetre
+        across the view is f / (D + z) for a wand at depth z beyond the cloud's centre. The ratio of a wand's true
+        length across the view to its image length is therefore a straight line in z, with slope 1/f and intercept
+        D/f (Figure 5, left). Only the right mirror image gives a positive slope; on T0 all four cameras agree on it.</li>
+      <li><b>A pinhole fit.</b> Behind a flat wall a camera is almost a pinhole camera in water, with a focal length
+        1.333× its real one. A pinhole bundle adjustment of all four cameras leaves
+        <span data-v="plate.pinhole_start.rms_px.0" data-d="2"></span> px on T0, the refraction's misfit, and its focal
+        lengths come out within <b id="pin-f"></b> % of the delivered ones × 1.333.</li>
+      <li><b>The walls.</b> For each wall, 92 candidate normals on a cap of 50° about its cameras' mean viewing
+        direction, 9° apart, each at 3 positions between the cameras and the cloud: 276 candidates. For each, the
+        cameras are moved behind it by the paraxial pinhole-to-wall equivalence and their poses fitted against the cloud
+        (<code>small_angle_camera</code>, <code>resect</code>). The best 8 are refined with the wall free, and the best
+        3 kept (Figure 5, right). On T0 the delivered walls are
+        <span data-v="plate.window_candidates.0.final.0" data-d="1"></span>° and
+        <span data-v="plate.window_candidates.1.final.0" data-d="1"></span>° from their cameras' mean views.</li>
+      <li><b>Several walls.</b> When each wall has two or more cameras, as on T0, each wall's cameras are calibrated
+        on their own first, then the groups are joined by the rigid motion that maps their shared wand positions onto
+        each other. The wand length fixes every group's scale. A camera alone behind its wall is placed against the
+        others.</li>
+    </ol>
+  </div>
+  <figure class="fig">
+    <div class="panels">
+      <div>
+        <div class="controls">
+          <div class="chips" id="persp-cams" role="group" aria-label="Camera"></div>
+          <div class="chips" id="persp-mirror" role="group" aria-label="Mirror image"></div>
+        </div>
+        <div class="mid-svg scroll" id="persp-plot"></div>
+        <p class="readout" id="persp-readout"></p>
+      </div>
+      <div>
+        <div class="controls"><div class="chips" id="cand-walls" role="group" aria-label="Wall"></div></div>
+        <div class="mid-svg scroll" id="cand-plot"></div>
+        <p class="readout" id="cand-readout"></p>
+      </div>
+    </div>
+    <figcaption><b>Figure 5. Stage 2 for flat walls, on T0.</b> Left: each dot is one wand
+      (<span data-v="plate.perspective.1.cams.0.n_used" data-d="0"></span> for C1, 700 drawn): its length across the
+      view divided by its length in the image, against its depth from the affine start. The line's slope gives the
+      focal length and its height the distance, of the equivalent pinhole camera in water. In the wrong mirror image
+      the depths flip and the slope turns negative. Right: the window search's candidate normals for one wall,
+      plotted by their angle from the cameras' mean viewing direction (centre), with the cameras' own viewing
+      directions and the delivered wall's normal.</figcaption>
+  </figure>
+
+  <h3 id="stage2-tube" style="scroll-margin-top:16px"><span class="lane tube">tube</span>&nbsp; The axis, then the distances</h3>
+  <div class="prose">
+    <ol>
+      <li><b>The axis direction.</b> Each linear camera magnifies more across the tube than along it, about 1.3×
+        (Figure 3). The axis must be perpendicular to every camera's direction of higher magnification, which gives it
+        directly. The world frame is then the tube's own: the axis is Y and Z points towards camera 1.</li>
+      <li><b>The axis position, by search.</b> Where the axis passes relative to the wand cloud is tried on a grid,
+        every point that keeps the cloud inside the tube: <span class="num" id="place-n"></span> positions <span id="place-step"></span> mm apart, for each mirror
+        image.</li>
+      <li><b>Distances from the stretch.</b> At each position, each camera is put on its line of sight at the
+        distance where a model camera's stretch ratio (across over along) for the same cloud matches its linear
+        camera's (Figure 6, right), and its focal length follows from the magnification along the axis.</li>
+      <li><b>Rank by fitting.</b> Every placement gets a quick coarse fit before it is ranked; the six best get a
+        longer one. Ranking them as placed can mislead: with the orientations still about a degree off, a placement far
+        from the tube can score best (seen in the tests).</li>
+    </ol>
+  </div>
+  <figure class="fig">
+    <div class="panels">
+      <div>
+        <div class="controls"><div class="chips" id="place-mirror" role="group" aria-label="Mirror image"></div></div>
+        <div class="mid-svg scroll" id="place-plot"></div>
+        <p class="readout" id="place-readout"></p>
+      </div>
+      <div>
+        <div class="controls"><div class="chips" id="ratio-cams" role="group" aria-label="Camera"></div></div>
+        <div class="legend" id="ratio-legend"></div>
+        <div class="mid-svg scroll" id="ratio-plot"></div>
+        <p class="readout" id="ratio-readout"></p>
+      </div>
+    </div>
+    <figcaption><b>Figure 6. Stage 2 for the tube, on the synthetic rig</b>
+      (<span data-v="tube.frames" data-d="0"></span> frames, <span data-v="tube.noise_px" data-d="1"></span> px of
+      noise). Left: the axis positions tried, relative to the wand cloud's centre; the darker, the lower the cost
+      after the quick fit. Ring: the six carried on; cross: the true axis. Right: a model camera's stretch ratio
+      against its distance, and the ratio the camera's linear fit measured. The curve flattens with distance, so the
+      start's distances are rough; stages 3 and 4 correct them.</figcaption>
+  </figure>
+</section>
+
+<section id="stage3">
+  <div class="sec-head">
+    <div class="tags"><span class="eyebrow">Stage 3</span><span class="lane both">both</span></div>
+    <h2>A coarse fit that is always defined</h2>
+  </div>
+  <div class="cols">
+    <div class="prose">
+      <p>The final fit measures errors in pixels, which needs every ball's projection. From a rough start some
+        projections do not exist: a ray misses the tube, or a ball lands on the wrong side of a wall. Stage 3 works
+        the other way round. It traces each detection's ray into the water, triangulates each ball from its rays,
+        sets the two balls exactly one wand length apart, and measures how far each ray misses its ball, scaled to
+        pixels. That cost always exists, and a robust loss keeps a few bad detections from steering it.</p>
+      <p>Only the cameras (and the walls) are adjusted; the ball positions follow from them by triangulation each
+        time, so they never lag behind.</p>
+    </div>
+    <figure class="fig">
+      <div class="mid-svg scroll" id="bp-plot"></div>
+      <figcaption><b>Figure 7.</b> Three cameras' rays to one ball, bent at the wall. Stage 3 minimises how far each
+        ray misses the triangulated ball (the short marks); stage 4 minimises the same errors measured in the
+        images.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="stage4">
+  <div class="sec-head">
+    <div class="tags"><span class="eyebrow">Stage 4</span><span class="lane both">both</span></div>
+    <h2>The final fit</h2>
+  </div>
+  <div class="prose">
+    <p>The answer is the maximum-likelihood fit: every detection's error in pixels, squared and summed over all
+      cameras and frames, minimised by Levenberg–Marquardt.</p>
+    <ul>
+      <li><b>The unknowns.</b> The rig: each camera's rotation, position and focal length (and k1), each wall's angle
+        and position. T0 has <span data-v="plate.params" data-d="0"></span> of them; the tube rig
+        <span data-v="tube.calibration.params" data-d="0"></span>. And every frame's wand: its midpoint and direction,
+        5 numbers, with the length held at L. T0 has <span class="num" id="t0-frame-unknowns"></span> of those.</li>
+      <li><b>Solved fast.</b> A frame's 5 unknowns touch only that frame's detections, so they are eliminated frame by
+        frame (the Schur complement). Each step solves only the rig's small system, and the cost grows only linearly
+        with the number of frames.</li>
+      <li><b>The frame of reference.</b> With flat walls nothing in the scene is fixed, so camera 1's position and
+        orientation are held and the answer is turned to wall 1 afterwards. A tube is its own frame; only a spin about
+        its axis and a slide along it are invisible, and camera 1 removes them.</li>
+      <li><b>Robust.</b> Detections more than 5σ off are dropped, and come back if they fit later. Each camera's noise
+        is estimated from its residuals and weights its detections.</li>
+    </ul>
+  </div>
+  <figure class="fig">
+    <div class="panels">
+      <div><p class="panel-title">The normal equations on T0</p><div class="mid-svg scroll" id="schur-plot"></div></div>
+      <div><p class="panel-title"><span class="lane plate">flat walls</span>&nbsp; A fit pinned against a wall</p>
+        <div class="mid-svg scroll" id="pin-plot"></div></div>
+    </div>
+    <figcaption><b>Figure 8. Left:</b> the rig block (cameras and walls) is dense, each frame's 5 × 5 block touches
+      only itself, and the coupling strips join them. Eliminating the frames leaves one small system per step.
+      <b>Right:</b> the flat-wall model has no image for a ball on the dry side of a wall, so the fit refuses any step
+      that would put one there. If a wrong start brings a wall up against a ball, every step that would lower the cost
+      is refused and the fit stops: it is pinned.</figcaption>
+  </figure>
+  <div class="cols">
+    <div class="callout plate">
+      <p><b>Flat walls only.</b> On rigs with several walls the fit restarts from a few answers perturbed by its own
+        error bars and keeps a restart only if it explains the data better: this frees pinned fits. A wall seen
+        only by one or two long-lens cameras gets its angle scanned, because its true angle can sit in a narrow valley
+        far from a wrong answer. Optional held facts (<code>constraints</code>) can keep the wand inside a channel of
+        known size or say where cameras aim, and <code>fit_lens</code> adds the principal point, k2 and tangential
+        distortion. T0's delivered calibration holds the channel and the aim.</p>
+    </div>
+    <div class="callout tube">
+      <p><b>Tube only.</b> Near the tube's wall a ball can have two images; balls whose second image lies within 30 px
+        are dropped, since a detector could mix them up. When the coarse fit leaves more than 1 px, every short-listed
+        start is carried through stage 4, because noisy data can favour a start with the cameras too far away. The
+        tube cannot pin a fit: it does not move, and its model projects a ball wherever it is.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stage5">
+  <div class="sec-head">
+    <div class="tags"><span class="eyebrow">Stage 5</span><span class="lane both">both</span></div>
+    <h2>Error bars and output</h2>
+  </div>
+  <div class="prose">
+    <p>The fit's covariance gives every parameter's error bar and the error it predicts for points in 3-D. The output
+      is a pyOpenLPT camera file per camera (PINPLATE or PINCYL), a result file with everything, and a text report
+      that also warns about weak spots: for flat walls a weakly seen wall, a pinned fit, a hint far from the answer,
+      too few frames.</p>
+  </div>
+  <div class="table-frame">
+    <table class="data" id="result-table">
+      <thead><tr><th>The two examples</th><th class="plate">flat walls: T0, real</th><th class="tube">tube: synthetic</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="differences">
+  <div class="sec-head"><h2>Where the two differ</h2></div>
+  <div class="table-frame">
+    <table class="data">
+      <thead><tr><th></th><th class="plate">flat walls · PINPLATE</th><th class="tube">tube · PINCYL</th></tr></thead>
+      <tbody>
+        <tr><th>Frame of reference</th><td>None in the scene; camera 1 held, the answer then turned to wall 1</td>
+          <td>The tube itself (axis = Y); only a spin about it and a slide along it are free</td></tr>
+        <tr><th>The window</th><td>Thickness and indices known; each wall's angle and position fitted (3 numbers)</td>
+          <td>Radii and indices known; nothing fitted</td></tr>
+        <tr><th>Stage 2</th><td>Perspective, then pinholes, then 276 candidate positions and angles per wall</td>
+          <td>Axis direction from the stretch, about 100 axis positions, distances from the stretch ratio</td></tr>
+        <tr><th>What the data see weakly</th><td>A wall's position (third order in the viewing angle); long lenses'
+          focal length against distance</td><td>Focal length against distance: the stretch ratio flattens far away</td></tr>
+        <tr><th>Known traps</th><td>Fits pinned against a wall; walls seen only by one or two long-lens cameras; on
+          T0 a wrong minimum from scratch</td><td>A start with the cameras too far and f too large at high noise
+          (caught by more starts); image-fixed error patterns</td></tr>
+        <tr><th>Ball images</th><td>Nearly round (at most 2.4 % longer on T0)</td><td>Ellipses, about 1.2–1.4 : 1; needs
+          an ellipse detector, not a circle fit</td></tr>
+        <tr><th>Run time</th><td>T0 (10,936 frames): 55–70 min from scratch, most of it the start; about 4 min from a
+          verified start</td><td><span data-v="tube.calibration.seconds" data-d="0"></span> s from scratch for 500
+          frames</td></tr>
+        <tr><th>Tested on</th><td>Synthetic rigs and the real T0 run</td><td>Synthetic rigs only so far</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="code">
+  <div class="sec-head"><h2>In the code</h2></div>
+  <div class="prose">
+    <p>Everything is in <code>modules/camera_calibration/curved_calibration/</code>. The camera models are
+      <code>plate_model.py</code> and <code>cyl_model.py</code>, with exact derivatives; the files are written by
+      <code>plate_wand_io.py</code> and <code>cylinder_wand_io.py</code>. The entry points are
+      <code>plate_wand.calibrate(data, rig)</code> and <code>cylinder_wand.calibrate(data, tube)</code>.</p>
+  </div>
+  <div class="table-frame">
+    <table class="data">
+      <thead><tr><th>Stage</th><th class="plate"><code>plate_wand.py</code></th><th class="tube"><code>cylinder_wand.py</code></th></tr></thead>
+      <tbody>
+        <tr><th>0 Data</th><td><code>observations</code> (from cylinder_wand)</td><td><code>observations</code></td></tr>
+        <tr><th>1 Affine start</th><td><code>affine_start</code>, which calls <code>affine_factorization</code></td>
+          <td><code>affine_factorization</code></td></tr>
+        <tr><th>2 Refractive start</th><td><code>pinhole_start</code>, <code>_distance_from_magnification</code>,
+          <code>window_search</code>, <code>small_angle_camera</code>, <code>bootstrap</code>,
+          <code>bootstrap_groups</code>, <code>bootstrap_singles</code></td><td><code>orient</code>, <code>place</code>,
+          <code>_distance_from_ratio</code>, <code>bootstrap</code></td></tr>
+        <tr><th>3 Coarse fit</th><td><code>coarse_fit</code>, <code>backprojection_residual</code></td>
+          <td><code>coarse_fit</code>, <code>backprojection_residual</code></td></tr>
+        <tr><th>4 Final fit</th><td><code>bundle_adjust</code>, <code>refine</code>, <code>variance_components</code>,
+          <code>perturbed_restart</code>, <code>scan_window_normal</code>, <code>channel_terms</code></td>
+          <td><code>bundle_adjust</code>, <code>refine</code>, <code>variance_components</code>,
+          <code>multi_image_guard</code></td></tr>
+        <tr><th>5 Output</th><td><code>covariance</code>, <code>camera_sigmas</code>, <code>window_sigmas</code>;
+          <code>plate_wand_io.write_result</code></td><td><code>covariance</code>, <code>camera_sigmas</code>;
+          <code>cylinder_wand_io.write_result</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p>Built on <span data-v="built"></span> by <code>make_guide.py</code> beside this page, which computes every
+    number and drawn ray with the calibration's own models (<code>python make_guide.py</code>; <code>--page-only</code>
+    rebuilds from <code>guide_data.json</code>). Flat walls: <code>cases/plate_20260727_T0</code>, calibration
+    <code>Results/T0/calib_plate_wand_ref_centre</code>. Tube: a synthetic copy of <code>tests/cylinder_wand</code>'s
+    reference rig (seed <span data-v="tube.seed" data-raw></span>, detections from <code>cyl_model</code>).</p>
+  <p>The tests behind the statements quoted: <code>tests/plate_wand/README.md</code> and
+    <code>tests/cylinder_wand/README.md</code> with their reports, and the T0 case's reports.</p>
+</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script type="application/json" id="guide-data">__GUIDE_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  const D = JSON.parse(document.getElementById("guide-data").textContent);
+  const NS = "http://www.w3.org/2000/svg";
+  const DEG = Math.PI / 180;
+
+  function el(tag, attrs, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function svgIn(host, w, h, label) {
+    host.textContent = "";
+    return el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": label }, host);
+  }
+  function num(x, d) {
+    const s = Math.abs(x).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+    return (x < 0 && Number(s.replace(/,/g, "")) !== 0 ? "−" : "") + s;
+  }
+  const lin = (d0, d1, r0, r1) => v => r0 + (v - d0) * (r1 - r0) / (d1 - d0);
+  function lg(d0, d1, r0, r1) {
+    const a = Math.log10(d0), b = Math.log10(d1);
+    return v => r0 + (Math.log10(v) - a) * (r1 - r0) / (b - a);
+  }
+  function setText(id, text) { const e = document.getElementById(id); if (e) e.textContent = text; }
+  function guard(id, fn) {
+    try { fn(); } catch (e) {
+      console.error(e);
+      const h = document.getElementById(id);
+      if (h) { const p = document.createElement("p"); p.className = "fig-error"; p.textContent = "This figure could not be drawn: " + e.message; h.appendChild(p); }
+    }
+  }
+  function chips(hostId, items, onPick, initial) {
+    const host = document.getElementById(hostId);
+    host.textContent = "";
+    const bs = items.map(it => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = it.label; b.dataset.key = it.key;
+      b.setAttribute("aria-pressed", String(it.key === initial));
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); onPick(it.key); });
+      host.appendChild(b);
+      return b;
+    });
+  }
+  function path(pts) { return pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" "); }
+  function ticksLog(s, y, x0, x1, vals) {
+    vals.forEach(v => {
+      el("line", { x1: x0, x2: x1, y1: y(v), y2: y(v), class: "grid-line" }, s);
+      el("text", { x: x0 - 8, y: y(v) + 4, "text-anchor": "end", class: "tick" }, s, v >= 1 ? String(v) : v.toFixed(Math.round(-Math.log10(v))));
+    });
+  }
+  function legendItem(host, cls, dash, label) {
+    const sp = document.createElement("span");
+    const sv = el("svg", { viewBox: "0 0 26 12", "aria-hidden": "true" }, sp);
+    el("line", { x1: 1, x2: 25, y1: 6, y2: 6, class: "curve " + cls + (dash ? " dashed" : "") }, sv);
+    sp.appendChild(document.createTextNode(label));
+    host.appendChild(sp);
+  }
+  function lookup(p) { return p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), D); }
+
+  /* numbers quoted in the text */
+  document.querySelectorAll("[data-v]").forEach(e => {
+    const v = lookup(e.dataset.v);
+    if (v === undefined || v === null) return;
+    e.textContent = typeof v === "number" && e.dataset.raw === undefined ? num(v, e.dataset.d !== undefined ? Number(e.dataset.d) : 2) : String(v);
+  });
+  (function () {
+    const a = D.plate.affine, sv = a.singular_values;
+    setText("aff-ratio", num(100 * sv[3] / sv[2], 1));
+    setText("aff-len", num(100 * (Math.sqrt(1 + a.length_rms_rel) - 1), 1));
+    const ps = D.plate.pinhole_start, per = D.plate.perspective[1].cams;
+    const errs = ps.f_px[0].map((f, c) => Math.abs(f / per[c].f_final_water - 1) * 100);
+    setText("pin-f", num(Math.max(...errs), 0));
+    setText("t0-frame-unknowns", num(5 * D.plate.n_frames, 0));
+    const cs = D.tube.placement.candidates.filter(c => c.placed && c.mirror === D.tube.placement.best.mirror);
+    setText("place-n", num(cs.length, 0));
+    setText("place-step", num(D.tube.placement.grids[D.tube.placement.best.mirror ? "True" : "False"].step, 1));
+  })();
+
+  /* Figure 2: the rigs in 3-D */
+  guard("rig3d", function () {
+    const host = document.getElementById("rig3d");
+    const note = document.getElementById("rig3d-note");
+    let renderer = null;
+    try { if (window.THREE && THREE.OrbitControls) renderer = new THREE.WebGLRenderer({ antialias: true }); } catch (e) { renderer = null; }
+    if (!renderer) {
+      host.hidden = true; note.hidden = false;
+      document.getElementById("scene-chips").hidden = true; document.getElementById("view-chips").hidden = true;
+      return;
+    }
+    const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    host.insertBefore(renderer.domElement, host.firstChild);
+    const scene = new THREE.Scene();
+    const cam = new THREE.PerspectiveCamera(32, 1, 5, 40000);
+    const V = a => new THREE.Vector3(a[0], a[1], a[2]);
+    const M = {
+      wall: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.32, depthWrite: false, side: THREE.DoubleSide }),
+      wallFar: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.1, depthWrite: false, side: THREE.DoubleSide }),
+      wallEdge: new THREE.LineBasicMaterial({}),
+      wallFarEdge: new THREE.LineDashedMaterial({ dashSize: 8, gapSize: 6 }),
+      glass: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.22, depthWrite: false, side: THREE.DoubleSide }),
+      water: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.07, depthWrite: false, side: THREE.DoubleSide }),
+      ring: new THREE.LineBasicMaterial({}),
+      axis: new THREE.LineDashedMaterial({ dashSize: 10, gapSize: 7 }),
+      wand: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.8 }),
+      fovP: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.85 }),
+      fovT: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.85 }),
+      fillP: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.08, depthWrite: false, side: THREE.DoubleSide }),
+      fillT: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.08, depthWrite: false, side: THREE.DoubleSide }),
+      ray: new THREE.LineBasicMaterial({}),
+      dotP: new THREE.MeshBasicMaterial({}),
+      dotT: new THREE.MeshBasicMaterial({}),
+      ball: new THREE.MeshBasicMaterial({}),
+    };
+    function theme() {
+      renderer.setClearColor(new THREE.Color(css("--surface")));
+      M.wall.color.set(css("--wall")); M.wallFar.color.set(css("--wall"));
+      M.wallEdge.color.set(css("--muted")); M.wallFarEdge.color.set(css("--muted"));
+      M.glass.color.set(css("--wall")); M.water.color.set(css("--accent")); M.ring.color.set(css("--muted"));
+      M.axis.color.set(css("--muted")); M.wand.color.set(css("--muted"));
+      M.fovP.color.set(css("--plate")); M.fillP.color.set(css("--plate")); M.dotP.color.set(css("--plate"));
+      M.fovT.color.set(css("--tube")); M.fillT.color.set(css("--tube")); M.dotT.color.set(css("--tube"));
+      M.ray.color.set(css("--ink")); M.ball.color.set(css("--ink"));
+    }
+    const layer = host.querySelector(".labels3d");
+    function group() { return { group: new THREE.Group(), labels: [] }; }
+    function label(G, text, pos, cls) {
+      const e = document.createElement("div");
+      e.className = "label3d" + (cls ? " " + cls : "");
+      e.textContent = text; e.hidden = true;
+      layer.appendChild(e);
+      G.labels.push({ e, pos });
+    }
+    function segs(G, pts, mat) {
+      const l = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), mat);
+      if (mat.isLineDashedMaterial) l.computeLineDistances();
+      G.group.add(l);
+    }
+    function line(G, pts, mat) {
+      const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat);
+      if (mat.isLineDashedMaterial) l.computeLineDistances();
+      G.group.add(l);
+    }
+    function dot(G, p, r, mat) {
+      const s = new THREE.Mesh(new THREE.SphereGeometry(r, 16, 12), mat);
+      s.position.copy(p); G.group.add(s);
+    }
+    function wandAndRays(G, T) {
+      const wp = [];
+      T.segments.forEach(s => { wp.push(V(s[0]), V(s[1])); });
+      segs(G, wp, M.wand);
+      const ends = {};
+      T.end_rays.forEach(r => { line(G, r.path.map(V), M.ray); ends[r.end] = r.path[r.path.length - 1]; });
+      Object.keys(ends).forEach(k => dot(G, V(ends[k]), 2.4, M.ball));
+    }
+    function fov(G, C, z, corners, centre, matLine, matFill) {
+      // corners: [{pts: [C, ..., last surface point], d}], extended to the plane through centre across the view
+      const ends = corners.map(r => {
+        const P = r.pts.map(V), last = P[P.length - 1], d = V(r.d);
+        const s = z.dot(centre.clone().sub(last)) / z.dot(d);
+        return { P, e: last.clone().add(d.multiplyScalar(s)) };
+      });
+      const L = [];
+      for (let i = 0; i < 4; i++) {
+        const P = ends[i].P;
+        for (let k = 0; k < P.length - 1; k++) L.push(P[k], P[k + 1]);
+        L.push(P[P.length - 1], ends[i].e, ends[i].e, ends[(i + 1) % 4].e);
+      }
+      segs(G, L, matLine);
+      G.group.add(new THREE.Mesh(new THREE.BufferGeometry().setFromPoints(
+        [ends[0].e, ends[1].e, ends[2].e, ends[0].e, ends[2].e, ends[3].e]), matFill));
+    }
+
+    function buildPlate() {
+      const T = D.plate.scene, G = group();
+      G.UP = new THREE.Vector3(0, 0, T.up);
+      const up = s => G.UP.clone().multiplyScalar(s);
+      const bx = T.box;
+      G.centre = new THREE.Vector3((bx[0][0] + bx[0][1]) / 2, (bx[1][0] + bx[1][1]) / 2, (bx[2][0] + bx[2][1]) / 2);
+      const Wy = T.channel.width_mm[0], Wx = T.channel.width_mm[1];
+      const zs = [].concat(...T.segments).map(p => p[2]).concat(T.cameras.map(c => c.C[2]));
+      const zLo = Math.min(...zs) - 120, zHi = Math.max(...zs) + 120, zMid = (zLo + zHi) / 2, zLen = zHi - zLo;
+      const t1 = T.walls[0].t, t2 = T.walls[1].t, n2 = T.walls[1].n;
+      const a2 = Math.atan2(n2[1], n2[0]), ca = Math.cos(a2), sa = Math.sin(a2);
+      const xOut = t2 + Wx + t1, yOut = t1 + Wy + t1;
+      function slab(sx, sy, pos, rotZ, far) {
+        const geo = new THREE.BoxGeometry(sx, sy, zLen);
+        const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), far ? M.wallFarEdge : M.wallEdge);
+        [new THREE.Mesh(geo, far ? M.wallFar : M.wall), edges].forEach(o => { o.position.copy(pos); o.rotation.z = rotZ; G.group.add(o); });
+        if (far) edges.computeLineDistances();
+      }
+      slab(xOut, t1, new THREE.Vector3(xOut / 2, t1 / 2, zMid), 0, false);
+      slab(t2, yOut, new THREE.Vector3(ca * t2 / 2 - sa * yOut / 2, sa * t2 / 2 + ca * yOut / 2, zMid), a2, false);
+      slab(xOut, t1, new THREE.Vector3(xOut / 2, t1 + Wy + t1 / 2, zMid), 0, true);
+      slab(t1, yOut, new THREE.Vector3(t2 + Wx + t1 / 2, yOut / 2, zMid), 0, true);
+      wandAndRays(G, T);
+      T.cameras.forEach(c => {
+        const C = V(c.C), z = V(c.z_axis);
+        fov(G, C, z, c.rays.slice(0, 4).map(r => ({ pts: [c.C, r.o], d: r.d })), G.centre, M.fovP, M.fillP);
+        dot(G, C, 14, M.dotP);
+        label(G, c.name, C.clone().add(up(46)), "");
+      });
+      label(G, "wall 1", new THREE.Vector3(xOut * 0.95, -30, zMid).add(up(-zLen / 2 + 10)), "dim");
+      label(G, "wall 2", new THREE.Vector3(-30, yOut * 0.95, zMid).add(up(-zLen / 2 + 10)), "dim");
+      label(G, `channel ${Wx} × ${Wy} mm`, new THREE.Vector3(xOut / 2, yOut / 2, zMid).add(up(zLen / 2 + 30)), "dim");
+      G.rigCentre = T.cameras.reduce((a, c) => a.add(V(c.C)), G.centre.clone().multiplyScalar(2)).multiplyScalar(1 / (T.cameras.length + 2));
+      G.views = [
+        { key: "overview", label: "Overview", dir: [-0.62, -0.78, 0], lift: 0.45, dist: 2450, rig: true },
+        { key: "top", label: "From above", dir: [0, 0.02, 0], lift: 1, dist: 3400, rig: true },
+        { key: "c12", label: "Through wall 1", dir: [0.06, -1, 0], lift: 0.14, dist: 2900 },
+        { key: "c34", label: "Through wall 2", dir: [-1, 0.06, 0], lift: 0.14, dist: 2900 },
+        { key: "close", label: "The wand", dir: [-0.62, -0.78, 0], lift: 0.45, dist: 560 },
+      ];
+      return G;
+    }
+
+    function buildTube() {
+      const T = D.tube, S = T.scene, G = group();
+      G.UP = new THREE.Vector3(0, 1, 0);
+      G.centre = new THREE.Vector3(0, 0, 0);
+      const H = 240;
+      [[T.radii[0], M.glass], [T.radii[1], M.water]].forEach(([R, mat]) => {
+        G.group.add(new THREE.Mesh(new THREE.CylinderGeometry(R, R, H, 120, 1, true), mat));
+        [-H / 2, H / 2].forEach(y => {
+          const pts = [];
+          for (let i = 0; i <= 128; i++) { const a = 2 * Math.PI * i / 128; pts.push(new THREE.Vector3(R * Math.sin(a), y, R * Math.cos(a))); }
+          line(G, pts, M.ring);
+        });
+      });
+      line(G, [new THREE.Vector3(0, -H / 2 - 40, 0), new THREE.Vector3(0, H / 2 + 40, 0)], M.axis);
+      wandAndRays(G, S);
+      S.cameras.forEach(c => {
+        const C = V(c.C), z = V(c.z_axis);
+        fov(G, C, z, c.rays.slice(0, 4), G.centre, M.fovT, M.fillT);
+        dot(G, C, 14, M.dotT);
+        label(G, c.name, C.clone().add(new THREE.Vector3(0, 46, 0)), "");
+      });
+      label(G, `tube ${num(2 * T.radii[0], 1)} mm across`, new THREE.Vector3(-0.62 * T.radii[0], -H / 2 - 36, -0.78 * T.radii[0]), "dim");
+      G.rigCentre = S.cameras.reduce((a, c) => a.add(V(c.C)), new THREE.Vector3(0, 0, 0)).multiplyScalar(1 / (S.cameras.length + 2));
+      G.views = [
+        { key: "overview", label: "Overview", dir: [-0.62, 0, -0.78], lift: 0.75, dist: 2350, rig: true },
+        { key: "top", label: "Along the axis", dir: [0.02, 0, 0.03], lift: 1, dist: 3000, rig: true },
+        { key: "side", label: "From the side", dir: [0.38, 0, -0.92], lift: 0.08, dist: 2900, rig: true },
+        { key: "close", label: "The wand", dir: [0.6, 0, 0.8], lift: 0.4, dist: 420 },
+      ];
+      return G;
+    }
+
+    const builds = { plate: buildPlate(), tube: buildTube() };
+    Object.values(builds).forEach(b => { b.group.visible = false; scene.add(b.group); });
+    let cur = builds.plate, view = "overview";
+    const controls = new THREE.OrbitControls(cam, renderer.domElement);
+    controls.screenSpacePanning = true;
+    function render() {
+      renderer.render(scene, cam);
+      const w = host.clientWidth, h = host.clientHeight;
+      Object.values(builds).forEach(b => b.labels.forEach(l => {
+        if (b !== cur) { l.e.hidden = true; return; }
+        const p = l.pos.clone().project(cam);
+        const vis = p.z > -1 && p.z < 1 && Math.abs(p.x) < 1.05 && Math.abs(p.y) < 1.05;
+        l.e.hidden = !vis;
+        if (vis) l.e.style.transform = `translate(${((p.x + 1) / 2) * w}px, ${((1 - p.y) / 2) * h}px) translate(-50%, -50%)`;
+      }));
+    }
+    controls.addEventListener("change", render);
+    let touched = false;
+    controls.addEventListener("start", () => { touched = true; });
+    function setView(key) {
+      touched = false;
+      const v = cur.views.find(x => x.key === key) || cur.views[0];
+      view = v.key;
+      cam.up.copy(cur.UP);
+      const d = new THREE.Vector3(v.dir[0], v.dir[1], v.dir[2]).add(cur.UP.clone().multiplyScalar(v.lift)).normalize();
+      const target = v.rig ? cur.rigCentre : cur.centre;
+      const fit = Math.max(1, 1.6 / Math.max(cam.aspect, 0.3));
+      cam.position.copy(target).add(d.multiplyScalar(v.dist * fit));
+      controls.target.copy(target);
+      controls.update();
+      render();
+    }
+    function viewChips() {
+      chips("view-chips", cur.views.map(v => ({ key: v.key, label: v.label })), setView, view);
+    }
+    function show(key) {
+      Object.values(builds).forEach(b => { b.group.visible = false; });
+      cur = builds[key];
+      cur.group.visible = true;
+      view = "overview";
+      viewChips();
+      setView(view);
+    }
+    chips("scene-chips", [{ key: "plate", label: "Flat walls: T0" }, { key: "tube", label: "Tube: synthetic" }], show, "plate");
+    function resize() {
+      const w = host.clientWidth, h = host.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      cam.aspect = w / h;
+      cam.updateProjectionMatrix();
+      if (!touched) setView(view); else render();
+    }
+    const onTheme = () => { theme(); render(); };
+    const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+    if (mq && mq.addEventListener) mq.addEventListener("change", onTheme);
+    new MutationObserver(onTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    theme();
+    show("plate");
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(host); else window.addEventListener("resize", resize);
+    resize();
+  });
+
+  /* Figure 3, left: a flat wall's move */
+  guard("wall-plot", function () {
+    const W = D.plate.wall_move;
+    const mid = Math.floor(W.rows[0].du.length / 2);
+    const rows = W.rows.map(r => ({
+      tilt: r.tilt, centre: Math.abs(r.du[mid]),
+      across: Math.max(...r.du) - Math.min(...r.du), left: Math.max(...r.left) - Math.min(...r.left) }));
+    function at(t, key) {
+      for (let i = 0; i < rows.length - 1; i++) {
+        if (t >= rows[i].tilt && t <= rows[i + 1].tilt) {
+          const w = (t - rows[i].tilt) / (rows[i + 1].tilt - rows[i].tilt);
+          return rows[i][key] * (1 - w) + rows[i + 1][key] * w;
+        }
+      }
+      return rows[rows.length - 1][key];
+    }
+    const inc = D.plate.incidence_deg;
+    setText("wall-sq-across", num(rows[0].across, 3));
+    setText("wall-sq-left", num(rows[0].left, 3));
+    setText("wall-c3-left", num(at(inc[2], "left"), 2));
+    setText("wall-c3-angle", num(inc[2], 1));
+    const lh = document.getElementById("wall-legend");
+    legendItem(lh, "c-muted thin", true, "at the image centre");
+    legendItem(lh, "c-muted thin", false, "largest across the image");
+    legendItem(lh, "c-plate", false, "left after the best turn and scale");
+
+    const dhost = document.getElementById("wall-diagram"), phost = document.getElementById("wall-plot");
+    function diagram(tilt) {
+      const w = 380, h = 250, s = svgIn(dhost, w, h, "Sketch: a camera's rays through a flat wall");
+      const yWall = 112, tP = 18, yWater = yWall + tP, dy = 16;
+      el("rect", { x: 0, y: 0, width: w, height: yWall, class: "air" }, s);
+      el("rect", { x: 0, y: yWater, width: w, height: h - yWater, class: "water" }, s);
+      el("rect", { x: 0, y: yWall, width: w, height: tP, class: "wall" }, s);
+      el("rect", { x: 0.5, y: yWall + dy, width: w - 1, height: tP, class: "ghost" }, s);
+      const cx0 = 70, cy0 = 22, th = tilt * DEG, half = 7 * DEG;
+      function trace(a, depth) {
+        const p1 = [cx0 + (yWall - cy0) * Math.tan(a), yWall];
+        const ap = Math.asin(Math.sin(a) / 1.49), aw = Math.asin(Math.sin(a) / 1.333);
+        const p2 = [p1[0] + tP * Math.tan(ap), yWater];
+        return [[cx0, cy0], p1, p2, [p2[0] + depth * Math.tan(aw), yWater + depth]];
+      }
+      [-half, half].forEach(da => el("path", { d: path(trace(th + da, 96)), class: "curve thin c-plate", "stroke-opacity": 0.55 }, s));
+      const P = trace(th, 88);
+      el("path", { d: path(P), class: "curve c-plate" }, s);
+      const b = P[3];
+      el("circle", { cx: b[0], cy: b[1], r: 6.5, class: "f-ink" }, s);
+      el("circle", { cx: b[0], cy: b[1] - dy * 0.333, r: 6.5, class: "ghost" }, s);
+      // the camera: a body turned to the tilt
+      const g = el("g", { transform: `translate(${cx0} ${cy0}) rotate(${-tilt})` }, s);
+      el("rect", { x: -13, y: -17, width: 26, height: 15, rx: 3, class: "f-plate" }, g);
+      el("rect", { x: -6, y: -3, width: 12, height: 5, class: "f-plate" }, g);
+      el("text", { x: w - 8, y: 18, "text-anchor": "end", class: "lbl-m" }, s, "air");
+      el("text", { x: w - 8, y: yWall + 13, "text-anchor": "end", class: "lbl-s" }, s, "acrylic 12.7 mm");
+      el("text", { x: w - 8, y: h - 10, "text-anchor": "end", class: "lbl-m" }, s, "water");
+      el("text", { x: w - 8, y: yWall + dy + tP + 14, "text-anchor": "end", class: "lbl-s" }, s, "wall moved 10 mm (dashed)");
+      el("text", { x: b[0] + 12, y: b[1] - 4, class: "lbl-s" }, s, "wand moved 3.3 mm");
+      el("text", { x: cx0 + 20, y: cy0 - 6, class: "lbl" }, s, `${num(tilt, 1)}°`);
+    }
+    const w = 480, h = 300, m = { l: 62, r: 14, t: 14, b: 44 };
+    const x = lin(0, 30, m.l, w - m.r), y = lg(1e-4, 10, h - m.b, m.t);
+    const clampY = v => y(Math.min(10, Math.max(1e-4, v)));
+    function plot(tilt) {
+      const s = svgIn(phost, w, h, "Image change against the camera's angle to the wall");
+      ticksLog(s, y, m.l, w - m.r, [1e-4, 1e-3, 1e-2, 1e-1, 1, 10]);
+      [0, 5, 10, 15, 20, 25, 30].forEach(v => {
+        el("line", { x1: x(v), x2: x(v), y1: m.t, y2: h - m.b, class: "grid-line" }, s);
+        el("text", { x: x(v), y: h - m.b + 18, "text-anchor": "middle", class: "tick" }, s, v + "°");
+      });
+      el("text", { x: (m.l + w - m.r) / 2, y: h - 6, "text-anchor": "middle", class: "axis-title" }, s, "camera's angle to the wall's normal");
+      el("text", { transform: `translate(15 ${(m.t + h - m.b) / 2}) rotate(-90)`, "text-anchor": "middle", class: "axis-title" }, s, "image change, px");
+      const curve = key => path(rows.filter(r => r[key] > 1e-6).map(r => [x(r.tilt), clampY(r[key])]));
+      el("path", { d: curve("centre"), class: "curve thin c-muted dashed" }, s);
+      el("path", { d: curve("across"), class: "curve thin c-muted" }, s);
+      el("path", { d: curve("left"), class: "curve c-plate" }, s);
+      el("line", { x1: x(tilt), x2: x(tilt), y1: m.t, y2: h - m.b, class: "axis" }, s);
+      ["centre", "across", "left"].forEach(k => {
+        const v = at(tilt, k);
+        if (v > 1e-6) el("circle", { cx: x(tilt), cy: clampY(v), r: 3.5, class: k === "left" ? "f-plate" : "f-muted" }, s);
+      });
+      const order = inc.map((a, c) => ({ a, c })).sort((p, q) => p.a - q.a);
+      const groups = [];
+      order.forEach(o => { const g = groups[groups.length - 1]; if (g && o.a - g[g.length - 1].a < 2) g.push(o); else groups.push([o]); });
+      groups.forEach(g => {
+        g.forEach(o => el("circle", { cx: x(o.a), cy: clampY(at(o.a, "left")), r: 5, class: "f-plate ring" }, s));
+        const a = g.reduce((t, o) => t + o.a, 0) / g.length;
+        el("text", { x: x(a), y: clampY(at(a, "left")) + 20, "text-anchor": "middle", class: "lbl" }, s, g.map(o => "C" + (o.c + 1)).join(", "));
+      });
+      const c = at(tilt, "centre"), ac = at(tilt, "across"), lf = at(tilt, "left");
+      document.getElementById("wall-readout").innerHTML =
+        `At <b>${num(tilt, 1)}°</b> the picture moves <b>${num(c, 3)} px</b> at its centre and up to <b>${num(ac, 3)} px</b> across it. ` +
+        `After the best slight turn and change of scale, <b>${num(lf, 3)} px</b> is left for the fit to see.`;
+    }
+    const sl = document.getElementById("wall-tilt");
+    function update() { const t = Number(sl.value); diagram(t); plot(t); }
+    sl.addEventListener("input", update);
+    update();
+  });
+
+  /* Figure 3, right: the tube */
+  guard("tube-xsec", function () {
+    const T = D.tube, Ro = T.radii[0], Ri = T.radii[1], n = T.n, Dc = T.D_mm;
+    const balls = T.balls;
+    const lo = Math.min(...balls.map(b => b.ratio)), hi = Math.max(...balls.map(b => b.ratio));
+    setText("ball-hi", num(hi, 2) + " : 1");
+    setText("ball-lo", num(lo, 2) + " : 1");
+    setText("ball-off", num(Math.max(...balls.map(b => b.centroid_offset_px)), 3));
+    const w = 380, h = 300, sc = 1.12, oz = 165;
+    const X = z => oz + z * sc, Y = x => h / 2 - x * sc;
+    function refract2(d, N, n1, n2) {
+      const cosi = -(N[0] * d[0] + N[1] * d[1]), r = n1 / n2, k = 1 - r * r * (1 - cosi * cosi);
+      if (k < 0) return null;
+      const t = [r * d[0] + (r * cosi - Math.sqrt(k)) * N[0], r * d[1] + (r * cosi - Math.sqrt(k)) * N[1]];
+      const L = Math.hypot(t[0], t[1]);
+      return [t[0] / L, t[1] / L];
+    }
+    function hit(P, d, R, far) {
+      const b = P[0] * d[0] + P[1] * d[1], c = P[0] * P[0] + P[1] * P[1] - R * R, disc = b * b - c;
+      if (disc < 0) return null;
+      const s = far ? -b + Math.sqrt(disc) : -b - Math.sqrt(disc);
+      return [P[0] + s * d[0], P[1] + s * d[1]];
+    }
+    function trace(xt) {
+      const P = [Dc, 0];
+      let d = [-Dc, xt];
+      const L0 = Math.hypot(d[0], d[1]); d = [d[0] / L0, d[1] / L0];
+      const zEdge = (w - oz) / sc, s0 = (zEdge - P[0]) / d[0];
+      const pts = [[P[0] + s0 * d[0], P[1] + s0 * d[1]]];
+      const p1 = hit(P, d, Ro, false); if (!p1) return null; pts.push(p1);
+      d = refract2(d, [p1[0] / Ro, p1[1] / Ro], n[0], n[1]); if (!d) return null;
+      const p2 = hit(p1, d, Ri, false); if (!p2) return null; pts.push(p2);
+      d = refract2(d, [p2[0] / Ri, p2[1] / Ri], n[1], n[2]); if (!d) return null;
+      pts.push(hit(p2, d, Ri, true));
+      return pts;
+    }
+    let sel = balls.findIndex(b => b.x === 0 && b.z === -20);
+    if (sel < 0) sel = 0;
+    const host = document.getElementById("tube-xsec"), bhost = document.getElementById("tube-ball");
+    function xsec() {
+      const s = svgIn(host, w, h, "The tube's cross-section with camera 1's rays");
+      el("circle", { cx: X(0), cy: Y(0), r: Ro * sc, class: "wall" }, s);
+      el("circle", { cx: X(0), cy: Y(0), r: Ri * sc, class: "water" }, s);
+      for (let xt = -48; xt <= 48.1; xt += 8) {
+        const P = trace(xt);
+        if (P) el("path", { d: path(P.map(p => [X(p[0]), Y(p[1])])), class: "curve thin c-tube", "stroke-opacity": 0.8 }, s);
+      }
+      el("line", { x1: X(0) - 6, x2: X(0) + 6, y1: Y(0), y2: Y(0), class: "axis" }, s);
+      el("line", { x1: X(0), x2: X(0), y1: Y(0) - 6, y2: Y(0) + 6, class: "axis" }, s);
+      balls.forEach((b, i) => {
+        const g = el("g", { class: "pick", tabindex: 0, role: "button", "aria-label": `Ball at ${b.x} mm across, ${b.z} mm towards camera 1`, "aria-pressed": String(i === sel) }, s);
+        el("circle", { cx: X(b.z), cy: Y(b.x), r: i === sel ? 5.5 : 3.6, class: i === sel ? "f-ink" : "f-muted", "fill-opacity": i === sel ? 1 : 0.7 }, g);
+        const pick = () => { sel = i; xsec(); ball(); };
+        g.addEventListener("click", pick);
+        g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+      });
+      el("text", { x: w - 6, y: 16, "text-anchor": "end", class: "lbl-m" }, s, "to camera 1 →");
+      el("text", { x: 8, y: 16, class: "lbl-s" }, s, `outer ${num(2 * Ro, 1)} mm, wall ${num(Ro - Ri, 2)} mm`);
+      el("text", { x: 8, y: h - 10, class: "lbl-s" }, s, "dots: ball positions, click one");
+    }
+    function ball() {
+      const b = balls[sel], bw = 380, bh = 210, k = 1.45, cx = 150, cy = bh / 2;
+      const s = svgIn(bhost, bw, bh, "A ball's image through the tube");
+      el("path", { d: path(b.outline.map(p => [cx + p[0] * k, cy + p[1] * k])) + " Z", class: "soft-tube c-tube curve" }, s);
+      el("circle", { cx, cy, r: b.minor_px / 2 * k, class: "ghost" }, s);
+      el("line", { x1: cx - 4, x2: cx + 4, y1: cy, y2: cy, class: "axis" }, s);
+      el("line", { x1: cx, x2: cx, y1: cy - 4, y2: cy + 4, class: "axis" }, s);
+      const tx = cx + b.major_px / 2 * k + 14;
+      el("text", { x: tx, y: cy - 30, class: "lbl" }, s, `${num(b.major_px, 1)} × ${num(b.minor_px, 1)} px`);
+      el("text", { x: tx, y: cy - 12, class: "lbl-m" }, s, "across × along the axis");
+      el("text", { x: tx, y: cy + 14, class: "lbl" }, s, `${num(b.ratio, 3)} : 1`);
+      el("text", { x: tx, y: cy + 32, class: "lbl-m" }, s, "dashed: a circle as tall");
+      const where = b.z < 0 ? `${num(-b.z, 0)} mm beyond the axis` : b.z > 0 ? `${num(b.z, 0)} mm in front of the axis` : "level with the axis";
+      document.getElementById("tube-readout").innerHTML =
+        `A 2 mm ball <b>${where}</b>, ${b.x === 0 ? "in the middle of the view" : num(Math.abs(b.x), 0) + " mm " + (b.x < 0 ? "below" : "above") + " the middle"}: its image is ` +
+        `<b>${num(b.ratio, 3)} : 1</b>, and its outline's centre is ${num(b.centroid_offset_px, 4)} px from the image of the ball's centre.`;
+    }
+    xsec(); ball();
+  });
+
+  /* Figure 4: stage 1 */
+  guard("aff-matrix", function () {
+    const a = D.plate.affine;
+    const w = 760, h = 190, s = svgIn(document.getElementById("aff-matrix"), w, h, "The factorisation W = M S");
+    const top = 46, rowH = 11;
+    el("rect", { x: 20, y: top, width: 300, height: 8 * rowH, class: "soft-accent c-accent", "stroke-width": 1.5 }, s);
+    for (let r = 1; r < 8; r++) el("line", { x1: 20, x2: 320, y1: top + r * rowH, y2: top + r * rowH, class: "grid-line" }, s);
+    el("text", { x: 170, y: top - 12, "text-anchor": "middle", class: "lbl" }, s, `W: ${a.rows} × ${num(a.cols_kept, 0)}`);
+    el("text", { x: 170, y: top + 8 * rowH + 20, "text-anchor": "middle", class: "lbl-m" }, s, "u, v of C1…C4 down; balls A, B of every frame across");
+    el("text", { x: 345, y: top + 4 * rowH + 8, "text-anchor": "middle", class: "op" }, s, "=");
+    el("rect", { x: 372, y: top, width: 33, height: 8 * rowH, class: "soft-accent c-accent", "stroke-width": 1.5 }, s);
+    el("text", { x: 388, y: top - 12, "text-anchor": "middle", class: "lbl" }, s, "M: 8 × 3");
+    el("text", { x: 388, y: top + 8 * rowH + 20, "text-anchor": "middle", class: "lbl-m" }, s, "the cameras");
+    el("text", { x: 428, y: top + 4 * rowH + 8, "text-anchor": "middle", class: "op" }, s, "×");
+    el("rect", { x: 450, y: top + 2.5 * rowH, width: 300, height: 3 * rowH, class: "soft-accent c-accent", "stroke-width": 1.5 }, s);
+    el("text", { x: 600, y: top + 2.5 * rowH - 12, "text-anchor": "middle", class: "lbl" }, s, `S: 3 × ${num(a.cols_kept, 0)}`);
+    el("text", { x: 600, y: top + 5.5 * rowH + 20, "text-anchor": "middle", class: "lbl-m" }, s, "every ball's x, y, z");
+    el("text", { x: 20, y: 18, class: "lbl-m" }, s, "centred detections (each row's mean removed)");
+  });
+  guard("aff-sv", function () {
+    const sv = D.plate.affine.singular_values;
+    const w = 420, h = 250, m = { l: 34, r: 74, t: 10, b: 34 };
+    const s = svgIn(document.getElementById("aff-sv"), w, h, "Singular values of the centred matrix, log scale");
+    const x = lg(10, 3e5, m.l, w - m.r), rh = (h - m.t - m.b) / sv.length;
+    [10, 100, 1e3, 1e4, 1e5].forEach(v => {
+      el("line", { x1: x(v), x2: x(v), y1: m.t, y2: h - m.b, class: "grid-line" }, s);
+      el("text", { x: x(v), y: h - m.b + 16, "text-anchor": "middle", class: "tick" }, s, v >= 1e3 ? (v / 1e3) + "k" : String(v));
+    });
+    sv.forEach((v, i) => {
+      const yy = m.t + i * rh;
+      el("rect", { x: x(10), y: yy + 3, width: Math.max(1, x(v) - x(10)), height: rh - 6, rx: 3, class: i < 3 ? "f-accent" : "f-muted", "fill-opacity": i < 3 ? 1 : 0.55 }, s);
+      el("text", { x: m.l - 6, y: yy + rh / 2 + 4, "text-anchor": "end", class: "tick" }, s, "σ" + (i + 1));
+      el("text", { x: x(v) + 6, y: yy + rh / 2 + 4, class: "lbl-s" }, s, num(v, 0));
+    });
+    const yd = m.t + 3 * rh;
+    el("line", { x1: m.l, x2: w - 8, y1: yd, y2: yd, class: "curve thin c-ink dashed" }, s);
+    el("text", { x: w - 8, y: yd - 6, "text-anchor": "end", class: "lbl" }, s, "rank 3");
+  });
+  guard("aff-mirror", function () {
+    const w = 440, h = 330, s = svgIn(document.getElementById("aff-mirror"), w, h, "A scene and its mirror image");
+    function panel(y0, persp) {
+      const yc = y0 + 96, ximg = 64, xp = 144;
+      el("text", { x: 8, y: y0 + 16, class: "lbl" }, s, persp ? "Through a pinhole" : "Parallel projection");
+      el("text", { x: 8, y: y0 + 32, class: "lbl-m" }, s, persp ? "swapping near and far changes the picture" : "swapping near and far changes nothing");
+      el("line", { x1: ximg, x2: ximg, y1: y0 + 48, y2: y0 + 144, class: "axis" }, s);
+      if (persp) el("circle", { cx: xp, cy: yc, r: 3.5, class: "f-ink" }, s);
+      // a parallel projection keeps a point's height; a pinhole inverts it and scales it by 1 / depth
+      const img = (X, Y) => persp ? yc - (Y - yc) * (xp - ximg) / (X - xp) : Y;
+      const wands = [{ x: 224, dy: -24, c: "c-accent", label: "near" }, { x: 364, dy: 24, c: "c-plate", label: "far" }];
+      wands.forEach((wd, i) => {
+        const A = [wd.x, yc + wd.dy - 18], B = [wd.x, yc + wd.dy + 18];
+        [A, B].forEach(P => el("line", { x1: P[0], x2: ximg, y1: P[1], y2: img(P[0], P[1]), class: "curve thin c-muted", "stroke-opacity": 0.4 }, s));
+        el("line", { x1: A[0], x2: B[0], y1: A[1], y2: B[1], class: "curve " + wd.c, "stroke-width": 3 }, s);
+        [A, B].forEach(P => el("circle", { cx: P[0], cy: P[1], r: 3.5, class: "f-ink" }, s));
+        el("line", { x1: ximg - 9, x2: ximg - 9, y1: img(A[0], A[1]), y2: img(B[0], B[1]), class: "curve " + wd.c, "stroke-width": 5 }, s);
+        // the mirror image swaps near and far: the same wand at the other's depth (dashed) and its picture (pale)
+        const xs = wands[1 - i].x + 22;
+        el("line", { x1: xs, x2: xs, y1: A[1], y2: B[1], class: "curve dashed " + wd.c, "stroke-width": 2, "stroke-opacity": 0.6 }, s);
+        el("line", { x1: ximg - 22, x2: ximg - 22, y1: img(xs, A[1]), y2: img(xs, B[1]), class: "curve " + wd.c, "stroke-width": 5, "stroke-opacity": 0.4 }, s);
+        el("text", { x: wd.x + 11, y: y0 + 158, "text-anchor": "middle", class: "lbl-s" }, s, wd.label);
+      });
+    }
+    panel(0, false);
+    el("line", { x1: 0, x2: w, y1: 166, y2: 166, class: "grid-line" }, s);
+    panel(168, true);
+  });
+  guard("aff-table", function () {
+    const tb = document.querySelector("#aff-table tbody");
+    const right = D.plate.affine.right_mirror;
+    D.plate.affine.mirrors.slice().sort((p, q) => (q.mirror === right) - (p.mirror === right)).forEach(m => {
+      const tr = document.createElement("tr");
+      const ok = m.mirror === right;
+      tr.innerHTML = `<th>${ok ? "The right mirror image" : "The wrong mirror image"}</th>` +
+        `<td class="num">${num(m.rms_mm, 2)} mm</td><td class="num">${num(m.scale, 3)}</td>` +
+        m.rot_deg.map(r => `<td class="num">${ok ? num(r, 1) + "°" : "—"}</td>`).join("");
+      tb.appendChild(tr);
+    });
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="muted" colspan="7">The wand cloud's RMS radius is ${num(D.plate.affine.cloud_rms_radius_mm, 1)} mm. ` +
+      "No rotation lines the wrong mirror image up with the answer, yet it fits the pictures exactly as well.</td>";
+    tb.appendChild(tr);
+  });
+
+  /* Figure 5, left: perspective */
+  guard("persp-plot", function () {
+    const P = D.plate.perspective, right = D.plate.affine.right_mirror;
+    let cam = 0, mir = right;
+    const host = document.getElementById("persp-plot");
+    function draw() {
+      const set = P.find(p => p.mirror === mir).cams[cam], other = P.find(p => p.mirror !== mir).cams[cam];
+      const w = 480, h = 320, m = { l: 62, r: 14, t: 14, b: 46 };
+      const s = svgIn(host, w, h, "Wand length per image length against depth");
+      const zs = set.z.concat(other.z), ys = set.y;
+      const zmax = Math.max(...zs.map(Math.abs)) * 1.05;
+      const ylo = Math.min(...ys), yhi = Math.max(...ys), pad = (yhi - ylo) * 0.08;
+      const x = lin(-zmax, zmax, m.l, w - m.r), y = lin(ylo - pad, yhi + pad, h - m.b, m.t);
+      const step = zmax > 40 ? 20 : 10;
+      for (let v = -Math.floor(zmax / step) * step; v <= zmax; v += step) {
+        el("line", { x1: x(v), x2: x(v), y1: m.t, y2: h - m.b, class: "grid-line" }, s);
+        el("text", { x: x(v), y: h - m.b + 18, "text-anchor": "middle", class: "tick" }, s, num(v, 0));
+      }
+      const yt = (yhi - ylo) > 3 ? 1 : 0.5;
+      for (let v = Math.ceil((ylo - pad) / yt) * yt; v <= yhi + pad; v += yt) {
+        el("line", { x1: m.l, x2: w - m.r, y1: y(v), y2: y(v), class: "grid-line" }, s);
+        el("text", { x: m.l - 8, y: y(v) + 4, "text-anchor": "end", class: "tick" }, s, num(v, 1));
+      }
+      el("text", { x: (m.l + w - m.r) / 2, y: h - 6, "text-anchor": "middle", class: "axis-title" }, s, "depth beyond the cloud's centre, mm");
+      el("text", { transform: `translate(15 ${(m.t + h - m.b) / 2}) rotate(-90)`, "text-anchor": "middle", class: "axis-title" }, s, "µm of wand per pixel of image");
+      const g = el("g", {}, s);
+      set.z.forEach((z, i) => el("circle", { cx: x(z).toFixed(1), cy: y(set.y[i]).toFixed(1), r: 1.8, class: "pt-plate" }, g));
+      const fy = z => (set.b + set.a * z) * 1000;
+      el("line", { x1: x(-zmax), x2: x(zmax), y1: y(fy(-zmax)), y2: y(fy(zmax)), class: "curve " + (mir === right ? "c-ink" : "c-wrong") }, s);
+      const ok = mir === right;
+      document.getElementById("persp-readout").innerHTML = ok
+        ? `C${cam + 1}: slope ${num(set.a * 1000, 4)} µm/px per mm, so <b>f = ${num(set.f, 0)} px</b> for the pinhole in water ` +
+          `(the delivered f × 1.333: ${num(set.f_final_water, 0)} px); height ${num(set.b * 1000, 1)} µm/px, so <b>D = ${num(set.D, 0)} mm</b>.`
+        : `C${cam + 1}: in the wrong mirror image the slope is <b>${num(set.a * 1000, 4)}</b> µm/px per mm: nearer wands would look ` +
+          `shorter, which no camera does. All four cameras reject this mirror image.`;
+    }
+    chips("persp-cams", D.plate.perspective[0].cams.map((_, c) => ({ key: c, label: "C" + (c + 1) })), k => { cam = k; draw(); }, 0);
+    chips("persp-mirror", [{ key: right, label: "right mirror image" }, { key: !right, label: "wrong mirror image" }], k => { mir = k; draw(); }, right);
+    draw();
+  });
+
+  /* Figure 5, right: the window search's candidate normals */
+  guard("cand-plot", function () {
+    const C = D.plate.window_candidates;
+    let wsel = 0;
+    const host = document.getElementById("cand-plot");
+    function draw() {
+      const c = C[wsel], w = 360, h = 360, cx = 178, cy = 160, R = 140, rr = t => t / 50 * R;
+      const s = svgIn(host, w, h, `Candidate normals for wall ${c.wall}`);
+      const rings = [10, 20, 30, 40, 50];
+      rings.forEach(t => el("circle", { cx, cy, r: rr(t), class: "grid-line", fill: "none" }, s));
+      const pt = (t, az) => [cx + rr(t) * Math.cos(az * DEG), cy - rr(t) * Math.sin(az * DEG)];
+      c.normals.forEach(n => { const p = pt(n[0], n[1]); el("circle", { cx: p[0], cy: p[1], r: 3, class: "f-muted", "fill-opacity": 0.55 }, s); });
+      rings.forEach(t => el("text", { x: cx + rr(t) * 0.7071 + 2, y: cy + rr(t) * 0.7071 + 4, class: "tick halo" }, s, t + "°"));
+      c.views.forEach((v, i) => {
+        const p = pt(v[0], v[1]), ux = Math.cos(v[1] * DEG), uy = -Math.sin(v[1] * DEG);
+        el("rect", { x: p[0] - 5, y: p[1] - 5, width: 10, height: 10, class: "f-plate ring" }, s);
+        el("text", { x: p[0] + ux * 20, y: p[1] + uy * 20 + 4, "text-anchor": "middle", class: "lbl halo" }, s, "C" + (c.cams[i] + 1));
+      });
+      const f = pt(c.final[0], c.final[1]);
+      el("path", { d: `M${f[0]} ${f[1] - 7} L${f[0] + 7} ${f[1]} L${f[0]} ${f[1] + 7} L${f[0] - 7} ${f[1]} Z`, class: "f-ink ring" }, s);
+      const ky = h - 34;
+      el("rect", { x: 10, y: ky - 9, width: 10, height: 10, class: "f-plate" }, s);
+      el("text", { x: 26, y: ky, class: "lbl-m" }, s, "a camera's view");
+      el("path", { d: `M140 ${ky - 10} L148 ${ky - 2} L140 ${ky + 6} L132 ${ky - 2} Z`, class: "f-ink" }, s);
+      el("text", { x: 154, y: ky, class: "lbl-m" }, s, "the delivered wall's normal");
+      el("circle", { cx: 15, cy: ky + 17, r: 3, class: "f-muted" }, s);
+      el("text", { x: 26, y: ky + 21, class: "lbl-m" }, s, "candidate normals; centre: the cameras' mean view");
+      document.getElementById("cand-readout").innerHTML =
+        `Wall ${c.wall}: <b>${c.normals.length}</b> normals × 3 positions. The delivered wall's normal is ` +
+        `<b>${num(c.final[0], 1)}°</b> from the cameras' mean view; ` + c.views.map((v, i) => `C${c.cams[i] + 1} looks ${num(v[0], 1)}° from it`).join(", ") + ".";
+    }
+    chips("cand-walls", C.map((c, i) => ({ key: i, label: `Wall ${c.wall} (${c.cams.map(k => "C" + (k + 1)).join(", ")})` })), k => { wsel = k; draw(); }, 0);
+    draw();
+  });
+
+  /* Figure 6, left: the tube's placement search */
+  guard("place-plot", function () {
+    const PL = D.tube.placement, right = PL.best.mirror;
+    const placed = PL.candidates.filter(c => c.placed);
+    const lmin = Math.log10(Math.min(...placed.map(c => c.cost_q))), lmax = Math.log10(Math.max(...placed.map(c => c.cost_q)));
+    const op = v => 0.1 + 0.9 * (lmax - Math.log10(v)) / (lmax - lmin);
+    let mir = right;
+    const host = document.getElementById("place-plot");
+    function draw() {
+      const g = PL.grids[mir ? "True" : "False"], rho = g.rho, w = 360, h = 360, cx = 180, cy = 172, R = 142, k = R / rho;
+      const s = svgIn(host, w, h, "Axis positions tried, by cost");
+      el("circle", { cx, cy, r: R, class: "grid-line", fill: "none" }, s);
+      const short = PL.short.filter(c => c.mirror === mir);
+      const r0 = Math.max(6, g.step * k * 0.36);
+      PL.candidates.filter(c => c.mirror === mir).forEach(c => {
+        const px = cx + c.p[0] * k, py = cy - c.p[1] * k;
+        const node = el("circle", { cx: px, cy: py, r: r0, class: c.placed ? "f-tube" : "ghost", "fill-opacity": c.placed ? op(c.cost_q) : 0 }, s);
+        if (c.placed) el("title", {}, node, `axis at (${num(c.p[0], 1)}, ${num(c.p[1], 1)}) mm: cost ${num(c.cost_q, 1)} after the quick fit`);
+        if (short.some(q => q.p[0] === c.p[0] && q.p[1] === c.p[1])) el("circle", { cx: px, cy: py, r: r0 + 4, class: "sel-ring" }, s);
+      });
+      const t = PL.p_true;
+      const tx = cx + t[0] * k, ty = cy - t[1] * k;
+      el("path", { d: `M${tx - 7} ${ty - 7} L${tx + 7} ${ty + 7} M${tx - 7} ${ty + 7} L${tx + 7} ${ty - 7}`, class: "curve c-right" }, s);
+      el("text", { x: cx, y: h - 8, "text-anchor": "middle", class: "lbl-m" }, s, "axis position across camera 1's view, mm →");
+      el("text", { x: 8, y: 16, class: "lbl-m" }, s, "↑ towards camera 1");
+      el("text", { x: cx + R * 0.72, y: cy - R * 0.72, class: "lbl-s" }, s, `±${num(rho, 0)} mm`);
+      const mine = placed.filter(c => c.mirror === mir);
+      const rightBest = Math.min(...placed.filter(c => c.mirror === right).map(c => c.cost_q));
+      if (mir === right) {
+        const dist = c => Math.hypot(c.p[0] - t[0], c.p[1] - t[1]);
+        const atTrue = mine.reduce((a, b) => (dist(b) < dist(a) ? b : a));
+        const rest = Math.min(...mine.filter(c => c !== atTrue).map(c => c.cost_q));
+        const sm = PL.short.filter(c => c.mirror === right), bestS = Math.min(...sm.map(c => c.cost_s));
+        const same = sm.filter(c => c.cost_s <= bestS * 1.01).length;
+        document.getElementById("place-readout").innerHTML =
+          `Right mirror image: the position nearest the true axis has the lowest quick-fit cost, <b>${num(atTrue.cost_q, 1)}</b>; ` +
+          `every other has <b>${num(rest, 0)}</b> or more. The six ringed go on to a longer fit, and ${same} of them end in the same rig.`;
+      } else {
+        const carried = PL.short.filter(c => c.mirror === mir).length;
+        document.getElementById("place-readout").innerHTML =
+          `Wrong mirror image: its best placement costs <b>${num(Math.min(...mine.map(c => c.cost_q)), 0)}</b> after the quick fit, ` +
+          `against ${num(rightBest, 1)} for the right one; ${carried ? carried + " of its placements are" : "none of its placements is"} carried on.`;
+      }
+    }
+    chips("place-mirror", [{ key: right, label: "right mirror image" }, { key: !right, label: "wrong mirror image" }], k => { mir = k; draw(); }, right);
+    draw();
+  });
+
+  /* Figure 6, right: distance from the stretch ratio */
+  guard("ratio-plot", function () {
+    const RC = D.tube.ratio_curves, Dt = D.tube.D_mm, ft = D.tube.f_px;
+    let cam = 0;
+    const lh = document.getElementById("ratio-legend");
+    legendItem(lh, "c-tube", false, "model camera, axis in its true place");
+    legendItem(lh, "c-muted thin", true, "axis at the grid point picked");
+    legendItem(lh, "c-ink thin", true, "measured stretch");
+    const host = document.getElementById("ratio-plot");
+    function draw() {
+      const c = RC[cam], w = 480, h = 320, m = { l: 56, r: 14, t: 14, b: 46 };
+      const s = svgIn(host, w, h, "Stretch ratio against camera distance");
+      const x = lg(150, 6000, m.l, w - m.r), y = lin(1.08, 1.35, h - m.b, m.t);
+      [200, 500, 1000, 2000, 5000].forEach(v => {
+        el("line", { x1: x(v), x2: x(v), y1: m.t, y2: h - m.b, class: "grid-line" }, s);
+        el("text", { x: x(v), y: h - m.b + 18, "text-anchor": "middle", class: "tick" }, s, num(v, 0));
+      });
+      [1.1, 1.15, 1.2, 1.25, 1.3, 1.35].forEach(v => {
+        el("line", { x1: m.l, x2: w - m.r, y1: y(v), y2: y(v), class: "grid-line" }, s);
+        el("text", { x: m.l - 8, y: y(v) + 4, "text-anchor": "end", class: "tick" }, s, num(v, 2));
+      });
+      el("text", { x: (m.l + w - m.r) / 2, y: h - 6, "text-anchor": "middle", class: "axis-title" }, s, "camera's distance, mm (log scale)");
+      el("text", { transform: `translate(14 ${(m.t + h - m.b) / 2}) rotate(-90)`, "text-anchor": "middle", class: "axis-title" }, s, "stretch ratio, across / along");
+      const curve = cc => path(cc.s.map((v, i) => [v, cc.ratio[i]]).filter(p => p[1] !== null).map(p => [x(p[0]), y(p[1])]));
+      el("path", { d: curve(c.chosen), class: "curve thin c-muted dashed" }, s);
+      el("path", { d: curve(c.true), class: "curve c-tube" }, s);
+      el("line", { x1: m.l, x2: w - m.r, y1: y(c.ratio_obs), y2: y(c.ratio_obs), class: "curve thin c-ink dashed" }, s);
+      el("line", { x1: x(Dt), x2: x(Dt), y1: m.t, y2: h - m.b, class: "curve thin c-right" }, s);
+      el("text", { x: x(Dt) - 6, y: m.t + 14, "text-anchor": "end", class: "lbl" }, s, `true ${num(Dt, 0)} mm`);
+      el("circle", { cx: x(c.true.s_best), cy: y(c.ratio_obs), r: 5, class: "f-tube ring" }, s);
+      el("text", { x: x(c.true.s_best) + 8, y: y(c.ratio_obs) + 18, class: "lbl" }, s, `start ${num(c.true.s_best, 0)} mm`);
+      document.getElementById("ratio-readout").innerHTML =
+        `C${cam + 1}: the linear fit measured a stretch of <b>${num(c.ratio_obs, 4)}</b>. With the axis in its true place that puts ` +
+        `the camera at <b>${num(c.true.D_axis, 0)} mm</b> from the axis with f ${num(c.true.f, 0)} px (true: ${num(Dt, 0)} mm, ${num(ft, 0)} px). ` +
+        `At the grid point picked: ${num(c.chosen.D_axis, 0)} mm. The fits that follow end within ` +
+        `${num(Math.max(...D.tube.calibration.D_err_mm.map(Math.abs)), 1)} mm.`;
+    }
+    chips("ratio-cams", RC.map((_, c) => ({ key: c, label: "C" + (c + 1) })), k => { cam = k; draw(); }, 0);
+    draw();
+  });
+
+  /* Figure 7: stage 3 */
+  guard("bp-plot", function () {
+    const w = 380, h = 270, s = svgIn(document.getElementById("bp-plot"), w, h, "Rays missing a triangulated ball");
+    const yWall = 92, tP = 12, yW = yWall + tP;
+    el("rect", { x: 0, y: yW, width: w, height: h - yW, class: "water" }, s);
+    el("rect", { x: 0, y: yWall, width: w, height: tP, class: "wall" }, s);
+    const X = [190, 196], B = [236, 248];
+    function trace(cx, cy, a, yEnd) {
+      const p1 = [cx + (yWall - cy) * Math.tan(a), yWall];
+      const ap = Math.asin(Math.sin(a) / 1.49), aw = Math.asin(Math.sin(a) / 1.333);
+      const p2 = [p1[0] + tP * Math.tan(ap), yW];
+      return [[cx, cy], p1, p2, [p2[0] + (yEnd - yW) * Math.tan(aw), yEnd]];
+    }
+    function aim(cx, cy, T) {
+      let lo = -1.4, hi = 1.4;
+      for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (trace(cx, cy, mid, T[1])[3][0] < T[0]) lo = mid; else hi = mid; }
+      return (lo + hi) / 2;
+    }
+    el("line", { x1: X[0], x2: B[0], y1: X[1], y2: B[1], class: "curve c-ink" }, s);
+    el("circle", { cx: B[0], cy: B[1], r: 5, class: "f-muted" }, s);
+    [[40, 20, 0.13], [200, 12, -0.12], [345, 24, 0.11]].forEach(([cx, cy, off]) => {
+      const P = trace(cx, cy, aim(cx, cy, X) + off, X[1] + 48);
+      el("path", { d: path(P), class: "curve thin c-plate" }, s);
+      el("rect", { x: cx - 10, y: cy - 13, width: 20, height: 12, rx: 2, class: "f-plate" }, s);
+      const p2 = P[2], p3 = P[3], dx = p3[0] - p2[0], dy = p3[1] - p2[1];
+      const u = ((X[0] - p2[0]) * dx + (X[1] - p2[1]) * dy) / (dx * dx + dy * dy);
+      el("line", { x1: X[0], x2: p2[0] + u * dx, y1: X[1], y2: p2[1] + u * dy, class: "curve c-wrong", "stroke-width": 2.6 }, s);
+    });
+    el("circle", { cx: X[0], cy: X[1], r: 5.5, class: "f-ink" }, s);
+    el("text", { x: X[0] - 14, y: X[1] + 26, "text-anchor": "end", class: "lbl" }, s, "triangulated ball");
+    el("text", { x: B[0] + 10, y: B[1] + 4, class: "lbl-m" }, s, "the other ball, L away");
+    el("text", { x: w - 6, y: yWall - 6, "text-anchor": "end", class: "lbl-s" }, s, "wall");
+  });
+
+  /* Figure 8, left: the normal equations */
+  guard("schur-plot", function () {
+    const P = D.plate.params, nf = 12, k = 2.15, rig = P * k, fr = 5 * k, N = rig + nf * fr;
+    const w = 420, h = 300, x0 = 16, y0 = 18, s = svgIn(document.getElementById("schur-plot"), w, h, "Block structure of the normal equations");
+    el("rect", { x: x0, y: y0, width: N, height: N, class: "f-surface c-muted", "stroke-width": 1 }, s);
+    el("rect", { x: x0, y: y0, width: rig, height: rig, class: "f-accent", "fill-opacity": 0.85 }, s);
+    el("rect", { x: x0 + rig, y: y0, width: N - rig, height: rig, class: "f-accent", "fill-opacity": 0.25 }, s);
+    el("rect", { x: x0, y: y0 + rig, width: rig, height: N - rig, class: "f-accent", "fill-opacity": 0.25 }, s);
+    for (let i = 0; i < nf; i++) el("rect", { x: x0 + rig + i * fr, y: y0 + rig + i * fr, width: fr, height: fr, class: "f-ink", "fill-opacity": 0.8 }, s);
+    el("text", { x: x0 + rig / 2, y: y0 + rig / 2 + 4, "text-anchor": "middle", class: "lbl on-dark" }, s, String(P));
+    const xr = x0 + N + 16;
+    el("text", { x: xr, y: y0 + 14, class: "lbl" }, s, `rig: ${P}`);
+    el("text", { x: xr, y: y0 + 30, class: "lbl-m" }, s, "cameras and walls");
+    el("text", { x: xr, y: y0 + rig + 34, class: "lbl" }, s, "5 per frame");
+    el("text", { x: xr, y: y0 + rig + 50, class: "lbl-m" }, s, `× ${num(D.plate.n_frames, 0)} frames`);
+    el("text", { x: xr, y: y0 + rig + 66, class: "lbl-m" }, s, `(${nf} drawn)`);
+    el("text", { x: xr, y: y0 + N - 34, class: "lbl" }, s, `→ one ${P} × ${P}`);
+    el("text", { x: xr, y: y0 + N - 18, class: "lbl-m" }, s, "system per step");
+  });
+
+  /* Figure 8, right: pinned against a wall */
+  guard("pin-plot", function () {
+    const w = 380, h = 270, s = svgIn(document.getElementById("pin-plot"), w, h, "A ball against a wall's water side");
+    const yWall = 96, tP = 22;
+    el("rect", { x: 0, y: yWall + tP, width: w, height: h - yWall - tP, class: "water" }, s);
+    el("rect", { x: 0, y: yWall, width: w, height: tP, class: "wall" }, s);
+    el("text", { x: 8, y: 20, class: "lbl-m" }, s, "air (camera side)");
+    el("text", { x: 8, y: yWall + 15, class: "lbl-s" }, s, "acrylic");
+    el("text", { x: 8, y: h - 10, class: "lbl-m" }, s, "water");
+    const A = [200, yWall + tP], B = [262, yWall + tP + 86];
+    el("line", { x1: A[0], x2: B[0], y1: A[1], y2: B[1], class: "curve c-ink" }, s);
+    el("circle", { cx: A[0], cy: A[1], r: 6, class: "f-ink" }, s);
+    el("circle", { cx: B[0], cy: B[1], r: 6, class: "f-ink" }, s);
+    el("path", { d: `M${A[0] - 4} ${A[1] - 8} L${A[0] - 26} ${A[1] - 40}`, class: "curve c-wrong dashed" }, s);
+    el("path", { d: `M${A[0] - 33} ${A[1] - 48} l12 12 M${A[0] - 33} ${A[1] - 36} l12 -12`, class: "curve c-wrong" }, s);
+    el("text", { x: A[0] - 40, y: A[1] - 54, "text-anchor": "end", class: "lbl" }, s, "step refused:");
+    el("text", { x: A[0] - 40, y: A[1] - 38, "text-anchor": "end", class: "lbl-m" }, s, "the ball would leave the water");
+    el("text", { x: A[0] + 14, y: A[1] + 22, class: "lbl-m" }, s, "ball touching the wall");
+  });
+
+  /* Stage 5: the two examples */
+  guard("result-table", function () {
+    const p = D.plate.result, c = D.tube.calibration;
+    const rows = [
+      ["Data", `${num(D.plate.n_frames, 0)} frames, ${num(p.detections, 0)} detections, 4 cameras`, `${num(D.tube.frames, 0)} frames, ${num(c.detections, 0)} detections, 3 cameras`],
+      ["Started from", "a verified earlier fit (from scratch T0 can end in a wrong minimum)", "scratch"],
+      ["Run time", `${num(p.seconds_from_start / 60, 1)} min`, `${num(c.seconds, 0)} s`],
+      ["Residual, RMS", `${num(p.rms_px, 3)} px`, `${num(c.rms_px, 3)} px (noise put in: ${num(D.tube.noise_px, 1)} px)`],
+      ["Free triangulation, every frame", `median ${num(p.median_px, 3)} px; wand length off by ${num(p.wand_abs_median_mm * 1000, 1)} µm (median)`, "—"],
+      ["Against the truth", "unknown (real data)", `f ${c.f_err_pct.map(v => num(v, 2) + " %").join(", ")}; distances to the axis ${c.D_err_mm.map(v => num(v, 2)).join(", ")} mm`],
+      ["Rig parameters", `${D.plate.params}: 26 for the cameras, 6 for the two walls`, `${c.params}: camera 1 has 5, the others 7`],
+    ];
+    const tb = document.querySelector("#result-table tbody");
+    rows.forEach(r => { const tr = document.createElement("tr"); tr.innerHTML = `<th>${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td>`; tb.appendChild(tr); });
+  });
+})();
+</script>

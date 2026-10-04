@@ -78,6 +78,16 @@ experiment.
 ## 1. Progress log
 
 **2026-10-04**
+- **An illustrated guide to both wand calibrations, flat walls and tube:**
+  `modules/camera_calibration/curved_calibration/guide/WAND_CALIBRATION_GUIDE.html`, also at
+  https://claude.ai/artifact/BR616e7TfeF63xsX4rrA46 (private until you share it).
+  - **What it shows:**
+    - a flow chart of the stages;
+    - both rigs in 3-D;
+    - what a wall and a tube do to an image;
+    - each stage with T0's real numbers (flat walls) and a synthetic rig (tube).
+  - **How it is made:** `make_guide.py` beside it computes every number and drawn ray with the calibration's own
+    models. It also checks that its replay of `cylinder_wand.bootstrap`'s placement search matches the library.
 - **Case `plate_20260727_T0`, your channel** (plan and report `cases/plate_20260727_T0/2026-10-03-walls-*.md`).
   - **The problem:** the channel is 15 × 10 cm inside, with C1 and C2 on the long side. The delivered calibration put
     the C3/C4 wall about 9 cm too close to its cameras, so the wand reached 225 mm into the 150 mm channel.
@@ -85,7 +95,8 @@ experiment.
     - the fit was pinned against the C1/C2 wall: a wand end sat on its surface, so every step was refused;
     - each lens's principal point was held at the image centre.
     - Freed of both, the data alone move the wall about 70 mm towards the channel.
-  - **Two library options, approved and off by default, so earlier results are unchanged; not committed:**
+  - **Two library options, approved and off by default, so earlier results are unchanged; committed by you in
+    `e2f3934`:**
     - **L1, `fit_lens`:** fits the principal point, k2 or the tangential terms.
     - **L2, `constraints`:**
       - **channel:** every wand end stays inside it, each ball its radius from every wall; held by a squared hinge,

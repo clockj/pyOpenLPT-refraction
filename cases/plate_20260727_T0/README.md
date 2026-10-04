@@ -94,8 +94,8 @@ The case found two library bugs on real data and fixed them on 3 Oct, with your 
 Each has a regression test in `tests/test_plate_wand.py`. Records: `tests/fix_*_console.txt` and the report, sections 3
 and 4. Both are committed (`180063f`).
 
-For your channel it added two options to `plate_wand` on 3 Oct, with your approval. Both are off by default and not
-committed:
+For your channel it added two options to `plate_wand` on 3 Oct, with your approval. Both are off by default; you
+committed them in `e2f3934`:
 - `fit_lens`: the principal point, k2, the tangential terms.
 - `constraints`: a channel the wand stays in, where cameras aim, a camera's distance to its wall.
 

@@ -1,6 +1,6 @@
 # Cylinder wand calibration (PINCYL): summary and progress
 
-Last updated: 2026-10-03.
+Last updated: 2026-10-04.
 
 Start here to catch up. This file gathers what all the wand tests so far concluded, and what that means for a real
 experiment.
@@ -19,6 +19,25 @@ experiment.
 - No real wand data have been tried yet.
 
 ## 1. Progress log
+
+**2026-10-04**
+- **An illustrated guide to both wand calibrations, tube and flat walls:**
+  `modules/camera_calibration/curved_calibration/guide/WAND_CALIBRATION_GUIDE.html`, also at
+  https://claude.ai/artifact/BR616e7TfeF63xsX4rrA46 (private until you share it).
+  - **What it shows:** a flow chart, both rigs in 3-D, a 2 mm ball's image through the tube, and each stage.
+  - **How it is made:** `make_guide.py` beside it computes everything with the calibration's own models, on a
+    synthetic copy of the reference rig (500 frames, 0.1 px).
+  - **The run behind it:**
+    - **Calibration:** from scratch in 28 s, with f within 0.1 % on all three cameras.
+    - **Start search:** its replay of `bootstrap`'s placement search matches the library.
+    - **The stretch ratio** puts the start's cameras 20–40 % too far away, even with the axis in its true place.
+      The ratio-against-distance curve flattens with distance, and stages 3–4 then correct it.
+- **The flat-wall calibration's "pinned" failure cannot happen through a tube** (checked for your question).
+  - On the plate, a fit can freeze with a wand end on a wall's water side: the model refuses that point, so the fit
+    refuses every step.
+  - `cyl_model.project` refuses no point at the tube's wall. Points up to 102 mm from the axis still project; the
+    inner wall is at 97.6 mm.
+  - The tube does not move, and the start keeps the wand inside it.
 
 **2026-10-03**
 - **A crash in `cylinder_wand.affine_factorization` (stage 1), found and fixed on real flat-window data** (case
