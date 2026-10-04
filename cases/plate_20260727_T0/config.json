@@ -5,6 +5,8 @@
   "image_pattern": "{folder}\\{folder}frame{frame:06d}.tif",
   "results_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0",
   "out_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand",
+  "out_dir_ref": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref",
+  "out_dir_ref_centre": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref_centre",
   "detections": {
     "_comment": "Wand CSVs in results_dir (the GUI's format: Filtered_Small = end A, Filtered_Large = end B). all: the circle finder's table, 10,936 frames with both balls in all four cameras; gui_8962 and gui_5563: the GUI's filtered sets behind calib_2 and calib_3.",
     "all": "circle_results_table_new.csv",
@@ -42,5 +44,10 @@
   "photo_hints": {
     "_comment": "T5 only: each camera roughly square-on to its wall (its window's normal along its optical axis).",
     "normals": [[0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0]]
+  },
+  "constraints": {
+    "_comment": "2026-10-03-walls-plan.md (W3, W4): plate_wand's optional constraints, from the user (2026-10-03). The channel is 15 x 10 cm inside ('not 100% accurate, it might have some small erros'); C1 and C2 look through its long side, so the inside width is 100 mm across wall_C1C2 and 150 mm across wall_C3C4 (windows in rig order). The balls' radii come from their image radii (26 and 34 px in C1 at about 17 px/mm). The cameras 'should somehow look at the center ... but no exactly accurate': aim_centre puts C1 and C2's aim (cameras 0-based) at the middle of the long side, 75 mm from wall_C3C4 (window 1).",
+    "channel": {"width_mm": [100.0, 150.0], "tolerance_mm": 3.0, "ball_radius_mm": [1.5, 2.0]},
+    "aim_centre": [{"cams": [0, 1], "wall": 1, "mm": 75.0}]
   }
 }

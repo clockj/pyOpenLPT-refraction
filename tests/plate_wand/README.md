@@ -1,6 +1,6 @@
 # Flat-window wand calibration (PINPLATE): summary and progress
 
-Last updated: 2026-10-03.
+Last updated: 2026-10-04.
 
 Start here to catch up. This file gathers what the flat-window wand tests concluded, and what that means for a real
 experiment.
@@ -67,10 +67,56 @@ experiment.
   - **From scratch it can end in a wrong minimum** (2 of 9 frame sets). The cause is one wall seen by its two cameras
     under only about 6°. Starting from a verified fit avoids it, and so do rough hints.
   - **Two library bugs** were found and fixed.
+  - **New (4 Oct): the channel.** The user's channel (15 × 10 cm) showed one wall about 9 cm off.
+    - **New options, off by default:** fitted lens terms (`fit_lens`) and held facts about the rig (`constraints`: the
+      channel, the cameras' aim, a camera's distance to its wall).
+    - **The fix:** with the principal point fitted and the channel held, the wall is in place, and the fit is better
+      on held-out frames too (progress log, 2026-10-04).
 - The GUI does not call this calibration yet. Section 4 says how to run and check a real experiment; the full report
   has the same advice (`2026-10-02-plate-wand-report.md`, section 6).
 
 ## 1. Progress log
+
+**2026-10-04**
+- **Case `plate_20260727_T0`, your channel** (plan and report `cases/plate_20260727_T0/2026-10-03-walls-*.md`).
+  - **The problem:** the channel is 15 × 10 cm inside, with C1 and C2 on the long side. The delivered calibration put
+    the C3/C4 wall about 9 cm too close to its cameras, so the wand reached 225 mm into the 150 mm channel.
+  - **The causes, found by tests W0–W2:**
+    - the fit was pinned against the C1/C2 wall: a wand end sat on its surface, so every step was refused;
+    - each lens's principal point was held at the image centre.
+    - Freed of both, the data alone move the wall about 70 mm towards the channel.
+  - **Two library options, approved and off by default, so earlier results are unchanged; not committed:**
+    - **L1, `fit_lens`:** fits the principal point, k2 or the tangential terms.
+    - **L2, `constraints`:**
+      - **channel:** every wand end stays inside it, each ball its radius from every wall; held by a squared hinge,
+        starts moved into it;
+      - **aim:** where cameras' optical axes meet their wall;
+      - **distance:** a camera's distance to its wall.
+      - `constraint_report` lists them at the answer.
+    - Three new tests in `tests/test_plate_wand.py`; the file passes, 21 tests with the slow ones.
+  - **Your choice:** the principal point held at the image centre, `Results\T0\calib_plate_wand_ref_centre` (W4c).
+    - Accuracy: 0.218 px and 0.0068 mm median on every frame, as the first calibration's.
+    - The wand: 14–99 mm from the C1/C2 wall, 16–132 mm from the C3/C4 wall.
+  - **The variant with the principal point fitted, `Results\T0\calib_plate_wand_ref`** (W4):
+
+    | measure | the first calibration | with the channel |
+    |---|---|---|
+    | reprojection error, median, every frame | 0.215 px | 0.210 px |
+    | wand length error, median | 0.0067 mm | 0.0065 mm |
+    | the wand from the C3/C4 wall | 109–225 mm | 16–131 mm |
+
+    - **Settings:** k1 and the principal point fitted; the channel and the cameras' aim held.
+    - **Held-out halves:** better too.
+    - **A cross-check:** C3 and C4 aim at the middle of their wall unprompted.
+  - **What the real data showed:**
+    - **"pinned" is not harmless for the walls.** It hides how freely they move.
+    - **The walls' positions** rest on effects of a few tenths of a pixel. A lens term held wrongly can move one by
+      9 cm.
+    - **Facts about the rig should be constraints.** A channel's size or a wall the wand touched works where a hint
+      cannot, because a hint never overrides the data.
+    - **The channel also guards against wrong minima.** From scratch on every frame with the channel held, both lens
+      models reached the right answer in 55–70 min on one thread. Without the channel, the same data had ended in
+      wrong minimum kind A.
 
 **2026-10-03**
 - **The first real data set: case `cases/plate_20260727_T0`, run 20260727/T0** (plan and report in the case folder).

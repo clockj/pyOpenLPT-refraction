@@ -428,6 +428,7 @@ def write_result(sol: pw.Solution, folder: str, names: Sequence[str] = None, pix
         "frame": "Z = window 1's normal (camera -> water); Y = n1 x n2 (two windows) or camera 1's image up in "
                  "window 1's plane; origin = the wand's mean position",
         "wand_length_mm": sol.L, "fit_L": bool(sol.layout.fit_L), "fit_k1": bool(sol.layout.fit_k1),
+        "fit_lens": list(getattr(sol.layout, "fit_lens", ())),
         "gauge": "camera 1's pose held during the fit (sigmas are in that gauge)",
         "rms_px": sol.rms, "sigma_px": sol.sigma_px, "frames": int(sol.obs.n_frames),
         "observations": int(len(sol.obs)), "active": int(sol.obs.active.sum()), "cameras": cams_json,
@@ -470,6 +471,48 @@ def _perturbed_line(pt: Dict) -> str:
         return head + (f"a restart refitted to rms {lost[0]['rms_after_px']:.5f} px was not better on the same terms "
                        f"(capped cost {lost[0].get('capped_rel', float('nan')):+.1e}); the answer stands")
     return head + "none lowered the cost; the answer stands"
+
+
+def _lens_lines(cameras) -> list:
+    """The report's lines on the lens terms of each camera, with their sigmas where fitted (`plate_wand.LENS_TERMS`)."""
+    out = []
+    for c in cameras:
+        s = c["sigma"] or {}
+        d = c["dist"]
+        sd = lambda k, fmt: f" +- {s[k]:{fmt}}" if s.get(k) is not None else ""
+        parts = [f"principal point ({c['cx']:.2f}{sd('cx_px', '.2f')}, {c['cy']:.2f}{sd('cy_px', '.2f')}) px",
+                 f"k1 {d[0]:.4f}{sd('k1', '.4f')}"]
+        for name, i in (("k2", 1), ("p1", 2), ("p2", 3)):
+            if s.get(name) is not None or d[i] != 0.0:
+                parts.append(f"{name} {d[i]:.4g}{sd(name, '.2g')}")
+        out.append(f"{c['name']} lens: " + ", ".join(parts))
+    return out
+
+
+def _constraint_lines(cons) -> list:
+    """The report's lines on the constraints at the answer (`plate_wand.constraint_report`)."""
+    if not cons:
+        return []
+    out = []
+    ch = cons.get("channel")
+    if ch:
+        parts = []
+        for k, w in enumerate(ch["windows"]):
+            lo, hi = w["band_mm"]
+            parts.append(f"window {k + 1}: the wand ends {w['depth_mm'][0]:.1f}-{w['depth_mm'][1]:.1f} mm below it; it "
+                         f"could move {'-inf' if lo is None else f'{lo:+.1f}'} to {hi:+.1f} mm along its normal (+: "
+                         f"away from its cameras) and still hold them")
+        out.append(f"channel (held): inside widths {ch['width']} mm + {ch['tol']:g} mm, ball radii {list(ch['ball'])} "
+                   f"mm; " + "; ".join(parts) + f"; {ch['active_rows']} wand ends on a limit (largest breach "
+                   f"{ch['max_breach_mm']:.3f} mm)")
+    for p in cons.get("priors") or []:
+        if p["kind"] == "aim":
+            out.append(f"aim: cameras {[c + 1 for c in p['cam']]} aim {p['value']:.2f} mm below window {p['wall'] + 1}'s "
+                       f"water side (given {p['mean']:.2f}, sigma {p['sigma']:g} mm)")
+        elif p["kind"] == "distance":
+            out.append(f"distance: camera {p['cam'] + 1} is {p['value']:.2f} mm from its window (given {p['mean']:.2f}, "
+                       f"sigma {p['sigma']:g} mm)")
+    return out
 
 
 def report_text(res: Dict) -> str:
@@ -525,6 +568,7 @@ def report_text(res: Dict) -> str:
                                        else "nothing better"))
             parts.append(p)
         out.append(f"scan of the weakly seen windows' normals ({sc['seconds']:.0f} s): " + "; ".join(parts))
+    out += _constraint_lines((res.get("info") or {}).get("constraints"))
     out += [f"frame: {res['frame']}", f"gauge: {res['gauge']}", ""]
     for k, w in enumerate(res["windows"]):
         s = w["sigma"] or {}
@@ -543,6 +587,8 @@ def report_text(res: Dict) -> str:
                    + (f", incidence {c['incidence_deg']:.2f} deg" if c['incidence_deg'] is not None else "")
                    + f"; reprojection RMS {c['residuals']['rms_px']:.4f} px ({c['residuals']['n_active']}/"
                    f"{c['residuals']['n_total']} active); camFile {c['camfile']}")
+    if res.get("fit_lens"):
+        out += _lens_lines(res["cameras"])
     pr = (res.get("predicted") or {}).get("points")
     if pr:
         out += ["", f"predicted calibration error on points like the wand's ({pr['n_points']}): re-triangulated "

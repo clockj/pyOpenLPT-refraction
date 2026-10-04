@@ -2,7 +2,9 @@
 (tests/states/*.pkl, not tracked by git), each fit's settings, RMS, warnings, the rig's frame-independent description
 (case.describe) and whether it is the right answer (both walls' cameras farther than 0.5 m from their walls and the
 walls within 1 degree of the right answer's 90.2); and, for the plan view, the delivered fit's and calib_3's cameras
-placed against the two walls, with the volume the wand covered.
+placed against the two walls, with the volume the wand covered (and, once it exists, the calibration with the
+channel, W4's w4_ref, and the channel's size).  The walls plan's W1 and W2 states are held bundle adjustments, not
+calibrations, and are left out.
 
     python tests/fits_summary.py
 """
@@ -19,9 +21,12 @@ sys.path.insert(0, os.path.dirname(HERE))
 import case  # noqa: E402
 
 SKIP = {"probe20"}
+SKIP_PREFIX = ("w1_", "w2_")     # the walls plan's held bundle adjustments (W1, W2): tests, not calibrations
 LABELS = {"t2_all": "T2, delivered (every frame, from the first half's fit)",
           "t2_scratch": "T2 from scratch (every frame)",
-          "t3k_h2_from_h1": "second half, from the first half's fit"}
+          "t3k_h2_from_h1": "second half, from the first half's fit",
+          "w4_ref": "W4, with the channel (every frame; principal point fitted; channel and aim held)",
+          "w4c_ref": "W4c, delivered with the channel (every frame; principal point at the centre; channel and aim held)"}
 
 
 def plan(cams, rig, P=None):
@@ -55,7 +60,7 @@ def main():
     fits = []
     for fn in sorted(os.listdir(os.path.join(HERE, "states"))):
         name = fn[:-4]
-        if not fn.endswith(".pkl") or name in SKIP:
+        if not fn.endswith(".pkl") or name in SKIP or name.startswith(SKIP_PREFIX):
             continue
         st = case.load_state(os.path.join(HERE, "states", fn))
         s = st["extra"].get("settings") or {}
@@ -71,6 +76,9 @@ def main():
             "hints": s.get("hints"), "edge_margin": s.get("edge_margin"),
             "start": os.path.basename(s["start"])[:-4] if s.get("start") else None,
             "n_water": s.get("n_water"), "thickness": s.get("thickness"),
+            "fit_lens": list(st["layout"].get("fit_lens") or []), "constraints": s.get("constraints"),
+            "pp_off_px": [[c.cx - (c.width - 1) / 2.0, c.cy - (c.height - 1) / 2.0] for c in st["cams"]],
+            "depth_mm": [[float(w.depth(P).min()), float(w.depth(P).max())] for w in st["rig"].windows],
             "rms_px": st["rms"], "sigma_px": st["sigma_px"], "seconds": st["extra"].get("seconds"),
             "walls_angle_deg": d["walls_angle_deg"], "f_px": [c["f_px"] for c in d["cameras"]],
             "k1": [c["k1"] for c in d["cameras"]], "distance_mm": [c["distance_to_wall_mm"] for c in d["cameras"]],
@@ -83,6 +91,12 @@ def main():
     g_cams, g_rig = case.load_gui(cfg, "calib_3")
     out = {"fits": fits, "plan": {"T2": plan(st2["cams"], st2["rig"], wand_ends(st2)),
                                   "calib_3": plan(g_cams, g_rig)}}
+    for key, state in (("ref", "w4c_ref"), ("ref_pp", "w4_ref")):   # the walls plan's deliveries (W4c chosen, W4)
+        p_ref = os.path.join(HERE, "states", f"{state}.pkl")
+        if os.path.exists(p_ref):
+            st_r = case.load_state(p_ref)
+            out["plan"][key] = plan(st_r["cams"], st_r["rig"], wand_ends(st_r))
+            out["plan"]["channel"] = {k: v for k, v in cfg["constraints"]["channel"].items() if not k.startswith("_")}
     with open(os.path.join(HERE, "fits_summary.json"), "w", encoding="utf-8") as fh:
         json.dump(out, fh, indent=1)
     print(f"{len(fits)} fits; right {sum(f['right'] for f in fits)}, wrong {sum(not f['right'] for f in fits)}")

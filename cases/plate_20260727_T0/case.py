@@ -151,7 +151,9 @@ def save_state(path: str, sol, extra: Dict = None) -> None:
     st = {"cams": [(c.R, c.C, c.f, c.cx, c.cy, c.width, c.height, c.dist) for c in sol.cams],
           "windows": [(w.n, w.d, w.t, w.idx, w.name) for w in sol.rig.windows], "cam_win": list(sol.rig.cam_win),
           "L": sol.L, "rms": sol.rms, "sigma_px": sol.sigma_px, "cov": sol.cov, "weights": sol.weights,
-          "layout": {"fit_k1": sol.layout.fit_k1, "fit_L": sol.layout.fit_L, "names": list(sol.layout.names)},
+          "layout": {"fit_k1": sol.layout.fit_k1, "fit_L": sol.layout.fit_L, "names": list(sol.layout.names),
+                     "fit_lens": list(getattr(sol.layout, "fit_lens", ())),
+                     "priors": [dict(p) for p in sol.layout.priors], "channel": getattr(sol.layout, "channel", None)},
           "frame_ids": sol.obs.frame_ids, "active": sol.obs.active, "obs_frame": sol.obs.frame,
           "obs_cam": sol.obs.cam, "obs_end": sol.obs.end, "frames_m": sol.frames.m, "frames_w": sol.frames.w,
           "info": {k: v for k, v in sol.info.items() if _plain(v)}, "extra": extra or {}}

@@ -14,7 +14,11 @@ of its checks (`-m "not slow"` skips the calibration from scratch):
   * weakly seen windows: the rule, the tilt the scan uses, and the report's warnings; slow: the scan of a weak
     window's normal brings W5 seed 1001 to the global minimum without hints (H4);
   * slow: a calibration from scratch reaches the same minimum as one started at the truth (W5, rig D), and the
-    perturbed restarts free W5 seed 2000's answer, pinned against a window (R6).
+    perturbed restarts free W5 seed 2000's answer, pinned against a window (R6);
+  * the optional lens terms (fit_lens: principal point, k2, tangential) and constraints (a channel the wand stays in,
+    where cameras aim), added for the real case cases/plate_20260727_T0 (its 2026-10-03-walls-plan.md, L1 and L2):
+    the terms recovered on noiseless data, the channel rows' Jacobian, a channel the truth satisfies changes nothing
+    and one it breaks is met, an aim held.
 The modules are imported from their folder directly, so the GUI package (Qt) is not loaded.
 """
 import math
@@ -401,6 +405,109 @@ def test_affine_start_rejection_in_last_round():
         aff = pw.cw.affine_factorization(obs, L, rounds=rounds)
         assert len(aff.frames) == len(aff.XA) == len(aff.XB) > F // 2
         assert np.all(np.isfinite(aff.XA)) and np.all(np.isfinite(aff.XB))
+
+
+def test_lens_terms():
+    """L1: rig B with every camera's principal point moved 20-40 px and k2, p1, p2 set, noiseless (the C++ cameras'
+    images).  Started from the truth with those terms at their defaults (principal point at the image centre, k2 = p1 =
+    p2 = 0), the fit with fit_lens recovers them; without fit_lens it cannot fit the data.  The layout without fit_lens
+    is the former one, and the sigmas name the new terms."""
+    rig_t = prigs.rig_B()
+    rng = np.random.default_rng(31)
+    for cam in rig_t.cams:
+        cam.cx += rng.choice([-1, 1]) * rng.uniform(20, 40)
+        cam.cy += rng.choice([-1, 1]) * rng.uniform(20, 40)
+        cam.dist = np.array([0.05, -0.05, 3e-4, -2e-4, 0.0])
+    wand = prigs.make_wand(rig_t, 400, np.random.default_rng(32), noise_px=0.0)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+    cams0 = []
+    for cam in rig_t.cams:
+        k = cam.copy()
+        k.cx, k.cy, k.dist = (k.width - 1) / 2.0, (k.height - 1) / 2.0, np.array([0.05, 0.0, 0.0, 0.0, 0.0])
+        cams0.append(k)
+    rig0 = pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win)
+    assert pw.Layout(4, 2, fit_k1=True).cols == list(pw.CAM_COLS) + ["k1"]
+    with pytest.raises(ValueError):
+        pw.Layout(4, 2, fit_lens=("k3",))
+    plain = pw.solve(data, cams0, rig0, fit_k1=True, noise_weights="none")
+    full = pw.solve(data, cams0, rig0, fit_k1=True, fit_lens=("pp", "k2", "tangential"), noise_weights="none")
+    assert full.layout.cols[-5:] == ["cx", "cy", "k2", "p1", "p2"]
+    assert plain.rms > 0.05 and full.rms < 1e-5, (plain.rms, full.rms)
+    for c, t in zip(full.cams, rig_t.cams):
+        assert abs(c.cx - t.cx) < 1e-3 and abs(c.cy - t.cy) < 1e-3
+        assert np.max(np.abs(c.dist[:4] - t.dist[:4]) / np.array([0.05, 0.05, 3e-4, 2e-4])) < 1e-3
+    sig = pw.camera_sigmas(full.cams, full.rig, full.layout, full.cov)
+    assert all(set(s) >= {"cx_px", "cy_px", "k1", "k2", "p1", "p2"} for s in sig)
+
+
+def _channel_case():
+    """Rig B's truth (its wand ends 100-200 mm below both walls' water side) as a Solution with a channel layout."""
+    sol = _truth_solution(prigs.rig_B(), 300, 41)
+    lay = pw.Layout(4, 2, fit_k1=True, anchors=pw.anchors_for(sol.cams, sol.rig))
+    return sol, lay
+
+
+def test_channel_rows_jacobian():
+    """L2: the channel's residual rows (a channel narrower than the wand's spread, so that many ends breach both a far
+    wall and a near one) against central differences, over every free parameter and over the frames."""
+    sol, lay = _channel_case()
+    pw.set_constraints(lay, {"channel": {"width_mm": [150.0, 170.0], "tolerance_mm": 2.0, "ball_radius_mm": [1.0, 1.5],
+                                         "sigma_mm": 0.5}})
+    rig = pw.Rig([pm.Window(w.n, w.d + dd, w.t, w.idx) for w, dd in zip(sol.rig.windows, (-25.0, 105.0))],
+                 sol.rig.cam_win)
+    r, fr, Jg, Jf = pw.channel_terms(rig, sol.frames, sol.L, sol.obs, lay)
+    assert len(r) > 50 and np.all(r > 0)
+    for k in range(lay.P):
+        h = 1e-6 if lay.names[k].endswith((".a", ".b")) else 1e-4
+        dx = np.zeros(lay.P)
+        dx[k] = h
+        _cp, rp, _ = lay.apply(sol.cams, rig, sol.L, dx)
+        _cn, rn, _ = lay.apply(sol.cams, rig, sol.L, -dx)
+        a = pw.channel_terms(rp, sol.frames, sol.L, sol.obs, lay, jac=False)[0]
+        b = pw.channel_terms(rn, sol.frames, sol.L, sol.obs, lay, jac=False)[0]
+        assert len(a) == len(b) == len(r)
+        assert np.max(np.abs((a - b) / (2 * h) - Jg[:, k])) <= 1e-6 * max(np.max(np.abs(Jg[:, k])), 1.0), lay.names[k]
+    for j in range(5):
+        h = 1e-6
+        dfp = np.zeros((sol.obs.n_frames, 5))
+        dfp[:, j] = h
+        a = pw.channel_terms(rig, sol.frames.retract(dfp), sol.L, sol.obs, lay, jac=False)[0]
+        b = pw.channel_terms(rig, sol.frames.retract(-dfp), sol.L, sol.obs, lay, jac=False)[0]
+        assert np.max(np.abs((a - b) / (2 * h) - Jf[:, j])) <= 1e-5 * max(np.max(np.abs(Jf[:, j])), 1.0), j
+
+
+def test_channel_and_aim_constraints():
+    """L2 on rig B (noise 0.1 px): a channel the truth satisfies leaves the fit unchanged; a channel 30 mm narrower
+    than the wand's place across wall 2 needs moves the wall to the band's edge (every end inside, some on the far
+    wall), and the report gives the band; an aim held 5 mm off the truth is met; into_channel moves a window only as
+    far as needed."""
+    rig_t = prigs.rig_B()
+    wand = prigs.make_wand(rig_t, 300, np.random.default_rng(42), noise_px=0.1)
+    data = pw.WandData(wand.uv, wand.L, rig_t.sizes)
+
+    def fit(cons=None):
+        return pw.solve(data, [c.copy() for c in rig_t.cams], pw.Rig([w.copy() for w in rig_t.wins], rig_t.cam_win),
+                        fit_k1=True, constraints=cons)
+
+    free = fit()
+    loose = fit({"channel": {"width_mm": [230.0, 230.0], "ball_radius_mm": 1.0}})
+    assert abs(loose.rms - free.rms) < 1e-9
+    assert np.max(np.abs(loose.rig.windows[1].d - free.rig.windows[1].d)) < 1e-6
+    d2 = loose.rig.windows[1].depth(np.vstack(loose.frames.ends(loose.L)))
+    tight = fit({"channel": {"width_mm": [230.0, float(d2.max()) - 30.0], "ball_radius_mm": 1.0}})
+    rep = pw.constraint_report(tight)
+    w2 = rep["channel"]["windows"][1]
+    assert w2["depth_mm"][1] <= rep["channel"]["width"][1] - 1.0 + 0.01      # every end inside the far wall ...
+    assert rep["channel"]["active_rows"] >= 1 and abs(w2["band_mm"][0]) < 0.05  # ... some on it: the band's edge
+    assert tight.rms > free.rms
+    aim0 = pw.aim_depth(free.cams, free.rig, [0, 1], 1)
+    aimed = fit({"aim": [{"cams": [0, 1], "wall": 1, "mm": aim0 + 5.0}]})
+    assert abs(pw.aim_depth(aimed.cams, aimed.rig, [0, 1], 1) - (aim0 + 5.0)) < 0.05
+    lay = pw.Layout(4, 2)
+    pw.set_constraints(lay, {"channel": {"width_mm": [None, float(d2.max()) - 30.0], "ball_radius_mm": 1.0}})
+    moved = pw.into_channel(free.rig, free.frames, free.L, free.obs, lay)
+    assert moved.windows[0].d == free.rig.windows[0].d
+    assert abs((moved.windows[1].d - free.rig.windows[1].d) - 31.0) < 0.5
 
 
 @pytest.mark.slow

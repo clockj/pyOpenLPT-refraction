@@ -1,0 +1,67 @@
+  none_free: exit 0, 75 s
+  none_w2mid: exit 0, 70 s
+  none_s0: exit 0, 17 s
+  pp_free: exit 0, 138 s
+  pp_w2mid: exit 0, 407 s
+  pp_s0: exit 0, 51 s
+  k2_free: exit 0, 77 s
+  k2_w2mid: exit 0, 70 s
+  k2_s0: exit 0, 18 s
+  tan_free: exit 0, 127 s
+  tan_w2mid: exit 0, 81 s
+  tan_s0: exit 0, 36 s
+  all_free: exit 0, 453 s
+  all_w2mid: exit 0, 462 s
+  all_s0: exit 0, 118 s
+W2: the lens model extended (plate_wand fit_lens), from the delivered fit T2 with its active detections and equal weights (T2's); dchi2 against 'none' (T2's model: f, k1) in the same frames and mode: the change of the sum of squared residuals over T2's variance per coordinate (0.2333 px)^2
+
+  free: every frame, walls free
+    variant  dchi2      RMS px   per camera (px)            wand below wall 2 (mm)  centring shift (mm)   evaluation: median px, inliers RMS, |dL| median, clean SD (mm)
+    none            0  0.2732   0.265 0.260 0.289 0.278     119.1.. 235.5        +102.3          0.2152, 0.1889, 0.0067, 0.0101
+    pp          -5943  0.2663   0.258 0.251 0.281 0.275      48.1.. 163.7         +30.9          0.2100, 0.1845, 0.0065, 0.0099
+    k2           -214  0.2729   0.265 0.259 0.288 0.278     118.7.. 235.0        +101.8          0.2150, 0.1887, 0.0067, 0.0101
+    tan         -5522  0.2668   0.258 0.251 0.282 0.275      49.0.. 164.7         +31.8          0.2103, 0.1848, 0.0065, 0.0099
+    all         -7114  0.2649   0.256 0.250 0.279 0.273      92.6.. 208.7         +75.7          0.2094, 0.1838, 0.0064, 0.0097
+
+  w2mid: every frame, wall 2 held where the channel (150 mm) centres the wand; dchi2 against none_free
+    variant  dchi2      RMS px   per camera (px)            wand below wall 2 (mm)  centring shift (mm)   evaluation: median px, inliers RMS, |dL| median, clean SD (mm)
+    none       161041  0.4185   0.301 0.268 0.527 0.511      16.7.. 133.0          -0.1          0.3005, 0.2926, 0.0071, 0.0107
+    pp          30293  0.3058   0.281 0.272 0.343 0.322      19.6.. 136.0          +2.8          0.2269, 0.2033, 0.0095, 0.0149
+    k2         160461  0.4180   0.301 0.268 0.526 0.511      16.7.. 133.0          -0.1          0.3000, 0.2921, 0.0071, 0.0108
+    tan        100747  0.3708   0.289 0.258 0.447 0.448      16.7.. 133.1          -0.1          0.2660, 0.2585, 0.0072, 0.0108
+    all         -3562  0.2691   0.257 0.252 0.285 0.281      12.2.. 128.5          -4.6          0.2122, 0.1867, 0.0064, 0.0097
+
+  s0: every 5th frame, walls free; evaluated on the other 80 %
+    variant  dchi2      RMS px   per camera (px)            wand below wall 2 (mm)  centring shift (mm)   evaluation: median px, inliers RMS, |dL| median, clean SD (mm)
+    none            0  0.2732   0.267 0.259 0.288 0.278     117.4.. 232.0         +99.7          0.2150, 0.1891, 0.0068, 0.0102
+    pp          -1218  0.2662   0.260 0.250 0.279 0.274      41.1.. 155.2         +23.2          0.2099, 0.1848, 0.0065, 0.0099
+    k2            -33  0.2730   0.267 0.259 0.287 0.278     117.4.. 232.0         +99.7          0.2148, 0.1889, 0.0068, 0.0102
+    tan         -1137  0.2667   0.260 0.250 0.281 0.275      36.5.. 150.6         +18.5          0.2104, 0.1851, 0.0066, 0.0100
+    all         -1374  0.2653   0.260 0.249 0.278 0.273      96.7.. 211.1         +78.9          0.2092, 0.1841, 0.0065, 0.0098
+
+  lens terms per camera (free mode, every frame): principal point offset from the image centre (px), k1, k2, p1, p2 (+- sigma); f (px); distance to its wall (mm)
+    none:
+      C1: k1 0.760 +- 0.0066; f 18836; 1068 mm
+      C2: k1 0.847 +- 0.0063; f 19220; 1033 mm
+      C3: k1 0.761 +- 0.0066; f 21477; 763 mm
+      C4: k1 1.053 +- 0.007; f 21937; 838 mm
+    pp:
+      C1: pp (-46.8 +- 2.6, -15.7 +- 2.6), k1 0.771 +- 0.0075; f 18913; 1075 mm
+      C2: pp (+17.3 +- 2.9, -22.8 +- 2.6), k1 0.712 +- 0.0074; f 19258; 1038 mm
+      C3: pp (-73.9 +- 3.1, -80.7 +- 2.7), k1 0.786 +- 0.0078; f 21463; 820 mm
+      C4: pp (+4.5 +- 3.0, +0.6 +- 3.4), k1 0.932 +- 0.008; f 21831; 887 mm
+    k2:
+      C1: k1 0.699 +- 0.021, k2 20.3 +- 6.1; f 18844; 1067 mm
+      C2: k1 0.933 +- 0.021, k2 -24.8 +- 6.1; f 19219; 1032 mm
+      C3: k1 1.008 +- 0.022, k2 -80.5 +- 6.7; f 21478; 763 mm
+      C4: k1 1.242 +- 0.022, k2 -62.5 +- 7.1; f 21941; 838 mm
+    tan:
+      C1: k1 0.782 +- 0.0078, p1 -8.22e-05 +- 0.00015, p2 0.00271 +- 0.00016; f 18900; 1043 mm
+      C2: k1 0.717 +- 0.0076, p1 0.00178 +- 0.00019, p2 -0.000996 +- 0.00017; f 19235; 1004 mm
+      C3: k1 0.795 +- 0.0079, p1 0.00412 +- 0.00015, p2 0.00366 +- 0.00017; f 21489; 821 mm
+      C4: k1 0.940 +- 0.0082, p1 4.63e-05 +- 0.00019, p2 -0.000359 +- 0.00017; f 21859; 887 mm
+    all:
+      C1: pp (-106.0 +- 12.7, -92.9 +- 10.1), k1 0.749 +- 0.019, k2 12.3 +- 4.8, p1 -0.00522 +- 0.00058, p2 -0.00406 +- 0.00081; f 18877; 1073 mm
+      C2: pp (-21.9 +- 14.1, +33.3 +- 10.0), k1 0.868 +- 0.021, k2 -49 +- 6.8, p1 0.00249 +- 0.0005, p2 -0.0026 +- 0.00081; f 19211; 1036 mm
+      C3: pp (-195.1 +- 12.6, -218.8 +- 21.7), k1 0.977 +- 0.018, k2 -50.7 +- 5.1, p1 -0.00842 +- 0.0013, p2 -0.00687 +- 0.0007; f 21421; 782 mm
+      C4: pp (+108.0 +- 12.8, +138.4 +- 19.6), k1 0.966 +- 0.019, k2 -5.34 +- 5, p1 0.00941 +- 0.00098, p2 0.00578 +- 0.00077; f 21824; 852 mm

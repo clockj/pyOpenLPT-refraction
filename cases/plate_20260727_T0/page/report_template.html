@@ -69,7 +69,7 @@ section > .prose { display: grid; gap: 12px; }
 .masthead { display: grid; gap: 16px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
 .lede { font-size: 1.12rem; max-width: 66ch; }
 .request { color: var(--muted); font-style: italic; max-width: 70ch; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 8px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 8px; }
 .stat { display: grid; gap: 6px; align-content: start; padding: 14px 16px; background: var(--surface);
   border: 1px solid var(--rule); border-radius: 8px; }
 .stat b { font: 700 1.7rem/1 var(--display); font-variant-numeric: tabular-nums; }
@@ -119,6 +119,9 @@ svg .water { fill: var(--water); }
 svg .wall { fill: var(--wall); }
 svg .wall-label { font: 600 12px var(--display); fill: var(--muted); letter-spacing: 0.06em; }
 svg .wand-box { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+svg .wand-box.out { stroke: var(--wrong); stroke-width: 1.6; }
+svg .row-sub.out { fill: var(--wrong); font-weight: 600; }
+svg .wall.far { opacity: 0.45; }
 svg .sight { stroke: var(--accent); stroke-width: 1.2; opacity: 0.7; }
 svg .shift { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 3; }
 svg .cam-now { fill: var(--accent); stroke: var(--surface); stroke-width: 1.5; }
@@ -156,6 +159,10 @@ button.view:hover { border-color: var(--accent); }
 button.view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 button.view[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 table.data td.vol { font-weight: 600; }
+table.data td.neg { color: var(--wrong); font-weight: 600; }
+#chan-table td.num, #chan-table th.num { white-space: normal; }
+#chan-table tbody th { min-width: 15em; }
+#cal-toggle { margin-bottom: -6px; }
 details { font-size: 0.92rem; }
 summary { cursor: pointer; color: var(--accent); font-weight: 500; }
 summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -214,14 +221,19 @@ footer code { font-size: 0.86em; }
   <p class="lede">Four Phantom cameras behind two perpendicular acrylic walls, and 10,936 frames of a 10 mm wand.
     The calibration works, and it is 6–8× better than your GUI calibration of the same data. Three things were
     needed: two library fixes, fitting the lens distortion, and a start from a verified answer, because from scratch
-    the fit can land in a wrong one.</p>
-  <p class="request">Your request: “help me check how the latest plate calibration works for my real experiment's
-    data”.</p>
+    the fit can land in a wrong one. Your channel's size then showed the C3/C4 wall placed 9 cm too close. A second
+    calibration holds the channel, with each lens's centre kept at the image centre as you prefer. It puts the walls in
+    place, just as accurately.</p>
+  <p class="request">Your requests: “help me check how the latest plate calibration works for my real experiment's
+    data”; then “my channel has cross section area 15cm*10cm, the part that cam 1 and cam 2 look at is the longer
+    edge; but your 3d visualization does not seem to be this case?”</p>
   <div class="stats" aria-label="Results at a glance">
-    <div class="stat good"><b>0.215 px</b><span>Median reprojection error on every frame. Your GUI's calib_3: 1.28
-      px.</span></div>
-    <div class="stat good"><b>0.0067 mm</b><span>Median error of the 10 mm wand's length on every frame. calib_3:
-      0.052 mm.</span></div>
+    <div class="stat good"><b>0.218 px</b><span>Median reprojection error on every frame, with the channel. The
+      first calibration: 0.215 px. Your GUI's calib_3: 1.28 px.</span></div>
+    <div class="stat good"><b>0.0068 mm</b><span>Median error of the 10 mm wand's length on every frame. The first
+      calibration: 0.0067 mm. calib_3: 0.052 mm.</span></div>
+    <div class="stat good"><b>16–132 mm</b><span>The wand's distance from the C3/C4 wall, inside your 150 mm channel.
+      The first calibration said 109–225 mm.</span></div>
     <div class="stat"><b>18,750–21,940 px</b><span>The cameras' real focal lengths, 253–296 mm. The GUI held them at
       13,333 px.</span></div>
     <div class="stat bad"><b>2 of 9</b><span>Frame sets where the calibration from scratch ended in a wrong answer,
@@ -236,8 +248,13 @@ footer code { font-size: 0.86em; }
 <section id="short">
   <div class="prose">
     <p class="eyebrow">In short</p>
-    <h2>Eight results, most important first</h2>
+    <h2>Nine results, most important first</h2>
     <ol class="keys">
+      <li><b>Use the calibration with the channel, <code>calib_plate_wand_ref_centre</code>.</b> The first calibration
+        put the C3/C4 wall 9 cm too close to its cameras, so the wand reached 225 mm into your 150 mm channel. The new
+        one holds the channel, keeps each lens's centre at the image centre as you prefer, and puts the wand 16–132 mm
+        from that wall. It is as accurate as the first: 0.218 px and 0.0068 mm. A variant that also fits the lens
+        centres, <code>calib_plate_wand_ref</code>, is 3–4 % better (next section).</li>
       <li><b>The calibration works and beats the GUI's.</b> On every frame, its median reprojection error is 6× lower
         and its median wand error 8× lower. On calib_3's own filtered frames it is 4× and 7× better. The wand comes
         out at 9.9998 mm on average, with an SD of 0.010 mm.</li>
@@ -253,13 +270,66 @@ footer code { font-size: 0.86em; }
         warnings missed 2 of the 4 wrong answers.</li>
       <li><b>A start from a verified answer, or rough hints, avoids it.</b> The delivered fit was refitted on every
         frame from the first half of the recording, in 5 minutes.</li>
-      <li><b>The report's “pinned” warning is harmless here.</b> A few frames where the wand touched the C1/C2 wall,
-        with its ball cut by C3's or C4's image border, hold the fit. That costs 0.5 % in C1's and C2's f and nothing
-        in the 3-D measurement.</li>
-      <li><b>The walls' positions are known only to a few cm, but measurements inside the wand's volume do not depend
-        on them.</b> The cameras did not drift during the recording.</li>
+      <li><b>The report's “pinned” warning hid how freely the walls move.</b> A few frames where the wand touched the
+        C1/C2 wall, with its ball cut by C3's or C4's image border, hold the fit. That costs 0.5 % in C1's and C2's f.
+        It also made the walls look firmly placed. Holding each ball its own radius inside the walls frees the fit.</li>
+      <li><b>The wand alone places the walls only to several cm.</b> Your channel fixes that, and measurements inside
+        the wand's volume do not change either way. The cameras did not drift during the recording.</li>
     </ol>
   </div>
+</section>
+
+<section id="channel">
+  <div class="prose">
+    <p class="eyebrow">Your channel</p>
+    <h2>The C3/C4 wall was 9 cm off; held by the channel, it is in place</h2>
+    <p>Your channel is 15 × 10 cm inside, and C1 and C2 look through its long side. So the wand must stay within
+      100 mm of the C1/C2 wall and 150 mm of the C3/C4 wall. The first calibration had it 0–85 mm from the C1/C2 wall,
+      which fits, but 109–225 mm from the C3/C4 wall, which cannot. C1 and C2 aimed 168 mm along their wall, outside
+      the channel, while C3 and C4 aimed at the middle of theirs.</p>
+    <ul>
+      <li><b>Why:</b> the wand alone places a wall only through a faint refraction effect, a few tenths of a pixel at
+        the image edges. Two things in the fit pulled wall 2 off. The fit was pinned against wall 1: a wand end sat on
+        its surface, so every step was refused. And each lens's centre, the principal point, was held at the image
+        centre. Freed of both, the data alone move wall 2 about 70 mm towards the channel.</li>
+      <li><b>The fix:</b> two optional settings in <code>plate_wand</code>, both off by default. The first holds
+        constraints. The channel: every wand end stays inside it, each ball at least its radius from every wall. The
+        aim: C1 and C2 look at the middle of the long side, as you said they roughly do. The second fits lens terms,
+        such as the principal point.</li>
+      <li><b>Two results</b> are in the table. With the lens centres held at the image centre, your choice, the fit is
+        as good as the first calibration's. With them fitted, it is 3–4 % better, on frames it did not use too. With
+        the centres fitted, C3 and C4 also aim at the middle of their wall (47 of 100 mm) and the wand touches the
+        C1/C2 wall, as the data hinted earlier. With the centres held, they aim at 62 mm, and the C1/C2 wall sits
+        13 mm further from the wand.</li>
+      <li><b>From scratch,</b> with the channel held, the calibration found the right answer on every frame, with and
+        without the principal point. Without the channel, the same data had ended in a wrong one.</li>
+    </ul>
+  </div>
+  <div class="table-frame">
+    <table class="data" id="chan-table">
+      <thead><tr><th scope="col">Quantity</th><th class="num" scope="col">First: calib_plate_wand</th>
+        <th class="num" scope="col">Channel, centre held: calib_plate_wand_ref_centre</th>
+        <th class="num" scope="col">Channel, centre fitted: calib_plate_wand_ref</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <details>
+    <summary>Every variant tried (test W3, every frame)</summary>
+    <div class="table-frame" style="margin-top: 10px">
+      <table class="data" id="w3-table">
+        <thead><tr><th scope="col">Lens model and constraints</th><th class="num" scope="col">RMS</th>
+          <th class="num" scope="col">Median, every frame</th><th class="num" scope="col">Wand error</th>
+          <th class="num" scope="col">Wand from C3/C4 wall</th><th class="num" scope="col">Wand from C1/C2 wall</th>
+          <th class="num" scope="col">C1, C2 aim</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+  <p class="callout"><b>How sure are the walls now?</b> Wall 2's place rests on the aim: C1 and C2 look at the channel's
+    middle, and any error in that aim moves the wall by the same amount. The channel alone allows a 34 mm band, 150 mm
+    minus the wand's 116 mm spread. Either way, measurements inside the wand's volume do not change. If you touch each
+    wall with the wand in your next recording, the channel pins that wall to a millimetre or two. Wall 1 differs by
+    13 mm between the two lens models, and by 16 mm between the halves of the recording.</p>
 </section>
 
 <section id="rig">
@@ -267,16 +337,22 @@ footer code { font-size: 0.86em; }
     <p class="eyebrow">The rig as calibrated</p>
     <h2>Two camera pairs, one behind each wall, 90.2° apart</h2>
     <p>C1 above C2 look through one wall, and C3 above C4 through the other. Each camera's position is fitted from
-      the wand alone, as are its focal length, its lens distortion and both walls; no camera or wall was measured.
-      The plan view places every camera against the two walls, beside where calib_3 put it. Figure 2 shows the same
-      rig in 3-D, with each camera's field of view.</p>
+      the wand, as are its focal length, its lens distortion and both walls; no camera or wall was measured. The plan
+      view places every camera against the two walls and your channel, beside where calib_3 put it. Figure 2 shows
+      the same rig in 3-D, with each camera's field of view. The buttons switch both figures and the two tables
+      between the calibrations with the channel and the first one.</p>
+  </div>
+  <div class="view-buttons" role="group" aria-label="Calibration shown" id="cal-toggle">
+    <button type="button" class="view" data-cal="ref" aria-pressed="true">Channel, centre held: calib_plate_wand_ref_centre</button>
+    <button type="button" class="view" data-cal="ref_pp" aria-pressed="false">Channel, centre fitted: calib_plate_wand_ref</button>
+    <button type="button" class="view" data-cal="T2" aria-pressed="false">First: calib_plate_wand</button>
   </div>
   <figure class="fig" aria-labelledby="fig-plan-cap">
     <figcaption id="fig-plan-cap"><b>Figure 1. Plan view, looking down along the tank's corner.</b> Filled markers
-      are this calibration's cameras and hollow ones calib_3's. Each is placed by its distances to the two walls'
-      outer surfaces, so the walls meet at the corner. A thin line marks each camera's line of sight. The dashed box
-      holds 98 % of the wand ends (1–99 %). The walls' positions themselves are uncertain by a few cm, so the corner
-      may lie a little off.</figcaption>
+      are the calibration's cameras and hollow ones calib_3's. Each is placed by its distances to the two walls'
+      outer surfaces, so the walls meet at the corner. The channel is drawn at your size, 150 × 100 mm inside, with its
+      two far walls fainter: they are not part of the model. A thin line marks each camera's line of sight. The dashed
+      box holds 98 % of the wand ends (1–99 %). In the first calibration it reaches through the far wall.</figcaption>
     <div class="legend" aria-hidden="true">
       <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5" class="cam-now"/></svg>This calibration</span>
       <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" class="cam-gui"/></svg>calib_3 (GUI)</span>
@@ -287,12 +363,13 @@ footer code { font-size: 0.86em; }
   </figure>
   <figure class="fig" aria-labelledby="fig-3d-cap">
     <figcaption id="fig-3d-cap"><b>Figure 2. The rig in 3-D.</b> Drag to turn it, scroll or pinch to zoom, and
-      right-drag or drag with two fingers to pan. Each of this calibration's cameras is drawn as its field of view,
+      right-drag or drag with two fingers to pan. Each of the calibration's cameras is drawn as its field of view,
       refracted through its wall, out to the wand volume's centre; a hollow marker shows where calib_3 put the same
-      camera. The grey slabs are the two acrylic walls (12.7 mm), the dots 2,000 of the 21,872 wand ends, and the dashed
-      box the volume that holds 98 % of them. Up runs from C2 to C1. Coordinates are in mm, with the origin on the
-      walls' corner at the wand's median height.</figcaption>
-    <div class="view-buttons" role="group" aria-label="Views of the 3-D figure">
+      camera. The grey slabs are the channel's acrylic walls (12.7 mm) at your size, 150 × 100 mm inside. The two the
+      cameras look through are in the model, and the far two, fainter, are not. The dots are 2,000 of the 21,872 wand
+      ends, and the dashed box the volume that holds 98 % of them. Up runs from C2 to C1. Coordinates are in mm, with
+      the origin on the walls' corner at the wand's median height.</figcaption>
+    <div class="view-buttons" role="group" aria-label="Views of the 3-D figure" id="view-buttons-3d">
       <button type="button" class="view" data-view="overview" aria-pressed="true">Overview</button>
       <button type="button" class="view" data-view="top" aria-pressed="false">From above</button>
       <button type="button" class="view" data-view="c12" aria-pressed="false">Behind C1, C2</button>
@@ -305,9 +382,10 @@ footer code { font-size: 0.86em; }
   </figure>
   <div class="prose">
     <h3>The wand's volume</h3>
-    <p>The space the wand's two balls went through, measured in this calibration from the 21,872 ball centres of
-      the 10,936 frames. Distances are from each wall's inner (water-side) surface; the height is along the walls'
-      corner, from the median.</p>
+    <p>The space the wand's two balls went through, measured in the calibration shown from the 21,872 ball centres of
+      the 10,936 frames. Distances are from each wall's inner (water-side) surface, and from the far wall across it at
+      your channel's size. The height is along the walls' corner, from the median. A negative distance lies beyond
+      that far wall.</p>
   </div>
   <div class="table-frame">
     <table class="data" id="vol-table">
@@ -321,14 +399,17 @@ footer code { font-size: 0.86em; }
   <div class="table-frame">
     <table class="data" id="cam-table">
       <thead><tr><th scope="col">Camera</th><th class="num" scope="col">f (px)</th><th class="num" scope="col">f (mm)</th>
-        <th class="num" scope="col">k1</th><th class="num" scope="col">To its wall</th>
-        <th class="num" scope="col">Angle to its wall</th><th class="num" scope="col">calib_3: f, to its wall</th></tr></thead>
+        <th class="num" scope="col">k1</th><th class="num" scope="col">Principal point</th>
+        <th class="num" scope="col">To its wall</th><th class="num" scope="col">Angle to its wall</th>
+        <th class="num" scope="col">calib_3: f, to its wall</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
-  <p class="callout">Check with a tape measure: this calibration puts C1 and C2 <b>243 mm</b> apart and C3 and C4
-    <b>287 mm</b> apart. calib_3 puts them 170 and 173 mm apart. Measure between the lens axes; where in each lens
-    its pinhole sits does not matter for these two.</p>
+  <p class="note" id="cam-note"></p>
+  <p class="callout">Check with a tape measure: the calibration with the channel puts C1 and C2 <b>243 mm</b> apart
+    and C3 and C4 <b>288 mm</b> apart; the variant with the centres fitted 244 and 286 mm, the first one 243 and 287 mm.
+    calib_3 puts them 170 and 173 mm apart. Measure between the lens axes; where in each lens its pinhole sits does not
+    matter for these two.</p>
 </section>
 
 <section id="minima">
@@ -380,7 +461,8 @@ footer code { font-size: 0.86em; }
   <p class="callout"><b>How to avoid it:</b> start from a verified answer, with <code>run_calibration.py --start</code>
     or <code>plate_wand.calibrate(start=...)</code>. Started from the first half's fit, the second half and every
     frame converged to the right answer in 2–5 minutes, where the start from scratch took 37–65 minutes. Rough
-    window-normal hints from your photo also turned the second half's wrong answer into the right one.</p>
+    window-normal hints from your photo also turned the second half's wrong answer into the right one. Holding your
+    channel works too: from scratch with the channel, every frame reached the right answer (55–70 minutes).</p>
 </section>
 
 <section id="gui">
@@ -426,11 +508,14 @@ footer code { font-size: 0.86em; }
         and wall 1 2–5 mm off.</li>
       <li><b>The measurement does not change.</b> Dropping the border-cut detections frees the pin but leaves the wand
         error unchanged: 0.0070 against 0.0067 mm on unused frames.</li>
-      <li><b>The walls' positions are uncertain by a few cm.</b> They come from the third-order refraction effect,
-        strongest at the image edges where detections are least reliable. They move 20–30 mm between frame sets, but
-        moving a wall by ±10–20 mm and refitting leaves the wand error at 0.0066–0.0069 mm.</li>
-      <li><b>So measure inside the wand's volume:</b> 3–72 mm from the C1/C2 wall, 120–221 mm from the C3/C4 wall,
-        77 mm high (98 % of the wand ends).</li>
+      <li><b>The wand alone places the walls only to several cm.</b> Their positions come from the third-order
+        refraction effect, strongest at the image edges where detections are least reliable. They moved 20–40 mm
+        between frame sets, and the pin made them look firmer than they are. Moving a wall by ±10–20 mm and refitting
+        leaves the wand error at 0.0066–0.0069 mm.</li>
+      <li><b>The channel setting frees the pin.</b> It holds each ball at least its radius inside every wall, so a
+        touching wand end no longer blocks the fit. With the channel and the aim, the walls are where your channel puts
+        them: the wand is 5–73 mm from the C1/C2 wall and 26–127 mm from the C3/C4 wall, 76 mm high (98 % of the wand
+        ends).</li>
     </ul>
   </div>
 </section>
@@ -467,6 +552,21 @@ footer code { font-size: 0.86em; }
         </table>
       </div>
     </div>
+    <div>
+      <h3>The walls against your channel (W0–W4)</h3>
+      <ul>
+        <li><b>W0:</b> no wall or corner shows in the images. Refraction alone bends them by at most 0.06 px (C1, C4)
+          and 0.28 px (C2, C3), so k1's 6 px is the lens. Every saved fit put the wand outside the channel.</li>
+        <li><b>W1:</b> holding wall 2 inside the channel, with the fit pinned, cost 0.27 → 0.42 px. The pin, not the
+          data, made it so expensive.</li>
+        <li><b>W2:</b> unpinned, a free principal point moves wall 2 about 70 mm towards the channel. It lowers the
+          error on unused frames by 2–3 %. k2 does nothing, and the tangential terms move wall 1 out instead.</li>
+        <li><b>W3:</b> with the channel held, the RMS is 0.276 px with k1 alone, and 0.266 px with the principal
+          point and the aim. From scratch, with the channel, both lens models found the right answer.</li>
+        <li><b>W4:</b> delivered. Each half's fit, judged on the other half, beats the plain fit in both directions,
+          and the camFiles read back identically.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -482,8 +582,13 @@ footer code { font-size: 0.86em; }
       <li><b><code>plate_model.to_cpp</code></b> refused to write two cameras' camFiles, because the C++ side rebuilt
         their rotation 1.2e-14 off. Its check is now 1e-12, still seven orders of magnitude below the errors it was
         written to catch.</li>
-      <li><b>Checks:</b> each fix has a regression test in <code>tests/test_plate_wand.py</code>. Every suite passes:
-        plate 14 fast + 4 slow, cylinder 6 + 1. Neither fix is committed yet.</li>
+      <li><b>Checks:</b> each fix has a regression test in <code>tests/test_plate_wand.py</code>. Every suite passed:
+        plate 14 fast + 4 slow, cylinder 6 + 1. You committed both (<code>180063f</code>).</li>
+      <li><b>New options, for your channel</b> (approved 3 Oct): <code>plate_wand.calibrate(fit_lens=...)</code> fits
+        the principal point, k2 or the tangential terms. <code>calibrate(constraints=...)</code> holds a channel the
+        wand stays in, where cameras aim, or a camera's distance to its wall. Both are off by default, so earlier
+        results are unchanged. Three new regression tests; the plate suite passes, 21 tests with the slow ones. Not
+        committed.</li>
     </ul>
   </div>
 </section>
@@ -495,27 +600,29 @@ footer code { font-size: 0.86em; }
   </div>
   <div class="steps">
     <div class="step">
-      <h3>Use this calibration</h3>
+      <h3>Use the calibration with the channel</h3>
       <ul>
-        <li>The camFiles are <code>calib_plate_wand\camFile\cam0.txt</code> … <code>cam3.txt</code>, for C1 … C4,
-          named as in calib_3.</li>
-        <li>Tape-measure the C1–C2 and C3–C4 spacings: 243 and 287 mm.</li>
-        <li>Measure inside the wand's volume.</li>
+        <li>The camFiles are <code>calib_plate_wand_ref_centre\camFile\cam0.txt</code> … <code>cam3.txt</code>, for C1
+          … C4, named as in calib_3.</li>
+        <li>Tape-measure the C1–C2 and C3–C4 spacings: 243 and 288 mm.</li>
+        <li>Distances to the C3/C4 wall rest on C1 and C2 aiming at the channel's middle.</li>
       </ul>
     </div>
     <div class="step">
       <h3>Calibrate this rig again</h3>
       <ul>
-        <li>Fit k1.</li>
+        <li>Fit k1: <code>--fit-k1</code>. Add <code>--fit-lens pp</code> to fit the lens centres too.</li>
+        <li>Hold the channel, and the aim if you know it: <code>--channel --aim centre</code>.</li>
         <li>Start from this calibration, or give window-normal hints.</li>
-        <li>Check the result against the table above, not only the warnings.</li>
+        <li>Check the result against the tables above, not only the warnings.</li>
       </ul>
     </div>
     <div class="step">
       <h3>Record the wand</h3>
       <ul>
         <li>Keep both balls fully inside every image.</li>
-        <li>Keep the wand a few mm off the walls.</li>
+        <li>Touch each wall with the wand for a second or two, the ball fully in view. With the channel held, that
+          pins the wall to a millimetre or two.</li>
         <li>Give C3 and C4 a wider view: move the wand over more of their images, or use a shorter lens.</li>
       </ul>
     </div>
@@ -524,7 +631,7 @@ footer code { font-size: 0.86em; }
       <ul>
         <li>Make the start more robust: when it joins the two camera pairs, it can begin 30 px off.</li>
         <li>Choose between starts by cost, not by detections kept.</li>
-        <li>Free a wall pinned by a few frames.</li>
+        <li>Free a wall pinned by a few frames: done by the channel's ball radii; without a channel it remains.</li>
         <li>Flag a noise twice the best start's, beyond the fixed 0.5 px.</li>
       </ul>
     </div>
@@ -533,10 +640,15 @@ footer code { font-size: 0.86em; }
 
 <footer>
   <p>From case <code>pyOpenLPT/cases/plate_20260727_T0</code>: plan <code>2026-10-03-plan.md</code> and the full report
-    <code>2026-10-03-report.md</code>. Tests T1–T7 and diagnoses D1–D3 are in <code>tests/</code>. The delivered
-    calibration is in <code>X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\calib_plate_wand</code>.</p>
+    <code>2026-10-03-report.md</code>; for the channel, <code>2026-10-03-walls-plan.md</code> and
+    <code>2026-10-03-walls-report.md</code>. Tests T1–T7, diagnoses D1–D3 and the walls' tests W0–W4 are in
+    <code>tests/</code>. The calibrations are in <code>X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0</code>:
+    <code>calib_plate_wand_ref_centre</code> (with the channel, centre held: use this one),
+    <code>calib_plate_wand_ref</code> (with the channel, centre fitted) and <code>calib_plate_wand</code> (the
+    first).</p>
   <p>This page was built by <code>make_report_page.py</code> from <code>tests/fits_summary.json</code>,
-    <code>tests/t7_vs_gui.json</code> and <code>page/report_template.html</code>.</p>
+    <code>tests/t7_vs_gui.json</code>, <code>tests/rig_3d.json</code>, <code>tests/w4*_delivery.json</code>,
+    <code>tests/w3_constraints*.json</code> and <code>page/report_template.html</code>.</p>
 </footer>
 </main>
 
@@ -580,21 +692,35 @@ footer code { font-size: 0.86em; }
   }
   const t2 = DATA.fits.find(f => f.name === "t2_all");
 
+  /* the calibration shown in Figures 1 and 2 and the camera and volume tables: "ref" (with the channel) or "T2" */
+  const R3 = DATA.rig3d;
+  let SEL = R3.fits.ref && location.hash !== "#first" ? "ref" : "T2";
+  const redraw = [];
+  const sgn = x => (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(0);
+
   /* the camera table */
-  (function () {
+  function fillCams() {
     const tb = document.querySelector("#cam-table tbody");
-    const g = DATA.gui_rig;
+    tb.textContent = "";
+    const g = DATA.gui_rig, F = R3.fits[SEL];
+    const sf = SEL === "ref" ? DATA.ref_sigma_f : SEL === "ref_pp" ? DATA.ref_pp_sigma_f : DATA.t2_sigma_f;
     CAM.forEach((name, c) => {
+      const k = F.cameras[c];
       const tr = document.createElement("tr");
-      const sf = DATA.t2_sigma_f ? ` ± ${fmt(DATA.t2_sigma_f[c])}` : "";
-      const cells = [`${name} (cam${c})`, fmt(t2.f_px[c]) + sf, (t2.f_px[c] * 0.0135).toFixed(1),
-        t2.k1[c].toFixed(2), `${fmt(t2.distance_mm[c])} mm`, `${t2.incidence_deg[c].toFixed(2)}°`,
+      const cells = [`${name} (cam${c})`, fmt(k.f) + (sf ? ` ± ${fmt(sf[c])}` : ""), (k.f * 0.0135).toFixed(1),
+        k.k1.toFixed(2), SEL === "ref_pp" ? `${sgn(k.pp_off_px[0])}, ${sgn(k.pp_off_px[1])} px` : "centre, held",
+        `${fmt(k.distance_to_wall_mm)} mm`, `${k.incidence_deg.toFixed(2)}°`,
         `${fmt(g.cameras[c].f_px)} px, ${fmt(g.cameras[c].distance_to_wall_mm)} mm`];
       cells.forEach((t, i) => { const td = document.createElement(i ? "td" : "th"); td.textContent = t;
         if (i) td.className = "num"; else td.scope = "row"; tr.appendChild(td); });
       tb.appendChild(tr);
     });
-  })();
+    document.getElementById("cam-note").textContent = SEL === "ref_pp"
+      ? "Principal point: each lens's centre, as its offset from the image centre (right, down), each ± 3 px. Its " +
+        "spread between the two halves of the recording is 10–35 px, so it is known to a few tens of px."
+      : "This calibration holds every principal point at the image centre.";
+  }
+  redraw.push(fillCams);
 
   /* the rig comparison table */
   (function () {
@@ -617,47 +743,67 @@ footer code { font-size: 0.86em; }
     });
   })();
 
-  /* Figure 1: plan view */
-  (function () {
+  /* Figure 1: plan view, the calibration shown against the channel */
+  function drawPlan() {
     const host = document.getElementById("fig-plan");
-    const T = DATA.plan.T2, G = DATA.plan.calib_3;
+    host.textContent = "";
+    const T = DATA.plan[SEL] || DATA.plan.T2, G = DATA.plan.calib_3, CH = DATA.plan.channel;
+    const F = R3.fits[SEL];
     const W = 760, ml = 30, mr = 30, mt = 30, mb = 56;
-    const all = T.cameras.concat(G.cameras);
-    const xs = all.map(c => c.x).concat([T.wand.x[1], T.t[1]]);
-    const ys = all.map(c => c.y).concat([T.wand.y[1], T.t[0]]);
+    const t1 = T.t[0], t2 = T.t[1];
+    const Wy = CH ? CH.width_mm[0] : 0, Wx = CH ? CH.width_mm[1] : 0;    // inside widths across wall 1 (y), wall 2 (x)
+    const xOut = t2 + Wx + t1, yOut = t1 + Wy + t1;                         // the far walls' outer surfaces
+    // the same frame for both calibrations, so that switching does not rescale the figure
+    const plans = [DATA.plan.T2, DATA.plan.ref, DATA.plan.ref_pp].filter(Boolean);
+    const all = [].concat(...plans.map(p => p.cameras), G.cameras);
+    const xs = all.map(c => c.x).concat(...plans.map(p => [p.wand.x[1]]), [t2], CH ? [xOut] : []);
+    const ys = all.map(c => c.y).concat(...plans.map(p => [p.wand.y[1]]), [t1], CH ? [yOut] : []);
     const x0 = Math.min(...xs) - 120, x1 = Math.max(...xs) + 150, y0 = Math.min(...ys) - 70, y1 = Math.max(...ys) + 110;
     const s = (W - ml - mr) / (x1 - x0);
     const H = Math.round((y1 - y0) * s) + mt + mb;
     const X = v => ml + (v - x0) * s, Y = v => mt + (v - y0) * s;
     const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
-      "aria-label": "Plan view of the rig: two camera pairs, one behind each wall; calib_3's cameras sit about 30 % closer" }, host);
-    // water, then the two walls (their outer surfaces at x = 0 and y = 0)
-    el("rect", { x: X(T.t[1]), y: Y(T.t[0]), width: X(x1) - X(T.t[1]), height: Y(y1) - Y(T.t[0]), class: "water" }, svg);
-    el("rect", { x: X(0), y: Y(0), width: X(x1) - X(0), height: Math.max(2, Y(T.t[0]) - Y(0)), class: "wall" }, svg);
-    el("rect", { x: X(0), y: Y(0), width: Math.max(2, X(T.t[1]) - X(0)), height: Y(y1) - Y(0), class: "wall" }, svg);
-    el("text", { x: X(T.t[1]) + 6, y: Y(0) - 7, "text-anchor": "start", class: "wall-label" }, svg, "WALL 1");
-    el("text", { x: X(0) - 8, y: Y(y1) - 8, "text-anchor": "start", class: "wall-label",
-      transform: `rotate(-90 ${X(0) - 8} ${Y(y1) - 8})` }, svg, "WALL 2");
-    el("text", { x: X(x1) - 10, y: Y(y1) - 12, "text-anchor": "end", class: "wall-label" }, svg, "WATER");
-    // the wand's volume
+      "aria-label": "Plan view of the rig: two camera pairs, one behind each wall of your channel; calib_3's cameras sit about 30 % closer" }, host);
+    const rect = (xa, xb, ya, yb, cls) => el("rect", { x: X(xa), y: Y(ya), width: Math.max(2, X(xb) - X(xa)),
+      height: Math.max(2, Y(yb) - Y(ya)), class: cls }, svg);
+    if (CH) {
+      // the channel: water inside, the two walls the cameras look through, and the two far walls (not in the model)
+      rect(t2, t2 + Wx, t1, t1 + Wy, "water");
+      rect(0, xOut, 0, t1, "wall");
+      rect(0, t2, 0, yOut, "wall");
+      rect(t2 + Wx, xOut, 0, yOut, "wall far");
+      rect(0, xOut, t1 + Wy, yOut, "wall far");
+      el("text", { x: X(xOut / 2), y: Y(yOut) + 18, "text-anchor": "middle", class: "wall-label" }, svg,
+        `CHANNEL ${Wx} × ${Wy} MM INSIDE`);
+    } else {
+      rect(t2, x1, t1, y1, "water");
+      rect(0, x1, 0, t1, "wall");
+      rect(0, t2, 0, y1, "wall");
+    }
+    el("text", { x: X(CH ? xOut : x1) + 8, y: Y(t1) - 2, "text-anchor": "start", class: "wall-label" }, svg,
+      "WALL 1 · C1, C2");
+    el("text", { x: X(0) - 8, y: Y(CH ? yOut : y1) + 4, "text-anchor": "end", class: "wall-label" }, svg,
+      "WALL 2 · C3, C4");
+    // the wand's volume: red where it reaches outside the channel
     const wx = T.wand.x, wy = T.wand.y;
-    el("rect", { x: X(wx[0]), y: Y(wy[0]), width: X(wx[1]) - X(wx[0]), height: Y(wy[1]) - Y(wy[0]), class: "wand-box" }, svg);
-    el("text", { x: X(wx[1]) + 6, y: Y(wy[1]) + 14, class: "row-sub" }, svg, "wand volume");
+    const out = CH && (wx[1] > t2 + Wx || wy[1] > t1 + Wy || wx[0] < t2 || wy[0] < t1);
+    rect(wx[0], wx[1], wy[0], wy[1], "wand-box" + (out ? " out" : ""));
+    el("text", { x: X(wx[1]) + 6, y: Y(wy[1]) + 14, class: "row-sub" + (out ? " out" : "") }, svg,
+      "wand volume");
     const xc = (wx[0] + wx[1]) / 2, yc = (wy[0] + wy[1]) / 2;
-    // calib_3's cameras, joined to this calibration's
+    // calib_3's cameras, joined to the calibration's
     G.cameras.forEach((c, k) => {
       const o = T.cameras[k];
       el("line", { x1: X(c.x), y1: Y(c.y), x2: X(o.x), y2: Y(o.y), class: "shift" }, svg);
     });
     // lines of sight to the wand's depth
     T.cameras.forEach(c => {
-      let t;
-      if (c.wall === 1) t = (yc - c.y) / c.dy; else t = (xc - c.x) / c.dx;
+      const t = c.wall === 1 ? (yc - c.y) / c.dy : (xc - c.x) / c.dx;
       el("line", { x1: X(c.x), y1: Y(c.y), x2: X(c.x + t * c.dx), y2: Y(c.y + t * c.dy), class: "sight" }, svg);
     });
     const label = (c, k, gui) => {
-      // wall 1's pair stacks along y: labels beside the markers (this calibration right, calib_3 left); wall 2's pair
-      // lies along x: this calibration's labels above, calib_3's below, the farther camera's anchored to the left
+      // wall 1's pair stacks along y: labels beside the markers (the calibration right, calib_3 left); wall 2's pair
+      // lies along x: the calibration's labels above, calib_3's below, the farther camera's anchored to the left
       const cams = gui ? G.cameras : T.cameras;
       const pair = cams.map((q, i) => [q, i]).filter(([q]) => q.wall === c.wall).sort((a, b) => a[0].x - b[0].x);
       const farther = pair.length > 1 && pair[0][1] === k;
@@ -682,9 +828,12 @@ footer code { font-size: 0.86em; }
       el("circle", { cx: X(c.x), cy: Y(c.y), r: 11, class: "hit" }, g);
       el("circle", { cx: X(c.x), cy: Y(c.y), r: 6.5, class: "cam-now" }, g);
       label(c, k, false);
-      bindTip(g, `<b>${CAM[k]} (cam${k}), this calibration</b><br>${fmt(t2.distance_mm[k])} mm from its wall, ` +
-        `${t2.incidence_deg[k].toFixed(2)}° to its normal<br>f ${fmt(t2.f_px[k])} px (${(t2.f_px[k] * 0.0135).toFixed(1)} mm), ` +
-        `k1 ${t2.k1[k].toFixed(2)}`);
+      const q = F.cameras[k];
+      bindTip(g, `<b>${CAM[k]} (cam${k}), ${{ ref: "with the channel, centre held", ref_pp: "with the channel, centre fitted",
+        T2: "the first calibration" }[SEL]}</b><br>` +
+        `${fmt(q.distance_to_wall_mm)} mm from its wall, ${q.incidence_deg.toFixed(2)}° to its normal<br>` +
+        `f ${fmt(q.f)} px (${(q.f * 0.0135).toFixed(1)} mm), k1 ${q.k1.toFixed(2)}` +
+        (SEL === "ref_pp" ? `, principal point ${sgn(q.pp_off_px[0])}, ${sgn(q.pp_off_px[1])} px` : ""));
     });
     // scale bar
     const sb = 200, bx = ml + 6, by = H - 24;
@@ -692,61 +841,130 @@ footer code { font-size: 0.86em; }
     el("line", { x1: bx, x2: bx, y1: by - 5, y2: by + 5, class: "scale-bar" }, svg);
     el("line", { x1: bx + sb * s, x2: bx + sb * s, y1: by - 5, y2: by + 5, class: "scale-bar" }, svg);
     el("text", { x: bx + sb * s + 8, y: by + 4, class: "tick" }, svg, "200 mm");
-  })();
+  }
+  redraw.push(drawPlan);
 
   /* the wand's volume */
-  (function () {
-    const v = DATA.rig3d.volume;
+  function fillVolume() {
+    const F = R3.fits[SEL], v = F.volume, Wd = R3.channel.width_mm;
     const tb = document.querySelector("#vol-table tbody");
+    tb.textContent = "";
     const mm = x => (Math.abs(x) < 0.05 ? 0 : x).toFixed(1) + " mm";
-    [["From wall 1 (C1 and C2's wall)", v.depth_from_wall1_mm], ["From wall 2 (C3 and C4's wall)", v.depth_from_wall2_mm],
-     ["Height along the walls' corner", v.height_mm]].forEach(([label, q]) => {
+    [["From wall 1 (C1 and C2's wall)", v.depth_from_wall1_mm],
+     [`From the far wall across wall 1 (${Wd[0]} mm)`, v.depth_from_far1_mm],
+     ["From wall 2 (C3 and C4's wall)", v.depth_from_wall2_mm],
+     [`From the far wall across wall 2 (${Wd[1]} mm)`, v.depth_from_far2_mm],
+     ["Height along the walls' corner", v.height_mm]].forEach(([label, q], row) => {
       const tr = document.createElement("tr");
       const th = document.createElement("th");
       th.scope = "row";
       th.textContent = label;
       tr.appendChild(th);
       [q["0"], q["1"], q["50"], q["99"], q["100"]].forEach(x => {
-        const td = document.createElement("td"); td.className = "num"; td.textContent = mm(x); tr.appendChild(td); });
+        const td = document.createElement("td");
+        td.className = "num" + (row < 4 && x < -0.05 ? " neg" : "");
+        td.textContent = mm(x);
+        tr.appendChild(td);
+      });
       [q["99"] - q["1"], q["100"] - q["0"]].forEach(x => {
         const td = document.createElement("td"); td.className = "num vol"; td.textContent = x.toFixed(0) + " mm"; tr.appendChild(td); });
       tb.appendChild(tr);
     });
     const s = v.box_1_99_size_mm, d = v.camera_to_centre_mm, h = v.camera_height_mm;
+    const beyond = Math.max(-v.depth_from_far1_mm["0"], -v.depth_from_far2_mm["0"], -v.depth_from_wall1_mm["0"],
+      -v.depth_from_wall2_mm["0"]);
     document.getElementById("vol-note").textContent =
       `The box holding 98 % of the ball centres is ${s.depth1.toFixed(0)} × ${s.depth2.toFixed(0)} × ` +
       `${s.height.toFixed(0)} mm (${v.box_1_99_cm3.toFixed(0)} cm³); the convex hull of all of them is ` +
-      `${v.hull_cm3.toFixed(0)} cm³. The cameras are ` + CAM.map((n, c) => `${n} ${(d[c] / 1000).toFixed(2)} m`).join(", ") +
-      " from the volume's centre, at heights " + CAM.map((n, c) => `${n} ${h[c] >= 0 ? "+" : "−"}${Math.abs(h[c]).toFixed(0)} mm`)
-      .join(", ") + " relative to it. The sizes are good to about 0.1 %. The distances to wall 1 are good to a few mm, " +
-      "since the wand touched it; those to wall 2 carry that wall's uncertainty, a few cm.";
+      `${v.hull_cm3.toFixed(0)} cm³, the same in all three calibrations. The cameras are ` +
+      CAM.map((n, c) => `${n} ${(d[c] / 1000).toFixed(2)} m`).join(", ") + " from the volume's centre, at heights " +
+      CAM.map((n, c) => `${n} ${h[c] >= 0 ? "+" : "−"}${Math.abs(h[c]).toFixed(0)} mm`).join(", ") +
+      " relative to it. " + (beyond > 0.5
+        ? `In this calibration the wand reaches ${beyond.toFixed(0)} mm beyond the channel's far wall (red), so its ` +
+          "wall 2 cannot be right."
+        : "The whole wand lies inside your channel. The sizes are good to about 0.1 %; the distances to wall 2 rest on " +
+          "C1 and C2 aiming at the channel's middle.");
+  }
+  redraw.push(fillVolume);
+
+  /* the channel section: the two calibrations side by side, and every variant tried (W3) */
+  (function () {
+    const tb = document.querySelector("#chan-table tbody");
+    const w4 = DATA.w4, w4c = DATA.w4c, A = R3.fits.T2, B = R3.fits.ref, C = R3.fits.ref_pp;
+    if (!w4 || !w4c || !B || !C) { document.getElementById("channel").hidden = true; return; }
+    const ef = w4c.every_frame, ho = w4c.held_out, efp = w4.every_frame, hop = w4.held_out;
+    const px = x => x.toFixed(4) + " px", mmf = x => x.toFixed(4) + " mm";
+    const rng = (q, d) => `${(Math.abs(q["0"]) < 0.05 ? 0 : q["0"]).toFixed(d)}–${q["100"].toFixed(d)} mm`;
+    const pp = F => F.cameras.map(c => `${c.name} ${sgn(c.pp_off_px[0])}, ${sgn(c.pp_off_px[1])}`).join("; ") + " px";
+    const h1 = ho.w4c_h1, h2 = ho.w4c_h2, p1 = hop.w4_h1, p2 = hop.w4_h2;
+    const pm = (j) => `${px(j.median_px)}, ${mmf(j.wand_abs_median_mm)}`;
+    const wsd = (j) => `${mmf(j.wand_abs_median_mm)} / ${mmf(j.wand_clean_sd_mm)}`;
+    const aim = (F, held) => `${F.volume.aim_C1C2_from_wall2_mm.toFixed(0)} mm${held ? " (held)" : ""}`;
+    const rows = [
+      ["Reprojection RMS, the fit's own", px(A.rms_px), px(B.rms_px), px(C.rms_px)],
+      ["Reprojection error, median, every frame", px(ef.t2_all.median_px), px(ef.w4c_ref.median_px), px(efp.w4_ref.median_px)],
+      ["Wand error, median / SD, every frame", wsd(ef.t2_all), wsd(ef.w4c_ref), wsd(efp.w4_ref)],
+      ["First half's fit on the second half: median, wand error", pm(h1.t3k_h1), pm(h1.w4c_h1), pm(p1.w4_h1)],
+      ["Second half's fit on the first half: median, wand error", pm(h2.t3k_h2_from_h1), pm(h2.w4c_h2), pm(p2.w4_h2)],
+      ["The wand from wall 1, C1/C2 (channel: 100 mm)", rng(A.volume.depth_from_wall1_mm, 0),
+        rng(B.volume.depth_from_wall1_mm, 0), rng(C.volume.depth_from_wall1_mm, 0)],
+      ["The wand from wall 2, C3/C4 (channel: 150 mm)", rng(A.volume.depth_from_wall2_mm, 0),
+        rng(B.volume.depth_from_wall2_mm, 0), rng(C.volume.depth_from_wall2_mm, 0)],
+      ["Where C1 and C2 aim, from wall 2", aim(A, false), aim(B, true), aim(C, true)],
+      ["Where C3 and C4 aim, from wall 1", ...[A, B, C].map(F => `${F.volume.aim_C3C4_from_wall1_mm.toFixed(0)} mm`)],
+      ["Principal points, from the image centre", "held at the centre", "held at the centre", pp(C)],
+      ["f, C1–C4", ...[A, B, C].map(F => F.cameras.map(c => fmt(c.f)).join(" / ") + " px")],
+      ["Cameras to their walls, C1–C4", ...[A, B, C].map(F => F.cameras.map(c => fmt(c.distance_to_wall_mm)).join(" / ") + " mm")],
+    ];
+    rows.forEach(r => {
+      const tr = document.createElement("tr");
+      r.forEach((t, i) => { const td = document.createElement(i ? "td" : "th"); td.textContent = t;
+        if (i) td.className = "num"; else td.scope = "row"; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+    // every variant tried (W3), with T2 and the free fit with the principal point
+    const t3 = document.querySelector("#w3-table tbody");
+    const names = {
+      t2_all: "f, k1 (the first calibration)", w3_A: "f, k1; channel", w3_AB: "f, k1; channel, aim (delivered: centre held)",
+      w3_B: "f, k1; aim only (no ball margin: pinned)", w3_A_scratch: "f, k1; channel; from scratch",
+      w2_pp_free: "+ principal point; no constraint", w3_A_pp: "+ principal point; channel",
+      w3_AB_pp: "+ principal point; channel, aim", w3_B_pp: "+ principal point; aim only (pinned)",
+      w3_A_scratch_pp: "+ principal point; channel; from scratch"};
+    [DATA.w3_k1, DATA.w3_pp].filter(Boolean).forEach(W3 => Object.keys(W3).forEach(k => {
+      if (!(k in names) || (W3 === DATA.w3_pp && k === "t2_all")) return;
+      const o = W3[k], e = o.every_frame;
+      const tr = document.createElement("tr");
+      [names[k], o.rms_px.toFixed(4), e.median_px.toFixed(4), e.wand_abs_median_mm.toFixed(4) + " mm",
+       `${o.depth_wall2_mm[0].toFixed(0)}–${o.depth_wall2_mm[1].toFixed(0)} mm`,
+       `${(Math.abs(o.depth_wall1_mm[0]) < 0.05 ? 0 : o.depth_wall1_mm[0]).toFixed(0)}–${o.depth_wall1_mm[1].toFixed(0)} mm`,
+       `${o.aim_C1C2_from_wall2_mm.toFixed(0)} mm`].forEach((t, i) => {
+        const td = document.createElement(i ? "td" : "th"); td.textContent = t;
+        if (i) td.className = "num"; else td.scope = "row"; tr.appendChild(td); });
+      t3.appendChild(tr);
+    }));
   })();
 
-  /* Figure 2: the rig in 3-D */
-  (function () {
+  /* Figure 2: the rig in 3-D, one scene group per calibration */
+  const show3d = (function () {
     const host = document.getElementById("rig3d");
     const note = document.getElementById("rig3d-note");
-    const buttons = document.querySelector(".view-buttons");
-    const R = DATA.rig3d;
+    const buttons = document.getElementById("view-buttons-3d");
     let renderer = null;
     try {
       if (window.THREE && THREE.OrbitControls) renderer = new THREE.WebGLRenderer({ antialias: true });
     } catch (e) { renderer = null; }
-    if (!renderer) { host.hidden = true; buttons.hidden = true; note.hidden = false; return; }
+    if (!renderer) { host.hidden = true; buttons.hidden = true; note.hidden = false; return () => {}; }
     const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     host.insertBefore(renderer.domElement, host.firstChild);
     const scene = new THREE.Scene();
     const cam = new THREE.PerspectiveCamera(32, 1, 10, 30000);
-    const UP = new THREE.Vector3(0, 0, R.up);           // physically up: from C2 towards C1
-    cam.up.copy(UP);
     const V = a => new THREE.Vector3(a[0], a[1], a[2]);
-    const up = s => UP.clone().multiplyScalar(s);
-    const T = R.T2, G = R.calib_3, bx = R.box_frame_mm;
-    const centre = new THREE.Vector3((bx[0][0] + bx[0][1]) / 2, (bx[1][0] + bx[1][1]) / 2, (bx[2][0] + bx[2][1]) / 2);
     const M = {
       wall: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.3, depthWrite: false, side: THREE.DoubleSide }),
+      wallFar: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.1, depthWrite: false, side: THREE.DoubleSide }),
       wallEdge: new THREE.LineBasicMaterial({}),
+      wallFarEdge: new THREE.LineDashedMaterial({ dashSize: 8, gapSize: 6 }),
       pts: new THREE.PointsMaterial({ size: 2.6, sizeAttenuation: false }),
       box: new THREE.LineDashedMaterial({ dashSize: 6, gapSize: 4 }),
       fov: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.85 }),
@@ -758,7 +976,9 @@ footer code { font-size: 0.86em; }
     function theme() {
       renderer.setClearColor(new THREE.Color(css("--surface")));
       M.wall.color.set(css("--wall"));
+      M.wallFar.color.set(css("--wall"));
       M.wallEdge.color.set(css("--muted"));
+      M.wallFarEdge.color.set(css("--muted"));
       M.pts.color.set(css("--accent"));
       M.box.color.set(css("--ink"));
       M.fov.color.set(css("--accent"));
@@ -767,90 +987,104 @@ footer code { font-size: 0.86em; }
       M.gui.color.set(css("--muted"));
       M.shift.color.set(css("--muted"));
     }
-    // the walls: wall 1 is y in [0, t1] from the corner along x; wall 2 the slab along its own normal from the corner
-    const zs = T.points.map(p => p[2]).concat(T.cameras.map(c => c.C[2]), G.cameras.map(c => c.C[2]));
-    const zLo = Math.min(...zs) - 120, zHi = Math.max(...zs) + 120, zMid = (zLo + zHi) / 2, zLen = zHi - zLo;
-    const xFar = Math.max(bx[0][1], ...T.cameras.filter(c => c.wall === 1).map(c => c.C[0])) + 260;
-    const yFar = Math.max(bx[1][1], ...T.cameras.filter(c => c.wall === 2).map(c => c.C[1])) + 260;
-    const t1 = T.walls[0].t, t2 = T.walls[1].t, n2 = T.walls[1].n;
-    const a2 = Math.atan2(n2[1], n2[0]), ca = Math.cos(a2), sa = Math.sin(a2);
-    function slab(sx, sy, pos, rotZ) {
-      const geo = new THREE.BoxGeometry(sx, sy, zLen);
-      [new THREE.Mesh(geo, M.wall), new THREE.LineSegments(new THREE.EdgesGeometry(geo), M.wallEdge)].forEach(o => {
-        o.position.copy(pos);
-        o.rotation.z = rotZ;
-        scene.add(o);
-      });
-    }
-    slab(xFar, t1, new THREE.Vector3(xFar / 2, t1 / 2, zMid), 0);
-    slab(t2, yFar, new THREE.Vector3(ca * t2 / 2 - sa * yFar / 2, sa * t2 / 2 + ca * yFar / 2, zMid), a2);
-    // the wand ends and the box holding 98 % of them
-    const pg = new THREE.BufferGeometry();
-    pg.setAttribute("position", new THREE.Float32BufferAttribute([].concat(...T.points), 3));
-    scene.add(new THREE.Points(pg, M.pts));
-    const bgeo = new THREE.BoxGeometry(bx[0][1] - bx[0][0], bx[1][1] - bx[1][0], bx[2][1] - bx[2][0]);
-    const box = new THREE.LineSegments(new THREE.EdgesGeometry(bgeo), M.box);
-    box.position.copy(centre);
-    box.computeLineDistances();
-    scene.add(box);
-    function seg(points, mat) {
-      const l = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), mat);
-      if (mat.isLineDashedMaterial) l.computeLineDistances();
-      scene.add(l);
-    }
-    // each camera's field of view: its corner rays refracted through its wall, out to the plane through the volume's
-    // centre across its line of sight
-    T.cameras.forEach(c => {
-      const C = V(c.C), z = V(c.z_axis);
-      const ends = c.rays.map(r => {
-        const o = V(r.o), d = V(r.d);
-        const s = z.dot(centre.clone().sub(o)) / z.dot(d);
-        return { o, e: o.clone().add(d.multiplyScalar(s)) };
-      });
-      const lines = [];
-      for (let i = 0; i < 4; i++) lines.push(C, ends[i].o, ends[i].o, ends[i].e, ends[i].e, ends[(i + 1) % 4].e);
-      lines.push(C, ends[4].o, ends[4].o, ends[4].e);
-      seg(lines, M.fov);
-      const fq = new THREE.BufferGeometry().setFromPoints([ends[0].e, ends[1].e, ends[2].e, ends[0].e, ends[2].e, ends[3].e]);
-      scene.add(new THREE.Mesh(fq, M.fovFill));
-      const dot = new THREE.Mesh(new THREE.SphereGeometry(14, 16, 12), M.camDot);
-      dot.position.copy(C);
-      scene.add(dot);
-    });
-    // calib_3's cameras, each joined to this calibration's
-    G.cameras.forEach((g, k) => {
-      const s = new THREE.Mesh(new THREE.SphereGeometry(18, 10, 8), M.gui);
-      s.position.copy(V(g.C));
-      scene.add(s);
-      seg([V(g.C), V(T.cameras[k].C)], M.shift);
-    });
-    // labels that follow their points
     const layer = host.querySelector(".labels3d");
-    const labels = [];
-    function label(text, pos, cls) {
-      const e = document.createElement("div");
-      e.className = "label3d" + (cls ? " " + cls : "");
-      e.textContent = text;
-      layer.appendChild(e);
-      labels.push({ e, pos });
+    const CH = R3.channel, Wy = CH.width_mm[0], Wx = CH.width_mm[1], G = R3.calib_3;
+    function build(T) {
+      const group = new THREE.Group(), labels = [];
+      const UP = new THREE.Vector3(0, 0, T.up);
+      const up = s => UP.clone().multiplyScalar(s);
+      const bx = T.box_frame_mm;
+      const centre = new THREE.Vector3((bx[0][0] + bx[0][1]) / 2, (bx[1][0] + bx[1][1]) / 2, (bx[2][0] + bx[2][1]) / 2);
+      const add = o => { group.add(o); return o; };
+      // the channel's walls: the two the cameras look through (in the model), and the far two at your size
+      const zs = T.points.map(p => p[2]).concat(T.cameras.map(c => c.C[2]), G.cameras.map(c => c.C[2]));
+      const zLo = Math.min(...zs) - 120, zHi = Math.max(...zs) + 120, zMid = (zLo + zHi) / 2, zLen = zHi - zLo;
+      const t1 = T.walls[0].t, t2 = T.walls[1].t, n2 = T.walls[1].n;
+      const a2 = Math.atan2(n2[1], n2[0]), ca = Math.cos(a2), sa = Math.sin(a2);
+      const xOut = t2 + Wx + t1, yOut = t1 + Wy + t1;
+      function slab(sx, sy, pos, rotZ, far) {
+        const geo = new THREE.BoxGeometry(sx, sy, zLen);
+        const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), far ? M.wallFarEdge : M.wallEdge);
+        [new THREE.Mesh(geo, far ? M.wallFar : M.wall), edges].forEach(o => {
+          o.position.copy(pos);
+          o.rotation.z = rotZ;
+          add(o);
+        });
+        if (far) edges.computeLineDistances();
+      }
+      slab(xOut, t1, new THREE.Vector3(xOut / 2, t1 / 2, zMid), 0, false);
+      slab(t2, yOut, new THREE.Vector3(ca * t2 / 2 - sa * yOut / 2, sa * t2 / 2 + ca * yOut / 2, zMid), a2, false);
+      slab(xOut, t1, new THREE.Vector3(xOut / 2, t1 + Wy + t1 / 2, zMid), 0, true);
+      slab(t1, yOut, new THREE.Vector3(t2 + Wx + t1 / 2, yOut / 2, zMid), 0, true);
+      // the wand ends and the box holding 98 % of them
+      const pg = new THREE.BufferGeometry();
+      pg.setAttribute("position", new THREE.Float32BufferAttribute([].concat(...T.points), 3));
+      add(new THREE.Points(pg, M.pts));
+      const bgeo = new THREE.BoxGeometry(bx[0][1] - bx[0][0], bx[1][1] - bx[1][0], bx[2][1] - bx[2][0]);
+      const box = add(new THREE.LineSegments(new THREE.EdgesGeometry(bgeo), M.box));
+      box.position.copy(centre);
+      box.computeLineDistances();
+      function seg(points, mat) {
+        const l = add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), mat));
+        if (mat.isLineDashedMaterial) l.computeLineDistances();
+      }
+      // each camera's field of view: its corner rays refracted through its wall, out to the plane through the
+      // volume's centre across its line of sight
+      T.cameras.forEach(c => {
+        const C = V(c.C), z = V(c.z_axis);
+        const ends = c.rays.map(r => {
+          const o = V(r.o), d = V(r.d);
+          const s = z.dot(centre.clone().sub(o)) / z.dot(d);
+          return { o, e: o.clone().add(d.multiplyScalar(s)) };
+        });
+        const lines = [];
+        for (let i = 0; i < 4; i++) lines.push(C, ends[i].o, ends[i].o, ends[i].e, ends[i].e, ends[(i + 1) % 4].e);
+        lines.push(C, ends[4].o, ends[4].o, ends[4].e);
+        seg(lines, M.fov);
+        const fq = new THREE.BufferGeometry().setFromPoints([ends[0].e, ends[1].e, ends[2].e, ends[0].e, ends[2].e, ends[3].e]);
+        add(new THREE.Mesh(fq, M.fovFill));
+        const dot = add(new THREE.Mesh(new THREE.SphereGeometry(14, 16, 12), M.camDot));
+        dot.position.copy(C);
+      });
+      // calib_3's cameras, each joined to this calibration's
+      G.cameras.forEach((g, k) => {
+        const s = add(new THREE.Mesh(new THREE.SphereGeometry(18, 10, 8), M.gui));
+        s.position.copy(V(g.C));
+        seg([V(g.C), V(T.cameras[k].C)], M.shift);
+      });
+      // labels that follow their points
+      function label(text, pos, cls) {
+        const e = document.createElement("div");
+        e.className = "label3d" + (cls ? " " + cls : "");
+        e.textContent = text;
+        e.hidden = true;
+        layer.appendChild(e);
+        labels.push({ e, pos });
+      }
+      T.cameras.forEach(c => label(c.name, V(c.C).add(up(42)), ""));
+      G.cameras.forEach(g => label(g.name + " (calib_3)", V(g.C).add(up(-44)), "gui"));
+      label(`channel, ${Wx} × ${Wy} mm inside`, new THREE.Vector3(xOut / 2, yOut / 2, zMid).add(up(zLen / 2 + 30)),
+        "dim");
+      label("wand volume", centre.clone().add(up((bx[2][1] - bx[2][0]) / 2 + 34)), "dim");
+      group.visible = false;
+      scene.add(group);
+      return { group, labels, centre, UP };
     }
-    T.cameras.forEach(c => label(c.name, V(c.C).add(up(42)), ""));
-    G.cameras.forEach(g => label(g.name + " (calib_3)", V(g.C).add(up(-44)), "gui"));
-    label("wall 1", new THREE.Vector3(xFar * 0.8, t1 / 2, zMid).add(up(zLen / 2 + 24)), "dim");
-    label("wall 2", new THREE.Vector3(ca * t2 / 2 - sa * yFar * 0.8, sa * t2 / 2 + ca * yFar * 0.8, zMid).add(up(zLen / 2 + 24)), "dim");
-    label("wand volume", centre.clone().add(up((bx[2][1] - bx[2][0]) / 2 + 34)), "dim");
+    const builds = {};
+    Object.keys(R3.fits).forEach(k => { builds[k] = build(R3.fits[k]); });
+    let cur = builds[SEL], view = "overview";
     const controls = new THREE.OrbitControls(cam, renderer.domElement);
-    controls.target.copy(centre);
     controls.screenSpacePanning = true;
     function render() {
       renderer.render(scene, cam);
       const w = host.clientWidth, h = host.clientHeight;
-      labels.forEach(l => {
+      Object.values(builds).forEach(b => b.labels.forEach(l => {
+        if (b !== cur) { l.e.hidden = true; return; }
         const p = l.pos.clone().project(cam);
         const vis = p.z > -1 && p.z < 1 && Math.abs(p.x) < 1.05 && Math.abs(p.y) < 1.05;
         l.e.hidden = !vis;
         if (vis) l.e.style.transform = `translate(${((p.x + 1) / 2) * w}px, ${((1 - p.y) / 2) * h}px) translate(-50%, -50%)`;
-      });
+      }));
     }
     controls.addEventListener("change", render);
     const VIEWS = {
@@ -861,10 +1095,12 @@ footer code { font-size: 0.86em; }
       volume: { dir: [-0.62, -0.78, 0], lift: 0.45, dist: 620 },
     };
     function setView(name) {
+      view = name;
       const v = VIEWS[name];
-      const d = new THREE.Vector3(v.dir[0], v.dir[1], v.dir[2]).add(up(v.lift)).normalize();
-      cam.position.copy(centre).add(d.multiplyScalar(v.dist));
-      controls.target.copy(centre);
+      cam.up.copy(cur.UP);
+      const d = new THREE.Vector3(v.dir[0], v.dir[1], v.dir[2]).add(cur.UP.clone().multiplyScalar(v.lift)).normalize();
+      cam.position.copy(cur.centre).add(d.multiplyScalar(v.dist));
+      controls.target.copy(cur.centre);
       controls.update();
       buttons.querySelectorAll("button[data-view]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.view === name)));
       render();
@@ -887,8 +1123,32 @@ footer code { font-size: 0.86em; }
     new MutationObserver(onTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     theme();
     if (window.ResizeObserver) new ResizeObserver(resize).observe(host); else window.addEventListener("resize", resize);
-    setView("overview");
+    function show() {
+      Object.values(builds).forEach(b => { b.group.visible = false; });
+      cur = builds[SEL] || builds.T2;
+      cur.group.visible = true;
+      setView(view);
+    }
+    show();
     resize();
+    return show;
+  })();
+  redraw.push(show3d);
+
+  /* the switch between the two calibrations */
+  (function () {
+    const tg = document.getElementById("cal-toggle");
+    if (!R3.fits.ref) { tg.hidden = true; }
+    function set(sel) {
+      SEL = sel;
+      tg.querySelectorAll("button[data-cal]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cal === sel)));
+      redraw.forEach(f => f());
+    }
+    tg.addEventListener("click", e => {
+      const b = e.target.closest("button[data-cal]");
+      if (b && b.dataset.cal !== SEL) set(b.dataset.cal);
+    });
+    set(SEL);
   })();
 
   /* Figure 3: every fit, right and wrong */
@@ -930,7 +1190,7 @@ footer code { font-size: 0.86em; }
       const g = el("g", { class: "m", tabindex: "0", role: "img" }, svg);
       el("circle", { cx, cy, r: 10, class: "hit" }, g);
       const cls = (m.right ? "m-right" : "m-wrong") + (m.fit_k1 ? "" : "-ring");
-      const big = m.fits.some(f => f.name === "t2_all" || f.name === "t2_scratch");
+      const big = m.fits.some(f => f.name === "t2_all" || f.name === "t2_scratch" || f.name === "w4c_ref");
       el("circle", { cx, cy, r: big ? 7.5 : (m.fit_k1 ? 5.5 : 5), class: cls }, g);
       const names = m.fits.map(f => f.desc).join("; ");
       const f0 = m.fits[0];
@@ -943,6 +1203,10 @@ footer code { font-size: 0.86em; }
         el("text", { x: cx, y: Y(0.97), "text-anchor": "middle", class: "mark-label" }, g, "delivered T2");
       }
       if (m.fits.some(f => f.name === "t2_scratch")) el("text", { x: cx - 12, y: cy + 22, "text-anchor": "end", class: "mark-label" }, g, "T2 from scratch");
+      if (m.fits.some(f => f.name === "w4c_ref")) {
+        el("line", { x1: cx + 6, y1: cy - 6, x2: X(0.29) - 4, y2: Y(1.04) + 4, class: "row-rule" }, g);
+        el("text", { x: X(0.29), y: Y(1.04), "text-anchor": "start", class: "mark-label" }, g, "with the channel");
+      }
       if (m.fits.length > 1 && !m.right) el("text", { x: cx + 10, y: cy + 4, class: "val" }, g, "×" + m.fits.length);
     });
     const wrong = DATA.fits.filter(f => !f.right), missed = wrong.filter(f => f.sigma_px <= 0.5);

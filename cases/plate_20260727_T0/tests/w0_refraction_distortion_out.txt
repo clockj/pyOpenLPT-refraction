@@ -1,0 +1,10 @@
+W0: refraction's distortion beyond a homography, delivered fit (T2) with k1 = 0; planes parallel to each camera's wall
+  C1 (0.7 deg to its wall's normal), water depth 30 mm: 861 points in the image; max 0.025 px, RMS 0.006 px
+  C1 (0.7 deg to its wall's normal), water depth 85 mm: 916 points in the image; max 0.060 px, RMS 0.014 px
+  C2 (12.8 deg to its wall's normal), water depth 30 mm: 833 points in the image; max 0.100 px, RMS 0.030 px
+  C2 (12.8 deg to its wall's normal), water depth 85 mm: 902 points in the image; max 0.201 px, RMS 0.066 px
+  C3 (18.1 deg to its wall's normal), water depth 30 mm: 409 points in the image; max 0.136 px, RMS 0.049 px
+  C3 (18.1 deg to its wall's normal), water depth 85 mm: 441 points in the image; max 0.280 px, RMS 0.102 px
+  C4 (1.2 deg to its wall's normal), water depth 30 mm: 399 points in the image; max 0.025 px, RMS 0.006 px
+  C4 (1.2 deg to its wall's normal), water depth 85 mm: 441 points in the image; max 0.053 px, RMS 0.014 px
+  For comparison, the fitted k1 (0.76-1.06) moves the image corners by about 6 px.

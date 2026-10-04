@@ -1,0 +1,19 @@
+W1: the delivered fit (T2) on every frame (10936 frames, 87242 active detections, T2's weights: equal), walls held where a channel 150 x 100 mm inside puts them, everything else refitted; dchi2 = the change of the sum of squared residuals over (0.2333 px)^2
+  shifts along each wall's normal, positive away from its cameras; ball centres at least 2 mm inside the channel
+  case      shifts (mm)            dchi2     RMS px   per camera (px)             f (px)                   k1                       to wall (mm)            depth below wall 1 / wall 2 (mm)
+  free      none                           0  0.2734   0.265 0.259 0.289 0.279   18752 19146 21488 21936   0.759 0.840 0.782 1.063    1067  1034   772   845    -0.0.. 84.7 / 109.0..225.2
+  w2_lo     wall 2 +77.2              113438  0.3815   0.288 0.267 0.469 0.457   18751 19167 21348 21851   0.801 0.869 0.854 1.192    1068  1036   821   899     0.0.. 84.6 /  31.7..148.0
+  w2_mid    wall 2 +92.1              160932  0.4185   0.300 0.269 0.527 0.512   18754 19188 21169 21740   0.769 0.831 0.846 1.181    1068  1037   824   906     0.0.. 84.6 /  16.8..133.1
+  w2_hi     wall 2 +107.0             218272  0.4593   0.313 0.271 0.589 0.572   18770 19192 21114 21704   0.765 0.830 0.856 1.199    1058  1026   833   915    14.9.. 99.5 /   1.8..118.1
+  both_mid  wall 1 -7.7, wall 2 +92.1    162981  0.4200   0.288 0.273 0.532 0.516   18765 19192 21153 21737   0.720 0.806 0.831 1.177    1059  1028   823   905    12.2.. 96.7 /  16.8..133.1
+  case      angles to wall normals (deg)   baselines C1-C2, C3-C4 (mm)   walls (deg)   every frame: median px, inliers RMS, |dL| median (mm), clean mean L, SD, outliers
+  free       0.70 12.80 18.10  1.24             242.57,  286.84               90.169       0.2153, 0.1890, 0.0067, 9.9998, 0.0101, 658
+  w2_lo      0.45 12.71 18.08  1.24             243.11,  285.86               90.395       0.2820, 0.2665, 0.0069, 10.0002, 0.0105, 657
+  w2_mid     0.38 12.70 18.07  1.24             243.30,  284.30               90.465       0.3009, 0.2927, 0.0070, 10.0002, 0.0107, 656
+  w2_hi      0.40 12.81 18.06  1.24             243.54,  283.86               90.534       0.3210, 0.3214, 0.0072, 10.0002, 0.0110, 657
+  both_mid   0.70 12.82 18.07  1.23             243.43,  284.21               90.169       0.2994, 0.2938, 0.0071, 10.0002, 0.0107, 656
+  residual maps (w1_residual_maps.png): per camera, the RMS over cells of the mean residual (px), and of its change from free to w2_mid
+    C1: free 0.0944, w2_mid 0.2186, change 0.1742; largest change 0.3833 px
+    C2: free 0.1066, w2_mid 0.1295, change 0.0675; largest change 0.2376 px
+    C3: free 0.1330, w2_mid 0.5560, change 0.5609; largest change 1.0818 px
+    C4: free 0.1066, w2_mid 0.5639, change 0.5693; largest change 0.9355 px

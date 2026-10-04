@@ -7,7 +7,10 @@ this script.
             and its volume (tests/rig_3d.json).
   Figure 3: every fit of the case by its noise and its nearest camera's distance to its wall (tests/fits_summary.json).
   Figure 4 and the rig table: the calibrations against the GUI's (tests/t7_vs_gui.json).
-  The sigmas of the delivered f come from its calibration_result.json in the output folder (left out if unreadable).
+  The channel section: the calibration with the channel against the delivered one (2026-10-03-walls-plan.md:
+            tests/w4_delivery.json, tests/w3_constraints*.json); Figures 1 and 2 and the volume and camera tables
+            switch between the two calibrations.
+  The sigmas of f come from each calibration's calibration_result.json in its output folder (left out if unreadable).
 The page opens in a browser as it is.  --fragment PATH also writes it without its document skeleton, for publishing as
 an artifact (the publisher adds its own).
 Usage: make_report_page.py [--fragment PATH]
@@ -57,18 +60,40 @@ def desc(f) -> str:
         parts.append(f"n_water {f['n_water']}")
     if f["thickness"]:
         parts.append(f"walls {f['thickness']} mm")
+    lens = f.get("fit_lens") or []
+    if lens:
+        parts.append("principal point fitted" if lens == ["pp"] else "lens terms " + ", ".join(lens) + " fitted")
+    cons = f.get("constraints") or {}
+    if cons.get("channel"):
+        parts.append("channel held")
+    if cons.get("aim"):
+        parts.append("C1, C2 aimed at the channel's middle")
     if f["start"]:
-        parts.append("started from the first half's fit" if f["start"] == "t3k_h1" else f"started from {f['start']}")
+        parts.append(STARTS.get(f["start"], f"started from {f['start']}"))
     return ", ".join(parts)
 
 
-def sigma_f():
-    """The delivered fit's sigma of f per camera (px), from the output folder's calibration_result.json."""
+STARTS = {"t3k_h1": "started from the first half's fit", "t2_all": "started from T2",
+          "w2_pp_free": "started from T2 refitted with the principal point",
+          "t3k_h2_from_h1": "started from the second half's fit"}
+
+
+def sigma_f(key: str = "out_dir"):
+    """A delivered fit's sigma of f per camera (px), from its output folder's calibration_result.json (config out_dir,
+    or out_dir_ref for the calibration with the channel)."""
     cfg = load("config.json")
     try:
-        res = json.loads(Path(cfg["out_dir"], "calibration_result.json").read_text(encoding="utf-8"))
+        res = json.loads(Path(cfg[key], "calibration_result.json").read_text(encoding="utf-8"))
         return [c["sigma"]["f_px"] for c in res["cameras"]]
     except (OSError, KeyError, TypeError, ValueError):
+        return None
+
+
+def load_opt(rel):
+    """A results file of the walls plan, or None before it exists."""
+    try:
+        return load(rel)
+    except (OSError, ValueError):
         return None
 
 
@@ -91,7 +116,13 @@ def main():
         rows.append(r)
     data = {"fits": fs["fits"], "plan": fs["plan"], "gui_rows": rows, "rig3d": load("tests/rig_3d.json"),
             "gui_rig": t7["rigs"]["GUI calib_3"], "our_rig": t7["rigs"]["plate_wand (T2, every frame)"],
-            "t2_sigma_f": sigma_f()}
+            "t2_sigma_f": sigma_f(), "ref_sigma_f": sigma_f("out_dir_ref_centre"),
+            "ref_pp_sigma_f": sigma_f("out_dir_ref"),
+            # the walls plan (2026-10-03-walls-plan.md): the deliveries W4c (chosen: principal point at the centre) and
+            # W4 (principal point fitted), and the constraint variants W3
+            "w4c": load_opt("tests/w4c_delivery.json"), "w4": load_opt("tests/w4_delivery.json"),
+            "w3_k1": load_opt("tests/w3_constraints.json"),
+            "w3_pp": load_opt("tests/w3_constraints_pp.json")}
     html = TEMPLATE.read_text(encoding="utf-8")
     assert html.count("__FIG_DATA__") == 1 and html.count("<!--BODY-->") == 1
     html = html.replace("__FIG_DATA__", json.dumps(data, separators=(",", ":")))

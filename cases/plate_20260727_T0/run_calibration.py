@@ -4,8 +4,11 @@ configured wand detections, then the outputs (PINPLATE camFiles, result JSON, re
     python run_calibration.py                                   # T2: every frame of "all"; outputs to config out_dir
     python run_calibration.py --every 5 --offset 0 --out none --state tests/s.pkl     # a subset, fit only
     python run_calibration.py --detections gui_5563 --n-water 1.33 --fit-k1 --hints photo --out none
+    python run_calibration.py --fit-k1 --start tests/states/t2_all.pkl --channel --aim centre --out ref
 
 Each run prints its progress and ends with a summary; --state saves the fit (case.save_state) for the tests.
+The options --fit-lens, --channel and --aim use plate_wand's optional lens terms and constraints
+(2026-10-03-walls-plan.md); the channel and the aim come from config.json's "constraints".
 """
 from __future__ import annotations
 
@@ -64,6 +67,30 @@ def calibrate_case(cfg: dict, detections: str = "all", rows=None, n_water: float
     log(f"calibrate: done in {secs:.0f} s; RMS {sol.rms:.4f} px, sigma {sol.sigma_px:.4f} px, "
         f"{int(sol.obs.active.sum())} of {len(sol.obs)} detections active")
     return sol, rc, cd, fids, secs
+
+
+def constraints_of(cfg: dict, channel: bool = False, aim=None, aim_sigma: float = None, tolerance: float = None):
+    """plate_wand.calibrate's constraints from config.json's "constraints": the channel (with another tolerance if
+    given) and the aims: "centre" (config aim_centre) or "CAMS:WALL:MM" (0-based cameras and window, e.g. 0,1:1:75),
+    held unless aim_sigma is given.  None when there are none."""
+    cons = {}
+    if channel:
+        cons["channel"] = {k: v for k, v in cfg["constraints"]["channel"].items() if not k.startswith("_")}
+        if tolerance is not None:
+            cons["channel"]["tolerance_mm"] = float(tolerance)
+    aims = []
+    for a in aim or []:
+        if a == "centre":
+            aims += [dict(x) for x in cfg["constraints"]["aim_centre"]]
+        else:
+            cams, wall, mm = a.split(":")
+            aims.append({"cams": [int(c) for c in cams.split(",")], "wall": int(wall), "mm": float(mm)})
+    for x in aims:
+        if aim_sigma is not None:
+            x["sigma_mm"] = float(aim_sigma)
+    if aims:
+        cons["aim"] = aims
+    return cons or None
 
 
 def summary(sol, rc) -> str:
@@ -136,7 +163,7 @@ def write_outputs(sol, rc, cfg, out_dir: str, detections: str, fids, secs: float
         json.dump({"all_detections": e_all}, fh, indent=1)
     with open(os.path.join(out_dir, "evaluation.txt"), "w", encoding="utf-8") as fh:
         fh.write("Free triangulation of every frame of the circle finder's table (evaluate.py)\n"
-                 + ev.text("calib_plate_wand", e_all) + "\n")
+                 + ev.text(os.path.basename(os.path.normpath(out_dir)), e_all) + "\n")
     write_readme(out_dir, res, e_all)
     log(f"outputs written to {out_dir}")
     return res, e_all
@@ -156,10 +183,12 @@ def write_readme(out_dir: str, res: dict = None, e_all: dict = None) -> None:
     def base(i, j):
         return float(np.linalg.norm(np.subtract(res["cameras"][i]["centre_mm"], res["cameras"][j]["centre_mm"])))
     start = st.get("start")
+    what = ("the first half of the recording; a start from scratch on every frame ended in a wrong minimum: case "
+            "report, section 4" if "t3k_h1" in str(start) else
+            "the delivered calibration calib_plate_wand; case report `2026-10-03-walls-report.md`")
     how = ("from the wand detections alone: no camera, wall or focal-length input" if not start else
            f"from the wand detections, started from an earlier fit of the same data (`{os.path.basename(start)}`, "
-           "the first half of the recording; a start from scratch on every frame ended in a wrong minimum: case "
-           "report, section 4). Every camera, both walls and k1 are refitted on every frame")
+           f"{what}). Every camera, both walls and the lens terms are refitted on every frame")
     readme = [
         f"# Flat-window wand calibration, run 20260727 / T0 ({res.get('written', '')[:10]})", "",
         f"Calibrated by pyOpenLPT's flat-window wand calibration (`plate_wand.calibrate`), {how}. Code, plan, tests "
@@ -169,8 +198,11 @@ def write_readme(out_dir: str, res: dict = None, e_all: dict = None) -> None:
         "| `calibration_result.json` | every fitted value with its standard deviation, the noise, the warnings |",
         "| `calibration_report.txt` | the same as a short report, with a WARNINGS block when there is one |",
         "| `evaluation.txt`, `evaluation.json` | every frame of the circle finder's table triangulated with these "
-        "cameras: reprojection errors and wand lengths (the same measure the case applies to calib, calib_2, calib_3) |",
-        "| `comparison_with_calib_3.txt` | this calibration against your GUI calibrations (case test T7) |", "",
+        "cameras: reprojection errors and wand lengths (the same measure the case applies to calib, calib_2, calib_3) |"]
+    if os.path.exists(os.path.join(out_dir, "comparison_with_calib_3.txt")):
+        readme.append("| `comparison_with_calib_3.txt` | this calibration against your GUI calibrations (case test T7) |")
+    readme += [
+        "",
         "Cameras: cam0 = C1 (image folder cam1), cam1 = C2 (cam2), cam2 = C3 (cam3), cam3 = C4 (cam4). C1 and C2 look "
         "through one wall, C3 and C4 through the other.", "",
         f"Inputs: `{os.path.basename(res.get('detections', ''))}`, {res.get('frames_used')} frames; walls "
@@ -189,8 +221,40 @@ def write_readme(out_dir: str, res: dict = None, e_all: dict = None) -> None:
                           "C2's f and nothing measurable in the 3-D measurement."), "",
         f"Check: the spacing of C1 and C2 is {base(0, 1):.1f} mm in this calibration and of C3 and C4 "
         f"{base(2, 3):.1f} mm (calib_3: 170 and 173 mm); a tape measure between the lens axes decides.", ""]
+    readme += _readme_constraints(res, st)
     with open(os.path.join(out_dir, "README.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(readme))
+
+
+def _readme_constraints(res: dict, st: dict) -> list:
+    """The README's paragraph on the optional lens terms and constraints (2026-10-03-walls-plan.md), if used."""
+    out = []
+    if st.get("fit_lens"):
+        names = {"pp": "the principal point (each lens's centre)", "k2": "k2", "tangential": "the tangential terms"}
+        out += [f"Lens terms fitted besides f and k1: {', '.join(names.get(t, t) for t in st['fit_lens'])} "
+                "(calibration_report.txt lists their values).", ""]
+    cons = (res.get("info") or {}).get("constraints")
+    if not cons:
+        return out
+    ch = cons.get("channel")
+    if ch:
+        names = [w["name"] for w in res["windows"]]
+        parts = []
+        for k, w in enumerate(ch["windows"]):
+            lo, hi = w["band_mm"]
+            parts.append(f"{names[k]}: the wand ends lie {w['depth_mm'][0]:.1f}-{w['depth_mm'][1]:.1f} mm from its water "
+                         f"side" + (f" (inside width {w['width_mm']:.0f} mm)" if w["width_mm"] else "")
+                         + f"; the wall could move {'-inf' if lo is None else f'{lo:+.1f}'} to {hi:+.1f} mm along its "
+                           "normal (+: away from its cameras) and still hold the wand")
+        out += ["Constraint, the channel: the wand stayed inside the channel (inside widths "
+                f"{ch['width']} mm across the walls, + {ch['tol']:g} mm for the size's error; ball radii "
+                f"{list(ch['ball'])} mm). " + "; ".join(parts) + ".", ""]
+    for p in cons.get("priors") or []:
+        if p["kind"] == "aim":
+            out += [f"Constraint, the aim: cameras {', '.join(f'C{c + 1}' for c in p['cam'])} aim at a point "
+                    f"{p['value']:.1f} mm from the water side of {res['windows'][p['wall']]['name']} (given "
+                    f"{p['mean']:.1f} mm: the middle of the channel's side; held).", ""]
+    return out
 
 
 def main():
@@ -208,7 +272,18 @@ def main():
     ap.add_argument("--edge-margin", type=float, default=None,
                     help="drop detections whose ball crosses the image border (this margin in px; default: keep all)")
     ap.add_argument("--start", default=None, help="start from this saved fit's cameras and walls (a state pickle)")
-    ap.add_argument("--out", default=None, help="output folder (default: config out_dir; 'none': no outputs)")
+    ap.add_argument("--fit-lens", default=None,
+                    help="optional lens terms besides f and k1, comma-separated: pp (principal point), k2, tangential")
+    ap.add_argument("--channel", action="store_true",
+                    help="constraint: the wand stays inside the channel (config constraints.channel)")
+    ap.add_argument("--channel-tol", type=float, default=None, help="the channel's tolerance (mm; default: config)")
+    ap.add_argument("--aim", action="append", default=None,
+                    help="constraint: where cameras aim, 'centre' (config constraints.aim_centre) or CAMS:WALL:MM "
+                         "(0-based, e.g. 0,1:1:75); repeatable")
+    ap.add_argument("--aim-sigma", type=float, default=None, help="the aims' sigma (mm; default: held)")
+    ap.add_argument("--out", default=None,
+                    help="output folder (default: config out_dir; 'ref': config out_dir_ref; 'ref_centre': config "
+                         "out_dir_ref_centre; 'none': no outputs)")
     ap.add_argument("--state", default=None, help="save the fit here (pickle)")
     ap.add_argument("--log", default=None, help="also write the console to this file")
     ap.add_argument("--verbose", action="store_true")
@@ -216,7 +291,9 @@ def main():
                     help="only rewrite the output folder's README.md from its result files (no fit)")
     args = ap.parse_args()
     if args.readme_only:
-        write_readme(case.load_config()["out_dir"] if args.out is None else args.out)
+        c = case.load_config()
+        write_readme({None: c["out_dir"], "ref": c["out_dir_ref"],
+                      "ref_centre": c["out_dir_ref_centre"]}.get(args.out, args.out))
         return
     cfg = case.load_config()
     log = case.Tee(args.log) if args.log else print
@@ -228,9 +305,16 @@ def main():
         rows = rows[rows >= n - int(round(args.last * n))]
     settings = {k: getattr(args, k) for k in ("detections", "every", "offset", "first", "last", "n_water", "thickness",
                                               "fit_k1", "hints", "edge_margin", "start")}
+    fit_lens = tuple(t for t in (args.fit_lens or "").split(",") if t)
+    cons = constraints_of(cfg, args.channel, args.aim, args.aim_sigma, args.channel_tol)
+    settings.update(fit_lens=list(fit_lens), constraints=cons)
+    if fit_lens or cons:
+        log(f"lens terms {list(fit_lens) or 'none'}; constraints {json.dumps(cons)}")
     sol, rc, cd, fids, secs = calibrate_case(cfg, args.detections, rows, args.n_water, args.thickness, args.fit_k1,
                                              args.hints, edge_margin=args.edge_margin, start_state=args.start,
-                                             verbose=args.verbose, log=log)
+                                             verbose=args.verbose, log=log, fit_lens=fit_lens, constraints=cons)
+    if cons:
+        log("constraints at the answer: " + json.dumps(sol.info.get("constraints"), default=float))
     log(summary(sol, rc))
     aw = along_wand(sol)
     log("residual along the wand (A, B), px: " + "; ".join(
@@ -242,7 +326,8 @@ def main():
         case.save_state(args.state, sol, extra={"frame_numbers": fids, "detections": args.detections,
                                                 "settings": settings, "seconds": secs, "along_wand": aw})
         log(f"state saved to {args.state}")
-    out = cfg["out_dir"] if args.out is None else (None if args.out == "none" else args.out)
+    out = {None: cfg["out_dir"], "none": None, "ref": cfg["out_dir_ref"],
+           "ref_centre": cfg["out_dir_ref_centre"]}.get(args.out, args.out)
     if out:
         write_outputs(sol, rc, cfg, out, args.detections, fids, secs, settings, log=log)
     if args.log:

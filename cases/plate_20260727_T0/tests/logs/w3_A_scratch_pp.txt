@@ -1,0 +1,18 @@
+lens terms ['pp']; constraints {"channel": {"width_mm": [100.0, 150.0], "tolerance_mm": 3.0, "ball_radius_mm": [1.5, 2.0]}}
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 10936 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+calibrate: done in 4189 s; RMS 0.2661 px, sigma 0.2271 px, 87243 of 87488 detections active
+constraints at the answer: {"channel": {"width": [100.0, 150.0], "tol": 3.0, "ball": [1.5, 2.0], "sigma": 0.01, "windows": [{"depth_mm": [1.4999997376330185, 86.1323885573087], "width_mm": 100.0, "band_mm": [-15.367611442691299, -2.623669814738605e-07]}, {"depth_mm": [35.4530780166142, 151.0000016892734], "width_mm": 150.0, "band_mm": [1.689273403826519e-06, 33.9530780166142]}], "active_rows": 2, "max_breach_mm": 1.689273403826519e-06}, "priors": []}
+walls 90.179 deg apart
+  cam0: f 18914 +- 12 px (255.3 mm), 1075.4 mm from its wall, 0.65 deg to its normal, k1 0.77
+  cam1: f 19258 +- 12 px (260.0 mm), 1038.4 mm from its wall, 12.92 deg to its normal, k1 0.709
+  cam2: f 21471 +- 9 px (289.9 mm), 830.9 mm from its wall, 16.65 deg to its normal, k1 0.792
+  cam3: f 21831 +- 9 px (294.7 mm), 896.2 mm from its wall, 0.30 deg to its normal, k1 0.937
+  cams [0, 1]: baseline 244.4 mm, views 12.52 deg apart
+  cams [0, 2]: baseline 1509.1 mm, views 90.85 deg apart
+  cams [0, 3]: baseline 1524.1 mm, views 90.40 deg apart
+  cams [1, 2]: baseline 1541.9 mm, views 94.43 deg apart
+  cams [1, 3]: baseline 1512.6 mm, views 90.44 deg apart
+  cams [2, 3]: baseline 285.7 mm, views 16.62 deg apart
+residual along the wand (A, B), px: cam0: +0.066, -0.037; cam1: +0.000, +0.003; cam2: +0.003, +0.046; cam3: -0.026, -0.002
+warnings: none
+state saved to D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\tests\states\w3_A_scratch_pp.pkl

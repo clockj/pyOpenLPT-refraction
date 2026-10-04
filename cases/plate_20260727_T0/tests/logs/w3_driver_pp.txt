@@ -1,0 +1,21 @@
+  w3_A_pp: exit 0, 580 s  (--fit-k1 --start tests\states\w2_pp_free.pkl --channel --fit-lens pp)
+  w3_AB_pp: exit 0, 404 s  (--fit-k1 --start tests\states\w2_pp_free.pkl --channel --aim centre --fit-lens pp)
+  w3_B_pp: exit 0, 383 s  (--fit-k1 --start tests\states\w2_pp_free.pkl --aim centre --fit-lens pp)
+W3: 3 fits in 580 s
+W3: the constraints through the case's calibration, every frame; lens terms: pp; t2_all = the delivered fit, no constraint
+  fit              RMS px  sigma   active   f (px)                    k1                       to wall (mm)             walls deg   wand below wall 1 / wall 2 (mm)       aim C1C2 / C3C4 (mm)
+  t2_all           0.2734  0.2333   87242   18752 19146 21488 21936   0.759 0.840 0.782 1.063    1067  1034   772   845   90.169      -0.0.. 84.7 / 109.0..225.2       167.9 /  47.3
+  w2_pp_free       0.2663  0.2273   87242   18913 19258 21463 21831   0.771 0.712 0.786 0.932    1075  1038   820   887   90.180       1.5.. 86.1 /  48.1..163.7       107.6 /  47.2
+  w3_A_pp          0.2675  0.2283   87245   18916 19260 21471 21828   0.770 0.709 0.791 0.937    1076  1038   831   896   90.193       1.5.. 86.1 /  35.5..151.0        95.0 /  47.2
+  w3_AB_pp         0.2661  0.2271   87242   18915 19260 21482 21830   0.771 0.711 0.802 0.944    1075  1038   848   911   90.176       1.5.. 86.1 /  15.5..131.0        75.0 /  47.1
+  w3_B_pp          0.3663  0.3128   87078   18881 19219 21495 21855   0.765 0.703 0.753 0.590    1075  1038   845   912   90.311       0.0.. 84.3 /  15.8..131.3        75.0 /  48.5
+  fit              every frame: median px, inliers RMS, |dL| median (mm), clean mean L, SD, outliers;  baselines C1-C2, C3-C4 (mm)
+  t2_all           0.2153, 0.1890, 0.0067, 9.9998, 0.0101, 658;  242.57, 286.84
+  w2_pp_free       0.2100, 0.1845, 0.0065, 10.0000, 0.0099, 658;  244.43, 285.65
+  w3_A_pp          0.2100, 0.1845, 0.0065, 9.9999, 0.0099, 658;  244.46, 285.64
+  w3_AB_pp         0.2100, 0.1845, 0.0065, 10.0000, 0.0099, 658;  244.45, 285.67
+  w3_B_pp          0.2193, 0.1948, 0.0067, 9.9981, 0.0099, 658;  244.24, 286.00
+  constraints at the answers (plate_wand.constraint_report): per wall the band of shifts that keeps the wand inside (mm, + away from its cameras); the channel's ends on a limit; the aims
+  w3_A_pp          wall 1 band -15.4..-0.0; wall 2 band +0.0..+34.0; 2 ends on a limit, largest breach 0.000 mm
+  w3_AB_pp         wall 1 band -15.4..-0.0; wall 2 band -20.0..+14.0; 1 ends on a limit, largest breach 0.000 mm; aim 75.00 (given 75.00)
+  w3_B_pp          aim 75.00 (given 75.00)

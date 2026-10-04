@@ -30,9 +30,12 @@ HALVES = ["h1", "h2", "h2_from_h1"]      # h2_from_h1: the second half started f
 def solution_of(st, obs, frames):
     """A plate_wand Solution of a saved fit (for the warnings and the sigmas)."""
     lay = case.pw.Layout(obs.n_cams, len(st["rig"].windows), fit_k1=bool(st["layout"]["fit_k1"]),
-                         anchors=case.pw.anchors_for(st["cams"], st["rig"]))
+                         anchors=case.pw.anchors_for(st["cams"], st["rig"]),
+                         fit_lens=st["layout"].get("fit_lens") or ())
     if list(lay.names) != list(st["layout"]["names"]):
         raise ValueError("layout differs from the saved fit's")
+    lay.priors = [dict(p) for p in st["layout"].get("priors") or []]       # the walls plan's constraints, if any
+    lay.channel = st["layout"].get("channel")
     return case.pw.Solution(st["cams"], st["rig"], frames, st["L"], obs, lay, rms=st["rms"], cov=st["cov"],
                             sigma_px=st["sigma_px"], info=st["info"], weights=st.get("weights"))
 

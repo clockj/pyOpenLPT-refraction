@@ -45,6 +45,12 @@ in the gauge of the fit (camera 1 held).
 window's normal moves along the unit sphere, n <- exp_n(da t1 + db t2), and its camera-side surface pivots about a
 fixed anchor point A (the mean crossing of its cameras' principal rays), d = n.A + delta; the wand frames are the
 midpoint and the direction on S^2, eliminated by the Schur complement.  Camera 1 has only logf (and k1) free.
+Optional lens terms (`LENS_TERMS`, calibrate's fit_lens) add the principal point (cx, cy, in px), k2 and the
+tangential p1, p2 to every camera, camera 1's too.
+
+**Constraints (optional).**  Facts about the rig that the data cannot give, held in stage 4 (calibrate's
+constraints): the channel the wand moved in (`channel_terms`: every wand end inside it), where cameras aim on their
+windows (`aim_depth`) and a camera's distance to its window.  Unlike hints, they override the data.
 """
 from __future__ import annotations
 
@@ -82,6 +88,19 @@ _subset_rows = cw._subset_rows
 Window = pm.Window
 
 CAM_COLS = ("w1", "w2", "w3", "C1", "C2", "C3", "logf")
+# the optional lens terms (`fit_lens`), each a set of the camera model's columns: the principal point (the distortion's
+# centre), k2, and the tangential terms
+LENS_TERMS = {"pp": ("cx", "cy"), "k2": ("k2",), "tangential": ("p1", "p2")}
+DIST_INDEX = {"k1": 0, "k2": 1, "p1": 2, "p2": 3}
+CONSTRAINT_SIGMA_MM = 0.01             # a held constraint: its residual rows' sigma (mm)
+
+
+def lens_columns(fit_lens: Sequence[str]) -> List[str]:
+    """The camera columns of the lens terms fit_lens (keys of LENS_TERMS), in LENS_TERMS' order."""
+    bad = [t for t in fit_lens if t not in LENS_TERMS]
+    if bad:
+        raise ValueError(f"unknown lens terms {bad}; the terms are {list(LENS_TERMS)}")
+    return [c for t in LENS_TERMS if t in fit_lens for c in LENS_TERMS[t]]
 
 
 # ------------------------------------------------------------------ normal equations (cylinder_wand's, with BLAS products)
@@ -184,15 +203,19 @@ def anchors_for(cams, rig: Rig) -> List[Optional[np.ndarray]]:
 
 
 class Layout:
-    """The free parameters: per camera the columns of CAM_COLS (+ k1), camera 1 without its pose (the gauge); per
-    window not in fixed_windows its (a, b, delta) about its anchor -- only delta for a window in held_normals, whose
-    normal is held (a hint-held start) --; optionally L.  `cams_free` limits the free cameras (e.g. a resection).
-    Optional priors (`add_prior`) add residual rows on log f or on a camera's distance to its window."""
+    """The free parameters: per camera the columns of CAM_COLS (+ k1, + the lens terms fit_lens, `LENS_TERMS`),
+    camera 1 without its pose (the gauge); per window not in fixed_windows its (a, b, delta) about its anchor -- only
+    delta for a window in held_normals, whose normal is held (a hint-held start) --; optionally L.  `cams_free` limits
+    the free cameras (e.g. a resection).  Optional priors (`add_prior`) add residual rows on log f, on a camera's
+    distance to its window or on where cameras aim; an optional channel (`set_constraints`) adds rows for the wand
+    ends outside it (`channel_terms`)."""
 
     def __init__(self, n_cams: int, n_wins: int = 0, fit_k1: bool = False, fit_L: bool = False, gauge: bool = True,
                  fixed_windows: Sequence[int] = (), anchors=None, cams_free: Sequence[int] = None,
-                 held_normals: Sequence[int] = ()):
-        self.cols = list(CAM_COLS) + (["k1"] if fit_k1 else [])
+                 held_normals: Sequence[int] = (), fit_lens: Sequence[str] = ()):
+        self.fit_lens = tuple(t for t in LENS_TERMS if t in tuple(fit_lens))
+        self.cols = list(CAM_COLS) + (["k1"] if fit_k1 else []) + lens_columns(tuple(fit_lens))
+        self.lens_cols = [(j, c) for j, c in enumerate(self.cols) if c in ("cx", "cy", "k2", "p1", "p2")]
         self.model_idx = [cm.CAM_PARAMS.index(c) for c in self.cols]
         self.n_cams, self.n_wins, self.fit_k1, self.fit_L, self.gauge = n_cams, n_wins, fit_k1, fit_L, gauge
         self.fixed_windows = tuple(int(w) for w in fixed_windows)
@@ -226,11 +249,19 @@ class Layout:
             k += 1
         self.P = k
         self.priors: List[dict] = []
+        self.channel: Optional[dict] = None
 
-    def add_prior(self, kind: str, cam: int, mean: float, sigma: float):
-        """kind "logf" (mean log f, sigma relative) or "distance" (mean h1 in mm, sigma mm) for camera `cam`."""
-        if kind not in ("logf", "distance"):
-            raise ValueError("a prior is on 'logf' or 'distance'")
+    def add_prior(self, kind: str, cam, mean: float, sigma: float, wall: int = None):
+        """kind "logf" (mean log f, sigma relative) or "distance" (mean h1 in mm, sigma mm) for camera `cam`; or "aim"
+        (where the cameras `cam`, a list, aim: `aim_depth` below window `wall`'s water side, mean and sigma in mm)."""
+        if kind not in ("logf", "distance", "aim"):
+            raise ValueError("a prior is on 'logf', 'distance' or 'aim'")
+        if kind == "aim":
+            if wall is None:
+                raise ValueError("an aim prior needs the window its depth is measured from")
+            self.priors.append({"kind": kind, "cam": [int(c) for c in np.atleast_1d(cam)], "wall": int(wall),
+                                "mean": float(mean), "sigma": float(sigma)})
+            return
         self.priors.append({"kind": kind, "cam": int(cam), "mean": float(mean), "sigma": float(sigma)})
 
     def apply(self, cams: List[pm.Camera], rig: Rig, L: float, dx: np.ndarray):
@@ -246,6 +277,16 @@ class Layout:
             if self.fit_k1:
                 k.dist = cam.dist.copy()
                 k.dist[0] += v[7]
+            if self.lens_cols:
+                if not self.fit_k1:
+                    k.dist = cam.dist.copy()
+                for j, name in self.lens_cols:
+                    if name == "cx":
+                        k.cx = cam.cx + v[j]
+                    elif name == "cy":
+                        k.cy = cam.cy + v[j]
+                    else:
+                        k.dist[DIST_INDEX[name]] += v[j]
             out.append(k)
         wins = []
         for w, win in enumerate(rig.windows):
@@ -260,6 +301,36 @@ class Layout:
         return out, Rig(wins, list(rig.cam_win)), (L + float(dx[self.L_index]) if self.fit_L else L)
 
 
+def aim_depth(cams, rig: Rig, cams_aim: Sequence[int], wall: int) -> float:
+    """Where cameras aim: the mean over cams_aim of the depth below window `wall`'s water-side surface (mm) of the point
+    where each camera's optical axis meets its own window's water-side surface."""
+    out = []
+    for c in cams_aim:
+        win = rig.windows[rig.cam_win[c]]
+        z = cams[c].R[2]
+        P = cams[c].C + (win.far_d - float(win.n @ cams[c].C)) / float(win.n @ z) * z
+        out.append(float(rig.windows[wall].depth(P)))
+    return float(np.mean(out))
+
+
+def _aim_row(cams, rig: Rig, layout: Layout, pr: dict, h: float = 1e-6):
+    """An aim prior's residual and its row of the Jacobian, by central differences over the columns it depends on:
+    its cameras' poses, their windows and its wall."""
+    r = (aim_depth(cams, rig, pr["cam"], pr["wall"]) - pr["mean"]) / pr["sigma"]
+    cols = [int(g) for c in pr["cam"] for g in layout.pos[c, :6] if g >= 0]
+    for w in {rig.cam_win[c] for c in pr["cam"]} | {pr["wall"]}:
+        if w < layout.n_wins:
+            cols += [int(g) for g in layout.wpos[w] if g >= 0]
+    J = np.zeros(layout.P)
+    for g in sorted(set(cols)):
+        dx = np.zeros(layout.P)
+        dx[g] = h
+        cp, rp, _ = layout.apply(cams, rig, 0.0, dx)
+        cn, rn, _ = layout.apply(cams, rig, 0.0, -dx)
+        J[g] = (aim_depth(cp, rp, pr["cam"], pr["wall"]) - aim_depth(cn, rn, pr["cam"], pr["wall"])) / (2.0 * h)
+    return r, J / pr["sigma"]
+
+
 def prior_terms(cams, rig: Rig, layout: Layout):
     """The priors' residual rows r (k,) and their Jacobian J (k, P), in units of their sigma."""
     k = len(layout.priors)
@@ -267,6 +338,9 @@ def prior_terms(cams, rig: Rig, layout: Layout):
     J = np.zeros((k, layout.P))
     for i, pr in enumerate(layout.priors):
         c = pr["cam"]
+        if pr["kind"] == "aim":
+            r[i], J[i] = _aim_row(cams, rig, layout, pr)
+            continue
         if pr["kind"] == "logf":
             r[i] = (math.log(cams[c].f) - pr["mean"]) / pr["sigma"]
             g = layout.pos[c, CAM_COLS.index("logf")]
@@ -289,6 +363,167 @@ def prior_terms(cams, rig: Rig, layout: Layout):
                     if layout.wpos[w, j] >= 0:
                         J[i, layout.wpos[w, j]] = dv[j] / pr["sigma"]
     return r, J
+
+
+def set_constraints(layout: Layout, constraints: Optional[dict]) -> Layout:
+    """Puts optional constraints (`calibrate`) on a layout: "channel" as layout.channel (`channel_terms`), "aim" and
+    "distance" entries as priors (held, sigma CONSTRAINT_SIGMA_MM, unless a sigma_mm is given)."""
+    if not constraints:
+        return layout
+    ch = constraints.get("channel")
+    if ch:
+        ball = ch.get("ball_radius_mm", 0.0)
+        ball = (float(ball), float(ball)) if np.isscalar(ball) else tuple(float(v) for v in ball)
+        layout.channel = {"width": [None if v is None else float(v) for v in ch["width_mm"]],
+                          "tol": float(ch.get("tolerance_mm", 0.0)), "ball": ball,
+                          "sigma": float(ch.get("sigma_mm", CONSTRAINT_SIGMA_MM))}
+    for a in constraints.get("aim", ()):
+        layout.add_prior("aim", a["cams"], a["mm"], a.get("sigma_mm", CONSTRAINT_SIGMA_MM), wall=a["wall"])
+    for d in constraints.get("distance", ()):
+        layout.add_prior("distance", d["cam"], d["mm"], d.get("sigma_mm", CONSTRAINT_SIGMA_MM))
+    return layout
+
+
+def _active_frames(obs: Obs) -> np.ndarray:
+    act = np.zeros(obs.n_frames, bool)
+    act[obs.frame[obs.active]] = True
+    return np.flatnonzero(act)
+
+
+def channel_bounds(layout: Layout, w: int, end: int):
+    """The channel's limits on the depth of a wand end (0: A, 1: B) below window w's water-side surface (mm): (the
+    least: its ball's radius, the most: width + tolerance - radius, or None without a width)."""
+    ch = layout.channel
+    rad = ch["ball"][end]
+    width = ch["width"][w] if w < len(ch["width"]) else None
+    return rad, (None if width is None else width + ch["tol"] - rad)
+
+
+def channel_terms(rig: Rig, frames: Frames, L: float, obs: Obs, layout: Layout, jac: bool = True):
+    """The channel's residual rows (layout.channel, `set_constraints`): every end of an active frame lies inside the
+    channel, between `channel_bounds` below each window's water-side surface.  One row per end and limit it breaks,
+    r = the breach (mm) / sigma, and none for the rest: a squared hinge, so the cost stays smooth (C1).  Returns
+    (r (k,), each row's frame (k,), Jg (k, P), Jf (k, 5)), Jf over the frame's midpoint and direction as in `evaluate`
+    (None, None without jac)."""
+    ch = layout.channel
+    fidx = _active_frames(obs)
+    XA, XB = frames.ends(L)
+    if jac:
+        t1, t2 = frames.tangent_basis()
+    rs, fs, gs, js = [], [], [], []
+    for w, win in enumerate(rig.windows):
+        free = jac and w < layout.n_wins and bool(np.any(layout.wpos[w] >= 0))
+        if free:
+            A = layout.anchors[w] if layout.anchors[w] is not None else win.d * win.n
+            u = np.vstack([b[0] for b in pm.tangent_basis(win.n)])
+        for end, X in ((0, XA[fidx]), (1, XB[fidx])):
+            lo, hi = channel_bounds(layout, w, end)
+            dep = win.depth(X)
+            for sgn, breach in ((-1.0, lo - dep), (1.0, None if hi is None else dep - hi)):
+                if breach is None or not np.any(breach > 0):
+                    continue
+                k = breach > 0
+                f_k = fidx[k]
+                rs.append(breach[k] / ch["sigma"])
+                fs.append(f_k)
+                if not jac:
+                    continue
+                s = sgn / ch["sigma"]
+                half = -0.5 * L if end == 0 else 0.5 * L
+                jf = np.zeros((len(f_k), 5))
+                jf[:, 0:3] = s * win.n
+                jf[:, 3] = s * half * (t1[f_k] @ win.n)
+                jf[:, 4] = s * half * (t2[f_k] @ win.n)
+                jg = np.zeros((len(f_k), layout.P))
+                if free:
+                    dv = (X[k] - A) @ u.T                                # d depth / d(a, b); d depth / d delta = -1
+                    for j, col in enumerate((dv[:, 0], dv[:, 1], -np.ones(len(f_k)))):
+                        if layout.wpos[w, j] >= 0:
+                            jg[:, layout.wpos[w, j]] = s * col
+                if layout.fit_L:
+                    jg[:, layout.L_index] = s * (frames.w[f_k] @ win.n) * (-0.5 if end == 0 else 0.5)
+                gs.append(jg)
+                js.append(jf)
+    if not rs:
+        return (np.zeros(0), np.zeros(0, int), np.zeros((0, layout.P)) if jac else None,
+                np.zeros((0, 5)) if jac else None)
+    return (np.concatenate(rs), np.concatenate(fs), np.vstack(gs) if jac else None,
+            np.vstack(js) if jac else None)
+
+
+def _add_rows(V, gV, U, gU, W, r, fr, Jg, Jf):
+    """Adds residual rows r (k,) of the frames fr, with Jacobians Jg (k, P) and Jf (k, 5), to the normal blocks
+    (`normal_blocks`), in place."""
+    if not len(r):
+        return
+    V += Jg.T @ Jg
+    gV += Jg.T @ r
+    np.add.at(U, fr, Jf[:, :, None] * Jf[:, None, :])
+    np.add.at(gU, fr, Jf * r[:, None])
+    np.add.at(W, fr, Jg[:, :, None] * Jf[:, None, :])
+
+
+def into_channel(rig: Rig, frames: Frames, L: float, obs: Obs, layout: Layout) -> Rig:
+    """The rig with each window not in layout.fixed_windows moved along its normal, if needed, to the nearest offset
+    at which every end of an active frame lies inside the channel (`channel_bounds`), or to the middle of that band
+    when the wand's spread is wider than the channel.  Moving a window along its normal changes every depth below it
+    alike, so the channel is then met exactly; stage 4 refits the rest from there."""
+    rig = rig.copy()
+    fidx = _active_frames(obs)
+    XA, XB = frames.ends(L)
+    for w, win in enumerate(rig.windows):
+        if w in layout.fixed_windows:
+            continue
+        lo_s, hi_s = -np.inf, np.inf                  # the shifts along n that keep every end inside
+        for end, X in ((0, XA[fidx]), (1, XB[fidx])):
+            lo, hi = channel_bounds(layout, w, end)
+            dep = win.depth(X)
+            hi_s = min(hi_s, float(np.min(dep - lo)))
+            if hi is not None:
+                lo_s = max(lo_s, float(np.max(dep - hi)))
+        shift = min(max(0.0, lo_s), hi_s) if lo_s <= hi_s else 0.5 * (lo_s + hi_s)
+        if shift != 0.0:
+            rig.windows[w] = pm.Window(win.n, win.d + shift, win.t, win.idx, win.name)
+    return rig
+
+
+def constraint_report(sol: "Solution") -> dict:
+    """The constraints at an answer.  The channel: per window the wand ends' depths below its water-side surface and
+    the band of shifts along its normal (mm, + away from its cameras) that keeps every end inside, the rows active
+    (ends on a limit) and their largest breach.  Each prior: its value and residual (in sigmas)."""
+    lay = sol.layout
+    out = {}
+    if lay.channel is not None:
+        fidx = _active_frames(sol.obs)
+        XA, XB = sol.frames.ends(sol.L)
+        wins = []
+        for w, win in enumerate(sol.rig.windows):
+            lo_s, hi_s, dmin, dmax = -np.inf, np.inf, np.inf, -np.inf
+            for end, X in ((0, XA[fidx]), (1, XB[fidx])):
+                lo, hi = channel_bounds(lay, w, end)
+                dep = win.depth(X)
+                dmin, dmax = min(dmin, float(dep.min())), max(dmax, float(dep.max()))
+                hi_s = min(hi_s, float(np.min(dep - lo)))
+                if hi is not None:
+                    lo_s = max(lo_s, float(np.max(dep - hi)))
+            wins.append({"depth_mm": [dmin, dmax],
+                         "width_mm": lay.channel["width"][w] if w < len(lay.channel["width"]) else None,
+                         "band_mm": [lo_s if np.isfinite(lo_s) else None, hi_s]})
+        rc, _f, _g, _j = channel_terms(sol.rig, sol.frames, sol.L, sol.obs, lay, jac=False)
+        out["channel"] = {**{k: lay.channel[k] for k in ("width", "tol", "ball", "sigma")}, "windows": wins,
+                          "active_rows": int(len(rc)),
+                          "max_breach_mm": float(np.max(rc)) * lay.channel["sigma"] if len(rc) else 0.0}
+    pri = []
+    for pr in lay.priors:
+        if pr["kind"] == "aim":
+            v = aim_depth(sol.cams, sol.rig, pr["cam"], pr["wall"])
+        elif pr["kind"] == "distance":
+            v = sol.rig.windows[sol.rig.cam_win[pr["cam"]]].distance(sol.cams[pr["cam"]].C)
+        else:
+            v = math.log(sol.cams[pr["cam"]].f)
+        pri.append({**pr, "value": v, "residual_sigmas": (v - pr["mean"]) / pr["sigma"]})
+    out["priors"] = pri
+    return out
 
 
 # ------------------------------------------------------------------ residuals and Jacobians
@@ -369,17 +604,20 @@ def bundle_adjust(cams, rig: Rig, frames: Frames, L: float, obs: Obs, layout: La
     wr = None if weights is None else np.asarray(weights, float)[rows]
     ps = 1.0 if weights is not None else float(prior_scale)
 
-    def wcost(e, g, cs, rg):
+    def wcost(e, g, cs, rg, fs, Ls):
         c0 = cost_of(e, g) if wr is None else float(np.sum(wr[g][:, None] * e.r[g] ** 2))
         if layout.priors:
             rp, _ = prior_terms(cs, rg, layout)
             c0 += ps * ps * float(rp @ rp)
+        if layout.channel is not None:
+            rc, _f, _g, _j = channel_terms(rg, fs, Ls, obs, layout, jac=False)
+            c0 += ps * ps * float(rc @ rc)
         return c0
 
     hist = []
     ev = evaluate(cams, rig, frames, L, obs, layout, rows)
     good = ev.ok.copy()
-    cost = wcost(ev, good, cams, rig)
+    cost = wcost(ev, good, cams, rig, frames, L)
     lam, nu = lam0, 2.0
     t0 = time.time()
     step_rel = np.inf
@@ -390,6 +628,9 @@ def bundle_adjust(cams, rig: Rig, frames: Frames, L: float, obs: Obs, layout: La
             rp, Jp = prior_terms(cams, rig, layout)
             V = V + ps * ps * (Jp.T @ Jp)
             gV = gV + ps * ps * (Jp.T @ rp)
+        if layout.channel is not None:
+            rch, fch, Jgc, Jfc = channel_terms(rig, frames, L, obs, layout)
+            _add_rows(V, gV, U, gU, W, ps * rch, fch, ps * Jgc, ps * Jfc)
         accepted = False
         r_g = np.where(good[:, None], ev.r, 0.0)
         Jg_g = np.where(good[:, None, None], ev.Jg, 0.0)
@@ -406,6 +647,9 @@ def bundle_adjust(cams, rig: Rig, frames: Frames, L: float, obs: Obs, layout: La
             if layout.priors:
                 rl = rp + Jp @ dc
                 pred -= ps * ps * float(rl @ rl)
+            if layout.channel is not None and len(rch):
+                rl = rch + Jgc @ dc + np.sum(Jfc * df[fch], axis=1)
+                pred -= ps * ps * float(rl @ rl)
             cams_t, rig_t, L_t = layout.apply(cams, rig, L, dc)
             frames_t = frames.retract(df)
             ev_t = evaluate(cams_t, rig_t, frames_t, L_t, obs, layout, rows)
@@ -413,14 +657,14 @@ def bundle_adjust(cams, rig: Rig, frames: Frames, L: float, obs: Obs, layout: La
                 lam *= nu
                 nu *= 2
                 continue
-            cost_t = wcost(ev_t, good, cams_t, rig_t)
+            cost_t = wcost(ev_t, good, cams_t, rig_t, frames_t, L_t)
             rho = (cost - cost_t) / pred if pred > 0 else -1.0
             if rho > 0:
                 step_rel = _step_size(dc, df, cams, rig, layout)
                 cams, rig, frames, L = cams_t, rig_t, frames_t, L_t
                 ev = ev_t
                 good = good | ev.ok
-                cost = wcost(ev, good, cams, rig)
+                cost = wcost(ev, good, cams, rig, frames, L)
                 lam *= max(1.0 / 3.0, 1.0 - (2.0 * rho - 1.0) ** 3)
                 nu = 2.0
                 accepted = True
@@ -440,6 +684,9 @@ def bundle_adjust(cams, rig: Rig, frames: Frames, L: float, obs: Obs, layout: La
                    history=hist, weights=None if weights is None else np.asarray(weights, float))
     sol.info["n_fail"] = int((~good).sum())
     sol.info["weighted_cost"] = cost
+    if layout.channel is not None:
+        rc, _f, _g, _j = channel_terms(rig, frames, L, obs, layout, jac=False)
+        sol.info["channel_rows"] = int(len(rc))
     return sol
 
 
@@ -456,6 +703,12 @@ def _step_size(dc, df, cams, rig: Rig, layout: Layout) -> float:
             v = abs(dc[g])
             if name.startswith("C"):
                 v /= max(float(np.linalg.norm(cams[c].C)), 1.0)
+            elif name in ("cx", "cy"):
+                v /= max(float(cams[c].f), 1.0)                  # px over f: an angle
+            elif name in ("k2", "p1", "p2"):
+                # their reach at the image corner against k1's: k2 r^2, p1 and p2 about 1 / r (r: half-diagonal / f)
+                r2 = 0.25 * (cams[c].width ** 2 + cams[c].height ** 2) / max(float(cams[c].f), 1.0) ** 2
+                v *= r2 if name == "k2" else 1.0 / math.sqrt(max(r2, 1e-12))
             s = max(s, v)
     for w in range(layout.n_wins):
         if layout.wpos[w, 0] >= 0:
@@ -761,10 +1014,14 @@ def information(cams, rig: Rig, frames, L, obs: Obs, layout: Layout, rows=None, 
     ev = evaluate(cams, rig, frames, L, obs, layout, rows)
     V, gV, U, gU, W = normal_blocks(ev, obs.frame[rows], obs.n_frames,
                                     weights=None if weights is None else np.asarray(weights, float)[rows])
+    ps = 1.0 if weights is not None else float(prior_scale)
     if layout.priors:
-        ps = 1.0 if weights is not None else float(prior_scale)
         _rp, Jp = prior_terms(cams, rig, layout)
         V = V + ps * ps * (Jp.T @ Jp)
+    if layout.channel is not None:
+        # the wand ends held at the channel's walls carry information as observations do
+        rch, fch, Jgc, Jfc = channel_terms(rig, frames, L, obs, layout)
+        _add_rows(V, gV, U, gU, W, ps * rch, fch, ps * Jgc, ps * Jfc)
     S, _rhs, _Ui, _WUi = reduced_system(V, gV, U, gU, W, 0.0)
     return S / sigma_px ** 2, ev
 
@@ -822,6 +1079,8 @@ def camera_sigmas(cams, rig: Rig, layout: Layout, cov: np.ndarray) -> List[dict]
              "f_rel": math.sqrt(max(full[6, 6], 0.0)), "f_px": cam.f * math.sqrt(max(full[6, 6], 0.0))}
         if layout.fit_k1:
             d["k1"] = math.sqrt(max(full[7, 7], 0.0))
+        for j, name in layout.lens_cols:
+            d[name + "_px" if name in ("cx", "cy") else name] = math.sqrt(max(full[j, j], 0.0))
         w = rig.cam_win[c]
         if w >= 0:
             d["distance_mm"] = math.sqrt(max(_distance_var(cams, rig, layout, cov, c), 0.0))
@@ -1048,17 +1307,22 @@ def triangulate_ml(cams, rig: Rig, cam_idx: np.ndarray, uv: np.ndarray, point_id
 def solve(data: WandData, cams, rig: Rig, fit_k1: bool = False, fit_L: bool = False, k_sigma: float = 5.0,
           noise_weights: str = "camera", sigma_cam_px=None, fixed_windows: Sequence[int] = (), obs: Obs = None,
           frames: Frames = None, verbose: bool = False, log=print, priors: Sequence[dict] = (),
-          prior_scale: float = 1.0, held_normals: Sequence[int] = ()) -> Solution:
+          prior_scale: float = 1.0, held_normals: Sequence[int] = (), fit_lens: Sequence[str] = (),
+          constraints: dict = None) -> Solution:
     """Stage 4-5 from given cameras and windows (in the gauge: camera 1's pose is held): frames triangulated, then
     `refine`.  Used by `calibrate` and by the tests that start from the truth.  held_normals: windows whose normal is
-    held (their offset is fitted)."""
+    held (their offset is fitted).  fit_lens: optional lens terms (`LENS_TERMS`).  constraints: optional, as
+    `calibrate`'s; with a channel, each free window is first moved along its normal into it (`into_channel`)."""
     obs = observations(data) if obs is None else obs
     layout = Layout(obs.n_cams, len(rig.windows), fit_k1=fit_k1, fit_L=fit_L, fixed_windows=fixed_windows,
-                    anchors=anchors_for(cams, rig), held_normals=held_normals)
+                    anchors=anchors_for(cams, rig), held_normals=held_normals, fit_lens=fit_lens)
     for p in priors:
         layout.add_prior(p["kind"], p["cam"], p["mean"], p["sigma"])
+    set_constraints(layout, constraints)
     if frames is None:
         frames = initial_frames(cams, rig, obs, data.L)
+    if layout.channel is not None:
+        rig = into_channel(rig, frames, data.L, obs, layout)
     sol = refine(cams, rig, frames, data.L, obs, layout, k_sigma=k_sigma, noise_weights=noise_weights,
                  sigma_cam_px=sigma_cam_px, verbose=verbose, log=log, prior_scale=prior_scale)
     return sol
@@ -1947,8 +2211,11 @@ def solve_obs(obs: Obs, L: float, cams, rig: Rig, **kw) -> Solution:
     fit_k1 = kw.pop("fit_k1", False)
     layout = Layout(obs.n_cams, len(rig.windows), fit_k1=fit_k1, fit_L=kw.pop("fit_L", False),
                     fixed_windows=kw.pop("fixed_windows", ()), anchors=anchors_for(cams, rig),
-                    held_normals=kw.pop("held_normals", ()))
+                    held_normals=kw.pop("held_normals", ()), fit_lens=kw.pop("fit_lens", ()))
+    set_constraints(layout, kw.pop("constraints", None))
     frames = initial_frames(cams, rig, obs, L)
+    if layout.channel is not None:
+        rig = into_channel(rig, frames, L, obs, layout)
     return refine(cams, rig, frames, L, obs, layout, **kw)
 
 
@@ -2440,10 +2707,13 @@ def capped_cost(sol: Solution, obs: Obs, weights, s02: float, k_sigma: float = 5
     w = np.ones(len(obs)) if weights is None else np.asarray(weights, float)
     e = np.where(ev.ok, w * np.sum(np.where(ev.ok[:, None], ev.r, 0.0) ** 2, axis=1), np.inf)
     c = float(np.sum(np.minimum(e, k_sigma ** 2 * s02)))
+    ps = 1.0 if weights is not None else float(prior_scale)
     if sol.layout.priors:
         rp, _ = prior_terms(sol.cams, sol.rig, sol.layout)
-        ps = 1.0 if weights is not None else float(prior_scale)
         c += ps * ps * float(rp @ rp)
+    if sol.layout.channel is not None:
+        rc, _f, _g, _j = channel_terms(sol.rig, sol.frames, sol.L, sol.obs, sol.layout, jac=False)
+        c += ps * ps * float(rc @ rc)
     return c
 
 
@@ -2622,9 +2892,9 @@ def scan_window_normal(sol: Solution, data: WandData, obs: Obs, active0: np.ndar
     def held(cams, rig, frames, L, n_new):
         rg = _tilted(cams, rig, frames, L, o_a, w, n_new)
         lay = Layout(obs.n_cams, len(rg.windows), fit_k1=sol.layout.fit_k1, fit_L=sol.layout.fit_L,
-                     anchors=anchors_for(cams, rg), held_normals=(w,))
-        for pr in sol.layout.priors:
-            lay.add_prior(pr["kind"], pr["cam"], pr["mean"], pr["sigma"])
+                     anchors=anchors_for(cams, rg), held_normals=(w,), fit_lens=sol.layout.fit_lens)
+        lay.priors = [dict(pr) for pr in sol.layout.priors]
+        lay.channel = sol.layout.channel
         try:
             b = bundle_adjust(cams, rg, frames, L, o_a, lay, max_iter=max_iter, weights=weights)
         except (np.linalg.LinAlgError, ValueError):
@@ -2732,7 +3002,8 @@ def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: 
               k_sigma: float = 5.0, n_final: int = 2, noise_weights: str = "camera", sigma_cam_px=None,
               more_starts_px: float = 1.0, theta_cap: float = 50.0, dtheta: float = 9.0, output_frame: bool = True,
               max_starts: int = 6, perturb_starts: int = 4, perturb_scale: float = 2.0, perturb_all: bool = False,
-              scan_weak: bool = True, verbose: bool = False, log=print) -> Solution:
+              scan_weak: bool = True, fit_lens: Sequence[str] = (), constraints: dict = None, verbose: bool = False,
+              log=print) -> Solution:
     """Stages 0-5: from the detections to the cameras and windows, with no camera or window input (or from `start`,
     cameras in the frame of rig.windows, which are then taken as given).  A rig with one window is started whole
     (`bootstrap`); one with several windows of which some have two or more cameras window by window
@@ -2763,7 +3034,18 @@ def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: 
     weights, and another minimum or the same observations kept): a rough or wrong hint costs time, not the answer, and
     the answer's normals come from the data.  No prior.  info["hints"] holds each hint's angle from the answer, every
     path's outcome and the path chosen; info["starts"] and info["bootstrap"] describe the default path}.  With fit_L
-    the wand length is estimated too: only the plates' thickness then fixes the scale, weakly."""
+    the wand length is estimated too: only the plates' thickness then fixes the scale, weakly.
+    fit_lens (optional): lens terms fitted in stage 4 beside f and k1, any of `LENS_TERMS`: "pp" the principal point
+    (the distortion's centre), "k2", "tangential" (p1, p2).  Off by default.
+    constraints (optional, off by default; unlike hints they override the data): {"channel": {"width_mm": [per
+    window the channel's inside width across it, or None], "tolerance_mm": t, "ball_radius_mm": r or [r_A, r_B],
+    "sigma_mm": s}: every wand end of an active frame lies inside the channel -- its ball inside each window's
+    water-side surface and, across a window with a width, inside the far wall at width + t -- (`channel_terms`, held:
+    a squared hinge of width s, default CONSTRAINT_SIGMA_MM); each stage-4 start is first moved into it
+    (`into_channel`); "aim": [{"cams": [...], "wall": w, "mm": s, "sigma_mm": ...}]: where the cameras aim
+    (`aim_depth`) lies s mm below window w's water-side surface, held unless a sigma is given; "distance": [{"cam": c,
+    "mm": h, "sigma_mm": ...}]: camera c's distance to its window, likewise}.  info["constraints"] reports them at the
+    answer (`constraint_report`)."""
     hints = hints or {}
     obs = observations(data)
     t0 = time.time()
@@ -2817,7 +3099,8 @@ def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: 
                 priors.append({"kind": "logf", "cam": c, "mean": math.log(float(fv)),
                                "sigma": float(hints["f_prior_rel"])})
     solve_kw = dict(fit_k1=fit_k1, fit_L=fit_L, k_sigma=k_sigma, noise_weights=noise_weights,
-                    sigma_cam_px=sigma_cam_px, priors=priors, verbose=False, log=log)
+                    sigma_cam_px=sigma_cam_px, priors=priors, fit_lens=tuple(fit_lens), constraints=constraints,
+                    verbose=False, log=log)
     active0 = obs.active.copy()
 
     def fit_starts(starts_):
@@ -2984,6 +3267,8 @@ def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: 
             scan["seconds"] = time.time() - t_s
     sol.info["sigmas_fit_frame"] = {"cameras": camera_sigmas(sol.cams, sol.rig, sol.layout, sol.cov),
                                     "windows": window_sigmas(sol.cams, sol.rig, sol.layout, sol.cov)}
+    if constraints:
+        sol.info["constraints"] = constraint_report(sol)
     if hinted:
         # each hint's angle from the answer's normal, in its camera's frame (a frame change leaves it unchanged)
         off = []
