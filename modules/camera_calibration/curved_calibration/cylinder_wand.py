@@ -1135,7 +1135,8 @@ def affine_factorization(obs: Obs, L: float, k_reject: float = 5.0, rounds: int 
         W[2 * c:2 * c + 2, 2 * k + e] = obs.uv[i]
     keep = np.ones(len(use), bool)
     for _ in range(rounds):
-        cols = np.flatnonzero(np.repeat(keep, 2))
+        used = keep.copy()             # the frames this round factorises (its rejections apply to the next round)
+        cols = np.flatnonzero(np.repeat(used, 2))
         Wk = W[:, cols]
         t = Wk.mean(axis=1)
         W0 = Wk - t[:, None]
@@ -1149,7 +1150,7 @@ def affine_factorization(obs: Obs, L: float, k_reject: float = 5.0, rounds: int 
         bad = per_frame > thr
         if not bad.any():
             break
-        idx = np.flatnonzero(keep)
+        idx = np.flatnonzero(used)
         keep[idx[bad]] = False
     rms = float(np.sqrt(np.mean(per_img ** 2)))
     d = S[:, 1::2] - S[:, 0::2]
@@ -1172,7 +1173,7 @@ def affine_factorization(obs: Obs, L: float, k_reject: float = 5.0, rounds: int 
     Am = np.sqrt(lam)[:, None] * V.T                                     # A^T A = Q
     Sm = Am @ S
     Mm = M @ np.linalg.inv(Am)
-    fr = np.flatnonzero(keep)
+    fr = np.flatnonzero(used)          # not keep: a last round's rejections were never factorised
     return Affine(M=Mm.reshape(Nc, 2, 3), t=t.reshape(Nc, 2), XA=Sm[:, 0::2].T[sel], XB=Sm[:, 1::2].T[sel],
                   frames=use[fr][sel], rms_px=rms, length_rms_rel=float(np.sqrt(np.mean(res[sel] ** 2))),
                   Q_eig=lam)

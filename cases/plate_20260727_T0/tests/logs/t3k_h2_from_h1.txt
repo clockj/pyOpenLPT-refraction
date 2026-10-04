@@ -1,0 +1,17 @@
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 5468 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+start: the cameras and walls of tests/states/t3k_h1.pkl (RMS 0.2730 px there)
+calibrate: done in 102 s; RMS 0.2728 px, sigma 0.2329 px, 43582 of 43744 detections active
+walls 90.144 deg apart
+  cam0: f 18836 +- 11 px (254.3 mm), 1066.0 mm from its wall, 0.74 deg to its normal, k1 0.731
+  cam1: f 19205 +- 12 px (259.3 mm), 1030.7 mm from its wall, 12.87 deg to its normal, k1 0.829
+  cam2: f 21454 +- 10 px (289.6 mm), 752.4 mm from its wall, 18.63 deg to its normal, k1 0.742
+  cam3: f 21951 +- 10 px (296.3 mm), 830.2 mm from its wall, 1.75 deg to its normal, k1 1.02
+  cams [0, 1]: baseline 243.6 mm, views 12.50 deg apart
+  cams [0, 2]: baseline 1522.7 mm, views 90.80 deg apart
+  cams [0, 3]: baseline 1541.8 mm, views 90.58 deg apart
+  cams [1, 2]: baseline 1557.1 mm, views 94.33 deg apart
+  cams [1, 3]: baseline 1532.5 mm, views 90.51 deg apart
+  cams [2, 3]: baseline 286.9 mm, views 16.89 deg apart
+residual along the wand (A, B), px: cam0: +0.068, -0.040; cam1: -0.009, +0.008; cam2: +0.007, +0.043; cam3: -0.029, -0.002
+warnings: none
+state saved to tests/states/t3k_h2_from_h1.pkl

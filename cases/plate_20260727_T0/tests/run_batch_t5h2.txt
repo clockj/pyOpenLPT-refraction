@@ -1,0 +1,3 @@
+run_batch t5h2: 2 jobs in parallel, 3410 s
+  t5k_photo_h2: exit 0, 3271 s  (--last 0.5 --fit-k1 --hints photo)
+  t5k_gui3_h2: exit 0, 3410 s  (--last 0.5 --fit-k1 --hints gui:calib_3)

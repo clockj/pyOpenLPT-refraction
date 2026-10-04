@@ -1,0 +1,16 @@
+calibrate: gui_5563 (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\wandpoints_filtered_2.csv), 5563 of 5563 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 False; hints none
+calibrate: done in 2330 s; RMS 0.2788 px, sigma 0.2378 px, 44492 of 44504 detections active
+walls 90.177 deg apart
+  cam0: f 19208 +- 22 px (259.3 mm), 1093.9 mm from its wall, 0.76 deg to its normal
+  cam1: f 19843 +- 22 px (267.9 mm), 1071.8 mm from its wall, 12.89 deg to its normal
+  cam2: f 21051 +- 18 px (284.2 mm), 757.1 mm from its wall, 17.90 deg to its normal
+  cam3: f 21482 +- 18 px (290.0 mm), 827.7 mm from its wall, 1.09 deg to its normal
+  cams [0, 1]: baseline 249.6 mm, views 12.50 deg apart
+  cams [0, 2]: baseline 1519.1 mm, views 90.75 deg apart
+  cams [0, 3]: baseline 1535.5 mm, views 90.53 deg apart
+  cams [1, 2]: baseline 1564.3 mm, views 94.24 deg apart
+  cams [1, 3]: baseline 1536.6 mm, views 90.42 deg apart
+  cams [2, 3]: baseline 280.3 mm, views 16.86 deg apart
+residual along the wand (A, B), px: cam0: +0.066, -0.039; cam1: +0.008, -0.002; cam2: -0.000, +0.050; cam3: -0.025, -0.001
+warnings: weak_window: window 1 is seen only by cam0 and cam1, which see the wand under 5.0 and 4.9 deg (a long lens or a far camera): its tilt shows only weakly, and the cost can have several minima. Every wrong answer in ; weak_window: window 2 is seen only by cam2 and cam3, which see the wand under 5.3 and 5.0 deg (a long lens or a far camera): its tilt shows only weakly, and the cost can have several minima. Every wrong answer in ; pinned: a wand end lies on window 1's water-side surface (1.5e-08 mm deep): the fit may be pinned against the window rather than at a minimum. 8 of the 14 wrong multi-window answers in the tests were, none of
+state saved to tests/states/t7_gui5563.pkl

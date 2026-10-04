@@ -399,7 +399,8 @@ def import_lpt():
 def to_cpp(cam: Camera, win: Window, tol: float = 1e-12, nmax: int = 1000, far_pt=None):
     """The C++ PINPLATE camera of `cam` behind `win`.  The window's point is the foot of the camera centre on the
     object-side surface unless `far_pt` (on that surface) is given.  Asserts that the C++ rotation is the intended
-    one: a rotation vector near a half-turn is easily wrong (tests/plate_wand/w0_logmap.py)."""
+    one: a rotation vector near a half-turn is easily wrong (tests/plate_wand/w0_logmap.py).  To 1e-12: the C++
+    conversion rounds to about 1e-14 (case plate_20260727_T0 had a rotation 1.2e-14 off)."""
     lpt = import_lpt()
     R = np.asarray(cam.R, float)
     C = np.asarray(cam.C, float)
@@ -415,7 +416,7 @@ def to_cpp(cam: Camera, win: Window, tol: float = 1e-12, nmax: int = 1000, far_p
     c.commitPinplateUpdate(True, 255.0)
     pp = c._pinplate_param
     R_cpp = np.array([[pp.r_mtx[i, j] for j in range(3)] for i in range(3)])
-    if not np.max(np.abs(R_cpp - R)) < 1e-14:
+    if not np.max(np.abs(R_cpp - R)) < 1e-12:
         raise AssertionError(f"the C++ rotation differs from the intended one by {np.max(np.abs(R_cpp - R)):.1e}")
     return c
 

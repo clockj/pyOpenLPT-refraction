@@ -367,6 +367,42 @@ def test_weak_windows_and_tilt():
             assert wn.d <= pivot + 1e-12                              # moved only towards the cameras, if at all
 
 
+def test_cpp_rotation_check_tolerates_rounding():
+    """pm.to_cpp's check of the C++ rotation tolerates rounding: this camera (case plate_20260727_T0, the first
+    calibration of every frame) came back from the C++ conversion 1.2e-14 off and was refused at the former 1e-14."""
+    R = np.array([[0.053715160341603334, -0.20084687981247923, 0.9781488702743903],
+                  [0.06691431986580397, -0.9766372411229803, -0.20421109922963687],
+                  [0.9963117761756936, 0.0764213983205725, -0.03902069364268137]])
+    cam = pm.Camera(R, [-1205.3832328455674, -67.82844825984218, 68.90381958980866], 21532.829558676105, 1023.5,
+                    975.5, 2048, 1952, [-1.0966510309524398, 0.0, 0.0, 0.0, 0.0])
+    win = pm.Window([0.9981182067080382, 2.862293735361731e-17, -0.06131920937137082], -958.199937622995, (12.7,),
+                    (1.0, 1.49, 1.333))
+    pp = pm.to_cpp(cam, win)._pinplate_param
+    R_cpp = np.array([[pp.r_mtx[i, j] for j in range(3)] for i in range(3)])
+    assert np.max(np.abs(R_cpp - R)) < 1e-12
+
+
+def test_affine_start_rejection_in_last_round():
+    """Stage 1 (cylinder_wand.affine_factorization) with gross errors still being rejected in its last round: the
+    frames it returns must be those it factorised (real detections of case plate_20260727_T0 crashed it)."""
+    rng = np.random.default_rng(11)
+    F, Nc, L = 400, 4, 10.0
+    M = rng.normal(size=(Nc, 2, 3)) * 14.0
+    t = rng.uniform(500.0, 1500.0, size=(Nc, 2))
+    m = rng.uniform(-40.0, 40.0, size=(F, 3))
+    w = rng.normal(size=(F, 3))
+    w /= np.linalg.norm(w, axis=1)[:, None]
+    X = np.stack([m - 0.5 * L * w, m + 0.5 * L * w], axis=1)
+    uv = np.einsum("cij,fej->fcei", M, X) + t[None, :, None, :] + rng.normal(scale=0.2, size=(F, Nc, 2, 2))
+    bad = rng.choice(F, 20, replace=False)
+    uv[bad, rng.integers(0, Nc, 20)] += rng.normal(scale=30.0, size=(20, 2, 2))
+    obs = pw.observations(pw.WandData(uv, L, [(2048, 2048)] * Nc))
+    for rounds in (1, 2, 5):
+        aff = pw.cw.affine_factorization(obs, L, rounds=rounds)
+        assert len(aff.frames) == len(aff.XA) == len(aff.XB) > F // 2
+        assert np.all(np.isfinite(aff.XA)) and np.all(np.isfinite(aff.XB))
+
+
 @pytest.mark.slow
 def test_scan_fixes_a_weak_window():
     """W5 seed 1001 (one camera per window; window 2's of 24,500 px sees the wand under 1.4 deg), without hints: the

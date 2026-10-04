@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\run_calibration.py", line 193, in <module>
+    main()
+  File "D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\run_calibration.py", line 172, in main
+    sol, rc, cd, fids, secs = calibrate_case(cfg, args.detections, rows, args.n_water, args.thickness, args.fit_k1,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\run_calibration.py", line 39, in calibrate_case
+    sol = case.pw.calibrate(data, rc.rig(), hints=rc.hints or None, fit_k1=fit_k1, verbose=verbose, log=log, **kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\plate_wand.py", line 2812, in calibrate
+    starts, binfo = make_starts()
+                    ^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\plate_wand.py", line 2784, in make_starts
+    st, inf = bootstrap_groups(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\plate_wand.py", line 2028, in bootstrap_groups
+    st_w, inf_w = bootstrap(o_w, rig_w, L, [sizes[c] for c in cs], hints=sub_h, cxcy=[cxcy[c] for c in cs],
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\plate_wand.py", line 1840, in bootstrap
+    pins, pinfo = pinhole_start(obs, L, sizes, cxcy, rig, hints=hints, verbose=verbose, log=log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\plate_wand.py", line 1511, in pinhole_start
+    aff, subset = affine_start(obs, L)
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\plate_wand.py", line 1332, in affine_start
+    return cw.affine_factorization(obs, L, min_frames=min_frames), subset
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\cylinder_wand.py", line 1177, in affine_factorization
+    frames=use[fr][sel], rms_px=rms, length_rms_rel=float(np.sqrt(np.mean(res[sel] ** 2))),
+           ~~~~~~~^^^^^
+IndexError: boolean index did not match indexed array along axis 0; size of axis is 5413 but size of corresponding boolean axis is 5417

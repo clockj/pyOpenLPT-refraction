@@ -1,0 +1,12 @@
+== pytest tests/test_plate_wand.py -m 'not slow' (after the to_cpp rotation-check fix, 2026-10-03 20:32)
+..............                                                           [100%]
+14 passed, 4 deselected in 4.05s
+== pytest tests/test_cylinder_wand.py -m 'not slow'
+......                                                                   [100%]
+6 passed, 1 deselected in 2.77s
+== pytest tests/test_plate_wand.py -m slow (after both fixes, 2026-10-03 20:45)
+....                                                                     [100%]
+4 passed, 14 deselected in 384.22s (0:06:24)
+== pytest tests/test_cylinder_wand.py -m slow
+.                                                                        [100%]
+1 passed, 6 deselected in 31.57s

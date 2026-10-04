@@ -59,12 +59,48 @@ experiment.
     independently;
   - **the window constants hardly matter.** A plate 10 % too thick or a water index 0.002 off leave the answer almost
     unchanged.
-- No real wand data have been tried yet, and the GUI does not call this calibration yet. Section 4 says how to run and
-  check a real experiment; the full report has the same advice (`2026-10-02-plate-wand-report.md`, section 6).
+- **New (3 Oct): the first real data set,** case `cases/plate_20260727_T0`. Four cameras look through two
+  perpendicular tank walls, two cameras per wall (report `cases/plate_20260727_T0/2026-10-03-report.md`).
+  - **The calibration works:** 0.215 px median reprojection error and 0.0067 mm median wand error on every frame. That
+    is 6× and 8× better than the GUI's calibration of the same data, which held f at the nominal value.
+  - **Lens distortion (k1) must be fitted.**
+  - **From scratch it can end in a wrong minimum** (2 of 9 frame sets). The cause is one wall seen by its two cameras
+    under only about 6°. Starting from a verified fit avoids it, and so do rough hints.
+  - **Two library bugs** were found and fixed.
+- The GUI does not call this calibration yet. Section 4 says how to run and check a real experiment; the full report
+  has the same advice (`2026-10-02-plate-wand-report.md`, section 6).
 
 ## 1. Progress log
 
 **2026-10-03**
+- **The first real data set: case `cases/plate_20260727_T0`, run 20260727/T0** (plan and report in the case folder).
+  - **The rig:** four cameras with 180 mm lenses, two per wall, behind two perpendicular 0.5 in acrylic walls.
+  - **The data:** your circle finder's detections, 10,936 frames.
+  - **Two library bugs, fixed with your approval, each with a regression test in `tests/test_plate_wand.py`:**
+    - `cylinder_wand.affine_factorization` crashed when its last rejection round still rejected frames. Real gross
+      detection errors cause that. It now returns the frames it factorised.
+    - `plate_model.to_cpp` refused a rotation that the C++ side rounds 1.2e-14 off. Its check is now 1e-12.
+    - All suites pass after both fixes: plate 14 + 4, cylinder 6 + 1.
+  - **The result** (`Results\T0\calib_plate_wand` on X:):
+
+    | measure | this calibration | GUI's calib_3 |
+    |---|---|---|
+    | reprojection error, median | 0.215 px | 1.28 px |
+    | wand length error, median | 0.0067 mm | 0.052 mm |
+    | wand length SD | 0.010 mm | |
+    | walls angle | 90.17° | |
+    | f | 18,750–21,940 px | 13,333 px (held) |
+
+    Holding f at 13,333 px put calib_3's cameras about 30 % too close.
+  - **What the real data showed:**
+    - **k1 is needed:** about 6 px of distortion at the image corners.
+    - **Wrong minima:** from scratch, the calibration ended in one on 2 of 9 frame sets, including every frame. The
+      wall seen by C3 and C4 under only 5.3–6.0° is the weak window. The "noisy" warning caught 2 of 4 wrong answers.
+      A start from a verified fit, or rough hints, avoided them.
+    - **"pinned":** caused by a few frames where the wand touched a wall while its ball was cut by another camera's
+      image border. It costs about 0.5 % in f and nothing in the measurement.
+    - **The walls' positions** are uncertain by a few cm. The measurement inside the wand's volume is not affected.
+    - **No drift** between the halves of the recording.
 - **The scan of a weak window's normal (H4, H4b), warnings (H5), and the final checks (H5a, H1b): all criteria met
   except H4b's strict one, on seed 1045** (report sections 6d–6g; plan sections 7.3a, 7.3b and 7.4).
   - **D8** (`d8_profile.py`) held the weak window's normal at points between the answer and the truth, and on grids,

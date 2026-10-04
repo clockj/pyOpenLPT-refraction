@@ -1,0 +1,3 @@
+run_batch d3: 2 jobs in parallel, 1035 s
+  d3_edge_s4k: exit 0, 1035 s  (--every 5 --offset 4 --fit-k1 --edge-margin 2)
+  d3_edge_s0k: exit 0, 831 s  (--every 5 --offset 0 --fit-k1 --edge-margin 2)

@@ -1,0 +1,4 @@
+# saved fits (pickles, regenerable with tests/run_batch.py and run_calibration.py --state); their results are in the
+# tests' *_out.txt and JSON files
+tests/states/
+__pycache__/

@@ -1,0 +1,42 @@
+D1 t3k_s0: 2188 frames, fit_k1 True; the saved fit: RMS 0.2736 px, sigma 0.2336 px
+  free walls: weighted cost 1344.86 (17458 detections), RMS 0.2776 px; smallest depth below the walls 4.1e-12, 108 mm
+  free walls on the 8748 unused frames: median 0.2150 px, inliers RMS 0.1890; wand |dL| median 0.0068 mm, mean L (clean frames) 9.9997, SD 0.0102
+  wall 1 moved by delta (mm, negative = towards its cameras) and held:
+    delta   dchi2    RMS px   cam0 to wall  cam1 to wall   f (px) of every camera     smallest depths (mm)   unused frames: |dL| median, clean mean L, inl. RMS
+     -80.0   165.09  0.2941          986.1         967.7    18112  18724  21564  22011   58.75, 108.29   0.0071, 9.9998, 0.2036
+     -60.0    77.05  0.2854         1006.1         984.2    18274  18836  21545  21996   44.71, 110.47   0.0070, 9.9998, 0.1976
+     -45.0    27.44  0.2804         1021.1         996.6    18398  18923  21531  21984   34.37, 112.14   0.0069, 9.9998, 0.1941
+     -30.0    -8.60  0.2767         1036.1        1009.0    18524  19011  21516  21973   24.20, 113.84   0.0069, 9.9998, 0.1916
+     -20.0   -25.31  0.2749         1046.1        1017.2    18609  19071  21506  21966   17.50, 114.98   0.0069, 9.9998, 0.1904
+     -10.0   -36.30  0.2738         1056.1        1025.4    18695  19132  21496  21958   10.88, 116.14   0.0068, 9.9999, 0.1896
+      -5.0   -39.70  0.2734         1061.1        1029.5    18738  19163  21492  21954   7.60, 116.72   0.0068, 9.9999, 0.1893
+      -2.0   -41.07  0.2733         1064.1        1032.0    18764  19182  21489  21952   5.64, 117.07   0.0068, 9.9999, 0.1892
+      +0.0    -0.00  0.2776         1066.1        1033.4    18727  19132  21490  21945   0.00, 107.67   0.0068, 9.9997, 0.1890
+      +2.0   (a wand end would lie in or before the wall: smallest depth -2.00 mm)
+      +5.0   (a wand end would lie in or before the wall: smallest depth -5.00 mm)
+     +10.0   (a wand end would lie in or before the wall: smallest depth -10.00 mm)
+     +20.0   (a wand end would lie in or before the wall: smallest depth -20.00 mm)
+     +40.0   (a wand end would lie in or before the wall: smallest depth -40.00 mm)
+  wall 2 moved by delta (mm, negative = towards its cameras) and held:
+    delta   dchi2    RMS px   cam2 to wall  cam3 to wall   f (px) of every camera     smallest depths (mm)   unused frames: |dL| median, clean mean L, inl. RMS
+C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\numpy\_core\fromnumeric.py:3824: RuntimeWarning: Mean of empty slice
+  return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\numpy\_core\_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\numpy\_core\_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\numpy\_core\_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\numpy\_core\_methods.py:211: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+     -40.0 20254305.76  34.0624          734.5         808.2    18727  19132  21450  21936   0.00, 147.70   0.0438, nan, nan
+     -20.0 5024679.16  16.9674          754.3         828.0    18727  19132  21471  21941   0.00, 127.69   0.0221, nan, 0.8342
+     -10.0 1253818.61  8.4792          764.2         837.9    18727  19132  21481  21943   0.00, 117.68   0.0116, nan, 1.8824
+      -5.0   -14.18  0.2761          769.6         843.2    18731  19136  21473  21931   0.00, 112.68   0.0069, 9.9989, 0.1906
+      +0.0    -0.00  0.2776          774.1         847.9    18727  19132  21490  21945   0.00, 107.67   0.0068, 9.9997, 0.1890
+      +5.0   -35.01  0.2739          778.5         852.4    18726  19132  21508  21962   0.00, 102.67   0.0068, 9.9999, 0.1893
+     +10.0   -18.76  0.2756          782.7         856.6    18725  19132  21523  21971   0.00, 97.66   0.0068, 9.9999, 0.1905
+     +20.0    46.40  0.2823          790.7         864.7    18724  19133  21544  21985   0.00, 87.66   0.0069, 9.9999, 0.1955
+     +40.0   300.59  0.3070          805.4         879.9    18724  19137  21552  21989   0.00, 67.64   0.0069, 10.0000, 0.2131
+     +80.0  1278.51  0.3876          827.8         905.6    18726  19154  21405  21892   0.00, 27.58   0.0070, 10.0001, 0.2703
+    +120.0   (a wand end would lie in or before the wall: smallest depth -12.33 mm)

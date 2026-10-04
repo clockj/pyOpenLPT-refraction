@@ -1,0 +1,7 @@
+The wand's volume in the delivered calibration (T2): 21872 wand ends of 10936 frames
+  from wall 1's water side (C1, C2's wall): min -0.0, 1 % 3.4, 5 % 8.8, median 30.1, 95 % 62.8, 99 % 71.5, max 84.7 mm
+  from wall 2's water side (C3, C4's wall): min 109.0, 1 % 119.5, 5 % 138.0, median 177.7, 95 % 213.6, 99 % 221.0, max 225.2 mm
+  height along the corner line, from the median (up = C2 -> C1): min -40.5, 1 % -30.8, 5 % -25.4, median -0.0, 95 % 37.0, 99 % 45.6, max 53.8 mm
+  1-99 % box: 68.1 (along wall 1's normal) x 101.5 (along wall 2's normal) x 76.5 (height) mm = 529 cm3; convex hull of every end 503 cm3
+  each camera to the volume's centre (the ends' median): C1 1110 mm, C2 1101 mm, C3 1011 mm, C4 1036 mm
+  heights of the cameras (up = C2 -> C1): C1 +9, C2 -231, C3 +309, C4 +32 mm; C3 above C4: True

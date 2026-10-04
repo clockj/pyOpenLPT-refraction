@@ -1,6 +1,6 @@
 # Cylinder wand calibration (PINCYL): summary and progress
 
-Last updated: 2026-10-02.
+Last updated: 2026-10-03.
 
 Start here to catch up. This file gathers what all the wand tests so far concluded, and what that means for a real
 experiment.
@@ -19,6 +19,17 @@ experiment.
 - No real wand data have been tried yet.
 
 ## 1. Progress log
+
+**2026-10-03**
+- **A crash in `cylinder_wand.affine_factorization` (stage 1), found and fixed on real flat-window data** (case
+  `cases/plate_20260727_T0`, report section 3).
+  - **Cause:** the outlier rejection runs at most 5 rounds. When the last round still rejected frames, the frames it
+    returned no longer matched its factorisation, giving an IndexError.
+  - **Why only now:** real detections with a few gross errors trigger it; the synthetic tests never did.
+  - **Fix:** the function returns the frames the last factorisation used. Wherever the rejection converged, which is
+    every earlier run that did not crash, the result is identical.
+  - **Checks:** a regression test is in `tests/test_plate_wand.py`. The cylinder suites still pass (6 fast + 1 slow).
+  - This is the first change to `cylinder_wand.py` since 2 Oct, made with your approval.
 
 **2026-10-02**
 - **Two weaknesses of `cylinder_wand.refine`, found by the flat-window calibration's tests** (`tests/plate_wand/`,

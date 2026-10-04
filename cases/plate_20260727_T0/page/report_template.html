@@ -1,0 +1,991 @@
+<title>Bubble Shear Run 20260727</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: the same lab-report look as the flat-window limits page (tests/plate_wand), on a cool optical-bench ground.
+   One reading column (about 70ch); the figures and wide tables run to the full 1080px frame. */
+:root {
+  --bg: #f2f5f6;
+  --surface: #ffffff;
+  --ink: #142029;
+  --muted: #55636f;
+  --rule: #d4dde3;
+  --accent: #0c6a8a;
+  --accent-soft: #e0eef3;
+  --right: #13875c;
+  --right-soft: #dcf1e7;
+  --fixed: #2f6fd0;
+  --fixed-soft: #e2ebfa;
+  --wrong: #d1452b;
+  --wrong-soft: #fbe5df;
+  --band: #fbefeb;
+  --water: #e3f0f5;
+  --wall: #b9c9d3;
+  --code-bg: #e8eff2;
+  --on-mark: #ffffff;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151b; --surface: #151f28; --ink: #e3eaef; --muted: #9babb8; --rule: #2a3845;
+    --accent: #5db7d5; --accent-soft: #12303d;
+    --right: #2fa676; --right-soft: #113628; --fixed: #4f86e0; --fixed-soft: #162845;
+    --wrong: #e0553a; --wrong-soft: #421d16; --band: #2a1a17; --water: #10283a; --wall: #3c5263;
+    --code-bg: #1b2833; --on-mark: #0e151b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151b; --surface: #151f28; --ink: #e3eaef; --muted: #9babb8; --rule: #2a3845;
+  --accent: #5db7d5; --accent-soft: #12303d;
+  --right: #2fa676; --right-soft: #113628; --fixed: #4f86e0; --fixed-soft: #162845;
+  --wrong: #e0553a; --wrong-soft: #421d16; --band: #2a1a17; --water: #10283a; --wall: #3c5263;
+  --code-bg: #1b2833; --on-mark: #0e151b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.page { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 44px 80px; display: grid; gap: 64px; }
+.prose { max-width: 70ch; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; text-wrap: balance; color: var(--ink); }
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.25rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 2.6vw, 1.85rem); font-weight: 600; }
+h3 { font-size: 1.08rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+code { font: 500 0.88em/1 var(--mono); background: var(--code-bg); padding: 0.12em 0.36em; border-radius: 4px; overflow-wrap: anywhere; }
+.eyebrow { font: 600 0.76rem/1.3 var(--display); letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+section { display: grid; gap: 22px; scroll-margin-top: 16px; }
+section > .prose { display: grid; gap: 12px; }
+.prose ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+.muted { color: var(--muted); }
+
+/* masthead */
+.masthead { display: grid; gap: 16px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+.lede { font-size: 1.12rem; max-width: 66ch; }
+.request { color: var(--muted); font-style: italic; max-width: 70ch; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 8px; }
+.stat { display: grid; gap: 6px; align-content: start; padding: 14px 16px; background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 8px; }
+.stat b { font: 700 1.7rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.9rem; color: var(--muted); line-height: 1.45; }
+.stat.bad b { color: var(--wrong); }
+.stat.good b { color: var(--right); }
+.terms { font-size: 0.9rem; color: var(--muted); max-width: 78ch; }
+.terms i { color: var(--ink); font-style: normal; font-weight: 600; }
+
+/* key list */
+.keys { margin: 0; padding-left: 1.4em; display: grid; gap: 12px; }
+.keys li::marker { font: 700 1rem var(--display); color: var(--accent); }
+.keys b { font-weight: 600; }
+
+/* figures */
+.fig { margin: 0; display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 10px; padding: 18px 18px 16px; }
+.fig figcaption { font-size: 0.92rem; color: var(--muted); max-width: 90ch; }
+.fig figcaption b { color: var(--ink); }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.fig svg { display: block; width: 100%; height: auto; }
+#fig-plan svg { min-width: 560px; }
+#fig-fits svg { min-width: 560px; }
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 8px 24px; }
+.panels > div { min-width: 0; }
+.panels svg { min-width: 330px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.88rem; color: var(--ink); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend svg { width: 16px; height: 16px; flex: none; }
+.note { font-size: 0.92rem; }
+svg text { fill: var(--ink); font-family: var(--body); }
+svg .tick { font: 400 12px var(--mono); fill: var(--muted); }
+svg .axis-title { font-size: 12px; fill: var(--muted); }
+svg .panel-title { font: 600 13px var(--display); fill: var(--ink); letter-spacing: 0.02em; }
+svg .row-label { font: 600 13px var(--display); fill: var(--ink); }
+svg .row-sub { font-size: 11.5px; fill: var(--muted); }
+svg .mark-label { font: 500 11.5px var(--mono); fill: var(--ink); }
+svg .val { font: 500 11px var(--mono); fill: var(--muted); }
+svg .grid-line { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 4; }
+svg .row-rule { stroke: var(--rule); stroke-width: 1; }
+svg .threshold { stroke: var(--wrong); stroke-width: 1.5; stroke-dasharray: 5 4; }
+svg .threshold-label { font: 600 12px var(--display); fill: var(--wrong); }
+svg .zone-label { font: 600 11px var(--display); letter-spacing: 0.08em; }
+svg .zone-right { fill: var(--right); }
+svg .zone-wrong { fill: var(--wrong); }
+svg .water { fill: var(--water); }
+svg .wall { fill: var(--wall); }
+svg .wall-label { font: 600 12px var(--display); fill: var(--muted); letter-spacing: 0.06em; }
+svg .wand-box { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+svg .sight { stroke: var(--accent); stroke-width: 1.2; opacity: 0.7; }
+svg .shift { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 3; }
+svg .cam-now { fill: var(--accent); stroke: var(--surface); stroke-width: 1.5; }
+svg .cam-gui { fill: var(--surface); stroke: var(--muted); stroke-width: 1.8; }
+svg .cam-label { font: 600 13px var(--display); fill: var(--ink); }
+svg .cam-label.gui { font-weight: 500; fill: var(--muted); font-size: 12px; }
+svg .scale-bar { stroke: var(--ink); stroke-width: 2; }
+svg .m { cursor: pointer; outline: none; }
+svg .m:focus-visible .hit, svg .m:hover .hit { stroke: var(--ink); stroke-width: 1.5; }
+svg .hit { fill: transparent; stroke: none; }
+.m-right { fill: var(--right); stroke: var(--surface); stroke-width: 1; }
+.m-right-ring { fill: var(--surface); stroke: var(--right); stroke-width: 2.2; }
+.m-wrong { fill: var(--wrong); stroke: var(--surface); stroke-width: 1; }
+.m-wrong-ring { fill: var(--surface); stroke: var(--wrong); stroke-width: 2.2; }
+.m-ours { fill: var(--accent); stroke: var(--surface); stroke-width: 1; }
+.m-ours-ring { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.m-gui { fill: var(--muted); stroke: var(--surface); stroke-width: 1; }
+.m-gui-ring { fill: var(--surface); stroke: var(--muted); stroke-width: 2; }
+svg .stem { stroke: var(--rule); stroke-width: 2; }
+
+/* the 3-D view */
+.rig3d { position: relative; width: 100%; height: 540px; border-radius: 8px; overflow: hidden; background: var(--surface);
+  border: 1px solid var(--rule); touch-action: none; cursor: grab; }
+.rig3d:active { cursor: grabbing; }
+.rig3d canvas { display: block; width: 100%; height: 100%; }
+.labels3d { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.label3d { position: absolute; left: 0; top: 0; font: 600 13px/1 var(--display); color: var(--ink); white-space: nowrap;
+  text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 0 3px var(--surface); }
+.label3d.gui { color: var(--muted); font-weight: 500; font-size: 11.5px; }
+.label3d.dim { color: var(--muted); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+.view-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+button.view { font: 500 0.86rem/1.2 var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+button.view:hover { border-color: var(--accent); }
+button.view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.view[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+table.data td.vol { font-weight: 600; }
+details { font-size: 0.92rem; }
+summary { cursor: pointer; color: var(--accent); font-weight: 500; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* tables */
+table.data { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.9rem; line-height: 1.5;
+  background: var(--surface); }
+table.data th, table.data td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+table.data thead th { font: 600 0.78rem/1.3 var(--display); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 2px solid var(--rule); background: var(--surface); }
+table.data tbody th { font-weight: 600; }
+table.data td.num, table.data th.num { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+.table-frame { border: 1px solid var(--rule); border-radius: 10px; overflow-x: auto; background: var(--surface); }
+.table-frame table { border: 0; }
+.table-frame tbody tr:last-child > * { border-bottom: 0; }
+.tag { display: inline-block; font: 600 0.72rem/1.2 var(--display); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 999px; white-space: nowrap; }
+.tag.bad { background: var(--wrong-soft); color: var(--wrong); }
+.tag.good { background: var(--right-soft); color: var(--right); }
+.tag.info { background: var(--accent-soft); color: var(--accent); }
+
+/* two columns, steps */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px 32px; }
+.cols > div { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.cols ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.step { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px;
+  display: grid; gap: 10px; align-content: start; min-width: 0; }
+.step ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; font-size: 0.93rem; }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; max-width: 72ch; }
+.callout.bad { border-color: var(--wrong); }
+
+footer { border-top: 1px solid var(--rule); padding-top: 22px; font-size: 0.88rem; color: var(--muted); display: grid; gap: 10px; }
+footer code { font-size: 0.86em; }
+
+/* tooltip */
+#tip { position: fixed; z-index: 10; max-width: min(380px, calc(100vw - 32px)); background: var(--surface);
+  color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; font-size: 0.84rem;
+  line-height: 1.45; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18); pointer-events: none; }
+#tip b { font-weight: 600; }
+
+@media (max-width: 560px) {
+  body { font-size: 15px; }
+  .page { gap: 48px; padding-block: 28px 60px; }
+  .fig { padding: 14px 12px; }
+  .rig3d { height: 400px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+<!--BODY-->
+<main class="page">
+
+<header class="masthead">
+  <p class="eyebrow">pyOpenLPT · flat-window wand calibration · run 20260727 / T0 · 3 Oct 2026</p>
+  <h1>The flat-window calibration on your tank rig</h1>
+  <p class="lede">Four Phantom cameras behind two perpendicular acrylic walls, and 10,936 frames of a 10 mm wand.
+    The calibration works, and it is 6–8× better than your GUI calibration of the same data. Three things were
+    needed: two library fixes, fitting the lens distortion, and a start from a verified answer, because from scratch
+    the fit can land in a wrong one.</p>
+  <p class="request">Your request: “help me check how the latest plate calibration works for my real experiment's
+    data”.</p>
+  <div class="stats" aria-label="Results at a glance">
+    <div class="stat good"><b>0.215 px</b><span>Median reprojection error on every frame. Your GUI's calib_3: 1.28
+      px.</span></div>
+    <div class="stat good"><b>0.0067 mm</b><span>Median error of the 10 mm wand's length on every frame. calib_3:
+      0.052 mm.</span></div>
+    <div class="stat"><b>18,750–21,940 px</b><span>The cameras' real focal lengths, 253–296 mm. The GUI held them at
+      13,333 px.</span></div>
+    <div class="stat bad"><b>2 of 9</b><span>Frame sets where the calibration from scratch ended in a wrong answer,
+      one of them every frame. The delivered fit was started from a verified one.</span></div>
+  </div>
+  <p class="terms"><i>Terms.</i> Every calibration is judged the same way. Each frame's two balls are triangulated
+    from all four cameras, without the wand length. <i>Reprojection error</i>: how far each detection lies from its
+    triangulated ball's image. <i>Wand error</i>: the triangulated length minus 10 mm. <i>Right answer</i>: the one
+    every verified fit agrees on, with the walls 90.2° apart and the cameras 0.7–1.1 m from their walls.</p>
+</header>
+
+<section id="short">
+  <div class="prose">
+    <p class="eyebrow">In short</p>
+    <h2>Eight results, most important first</h2>
+    <ol class="keys">
+      <li><b>The calibration works and beats the GUI's.</b> On every frame, its median reprojection error is 6× lower
+        and its median wand error 8× lower. On calib_3's own filtered frames it is 4× and 7× better. The wand comes
+        out at 9.9998 mm on average, with an SD of 0.010 mm.</li>
+      <li><b>Two library bugs had to be fixed first,</b> with your approval. One was a crash in the start-up stage,
+        shared with the cylinder calibration. The other was a camFile check too strict for rounding. Both have
+        regression tests, and every test suite passes.</li>
+      <li><b>The lens distortion must be fitted (k1).</b> It is about 6 px at the image corners. The water index and
+        the wall thickness, within ±0.003 and ±0.3 mm, make no measurable difference.</li>
+      <li><b>The real focal lengths are 18,750–21,940 px, not 13,333.</b> calib_3 held f at the nominal value, which
+        put its cameras about 30 % too close to each other and to the walls.</li>
+      <li><b>From scratch, the calibration can end in a wrong answer on this rig</b>, as it did on 2 of 9 frame sets.
+        C3 and C4 see the wand under only about 6°, the limit where the synthetic tests also failed. The report's
+        warnings missed 2 of the 4 wrong answers.</li>
+      <li><b>A start from a verified answer, or rough hints, avoids it.</b> The delivered fit was refitted on every
+        frame from the first half of the recording, in 5 minutes.</li>
+      <li><b>The report's “pinned” warning is harmless here.</b> A few frames where the wand touched the C1/C2 wall,
+        with its ball cut by C3's or C4's image border, hold the fit. That costs 0.5 % in C1's and C2's f and nothing
+        in the 3-D measurement.</li>
+      <li><b>The walls' positions are known only to a few cm, but measurements inside the wand's volume do not depend
+        on them.</b> The cameras did not drift during the recording.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="rig">
+  <div class="prose">
+    <p class="eyebrow">The rig as calibrated</p>
+    <h2>Two camera pairs, one behind each wall, 90.2° apart</h2>
+    <p>C1 above C2 look through one wall, and C3 above C4 through the other. Each camera's position is fitted from
+      the wand alone, as are its focal length, its lens distortion and both walls; no camera or wall was measured.
+      The plan view places every camera against the two walls, beside where calib_3 put it. Figure 2 shows the same
+      rig in 3-D, with each camera's field of view.</p>
+  </div>
+  <figure class="fig" aria-labelledby="fig-plan-cap">
+    <figcaption id="fig-plan-cap"><b>Figure 1. Plan view, looking down along the tank's corner.</b> Filled markers
+      are this calibration's cameras and hollow ones calib_3's. Each is placed by its distances to the two walls'
+      outer surfaces, so the walls meet at the corner. A thin line marks each camera's line of sight. The dashed box
+      holds 98 % of the wand ends (1–99 %). The walls' positions themselves are uncertain by a few cm, so the corner
+      may lie a little off.</figcaption>
+    <div class="legend" aria-hidden="true">
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5" class="cam-now"/></svg>This calibration</span>
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" class="cam-gui"/></svg>calib_3 (GUI)</span>
+      <span><svg viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="10" class="wand-box"/></svg>Wand
+        volume</span>
+    </div>
+    <div class="scroll"><div id="fig-plan"></div></div>
+  </figure>
+  <figure class="fig" aria-labelledby="fig-3d-cap">
+    <figcaption id="fig-3d-cap"><b>Figure 2. The rig in 3-D.</b> Drag to turn it, scroll or pinch to zoom, and
+      right-drag or drag with two fingers to pan. Each of this calibration's cameras is drawn as its field of view,
+      refracted through its wall, out to the wand volume's centre; a hollow marker shows where calib_3 put the same
+      camera. The grey slabs are the two acrylic walls (12.7 mm), the dots 2,000 of the 21,872 wand ends, and the dashed
+      box the volume that holds 98 % of them. Up runs from C2 to C1. Coordinates are in mm, with the origin on the
+      walls' corner at the wand's median height.</figcaption>
+    <div class="view-buttons" role="group" aria-label="Views of the 3-D figure">
+      <button type="button" class="view" data-view="overview" aria-pressed="true">Overview</button>
+      <button type="button" class="view" data-view="top" aria-pressed="false">From above</button>
+      <button type="button" class="view" data-view="c12" aria-pressed="false">Behind C1, C2</button>
+      <button type="button" class="view" data-view="c34" aria-pressed="false">Behind C3, C4</button>
+      <button type="button" class="view" data-view="volume" aria-pressed="false">The wand volume</button>
+    </div>
+    <div id="rig3d" class="rig3d" role="img" aria-label="The rig in 3-D: four cameras, each looking through one of two perpendicular walls at the wand volume"><div class="labels3d" aria-hidden="true"></div></div>
+    <p class="note" id="rig3d-note" hidden>The 3-D view needs WebGL, which this browser does not offer. Figure 1 shows
+      the rig from above.</p>
+  </figure>
+  <div class="prose">
+    <h3>The wand's volume</h3>
+    <p>The space the wand's two balls went through, measured in this calibration from the 21,872 ball centres of
+      the 10,936 frames. Distances are from each wall's inner (water-side) surface; the height is along the walls'
+      corner, from the median.</p>
+  </div>
+  <div class="table-frame">
+    <table class="data" id="vol-table">
+      <thead><tr><th scope="col">Direction</th><th class="num" scope="col">Nearest</th><th class="num" scope="col">1 %</th>
+        <th class="num" scope="col">Median</th><th class="num" scope="col">99 %</th><th class="num" scope="col">Farthest</th>
+        <th class="num" scope="col">Size (1–99 %)</th><th class="num" scope="col">Size (all)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note" id="vol-note"></p>
+  <div class="table-frame">
+    <table class="data" id="cam-table">
+      <thead><tr><th scope="col">Camera</th><th class="num" scope="col">f (px)</th><th class="num" scope="col">f (mm)</th>
+        <th class="num" scope="col">k1</th><th class="num" scope="col">To its wall</th>
+        <th class="num" scope="col">Angle to its wall</th><th class="num" scope="col">calib_3: f, to its wall</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="callout">Check with a tape measure: this calibration puts C1 and C2 <b>243 mm</b> apart and C3 and C4
+    <b>287 mm</b> apart. calib_3 puts them 170 and 173 mm apart. Measure between the lens axes; where in each lens
+    its pinhole sits does not matter for these two.</p>
+</section>
+
+<section id="minima">
+  <div class="prose">
+    <p class="eyebrow">The main thing to watch</p>
+    <h2>From scratch, the fit can land in a wrong answer</h2>
+    <p>Wall 2 is seen only by C3 and C4, which see the wand under about 6° with their real focal lengths. A wall's
+      tilt then changes their images only slightly, and the fit has a second, wrong minimum. Which minimum the
+      calibration reaches depends on the frames it starts from.</p>
+    <ul>
+      <li><b>Kind A:</b> both walls are wrong. They come out 93.5–94° apart, with every camera 0.2–0.3 m from its
+        wall. This happened on every frame (T2's first run), on subset s0 with k1 held at 0, and on s0 with the edge
+        filter.</li>
+      <li><b>Kind B:</b> only wall 2 is wrong, tilted the other way. C3 and C4 swap their angles to it and sit 0.2 m
+        from it, while the walls stay 90.1° apart. This happened on the second half of the recording, with k1
+        fitted.</li>
+    </ul>
+  </div>
+  <figure class="fig" aria-labelledby="fig-fits-cap">
+    <figcaption id="fig-fits-cap"><b>Figure 3. Every fit of the case.</b> Each fit sits at the noise it reports (sigma
+      in <code>calibration_report.txt</code>) and its nearest camera's distance to its wall. Right answers sit high and
+      left, wrong ones low and right. The report's “noisy” warning fires only right of the dashed line, so it missed
+      two wrong answers. Hover a mark for its fit.</figcaption>
+    <div class="legend" aria-hidden="true">
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" class="m-right"/></svg>Right, k1 fitted</span>
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4.5" class="m-right-ring"/></svg>Right, k1 held at
+        0</span>
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" class="m-wrong"/></svg>Wrong, k1 fitted</span>
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4.5" class="m-wrong-ring"/></svg>Wrong, k1 held at
+        0</span>
+    </div>
+    <div class="scroll"><div id="fig-fits"></div></div>
+    <p class="note" id="fig-fits-note"></p>
+  </figure>
+  <div class="table-frame">
+    <table class="data">
+      <thead><tr><th scope="col">Check</th><th scope="col">Right answer</th><th scope="col">Wrong answers</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Reprojection RMS in <code>calibration_report.txt</code></th><td>about 0.27 px</td>
+          <td>0.55 px or more</td></tr>
+        <tr><th scope="row">Each camera's distance to its wall</th><td>C1 1.07, C2 1.03, C3 0.77, C4 0.85 m</td>
+          <td>0.2–0.3 m for one wall's cameras or for all</td></tr>
+        <tr><th scope="row">Each camera's angle to its wall's normal</th><td>C1 0.7°, C2 12.8°, C3 18°, C4 1–2°</td>
+          <td>swapped or far off (C1 16°, or C3 2° and C4 19°)</td></tr>
+        <tr><th scope="row">Angle between the walls</th><td>90.1–90.2°</td><td>93.5–94° (kind A only)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="callout"><b>How to avoid it:</b> start from a verified answer, with <code>run_calibration.py --start</code>
+    or <code>plate_wand.calibrate(start=...)</code>. Started from the first half's fit, the second half and every
+    frame converged to the right answer in 2–5 minutes, where the start from scratch took 37–65 minutes. Rough
+    window-normal hints from your photo also turned the second half's wrong answer into the right one.</p>
+</section>
+
+<section id="gui">
+  <div class="prose">
+    <p class="eyebrow">Against your GUI calibrations</p>
+    <h2>6–8× better on the same detections</h2>
+    <p>All calibrations are judged by the same free triangulation, on every frame of your circle finder's table and on
+      calib_3's own 5,563 frames, the ones the GUI's filter kept.</p>
+  </div>
+  <figure class="fig" aria-labelledby="fig-gui-cap">
+    <figcaption id="fig-gui-cap"><b>Figure 4. Median errors, log scales.</b> Filled markers: every frame (10,936).
+      Hollow markers: calib_3's frames (5,563). calib's wand comes out 5.5 mm long, so its scale is wrong. The last row
+      is this case's pipeline fitted only on calib_3's frames.</figcaption>
+    <div class="legend" aria-hidden="true">
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" class="m-ours"/></svg>Every frame</span>
+      <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4.5" class="m-ours-ring"/></svg>calib_3's frames</span>
+    </div>
+    <div class="panels"><div class="scroll" id="fig-gui-a"></div><div class="scroll" id="fig-gui-b"></div></div>
+  </figure>
+  <div class="table-frame">
+    <table class="data" id="rig-table">
+      <thead><tr><th scope="col">Quantity</th><th scope="col">calib_3 (GUI)</th><th scope="col">This calibration</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="prose"><p>calib_3 held f at the nominal 13,333 px, 180 mm over 13.5 µm pixels. The lenses are focused at
+    about 1 m, where their image distance is 253–296 mm. With f too small, the images' scale forced calib_3's cameras
+    about 30 % closer together and closer to the walls, and its residuals stayed near 0.8 px with a long tail on
+    the frames its filter dropped.</p></div>
+</section>
+
+<section id="walls">
+  <div class="prose">
+    <p class="eyebrow">The “pinned” warning and the walls</p>
+    <h2>A few frames hold wall 1; the measurement does not care</h2>
+    <p>Most fits end with the report's <code>pinned</code> warning: a wand end lies exactly on wall 1's water side.</p>
+    <ul>
+      <li><b>The frames:</b> they are frames where the wand touched or nearly touched the C1/C2 wall. In each, the
+        near-wall ball is cut by C3's or C4's left image border, which biases its centre. 697 detections in all have
+        a ball cut by the border.</li>
+      <li><b>The fit stops at the wall.</b> A step that would push those ends into the acrylic is refused. Holding the
+        wall 2–5 mm back and refitting lowers the cost. In the pinned fits, C1's and C2's f come out about 0.5 % low,
+        and wall 1 2–5 mm off.</li>
+      <li><b>The measurement does not change.</b> Dropping the border-cut detections frees the pin but leaves the wand
+        error unchanged: 0.0070 against 0.0067 mm on unused frames.</li>
+      <li><b>The walls' positions are uncertain by a few cm.</b> They come from the third-order refraction effect,
+        strongest at the image edges where detections are least reliable. They move 20–30 mm between frame sets, but
+        moving a wall by ±10–20 mm and refitting leaves the wand error at 0.0066–0.0069 mm.</li>
+      <li><b>So measure inside the wand's volume:</b> 3–72 mm from the C1/C2 wall, 120–221 mm from the C3/C4 wall,
+        77 mm high (98 % of the wand ends).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="tests">
+  <div class="prose">
+    <p class="eyebrow">What else was tested</p>
+    <h2>Repeatable, no drift, and only k1 among the inputs matters</h2>
+  </div>
+  <div class="cols">
+    <div>
+      <h3>Repeatability and held-out frames</h3>
+      <ul>
+        <li><b>Subsets:</b> the five interleaved subsets (every 5th frame) agree. The walls angle is 90.157 ±
+          0.023°, the baselines agree to 0.1–3 mm, and C3's and C4's f vary less than their own error bars.</li>
+        <li><b>No over-fitting:</b> each fit predicts the 80 % of frames it never saw as well as its own. The median
+          wand error there is 0.0066–0.0069 mm, with an SD of 0.010 mm.</li>
+        <li><b>No drift:</b> the two halves of the recording agree. f agrees within 0.05–0.9σ for C1–C3 and within 0.3
+          % for C4, and only wall 2's position moves, by about 20 mm.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Inputs and hints</h3>
+      <div class="table-frame">
+        <table class="data" style="min-width: 0">
+          <thead><tr><th scope="col">Change</th><th scope="col">Measurement</th></tr></thead>
+          <tbody>
+            <tr><td>n<sub>water</sub> 1.33 instead of 1.333</td><td><span class="tag good">unchanged</span></td></tr>
+            <tr><td>walls 12.4 or 13.0 mm</td><td><span class="tag good">unchanged</span></td></tr>
+            <tr><td>k1 held at 0</td><td><span class="tag bad">worse</span> wand error 0.0096 against 0.0067 mm</td></tr>
+            <tr><td>photo hints, fit already right</td><td><span class="tag good">same answer</span> 1.5× the time</td></tr>
+            <tr><td>photo or calib_3 hints, plain fit wrong</td><td><span class="tag info">rescued</span> second half</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fixes">
+  <div class="prose">
+    <p class="eyebrow">Library fixes</p>
+    <h2>Two bugs that only real data showed</h2>
+    <ul>
+      <li><b><code>cylinder_wand.affine_factorization</code></b>, stage 1 of both wand calibrations, crashed with
+        an IndexError on more than about 550 frames. Gross detection errors kept its outlier rejection going to the
+        last round, and it then returned frames it had not factorised. It now returns the ones it used, so every run
+        that worked before gives the same result.</li>
+      <li><b><code>plate_model.to_cpp</code></b> refused to write two cameras' camFiles, because the C++ side rebuilt
+        their rotation 1.2e-14 off. Its check is now 1e-12, still seven orders of magnitude below the errors it was
+        written to catch.</li>
+      <li><b>Checks:</b> each fix has a regression test in <code>tests/test_plate_wand.py</code>. Every suite passes:
+        plate 14 fast + 4 slow, cylinder 6 + 1. Neither fix is committed yet.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="advice">
+  <div class="prose">
+    <p class="eyebrow">For the experiment</p>
+    <h2>Using this calibration, and the next one</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <h3>Use this calibration</h3>
+      <ul>
+        <li>The camFiles are <code>calib_plate_wand\camFile\cam0.txt</code> … <code>cam3.txt</code>, for C1 … C4,
+          named as in calib_3.</li>
+        <li>Tape-measure the C1–C2 and C3–C4 spacings: 243 and 287 mm.</li>
+        <li>Measure inside the wand's volume.</li>
+      </ul>
+    </div>
+    <div class="step">
+      <h3>Calibrate this rig again</h3>
+      <ul>
+        <li>Fit k1.</li>
+        <li>Start from this calibration, or give window-normal hints.</li>
+        <li>Check the result against the table above, not only the warnings.</li>
+      </ul>
+    </div>
+    <div class="step">
+      <h3>Record the wand</h3>
+      <ul>
+        <li>Keep both balls fully inside every image.</li>
+        <li>Keep the wand a few mm off the walls.</li>
+        <li>Give C3 and C4 a wider view: move the wand over more of their images, or use a shorter lens.</li>
+      </ul>
+    </div>
+    <div class="step">
+      <h3>Software, your call</h3>
+      <ul>
+        <li>Make the start more robust: when it joins the two camera pairs, it can begin 30 px off.</li>
+        <li>Choose between starts by cost, not by detections kept.</li>
+        <li>Free a wall pinned by a few frames.</li>
+        <li>Flag a noise twice the best start's, beyond the fixed 0.5 px.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>From case <code>pyOpenLPT/cases/plate_20260727_T0</code>: plan <code>2026-10-03-plan.md</code> and the full report
+    <code>2026-10-03-report.md</code>. Tests T1–T7 and diagnoses D1–D3 are in <code>tests/</code>. The delivered
+    calibration is in <code>X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\calib_plate_wand</code>.</p>
+  <p>This page was built by <code>make_report_page.py</code> from <code>tests/fits_summary.json</code>,
+    <code>tests/t7_vs_gui.json</code> and <code>page/report_template.html</code>.</p>
+</footer>
+</main>
+
+<div id="tip" role="tooltip" hidden></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script type="application/json" id="fig-data">__FIG_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  const DATA = JSON.parse(document.getElementById("fig-data").textContent);
+  const NS = "http://www.w3.org/2000/svg";
+  const tip = document.getElementById("tip");
+  const fmt = (n, d) => n.toLocaleString("en-US", { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
+  const CAM = ["C1", "C2", "C3", "C4"];
+
+  function el(tag, attrs, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function showTip(html, x, y) {
+    tip.innerHTML = html;
+    tip.hidden = false;
+    const r = tip.getBoundingClientRect();
+    let left = x + 14, top = y + 14;
+    if (left + r.width > window.innerWidth - 8) left = Math.max(8, x - r.width - 14);
+    if (top + r.height > window.innerHeight - 8) top = Math.max(8, y - r.height - 14);
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+  }
+  function hideTip() { tip.hidden = true; }
+  function bindTip(node, html) {
+    node.addEventListener("mousemove", e => showTip(html, e.clientX, e.clientY));
+    node.addEventListener("mouseleave", hideTip);
+    node.addEventListener("focus", () => { const r = node.getBoundingClientRect(); showTip(html, r.right, r.bottom); });
+    node.addEventListener("blur", hideTip);
+    node.setAttribute("aria-label", html.replace(/<[^>]+>/g, " "));
+  }
+  const t2 = DATA.fits.find(f => f.name === "t2_all");
+
+  /* the camera table */
+  (function () {
+    const tb = document.querySelector("#cam-table tbody");
+    const g = DATA.gui_rig;
+    CAM.forEach((name, c) => {
+      const tr = document.createElement("tr");
+      const sf = DATA.t2_sigma_f ? ` ± ${fmt(DATA.t2_sigma_f[c])}` : "";
+      const cells = [`${name} (cam${c})`, fmt(t2.f_px[c]) + sf, (t2.f_px[c] * 0.0135).toFixed(1),
+        t2.k1[c].toFixed(2), `${fmt(t2.distance_mm[c])} mm`, `${t2.incidence_deg[c].toFixed(2)}°`,
+        `${fmt(g.cameras[c].f_px)} px, ${fmt(g.cameras[c].distance_to_wall_mm)} mm`];
+      cells.forEach((t, i) => { const td = document.createElement(i ? "td" : "th"); td.textContent = t;
+        if (i) td.className = "num"; else td.scope = "row"; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  })();
+
+  /* the rig comparison table */
+  (function () {
+    const tb = document.querySelector("#rig-table tbody");
+    const g = DATA.gui_rig, o = DATA.our_rig;
+    const pair = (d, a, b) => d.pairs.find(p => p.cams[0] === a && p.cams[1] === b).baseline_mm;
+    const rows = [
+      ["f, C1–C4", g.cameras.map(c => fmt(c.f_px)).join(" / ") + " px", o.cameras.map(c => fmt(c.f_px)).join(" / ") + " px"],
+      ["C1–C2 spacing", fmt(pair(g, 0, 1)) + " mm", fmt(pair(o, 0, 1)) + " mm"],
+      ["C3–C4 spacing", fmt(pair(g, 2, 3)) + " mm", fmt(pair(o, 2, 3)) + " mm"],
+      ["C1–C3 distance", fmt(pair(g, 0, 2)) + " mm", fmt(pair(o, 0, 2)) + " mm"],
+      ["C1 to its wall", fmt(g.cameras[0].distance_to_wall_mm) + " mm", fmt(o.cameras[0].distance_to_wall_mm) + " mm"],
+      ["Angle between the walls", g.walls_angle_deg.toFixed(1) + "°", o.walls_angle_deg.toFixed(1) + "°"],
+    ];
+    rows.forEach(r => {
+      const tr = document.createElement("tr");
+      r.forEach((t, i) => { const td = document.createElement(i ? "td" : "th"); td.textContent = t;
+        if (!i) td.scope = "row"; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  })();
+
+  /* Figure 1: plan view */
+  (function () {
+    const host = document.getElementById("fig-plan");
+    const T = DATA.plan.T2, G = DATA.plan.calib_3;
+    const W = 760, ml = 30, mr = 30, mt = 30, mb = 56;
+    const all = T.cameras.concat(G.cameras);
+    const xs = all.map(c => c.x).concat([T.wand.x[1], T.t[1]]);
+    const ys = all.map(c => c.y).concat([T.wand.y[1], T.t[0]]);
+    const x0 = Math.min(...xs) - 120, x1 = Math.max(...xs) + 150, y0 = Math.min(...ys) - 70, y1 = Math.max(...ys) + 110;
+    const s = (W - ml - mr) / (x1 - x0);
+    const H = Math.round((y1 - y0) * s) + mt + mb;
+    const X = v => ml + (v - x0) * s, Y = v => mt + (v - y0) * s;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+      "aria-label": "Plan view of the rig: two camera pairs, one behind each wall; calib_3's cameras sit about 30 % closer" }, host);
+    // water, then the two walls (their outer surfaces at x = 0 and y = 0)
+    el("rect", { x: X(T.t[1]), y: Y(T.t[0]), width: X(x1) - X(T.t[1]), height: Y(y1) - Y(T.t[0]), class: "water" }, svg);
+    el("rect", { x: X(0), y: Y(0), width: X(x1) - X(0), height: Math.max(2, Y(T.t[0]) - Y(0)), class: "wall" }, svg);
+    el("rect", { x: X(0), y: Y(0), width: Math.max(2, X(T.t[1]) - X(0)), height: Y(y1) - Y(0), class: "wall" }, svg);
+    el("text", { x: X(T.t[1]) + 6, y: Y(0) - 7, "text-anchor": "start", class: "wall-label" }, svg, "WALL 1");
+    el("text", { x: X(0) - 8, y: Y(y1) - 8, "text-anchor": "start", class: "wall-label",
+      transform: `rotate(-90 ${X(0) - 8} ${Y(y1) - 8})` }, svg, "WALL 2");
+    el("text", { x: X(x1) - 10, y: Y(y1) - 12, "text-anchor": "end", class: "wall-label" }, svg, "WATER");
+    // the wand's volume
+    const wx = T.wand.x, wy = T.wand.y;
+    el("rect", { x: X(wx[0]), y: Y(wy[0]), width: X(wx[1]) - X(wx[0]), height: Y(wy[1]) - Y(wy[0]), class: "wand-box" }, svg);
+    el("text", { x: X(wx[1]) + 6, y: Y(wy[1]) + 14, class: "row-sub" }, svg, "wand volume");
+    const xc = (wx[0] + wx[1]) / 2, yc = (wy[0] + wy[1]) / 2;
+    // calib_3's cameras, joined to this calibration's
+    G.cameras.forEach((c, k) => {
+      const o = T.cameras[k];
+      el("line", { x1: X(c.x), y1: Y(c.y), x2: X(o.x), y2: Y(o.y), class: "shift" }, svg);
+    });
+    // lines of sight to the wand's depth
+    T.cameras.forEach(c => {
+      let t;
+      if (c.wall === 1) t = (yc - c.y) / c.dy; else t = (xc - c.x) / c.dx;
+      el("line", { x1: X(c.x), y1: Y(c.y), x2: X(c.x + t * c.dx), y2: Y(c.y + t * c.dy), class: "sight" }, svg);
+    });
+    const label = (c, k, gui) => {
+      // wall 1's pair stacks along y: labels beside the markers (this calibration right, calib_3 left); wall 2's pair
+      // lies along x: this calibration's labels above, calib_3's below, the farther camera's anchored to the left
+      const cams = gui ? G.cameras : T.cameras;
+      const pair = cams.map((q, i) => [q, i]).filter(([q]) => q.wall === c.wall).sort((a, b) => a[0].x - b[0].x);
+      const farther = pair.length > 1 && pair[0][1] === k;
+      let anchor, dx, dy;
+      if (c.wall === 1) { anchor = gui ? "end" : "start"; dx = gui ? -11 : 11; dy = 4; }
+      else if (gui) { anchor = farther ? "end" : "start"; dx = farther ? -4 : 4; dy = 21; }
+      else { anchor = "middle"; dx = 0; dy = -12; }
+      el("text", { x: X(c.x) + dx, y: Y(c.y) + dy, "text-anchor": anchor,
+        class: "cam-label" + (gui ? " gui" : "") }, svg, CAM[k] + (gui ? " (calib_3)" : ""));
+    };
+    G.cameras.forEach((c, k) => {
+      const g = el("g", { class: "m", tabindex: "0", role: "img" }, svg);
+      el("circle", { cx: X(c.x), cy: Y(c.y), r: 10, class: "hit" }, g);
+      el("circle", { cx: X(c.x), cy: Y(c.y), r: 5.5, class: "cam-gui" }, g);
+      label(c, k, true);
+      const gc = DATA.gui_rig.cameras[k];
+      bindTip(g, `<b>${CAM[k]} in calib_3</b><br>${fmt(gc.distance_to_wall_mm)} mm from its wall, ` +
+        `${gc.incidence_deg.toFixed(1)}° to its normal; f ${fmt(gc.f_px)} px (held)`);
+    });
+    T.cameras.forEach((c, k) => {
+      const g = el("g", { class: "m", tabindex: "0", role: "img" }, svg);
+      el("circle", { cx: X(c.x), cy: Y(c.y), r: 11, class: "hit" }, g);
+      el("circle", { cx: X(c.x), cy: Y(c.y), r: 6.5, class: "cam-now" }, g);
+      label(c, k, false);
+      bindTip(g, `<b>${CAM[k]} (cam${k}), this calibration</b><br>${fmt(t2.distance_mm[k])} mm from its wall, ` +
+        `${t2.incidence_deg[k].toFixed(2)}° to its normal<br>f ${fmt(t2.f_px[k])} px (${(t2.f_px[k] * 0.0135).toFixed(1)} mm), ` +
+        `k1 ${t2.k1[k].toFixed(2)}`);
+    });
+    // scale bar
+    const sb = 200, bx = ml + 6, by = H - 24;
+    el("line", { x1: bx, x2: bx + sb * s, y1: by, y2: by, class: "scale-bar" }, svg);
+    el("line", { x1: bx, x2: bx, y1: by - 5, y2: by + 5, class: "scale-bar" }, svg);
+    el("line", { x1: bx + sb * s, x2: bx + sb * s, y1: by - 5, y2: by + 5, class: "scale-bar" }, svg);
+    el("text", { x: bx + sb * s + 8, y: by + 4, class: "tick" }, svg, "200 mm");
+  })();
+
+  /* the wand's volume */
+  (function () {
+    const v = DATA.rig3d.volume;
+    const tb = document.querySelector("#vol-table tbody");
+    const mm = x => (Math.abs(x) < 0.05 ? 0 : x).toFixed(1) + " mm";
+    [["From wall 1 (C1 and C2's wall)", v.depth_from_wall1_mm], ["From wall 2 (C3 and C4's wall)", v.depth_from_wall2_mm],
+     ["Height along the walls' corner", v.height_mm]].forEach(([label, q]) => {
+      const tr = document.createElement("tr");
+      const th = document.createElement("th");
+      th.scope = "row";
+      th.textContent = label;
+      tr.appendChild(th);
+      [q["0"], q["1"], q["50"], q["99"], q["100"]].forEach(x => {
+        const td = document.createElement("td"); td.className = "num"; td.textContent = mm(x); tr.appendChild(td); });
+      [q["99"] - q["1"], q["100"] - q["0"]].forEach(x => {
+        const td = document.createElement("td"); td.className = "num vol"; td.textContent = x.toFixed(0) + " mm"; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+    const s = v.box_1_99_size_mm, d = v.camera_to_centre_mm, h = v.camera_height_mm;
+    document.getElementById("vol-note").textContent =
+      `The box holding 98 % of the ball centres is ${s.depth1.toFixed(0)} × ${s.depth2.toFixed(0)} × ` +
+      `${s.height.toFixed(0)} mm (${v.box_1_99_cm3.toFixed(0)} cm³); the convex hull of all of them is ` +
+      `${v.hull_cm3.toFixed(0)} cm³. The cameras are ` + CAM.map((n, c) => `${n} ${(d[c] / 1000).toFixed(2)} m`).join(", ") +
+      " from the volume's centre, at heights " + CAM.map((n, c) => `${n} ${h[c] >= 0 ? "+" : "−"}${Math.abs(h[c]).toFixed(0)} mm`)
+      .join(", ") + " relative to it. The sizes are good to about 0.1 %. The distances to wall 1 are good to a few mm, " +
+      "since the wand touched it; those to wall 2 carry that wall's uncertainty, a few cm.";
+  })();
+
+  /* Figure 2: the rig in 3-D */
+  (function () {
+    const host = document.getElementById("rig3d");
+    const note = document.getElementById("rig3d-note");
+    const buttons = document.querySelector(".view-buttons");
+    const R = DATA.rig3d;
+    let renderer = null;
+    try {
+      if (window.THREE && THREE.OrbitControls) renderer = new THREE.WebGLRenderer({ antialias: true });
+    } catch (e) { renderer = null; }
+    if (!renderer) { host.hidden = true; buttons.hidden = true; note.hidden = false; return; }
+    const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    host.insertBefore(renderer.domElement, host.firstChild);
+    const scene = new THREE.Scene();
+    const cam = new THREE.PerspectiveCamera(32, 1, 10, 30000);
+    const UP = new THREE.Vector3(0, 0, R.up);           // physically up: from C2 towards C1
+    cam.up.copy(UP);
+    const V = a => new THREE.Vector3(a[0], a[1], a[2]);
+    const up = s => UP.clone().multiplyScalar(s);
+    const T = R.T2, G = R.calib_3, bx = R.box_frame_mm;
+    const centre = new THREE.Vector3((bx[0][0] + bx[0][1]) / 2, (bx[1][0] + bx[1][1]) / 2, (bx[2][0] + bx[2][1]) / 2);
+    const M = {
+      wall: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.3, depthWrite: false, side: THREE.DoubleSide }),
+      wallEdge: new THREE.LineBasicMaterial({}),
+      pts: new THREE.PointsMaterial({ size: 2.6, sizeAttenuation: false }),
+      box: new THREE.LineDashedMaterial({ dashSize: 6, gapSize: 4 }),
+      fov: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.85 }),
+      fovFill: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.1, depthWrite: false, side: THREE.DoubleSide }),
+      camDot: new THREE.MeshBasicMaterial({}),
+      gui: new THREE.MeshBasicMaterial({ wireframe: true }),
+      shift: new THREE.LineDashedMaterial({ dashSize: 12, gapSize: 9 }),
+    };
+    function theme() {
+      renderer.setClearColor(new THREE.Color(css("--surface")));
+      M.wall.color.set(css("--wall"));
+      M.wallEdge.color.set(css("--muted"));
+      M.pts.color.set(css("--accent"));
+      M.box.color.set(css("--ink"));
+      M.fov.color.set(css("--accent"));
+      M.fovFill.color.set(css("--accent"));
+      M.camDot.color.set(css("--accent"));
+      M.gui.color.set(css("--muted"));
+      M.shift.color.set(css("--muted"));
+    }
+    // the walls: wall 1 is y in [0, t1] from the corner along x; wall 2 the slab along its own normal from the corner
+    const zs = T.points.map(p => p[2]).concat(T.cameras.map(c => c.C[2]), G.cameras.map(c => c.C[2]));
+    const zLo = Math.min(...zs) - 120, zHi = Math.max(...zs) + 120, zMid = (zLo + zHi) / 2, zLen = zHi - zLo;
+    const xFar = Math.max(bx[0][1], ...T.cameras.filter(c => c.wall === 1).map(c => c.C[0])) + 260;
+    const yFar = Math.max(bx[1][1], ...T.cameras.filter(c => c.wall === 2).map(c => c.C[1])) + 260;
+    const t1 = T.walls[0].t, t2 = T.walls[1].t, n2 = T.walls[1].n;
+    const a2 = Math.atan2(n2[1], n2[0]), ca = Math.cos(a2), sa = Math.sin(a2);
+    function slab(sx, sy, pos, rotZ) {
+      const geo = new THREE.BoxGeometry(sx, sy, zLen);
+      [new THREE.Mesh(geo, M.wall), new THREE.LineSegments(new THREE.EdgesGeometry(geo), M.wallEdge)].forEach(o => {
+        o.position.copy(pos);
+        o.rotation.z = rotZ;
+        scene.add(o);
+      });
+    }
+    slab(xFar, t1, new THREE.Vector3(xFar / 2, t1 / 2, zMid), 0);
+    slab(t2, yFar, new THREE.Vector3(ca * t2 / 2 - sa * yFar / 2, sa * t2 / 2 + ca * yFar / 2, zMid), a2);
+    // the wand ends and the box holding 98 % of them
+    const pg = new THREE.BufferGeometry();
+    pg.setAttribute("position", new THREE.Float32BufferAttribute([].concat(...T.points), 3));
+    scene.add(new THREE.Points(pg, M.pts));
+    const bgeo = new THREE.BoxGeometry(bx[0][1] - bx[0][0], bx[1][1] - bx[1][0], bx[2][1] - bx[2][0]);
+    const box = new THREE.LineSegments(new THREE.EdgesGeometry(bgeo), M.box);
+    box.position.copy(centre);
+    box.computeLineDistances();
+    scene.add(box);
+    function seg(points, mat) {
+      const l = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), mat);
+      if (mat.isLineDashedMaterial) l.computeLineDistances();
+      scene.add(l);
+    }
+    // each camera's field of view: its corner rays refracted through its wall, out to the plane through the volume's
+    // centre across its line of sight
+    T.cameras.forEach(c => {
+      const C = V(c.C), z = V(c.z_axis);
+      const ends = c.rays.map(r => {
+        const o = V(r.o), d = V(r.d);
+        const s = z.dot(centre.clone().sub(o)) / z.dot(d);
+        return { o, e: o.clone().add(d.multiplyScalar(s)) };
+      });
+      const lines = [];
+      for (let i = 0; i < 4; i++) lines.push(C, ends[i].o, ends[i].o, ends[i].e, ends[i].e, ends[(i + 1) % 4].e);
+      lines.push(C, ends[4].o, ends[4].o, ends[4].e);
+      seg(lines, M.fov);
+      const fq = new THREE.BufferGeometry().setFromPoints([ends[0].e, ends[1].e, ends[2].e, ends[0].e, ends[2].e, ends[3].e]);
+      scene.add(new THREE.Mesh(fq, M.fovFill));
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(14, 16, 12), M.camDot);
+      dot.position.copy(C);
+      scene.add(dot);
+    });
+    // calib_3's cameras, each joined to this calibration's
+    G.cameras.forEach((g, k) => {
+      const s = new THREE.Mesh(new THREE.SphereGeometry(18, 10, 8), M.gui);
+      s.position.copy(V(g.C));
+      scene.add(s);
+      seg([V(g.C), V(T.cameras[k].C)], M.shift);
+    });
+    // labels that follow their points
+    const layer = host.querySelector(".labels3d");
+    const labels = [];
+    function label(text, pos, cls) {
+      const e = document.createElement("div");
+      e.className = "label3d" + (cls ? " " + cls : "");
+      e.textContent = text;
+      layer.appendChild(e);
+      labels.push({ e, pos });
+    }
+    T.cameras.forEach(c => label(c.name, V(c.C).add(up(42)), ""));
+    G.cameras.forEach(g => label(g.name + " (calib_3)", V(g.C).add(up(-44)), "gui"));
+    label("wall 1", new THREE.Vector3(xFar * 0.8, t1 / 2, zMid).add(up(zLen / 2 + 24)), "dim");
+    label("wall 2", new THREE.Vector3(ca * t2 / 2 - sa * yFar * 0.8, sa * t2 / 2 + ca * yFar * 0.8, zMid).add(up(zLen / 2 + 24)), "dim");
+    label("wand volume", centre.clone().add(up((bx[2][1] - bx[2][0]) / 2 + 34)), "dim");
+    const controls = new THREE.OrbitControls(cam, renderer.domElement);
+    controls.target.copy(centre);
+    controls.screenSpacePanning = true;
+    function render() {
+      renderer.render(scene, cam);
+      const w = host.clientWidth, h = host.clientHeight;
+      labels.forEach(l => {
+        const p = l.pos.clone().project(cam);
+        const vis = p.z > -1 && p.z < 1 && Math.abs(p.x) < 1.05 && Math.abs(p.y) < 1.05;
+        l.e.hidden = !vis;
+        if (vis) l.e.style.transform = `translate(${((p.x + 1) / 2) * w}px, ${((1 - p.y) / 2) * h}px) translate(-50%, -50%)`;
+      });
+    }
+    controls.addEventListener("change", render);
+    const VIEWS = {
+      overview: { dir: [-0.62, -0.78, 0], lift: 0.55, dist: 2700 },
+      top: { dir: [0, 0.02, 0], lift: 1, dist: 3500 },
+      c12: { dir: [0.06, -1, 0], lift: 0.14, dist: 3000 },
+      c34: { dir: [-1, 0.06, 0], lift: 0.14, dist: 3000 },
+      volume: { dir: [-0.62, -0.78, 0], lift: 0.45, dist: 620 },
+    };
+    function setView(name) {
+      const v = VIEWS[name];
+      const d = new THREE.Vector3(v.dir[0], v.dir[1], v.dir[2]).add(up(v.lift)).normalize();
+      cam.position.copy(centre).add(d.multiplyScalar(v.dist));
+      controls.target.copy(centre);
+      controls.update();
+      buttons.querySelectorAll("button[data-view]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.view === name)));
+      render();
+    }
+    buttons.addEventListener("click", e => {
+      const b = e.target.closest("button[data-view]");
+      if (b) setView(b.dataset.view);
+    });
+    function resize() {
+      const w = host.clientWidth, h = host.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      cam.aspect = w / h;
+      cam.updateProjectionMatrix();
+      render();
+    }
+    const onTheme = () => { theme(); render(); };
+    const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+    if (mq && mq.addEventListener) mq.addEventListener("change", onTheme);
+    new MutationObserver(onTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    theme();
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(host); else window.addEventListener("resize", resize);
+    setView("overview");
+    resize();
+  })();
+
+  /* Figure 3: every fit, right and wrong */
+  (function () {
+    const host = document.getElementById("fig-fits");
+    const W = 760, ml = 64, mr = 24, mt = 30, mb = 52, H = 400;
+    const xlo = 0.2, xhi = 0.6, ylo = 0, yhi = 1.2;
+    const X = v => ml + (v - xlo) / (xhi - xlo) * (W - ml - mr);
+    const Y = v => mt + (1 - (v - ylo) / (yhi - ylo)) * (H - mt - mb);
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+      "aria-label": "Every fit by its noise and its nearest camera's distance to its wall: right answers high and left, wrong ones low and right" }, host);
+    [0.2, 0.3, 0.4, 0.5, 0.6].forEach(v => {
+      el("line", { x1: X(v), x2: X(v), y1: mt, y2: H - mb, class: "grid-line" }, svg);
+      el("text", { x: X(v), y: H - mb + 18, "text-anchor": "middle", class: "tick" }, svg, v.toFixed(1));
+    });
+    [0, 0.4, 0.8, 1.2].forEach(v => {
+      el("line", { x1: ml, x2: W - mr, y1: Y(v), y2: Y(v), class: "grid-line" }, svg);
+      el("text", { x: ml - 8, y: Y(v) + 4, "text-anchor": "end", class: "tick" }, svg, v.toFixed(1));
+    });
+    el("text", { x: (ml + W - mr) / 2, y: H - 10, "text-anchor": "middle", class: "axis-title" }, svg,
+      "sigma in calibration_report.txt (px per coordinate)");
+    el("text", { x: 14, y: (mt + H - mb) / 2, "text-anchor": "middle", class: "axis-title",
+      transform: `rotate(-90 14 ${(mt + H - mb) / 2})` }, svg, "nearest camera to its wall (m)");
+    el("line", { x1: X(0.5), x2: X(0.5), y1: mt - 6, y2: H - mb, class: "threshold" }, svg);
+    el("text", { x: X(0.5) + 6, y: mt + 6, class: "threshold-label" }, svg, "“noisy” warning →");
+    el("text", { x: X(0.215), y: mt + 6, class: "zone-label zone-right" }, svg, "RIGHT ANSWERS");
+    el("text", { x: X(0.215), y: Y(0.07), class: "zone-label zone-wrong" }, svg, "WRONG ANSWERS");
+    // fits at the same place (the same frames ending in the same answer) share one mark
+    const groups = new Map();
+    DATA.fits.forEach(f => {
+      const y = Math.min(...f.distance_mm) / 1000;
+      const key = [f.sigma_px.toFixed(3), y.toFixed(2), f.fit_k1, f.right].join("|");
+      if (!groups.has(key)) groups.set(key, { sigma: f.sigma_px, y, fit_k1: f.fit_k1, right: f.right, fits: [] });
+      groups.get(key).fits.push(f);
+    });
+    const marks = Array.from(groups.values()).sort((a, b) => (b.fits.some(f => f.name === "t2_all")) - (a.fits.some(f => f.name === "t2_all")));
+    marks.reverse().forEach(m => {
+      const cx = X(m.sigma), cy = Y(m.y);
+      const g = el("g", { class: "m", tabindex: "0", role: "img" }, svg);
+      el("circle", { cx, cy, r: 10, class: "hit" }, g);
+      const cls = (m.right ? "m-right" : "m-wrong") + (m.fit_k1 ? "" : "-ring");
+      const big = m.fits.some(f => f.name === "t2_all" || f.name === "t2_scratch");
+      el("circle", { cx, cy, r: big ? 7.5 : (m.fit_k1 ? 5.5 : 5), class: cls }, g);
+      const names = m.fits.map(f => f.desc).join("; ");
+      const f0 = m.fits[0];
+      bindTip(g, `<b>${m.right ? "Right" : "Wrong"} answer</b>, k1 ${m.fit_k1 ? "fitted" : "held at 0"}<br>${names}<br>` +
+        `sigma ${f0.sigma_px.toFixed(3)} px, RMS ${f0.rms_px.toFixed(3)} px; walls ${f0.walls_angle_deg.toFixed(2)}° apart<br>` +
+        `cameras to their walls ${f0.distance_mm.map(d => fmt(d)).join(" / ")} mm` +
+        (f0.warnings.length ? `<br>warnings: ${f0.warnings.join(", ")}` : "<br>no warning"));
+      if (m.fits.some(f => f.name === "t2_all")) {
+        el("line", { x1: cx, x2: cx, y1: Y(0.97) + 4, y2: cy - 9, class: "row-rule" }, g);
+        el("text", { x: cx, y: Y(0.97), "text-anchor": "middle", class: "mark-label" }, g, "delivered T2");
+      }
+      if (m.fits.some(f => f.name === "t2_scratch")) el("text", { x: cx - 12, y: cy + 22, "text-anchor": "end", class: "mark-label" }, g, "T2 from scratch");
+      if (m.fits.length > 1 && !m.right) el("text", { x: cx + 10, y: cy + 4, class: "val" }, g, "×" + m.fits.length);
+    });
+    const wrong = DATA.fits.filter(f => !f.right), missed = wrong.filter(f => f.sigma_px <= 0.5);
+    document.getElementById("fig-fits-note").textContent =
+      `${DATA.fits.length} fits: ${DATA.fits.length - wrong.length} right, ${wrong.length} wrong (five of them on the same frames, subset s0). ` +
+      `The wrong ones without the “noisy” warning: ${missed.map(f => f.desc).join("; and ")}.`;
+  })();
+
+  /* Figure 4: against the GUI's calibrations */
+  (function () {
+    const rows = DATA.gui_rows;
+    function panel(hostId, key, title, lo, hi, ticks, unit, digits) {
+      const host = document.getElementById(hostId);
+      const W = 420, ml = 150, mr = 18, mt = 34, mb = 46, rh = 34, H = mt + rows.length * rh + mb;
+      const L0 = Math.log10(lo), L1 = Math.log10(hi);
+      const X = v => ml + (Math.log10(v) - L0) / (L1 - L0) * (W - ml - mr);
+      const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": title }, host);
+      el("text", { x: ml, y: 18, class: "panel-title" }, svg, title);
+      ticks.forEach(v => {
+        el("line", { x1: X(v), x2: X(v), y1: mt - 6, y2: H - mb, class: "grid-line" }, svg);
+        el("text", { x: X(v), y: H - mb + 16, "text-anchor": "middle", class: "tick" }, svg, String(v));
+      });
+      el("text", { x: (ml + W - mr) / 2, y: H - 10, "text-anchor": "middle", class: "axis-title" }, svg, unit + " (log scale)");
+      rows.forEach((r, i) => {
+        const cy = mt + i * rh + rh / 2;
+        el("line", { x1: ml - 6, x2: W - mr, y1: cy + rh / 2, y2: cy + rh / 2, class: "row-rule" }, svg);
+        el("text", { x: ml - 10, y: cy + 4, "text-anchor": "end", class: "row-label" }, svg, r.label);
+        const a = r[key + "_all"], b = r[key + "_c3"];
+        const ours = r.ours;
+        if (a != null && b != null) el("line", { x1: X(Math.min(a, b)), x2: X(Math.max(a, b)), y1: cy, y2: cy, class: "stem" }, svg);
+        [[b, "-ring", "calib_3's 5,563 frames"], [a, "", "every frame (10,936)"]].forEach(([v, ring, what]) => {
+          if (v == null) return;
+          const g = el("g", { class: "m", tabindex: "0", role: "img" }, svg);
+          el("circle", { cx: X(v), cy, r: 9, class: "hit" }, g);
+          el("circle", { cx: X(v), cy, r: ring ? 4.8 : 5.5, class: (ours ? "m-ours" : "m-gui") + ring }, g);
+          bindTip(g, `<b>${r.label}</b>, ${what}<br>${title}: ${v < 0.1 ? v.toFixed(4) : v.toFixed(digits)} ${unit}`);
+        });
+        if (a != null) el("text", { x: X(Math.max(a, b == null ? a : b)) + 10, y: cy + 4, class: "val" }, svg,
+          a < 0.1 ? a.toFixed(4) : a.toFixed(digits));
+      });
+    }
+    panel("fig-gui-a", "repro", "median reprojection error", 0.1, 5, [0.1, 0.2, 0.5, 1, 2, 5], "px", 2);
+    panel("fig-gui-b", "wand", "median wand error", 0.003, 10, [0.003, 0.01, 0.03, 0.1, 0.3, 1, 3, 10], "mm", 3);
+  })();
+})();
+</script>
