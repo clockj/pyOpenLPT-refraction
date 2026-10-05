@@ -9,6 +9,13 @@ Camera calibration of one Phantom VEO710 camera (180 mm macro lens) looking thro
   `2026-10-01-report.md`.
 - The first calibration assumed 2 mm steps and a 2 mm dot size. Its plan is `2026-09-30-plan.md` and its report
   `2026-09-30-report.md` (superseded). Its test results are in `tests/v1_2mm_steps/`.
+- **A check of f without the tube (2026-10-05), in `focal/`.**
+  - **Data:** 15 images of the board in air, at different tilts, in `X:\Shijie Zhong\Refraction\Raw\20260930\T0\focal`.
+  - **Result:** f = 41,610 px from these images, 0.4 % from the cylinder calibration's 41,459 px. A full analysis was
+    planned (`focal/2026-10-05-plan.md`) but not built, at your request.
+  - **Explainer page** (why a 180 mm lens gives f of about 41,600 px), for your labmate:
+    `X:\Shijie Zhong\Refraction\Processed\20260930\T0\focal\focal_length_explained.html`, written by
+    `focal/make_f_explainer.py`.
 - Raw images: `X:\Shijie Zhong\Refraction\Raw\20260930\T0\cam1`.
 - Outputs: `X:\Shijie Zhong\Refraction\Processed\20260930\T0\cam1` (its own `README.md` lists them). The first
   run's outputs are in its `superseded_v1_2mm_steps\` folder.
