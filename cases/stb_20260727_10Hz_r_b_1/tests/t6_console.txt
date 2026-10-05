@@ -1,0 +1,53 @@
+T6: STB with the new camFiles (T4) against the old ones (T5); medians per frame over each window,
+    convergence phase, frames that save tracks excluded
+  new: frames [0, 505] (506 done), sum of frame times 2.48 h; save frames {3: 36.15, 500: 892.52}
+  old: frames [0, 500] (501 done), sum of frame times 3.15 h, wall 3.28 h; save frames {3: 31.51, 500: 529.19}
+                                                                        4-99               100-299               300-499              500-1000
+                                                              new        old        new        old        new        old        new        old
+  time per frame, s                                          6.07       7.11      10.79      12.64      24.36      35.94      33.66          -
+  matching time, s                                           3.50       5.39       7.69      10.82      21.34      34.11      30.53          -
+    [0,1,2,3]                                                1.23       1.39       1.07       1.48       1.29       2.41       1.62          -
+    [0,1,2]                                                  0.65       1.14       0.67       1.30       1.38       3.57       1.86          -
+    [0,1,3]                                                  0.34       0.90       0.33       0.86       0.59       1.44       0.75          -
+    [0,2,3]                                                  1.18       1.86       5.64       7.11      17.83      26.23      26.31          -
+    [1,2,3]                                                  0.02       0.09       0.02       0.09       0.02       0.09       0.03          -
+  shaking the predictions, s                                 0.33       0.15       0.50       0.30       0.55       0.35       0.55          -
+  IPR shaking, s                                             1.40       0.97       1.26       0.90       1.24       0.86       1.18          -
+  detections in the residual images (sum, 1st round)        81872      86866      74510      82932      72312      81737      71500          -
+  objects found by IPR                                      13174       6216      11137       5306      10704       5158      10459          -
+    matched on 4 cameras at 2 px                              272          0        154          0        138          0        147          -
+    matched on 4 cameras at 3 px                             1149         32        808         21        748         18        750          -
+  active long tracks                                         5756       2688      11290       6400      13352       7910      13615          -
+  active short tracks                                       11430       5422       9592       4628       9238       4492       9044          -
+  long tracks added per frame                                1680        786       1410        678       1347        646       1326          -
+  long tracks removed per frame                              1616        749       1388        662       1341        640       1335          -
+    failed the linear fit                                    1614        747       1382        651       1330        628       1319          -
+    failed shaking                                              1          0          2          1          2          1          2          -
+    left the view volume                                        0          1          3          8          9         12         14          -
+  removed, % of active long tracks                         28.98%     28.91%     12.33%     10.37%     10.01%      8.14%      9.82%          -
+    linear-fit failures, %                                 28.96%     28.79%     12.28%     10.22%      9.94%      8.00%      9.70%          -
+  new resources: private bytes 4308 -> 7523 MB, working set max 3612 MB, cores used median 8.1, other programs median 0.8 (p90 1.5) cores
+  new tracks,           finished: n  27281, length median 78, mean 110.1, p90 259, max 500; >=50: 17805, >=100: 11165, >=200: 4660; points 3004693
+  new tracks,               exit: n   2542, length median 262, mean 263.7, p90 406, max 500; >=50: 2515, >=100: 2413, >=200: 1816; points 670375
+  new tracks,           inactive: n  24739, length median 69, mean 94.4, p90 211, max 498; >=50: 15290, >=100: 8752, >=200: 2844; points 2334318
+  new tracks, active_long_at_end: n  13642, length median 149, mean 187.4, p90 430, max 501; >=50: 10779, >=100: 8523, >=200: 5442; points 2556027
+  new tracks,           all_long: n  40923, length median 94, mean 135.9, p90 328, max 501; >=50: 28584, >=100: 19688, >=200: 10102; points 5560720
+  old resources: private bytes 4538 -> 5639 MB, working set max 2212 MB, cores used median 6.3, other programs median 0.8 (p90 1.6) cores
+  old tracks,           finished: n  13020, length median 111, mean 133.1, p90 274, max 499; >=50: 10220, >=100: 7126, >=200: 2941; points 1733499
+  old tracks,               exit: n   4156, length median 146, mean 165.2, p90 307, max 499; >=50: 3890, >=100: 2940, >=200: 1284; points 686424
+  old tracks,           inactive: n   8864, length median 92, mean 118.1, p90 255, max 495; >=50: 6330, >=100: 4186, >=200: 1657; points 1047075
+  old tracks, active_long_at_end: n   8236, length median 135, mean 170.9, p90 382, max 501; >=50: 6532, >=100: 5031, >=200: 2894; points 1407213
+  old tracks,           all_long: n  21256, length median 119, mean 147.8, p90 319, max 501; >=50: 16752, >=100: 12157, >=200: 5835; points 3140712
+  context, the old run's logs (medians):
+    log_0_1500 frames 4-99: time 5.77 s, matching 4.92 s, found 3921, active long 2762, removed 17.44%, linear-fit 17.43%, 4 cams at 2/3 px 0/28
+    log_0_1500 frames 100-299: time 7.10 s, matching 6.11 s, found 3341, active long 6421, removed 6.39%, linear-fit 6.34%, 4 cams at 2/3 px 0/21
+    log_0_1500 frames 300-499: time 11.73 s, matching 10.70 s, found 3223, active long 8035, removed 4.98%, linear-fit 4.87%, 4 cams at 2/3 px 0/19
+    log_0_1500 frames 500-1000: time 18.30 s, matching 17.21 s, found 3166, active long 8609, removed 4.61%, linear-fit 4.49%, 4 cams at 2/3 px 0/18
+    log frames 3505-3600: time 11.14 s, matching 9.18 s, found 4950, active long 10108, removed 6.19%, linear-fit 6.02%, 4 cams at 2/3 px 0/18
+    log frames 3601-3800: time 32.81 s, matching 30.89 s, found 5022, active long 9152, removed 6.88%, linear-fit 6.69%, 4 cams at 2/3 px 0/18
+    log frames 3801-4000: time 62.65 s, matching 60.66 s, found 5067, active long 8589, removed 7.34%, linear-fit 7.15%, 4 cams at 2/3 px 0/16
+    log frames 4001-4501: time 75.51 s, matching 73.66 s, found 5008, active long 8692, removed 7.18%, linear-fit 7.00%, 4 cams at 2/3 px 0/17
+
+wrote D:\Refraction\pyOpenLPT\cases\stb_20260727_10Hz_r_b_1\tests\t6_compare.json
+      D:\Refraction\pyOpenLPT\cases\stb_20260727_10Hz_r_b_1\tests\t6_compare_out.txt
+      figures ['t6_time_per_frame.png', 't6_active_long_tracks.png', 't6_removal_rate.png', 't6_ipr_found.png', 't6_track_lengths.png', 't6_memory.png']

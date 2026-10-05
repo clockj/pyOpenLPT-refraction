@@ -1,0 +1,36 @@
+
+== new camFiles, view volume [-81.0, 54.0, -42.0, 59.0, -36.0, 52.5]
+cam0: lineOfSight 1.31 us/call
+     delivered (1e-12/1000): volume   1.48 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.36 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.42 us/call, fail      0/100000, max |d| 1.76e-05 px | matcher   1.35 us/call, fail      0/36000, max |d| 1.76e-05 px
+             tol1e-12_n1000: volume   1.36 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.35 us/call, fail      0/36000, max |d| 0.00e+00 px
+cam1: lineOfSight 1.30 us/call
+     delivered (1e-12/1000): volume   1.40 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.35 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.41 us/call, fail      0/100000, max |d| 1.03e-07 px | matcher   1.34 us/call, fail      0/36000, max |d| 1.59e-07 px
+             tol1e-12_n1000: volume   1.36 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.39 us/call, fail      0/36000, max |d| 0.00e+00 px
+cam2: lineOfSight 1.31 us/call
+     delivered (1e-12/1000): volume   1.46 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.34 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.36 us/call, fail      0/100000, max |d| 2.12e-05 px | matcher   1.35 us/call, fail      0/36000, max |d| 6.74e-06 px
+             tol1e-12_n1000: volume   1.42 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.37 us/call, fail      0/36000, max |d| 0.00e+00 px
+cam3: lineOfSight 1.34 us/call
+     delivered (1e-12/1000): volume   1.40 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.53 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.36 us/call, fail      0/100000, max |d| 2.34e-05 px | matcher   1.42 us/call, fail      0/36000, max |d| 2.40e-05 px
+             tol1e-12_n1000: volume   1.38 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.42 us/call, fail      0/36000, max |d| 0.00e+00 px
+
+== old camFiles, view volume [-40.0, 65.0, -45.0, 30.0, -45.0, 35.0]
+cam0: lineOfSight 1.18 us/call
+       delivered (1e-06/50): volume   1.36 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.36 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.34 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.44 us/call, fail      0/36000, max |d| 0.00e+00 px
+             tol1e-12_n1000: volume   1.41 us/call, fail      0/100000, max |d| 2.14e-05 px | matcher   1.39 us/call, fail      0/36000, max |d| 2.50e-05 px
+cam1: lineOfSight 1.18 us/call
+       delivered (1e-06/50): volume   1.38 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.43 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.55 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.37 us/call, fail      0/36000, max |d| 0.00e+00 px
+             tol1e-12_n1000: volume   1.40 us/call, fail      0/100000, max |d| 2.21e-05 px | matcher   1.40 us/call, fail      0/36000, max |d| 2.13e-05 px
+cam2: lineOfSight 1.17 us/call
+       delivered (1e-06/50): volume   1.38 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.41 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.39 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.38 us/call, fail      0/36000, max |d| 0.00e+00 px
+             tol1e-12_n1000: volume   1.40 us/call, fail      0/100000, max |d| 3.03e-05 px | matcher   1.42 us/call, fail      0/36000, max |d| 2.71e-05 px
+cam3: lineOfSight 1.12 us/call
+       delivered (1e-06/50): volume   1.52 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.38 us/call, fail      0/36000, max |d| 0.00e+00 px
+                tol1e-6_n50: volume   1.35 us/call, fail      0/100000, max |d| 0.00e+00 px | matcher   1.36 us/call, fail      0/36000, max |d| 0.00e+00 px
+             tol1e-12_n1000: volume   1.40 us/call, fail      0/100000, max |d| 2.89e-05 px | matcher   1.37 us/call, fail      0/36000, max |d| 3.21e-05 px

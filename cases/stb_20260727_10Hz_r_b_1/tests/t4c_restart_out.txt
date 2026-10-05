@@ -1,0 +1,17 @@
+T4c: the same tracking state at frame 501, in T4's process (500 frames old) and in a fresh one (T4c)
+  medians over 20-frame windows; T4's frames 24-63 for reference: total 6.00 s, [0,2,3] 1.15 s
+  frames     T4 total  T4c total   T4 [0,2,3]  T4c [0,2,3]   T4 found  T4c found   T4 long  T4c long
+   501- 505      33.66       5.60        26.31         0.77      10459      10461     13615     13615
+
+  by frames since the process started (T4: frame k; T4c: frame 500 + k), medians over 10 frames:
+  k          T4 total  T4c total   T4 [0,2,3]  T4c [0,2,3]   T4 long  T4c long
+    5- 14       5.97       5.71         1.24         0.81      1806     13568
+   15- 24       5.98       5.66         1.20         0.85      3098     13608
+   25- 34       5.70       5.33         1.14         0.86      4112     13640
+   35- 44       6.03       6.31         1.17         1.61      4922     13590
+   45- 54       6.18       6.74         1.15         1.88      5634     13596
+   55- 64       6.24       7.29         1.15         2.36      6283     13648
+   65- 74       5.88       7.33         1.11         2.65      6865     13694
+   75- 84       6.37       8.26         1.28         3.46      7461     13703
+   85- 94       6.92       9.20         2.03         4.24      8042     13719
+   95-104       7.17       9.52         2.20         4.83      8470     13788

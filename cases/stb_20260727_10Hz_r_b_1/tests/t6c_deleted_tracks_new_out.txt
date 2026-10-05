@@ -1,0 +1,39 @@
+T6c (new camFiles, tracks saved at frame 500): 24739 inactive long tracks; 40923 saved tracks to search for continuations
+  inactive long tracks with >= 9 points: 24273; of them ended by the linear-fit test (last point > 0.05 mm): 23605
+  their own noise per axis before the end: median 0.0059 mm
+  last point against a prediction from the 6 points before it: constant velocity median 0.1885 mm (32 sigma), constant acceleration median 0.1972 mm (34 sigma)
+  acceleration fitted over the 7 points before the end: median 0.00793, p90 0.02412 mm/frame^2 (a 0.05 mm linear-fit residual needs 0.1 mm/frame^2)
+  share of these deletions that another rule would have avoided at that point: linear 0.075 mm 0.93; linear 0.1 mm 1.00; linear 0.15 mm 1.00; quadratic 5 points, 0.05 mm 1.00; linear, k=6 x own sigma (min 0.05) 0.08; linear, k=8 x own sigma (min 0.05) 0.26; linear, k=10 x own sigma (min 0.05) 0.50
+  continued by another saved track within 10 frames (start within 0.2 mm of the extrapolated position, velocity within 0.03 mm/frame): 0.00 (38 of 23605); gap median 3 frames (p10 1, p90 9)
+  short tracks active at frame 500: 8923 (4519 with 2-3 points); tracked long tracks move 0.076-0.154 mm/frame (p10-p90)
+    2 points: displacement per frame median 1.385 mm; within 0.06-0.16 mm/frame (as the tracked particles): 0.23; over 0.5 mm/frame: 0.70
+    3 points: displacement per frame median 1.315 mm; within 0.06-0.16 mm/frame (as the tracked particles): 0.09; over 0.5 mm/frame: 0.85
+  continuation, radius 0.2 mm, velocity within 0.03 mm/frame, 10 frames, short tracks included: 38/23605 = 0.002
+  continuation, radius 0.5 mm, velocity within 0.05 mm/frame, 10 frames, short tracks included: 150/23605 = 0.006
+  continuation, radius 1.0 mm, velocity within 0.08 mm/frame, 10 frames, short tracks included: 391/23605 = 0.017
+  continuation, radius 0.5 mm, velocity within 0.05 mm/frame, 30 frames, short tracks included: 276/23605 = 0.012
+  continuation, radius 1.0 mm, velocity within inf mm/frame, 10 frames, short tracks included: 513/23605 = 0.022
+  cameras seeing the deleted, last good point (23605): 4 0.99, 3 0.00, 2 0.01, <=1 0.00
+  cameras seeing the deleted, middle point (23605): 4 0.98, 3 0.02, 2 0.00, <=1 0.00
+  cameras seeing the exit tracks, last point (2542): 4 0.01, 3 0.02, 2 0.96, <=1 0.01
+  deletions per tracked point relative to the mean, x rows (low to high) x z columns: p10 0.68, p90 2.04
+      0.57  0.70  0.79  0.76  0.97  0.99
+      0.50  0.52  0.66  0.73  0.96  1.03
+      0.73  0.73  0.79  0.92  1.13  1.33
+      1.06  0.84  0.90  0.95  1.47  1.93
+      1.72  1.46  1.56  1.67  2.15  2.92
+      1.77  1.37  1.40  1.81  2.23  2.80
+  deletions per tracked point relative to the mean, x rows (low to high) x y columns: p10 0.65, p90 1.82
+      0.11  0.65  0.92  1.09  1.08  1.05
+      0.12  0.69  0.65  0.79  0.95  0.79
+      0.29  0.84  0.83  1.04  1.04  0.81
+      0.68  0.90  1.05  1.16  1.06  0.94
+      1.16  1.69  1.88  1.87  1.47     -
+      1.06  1.65  1.92  1.91  1.70     -
+  deletions per tracked point relative to the mean, z rows (low to high) x y columns: p10 0.34, p90 1.57
+      0.33  1.02  1.04  1.07  1.00  0.83
+      0.28  0.85  0.90  0.90  0.88  0.72
+      0.42  0.88  0.93  1.10  0.95  0.85
+      0.29  1.03  1.08  1.08  1.17  1.05
+      0.27  1.13  1.57  1.57  1.50  1.08
+      0.35  1.27  2.25  2.12  1.57     -

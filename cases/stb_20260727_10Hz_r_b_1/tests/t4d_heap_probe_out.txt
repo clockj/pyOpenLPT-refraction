@@ -1,0 +1,5 @@
+fresh process: project 1.625 us, lineOfSight 1.376 us
+after allocating 12 M Pt3D (11.5 s): project 1.911 us, lineOfSight 1.673 us
+after freeing every other one: project 2.499 us, lineOfSight 2.292 us
+after churn (allocate and free more of the same size): project 2.629 us, lineOfSight 2.580 us
+after freeing everything: project 1.604 us, lineOfSight 1.411 us

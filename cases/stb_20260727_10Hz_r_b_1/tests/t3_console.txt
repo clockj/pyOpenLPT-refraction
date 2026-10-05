@@ -1,0 +1,53 @@
+2026-10-04T20:20:14 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f0000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f0000\log.txt
+2026-10-04T20:20:25 ok, wall 11.5 s
+2026-10-04T20:20:25 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f0000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f0000\log.txt
+2026-10-04T20:20:34 ok, wall 8.4 s
+2026-10-04T20:20:34 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f1000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f1000\log.txt
+2026-10-04T20:20:45 ok, wall 10.9 s
+2026-10-04T20:20:45 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f1000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f1000\log.txt
+2026-10-04T20:20:54 ok, wall 8.4 s
+2026-10-04T20:20:54 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f2000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f2000\log.txt
+2026-10-04T20:21:04 ok, wall 10.6 s
+2026-10-04T20:21:05 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f2000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f2000\log.txt
+2026-10-04T20:21:13 ok, wall 8.3 s
+2026-10-04T20:21:13 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f3000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f3000\log.txt
+2026-10-04T20:21:24 ok, wall 10.6 s
+2026-10-04T20:21:24 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f3000\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f3000\log.txt
+2026-10-04T20:21:32 ok, wall 8.3 s
+2026-10-04T20:21:33 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f3600\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f3600\log.txt
+2026-10-04T20:21:44 ok, wall 11.2 s
+2026-10-04T20:21:44 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f3600\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f3600\log.txt
+2026-10-04T20:21:53 ok, wall 8.6 s
+2026-10-04T20:21:53 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f4600\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\new_f4600\log.txt
+2026-10-04T20:22:04 ok, wall 11.0 s
+2026-10-04T20:22:04 run X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f4600\config.txt
+          log X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\10Hz_r_b_1\stb_new_calib\ipr_probe\old_f4600\log.txt
+2026-10-04T20:22:13 ok, wall 8.6 s
+T3: one IPR on raw images (initial phase, no tracking), per frame and camFile set
+  t: the frame's total time; match: matching time of all rounds; found: objects IPR kept
+  f   0 old: t   7.24s match   5.89s found  7245 | det [6959, 19202, 19900, 44138] | 0123: 0+30 (1.60s)  012: 111+1419 (1.23s)  013: 1146+2273 (1.01s)  023: 24+2106 (1.96s)  123: 1+135 (0.09s)
+  f   0 new: t   5.85s match   3.80s found 16315 | det [6959, 19202, 19900, 44138] | 0123: 580+1808 (1.52s)  012: 1405+1535 (0.67s)  013: 307+672 (0.35s)  023: 5419+4534 (1.23s)  123: 6+52 (0.03s)
+  f1000 old: t   7.11s match   5.79s found  7018 | det [6917, 19152, 19582, 43667] | 0123: 0+42 (1.62s)  012: 114+1308 (1.19s)  013: 1180+2235 (0.98s)  023: 19+1961 (1.91s)  123: 2+157 (0.09s)
+  f1000 new: t   5.61s match   3.82s found 16252 | det [6917, 19582, 43667, 19152] | 0123: 550+1804 (1.52s)  012: 1410+1614 (0.69s)  013: 364+646 (0.37s)  023: 5353+4454 (1.22s)  123: 5+57 (0.02s)
+  f2000 old: t   7.12s match   5.86s found  7291 | det [7040, 19815, 43826, 19329] | 0123: 0+53 (1.64s)  012: 112+1432 (1.25s)  013: 1163+2291 (0.97s)  023: 43+2039 (1.87s)  123: 0+160 (0.13s)
+  f2000 new: t   5.65s match   3.84s found 16629 | det [7040, 19815, 19329, 43826] | 0123: 632+1879 (1.55s)  012: 1503+1609 (0.68s)  013: 310+678 (0.35s)  023: 5476+4503 (1.24s)  123: 11+36 (0.02s)
+  f3000 old: t   7.11s match   5.71s found  7101 | det [7012, 19554, 43710, 19022] | 0123: 0+34 (1.60s)  012: 120+1456 (1.22s)  013: 1243+2104 (0.94s)  023: 20+1977 (1.84s)  123: 2+148 (0.11s)
+  f3000 new: t   5.61s match   3.85s found 15916 | det [7012, 19554, 19022, 43710] | 0123: 527+1780 (1.55s)  012: 1406+1544 (0.69s)  013: 336+631 (0.37s)  023: 5348+4290 (1.21s)  123: 7+53 (0.03s)
+  f3600 old: t   7.30s match   6.00s found  7244 | det [7061, 19968, 43672, 19481] | 0123: 0+32 (1.68s)  012: 125+1473 (1.29s)  013: 1189+2236 (1.00s)  023: 13+2012 (1.92s)  123: 0+165 (0.11s)
+  f3600 new: t   5.85s match   3.98s found 16533 | det [7061, 19481, 19968, 43672] | 0123: 560+1930 (1.61s)  012: 1472+1524 (0.70s)  013: 317+656 (0.36s)  023: 5516+4505 (1.29s)  123: 8+52 (0.02s)
+  f4600 old: t   7.35s match   5.89s found  7225 | det [6911, 20016, 43923, 19245] | 0123: 0+41 (1.59s)  012: 143+1480 (1.29s)  013: 1168+2146 (0.97s)  023: 31+2066 (1.93s)  123: 2+149 (0.11s)
+  f4600 new: t   5.76s match   3.95s found 16543 | det [6911, 19245, 20016, 43923] | 0123: 541+1814 (1.56s)  012: 1467+1577 (0.71s)  013: 300+642 (0.37s)  023: 5509+4640 (1.28s)  123: 6+48 (0.03s)
+
+wrote D:\Refraction\pyOpenLPT\cases\stb_20260727_10Hz_r_b_1\tests\t3_ipr_probe.json
+      D:\Refraction\pyOpenLPT\cases\stb_20260727_10Hz_r_b_1\tests\t3_ipr_probe_out.txt
