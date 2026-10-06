@@ -1,0 +1,90 @@
+{
+  "frames": [
+    0,
+    300
+  ],
+  "fps": 5000,
+  "threads": 26,
+  "cameras": [
+    {
+      "file": "../../data/camFile/cam0.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam1.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam2.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam3.txt",
+      "max_intensity": 255
+    }
+  ],
+  "image_lists": [
+    "../../data/imgLists/cam0ImageNames.txt",
+    "../../data/imgLists/cam1ImageNames.txt",
+    "../../data/imgLists/cam2ImageNames.txt",
+    "../../data/imgLists/cam3ImageNames.txt"
+  ],
+  "view_volume_mm": {
+    "x": [
+      -81.0,
+      54.0
+    ],
+    "y": [
+      -42.0,
+      59.0
+    ],
+    "z": [
+      -36.0,
+      52.5
+    ]
+  },
+  "voxel_mm": 0.129,
+  "output_dir": "Results",
+  "objects": [
+    {
+      "type": "Tracer",
+      "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+      },
+      "convergence_phase": {
+        "avg_spacing_vox": 30.0
+      },
+      "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+      },
+      "predictive_field": {
+        "grid": [
+          51,
+          51,
+          51
+        ],
+        "search_radius_vox": 25.0
+      },
+      "ipr": {
+        "loops": 2,
+        "reduced_cameras": 1,
+        "reduced_loops": 2,
+        "tol_2d_px": 2.0,
+        "tol_3d_vox": 1.0
+      },
+      "tracer": {
+        "intensity_threshold": 20,
+        "radius_px": 2.0
+      }
+    }
+  ],
+  "load_tracks": {
+    "enabled": false,
+    "frame": 0,
+    "folder": "Results/ConvergeTrack/"
+  },
+  "save_interval": 500
+}

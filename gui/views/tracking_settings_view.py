@@ -16,6 +16,8 @@ import numpy as np
 import re
 import cv2
 
+from modules import stb_config
+
 
 class TrackingSettingsView(QWidget):
     """View for configuring tracking parameters."""
@@ -198,7 +200,18 @@ class TrackingSettingsView(QWidget):
         output_layout.addWidget(output_browse)
         
         basic_grid.addLayout(output_layout, 6, 2)
-        
+
+        # Save interval: frames between saves of the tracks in the convergence phase
+        basic_grid.addWidget(QLabel("Save Interval (frames):"), 7, 0)
+        self.save_interval_spin = QSpinBox()
+        self.save_interval_spin.setRange(1, 100000)
+        self.save_interval_spin.setSingleStep(100)
+        self.save_interval_spin.setValue(500)
+        self.save_interval_spin.setToolTip(
+            "Frames between saves of the tracks in the convergence phase. Each save writes the lost and "
+            "exited tracks to disk and frees their memory; 200 suits long runs.")
+        basic_grid.addWidget(self.save_interval_spin, 7, 2)
+
         # Resume Settings
         resume_group = QGroupBox("Resume Settings")
         resume_layout = QGridLayout(resume_group)
@@ -728,7 +741,7 @@ class TrackingSettingsView(QWidget):
             calibrator.params_dirty = False # Clear dirty flag after successful save
             
     def _save_configuration(self):
-        """Save config.txt and [type]Config.txt to project directory."""
+        """Save config.json (the basic and the object settings, one file) to the project directory."""
         project_dir = self.project_path.text().strip()
         if not project_dir or not os.path.isdir(project_dir):
             QMessageBox.warning(self, "Invalid Path", "Please select a valid Project Directory first.")
@@ -766,124 +779,71 @@ class TrackingSettingsView(QWidget):
             return f"{base}/{tail}"
 
         obj_type = self.obj_type_combo.currentText()
-        stb_config_name = "tracerConfig.txt" if obj_type == "Tracer" else "bubbleConfig.txt"
-        stb_config_rel = stb_config_name
-        stb_config_path_abs = os.path.join(project_dir, stb_config_name).replace('\\', '/')
-        master_config_path_abs = os.path.join(project_dir, "config.txt").replace('\\', '/')
+        config_path_abs = os.path.join(project_dir, "config.json").replace('\\', '/')
+
+        n_cams = self.n_cam_spin.value()
+        cam_dir_rel = _to_rel(self.camera_path_display.text())
+        cameras = []
+        for i in range(n_cams):
+            # the detected file name (e.g. vsc_cam1.txt) if there is one
+            fname = self.detected_cam_files[i] if i < len(self.detected_cam_files) else f"cam{i}.txt"
+            cameras.append({"file": _join_rel(cam_dir_rel, fname), "max_intensity": 255})
+        img_dir_rel = _to_rel(self.image_path_display.text())
+        results_path_rel = _to_rel(self.output_path.text())
+
+        obj = {
+            "type": obj_type,
+            "initial_phase": {"search_radius_vox": self.stb_initial_radius.value(),
+                              "frames": self.stb_initial_frames.value()},
+            "convergence_phase": {"avg_spacing_vox": self.stb_avg_spacing.value()},
+            "shake": {"width_vox": self.shake_width.value(), "loops": self.shake_loops.value(),
+                      "ghost_threshold": self.shake_ghost.value()},
+            "predictive_field": {"grid": [self.pred_grid_x.value(), self.pred_grid_y.value(),
+                                          self.pred_grid_z.value()],
+                                 "search_radius_vox": self.pred_search_radius.value()},
+            "ipr": {"loops": self.ipr_loop_spin.value(), "reduced_cameras": self.ipr_reduce_spin.value(),
+                    "reduced_loops": self.ipr_reduced_spin.value(), "tol_2d_px": self.ipr_2d_tol.value(),
+                    "tol_3d_vox": self.ipr_3d_tol.value()},
+        }
+        if obj_type == "Tracer":
+            obj["tracer"] = {"intensity_threshold": self.tracer_int_thresh.value(),
+                             "radius_px": self.tracer_radius.value()}
+        else:
+            # whole pixels, as OpenLPT read them from the text config (std::stoi)
+            obj["bubble"] = {"radius_min_px": int(self.bubble_min_rad.value()),
+                             "radius_max_px": int(self.bubble_max_rad.value()),
+                             "sense": self.bubble_sens.value()}
+
+        cfg = {
+            "frames": [self.frame_start_spin.value(), self.frame_end_spin.value()],
+            "fps": self.fps_spin.value(),
+            "threads": self.n_threads_spin.value(),
+            "cameras": cameras,
+            "image_lists": [_join_rel(img_dir_rel, f"cam{i}ImageNames.txt") for i in range(n_cams)],
+            "view_volume_mm": {"x": [self.vol_x_min.value(), self.vol_x_max.value()],
+                               "y": [self.vol_y_min.value(), self.vol_y_max.value()],
+                               "z": [self.vol_z_min.value(), self.vol_z_max.value()]},
+            "voxel_mm": self.voxel_spin.value(),
+            "output_dir": results_path_rel,
+            "save_interval": self.save_interval_spin.value(),
+            "load_tracks": {"enabled": self.resume_check.isChecked(),
+                            "frame": self.resume_frame_spin.value(),
+                            "folder": _join_rel(results_path_rel, "ConvergeTrack") + "/"},
+            "objects": [obj],
+        }
 
         try:
-            # 1. Save Master config.txt
-            with open(master_config_path_abs, 'w') as f:
-                f.write("# Frame Range: [startID,endID]\n")
-                f.write(f"{self.frame_start_spin.value()},{self.frame_end_spin.value()}\n")
-                
-                f.write("# Frame Rate: [Hz]\n")
-                f.write(f"{self.fps_spin.value()}\n")
-                
-                f.write("# Number of Threads: (0: use as many as possible)\n")
-                f.write(f"{self.n_threads_spin.value()}\n")
-                
-                f.write("# Number of Cameras: \n")
-                n_cams = self.n_cam_spin.value()
-                f.write(f"{n_cams}\n")
-                
-                fwrite_cam_info = "# Camera File Path, Max Intensity\n"
-                f.write(fwrite_cam_info)
-                cam_dir_rel = _to_rel(self.camera_path_display.text())
-                for i in range(n_cams):
-                    if i < len(self.detected_cam_files):
-                        # Use actual detected filename (e.g. vsc_cam1.txt)
-                        fname = self.detected_cam_files[i]
-                        f.write(f"{_join_rel(cam_dir_rel, fname)},255\n")
-                    else:
-                        # Fallback if request n_cams > detected files
-                        f.write(f"{_join_rel(cam_dir_rel, f'cam{i}.txt')},255\n")
-                
-                f.write("# Image File Path\n")
-                img_dir_rel = _to_rel(self.image_path_display.text())
-                for i in range(n_cams):
-                    f.write(f"{_join_rel(img_dir_rel, f'cam{i}ImageNames.txt')}\n")
-                
-                f.write("# View Volume: (xmin,xmax,ymin,ymax,zmin,zmax)\n")
-                vol_str = f"{self.vol_x_min.value()},{self.vol_x_max.value()}," \
-                          f"{self.vol_y_min.value()},{self.vol_y_max.value()}," \
-                          f"{self.vol_z_min.value()},{self.vol_z_max.value()}"
-                f.write(f"{vol_str}\n")
-                
-                f.write("# Voxel to MM: e.g. use 1000^3 voxel, (xmax-xmin)/1000\n")
-                f.write(f"{self.voxel_spin.value()}\n")
-                
-                f.write("# Output Folder Path: \n")
-                f.write(f"{_to_rel(self.output_path.text())}\n")
-                
-                f.write("# Object Types: \n")
-                f.write(f"{obj_type}\n")
-                
-                f.write("# STB Config Files:\n")
-                f.write(f"{stb_config_rel}\n")
-                
-                f.write("# Flag to load previous track files, previous frameID\n")
-                resume_flag = 1 if self.resume_check.isChecked() else 0
-                f.write(f"{resume_flag},{self.resume_frame_spin.value()}\n")
-                
-                results_path_rel = _to_rel(self.output_path.text())
-                f.write("# Path to active long track files\n")
-                f.write(f"{_join_rel(results_path_rel, 'ConvergeTrack')}/\n")
-                f.write("# Path to active short track files\n")
-                f.write(f"{_join_rel(results_path_rel, 'ConvergeTrack')}/\n")
-
-            # 2. Save [type]Config.txt
-            with open(stb_config_path_abs, 'w') as f:
-                f.write("############################\n")
-                f.write("######### Tracking #########\n")
-                f.write("############################\n")
-                f.write("######### Initial Phase ############## \n")
-                f.write(f"{self.stb_initial_radius.value()} # Search radius for connecting tracks to objects\n")
-                f.write(f"{self.stb_initial_frames.value()} # Number of frames for initial phase\n")
-                f.write("######### Convergence Phase ############# \n")
-                f.write(f"{self.stb_avg_spacing.value()} # Avg Interparticle spacing. (vox) to identify neighbour tracks \n\n")
-
-                f.write("#########################\n")
-                f.write("######### Shake #########\n")
-                f.write("#########################\n")
-                f.write(f"{self.shake_width.value()} # shake width 0.25\n\n")
-
-                f.write("#################################\n")
-                f.write("######### Predict Field #########\n")
-                f.write("#################################\n")
-                f.write(f"{self.pred_grid_x.value()} # xgrid \n")
-                f.write(f"{self.pred_grid_y.value()} # ygrid\n")
-                f.write(f"{self.pred_grid_z.value()} # zgrid\n")
-                f.write(f"{self.pred_search_radius.value()} # searchRadius [voxel]\n\n")
-
-                f.write("#######################\n")
-                f.write("######### IPR #########\n")
-                f.write("#######################\n")
-                f.write(f"{self.ipr_loop_spin.value()}   # No. of IPR loop\n")
-                f.write(f"{self.shake_loops.value()}   # No. of Shake loop\n")
-                f.write(f"{self.shake_ghost.value()} # ghost threshold\n")
-                f.write(f"{self.ipr_2d_tol.value()}   # 2D tolerance [px]\n")
-                f.write(f"{self.ipr_3d_tol.value()}  # 3D tolerance [voxel]\n\n")
-
-                f.write(f"{self.ipr_reduce_spin.value()} # number of reduced camera\n")
-                f.write(f"{self.ipr_reduced_spin.value()} # no. of ipr loops for each reduced camera combination\n\n\n")
-
-                f.write("###############################\n")
-                f.write("######### Object Info #########\n")
-                f.write("###############################\n")
-                if obj_type == "Tracer":
-                    f.write(f"{self.tracer_int_thresh.value()} # 2D particle finder threshold\n")
-                    f.write(f"{self.tracer_radius.value()} # Particle radius [px], for calculating residue image and shaking\n")
-                else:
-                    f.write(f"{self.bubble_min_rad.value()}   # minimum bubble size to track\n")
-                    f.write(f"{self.bubble_max_rad.value()}  # maximum bubble size to track\n")
-                    f.write(f"{self.bubble_sens.value()} # sensitivity of identify circles\n")
-
-            QMessageBox.information(self, "Success", f"Configuration saved to:\n{master_config_path_abs}\n{stb_config_path_abs}")
-            print(f"[TrackingSettings] Saved config files to {project_dir}")
-
+            stb_config.write_json(cfg, config_path_abs)
         except Exception as e:
             QMessageBox.critical(self, "Save Error", f"Failed to save configuration:\n{str(e)}")
+            return
+
+        msg = f"Configuration saved to:\n{config_path_abs}"
+        if os.path.exists(os.path.join(project_dir, "config.txt")):
+            msg += ("\n\nThe config.txt in this folder is no longer used: tracking reads config.json "
+                    "whenever both exist.")
+        QMessageBox.information(self, "Success", msg)
+        print(f"[TrackingSettings] Saved {config_path_abs}")
 
     def _update_object_tab(self, index):
         """Update Object tab content based on selected Object Type."""
@@ -1531,10 +1491,12 @@ class TrackingSettingsView(QWidget):
         if not project_dir or " (" in project_dir:
             project_dir = project_dir.split(" (")[0]
             
-        config_file = os.path.join(project_dir, "config.txt").replace('\\', '/')
-        if not os.path.exists(config_file):
+        config_file = stb_config.find_config(project_dir)
+        if config_file is None:
             QMessageBox.warning(self, "Error", "Config file not found. Please save configuration first.")
+            self._busy_end('validate_settings')
             return
+        config_file = config_file.replace('\\', '/')
 
         # Setup Progress Dialog
         progress = QProgressDialog("Verifying Settings...", "Cancel", 0, 0, self)

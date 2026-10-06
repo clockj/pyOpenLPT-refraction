@@ -127,8 +127,8 @@ def main():
                     if os.path.exists(pdb):
                         shutil.copy2(pdb, out)
 
-    # The GUI runs build/Release/OpenLPT.exe: put the user's own exe (saved before the campaign's first build in
-    # build-stb/prev/) back, so campaign builds never replace it.
+    # The GUI runs build/Release/OpenLPT.exe: put the user's own exe (a copy in build-stb/prev/: the 24 Sep build,
+    # then from 5 Oct night the build_local.py rebuild of acd78d4) back, so campaign builds never replace it.
     backup = os.path.join(REPO, "build-stb", "prev", "OpenLPT.exe")
     if os.path.normcase(src) == os.path.normcase(REPO) and config == "Release" and os.path.exists(backup):
         shutil.copy2(backup, shared_exe)

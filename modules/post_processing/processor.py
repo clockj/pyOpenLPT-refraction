@@ -12,6 +12,8 @@ from scipy.ndimage import gaussian_filter1d
 from scipy.signal import convolve
 from PySide6.QtCore import QObject, Signal, QThread
 
+from .. import stb_config
+
 class ResultsProcessor(QObject):
     """
     Handles heavy processing for the Results module:
@@ -695,28 +697,21 @@ class DataLoaderWorker(QObject):
 
     def run(self):
         try:
-            config_path = os.path.join(self.proj_dir, "config.txt")
             output_dir = os.path.join(self.proj_dir, "Results") # Default fallback
             obj_type = "Tracer"
-            
-            # 1. Parse config.txt for Output Path and Object Type
-            if os.path.exists(config_path):
-                with open(config_path, 'r') as f:
-                    lines = f.readlines()
-                    for i, line in enumerate(lines):
-                        line = line.strip()
-                        if "Output Folder Path" in line:
-                            # Next line should be the path
-                            if i + 1 < len(lines):
-                                path_line = lines[i+1].strip()
-                                if path_line:
-                                    output_dir = path_line
-                        elif "Object Types" in line:
-                             if i + 1 < len(lines):
-                                 type_line = lines[i+1].strip()
-                                 if "Bubble" in type_line:
-                                     obj_type = "Bubble"
-            
+
+            # 1. Output folder and object type from the project's config (config.json or config.txt)
+            try:
+                config_path, cfg = stb_config.read_project(self.proj_dir, inline_objects=False)
+            except Exception as e:
+                print(f"[Results] Cannot read the tracking config in {self.proj_dir}: {e}")
+                config_path, cfg = None, None
+            if cfg:
+                if cfg.get("output_dir"):
+                    output_dir = stb_config.resolve(config_path, cfg["output_dir"])
+                if cfg["objects"] and cfg["objects"][0].get("type") == "Bubble":
+                    obj_type = "Bubble"
+
             track_dir = os.path.join(output_dir, "ConvergeTrack")
             if not os.path.exists(track_dir):
                 # Fallback: Maybe user didn't set output path correctly in config, try default project result

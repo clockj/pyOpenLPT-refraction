@@ -1,0 +1,134 @@
+A4b GUI config tests (A5 writer, A6 readers, A7 VSC writers), offscreen Qt
+module: D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+HEAD: acd78d4
+
+A5 the writer: HEAD's config.txt + object file against the new config.json, from the same form
+  PASS  the new writer writes only config.json (no config.txt or object file), 31 forms
+  PASS  identical C++ settings from both writers (23 Tracer and 8 Bubble forms, every bound setting)  (31/31)
+    the case form, read by C++ from config.json: frames 0-300, voxel 0.129, tol 2.0 px / 0.129 mm, save interval 500
+  PASS  identical settings through modules/stb_config.py, 31 forms  (31/31)
+  PASS  the form's save interval 200 reaches the C++ settings  (200)
+  PASS  saving beside an old config.txt says that config.json is used  (Configuration saved to: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/a5_save_interval/config.json  The config.txt in this folder is no longer used: tracking reads config.json whenever both exist.)
+    config.json of the case form:
+      {
+        "frames": [
+          0,
+          300
+        ],
+        "fps": 5000,
+        "threads": 26,
+        "cameras": [
+          {
+            "file": "camFile/cam0.txt",
+            "max_intensity": 255
+          },
+          {
+            "file": "camFile/cam1.txt",
+            "max_intensity": 255
+          },
+          {
+            "file": "camFile/cam2.txt",
+            "max_intensity": 255
+          },
+          {
+            "file": "camFile/cam3.txt",
+            "max_intensity": 255
+          }
+        ],
+        "image_lists": [
+          "imgFile/cam0ImageNames.txt",
+          "imgFile/cam1ImageNames.txt",
+          "imgFile/cam2ImageNames.txt",
+          "imgFile/cam3ImageNames.txt"
+        ],
+        "view_volume_mm": {
+          "x": [
+            -81.0,
+            54.0
+          ],
+          "y": [
+            -42.0,
+            59.0
+          ],
+          "z": [
+            -36.0,
+            52.5
+          ]
+        },
+        "voxel_mm": 0.129,
+        "output_dir": "Results",
+        "objects": [
+          {
+            "type": "Tracer",
+            "initial_phase": {
+              "search_radius_vox": 10.0,
+              "frames": 4
+            },
+            "convergence_phase": {
+              "avg_spacing_vox": 30.0
+            },
+            "shake": {
+              "width_vox": 0.25,
+              "loops": 4,
+              "ghost_threshold": 0.01
+            },
+            "predictive_field": {
+              "grid": [
+                51,
+                51,
+                51
+              ],
+              "search_radius_vox": 25.0
+            },
+            "ipr": {
+              "loops": 2,
+              "reduced_cameras": 1,
+              "reduced_loops": 2,
+              "tol_2d_px": 2.0,
+              "tol_3d_vox": 1.0
+            },
+            "tracer": {
+              "intensity_threshold": 20,
+              "radius_px": 2.0
+            }
+          }
+        ],
+        "load_tracks": {
+          "enabled": false,
+          "frame": 0,
+          "folder": "Results/ConvergeTrack/"
+        },
+        "save_interval": 500
+      }
+
+
+A6 the readers: HEAD's code on the text project, the new code on the text and the JSON project
+  PASS  TrackLoaderWorker: same tracks, object type and 2-D views (303 tracks, Tracer)
+  PASS  _check_project_files: passes on both projects  ((True, '') (True, '') (True, ''))
+  PASS  _discover_cameras: the same 4 cameras and image paths (311 per camera)
+  PASS  _read_tracer_radius: 2.5 px from all three  (2.5 2.5 2.5)
+  PASS  the output folder of _run_vsc / _load_track_statistics  (D:\Refraction\pyOpenLPT\tests\stb_improve\runs\a6_txt\Results | D:\Refraction\pyOpenLPT\tests\stb_improve\runs\a6_txt\Results | D:\Refraction\pyOpenLPT\tests\stb_improve\runs\a6_json\Results)
+  PASS  post-processing loader: the same tracks and metadata (303 tracks)
+  PASS  VSC cameras_ok: True
+  PASS  VSC camera_paths: {0: 'camfile\\cam0.txt', 1: 'camfile\\cam1.txt', 2: 'camfile\\cam2.txt
+  PASS  VSC camera_params: {0: {'model': 'PINPLATE', 'calib_error': (0.23194122, 0.12499618), 'po
+  PASS  VSC obj_type: Tracer
+  PASS  VSC obj_radius: 2.5
+  PASS  VSC n_tracks: 303
+  PASS  VSC tracks_hash: -3692358501066176289
+  PASS  VSC image_loaders: [0, 1, 2, 3]
+  PASS  VSC detect_cfg: [20, 2.5]
+  PASS  no config: the same tracks from Results/, the same VSC fallbacks (camFile/, defaults), and the run check stops  (- Master config file (config.json or config.txt) is missing.)
+  PASS  a broken config.json: the run check names it, the track loader falls back to Results/, and VSC stops at step 1 with the parser's message  (- config.json cannot be read: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\a6_broken\config.json:  | VSC: Cannot read config.json: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\a6_broken\config.j)
+  PASS  output folder 'out_custom': found by the new loaders (HEAD's TrackLoaderWorker and VSC looked for it relative to the working directory and found no tracks)  (HEAD 0 tracks, VSC 0; new 303, VSC 303)
+
+A7 VSC's writers: the new tolerances and the optimised camera files
+  PASS  text project: HEAD and the new code write byte-identical config.txt, tracerConfig.txt and backups
+  PASS  config.json: tolerances 0.7346 px and 0.3541 vox  (0.7346 0.3541)
+  PASS  config.json: the cameras are camFile_VSC/vsc_camX.txt  (['camFile_VSC/vsc_cam0.txt', 'camFile_VSC/vsc_cam1.txt', 'camFile_VSC/vsc_cam2.txt', 'camFile_VSC/vsc_cam3.txt'])
+  PASS  config_backup.json holds the original config.json
+  PASS  the C++ code reads the same settings from both updated projects (tol 0.7346 px, 0.0456789 mm)
+  PASS  both updated projects name the same camera files  ([{'file': 'camFile_VSC/vsc_cam0.txt', 'max_intensity': 255}, {'file': 'camFile_VSC/vsc_cam1.txt', 'max_intensity': 255}, {'file': 'camFile_VSC/vsc_cam2.txt', 'max_intensity': 255}, {'file': 'camFile_VSC/vsc_cam3.txt', 'max_intensity': 255}] | [{'file': 'camFile_VSC/vsc_cam0.txt', 'max_intensity': 255}, {'file': 'camFile_VSC/vsc_cam1.txt', 'max_intensity': 255}, {'file': 'camFile_VSC/vsc_cam2.txt', 'max_intensity': 255}, {'file': 'camFile_VSC/vsc_cam3.txt', 'max_intensity': 255}])
+  PASS  a second VSC run updates the tolerances again and keeps the first backup
+
+30 of 30 checks passed

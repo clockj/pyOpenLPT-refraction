@@ -1,0 +1,11 @@
+G3, the desktop shortcut (5 Oct 2026, late night), read back with WScript.Shell:
+  C:\Users\zcloc\OneDrive\Desktop\OpenLPT (new).lnk
+    Target:  C:\Users\zcloc\.conda\envs\refract\python.exe
+    Args:    "D:\Refraction\pyOpenLPT\GUI.py"
+    WorkDir: D:\Refraction\pyOpenLPT
+    Icon:    D:\Refraction\pyOpenLPT\gui\assets\icon.ico,0
+  unchanged: C:\Users\zcloc\OneDrive\Desktop\OpenLPT.lnk
+    -> C:\Users\zcloc\.conda\envs\bubble-visual-hull\python.exe
+       "C:\Users\zcloc\.conda\envs\bubble-visual-hull\Lib\site-packages\gui\main.py"   (openlpt 2.2.4, 13 Jul)
+Launch check (g3_gui_launch.txt): the full GUI started offscreen with the refract python, loaded
+build-py\Release\pyopenlpt.cp311-win_amd64.pyd, ran 20 s without an error on stderr, and was stopped.

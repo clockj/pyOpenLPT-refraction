@@ -6,13 +6,18 @@ tests/stb_improve/; these are the fast ones:
     lines, comments in JSON, bad values;
   - the C++ reader through the Python module (skipped on a build without the new settings): config.txt and its
     converted config.json give the same basic settings; save_interval and profile are read; bad files fail with
-    messages that name the key.
+    messages that name the key;
+  - the GUI (offscreen Qt) and VSC on config.json (A4b): the settings form writes config.json only, with its save
+    interval; the tracking view's readers accept both formats and report a missing or broken config; VSC writes
+    its tolerances and optimised camera files into config.json and keeps the original as config_backup.json.
 """
 from __future__ import annotations
 
 import json
 import os
+import sys
 import textwrap
+import types
 
 import pytest
 
@@ -156,6 +161,144 @@ def test_find_config_prefers_json(tmp_path):
     assert stb_config.find_config(str(tmp_path)) == txt
     js = stb_config.convert(txt)
     assert stb_config.find_config(str(tmp_path)) == js
+
+
+def test_read_project_and_raw_edit(tmp_path):
+    assert stb_config.read_project(str(tmp_path)) == (None, None)
+    txt = write_case(str(tmp_path))
+    os.remove(os.path.join(str(tmp_path), "tracerConfig.txt"))
+    # without inline_objects the object file is not needed
+    path, cfg = stb_config.read_project(str(tmp_path), inline_objects=False)
+    assert path == txt and cfg["objects"] == [{"type": "Tracer", "config_file": "tracerConfig.txt"}]
+    with pytest.raises(OSError):
+        stb_config.read_project(str(tmp_path))
+    # read_json_raw / write_json_raw keep every key, also the comment keys that write_json drops
+    p = os.path.join(str(tmp_path), "config.json")
+    with open(p, "w") as f:
+        f.write('{"_note": "keep me", "fps": 5000} // trailing comment\n')
+    d = stb_config.read_json_raw(p)
+    d["fps"] = 100
+    stb_config.write_json_raw(d, p)
+    assert stb_config.read_json_raw(p) == {"_note": "keep me", "fps": 100}
+    with open(p, "w") as f:
+        f.write('{"fps": 5000,, }')
+    with pytest.raises(stb_config.ConfigError, match="invalid JSON"):
+        stb_config.read_json_raw(p)
+
+
+# ---------------------------------------------------------------- the GUI and VSC (A4b), offscreen
+
+@pytest.fixture(scope="module")
+def qapp():
+    os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+    # an earlier test may have left MagicMock stand-ins for PySide6 in sys.modules (test_precalibrate_3d_view.py
+    # does); drop them so that the real bindings load
+    for name in [n for n, m in sys.modules.items()
+                 if (n == "PySide6" or n.startswith("PySide6.")) and not isinstance(m, types.ModuleType)]:
+        del sys.modules[name]
+    widgets = pytest.importorskip("PySide6.QtWidgets")
+    pytest.importorskip("qtawesome")
+    pytest.importorskip("cv2")
+    gui = os.path.join(REPO, "gui")
+    if gui not in sys.path:
+        sys.path.insert(0, gui)
+    return widgets.QApplication.instance() or widgets.QApplication([])
+
+
+def gui_project(folder):
+    """A project folder as the GUI expects it: camFile/cam0-3.txt and imgFile/cam0-3ImageNames.txt."""
+    import shutil
+    os.makedirs(os.path.join(folder, "camFile"))
+    os.makedirs(os.path.join(folder, "imgFile"))
+    for i, c in enumerate(CAMS):
+        shutil.copy(c, os.path.join(folder, "camFile", f"cam{i}.txt"))
+        with open(os.path.join(folder, "imgFile", f"cam{i}ImageNames.txt"), "w") as f:
+            f.write(f"img/cam{i}/img000000.tif\n")
+    return folder
+
+
+def test_gui_writes_config_json(qapp, tmp_path, monkeypatch):
+    from PySide6.QtWidgets import QMessageBox
+    from views.tracking_settings_view import TrackingSettingsView
+    boxes = []
+    for kind in ("information", "warning", "critical"):
+        monkeypatch.setattr(QMessageBox, kind, lambda *a, kind=kind, **k: boxes.append((kind, a[2] if len(a) > 2 else "")))
+    proj = gui_project(str(tmp_path / "proj"))
+    v = TrackingSettingsView()
+    v.project_path.setText(proj)
+    v.image_path_display.setText(os.path.join(proj, "imgFile"))
+    v.camera_path_display.setText(os.path.join(proj, "camFile"))
+    v.output_path.setText(os.path.join(proj, "Results"))
+    v.n_cam_spin.setValue(4)
+    v.save_interval_spin.setValue(200)
+    v.tracer_radius.setValue(2.5)
+    v._save_configuration()
+    assert [k for k, _ in boxes] == ["information"]
+    assert sorted(os.listdir(proj)) == ["camFile", "config.json", "imgFile"]
+    cfg = stb_config.read(os.path.join(proj, "config.json"))
+    assert cfg["save_interval"] == 200 and cfg["output_dir"] == "Results"
+    assert [c["file"] for c in cfg["cameras"]] == [f"camFile/cam{i}.txt" for i in range(4)]
+    assert cfg["image_lists"] == [f"imgFile/cam{i}ImageNames.txt" for i in range(4)]
+    assert cfg["objects"][0]["type"] == "Tracer" and cfg["objects"][0]["tracer"]["radius_px"] == 2.5
+    try:
+        import pyopenlpt
+    except ImportError:
+        return
+    if hasattr(pyopenlpt.BasicSetting(), "_save_interval"):
+        bs = pyopenlpt.BasicSetting()
+        assert bs.readConfig(os.path.join(proj, "config.json"))
+        assert bs._save_interval == 200 and bs._object_config_paths[0].endswith("config.json#0")
+
+
+def test_gui_readers_accept_both_formats(qapp, tmp_path):
+    from views import tracking_view
+    p_txt = gui_project(str(tmp_path / "txt"))
+    write_case(p_txt)
+    p_json = gui_project(str(tmp_path / "json"))
+    stb_config.convert(write_case(p_json))
+    os.remove(os.path.join(p_json, "config.txt"))
+    os.remove(os.path.join(p_json, "tracerConfig.txt"))
+    view = tracking_view.TrackingView(settings_view=None)
+    for proj, name in ((p_txt, "config.txt"), (p_json, "config.json")):
+        path, cfg = tracking_view._project_config(proj)
+        assert os.path.basename(path) == name
+        assert tracking_view._output_dir(proj, path, cfg) == os.path.join(proj, "Results")
+        assert tracking_view._object_type(cfg) == "Tracer"
+        assert view._check_project_files(proj) == (True, "")
+    # no config, and a broken one
+    empty = str(tmp_path / "empty")
+    os.makedirs(empty)
+    assert tracking_view._project_config(empty) == (None, None)
+    assert tracking_view._output_dir(empty, None, None) == os.path.join(empty, "Results")
+    ok, msg = view._check_project_files(empty)
+    assert not ok and "missing" in msg
+    with open(os.path.join(p_json, "config.json"), "w") as f:
+        f.write("{")
+    ok, msg = view._check_project_files(p_json)
+    assert not ok and "config.json cannot be read" in msg
+
+
+def test_vsc_updates_config_json(tmp_path):
+    pytest.importorskip("scipy")
+    from modules.vsc.vsc_service import VSCService
+    proj = gui_project(str(tmp_path / "proj"))
+    stb_config.convert(write_case(proj))
+    os.remove(os.path.join(proj, "config.txt"))
+    os.remove(os.path.join(proj, "tracerConfig.txt"))
+    before = open(os.path.join(proj, "config.json"), "rb").read()
+    svc = VSCService(proj, log_callback=lambda m: None)
+    svc.cameras = {0: {}, 1: {}, 2: {}, 3: {}}
+    svc._update_object_config({"proj_tol": 0.734567, "triang_tol": 0.045678})
+    svc._update_config()
+    cfg = stb_config.read_json_raw(os.path.join(proj, "config.json"))
+    assert cfg["objects"][0]["ipr"]["tol_2d_px"] == 0.7346
+    assert cfg["objects"][0]["ipr"]["tol_3d_vox"] == round(0.045678 / 0.129, 4)
+    # the test cameras are cam1-4.txt: cam1-3 match VSC's cameras 1-3, cam4 is not one of them
+    assert [c["file"].split("/")[-1] for c in cfg["cameras"]] == ["vsc_cam1.txt", "vsc_cam2.txt", "vsc_cam3.txt",
+                                                                    "cam4.txt"]
+    assert open(os.path.join(proj, "config_backup.json"), "rb").read() == before
+    svc._update_object_config({"proj_tol": 1.0, "triang_tol": 0.1})
+    assert open(os.path.join(proj, "config_backup.json"), "rb").read() == before
 
 
 # ---------------------------------------------------------------- the C++ reader

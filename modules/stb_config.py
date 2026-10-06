@@ -8,7 +8,9 @@ Two formats hold the same settings:
 
 read(path) returns the same dict for either format, in the JSON layout below, with paths as written in the file
 (relative paths are relative to the config file's folder; resolve() makes them absolute).  write_json() and
-write_text() write such a dict, and convert() turns a text config into config.json beside it.
+write_text() write such a dict, and convert() turns a text config into config.json beside it.  A project folder's
+config is config.json if it has one, else config.txt (find_config, read_project); the GUI writes config.json.
+read_json_raw() / write_json_raw() edit a config.json in place, keeping every key it holds.
 
     python -m modules.stb_config convert config.txt [-o config.json]
     python -m modules.stb_config show CONFIG
@@ -213,9 +215,9 @@ _TOP_KEYS = ["frames", "fps", "threads", "cameras", "image_lists", "view_volume_
              "objects", "load_tracks", "save_interval", "profile"]
 
 
-def read_json(path: str) -> Dict:
-    """config.json, with objects that name a text file ("config_file") read into place (the name kept under
-    "_config_file")."""
+def read_json_raw(path: str) -> Dict:
+    """config.json exactly as written (comments removed), for editing in place: write_json_raw() writes it back with
+    every key it holds."""
     with open(path, encoding="utf-8") as f:
         text = f.read()
     try:
@@ -224,13 +226,31 @@ def read_json(path: str) -> Dict:
         raise ConfigError(f"{path}: invalid JSON: {e}") from None
     if not isinstance(cfg, dict):
         raise ConfigError(f"{path}: must hold an object {{...}}")
+    return cfg
+
+
+def write_json_raw(cfg: Dict, path: str) -> None:
+    """A dict from read_json_raw(), written back (comments in the original file are not kept)."""
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(cfg, f, indent=2)
+        f.write("\n")
+
+
+def read_json(path: str, inline_objects: bool = True) -> Dict:
+    """config.json, with objects that name a text file ("config_file") read into place (the name kept under
+    "_config_file"); with inline_objects=False such objects stay {"type", "config_file"}."""
+    cfg = read_json_raw(path)
     for key in ("frames", "fps", "cameras", "image_lists", "view_volume_mm", "voxel_mm", "output_dir", "objects"):
         if key not in cfg:
             raise ConfigError(f"{path}: \"{key}\" is missing")
+    if not isinstance(cfg["objects"], list) or not all(isinstance(o, dict) and "type" in o for o in cfg["objects"]):
+        raise ConfigError(f"{path}: \"objects\" must be a list of objects with a \"type\"")
+    if not isinstance(cfg["cameras"], list) or not all(isinstance(c, dict) and "file" in c for c in cfg["cameras"]):
+        raise ConfigError(f"{path}: \"cameras\" must be a list of objects with a \"file\"")
     root = os.path.dirname(os.path.abspath(path))
     objs = []
     for k, obj in enumerate(cfg["objects"]):
-        if "config_file" in obj:
+        if "config_file" in obj and inline_objects:
             fname = obj["config_file"]
             full = read_text_object(fname if os.path.isabs(fname) else os.path.join(root, fname), obj["type"])
             full["_config_file"] = fname
@@ -276,9 +296,12 @@ def _strip_json_comments(text: str) -> str:
     return "".join(out)
 
 
-def read(path: str) -> Dict:
-    """Either format, by the file extension (.json or text)."""
-    return read_json(path) if path.lower().endswith(".json") else read_text(path)
+def read(path: str, inline_objects: bool = True) -> Dict:
+    """Either format, by the file extension (.json or text).  With inline_objects=False the object files are not
+    read: an object that lives in a text file stays {"type", "config_file"}."""
+    if path.lower().endswith(".json"):
+        return read_json(path, inline_objects)
+    return read_text(path, inline_objects)
 
 
 def find_config(project_dir: str) -> Optional[str]:
@@ -288,6 +311,15 @@ def find_config(project_dir: str) -> Optional[str]:
         if os.path.isfile(p):
             return p
     return None
+
+
+def read_project(project_dir: str, inline_objects: bool = True):
+    """(path, settings) of a project's config (find_config), or (None, None) if the folder has none.  A config that
+    cannot be read raises ConfigError or OSError."""
+    path = find_config(project_dir)
+    if path is None:
+        return None, None
+    return path, read(path, inline_objects)
 
 
 def resolve(config_path: str, path: str) -> str:

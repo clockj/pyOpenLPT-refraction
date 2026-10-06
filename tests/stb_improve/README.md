@@ -1,6 +1,6 @@
 # STB speed and robustness improvements: summary and progress
 
-Last updated: 2026-10-05, 21:15 (Phases A and B done and tested).
+Last updated: 2026-10-05, night (Phases A and B committed as `acd78d4`; A4b and G, the GUI, done and tested).
 
 Start here to catch up. The plan is `2026-10-05-plan.md` (approved for Phases A and B on 5 Oct); the final report is
 `2026-10-05-report.md`. Every number below comes from a file in `results/`, written by the scripts named.
@@ -8,11 +8,27 @@ Start here to catch up. The plan is `2026-10-05-plan.md` (approved for Phases A 
 **In short.** Tracking this case now takes a flat **2.5 s per frame** over 300 frames, where HEAD went from 6.4 to
 16.9 s: 6.8× faster by frame 300, 3.9× less frame time, at HEAD's memory, while finding more particles (B2: active
 long tracks +15 %). The slowdown was the matching search's allocations in an aging process; B3 removed it. Without
-B2 the outputs are identical to HEAD's. Every check passed (section 3). Nothing is committed, and your own build is
-untouched until you run `python build_local.py`.
+B2 the outputs are identical to HEAD's. Every check passed (section 3).
+
+**The GUI** now runs this code: the desktop shortcut **OpenLPT (new)** starts this repo's GUI on the rebuilt
+`build/Release/OpenLPT.exe`. Save Configuration writes `config.json`, which has a Save Interval field (use 200 for
+long runs). The A4b and G changes are not committed yet.
 
 ## 1. Progress log (newest first)
 
+- **5 Oct, late night: A4b and G, the GUI on config.json and on the new build** (report section 8; `queue4.sh`,
+  `a4b_gui_config.py`, `g_gui_e2e.py`).
+  - **Which GUI:** your desktop shortcut runs openlpt 2.2.4 of 13 Jul (`bubble-visual-hull` env, from
+    `D:\Bubble_Reconstruct\OpenLPT_GUI`), the build of your slow run. Your choice: this repo's GUI with a new
+    shortcut, **OpenLPT (new)**; the old shortcut and env are unchanged.
+  - **The GUI's build:** `build_local.py` rebuilt `build/Release/OpenLPT.exe` and `build-py/Release` (24 Sep builds
+    kept in `build-stb/user-2026-09-24/`). They give byte-identical outputs to the tested final build (G-S50,
+    frames 0–50).
+  - **config.json:** Save Configuration writes `config.json`, with a new Save Interval field. Every reader (the
+    tracking view, post-processing, VSC) accepts `config.json` and `config.txt`, and VSC writes its tolerances and
+    cameras into `config.json`.
+  - **Checks:** A5 (31 forms: identical settings from HEAD's and the new writer), A6 (every reader), A7 (VSC's
+    writers): 30 of 30 passed. G-E2E: the GUI's own path (form → Save → Run Tracking → QProcess → new exe) on frames 0–300 gives outputs byte-identical to the benchmark `b300_final3` at the same speed (2.51 → 2.48 s per frame). G-log: the log window costs about 4 ms per frame even at a 5000-frame log. pytest: 254 passed, the same 4 old failures.
 - **5 Oct, night: done.** The final code (inline size 3, chosen over 9: same speed, 0.9 GB less memory) runs flat
   at 2.49 → 2.48 s per frame; a restarted process is no faster (1.01, criterion < 1.2); index checks, AddressSanitizer
   and the unit tests pass on it; `save_interval = 200` leaves tracking unchanged over 300 frames and saves 0.4 GB;
@@ -55,6 +71,8 @@ untouched until you run `python build_local.py`.
 | B2 | `src/srcSTB/StereoMatch.cpp` | an image line passes through the images of the points where the line of sight enters and leaves the view volume, not 1 and 2 mm past the window. | more matches |
 | log | `src/srcSTB/IPR.cpp` | the detections per camera are printed after IPR's parallel loop, in camera order (they were printed from inside it, in the threads' order and sometimes with interleaved digits). | log text only |
 | build | `cmake/openLPT.cmake` | `RefractCurved` added to the install export, so the non-Python configuration (C++ tests) configures again. | — |
+| A4b | `gui/views/tracking_settings_view.py`, `gui/views/tracking_view.py`, `modules/post_processing/processor.py`, `modules/vsc/vsc_service.py`, `modules/stb_config.py` | The GUI's Save writes `config.json` (plus a Save Interval field). Every reader of a project's config accepts both formats, preferring `config.json`. VSC writes its tolerances and cameras into `config.json` (keeping `config_backup.json`) and stops at step 1 on an unreadable config. Relative output folders are now resolved against the project. | identical settings (A5) |
+| G | `openlpt.py`, your `build/Release` and `build-py/Release`, desktop shortcut | `build_local.py` rebuilt the GUI's exe and module; in a checkout the GUI loads `build-py/<CONFIG>`'s module; **OpenLPT (new)** starts this repo's GUI with the refract env. | identical outputs (G-S50, G-E2E) |
 
 ## 3. Results
 
@@ -88,7 +106,17 @@ untouched until you run `python build_local.py`.
   tracks; over 300 frames at 200 the tracking is unchanged (active tracks byte-identical, the lost tracks of the two
   saves add up exactly) and peak memory is 0.4 GB lower.
 - **pytest:** the subset `tests/test_stb_improve.py` 19 passed; the whole suite (`results/pytest_full_*.txt`) shows no
-  regression (HEAD's build 242 passed, the final 250; the same 4 failures from before on both).
+  regression (HEAD's build 242 passed, the final 250; the same 4 failures from before on both). After A4b: the subset
+  23 passed, the whole suite 254 (`results/pytest_full_a4b.txt`), the same 4 old failures.
+- **A4b and G, the GUI** (report section 8):
+  - G-S50 (`results/g_s50_*`): your rebuilt exe and module against the final build, frames 0–50, identical.
+  - A5–A7 (`results/a4b_gui_config.txt`): 30 of 30 checks.
+    - A5: 31 forms give identical C++ and `stb_config` settings from HEAD's writer and the new one.
+    - A6: every reader gives the same values on text and JSON projects as HEAD on text.
+    - A7: VSC writes identical text files to HEAD's, and correct `config.json` updates.
+  - G-E2E (`results/g_e2e_*`): the GUI run of frames 0–300 is byte-identical to `b300_final3`, at 2.51 → 2.48 s per
+    frame.
+  - G-log (`results/g_log_window.txt`): about 4 ms per frame for the log window at the size of a 5000-frame log.
 
 **B2, the image lines** (M1, `m1_epipolar.py` → `results/m1_epipolar.txt`): with exact pixels, the share of
 4-camera particles whose lines all lie within 2 px rises from 35.9 % (HEAD) to 91.8 %, within 3 px from 54.4 % to
@@ -113,5 +141,9 @@ python tests/stb_improve/analyze.py s1|p2|p1|b
 bash tests/stb_improve/queue1.sh                         # the runs of Phases A and B, in order
 bash tests/stb_improve/queue2.sh                         # the final code: B1 alone, inline 9 vs 3, save interval, restart, ASan
 bash tests/stb_improve/queue3.sh                         # the shipped configuration (inline 3): checks, ASan, unit tests
+bash tests/stb_improve/queue4.sh                         # G-S50: your build_local.py build against the final build
+python tests/stb_improve/a4b_gui_config.py               # A5-A7: the GUI's writer, the readers, VSC's writers (offscreen)
+python tests/stb_improve/g_gui_e2e.py e2e --frames 0 300 # G-E2E: form -> Save -> Run Tracking, then compare_runs with b300_final3
+python tests/stb_improve/g_gui_e2e.py log                # G-log: the log window's cost up to a 5000-frame log
 ```
 The python is the `refract` env's (`C:\Users\zcloc\.conda\envs\refract\python.exe`).

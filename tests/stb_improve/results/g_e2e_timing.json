@@ -1,0 +1,32 @@
+[
+ {
+  "run": "b300_final3",
+  "build": "final3",
+  "frames": "0-300",
+  "n_frames": 301,
+  "conv_unsaved": 297,
+  "early_s": 2.4855,
+  "late_s": 2.4825,
+  "growth": 0.9987929993964997,
+  "sum_frame_s": 747.2599999999995,
+  "peak_private_MB": 2334.7,
+  "others_cores_mean": 0.9228846153846154,
+  "others_cores_max": 1.65,
+  "wall_s": 786.2
+ },
+ {
+  "run": "g_e2e_gui",
+  "build": "user (GUI)",
+  "frames": "0-300",
+  "n_frames": 301,
+  "conv_unsaved": 297,
+  "early_s": 2.506,
+  "late_s": 2.4825,
+  "growth": 0.9906225059856345,
+  "sum_frame_s": 752.0099999999994,
+  "peak_private_MB": 2342.2,
+  "others_cores_mean": 1.4744230769230768,
+  "others_cores_max": 3.24,
+  "wall_s": 792.6
+ }
+]

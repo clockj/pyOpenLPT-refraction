@@ -16,6 +16,12 @@ except ImportError:
     __version__ = "0.1.0"
 
 # --- C++ Extension Import ---
+# In a source checkout, build_local.py leaves the extension in build-py/<CONFIG>/ instead of installing it: put that
+# build first on the path (as conftest.py does for the tests), so the GUI run from the checkout uses it.
+_local_build = Path(__file__).resolve().parent / "build-py" / os.environ.get("CONFIG", "Release")
+if any(_local_build.glob("pyopenlpt*.pyd")) or any(_local_build.glob("pyopenlpt*.so")):
+    sys.path.insert(0, str(_local_build))
+
 try:
     import pyopenlpt
     # Expose core C++ functionality to the openlpt namespace

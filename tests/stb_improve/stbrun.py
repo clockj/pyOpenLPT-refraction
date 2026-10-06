@@ -13,7 +13,8 @@ RUN is a folder runs/RUN/ (git-ignored).  It gets:
     used by other programs (cores), to tell a slowdown inside the process from load by other programs;
   - per_frame.csv: one row per frame (the case's parse_log.py);
   - run_info.json: the build (its build_info.json), the command, start, end, wall time, exit code, peak memory.
-Builds: "base" is build-py-baseline/Release (HEAD); any other NAME is build-stb/NAME/out (build_variant.py).
+Builds: "base" is build-py-baseline/Release (HEAD); "user" is build_local.py's build (build-py/Release, and
+build/Release/OpenLPT.exe, the exe the GUI runs, with --exe); any other NAME is build-stb/NAME/out (build_variant.py).
 """
 from __future__ import annotations
 
@@ -73,9 +74,12 @@ tracerConfig.txt
 """
 
 
-def build_dir(name):
-    return os.path.join(REPO, "build-py-baseline", "Release") if name == "base" else \
-        os.path.join(REPO, "build-stb", name, "out")
+def build_dir(name, exe=False):
+    if name == "base":
+        return os.path.join(REPO, "build-py-baseline", "Release")
+    if name == "user":  # build_local.py's build: the module in build-py/Release, the GUI's exe in build/Release
+        return os.path.join(REPO, "build", "Release") if exe else os.path.join(REPO, "build-py", "Release")
+    return os.path.join(REPO, "build-stb", name, "out")
 
 
 def load_parse_log():
@@ -184,7 +188,7 @@ def main():
     if (args.load is None) != (args.load_from is None):
         ap.error("--load and --load-from go together")
 
-    bdir = build_dir(args.build)
+    bdir = build_dir(args.build, args.exe)
     want = (lambda f: f == "OpenLPT.exe") if args.exe else (lambda f: f.endswith(".pyd"))
     if not os.path.isdir(bdir) or not any(want(f) for f in os.listdir(bdir)):
         sys.exit(f"no {'OpenLPT.exe' if args.exe else 'pyd'} in {bdir}")

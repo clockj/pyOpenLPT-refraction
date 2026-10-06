@@ -1,0 +1,22 @@
+2026-10-05 22:14:15 queue4 begins
+2026-10-05 22:14:15 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g_s50_user_exe --build user --exe --frames 0 50
+2026-10-05T22:14:16 g_s50_user_exe: build user, frames 0-50
+2026-10-05T22:16:31 g_s50_user_exe: exit 0, 51 frames, wall 2.3 min, frame time 2.46 s (frames 4-23) -> 2.45 s (last 20), peak private 863 MB
+2026-10-05 22:16:31 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g_s50_user_exe --build user --exe --frames 0 50
+2026-10-05 22:16:31 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g_s50_user_py --build user --frames 0 50
+2026-10-05T22:16:31 g_s50_user_py: build user, frames 0-50
+2026-10-05T22:18:50 g_s50_user_py: exit 0, 51 frames, wall 2.3 min, frame time 2.58 s (frames 4-23) -> 2.50 s (last 20), peak private 874 MB
+2026-10-05 22:18:51 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g_s50_user_py --build user --frames 0 50
+2026-10-05 22:18:51 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_final3 g_s50_user_exe --out g_s50_exe_vs_final3
+S1 identical outputs: s50_final3 vs g_s50_user_exe
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL
+2026-10-05 22:18:51 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_final3 g_s50_user_exe --out g_s50_exe_vs_final3
+2026-10-05 22:18:51 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_final3 g_s50_user_py --out g_s50_py_vs_final3
+S1 identical outputs: s50_final3 vs g_s50_user_py
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL
+2026-10-05 22:18:51 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_final3 g_s50_user_py --out g_s50_py_vs_final3
+2026-10-05 22:18:51 queue4 ends
