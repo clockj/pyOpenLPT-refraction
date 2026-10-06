@@ -1,0 +1,3 @@
+t_s,working_set_MB,private_MB,page_faults,proc_cpu_s,proc_cores,machine_busy_frac,others_cores
+15.0,237.3,232.4,3686214,345.7,23.04,0.767,1.51
+30.0,851.0,847.7,8607939,716.8,24.73,0.813,1.30

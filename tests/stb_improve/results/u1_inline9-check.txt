@@ -1,0 +1,4 @@
+variant inline9-check: src D:\Refraction\pyOpenLPT, flags /DWIN32 /D_WINDOWS /EHsc /DOPENLPT_MATRIX_INLINE=9 /DOPENLPT_MATRIX_CHECKS, config Release
+Matrix storage: inline up to 9, sizeof(Matrix<double>) = 96, sizeof(Pt3D) = 96
+189 checks, 0 failed
+exit code 0

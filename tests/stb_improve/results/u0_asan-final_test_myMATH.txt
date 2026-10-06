@@ -1,0 +1,1 @@
+myMATH::Inverse: not supported for int

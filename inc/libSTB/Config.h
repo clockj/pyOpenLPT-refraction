@@ -35,6 +35,16 @@ public:
   bool _load_track = false;
   int _load_track_frame = _frame_start;
   std::string _load_track_path;
+
+  // Optional settings, written "key = value" after the fixed lines of
+  // config.txt:
+  // save_interval: frames between the convergence phase's track saves (the
+  // saves free the lost and exited tracks); a save happens when the frame
+  // number is a multiple of it, and at the last frame.
+  int _save_interval = 500;
+  // profile: print work counters and times of stereo matching for every IPR
+  // round (a diagnostic; off by default).
+  bool _profile = false;
 };
 
 // IPR parameters definition
@@ -78,6 +88,7 @@ struct SMParam {
   double tol_2d_px = 1.0;    // strip half-width in pixels (used inside IDMap)
   double tol_3d_mm = 2.4e-2; // final triangulation tolerance (mm)
   AxisLimit limit;
+  bool profile = false; // print work counters and times per match (BasicSetting::_profile)
   // ... add other knobs if needed
 };
 

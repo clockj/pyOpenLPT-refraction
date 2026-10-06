@@ -1,0 +1,4 @@
+S1 identical outputs: b300_base vs b300_b134
+log: 301 frames compared (0-300), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL

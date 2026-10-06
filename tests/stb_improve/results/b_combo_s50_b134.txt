@@ -1,0 +1,7 @@
+[profile] per camera combination, s50_b134: mean per round (each combination runs 2 rounds per frame)
+combo  frames             refs           dfs         cands     strip_pts         built       checked      selected      t_tables t_build_check
+0123     4- 23            6388     4.283e+05     4.283e+05     5.929e+05          2456          2450         952.5          0.03        0.1133
+012      4- 23            4751     2.466e+05     2.466e+05     3.847e+05          5337          5256          1403       0.01975       0.06275
+013      4- 23            3032     1.132e+05     1.132e+05     1.919e+05          1466          1455         478.6         0.019        0.0345
+023      4- 23       1.346e+04     4.142e+05     4.142e+05     6.779e+05     2.186e+04     2.175e+04          4628       0.01875         0.105
+123      4- 23            2472         929.2         929.2      3.13e+04         33.62         33.45         23.43       0.00925             0

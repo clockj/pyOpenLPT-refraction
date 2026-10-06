@@ -1,7 +1,19 @@
 #include "StereoMatch.h"
 #include <array>
+#include <chrono>
 #include <iterator>
 #include <omp.h>
+
+// Profiling (setting "profile"): add n to this thread's counter `field`; a
+// no-op unless profiling is on.
+#define SM_PROFILE_ADD(field, n)                                               \
+  do {                                                                         \
+    if (_profile) {                                                            \
+      const size_t t_ = static_cast<size_t>(omp_get_thread_num());             \
+      if (t_ < _prof.size())                                                   \
+        _prof[t_].field += (n);                                                \
+    }                                                                          \
+  } while (0)
 
 static std::vector<std::vector<const Object2D *>>
 makeView(const std::vector<std::vector<std::unique_ptr<Object2D>>> &src2d) {
@@ -58,6 +70,7 @@ StereoMatch::StereoMatch(
     // build IDMap buckets
     _idmaps[c]->rebuild(_obj2d_list[c]);
   }
+  _profile = _obj_cfg._sm_param.profile;
 } // All reference variable should be initialized first
 
 std::vector<std::unique_ptr<Object3D>> StereoMatch::match() const {
@@ -97,42 +110,48 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::match() const {
   };
   std::vector<std::vector<MatchWithScore>> thread_buckets(T);
 
+  using clk = std::chrono::steady_clock;
+  const auto t_start = clk::now();
+  if (_profile)
+    _prof.assign(static_cast<size_t>(T), ProfileCounters{});
+
+  // lines of sight and image lines of all observations, once
+  buildTables();
+  const auto t_tables = clk::now();
+
 #pragma omp parallel num_threads(T)
   {
     const int tid = omp_get_thread_num();
     auto &bucket = thread_buckets[tid]; // thread-local bucket (by index)
+    Scratch scratch;                    // this thread's search buffers
+    std::vector<int> match_candidate_id;
+    std::vector<std::vector<int>> build_candidates;
 
 #pragma omp for schedule(dynamic, 32)
     for (int id_ref = 0; id_ref < static_cast<int>(ref_obs.size()); ++id_ref) {
       // One candidate initialized with -1 everywhere and ref_cam filled.
-      std::vector<int> match_candidate_id(n_cams, -1);
+      match_candidate_id.assign(n_cams, -1);
       match_candidate_id[ref_cam] = id_ref;
 
       // Build across the first m active cams (DFS inside; uses new selection
       // rules).
-      std::vector<std::vector<int>> build_candidates;
-      buildMatch(match_candidate_id, build_candidates); // must be thread-safe
+      buildMatch(match_candidate_id, build_candidates, scratch);
+      SM_PROFILE_ADD(built, static_cast<long long>(build_candidates.size()));
 
       // Check on remaining active cams (existence / object-specific light
-      // checks).
-      std::vector<MatchWithScore> selected; // per-iter local
-      selected.reserve(build_candidates.size());
+      // checks); the passing candidates go to this thread's bucket, in order.
       for (auto &cand : build_candidates) {
         double e_check = std::numeric_limits<double>::quiet_NaN();
-        if (!checkMatch(static_cast<const std::vector<int> &>(cand), e_check))
+        if (!checkMatch(static_cast<const std::vector<int> &>(cand), e_check,
+                        scratch))
           continue;
         REQUIRE(!std::isnan(e_check), ErrorCode::InvalidArgument,
                 "StereoMatch::match: checkMatch returned NaN e_check.");
-        selected.emplace_back(MatchWithScore{std::move(cand), e_check});
-      }
-
-      // Move this thread's selected candidates into its own bucket (no lock)
-      if (!selected.empty()) {
-        bucket.insert(bucket.end(), std::make_move_iterator(selected.begin()),
-                      std::make_move_iterator(selected.end()));
+        bucket.push_back(MatchWithScore{std::move(cand), e_check});
       }
     }
   } // parallel region ends
+  const auto t_built = clk::now();
 
   // Flatten buckets sequentially (single-thread).
   std::vector<MatchWithScore> match_score_all;
@@ -163,16 +182,93 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::match() const {
     e_checks.push_back(m.e_check);
   }
 
+  const auto t_sorted = clk::now();
+
   // ---- Global pruning (disjoint usage of 2D points, pick best by
   // triangulation error, etc.). ----
   std::vector<std::vector<int>> selected =
       pruneMatch(match_candidates, e_checks);
+  const auto t_pruned = clk::now();
 
   // ---- Final triangulation and Object3D construction (all active cams
   // participate). ----
   std::vector<std::unique_ptr<Object3D>> out = triangulateMatch(selected);
 
+  if (_profile) {
+    const auto t_end = clk::now();
+    auto sec = [](clk::duration d) {
+      return std::chrono::duration<double>(d).count();
+    };
+    ProfileCounters sum;
+    for (const auto &c : _prof) {
+      sum.los += c.los;
+      sum.proj += c.proj;
+      sum.tri += c.tri;
+      sum.enumerations += c.enumerations;
+      sum.strip_points += c.strip_points;
+      sum.candidates += c.candidates;
+      sum.dfs_steps += c.dfs_steps;
+      sum.built += c.built;
+    }
+    std::cout << "\t\t[profile] refs " << ref_obs.size() << ", built "
+              << sum.built << ", checked " << match_candidates.size()
+              << ", selected " << selected.size() << ", objects " << out.size()
+              << " | los " << sum.los
+              << ", proj " << sum.proj << ", tri " << sum.tri << ", enum "
+              << sum.enumerations << ", strip pts " << sum.strip_points
+              << ", cands " << sum.candidates << ", dfs " << sum.dfs_steps
+              << " | t tables " << sec(t_tables - t_start)
+              << " s, build+check " << sec(t_built - t_tables) << " s, sort "
+              << sec(t_sorted - t_built) << " s, prune "
+              << sec(t_pruned - t_sorted) << " s, tri "
+              << sec(t_end - t_pruned) << " s" << std::endl;
+  }
+
   return out;
+}
+
+// The tables of lines of sight and image lines (see StereoMatch.h): one work
+// item per observation of an active camera, in parallel.
+void StereoMatch::buildTables() const {
+  const int n_cams = static_cast<int>(_cam_list.size());
+  auto active = [&](int c) { return _cam_list[c] && _cam_list[c]->is_active; };
+
+  _los_tab.assign(static_cast<size_t>(n_cams), {});
+  _line_tab.assign(static_cast<size_t>(n_cams),
+                   std::vector<std::vector<LineEntry>>(static_cast<size_t>(n_cams)));
+  std::vector<std::pair<int, int>> items; // (cam, pid)
+  for (int c = 0; c < n_cams; ++c) {
+    if (!active(c))
+      continue;
+    const size_t n = _obj2d_list[c].size();
+    _los_tab[c].resize(n);
+    for (int t = 0; t < n_cams; ++t)
+      if (t != c && active(t))
+        _line_tab[c][t].resize(n);
+    for (size_t pid = 0; pid < n; ++pid)
+      items.emplace_back(c, static_cast<int>(pid));
+  }
+
+#pragma omp parallel for schedule(dynamic, 64)
+  for (int k = 0; k < static_cast<int>(items.size()); ++k) {
+    const int c = items[k].first, pid = items[k].second;
+    const Object2D *o = _obj2d_list[c][pid];
+    if (!o)
+      continue;
+    auto los_status = _cam_list[c]->lineOfSight(o->_pt_center);
+    SM_PROFILE_ADD(los, 1);
+    if (!los_status)
+      continue;
+    LosEntry &e = _los_tab[c][pid];
+    e.los = los_status.value();
+    e.ok = true;
+    for (int t = 0; t < n_cams; ++t) {
+      if (t == c || !active(t))
+        continue;
+      LineEntry &le = _line_tab[c][t][pid];
+      le.ok = makeLine2DFromLOS3D(t, e.los, le.line);
+    }
+  }
 }
 
 // Build across the first m active cameras (iterative DFS).
@@ -182,6 +278,17 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::match() const {
 void StereoMatch::buildMatch(
     std::vector<int> &match_candidate_id,
     std::vector<std::vector<int>> &build_candidates) const {
+  Scratch s;
+  buildMatch(match_candidate_id, build_candidates, s);
+}
+
+// Build across the first m active cameras: a depth-first search over the
+// candidates of one camera after another (expandMatch), on the thread's
+// buffers. The order is that of the former stack version: candidates in list
+// order, each one's subtree finished before the next.
+void StereoMatch::buildMatch(std::vector<int> &match_candidate_id,
+                             std::vector<std::vector<int>> &build_candidates,
+                             Scratch &s) const {
   build_candidates.clear();
 
   const int n_cams = static_cast<int>(_cam_list.size());
@@ -199,251 +306,116 @@ void StereoMatch::buildMatch(
     }
   }
 
-  // ---- Collect active cams & pool (exclude ref) in one pass ----
-  std::vector<int> active_cams;
-  active_cams.reserve(n_cams);
-  std::vector<int> pool_cams;
-  pool_cams.reserve(n_cams);
+  // one remaining-camera list and one candidate list per depth
+  if (s.rem.size() < static_cast<size_t>(n_cams) + 1)
+    s.rem.resize(static_cast<size_t>(n_cams) + 1);
+  if (s.cand.size() < static_cast<size_t>(n_cams) + 1)
+    s.cand.resize(static_cast<size_t>(n_cams) + 1);
+
+  // ---- Active cams & pool (active, excluding ref) ----
+  std::vector<int> &pool = s.rem[0];
+  pool.clear();
+  int n_active = 0;
   for (int c = 0; c < n_cams; ++c) {
     if (!_cam_list[c] || !_cam_list[c]->is_active)
       continue;
-    active_cams.push_back(c);
+    ++n_active;
     if (c != ref_cam)
-      pool_cams.push_back(c);
+      pool.push_back(c);
   }
 
   const int build_cam_count =
-      std::min(std::max(2, _obj_cfg._sm_param.match_cam_count),
-               static_cast<int>(active_cams.size()));
+      std::min(std::max(2, _obj_cfg._sm_param.match_cam_count), n_active);
 
-  // ---- DFS frame definition ----
-  struct Frame {
-    // Chosen path so far (parallel arrays)
-    std::vector<int>
-        chosen_cams; // camera ids on this path (order = build order)
-    std::vector<int> chosen_ids;  // 2D indices aligned with chosen_cams
-    std::vector<Pt2D> chosen_pts; // 2D points aligned with chosen
-    std::vector<Line3D> los3d;    // LOS for each chosen pair (same order)
-
-    // Remaining build cameras to choose from
-    std::vector<int> rem_cams;
-
-    // The camera we are currently expanding and its candidate list
-    int target_cam = -1;
-    std::vector<int> candidates; // candidate 2D ids on target_cam
-    size_t cand_idx = 0;         // next candidate index to try
-  };
-
-  std::vector<Frame> stack;
-  stack.reserve(build_cam_count + 4); // small headroom
-
-  // ---- Initialize root frame from (ref_cam, ref_id) ----
-  Frame root;
-  root.chosen_cams = {ref_cam};
-  root.chosen_ids = {ref_id};
-  root.rem_cams = pool_cams;
-
-  {
-    const Pt2D &p = _obj2d_list[ref_cam][ref_id]->_pt_center;
-    auto los_status = _cam_list[ref_cam]->lineOfSight(p);
-    if (!los_status)
-      return;
-    root.los3d.push_back(los_status.value());
-    root.chosen_pts = {p};
-  }
+  // ---- The path starts at (ref_cam, ref_id) ----
+  const LosEntry &le = _los_tab[ref_cam][ref_id];
+  if (!le.ok)
+    return;
+  s.path_cams.assign(1, ref_cam);
+  s.path_ids.assign(1, ref_id);
+  s.path_los.clear();
+  s.path_los.push_back(le.los);
+  s.path_pts.clear();
+  s.path_pts.push_back(_obj2d_list[ref_cam][ref_id]->_pt_center);
 
   // Select the 2nd build camera by "shortest projected LOS segment", then
   // enumerate its candidates.
-  if (!root.rem_cams.empty()) {
-    root.target_cam =
-        selectSecondCameraByLineLength(root.los3d.front(), root.rem_cams);
-    if (root.target_cam >= 0) {
-      enumerateCandidatesOnCam(root.los3d, root.target_cam, root.chosen_cams,
-                               root.chosen_pts, root.candidates);
-      root.cand_idx = 0;
-    }
-  }
-  if (root.target_cam < 0 || root.candidates.empty())
+  if (pool.empty())
+    return;
+  const int target_cam = selectSecondCameraByLineLength(ref_cam, ref_id, pool);
+  if (target_cam < 0)
+    return;
+  enumerateCandidatesOnCam(target_cam, s.path_cams, s.path_ids, s.path_pts,
+                           s.cand[0], s);
+  if (s.cand[0].empty())
     return; // cannot grow from this ref
 
-  // ---- Push the root frame to start DFS ----
-  stack.push_back(std::move(root));
+  expandMatch(0, target_cam, build_cam_count, match_candidate_id,
+              build_candidates, s);
+}
 
-  // =========================
-  // Iterative DFS main loop
-  // =========================
-  //
-  // Stack mechanics:
-  // - stack.back() is the current frame to expand.
-  // - Try candidates of frame.target_cam one by one:
-  //     * For each candidate → extend path (build a child "nxt"),
-  //       run quick triangulation + object early checks.
-  //     * If checks fail → CONTINUE (stay on current frame, try next
-  //     candidate).
-  //     * If checks pass:
-  //         - If chosen_cams reached build_cam_count → push terminal child;
-  //           it will be recorded (materialized) at the next loop head, then
-  //           POP (backtrack).
-  //         - Else select next target_cam (max pairwise 2D angle), enumerate
-  //         candidates,
-  //           then PUSH child (go deeper).
-  // - When current frame runs out of candidates → POP (backtrack to its
-  // parent).
-  //
-  /*
-      ===============================================================
-      DFS (stack-based) – concise, plain-language version
-      Focus: per-camera / per-2D iteration with PUSH/POP
-      ---------------------------------------------------------------
-
-      [Start]
-      |
-      [Initialize: candidate=-1 per camera; clear scratch; clear stack]
-      |
-      [Push root frame (first camera, its 2D list, save scratch sizes)]
-      |
-      +------------------- While stack is not empty -------------------+
-      | [Top = stack.back()]                                           |
-      |   |                                                            |
-      |   +-- Have we tried all 2D ids for Top.camera? -- Yes --> [POP]|
-      |   |      (restore scratch sizes; clear this camera;            |
-      |   |       pop the frame; go back to while)                     |
-      |   |                                                            |
-      |   +-- No --> [Take next 2D id for Top.camera]                  |
-      |                |                                               |
-      |                [Extend locally: set candidate[Top.camera]=id;  |
-      |                 append LOS/flat to scratch]                    |
-      |                |                                               |
-      |                +-- Do quick checks pass? -- No -->             |
-      |                |     [Undo local extend (clear and pop)        |
-      |                |      try next 2D in the same frame]           |
-      |                |                                               |
-      |                +-- Yes --> Do we still need more cameras?      |
-      |                           |                                    |
-      |                           +-- Yes -->                          |
-      |                           |    [PUSH child frame               |
-      |                           |     (next camera, its 2D list,     |
-      |                           |      save current scratch sizes);  |
-      |                           |     descend and continue while]    |
-      |                           |                                    |
-      |                           +-- No  -->                          |
-      |                                [Emit full candidate;           |
-      |                                 Undo local extend (stay here); |
-      |                                 try next 2D in this frame]     |
-      +----------------------------------------------------------------+
-
-      Legend:
-      - PUSH: push a new frame (chosen camera, its 2D list, and saved scratch
-     sizes).
-      - POP : pop current frame, restore scratch to saved sizes, clear that
-     camera’s slot.
-      - “Undo local extend” = revert only the latest (camera,2D) choice without
-     popping the frame.
-      ===============================================================
-      */
-
-  while (!stack.empty()) {
-    Frame &fr = stack.back();
-
-    // Terminal frame: reached build_cam_count cameras on this path
-    if (static_cast<int>(fr.chosen_cams.size()) == build_cam_count) {
-      // Materialize a cam-aligned result starting from the incoming pattern.
-      std::vector<int> ids_norm =
-          match_candidate_id; // ref already set; others -1
-      for (size_t i = 0; i < fr.chosen_cams.size(); ++i) {
-        ids_norm[fr.chosen_cams[i]] = fr.chosen_ids[i];
-      }
-      build_candidates.push_back(std::move(ids_norm));
-
-      // Done with this terminal node → POP to try siblings at the upper level.
-      stack.pop_back();
+// Try each candidate on target_cam after the current path (depth: the path has
+// depth + 1 cameras): a quick triangulation check and the object check, then
+// either a complete candidate (build_cam_count cameras) or the next camera
+// (max pairwise 2D angle) and its candidates, one level deeper.
+void StereoMatch::expandMatch(int depth, int target_cam, int build_cam_count,
+                              const std::vector<int> &match_candidate_id,
+                              std::vector<std::vector<int>> &build_candidates,
+                              Scratch &s) const {
+  const std::vector<int> &cands = s.cand[depth];
+  const std::vector<int> &rem = s.rem[depth];
+  for (size_t ci = 0; ci < cands.size(); ++ci) {
+    const int pid = cands[ci];
+    SM_PROFILE_ADD(dfs_steps, 1);
+    const LosEntry &le = _los_tab[target_cam][pid];
+    if (!le.ok)
       continue;
-    }
 
-    // already loop all candidates on current target → POP and backtrack
-    if (fr.cand_idx >= fr.candidates.size()) {
-      stack.pop_back();
-      continue;
-    }
+    // Extend path with (target_cam, pid)
+    s.path_cams.push_back(target_cam);
+    s.path_ids.push_back(pid);
+    s.path_los.push_back(le.los);
+    s.path_pts.push_back(_obj2d_list[target_cam][pid]->_pt_center);
 
-    // Take the next candidate on current target_cam
-    const int pid = fr.candidates[fr.cand_idx++]; // advance for the next loop
-    const int cam = fr.target_cam;
-
-    // Prepare child frame (nxt). Push only if sanity checks pass.
-    Frame nxt;
-    nxt.chosen_cams = fr.chosen_cams;
-    nxt.chosen_ids = fr.chosen_ids;
-    nxt.chosen_pts = fr.chosen_pts;
-    nxt.los3d = fr.los3d;
-    nxt.rem_cams = fr.rem_cams;
-
-    // Extend path with (cam, pid)
-    nxt.chosen_cams.push_back(cam);
-    nxt.chosen_ids.push_back(pid);
-
-    {
-      const Pt2D &p = _obj2d_list[cam][pid]->_pt_center;
-      auto los_status = _cam_list[cam]->lineOfSight(p);
-      if (!los_status)
-        continue;
-      nxt.los3d.push_back(los_status.value());
-      nxt.chosen_pts.push_back(p);
-    }
-
-    // Remove this cam from the remaining pool
-    if (auto it = std::find(nxt.rem_cams.begin(), nxt.rem_cams.end(), cam);
-        it != nxt.rem_cams.end())
-      nxt.rem_cams.erase(it);
-
-    // ---- Early pruning BEFORE pushing the child frame ----
-    // Quick triangulation check with unified tolerance (>=2 LOS here)
-    {
-      const int k = static_cast<int>(nxt.los3d.size());
-      const double th_min_deg = computeMinParallaxDeg(nxt.los3d);
-      const double tol_quickmm = calTriangulateTol(
-          _obj_cfg._sm_param.tol_3d_mm, k, build_cam_count, th_min_deg);
-      if (!TriangulationCheckWithTol(nxt.los3d, tol_quickmm)) {
-        // Reject this candidate; stay on current frame to try its next
-        // candidate.
-        continue;
+    // ---- Early pruning: quick triangulation check with unified tolerance
+    // (>=2 LOS here), then the object-specific cheap check ----
+    const int k = static_cast<int>(s.path_los.size());
+    const double th_min_deg = computeMinParallaxDeg(s.path_los);
+    const double tol_quickmm = calTriangulateTol(
+        _obj_cfg._sm_param.tol_3d_mm, k, build_cam_count, th_min_deg);
+    if (TriangulationCheckWithTol(s.path_los, tol_quickmm) &&
+        objectEarlyCheck(s.path_cams, s.path_ids)) {
+      if (static_cast<int>(s.path_cams.size()) == build_cam_count) {
+        // Complete: a cam-aligned result from the incoming pattern
+        std::vector<int> ids_norm = match_candidate_id;
+        for (size_t i = 0; i < s.path_cams.size(); ++i)
+          ids_norm[s.path_cams[i]] = s.path_ids[i];
+        build_candidates.push_back(std::move(ids_norm));
+      } else {
+        // The remaining cameras without target_cam (order kept), the next
+        // build camera, and its candidates
+        std::vector<int> &rem_next = s.rem[depth + 1];
+        rem_next.clear();
+        for (int c : rem)
+          if (c != target_cam)
+            rem_next.push_back(c);
+        const int next_cam = selectNextCameraByMaxPairAngle(
+            s.path_cams, s.path_ids, rem_next, s);
+        if (next_cam >= 0) {
+          enumerateCandidatesOnCam(next_cam, s.path_cams, s.path_ids,
+                                   s.path_pts, s.cand[depth + 1], s);
+          if (!s.cand[depth + 1].empty())
+            expandMatch(depth + 1, next_cam, build_cam_count,
+                        match_candidate_id, build_candidates, s);
+        }
       }
     }
-    // Object-specific cheap check (e.g., bubble radius coherence)
-    if (!objectEarlyCheck(nxt.chosen_cams, nxt.chosen_ids)) {
-      // Reject this candidate; try the next one in current frame.
-      continue;
-    }
 
-    // Reached build count after adding this cam → push terminal child.
-    if (static_cast<int>(nxt.chosen_cams.size()) == build_cam_count) {
-      nxt.target_cam = -1;
-      nxt.candidates.clear();
-      nxt.cand_idx = 0;
-      stack.push_back(
-          std::move(nxt)); // will be materialized and popped at loop head
-      continue;
-    }
-
-    // Select NEXT build camera (we already have >=2 LOS here):
-    nxt.target_cam = selectNextCameraByMaxPairAngle(nxt.los3d, nxt.rem_cams);
-    if (nxt.target_cam < 0) {
-      // Dead end for this candidate; try the next one in current frame.
-      continue;
-    }
-
-    // Enumerate candidates ONLY for the selected next camera.
-    enumerateCandidatesOnCam(nxt.los3d, nxt.target_cam, nxt.chosen_cams,
-                             nxt.chosen_pts, nxt.candidates);
-    if (nxt.candidates.empty()) {
-      // Dead end for this candidate; try the next one in current frame.
-      continue;
-    }
-    nxt.cand_idx = 0;
-
-    // All early checks passed and we have next-camera candidates → PUSH child,
-    // go deeper.
-    stack.push_back(std::move(nxt));
+    // Undo the extension; try the next candidate
+    s.path_cams.pop_back();
+    s.path_ids.pop_back();
+    s.path_los.pop_back();
+    s.path_pts.pop_back();
   }
 }
 
@@ -451,28 +423,43 @@ void StereoMatch::buildMatch(
 // intersection of all projected strips. Geometry checks & dedup are done inside
 // IDMap::visitPointsInRowSpans.
 void StereoMatch::enumerateCandidatesOnCam(
-    const std::vector<Line3D> &los3d, int target_cam,
-    const std::vector<int> &chosen_cams, const std::vector<Pt2D> &chosen_pts,
+    int target_cam, const std::vector<int> &chosen_cams,
+    const std::vector<int> &chosen_ids, const std::vector<Pt2D> &chosen_pts,
     std::vector<int> &out_candidates) const {
+  Scratch s;
+  enumerateCandidatesOnCam(target_cam, chosen_cams, chosen_ids, chosen_pts,
+                           out_candidates, s);
+}
+
+void StereoMatch::enumerateCandidatesOnCam(
+    int target_cam, const std::vector<int> &chosen_cams,
+    const std::vector<int> &chosen_ids, const std::vector<Pt2D> &chosen_pts,
+    std::vector<int> &out_candidates, Scratch &s) const {
   out_candidates.clear();
+  SM_PROFILE_ADD(enumerations, 1);
   if (target_cam < 0 || target_cam >= static_cast<int>(_idmaps.size()))
     return;
   IDMap *idm = _idmaps[target_cam].get();
-  if (!idm || los3d.empty())
+  if (!idm || chosen_cams.empty())
     return;
 
-  // 1) Project LOS -> 2D image lines on this camera
-  std::vector<Line2D> lines_px;
-  if (!buildLinesOnCam(los3d, target_cam, lines_px) || lines_px.empty())
-    return;
+  // 1) The chosen observations' image lines on this camera (from the table)
+  std::vector<Line2D> &lines_px = s.lines;
+  lines_px.clear();
+  for (size_t i = 0; i < chosen_cams.size(); ++i) {
+    const LineEntry &le = _line_tab[chosen_cams[i]][target_cam][chosen_ids[i]];
+    if (!le.ok)
+      return;
+    lines_px.push_back(le.line);
+  }
 
   // 2) Compute per-row strip intersection in CELL indices
-  std::vector<IDMap::RowSpan> spans;
+  std::vector<IDMap::RowSpan> &spans = s.spans;
   idm->computeStripIntersection(lines_px, _obj_cfg._sm_param.tol_2d_px, spans);
 
   bool any_valid = false;
-  for (const auto &s : spans) {
-    if (s.x_min <= s.x_max) {
+  for (const auto &sp : spans) {
+    if (sp.x_min <= sp.x_max) {
       any_valid = true;
       break;
     }
@@ -480,9 +467,10 @@ void StereoMatch::enumerateCandidatesOnCam(
   if (!any_valid)
     return;
 
-  // 3) Visit-and-collect with precise distance test and dedup done by IDMap
+  // 3) Visit-and-collect with precise distance test
   idm->visitPointsInRowSpans(spans, lines_px, _obj_cfg._sm_param.tol_2d_px,
-                             out_candidates);
+                             out_candidates, s.dirs);
+  SM_PROFILE_ADD(strip_points, static_cast<long long>(out_candidates.size()));
   if (out_candidates.empty())
     return;
 
@@ -492,12 +480,12 @@ void StereoMatch::enumerateCandidatesOnCam(
     const Object2D *o = _obj2d_list[target_cam][pid];
     if (!o)
       continue;
-    const Pt2D &q_t = o->_pt_center;
-    if (checkBackProjection(target_cam, q_t, chosen_cams, chosen_pts)) {
+    if (checkBackProjection(target_cam, pid, chosen_cams, chosen_pts)) {
       out_candidates[write++] = pid;
     }
   }
   out_candidates.resize(write);
+  SM_PROFILE_ADD(candidates, write);
 }
 
 // Verify: for every remaining active (check) camera, the intersection of all
@@ -506,22 +494,25 @@ void StereoMatch::enumerateCandidatesOnCam(
 // others -1.
 bool StereoMatch::checkMatch(const std::vector<int> &candidate_ids,
                              double &out_e_check) const {
-  // out_e_check = 0.0;
-  // out_e_check = std::numeric_limits<double>::quiet_NaN();
+  Scratch s;
+  return checkMatch(candidate_ids, out_e_check, s);
+}
+
+bool StereoMatch::checkMatch(const std::vector<int> &candidate_ids,
+                             double &out_e_check, Scratch &s) const {
   const int n_cams = static_cast<int>(_cam_list.size());
 
   // ---- 1) Gather LOS from chosen (build) cameras ----
-  std::vector<Line3D> los3d;
-  los3d.reserve(_obj_cfg._sm_param.match_cam_count);
+  std::vector<Line3D> &los3d = s.los3d;
+  los3d.clear();
   for (int cam = 0; cam < n_cams; ++cam) {
     const int pid = candidate_ids[cam];
     if (pid < 0)
       continue; // not chosen on this cam
-    const Pt2D &q = _obj2d_list[cam][pid]->_pt_center;
-    auto los_status = _cam_list[cam]->lineOfSight(q);
-    if (!los_status)
+    const LosEntry &le = _los_tab[cam][pid];
+    if (!le.ok)
       return false;
-    los3d.push_back(los_status.value());
+    los3d.push_back(le.los);
   }
   if (los3d.size() < 2) {
     // Should not happen if build stage produced a valid candidate,
@@ -537,24 +528,24 @@ bool StereoMatch::checkMatch(const std::vector<int> &candidate_ids,
       n_active_cam) { // all active cams are used in build → nothing to check
     Pt3D Xw{};
     myMATH::triangulation(Xw, out_e_check, los3d);
+    SM_PROFILE_ADD(tri, 1);
     if (out_e_check > _obj_cfg._sm_param.tol_3d_mm)
       return false;
     if (!(_obj_cfg._sm_param.limit.check(Xw[0], Xw[1], Xw[2])))
       return false; // if out of bounds
-    // out_e_check = triangulationVariance(los3d);
     return true;
   }
 
-  // Prepare chosen cams & points for back-projection checks
-  std::vector<int> chosen_cams;
-  std::vector<Pt2D> chosen_pts;
-  chosen_cams.reserve(los3d.size());
-  chosen_pts.reserve(los3d.size());
+  // Prepare chosen cams, ids & points for back-projection checks
+  s.chosen_cams.clear();
+  s.chosen_ids.clear();
+  s.chosen_pts.clear();
   for (int c = 0; c < n_cams; ++c) {
     const int pid = candidate_ids[c];
     if (pid >= 0) {
-      chosen_cams.push_back(c);
-      chosen_pts.push_back(_obj2d_list[c][pid]->_pt_center);
+      s.chosen_cams.push_back(c);
+      s.chosen_ids.push_back(pid);
+      s.chosen_pts.push_back(_obj2d_list[c][pid]->_pt_center);
     }
   }
 
@@ -568,13 +559,9 @@ bool StereoMatch::checkMatch(const std::vector<int> &candidate_ids,
       continue; // already used in build -> skip
 
     // obtain points in the intersection of LOS from chosen cameras ----
-    std::vector<int> inliers;
-    enumerateCandidatesOnCam(los3d, /*target_cam=*/cam, chosen_cams, chosen_pts,
-                             inliers);
-
-    // Optional: add object-specific quick filter here (e.g., bubble radius
-    // coherence per-cam). if (!inliers.empty() && !objectCheckOnCheckCam(cam,
-    // inliers, candidate_ids)) { return false; }
+    std::vector<int> &inliers = s.inliers;
+    enumerateCandidatesOnCam(/*target_cam=*/cam, s.chosen_cams, s.chosen_ids,
+                             s.chosen_pts, inliers, s);
 
     if (inliers.empty())
       return false; // this check cam has no supporting observation
@@ -584,18 +571,18 @@ bool StereoMatch::checkMatch(const std::vector<int> &candidate_ids,
     double best_err_c = std::numeric_limits<double>::infinity();
 
     for (int pid : inliers) {
-      const Pt2D &q = _obj2d_list[cam][pid]->_pt_center;
-      auto los_status = _cam_list[cam]->lineOfSight(q);
-      if (!los_status)
+      const LosEntry &lq = _los_tab[cam][pid];
+      if (!lq.ok)
         continue;
-      Line3D los_q = los_status.value();
 
-      std::vector<Line3D> los_all = los3d;
-      los_all.push_back(los_q);
+      std::vector<Line3D> &los_all = s.los_all;
+      los_all.assign(los3d.begin(), los3d.end());
+      los_all.push_back(lq.los);
 
       Pt3D Xw{};
       double err = 0.0;
       myMATH::triangulation(Xw, err, los_all);
+      SM_PROFILE_ADD(tri, 1);
 
       if (!std::isfinite(err))
         continue;
@@ -1012,13 +999,12 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::triangulateMatch(
       const int pid = ids[c];
       if (pid < 0)
         continue;
-      const Pt2D &q = obs2d[c][pid]->_pt_center;
-      auto los_status = _cam_list[c]->lineOfSight(q);
-      if (!los_status) {
+      const LosEntry &le = _los_tab[c][pid];
+      if (!le.ok) {
         los.clear();
         break;
       }
-      los.push_back(los_status.value());
+      los.push_back(le.los);
     }
     if (los.size() < 2)
       continue;
@@ -1026,6 +1012,7 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::triangulateMatch(
     // 2) Triangulation
     try {
       myMATH::triangulation(pt_world, err, los);
+      SM_PROFILE_ADD(tri, 1);
     } catch (...) {
       continue;
     }
@@ -1063,22 +1050,48 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::triangulateMatch(
 }
 
 // ---- helper: make a 2D line on camera 'cam_id' from a 3D LOS ----
-inline bool StereoMatch::makeLine2DFromLOS3D(int cam_id, const Line3D &los,
+bool StereoMatch::makeLine2DFromLOS3D(int cam_id, const Line3D &los,
                                               Line2D &out_line) const {
-  // TODO(refraction): This workaround avoids projecting los.pt (interface point)
-  // to reduce boundary degeneracy in refractive projection. It does NOT address
-  // physical invalid branches (e.g., TIR/parallel geometry) and should be
-  // replaced by a robust failure-aware LOS-to-2D construction.
-  Pt3D p_a{los.pt[0] + los.unit_vector[0], los.pt[1] + los.unit_vector[1],
-           los.pt[2] + los.unit_vector[2]};
-  Pt3D p_b{los.pt[0] + 2.0 * los.unit_vector[0],
-           los.pt[1] + 2.0 * los.unit_vector[1],
-           los.pt[2] + 2.0 * los.unit_vector[2]};
+  // Seen through a refractive window, the image of a line of sight is a curve,
+  // and a straight line through the images of two of its points follows it
+  // only near them. The points are where the line of sight enters and leaves
+  // the view volume, so the line follows the curve where the matches can be
+  // (a point outside the volume is never matched). A line of sight that misses
+  // the volume gets no image line.
+  const AxisLimit &lim = _obj_cfg._sm_param.limit;
+  const double lo[3] = {lim.x_min, lim.y_min, lim.z_min};
+  const double hi[3] = {lim.x_max, lim.y_max, lim.z_max};
+  double t_in = 0.0, t_out = std::numeric_limits<double>::infinity();
+  for (int d = 0; d < 3; ++d) { // the slab method, for los.pt + t * u, t >= 0
+    const double o = los.pt[d], u = los.unit_vector[d];
+    if (std::fabs(u) < 1e-15) {
+      if (o < lo[d] || o > hi[d])
+        return false;
+      continue;
+    }
+    double ta = (lo[d] - o) / u, tb = (hi[d] - o) / u;
+    if (ta > tb)
+      std::swap(ta, tb);
+    t_in = std::max(t_in, ta);
+    t_out = std::min(t_out, tb);
+    if (t_in > t_out)
+      return false;
+  }
+  if (t_out - t_in < 1e-6) // grazing a corner: any second point on the ray
+    t_out = t_in + 1.0;
+  Pt3D p_a{los.pt[0] + t_in * los.unit_vector[0],
+           los.pt[1] + t_in * los.unit_vector[1],
+           los.pt[2] + t_in * los.unit_vector[2]};
+  Pt3D p_b{los.pt[0] + t_out * los.unit_vector[0],
+           los.pt[1] + t_out * los.unit_vector[1],
+           los.pt[2] + t_out * los.unit_vector[2]};
 
   auto a_status = _cam_list[cam_id]->project(p_a);
+  SM_PROFILE_ADD(proj, 1);
   if (!a_status)
     return false;
   auto b_status = _cam_list[cam_id]->project(p_b);
+  SM_PROFILE_ADD(proj, 1);
   if (!b_status)
     return false;
 
@@ -1088,22 +1101,6 @@ inline bool StereoMatch::makeLine2DFromLOS3D(int cam_id, const Line3D &los,
   L.pt = a;
   L.unit_vector = myMATH::createUnitVector(a, b); // assumed normalized
   out_line = L;
-  return true;
-}
-
-// ---- helper: project a set of LOS to 2D lines on a camera (re-uses output
-// buffer) ----
-inline bool StereoMatch::buildLinesOnCam(const std::vector<Line3D> &los3d,
-                                         int cam_id,
-                                         std::vector<Line2D> &out_lines) const {
-  out_lines.clear();
-  out_lines.reserve(los3d.size());
-  for (const auto &L3 : los3d) {
-    Line2D line;
-    if (!makeLine2DFromLOS3D(cam_id, L3, line))
-      return false;
-    out_lines.push_back(line);
-  }
   return true;
 }
 
@@ -1164,6 +1161,7 @@ bool StereoMatch::TriangulationCheckWithTol(const std::vector<Line3D> &los3d,
   double err = 0.0;
   try {
     myMATH::triangulation(pt, err, los3d);
+    SM_PROFILE_ADD(tri, 1);
   } catch (...) {
     return false;
   }
@@ -1234,15 +1232,13 @@ StereoMatch::triangulationVariance(const std::vector<Line3D> &los) const {
 }
 
 bool StereoMatch::checkBackProjection(
-    int target_cam, const Pt2D &q_t, const std::vector<int> &chosen_cams,
+    int target_cam, int pid, const std::vector<int> &chosen_cams,
     const std::vector<Pt2D> &chosen_pts) const {
   if (chosen_cams.empty())
     return true;
 
-  auto los_t_status = _cam_list[target_cam]->lineOfSight(q_t);
-  if (!los_t_status)
+  if (!_los_tab[target_cam][pid].ok)
     return false;
-  const Line3D los_t = los_t_status.value();
 
   const double tol2 =
       _obj_cfg._sm_param.tol_2d_px * _obj_cfg._sm_param.tol_2d_px;
@@ -1252,10 +1248,10 @@ bool StereoMatch::checkBackProjection(
     const int ci = chosen_cams[i];
     const Pt2D &qi = chosen_pts[i];
 
-    Line2D L;
-    if (!makeLine2DFromLOS3D(ci, los_t, L))
+    const LineEntry &le = _line_tab[target_cam][ci][pid];
+    if (!le.ok)
       return false;
-    if (myMATH::dist2(qi, L) > tol2)
+    if (myMATH::dist2(qi, le.line) > tol2)
       return false;
   }
   return true;
@@ -1303,11 +1299,10 @@ bool StereoMatch::bubbleEarlyCheck(const std::vector<int> &cams_in_path,
     if (!base)
       continue;
 
-    const Pt2D &q = base->_pt_center; // same domain as calibration
-    auto los_status = _cam_list[cam]->lineOfSight(q);
-    if (!los_status)
+    const LosEntry &le = _los_tab[cam][pid];
+    if (!le.ok)
       return true;
-    los.push_back(los_status.value());
+    los.push_back(le.los);
     cams.push_back(_cam_list[cam].get());
     obj2d_by_cam.push_back(base);
   }
@@ -1343,14 +1338,15 @@ bool StereoMatch::bubbleEarlyCheck(const std::vector<int> &cams_in_path,
 // Select the 2nd build camera by minimizing the visible segment length of the
 // single projected LOS.
 int StereoMatch::selectSecondCameraByLineLength(
-    const Line3D &los_ref, const std::vector<int> &remaining_cams) const {
+    int ref_cam, int ref_id, const std::vector<int> &remaining_cams) const {
   if (remaining_cams.empty())
     return -1;
 
   auto segLenOnCam = [&](int cam) -> double {
-    Line2D L;
-    if (!makeLine2DFromLOS3D(cam, los_ref, L))
+    const LineEntry &le = _line_tab[ref_cam][cam][ref_id];
+    if (!le.ok)
       return std::numeric_limits<double>::infinity();
+    const Line2D &L = le.line;
     const double px = L.pt[0], py = L.pt[1];
     const double ux = L.unit_vector[0], uy = L.unit_vector[1];
 
@@ -1358,42 +1354,50 @@ int StereoMatch::selectSecondCameraByLineLength(
     const double H = static_cast<double>(_cam_list[cam]->getNRow());
 
     auto in = [](double v, double lo, double hi) { return v >= lo && v <= hi; };
-    auto push_if = [&](double x, double y, std::vector<Pt2D> &v) {
-      if (in(x, 0.0, W) && in(y, 0.0, H))
-        v.emplace_back(x, y);
+    // the line's crossings of the image border (at most 4), in fixed arrays
+    double pts_x[4], pts_y[4];
+    int n_pts = 0;
+    auto push_if = [&](double x, double y) {
+      if (in(x, 0.0, W) && in(y, 0.0, H)) {
+        pts_x[n_pts] = x;
+        pts_y[n_pts] = y;
+        ++n_pts;
+      }
     };
 
-    std::vector<Pt2D> pts;
-    pts.reserve(4);
     if (std::fabs(ux) > 1e-12) {
       double t = (0.0 - px) / ux;
-      push_if(0.0, py + t * uy, pts);
+      push_if(0.0, py + t * uy);
       t = (W - 1 - px) / ux;
-      push_if(W - 1, py + t * uy, pts);
+      push_if(W - 1, py + t * uy);
     }
     if (std::fabs(uy) > 1e-12) {
       double t = (0.0 - py) / uy;
-      push_if(px + t * ux, 0.0, pts);
+      push_if(px + t * ux, 0.0);
       t = (H - 1 - py) / uy;
-      push_if(px + t * ux, H - 1, pts);
+      push_if(px + t * ux, H - 1);
     }
     // de-dup corners
     const double eps = 1e-9;
-    std::vector<Pt2D> uniq;
-    uniq.reserve(pts.size());
-    for (auto &q : pts) {
+    double uniq_x[4], uniq_y[4];
+    int n_uniq = 0;
+    for (int a = 0; a < n_pts; ++a) {
       bool dup = false;
-      for (auto &p : uniq)
-        if (std::fabs(p[0] - q[0]) < eps && std::fabs(p[1] - q[1]) < eps) {
+      for (int b = 0; b < n_uniq; ++b)
+        if (std::fabs(uniq_x[b] - pts_x[a]) < eps &&
+            std::fabs(uniq_y[b] - pts_y[a]) < eps) {
           dup = true;
           break;
         }
-      if (!dup)
-        uniq.push_back(q);
+      if (!dup) {
+        uniq_x[n_uniq] = pts_x[a];
+        uniq_y[n_uniq] = pts_y[a];
+        ++n_uniq;
+      }
     }
-    if (uniq.size() < 2)
+    if (n_uniq < 2)
       return 0.0;
-    const double dx = uniq[0][0] - uniq[1][0], dy = uniq[0][1] - uniq[1][1];
+    const double dx = uniq_x[0] - uniq_x[1], dy = uniq_y[0] - uniq_y[1];
     return std::sqrt(dx * dx + dy * dy);
   };
 
@@ -1413,18 +1417,37 @@ int StereoMatch::selectSecondCameraByLineLength(
 // pairwise 2D angle. Score = max_{i<j} |sin(theta_ij)| = |u_i x u_j|; ties keep
 // the first encountered.
 int StereoMatch::selectNextCameraByMaxPairAngle(
-    const std::vector<Line3D> &los3d,
+    const std::vector<int> &chosen_cams, const std::vector<int> &chosen_ids,
     const std::vector<int> &remaining_cams) const {
+  Scratch s;
+  return selectNextCameraByMaxPairAngle(chosen_cams, chosen_ids, remaining_cams,
+                                        s);
+}
+
+int StereoMatch::selectNextCameraByMaxPairAngle(
+    const std::vector<int> &chosen_cams, const std::vector<int> &chosen_ids,
+    const std::vector<int> &remaining_cams, Scratch &scratch) const {
   if (remaining_cams.empty())
     return -1;
 
   int best_cam = -1;
   double best_score = -1.0;
 
-  std::vector<Line2D> lines_px; // reused buffer
+  std::vector<Line2D> &lines_px = scratch.sel_lines; // the thread's buffer
 
   for (int cam : remaining_cams) {
-    if (!buildLinesOnCam(los3d, cam, lines_px))
+    // the chosen observations' image lines on this camera (from the table)
+    lines_px.clear();
+    bool all_ok = true;
+    for (size_t i = 0; i < chosen_cams.size(); ++i) {
+      const LineEntry &le = _line_tab[chosen_cams[i]][cam][chosen_ids[i]];
+      if (!le.ok) {
+        all_ok = false;
+        break;
+      }
+      lines_px.push_back(le.line);
+    }
+    if (!all_ok)
       continue;
 
     double score = 0.0;
@@ -1610,21 +1633,28 @@ void IDMap::visitPointsInRowSpans(const std::vector<RowSpan> &spans,
                                   const std::vector<Line2D> &lines_px,
                                   double tol_px,
                                   std::vector<int> &out_indices) const {
+  std::vector<Pt2D> dirs;
+  visitPointsInRowSpans(spans, lines_px, tol_px, out_indices, dirs);
+}
+
+// Each observation is in exactly one cell (rebuild), and each cell is visited
+// at most once (one span per row), so no point can be met twice.
+void IDMap::visitPointsInRowSpans(const std::vector<RowSpan> &spans,
+                                  const std::vector<Line2D> &lines_px,
+                                  double tol_px, std::vector<int> &out_indices,
+                                  std::vector<Pt2D> &dirs) const {
   out_indices.clear();
 
   if (!_objs || lines_px.empty() || spans.empty())
     return;
 
   // Precompute unit directions (required by cross-product distance)
-  std::vector<Pt2D> U(lines_px.size());
+  dirs.resize(lines_px.size());
   for (size_t i = 0; i < lines_px.size(); ++i)
-    U[i] = normalized(lines_px[i].unit_vector);
+    dirs[i] = normalized(lines_px[i].unit_vector);
 
   const double tol2 = tol_px * tol_px;
   const auto &objs = *_objs;
-
-  // Dedup bitmap: a point may appear in multiple cells along the row-span
-  std::vector<unsigned char> seen(objs.size(), 0);
 
   // Iterate every row of cells
   const int rowsC = _rows_cell;
@@ -1639,15 +1669,13 @@ void IDMap::visitPointsInRowSpans(const std::vector<RowSpan> &spans,
       for (int pid : cell) {
         if (pid < 0 || static_cast<size_t>(pid) >= objs.size())
           continue;
-        if (seen[pid])
-          continue;
 
         const Pt2D &q = objs[pid]->_pt_center;
 
         // Precise distance check w.r.t. all lines: |(q - p) x u| <= tol
         for (size_t i = 0; i < lines_px.size(); ++i) {
           const Pt2D &Lp = lines_px[i].pt;
-          const Pt2D &u = U[i];
+          const Pt2D &u = dirs[i];
           const double dx = q[0] - Lp[0];
           const double dy = q[1] - Lp[1];
           const double z =
@@ -1657,8 +1685,7 @@ void IDMap::visitPointsInRowSpans(const std::vector<RowSpan> &spans,
             goto reject_point;
         }
 
-        // All distances within tol -> accept once
-        seen[pid] = 1;
+        // All distances within tol -> accept
         out_indices.push_back(pid);
 
       reject_point:;

@@ -1,0 +1,201 @@
+{
+ "failures": [],
+ "text_settings": {
+  "ok": true,
+  "_n_cam": 4,
+  "_frame_start": 0,
+  "_frame_end": 20,
+  "_fps": 5000,
+  "_n_thread": 26,
+  "_voxel_to_mm": 0.129,
+  "_output_path": "D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/Results/",
+  "_image_file_paths": [
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam0ImageNames.txt",
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam1ImageNames.txt",
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam2ImageNames.txt",
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam3ImageNames.txt"
+  ],
+  "_object_types": [
+   "Tracer"
+  ],
+  "_object_config_paths": [
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/tracerConfig.txt"
+  ],
+  "_load_track": false,
+  "_load_track_frame": 0,
+  "_load_track_path": "",
+  "_save_interval": 10,
+  "_axis_limit": [
+   -81.0,
+   54.0,
+   -42.0,
+   59.0,
+   -36.0,
+   52.5
+  ],
+  "cam_max_intensity": [
+   255.0,
+   255.0,
+   255.0,
+   255.0
+  ],
+  "stb": [
+   1.29,
+   4,
+   3.87
+  ],
+  "shake": [
+   0.03225,
+   4,
+   0.01,
+   0.0016125,
+   2
+  ],
+  "pf": [
+   51,
+   51,
+   51,
+   3.225,
+   11,
+   11,
+   11,
+   true,
+   1.0,
+   1.0,
+   1.0,
+   [
+    -81.0,
+    54.0,
+    -42.0,
+    59.0,
+    -36.0,
+    52.5
+   ]
+  ],
+  "ipr": [
+   1,
+   2,
+   2,
+   200000
+  ],
+  "sm": [
+   4,
+   4,
+   2.0,
+   0.129
+  ],
+  "tracer": [
+   20,
+   2.0
+  ],
+  "otf_grid": [
+   4,
+   5,
+   5,
+   5,
+   125,
+   33.75,
+   25.25,
+   22.125
+  ]
+ },
+ "json_settings": {
+  "ok": true,
+  "_n_cam": 4,
+  "_frame_start": 0,
+  "_frame_end": 20,
+  "_fps": 5000,
+  "_n_thread": 26,
+  "_voxel_to_mm": 0.129,
+  "_output_path": "D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/Results/",
+  "_image_file_paths": [
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam0ImageNames.txt",
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam1ImageNames.txt",
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam2ImageNames.txt",
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/data/imgLists/cam3ImageNames.txt"
+  ],
+  "_object_types": [
+   "Tracer"
+  ],
+  "_object_config_paths": [
+   "D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/config.json#0"
+  ],
+  "_load_track": false,
+  "_load_track_frame": 0,
+  "_load_track_path": "",
+  "_save_interval": 10,
+  "_axis_limit": [
+   -81.0,
+   54.0,
+   -42.0,
+   59.0,
+   -36.0,
+   52.5
+  ],
+  "cam_max_intensity": [
+   255.0,
+   255.0,
+   255.0,
+   255.0
+  ],
+  "stb": [
+   1.29,
+   4,
+   3.87
+  ],
+  "shake": [
+   0.03225,
+   4,
+   0.01,
+   0.0016125,
+   2
+  ],
+  "pf": [
+   51,
+   51,
+   51,
+   3.225,
+   11,
+   11,
+   11,
+   true,
+   1.0,
+   1.0,
+   1.0,
+   [
+    -81.0,
+    54.0,
+    -42.0,
+    59.0,
+    -36.0,
+    52.5
+   ]
+  ],
+  "ipr": [
+   1,
+   2,
+   2,
+   200000
+  ],
+  "sm": [
+   4,
+   4,
+   2.0,
+   0.129
+  ],
+  "tracer": [
+   20,
+   2.0
+  ],
+  "otf_grid": [
+   4,
+   5,
+   5,
+   5,
+   125,
+   33.75,
+   25.25,
+   22.125
+  ]
+ }
+}

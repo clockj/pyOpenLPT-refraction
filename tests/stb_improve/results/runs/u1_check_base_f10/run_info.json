@@ -1,0 +1,46 @@
+{
+ "run": "u1_check_base_f10",
+ "argv": [
+  "u1_check_base_f10",
+  "--build",
+  "check-py",
+  "--frames",
+  "0",
+  "10"
+ ],
+ "build": "check-py",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\check-py\\out",
+ "build_info": {
+  "name": "check-py",
+  "mode": "py",
+  "config": "Release",
+  "src": "D:\\Refraction\\pyOpenLPT",
+  "git_head": "14ad4b6",
+  "git_diff_stat": ".gitignore             | 11 +++++++++++\n src/srcMath/Matrix.hpp | 36 ++++++++++++++++++++++++++++++++++--\n 2 files changed, 45 insertions(+), 2 deletions(-)",
+  "git_diff_sha256": "09381b955bbb41526c907dda3f3fa9d69109be7a90711529ef02fcfd7be45832",
+  "untracked": [],
+  "defs": [
+   "OPENLPT_MATRIX_CHECKS"
+  ],
+  "asan": false,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc /DOPENLPT_MATRIX_CHECKS",
+  "start": "2026-10-05T13:36:16",
+  "minutes": 0.5,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 370,
+  "products": [
+   "OpenLPT.exe",
+   "pyopenlpt.cp311-win_amd64.pyd"
+  ]
+ },
+ "host": "HELLOWORLD",
+ "start": "2026-10-05T13:40:19",
+ "end": "2026-10-05T13:41:34",
+ "wall_s": 75.0,
+ "returncode": 0,
+ "frames_done": 11,
+ "sum_frame_s": 73.1,
+ "peak_working_set_MB": 860,
+ "peak_private_MB": 734
+}

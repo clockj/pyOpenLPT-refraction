@@ -21,20 +21,35 @@
 #include <fstream>
 #include <initializer_list>
 #include <iostream>
+#include <new>
 #include <sstream>
 #include <string>
 
 
 #include "STBCommons.h"
 
+// Matrices with at most OPENLPT_MATRIX_INLINE elements keep their elements
+// inside the object, so creating, copying and destroying them never touches the
+// heap; larger ones (3x3 matrices with the default 3, images, tables) are
+// allocated on the heap. create() is the only place that chooses, and clear()
+// frees only heap storage. The default 3 covers points and lines; 9 (also 3x3
+// matrices) ran no faster in the benchmarks and needed 0.9 GB more memory over
+// 300 frames (tests/stb_improve).
+#ifndef OPENLPT_MATRIX_INLINE
+#define OPENLPT_MATRIX_INLINE 3
+#endif
+
 template <class T> class Matrix {
+  static constexpr int kInline = OPENLPT_MATRIX_INLINE;
+  static_assert(kInline >= 1, "OPENLPT_MATRIX_INLINE must be at least 1");
+
   int _dim_row = 0;
   int _dim_col = 0;
   int _n = 0;        // tot number of elem
   int _is_space = 0; // 0 for nothing installed; 1 for already claim space
   int mapID(int id_x, int id_y) const; // id_x*_dim_col + id_y
-  T *_mtx;
-  // std::vector<T> _mtx;
+  T *_mtx = nullptr; // points at _buf (_n <= kInline) or at heap memory
+  T _buf[kInline];   // storage of small matrices
 
   // Create/Clear space
   void clear();

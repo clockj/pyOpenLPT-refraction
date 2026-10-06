@@ -1,0 +1,45 @@
+{
+ "files": [
+  "ExitTrack_20.csv",
+  "ExitTrack_40.csv",
+  "ExitTrack_45.csv",
+  "LongTrackActive_45.csv",
+  "LongTrackInactive_20.csv",
+  "LongTrackInactive_40.csv",
+  "LongTrackInactive_45.csv",
+  "ShortTrackActive_45.csv"
+ ],
+ "saved": [
+  20,
+  40
+ ],
+ "li": {
+  "20": [
+   125,
+   132
+  ],
+  "21": [
+   0,
+   15
+  ],
+  "40": [
+   406,
+   434
+  ],
+  "41": [
+   0,
+   30
+  ]
+ },
+ "rows": {
+  "ExitTrack_20.csv": 0,
+  "ExitTrack_40.csv": 19,
+  "ExitTrack_45.csv": 0,
+  "LongTrackActive_45.csv": 149412,
+  "LongTrackInactive_20.csv": 1607,
+  "LongTrackInactive_40.csv": 9318,
+  "LongTrackInactive_45.csv": 4055,
+  "ShortTrackActive_45.csv": 20338
+ },
+ "ok": true
+}

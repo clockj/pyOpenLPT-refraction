@@ -1,0 +1,50 @@
+{
+ "run": "u2_asan_base_f5",
+ "argv": [
+  "u2_asan_base_f5",
+  "--build",
+  "asan-base",
+  "--exe",
+  "--frames",
+  "0",
+  "5",
+  "--asan-options",
+  "malloc_context_size=0"
+ ],
+ "build": "asan-base",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\asan-base\\out",
+ "build_info": {
+  "name": "asan-base",
+  "mode": "tests",
+  "config": "RelWithDebInfo",
+  "src": "D:\\Refraction\\pyOpenLPT\\build-stb\\src-base",
+  "git_head": "14ad4b6",
+  "git_diff_stat": "cmake/openLPT.cmake | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+  "git_diff_sha256": "1c81dce2da2216bfdeaff0f87ca90ece25e4dc1177e2a79cfef5777b63d09df7",
+  "untracked": [],
+  "defs": [],
+  "asan": true,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc  /fsanitize=address",
+  "start": "2026-10-05T13:38:01",
+  "minutes": 0.4,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 369,
+  "products": [
+   "OpenLPT.exe",
+   "test_ImageIO.exe",
+   "test_Matrix.exe",
+   "test_myMATH.exe"
+  ]
+ },
+ "asan_options": "malloc_context_size=0",
+ "host": "HELLOWORLD",
+ "start": "2026-10-05T13:52:40",
+ "end": "2026-10-05T14:44:24",
+ "wall_s": 3104.0,
+ "returncode": 0,
+ "frames_done": 6,
+ "sum_frame_s": 3100.9,
+ "peak_working_set_MB": 2745,
+ "peak_private_MB": 3230
+}

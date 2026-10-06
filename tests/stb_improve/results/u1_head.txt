@@ -1,0 +1,4 @@
+variant head: src D:\Refraction\pyOpenLPT\build-stb\src-base, flags /DWIN32 /D_WINDOWS /EHsc, config Release
+Matrix storage: heap, sizeof(Matrix<double>) = 24, sizeof(Pt3D) = 24
+142 checks, 0 failed
+exit code 0

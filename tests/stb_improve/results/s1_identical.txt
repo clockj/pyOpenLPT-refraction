@@ -1,0 +1,22 @@
+S1 identical outputs (frames 0-50; C1: frames 0-20)
+
+the baseline run twice (determinism):
+  log: 51 frames compared (0-50), 0 differ
+  Results/: 11 files, 11 byte-identical
+  IDENTICAL
+A1, inline size 9:
+  log: 51 frames compared (0-50), 0 differ
+  Results/: 11 files, 11 byte-identical
+  IDENTICAL
+A1, inline size 3:
+  log: 51 frames compared (0-50), 0 differ
+  Results/: 11 files, 11 byte-identical
+  IDENTICAL
+A1+A3+A4 and B0, B1, B3, B4 (profile on):
+  log: 51 frames compared (0-50), 0 differ
+  Results/: 11 files, 11 byte-identical
+  IDENTICAL
+the same run from config.txt and from config.json (C1):
+  log: 21 frames compared (0-20), 0 differ
+  Results/: 11 files, 11 byte-identical
+  IDENTICAL

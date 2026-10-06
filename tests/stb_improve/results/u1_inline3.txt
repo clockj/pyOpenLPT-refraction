@@ -1,0 +1,4 @@
+variant inline3: src D:\Refraction\pyOpenLPT, flags /DWIN32 /D_WINDOWS /EHsc /DOPENLPT_MATRIX_INLINE=3, config Release
+Matrix storage: inline up to 3, sizeof(Matrix<double>) = 48, sizeof(Pt3D) = 48
+189 checks, 0 failed
+exit code 0

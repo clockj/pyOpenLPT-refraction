@@ -1,0 +1,4 @@
+S1 identical outputs: s20_text vs s20_json
+log: 21 frames compared (0-20), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL

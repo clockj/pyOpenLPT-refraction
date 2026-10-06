@@ -1,0 +1,50 @@
+{
+ "run": "s50_b2",
+ "argv": [
+  "s50_b2",
+  "--build",
+  "b2",
+  "--frames",
+  "0",
+  "50",
+  "--config-extra",
+  "profile = 1"
+ ],
+ "build": "b2",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\b2\\out",
+ "build_info": {
+  "name": "b2",
+  "mode": "py",
+  "config": "Release",
+  "src": "D:\\Refraction\\pyOpenLPT",
+  "git_head": "14ad4b6",
+  "git_diff_stat": ".gitignore                           |  11 +\n cmake/openLPT.cmake                  |   2 +-\n inc/libMath/Matrix.h                 |  17 +-\n inc/libSTB/Config.h                  |  11 +\n inc/libSTB/StereoMatch.h             | 225 +++++++----\n src/pybind_OpenLPT/pyConfig.cpp      |   7 +-\n src/pybind_OpenLPT/pyStereoMatch.cpp |  82 ++--\n src/srcMath/Matrix.hpp               |  73 +++-\n src/srcSTB/Config.cpp                | 476 +++++++++++++++++++++-\n src/srcSTB/STB.cpp                   |  43 +-\n src/srcSTB/StereoMatch.cpp           | 743 ++++++++++++++++++-----------------\n 11 files changed, 1187 insertions(+), 503 deletions(-)",
+  "git_diff_sha256": "",
+  "untracked": [
+   "inc/nlohmann/LICENSE.MIT",
+   "inc/nlohmann/json.hpp"
+  ],
+  "defs": [],
+  "asan": false,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc",
+  "start": "2026-10-05T14:34:23",
+  "minutes": 0.7,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 370,
+  "products": [
+   "OpenLPT.exe",
+   "pyopenlpt.cp311-win_amd64.pyd"
+  ]
+ },
+ "asan_options": "",
+ "host": "HELLOWORLD",
+ "start": "2026-10-05T15:05:11",
+ "end": "2026-10-05T15:07:30",
+ "wall_s": 138.3,
+ "returncode": 0,
+ "frames_done": 51,
+ "sum_frame_s": 132.8,
+ "peak_working_set_MB": 1112,
+ "peak_private_MB": 957
+}

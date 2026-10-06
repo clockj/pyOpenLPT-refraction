@@ -93,6 +93,17 @@ tests/cylinder_wand/**/__pycache__/
 !tests/plate_wand/**
 tests/plate_wand/**/__pycache__/
 tests/plate_wand/w6_cases/
+# STB speed and robustness improvements: the pytest subset, and the test campaign under tests/stb_improve/
+# (runs/ and data/ hold benchmark runs and copied images, regenerable with the campaign's scripts)
+!tests/test_stb_improve.py
+!tests/stb_improve/
+!tests/stb_improve/**
+tests/stb_improve/**/__pycache__/
+tests/stb_improve/runs/
+tests/stb_improve/data/
+# the campaign's build trees and the saved baseline build
+build-stb/
+build-py-baseline/
 
 test/inputs/test_LPTNetBenchmark
 docs/

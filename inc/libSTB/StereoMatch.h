@@ -31,95 +31,6 @@
 #include "STBCommons.h"
 #include "myMATH.h" // Pt2D, Pt3D, Line2D, Line3D
 
-// Forward declarations of types used here
-class IDMap;
-
-class StereoMatch {
-public:
-  // Constructor
-  explicit StereoMatch(
-      const std::vector<std::shared_ptr<Camera>> &camera_models,
-      const std::vector<std::vector<std::unique_ptr<Object2D>>> &obj2d_list,
-      const ObjectConfig
-          &obj_cfg); // All reference variable should be initialized first
-
-  // Main entry
-  std::vector<std::unique_ptr<Object3D>> match() const;
-
-private:
-  // ---- bound per-call inputs (read-only during a match) ----
-  const std::vector<std::shared_ptr<Camera>> &_cam_list;
-  const ObjectConfig &_obj_cfg;
-  std::vector<std::vector<const Object2D *>> _obj2d_list;
-
-  // ---- shared accelerators usable by build/check during a match ----
-  std::vector<std::unique_ptr<IDMap>>
-      _idmaps; // one per camera (nullptr if inactive)
-  // _idmaps must be built in the contructor, because match() const cannot
-  // change any member variable due to "const".
-
-  // ---- main pipeline pieces ----
-  void buildMatch(std::vector<int> &match_candidate_id,
-                  std::vector<std::vector<int>> &build_candidates) const;
-
-  // Enumerate candidates on a specific camera, given the 3D lines of sight,
-  // chosen cams and chosen pts are used for back-projection check.
-  void enumerateCandidatesOnCam(const std::vector<Line3D> &los3d,
-                                int target_cam,
-                                const std::vector<int> &chosen_cams,
-                                const std::vector<Pt2D> &chosen_pts,
-                                std::vector<int> &out_candidates) const;
-
-  bool checkMatch(const std::vector<int> &candidate_ids,
-                  double &out_e_check)
-      const; // out_e_check: the triangulation error obtained during checking
-
-  std::vector<std::vector<int>>
-  pruneMatch(const std::vector<std::vector<int>> &match_candidates,
-             const std::vector<double> &e_checks)
-      const; // e_checks is used to prune matches
-
-  std::vector<std::unique_ptr<Object3D>>
-  triangulateMatch(const std::vector<std::vector<int>> &selected_matches) const;
-
-  // ---- camera selection helpers ----
-  int selectSecondCameraByLineLength(
-      const Line3D &los_ref, const std::vector<int> &remaining_cams) const;
-
-  int selectNextCameraByMaxPairAngle(
-      const std::vector<Line3D> &los3d,
-      const std::vector<int> &remaining_cams) const;
-
-  // ---- LOS→image line helpers ----
-  bool makeLine2DFromLOS3D(int cam_id, const Line3D &los, Line2D &out_line) const;
-
-  bool buildLinesOnCam(const std::vector<Line3D> &los3d, int cam_id,
-                       std::vector<Line2D> &out_lines) const;
-
-  // ---- early checks & tolerances (decl only; you已有实现或后续实现) ----
-  double computeMinParallaxDeg(const std::vector<Line3D> &los3d) const;
-  double calTriangulateTol(double final_tol_3d_mm, int k_selected, int k_target,
-                           double min_parallax_deg) const;
-  bool TriangulationCheckWithTol(const std::vector<Line3D> &los3d,
-                                 double tol_3d_mm) const;
-  double triangulationVariance(const std::vector<Line3D> &los) const;
-
-  // project point q_t on target_cam back to all chosen cams, check distance to
-  // chosen_pts
-  bool checkBackProjection(int target_cam, const Pt2D &q_t,
-                           const std::vector<int> &chosen_cams,
-                           const std::vector<Pt2D> &chosen_pts) const;
-
-  bool objectEarlyCheck(const std::vector<int> &cams_used,
-                        const std::vector<int> &ids_on_used) const;
-  bool tracerEarlyCheck(const std::vector<int> &cams_in_path,
-                        const std::vector<int> &ids_in_path) const;
-  bool bubbleEarlyCheck(const std::vector<int> &cams_in_path,
-                        const std::vector<int> &ids_in_path) const;
-
-  FRIEND_DEBUG(StereoMatch); // for debugging private members
-};
-
 /**
  * @brief Sparse grid (cell buckets) over an image for fast 2D candidate lookup.
  *        Cells are axis-aligned squares of size _cell_px (in pixels).
@@ -148,11 +59,17 @@ public:
 
   // Enumerate points ONLY inside the final per-row spans, with precise
   // point-to-line checks. Geometry check: for each point q, require
-  // distance_to_every_line(q) <= tol_px. Dedup is handled internally (a point
-  // may appear in multiple cells).
+  // distance_to_every_line(q) <= tol_px. Each point is in exactly one cell
+  // (rebuild) and each cell is visited at most once, so none is reported twice.
   void visitPointsInRowSpans(const std::vector<RowSpan> &spans,
                              const std::vector<Line2D> &lines_px, double tol_px,
                              std::vector<int> &out_indices) const;
+  // The same, with a caller's buffer for the lines' unit directions (no
+  // allocation once the buffer has grown).
+  void visitPointsInRowSpans(const std::vector<RowSpan> &spans,
+                             const std::vector<Line2D> &lines_px, double tol_px,
+                             std::vector<int> &out_indices,
+                             std::vector<Pt2D> &dirs) const;
 
   // ---- small helpers (inline) ----
   inline int rowsCell() const { return _rows_cell; }
@@ -180,3 +97,163 @@ private:
   // enumeration
   const std::vector<const Object2D *> *_objs = nullptr;
 };
+
+class StereoMatch {
+public:
+  // Constructor
+  explicit StereoMatch(
+      const std::vector<std::shared_ptr<Camera>> &camera_models,
+      const std::vector<std::vector<std::unique_ptr<Object2D>>> &obj2d_list,
+      const ObjectConfig
+          &obj_cfg); // All reference variable should be initialized first
+
+  // Main entry
+  std::vector<std::unique_ptr<Object3D>> match() const;
+
+private:
+  // ---- bound per-call inputs (read-only during a match) ----
+  const std::vector<std::shared_ptr<Camera>> &_cam_list;
+  const ObjectConfig &_obj_cfg;
+  std::vector<std::vector<const Object2D *>> _obj2d_list;
+
+  // ---- shared accelerators usable by build/check during a match ----
+  std::vector<std::unique_ptr<IDMap>>
+      _idmaps; // one per camera (nullptr if inactive)
+  // _idmaps must be built in the contructor, because match() const cannot
+  // change any member variable due to "const".
+
+  // ---- profiling (setting "profile"): work counters of one match() ----
+  // One entry per thread, each on its own cache line; summed and printed at the
+  // end of match().
+  struct alignas(64) ProfileCounters {
+    long long los = 0;          // lines of sight computed
+    long long proj = 0;         // camera projections
+    long long tri = 0;          // triangulations
+    long long enumerations = 0; // enumerateCandidatesOnCam calls
+    long long strip_points = 0; // points inside all strips (before back-check)
+    long long candidates = 0;   // points kept after the back-projection check
+    long long dfs_steps = 0;    // candidates tried by the depth-first search
+    long long built = 0;        // candidates built (before the check cameras)
+  };
+  bool _profile = false;
+  mutable std::vector<ProfileCounters> _prof;
+
+  // ---- per-match tables: the line of sight of every 2D observation of the
+  // active cameras, and its image line on every other active camera, computed
+  // once at the start of match() (in parallel); the search reads them instead
+  // of recomputing them for every candidate. Same functions, same inputs, so
+  // the same values as computing them on demand.
+  struct LosEntry {
+    Line3D los;
+    bool ok = false; // false: lineOfSight failed
+  };
+  struct LineEntry {
+    Line2D line;
+    bool ok = false; // false: the projection failed
+  };
+  mutable std::vector<std::vector<LosEntry>> _los_tab; // [cam][pid]
+  mutable std::vector<std::vector<std::vector<LineEntry>>>
+      _line_tab; // [cam][target cam][pid]: image line on the target camera
+  void buildTables() const;
+
+  // ---- per-thread buffers of the search: reused from one candidate to the
+  // next, so the search does not allocate once they have grown ----
+  struct Scratch {
+    // depth-first search: the path, and per depth the remaining cameras and
+    // the candidates
+    std::vector<int> path_cams, path_ids;
+    std::vector<Pt2D> path_pts;
+    std::vector<Line3D> path_los;
+    std::vector<std::vector<int>> rem, cand;
+    // enumerateCandidatesOnCam
+    std::vector<Line2D> lines;
+    std::vector<IDMap::RowSpan> spans;
+    std::vector<Pt2D> dirs;
+    // checkMatch
+    std::vector<Line3D> los3d, los_all;
+    std::vector<int> chosen_cams, chosen_ids, inliers;
+    std::vector<Pt2D> chosen_pts;
+    // selectNextCameraByMaxPairAngle
+    std::vector<Line2D> sel_lines;
+  };
+  void buildMatch(std::vector<int> &match_candidate_id,
+                  std::vector<std::vector<int>> &build_candidates,
+                  Scratch &s) const;
+  void expandMatch(int depth, int target_cam, int build_cam_count,
+                   const std::vector<int> &match_candidate_id,
+                   std::vector<std::vector<int>> &build_candidates,
+                   Scratch &s) const;
+  void enumerateCandidatesOnCam(int target_cam,
+                                const std::vector<int> &chosen_cams,
+                                const std::vector<int> &chosen_ids,
+                                const std::vector<Pt2D> &chosen_pts,
+                                std::vector<int> &out_candidates,
+                                Scratch &s) const;
+  bool checkMatch(const std::vector<int> &candidate_ids, double &out_e_check,
+                  Scratch &s) const;
+  int selectNextCameraByMaxPairAngle(const std::vector<int> &chosen_cams,
+                                     const std::vector<int> &chosen_ids,
+                                     const std::vector<int> &remaining_cams,
+                                     Scratch &s) const;
+
+  // ---- main pipeline pieces ----
+  void buildMatch(std::vector<int> &match_candidate_id,
+                  std::vector<std::vector<int>> &build_candidates) const;
+
+  // Enumerate candidates on a specific camera: the points within tol_2d_px of
+  // the image lines of all chosen observations (cams, ids), that pass the
+  // back-projection check against the chosen points.
+  void enumerateCandidatesOnCam(int target_cam,
+                                const std::vector<int> &chosen_cams,
+                                const std::vector<int> &chosen_ids,
+                                const std::vector<Pt2D> &chosen_pts,
+                                std::vector<int> &out_candidates) const;
+
+  bool checkMatch(const std::vector<int> &candidate_ids,
+                  double &out_e_check)
+      const; // out_e_check: the triangulation error obtained during checking
+
+  std::vector<std::vector<int>>
+  pruneMatch(const std::vector<std::vector<int>> &match_candidates,
+             const std::vector<double> &e_checks)
+      const; // e_checks is used to prune matches
+
+  std::vector<std::unique_ptr<Object3D>>
+  triangulateMatch(const std::vector<std::vector<int>> &selected_matches) const;
+
+  // ---- camera selection helpers ----
+  int selectSecondCameraByLineLength(
+      int ref_cam, int ref_id, const std::vector<int> &remaining_cams) const;
+
+  int selectNextCameraByMaxPairAngle(
+      const std::vector<int> &chosen_cams, const std::vector<int> &chosen_ids,
+      const std::vector<int> &remaining_cams) const;
+
+  // ---- LOS→image line helper (fills the tables) ----
+  bool makeLine2DFromLOS3D(int cam_id, const Line3D &los, Line2D &out_line) const;
+
+  // ---- early checks & tolerances (decl only; you已有实现或后续实现) ----
+  double computeMinParallaxDeg(const std::vector<Line3D> &los3d) const;
+  double calTriangulateTol(double final_tol_3d_mm, int k_selected, int k_target,
+                           double min_parallax_deg) const;
+  bool TriangulationCheckWithTol(const std::vector<Line3D> &los3d,
+                                 double tol_3d_mm) const;
+  double triangulationVariance(const std::vector<Line3D> &los) const;
+
+  // project the line of sight of point pid on target_cam back to all chosen
+  // cams, check the distance to chosen_pts
+  bool checkBackProjection(int target_cam, int pid,
+                           const std::vector<int> &chosen_cams,
+                           const std::vector<Pt2D> &chosen_pts) const;
+
+  bool objectEarlyCheck(const std::vector<int> &cams_used,
+                        const std::vector<int> &ids_on_used) const;
+  bool tracerEarlyCheck(const std::vector<int> &cams_in_path,
+                        const std::vector<int> &ids_in_path) const;
+  bool bubbleEarlyCheck(const std::vector<int> &cams_in_path,
+                        const std::vector<int> &ids_in_path) const;
+
+  FRIEND_DEBUG(StereoMatch); // for debugging private members
+};
+
+

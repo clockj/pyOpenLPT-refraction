@@ -1,0 +1,2 @@
+2026-10-05T13:52:40 u2_asan_base_f5: build asan-base, frames 0-5
+2026-10-05T14:44:24 u2_asan_base_f5: exit 0, 6 frames, wall 51.7 min, frame time 516.81 s (frames 4-23) -> 516.81 s (last 20), peak private 3230 MB

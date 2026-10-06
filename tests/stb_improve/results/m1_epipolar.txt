@@ -1,0 +1,41 @@
+M1 epipolar lines: 20000 random points of the view volume (seed 7), exact pixels; share of points seen by all cameras of a combination with every ordered pair within 1 / 2 / 3 / 4.5 px
+
+build base (D:\Refraction\pyOpenLPT\build-py-baseline\Release\pyopenlpt.cp311-win_amd64.pyd):
+  [0, 1, 2, 3]   (12978 points): 0.151 / 0.359 / 0.544 / 0.744
+  [0, 1, 2]      (14067 points): 0.215 / 0.438 / 0.609 / 0.791
+  [0, 1, 3]      (13835 points): 0.219 / 0.431 / 0.597 / 0.778
+  [0, 2, 3]      (13424 points): 0.194 / 0.413 / 0.594 / 0.788
+  [1, 2, 3]      (13074 points): 0.177 / 0.395 / 0.572 / 0.766
+  ordered pairs, median / p95 / max px (lines that could not be built):
+    0->1: 0.011 / 0.067 / 0.129 (0 failed of 17251)
+    0->2: 1.037 / 5.241 / 8.772 (0 failed of 14563)
+    0->3: 1.187 / 5.933 / 9.804 (0 failed of 14316)
+    1->0: 0.020 / 0.110 / 0.192 (0 failed of 17251)
+    1->2: 1.048 / 5.445 / 9.872 (0 failed of 14181)
+    1->3: 1.241 / 6.114 / 11.292 (0 failed of 13941)
+    2->0: 1.070 / 5.657 / 8.887 (0 failed of 14563)
+    2->1: 1.130 / 6.118 / 11.451 (0 failed of 14181)
+    2->3: 0.102 / 0.574 / 1.009 (0 failed of 14783)
+    3->0: 1.011 / 5.566 / 9.531 (0 failed of 14316)
+    3->1: 1.068 / 5.879 / 9.914 (0 failed of 13941)
+    3->2: 0.039 / 0.237 / 0.481 (0 failed of 14783)
+
+build b2 (D:\Refraction\pyOpenLPT\build-stb\b2\out\pyopenlpt.cp311-win_amd64.pyd):
+  [0, 1, 2, 3]   (12978 points): 0.461 / 0.918 / 1.000 / 1.000
+  [0, 1, 2]      (14067 points): 0.511 / 0.971 / 1.000 / 1.000
+  [0, 1, 3]      (13835 points): 0.502 / 0.917 / 1.000 / 1.000
+  [0, 2, 3]      (13424 points): 0.546 / 0.968 / 1.000 / 1.000
+  [1, 2, 3]      (13074 points): 0.492 / 0.929 / 1.000 / 1.000
+  ordered pairs, median / p95 / max px (lines that could not be built):
+    0->1: 0.005 / 0.019 / 0.028 (0 failed of 17251)
+    0->2: 0.540 / 1.472 / 1.958 (0 failed of 14563)
+    0->3: 0.614 / 1.703 / 2.161 (0 failed of 14316)
+    1->0: 0.009 / 0.029 / 0.040 (0 failed of 17251)
+    1->2: 0.510 / 1.418 / 1.930 (0 failed of 14181)
+    1->3: 0.622 / 1.698 / 2.270 (0 failed of 13941)
+    2->0: 0.676 / 1.671 / 2.192 (0 failed of 14563)
+    2->1: 0.782 / 1.845 / 2.622 (0 failed of 14181)
+    2->3: 0.060 / 0.183 / 0.253 (0 failed of 14783)
+    3->0: 0.701 / 1.901 / 2.572 (0 failed of 14316)
+    3->1: 0.815 / 2.111 / 2.911 (0 failed of 13941)
+    3->2: 0.026 / 0.082 / 0.126 (0 failed of 14783)

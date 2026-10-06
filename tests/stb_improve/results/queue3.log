@@ -1,0 +1,53 @@
+2026-10-05 20:43:31 queue3 begins
+2026-10-05 20:43:31 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py final3-check --def OPENLPT_MATRIX_CHECKS --fresh
+{
+ "name": "final3-check",
+ "config": "Release",
+ "git_head": "14ad4b6",
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 370,
+ "minutes": 0.6,
+ "products": [
+  "OpenLPT.exe",
+  "pyopenlpt.cp311-win_amd64.pyd"
+ ]
+}
+2026-10-05 20:44:06 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py final3-check --def OPENLPT_MATRIX_CHECKS --fresh
+2026-10-05 20:44:06 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py asan-final3 --mode tests --asan --fresh
+{
+ "name": "asan-final3",
+ "config": "RelWithDebInfo",
+ "git_head": "14ad4b6",
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 369,
+ "minutes": 0.4,
+ "products": [
+  "OpenLPT.exe",
+  "test_ImageIO.exe",
+  "test_Matrix.exe",
+  "test_myMATH.exe"
+ ]
+}
+2026-10-05 20:44:33 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py asan-final3 --mode tests --asan --fresh
+2026-10-05 20:44:33 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/cpp/run_unit_tests.py
+head: Matrix storage: heap, sizeof(Matrix<double>) = 24, sizeof(Pt3D) = 24 | 142 checks, 0 failed | exit 0
+head-asan: Matrix storage: heap, sizeof(Matrix<double>) = 24, sizeof(Pt3D) = 24 | 141 checks, 0 failed | exit 0
+inline9: Matrix storage: inline up to 9, sizeof(Matrix<double>) = 96, sizeof(Pt3D) = 96 | 189 checks, 0 failed | exit 0
+inline3: Matrix storage: inline up to 3, sizeof(Matrix<double>) = 48, sizeof(Pt3D) = 48 | 189 checks, 0 failed | exit 0
+inline9-check: Matrix storage: inline up to 9, sizeof(Matrix<double>) = 96, sizeof(Pt3D) = 96 | 189 checks, 0 failed | exit 0
+inline3-check: Matrix storage: inline up to 3, sizeof(Matrix<double>) = 48, sizeof(Pt3D) = 48 | 189 checks, 0 failed | exit 0
+inline9-asan: Matrix storage: inline up to 9, sizeof(Matrix<double>) = 96, sizeof(Pt3D) = 96 | 189 checks, 0 failed | exit 0
+inline3-asan: Matrix storage: inline up to 3, sizeof(Matrix<double>) = 48, sizeof(Pt3D) = 48 | 189 checks, 0 failed | exit 0
+default: Matrix storage: inline up to 3, sizeof(Matrix<double>) = 48, sizeof(Pt3D) = 48 | 189 checks, 0 failed | exit 0
+2026-10-05 20:44:49 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/cpp/run_unit_tests.py
+2026-10-05 20:44:49 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u1_check_final3_f10 --build final3-check --frames 0 10
+2026-10-05T20:44:49 u1_check_final3_f10: build final3-check, frames 0-10
+2026-10-05T20:45:23 u1_check_final3_f10: exit 0, 11 frames, wall 0.6 min, frame time 2.99 s (frames 4-23) -> 2.99 s (last 20), peak private 597 MB
+2026-10-05 20:45:23 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u1_check_final3_f10 --build final3-check --frames 0 10
+2026-10-05 20:45:23 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u2_asan_final3_f5 --build asan-final3 --exe --frames 0 5 --asan-options malloc_context_size=0
+2026-10-05T20:45:23 u2_asan_final3_f5: build asan-final3, frames 0-5
+2026-10-05T20:50:08 u2_asan_final3_f5: exit 0, 6 frames, wall 4.7 min, frame time 46.91 s (frames 4-23) -> 46.91 s (last 20), peak private 2570 MB
+2026-10-05 20:50:08 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u2_asan_final3_f5 --build asan-final3 --exe --frames 0 5 --asan-options malloc_context_size=0
+2026-10-05 20:50:08 queue3 ends

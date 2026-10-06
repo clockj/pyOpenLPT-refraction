@@ -125,10 +125,14 @@ runSingleIPRIteration(const std::vector<std::shared_ptr<Camera>> &camera_models,
     std::vector<std::unique_ptr<Object2D>> o2d_list =
         finder.findObject2D(images[cam_id], cfg);
 
-    std::cout << o2d_list.size() << "  ";
     o2d_list_all[cam_id] = std::move(o2d_list);
   }
   const clock_t t_find2D_end = clock();
+  // printed after the parallel loop, in camera order (printing inside it
+  // interleaved the threads' digits)
+  for (int cam_id = 0; cam_id < static_cast<int>(n_cam); ++cam_id)
+    if (camera_models[cam_id]->is_active)
+      std::cout << o2d_list_all[cam_id].size() << "  ";
   std::cout << " (" << double(t_find2D_end - t_find2D_start) / CLOCKS_PER_SEC
             << " s)" << "\n";
 

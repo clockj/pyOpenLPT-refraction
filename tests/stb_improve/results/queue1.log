@@ -1,0 +1,90 @@
+2026-10-05 14:44:31 queue1 begins
+2026-10-05 14:44:31 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u1_check_a1_f10 --build a1-9-check --frames 0 10
+2026-10-05T14:44:31 u1_check_a1_f10: build a1-9-check, frames 0-10
+2026-10-05T14:45:18 u1_check_a1_f10: exit 0, 11 frames, wall 0.8 min, frame time 4.12 s (frames 4-23) -> 4.12 s (last 20), peak private 645 MB
+2026-10-05 14:45:18 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u1_check_a1_f10 --build a1-9-check --frames 0 10
+2026-10-05 14:45:18 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_base --build base --frames 0 50
+2026-10-05T14:45:18 s50_base: build base, frames 0-50
+2026-10-05T14:50:28 s50_base: exit 0, 51 frames, wall 5.2 min, frame time 5.89 s (frames 4-23) -> 5.86 s (last 20), peak private 741 MB
+2026-10-05 14:50:28 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_base --build base --frames 0 50
+2026-10-05 14:50:28 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_base_2 --build base --frames 0 50
+2026-10-05T14:50:28 s50_base_2: build base, frames 0-50
+2026-10-05T14:55:42 s50_base_2: exit 0, 51 frames, wall 5.2 min, frame time 5.92 s (frames 4-23) -> 6.11 s (last 20), peak private 819 MB
+2026-10-05 14:55:42 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_base_2 --build base --frames 0 50
+2026-10-05 14:55:42 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_a1_9 --build a1-9 --frames 0 50
+2026-10-05T14:55:42 s50_a1_9: build a1-9, frames 0-50
+2026-10-05T14:59:26 s50_a1_9: exit 0, 51 frames, wall 3.7 min, frame time 4.27 s (frames 4-23) -> 4.11 s (last 20), peak private 959 MB
+2026-10-05 14:59:26 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_a1_9 --build a1-9 --frames 0 50
+2026-10-05 14:59:26 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_a1_3 --build a1-3 --frames 0 50
+2026-10-05T14:59:26 s50_a1_3: build a1-3, frames 0-50
+2026-10-05T15:02:52 s50_a1_3: exit 0, 51 frames, wall 3.4 min, frame time 3.94 s (frames 4-23) -> 3.77 s (last 20), peak private 825 MB
+2026-10-05 15:02:52 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_a1_3 --build a1-3 --frames 0 50
+2026-10-05 15:02:52 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_b134 --build b134 --frames 0 50 --config-extra profile = 1
+2026-10-05T15:02:52 s50_b134: build b134, frames 0-50
+2026-10-05T15:05:11 s50_b134: exit 0, 51 frames, wall 2.3 min, frame time 2.57 s (frames 4-23) -> 2.54 s (last 20), peak private 789 MB
+2026-10-05 15:05:11 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_b134 --build b134 --frames 0 50 --config-extra profile = 1
+2026-10-05 15:05:11 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_b2 --build b2 --frames 0 50 --config-extra profile = 1
+2026-10-05T15:05:11 s50_b2: build b2, frames 0-50
+2026-10-05T15:07:30 s50_b2: exit 0, 51 frames, wall 2.3 min, frame time 2.52 s (frames 4-23) -> 2.52 s (last 20), peak private 957 MB
+2026-10-05 15:07:30 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_b2 --build b2 --frames 0 50 --config-extra profile = 1
+2026-10-05 15:07:30 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s20_text --build b134 --frames 0 20
+2026-10-05T15:07:30 s20_text: build b134, frames 0-20
+2026-10-05T15:08:30 s20_text: exit 0, 21 frames, wall 1.0 min, frame time 2.75 s (frames 4-23) -> 2.77 s (last 20), peak private 804 MB
+2026-10-05 15:08:30 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s20_text --build b134 --frames 0 20
+2026-10-05 15:08:30 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s20_json --build b134 --frames 0 20 --json
+2026-10-05T15:08:30 s20_json: build b134, frames 0-20
+2026-10-05T15:09:32 s20_json: exit 0, 21 frames, wall 1.0 min, frame time 2.83 s (frames 4-23) -> 2.84 s (last 20), peak private 791 MB
+2026-10-05 15:09:32 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s20_json --build b134 --frames 0 20 --json
+2026-10-05 15:09:32 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py p2_si20 --build b134 --frames 0 45 --config-extra save_interval = 20
+2026-10-05T15:09:32 p2_si20: build b134, frames 0-45
+2026-10-05T15:11:50 p2_si20: exit 0, 46 frames, wall 2.3 min, frame time 2.86 s (frames 4-23) -> 2.76 s (last 20), peak private 884 MB
+2026-10-05 15:11:50 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py p2_si20 --build b134 --frames 0 45 --config-extra save_interval = 20
+2026-10-05 15:11:50 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_base --build base --frames 0 300
+2026-10-05T15:11:50 b300_base: build base, frames 0-300
+2026-10-05T16:01:44 b300_base: exit 0, 301 frames, wall 49.9 min, frame time 6.39 s (frames 4-23) -> 16.85 s (last 20), peak private 2306 MB
+2026-10-05 16:01:44 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_base --build base --frames 0 300
+2026-10-05 16:01:44 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_a1_9 --build a1-9 --frames 0 300
+2026-10-05T16:01:44 b300_a1_9: build a1-9, frames 0-300
+2026-10-05T16:31:47 b300_a1_9: exit 0, 301 frames, wall 30.0 min, frame time 3.83 s (frames 4-23) -> 10.33 s (last 20), peak private 2694 MB
+2026-10-05 16:31:47 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_a1_9 --build a1-9 --frames 0 300
+2026-10-05 16:31:47 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_b134 --build b134 --frames 0 300 --config-extra profile = 1
+2026-10-05T16:31:47 b300_b134: build b134, frames 0-300
+2026-10-05T16:45:30 b300_b134: exit 0, 301 frames, wall 13.7 min, frame time 2.65 s (frames 4-23) -> 2.58 s (last 20), peak private 2735 MB
+2026-10-05 16:45:30 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_b134 --build b134 --frames 0 300 --config-extra profile = 1
+2026-10-05 16:45:30 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_b2 --build b2 --frames 0 300 --config-extra profile = 1
+2026-10-05T16:45:30 b300_b2: build b2, frames 0-300
+2026-10-05T16:59:11 b300_b2: exit 0, 301 frames, wall 13.7 min, frame time 2.57 s (frames 4-23) -> 2.56 s (last 20), peak private 3015 MB
+2026-10-05 16:59:11 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_b2 --build b2 --frames 0 300 --config-extra profile = 1
+2026-10-05 16:59:11 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_a1_3 --build a1-3 --frames 0 300
+2026-10-05T16:59:11 b300_a1_3: build a1-3, frames 0-300
+2026-10-05T17:32:08 b300_a1_3: exit 0, 301 frames, wall 33.0 min, frame time 3.91 s (frames 4-23) -> 11.01 s (last 20), peak private 2234 MB
+2026-10-05 17:32:08 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_a1_3 --build a1-3 --frames 0 300
+2026-10-05 17:32:08 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_base --build base --frames 0 200
+2026-10-05T17:32:08 r200_base: build base, frames 0-200
+2026-10-05T17:56:48 r200_base: exit 0, 201 frames, wall 24.7 min, frame time 5.85 s (frames 4-23) -> 9.39 s (last 20), peak private 1527 MB
+2026-10-05 17:56:48 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_base --build base --frames 0 200
+2026-10-05 17:56:48 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_base --build base --frames 0 300 --load 200 --load-from r200_base
+2026-10-05T17:56:48 r300_base: build base, frames 0-300, load 200 from r200_base
+2026-10-05T18:10:06 r300_base: exit 0, 100 frames, wall 13.3 min, frame time 6.00 s (frames 4-23) -> 10.59 s (last 20), peak private 1883 MB
+2026-10-05 18:10:06 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_base --build base --frames 0 300 --load 200 --load-from r200_base
+2026-10-05 18:10:06 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_a1_9 --build a1-9 --frames 0 200
+2026-10-05T18:10:06 r200_a1_9: build a1-9, frames 0-200
+2026-10-05T18:28:14 r200_a1_9: exit 0, 201 frames, wall 18.1 min, frame time 3.74 s (frames 4-23) -> 7.57 s (last 20), peak private 1913 MB
+2026-10-05 18:28:14 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_a1_9 --build a1-9 --frames 0 200
+2026-10-05 18:28:14 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_a1_9 --build a1-9 --frames 0 300 --load 200 --load-from r200_a1_9
+2026-10-05T18:28:14 r300_a1_9: build a1-9, frames 0-300, load 200 from r200_a1_9
+2026-10-05T18:35:54 r300_a1_9: exit 0, 100 frames, wall 7.7 min, frame time 3.65 s (frames 4-23) -> 5.02 s (last 20), peak private 2324 MB
+2026-10-05 18:35:54 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_a1_9 --build a1-9 --frames 0 300 --load 200 --load-from r200_a1_9
+2026-10-05 18:35:54 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_a1_3 --build a1-3 --frames 0 200
+2026-10-05T18:35:54 r200_a1_3: build a1-3, frames 0-200
+2026-10-05T18:51:35 r200_a1_3: exit 0, 201 frames, wall 15.7 min, frame time 3.80 s (frames 4-23) -> 6.03 s (last 20), peak private 1445 MB
+2026-10-05 18:51:35 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_a1_3 --build a1-3 --frames 0 200
+2026-10-05 18:51:35 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_a1_3 --build a1-3 --frames 0 300 --load 200 --load-from r200_a1_3
+2026-10-05T18:51:35 r300_a1_3: build a1-3, frames 0-300, load 200 from r200_a1_3
+2026-10-05T18:59:09 r300_a1_3: exit 0, 100 frames, wall 7.6 min, frame time 3.60 s (frames 4-23) -> 5.13 s (last 20), peak private 1838 MB
+2026-10-05 18:59:09 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_a1_3 --build a1-3 --frames 0 300 --load 200 --load-from r200_a1_3
+2026-10-05 18:59:09 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u2_asan_a1_f5 --build asan-a1 --exe --frames 0 5 --asan-options malloc_context_size=0
+2026-10-05T18:59:09 u2_asan_a1_f5: build asan-a1, frames 0-5
+2026-10-05T19:06:41 u2_asan_a1_f5: exit 0, 6 frames, wall 7.5 min, frame time 74.76 s (frames 4-23) -> 74.76 s (last 20), peak private 2984 MB
+2026-10-05 19:06:41 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u2_asan_a1_f5 --build asan-a1 --exe --frames 0 5 --asan-options malloc_context_size=0
+2026-10-05 19:06:41 queue1 ends

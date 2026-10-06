@@ -3,6 +3,18 @@
 
 namespace fs = std::filesystem;
 
+namespace {
+// nanoflann adaptor over a vector of points (STB::checkRepeat)
+struct PointCloud3D {
+  const std::vector<Pt3D> &pts;
+  size_t kdtree_get_point_count() const { return pts.size(); }
+  double kdtree_get_pt(const size_t idx, int dim) const { return pts[idx][dim]; }
+  template <class BBOX> bool kdtree_get_bbox(BBOX &) const { return false; }
+};
+using KDTreePoints = nanoflann::KDTreeSingleIndexAdaptor<
+    nanoflann::L2_Simple_Adaptor<double, PointCloud3D>, PointCloud3D, 3>;
+} // namespace
+
 STB::STB(const BasicSetting &setting, const std::string &type,
          const std::string &obj_cfg_path)
     : _basic_setting(setting) {
@@ -66,7 +78,8 @@ void STB::processFrame(int frame_id, std::vector<Image> &img_list) {
   std::cout << std::endl;
 
   if (frame_id == _basic_setting._frame_end &&
-      frame_id % 500 != 0) // save at the end if not already saved
+      frame_id % _basic_setting._save_interval !=
+          0) // save at the end if not already saved
   {
     std::cout << "Finish STB!" << std::endl;
     std::cout << "Frame start: " << _basic_setting._frame_start
@@ -700,8 +713,8 @@ void STB::runConvPhase(int frame, std::vector<Image> &img_list) {
             << std::endl;
   std::cout << "\tNo. of fail linear fit: " << n_fail_lf << std::endl;
 
-  // save all data every 500 frames
-  if (frame % 500 == 0) {
+  // save all data every save_interval frames (config setting, default 500)
+  if (frame % _basic_setting._save_interval == 0) {
     saveTracksAll(_basic_setting._output_path + "ConvergeTrack/", frame);
     _long_track_inactive.clear();
     _exit_track.clear();
@@ -730,6 +743,13 @@ STB::checkRepeat(const std::vector<std::unique_ptr<Object3D>> &objs) const {
 
   const int ni_obj3d = static_cast<int>(n_obj3d);
 
+  // A k-d tree over the last points finds the candidates near each object; the
+  // same distance test as comparing every pair then decides, so the flags are
+  // the same.
+  PointCloud3D cloud{last_centers};
+  KDTreePoints tree(3, cloud, {10 /* max leaf */});
+  tree.buildIndex();
+
 #pragma omp parallel for if (!omp_in_parallel())
   for (int i = 0; i < ni_obj3d; ++i) {
     const Pt3D &p = objs[i]->_pt_center;
@@ -739,11 +759,20 @@ STB::checkRepeat(const std::vector<std::unique_ptr<Object3D>> &objs) const {
     if (const auto *bubble = dynamic_cast<const Bubble3D *>(objs[i].get())) {
       r_obj = bubble->_r3d;
     }
+    const double r = tol + r_obj;
 
-    for (const Pt3D &q : last_centers) {
-      Pt3D d = p - q;
+    // query a slightly larger radius (nanoflann compares squared distances),
+    // so rounding cannot drop a point the exact test accepts
+    const double r_query = r * (1.0 + 1e-9) + 1e-12;
+    std::vector<nanoflann::ResultItem<size_t, double>> hits;
+    nanoflann::RadiusResultSet<double, size_t> result_set(r_query * r_query,
+                                                          hits);
+    tree.findNeighbors(result_set, p.data(), nanoflann::SearchParameters());
+
+    for (const auto &h : hits) {
+      Pt3D d = p - last_centers[h.first];
       double dist = d.norm();
-      if (dist <= tol + r_obj) {
+      if (dist <= r) {
         flags[i] = ObjFlag::Repeated;
         break;
       }

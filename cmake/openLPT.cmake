@@ -309,7 +309,7 @@ install(DIRECTORY "${PROJECT_SOURCE_DIR}/inc/" DESTINATION ${CMAKE_INSTALL_INCLU
 
 # Install our targets & archives
 install(TARGETS
-  Matrix myMath ImageIO Camera ObjectInfo
+  Matrix myMath ImageIO RefractCurved Camera ObjectInfo
   ObjectFinder CircleIdentifier BubbleResize BubbleRefImg
   StereoMatch OTF VSC Shake IPR PredField Track
   STB Config

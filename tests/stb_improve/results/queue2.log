@@ -1,0 +1,72 @@
+2026-10-05 19:07:34 queue2 begins
+2026-10-05 19:07:34 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u1_check_final_f10 --build final-check --frames 0 10
+2026-10-05T19:07:34 u1_check_final_f10: build final-check, frames 0-10
+2026-10-05T19:08:09 u1_check_final_f10: exit 0, 11 frames, wall 0.6 min, frame time 3.01 s (frames 4-23) -> 3.01 s (last 20), peak private 848 MB
+2026-10-05 19:08:09 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u1_check_final_f10 --build final-check --frames 0 10
+2026-10-05 19:08:09 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_b1 --build b1 --frames 0 300 --config-extra profile = 1
+2026-10-05T19:08:09 b300_b1: build b1, frames 0-300
+2026-10-05T19:40:35 b300_b1: exit 0, 301 frames, wall 32.4 min, frame time 3.20 s (frames 4-23) -> 11.95 s (last 20), peak private 2861 MB
+2026-10-05 19:40:35 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_b1 --build b1 --frames 0 300 --config-extra profile = 1
+2026-10-05 19:40:35 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py final --fresh
+{
+ "name": "final",
+ "config": "Release",
+ "git_head": "14ad4b6",
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 370,
+ "minutes": 0.6,
+ "products": [
+  "OpenLPT.exe",
+  "pyopenlpt.cp311-win_amd64.pyd"
+ ]
+}
+2026-10-05 19:41:12 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py final --fresh
+2026-10-05 19:41:12 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py final3 --def OPENLPT_MATRIX_INLINE=3 --fresh
+{
+ "name": "final3",
+ "config": "Release",
+ "git_head": "14ad4b6",
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 370,
+ "minutes": 0.5,
+ "products": [
+  "OpenLPT.exe",
+  "pyopenlpt.cp311-win_amd64.pyd"
+ ]
+}
+2026-10-05 19:41:44 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/build_variant.py final3 --def OPENLPT_MATRIX_INLINE=3 --fresh
+2026-10-05 19:41:45 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_final --build final --frames 0 50
+2026-10-05T19:41:45 s50_final: build final, frames 0-50
+2026-10-05T19:44:01 s50_final: exit 0, 51 frames, wall 2.3 min, frame time 2.50 s (frames 4-23) -> 2.45 s (last 20), peak private 1055 MB
+2026-10-05 19:44:01 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_final --build final --frames 0 50
+2026-10-05 19:44:01 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_final3 --build final3 --frames 0 50
+2026-10-05T19:44:01 s50_final3: build final3, frames 0-50
+2026-10-05T19:46:16 s50_final3: exit 0, 51 frames, wall 2.3 min, frame time 2.48 s (frames 4-23) -> 2.44 s (last 20), peak private 812 MB
+2026-10-05 19:46:16 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_final3 --build final3 --frames 0 50
+2026-10-05 19:46:16 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_final --build final --frames 0 300
+2026-10-05T19:46:16 b300_final: build final, frames 0-300
+2026-10-05T19:59:25 b300_final: exit 0, 301 frames, wall 13.1 min, frame time 2.47 s (frames 4-23) -> 2.47 s (last 20), peak private 3257 MB
+2026-10-05 19:59:25 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_final --build final --frames 0 300
+2026-10-05 19:59:25 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_final3 --build final3 --frames 0 300
+2026-10-05T19:59:25 b300_final3: build final3, frames 0-300
+2026-10-05T20:12:31 b300_final3: exit 0, 301 frames, wall 13.1 min, frame time 2.49 s (frames 4-23) -> 2.48 s (last 20), peak private 2335 MB
+2026-10-05 20:12:31 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_final3 --build final3 --frames 0 300
+2026-10-05 20:12:31 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_final_si200 --build final --frames 0 300 --config-extra save_interval = 200
+2026-10-05T20:12:31 b300_final_si200: build final, frames 0-300
+2026-10-05T20:25:44 b300_final_si200: exit 0, 301 frames, wall 13.2 min, frame time 2.52 s (frames 4-23) -> 2.45 s (last 20), peak private 2851 MB
+2026-10-05 20:25:44 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py b300_final_si200 --build final --frames 0 300 --config-extra save_interval = 200
+2026-10-05 20:25:45 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_final --build final --frames 0 200
+2026-10-05T20:25:45 r200_final: build final, frames 0-200
+2026-10-05T20:34:30 r200_final: exit 0, 201 frames, wall 8.7 min, frame time 2.51 s (frames 4-23) -> 2.46 s (last 20), peak private 2008 MB
+2026-10-05 20:34:30 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r200_final --build final --frames 0 200
+2026-10-05 20:34:30 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_final --build final --frames 0 300 --load 200 --load-from r200_final
+2026-10-05T20:34:30 r300_final: build final, frames 0-300, load 200 from r200_final
+2026-10-05T20:39:03 r300_final: exit 0, 100 frames, wall 4.6 min, frame time 2.48 s (frames 4-23) -> 2.46 s (last 20), peak private 2776 MB
+2026-10-05 20:39:03 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py r300_final --build final --frames 0 300 --load 200 --load-from r200_final
+2026-10-05 20:39:03 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u2_asan_final_f5 --build asan-final --exe --frames 0 5 --asan-options malloc_context_size=0
+2026-10-05T20:39:03 u2_asan_final_f5: build asan-final, frames 0-5
+2026-10-05T20:43:02 u2_asan_final_f5: exit 0, 6 frames, wall 4.0 min, frame time 39.37 s (frames 4-23) -> 39.37 s (last 20), peak private 2593 MB
+2026-10-05 20:43:02 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py u2_asan_final_f5 --build asan-final --exe --frames 0 5 --asan-options malloc_context_size=0
+2026-10-05 20:43:02 queue2 ends
