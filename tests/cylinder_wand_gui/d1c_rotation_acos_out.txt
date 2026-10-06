@@ -1,0 +1,8 @@
+cam0: rotation angle 179.999923 deg (1.348e-06 rad from a half-turn); |rvec_of - file rvec| 3.64e-05
+   R vs exp(log R) in Python 0.00e+00 rad; vs the camFile's matrix 0.00e+00 rad; vs cv2.Rodrigues(file rvec) 3.64e-05 rad; offset that makes at f = 41452 px: 0.00e+00 px
+cam1: rotation angle 179.997980 deg (3.526e-05 rad from a half-turn); |rvec_of - file rvec| 3.62e-07
+   R vs exp(log R) in Python 6.66e-08 rad; vs the camFile's matrix 6.66e-08 rad; vs cv2.Rodrigues(file rvec) 3.67e-07 rad; offset that makes at f = 41458 px: 2.76e-03 px
+cam2: rotation angle 179.997211 deg (4.867e-05 rad from a half-turn); |rvec_of - file rvec| 1.09e-07
+   R vs exp(log R) in Python 2.98e-08 rad; vs the camFile's matrix 2.98e-08 rad; vs cv2.Rodrigues(file rvec) 1.15e-07 rad; offset that makes at f = 41468 px: 1.24e-03 px
+
+0 of 0 checks passed; 1 s

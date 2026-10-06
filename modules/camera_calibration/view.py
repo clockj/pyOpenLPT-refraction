@@ -617,6 +617,184 @@ class RefractiveCalibWorker(QObject):
         except Exception as e:
             self.error.emit(traceback.format_exc())
 
+class ResultsReportTab(QWidget):
+    """The Report tab: the results page of the last calibration (modules/camera_calibration/results_page), shown
+    with QtWebEngine when it is installed, otherwise a short summary and a button that opens it in the browser."""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.page_path = None
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(4)
+        bar = QHBoxLayout()
+        bar.setContentsMargins(6, 4, 6, 0)
+        self.path_label = QLabel("No results yet: run a calibration.")
+        self.path_label.setStyleSheet("color: #888; font-size: 11px;")
+        self.btn_browser = QPushButton("Open in browser")
+        self.btn_folder = QPushButton("Open folder")
+        for b in (self.btn_browser, self.btn_folder):
+            b.setStyleSheet("background-color: #2a3f5f; color: white; padding: 3px 10px; border-radius: 4px;")
+            b.setEnabled(False)
+        self.btn_browser.clicked.connect(self._open_in_browser)
+        self.btn_folder.clicked.connect(self._open_folder)
+        bar.addWidget(self.path_label, stretch=1)
+        bar.addWidget(self.btn_browser)
+        bar.addWidget(self.btn_folder)
+        lay.addLayout(bar)
+        self.web = None
+        try:
+            from PySide6.QtWebEngineWidgets import QWebEngineView
+            self.web = QWebEngineView(self)
+            self.web.setHtml("<html><body style='background:#0d0d0d;color:#888;font-family:system-ui;padding:24px'>"
+                             "The results page of the next calibration appears here.</body></html>")
+            lay.addWidget(self.web, stretch=1)
+        except Exception as e:                  # QtWebEngine not installed: summary + browser
+            from PySide6.QtWidgets import QTextBrowser
+            print(f"[Report] QtWebEngine not available ({e}); the page opens in the browser.")
+            self.text = QTextBrowser(self)
+            self.text.setOpenExternalLinks(True)
+            self.text.setStyleSheet("background: #111; color: #ddd;")
+            self.text.setHtml("<p style='color:#888'>The summary of the next calibration appears here; its full page "
+                              "opens in the browser (QtWebEngine is not installed).</p>")
+            lay.addWidget(self.text, stretch=1)
+
+    def show_page(self, path, summary_html=None):
+        """Show the page at `path` (dark theme inside the GUI)."""
+        from PySide6.QtCore import QUrl
+        self.page_path = str(path)
+        self.path_label.setText(self.page_path)
+        self.btn_browser.setEnabled(True)
+        self.btn_folder.setEnabled(True)
+        if self.web is not None:
+            url = QUrl.fromLocalFile(self.page_path)
+            url.setQuery("theme=dark")
+            self.web.load(url)
+        else:
+            if summary_html is None:
+                summary_html = "<p>The results page was written to " + self.page_path + ".</p>"
+            self.text.setHtml(summary_html)
+
+    def _open_in_browser(self):
+        import webbrowser
+        from pathlib import Path
+        if self.page_path:
+            webbrowser.open(Path(self.page_path).as_uri())
+
+    def _open_folder(self):
+        from PySide6.QtCore import QUrl
+        from PySide6.QtGui import QDesktopServices
+        if self.page_path:
+            QDesktopServices.openUrl(QUrl.fromLocalFile(os.path.dirname(self.page_path)))
+
+
+class ProcessCalibWorker(QThread):
+    """Runs a calibration in a separate process (target(job, folder, queue), e.g. plate_wand_gui.child_run) and
+    relays its messages: Stop ends the process at once, whatever it is doing."""
+    progress = Signal(str, float, str)
+    finished_ok = Signal(object)
+    failed = Signal(str)
+    stopped = Signal()
+
+    def __init__(self, target, job, folder):
+        super().__init__()
+        self.target = target
+        self.job = job
+        self.folder = folder
+        self._stop = False
+
+    def stop(self):
+        self._stop = True
+
+    def run(self):
+        import multiprocessing as mp
+        import queue as _queue
+        ctx = mp.get_context("spawn")
+        q = ctx.Queue()
+        proc = ctx.Process(target=self.target, args=(self.job, self.folder, q), daemon=True)
+        proc.start()
+        try:
+            while True:
+                if self._stop:
+                    proc.terminate()
+                    proc.join(5)
+                    self.stopped.emit()
+                    return
+                try:
+                    msg = q.get(timeout=0.2)
+                except _queue.Empty:
+                    if not proc.is_alive():
+                        try:
+                            msg = q.get(timeout=1.0)
+                        except _queue.Empty:
+                            self.failed.emit(f"The calibration process ended without a result (exit code "
+                                             f"{proc.exitcode}).")
+                            return
+                    else:
+                        continue
+                kind = msg[0]
+                if kind == "progress":
+                    self.progress.emit(msg[1], float(msg[2]), msg[3])
+                elif kind == "done":
+                    self.finished_ok.emit(msg[1])
+                    proc.join(10)
+                    return
+                elif kind == "failed":
+                    self.failed.emit(msg[1])
+                    proc.join(10)
+                    return
+        except Exception:
+            import traceback
+            if proc.is_alive():
+                proc.terminate()
+            self.failed.emit(traceback.format_exc())
+
+
+class CylinderCalibWorker(QThread):
+    """Runs the cylinder wand calibration (curved_calibration/cylinder_wand_gui.py) off the GUI thread: the full
+    calibration and its outputs, or with precheck=True stages 1-3 only.  stop() ends it at the next log line."""
+    progress = Signal(str, float, str)      # stage, RMS in px (nan when the line has none), the log line
+    finished_ok = Signal(object)            # dict: precheck, sol, result, folder, per_frame, lines
+    failed = Signal(str)                    # a message for the user (a traceback for unexpected errors)
+    stopped = Signal()
+
+    def __init__(self, job, folder=None, precheck=False):
+        super().__init__()
+        self.job = job
+        self.folder = folder
+        self.precheck = bool(precheck)
+        self._stop = False
+
+    def stop(self):
+        self._stop = True
+
+    def run(self):
+        from .curved_calibration import cylinder_wand_gui as cg
+
+        def emit(stage, rms, text):
+            self.progress.emit(str(stage), float(rms), str(text))
+
+        try:
+            if self.precheck:
+                sol = cg.precheck(self.job, progress=emit, stop=lambda: self._stop)
+                payload = {"precheck": True, "sol": sol, "result": None, "folder": None,
+                           "per_frame": cg.per_frame_errors(sol, self.job), "lines": cg.precheck_lines(sol, self.job)}
+            else:
+                sol = cg.run(self.job, progress=emit, stop=lambda: self._stop)
+                emit("Writing the results", float("nan"), str(self.folder))
+                result = cg.write_outputs(sol, self.job, self.folder)
+                payload = {"precheck": False, "sol": sol, "result": result, "folder": self.folder,
+                           "per_frame": cg.per_frame_errors(sol, self.job), "lines": cg.summary_lines(result)}
+            self.finished_ok.emit(payload)
+        except cg.Stopped:
+            self.stopped.emit()
+        except ValueError as e:
+            self.failed.emit(str(e))
+        except Exception:
+            import traceback
+            self.failed.emit(traceback.format_exc())
+
+
 class NumericTableWidgetItem(QTableWidgetItem):
     """TableWidgetItem that sorts numerically instead of alphabetically."""
     def __lt__(self, other):
@@ -1153,6 +1331,42 @@ class Calibration3DViewer(QWidget):
 
 
 
+    def plot_cylinder(self, cameras, radii, points_3d=None, sight_lines=None, y_range=None):
+        """Cylinder-port result (model PINCYL): the cameras ({id: {'R', 'T'}}, mm, the tube's frame), the tube's
+        walls about the Y axis (radii in mm, outer first), the wand ends and each camera's line of sight bent at
+        the walls ([[camera, [[x, y, z], ...]], ...]).  Drawn with Y up, like plot_refractive."""
+        self.plot_calibration(cameras, points_3d, axis_map='y_up')
+        scale = 1000.0
+        try:
+            if y_range is None:
+                if points_3d is not None and len(points_3d) > 0:
+                    yy = np.asarray(points_3d, dtype=float)[:, 1]
+                    pad = max(10.0, 0.3 * float(np.ptp(yy)))
+                    y_range = (float(np.min(yy)) - pad, float(np.max(yy)) + pad)
+                else:
+                    y_range = (-20.0, 20.0)
+            th = np.linspace(0.0, 2.0 * np.pi, 97)
+            for k, R in enumerate(radii):
+                R = float(R)
+                if k == 0:
+                    Th, Yy = np.meshgrid(th, np.array(y_range, dtype=float))
+                    self.ax.plot_surface(R * np.sin(Th) / scale, R * np.cos(Th) / scale, Yy / scale,
+                                         color='#00d4ff', alpha=0.10, linewidth=0, shade=False)
+                for yv in y_range:
+                    self.ax.plot(R * np.sin(th) / scale, R * np.cos(th) / scale, np.full_like(th, yv / scale),
+                                 color='#00d4ff', linewidth=0.8, alpha=0.9 if k == 0 else 0.5)
+            self.ax.plot([0.0, 0.0], [0.0, 0.0], [y_range[0] / scale, y_range[1] / scale],
+                         color='#00d4ff', linewidth=0.7, linestyle='--', alpha=0.7)
+            for _cam, pts in (sight_lines or []):
+                P = np.asarray(pts, dtype=float) / scale
+                self.ax.plot(P[:, 0], P[:, 2], P[:, 1], color='#FFB000', linewidth=0.8, alpha=0.85)
+            self.canvas.draw()
+        except Exception as e:
+            import traceback
+            print(f"[Viz] Error plotting the tube: {e}")
+            print(traceback.format_exc())
+
+
 class CameraCalibrationView(QWidget):
 # ... (skip to create_wand_tab_v2)
 
@@ -1370,12 +1584,50 @@ class CameraCalibrationView(QWidget):
             "reliable but slower, recommended for camera system with refraction."
         )
 
+        self.detect_mode_ellipse = QRadioButton("ellipse")
+        self.detect_mode_ellipse.setStyleSheet(detect_mode_radio_style)
+        self.detect_mode_ellipse.setToolTip(
+            "for balls seen through a tube (their images are ellipses): an ellipse fitted to each ball's edge, "
+            "with the rod's edge points left out. Slower than fast."
+        )
+
         self.detect_mode_group.addButton(self.detect_mode_fast)
         self.detect_mode_group.addButton(self.detect_mode_reliable)
+        self.detect_mode_group.addButton(self.detect_mode_ellipse)
         mode_row.addWidget(self.detect_mode_fast)
         mode_row.addWidget(self.detect_mode_reliable)
+        mode_row.addWidget(self.detect_mode_ellipse)
         mode_row.addStretch()
         det_layout.addLayout(mode_row)
+
+        # Settings of the "ellipse" mode (curved_calibration/ball_ellipses.py)
+        self.ellipse_opts_container = QWidget()
+        ellipse_form = QFormLayout(self.ellipse_opts_container)
+        ellipse_form.setContentsMargins(0, 0, 0, 0)
+        self.ellipse_open_spin = QSpinBox()
+        self.ellipse_open_spin.setRange(0, 401)
+        self.ellipse_open_spin.setValue(25)
+        self.ellipse_open_spin.setSuffix(" px")
+        self.ellipse_open_spin.setToolTip(
+            "An opening that removes the rod before the balls are separated: a little wider than the rod's image, "
+            "narrower than the small ball's. 0: no opening."
+        )
+        self._apply_input_style(self.ellipse_open_spin)
+        self.ellipse_mask_spin = QDoubleSpinBox()
+        self.ellipse_mask_spin.setRange(0.0, 400.0)
+        self.ellipse_mask_spin.setDecimals(1)
+        self.ellipse_mask_spin.setValue(18.0)
+        self.ellipse_mask_spin.setSuffix(" px")
+        self.ellipse_mask_spin.setToolTip(
+            "Edge points within this distance of the line joining the two balls, on the side facing the other ball, "
+            "are left out (the rod pulls them): about the rod's half-width plus twice its blur. 0: none."
+        )
+        self._apply_input_style(self.ellipse_mask_spin)
+        ellipse_form.addRow("Rod opening:", self.ellipse_open_spin)
+        ellipse_form.addRow("Rod mask:", self.ellipse_mask_spin)
+        self.ellipse_opts_container.setVisible(False)
+        det_layout.addWidget(self.ellipse_opts_container)
+        self.detect_mode_ellipse.toggled.connect(self.ellipse_opts_container.setVisible)
 
         # Actions
         self.btn_detect_single = QPushButton("Test Detect (Current Frame)")
@@ -1472,7 +1724,7 @@ class CameraCalibrationView(QWidget):
         
         self.wand_model_combo = QComboBox()
         self._apply_input_style(self.wand_model_combo)
-        self.wand_model_combo.addItems(["Pinhole", "Pinhole+Refraction"])
+        self.wand_model_combo.addItems(["Pinhole", "Pinhole+Refraction", "Pinhole+Cylinder"])
         self.wand_model_combo.currentIndexChanged.connect(self._on_model_changed)
         
         self.wand_len_spin = QDoubleSpinBox()
@@ -1595,8 +1847,28 @@ class CameraCalibrationView(QWidget):
         diagram_layout.addWidget(seg3)
 
         ref_layout.addLayout(diagram_layout)
+
+        # the calibrator (plate_wand by default; curved_calibration/plate_wand_gui.py)
+        self.refr_legacy_check = QCheckBox("Use the previous calibrator (before October 2026)")
+        self.refr_legacy_check.setToolTip(
+            "Off: the flat-window wand calibration plate_wand finds the windows' planes and every camera's pose, f "
+            "and k1 from the wand (faster and more robust in the tests). On: the GUI's previous calibrator."
+        )
+        self.refr_thorough_check = QCheckBox("Thorough start search (slower; for noisy data)")
+        self.refr_thorough_check.setToolTip("Carry six starts through the fit instead of two.")
+        self.refr_refit_check = QCheckBox("Refit from the last result (skips the start search)")
+        self.refr_refit_check.setToolTip("After deleting frames: start from the last flat-window calibration of the "
+                                         "same cameras and windows.")
+        for w in (self.refr_legacy_check, self.refr_thorough_check, self.refr_refit_check):
+            w.setStyleSheet("border: none;")
+            ref_layout.addWidget(w)
         cal_layout.addWidget(self.refraction_group)
         self.refraction_group.setVisible(False) # Hidden by default
+
+        # --- Tube Settings (shown only if Pinhole+Cylinder) ---
+        self.cylinder_group = self._build_cylinder_group()
+        cal_layout.addWidget(self.cylinder_group)
+        self.cylinder_group.setVisible(False)
 
         # Connect Refraction Logic
         self.media1_combo.currentIndexChanged.connect(self._on_refraction_media_changed)
@@ -1811,6 +2083,8 @@ class CameraCalibrationView(QWidget):
             
         success, msg = self.wand_calibrator.load_wand_data_from_csv(file_path)
         if success:
+            self._wand_detect_mode_used = None          # not known for points read from a file
+            self._wand_points_source = file_path
             self.error_table.setRowCount(0)
             self._update_3d_viz()
             # Ensure calibrator has access to cameras/size
@@ -1920,6 +2194,7 @@ class CameraCalibrationView(QWidget):
         self.wand_images = {}  # Dict {cam_idx: [paths]}
         self.wand_calibrator = WandCalibrator() # Init calibrator
         self._refr_has_result = False
+        self._refr_kind = None              # "plate" or "cylinder": which refractive result _refr_has_result means
         self._refr_params_dirty = False
         self._refr_final_cam_params = None
         self._refr_window_planes = None
@@ -3183,6 +3458,10 @@ class CameraCalibrationView(QWidget):
             if not hasattr(self, 'calib_3d_view') or self.calib_3d_view is None:
                 self.calib_3d_view = Calibration3DViewer()
             self.vis_tabs.addTab(self.calib_3d_view, "3D View")
+            # and the Report tab: the results page of the last calibration
+            if getattr(self, 'report_tab', None) is None:
+                self.report_tab = ResultsReportTab()
+            self.vis_tabs.addTab(self.report_tab, "Report")
             # self.vis_tabs.addTab(QLabel("3D View Disabled (Debug)"), "3D View")
             
         except RuntimeError:
@@ -3231,6 +3510,7 @@ class CameraCalibrationView(QWidget):
         self._update_axis_cam_table(count)
 
         self._refresh_wand_radius_range_limit()
+        self._apply_cylinder_focal_state()
 
     def _update_axis_cam_table(self, count):
         if not hasattr(self, 'axis_cam_table'):
@@ -3938,7 +4218,7 @@ class CameraCalibrationView(QWidget):
             from pathlib import Path
             p = Path(folder)
             # Find images
-            files = sorted([str(f) for f in p.iterdir() if f.suffix.lower() in ['.png', '.jpg', '.bmp', '.tif', '.jpeg']])
+            files = sorted([str(f) for f in p.iterdir() if f.suffix.lower() in ['.png', '.jpg', '.bmp', '.tif', '.tiff', '.jpeg']])
             
             if files:
                 self.wand_images[cam_idx] = files
@@ -4001,9 +4281,19 @@ class CameraCalibrationView(QWidget):
         self.radius_range.setRange(1, max_r)
 
     def _get_wand_detect_mode(self):
+        if hasattr(self, 'detect_mode_ellipse') and self.detect_mode_ellipse.isChecked():
+            return "ellipse"
         if hasattr(self, 'detect_mode_reliable') and self.detect_mode_reliable.isChecked():
             return "reliable"
         return "fast"
+
+    def _get_wand_detect_opts(self, full=False):
+        """Settings of the "ellipse" detection mode (None for the other modes); full: every measured ball with its
+        ellipse, for display."""
+        if self._get_wand_detect_mode() != "ellipse":
+            return None
+        return {"open_px": int(self.ellipse_open_spin.value()), "rod_mask_px": float(self.ellipse_mask_spin.value()),
+                "guard_px": 3.0, "full": bool(full)}
     
     def populate_wand_table(self):
         """Populates the frame table with filenames and status."""
@@ -4988,7 +5278,8 @@ class CameraCalibrationView(QWidget):
         
         # Worker Setup
         self._single_detect_worker = WandDetectionSingleFrameWorker(
-            self.wand_calibrator, single_frame_dict, wand_type, min_r, max_r, sensitivity, detect_mode
+            self.wand_calibrator, single_frame_dict, wand_type, min_r, max_r, sensitivity, detect_mode,
+            detect_opts=self._get_wand_detect_opts(full=True),
         )
         self._single_detect_worker.finished_signal.connect(self._on_single_detection_finished)
         
@@ -5054,6 +5345,18 @@ class CameraCalibrationView(QWidget):
                         for pt in pts:
                             x, y = int(pt[0]), int(pt[1])
                             r = int(pt[2]) if len(pt) > 2 else 15
+                            if len(pt) >= 8:
+                                # "ellipse" mode: the fitted ellipse; red when the overlap guard dropped the pair
+                                dropped = float(pt[7]) > 0.5
+                                col = (255, 60, 60) if dropped else (0, 100, 255)
+                                cv2.ellipse(img, (int(round(float(pt[0]))), int(round(float(pt[1])))),
+                                            (max(1, int(round(float(pt[4])))), max(1, int(round(float(pt[5]))))),
+                                            float(np.degrees(float(pt[6]))), 0.0, 360.0, col, 2)
+                                cv2.drawMarker(img, (x, y), col, cv2.MARKER_CROSS, 14, 2)
+                                label = "overlap: dropped" if dropped else f"r={float(pt[2]):.1f}"
+                                cv2.putText(img, label, (x + r + 5, y),
+                                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)
+                                continue
                             # Draw circle
                             cv2.circle(img, (x, y), r, (0, 100, 255), 3)
                             # Draw radius label next to circle
@@ -5128,13 +5431,17 @@ class CameraCalibrationView(QWidget):
 
         # Start Worker
         self._proc_thread = WandDetectionWorker(
-            self.wand_calibrator, 
-            self.wand_images, 
+            self.wand_calibrator,
+            self.wand_images,
             wand_type, min_r, max_r, sensitivity,
             autosave_path=autosave_path,
             resume=resume,
             detect_mode=detect_mode,
+            detect_opts=self._get_wand_detect_opts(),
         )
+        # remembered for the cylinder calibration's checks (through a tube only "ellipse" measures the centres)
+        self._wand_detect_mode_used = detect_mode
+        self._wand_points_source = f"detected in the GUI ({detect_mode} mode)"
         
         # Setup dialog
         self._proc_dialog = ProcessingDialog(self)
@@ -5285,6 +5592,14 @@ class CameraCalibrationView(QWidget):
         # --- Dispatch based on Camera Model ---
         model_name = self.wand_model_combo.currentText()
         
+        if model_name == "Pinhole+Cylinder":
+            self._run_cylinder_wand_calibration(wand_len, dist_coeff_num, precalibrate)
+            return
+
+        if model_name == "Pinhole+Refraction" and not precalibrate and not self.refr_legacy_check.isChecked():
+            self._run_plate_wand_calibration(wand_len, dist_coeff_num)
+            return
+
         if model_name == "Pinhole+Refraction" and not precalibrate:
             self._run_refractive_wand_calibration(wand_len, dist_coeff_num)
             return
@@ -5588,6 +5903,9 @@ class CameraCalibrationView(QWidget):
         if success:
             self.status_label.setText("Calibration Successful!")
             self._axis_landmarks_3d = None
+            if not getattr(self, '_is_precalibrating', False):
+                self._refr_has_result = False
+                self._refr_kind = None
             
             # Update 3D Visualization and Error Table FIRST so user can see results in background
             self._update_3d_viz()
@@ -5679,7 +5997,9 @@ class CameraCalibrationView(QWidget):
             # NOTE: per_frame_errors reflect optimization residuals before axis alignment.
             # They remain valid as calibration quality indicators but are not in the aligned frame.
             self._populate_error_table()
-            
+            if not getattr(self, '_is_precalibrating', False):
+                self._show_pinhole_report()
+
             # If Pre-calibration, SKIP save prompt
             if getattr(self, '_is_precalibrating', False):
                 QMessageBox.information(self, "Check Complete", "Pre-calibration check complete.\nReview errors in the table.")
@@ -5707,6 +6027,7 @@ class CameraCalibrationView(QWidget):
                         path = cam_file_dir / f"cam{cam_idx}.txt"
                         self.wand_calibrator.export_to_file(cam_idx, str(path))
                     print(f"Parameters saved to {cam_file_dir}")
+                    self._show_pinhole_report(output_dir=str(output_dir))
                     QMessageBox.information(self, "Saved", f"Camera parameters saved to:\n{cam_file_dir}")
         else:
             self.status_label.setText(f"Calibration Failed: {msg}")
@@ -7264,12 +7585,22 @@ class CameraCalibrationView(QWidget):
                                f"User guide not found at:\n{guide_path}")
 
     def _on_model_changed(self):
-        """Show/hide refraction group based on selected camera model."""
+        """Show/hide the refraction or tube group based on selected camera model."""
         if not hasattr(self, 'refraction_group') or self.refraction_group is None:
             return
         model_name = self.wand_model_combo.currentText()
         is_refraction = (model_name == "Pinhole+Refraction")
         self.refraction_group.setVisible(is_refraction)
+        is_cylinder = (model_name == "Pinhole+Cylinder")
+        if hasattr(self, 'cylinder_group'):
+            self.cylinder_group.setVisible(is_cylinder)
+        # the cylinder model fits k1 at most
+        item = self.dist_model_combo.model().item(2) if hasattr(self, 'dist_model_combo') else None
+        if item is not None:
+            item.setEnabled(not is_cylinder)
+        if is_cylinder and self.dist_model_combo.currentIndex() == 2:
+            self.dist_model_combo.setCurrentIndex(1)
+        self._apply_cylinder_focal_state()
 
     def _default_plate_refraction_setting(self):
         return {
@@ -7938,6 +8269,7 @@ class CameraCalibrationView(QWidget):
         if success and cam_params:
             self._refr_has_result = True
             self._refr_params_dirty = True
+            self._refr_kind = "plate"
             self._refr_final_cam_params = cam_params
             self._refr_window_planes = report.get('window_planes', {}) if isinstance(report, dict) else {}
             self._refr_proj_err_stats = dataset.get('per_camera_proj_err_stats', {}) if isinstance(dataset, dict) else {}
@@ -8107,6 +8439,20 @@ class CameraCalibrationView(QWidget):
         """Export latest refractive calibration result into target camFile directory."""
         if not out_dir:
             return False
+        if getattr(self, '_refr_kind', None) in ("cylinder", "plate_wand"):
+            # the cylinder and the flat-window calibrations wrote their camFiles already: copy them
+            folder = getattr(self, '_cyl_result_dir', None)
+            names = getattr(self, '_cyl_result_names', None)
+            if not folder or not names:
+                return False
+            try:
+                from .curved_calibration import cylinder_wand_gui as cg
+                n = cg.copy_camfiles(folder, names, out_dir)
+                self._refr_params_dirty = False
+                return n == len(names)
+            except Exception as e:
+                print(f"[Cylinder] Export to project camFile failed: {e}")
+                return False
         if not self._refr_has_result or not self._refr_final_cam_params:
             return False
         if not self._refr_cam_to_window or not self._refr_window_media:
@@ -8169,3 +8515,503 @@ class CameraCalibrationView(QWidget):
             self._apply_input_style(win_combo)
             win_combo.addItems(window_options)
             self.cam_window_table.setCellWidget(i, 1, win_combo)
+
+    # ------------------------------------------------------------------ the cylinder model (PINCYL)
+    def _build_cylinder_group(self):
+        """The tube's settings for the "Pinhole+Cylinder" model: one wall between the camera side and the liquid
+        (curved_calibration/cylinder_wand_gui.py, tests/cylinder_wand_gui)."""
+        grp = QGroupBox("Tube Settings")
+        grp.setStyleSheet(self.GROUP_BOX_STYLE)
+        lay = QVBoxLayout(grp)
+        lay.setContentsMargins(5, 15, 5, 5)
+
+        note = QLabel("The cameras look through the tube's side wall. f, the poses and k1 come from the wand: "
+                      "the Focal column is not used. Detect the balls with the 'ellipse' mode.")
+        note.setWordWrap(True)
+        note.setStyleSheet("color: #aaa; font-size: 11px; border: none;")
+        lay.addWidget(note)
+
+        def dspin(lo, hi, val, decimals, suffix=""):
+            w = QDoubleSpinBox()
+            w.setRange(lo, hi)
+            w.setDecimals(decimals)
+            w.setValue(val)
+            if suffix:
+                w.setSuffix(suffix)
+            self._apply_input_style(w)
+            return w
+
+        def combo(items):
+            w = QComboBox()
+            w.addItems(items)
+            self._apply_input_style(w)
+            return w
+
+        def pair(a, b):
+            box = QWidget()
+            h = QHBoxLayout(box)
+            h.setContentsMargins(0, 0, 0, 0)
+            h.setSpacing(6)
+            h.addWidget(a)
+            h.addWidget(b)
+            return box
+
+        self.cyl_out_combo = combo(["Air", "Other"])
+        self.cyl_out_index = dspin(1.0, 3.0, 1.0, 4)
+        self.cyl_wall_combo = combo(["Acrylic", "Glass", "Other"])
+        self.cyl_wall_index = dspin(1.0, 3.0, 1.49, 4)
+        self.cyl_in_combo = combo(["Water", "Other"])
+        self.cyl_in_index = dspin(1.0, 3.0, 1.333, 4)
+        self.cyl_od_spin = dspin(1.0, 5000.0, 201.6125, 4, " mm")
+        self.cyl_od_spin.setToolTip("Outer diameter of the tube (7.9375 in = 201.6125 mm).")
+        self.cyl_wall_spin = dspin(0.01, 1000.0, 3.175, 4, " mm")
+        self.cyl_wall_spin.setToolTip("Wall thickness (0.125 in = 3.175 mm).")
+        self.cyl_in_index.setToolTip("Water: 1.333. The tube's radii set the scale, so an error in n shows in f "
+                                     "and in the wand length.")
+
+        form = QFormLayout()
+        form.addRow("Camera side:", pair(self.cyl_out_combo, self.cyl_out_index))
+        form.addRow("Wall:", pair(self.cyl_wall_combo, self.cyl_wall_index))
+        form.addRow("Outer diameter:", self.cyl_od_spin)
+        form.addRow("Wall thickness:", self.cyl_wall_spin)
+        form.addRow("Inside:", pair(self.cyl_in_combo, self.cyl_in_index))
+        lay.addLayout(form)
+
+        self.cyl_fit_L_check = QCheckBox("Fit the wand length (checks the tube's size and indices)")
+        self.cyl_noise_combo = combo(["Per camera", "Per camera and ball", "Equal"])
+        self.cyl_noise_combo.setToolTip("How each detection is weighted: by its camera's noise level (estimated from "
+                                        "the residuals), by camera and ball size, or equally.")
+        self.cyl_thorough_check = QCheckBox("Thorough start search (slower; for noisy data)")
+        self.cyl_thorough_check.setToolTip("Carry six starts through the fit instead of two.")
+        self.cyl_refit_check = QCheckBox("Refit from the last result (skips the start search)")
+        self.cyl_refit_check.setToolTip("After deleting frames: start from the last cylinder calibration of the same "
+                                        "cameras instead of searching for a start.")
+        self.cyl_pixel_spin = dspin(0.0, 100.0, 0.0, 2, " um")
+        self.cyl_pixel_spin.setSpecialValueText("not set")
+        self.cyl_pixel_spin.setToolTip("Pixel size, only used to print f in mm.")
+        opt = QFormLayout()
+        opt.addRow("Noise weights:", self.cyl_noise_combo)
+        opt.addRow("Pixel size:", self.cyl_pixel_spin)
+        lay.addLayout(opt)
+        for w in (self.cyl_fit_L_check, self.cyl_thorough_check, self.cyl_refit_check):
+            w.setStyleSheet("border: none;")
+            lay.addWidget(w)
+
+        for w in (self.cyl_out_combo, self.cyl_wall_combo, self.cyl_in_combo):
+            w.currentIndexChanged.connect(self._on_cylinder_media_changed)
+        self._on_cylinder_media_changed()
+        return grp
+
+    def _on_cylinder_media_changed(self, *_args):
+        """A named material sets its refractive index (read-only); "Other" lets it be typed."""
+        named = {"Air": 1.0, "Acrylic": 1.49, "Glass": 1.52, "Water": 1.333}
+        for c, spin in ((self.cyl_out_combo, self.cyl_out_index), (self.cyl_wall_combo, self.cyl_wall_index),
+                        (self.cyl_in_combo, self.cyl_in_index)):
+            name = c.currentText()
+            if name in named:
+                spin.setValue(named[name])
+                spin.setReadOnly(True)
+            else:
+                spin.setReadOnly(False)
+
+    def _apply_cylinder_focal_state(self):
+        """The cylinder model finds f from the wand: grey out the camera table's Focal column for it."""
+        if not hasattr(self, 'wand_cam_table') or not hasattr(self, 'wand_model_combo'):
+            return
+        is_cyl = self.wand_model_combo.currentText() == "Pinhole+Cylinder"
+        for row in range(self.wand_cam_table.rowCount()):
+            w = self.wand_cam_table.cellWidget(row, 2)
+            if w is not None:
+                w.setEnabled(not is_cyl)
+                w.setToolTip("Not used by the cylinder model: f is found from the wand." if is_cyl else "")
+
+    def _run_cylinder_wand_calibration(self, wand_len, dist_coeff_num, precalibrate=False):
+        """The "Pinhole+Cylinder" model: check the inputs, ask for the output folder, run CylinderCalibWorker.
+        With precalibrate, stages 1-3 only (no files)."""
+        from .curved_calibration import cylinder_wand_gui as cg
+        try:
+            if dist_coeff_num > 1:
+                raise ValueError("The cylinder model fits k1 at most: choose 'None' or 'Radial k1' as distortion.")
+            pts = self.wand_calibrator.wand_points_filtered
+            if pts is None:
+                pts = self.wand_calibrator.wand_points
+            if not pts:
+                raise ValueError("No wand points yet: detect them (Point Detection) or load a CSV first.")
+            uv, fids, cids = cg.uv_from_wand_points(pts)
+            settings = self._collect_camera_settings_from_table()
+            missing = [c for c in cids if c not in settings]
+            if missing:
+                raise ValueError(f"The camera table has no row for camera(s) {missing}: set Num Cameras.")
+            sizes = [(settings[c]['width'], settings[c]['height']) for c in cids]
+            tube = cg.tube_from_settings(self.cyl_od_spin.value(), self.cyl_wall_spin.value(),
+                                         self.cyl_out_index.value(), self.cyl_wall_index.value(),
+                                         self.cyl_in_index.value())
+            start = None
+            notes = []
+            if self.cyl_refit_check.isChecked() and not precalibrate:
+                last = getattr(self, '_cyl_last', None)
+                if last and list(last["job"].cam_ids) == list(cids):
+                    start = [c.copy() for c in last["sol"].cams]
+                else:
+                    notes.append("No earlier cylinder result for these cameras: the start is searched.")
+            pixel_um = float(self.cyl_pixel_spin.value())
+            job = cg.Job(uv=uv, frame_ids=fids, cam_ids=cids, sizes=sizes, wand_length=float(wand_len),
+                         radii=tube.radii, n=tube.n, fit_k1=(dist_coeff_num == 1),
+                         fit_L=self.cyl_fit_L_check.isChecked(),
+                         noise_weights=cg.NOISE_WEIGHTS[self.cyl_noise_combo.currentText()],
+                         n_final=6 if self.cyl_thorough_check.isChecked() else 2, start=start,
+                         pixel_mm=pixel_um / 1000.0 if pixel_um > 0 else None,
+                         detect_mode=getattr(self, '_wand_detect_mode_used', None),
+                         source=str(getattr(self, '_wand_points_source', "") or ""))
+            job.check()
+        except ValueError as e:
+            QMessageBox.warning(self, "Cylinder Calibration", str(e))
+            self._busy_end('wand_calibration')
+            return
+
+        folder = None
+        if not precalibrate:
+            folder = QFileDialog.getExistingDirectory(
+                self, "Select the folder for the cylinder calibration (camFile/ and the report go there)")
+            if not folder:
+                self._busy_end('wand_calibration')
+                return
+        if getattr(self, 'axis_direction_map', None):
+            notes.append("Axis points are not applied to the cylinder model: its frame is the tube's "
+                         "(Y along the axis, Z towards the first camera).")
+        self._cyl_notes = notes
+        self._cyl_job = job
+
+        self._cyl_worker = CylinderCalibWorker(job, folder, precheck=precalibrate)
+        self._cyl_worker.progress.connect(self._on_cylinder_progress)
+        self._cyl_worker.finished_ok.connect(self._on_cylinder_finished)
+        self._cyl_worker.failed.connect(self._on_cylinder_failed)
+        self._cyl_worker.stopped.connect(self._on_cylinder_stopped)
+        self._create_cylinder_progress_dialog(precalibrate)
+        for b in (getattr(self, 'btn_calibrate_wand', None), getattr(self, 'btn_precalibrate', None)):
+            if b is not None:
+                b.setEnabled(False)
+        self.status_label.setText("Cylinder calibration running..." if not precalibrate
+                                  else "Cylinder check (stages 1-3) running...")
+        self._cyl_worker.start()
+
+    def _create_cylinder_progress_dialog(self, precheck):
+        from PySide6.QtWidgets import QDialog, QProgressBar
+        from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+        from matplotlib.figure import Figure
+
+        dlg = QDialog(self)
+        dlg.setWindowTitle("Cylinder Calibration: check (stages 1-3)" if precheck else "Cylinder Calibration")
+        dlg.setModal(False)
+        dlg.setMinimumSize(520, 400)
+        dlg.setStyleSheet("background-color: #000000;")
+        lay = QVBoxLayout(dlg)
+        lay.setContentsMargins(10, 10, 10, 10)
+        self._cyl_phase_label = QLabel("Starting...")
+        self._cyl_phase_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #00d4ff; background: transparent;")
+        self._cyl_phase_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        lay.addWidget(self._cyl_phase_label)
+        bar = QProgressBar()
+        bar.setRange(0, 0)
+        bar.setTextVisible(False)
+        bar.setFixedHeight(8)
+        lay.addWidget(bar)
+        self._cyl_fig = Figure(figsize=(4.8, 2.6), facecolor='#000000')
+        self._cyl_canvas = FigureCanvasQTAgg(self._cyl_fig)
+        ax = self._cyl_fig.add_subplot(111)
+        ax.set_facecolor('#000000')
+        ax.set_xlabel('Update', color='white', fontsize=9)
+        ax.set_ylabel('RMS (px)', color='white', fontsize=9)
+        ax.set_yscale('log')
+        ax.tick_params(colors='white', labelsize=8)
+        for sp in ax.spines.values():
+            sp.set_color('#444')
+        ax.grid(True, which='both', ls='--', color='#333', alpha=0.5)
+        self._cyl_ax = ax
+        self._cyl_line, = ax.plot([], [], color='#00d4ff', marker='o', markersize=3, linewidth=1.2)
+        self._cyl_fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.95)
+        lay.addWidget(self._cyl_canvas)
+        self._cyl_text_label = QLabel("")
+        self._cyl_text_label.setWordWrap(True)
+        self._cyl_text_label.setStyleSheet("font-family: Consolas, monospace; font-size: 11px; color: #bbb; "
+                                           "background: transparent;")
+        lay.addWidget(self._cyl_text_label)
+        self._cyl_stop_btn = QPushButton("Stop")
+        self._cyl_stop_btn.setStyleSheet("background-color: #d32f2f; color: white; font-weight: bold; padding: 5px;")
+        self._cyl_stop_btn.clicked.connect(self._stop_cylinder_calibration)
+        lay.addWidget(self._cyl_stop_btn)
+        dlg.rejected.connect(self._stop_cylinder_calibration)
+        self._cyl_dialog = dlg
+        self._cyl_rms = []
+        self._cyl_last_progress = None
+        self._cyl_timer = QTimer(self)
+        self._cyl_timer.setInterval(200)
+        self._cyl_timer.timeout.connect(self._flush_cylinder_progress)
+        self._cyl_timer.start()
+        dlg.show()
+
+    def _on_cylinder_progress(self, stage, rms, text):
+        self._cyl_last_progress = (stage, text)
+        if np.isfinite(rms) and rms > 0:
+            self._cyl_rms.append(float(rms))
+
+    def _flush_cylinder_progress(self):
+        if getattr(self, '_cyl_last_progress', None) is None:
+            return
+        stage, text = self._cyl_last_progress
+        self._cyl_last_progress = None
+        self._cyl_phase_label.setText(stage)
+        self._cyl_text_label.setText(text[:240])
+        if self._cyl_rms:
+            y = np.asarray(self._cyl_rms, dtype=float)
+            self._cyl_line.set_data(np.arange(1, len(y) + 1), y)
+            self._cyl_ax.set_xlim(0, len(y) + 1)
+            lo, hi = float(np.min(y)), float(np.max(y))
+            self._cyl_ax.set_ylim(10 ** np.floor(np.log10(max(lo, 1e-6))), 10 ** np.ceil(np.log10(max(hi, 1e-6)) + 1e-9))
+            self._cyl_canvas.draw_idle()
+
+    def _stop_cylinder_calibration(self, *_args):
+        w = getattr(self, '_cyl_worker', None)
+        if w is not None and w.isRunning():
+            w.stop()
+            if getattr(self, '_cyl_phase_label', None) is not None:
+                self._cyl_phase_label.setText("Stopping at the next step...")
+            if getattr(self, '_cyl_stop_btn', None) is not None:
+                self._cyl_stop_btn.setEnabled(False)
+
+    def _cylinder_cleanup(self):
+        t = getattr(self, '_cyl_timer', None)
+        if t is not None:
+            t.stop()
+        dlg = getattr(self, '_cyl_dialog', None)
+        if dlg is not None:
+            try:
+                dlg.rejected.disconnect(self._stop_cylinder_calibration)
+            except Exception:
+                pass
+            dlg.close()
+        self._cyl_dialog = None
+        for b in (getattr(self, 'btn_calibrate_wand', None), getattr(self, 'btn_precalibrate', None)):
+            if b is not None:
+                b.setEnabled(True)
+        w = getattr(self, '_cyl_worker', None)
+        if w is not None:
+            w.wait(5000)
+
+    def _on_cylinder_finished(self, payload):
+        self._cylinder_cleanup()
+        job = self._cyl_job
+        try:
+            self.wand_calibrator.per_frame_errors = payload["per_frame"]
+            self._populate_error_table()
+        except Exception as e:
+            print(f"[Cylinder] Error table population failed: {e}")
+        try:
+            self._show_cylinder_in_3d(payload, job)
+        except Exception as e:
+            print(f"[Cylinder] 3-D view failed: {e}")
+        lines = list(payload["lines"]) + list(getattr(self, '_cyl_notes', []) or [])
+        if payload["precheck"]:
+            self.status_label.setText(f"Cylinder check done: RMS {payload['sol'].rms:.3f} px (stages 1-3).")
+            QMessageBox.information(self, "Check Complete", "\n".join(lines))
+        else:
+            self._cyl_last = dict(payload, job=job)
+            self._cyl_result_dir = payload["folder"]
+            self._cyl_result_names = list(job.names)
+            self._refr_has_result = True
+            self._refr_params_dirty = True
+            self._refr_kind = "cylinder"
+            res = payload["result"]
+            self.status_label.setText(f"Cylinder calibration done: RMS {res['rms_px']:.3f} px.")
+            if res.get("page") and getattr(self, 'report_tab', None) is not None:
+                self.report_tab.show_page(res["page"])
+                if hasattr(self, 'vis_tabs'):
+                    self.vis_tabs.setCurrentWidget(self.report_tab)
+            QMessageBox.information(self, "Cylinder Calibration",
+                                    "\n".join(lines) + f"\n\nSaved to:\n{payload['folder']}")
+        self._busy_end('wand_calibration')
+
+    def _on_cylinder_failed(self, msg):
+        self._cylinder_cleanup()
+        self.status_label.setText("Cylinder calibration failed.")
+        QMessageBox.critical(self, "Cylinder Calibration", msg)
+        self._busy_end('wand_calibration')
+
+    def _on_cylinder_stopped(self):
+        self._cylinder_cleanup()
+        self.status_label.setText("Cylinder calibration stopped.")
+        self._busy_end('wand_calibration')
+
+    def _show_cylinder_in_3d(self, payload, job):
+        """The tube, the cameras, their lines of sight and the wand ends in the 3D View tab."""
+        if not hasattr(self, 'calib_3d_view'):
+            return
+        from .curved_calibration import cylinder_wand as cw
+        from .curved_calibration import cylinder_wand_gui as cg
+        sol = payload["sol"]
+        cams_out, frames_out, _y0 = cw.relabel(sol.cams, sol.frames)
+        XA, XB = frames_out.ends(sol.L)
+        pts = np.vstack([XA, XB])
+        if len(pts) > 3000:
+            pts = pts[np.random.default_rng(0).choice(len(pts), 3000, replace=False)]
+        cameras = {int(cid): {'R': c.R, 'T': c.tvec.reshape(3, 1)} for cid, c in zip(job.cam_ids, cams_out)}
+        lines = cg.sight_lines(cams_out, sol.tube)
+        self.calib_3d_view.plot_cylinder(cameras, sol.tube.radii, pts, lines)
+        if hasattr(self, 'vis_tabs'):
+            self.vis_tabs.setCurrentWidget(self.calib_3d_view)
+
+    # ------------------------------------------------------------------ flat windows with plate_wand (PINPLATE)
+    def _run_plate_wand_calibration(self, wand_len, dist_coeff_num):
+        """The "Pinhole+Refraction" model with plate_wand: check the inputs, ask for the output folder, run
+        plate_wand_gui.child_run in a separate process (ProcessCalibWorker)."""
+        from .curved_calibration import plate_wand_gui as pg
+        try:
+            if dist_coeff_num > 1:
+                raise ValueError("The flat-window calibration fits k1 at most: choose 'None' or 'Radial k1'.")
+            pts = self.wand_calibrator.wand_points_filtered
+            if pts is None:
+                pts = self.wand_calibrator.wand_points
+            if not pts:
+                raise ValueError("No wand points yet: detect them (Point Detection) or load a CSV first.")
+            uv, fids, cids = pg.uv_from_wand_points(pts)
+            settings = self._collect_camera_settings_from_table()
+            missing = [c for c in cids if c not in settings]
+            if missing:
+                raise ValueError(f"The camera table has no row for camera(s) {missing}: set Num Cameras.")
+            sizes = [(settings[c]['width'], settings[c]['height']) for c in cids]
+            gui_win = {}
+            for row in range(self.cam_window_table.rowCount()):
+                id_item = self.cam_window_table.item(row, 0)
+                combo = self.cam_window_table.cellWidget(row, 1)
+                if id_item is not None and combo is not None:
+                    gui_win[int(id_item.text())] = int(combo.currentText().split()[-1])
+            no_win = [c for c in cids if c not in gui_win]
+            if no_win:
+                raise ValueError(f"Camera(s) {no_win} have no window in the Camera-Window Mapping.")
+            used = sorted({gui_win[c] for c in cids})                 # the windows that have cameras
+            index = {w: k for k, w in enumerate(used)}
+            windows = [{"name": f"window {w}", "thickness_mm": [float(self.media2_thick.value())],
+                        "n": [float(self.media1_index.value()), float(self.media2_index.value()),
+                              float(self.media3_index.value())]} for w in used]
+            cam_to_window = [index[gui_win[c]] for c in cids]
+            start = None
+            notes = []
+            if self.refr_refit_check.isChecked():
+                last = getattr(self, '_plate_last', None)
+                if last and list(last["job"].cam_ids) == list(cids) and list(last["job"].cam_to_window) == cam_to_window:
+                    start = last["start"]
+                else:
+                    notes.append("No earlier flat-window result for these cameras and windows: the start is searched.")
+            job = pg.Job(uv=uv, frame_ids=fids, cam_ids=cids, sizes=sizes, wand_length=float(wand_len),
+                         windows=windows, cam_to_window=cam_to_window, fit_k1=(dist_coeff_num == 1),
+                         n_final=6 if self.refr_thorough_check.isChecked() else 2, start=start,
+                         detect_mode=getattr(self, '_wand_detect_mode_used', None),
+                         source=str(getattr(self, '_wand_points_source', "") or ""), window_ids=used)
+            job.check()
+        except ValueError as e:
+            QMessageBox.warning(self, "Flat-Window Calibration", str(e))
+            self._busy_end('wand_calibration')
+            return
+        folder = QFileDialog.getExistingDirectory(
+            self, "Select the folder for the flat-window calibration (camFile/ and the report go there)")
+        if not folder:
+            self._busy_end('wand_calibration')
+            return
+        if getattr(self, 'axis_direction_map', None):
+            notes.append("Axis points are not applied by this calibrator: its frame is plate_wand's (Z along window "
+                         "1's normal, the origin at the wand's mean position). Tick 'Use the previous calibrator' "
+                         "to align the world to axis points.")
+        self._cyl_notes = notes
+        self._plate_job = job
+        self._cyl_worker = ProcessCalibWorker(pg.child_run, job, folder)
+        self._cyl_worker.progress.connect(self._on_cylinder_progress)
+        self._cyl_worker.finished_ok.connect(self._on_plate_finished)
+        self._cyl_worker.failed.connect(self._on_plate_failed)
+        self._cyl_worker.stopped.connect(self._on_plate_stopped)
+        self._create_cylinder_progress_dialog(False)
+        self._cyl_dialog.setWindowTitle("Flat-Window Calibration")
+        for b in (getattr(self, 'btn_calibrate_wand', None), getattr(self, 'btn_precalibrate', None)):
+            if b is not None:
+                b.setEnabled(False)
+        self.status_label.setText("Flat-window calibration running...")
+        self._cyl_worker.start()
+
+    def _on_plate_finished(self, payload):
+        self._cylinder_cleanup()
+        job = self._plate_job
+        res = payload["result"]
+        try:
+            self.wand_calibrator.per_frame_errors = payload["per_frame"]
+            self._populate_error_table()
+        except Exception as e:
+            print(f"[Plate] Error table population failed: {e}")
+        try:
+            self._show_plate_in_3d(res, payload["folder"], job)
+        except Exception as e:
+            print(f"[Plate] 3-D view failed: {e}")
+        self._plate_last = dict(payload, job=job)
+        self._cyl_result_dir = payload["folder"]
+        self._cyl_result_names = list(job.names)
+        self._refr_has_result = True
+        self._refr_params_dirty = True
+        self._refr_kind = "plate_wand"
+        self.status_label.setText(f"Flat-window calibration done: RMS {res['rms_px']:.3f} px.")
+        if res.get("page") and getattr(self, 'report_tab', None) is not None:
+            self.report_tab.show_page(res["page"])
+            if hasattr(self, 'vis_tabs'):
+                self.vis_tabs.setCurrentWidget(self.report_tab)
+        lines = list(payload["lines"]) + list(getattr(self, '_cyl_notes', []) or [])
+        QMessageBox.information(self, "Flat-Window Calibration", "\n".join(lines) + f"\n\nSaved to:\n{payload['folder']}")
+        self._busy_end('wand_calibration')
+
+    def _on_plate_failed(self, msg):
+        self._cylinder_cleanup()
+        self.status_label.setText("Flat-window calibration failed.")
+        QMessageBox.critical(self, "Flat-Window Calibration", msg)
+        self._busy_end('wand_calibration')
+
+    def _on_plate_stopped(self):
+        self._cylinder_cleanup()
+        self.status_label.setText("Flat-window calibration stopped.")
+        self._busy_end('wand_calibration')
+
+    def _show_plate_in_3d(self, result, folder, job):
+        """The cameras, the windows' planes and the wand ends in the 3D View tab (as the previous calibrator's)."""
+        import json as _json
+        if not hasattr(self, 'calib_3d_view'):
+            return
+        with open(os.path.join(folder, "calibration_data.json"), "r", encoding="utf-8") as fh:
+            data = _json.load(fh)
+        pts = np.vstack([np.asarray(data["ends_A_mm"], float), np.asarray(data["ends_B_mm"], float)])
+        if len(pts) > 3000:
+            pts = pts[np.random.default_rng(0).choice(len(pts), 3000, replace=False)]
+        cams = {int(cid): {'R': np.asarray(c["R"], float), 'T': np.asarray(c["tvec"], float).reshape(3, 1)}
+                for cid, c in zip(job.cam_ids, result["cameras"])}
+        planes = {}
+        for k, w in enumerate(result["windows"]):
+            n = np.asarray(w["normal"], float)
+            planes[k] = {'plane_n': n, 'plane_pt': n * float(w["d_mm"])}
+        self.calib_3d_view.plot_refractive(cams, planes, pts)
+
+    # ------------------------------------------------------------------ the pinhole calibration's page (O4)
+    def _show_pinhole_report(self, output_dir=None):
+        """The results page of the last pinhole wand calibration, in the Report tab: written beside the camFile
+        folder when the parameters are saved, else into a temporary folder.  Never interrupts the calibration."""
+        try:
+            import tempfile
+            import time as _time
+            from .results_page import page as rp
+            wc = self.wand_calibrator
+            if not getattr(wc, 'final_params', None):
+                return
+            pts = wc.wand_points_filtered if wc.wand_points_filtered is not None else wc.wand_points
+            folder = output_dir or os.path.join(tempfile.gettempdir(), "openlpt_reports",
+                                                _time.strftime("pinhole_%Y%m%d_%H%M%S"))
+            report = rp.report_from_pinhole(wc.final_params, pts, float(self.wand_len_spin.value()),
+                                            folder=folder, detect_mode=getattr(self, '_wand_detect_mode_used', None),
+                                            source=str(getattr(self, '_wand_points_source', "") or ""))
+            path = rp.write_page(report, os.path.join(folder, "calibration_report.html"))
+            if getattr(self, 'report_tab', None) is not None:
+                self.report_tab.show_page(path)
+        except Exception as e:
+            print(f"[Report] The pinhole results page could not be written: {e}")

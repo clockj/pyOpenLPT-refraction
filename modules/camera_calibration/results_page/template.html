@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wand Calibration Results</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --surface-2: #f2f1ed;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+  --q1: #b7d3f6; --q2: #86b6ef; --q3: #5598e7; --q4: #2a78d6; --q5: #1c5cab; --q6: #104281;
+  --port: #6b6a65; --port-fill: rgba(107,106,101,0.10); --pts: rgba(82,81,78,0.55);
+  --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+  --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232321;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --q1: #184f95; --q2: #1c5cab; --q3: #256abf; --q4: #3987e5; --q5: #6da7ec; --q6: #9ec5f4;
+    --port: #9a998f; --port-fill: rgba(154,153,143,0.10); --pts: rgba(195,194,183,0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232321;
+  --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  --q1: #184f95; --q2: #1c5cab; --q3: #256abf; --q4: #3987e5; --q5: #6da7ec; --q6: #9ec5f4;
+  --port: #9a998f; --port-fill: rgba(154,153,143,0.10); --pts: rgba(195,194,183,0.55);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--font); font-size: 15px;
+  line-height: 1.5; }
+main { max-width: 1180px; margin: 0 auto; padding: 20px 16px 48px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px;
+  margin-bottom: 8px; }
+h1 { font-size: 24px; line-height: 1.25; margin: 0 0 4px; font-weight: 650; }
+h2 { font-size: 18px; margin: 0 0 4px; font-weight: 650; }
+h3 { font-size: 15px; margin: 0 0 4px; font-weight: 600; }
+p { margin: 0 0 8px; }
+.sub { color: var(--ink-2); font-size: 14px; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+section { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 16px; margin: 16px 0; }
+.lead { color: var(--ink-2); font-size: 14px; margin-bottom: 12px; max-width: 80ch; }
+button.toggle { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--ring);
+  border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+button.toggle:hover { border-color: var(--axis); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 12px; }
+.tile { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
+.tile .label { color: var(--ink-2); font-size: 13px; }
+.tile .value { font-size: 26px; font-weight: 600; line-height: 1.2; }
+.tile .note { color: var(--muted); font-size: 12px; }
+.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.check { display: grid; grid-template-columns: 22px 1fr; gap: 8px; padding: 8px 10px; border-radius: 8px;
+  background: var(--surface-2); }
+.check .icon { font-weight: 700; text-align: center; }
+.check.warning .icon { color: var(--warning); }
+.check.note .icon { color: var(--muted); }
+.check .title { font-weight: 600; }
+.check .detail, .check .todo { font-size: 14px; color: var(--ink-2); }
+.check .evidence { font-size: 12px; color: var(--muted); }
+.ok-line { color: var(--ink-2); font-size: 14px; }
+.ok-line .icon { color: var(--good); font-weight: 700; margin-right: 6px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; }
+.panel { min-width: 0; }
+.panel svg, .panel canvas { display: block; width: 100%; height: auto; background: var(--surface); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); margin: 6px 0 2px; }
+.legend .key { display: inline-flex; align-items: center; gap: 6px; }
+.legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.legend .line { width: 18px; height: 2px; display: inline-block; }
+.legend .ramp { display: inline-flex; height: 10px; }
+.legend .ramp span { width: 16px; height: 10px; display: inline-block; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 13px;
+  color: var(--ink-2); }
+.multiples { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.cap { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--ink-2); font-weight: 600; font-size: 13px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: var(--ink-2); font-size: 14px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; background: var(--surface-2); color: var(--ink);
+  border: 1px solid var(--ring); border-radius: 6px; padding: 6px 8px; font-size: 13px; line-height: 1.35;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25); display: none; max-width: 280px; }
+#tip .v { font-weight: 650; }
+#tip .k { color: var(--ink-2); }
+svg text { font-family: var(--font); }
+.axis-text { fill: var(--muted); font-size: 11px; }
+.label-text { fill: var(--ink-2); font-size: 12px; }
+.strong-text { fill: var(--ink); font-size: 12px; font-weight: 600; }
+footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main id="app">
+  <noscript>This page needs JavaScript to draw its figures.</noscript>
+</main>
+<div id="tip" role="status" aria-live="polite"></div>
+<script id="report-data" type="application/json">__REPORT_DATA__</script>
+<script>
+"use strict";
+(function () {
+  const R = JSON.parse(document.getElementById("report-data").textContent);
+  const params = new URLSearchParams(location.search);
+  const THEME_KEY = "wand-report-theme";
+  function setTheme(t) {
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    else document.documentElement.removeAttribute("data-theme");
+  }
+  let theme = params.get("theme");
+  try { if (!theme) theme = localStorage.getItem(THEME_KEY); } catch (e) { /* storage off */ }
+  setTheme(theme);
+
+  // ------------------------------------------------------------------ helpers
+  const SVGNS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, kids) {
+    const e = document.createElement(tag);
+    for (const k in (attrs || {})) {
+      if (k === "text") e.textContent = attrs[k];
+      else if (k === "class") e.className = attrs[k];
+      else e.setAttribute(k, attrs[k]);
+    }
+    (kids || []).forEach(c => { if (c) e.appendChild(c); });
+    return e;
+  }
+  function sv(tag, attrs) {
+    const e = document.createElementNS(SVGNS, tag);
+    for (const k in (attrs || {})) {
+      if (k === "text") e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]);
+    }
+    return e;
+  }
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function isNum(x) { return typeof x === "number" && isFinite(x); }
+  function fmt(x, d) {
+    if (!isNum(x)) return "–";
+    return x.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+  function fmtSig(x, s) {
+    if (!isNum(x)) return "–";
+    if (x === 0) return "0";
+    const d = Math.max(0, s - 1 - Math.floor(Math.log10(Math.abs(x))));
+    return fmt(x, Math.min(d, 6));
+  }
+  function camColor(i) { return css("--s" + (Math.min(i, 7) + 1)); }
+  function seqColor(t) {                       // t in [0, 1]: magnitude, light -> dark ramp of one hue
+    const k = Math.max(0, Math.min(5, Math.floor(t * 6)));
+    return css("--q" + (k + 1));
+  }
+  const tip = document.getElementById("tip");
+  function showTip(evt, rows) {
+    tip.textContent = "";
+    rows.forEach(r => {
+      const line = el("div");
+      if (r.v !== undefined) line.appendChild(el("span", { class: "v", text: r.v }));
+      if (r.k !== undefined) line.appendChild(el("span", { class: "k", text: (r.v !== undefined ? "  " : "") + r.k }));
+      tip.appendChild(line);
+    });
+    tip.style.display = "block";
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = evt.clientX + 14, y = evt.clientY + 14;
+    if (x + w > window.innerWidth - 8) x = evt.clientX - w - 14;
+    if (y + h > window.innerHeight - 8) y = evt.clientY - h - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { tip.style.display = "none"; }
+  function svgPoint(svg, evt) {
+    const pt = svg.createSVGPoint(); pt.x = evt.clientX; pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+  function quantile(a, q) {
+    const s = a.filter(isNum).slice().sort((x, y) => x - y);
+    if (!s.length) return NaN;
+    const i = (s.length - 1) * q, lo = Math.floor(i), hi = Math.ceil(i);
+    return s[lo] + (s[hi] - s[lo]) * (i - lo);
+  }
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const norm = a => Math.hypot(a[0], a[1], a[2]);
+  const unit = a => { const n = norm(a) || 1; return [a[0] / n, a[1] / n, a[2] / n]; };
+  function viewDir(cam) { return [cam.R[2][0], cam.R[2][1], cam.R[2][2]]; }   // camera z axis in the world
+
+  // ------------------------------------------------------------------ frame of the views
+  const cams = R.cameras || [];
+  const pts = R.points || [];
+  const up = unit(R.up || [0, 1, 0]);
+  const centreOf = arr => {
+    if (!arr.length) return [0, 0, 0];
+    const c = [0, 0, 0]; arr.forEach(p => { c[0] += p[0]; c[1] += p[1]; c[2] += p[2]; });
+    return mul(c, 1 / arr.length);
+  };
+  const volCentre = (R.port && R.port.type === "tube")
+    ? mul(up, dot(centreOf(pts.length ? pts : [[0, 0, 0]]), up)) : centreOf(pts.length ? pts : cams.map(c => c.centre));
+  let e2 = cams.length ? sub(cams[0].centre, volCentre) : [0, 0, 1];
+  e2 = sub(e2, mul(up, dot(e2, up)));
+  if (norm(e2) < 1e-9) e2 = Math.abs(up[0]) < 0.9 ? cross(up, [1, 0, 0]) : cross(up, [0, 0, 1]);
+  e2 = unit(e2);                                     // screen down: towards the first camera
+  const e1 = unit(cross(up, e2));                    // screen right
+  const top = p => [dot(sub(p, volCentre), e1), dot(sub(p, volCentre), e2)];
+
+  // ------------------------------------------------------------------ page
+  const app = document.getElementById("app");
+  const S = R.summary || {};
+  const head = el("header", {}, [
+    el("div", {}, [
+      el("h1", { text: R.title || "Wand calibration results" }),
+      el("div", { class: "sub", text: [R.model_label, R.created].filter(Boolean).join(" · ") }),
+      R.folder ? el("div", { class: "sub mono", text: R.folder }) : null,
+    ]),
+    (function () {
+      const b = el("button", { class: "toggle", type: "button", text: "Light / dark" });
+      b.addEventListener("click", () => {
+        const cur = document.documentElement.getAttribute("data-theme") ||
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        const nxt = cur === "dark" ? "light" : "dark";
+        setTheme(nxt);
+        try { localStorage.setItem(THEME_KEY, nxt); } catch (e) { /* storage off */ }
+        redraw();
+      });
+      return b;
+    })(),
+  ]);
+  app.appendChild(head);
+
+  function section(id, title, lead) {
+    const s = el("section", { id: id }, [el("h2", { text: title })]);
+    if (lead) s.appendChild(el("p", { class: "lead", text: lead }));
+    app.appendChild(s);
+    return s;
+  }
+
+  // ---- summary
+  const sSum = section("summary", "Summary", R.summary_text || null);
+  const tiles = el("div", { class: "tiles" });
+  function tile(label, value, note) {
+    tiles.appendChild(el("div", { class: "tile" }, [el("div", { class: "label", text: label }),
+      el("div", { class: "value", text: value }), note ? el("div", { class: "note", text: note }) : null]));
+  }
+  tile("Cameras", String(cams.length), R.model_label || "");
+  tile("Frames used", fmt(S.frames, 0), isNum(S.frames_total) && S.frames_total !== S.frames ? "of " + fmt(S.frames_total, 0) : "");
+  tile("Reprojection RMS", fmtSig(S.rms_px, 3) + " px",
+    isNum(S.detections) ? fmt(S.detections_used, 0) + " of " + fmt(S.detections, 0) + " detections used" : "");
+  if (isNum(S.wand_rms_um))
+    tile("Wand length error", fmtSig(S.wand_rms_um, 2) + " µm RMS",
+      "free triangulation, " + fmt(S.wand_frames, 0) + " frames; wand " + fmt(S.wand_length_mm, 3) + " mm");
+  sSum.appendChild(tiles);
+  const checks = R.checks || [];
+  if (checks.length) {
+    sSum.appendChild(el("h3", { text: "Checks" }));
+    const ul = el("ul", { class: "checks" });
+    checks.forEach(c => {
+      ul.appendChild(el("li", { class: "check " + (c.level === "warning" ? "warning" : "note") }, [
+        el("div", { class: "icon", text: c.level === "warning" ? "!" : "i", "aria-label": c.level }),
+        el("div", {}, [el("div", { class: "title", text: (c.level === "warning" ? "Warning: " : "Note: ") + c.title }),
+          c.detail ? el("div", { class: "detail", text: c.detail }) : null,
+          c.what_to_do ? el("div", { class: "todo", text: "What to do: " + c.what_to_do }) : null,
+          c.evidence ? el("div", { class: "evidence", text: "Evidence: " + c.evidence }) : null]),
+      ]));
+    });
+    sSum.appendChild(ul);
+  } else {
+    sSum.appendChild(el("div", { class: "ok-line" }, [el("span", { class: "icon", text: "✓" }),
+      el("span", { text: "No check fired: nothing the tests associate with a wrong or a weak answer." })]));
+  }
+
+  // ---- camera legend (shared)
+  function camLegend() {
+    const lg = el("div", { class: "legend" });
+    cams.forEach((c, i) => {
+      const sw = el("span", { class: "dot" }); sw.style.background = camColor(i);
+      lg.appendChild(el("span", { class: "key" }, [sw, el("span", { text: c.name })]));
+    });
+    return lg;
+  }
+
+  // ---- the rig from above
+  const sTop = section("rig", "The rig from above",
+    R.top_lead || "Looking along the vertical: each camera, its lines of sight through the window, and the wand " +
+    "positions. Left: the whole rig; right: the measurement volume. Hover a camera for its numbers.");
+  sTop.appendChild(camLegend());
+  const topGrid = el("div", { class: "grid2" });
+  const topWhole = el("div", { class: "panel" }), topClose = el("div", { class: "panel" });
+  topGrid.appendChild(topWhole); topGrid.appendChild(topClose);
+  sTop.appendChild(topGrid);
+
+  function drawTop(container, closeUp) {
+    container.textContent = "";
+    const W = 520, H = 440, pad = 34;
+    const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+      "aria-label": closeUp ? "Top view of the measurement volume" : "Top view of the whole rig" });
+    let xs = [], ys = [];
+    const P = pts.map(top);
+    const C = cams.map(c => top(c.centre));
+    if (closeUp) {
+      P.forEach(p => { xs.push(p[0]); ys.push(p[1]); });
+      if (R.port && R.port.type === "tube") {
+        const r = R.port.radii[0] * 1.12;
+        const c0 = top(mul(up, dot(volCentre, up)));
+        xs.push(c0[0] - r, c0[0] + r); ys.push(c0[1] - r, c0[1] + r);
+      }
+      if (!xs.length) C.forEach(c => { xs.push(c[0]); ys.push(c[1]); });
+    } else {
+      C.forEach(c => { xs.push(c[0]); ys.push(c[1]); });
+      P.forEach(p => { xs.push(p[0]); ys.push(p[1]); });
+      if (R.port && R.port.type === "tube") { const r = R.port.radii[0]; xs.push(-r, r); ys.push(-r, r); }
+    }
+    let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    if (!isFinite(x0)) { x0 = -1; x1 = 1; y0 = -1; y1 = 1; }
+    const span = Math.max(x1 - x0, y1 - y0, 1e-6) * (closeUp ? 1.08 : 1.12);
+    const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    const sc = Math.min(W - 2 * pad, H - 2 * pad) / span;
+    const X = x => W / 2 + (x - cx) * sc, Y = y => H / 2 + (y - cy) * sc;
+    const clipId = "clip" + (closeUp ? "c" : "w");
+    const defs = sv("defs"); const cp = sv("clipPath", { id: clipId });
+    cp.appendChild(sv("rect", { x: 0, y: 0, width: W, height: H })); defs.appendChild(cp); svg.appendChild(defs);
+    const g = sv("g", { "clip-path": `url(#${clipId})` }); svg.appendChild(g);
+    // the port
+    if (R.port && R.port.type === "tube") {
+      const c0 = top(mul(up, dot(volCentre, up)));
+      R.port.radii.forEach((r, k) => g.appendChild(sv("circle", { cx: X(c0[0]), cy: Y(c0[1]), r: r * sc,
+        fill: k === R.port.radii.length - 1 ? "var(--port-fill)" : "none", stroke: "var(--port)", "stroke-width": 1.5 })));
+      if (isNum(R.port.fold_radius) && closeUp)
+        g.appendChild(sv("circle", { cx: X(c0[0]), cy: Y(c0[1]), r: R.port.fold_radius * sc, fill: "none",
+          stroke: "var(--port)", "stroke-width": 1, "stroke-dasharray": "5 4" }));
+    }
+    if (R.port && R.port.type === "windows") {
+      R.port.windows.forEach(w => {
+        const n = sub(w.normal, mul(up, dot(w.normal, up)));
+        if (norm(n) < 1e-6) return;
+        const t = unit(cross(up, n));
+        const half = span;                       // long enough to cross the view
+        const a = top(add(w.point, mul(t, -half))), b = top(add(w.point, mul(t, half)));
+        const thick = (w.thickness || 0) * sc;
+        g.appendChild(sv("line", { x1: X(a[0]), y1: Y(a[1]), x2: X(b[0]), y2: Y(b[1]), stroke: "var(--port)",
+          "stroke-width": Math.max(1.5, thick), "stroke-opacity": thick > 1.5 ? 0.45 : 1 }));
+      });
+    }
+    // lines of sight
+    (R.sight_lines || []).forEach(([ci, line]) => {
+      const d = line.map(p => { const q = top(p); return `${X(q[0]).toFixed(1)},${Y(q[1]).toFixed(1)}`; }).join(" ");
+      g.appendChild(sv("polyline", { points: d, fill: "none", stroke: camColor(ci), "stroke-width": 1,
+        "stroke-opacity": 0.8 }));
+    });
+    // wand ends
+    const r0 = closeUp ? 1.6 : 1.2;
+    P.forEach(p => g.appendChild(sv("circle", { cx: X(p[0]).toFixed(1), cy: Y(p[1]).toFixed(1), r: r0, fill: "var(--pts)" })));
+    // cameras
+    const hits = [];
+    cams.forEach((c, i) => {
+      const q = top(c.centre);
+      const x = X(q[0]), y = Y(q[1]);
+      const vd = viewDir(c), v2 = unit([dot(vd, e1), dot(vd, e2), 0]);
+      if (x > -20 && x < W + 20 && y > -20 && y < H + 20) {
+        g.appendChild(sv("line", { x1: x, y1: y, x2: x + v2[0] * 18, y2: y + v2[1] * 18, stroke: camColor(i),
+          "stroke-width": 2, "stroke-linecap": "round" }));
+        g.appendChild(sv("circle", { cx: x, cy: y, r: 6, fill: camColor(i), stroke: "var(--surface)", "stroke-width": 2 }));
+        const lx = x - v2[0] * 12, ly = y - v2[1] * 12;
+        g.appendChild(sv("text", { x: lx, y: ly + 4, class: "strong-text", "text-anchor": v2[0] > 0.3 ? "end" :
+          (v2[0] < -0.3 ? "start" : "middle"), text: c.name }));
+        hits.push({ x, y, i });
+      }
+    });
+    // scale bar
+    const nice = v => { const p = Math.pow(10, Math.floor(Math.log10(v))); const m = v / p;
+      return (m >= 5 ? 5 : m >= 2 ? 2 : 1) * p; };
+    const L = nice(span / 5), Lpx = L * sc;
+    svg.appendChild(sv("line", { x1: pad, y1: H - 14, x2: pad + Lpx, y2: H - 14, stroke: "var(--ink-2)", "stroke-width": 2 }));
+    svg.appendChild(sv("text", { x: pad + Lpx + 6, y: H - 10, class: "axis-text", text: fmtSig(L, 2) + " mm" }));
+    svg.appendChild(sv("text", { x: W - pad, y: 18, class: "axis-text", "text-anchor": "end",
+      text: closeUp ? "measurement volume" : "whole rig" }));
+    svg.addEventListener("pointermove", evt => {
+      const p = svgPoint(svg, evt);
+      let best = null, bd = 18;
+      hits.forEach(h => { const d = Math.hypot(h.x - p.x, h.y - p.y); if (d < bd) { bd = d; best = h; } });
+      if (!best) { hideTip(); return; }
+      showTip(evt, camTip(cams[best.i]));
+    });
+    svg.addEventListener("pointerleave", hideTip);
+    container.appendChild(svg);
+  }
+  function camTip(c) {
+    const rows = [{ v: c.name }, { v: fmt(c.f_px, 0) + " px", k: "f" + (isNum(c.f_mm) ? " (" + fmt(c.f_mm, 1) + " mm)" : "") }];
+    if (isNum(c.f_sigma_rel)) rows.push({ v: "± " + fmtSig(100 * c.f_sigma_rel, 2) + " %", k: "sigma of f" });
+    (c.extra || []).forEach(([k, v]) => rows.push({ v: v, k: k }));
+    rows.push({ v: fmtSig(c.rms_px, 3) + " px", k: "reprojection RMS" });
+    return rows;
+  }
+
+  // ---- 3-D
+  const s3 = section("rig3d", "The rig in 3-D",
+    "Drag to turn, scroll to zoom, shift-drag to move, double-click to reset. The buttons switch between the whole rig " +
+    "and the measurement volume.");
+  const ctr = el("div", { class: "controls" });
+  const bWhole = el("button", { class: "toggle", type: "button", text: "Whole rig" });
+  const bClose = el("button", { class: "toggle", type: "button", text: "Measurement volume" });
+  ctr.appendChild(bWhole); ctr.appendChild(bClose);
+  s3.appendChild(ctr);
+  s3.appendChild(camLegend());
+  const cv = el("canvas", { width: 1100, height: 560, "aria-label": "3-D view of the rig" });
+  cv.style.cursor = "grab";
+  s3.appendChild(el("div", { class: "panel" }, [cv]));
+  const scene = { yaw: 0.6, pitch: 0.45, dist: 1, target: volCentre.slice(), mode: "whole" };
+  function sceneExtent(mode) {
+    let ps = pts.slice();
+    if (mode === "whole") ps = ps.concat(cams.map(c => c.centre));
+    if (R.port && R.port.type === "tube") {
+      const r = R.port.radii[0];
+      ps.push(add(volCentre, mul(e1, r)), add(volCentre, mul(e1, -r)), add(volCentre, mul(e2, r)), add(volCentre, mul(e2, -r)));
+    }
+    if (!ps.length) return 1;
+    return Math.max(...ps.map(p => norm(sub(p, volCentre)))) || 1;
+  }
+  function resetView(mode) {
+    scene.mode = mode; scene.target = volCentre.slice(); scene.yaw = 0.6; scene.pitch = 0.45;
+    scene.dist = sceneExtent(mode) * 2.6;
+    draw3d();
+  }
+  function camBasis() {
+    const cyw = Math.cos(scene.yaw), syw = Math.sin(scene.yaw), cp = Math.cos(scene.pitch), sp = Math.sin(scene.pitch);
+    const back = add(add(mul(e2, cp * cyw), mul(e1, cp * syw)), mul(up, sp));      // from the target to the eye
+    const eye = add(scene.target, mul(back, scene.dist));
+    const fwd = mul(back, -1);
+    const right = unit(cross(fwd, up));
+    const upv = cross(right, fwd);
+    return { eye, fwd, right, upv };
+  }
+  function draw3d() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = cv.clientWidth || 900, h = Math.round(w * 0.5);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); cv.style.height = h + "px";
+    const ctx = cv.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = css("--surface"); ctx.fillRect(0, 0, w, h);
+    const B = camBasis();
+    const F = 0.5 * h / Math.tan(17 * Math.PI / 180);
+    function pr(p) {
+      const v = sub(p, B.eye); const z = dot(v, B.fwd);
+      if (z <= scene.dist * 0.02) return null;
+      return [w / 2 + F * dot(v, B.right) / z, h / 2 - F * dot(v, B.upv) / z, z];
+    }
+    function poly(points3, color, width, dash) {
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash(dash || []);
+      ctx.beginPath(); let pen = false;
+      points3.forEach(p => { const q = pr(p); if (!q) { pen = false; return; }
+        if (!pen) { ctx.moveTo(q[0], q[1]); pen = true; } else ctx.lineTo(q[0], q[1]); });
+      ctx.stroke(); ctx.setLineDash([]);
+    }
+    // the port
+    const ys = pts.length ? pts.map(p => dot(p, up)) : [dot(volCentre, up) - 20, dot(volCentre, up) + 20];
+    const yLo = Math.min(...ys), yHi = Math.max(...ys), yPad = Math.max(10, 0.4 * (yHi - yLo));
+    if (R.port && R.port.type === "tube") {
+      const port = css("--port");
+      const axisPt = mul(up, dot(volCentre, up));
+      const ring = (r, yv) => { const out = [];
+        for (let k = 0; k <= 96; k++) { const a = 2 * Math.PI * k / 96;
+          out.push(add(add(mul(up, yv), mul(e1, r * Math.cos(a))), mul(e2, r * Math.sin(a)))); }
+        return out; };
+      R.port.radii.forEach((r, k) => { [yLo - yPad, yHi + yPad].forEach(yv => poly(ring(r, yv), port, k === 0 ? 1.4 : 0.9)); });
+      const r0 = R.port.radii[0];
+      for (let k = 0; k < 16; k++) { const a = 2 * Math.PI * k / 16;
+        const base = add(mul(e1, r0 * Math.cos(a)), mul(e2, r0 * Math.sin(a)));
+        poly([add(base, mul(up, yLo - yPad)), add(base, mul(up, yHi + yPad))], port, 0.6); }
+      poly([add(axisPt, mul(up, yLo - yPad - dot(axisPt, up))), add(axisPt, mul(up, yHi + yPad - dot(axisPt, up)))],
+        port, 0.8, [5, 4]);
+    }
+    if (R.port && R.port.type === "windows") {
+      const port = css("--port");
+      const half = Math.max(sceneExtent("close") * 0.9, 10);
+      R.port.windows.forEach(wn => {
+        const n = unit(wn.normal);
+        let a = unit(cross(n, Math.abs(dot(n, up)) < 0.9 ? up : e1)); const b = cross(n, a);
+        [0, wn.thickness || 0].forEach(off => {
+          const c0 = add(wn.point, mul(n, off));
+          const q = [add(add(c0, mul(a, half)), mul(b, half)), add(add(c0, mul(a, -half)), mul(b, half)),
+            add(add(c0, mul(a, -half)), mul(b, -half)), add(add(c0, mul(a, half)), mul(b, -half))];
+          poly(q.concat([q[0]]), port, 1.1);
+        });
+      });
+    }
+    // lines of sight
+    (R.sight_lines || []).forEach(([ci, line]) => poly(line, camColor(ci), 1));
+    // wand ends
+    ctx.fillStyle = css("--pts");
+    pts.forEach(p => { const q = pr(p); if (q) ctx.fillRect(q[0] - 1, q[1] - 1, 2, 2); });
+    // cameras: a small pyramid along the viewing direction, sized to the view
+    const hits = [];
+    const glyph = sceneExtent(scene.mode) * 0.08;
+    cams.forEach((c, i) => {
+      const z = viewDir(c), x = [c.R[0][0], c.R[0][1], c.R[0][2]], y = [c.R[1][0], c.R[1][1], c.R[1][2]];
+      const a = c.width / Math.max(c.width, c.height), bb = c.height / Math.max(c.width, c.height);
+      const base = add(c.centre, mul(z, glyph));
+      const q = [[1, 1], [-1, 1], [-1, -1], [1, -1]].map(([sx, sy]) => add(base, add(mul(x, sx * a * glyph * 0.45),
+        mul(y, sy * bb * glyph * 0.45))));
+      poly(q.concat([q[0]]), camColor(i), 2);
+      q.forEach(p => poly([c.centre, p], camColor(i), 1.2));
+      const pc = pr(c.centre);
+      if (pc) {
+        ctx.fillStyle = camColor(i); ctx.beginPath(); ctx.arc(pc[0], pc[1], 5, 0, 2 * Math.PI); ctx.fill();
+        ctx.fillStyle = css("--ink"); ctx.font = "600 12px " + css("--font");
+        ctx.fillText(c.name, pc[0] + 8, pc[1] - 8);
+        hits.push({ x: pc[0], y: pc[1], i });
+      }
+    });
+    // axes
+    const L = sceneExtent("close") * 0.5;
+    [["X", [1, 0, 0]], ["Y", [0, 1, 0]], ["Z", [0, 0, 1]]].forEach(([n, d]) => {
+      const o = volCentre, e = add(o, mul(d, L));
+      poly([o, e], css("--muted"), 1);
+      const q = pr(e); if (q) { ctx.fillStyle = css("--muted"); ctx.font = "11px " + css("--font"); ctx.fillText(n, q[0] + 3, q[1] - 3); }
+    });
+    cv._hits = hits;
+  }
+  let drag = null;
+  cv.addEventListener("pointerdown", e => { drag = { x: e.clientX, y: e.clientY, shift: e.shiftKey,
+    yaw: scene.yaw, pitch: scene.pitch, target: scene.target.slice() }; cv.setPointerCapture(e.pointerId);
+    cv.style.cursor = "grabbing"; });
+  cv.addEventListener("pointerup", e => { drag = null; cv.style.cursor = "grab"; });
+  cv.addEventListener("pointermove", e => {
+    if (drag) {
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (drag.shift) {
+        const B = camBasis(), s = scene.dist / 700;
+        scene.target = add(drag.target, add(mul(B.right, -dx * s), mul(B.upv, dy * s)));
+      } else {
+        scene.yaw = drag.yaw - dx * 0.008;
+        scene.pitch = Math.max(-1.45, Math.min(1.45, drag.pitch + dy * 0.008));
+      }
+      draw3d(); hideTip(); return;
+    }
+    const r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+    let best = null, bd = 16;
+    (cv._hits || []).forEach(h => { const d = Math.hypot(h.x - mx, h.y - my); if (d < bd) { bd = d; best = h; } });
+    if (best) showTip(e, camTip(cams[best.i])); else hideTip();
+  });
+  cv.addEventListener("pointerleave", hideTip);
+  cv.addEventListener("wheel", e => { e.preventDefault(); scene.dist *= Math.exp(e.deltaY * 0.0012); draw3d(); },
+    { passive: false });
+  cv.addEventListener("dblclick", () => resetView(scene.mode));
+  bWhole.addEventListener("click", () => resetView("whole"));
+  bClose.addEventListener("click", () => resetView("close"));
+
+  // ---- residuals
+  const res = R.residuals || [];
+  const allR = [];
+  res.forEach(r => r.du.forEach((du, k) => { if (r.used[k] && isNum(du)) allR.push(Math.hypot(du, r.dv[k])); }));
+  const r95 = quantile(allR, 0.95) || 1;
+  const sRes = section("residuals", "How well each camera fits",
+    "Each camera's image with every detection's residual, the difference between where the calibrated model puts the " +
+    "ball and where it was detected, drawn as a short line, magnified. Colour shows its size; crosses are detections " +
+    "the calibration did not use. A pattern (lines turning around a point, or growing towards an edge) means the " +
+    "model misses something; random directions are detection noise.");
+  const lg = el("div", { class: "legend" });
+  const ramp = el("span", { class: "ramp" });
+  for (let k = 0; k < 6; k++) { const s = el("span"); s.style.background = "var(--q" + (k + 1) + ")"; ramp.appendChild(s); }
+  lg.appendChild(el("span", { class: "key" }, [el("span", { text: "0" }), ramp,
+    el("span", { text: "≥ " + fmtSig(r95, 2) + " px (the 95th percentile)" })]));
+  lg.appendChild(el("span", { class: "key" }, [el("span", { text: "×", style: "color: var(--critical); font-weight: 700" }),
+    el("span", { text: "not used" })]));
+  sRes.appendChild(lg);
+  const mult = el("div", { class: "multiples" });
+  sRes.appendChild(mult);
+  function drawResiduals() {
+    mult.textContent = "";
+    res.forEach(r => {
+      const c = cams[r.cam] || { name: "camera " + r.cam, width: 1, height: 1 };
+      const W = c.width, H = c.height;
+      const k = 0.06 * Math.max(W, H) / r95;
+      const svg = sv("svg", { viewBox: `${-0.02 * W} ${-0.02 * H} ${1.04 * W} ${1.04 * H}`, role: "img",
+        "aria-label": c.name + " residuals" });
+      svg.appendChild(sv("rect", { x: 0, y: 0, width: W, height: H, fill: "var(--surface-2)", stroke: "var(--axis)",
+        "stroke-width": Math.max(W, H) / 300 }));
+      const sw = Math.max(W, H) / 260;
+      const g = sv("g"); svg.appendChild(g);
+      const used = [], unused = [];
+      r.u.forEach((u, i) => (r.used[i] ? used : unused).push(i));
+      used.forEach(i => {
+        const du = r.du[i], dv = r.dv[i]; if (!isNum(du)) return;
+        const m = Math.hypot(du, dv);
+        g.appendChild(sv("line", { x1: r.u[i], y1: r.v[i], x2: r.u[i] + k * du, y2: r.v[i] + k * dv,
+          stroke: seqColor(m / r95), "stroke-width": sw, "stroke-linecap": "round" }));
+      });
+      unused.forEach(i => {
+        const s = Math.max(W, H) / 120;
+        g.appendChild(sv("path", { d: `M${r.u[i] - s},${r.v[i] - s}L${r.u[i] + s},${r.v[i] + s}M${r.u[i] - s},${r.v[i] + s}L${r.u[i] + s},${r.v[i] - s}`,
+          stroke: "var(--critical)", "stroke-width": sw * 1.4 }));
+      });
+      // scale: the 95th percentile drawn to length
+      const Lp = k * r95;
+      svg.appendChild(sv("line", { x1: 0.03 * W, y1: 0.95 * H, x2: 0.03 * W + Lp, y2: 0.95 * H, stroke: "var(--ink-2)",
+        "stroke-width": sw * 1.5 }));
+      svg.appendChild(sv("text", { x: 0.03 * W + Lp + 0.01 * W, y: 0.95 * H + 0.012 * Math.max(W, H),
+        style: `font-size:${0.035 * Math.max(W, H)}px; fill: var(--muted)`, text: fmtSig(r95, 2) + " px" }));
+      svg.addEventListener("pointermove", evt => {
+        const p = svgPoint(svg, evt);
+        let best = -1, bd = 0.03 * Math.max(W, H);
+        r.u.forEach((u, i) => { const d = Math.hypot(u - p.x, r.v[i] - p.y); if (d < bd) { bd = d; best = i; } });
+        if (best < 0) { hideTip(); return; }
+        const m = Math.hypot(r.du[best], r.dv[best]);
+        showTip(evt, [{ v: fmtSig(m, 2) + " px", k: "residual" + (r.used[best] ? "" : " (not used)") },
+          { v: "(" + fmtSig(r.du[best], 2) + ", " + fmtSig(r.dv[best], 2) + ") px", k: "du, dv" },
+          { v: String(r.frame[best]), k: "frame" }, { v: r.end[best] === 0 ? "A (small)" : "B (large)", k: "ball" },
+          { v: "(" + fmt(r.u[best], 1) + ", " + fmt(r.v[best], 1) + ")", k: "pixel" }]);
+      });
+      svg.addEventListener("pointerleave", hideTip);
+      const nUsed = used.length, nAll = r.u.length;
+      mult.appendChild(el("div", { class: "panel" }, [el("h3", { text: c.name }), svg,
+        el("div", { class: "cap", text: "RMS " + fmtSig(c.rms_px, 3) + " px · " + fmt(c.n_used, 0) + " of " +
+          fmt(c.n_total, 0) + " used" + (r.subsampled ? " · " + fmt(nAll, 0) + " drawn" : "") + " · lines ×" +
+          fmt(k, 0) })]));
+    });
+  }
+
+  // ---- wand length
+  const wd = R.wand || null;
+  let drawWand = () => {};
+  if (wd && wd.err_um && wd.err_um.length) {
+    const sW = section("wand", "The wand length",
+      "Each frame's wand length from a free triangulation (the length not imposed), minus the nominal length. " +
+      (wd.lead || "It should scatter evenly about zero; a trend along the horizontal axis means the model is off there."));
+    const g2 = el("div", { class: "grid2" });
+    const pScatter = el("div", { class: "panel" }), pHist = el("div", { class: "panel" });
+    g2.appendChild(pScatter); g2.appendChild(pHist); sW.appendChild(g2);
+    drawWand = function () {
+      pScatter.textContent = ""; pHist.textContent = "";
+      const W = 520, H = 320, l = 56, r = 14, t = 14, b = 44;
+      const xs = wd.x, ys = wd.err_um;
+      const xlo = Math.min(...xs), xhi = Math.max(...xs);
+      const ylim = Math.max(quantile(ys.map(Math.abs), 0.995) * 1.15, 1e-6);
+      const X = x => l + (x - xlo) / Math.max(xhi - xlo, 1e-9) * (W - l - r);
+      const Y = y => t + (1 - (y + ylim) / (2 * ylim)) * (H - t - b);
+      const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Wand length error per frame" });
+      const ticks = (lo, hi, n) => { const st = (hi - lo) / n, p = Math.pow(10, Math.floor(Math.log10(st))),
+        m = st / p, s2 = (m >= 5 ? 5 : m >= 2 ? 2 : 1) * p, out = [];
+        for (let v = Math.ceil(lo / s2) * s2; v <= hi + 1e-12; v += s2) out.push(v); return out; };
+      ticks(-ylim, ylim, 4).forEach(v => {
+        svg.appendChild(sv("line", { x1: l, x2: W - r, y1: Y(v), y2: Y(v), stroke: v === 0 ? "var(--axis)" : "var(--grid)",
+          "stroke-width": 1 }));
+        svg.appendChild(sv("text", { x: l - 6, y: Y(v) + 4, class: "axis-text", "text-anchor": "end", text: fmtSig(v, 2) }));
+      });
+      ticks(xlo, xhi, 5).forEach(v => {
+        svg.appendChild(sv("text", { x: X(v), y: H - b + 16, class: "axis-text", "text-anchor": "middle", text: fmtSig(v, 3) }));
+      });
+      svg.appendChild(sv("text", { x: (l + W - r) / 2, y: H - 8, class: "label-text", "text-anchor": "middle",
+        text: wd.x_label }));
+      svg.appendChild(sv("text", { x: 14, y: (t + H - b) / 2, class: "label-text", "text-anchor": "middle",
+        transform: `rotate(-90 14 ${(t + H - b) / 2})`, text: "error (µm)" }));
+      xs.forEach((x, i) => svg.appendChild(sv("circle", { cx: X(x).toFixed(1), cy: Y(Math.max(-ylim, Math.min(ylim, ys[i]))).toFixed(1),
+        r: 3, fill: "var(--s1)", "fill-opacity": 0.75, stroke: "var(--surface)", "stroke-width": 1 })));
+      svg.addEventListener("pointermove", evt => {
+        const p = svgPoint(svg, evt);
+        let best = -1, bd = 14;
+        xs.forEach((x, i) => { const d = Math.hypot(X(x) - p.x, Y(ys[i]) - p.y); if (d < bd) { bd = d; best = i; } });
+        if (best < 0) { hideTip(); return; }
+        showTip(evt, [{ v: fmtSig(ys[best], 3) + " µm", k: "wand length error" }, { v: String(wd.frame[best]), k: "frame" },
+          { v: fmtSig(xs[best], 4), k: wd.x_short || "x" }]);
+      });
+      svg.addEventListener("pointerleave", hideTip);
+      pScatter.appendChild(svg);
+      // histogram
+      const nb = 24, lo = -ylim, hi = ylim, wb = (hi - lo) / nb, cnt = new Array(nb).fill(0);
+      ys.forEach(v => { const k = Math.min(nb - 1, Math.max(0, Math.floor((v - lo) / wb))); cnt[k]++; });
+      const cmax = Math.max(...cnt, 1);
+      const H2 = 320, svg2 = sv("svg", { viewBox: `0 0 ${W} ${H2}`, role: "img", "aria-label": "Histogram of the wand length error" });
+      const XB = v => l + (v - lo) / (hi - lo) * (W - l - r), YB = c => t + (1 - c / cmax) * (H2 - t - b);
+      ticks(0, cmax, 4).forEach(v => {
+        svg2.appendChild(sv("line", { x1: l, x2: W - r, y1: YB(v), y2: YB(v), stroke: v === 0 ? "var(--axis)" : "var(--grid)" }));
+        svg2.appendChild(sv("text", { x: l - 6, y: YB(v) + 4, class: "axis-text", "text-anchor": "end", text: fmt(v, 0) }));
+      });
+      ticks(lo, hi, 4).forEach(v => svg2.appendChild(sv("text", { x: XB(v), y: H2 - b + 16, class: "axis-text",
+        "text-anchor": "middle", text: fmtSig(v, 2) })));
+      svg2.appendChild(sv("text", { x: (l + W - r) / 2, y: H2 - 8, class: "label-text", "text-anchor": "middle",
+        text: "error (µm)" }));
+      cnt.forEach((c, k) => {
+        if (!c) return;
+        const x0 = XB(lo + k * wb) + 1, x1 = XB(lo + (k + 1) * wb) - 1, y = YB(c);
+        const bar = sv("path", { d: `M${x0},${YB(0)}V${y + 3}Q${x0},${y} ${x0 + 3},${y}H${x1 - 3}Q${x1},${y} ${x1},${y + 3}V${YB(0)}Z`,
+          fill: "var(--s1)" });
+        bar.addEventListener("pointermove", evt => showTip(evt, [{ v: fmt(c, 0) + " frames", k: "" },
+          { v: fmtSig(lo + k * wb, 2) + " to " + fmtSig(lo + (k + 1) * wb, 2) + " µm", k: "" }]));
+        bar.addEventListener("pointerleave", hideTip);
+        svg2.appendChild(bar);
+      });
+      pHist.appendChild(svg2);
+      pHist.appendChild(el("div", { class: "cap", text: "RMS " + fmtSig(S.wand_rms_um, 2) + " µm, mean " +
+        fmtSig(S.wand_mean_um, 2) + " µm over " + fmt(ys.length, 0) + " frames" }));
+    };
+  }
+
+  // ---- tables
+  function table(cols, rows, numCols) {
+    const t = el("table");
+    const thead = el("thead"), tr = el("tr");
+    cols.forEach((c, i) => tr.appendChild(el("th", { class: (numCols || []).includes(i) ? "num" : "", text: c })));
+    thead.appendChild(tr); t.appendChild(thead);
+    const tb = el("tbody");
+    rows.forEach(r => { const row = el("tr");
+      r.forEach((v, i) => row.appendChild(el("td", { class: (numCols || []).includes(i) ? "num" : "", text: v })));
+      tb.appendChild(row); });
+    t.appendChild(tb);
+    return el("div", { class: "tablewrap" }, [t]);
+  }
+  const sCam = section("cameras", "The cameras", R.cameras_lead || null);
+  const extraKeys = [];
+  cams.forEach(c => (c.extra || []).forEach(([k]) => { if (!extraKeys.includes(k)) extraKeys.push(k); }));
+  const camCols = ["Camera", "f (px)", "f (mm)", "sigma of f", "k1"].concat(extraKeys, ["RMS (px)", "Used"]);
+  sCam.appendChild(table(camCols, cams.map(c => [c.name, fmt(c.f_px, 1), isNum(c.f_mm) ? fmt(c.f_mm, 2) : "–",
+    isNum(c.f_sigma_rel) ? fmtSig(100 * c.f_sigma_rel, 2) + " %" : "–", isNum(c.k1) ? fmtSig(c.k1, 3) : "–"]
+    .concat(extraKeys.map(k => { const e = (c.extra || []).find(x => x[0] === k); return e ? e[1] : "–"; }),
+      [fmtSig(c.rms_px, 3), fmt(c.n_used, 0) + " / " + fmt(c.n_total, 0)])),
+    camCols.map((_, i) => i).filter(i => i > 0)));
+  if (R.noise && R.noise.rows && R.noise.rows.length) {
+    const sN = section("noise", "Noise and weights", R.noise.note || null);
+    sN.appendChild(table(R.noise.columns, R.noise.rows, R.noise.num_cols || []));
+  }
+  const sF = section("files", "Settings and files", null);
+  if (R.settings && R.settings.length) sF.appendChild(table(["Setting", "Value"], R.settings, []));
+  if (R.files && R.files.length) {
+    sF.appendChild(el("h3", { text: "Files written", style: "margin-top: 12px" }));
+    const ul = el("ul");
+    R.files.forEach(f => ul.appendChild(el("li", {}, [el("span", { text: f.label + ": " }), el("span", { class: "mono", text: f.path })])));
+    sF.appendChild(ul);
+  }
+  app.appendChild(el("footer", { text: (R.footer || "") + " Page written by pyOpenLPT (modules/camera_calibration/results_page)." }));
+
+  function redraw() {
+    drawTop(topWhole, false); drawTop(topClose, true); draw3d(); drawResiduals(); drawWand();
+    // the legends' swatches follow the theme
+    document.querySelectorAll(".legend .dot").forEach((d, i) => { d.style.background = camColor(i % Math.max(cams.length, 1)); });
+  }
+  resetView("whole");
+  redraw();
+  let rt = null;
+  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { draw3d(); }, 120); });
+  window.__reportReady = true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+G8: plate_wand behind the GUI's Pinhole+Refraction, offscreen
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  300 frames; media 1.0, 1.49, 1.33, 12.7 mm; legacy box False
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  Run Calibration: 46 s (finished True); message ('info', 'Flat-Window Calibration')
+    4 cameras, 2 windows, 300 frames, 2400 of 2400 detections used.
+    Reprojection RMS 0.116 px; wand length (free triangulation) RMS error 15.4 um over 300 frames.
+      cam0: f 4,324 px +- 0.10 %, window 1, 582 mm from it, RMS 0.113 px
+      cam1: f 4,326 px +- 0.10 %, window 1, 583 mm from it, RMS 0.120 px
+      cam2: f 3,982 px +- 0.10 %, window 2, 584 mm from it, RMS 0.118 px
+      cam3: f 3,979 px +- 0.10 %, window 2, 583 mm from it, RMS 0.114 px
+    
+    Saved to:
+    D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g8_run\results
+  PASS  the calibration ran in a separate process (ProcessCalibWorker)
+  PASS  f of every camera within 0.5 % of the truth  (cam0 4,323.7 (+0.063 %), cam1 4,326.1 (+0.119 %), cam2 3,981.6 (+0.116 %), cam3 3,978.7 (+0.041 %))
+  PASS  every detection used  (2400/2400)
+  PASS  camFiles are PINPLATE, load in C++, and carry the GUI's window ids for VSC  (models {'PINPLATE'}, window ids [0, 0, 1, 1])
+  PASS  error table, 3-D windows, the result's kind and the page  (300 rows, 2 planes, kind plate_wand, page True)
+[TrackingSettings] Auto-saved 0 refractive camera params to D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g8_run\project\camFile
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: step=20.00mm, span=(235.2,147.0,978.2), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=2: step=20.00mm, span=(272.4,191.1,782.6), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=3: step=20.00mm, span=(268.6,207.4,626.0), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=4: step=20.00mm, span=(265.9,204.4,500.8), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=5: step=16.69mm, span=(261.8,203.1,400.7), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=6: step=13.36mm, span=(260.1,188.8,320.5), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=7: step=10.68mm, span=(248.7,176.0,277.8), rel_change=0.133
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: step=20.00mm, span=(235.2,147.0,978.2), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=2: step=20.00mm, span=(272.4,191.1,782.6), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=3: step=20.00mm, span=(268.6,207.4,626.0), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=4: step=20.00mm, span=(265.9,204.4,500.8), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=5: step=16.69mm, span=(261.8,203.1,400.7), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=6: step=13.36mm, span=(260.1,188.8,320.5), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=7: step=10.68mm, span=(248.7,176.0,277.8), rel_change=0.133
+  PASS  tracking settings' hook copies the PINPLATE files  (['cam0.txt', 'cam1.txt', 'cam2.txt', 'cam3.txt'], byte-identical True)
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  Stop ends the process within 2 s  (0.19 s; status 'Flat-window calibration stopped.')
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  refit from the last result: the same f (1e-6), and faster  (3 s; largest change of f 2.7e-09)
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  'Use the previous calibrator' goes to the previous calibrator  (calls [(25.0, 0)])
+
+9 of 9 checks passed; 59 s

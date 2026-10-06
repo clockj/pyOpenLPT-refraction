@@ -1,0 +1,76 @@
+{
+ "checks": [
+  {
+   "check": "g2_backlit (a): identical to T13's estimator and guard",
+   "ok": true,
+   "detail": "180/180 camera-frames identical"
+  },
+  {
+   "check": "g2_backlit (b): accuracy as T13 (RMS <= 0.035, |mean| <= 0.01, max < 0.25 px, none > 1 px)",
+   "ok": true,
+   "detail": "RMS 0.0265, mean (+0.0018, +0.0006), max 0.121, wrong 0"
+  },
+  {
+   "check": "g2_backlit (c): a wider background window moves the centres < 0.02 px RMS",
+   "ok": true,
+   "detail": "0.0003 px"
+  },
+  {
+   "check": "g2_even (a): identical to T13's estimator and guard",
+   "ok": true,
+   "detail": "172/172 camera-frames identical"
+  },
+  {
+   "check": "g2_even (b): accuracy as T13 (RMS <= 0.035, |mean| <= 0.01, max < 0.25 px, none > 1 px)",
+   "ok": true,
+   "detail": "RMS 0.0277, mean (+0.0002, -0.0012), max 0.118, wrong 0"
+  },
+  {
+   "check": "g2_even (c): a wider background window moves the centres < 0.02 px RMS",
+   "ok": true,
+   "detail": "0.0000 px"
+  },
+  {
+   "check": "(d) 'fast' and 'reliable' byte-identical to HEAD (8- and 9-argument tasks)",
+   "ok": true,
+   "detail": "52/52"
+  }
+ ],
+ "seconds": 208.26939797401428,
+ "sets": {
+  "g2_backlit": {
+   "camera_frames": 180,
+   "identical": 180,
+   "not_measured": 3,
+   "guard_dropped": 0,
+   "rms_px": 0.026466568472969326,
+   "mean_px": [
+    0.001764496232825363,
+    0.0005968687735364953
+   ],
+   "max_px": 0.12050284890608083,
+   "wrong": 0,
+   "moved_rms_px": 0.00032693018920711294,
+   "ms_per_image": 91.13388988706801
+  },
+  "g2_even": {
+   "camera_frames": 172,
+   "identical": 172,
+   "not_measured": 8,
+   "guard_dropped": 0,
+   "rms_px": 0.027656179842244846,
+   "mean_px": [
+    0.00016198246431930476,
+    -0.0012464169975733108
+   ],
+   "max_px": 0.1179458154208728,
+   "wrong": 0,
+   "moved_rms_px": 4.106601340465188e-05,
+   "ms_per_image": 129.87598707509596
+  },
+  "fast_reliable": {
+   "identical": 52,
+   "compared": 52
+  }
+ }
+}

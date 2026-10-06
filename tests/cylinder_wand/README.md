@@ -20,6 +20,24 @@ experiment.
 
 ## 1. Progress log
 
+**2026-10-06 (afternoon)**
+- **The cylinder wand calibration is in the GUI.**
+  - **Where:** Wand Calibration → Calibration → Camera Model "Pinhole+Cylinder", with a Tube panel. The defaults are
+    your tube.
+  - **Detection:** a new mode, "ellipse", measures balls seen through the tube. It is T13's estimator with the rod
+    masked and the overlap guard, now in the library (`curved_calibration/ball_ellipses.py`).
+  - **What a run writes:** PINCYL camFiles, the result JSON and report, and a results page (`calibration_report.html`).
+  - **What the GUI shows:** the page in a new Report tab, the error table and overlays, and the tube in the 3-D view.
+    The tracking settings pick up the camFiles.
+  - **Tests** (`tests/cylinder_wand_gui/`: plan, report, G0–G9):
+    - on rendered images through your tube, going from the images to the camFiles through the GUI: f within 0.02 %
+      (σ 0.06 %), RMS 0.017 px;
+    - the GUI's runner gives exactly `calibrate`'s answer;
+    - pytest is unchanged.
+  - **Library change:** `calibrate` and `bootstrap` gained `log_fits` (off by default) for the GUI's progress and
+    Stop.
+  - **Still to try:** real images through the tube.
+
 **2026-10-06**
 - **The paper's §9.2.2 now quotes this campaign** (`cases/cyl_wand_paper/2026-10-06-report.md`; every number, with
   its source file and key, in that case's `paper_numbers_out.txt`).

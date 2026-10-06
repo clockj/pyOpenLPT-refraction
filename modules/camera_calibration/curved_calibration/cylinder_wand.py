@@ -1323,7 +1323,7 @@ def _robust_cost(r, f_scale: float = 2.0) -> float:
 
 def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict = None, n_score_frames: int = 150,
               n_short: int = 6, n_quick_frames: int = 40, quick_nfev: int = 8, grid_step: float = None,
-              verbose: bool = False, log=print):
+              verbose: bool = False, log=print, log_fits: bool = False):
     """Stages 1-2: candidate starting rigs from the data alone, best first.
 
     Stage 1 factorises the frames seen by every camera (affine cameras, metric upgrade with L).  For both mirror
@@ -1334,6 +1334,7 @@ def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict =
     ranked by its robust back-projection cost after it; the best `n_short` get a longer fit on `n_score_frames`
     frames and are ranked again.
     Hints (all optional): {"f_range": (lo, hi) px, "distance_range": (lo, hi) mm along each principal ray}.
+    log_fits: also log every candidate's quick and short fit (prefixed "start search: "; the GUI's Stop uses it).
     Returns (list of (cost, cameras), info)."""
     hints = hints or {}
     t0 = time.time()
@@ -1370,13 +1371,18 @@ def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict =
     # telecentric) score better than the right one (T5 rig 37)
     quick_rows = _subset_rows(obs, n_quick_frames)
     quick = []
+
+    def fit_log(msg):
+        log("start search: " + str(msg).strip())
     for cost0, mirror, p, cams in cands:
-        cs, _info = coarse_fit(cams, tube, obs, L, layout, max_outer=1, max_nfev=quick_nfev, rows=quick_rows)
+        cs, _info = coarse_fit(cams, tube, obs, L, layout, max_outer=1, max_nfev=quick_nfev, rows=quick_rows,
+                               verbose=log_fits, log=fit_log)
         quick.append((_robust_cost(backprojection_residual(cs, tube, obs, L, quick_rows)), cs, mirror, p, cost0))
     quick.sort(key=lambda c: c[0])
     short = []
     for cost_q, cams, mirror, p, cost0 in quick[:n_short]:
-        cs, _info = coarse_fit(cams, tube, obs, L, layout, max_outer=2, max_nfev=40, rows=rows)
+        cs, _info = coarse_fit(cams, tube, obs, L, layout, max_outer=2, max_nfev=40, rows=rows, verbose=log_fits,
+                               log=fit_log)
         short.append((_robust_cost(backprojection_residual(cs, tube, obs, L, rows)), cs, mirror, p, cost0))
         if verbose:
             log(f"    candidate mirror {mirror} p ({p[0]:+.1f}, {p[1]:+.1f}) mm: cost as placed {cost0:.3g}, after a "
@@ -1391,7 +1397,7 @@ def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict =
 def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit_k1: bool = False,
               fit_L: bool = False, k_sigma: float = 5.0, guard_px: float = 30.0, n_final: int = 2,
               verbose: bool = False, log=print, noise_weights: str = "camera", sigma_cam_px=None,
-              more_starts_px: float = 1.0) -> Solution:
+              more_starts_px: float = 1.0, log_fits: bool = False) -> Solution:
     """Stages 0-5: from the detections to the cameras, with no camera input (or from `start`, cameras in the
     gauge).  The best `n_final` bootstrap candidates are carried through stages 3 and 4; when the best of them
     still has a stage-3 RMS above more_starts_px (noisy data), every short-listed candidate is (T11b: at 5 px one rig
@@ -1399,7 +1405,9 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
     keeping the most observations, then with the highest likelihood (the lowest sum over noise groups of n_g log of
     the mean squared residual: the lowest RMS for a single group), wins.  noise_weights and sigma_cam_px: see
     `refine`.  With fit_L the wand length is estimated too (stages 1-3 use the nominal data.L): the tube's radii fix
-    the scale, so the fitted L against the nominal checks the tube's constants (tests/cylinder_wand T9)."""
+    the scale, so the fitted L against the nominal checks the tube's constants (tests/cylinder_wand T9).
+    log_fits: also pass `log` to the start search's fits and to the stage-3 and stage-4 fits (one line per iteration
+    and round; the GUI's progress and Stop use it).  Off by default: the numbers do not depend on it."""
     obs = observations(data)
     layout = Layout(data.n_cams, fit_k1=fit_k1, fit_L=fit_L)
     t0 = time.time()
@@ -1407,7 +1415,8 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
     if start is not None:
         starts = [start]
     else:
-        ranked, binfo = bootstrap(obs, tube, data.L, data.sizes, hints=hints, verbose=verbose, log=log)
+        ranked, binfo = bootstrap(obs, tube, data.L, data.sizes, hints=hints, verbose=verbose, log=log,
+                                  log_fits=log_fits)
         starts = [c for _cost, c in ranked]
     best = None
     active0 = obs.active.copy()
@@ -1416,10 +1425,11 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
         if k >= n_final and min(stage3, default=0.0) <= more_starts_px:
             break
         o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
-        cams3, info3 = coarse_fit(cams0, tube, o, data.L, layout)
+        cams3, info3 = coarse_fit(cams0, tube, o, data.L, layout, verbose=log_fits, log=log)
         stage3.append(info3["rms_px"])
         sol = refine(cams3, tube, initial_frames(cams3, tube, o, data.L), data.L, o, layout, k_sigma=k_sigma,
-                     guard_px=guard_px, noise_weights=noise_weights, sigma_cam_px=sigma_cam_px)
+                     guard_px=guard_px, noise_weights=noise_weights, sigma_cam_px=sigma_cam_px, verbose=log_fits,
+                     log=log)
         sol.info["stage3"] = info3
         tried += 1
         n_act = int(o.active.sum())

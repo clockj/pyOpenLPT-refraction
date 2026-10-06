@@ -1,0 +1,10 @@
+cam0: 354 points; Python vs C++ above 1e-6 px at 354 points (largest 2.75e-03, from the principal point 2.75e-03); ray misses: C++ median 5.4e-05 max 5.6e-05 mm, Python median 1.4e-14 max 4.3e-14 mm
+    point 131: X (-10.118, 8.719, -9.174) mm, 13.66 mm from the axis; C++ (118.65995, 61.89672) misses by 5.34e-05 mm; Python (118.65720, 61.89672) misses by 2.85e-14 mm; ok True; all C++ images [[118.66, 61.8967]]
+    point 198: X (11.320, 5.042, -3.591) mm, 11.88 mm from the axis; C++ (1215.53591, 202.79211) misses by 5.41e-05 mm; Python (1215.53316, 202.79211) misses by 1.11e-16 mm; ok True; all C++ images [[1215.5359, 202.7921]]
+    point 9: X (10.667, -7.101, -1.881) mm, 10.83 mm from the axis; C++ (1180.40230, 672.89057) misses by 5.43e-05 mm; Python (1180.39955, 672.89057) misses by 4.08e-15 mm; ok True; all C++ images [[1180.4023, 672.8906]]
+    point 283: X (-10.230, 8.221, 1.171) mm, 10.30 mm from the axis; C++ (124.17565, 78.74211) misses by 5.46e-05 mm; Python (124.17290, 78.74211) misses by 1.45e-14 mm; ok True; all C++ images [[124.1756, 78.7421]]
+    point 69: X (-11.441, -5.176, 3.602) mm, 11.99 mm from the axis; C++ (66.07733, 599.16334) misses by 5.49e-05 mm; Python (66.07458, 599.16334) misses by 2.86e-14 mm; ok True; all C++ images [[66.0773, 599.1633]]
+cam1: 354 points; Python vs C++ above 1e-6 px at 0 points (largest 8.02e-09, from the principal point 8.02e-09); ray misses: C++ median 3.9e-11 max 1.6e-10 mm, Python median 4.5e-14 max 1.9e-13 mm
+cam2: 354 points; Python vs C++ above 1e-6 px at 0 points (largest 1.58e-10, from the principal point 1.58e-10); ray misses: C++ median 6.1e-13 max 3.5e-12 mm, Python median 1.4e-14 max 4.3e-14 mm
+
+0 of 0 checks passed; 1 s

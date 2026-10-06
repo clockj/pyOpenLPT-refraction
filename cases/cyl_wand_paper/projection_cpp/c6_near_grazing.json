@@ -1,0 +1,194 @@
+{
+ "provenance": {
+  "time": "2026-10-06 13:17:35",
+  "module": "projbench.cp311-win_amd64.pyd",
+  "module_sha256": "01ab7737e3b809479160bafea7d01e071c384b259ec557765231541b33121c47",
+  "module_as_built": true,
+  "module_info": {
+   "compiler": "MSVC 194033812",
+   "cxx_standard": 202002,
+   "ndebug": true,
+   "release_flags": "/O2 /Ob2 /DNDEBUG",
+   "clock": "std::chrono::steady_clock",
+   "clock_period_ns": 1.0
+  },
+  "refract_curved_sources": [
+   {
+    "path": "src/srcMath/RefractCurved.cpp",
+    "git_blob": "ef311b5f5b93919154852eb8bf07c4ac8112f38e",
+    "same_as_head": true,
+    "last_commit": "ce6ae77 2026-09-24 19:03:04 -0400"
+   },
+   {
+    "path": "inc/libMath/RefractCurved.h",
+    "git_blob": "6cf335b4b0ee6beb573d6ae1143b1ad152122b04",
+    "same_as_head": true,
+    "last_commit": "ce6ae77 2026-09-24 19:03:04 -0400"
+   }
+  ],
+  "paper_baselines_sha256": "bbb23baa237fc30eb2138a52dfc0249ff5187bef9dbb533bef5d1f98968611b1",
+  "project_cylinder_sha256": "4fba7d6e33de469fd5e96c5ba63a581e29a26e916128c4011e785ad24432a4e8",
+  "pyopenlpt_head": "7d845336136b813883189efa0b0e93dc8f65556b",
+  "python": "3.11.16",
+  "numpy": "2.4.6"
+ },
+ "passed": true,
+ "cpp": [
+  1935,
+  1950
+ ],
+ "python": [
+  1936,
+  1950
+ ],
+ "cpp_lost": [
+  [
+   "reference port",
+   "near",
+   1.8067658106985355e-14
+  ],
+  [
+   "reference port",
+   "near",
+   2.932914344817919e-15
+  ],
+  [
+   "reference port",
+   "near",
+   1.533263697925818e-15
+  ],
+  [
+   "reference port",
+   "near",
+   1.679490923781136e-14
+  ],
+  [
+   "reference port",
+   "near",
+   1.3323630212341138e-15
+  ],
+  [
+   "reference port",
+   "near",
+   8.745709561114244e-15
+  ],
+  [
+   "reference port",
+   "near",
+   5.534365166443647e-15
+  ],
+  [
+   "reference port",
+   "near",
+   5.342699174879027e-15
+  ],
+  [
+   "reference port",
+   "near",
+   5.5583393633189445e-14
+  ],
+  [
+   "reference port",
+   "far",
+   5.045781211140893e-15
+  ],
+  [
+   "reference port",
+   "far",
+   1.4275733015151808e-15
+  ],
+  [
+   "random stack 1 (N = 4)",
+   "far",
+   1.809598782180055e-15
+  ],
+  [
+   "random stack 1 (N = 4)",
+   "far",
+   5.841470345681732e-15
+  ],
+  [
+   "random stack 1 (N = 4)",
+   "far",
+   6.19931974274621e-15
+  ],
+  [
+   "random stack 2 (N = 4)",
+   "near",
+   1.956791156965162e-15
+  ]
+ ],
+ "python_lost": [
+  [
+   "reference port",
+   "near",
+   1.8067658106985355e-14
+  ],
+  [
+   "reference port",
+   "near",
+   2.932914344817919e-15
+  ],
+  [
+   "reference port",
+   "near",
+   1.533263697925818e-15
+  ],
+  [
+   "reference port",
+   "near",
+   1.679490923781136e-14
+  ],
+  [
+   "reference port",
+   "near",
+   1.3323630212341138e-15
+  ],
+  [
+   "reference port",
+   "near",
+   8.745709561114244e-15
+  ],
+  [
+   "reference port",
+   "near",
+   5.534365166443647e-15
+  ],
+  [
+   "reference port",
+   "near",
+   5.342699174879027e-15
+  ],
+  [
+   "reference port",
+   "near",
+   5.5583393633189445e-14
+  ],
+  [
+   "reference port",
+   "far",
+   5.045781211140893e-15
+  ],
+  [
+   "reference port",
+   "far",
+   1.4275733015151808e-15
+  ],
+  [
+   "random stack 1 (N = 4)",
+   "far",
+   5.841470345681732e-15
+  ],
+  [
+   "random stack 1 (N = 4)",
+   "far",
+   6.19931974274621e-15
+  ],
+  [
+   "random stack 2 (N = 4)",
+   "near",
+   1.956791156965162e-15
+  ]
+ ],
+ "seconds": 120.4
+}

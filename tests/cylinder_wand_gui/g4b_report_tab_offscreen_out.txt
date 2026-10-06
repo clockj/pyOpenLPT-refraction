@@ -1,0 +1,8 @@
+  PASS  the Report tab exists and uses QtWebEngine  (web view: QWebEngineView)
+  FAIL  the page loads and its script draws every figure  (loadFinished False, svg elements None, 212.8 s)
+  PASS  no JavaScript errors  (0 console messages, errors [])
+  FAIL  inside the GUI the page is dark  (data-theme None)
+  PASS  the widget's image is not blank  (304 x 408 -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\g4b_report_tab.png)
+  buttons enabled: browser True, folder True; label D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g3_run\results\calibration_report.html
+
+3 of 5 checks passed; 221 s

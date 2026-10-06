@@ -181,10 +181,15 @@ def detect_circles_robust(img_gray, min_r, max_r):
 def run_detection_task(args):
     """
     Worker function for parallel wand detection.
-    args: (frame_idx, cam_idx, img_path, wand_type, min_radius, max_radius, sensitivity)
+    args: (frame_idx, cam_idx, img_path, wand_type, min_radius, max_radius, sensitivity[, detect_mode[, detect_opts]])
+    detect_mode: "fast", "reliable" or "ellipse" (balls seen through a tube; curved_calibration/ball_ellipses.py).
+    detect_opts: settings of the "ellipse" mode, {"open_px", "rod_mask_px", "guard_px", "full"} (others ignore it).
     Returns: (frame_idx, cam_idx, points_array_or_None)
     """
-    if len(args) >= 8:
+    detect_opts = None
+    if len(args) >= 9:
+        f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode, detect_opts = args[:9]
+    elif len(args) >= 8:
         f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode = args
     else:
         f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity = args
@@ -206,7 +211,23 @@ def run_detection_task(args):
         # 3. Invert if dark
         if wand_type == "dark":
             img = cv2.bitwise_not(img)
-            
+
+        if str(detect_mode).lower() == "ellipse":
+            # Balls seen through a tube are ellipses: fit ellipses to their edges (tests/cylinder_wand T13).
+            # The image is bright-on-dark here (inverted above for dark wands).
+            try:
+                from ..curved_calibration import ball_ellipses
+            except ImportError:
+                from modules.camera_calibration.curved_calibration import ball_ellipses
+            opts = detect_opts or {}
+            rows = ball_ellipses.detect_wand_balls(
+                img, "bright", min_r_px=float(min_radius), max_r_px=float(max_radius),
+                open_px=int(opts.get("open_px", 25)), rod_mask_px=float(opts.get("rod_mask_px", 18.0)),
+                guard_px=float(opts.get("guard_px", 3.0)), full=bool(opts.get("full", False)))
+            if not rows:
+                return f_idx, c_idx, None
+            return f_idx, c_idx, np.array(rows, dtype=float)
+
         if str(detect_mode).lower() == "fast":
             # --- STRATEGY: Try Fast Robust DT First ---
             try:
@@ -254,7 +275,8 @@ def run_detection_task(args):
 class WandDetectionSingleFrameWorker(QThread):
     finished_signal = Signal(object) # Returns dict of results
 
-    def __init__(self, calibrator, image_paths_dict, wand_type, min_r, max_r, sensitivity, detect_mode="fast"):
+    def __init__(self, calibrator, image_paths_dict, wand_type, min_r, max_r, sensitivity, detect_mode="fast",
+                 detect_opts=None):
         super().__init__()
         self.calibrator = calibrator
         self.image_paths_dict = image_paths_dict
@@ -263,17 +285,19 @@ class WandDetectionSingleFrameWorker(QThread):
         self.max_r = max_r
         self.sensitivity = sensitivity
         self.detect_mode = detect_mode
+        self.detect_opts = detect_opts
 
     def run(self):
         # Run detection
         try:
             res = self.calibrator.detect_single_frame(
-                self.image_paths_dict, 
-                self.wand_type, 
-                self.min_r, 
-                self.max_r, 
+                self.image_paths_dict,
+                self.wand_type,
+                self.min_r,
+                self.max_r,
                 self.sensitivity,
-                self.detect_mode
+                self.detect_mode,
+                detect_opts=self.detect_opts,
             )
             self.finished_signal.emit(res)
         except Exception as e:
@@ -284,7 +308,8 @@ class WandDetectionWorker(QThread):
     progress = Signal(int, int) # current, total
     finished_signal = Signal(bool, str) # success, msg
     
-    def __init__(self, calibrator, image_paths, wand_type, min_r, max_r, sens, autosave_path=None, resume=False, detect_mode="fast"):
+    def __init__(self, calibrator, image_paths, wand_type, min_r, max_r, sens, autosave_path=None, resume=False, detect_mode="fast",
+                 detect_opts=None):
         super().__init__()
         self.calibrator = calibrator
         self.image_paths = image_paths
@@ -293,6 +318,7 @@ class WandDetectionWorker(QThread):
         self.max_r = max_r
         self.sens = sens
         self.detect_mode = detect_mode
+        self.detect_opts = detect_opts
         self.autosave_path = autosave_path
         self.resume_flag = resume
         
@@ -313,7 +339,8 @@ class WandDetectionWorker(QThread):
             gen = self.calibrator.detect_wand_points_generator(
                 self.image_paths, self.wand_type, self.min_r, self.max_r, self.sens,
                 self.autosave_path, self.resume_flag, self.detect_mode,
-                stop_check=lambda: self._is_stopped
+                stop_check=lambda: self._is_stopped,
+                detect_opts=self.detect_opts,
             )
             
             # First item yielded is (0, total_frames) for init
@@ -648,12 +675,14 @@ class WandCalibrator:
         
         return (m_s, s_s), (m_l, s_l)
 
-    def detect_wand_points_generator(self, image_paths_dict, wand_type, min_radius, max_radius, sensitivity, autosave_path=None, resume=False, detect_mode="fast", stop_check=None):
+    def detect_wand_points_generator(self, image_paths_dict, wand_type, min_radius, max_radius, sensitivity, autosave_path=None, resume=False, detect_mode="fast", stop_check=None,
+                                     detect_opts=None):
         """
         Generator for detecting wand points. Yields (current_frame_idx, total_frames).
         Implements dual-radius logic and strict filtering.
         Supports Resume and Autosave.
         stop_check: Optional callable that returns True if stop was requested.
+        detect_opts: settings of the "ellipse" detect_mode (see run_detection_task).
         """
         # Update Cameras Dict
         for c_idx, paths in image_paths_dict.items():
@@ -696,7 +725,8 @@ class WandCalibrator:
             for c_idx in cam_indices:
                 if f_idx < len(image_paths_dict[c_idx]):
                     img_path = str(image_paths_dict[c_idx][f_idx])
-                    all_tasks.append((f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode))
+                    all_tasks.append((f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode,
+                                      detect_opts))
         
         total_tasks = len(all_tasks)
         print(f"Parallel Execution: {total_tasks} tasks to run (Skipped {num_frames * num_cams - total_tasks})")
@@ -1089,7 +1119,8 @@ class WandCalibrator:
             return False, str(e)
 
 
-    def detect_single_frame(self, image_dict, wand_type="bright", min_radius=20, max_radius=200, sensitivity=0.85, detect_mode="fast"):
+    def detect_single_frame(self, image_dict, wand_type="bright", min_radius=20, max_radius=200, sensitivity=0.85, detect_mode="fast",
+                            detect_opts=None):
         """
         Run detection on a single frame dictionary {cam_idx: path}.
         Returns {cam_idx: points} for visualization.
@@ -1101,7 +1132,7 @@ class WandCalibrator:
         tasks = []
         for c_idx, path in image_dict.items():
             # Frame index is dummy 0 here
-            tasks.append((0, c_idx, str(path), wand_type, min_radius, max_radius, sensitivity, detect_mode))
+            tasks.append((0, c_idx, str(path), wand_type, min_radius, max_radius, sensitivity, detect_mode, detect_opts))
             
         # Run Parallel
         try:
@@ -1120,7 +1151,8 @@ class WandCalibrator:
             print(f"Parallel detection failed: {e}. Fallback to sequential.")
             # Fallback Sequential
             for c_idx, path in image_dict.items():
-                _, _, pts = run_detection_task((0, c_idx, str(path), wand_type, min_radius, max_radius, sensitivity, detect_mode))
+                _, _, pts = run_detection_task((0, c_idx, str(path), wand_type, min_radius, max_radius, sensitivity, detect_mode,
+                                                detect_opts))
                 if pts is not None:
                     results[c_idx] = pts
                     

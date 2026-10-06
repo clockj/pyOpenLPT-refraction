@@ -1,0 +1,102 @@
+{
+ "checks": [
+  {
+   "check": "G0 GUI points = the GUI's CSV as read by read_gui_csv (to the CSV's 3 decimals)",
+   "ok": true,
+   "detail": "largest difference 4.99e-04 px"
+  },
+  {
+   "check": "G0 after the GUI's own CSV loader: exactly read_gui_csv's",
+   "ok": true,
+   "detail": "120 frames"
+  },
+  {
+   "check": "G0 a camera missing from a frame gives NaN",
+   "ok": true,
+   "detail": "6 NaN coordinates, 6 in the truth"
+  },
+  {
+   "check": "G0 unlabelled points: the smaller radius is end A",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "G1 3 cameras: the GUI's runner = cylinder_wand.calibrate",
+   "ok": true,
+   "detail": "f 0.0e+00, centres 0.0e+00 mm, rotations 0.0e+00 rad"
+  },
+  {
+   "check": "G1 3 cameras: L1 off by default (no fit lines in calibrate's verbose log)",
+   "ok": true,
+   "detail": "8 lines, 0 from the fits"
+  },
+  {
+   "check": "G1 3 cameras: camFiles load in C++; their projections = the model's (0.01 px)",
+   "ok": true,
+   "detail": "largest difference 3.67e-04 px (the ends are rounded to 1e-5 mm)"
+  },
+  {
+   "check": "G1 3 cameras: per-frame errors = an independent recomputation",
+   "ok": true,
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "G1 3 cameras: f within 3 sigma of the truth",
+   "ok": true,
+   "detail": "z +0.62, +0.74, +0.40"
+  },
+  {
+   "check": "G1 4 cameras: the GUI's runner = cylinder_wand.calibrate",
+   "ok": true,
+   "detail": "f 0.0e+00, centres 0.0e+00 mm, rotations 0.0e+00 rad"
+  },
+  {
+   "check": "G1 4 cameras: L1 off by default (no fit lines in calibrate's verbose log)",
+   "ok": true,
+   "detail": "8 lines, 0 from the fits"
+  },
+  {
+   "check": "G1 4 cameras: camFiles load in C++; their projections = the model's (0.01 px)",
+   "ok": true,
+   "detail": "largest difference 3.85e-04 px (the ends are rounded to 1e-5 mm)"
+  },
+  {
+   "check": "G1 4 cameras: per-frame errors = an independent recomputation",
+   "ok": true,
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "G1 4 cameras: f within 3 sigma of the truth",
+   "ok": true,
+   "detail": "z +0.70, -0.61, +0.51, -0.88"
+  }
+ ],
+ "seconds": 145.27419900894165,
+ "g1": {
+  "3": {
+   "df": 0.0,
+   "dC": 0.0,
+   "dR": 0.0,
+   "cpp_px": 0.0003672573136398236,
+   "z_f": [
+    0.6217674256290204,
+    0.7353066735826514,
+    0.39762851486192774
+   ],
+   "rms_px": 0.10733215011967111
+  },
+  "4": {
+   "df": 0.0,
+   "dC": 0.0,
+   "dR": 0.0,
+   "cpp_px": 0.0003853058832009884,
+   "z_f": [
+    0.6977359203131419,
+    -0.6142515980120355,
+    0.5144660026798125,
+    -0.8792127939874832
+   ],
+   "rms_px": 0.11611778112035236
+  }
+ }
+}

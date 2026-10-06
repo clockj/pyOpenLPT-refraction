@@ -1,0 +1,4 @@
+# the CMake build and the compiled module (rebuilt by build.py)
+build/
+*.pyd
+__pycache__/

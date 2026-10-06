@@ -1,0 +1,21 @@
+c1_smoke: started 2026-10-06 12:58:04; module projbench.cp311-win_amd64.pyd (SHA-256 01ab7737e3b8, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+ref: X = (0.05, 0.03, 0.02); ours: 1 ray(s): near Lambda 0.0405402 C_z 0.0688226
+  afrt  zero       ev   48 it   24 miss 5.87e-10 m
+  gn    zero       ev    7 it    2 miss 7.15e-11 m
+  lm    zero       ev    7 it    2 miss 7.56e-11 m
+  shoot zero       ev    7 it    2 miss 3.99e-10 m
+  single_start: ours 278.6 us, baselines afrt 6.3 us, gn 1.5 us, lm 1.5 us, shoot 1.4 us; passes differ 0; multistart kept per method [4, 4, 4, 4]
+pa: X = (0.02, 0.01, 0.01); ours: 1 ray(s): near Lambda 0.010605 C_z 0.022638
+  afrt  zero       ev   34 it   17 miss 8.63e-10 m
+  gn    zero       ev    7 it    2 miss 1.28e-17 m
+  lm    zero       ev    7 it    2 miss 2.44e-15 m
+  shoot zero       ev    7 it    2 miss 3.29e-15 m
+  single_start: ours 266.0 us, baselines afrt 4.4 us, gn 1.4 us, lm 1.5 us, shoot 1.4 us; passes differ 0; multistart kept per method [4, 4, 4, 4]
+sph: X = (0.05, 0.03, 0.02); ours: 1 ray(s): near Lambda 0.0485485 C_z 0
+  afrt  zero       ev   50 it   25 miss 4.91e-10 m
+  gn    zero       ev    7 it    2 miss 5.04e-10 m
+  lm    zero       ev    7 it    2 miss 5.12e-10 m
+  shoot zero       ev   10 it    3 miss 1.71e-16 m
+  single_start: ours 88.0 us, baselines afrt 4.2 us, gn 1.1 us, lm 1.2 us, shoot 1.5 us; passes differ 0; multistart kept per method [4, 4, 4, 4]
+C1 PASS: every baseline converged on these interior points
+c1_smoke: done in 0.0 s

@@ -1,6 +1,6 @@
 # Flat-window wand calibration (PINPLATE): summary and progress
 
-Last updated: 2026-10-04.
+Last updated: 2026-10-06.
 
 Start here to catch up. This file gathers what the flat-window wand tests concluded, and what that means for a real
 experiment.
@@ -76,6 +76,20 @@ experiment.
   has the same advice (`2026-10-02-plate-wand-report.md`, section 6).
 
 ## 1. Progress log
+
+**2026-10-06**
+- **The GUI's "Pinhole+Refraction" now runs this calibration** (`curved_calibration/plate_wand_gui.py`).
+  - **The window panel:** it gives the windows, the camera-to-window mapping and the media, the same for every
+    window, as the panel had them.
+  - **How it runs:** in a separate process, so that Stop ends it at once. The start search can run for many minutes
+    between two log lines.
+  - **What it writes:** PINPLATE camFiles that carry the GUI's previous `REFRACTION_META` block, so VSC groups the
+    cameras by window. Also the result JSON and report, and a results page shown in the new Report tab.
+  - **The previous calibrator:** a box, "Use the previous calibrator", keeps it available. It is the only one that
+    applies axis points.
+  - **Tests:** `tests/cylinder_wand_gui/` G8 on rig B (two walls, four cameras): f within 0.12 % of the truth,
+    46 s, Stop in 0.19 s, a refit from the last result in 3 s.
+  - The calibration code itself is unchanged.
 
 **2026-10-04**
 - **An illustrated guide to both wand calibrations, flat walls and tube:**

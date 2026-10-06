@@ -1,0 +1,24 @@
+{
+ "checks": [],
+ "seconds": 0.7759087085723877,
+ "cameras": {
+  "cam0": {
+   "angle_from_half_turn_rad": 1.3482874989811933e-06,
+   "python_roundtrip_rad": 0.0,
+   "camfile_matrix_rad": 0.0,
+   "cv2_of_file_rvec_rad": 3.6366710534610245e-05
+  },
+  "cam1": {
+   "angle_from_half_turn_rad": 3.5260322739372185e-05,
+   "python_roundtrip_rad": 6.664001874625058e-08,
+   "camfile_matrix_rad": 6.664001874625058e-08,
+   "cv2_of_file_rvec_rad": 3.674277068954117e-07
+  },
+  "cam2": {
+   "angle_from_half_turn_rad": 4.867201023683876e-05,
+   "python_roundtrip_rad": 2.9802322387695312e-08,
+   "camfile_matrix_rad": 2.9802322387695312e-08,
+   "cv2_of_file_rvec_rad": 1.1542389828584848e-07
+  }
+ }
+}

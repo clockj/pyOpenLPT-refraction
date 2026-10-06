@@ -1,0 +1,5 @@
+c2b_timing: started 2026-10-06 12:48:54; module projbench.cp311-win_amd64.pyd (SHA-256 01ab7737e3b8, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+ref e1 uniform: 500 points, r_X median 64.3 mm; ours median per point: this module 261.4 us (C++ timer), OpenLPT's extension 260.7 us (Python timer); p95 314.0 / 314.2 us
+sph e1 uniform: 500 points, r_X median 73.5 mm; ours median per point: this module 88.2 us (C++ timer), OpenLPT's extension 90.8 us (Python timer); p95 103.9 / 105.3 us
+sph B1-style uniform: 500 points, r_X median 75.4 mm; ours median per point: this module 91.1 us (C++ timer), OpenLPT's extension 92.3 us (Python timer); p95 102.6 / 104.0 us
+c2b_timing: done in 1.2 s

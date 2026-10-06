@@ -20,6 +20,11 @@ The synthetic wand-calibration evidence for Section 9.2.2 of the Optics Express 
   27 rays that graze the point's own radius, where rounding limits the residual to about 10⁻¹²–4×10⁻¹¹. The projection's
   own default, 10⁻⁹, finds them all.
 
+**`projection_cpp/` (2026-10-06):** the paper's comparison of the projection with iterative projection (Section 9.2.1,
+Fig. 14, S8) in C++. A module of its own compiles OpenLPT's search unmodified, together with C++ ports of the iterative
+methods of the paper's `code/paper_baselines.py`, and times them alike. See its `2026-10-06-plan.md` and
+`2026-10-06-report.md`. Nothing outside that folder is changed or built.
+
 **History:**
 - `2026-10-03-plan.md`: the first plan, with P0–P5 reruns and a single-image rule. It is superseded: the paper
   dropped the rule, and the campaign already had the results.

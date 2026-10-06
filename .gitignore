@@ -101,6 +101,12 @@ tests/plate_wand/w6_cases/
 tests/stb_improve/**/__pycache__/
 tests/stb_improve/runs/
 tests/stb_improve/data/
+# the wand calibrations in the GUI (cylinder port, flat windows, the results page): tests/cylinder_wand_gui/
+# (data/ holds rendered images and run outputs, regenerable with its scripts)
+!tests/cylinder_wand_gui/
+!tests/cylinder_wand_gui/**
+tests/cylinder_wand_gui/**/__pycache__/
+tests/cylinder_wand_gui/data/
 # the campaign's build trees and the saved baseline build
 build-stb/
 build-py-baseline/
