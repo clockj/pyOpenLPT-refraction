@@ -1,9 +1,10 @@
 # STB speed and robustness improvements: summary and progress
 
-Last updated: 2026-10-06 (Phases A and B committed as `acd78d4`, A4b and G as `f2a3dbb`; the fixes of the issues
-noticed during A4b done and tested, not committed).
+Last updated: 2026-10-06 (Phases A and B committed as `acd78d4`, A4b and G as `f2a3dbb`, the fixes of the issues
+noticed during A4b as `c3dd9e5`; Phase E done; E4, the origin-free predictor, tested, in the source and in your
+rebuilt exe and module; Phase E and E4 not committed).
 
-Start here to catch up. The plan is `2026-10-05-plan.md` (approved for Phases A and B on 5 Oct); the final report is
+Start here to catch up. The plan is `2026-10-05-plan.md` (approved for Phases A and B on 5 Oct, Phase E on 6 Oct); the final report is
 `2026-10-05-report.md`. Every number below comes from a file in `results/`, written by the scripts named.
 
 **In short.** Tracking this case now takes a flat **2.5 s per frame** over 300 frames, where HEAD went from 6.4 to
@@ -15,8 +16,53 @@ B2 the outputs are identical to HEAD's. Every check passed (section 3).
 `build/Release/OpenLPT.exe`. Choosing a project fills the settings form from its saved config. Save Configuration
 writes `config.json`, which has a Save Interval field (use 200 for long runs).
 
+**Track prediction (Phase E):** today's predictor is as good as any tried, Kalman filters included (report section
+10). Its origin-free form, the mean step, is now in the source: it no longer depends on where the calibration put
+the origin, and tracks slightly better (E4, section 11). Your exe and module were rebuilt with it, so the GUI uses
+it.
+
 ## 1. Progress log (newest first)
 
+- **6 Oct: G5, the GUI on the new predictor** (report 11.4; `queue5.sh`).
+  - **Rebuild:** `build_local.py` rebuilt your `build/Release/OpenLPT.exe` and `build-py/Release` module with E4's
+    origin-free predictor; the builds before it are kept in `build-stb/user-2026-10-05/`.
+  - **Checks, frames 0–50, against the tested build:** the exe, the module, and the GUI's own Run path (form → Save →
+    Run Tracking) are all IDENTICAL, with 11 of 11 output files byte-identical. They differ from today's old
+    predictor from frame 4 on, as they should.
+  - **pytest:** 254 passed, the same 4 old failures. Speed unchanged (about 2.45 s per frame).
+- **6 Oct: E4, the origin-free predictor** (report section 11; `e4_mean_step.py`, 7 of 7 checks).
+  - **The change:** `STB::predictNext` predicts each axis with the mean step over the last 5 frames. It replaces the LMS
+    fit, which pushed predictions away from 0 near the coordinate planes. The change is in the source, not committed.
+  - **Port:** the new C++ prediction equals the formula to the last bit on 20,104 histories. Shifting a history by up
+    to 100 mm shifts the prediction exactly (4e-14 mm), where today's moved by up to 0.29 mm.
+  - **Tracking, frames 0–300, against today's:**
+    - tracked points +0.7 %, tracks of ≥ 100 frames +1.3 %, lost tracks −1.0 %, at the same 2.47 s per frame;
+    - a control with an offset of the same size in a random direction went the other way (−0.2 to −1.6 %).
+  - **Near the planes (1–3 mm):** the bias is gone (+0.0067 → 0.0000 mm), and 6 % fewer tracks are lost there
+    (2.0 standard errors).
+  - **pytest:** 254 passed, the same 4 old failures.
+  - **Your exe and module:** rebuilt with it on your OK (G5, above).
+- **6 Oct: Phase E, track prediction** (report section 10; `e1_sympy_check.py`, `e1a_port_check.py`,
+  `e1b_replay.py`, `e1c_shake_capture.py`, `e1d_synthetic.py`).
+  - **Answer:** on the saved tracks of B300, T4 and T5 (11.6 million scored points) no predictor is measurably better
+    than today's. The best line, parabola and Kalman filters have p99 one-step errors 0.3–21 % above today's. The
+    plan's rule for implementing one (30 % lower p99, or jumps caused by the predictor) is not met, so no code
+    changed.
+  - **Why:** the errors are the shake's, not the predictor's.
+    - Their tail is heavy: p99 0.12 mm against a median of 0.018 mm.
+    - A start 0.1 mm off still keeps 99.98 % of the particles from being flagged.
+    - The last point of a lost track lies 0.18 mm from a prediction that every predictor agreed on.
+  - **Kalman parameters,** from the data: q/r 0.56 (constant velocity) or 0.056 (constant acceleration), σ
+    0.011–0.013 mm, the same on all three runs.
+  - **One prediction step for all tracks** is what the code already does: 0.0001 s per frame.
+  - **Found on the way:**
+    - Today's predictor depends on where the world origin lies: up to 0.037 mm at 1–3 mm from a coordinate plane.
+    - The shake's result depends on its start: for a start 0.01 mm off, 18 % of the particles end 0.005 mm or more
+      elsewhere.
+    - Options for you: report section 10.6.
+  - **Checks:** the Python copy of the predictor equals the C++ to the last bit on 20,104 histories; E1c reproduces
+    STB's own frame 301 to 8.5e-7 mm; the Kalman code passes its self-tests on synthetic tracks; SymPy proves the
+    predictor's formulas (28 proved, 6 numbers recomputed, 1 skipped).
 - **6 Oct: the issues noticed during A4b are fixed** (report section 9; `f_noticed_fixes.py`, 15 of 15 checks).
   - **The settings form loads the project's `config.json` (else `config.txt`)** when the project is chosen.
     - Save changes only what the form shows: 31 of 31 GUI configs come back byte-identical, and 32 text
@@ -130,6 +176,11 @@ writes `config.json`, which has a Save Interval field (use 200 for long runs).
     frame.
   - G-log (`results/g_log_window.txt`): about 4 ms per frame for the log window at the size of a 5000-frame log.
 
+**Phase E, track prediction** (report section 10): one-step errors on the test half of B300 / T4 / T5, median and
+p99: today's 0.0177 / 0.1215, 0.0167 / 0.1166, 0.0188 / 0.1170 mm; the best other predictor's p99 is 0.3–0.7 %
+higher (`results/e1b_replay.txt`). The shake keeps 99.98 % of the particles for a start 0.1 mm off
+(`results/e1c_shake_capture.txt`).
+
 **B2, the image lines** (M1, `m1_epipolar.py` → `results/m1_epipolar.txt`): with exact pixels, the share of
 4-camera particles whose lines all lie within 2 px rises from 35.9 % (HEAD) to 91.8 %, within 3 px from 54.4 % to
 100 %. In tracking (300 frames): IPR objects +24 %, 4-camera matches at 2 px +98 %, active long tracks +15 %, at the
@@ -158,5 +209,17 @@ python tests/stb_improve/a4b_gui_config.py               # A5-A7: the GUI's writ
 python tests/stb_improve/g_gui_e2e.py e2e --frames 0 300 # G-E2E: form -> Save -> Run Tracking, then compare_runs with b300_final3
 python tests/stb_improve/g_gui_e2e.py log                # G-log: the log window's cost up to a 5000-frame log
 python tests/stb_improve/f_noticed_fixes.py              # F1-F3: the form loads configs, log.txt line ends, test isolation
+python tests/stb_improve/e1_sympy_check.py               # Phase E: SymPy checks of the predictor's formulas (plain python, needs D:/Refraction/code)
+python tests/stb_improve/e1a_port_check.py               # E1a: the Python predictors against the C++ predictNext
+python tests/stb_improve/e1b_replay.py                   # E1b + E2: the replay on B300, T4, T5 (T4/T5 read from X: once, cached in runs/e1_cache)
+python tests/stb_improve/stbrun.py r301_e1c --build user --frames 0 301 --load 300 --load-from b300_final3
+python tests/stb_improve/e1c_shake_capture.py            # E1c: the shake capture test on frame 301 (needs r301_e1c and e1b's results)
+python tests/stb_improve/e1d_synthetic.py                # E1d: synthetic tracks (needs e1b's results)
+python tests/stb_improve/build_variant.py md --def OPENLPT_MATRIX_INLINE=3   # E4: the working tree with the mean step
+python tests/stb_improve/e4_mean_step.py port md         # E4a: port and shift checks
+python tests/stb_improve/stbrun.py b300_md --build md --frames 0 300
+python tests/stb_improve/stbrun.py b300_wjit --build wjit --frames 0 300   # the control (build: patches/README.md)
+python tests/stb_improve/e4_mean_step.py compare         # E4b-d: against b300_final3
+bash tests/stb_improve/queue5.sh                         # G5: your rebuilt exe, module and GUI path against md (frames 0-50)
 ```
 The python is the `refract` env's (`C:\Users\zcloc\.conda\envs\refract\python.exe`).

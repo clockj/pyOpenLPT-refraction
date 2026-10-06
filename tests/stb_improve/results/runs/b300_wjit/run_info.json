@@ -1,0 +1,47 @@
+{
+ "run": "b300_wjit",
+ "argv": [
+  "b300_wjit",
+  "--build",
+  "wjit",
+  "--frames",
+  "0",
+  "300"
+ ],
+ "build": "wjit",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\wjit\\out",
+ "build_info": {
+  "name": "wjit",
+  "mode": "py",
+  "config": "Release",
+  "src": "D:\\Refraction\\pyOpenLPT\\build-stb\\src-wjit",
+  "git_head": "c3dd9e5",
+  "git_diff_stat": "src/srcSTB/STB.cpp | 38 ++++++++++++++++++++++++++++++++++++++\n 1 file changed, 38 insertions(+)",
+  "git_diff_sha256": "d8045b0223537fc0d69cff327390d4705ec1ee5a29be45c755273e02d32b4693",
+  "untracked": [],
+  "defs": [
+   "OPENLPT_MATRIX_INLINE=3"
+  ],
+  "asan": false,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc /DOPENLPT_MATRIX_INLINE=3",
+  "start": "2026-10-06T09:20:21",
+  "minutes": 0.5,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 370,
+  "products": [
+   "OpenLPT.exe",
+   "pyopenlpt.cp311-win_amd64.pyd"
+  ]
+ },
+ "asan_options": "",
+ "host": "HELLOWORLD",
+ "start": "2026-10-06T09:34:31",
+ "end": "2026-10-06T09:47:33",
+ "wall_s": 782.0,
+ "returncode": 0,
+ "frames_done": 301,
+ "sum_frame_s": 742.7,
+ "peak_working_set_MB": 2558,
+ "peak_private_MB": 2543
+}

@@ -9,11 +9,17 @@ e0.reference_max_abs_cz                      0.0239                             
 e0.t5_max_radius_mm                          49.32                                        <- e0_census.json t5_max_radius_mm
 e0.t5_max_abs_cz                             0.2097                                       <- e0_census.json t5_max_abs_cz
 e0.pairs_total                               907000                                       <- e0_census.json counts_data + counts_box, summed
-e0.pairs_by_image_count                      {'0': 27, '1': 906973}                       <- e0_census.json, summed
+e0.pairs_by_image_count_tol_1e-12            {'0': 27, '1': 906973}                       <- e0_census.json, summed (cameras at cyl_model.to_cpp's tol 1e-12)
+e0.data_pairs_without_image_tol_1e-12        7, 227000                                    <- e0_census.json counts_data (the regenerated data sets): zeros, total
 e0b.zero_pairs                               27                                           <- e0b_zero_images.json pairs
 e0b.python_finds_one                         27                                           <- e0b_zero_images.json python_images
 e0b.max_one_minus_lam_ratio                  7.8e-09                                      <- e0b_zero_images.json python_one_minus_lam_ratio
 e0b.abs_dphi_deg_range                       90.06, 94.37                                 <- e0b_zero_images.json dphi_deg
+e0c.core_finds_tol_1e-9                      27                                           <- e0c_tolerance.json pairs[].core_rays_tol_1e-9
+e0c.core_finds_tol_1e-12                     1                                            <- e0c_tolerance.json pairs[].core_rays_tol_1e-12
+e0c.residual_range                           1.0e-12, 4.1e-11                             <- e0c_tolerance.json pairs[].residual
+e0c.eps_over_sqrt_delta_range                2.5e-12, 1.3e-10                             <- e0c_tolerance.json pairs[].eps_over_sqrt_delta
+e0c.census_tol_1e-9                          {'1': 907000}                                <- e0c_tolerance.json census_tol_1e-9.totals
 e1.max_dr_px_truth                           1.3e-11                                      <- e1_equivalence.json cases[].truth
 e1.max_dr_px_start                           3.4e-11                                      <- e1_equivalence.json cases[].start
 e1.max_dJ_rel                                3.8e-14                                      <- e1_equivalence.json cases[].*.max_dJ_*

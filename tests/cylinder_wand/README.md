@@ -1,6 +1,6 @@
 # Cylinder wand calibration (PINCYL): summary and progress
 
-Last updated: 2026-10-04.
+Last updated: 2026-10-06.
 
 Start here to catch up. This file gathers what all the wand tests so far concluded, and what that means for a real
 experiment.
@@ -19,6 +19,29 @@ experiment.
 - No real wand data have been tried yet.
 
 ## 1. Progress log
+
+**2026-10-06**
+- **The paper's §9.2.2 now quotes this campaign** (`cases/cyl_wand_paper/2026-10-06-report.md`; every number, with
+  its source file and key, in that case's `paper_numbers_out.txt`).
+  - **The paper's calibration differs in two ways:** it starts each image's Newton iteration at the image of the C++
+    projection instead of at the detection, and it has no guard.
+  - **E1, E2:** on this campaign's data it gives the same residuals as `cylinder_wand`, to 3.4e-11 px, and the same
+    fits: the same observations, parameters within 1.7e-5 σ.
+  - **E0, E0c:** every wand end of the campaign lies in the single-image volume. 907,000 point–camera pairs each
+    have exactly one image. The ends reach 33.2 mm from the axis on the reference rig and 49.3 mm on T5's rigs.
+  - **E2b:** today's library, with per-camera noise weights, moves T4's fits of 1 Oct by at most 0.038 Cramér–Rao σ.
+    With T12b, the equal-weight results of T4–T11 therefore stand for the present calibration.
+- **`cyl_model.to_cpp`'s default tolerance, 1e-12, is below the rounding floor next to grazing.**
+  - **Where it bites:** a ray that grazes the point's own radius, the junction of the near and far branches.
+    Rounding limits the projection's residual there to about 1e-12–4e-11.
+  - **Effect:** C++ cameras built by `to_cpp` (in `rigs.wand_frames`, in the guard, in E0) skip such rays: 27 of
+    907,000 pairs in the census, 7 of 227,000 wand-end images in the regenerated data sets.
+  - **At the projection's own default, 1e-9,** all are found.
+  - No result changes. Not fixed: a rounding-level effect (your rule of 2026-10-06).
+- **Corrected in section 3 item 2:**
+  - the 0.1 px table comes from T11a's 0.1 px level (40 data sets) and from T7, not from T4;
+  - T4's z-score SD is 0.925;
+  - the campaign's sensor is 3200×2400 px.
 
 **2026-10-04**
 - **Double images during the fit (your question for the paper's §9.1).** You keep the calibration to observations in
@@ -223,8 +246,10 @@ The output frame is the tube frame:
    - It still works at 2 px of noise on every rig tried, and at 5 px since T12 (10 of 10).
 2. **It reaches the theoretical limit, and its error bars match the real scatter.**
    - Errors grow in proportion to the detection noise and sit on the Cramér–Rao bound from 0.02 to 2 px.
-   - The z-scores' standard deviations are 0.93–1.02 (T4, T11a).
-   - The table is for the reference rig: three copies of cam1, 45° apart, a ±20 mm wand cloud and 500 frames.
+   - The z-scores' standard deviations are 0.92–1.02 (T4: 0.925; T11a: 0.95–1.02).
+   - The table is for the reference rig: three copies of cam1, 45° apart, a 3200×2400 px sensor, a ±20 mm wand
+     cloud and 500 frames. It comes from T11a's 0.1 px level (40 data sets); the cameras' agreement on unseen
+     points comes from T7.
 
    | quantity | error at 0.1 px noise |
    |---|---|

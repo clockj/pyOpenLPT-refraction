@@ -14,9 +14,11 @@ The synthetic wand-calibration evidence for Section 9.2.2 of the Optics Express 
 - On the campaign's data (`tests/cylinder_wand`), the paper's calibration and the library's give the same residuals
   and the same fits (E1, E2). Section 9.2.2 therefore quotes the campaign's results. `paper_numbers.py` lists each
   number with its source.
-- Every wand end of the campaign lies in the single-image volume (E0).
-- **Found:** the C++ projection misses images whose ray grazes the point's own radius, 27 of 907,000 pairs (E0b).
-  The Python reference finds them. Not fixed, by request (reminder below).
+- Every wand end of the campaign lies in the single-image volume: 907,000 point–camera pairs, each with exactly
+  one image (E0, E0c).
+- **No C++ bug** (E0b, E0c). The first census's cameras, made by `cyl_model.to_cpp` with a tolerance of 10⁻¹², skipped
+  27 rays that graze the point's own radius, where rounding limits the residual to about 10⁻¹²–4×10⁻¹¹. The projection's
+  own default, 10⁻⁹, finds them all.
 
 **History:**
 - `2026-10-03-plan.md`: the first plan, with P0–P5 reruns and a single-image rule. It is superseded: the paper
@@ -27,13 +29,10 @@ The tube is the one of the dot-board trial `cases/cyl_20260930_T0_cam1`:
 - OD 7.9375 in, wall 0.125 in;
 - air, acrylic and water at 1.0, 1.49 and 1.333.
 
-## Reminders (not fixed, by request: no other pyOpenLPT file is to change)
+## Notes (nothing to fix now)
 
-1. **The C++ projection's blind band at the branch junction** (report, E0b).
-   - Points about 90–94° in azimuth from the camera get no image when their ray grazes their own radius within about
-     10⁻⁸ of Λmax.
-   - The Python reference's fixes for this region are in `D:\Refraction\code\tests\classify_grazing\`.
+1. **`cyl_model.to_cpp`'s default tolerance of 10⁻¹²** is below the rounding floor next to grazing. Raising it to the
+   projection's 10⁻⁹ would be a one-line change; it is left as is, since a rounding-level effect needs no extra
+   effort (your rule of 2026-10-06).
 2. **`cylinder_wand.multi_image_guard` checks only points beyond r_c at zero tilt** (`2026-10-03-plan.md` §6). The
    paper no longer uses a guard.
-3. **`tests/cylinder_wand/README.md`** needs the E0b finding and the corrections to its 0.1 px table (report, "The
-   numbers for the paper"). It was left alone at your request of 2026-10-03.

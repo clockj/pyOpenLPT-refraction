@@ -1,0 +1,31 @@
+B300 motion: speed p10/p50/p90 0.080 / 0.099 / 0.121 mm/frame; acceleration (15-point fits, 532951 samples) sd per axis 0.0021 / 0.0012 / 0.0023 mm/frame^2, autocorrelation at 5/10/20/40 frames 5:0.12 10:-0.27 20:-0.00 40:0.00, correlation time 2.0 / 5.0 / 3.7 frames; noise [0.0054, 0.0064, 0.0046] mm
+
+=== 1. the Kalman code on tracks drawn from its own model
+PASS  1 cv: the true model with the true q/r has the lowest MSE: true q/r 0.562: MSE 0.0003035 mm^2; chosen by MSE 0.562; best other predictor MD 0.0003222 mm^2
+PASS  1 cv: squared innovations / predicted variance average 1: 1.0008
+PASS  1 cv: the likelihood recovers r: r_ML / r = 1.0008
+PASS  1 ca: the true model with the true q/r has the lowest MSE: true q/r 0.0562: MSE 0.0003183 mm^2; chosen by MSE 0.0562; best other predictor QUAD-8 0.0003374 mm^2
+PASS  1 ca: squared innovations / predicted variance average 1: 0.9992
+PASS  1 ca: the likelihood recovers r: r_ML / r = 0.9992
+
+=== 2. W's origin dependence on straight synthetic tracks (B300's velocities and noise)
+      band  W synthetic  MD synthetic  W real (B300)   mean error away from 0, mm
+       0-1      -0.0001       -0.0000        -0.0000
+       1-3      +0.0058       +0.0000        +0.0067
+      3-10      +0.0018       +0.0000        +0.0019
+      >=10      +0.0010       +0.0000        +0.0004
+PASS  2 W pushes predictions away from 0 at 1-3 mm, as on the real tracks; MD does not: 1-3 mm: W +0.0058, MD +0.0000, W on B300 +0.0067 mm
+
+=== 3. the ranking without shaking (OU acceleration, Gaussian noise)
+  chosen on half A: LIN-4, QUAD-10, KF-CV q/r 0.562, KF-CA q/r 0.0316 (real B300: LIN-4, QUAD-8, KF-CV 0.562, KF-CA 0.0562)
+  predictor   vs truth: median      p99    vs next point: median      p99    real B300: median      p99
+  W                     0.0131   0.0340                   0.0156   0.0384               0.0177   0.1215
+  MD                    0.0126   0.0275                   0.0151   0.0333               0.0171   0.1218
+  LIN-4                 0.0122   0.0267                   0.0148   0.0327               0.0181   0.1302
+  QUAD-10               0.0129   0.0291                   0.0155   0.0345               0.0233   0.1516
+  KF-CV                 0.0117   0.0257                   0.0144   0.0319               0.0172   0.1239
+  KF-CA                 0.0124   0.0281                   0.0150   0.0337               0.0214   0.1387
+  best against the truth: KF-CV (+24.4 % lower p99 than W); against the next point: +16.9 %
+  W's p99 / median: synthetic 2.46, real B300 6.85 (Gaussian errors give about 2.2)
+
+E1d: 7 of 7 checks passed (29 s)

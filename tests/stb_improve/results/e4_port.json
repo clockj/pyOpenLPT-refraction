@@ -1,0 +1,59 @@
+{
+ "checks": {
+  "E4a-1 the md build's predictNext = the mean step": {
+   "ok": true,
+   "detail": "identical to the last bit: 20104 of 20104 histories (19933 sampled, 171 edge cases); max |diff| 0 mm"
+  },
+  "E4a-2 shifting a history shifts the md prediction by the same amount": {
+   "ok": true,
+   "detail": "max |p(P + C) - C - p(P)| 4.26e-14 mm over C = 0.5, -0.5, 1, -1, 7.3, -7.3, 100, -100 mm and 2165 histories (1994 sampled, 171 edge cases); today's predictor moves by up to 0.2940 mm on the sampled ones (52.5 mm on the edge cases)"
+  }
+ },
+ "shift": {
+  "0.5": {
+   "md_max_mm": 1.4210854715202004e-14,
+   "wiener_max_mm": 52.5,
+   "wiener_max_sampled_mm": 0.07509356022643265
+  },
+  "-0.5": {
+   "md_max_mm": 7.105427357601002e-15,
+   "wiener_max_mm": 45.5,
+   "wiener_max_sampled_mm": 0.0874851935868981
+  },
+  "1": {
+   "md_max_mm": 1.4210854715202004e-14,
+   "wiener_max_mm": 28.0,
+   "wiener_max_sampled_mm": 0.20508963942248792
+  },
+  "-1": {
+   "md_max_mm": 7.105427357601002e-15,
+   "wiener_max_mm": 21.0,
+   "wiener_max_sampled_mm": 0.0762317039063296
+  },
+  "7.3": {
+   "md_max_mm": 1.4210854715202004e-14,
+   "wiener_max_mm": 5.610789980732179,
+   "wiener_max_sampled_mm": 0.29395797216245967
+  },
+  "-7.3": {
+   "md_max_mm": 1.4210854715202004e-14,
+   "wiener_max_mm": 5.643835616438356,
+   "wiener_max_sampled_mm": 0.17599272626564755
+  },
+  "100": {
+   "md_max_mm": 4.263256414560601e-14,
+   "wiener_max_mm": 4.829999999999998,
+   "wiener_max_sampled_mm": 0.2249218511160871
+  },
+  "-100": {
+   "md_max_mm": 4.263256414560601e-14,
+   "wiener_max_mm": 4.50333333333333,
+   "wiener_max_sampled_mm": 0.21678594649200367
+  }
+ },
+ "wiener_vs_md": {
+  "median": 0.001229647114834184,
+  "p99": 0.02095048329407502,
+  "max": 0.23270591712807326
+ }
+}

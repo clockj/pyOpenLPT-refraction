@@ -1,0 +1,48 @@
+{
+ "run": "s50_md",
+ "argv": [
+  "s50_md",
+  "--build",
+  "md",
+  "--frames",
+  "0",
+  "50",
+  "--force"
+ ],
+ "build": "md",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\md\\out",
+ "build_info": {
+  "name": "md",
+  "mode": "py",
+  "config": "Release",
+  "src": "D:\\Refraction\\pyOpenLPT",
+  "git_head": "c3dd9e5",
+  "git_diff_stat": "cases/cyl_wand_paper/2026-10-06-report.md  | 114 +++++++++--------\n cases/cyl_wand_paper/README.md             |  19 ++-\n cases/cyl_wand_paper/paper_numbers.json    |  19 ++-\n cases/cyl_wand_paper/paper_numbers.py      |  18 ++-\n cases/cyl_wand_paper/paper_numbers_out.txt |   8 +-\n src/srcSTB/STB.cpp                         |  75 ++----------\n tests/cylinder_wand/README.md              |  31 ++++-\n tests/stb_improve/2026-10-05-plan.md       | 161 +++++++++++++++++++++++-\n tests/stb_improve/2026-10-05-report.md     | 188 ++++++++++++++++++++++++++++-\n tests/stb_improve/README.md                |  41 ++++++-\n 10 files changed, 534 insertions(+), 140 deletions(-)",
+  "git_diff_sha256": "e08c2472468ef5a30ee9209c3ef7f769bd5482873283abc61bd2c90de44cb21b",
+  "untracked": [],
+  "defs": [
+   "OPENLPT_MATRIX_INLINE=3"
+  ],
+  "asan": false,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc /DOPENLPT_MATRIX_INLINE=3",
+  "start": "2026-10-06T09:17:41",
+  "minutes": 0.6,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 370,
+  "products": [
+   "OpenLPT.exe",
+   "pyopenlpt.cp311-win_amd64.pyd"
+  ]
+ },
+ "asan_options": "",
+ "host": "HELLOWORLD",
+ "start": "2026-10-06T10:32:04",
+ "end": "2026-10-06T10:34:17",
+ "wall_s": 132.9,
+ "returncode": 0,
+ "frames_done": 51,
+ "sum_frame_s": 127.4,
+ "peak_working_set_MB": 982,
+ "peak_private_MB": 820
+}

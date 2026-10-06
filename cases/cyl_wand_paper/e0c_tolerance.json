@@ -1,0 +1,976 @@
+{
+ "start": {
+  "time": "2026-10-06 01:16:48",
+  "pyopenlpt_commit": "c3dd9e57a6a6499fa591563ca4efcf21cec3a8dd",
+  "library_files_changed_since_commit": null,
+  "extension": "C:\\Users\\zcloc\\AppData\\Local\\Temp\\claude\\D--Refraction\\a41554c2-317f-4657-a430-107eb353b7ed\\scratchpad\\frozen_pyopenlpt\\pyopenlpt.cp311-win_amd64.pyd",
+  "extension_sha256": "4448649738b11664d62417b63b47127490392dadfbe138dfc037dc6b64d50f1b",
+  "files_sha256": {
+   "cyl_model.py": "4a45d57c5b9bed5e8763e9f778591739e579837498a7e8de14e384965dcf61a1",
+   "cylinder_wand.py": "633de19ac071dbe781b777dc0e5476fb6bc6d5f5ffb92f09813cadcc061c4cb0",
+   "cylinder_wand_io.py": "9d380e4a48090d7fce2832c23b2afa53624cbad9d5176a09f7ae5b11749df496",
+   "rigs.py": "76b56ecd1167ab7ad585684ed3b2901322861fad79a1d34c74da6265a8e01d0a"
+  }
+ },
+ "end": {
+  "time": "2026-10-06 01:20:32",
+  "pyopenlpt_commit": "c3dd9e57a6a6499fa591563ca4efcf21cec3a8dd",
+  "library_files_changed_since_commit": null,
+  "extension": "C:\\Users\\zcloc\\AppData\\Local\\Temp\\claude\\D--Refraction\\a41554c2-317f-4657-a430-107eb353b7ed\\scratchpad\\frozen_pyopenlpt\\pyopenlpt.cp311-win_amd64.pyd",
+  "extension_sha256": "4448649738b11664d62417b63b47127490392dadfbe138dfc037dc6b64d50f1b",
+  "files_sha256": {
+   "cyl_model.py": "4a45d57c5b9bed5e8763e9f778591739e579837498a7e8de14e384965dcf61a1",
+   "cylinder_wand.py": "633de19ac071dbe781b777dc0e5476fb6bc6d5f5ffb92f09813cadcc061c4cb0",
+   "cylinder_wand_io.py": "9d380e4a48090d7fce2832c23b2afa53624cbad9d5176a09f7ae5b11749df496",
+   "rigs.py": "76b56ecd1167ab7ad585684ed3b2901322861fad79a1d34c74da6265a8e01d0a"
+  }
+ },
+ "unchanged_during_run": true,
+ "seconds": 224.84858441352844,
+ "pairs": [
+  {
+   "set": "reference rig, data",
+   "camera": 2,
+   "r_X_mm": 10.635213994618152,
+   "dphi_deg": 91.26545662002484,
+   "branch": "far",
+   "delta": 4.352629368042926e-12,
+   "residual": 3.294853280497574e-11,
+   "eps_over_sqrt_delta": 1.0643007825422723e-10,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 0, data",
+   "camera": 1,
+   "r_X_mm": 6.6078685186731665,
+   "dphi_deg": 90.71277942480695,
+   "branch": "far",
+   "delta": 6.044720279874127e-12,
+   "residual": 6.4388503864689904e-12,
+   "eps_over_sqrt_delta": 9.031338519848561e-11,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 2, volume",
+   "camera": 3,
+   "r_X_mm": 13.700916553051735,
+   "dphi_deg": -90.05894672792004,
+   "branch": "far",
+   "delta": 5.5767295226161195e-09,
+   "residual": 1.2641004480583986e-12,
+   "eps_over_sqrt_delta": 2.9733801298268284e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 5, data",
+   "camera": 3,
+   "r_X_mm": 24.722102944590453,
+   "dphi_deg": 91.92105572528621,
+   "branch": "near",
+   "delta": 7.772553045626296e-09,
+   "residual": 1.6222592550247318e-12,
+   "eps_over_sqrt_delta": 2.5185952394468167e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 12, volume",
+   "camera": 3,
+   "r_X_mm": 30.374874355535226,
+   "dphi_deg": -94.36771497578081,
+   "branch": "near",
+   "delta": 9.502865161437057e-11,
+   "residual": 1.6318058015977433e-12,
+   "eps_over_sqrt_delta": 2.277786118874716e-11,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 13, data",
+   "camera": 1,
+   "r_X_mm": 19.77286395453449,
+   "dphi_deg": 91.09807025336995,
+   "branch": "near",
+   "delta": 2.5671145209571478e-09,
+   "residual": 1.0489466757969728e-12,
+   "eps_over_sqrt_delta": 4.3824563971641064e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 14, volume",
+   "camera": 3,
+   "r_X_mm": 8.931573348278851,
+   "dphi_deg": -90.16328000895683,
+   "branch": "far",
+   "delta": 4.450586343907048e-09,
+   "residual": 1.1706198686413766e-12,
+   "eps_over_sqrt_delta": 3.328370084986093e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 15, data",
+   "camera": 1,
+   "r_X_mm": 9.157690107233426,
+   "dphi_deg": -91.16909709462833,
+   "branch": "near",
+   "delta": 2.8812507935072063e-12,
+   "residual": 2.059352688377203e-11,
+   "eps_over_sqrt_delta": 1.3081263512757114e-10,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 16, volume",
+   "camera": 3,
+   "r_X_mm": 20.867579167519228,
+   "dphi_deg": -91.94080700800554,
+   "branch": "far",
+   "delta": 1.153228734729339e-09,
+   "residual": 3.4519268841980146e-12,
+   "eps_over_sqrt_delta": 6.538565790661919e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 21, volume",
+   "camera": 2,
+   "r_X_mm": 2.311473678260987,
+   "dphi_deg": 90.0716179639683,
+   "branch": "far",
+   "delta": 4.6677555154417405e-09,
+   "residual": 1.2845281717321036e-12,
+   "eps_over_sqrt_delta": 3.2500210591212133e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 25, volume",
+   "camera": 3,
+   "r_X_mm": 11.042331243638339,
+   "dphi_deg": 91.20976918852426,
+   "branch": "near",
+   "delta": 2.1742172506833413e-09,
+   "residual": 1.2545530865998513e-12,
+   "eps_over_sqrt_delta": 4.761993046095889e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 29, volume",
+   "camera": 1,
+   "r_X_mm": 18.79296259384434,
+   "dphi_deg": 92.4608271616366,
+   "branch": "near",
+   "delta": 1.191002851896883e-11,
+   "residual": 6.658229753805112e-12,
+   "eps_over_sqrt_delta": 6.43404101052856e-11,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 30, data",
+   "camera": 4,
+   "r_X_mm": 3.3527541709158006,
+   "dphi_deg": -90.41257010529425,
+   "branch": "far",
+   "delta": 5.34337907254212e-10,
+   "residual": 5.144995571417699e-12,
+   "eps_over_sqrt_delta": 9.605771087471493e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 31, volume",
+   "camera": 1,
+   "r_X_mm": 37.90610463630234,
+   "dphi_deg": 92.54050076035782,
+   "branch": "far",
+   "delta": 6.166970267784677e-10,
+   "residual": 2.645884500135607e-12,
+   "eps_over_sqrt_delta": 8.941374766466381e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 32, volume",
+   "camera": 2,
+   "r_X_mm": 15.736974197622581,
+   "dphi_deg": -92.06748826662889,
+   "branch": "far",
+   "delta": 2.931321851917801e-12,
+   "residual": 3.7541303566893004e-11,
+   "eps_over_sqrt_delta": 1.2969059200784214e-10,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 33, data",
+   "camera": 3,
+   "r_X_mm": 17.053924329968087,
+   "dphi_deg": 90.09550801746654,
+   "branch": "far",
+   "delta": 2.0413817303222004e-09,
+   "residual": 2.1829250141413544e-12,
+   "eps_over_sqrt_delta": 4.914486129225254e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 35, volume",
+   "camera": 3,
+   "r_X_mm": 33.002619715018454,
+   "dphi_deg": 92.37574068788865,
+   "branch": "far",
+   "delta": 1.2323672082814596e-09,
+   "residual": 2.869039350589061e-12,
+   "eps_over_sqrt_delta": 6.325140233038924e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 36, volume",
+   "camera": 2,
+   "r_X_mm": 19.755652129502504,
+   "dphi_deg": -92.76250849578865,
+   "branch": "far",
+   "delta": 1.0173673015145823e-10,
+   "residual": 9.89697438183642e-12,
+   "eps_over_sqrt_delta": 2.201412042497801e-11,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 37, volume",
+   "camera": 2,
+   "r_X_mm": 27.588656507532217,
+   "dphi_deg": -92.96222789214133,
+   "branch": "near",
+   "delta": 8.587545119453921e-10,
+   "residual": 1.0871303858015319e-12,
+   "eps_over_sqrt_delta": 7.577146942357146e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 39, volume",
+   "camera": 4,
+   "r_X_mm": 12.190515870053828,
+   "dphi_deg": 90.09840852847083,
+   "branch": "far",
+   "delta": 1.5092285199358457e-09,
+   "residual": 2.5970499489846428e-12,
+   "eps_over_sqrt_delta": 5.715611794232163e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 40, volume",
+   "camera": 2,
+   "r_X_mm": 30.172718792317994,
+   "dphi_deg": 93.50910378061242,
+   "branch": "near",
+   "delta": 7.013178926484898e-10,
+   "residual": 4.00723898508204e-12,
+   "eps_over_sqrt_delta": 8.384608053339802e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 40, volume",
+   "camera": 2,
+   "r_X_mm": 31.242953776618766,
+   "dphi_deg": 93.66321060898136,
+   "branch": "near",
+   "delta": 2.4270652154712025e-09,
+   "residual": 1.60383493966288e-12,
+   "eps_over_sqrt_delta": 4.507123957618339e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 40, volume",
+   "camera": 3,
+   "r_X_mm": 2.0251782353169783,
+   "dphi_deg": 90.21837546634006,
+   "branch": "near",
+   "delta": 5.018526705313775e-10,
+   "residual": 1.22435419820571e-12,
+   "eps_over_sqrt_delta": 9.911790310281424e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 40, volume",
+   "camera": 3,
+   "r_X_mm": 16.198390674795263,
+   "dphi_deg": 91.82062218557623,
+   "branch": "far",
+   "delta": 2.410865063140477e-09,
+   "residual": 2.1145319826626096e-12,
+   "eps_over_sqrt_delta": 4.522241735397637e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 40, volume",
+   "camera": 3,
+   "r_X_mm": 14.950864048668036,
+   "dphi_deg": 91.6613337893889,
+   "branch": "near",
+   "delta": 3.914704338470187e-09,
+   "residual": 1.929567677933051e-12,
+   "eps_over_sqrt_delta": 3.5488753202054478e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 1
+  },
+  {
+   "set": "T5 rig 42, volume",
+   "camera": 3,
+   "r_X_mm": 7.816243350992184,
+   "dphi_deg": 90.86399736800968,
+   "branch": "near",
+   "delta": 6.318723322351616e-12,
+   "residual": 4.050049795877814e-11,
+   "eps_over_sqrt_delta": 8.833352382964185e-11,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  },
+  {
+   "set": "T5 rig 44, volume",
+   "camera": 2,
+   "r_X_mm": 14.714147637223938,
+   "dphi_deg": 91.49543540933377,
+   "branch": "far",
+   "delta": 8.605501866654208e-10,
+   "residual": 1.5059065889352473e-12,
+   "eps_over_sqrt_delta": 7.569237353434735e-12,
+   "core_rays_tol_1e-9": 1,
+   "core_rays_tol_1e-12": 0
+  }
+ ],
+ "census_tol_1e-9": {
+  "totals": {
+   "1": 907000
+  },
+  "per_set": [
+   {
+    "set": "reference rig, data",
+    "counts": {
+     "1": 72000
+    }
+   },
+   {
+    "set": "reference rig, volume",
+    "counts": {
+     "1": 60000
+    }
+   },
+   {
+    "set": "T5 rig 0, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 0, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 1, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 1, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 2, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 2, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 3, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 3, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 4, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 4, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 5, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 5, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 6, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 6, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 7, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 7, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 8, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 8, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 9, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 9, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 10, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 10, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 11, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 11, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 12, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 12, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 13, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 13, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 14, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 14, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 15, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 15, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 16, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 16, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 17, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 17, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 18, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 18, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 19, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 19, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 20, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 20, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 21, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 21, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 22, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 22, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 23, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 23, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 24, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 24, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 25, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 25, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 26, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 26, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 27, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 27, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 28, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 28, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 29, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 29, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 30, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 30, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 31, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 31, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 32, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 32, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 33, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 33, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 34, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 34, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 35, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 35, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 36, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 36, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 37, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 37, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 38, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 38, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 39, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 39, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 40, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 40, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 41, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 41, volume",
+    "counts": {
+     "1": 16000
+    }
+   },
+   {
+    "set": "T5 rig 42, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 42, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 43, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 43, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 44, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 44, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 45, data",
+    "counts": {
+     "1": 2000
+    }
+   },
+   {
+    "set": "T5 rig 45, volume",
+    "counts": {
+     "1": 8000
+    }
+   },
+   {
+    "set": "T5 rig 46, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 46, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 47, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 47, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 48, data",
+    "counts": {
+     "1": 3000
+    }
+   },
+   {
+    "set": "T5 rig 48, volume",
+    "counts": {
+     "1": 12000
+    }
+   },
+   {
+    "set": "T5 rig 49, data",
+    "counts": {
+     "1": 4000
+    }
+   },
+   {
+    "set": "T5 rig 49, volume",
+    "counts": {
+     "1": 16000
+    }
+   }
+  ]
+ },
+ "pass": true
+}

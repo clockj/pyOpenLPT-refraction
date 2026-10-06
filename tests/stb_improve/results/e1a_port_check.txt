@@ -1,0 +1,17 @@
+E1a: module D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+B300: 33956 saved long tracks, 3338024 points
+histories: 19933 sampled (3-7 points), 171 edge cases
+PASS  1 port: wiener_one = C++ predictNext: max |diff| 0 mm over 20104 histories; identical to the last bit: 20104 (100.00 %); edge cases max |diff| 0 mm
+PASS  2 vectorised wiener = wiener_one: identical to the last bit: 20104 of 20104
+PASS  3 W(P + C) - C -> mean step, as 1/C: max |diff| 0.000257 mm at C = 10000, 2.58e-05 mm at C = 100000, 2.58e-06 mm at C = 1e+06; ratios 9.97, 10.00 (1/C: 10)
+PASS  4 least-squares weights reproduce polynomials: max |error| 8.53e-14 mm
+PASS  5 Kalman cv, q = 0: = least squares through all points: max |diff| 5.68e-14 mm
+PASS  5 Kalman cv, q/r = 0.0001: recursive = fixed weights: max |diff| 5.68e-14 mm
+PASS  5 Kalman cv, q/r = 0.01: recursive = fixed weights: max |diff| 4.26e-14 mm
+PASS  5 Kalman cv, q/r = 1: recursive = fixed weights: max |diff| 4.26e-14 mm
+PASS  5 Kalman ca, q = 0: = least squares through all points: max |diff| 1.28e-13 mm
+PASS  5 Kalman ca, q/r = 0.0001: recursive = fixed weights: max |diff| 8.53e-14 mm
+PASS  5 Kalman ca, q/r = 0.01: recursive = fixed weights: max |diff| 8.53e-14 mm
+PASS  5 Kalman ca, q/r = 1: recursive = fixed weights: max |diff| 5.68e-14 mm
+
+E1a: 12 of 12 checks passed (1 s)

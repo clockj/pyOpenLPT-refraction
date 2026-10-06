@@ -1,0 +1,182 @@
+
+=== b300: B300: new camFiles, frames 0-300, this campaign's final code
+  33956 saved long tracks (active 14565, left the volume 1380, lost 18011), 3338024 points; scored 3184658 (half A 1592268, half B 1592390)
+  lost tracks ending with a linear-fit failure: 17542 of 18011; with >= 9 points (the jumps examined): 17168  [0 s]
+  position noise per axis (median over 32788 tracks of >= 10 points): 0.0054 / 0.0064 / 0.0046 mm (x / y / z)
+  W, MD, LIN, QUAD predictions [10 s]
+  KF-CV: lam by MSE 0.562, by p99 1, by the innovation likelihood 0.562 (its sigma 0.0116 mm)  [25 s]
+  KF-CA: lam by MSE 0.0562, by p99 0.1, by the innovation likelihood 0.0562 (its sigma 0.0133 mm)  [27 s]
+
+  one-step 3-D error on half B (1592390 points), mm; shares above 0.032 / 0.064 / 0.1 mm:
+  predictor    median      RMS      p90      p99    p99.9    >0.032  >0.064    >0.1
+  W            0.0177   0.0361   0.0606   0.1215   0.1662    27.45%   7.68%   2.26% *
+  MD           0.0171   0.0359   0.0597   0.1218   0.1667    26.72%   7.70%   2.27% *
+  LIN-3        0.0189   0.0394   0.0651   0.1293   0.1607    29.56%  10.37%   3.24%
+  LIN-4        0.0181   0.0394   0.0651   0.1302   0.1740    28.75%  10.36%   3.18% *
+  LIN-6        0.0187   0.0428   0.0714   0.1419   0.2054    30.93%  12.26%   4.26%
+  LIN-8        0.0202   0.0484   0.0801   0.1604   0.2412    34.07%  14.84%   6.16%
+  LIN-10       0.0220   0.0549   0.0899   0.1903   0.2833    37.19%  17.48%   8.05%
+  LIN-15       0.0261   0.0724   0.1134   0.2625   0.4377    43.39%  23.15%  12.50%
+  QUAD-5       0.0261   0.0511   0.0860   0.1574   0.2189    41.29%  17.30%   6.81%
+  QUAD-6       0.0244   0.0486   0.0813   0.1516   0.2050    38.79%  15.95%   5.89%
+  QUAD-8       0.0231   0.0470   0.0784   0.1472   0.2047    37.29%  15.02%   5.26% *
+  QUAD-10      0.0233   0.0481   0.0800   0.1516   0.2133    37.95%  15.64%   5.64%
+  QUAD-15      0.0256   0.0549   0.0911   0.1784   0.2520    41.96%  19.11%   8.05%
+  QUAD-20      0.0282   0.0635   0.1039   0.2127   0.3186    45.54%  22.66%  10.83%
+  KF-CV        0.0172   0.0369   0.0603   0.1239   0.1656    27.27%   8.70%   2.53% *
+  KF-CA        0.0214   0.0436   0.0722   0.1387   0.1896    34.18%  12.81%   4.22% *
+  best alternative by p99: MD, p99 0.1218 against W's 0.1215 mm (-0.3 % lower)
+
+  by the number of points before the prediction (all scored points): median / p99, mm
+    points                 W                MD             LIN-4            QUAD-8             KF-CV             KF-CA
+       4-4   0.0207 / 0.1309   0.0204 / 0.1307   0.0203 / 0.1351   0.0356 / 0.2671   0.0203 / 0.1247   0.0355 / 0.2668   n=33846
+       5-5   0.0169 / 0.1200   0.0165 / 0.1198   0.0177 / 0.1344   0.0266 / 0.1747   0.0168 / 0.1191   0.0266 / 0.1733   n=33754
+       6-6   0.0171 / 0.1235   0.0165 / 0.1237   0.0174 / 0.1279   0.0260 / 0.1528   0.0164 / 0.1233   0.0258 / 0.1497   n=33482
+      7-10   0.0173 / 0.1247   0.0167 / 0.1246   0.0176 / 0.1287   0.0243 / 0.1445   0.0167 / 0.1252   0.0226 / 0.1371   n=130961
+     11-30   0.0184 / 0.1273   0.0178 / 0.1272   0.0189 / 0.1353   0.0241 / 0.1499   0.0179 / 0.1291   0.0222 / 0.1411   n=580145
+       >30   0.0175 / 0.1195   0.0169 / 0.1200   0.0178 / 0.1287   0.0224 / 0.1432   0.0169 / 0.1224   0.0208 / 0.1344   n=2372470
+
+  per axis, by the last point's distance from 0 on that axis (all scored points): mean signed error x sign(coordinate) / p99 |error|, mm
+       band                 W                MD             LIN-4            QUAD-8             KF-CV             KF-CA   share of axis samples
+        0-1  -0.0000 / 0.0811  +0.0001 / 0.0812  +0.0001 / 0.0898  +0.0000 / 0.1030  +0.0001 / 0.0847  +0.0000 / 0.0963   0.021
+        1-3  +0.0067 / 0.0843  -0.0003 / 0.0842  -0.0002 / 0.0923  -0.0001 / 0.1056  -0.0002 / 0.0874  -0.0001 / 0.0990   0.040
+       3-10  +0.0019 / 0.0823  -0.0001 / 0.0833  -0.0001 / 0.0922  -0.0000 / 0.1055  -0.0001 / 0.0867  -0.0000 / 0.0991   0.153
+       >=10  +0.0004 / 0.0869  -0.0000 / 0.0872  -0.0000 / 0.0969  +0.0000 / 0.1121  -0.0000 / 0.0908  +0.0000 / 0.1056   0.785
+
+  over the view volume (6 x 6 bins per plane, >= 200 points): W's p99 0.0864-0.1431 mm; MD's p99 / W's p99 per bin: 0.99-1.07 (median 1.00)
+
+  the jumps (17168 lost tracks of >= 9 points whose last point failed the linear-fit test):
+  predictor   |last - pred|: p10   median      p90  <0.032    |pred - W| at jumps: median      p99    ordinary: median      p99
+  W                       0.1333   0.1854   0.2385    0.1%                         0.0000   0.0000   
+  MD                      0.1353   0.1862   0.2393    0.0%                         0.0019   0.0558              0.0015   0.0228
+  LIN-4                   0.1488   0.1910   0.2458    0.0%                         0.0177   0.0846              0.0095   0.0545
+  QUAD-8                  0.1427   0.1914   0.2525    0.0%                         0.0254   0.1296              0.0130   0.0927
+  KF-CV                   0.1493   0.1881   0.2408    0.0%                         0.0102   0.0609              0.0057   0.0336
+  KF-CA                   0.1511   0.1902   0.2457    0.0%                         0.0203   0.1124              0.0104   0.0759
+  W's error on ordinary points: median 0.0177, p99 0.1214 mm
+  jumps that W's prediction may have caused (last point within 0.032 mm of W's prediction, more than 0.064 mm from MD's, and the two predictions more than 0.032 mm apart): 9 (0.1 %)
+
+=== t4: T4: new camFiles, frames 0-500, the code before this campaign
+  40923 saved long tracks (active 13642, left the volume 2542, lost 24739), 5560720 points; scored 5372987 (half A 2699622, half B 2673365)
+  lost tracks ending with a linear-fit failure: 24041 of 24739; with >= 9 points (the jumps examined): 23605  [0 s]
+  position noise per axis (median over 39812 tracks of >= 10 points): 0.0052 / 0.0063 / 0.0046 mm (x / y / z)
+  W, MD, LIN, QUAD predictions [17 s]
+  KF-CV: lam by MSE 0.562, by p99 1, by the innovation likelihood 0.562 (its sigma 0.0110 mm)  [43 s]
+  KF-CA: lam by MSE 0.0562, by p99 0.0562, by the innovation likelihood 0.0562 (its sigma 0.0126 mm)  [46 s]
+
+  one-step 3-D error on half B (2673365 points), mm; shares above 0.032 / 0.064 / 0.1 mm:
+  predictor    median      RMS      p90      p99    p99.9    >0.032  >0.064    >0.1
+  W            0.0167   0.0343   0.0575   0.1166   0.1640    25.00%   6.73%   1.87% *
+  MD           0.0160   0.0341   0.0568   0.1174   0.1659    24.17%   6.79%   1.91% *
+  LIN-3        0.0179   0.0373   0.0611   0.1247   0.1596    26.76%   9.05%   2.72%
+  LIN-4        0.0169   0.0372   0.0613   0.1257   0.1720    25.85%   9.07%   2.71% *
+  LIN-6        0.0171   0.0407   0.0672   0.1377   0.2047    27.61%  10.91%   3.77%
+  LIN-8        0.0182   0.0463   0.0756   0.1581   0.2451    30.29%  13.22%   5.64%
+  LIN-10       0.0195   0.0531   0.0853   0.1909   0.2932    33.06%  15.56%   7.39%
+  LIN-15       0.0225   0.0717   0.1088   0.2707   0.4578    38.67%  20.64%  11.50%
+  QUAD-5       0.0244   0.0482   0.0802   0.1526   0.2119    37.81%  15.05%   5.86%
+  QUAD-6       0.0226   0.0457   0.0759   0.1468   0.1995    35.04%  13.81%   5.05%
+  QUAD-8       0.0210   0.0441   0.0733   0.1416   0.1978    33.34%  13.01%   4.52% *
+  QUAD-10      0.0210   0.0452   0.0749   0.1466   0.2071    33.80%  13.57%   4.86%
+  QUAD-15      0.0225   0.0522   0.0864   0.1763   0.2469    37.23%  16.78%   7.25%
+  QUAD-20      0.0244   0.0611   0.0992   0.2150   0.3211    40.51%  20.11%   9.83%
+  KF-CV        0.0160   0.0349   0.0571   0.1194   0.1644    24.59%   7.67%   2.13% *
+  KF-CA        0.0196   0.0410   0.0673   0.1335   0.1837    30.50%  11.08%   3.60% *
+  best alternative by p99: MD, p99 0.1174 against W's 0.1166 mm (-0.7 % lower)
+
+  by the number of points before the prediction (all scored points): median / p99, mm
+    points                 W                MD             LIN-4            QUAD-8             KF-CV             KF-CA
+       4-4   0.0207 / 0.1307   0.0205 / 0.1305   0.0205 / 0.1360   0.0353 / 0.2581   0.0203 / 0.1264   0.0353 / 0.2574   n=40834
+       5-5   0.0166 / 0.1193   0.0160 / 0.1196   0.0173 / 0.1384   0.0265 / 0.1672   0.0163 / 0.1200   0.0264 / 0.1654   n=40757
+       6-6   0.0167 / 0.1190   0.0160 / 0.1190   0.0171 / 0.1238   0.0254 / 0.1463   0.0161 / 0.1183   0.0252 / 0.1432   n=40501
+      7-10   0.0167 / 0.1208   0.0162 / 0.1206   0.0170 / 0.1254   0.0232 / 0.1406   0.0161 / 0.1216   0.0216 / 0.1333   n=158954
+     11-30   0.0175 / 0.1240   0.0169 / 0.1240   0.0178 / 0.1326   0.0225 / 0.1466   0.0170 / 0.1261   0.0209 / 0.1383   n=719336
+       >30   0.0166 / 0.1148   0.0158 / 0.1159   0.0167 / 0.1243   0.0205 / 0.1387   0.0159 / 0.1182   0.0191 / 0.1302   n=4372605
+
+  per axis, by the last point's distance from 0 on that axis (all scored points): mean signed error x sign(coordinate) / p99 |error|, mm
+       band                 W                MD             LIN-4            QUAD-8             KF-CV             KF-CA   share of axis samples
+        0-1  +0.0000 / 0.0788  +0.0001 / 0.0790  +0.0001 / 0.0895  +0.0001 / 0.1029  +0.0001 / 0.0828  +0.0001 / 0.0970   0.024
+        1-3  +0.0069 / 0.0814  -0.0004 / 0.0826  -0.0004 / 0.0917  -0.0001 / 0.1048  -0.0004 / 0.0862  -0.0001 / 0.0981   0.046
+       3-10  +0.0020 / 0.0783  -0.0001 / 0.0796  -0.0001 / 0.0897  -0.0000 / 0.1031  -0.0001 / 0.0832  -0.0000 / 0.0967   0.172
+       >=10  +0.0004 / 0.0809  -0.0000 / 0.0814  -0.0000 / 0.0921  +0.0000 / 0.1076  -0.0000 / 0.0852  +0.0000 / 0.1009   0.758
+
+  over the view volume (6 x 6 bins per plane, >= 200 points): W's p99 0.0855-0.1416 mm; MD's p99 / W's p99 per bin: 0.99-1.17 (median 1.00)
+
+  the jumps (23605 lost tracks of >= 9 points whose last point failed the linear-fit test):
+  predictor   |last - pred|: p10   median      p90  <0.032    |pred - W| at jumps: median      p99    ordinary: median      p99
+  W                       0.1307   0.1843   0.2372    0.1%                         0.0000   0.0000   
+  MD                      0.1360   0.1855   0.2395    0.0%                         0.0021   0.1633              0.0016   0.0246
+  LIN-4                   0.1486   0.1905   0.2455    0.0%                         0.0178   0.1541              0.0091   0.0535
+  QUAD-8                  0.1413   0.1905   0.2498    0.1%                         0.0251   0.1340              0.0119   0.0885
+  KF-CV                   0.1490   0.1877   0.2402    0.0%                         0.0103   0.1491              0.0054   0.0336
+  KF-CA                   0.1496   0.1896   0.2443    0.0%                         0.0207   0.1177              0.0094   0.0723
+  W's error on ordinary points: median 0.0167, p99 0.1167 mm
+  jumps that W's prediction may have caused (last point within 0.032 mm of W's prediction, more than 0.064 mm from MD's, and the two predictions more than 0.032 mm apart): 20 (0.1 %)
+
+=== t5: T5: old camFiles, frames 0-500, the code before this campaign
+  21256 saved long tracks (active 8236, left the volume 4156, lost 8864), 3140712 points; scored 3047223 (half A 1529529, half B 1517694)
+  lost tracks ending with a linear-fit failure: 8465 of 8864; with >= 9 points (the jumps examined): 8319  [0 s]
+  position noise per axis (median over 20779 tracks of >= 10 points): 0.0043 / 0.0056 / 0.0045 mm (x / y / z)
+  W, MD, LIN, QUAD predictions [10 s]
+  KF-CV: lam by MSE 1, by p99 1, by the innovation likelihood 1 (its sigma 0.0105 mm)  [23 s]
+  KF-CA: lam by MSE 0.0562, by p99 0.0562, by the innovation likelihood 0.0562 (its sigma 0.0131 mm)  [25 s]
+
+  one-step 3-D error on half B (1517694 points), mm; shares above 0.032 / 0.064 / 0.1 mm:
+  predictor    median      RMS      p90      p99    p99.9    >0.032  >0.064    >0.1
+  W            0.0188   0.0355   0.0558   0.1170   0.1614    28.33%   7.18%   1.84% *
+  MD           0.0185   0.0355   0.0559   0.1177   0.1630    28.20%   7.24%   1.87% *
+  LIN-3        0.0196   0.0389   0.0645   0.1252   0.1590    31.59%  10.15%   2.71% *
+  LIN-4        0.0194   0.0392   0.0648   0.1266   0.1689    31.59%  10.26%   2.71%
+  LIN-6        0.0206   0.0429   0.0714   0.1379   0.1979    34.54%  12.65%   3.62%
+  LIN-8        0.0231   0.0491   0.0813   0.1561   0.2355    38.63%  16.03%   5.78%
+  LIN-10       0.0260   0.0564   0.0925   0.1814   0.2829    42.73%  19.68%   8.28%
+  LIN-15       0.0331   0.0771   0.1211   0.2622   0.4398    51.14%  27.82%  14.55%
+  QUAD-5       0.0274   0.0504   0.0842   0.1515   0.2085    43.46%  17.80%   6.10%
+  QUAD-6       0.0260   0.0481   0.0799   0.1454   0.1968    41.62%  16.23%   5.21%
+  QUAD-8       0.0252   0.0464   0.0769   0.1408   0.1931    40.67%  15.12%   4.49% *
+  QUAD-10      0.0260   0.0476   0.0786   0.1443   0.2025    41.82%  15.88%   4.86%
+  QUAD-15      0.0299   0.0552   0.0908   0.1682   0.2400    47.36%  20.67%   7.69%
+  QUAD-20      0.0343   0.0649   0.1060   0.2027   0.2933    52.61%  25.97%  11.46%
+  KF-CV        0.0185   0.0365   0.0592   0.1187   0.1576    29.94%   8.28%   2.08% *
+  KF-CA        0.0233   0.0430   0.0708   0.1330   0.1803    37.05%  12.58%   3.48% *
+  best alternative by p99: MD, p99 0.1177 against W's 0.1170 mm (-0.6 % lower)
+
+  by the number of points before the prediction (all scored points): median / p99, mm
+    points                 W                MD             LIN-3            QUAD-8             KF-CV             KF-CA
+       4-4   0.0215 / 0.1311   0.0213 / 0.1311   0.0226 / 0.1551   0.0359 / 0.2530   0.0215 / 0.1277   0.0359 / 0.2523   n=21205
+       5-5   0.0178 / 0.1246   0.0176 / 0.1242   0.0185 / 0.1384   0.0281 / 0.1724   0.0175 / 0.1262   0.0281 / 0.1716   n=21179
+       6-6   0.0177 / 0.1209   0.0174 / 0.1207   0.0193 / 0.1267   0.0280 / 0.1537   0.0177 / 0.1213   0.0277 / 0.1523   n=21068
+      7-10   0.0171 / 0.1192   0.0168 / 0.1193   0.0173 / 0.1247   0.0248 / 0.1430   0.0166 / 0.1192   0.0226 / 0.1336   n=83084
+     11-30   0.0174 / 0.1170   0.0171 / 0.1171   0.0184 / 0.1243   0.0233 / 0.1385   0.0173 / 0.1185   0.0215 / 0.1307   n=390991
+       >30   0.0190 / 0.1163   0.0187 / 0.1170   0.0198 / 0.1244   0.0253 / 0.1386   0.0187 / 0.1182   0.0233 / 0.1305   n=2509696
+
+  per axis, by the last point's distance from 0 on that axis (all scored points): mean signed error x sign(coordinate) / p99 |error|, mm
+       band                 W                MD             LIN-3            QUAD-8             KF-CV             KF-CA   share of axis samples
+        0-1  -0.0001 / 0.0704  -0.0001 / 0.0702  -0.0000 / 0.0791  -0.0000 / 0.0911  -0.0000 / 0.0729  +0.0000 / 0.0848   0.017
+        1-3  +0.0043 / 0.0729  -0.0004 / 0.0758  -0.0003 / 0.0821  -0.0001 / 0.0922  -0.0003 / 0.0768  -0.0001 / 0.0867   0.035
+       3-10  +0.0012 / 0.0752  -0.0002 / 0.0767  -0.0001 / 0.0842  -0.0001 / 0.0947  -0.0002 / 0.0783  -0.0001 / 0.0893   0.143
+       >=10  +0.0004 / 0.0853  +0.0000 / 0.0854  +0.0000 / 0.0951  +0.0000 / 0.1081  +0.0000 / 0.0889  +0.0000 / 0.1013   0.806
+
+  over the view volume (6 x 6 bins per plane, >= 200 points): W's p99 0.0699-0.1437 mm; MD's p99 / W's p99 per bin: 0.98-1.98 (median 1.00)
+
+  the jumps (8319 lost tracks of >= 9 points whose last point failed the linear-fit test):
+  predictor   |last - pred|: p10   median      p90  <0.032    |pred - W| at jumps: median      p99    ordinary: median      p99
+  W                       0.1271   0.1767   0.2132    0.1%                         0.0000   0.0000   
+  MD                      0.1315   0.1779   0.2171    0.0%                         0.0012   0.1754              0.0010   0.0145
+  LIN-3                   0.1698   0.1850   0.2222    0.0%                         0.0185   0.1264              0.0101   0.0614
+  QUAD-8                  0.1347   0.1821   0.2315    0.0%                         0.0228   0.1291              0.0137   0.0883
+  KF-CV                   0.1524   0.1806   0.2175    0.0%                         0.0102   0.1396              0.0059   0.0370
+  KF-CA                   0.1441   0.1818   0.2264    0.0%                         0.0190   0.1118              0.0110   0.0724
+  W's error on ordinary points: median 0.0187, p99 0.1168 mm
+  jumps that W's prediction may have caused (last point within 0.032 mm of W's prediction, more than 0.064 mm from MD's, and the two predictions more than 0.032 mm apart): 12 (0.1 %)
+
+=== transfer: each run's lam on the others (half B; p99 / MSE relative to the run's own lam)
+  KF-CV lam from b300 (0.562): on b300 p99 x1.000, MSE x1.000, on t4 p99 x1.000, MSE x1.000, on t5 p99 x1.011, MSE x1.004
+  KF-CV lam from t4 (0.562): on b300 p99 x1.000, MSE x1.000, on t4 p99 x1.000, MSE x1.000, on t5 p99 x1.011, MSE x1.004
+  KF-CV lam from t5 (1): on b300 p99 x0.994, MSE x1.001, on t4 p99 x0.995, MSE x1.001, on t5 p99 x1.000, MSE x1.000
+  KF-CA lam from b300 (0.0562): on b300 p99 x1.000, MSE x1.000, on t4 p99 x1.000, MSE x1.000, on t5 p99 x1.000, MSE x1.000
+  KF-CA lam from t4 (0.0562): on b300 p99 x1.000, MSE x1.000, on t4 p99 x1.000, MSE x1.000, on t5 p99 x1.000, MSE x1.000
+  KF-CA lam from t5 (0.0562): on b300 p99 x1.000, MSE x1.000, on t4 p99 x1.000, MSE x1.000, on t5 p99 x1.000, MSE x1.000
+
+=== E3 threshold (plan): the best alternative's p99 at least 30 % below W's on every run: b300 -0.3 % (MD), t4 -0.7 % (MD), t5 -0.6 % (MD) -> not met
+(total 261 s)

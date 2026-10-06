@@ -14,6 +14,8 @@ and line counts):
 | `b134` | `b14` + `5_b3_scratch.py` |
 | `b2` | `b134` + `6_b2_volume_lines.py` |
 | `final`, `final-check`, `asan-final` | `b2` + IPR's log line printed after its parallel loop |
+| `md` (E4, 6 Oct) | the working tree at `c3dd9e5` + `7_e4_mean_step.py` (`predictNext` predicts with the mean step) |
+| `wjit` (E4's control, test only) | a worktree at `c3dd9e5` (removed after the build) + `e4c_wjit_control.py SRC`: today's prediction plus an offset of size \|W − MD\| in a pseudo-random direction; never for the working tree |
 
 The scripts replace exact text and assert each match, so they apply only to the tree state they were written for
 (absolute paths to `D:\Refraction\pyOpenLPT`). The working tree holds the final state; `git diff` shows it whole.

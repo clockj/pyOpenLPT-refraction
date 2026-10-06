@@ -54,7 +54,12 @@ def main():
             for k, v in blk[part].items():
                 counts[int(k)] = counts.get(int(k), 0) + v
     say("e0.pairs_total", sum(counts.values()), "e0_census.json counts_data + counts_box, summed")
-    say("e0.pairs_by_image_count", {str(k): v for k, v in sorted(counts.items())}, "e0_census.json, summed")
+    say("e0.pairs_by_image_count_tol_1e-12", {str(k): v for k, v in sorted(counts.items())},
+        "e0_census.json, summed (cameras at cyl_model.to_cpp's tol 1e-12)")
+    data_pairs = [blk["counts_data"] for blk in [e0["reference"]] + e0["t5"]]
+    say("e0.data_pairs_without_image_tol_1e-12", [sum(c.get("0", 0) for c in data_pairs),
+                                                  sum(sum(c.values()) for c in data_pairs)],
+        "e0_census.json counts_data (the regenerated data sets): zeros, total")
     e0b = load(HERE / "e0b_zero_images.json")["pairs"]
     say("e0b.zero_pairs", len(e0b), "e0b_zero_images.json pairs")
     say("e0b.python_finds_one", sum(p["python_images"] == 1 for p in e0b), "e0b_zero_images.json python_images")
@@ -62,6 +67,17 @@ def main():
         "e0b_zero_images.json python_one_minus_lam_ratio", "{:.1e}")
     say("e0b.abs_dphi_deg_range", [min(abs(p["dphi_deg"]) for p in e0b), max(abs(p["dphi_deg"]) for p in e0b)],
         "e0b_zero_images.json dphi_deg", "{:.2f}")
+    e0c = load(HERE / "e0c_tolerance.json")
+    say("e0c.core_finds_tol_1e-9", sum(q["core_rays_tol_1e-9"] == 1 for q in e0c["pairs"]),
+        "e0c_tolerance.json pairs[].core_rays_tol_1e-9")
+    say("e0c.core_finds_tol_1e-12", sum(q["core_rays_tol_1e-12"] == 1 for q in e0c["pairs"]),
+        "e0c_tolerance.json pairs[].core_rays_tol_1e-12")
+    say("e0c.residual_range", [min(q["residual"] for q in e0c["pairs"]), max(q["residual"] for q in e0c["pairs"])],
+        "e0c_tolerance.json pairs[].residual", "{:.1e}")
+    say("e0c.eps_over_sqrt_delta_range", [min(q["eps_over_sqrt_delta"] for q in e0c["pairs"]),
+                                          max(q["eps_over_sqrt_delta"] for q in e0c["pairs"])],
+        "e0c_tolerance.json pairs[].eps_over_sqrt_delta", "{:.1e}")
+    say("e0c.census_tol_1e-9", e0c["census_tol_1e-9"]["totals"], "e0c_tolerance.json census_tol_1e-9.totals")
 
     # ---- the paper's residual against the library's (E1, E2)
     e1 = load(HERE / "e1_equivalence.json")
