@@ -1,0 +1,33 @@
+D2 (d2_shape_prior): shapes predicted by the calibration in X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results
+  cam1 ball A: 1519 fits; free-fit aspect / predicted - 1: median +0.69 %, spread (16-84 %) 1.85 %; orientation difference median -0.03 deg, spread 0.68 deg; size / predicted - 1: median -1.95 %
+  cam1 ball B: 1519 fits; free-fit aspect / predicted - 1: median +0.56 %, spread (16-84 %) 0.92 %; orientation difference median -1.11 deg, spread 0.98 deg; size / predicted - 1: median -1.46 %
+  cam2 ball A: 1519 fits; free-fit aspect / predicted - 1: median +1.47 %, spread (16-84 %) 1.98 %; orientation difference median -0.98 deg, spread 1.09 deg; size / predicted - 1: median -3.32 %
+  cam2 ball B: 1519 fits; free-fit aspect / predicted - 1: median +1.47 %, spread (16-84 %) 1.47 %; orientation difference median -1.87 deg, spread 0.72 deg; size / predicted - 1: median -1.77 %
+  refit 3038 camera-frames in 142 s
+  new centres for 3038 camera-frames (0 lost: too few edge points)
+  ball A: shift from S1 RMS 1.525 px, median 1.105, 99th percentile 4.235, largest 5.833; edge RMS about the fixed-shape fit median 0.311 px
+  ball B: shift from S1 RMS 1.336 px, median 1.005, 99th percentile 3.058, largest 3.613; edge RMS about the fixed-shape fit median 0.413 px
+  sensitivity   mask-10, ball A: 314 camera-frames, centre moves RMS 0.3430 px, largest 2.3502 px
+  sensitivity   mask-10, ball B: 314 camera-frames, centre moves RMS 0.4427 px, largest 1.4236 px
+  sensitivity   mask+10, ball A: 314 camera-frames, centre moves RMS 0.3750 px, largest 5.6033 px
+  sensitivity   mask+10, ball B: 314 camera-frames, centre moves RMS 0.7915 px, largest 2.5320 px
+  sensitivity start+3px, ball A: 313 camera-frames, centre moves RMS 0.1066 px, largest 1.2912 px
+  sensitivity start+3px, ball B: 313 camera-frames, centre moves RMS 0.0740 px, largest 0.6496 px
+  calibration on 1519 frames -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\d2_shape_prior
+        0.0 s  Start search (stages 1-2)
+       14.4 s  Coarse fit (stage 3)
+       15.1 s  Final fit (stage 4)
+       70.0 s  Coarse fit (stage 3)
+       70.3 s  Final fit (stage 4)
+      131.6 s  Coarse fit (stage 3)
+      131.9 s  Final fit (stage 4)
+      200.2 s  Coarse fit (stage 3)
+      200.5 s  Final fit (stage 4)
+      267.5 s  Coarse fit (stage 3)
+      272.4 s  Final fit (stage 4)
+      340.2 s  Coarse fit (stage 3)
+      352.2 s  Final fit (stage 4)
+    2 cameras, 1519 frames, 6052 of 6076 detections used.
+    Reprojection RMS 0.632 px; wand length (free triangulation) RMS error 32.1 um over 1513 frames.
+      cam1: f 31,638 px (632.8 mm) +- 0.87 %, 835 mm from the axis, RMS 0.673 px
+      cam2: f 23,424 px (468.5 mm) +- 1.00 %, 688 mm from the axis, RMS 0.589 px

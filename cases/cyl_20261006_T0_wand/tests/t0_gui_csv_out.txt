@@ -1,0 +1,6 @@
+T0: X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\wand_points.csv: the GUI's loader says: True, Loaded 1519 valid frames.
+  PASS: every kept frame loaded 1519 of 1519
+  PASS: cameras 0 and 1 [0, 1]
+  PASS: labels Filtered_Small / Filtered_Large in every camera-frame 
+  PASS: the same frames, in order 
+  PASS: centres equal the selection's within 5.1e-5 px largest 5.00e-05 px

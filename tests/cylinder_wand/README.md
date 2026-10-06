@@ -16,9 +16,39 @@ experiment.
 - That holds while PINCYL and the tube constants describe the optics exactly.
 - The main risk for real data is a model error fixed to each image (section 3, item 8). The real cam1 plate case
   already shows it.
-- No real wand data have been tried yet.
+- **First real wand data (6 Oct, two long-lens cameras):** the calibration fits (0.45 px) and is usable inside the
+  wand's volume, but the recording did not determine f (its parts disagree by ±10 %). See the newest entry below.
 
 ## 1. Progress log
+
+**2026-10-06 (evening): the first real wand data**
+- **The data:** run 20261006/T0, two cameras (VEO 710L, 180 mm macro, 100 frames/s) through your tube. The wand is
+  10 mm long with 3 mm and 4 mm balls on a 2 mm rod, hanging on a string. 10,640 frames; 1,519 usable in both
+  cameras. Case: `cases/cyl_20261006_T0_wand/` (plan, report, tests T0–T7, diagnoses D1–D8). Results:
+  `X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results`.
+- **The detector works on real images:** the "ellipse" mode, with rod settings sized for this wand (opening 95 px,
+  mask 50 px). The fits follow the outlines, and A and B never swap.
+  - **But the rod limits it.** The 2 mm rod is about 75 % of the small ball's height in the image, so the small
+    ball's centre moves by 0.6–2 px RMS with the rod mask (T1 b).
+- **The calibration:**
+  - reprojection RMS 0.45 px;
+  - free-triangulation wand length 22 µm RMS;
+  - cam1 f 38,678 px, cam2 f 36,022 px, the cameras 61° apart around the tube.
+- **This recording does not determine f (T3 failed).**
+  - **The spread:** the halves and quarters give cam1 f from 32,800 to 40,200 px. Each time the distance changes in
+    proportion, the near-telecentric valley.
+  - **The error bars:** 0.8–1.3 %, 10–30 times too small.
+  - **The free wand length (T4):** 11.07 ± 0.10 mm, no conclusion about the tube.
+- **Inside the wand's volume the cameras agree (D8):** each half predicts the other half's wand lengths to 0.07–0.13 %
+  (mean), 25–38 µm RMS. So the camFiles are usable there, but f and the distances are not physical.
+- **Ruled out:** synchronisation (D1), motion blur (100 µs exposures), the wand's bouncing (D5), a stretched calibration
+  (D6). Each camera's image also shifts by 0.2–0.3 px horizontally from frame to frame on its own (vibration?), which
+  the fit absorbs.
+- **Lessons:**
+  - **Rod thickness:** this detector needs a rod well below the small ball's size (T13 used about 1/4).
+  - **f with two long lenses:** they need an independent f, from a dot board through the tube. Holding it in the
+    calibration is a small library option, not yet built.
+  - **The page's checks:** a single calibration's page cannot see T3's problem. A split-half check in the GUI would.
 
 **2026-10-06 (afternoon)**
 - **The cylinder wand calibration is in the GUI.**

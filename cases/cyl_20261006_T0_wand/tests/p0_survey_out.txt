@@ -1,0 +1,17 @@
+P0: usable frames and the estimator on run 20261006/T0 (read-only)
+Opening scan: blobs > 500 px^2 left after an opening of k px (1 = rod kept or a ball lost, 2 = separated)
+  frame     0 cam1: 21:1 41:1 61:1 71:1 81:1 91:3 101:2 111:2 121:1 141:1
+  frame     0 cam2: 21:1 41:1 61:1 71:1 81:1 91:1 101:1 111:1 121:1 141:1
+  frame  2500 cam1: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:2 121:1 141:1
+  frame  2500 cam2: 21:1 41:1 61:1 71:1 81:1 91:1 101:2 111:2 121:1 141:1
+  frame  4000 cam1: 21:1 41:1 61:1 71:1 81:3 91:2 101:2 111:2 121:1 141:1
+  frame  4000 cam2: 21:1 41:1 61:1 71:1 81:1 91:1 101:1 111:1 121:1 141:1
+  frame  8500 cam1: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:2 121:1 141:1
+  frame  8500 cam2: 21:1 41:1 61:1 71:2 81:2 91:2 101:2 111:1 121:1 141:0
+  frame 10000 cam1: 21:1 41:1 61:1 71:1 81:1 91:1 101:1 111:2 121:2 141:1
+  frame 10000 cam2: 21:1 41:1 61:1 71:1 81:3 91:2 101:2 111:1 121:1 141:0
+
+Survey: every 100th frame (107 frames), rod opening 95 px, rod mask 50 px
+  cam1: two balls apart in 32, clean in 32; median semi-axes (a, b): small 74.9, 57.5 px; large 99.7, 77.5 px; edge RMS median 0.256 px, 90th percentile 0.398 px
+  cam2: two balls apart in 46, clean in 46; median semi-axes (a, b): small 66.2, 51.4 px; large 89.2, 69.5 px; edge RMS median 0.241 px, 90th percentile 0.383 px
+  clean in both cameras: 13 of 107 frames (12 %)
