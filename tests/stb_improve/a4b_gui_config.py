@@ -20,6 +20,9 @@ A7, VSC's writers: _update_object_config and _update_config on the text project 
 identical files) and on the JSON project (the cameras and tolerances change as intended, config_backup.json holds
 the original and is written once, and the C++ code reads the same settings as from the updated text project).
 
+"HEAD" here is the code before A4b, commit acd78d4 (BASE; its GUI writes config.txt), taken from git, so that the
+test keeps its meaning after A4b is committed (f2a3dbb).
+
 Writes results/a4b_gui_config.txt and .json; exit code 1 if anything fails.
 """
 from __future__ import annotations
@@ -43,6 +46,7 @@ DATA = os.path.join(HERE, "data")
 PY = r"C:\Users\zcloc\.conda\envs\refract\python.exe"
 BUILD = os.path.join(REPO, "build-py", "Release")
 TRACKS_SRC = os.path.join(RUNS, "s50_final3", "Results", "ConvergeTrack")
+BASE = "acd78d4"  # the last commit before A4b: its GUI writes config.txt
 for p in (os.path.join(REPO, "gui"), REPO):
     sys.path.insert(0, p)
 
@@ -81,8 +85,9 @@ QMessageBox.critical = _fake_box("critical")
 
 
 def load_head(rel, modname):
-    """HEAD's version of a repository file, imported as modname (its package gives the relative imports)."""
-    src = subprocess.run(["git", "-C", REPO, "show", f"HEAD:{rel}"], capture_output=True, check=True).stdout
+    """The version before A4b (BASE) of a repository file, imported as modname (its package gives the relative
+    imports)."""
+    src = subprocess.run(["git", "-C", REPO, "show", f"{BASE}:{rel}"], capture_output=True, check=True).stdout
     folder = os.path.join(RUNS, "a4b_head_src")
     os.makedirs(folder, exist_ok=True)
     path = os.path.join(folder, rel.replace("/", "__"))
@@ -616,7 +621,8 @@ def main():
     os.makedirs(RESULTS, exist_ok=True)
     say("A4b GUI config tests (A5 writer, A6 readers, A7 VSC writers), offscreen Qt")
     say(f"module: {lpt.__file__}")
-    say(f"HEAD: {subprocess.run(['git', '-C', REPO, 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip()}")
+    head = subprocess.run(['git', '-C', REPO, 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True)
+    say(f"the code before A4b (\"HEAD\" below): {BASE}; the working tree: HEAD {head.stdout.strip()} + changes")
     pairs = test_writer()
     test_readers(pairs)
     test_vsc_writers()

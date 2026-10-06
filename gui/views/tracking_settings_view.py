@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt
 import os
+import copy
 import multiprocessing
 import qtawesome as qta
 import numpy as np
@@ -29,6 +30,7 @@ class TrackingSettingsView(QWidget):
         self.tri_err_3sigma_mm = None # Store for dynamic voxel conversion
         self.detected_cam_files = [] # Store detected camera filenames (e.g. cam0.txt or vsc_cam1.txt)
         self.last_project_path = None # Track changes to prevent overwriting manual paths
+        self._loaded_config = None # (project folder, config path, settings) the form was last filled from
         self._busy_tokens = {}
         self._setup_ui()
 
@@ -173,7 +175,8 @@ class TrackingSettingsView(QWidget):
         # Threads
         basic_grid.addWidget(QLabel("Number of Threads:"), 4, 0)
         self.n_threads_spin = QSpinBox()
-        self.n_threads_spin.setRange(1, 128)
+        self.n_threads_spin.setRange(0, 128)
+        self.n_threads_spin.setSpecialValueText("All")  # 0: as many threads as the machine has
         self.n_threads_spin.setValue(multiprocessing.cpu_count())
         basic_grid.addWidget(self.n_threads_spin, 4, 2)
         
@@ -557,8 +560,106 @@ class TrackingSettingsView(QWidget):
         pass
     
     def _load_config(self):
-        # TODO: Implement config loading
-        pass
+        """Fill the form from the project's saved config (config.json, else config.txt), so that Save keeps what was
+        saved.  Without a config the form keeps its values; a config that cannot be read is reported.  Returns the
+        path of the config read, or None."""
+        self._loaded_config = None
+        project_dir = self.project_path.text().strip()
+        if not project_dir or not os.path.isdir(project_dir):
+            return None
+        try:
+            return self._fill_from_config(project_dir)
+        except Exception as e:
+            name = os.path.basename(stb_config.find_config(project_dir) or "config")
+            reason = f"the setting {e} is missing" if isinstance(e, KeyError) else str(e)
+            QMessageBox.warning(self, "Tracking Config Not Loaded",
+                                f"{name} in this project cannot be read:\n{reason}\n\nThe form keeps the values it "
+                                f"shows; Save Configuration will replace the file.")
+            return None
+
+    def _fill_from_config(self, project_dir):
+        """_load_config's work; raises for a config that cannot be read or lacks a setting."""
+        config_path, cfg = stb_config.read_project(project_dir)
+        if cfg is None:
+            return None
+
+        def _folder(files):
+            return os.path.dirname(stb_config.resolve(config_path, files[0])).replace('\\', '/') if files else ""
+
+        # The camera folder first: choosing it re-estimates the tolerances and the view volume from the camera
+        # files, which the saved values below then replace.
+        cam_dir = _folder([c["file"] for c in cfg["cameras"]])
+        if cam_dir:
+            self.camera_path_display.setText(cam_dir)
+        self.detected_cam_files = [os.path.basename(c["file"]) for c in cfg["cameras"]]
+        img_dir = _folder(cfg["image_lists"])
+        if img_dir:
+            self.image_path_display.setText(img_dir if os.path.isdir(img_dir) else f"{img_dir} (Not Found)")
+        self.output_path.setText(stb_config.resolve(config_path, cfg["output_dir"]).replace('\\', '/'))
+
+        self._set_spin(self.n_cam_spin, len(cfg["cameras"]))
+        self._set_spin(self.frame_start_spin, cfg["frames"][0])
+        self._set_spin(self.frame_end_spin, cfg["frames"][1])
+        self._set_spin(self.fps_spin, cfg["fps"])
+        self._set_spin(self.n_threads_spin, cfg.get("threads", 0))
+        self._set_spin(self.voxel_spin, cfg["voxel_mm"])  # before the 3D tolerance, which it may re-derive
+        vv = cfg["view_volume_mm"]
+        for w, x in zip((self.vol_x_min, self.vol_x_max, self.vol_y_min, self.vol_y_max, self.vol_z_min,
+                         self.vol_z_max), (*vv["x"], *vv["y"], *vv["z"])):
+            self._set_spin(w, x)
+        self._set_spin(self.save_interval_spin, cfg.get("save_interval", 500))
+        lt = cfg.get("load_tracks", {})
+        self.resume_check.setChecked(bool(lt.get("enabled")))
+        self._set_spin(self.resume_frame_spin, lt.get("frame", cfg["frames"][0]))
+
+        obj = cfg["objects"][0]
+        idx = self.obj_type_combo.findText(obj["type"])
+        if idx >= 0:
+            self.obj_type_combo.setCurrentIndex(idx)
+        ip, sh, pf, ipr = obj["initial_phase"], obj["shake"], obj["predictive_field"], obj["ipr"]
+        self._set_spin(self.stb_initial_radius, ip["search_radius_vox"])
+        self._set_spin(self.stb_initial_frames, ip["frames"])
+        self._set_spin(self.stb_avg_spacing, obj["convergence_phase"]["avg_spacing_vox"])
+        self._set_spin(self.shake_width, sh["width_vox"])
+        self._set_spin(self.shake_loops, sh["loops"])
+        self._set_spin(self.shake_ghost, sh["ghost_threshold"])
+        for w, n in zip((self.pred_grid_x, self.pred_grid_y, self.pred_grid_z), pf["grid"]):
+            self._set_spin(w, n)
+        self._set_spin(self.pred_search_radius, pf["search_radius_vox"])
+        self._set_spin(self.ipr_loop_spin, ipr["loops"])
+        self._set_spin(self.ipr_reduce_spin, ipr["reduced_cameras"])
+        self._set_spin(self.ipr_reduced_spin, ipr["reduced_loops"])
+        self._set_spin(self.ipr_2d_tol, ipr["tol_2d_px"])
+        self._set_spin(self.ipr_3d_tol, ipr["tol_3d_vox"])
+        if "tracer" in obj:
+            self._set_spin(self.tracer_int_thresh, obj["tracer"]["intensity_threshold"])
+            self._set_spin(self.tracer_radius, obj["tracer"]["radius_px"])
+        if "bubble" in obj:
+            self._set_spin(self.bubble_min_rad, obj["bubble"]["radius_min_px"])
+            self._set_spin(self.bubble_max_rad, obj["bubble"]["radius_max_px"])
+            self._set_spin(self.bubble_sens, obj["bubble"]["sense"])
+
+        self._loaded_config = (os.path.abspath(project_dir), config_path, copy.deepcopy(cfg))
+        print(f"[TrackingSettings] Loaded the settings of {config_path}")
+        return config_path
+
+    @staticmethod
+    def _set_spin(widget, value):
+        """Set a spin box to a value from a config without changing it: the range widens to hold it, and a
+        QDoubleSpinBox shows as many decimals as it needs (up to 10)."""
+        if isinstance(widget, QDoubleSpinBox):
+            value = float(value)
+            decimals = widget.decimals()
+            while decimals < 10 and round(value, decimals) != value:
+                decimals += 1
+            widget.setDecimals(decimals)
+        else:
+            value = int(value)
+        if value < widget.minimum():
+            widget.setMinimum(value)
+        if value > widget.maximum():
+            widget.setMaximum(value)
+        widget.setValue(value)
     
     def _browse_output(self):
         dir_path = QFileDialog.getExistingDirectory(self, "Select Output Directory")
@@ -588,8 +689,9 @@ class TrackingSettingsView(QWidget):
                      self.project_path.setText(pre_path)
                      
     def _update_paths(self):
-        """Update derived Image and Camera paths based on Project Path."""
+        """Update derived Image and Camera paths based on Project Path, then load the project's saved config."""
         project_dir = self.project_path.text().strip()
+        self.last_project_path = project_dir  # showEvent then does not run this again (and reload) for the same project
         if not project_dir:
             self.image_path_display.setText("")
             self.camera_path_display.setText("")
@@ -665,6 +767,9 @@ class TrackingSettingsView(QWidget):
                 
         # 3. Frame Start (Reset to 0)
         self.frame_start_spin.setValue(0)
+
+        # 4. The project's saved settings replace these defaults
+        self._load_config()
         
     def _save_camera_params(self):
         """Auto-save camera parameters if available from Calibration module."""
@@ -832,8 +937,35 @@ class TrackingSettingsView(QWidget):
             "objects": [obj],
         }
 
+        # Keep from the config the form was filled from what the form does not show: the camera and image-list
+        # entries as written (if their folder and number are unchanged), the folder of the tracks to load (if the
+        # output folder is unchanged), further objects, and the settings without a field ("profile", comments).
+        loaded = self._loaded_config
+        if loaded and os.path.normcase(loaded[0]) == os.path.normcase(project_dir):
+            _, loaded_path, lcfg = loaded
+
+            def _abs_dir(p):
+                return os.path.normcase(os.path.normpath(p if os.path.isabs(p) else os.path.join(project_dir, p)))
+
+            def _in_dir(files, ui_text):
+                return bool(files) and _abs_dir(os.path.dirname(stb_config.resolve(loaded_path, files[0]))) == \
+                    _abs_dir(_clean_ui_path(ui_text))
+
+            if len(lcfg["cameras"]) == n_cams and _in_dir([c["file"] for c in lcfg["cameras"]],
+                                                          self.camera_path_display.text()):
+                cfg["cameras"] = copy.deepcopy(lcfg["cameras"])
+            if len(lcfg["image_lists"]) == n_cams and _in_dir(lcfg["image_lists"], self.image_path_display.text()):
+                cfg["image_lists"] = list(lcfg["image_lists"])
+            if lcfg.get("load_tracks", {}).get("folder") and _abs_dir(stb_config.resolve(
+                    loaded_path, lcfg["output_dir"])) == _abs_dir(_clean_ui_path(self.output_path.text())):
+                cfg["load_tracks"]["folder"] = lcfg["load_tracks"]["folder"]
+            cfg["objects"] += copy.deepcopy(lcfg["objects"][1:])
+            for k, v in lcfg.items():
+                if k not in cfg:
+                    cfg[k] = copy.deepcopy(v)
+
         try:
-            stb_config.write_json(cfg, config_path_abs)
+            stb_config.write_json(cfg, config_path_abs, keep_unknown=True)
         except Exception as e:
             QMessageBox.critical(self, "Save Error", f"Failed to save configuration:\n{str(e)}")
             return

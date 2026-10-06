@@ -1,6 +1,7 @@
 # STB speed and robustness improvements: summary and progress
 
-Last updated: 2026-10-05, night (Phases A and B committed as `acd78d4`; A4b and G, the GUI, done and tested).
+Last updated: 2026-10-06 (Phases A and B committed as `acd78d4`, A4b and G as `f2a3dbb`; the fixes of the issues
+noticed during A4b done and tested, not committed).
 
 Start here to catch up. The plan is `2026-10-05-plan.md` (approved for Phases A and B on 5 Oct); the final report is
 `2026-10-05-report.md`. Every number below comes from a file in `results/`, written by the scripts named.
@@ -11,11 +12,22 @@ long tracks +15 %). The slowdown was the matching search's allocations in an agi
 B2 the outputs are identical to HEAD's. Every check passed (section 3).
 
 **The GUI** now runs this code: the desktop shortcut **OpenLPT (new)** starts this repo's GUI on the rebuilt
-`build/Release/OpenLPT.exe`. Save Configuration writes `config.json`, which has a Save Interval field (use 200 for
-long runs). The A4b and G changes are not committed yet.
+`build/Release/OpenLPT.exe`. Choosing a project fills the settings form from its saved config. Save Configuration
+writes `config.json`, which has a Save Interval field (use 200 for long runs).
 
 ## 1. Progress log (newest first)
 
+- **6 Oct: the issues noticed during A4b are fixed** (report section 9; `f_noticed_fixes.py`, 15 of 15 checks).
+  - **The settings form loads the project's `config.json` (else `config.txt`)** when the project is chosen.
+    - Save changes only what the form shows: 31 of 31 GUI configs come back byte-identical, and 32 text
+      configs convert to the same C++ settings.
+    - Out-of-range values, `profile`, comments, unknown keys and further objects are kept.
+    - Threads 0 shows as "All".
+    - A bad config gives a warning, not a crash.
+  - **The GUI's `log.txt`** has plain CRLF line ends.
+  - **`tests/test_precalibrate_3d_view.py`** no longer leaves PySide6 mocks behind.
+  - **Regression checks:** A5–A7 30 of 30 again (their "before" code now pinned to `acd78d4`); pytest 254 passed,
+    the same 4 old failures.
 - **5 Oct, late night: A4b and G, the GUI on config.json and on the new build** (report section 8; `queue4.sh`,
   `a4b_gui_config.py`, `g_gui_e2e.py`).
   - **Which GUI:** your desktop shortcut runs openlpt 2.2.4 of 13 Jul (`bubble-visual-hull` env, from
@@ -145,5 +157,6 @@ bash tests/stb_improve/queue4.sh                         # G-S50: your build_loc
 python tests/stb_improve/a4b_gui_config.py               # A5-A7: the GUI's writer, the readers, VSC's writers (offscreen)
 python tests/stb_improve/g_gui_e2e.py e2e --frames 0 300 # G-E2E: form -> Save -> Run Tracking, then compare_runs with b300_final3
 python tests/stb_improve/g_gui_e2e.py log                # G-log: the log window's cost up to a 5000-frame log
+python tests/stb_improve/f_noticed_fixes.py              # F1-F3: the form loads configs, log.txt line ends, test isolation
 ```
 The python is the `refract` env's (`C:\Users\zcloc\.conda\envs\refract\python.exe`).

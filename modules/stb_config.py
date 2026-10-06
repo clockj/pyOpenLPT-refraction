@@ -338,19 +338,25 @@ def _public(d):
     return d
 
 
-def to_json_dict(cfg: Dict) -> Dict:
-    """The dict as config.json holds it: keys in the documented order, objects inline."""
+_BOOKKEEPING = ("_unknown_settings", "_config_file")  # keys the readers add, never written
+
+
+def to_json_dict(cfg: Dict, keep_unknown: bool = False) -> Dict:
+    """The dict as config.json holds it: keys in the documented order, objects inline.  With keep_unknown the other
+    top-level keys (comments "_..." and keys this version does not know) follow, as they are."""
     c = _public(cfg)
     out = {k: c[k] for k in _TOP_KEYS if k in c}
     lt = out.get("load_tracks")
     if lt is not None and not lt.get("enabled") and "folder" not in lt:
         out["load_tracks"] = {"enabled": False}
+    if keep_unknown:
+        out.update({k: v for k, v in cfg.items() if k not in out and k not in _BOOKKEEPING})
     return out
 
 
-def write_json(cfg: Dict, path: str) -> None:
+def write_json(cfg: Dict, path: str, keep_unknown: bool = False) -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as f:
-        json.dump(to_json_dict(cfg), f, indent=2)
+        json.dump(to_json_dict(cfg, keep_unknown), f, indent=2)
         f.write("\n")
 
 

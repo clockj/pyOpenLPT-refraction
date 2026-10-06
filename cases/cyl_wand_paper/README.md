@@ -1,36 +1,39 @@
 # Case: the paper's synthetic wand calibration through the tube
 
-The synthetic wand-calibration tests behind Section 9.2.2 of the Optics Express paper (`D:\Refraction\paper`). The fit
-is pyOpenLPT's `cylinder_wand` with two changes:
-- **its residuals come from the paper's projection** (the C++ PINCYL `projectAll`), polished by `cyl_model.project`;
-- **only the single-image region is used.**
+The synthetic wand-calibration evidence for Section 9.2.2 of the Optics Express paper (`D:\Refraction\paper`).
 
-Both changes are made in memory, inside this folder's code. No library file is edited.
+**The calibration the paper describes** (Section 9.1, as rewritten in the paper's commit `150325e`) is pyOpenLPT's
+`cylinder_wand` with two changes:
+- **the residual's image comes from the paper's projection,** the C++ PINCYL `projectAll`, which starts Newton
+  (`cyl_model.project`); the library starts Newton at the detection;
+- **no double-image guard.** The wand is kept in a central single-image volume instead.
 
-**Status (2026-10-04): plan only, waiting for approval.** See `2026-10-03-plan.md`. Nothing has been built or run,
-and on 4 Oct you decided to change no code for now.
+`projection_fit.py` makes both changes in memory. No library file is edited.
 
-The plan was amended on 4 Oct, after you asked whether the single-image rule could steer the fit (its section 7):
-- the rule runs once, on the converged answer, and a recount afterwards warns on drops;
-- where the C++ projection finds no image, the residual falls back to the library's Newton. The C++ does not look
-  outside the water, so without the fallback the fit would refuse steps that the library accepts;
-- P0 gains a barrier test.
+**Status (2026-10-06): done.** See `2026-10-06-report.md`.
+- On the campaign's data (`tests/cylinder_wand`), the paper's calibration and the library's give the same residuals
+  and the same fits (E1, E2). Section 9.2.2 therefore quotes the campaign's results. `paper_numbers.py` lists each
+  number with its source.
+- Every wand end of the campaign lies in the single-image volume (E0).
+- **Found:** the C++ projection misses images whose ray grazes the point's own radius, 27 of 907,000 pairs (E0b).
+  The Python reference finds them. Not fixed, by request (reminder below).
+
+**History:**
+- `2026-10-03-plan.md`: the first plan, with P0–P5 reruns and a single-image rule. It is superseded: the paper
+  dropped the rule, and the campaign already had the results.
+- `2026-10-06-plan.md`: the plan that was run.
 
 The tube is the one of the dot-board trial `cases/cyl_20260930_T0_cam1`:
 - OD 7.9375 in, wall 0.125 in;
 - air, acrylic and water at 1.0, 1.49 and 1.333.
 
-## Reminder: the library's double-image guard (not fixed, by request)
+## Reminders (not fixed, by request: no other pyOpenLPT file is to change)
 
-`modules/camera_calibration/curved_calibration/cylinder_wand.py`, `multi_image_guard`, has a gap.
-
-- **What it checks.** Only points beyond `Tube.fold_radius()`, which is r_c at zero tilt (75.62 mm here).
-- **Why that misses points.** Tilted rays fold inside that radius:
-  - r_c is 74.04 mm at C_z = 0.3;
-  - a point at r = 74.5 mm, Δφ = 130.50°, Δz = 357.5 mm, seen from 1.1 m, has two images.
-  - The paper also notes that multilayer cylinders can fold inside r_c.
-- **Effect so far.** Nothing reported is affected: wand rigs have C_z ≈ 0.02, which leaves a 7 µm band.
-- **Fix later.** Take the census of every observation; the single-image rule of this case does so.
-- **Logged** in `tests/cylinder_wand/README.md` on 2026-10-04 (progress log and open item 8).
-
-Details: `2026-10-03-plan.md`, section 6.
+1. **The C++ projection's blind band at the branch junction** (report, E0b).
+   - Points about 90–94° in azimuth from the camera get no image when their ray grazes their own radius within about
+     10⁻⁸ of Λmax.
+   - The Python reference's fixes for this region are in `D:\Refraction\code\tests\classify_grazing\`.
+2. **`cylinder_wand.multi_image_guard` checks only points beyond r_c at zero tilt** (`2026-10-03-plan.md` §6). The
+   paper no longer uses a guard.
+3. **`tests/cylinder_wand/README.md`** needs the E0b finding and the corrections to its 0.1 px table (report, "The
+   numbers for the paper"). It was left alone at your request of 2026-10-03.

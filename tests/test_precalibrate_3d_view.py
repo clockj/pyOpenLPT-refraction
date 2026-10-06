@@ -10,7 +10,7 @@ from modules.camera_calibration.wand_calibration.wand_calibrator import (
 )
 
 
-def test_plot_calibration_handles_list_input():
+def test_plot_calibration_handles_list_input(monkeypatch):
     """
     Regression test: plot_calibration() should NOT crash when points_3d
     is a Python list.
@@ -24,10 +24,9 @@ def test_plot_calibration_handles_list_input():
     import sys
 
     # Mock PySide6 modules to prevent Qt import errors in headless test
-    sys.modules['PySide6'] = MagicMock()
-    sys.modules['PySide6.QtWidgets'] = MagicMock()
-    sys.modules['PySide6.QtCore'] = MagicMock()
-    sys.modules['PySide6.QtGui'] = MagicMock()
+    # (for this test only: monkeypatch puts the real modules back, so later tests get real Qt)
+    for name in ('PySide6', 'PySide6.QtWidgets', 'PySide6.QtCore', 'PySide6.QtGui'):
+        monkeypatch.setitem(sys.modules, name, MagicMock())
 
     from modules.camera_calibration.view import Calibration3DViewer
 

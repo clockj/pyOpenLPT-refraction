@@ -1,6 +1,6 @@
 A4b GUI config tests (A5 writer, A6 readers, A7 VSC writers), offscreen Qt
 module: D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
-HEAD: acd78d4
+the code before A4b ("HEAD" below): acd78d4; the working tree: HEAD f2a3dbb + changes
 
 A5 the writer: HEAD's config.txt + object file against the new config.json, from the same form
   PASS  the new writer writes only config.json (no config.txt or object file), 31 forms
@@ -115,7 +115,7 @@ A6 the readers: HEAD's code on the text project, the new code on the text and th
   PASS  VSC obj_type: Tracer
   PASS  VSC obj_radius: 2.5
   PASS  VSC n_tracks: 303
-  PASS  VSC tracks_hash: -3692358501066176289
+  PASS  VSC tracks_hash: -1980975078685494718
   PASS  VSC image_loaders: [0, 1, 2, 3]
   PASS  VSC detect_cfg: [20, 2.5]
   PASS  no config: the same tracks from Results/, the same VSC fallbacks (camFile/, defaults), and the run check stops  (- Master config file (config.json or config.txt) is missing.)

@@ -1,0 +1,350 @@
+{
+ "start": {
+  "time": "2026-10-06 00:22:54",
+  "pyopenlpt_commit": "f2a3dbb5a2df257cb06de7e9149ab33120bd7d64",
+  "library_files_changed_since_commit": null,
+  "extension": "C:\\Users\\zcloc\\AppData\\Local\\Temp\\claude\\D--Refraction\\a41554c2-317f-4657-a430-107eb353b7ed\\scratchpad\\frozen_pyopenlpt\\pyopenlpt.cp311-win_amd64.pyd",
+  "extension_sha256": "4448649738b11664d62417b63b47127490392dadfbe138dfc037dc6b64d50f1b",
+  "files_sha256": {
+   "cyl_model.py": "4a45d57c5b9bed5e8763e9f778591739e579837498a7e8de14e384965dcf61a1",
+   "cylinder_wand.py": "633de19ac071dbe781b777dc0e5476fb6bc6d5f5ffb92f09813cadcc061c4cb0",
+   "cylinder_wand_io.py": "9d380e4a48090d7fce2832c23b2afa53624cbad9d5176a09f7ae5b11749df496",
+   "rigs.py": "76b56ecd1167ab7ad585684ed3b2901322861fad79a1d34c74da6265a8e01d0a"
+  }
+ },
+ "end": {
+  "time": "2026-10-06 00:44:30",
+  "pyopenlpt_commit": "f2a3dbb5a2df257cb06de7e9149ab33120bd7d64",
+  "library_files_changed_since_commit": null,
+  "extension": "C:\\Users\\zcloc\\AppData\\Local\\Temp\\claude\\D--Refraction\\a41554c2-317f-4657-a430-107eb353b7ed\\scratchpad\\frozen_pyopenlpt\\pyopenlpt.cp311-win_amd64.pyd",
+  "extension_sha256": "4448649738b11664d62417b63b47127490392dadfbe138dfc037dc6b64d50f1b",
+  "files_sha256": {
+   "cyl_model.py": "4a45d57c5b9bed5e8763e9f778591739e579837498a7e8de14e384965dcf61a1",
+   "cylinder_wand.py": "633de19ac071dbe781b777dc0e5476fb6bc6d5f5ffb92f09813cadcc061c4cb0",
+   "cylinder_wand_io.py": "9d380e4a48090d7fce2832c23b2afa53624cbad9d5176a09f7ae5b11749df496",
+   "rigs.py": "76b56ecd1167ab7ad585684ed3b2901322861fad79a1d34c74da6265a8e01d0a"
+  }
+ },
+ "unchanged_during_run": true,
+ "seconds": 1295.7263803482056,
+ "t4": [
+  {
+   "max_shift_sigma": 2.083557269384632e-06,
+   "max_shift_param": "cam3.C1",
+   "rms_library_px": 0.10565348461902704,
+   "rms_projection_px": 0.10565348457015568,
+   "rms_rel_diff": 4.625627658683129e-10,
+   "active_library": 3000,
+   "active_projection": 3000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    6,
+    6
+   ],
+   "cpp_images": {
+    "calls": 143,
+    "rows": 429000,
+    "no_image": 11,
+    "one_image": 428989,
+    "more_images": 0
+   },
+   "data": "T4 seed 0",
+   "seconds": [
+    3.3021559715270996,
+    71.67872524261475
+   ],
+   "pass": false
+  },
+  {
+   "max_shift_sigma": 1.69246551686855e-05,
+   "max_shift_param": "cam1.C3",
+   "rms_library_px": 0.10839969009414291,
+   "rms_projection_px": 0.10839969008486733,
+   "rms_rel_diff": 8.556833019923715e-11,
+   "active_library": 3000,
+   "active_projection": 3000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    3,
+    3
+   ],
+   "cpp_images": {
+    "calls": 72,
+    "rows": 216000,
+    "no_image": 0,
+    "one_image": 216000,
+    "more_images": 0
+   },
+   "data": "T4 seed 1",
+   "seconds": [
+    1.7971014976501465,
+    36.67609739303589
+   ],
+   "pass": false
+  },
+  {
+   "max_shift_sigma": 5.703245345636679e-06,
+   "max_shift_param": "cam2.w2",
+   "rms_library_px": 0.10685281783071972,
+   "rms_projection_px": 0.10685281787352525,
+   "rms_rel_diff": 4.0060288419851986e-10,
+   "active_library": 3000,
+   "active_projection": 3000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    5,
+    5
+   ],
+   "cpp_images": {
+    "calls": 137,
+    "rows": 411000,
+    "no_image": 0,
+    "one_image": 411000,
+    "more_images": 0
+   },
+   "data": "T4 seed 2",
+   "seconds": [
+    2.3810558319091797,
+    69.54369688034058
+   ],
+   "pass": false
+  }
+ ],
+ "t5": [
+  {
+   "max_shift_sigma": 7.0129891291240635e-06,
+   "max_shift_param": "cam2.C1",
+   "rms_library_px": 0.1095055954623246,
+   "rms_projection_px": 0.1095055953309617,
+   "rms_rel_diff": 1.1995999749103703e-09,
+   "active_library": 2998,
+   "active_projection": 2998,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    5,
+    5
+   ],
+   "cpp_images": {
+    "calls": 243,
+    "rows": 728514,
+    "no_image": 0,
+    "one_image": 728514,
+    "more_images": 0
+   },
+   "data": "T5 rig 0",
+   "n_cams": 3,
+   "seconds": [
+    40.41387939453125,
+    144.28627848625183
+   ],
+   "pass": false
+  },
+  {
+   "max_shift_sigma": 1.0422331974310008e-05,
+   "max_shift_param": "cam2.C1",
+   "rms_library_px": 0.08589602045948869,
+   "rms_projection_px": 0.08589602054636486,
+   "rms_rel_diff": 1.0114109549874684e-09,
+   "active_library": 2000,
+   "active_projection": 2000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    7,
+    7
+   ],
+   "cpp_images": {
+    "calls": 378,
+    "rows": 756000,
+    "no_image": 0,
+    "one_image": 756000,
+    "more_images": 0
+   },
+   "data": "T5 rig 1",
+   "n_cams": 2,
+   "seconds": [
+    16.53999161720276,
+    162.08467960357666
+   ],
+   "pass": false
+  },
+  {
+   "max_shift_sigma": 1.0837410525478628e-06,
+   "max_shift_param": "cam3.w2",
+   "rms_library_px": 0.11803176827040174,
+   "rms_projection_px": 0.11803176826906249,
+   "rms_rel_diff": 1.13464793116691e-11,
+   "active_library": 4000,
+   "active_projection": 4000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    5,
+    5
+   ],
+   "cpp_images": {
+    "calls": 234,
+    "rows": 936000,
+    "no_image": 57,
+    "one_image": 935943,
+    "more_images": 0
+   },
+   "data": "T5 rig 2",
+   "n_cams": 4,
+   "seconds": [
+    52.016775369644165,
+    204.6968879699707
+   ],
+   "pass": false
+  },
+  {
+   "max_shift_sigma": 4.488579144858792e-07,
+   "max_shift_param": "cam3.C1",
+   "rms_library_px": 0.10700428713647664,
+   "rms_projection_px": 0.10700428713462466,
+   "rms_rel_diff": 1.730748877548649e-11,
+   "active_library": 3000,
+   "active_projection": 3000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    4,
+    4
+   ],
+   "cpp_images": {
+    "calls": 210,
+    "rows": 630000,
+    "no_image": 0,
+    "one_image": 630000,
+    "more_images": 0
+   },
+   "data": "T5 rig 3",
+   "n_cams": 3,
+   "seconds": [
+    28.94421124458313,
+    97.32848119735718
+   ],
+   "pass": true
+  },
+  {
+   "max_shift_sigma": 3.822951354016476e-06,
+   "max_shift_param": "cam1.w2",
+   "rms_library_px": 0.08598236356028492,
+   "rms_projection_px": 0.08598236356381485,
+   "rms_rel_diff": 4.1054049049193964e-11,
+   "active_library": 2000,
+   "active_projection": 2000,
+   "active_differ": 0,
+   "L_library": 10.0,
+   "L_projection": 10.0,
+   "rounds": [
+    5,
+    5
+   ],
+   "cpp_images": {
+    "calls": 268,
+    "rows": 536000,
+    "no_image": 0,
+    "one_image": 536000,
+    "more_images": 0
+   },
+   "data": "T5 rig 4",
+   "n_cams": 2,
+   "seconds": [
+    15.127753257751465,
+    112.94037652015686
+   ],
+   "pass": false
+  }
+ ],
+ "t9": {
+  "max_shift_sigma": 7.081666560925478e-07,
+  "max_shift_param": "cam2.C1",
+  "rms_library_px": 0.10636707904761014,
+  "rms_projection_px": 0.10636707904754997,
+  "rms_rel_diff": 5.657696533489798e-13,
+  "active_library": 11997,
+  "active_projection": 11997,
+  "active_differ": 0,
+  "L_library": 10.000985767303666,
+  "L_projection": 10.000985766396187,
+  "rounds": [
+   4,
+   4
+  ],
+  "cpp_images": {
+   "calls": 100,
+   "rows": 1199740,
+   "no_image": 6,
+   "one_image": 1199734,
+   "more_images": 0
+  },
+  "data": "T9 (2000 frames, L free)",
+  "L_sigma_mm": 0.0019179655776959056,
+  "seconds": [
+   8.705936193466187,
+   206.9486882686615
+  ],
+  "pass": true
+ },
+ "e2b": [
+  {
+   "seed": 0,
+   "max_shift_crb_sigma": 0.028157325250913322,
+   "param": "cam2.w1",
+   "rms_now_px": 0.10565348461902704,
+   "rms_2026_10_01_px": 0.10564190043887957,
+   "active_now": 3000,
+   "active_2026_10_01": 3000,
+   "noise_weights_now": [
+    0.09801318422227849,
+    0.09654950774288551,
+    0.09904065100511208
+   ]
+  },
+  {
+   "seed": 1,
+   "max_shift_crb_sigma": 0.013530529748633346,
+   "param": "cam3.C2",
+   "rms_now_px": 0.10839969009414291,
+   "rms_2026_10_01_px": 0.1083950763364505,
+   "active_now": 3000,
+   "active_2026_10_01": 3000,
+   "noise_weights_now": [
+    0.09938746318835315,
+    0.10087172091085704,
+    0.10071400637938059
+   ]
+  },
+  {
+   "seed": 2,
+   "max_shift_crb_sigma": 0.03827457563548025,
+   "param": "cam2.w2",
+   "rms_now_px": 0.10685281783071972,
+   "rms_2026_10_01_px": 0.10679808188797402,
+   "active_now": 3000,
+   "active_2026_10_01": 3000,
+   "noise_weights_now": [
+    0.1000395571315029,
+    0.10067615238025261,
+    0.09555763021270507
+   ]
+  }
+ ],
+ "criteria": {
+  "sigma": 1e-06,
+  "rms_rel": 1e-09
+ },
+ "pass": false
+}

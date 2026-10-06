@@ -17,7 +17,6 @@ import json
 import os
 import sys
 import textwrap
-import types
 
 import pytest
 
@@ -191,11 +190,6 @@ def test_read_project_and_raw_edit(tmp_path):
 @pytest.fixture(scope="module")
 def qapp():
     os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
-    # an earlier test may have left MagicMock stand-ins for PySide6 in sys.modules (test_precalibrate_3d_view.py
-    # does); drop them so that the real bindings load
-    for name in [n for n, m in sys.modules.items()
-                 if (n == "PySide6" or n.startswith("PySide6.")) and not isinstance(m, types.ModuleType)]:
-        del sys.modules[name]
     widgets = pytest.importorskip("PySide6.QtWidgets")
     pytest.importorskip("qtawesome")
     pytest.importorskip("cv2")

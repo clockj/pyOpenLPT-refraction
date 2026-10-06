@@ -295,6 +295,7 @@ class TrackingView(QWidget):
         self.process.readyReadStandardError.connect(self._handle_stderr)
         self.process.finished.connect(self._on_process_finished)
         self.log_file = None
+        self._pending_cr = {}  # per output stream: a '\r' that ended the last chunk read
         
         # Cache for statistics
         self.cached_proj_path = None
@@ -946,6 +947,7 @@ class TrackingView(QWidget):
         log_path = os.path.join(proj_dir, "log.txt")
         try:
             self.log_file = open(log_path, "w")
+            self._pending_cr = {}
             self.log_text.clear()
             self.vis_tabs.setCurrentWidget(self.log_text)
             if use_python_module:
@@ -1301,12 +1303,19 @@ class TrackingView(QWidget):
 
 
     def _handle_stdout(self):
-        data = self.process.readAllStandardOutput().data().decode(errors='replace')
-        self._append_log(data)
+        self._append_log(self._process_text(self.process.readAllStandardOutput().data(), "out"))
 
     def _handle_stderr(self):
-        data = self.process.readAllStandardError().data().decode(errors='replace')
-        self._append_log(data)
+        self._append_log(self._process_text(self.process.readAllStandardError().data(), "err"))
+
+    def _process_text(self, data, stream):
+        """The process's output with '\n' line ends: it writes '\r\n' (Windows text mode), and log.txt, opened in text
+        mode, adds the '\r' again.  A '\r' that ends a chunk waits for the next chunk, which may start with its '\n'."""
+        text = self._pending_cr.pop(stream, "") + data.decode(errors='replace')
+        if text.endswith("\r"):
+            self._pending_cr[stream] = "\r"
+            text = text[:-1]
+        return text.replace("\r\n", "\n")
 
     def _append_log(self, text):
         v_scroll = self.log_text.verticalScrollBar()

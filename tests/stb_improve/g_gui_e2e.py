@@ -107,7 +107,8 @@ def e2e(args):
             "wall_s": round(wall, 1), "returncode": rc, "frames_done": len(recs), "sum_frame_s": round(sum(times), 1),
             "peak_working_set_MB": round(sampler.peak["working_set_MB"]),
             "peak_private_MB": round(sampler.peak["private_MB"]),
-            "log_window_chars": len(widget_text), "log_txt_bytes": os.path.getsize(os.path.join(proj, "log.txt")),
+            "log_window_chars": len(widget_text), "log_window_has_cr": "\r" in widget_text,
+            "log_txt_bytes": os.path.getsize(os.path.join(proj, "log.txt")),
             "messages": [list(m) for m in __import__("a4b_gui_config").MESSAGES]}
     with open(os.path.join(proj, "run_info.json"), "w") as f:
         json.dump(info, f, indent=1)

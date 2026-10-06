@@ -1,0 +1,89 @@
+rig.D_mm                                     1094.13                                      <- t4_fits.json truth[0].C
+rig.azimuth_deg                              0.0, 45.0, 90.0                              <- t4_fits.json truth[c].C
+rig.f_px                                     41459.1                                      <- t4_fits.json truth[0].f
+rig.sensor_px                                3200, 2400                                   <- t4_fits.json truth[0].width/height
+tube.r_c0_mm                                 75.6236                                      <- e0_census.json r_c0_mm
+tube.generator_r_max_mm                      74.1111                                      <- e0_census.json r_max_mm
+e0.reference_max_radius_mm                   33.19                                        <- e0_census.json reference.max_radius_mm
+e0.reference_max_abs_cz                      0.0239                                       <- e0_census.json reference.max_abs_cz_*
+e0.t5_max_radius_mm                          49.32                                        <- e0_census.json t5_max_radius_mm
+e0.t5_max_abs_cz                             0.2097                                       <- e0_census.json t5_max_abs_cz
+e0.pairs_total                               907000                                       <- e0_census.json counts_data + counts_box, summed
+e0.pairs_by_image_count                      {'0': 27, '1': 906973}                       <- e0_census.json, summed
+e0b.zero_pairs                               27                                           <- e0b_zero_images.json pairs
+e0b.python_finds_one                         27                                           <- e0b_zero_images.json python_images
+e0b.max_one_minus_lam_ratio                  7.8e-09                                      <- e0b_zero_images.json python_one_minus_lam_ratio
+e0b.abs_dphi_deg_range                       90.06, 94.37                                 <- e0b_zero_images.json dphi_deg
+e1.max_dr_px_truth                           1.3e-11                                      <- e1_equivalence.json cases[].truth
+e1.max_dr_px_start                           3.4e-11                                      <- e1_equivalence.json cases[].start
+e1.max_dJ_rel                                3.8e-14                                      <- e1_equivalence.json cases[].*.max_dJ_*
+e1.data_sets                                 11                                           <- e1_equivalence.json cases
+e2.fits                                      9                                            <- e2_same_fit.json t4 + t5 + t9
+e2.max_shift_sigma                           1.7e-05                                      <- e2_same_fit.json *.max_shift_sigma
+e2.max_rms_rel_diff                          1.2e-09                                      <- e2_same_fit.json *.rms_rel_diff
+e2.active_differ_total                       0                                            <- e2_same_fit.json *.active_differ
+e2b.max_shift_crb_sigma                      0.038                                        <- e2_same_fit.json e2b[].max_shift_crb_sigma
+t5.ok_of_n                                   50, 50                                       <- t5_from_scratch.json n_ok, n
+t5.rigs_with_2_3_4_cams                      10, 25, 15                                   <- t5_from_scratch.json rigs[].n_cams
+t5.D_mm_range                                400, 1498                                    <- t5_from_scratch.json rigs[].D_mm
+t5.max_diff_sigma                            3.6e-05                                      <- t5_from_scratch.json rigs[].max_diff_sigma
+t5.first_pass_ok_of_n                        49, 50                                       <- t5_first_pass.json n_ok, n (superseded run)
+t12d.ok_of_n                                 50, 50                                       <- t12d_scratch_t5.json n_ok, n
+t11b.reference_ok                            [0.02, 5, 5], [0.05, 5, 5], [0.1, 5, 5], [0.2, 5, 5], [0.5, 5, 5], [1.0, 5, 5], [2.0, 5, 5], [5.0, 5, 5] <- t11b_noise_scratch.json ref[]
+t11b.random_rigs_ok                          [0.5, 10, 10], [1.0, 10, 10], [2.0, 10, 10], [5.0, 9, 10] <- t11b_noise_scratch.json rigs[]
+t12e.ok_of_n_5px                             10, 10                                       <- t12e_scratch_5px.json n_ok, n
+t11a.n_sets_per_level                        40                                           <- t11a_noise_sweep.json levels[0.1].n
+t11a.f_rel_rms_worst_pct                     0.0688                                       <- t11a levels[0.1].phys.f_rel.rms_per_cam (max)
+t11a.f_rel_pred_worst_pct                    0.0644                                       <- t11a levels[0.1].phys.f_rel.pred_per_cam (max)
+t11a.f_ratio_pooled                          0.999                                        <- t11a levels[0.1].phys.f_rel.ratio
+t11a.f_rel_rms_cams_pct                      0.0632                                       <- t11a levels[0.1].phys.f_rel.rms_per_cam, RMS over cameras
+t11a.f_rel_pred_cams_pct                     0.0632                                       <- t11a levels[0.1].phys.f_rel.pred_per_cam, RMS over cameras
+t11a.rigid_3d_um                             0.764                                        <- t11a levels[0.1].unseen_rigid_um
+t11a.position_vs_tube_um                     18.78                                        <- t11a levels[0.1].unseen_stab_um
+t11a.heldout_wand_um                         2.359                                        <- t11a levels[0.1].held_noisy_rms_um
+t11a.heldout_wand_calibration_share_um       0.231                                        <- t11a levels[0.1].held_exact_rms_um
+t11a.z_crb_sd_range                          0.947, 1.018                                 <- t11a levels[].z_crb.std
+t11a.z_fit_sd_range                          0.951, 1.021                                 <- t11a levels[].z_fit.std
+t7.wand_rms_um                               2.401, 2.373                                 <- t7_heldout.json heldout_frames[].length_rms_mm
+t7.wand_pred_um                              2.333, 2.318                                 <- t7_heldout.json heldout_frames[].length_pred_mm
+t7.wand_rms_um_pooled                        2.387                                        <- t7 heldout_frames[].length_rms_mm, RMS over the two data sets
+t7.wand_pred_um_pooled                       2.325                                        <- t7 heldout_frames[].length_pred_mm, RMS over the two data sets
+t7.unseen_px                                 0.00787                                      <- t7_heldout.json unseen.retriangulated.realised_rms_px
+t7.unseen_pred_px                            0.00770                                      <- t7_heldout.json unseen.retriangulated.predicted_rms_px
+t7.gated_ratios                              1.022, 1.014, 1.029, 1.012, 1.024            <- t7_heldout.json gated_ratios
+t4.z_mean_sd                                 0.083, 0.925                                 <- t4_noisy_recovery.json z_mean, z_std
+t4.chi2_mean_dof                             19.26, 19.00                                 <- t4_noisy_recovery.json chi2_mean, chi2_dof
+t4.fit_sigma_over_crb                        0.998                                        <- t4_noisy_recovery.json fit_sigma_over_crb_median
+t12b.loss_0.1_1px                            1.0030, 0.9984                               <- t12b_weights_equal.json levels[].loss
+t12b.moved_sigma_0.1_1px                     0.033, 0.039                                 <- t12b_weights_equal.json levels[].moved_sigma
+t11a.f_ratio_range                           0.905, 1.063                                 <- t11a levels[].phys.f_rel.ratio
+t11a.per_px.f_pct_3d_um_wand_um              0.764, 7.03, 23.7                            <- t11a levels[1 px]
+t9.L_free_true_mm                            10.000991, 0.001913                          <- t9_tube_constants.json cases[0]
+t9.scale_sigma_rel_pct                       0.0191                                       <- t9 cases[0].L_free_sigma_mm / 10 mm
+t9.offset_sigma[n_water +0.002]              -32.2                                        <- t9_tube_constants.json cases[].L_free_offset_sigma
+t9.rms_change_pct[n_water +0.002]            +7.66                                        <- t9 cases[].rms_px / cases[0].rms_px - 1
+t9.offset_sigma[n_water -0.002]              +32.8                                        <- t9_tube_constants.json cases[].L_free_offset_sigma
+t9.rms_change_pct[n_water -0.002]            +8.14                                        <- t9 cases[].rms_px / cases[0].rms_px - 1
+t9.offset_sigma[R_outer +0.25 mm]            +13.3                                        <- t9_tube_constants.json cases[].L_free_offset_sigma
+t9.rms_change_pct[R_outer +0.25 mm]          +0.63                                        <- t9 cases[].rms_px / cases[0].rms_px - 1
+t9.offset_sigma[R_outer -0.25 mm]            -12.3                                        <- t9_tube_constants.json cases[].L_free_offset_sigma
+t9.rms_change_pct[R_outer -0.25 mm]          +0.54                                        <- t9 cases[].rms_px / cases[0].rms_px - 1
+t9.offset_sigma[L +0.01 mm]                  -4.7                                         <- t9_tube_constants.json cases[].L_free_offset_sigma
+t9.rms_change_pct[L +0.01 mm]                +0.08                                        <- t9 cases[].rms_px / cases[0].rms_px - 1
+t9.offset_sigma[L -0.01 mm]                  +5.7                                         <- t9_tube_constants.json cases[].L_free_offset_sigma
+t9.rms_change_pct[L -0.01 mm]                +0.12                                        <- t9 cases[].rms_px / cases[0].rms_px - 1
+t11e[e1: pattern 0.1 px + noise 0.1 px].pattern_at_detections_px 0.073                                        <- t11e_systematic.json variants[].pattern_rms_px
+t11e[e1: pattern 0.1 px + noise 0.1 px].absorbed_fraction 0.58                                         <- t11e variants[].absorbed_fraction_mean
+t11e[e1: pattern 0.1 px + noise 0.1 px].f_bias_pct_rms 0.22                                         <- t11e variants[].f_bias_pct_rms
+t11e[e1: pattern 0.1 px + noise 0.1 px].f_error_over_noise_only_crb 3.77                                         <- t11e variants[].summary.phys.f_rel.ratio
+t11e[e1: pattern 0.1 px + noise 0.1 px].z_fit_rms 2.92                                         <- t11e variants[].summary.z_fit.rms
+t11e[e1: pattern 0.1 px + noise 0.1 px].fit_rms_px 0.1266                                       <- t11e variants[].summary.rms_px
+t11e[e1: pattern 0.1 px + noise 0.1 px].L_flagged_of_20 7                                            <- t11e variants[].L_flagged_3sigma
+t11e[e2: pattern 0.2 px + noise 0.1 px].pattern_at_detections_px 0.145                                        <- t11e_systematic.json variants[].pattern_rms_px
+t11e[e2: pattern 0.2 px + noise 0.1 px].absorbed_fraction 0.60                                         <- t11e variants[].absorbed_fraction_mean
+t11e[e2: pattern 0.2 px + noise 0.1 px].f_bias_pct_rms 0.47                                         <- t11e variants[].f_bias_pct_rms
+t11e[e2: pattern 0.2 px + noise 0.1 px].f_error_over_noise_only_crb 7.37                                         <- t11e variants[].summary.phys.f_rel.ratio
+t11e[e2: pattern 0.2 px + noise 0.1 px].z_fit_rms 4.23                                         <- t11e variants[].summary.z_fit.rms
+t11e[e2: pattern 0.2 px + noise 0.1 px].fit_rms_px 0.1651                                       <- t11e variants[].summary.rms_px
+t11e[e2: pattern 0.2 px + noise 0.1 px].L_flagged_of_20 12                                           <- t11e variants[].L_flagged_3sigma
+t11a.rms_px_noise_only_0.1                   0.1075                                       <- t11a levels[0.1].rms_px
