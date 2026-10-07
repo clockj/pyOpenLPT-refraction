@@ -1,0 +1,140 @@
+{
+ "cam1": {
+  "noise_counts": 1.5221359729766846,
+  "thr_4sigma": {
+   "objects": 1179,
+   "per_Mpx": 1151.3671875,
+   "horizontal_frac": 0.2586938083121289,
+   "vertical_frac": 0.2960135708227311,
+   "h_len_px_pcts": [
+    5.0,
+    9.0,
+    18.0
+   ],
+   "v_len_px_pcts": [
+    6.0,
+    8.0,
+    12.0
+   ],
+   "thickness_px_median": 3.0
+  },
+  "thr_6sigma": {
+   "objects": 390,
+   "per_Mpx": 380.859375,
+   "horizontal_frac": 0.2076923076923077,
+   "vertical_frac": 0.30512820512820515,
+   "h_len_px_pcts": [
+    4.0,
+    9.0,
+    16.0
+   ],
+   "v_len_px_pcts": [
+    5.0,
+    8.0,
+    10.200000000000003
+   ],
+   "thickness_px_median": 3.0
+  },
+  "shift_frame0_to_1": {
+   "windows": 66,
+   "dx_pcts": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "dy_pcts": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "speed_px_per_frame_median": 0.0,
+   "corr_median": 0.7955221831798553
+  },
+  "shift_frame0_to_4": {
+   "windows": 66,
+   "dx_pcts": [
+    -3.0,
+    -2.0,
+    0.0
+   ],
+   "dy_pcts": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "speed_px_per_frame_median": 0.5,
+   "corr_median": 0.6207263469696045
+  },
+  "bg_p90_median": 107.0,
+  "bg_max_minus_p90_median": 1.0
+ },
+ "cam2": {
+  "noise_counts": 1.7395840883255005,
+  "thr_4sigma": {
+   "objects": 1608,
+   "per_Mpx": 1570.3125,
+   "horizontal_frac": 0.26865671641791045,
+   "vertical_frac": 0.35199004975124376,
+   "h_len_px_pcts": [
+    4.0,
+    9.0,
+    18.0
+   ],
+   "v_len_px_pcts": [
+    5.0,
+    8.0,
+    12.0
+   ],
+   "thickness_px_median": 3.0
+  },
+  "thr_6sigma": {
+   "objects": 590,
+   "per_Mpx": 576.171875,
+   "horizontal_frac": 0.22542372881355932,
+   "vertical_frac": 0.3864406779661017,
+   "h_len_px_pcts": [
+    4.0,
+    8.0,
+    16.0
+   ],
+   "v_len_px_pcts": [
+    4.0,
+    7.0,
+    11.0
+   ],
+   "thickness_px_median": 3.0
+  },
+  "shift_frame0_to_1": {
+   "windows": 66,
+   "dx_pcts": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dy_pcts": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "speed_px_per_frame_median": 0.0,
+   "corr_median": 0.8785088658332825
+  },
+  "shift_frame0_to_4": {
+   "windows": 66,
+   "dx_pcts": [
+    -2.0,
+    -1.0,
+    0.0
+   ],
+   "dy_pcts": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "speed_px_per_frame_median": 0.25,
+   "corr_median": 0.6767017841339111
+  },
+  "bg_p90_median": 149.0,
+  "bg_max_minus_p90_median": 1.0
+ }
+}
