@@ -454,6 +454,8 @@ The page shows the result and how to read it:
 - **Summary**, with the **Checks** (each a warning when something often means a wrong or weak answer, or a tick when
   none fired);
 - the rig from above and in 3D; how well each camera fits (its residuals over the image);
+- the distribution of the reprojection errors: each camera's du, dv and |e| = √(du² + dv²) as probability densities
+  (a Linear / Log switch shows the tails), a table of their statistics, and du against dv in 2-D;
 - the wand length; the cameras; noise and weights; the settings and the files written.
 
 Hover over the figures for numbers. Without QtWebEngine the tab shows a short summary, and **Open in browser** shows
@@ -464,6 +466,9 @@ the page (the installers add QtWebEngine).
 - **Reprojection RMS:** a few tenths of a pixel is typical for real data; above 1 px, look for detection problems
   first. The value depends on the detection noise: compare calibrations of the same rig rather than different rigs.
 - **The wand length error:** the scatter of the free-triangulated wand length (in µm), against the wand length.
+- **The error distributions:** du and dv should be centred on zero, without long tails (switch to Log to see them).
+  A shifted curve or a long tail points to wrong detections or something the model misses. du much wider than dv,
+  or the reverse, points to an error along one direction, e.g. a rod hiding part of each ball's outline.
 - **The Checks:** read every warning on the results page.
 - **Consistency, for long lenses:** calibrate two parts of the recording separately and compare.
   - **When f and the cameras' distances differ by several per cent between the parts, in proportion,** the recording

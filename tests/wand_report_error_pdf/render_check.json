@@ -1,0 +1,332 @@
+{
+ "checks": [
+  {
+   "check": "g3 dark 1200 px: loads, the error section drawn (6 charts), theme applied",
+   "ok": true,
+   "detail": "charts 6, curves 9, theme dark"
+  },
+  {
+   "check": "g3 dark 1200 px: a pointer over the du chart shows the tooltip",
+   "ok": true,
+   "detail": "block|du 0.0000 to 0.0025 px / 33.2 /px cam0, 29 detections / 31.7 /px cam1, 27 detections / 43.6 /px cam2, 38 detections"
+  },
+  {
+   "check": "g3 dark 1200 px: the Log switch redraws the curves",
+   "ok": true,
+   "detail": "25.0 curves and points on the log scale"
+  },
+  {
+   "check": "g3 light 1200 px: loads, the error section drawn (6 charts), theme applied",
+   "ok": true,
+   "detail": "charts 6, curves 9, theme light"
+  },
+  {
+   "check": "g3 dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "g3: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; other requests []"
+  },
+  {
+   "check": "g8 dark 1200 px: loads, the error section drawn (7 charts), theme applied",
+   "ok": true,
+   "detail": "charts 7, curves 12, theme dark"
+  },
+  {
+   "check": "g8 dark 1200 px: a pointer over the du chart shows the tooltip",
+   "ok": true,
+   "detail": "block|du 0.000 to 0.025 px / 5.47 /px cam0, 82 detections / 5.67 /px cam1, 85 detections / 4.93 /px cam2, 74 detections / 5.27 /px cam3, 79 detections"
+  },
+  {
+   "check": "g8 dark 1200 px: the Log switch redraws the curves",
+   "ok": true,
+   "detail": "15.0 curves and points on the log scale"
+  },
+  {
+   "check": "g8 light 1200 px: loads, the error section drawn (7 charts), theme applied",
+   "ok": true,
+   "detail": "charts 7, curves 12, theme light"
+  },
+  {
+   "check": "g8 dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "g8: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; other requests []"
+  },
+  {
+   "check": "t0 dark 1200 px: loads, the error section drawn (5 charts), theme applied",
+   "ok": true,
+   "detail": "charts 5, curves 6, theme dark"
+  },
+  {
+   "check": "t0 dark 1200 px: a pointer over the du chart shows the tooltip",
+   "ok": true,
+   "detail": "block|du -0.02 to 0.02 px / 3.20 /px cam1, 388 detections / 2.55 /px cam2, 309 detections"
+  },
+  {
+   "check": "t0 dark 1200 px: the Log switch redraws the curves",
+   "ok": true,
+   "detail": "27.0 curves and points on the log scale"
+  },
+  {
+   "check": "t0 light 1200 px: loads, the error section drawn (5 charts), theme applied",
+   "ok": true,
+   "detail": "charts 5, curves 6, theme light"
+  },
+  {
+   "check": "t0 dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "t0: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; other requests []"
+  },
+  {
+   "check": "t2 dark 1200 px: loads, the error section drawn (5 charts), theme applied",
+   "ok": true,
+   "detail": "charts 5, curves 6, theme dark"
+  },
+  {
+   "check": "t2 dark 1200 px: a pointer over the du chart shows the tooltip",
+   "ok": true,
+   "detail": "block|du 0.00 to 0.04 px / 1.68 /px cam1, 264 detections / 1.96 /px cam2, 308 detections"
+  },
+  {
+   "check": "t2 dark 1200 px: the Log switch redraws the curves",
+   "ok": true,
+   "detail": "27.0 curves and points on the log scale"
+  },
+  {
+   "check": "t2 light 1200 px: loads, the error section drawn (5 charts), theme applied",
+   "ok": true,
+   "detail": "charts 5, curves 6, theme light"
+  },
+  {
+   "check": "t2 dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "t2: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; other requests []"
+  },
+  {
+   "check": "pinhole dark 1200 px: loads, the error section drawn (6 charts), theme applied",
+   "ok": true,
+   "detail": "charts 6, curves 9, theme dark"
+  },
+  {
+   "check": "pinhole dark 1200 px: a pointer over the du chart shows the tooltip",
+   "ok": true,
+   "detail": "block|du -0.01 to 0.01 px / 8.25 /px cam0, 99 detections / 5.00 /px cam1, 60 detections / 7.50 /px cam2, 90 detections"
+  },
+  {
+   "check": "pinhole dark 1200 px: the Log switch redraws the curves",
+   "ok": true,
+   "detail": "13.0 curves and points on the log scale"
+  },
+  {
+   "check": "pinhole light 1200 px: loads, the error section drawn (6 charts), theme applied",
+   "ok": true,
+   "detail": "charts 6, curves 9, theme light"
+  },
+  {
+   "check": "pinhole dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "pinhole: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; other requests []"
+  },
+  {
+   "check": "old dark 1200 px: loads, the error section drawn (0 charts), theme applied",
+   "ok": true,
+   "detail": "charts 0, curves 0, theme dark"
+  },
+  {
+   "check": "old light 1200 px: loads, the error section drawn (0 charts), theme applied",
+   "ok": true,
+   "detail": "charts 0, curves 0, theme light"
+  },
+  {
+   "check": "old dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "old: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; other requests []"
+  }
+ ],
+ "states": {
+  "g3": {
+   "g3 dark 1200 px": [
+    true,
+    6,
+    1185,
+    1200,
+    "dark",
+    9
+   ],
+   "g3 light 1200 px": [
+    true,
+    6,
+    1185,
+    1200,
+    "light",
+    9
+   ],
+   "g3 dark 390 px": [
+    true,
+    6,
+    375,
+    390,
+    "dark",
+    9
+   ]
+  },
+  "g8": {
+   "g8 dark 1200 px": [
+    true,
+    7,
+    1185,
+    1200,
+    "dark",
+    12
+   ],
+   "g8 light 1200 px": [
+    true,
+    7,
+    1185,
+    1200,
+    "light",
+    12
+   ],
+   "g8 dark 390 px": [
+    true,
+    7,
+    375,
+    390,
+    "dark",
+    12
+   ]
+  },
+  "t0": {
+   "t0 dark 1200 px": [
+    true,
+    5,
+    1185,
+    1200,
+    "dark",
+    6
+   ],
+   "t0 light 1200 px": [
+    true,
+    5,
+    1185,
+    1200,
+    "light",
+    6
+   ],
+   "t0 dark 390 px": [
+    true,
+    5,
+    375,
+    390,
+    "dark",
+    6
+   ]
+  },
+  "t2": {
+   "t2 dark 1200 px": [
+    true,
+    5,
+    1185,
+    1200,
+    "dark",
+    6
+   ],
+   "t2 light 1200 px": [
+    true,
+    5,
+    1185,
+    1200,
+    "light",
+    6
+   ],
+   "t2 dark 390 px": [
+    true,
+    5,
+    375,
+    390,
+    "dark",
+    6
+   ]
+  },
+  "pinhole": {
+   "pinhole dark 1200 px": [
+    true,
+    6,
+    1185,
+    1200,
+    "dark",
+    9
+   ],
+   "pinhole light 1200 px": [
+    true,
+    6,
+    1185,
+    1200,
+    "light",
+    9
+   ],
+   "pinhole dark 390 px": [
+    true,
+    6,
+    375,
+    390,
+    "dark",
+    9
+   ]
+  },
+  "old": {
+   "old dark 1200 px": [
+    true,
+    0,
+    1185,
+    1200,
+    "dark",
+    0
+   ],
+   "old light 1200 px": [
+    true,
+    0,
+    1185,
+    1200,
+    "light",
+    0
+   ],
+   "old dark 390 px": [
+    true,
+    0,
+    375,
+    390,
+    "dark",
+    0
+   ]
+  }
+ }
+}

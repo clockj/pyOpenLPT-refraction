@@ -120,6 +120,11 @@ tests/wand_gui_fixes/w11*/*.png
 !tests/install_scripts/**
 tests/install_scripts/**/__pycache__/
 tests/install_scripts/t4_lf/
+# the results page's error charts of 7 Oct 2026: tests/wand_report_error_pdf/ (data/ holds the pages it renders)
+!tests/wand_report_error_pdf/
+!tests/wand_report_error_pdf/**
+tests/wand_report_error_pdf/**/__pycache__/
+tests/wand_report_error_pdf/data/
 # the campaign's build trees and the saved baseline build
 build-stb/
 build-py-baseline/

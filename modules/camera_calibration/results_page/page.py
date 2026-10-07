@@ -9,8 +9,11 @@ what_to_do, evidence}]; cameras [{name, f_px, f_mm, f_sigma_rel, k1, cx, cy, wid
 n_used, n_total, extra: [[label, text], ...]}]; port None | {type: "tube", radii, n, fold_radius} | {type: "windows",
 windows: [{name, point, normal, thickness, n}]}; up (the views' vertical); points [[x, y, z], ...] (wand ends);
 sight_lines [[camera index, [[x, y, z], ...]], ...]; residuals [{cam, u, v, du, dv, used, frame, end, subsampled}];
-wand {x, x_label, x_short, err_um, frame, lead}; noise {columns, rows, num_cols, note}; settings [[label, text]];
-files [{label, path}].  Lengths in mm, pixels in px; NaN and inf become null.
+error_pdf None | {cover, uv, mag, joint: {lo, hi, width, bins (joint: max)}, cams [{n, n_total, du, dv, mag (counts per
+bin), cells [[i, j, count]], mu, mv, mean_du, rms_du, mean_dv, rms_dv, median, rms, p95, max, beyond_du, beyond_dv,
+beyond_mag, beyond_joint}]} (_error_pdf); wand {x, x_label, x_short, err_um, frame, lead}; noise {columns, rows,
+num_cols, note}; settings [[label, text]]; files [{label, path}].  Lengths in mm, pixels in px; NaN and inf become
+null.
 """
 from __future__ import annotations
 
@@ -26,6 +29,9 @@ import numpy as np
 TEMPLATE = Path(__file__).with_name("template.html")
 MAX_POINTS = 3000              # wand ends drawn (all frames are in the statistics)
 MAX_RESIDUALS = 2500           # detections drawn per camera
+ERR_COVER = 99.5               # the error charts' range holds this percentile of every camera's errors
+ERR_BINS = (20, 150)           # the du, dv and |e| charts: bins across the range, at least and at most
+ERR_CELLS = (16, 40)           # the du-against-dv chart: cells per side, at least and at most
 
 
 # ------------------------------------------------------------------ page
@@ -78,6 +84,108 @@ def _fmt(v, d, unit=""):
     if abs(v) < 0.5 * 10.0 ** (-d):
         v = 0.0                                       # no "-0.00"
     return f"{v:,.{d}f}{unit}"
+
+
+# ------------------------------------------------------------------ the reprojection errors' distributions
+def _nice_up(x: float) -> float:
+    """The smallest of 1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8 x 10^k not below x (x > 0)."""
+    p = 10.0 ** math.floor(math.log10(x))
+    return next(m * p for m in (1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10) if m * p >= x * (1 - 1e-9))
+
+
+def _round_width(span: float, target: float, lo: int, hi: int):
+    """(width, count): a bin width of 1, 2, 2.5, 4 or 5 x 10^k that splits `span` into lo..hi bins exactly, the
+    nearest to `target` on a log scale."""
+    best = None
+    k0 = math.floor(math.log10(span))
+    for k in range(k0 - 4, k0 + 1):
+        for m in (1.0, 2.0, 2.5, 4.0, 5.0):
+            w = m * 10.0 ** k
+            nb = span / w
+            if abs(nb - round(nb)) < 1e-6 and lo <= round(nb) <= hi:
+                d = abs(math.log(w / target))
+                if best is None or d < best[0]:
+                    best = (d, w, int(round(nb)))
+    if best is None:                                  # (not met by the spans _nice_up gives)
+        return span / lo, lo
+    return best[1], best[2]
+
+
+def _error_pdf(errs: Sequence[np.ndarray], totals: Sequence[int]) -> Optional[Dict]:
+    """The page's error charts: per camera the counts of du, dv (the model's position minus the detection, px) and
+    |e| = sqrt(du^2 + dv^2) in bins shared by all cameras, the counts of du against dv in square cells, and the
+    statistics.  errs[k]: camera k's (n, 2) array of (du, dv) over the detections the fit used; totals[k]: all its
+    detections.  The range holds the ERR_COVER percentile of every camera's |du|, |dv| (and |e|); the bin width is
+    a round number near the Freedman-Diaconis width of the narrowest camera.  None when no camera has an error."""
+    errs = [np.asarray(e, float).reshape(-1, 2) for e in errs]
+    errs = [e[np.all(np.isfinite(e), axis=1)] for e in errs]
+    used = [e for e in errs if len(e)]
+    if not used:
+        return None
+
+    def cover(vals):
+        q = max(float(np.percentile(v, ERR_COVER)) for v in vals)
+        if not q > 0:
+            q = max(float(np.max(v)) for v in vals)
+        return _nice_up(q) if q > 0 else 1.0
+
+    def fd_width(vals):
+        w = [2.0 * float(np.subtract(*np.percentile(v, [75, 25]))) * len(v) ** (-1.0 / 3.0)
+             for v in vals if len(v) >= 20]
+        w = [x for x in w if x > 0]
+        return min(w) if w else None
+
+    mags = [np.hypot(e[:, 0], e[:, 1]) for e in used]
+    R = cover([np.abs(e[:, 0]) for e in used] + [np.abs(e[:, 1]) for e in used])
+    Rm = cover(mags)
+    w, nb = _round_width(2 * R, fd_width([e[:, 0] for e in used] + [e[:, 1] for e in used]) or 2 * R / 40, *ERR_BINS)
+    wm, nbm = _round_width(Rm, fd_width(mags) or Rm / 40, *ERR_BINS)
+    n_min = min(len(e) for e in used)
+    cells = min(max(2 * round(math.sqrt(n_min) / 3), ERR_CELLS[0]), ERR_CELLS[1])
+    wj, nj = _round_width(2 * R, 2 * R / cells, *ERR_CELLS)
+    cams, jmax = [], 0
+    for k, e in enumerate(errs):
+        n = len(e)
+        if n == 0:
+            cams.append({"n": 0, "n_total": int(totals[k])})
+            continue
+        du, dv = e[:, 0], e[:, 1]
+        m = np.hypot(du, dv)
+        cu = np.histogram(du, bins=nb, range=(-R, R))[0]
+        cv = np.histogram(dv, bins=nb, range=(-R, R))[0]
+        cm = np.histogram(m, bins=nbm, range=(0.0, Rm))[0]
+        H = np.histogram2d(du, dv, bins=nj, range=[[-R, R], [-R, R]])[0].astype(int)
+        jmax = max(jmax, int(H.max()))
+        cams.append({"n": n, "n_total": int(totals[k]), "du": cu.tolist(), "dv": cv.tolist(), "mag": cm.tolist(),
+                     "cells": [[int(i), int(j), int(H[i, j])] for i, j in zip(*np.nonzero(H))],
+                     "mu": np.histogram(du, bins=nj, range=(-R, R))[0].tolist(),
+                     "mv": np.histogram(dv, bins=nj, range=(-R, R))[0].tolist(),
+                     "mean_du": float(du.mean()), "rms_du": float(np.sqrt(np.mean(du ** 2))),
+                     "mean_dv": float(dv.mean()), "rms_dv": float(np.sqrt(np.mean(dv ** 2))),
+                     "median": float(np.median(m)), "rms": float(np.sqrt(np.mean(m ** 2))),
+                     "p95": float(np.percentile(m, 95)), "max": float(m.max()),
+                     "beyond_du": int(n - cu.sum()), "beyond_dv": int(n - cv.sum()), "beyond_mag": int(n - cm.sum()),
+                     "beyond_joint": int(n - H.sum())})
+    return {"cover": ERR_COVER, "uv": {"lo": -R, "hi": R, "width": w, "bins": nb},
+            "mag": {"lo": 0.0, "hi": Rm, "width": wm, "bins": nbm},
+            "joint": {"lo": -R, "hi": R, "width": wj, "bins": nj, "max": jmax}, "cams": cams}
+
+
+def _errors_from_data(data: Dict, names: Sequence[str]):
+    """([errors], [totals]) per camera (in the order of `names`, cam<id>): the (du, dv) of the detections the fit
+    used, as an (n, 2) array, and the number of the camera's detections."""
+    obs = data["observations"]
+    index_of = {n: k for k, n in enumerate(names)}
+    errs, totals = [[] for _ in names], [0] * len(names)
+    for i, cid in enumerate(obs["cam_id"]):
+        k = index_of.get(f"cam{cid}")
+        if k is None:
+            continue
+        totals[k] += 1
+        du, dv = obs["du"][i], obs["dv"][i]
+        if obs["active"][i] and du is not None and dv is not None:
+            errs[k].append((du, dv))
+    return [np.asarray(e, float).reshape(-1, 2) for e in errs], totals
 
 
 # ------------------------------------------------------------------ the cylinder (PINCYL)
@@ -180,6 +288,7 @@ def report_from_cylinder(result: Dict, data: Dict, folder: str = None) -> Dict:
         "points": points,
         "sight_lines": data.get("sight_lines_mm", []),
         "residuals": residuals,
+        "error_pdf": _error_pdf(*_errors_from_data(data, names)),
         "wand": wand,
         "noise": noise,
         "settings": settings,
@@ -309,6 +418,7 @@ def report_from_plate(result: Dict, data: Dict, folder: str = None) -> Dict:
         "checks": result.get("checks", []), "cameras": cameras,
         "port": {"type": "windows", "windows": port_windows}, "up": _up_of(cams_res), "points": points,
         "sight_lines": data.get("sight_lines_mm", []), "residuals": _residuals_from_data(data, names),
+        "error_pdf": _error_pdf(*_errors_from_data(data, names)),
         "wand": wand, "noise": _noise_table(result.get("noise") or {}), "settings": settings, "files": files,
         "top_lead": "Looking down from above: each camera, its lines of sight bent at its window, and the wand ends. "
                     "Left: the whole rig; right: the measurement volume. Hover a camera for its numbers.",
@@ -458,6 +568,8 @@ def report_from_pinhole(final_params: Dict, wand_points: Dict, wand_length: floa
         "checks": checks, "cameras": cameras, "port": None, "up": _up_of(cameras),
         "points": np.vstack([XA[pts_idx], XB[pts_idx]]).round(4).tolist() if len(good) else [],
         "sight_lines": sight, "residuals": residuals,
+        "error_pdf": _error_pdf([np.array([(r[4], r[5]) for r in res[c]], float).reshape(-1, 2) for c in cids],
+                                [len(res[c]) for c in cids]),
         "wand": {"x": rad.round(4).tolist(), "err_um": err_um.round(4).tolist(), "frame": good,
                  "x_label": "Distance of the wand's centre from the volume's centre (mm)", "x_short": "from the centre (mm)",
                  "lead": "Plotted against the distance from the middle of the volume: errors growing outwards point "

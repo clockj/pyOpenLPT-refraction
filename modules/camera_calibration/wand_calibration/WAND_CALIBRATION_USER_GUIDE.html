@@ -1196,6 +1196,10 @@ warning when something often means a wrong or weak answer, or a tick
 when none fired);</li>
 <li>the rig from above and in 3D; how well each camera fits (its
 residuals over the image);</li>
+<li>the distribution of the reprojection errors: each camera's du, dv
+and |e| = √(du² + dv²) as probability densities (a Linear / Log switch
+shows the tails), a table of their statistics, and du against dv in
+2-D;</li>
 <li>the wand length; the cameras; noise and weights; the settings and
 the files written.</li>
 </ul>
@@ -1210,6 +1214,11 @@ The value depends on the detection noise: compare calibrations of the
 same rig rather than different rigs.</li>
 <li><strong>The wand length error:</strong> the scatter of the
 free-triangulated wand length (in µm), against the wand length.</li>
+<li><strong>The error distributions:</strong> du and dv should be
+centred on zero, without long tails (switch to Log to see them). A
+shifted curve or a long tail points to wrong detections or something the
+model misses. du much wider than dv, or the reverse, points to an error
+along one direction, e.g. a rod hiding part of each ball's outline.</li>
 <li><strong>The Checks:</strong> read every warning on the results
 page.</li>
 <li><strong>Consistency, for long lenses:</strong> calibrate two parts

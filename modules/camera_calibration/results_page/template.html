@@ -55,6 +55,7 @@ section { background: var(--surface); border: 1px solid var(--ring); border-radi
 button.toggle { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--ring);
   border-radius: 6px; padding: 4px 10px; cursor: pointer; }
 button.toggle:hover { border-color: var(--axis); }
+button.toggle[aria-pressed="true"] { border-color: var(--ink-2); font-weight: 600; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 12px; }
 .tile { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
 .tile .label { color: var(--ink-2); font-size: 13px; }
@@ -80,9 +81,12 @@ button.toggle:hover { border-color: var(--axis); }
 .legend .line { width: 18px; height: 2px; display: inline-block; }
 .legend .ramp { display: inline-flex; height: 10px; }
 .legend .ramp span { width: 16px; height: 10px; display: inline-block; }
+.legend .sq { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.legend .dash { width: 18px; height: 0; border-top: 2px dashed var(--ink-2); display: inline-block; }
 .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 13px;
   color: var(--ink-2); }
 .multiples { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.multiples.joint { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 .cap { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
 th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
@@ -625,6 +629,240 @@ footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
     });
   }
 
+  // ---- the reprojection errors' distributions: du, dv and |e| per camera, then du against dv (page.py's _error_pdf;
+  // a report without it, from an older page.py, has no such section)
+  const EP = R.error_pdf || null;
+  let drawErrors = () => {};
+  if (EP && (EP.cams || []).some(c => c.n > 0)) {
+    const sErr = section("errors", "The distribution of the reprojection errors",
+      "How each camera's reprojection errors are spread, over every detection the calibration used. du and dv are " +
+      "where the calibrated model puts a ball minus where it was detected, along the image's x and y (+dv points " +
+      "down); |e| = √(du² + dv²) is the error's size. Each curve is a probability density: its area is 1. Detection " +
+      "noise gives curves centred on zero without long tails. A shifted curve, a long tail, or du much wider than dv " +
+      "(or the reverse) means something the model or the detector misses; the maps above show where. The log scale " +
+      "shows the tails.");
+    const camName = k => (cams[k] ? cams[k].name : "camera " + k);
+    const decimalsOf = w => {
+      for (let d = 0; d < 9; d++) { const s = w * Math.pow(10, d); if (Math.abs(s - Math.round(s)) < 1e-6 * Math.max(1, s)) return d; }
+      return 9;
+    };
+    const fmtD = (x, d) => (isNum(x) ? fmt(Math.abs(x) < 0.5 * Math.pow(10, -d) ? 0 : x, d) : "–");
+    function niceTicks(lo, hi, n) {
+      const st = (hi - lo) / n, p = Math.pow(10, Math.floor(Math.log10(st))), m = st / p;
+      const s = (m >= 5 ? 5 : m >= 2 ? 2 : 1) * p, vals = [];
+      for (let k = Math.ceil(lo / s - 1e-9); k <= Math.floor(hi / s + 1e-9); k++) vals.push(k * s);
+      return { vals, d: decimalsOf(s) };
+    }
+    const shown = EP.cams.map((c, k) => k).filter(k => EP.cams[k].n > 0);
+    const rmsMax = Math.max(...shown.map(k => EP.cams[k].rms));
+    const dq = Math.max(0, Math.min(6, 2 - Math.floor(Math.log10(rmsMax > 0 ? rmsMax : 1))));   // 3 digits
+
+    // du, dv and |e|: one curve per camera, the density of its histogram (counts / (n x bin width))
+    let logScale = false;
+    const ctrE = el("div", { class: "controls" });
+    const bLin = el("button", { class: "toggle", type: "button", text: "Linear", "aria-pressed": "true" });
+    const bLog = el("button", { class: "toggle", type: "button", text: "Log", "aria-pressed": "false" });
+    ctrE.appendChild(el("span", { text: "Density scale" }));
+    ctrE.appendChild(bLin); ctrE.appendChild(bLog);
+    sErr.appendChild(ctrE);
+    sErr.appendChild(camLegend());
+    const gridE = el("div", { class: "multiples" });
+    sErr.appendChild(gridE);
+    const PANELS = [{ key: "du", axis: "uv", title: "du", short: "du", xl: "du (px)" },
+      { key: "dv", axis: "uv", title: "dv", short: "dv", xl: "dv (px, + down)" },
+      { key: "mag", axis: "mag", title: "|e| = √(du² + dv²)", short: "|e|", xl: "|e| (px)" }];
+    PANELS.forEach(P => { P.div = el("div", { class: "panel" }); gridE.appendChild(P.div); });
+    const usedTxt = shown.map(k => camName(k) + " " + fmt(EP.cams[k].n, 0) +
+      (EP.cams[k].n_total > EP.cams[k].n ? " of " + fmt(EP.cams[k].n_total, 0) : "")).join(", ");
+    sErr.appendChild(el("div", { class: "cap", text: "Histograms of the detections the calibration used (" + usedTxt +
+      ")" + (EP.cams.some(c => c.n_total > c.n) ? "; the ones it set aside are left out" : "") + ", in bins of " +
+      fmtD(EP.uv.width, decimalsOf(EP.uv.width)) + " px for du and dv and " + fmtD(EP.mag.width, decimalsOf(EP.mag.width)) +
+      " px for |e|, drawn through the bins' centres. The area under each curve is 1, less the share beyond the plotted " +
+      "range (the table's last column). Hover for each camera's density." }));
+    const colsE = ["Camera", "Used", "du mean", "du RMS", "dv mean", "dv RMS", "|e| median", "|e| RMS", "|e| 95 %",
+      "|e| max", "Beyond the range (du / dv / |e|)"];
+    const rowsE = EP.cams.map((c, k) => (!c.n ? [camName(k), "0 of " + fmt(c.n_total, 0)].concat(Array(9).fill("–")) :
+      [camName(k), fmt(c.n, 0) + " of " + fmt(c.n_total, 0), fmtD(c.mean_du, dq), fmtD(c.rms_du, dq),
+        fmtD(c.mean_dv, dq), fmtD(c.rms_dv, dq), fmtD(c.median, dq), fmtD(c.rms, dq), fmtD(c.p95, dq), fmtD(c.max, dq),
+        fmt(c.beyond_du, 0) + " / " + fmt(c.beyond_dv, 0) + " / " + fmt(c.beyond_mag, 0)]));
+    sErr.appendChild(table(colsE, rowsE, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+    sErr.appendChild(el("div", { class: "cap", text: "In px. |e| RMS is the cameras table's reprojection RMS; 95 % is " +
+      "the 95th percentile of |e|." }));
+    function yRange(axis) {
+      let mx = 0, mn = Infinity;
+      PANELS.filter(P => P.axis === axis).forEach(P => shown.forEach(k => {
+        const c = EP.cams[k], f = 1 / (c.n * EP[axis].width);
+        c[P.key].forEach(v => { const d = v * f; if (d > mx) mx = d; if (d > 0 && d < mn) mn = d; });
+      }));
+      if (!(mx > 0)) mx = 1;
+      if (!logScale) return { lo: 0, hi: mx * 1.06, log: false };
+      return { lo: Math.pow(10, Math.floor(Math.log10(isFinite(mn) ? mn : mx / 100))), hi: mx * 1.6, log: true };
+    }
+    function drawPdf(P) {
+      P.div.textContent = "";
+      const A = EP[P.axis], YR = yRange(P.axis);
+      const W = 360, H = 250, l = 54, r = 12, t = 10, b = 40, pw = W - l - r, ph = H - t - b;
+      const X = x => l + (x - A.lo) / (A.hi - A.lo) * pw;
+      const lg0 = YR.log ? Math.log10(YR.lo) : 0, lg1 = YR.log ? Math.log10(YR.hi) : 1;
+      const Y = y => (YR.log ? t + (1 - (Math.log10(Math.max(y, YR.lo)) - lg0) / (lg1 - lg0)) * ph
+        : t + (1 - (y - YR.lo) / (YR.hi - YR.lo)) * ph);
+      const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+        "aria-label": "Probability density of " + P.short + ", one curve per camera" });
+      const yt = YR.log ? { vals: [], d: 0 } : niceTicks(0, YR.hi, 4);
+      if (YR.log) for (let k = Math.ceil(lg0 - 1e-9); k <= Math.floor(lg1 + 1e-9); k++) yt.vals.push(Math.pow(10, k));
+      yt.vals.forEach(v => {
+        svg.appendChild(sv("line", { x1: l, x2: W - r, y1: Y(v), y2: Y(v), stroke: "var(--grid)", "stroke-width": 1 }));
+        svg.appendChild(sv("text", { x: l - 6, y: Y(v) + 4, class: "axis-text", "text-anchor": "end",
+          text: YR.log ? fmtSig(v, 1) : fmtD(v, yt.d) }));
+      });
+      const xt = niceTicks(A.lo, A.hi, 4);
+      xt.vals.forEach(v => {
+        svg.appendChild(sv("line", { x1: X(v), x2: X(v), y1: t, y2: t + ph, stroke: "var(--grid)", "stroke-width": 1 }));
+        svg.appendChild(sv("text", { x: X(v), y: t + ph + 15, class: "axis-text", "text-anchor": "middle", text: fmtD(v, xt.d) }));
+      });
+      svg.appendChild(sv("line", { x1: l, x2: W - r, y1: t + ph, y2: t + ph, stroke: "var(--axis)", "stroke-width": 1 }));
+      if (P.axis === "uv") svg.appendChild(sv("line", { x1: X(0), x2: X(0), y1: t, y2: t + ph, stroke: "var(--axis)",
+        "stroke-width": 1, "stroke-dasharray": "4 3" }));
+      svg.appendChild(sv("text", { x: l + pw / 2, y: H - 6, class: "label-text", "text-anchor": "middle", text: P.xl }));
+      svg.appendChild(sv("text", { x: 13, y: t + ph / 2, class: "label-text", "text-anchor": "middle",
+        transform: `rotate(-90 13 ${t + ph / 2})`, text: "density (1/px)" }));
+      shown.forEach(k => {
+        const c = EP.cams[k], f = 1 / (c.n * A.width), col = camColor(k);
+        let seg = [];
+        const flush = () => {                        // on the log scale an empty bin breaks the line
+          if (seg.length > 1) svg.appendChild(sv("polyline", { points: seg.map(q => q.join(",")).join(" "), fill: "none",
+            stroke: col, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+          else if (seg.length === 1) svg.appendChild(sv("circle", { cx: seg[0][0], cy: seg[0][1], r: 2.5, fill: col }));
+          seg = [];
+        };
+        c[P.key].forEach((v, i) => {
+          if (YR.log && !(v > 0)) { flush(); return; }
+          seg.push([X(A.lo + (i + 0.5) * A.width).toFixed(1), Y(v * f).toFixed(1)]);
+        });
+        flush();
+      });
+      const hair = sv("line", { x1: 0, x2: 0, y1: t, y2: t + ph, stroke: "var(--ink-2)", "stroke-width": 1,
+        visibility: "hidden" });
+      svg.appendChild(hair);
+      const hit = sv("rect", { x: l, y: t, width: pw, height: ph, fill: "transparent", "pointer-events": "all" });
+      svg.appendChild(hit);
+      const dw = decimalsOf(A.width);
+      hit.addEventListener("pointermove", evt => {
+        const p = svgPoint(svg, evt);
+        const i = Math.max(0, Math.min(A.bins - 1, Math.floor((p.x - l) / pw * A.bins)));
+        const xc = X(A.lo + (i + 0.5) * A.width);
+        hair.setAttribute("x1", xc); hair.setAttribute("x2", xc); hair.setAttribute("visibility", "visible");
+        const rows = [{ v: P.short + " " + fmtD(A.lo + i * A.width, dw) + " to " + fmtD(A.lo + (i + 1) * A.width, dw) + " px" }];
+        shown.forEach(k => {
+          const c = EP.cams[k], v = c[P.key][i];
+          rows.push({ v: fmtSig(v / (c.n * A.width), 3) + " /px", k: camName(k) + ", " + fmt(v, 0) +
+            (v === 1 ? " detection" : " detections") });
+        });
+        showTip(evt, rows);
+      });
+      hit.addEventListener("pointerleave", () => { hair.setAttribute("visibility", "hidden"); hideTip(); });
+      P.div.appendChild(el("h3", { text: P.title }));
+      P.div.appendChild(svg);
+    }
+    function setScale(v) {
+      logScale = v;
+      bLin.setAttribute("aria-pressed", String(!v)); bLog.setAttribute("aria-pressed", String(v));
+      PANELS.forEach(drawPdf);
+    }
+    bLin.addEventListener("click", () => setScale(false));
+    bLog.addEventListener("click", () => setScale(true));
+
+    // du against dv: counts per cell on a square-root scale in six steps of one ramp, shared by every camera (the same
+    // colour is the same count); du's and dv's own histograms along the top and the right; +dv drawn downward
+    sErr.appendChild(el("h3", { text: "du against dv", style: "margin-top: 16px" }));
+    sErr.appendChild(el("p", { class: "lead", text: "Each camera's errors in 2‑D: how many detections fall in each " +
+      "cell (the same colour is the same count in every camera), with du's and dv's own histograms along the top and " +
+      "the right, and the 2‑D RMS dashed. +dv points down, as in the image. A round cloud is noise alike in both " +
+      "directions; an ellipse along an axis means one direction is noisier, and a tilted one that du and dv go " +
+      "together." }));
+    const J = EP.joint, dj = decimalsOf(J.width);
+    const stepOf = n => Math.min(6, 1 + Math.floor(6 * Math.sqrt(n / Math.max(J.max, 1)) - 1e-9));
+    const lgJ = el("div", { class: "legend" });
+    (function () {
+      const ranges = {};
+      for (let n = 1; n <= J.max; n++) { const s = stepOf(n); if (!ranges[s]) ranges[s] = [n, n]; ranges[s][1] = n; }
+      lgJ.appendChild(el("span", { class: "key", text: "detections per " + fmtD(J.width, dj) + " × " + fmtD(J.width, dj) +
+        " px cell:" }));
+      for (let s = 1; s <= 6; s++) {
+        if (!ranges[s]) continue;
+        const sw = el("span", { class: "sq" }); sw.style.background = "var(--q" + s + ")";
+        lgJ.appendChild(el("span", { class: "key" }, [sw, el("span", { text: ranges[s][0] === ranges[s][1] ?
+          fmt(ranges[s][0], 0) : fmt(ranges[s][0], 0) + "–" + fmt(ranges[s][1], 0) })]));
+      }
+      lgJ.appendChild(el("span", { class: "key" }, [el("span", { class: "dash" }), el("span", { text: "RMS (2‑D)" })]));
+      const bar = el("span", { class: "sq" }); bar.style.background = "var(--ink-2)";
+      lgJ.appendChild(el("span", { class: "key" }, [bar, el("span", { text: "du (top) and dv (right)" })]));
+    })();
+    sErr.appendChild(lgJ);
+    const gridJ = el("div", { class: "multiples joint" });           // at most 3 a row, each at least 300 px
+    sErr.appendChild(gridJ);
+    function drawJoint(k) {
+      const c = EP.cams[k], nb = J.bins, SZ = 280, L = 46, T = 52, MG = 40, GAP = 5;
+      const W = L + SZ + GAP + MG + 6, H = T + SZ + 40, cs = SZ / nb;
+      const X = x => L + (x - J.lo) / (J.hi - J.lo) * SZ, Y = y => T + (y - J.lo) / (J.hi - J.lo) * SZ;
+      const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": camName(k) + ": du against dv" });
+      const xt = niceTicks(J.lo, J.hi, 4);
+      xt.vals.forEach(v => {
+        svg.appendChild(sv("line", { x1: X(v), x2: X(v), y1: T, y2: T + SZ, stroke: "var(--grid)", "stroke-width": 1 }));
+        svg.appendChild(sv("line", { x1: L, x2: L + SZ, y1: Y(v), y2: Y(v), stroke: "var(--grid)", "stroke-width": 1 }));
+        svg.appendChild(sv("text", { x: X(v), y: T + SZ + 15, class: "axis-text", "text-anchor": "middle", text: fmtD(v, xt.d) }));
+        svg.appendChild(sv("text", { x: L - 6, y: Y(v) + 4, class: "axis-text", "text-anchor": "end", text: fmtD(v, xt.d) }));
+      });
+      const count = new Map();
+      c.cells.forEach(([i, j, n]) => {
+        count.set(i * nb + j, n);
+        svg.appendChild(sv("rect", { x: (L + i * cs).toFixed(2), y: (T + j * cs).toFixed(2), width: (cs + 0.3).toFixed(2),
+          height: (cs + 0.3).toFixed(2), fill: "var(--q" + stepOf(n) + ")" }));
+      });
+      svg.appendChild(sv("line", { x1: X(0), x2: X(0), y1: T, y2: T + SZ, stroke: "var(--axis)", "stroke-width": 1 }));
+      svg.appendChild(sv("line", { x1: L, x2: L + SZ, y1: Y(0), y2: Y(0), stroke: "var(--axis)", "stroke-width": 1 }));
+      svg.appendChild(sv("circle", { cx: X(0), cy: Y(0), r: c.rms * SZ / (J.hi - J.lo), fill: "none",
+        stroke: "var(--ink-2)", "stroke-width": 2, "stroke-dasharray": "5 4" }));
+      const mm = Math.max(1, ...c.mu, ...c.mv);
+      c.mu.forEach((n, i) => {
+        if (!n) return;
+        const hh = (MG - 4) * n / mm;
+        svg.appendChild(sv("rect", { x: (L + i * cs + 0.5).toFixed(2), y: (T - GAP - hh).toFixed(2),
+          width: Math.max(cs - 1, 0.5).toFixed(2), height: hh.toFixed(2), fill: "var(--ink-2)", rx: 1 }));
+      });
+      c.mv.forEach((n, j) => {
+        if (!n) return;
+        const ww = (MG - 4) * n / mm;
+        svg.appendChild(sv("rect", { x: L + SZ + GAP, y: (T + j * cs + 0.5).toFixed(2), width: ww.toFixed(2),
+          height: Math.max(cs - 1, 0.5).toFixed(2), fill: "var(--ink-2)", rx: 1 }));
+      });
+      svg.appendChild(sv("text", { x: L + SZ / 2, y: T + SZ + 33, class: "label-text", "text-anchor": "middle", text: "du (px)" }));
+      svg.appendChild(sv("text", { x: 12, y: T + SZ / 2, class: "label-text", "text-anchor": "middle",
+        transform: `rotate(-90 12 ${T + SZ / 2})`, text: "dv (px, + down)" }));
+      const rng = a => fmtD(J.lo + a * J.width, dj) + " to " + fmtD(J.lo + (a + 1) * J.width, dj) + " px";
+      const nDet = n => fmt(n, 0) + (n === 1 ? " detection" : " detections");
+      svg.addEventListener("pointermove", evt => {
+        const p = svgPoint(svg, evt);
+        const i = Math.floor((p.x - L) / cs), j = Math.floor((p.y - T) / cs);
+        const inI = i >= 0 && i < nb, inJ = j >= 0 && j < nb;
+        if (inI && inJ) showTip(evt, [{ v: nDet(count.get(i * nb + j) || 0) }, { k: "du " + rng(i) }, { k: "dv " + rng(j) }]);
+        else if (inI && p.y < T && p.y >= T - GAP - MG) showTip(evt, [{ v: nDet(c.mu[i]) }, { k: "du " + rng(i) }]);
+        else if (inJ && p.x > L + SZ && p.x <= L + SZ + GAP + MG) showTip(evt, [{ v: nDet(c.mv[j]) }, { k: "dv " + rng(j) }]);
+        else hideTip();
+      });
+      svg.addEventListener("pointerleave", hideTip);
+      gridJ.appendChild(el("div", { class: "panel" }, [el("h3", { text: camName(k) }), svg,
+        el("div", { class: "cap", text: "RMS " + fmtD(c.rms, dq) + " px (du " + fmtD(c.rms_du, dq) + ", dv " +
+          fmtD(c.rms_dv, dq) + ") · " + nDet(c.n) + (c.beyond_joint ? " · " + fmt(c.beyond_joint, 0) + " beyond ±" +
+          fmtD(J.hi, decimalsOf(J.hi)) + " px, not drawn" : "") })]));
+    }
+    drawErrors = function () {
+      PANELS.forEach(drawPdf);
+      gridJ.textContent = "";
+      shown.forEach(k => drawJoint(k));
+    };
+  }
+
   // ---- wand length
   const wd = R.wand || null;
   let drawWand = () => {};
@@ -738,7 +976,7 @@ footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
   app.appendChild(el("footer", { text: (R.footer || "") + " Page written by pyOpenLPT (modules/camera_calibration/results_page)." }));
 
   function redraw() {
-    drawTop(topWhole, false); drawTop(topClose, true); draw3d(); drawResiduals(); drawWand();
+    drawTop(topWhole, false); drawTop(topClose, true); draw3d(); drawResiduals(); drawErrors(); drawWand();
     // the legends' swatches follow the theme
     document.querySelectorAll(".legend .dot").forEach((d, i) => { d.style.background = camColor(i % Math.max(cams.length, 1)); });
   }

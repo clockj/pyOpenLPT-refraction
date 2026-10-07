@@ -94,6 +94,13 @@ experiment.
     hint-searched start paths.
 - Part of the wand tab's fixes of 7 Oct (`tests/wand_gui_fixes/2026-10-07-report.md`). The panel also takes four
   decimals now (water 1.333), and its notes on axis points are right.
+- **The results page** (the GUI's Report tab) now shows the distribution of the reprojection errors
+  (`tests/wand_report_error_pdf/2026-10-07-report.md`). Per camera:
+  - the probability density of du, dv and |e|;
+  - their statistics;
+  - du against dv.
+
+  Checked on G8's synthetic four-camera run.
 
 **2026-10-06**
 - **The GUI's "Pinhole+Refraction" now runs this calibration** (`curved_calibration/plate_wand_gui.py`).

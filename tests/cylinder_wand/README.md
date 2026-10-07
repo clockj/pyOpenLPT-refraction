@@ -26,9 +26,26 @@ experiment.
     variants were rerun on 7 Oct.
   - See the entries of 6–7 Oct below.
 - **The GUI's wand tab (7 Oct):** ten bugs are fixed, and then the two Pinhole-model bugs found with them (the
-  progress log's two newest entries). The "fast" detection mode is kept, and now repeatable (your choice).
+  progress log's entries of 7 Oct). The "fast" detection mode is kept, and now repeatable (your choice). The results
+  page now shows the distribution of the reprojection errors.
 
 ## 1. Progress log
+
+**2026-10-07 (night): the results page shows the reprojection errors' distributions** (your message: "for the gui,
+please add 2d projection error pdf for your wand calibration reports: du, dv, 2d magnitude"; then "do the optional
+a,b")
+- **Where:** `tests/wand_report_error_pdf/2026-10-07-plan.md` and `-report.md`.
+- **A new section on every results page** (the Report tab, all three models). Per camera it shows:
+  - the probability density of du, dv and |e| = √(du² + dv²), on a linear or log scale;
+  - a table of their statistics;
+  - du against dv in 2-D, the T0/T2 case pages' chart.
+- **T0 and T2 on X:** their `calibration_report.html` is rendered again with the new section. I checked before
+  writing that nothing else on them changed.
+- **What it shows on the real runs:**
+  - **du is about twice as wide as dv** in both cameras, as the case pages found. T2: du 0.56 and 0.50 px, against
+    dv 0.27 and 0.29 px.
+  - **T2's du has a sharp spike at zero,** in both cameras at once. It is in the data; its cause was not looked into.
+- **Checked:** the six pages draw in QtWebEngine without an error (34 of 34). No further tests (your call).
 
 **2026-10-07 (evening): the Pinhole model's two bugs fixed; the "fast" mode measured** (your message: "fix B11 to
 make it able to accept different size of image. For B12, fix it. for the "Fast" detection, shall we just remove
