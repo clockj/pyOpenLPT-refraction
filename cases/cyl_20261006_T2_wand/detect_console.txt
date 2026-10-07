@@ -1,0 +1,17 @@
+S1 detection: 12716 frames x 2 cameras = 25432 images, 16 workers
+  settings: {'_comment': "T0's settings, unchanged: the same wand at the same magnification (P0: ball sizes within 1 % of T0's), and the opening scan still separates the balls at 91-101 px.", 'polarity': 'dark', 'min_r_px': 40.0, 'max_r_px': 120.0, 'open_px': 95, 'rod_mask_px': 50.0, 'guard_px': 3.0, 'workers': 16, '_workers': '16 processes: the file server (about 22 MB/s) limits the speed; T0 ran as fast with 16 as with 48.'}
+  2000 / 25432 images, 103 s (19.3 images/s)
+  4000 / 25432 images, 206 s (19.4 images/s)
+  6000 / 25432 images, 302 s (19.8 images/s)
+  8000 / 25432 images, 404 s (19.8 images/s)
+  10000 / 25432 images, 505 s (19.8 images/s)
+  12000 / 25432 images, 605 s (19.8 images/s)
+  14000 / 25432 images, 707 s (19.8 images/s)
+  16000 / 25432 images, 807 s (19.8 images/s)
+  18000 / 25432 images, 909 s (19.8 images/s)
+  20000 / 25432 images, 1010 s (19.8 images/s)
+  22000 / 25432 images, 1109 s (19.8 images/s)
+  24000 / 25432 images, 1209 s (19.8 images/s)
+  done in 1278 s (19.9 images/s); written X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\detection\detections_all.csv
+  cam1: 0 unreadable, 2010 0 balls, 6278 1 balls, 4428 2 balls, 0 more, 0 pairs dropped by the guard
+  cam2: 0 unreadable, 1584 0 balls, 4842 1 balls, 6290 2 balls, 0 more, 0 pairs dropped by the guard

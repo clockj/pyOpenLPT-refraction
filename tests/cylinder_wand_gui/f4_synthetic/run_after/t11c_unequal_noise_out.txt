@@ -1,0 +1,120 @@
+T11c: 2 variants x (40 near-truth fits + 5 from scratch), 16 processes
+  [  1/90     9 s] c1 local   14: rms 0.3348 px, sigma fit 0.3108, rejected per camera [0/1000, 2/1000, 0/1000], per end [1, 1] | |z fit| max 1.58, |z sand| max 1.67
+  [  2/90    10 s] c1 local    5: rms 0.3352 px, sigma fit 0.3113, rejected per camera [0/1000, 2/1000, 0/1000], per end [0, 2] | |z fit| max 2.75, |z sand| max 3.40
+  [  3/90    10 s] c1 local    3: rms 0.3325 px, sigma fit 0.3087, rejected per camera [0/1000, 2/1000, 0/1000], per end [1, 1] | |z fit| max 2.04, |z sand| max 2.16
+  [  4/90    10 s] c1 local    0: rms 0.3298 px, sigma fit 0.3062, rejected per camera [0/1000, 3/1000, 0/1000], per end [1, 2] | |z fit| max 3.20, |z sand| max 2.73
+  [  5/90    10 s] c1 local   11: rms 0.3388 px, sigma fit 0.3146, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.90, |z sand| max 2.06
+  [  6/90    10 s] c1 local   13: rms 0.3256 px, sigma fit 0.3023, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.09, |z sand| max 0.99
+  [  7/90    10 s] c1 local    1: rms 0.3358 px, sigma fit 0.3118, rejected per camera [0/1000, 3/1000, 0/1000], per end [1, 2] | |z fit| max 1.76, |z sand| max 1.59
+  [  8/90    10 s] c1 local    4: rms 0.3385 px, sigma fit 0.3143, rejected per camera [0/1000, 3/1000, 0/1000], per end [2, 1] | |z fit| max 0.68, |z sand| max 0.73
+  [  9/90    10 s] c1 local    9: rms 0.3247 px, sigma fit 0.3015, rejected per camera [0/1000, 3/1000, 0/1000], per end [2, 1] | |z fit| max 1.63, |z sand| max 1.84
+  [ 10/90    10 s] c1 local    6: rms 0.3375 px, sigma fit 0.3133, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 2.61, |z sand| max 2.80
+  [ 11/90    11 s] c1 local    8: rms 0.3352 px, sigma fit 0.3113, rejected per camera [0/1000, 3/1000, 0/1000], per end [0, 3] | |z fit| max 2.01, |z sand| max 2.45
+  [ 12/90    11 s] c1 local   10: rms 0.3384 px, sigma fit 0.3143, rejected per camera [0/1000, 2/998, 0/1000], per end [2, 0] | |z fit| max 1.37, |z sand| max 1.48
+  [ 13/90    11 s] c1 local    7: rms 0.3159 px, sigma fit 0.2936, rejected per camera [0/1000, 7/998, 0/1000], per end [5, 2] | |z fit| max 2.16, |z sand| max 2.26
+  [ 14/90    11 s] c1 local    2: rms 0.3368 px, sigma fit 0.3128, rejected per camera [0/1000, 3/1000, 0/1000], per end [2, 1] | |z fit| max 1.94, |z sand| max 2.06
+  [ 15/90    11 s] c1 local   12: rms 0.3371 px, sigma fit 0.3132, rejected per camera [0/1000, 4/996, 0/1000], per end [2, 2] | |z fit| max 2.07, |z sand| max 2.60
+  [ 16/90    13 s] c1 local   15: rms 0.3318 px, sigma fit 0.3083, rejected per camera [2/1000, 3/998, 2/1000], per end [4, 3] | |z fit| max 1.99, |z sand| max 2.11
+  [ 17/90    17 s] c1 local   23: rms 0.3450 px, sigma fit 0.3203, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 0.89, |z sand| max 0.98
+  [ 18/90    17 s] c1 local   20: rms 0.3382 px, sigma fit 0.3140, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.86, |z sand| max 2.35
+  [ 19/90    17 s] c1 local   16: rms 0.3341 px, sigma fit 0.3103, rejected per camera [0/1000, 4/1000, 0/1000], per end [2, 2] | |z fit| max 1.89, |z sand| max 1.93
+  [ 20/90    18 s] c1 local   26: rms 0.3430 px, sigma fit 0.3184, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.39, |z sand| max 1.51
+  [ 21/90    18 s] c1 local   25: rms 0.3330 px, sigma fit 0.3091, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.12, |z sand| max 0.95
+  [ 22/90    18 s] c1 local   18: rms 0.3279 px, sigma fit 0.3044, rejected per camera [0/1000, 2/1000, 0/1000], per end [1, 1] | |z fit| max 1.16, |z sand| max 1.37
+  [ 23/90    18 s] c1 local   27: rms 0.3339 px, sigma fit 0.3102, rejected per camera [0/1000, 4/998, 0/1000], per end [3, 1] | |z fit| max 2.04, |z sand| max 2.17
+  [ 24/90    18 s] c1 local   21: rms 0.3372 px, sigma fit 0.3131, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.84, |z sand| max 1.55
+  [ 25/90    18 s] c1 local   29: rms 0.3329 px, sigma fit 0.3092, rejected per camera [0/1000, 2/998, 0/1000], per end [0, 2] | |z fit| max 1.06, |z sand| max 1.30
+  [ 26/90    19 s] c1 local   22: rms 0.3314 px, sigma fit 0.3078, rejected per camera [0/1000, 3/998, 0/1000], per end [2, 1] | |z fit| max 1.74, |z sand| max 1.82
+  [ 27/90    19 s] c1 local   30: rms 0.3437 px, sigma fit 0.3192, rejected per camera [0/1000, 4/1000, 0/1000], per end [3, 1] | |z fit| max 1.58, |z sand| max 1.77
+  [ 28/90    19 s] c1 local   19: rms 0.3313 px, sigma fit 0.3076, rejected per camera [0/1000, 2/1000, 0/1000], per end [1, 1] | |z fit| max 2.68, |z sand| max 2.22
+  [ 29/90    19 s] c1 local   17: rms 0.3314 px, sigma fit 0.3078, rejected per camera [0/1000, 4/1000, 0/1000], per end [1, 3] | |z fit| max 0.76, |z sand| max 0.90
+  [ 30/90    19 s] c1 local   24: rms 0.3324 px, sigma fit 0.3087, rejected per camera [0/1000, 2/1000, 0/1000], per end [2, 0] | |z fit| max 3.11, |z sand| max 2.65
+  [ 31/90    20 s] c1 local   31: rms 0.3477 px, sigma fit 0.3229, rejected per camera [0/1000, 2/998, 0/1000], per end [1, 1] | |z fit| max 1.61, |z sand| max 1.79
+  [ 32/90    20 s] c1 local   28: rms 0.3292 px, sigma fit 0.3057, rejected per camera [0/1000, 4/1000, 0/1000], per end [2, 2] | |z fit| max 1.50, |z sand| max 1.71
+  [ 33/90    24 s] c1 local   34: rms 0.3315 px, sigma fit 0.3077, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.56, |z sand| max 1.87
+  [ 34/90    24 s] c1 local   32: rms 0.3410 px, sigma fit 0.3166, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.86, |z sand| max 1.97
+  [ 35/90    24 s] c1 local   36: rms 0.3368 px, sigma fit 0.3127, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.95, |z sand| max 1.68
+  [ 36/90    25 s] c1 local   33: rms 0.3330 px, sigma fit 0.3092, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.72, |z sand| max 1.63
+  [ 37/90    25 s] c1 local   35: rms 0.3417 px, sigma fit 0.3174, rejected per camera [0/1000, 3/1000, 0/1000], per end [2, 1] | |z fit| max 1.53, |z sand| max 1.64
+  [ 38/90    26 s] c1 local   37: rms 0.3297 px, sigma fit 0.3062, rejected per camera [0/1000, 3/1000, 0/1000], per end [2, 1] | |z fit| max 1.58, |z sand| max 1.65
+  [ 39/90    26 s] c2 local    1: rms 0.1704 px, sigma fit 0.1582, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.76, |z sand| max 1.76
+  [ 40/90    26 s] c1 local   39: rms 0.3353 px, sigma fit 0.3114, rejected per camera [0/1000, 2/1000, 0/1000], per end [1, 1] | |z fit| max 2.49, |z sand| max 2.63
+  [ 41/90    26 s] c2 local    2: rms 0.1687 px, sigma fit 0.1566, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.91, |z sand| max 1.89
+  [ 42/90    26 s] c2 local    3: rms 0.1678 px, sigma fit 0.1558, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.64, |z sand| max 1.61
+  [ 43/90    27 s] c2 local    0: rms 0.1635 px, sigma fit 0.1519, rejected per camera [0/1000, 1/1000, 2/1000], per end [3, 0] | |z fit| max 1.63, |z sand| max 1.55
+  [ 44/90    27 s] c2 local    4: rms 0.1702 px, sigma fit 0.1580, rejected per camera [1/1000, 0/1000, 0/1000], per end [1, 0] | |z fit| max 2.32, |z sand| max 2.32
+  [ 45/90    27 s] c1 local   38: rms 0.3427 px, sigma fit 0.3183, rejected per camera [0/1000, 4/1000, 0/1000], per end [3, 1] | |z fit| max 0.89, |z sand| max 1.10
+  [ 46/90    27 s] c2 local    5: rms 0.1652 px, sigma fit 0.1534, rejected per camera [0/1000, 0/1000, 2/1000], per end [2, 0] | |z fit| max 1.76, |z sand| max 1.70
+  [ 47/90    27 s] c2 local    6: rms 0.1702 px, sigma fit 0.1580, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.73, |z sand| max 1.73
+  [ 48/90    29 s] c2 local    7: rms 0.1731 px, sigma fit 0.1610, rejected per camera [5/1000, 4/1000, 4/1000], per end [7, 6] | |z fit| max 1.70, |z sand| max 1.74
+  [ 49/90    31 s] c2 local   10: rms 0.1648 px, sigma fit 0.1530, rejected per camera [0/1000, 0/998, 1/1000], per end [1, 0] | |z fit| max 2.53, |z sand| max 2.45
+  [ 50/90    32 s] c2 local    9: rms 0.1704 px, sigma fit 0.1583, rejected per camera [0/1000, 1/998, 2/1000], per end [3, 0] | |z fit| max 1.69, |z sand| max 1.70
+  [ 51/90    32 s] c2 local   11: rms 0.1729 px, sigma fit 0.1605, rejected per camera [1/1000, 0/1000, 1/1000], per end [2, 0] | |z fit| max 1.58, |z sand| max 1.60
+  [ 52/90    32 s] c2 local   14: rms 0.1693 px, sigma fit 0.1571, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 2.15, |z sand| max 2.14
+  [ 53/90    34 s] c2 local   15: rms 0.1704 px, sigma fit 0.1582, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 2.49, |z sand| max 2.49
+  [ 54/90    34 s] c2 local    8: rms 0.1660 px, sigma fit 0.1541, rejected per camera [1/1000, 1/1000, 0/1000], per end [2, 0] | |z fit| max 3.34, |z sand| max 3.25
+  [ 55/90    34 s] c2 local   13: rms 0.1691 px, sigma fit 0.1571, rejected per camera [1/1000, 0/998, 0/1000], per end [1, 0] | |z fit| max 1.21, |z sand| max 1.21
+  [ 56/90    34 s] c2 local   17: rms 0.1698 px, sigma fit 0.1577, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.13, |z sand| max 1.12
+  [ 57/90    34 s] c2 local   22: rms 0.1691 px, sigma fit 0.1570, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 2.03, |z sand| max 2.02
+  [ 58/90    35 s] c2 local   21: rms 0.1655 px, sigma fit 0.1537, rejected per camera [2/1000, 2/1000, 1/1000], per end [5, 0] | |z fit| max 1.55, |z sand| max 1.51
+  [ 59/90    35 s] c2 local   18: rms 0.1681 px, sigma fit 0.1561, rejected per camera [1/1000, 0/1000, 0/1000], per end [1, 0] | |z fit| max 2.48, |z sand| max 2.46
+  [ 60/90    35 s] c2 local   20: rms 0.1722 px, sigma fit 0.1599, rejected per camera [0/1000, 1/1000, 1/1000], per end [2, 0] | |z fit| max 1.61, |z sand| max 1.63
+  [ 61/90    35 s] c2 local   19: rms 0.1688 px, sigma fit 0.1568, rejected per camera [2/1000, 1/1000, 0/1000], per end [3, 0] | |z fit| max 2.13, |z sand| max 2.07
+  [ 62/90    35 s] c2 local   16: rms 0.1715 px, sigma fit 0.1592, rejected per camera [0/1000, 1/1000, 1/1000], per end [2, 0] | |z fit| max 1.04, |z sand| max 1.04
+  [ 63/90    35 s] c2 local   12: rms 0.1698 px, sigma fit 0.1578, rejected per camera [2/1000, 2/998, 0/1000], per end [4, 0] | |z fit| max 2.19, |z sand| max 2.18
+  [ 64/90    36 s] c2 local   23: rms 0.1688 px, sigma fit 0.1567, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 1.30, |z sand| max 1.27
+  [ 65/90    38 s] c2 local   24: rms 0.1676 px, sigma fit 0.1556, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 2.21, |z sand| max 2.17
+  [ 66/90    39 s] c2 local   25: rms 0.1692 px, sigma fit 0.1571, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 2.50, |z sand| max 2.51
+  [ 67/90    41 s] c2 local   27: rms 0.1679 px, sigma fit 0.1559, rejected per camera [1/1000, 1/1000, 0/1000], per end [2, 0] | |z fit| max 1.46, |z sand| max 1.42
+  [ 68/90    41 s] c2 local   28: rms 0.1672 px, sigma fit 0.1553, rejected per camera [2/1000, 1/1000, 1/1000], per end [4, 0] | |z fit| max 2.22, |z sand| max 2.18
+  [ 69/90    41 s] c2 local   29: rms 0.1699 px, sigma fit 0.1577, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 4.27, |z sand| max 4.30
+  [ 70/90    41 s] c2 local   31: rms 0.1692 px, sigma fit 0.1573, rejected per camera [2/1000, 3/998, 4/998], per end [6, 3] | |z fit| max 2.61, |z sand| max 2.65
+  [ 71/90    41 s] c2 local   26: rms 0.1708 px, sigma fit 0.1586, rejected per camera [0/1000, 1/1000, 0/1000], per end [1, 0] | |z fit| max 1.79, |z sand| max 1.79
+  [ 72/90    42 s] c2 local   34: rms 0.1699 px, sigma fit 0.1577, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 0.77, |z sand| max 0.77
+  [ 73/90    42 s] c2 local   32: rms 0.1685 px, sigma fit 0.1565, rejected per camera [0/1000, 0/1000, 1/1000], per end [1, 0] | |z fit| max 1.58, |z sand| max 1.57
+  [ 74/90    42 s] c2 local   33: rms 0.1722 px, sigma fit 0.1599, rejected per camera [0/1000, 0/1000, 0/1000], per end [0, 0] | |z fit| max 2.23, |z sand| max 2.26
+  [ 75/90    43 s] c2 local   38: rms 0.1743 px, sigma fit 0.1619, rejected per camera [1/1000, 0/998, 0/1000], per end [1, 0] | |z fit| max 1.84, |z sand| max 1.89
+  [ 76/90    43 s] c2 local   30: rms 0.1698 px, sigma fit 0.1577, rejected per camera [0/1000, 1/1000, 1/1000], per end [2, 0] | |z fit| max 1.12, |z sand| max 1.11
+  [ 77/90    43 s] c2 local   35: rms 0.1639 px, sigma fit 0.1521, rejected per camera [1/1000, 0/1000, 0/1000], per end [1, 0] | |z fit| max 1.63, |z sand| max 1.57
+  [ 78/90    44 s] c2 local   37: rms 0.1690 px, sigma fit 0.1569, rejected per camera [0/1000, 1/1000, 2/1000], per end [3, 0] | |z fit| max 1.81, |z sand| max 1.80
+  [ 79/90    44 s] c2 local   36: rms 0.1698 px, sigma fit 0.1577, rejected per camera [1/1000, 1/1000, 2/1000], per end [4, 0] | |z fit| max 2.09, |z sand| max 2.09
+  [ 80/90    46 s] c2 local   39: rms 0.1647 px, sigma fit 0.1530, rejected per camera [2/1000, 4/1000, 2/1000], per end [5, 3] | |z fit| max 2.45, |z sand| max 2.36
+  [ 81/90    82 s] c1 scratch  0: OK   from scratch: max diff 4.5e-06 sigma, active 2998/2998/3000 (37 s)
+  [ 82/90    82 s] c2 scratch  1: OK   from scratch: max diff 1.1e-07 sigma, active 3000/3000/3000 (37 s)
+  [ 83/90    82 s] c1 scratch  2: OK   from scratch: max diff 5.2e-06 sigma, active 2998/2998/3000 (37 s)
+  [ 84/90    83 s] c1 scratch  4: OK   from scratch: max diff 4.2e-07 sigma, active 2996/2996/2998 (37 s)
+  [ 85/90    83 s] c1 scratch  1: OK   from scratch: max diff 2.5e-11 sigma, active 2998/2998/3000 (39 s)
+  [ 86/90    84 s] c2 scratch  4: OK   from scratch: max diff 7.7e-09 sigma, active 2999/2999/3000 (37 s)
+  [ 87/90    85 s] c2 scratch  0: OK   from scratch: max diff 4.2e-07 sigma, active 2999/2999/3000 (38 s)
+  [ 88/90    86 s] c2 scratch  2: OK   from scratch: max diff 1.4e-05 sigma, active 2995/2995/2996 (37 s)
+  [ 89/90    87 s] c1 scratch  3: OK   from scratch: max diff 1.5e-06 sigma, active 2993/2993/2998 (39 s)
+  [ 90/90    87 s] c2 scratch  3: OK   from scratch: max diff 1.2e-06 sigma, active 2995/2995/2998 (37 s)
+
+== c1: cam2 at 0.5 px, others 0.1 px (40 near-truth fits) ==
+  rejected: per camera 0.0 %, 0.2 %, 0.0 %; per end 0.1 %, 0.1 %
+  sigma: fit 0.3109 px, robust 0.2862 px; noise RMS (all) 0.3002, (kept) 0.2983 px; fit RMS 0.3348 px
+  z RMS per camera against the fit's own covariance  : 0.87, 1.10, 0.95   (pooled std 0.98, max |t| 1.5 cam2.C1)
+  z RMS per camera against least squares' sandwich   : 0.97, 1.02, 1.05   (pooled std 1.01, max |t| 1.6 cam2.C1)
+  z RMS per camera against the weighted bound        : 1.99, 1.76, 2.24   (pooled std 2.01, max |t| 1.6 cam2.C1)
+  equal weights cost (sandwich sigma / weighted-bound sigma) per camera: 2.03, 1.71, 2.14
+  f_rel        realised RMS per camera 0.001575, 0.002537, 0.001894 | weighted bound 0.0009231, 0.001739, 0.0009186 | sandwich 0.001641, 0.002239, 0.001636
+  distance_mm  realised RMS per camera 1.684, 2.717, 2.029 | weighted bound 0.9912, 1.871, 0.9865 | sandwich 1.763, 2.392, 1.758
+  azimuth_deg  realised RMS per camera 0, 0.006582, 0.01169 | weighted bound 0, 0.003287, 0.004674 | sandwich 0, 0.006781, 0.01092
+  height_mm    realised RMS per camera 0, 0.2245, 0.4156 | weighted bound 0, 0.1137, 0.1857 | sandwich 0, 0.2406, 0.43
+  unseen 3-D: 50.46 um relative to the tube, 2.09 um after a rigid motion; held-out wand length 5.9 um (calibration share 0.65)
+  from scratch: 5/5 reach the truth-started answer
+
+== c2: end A at 0.2 px, end B 0.1 px (40 near-truth fits) ==
+  rejected: per camera 0.1 %, 0.1 %, 0.1 %; per end 0.1 %, 0.0 %
+  sigma: fit 0.1569 px, robust 0.1415 px; noise RMS (all) 0.1577, (kept) 0.1574 px; fit RMS 0.1690 px
+  z RMS per camera against the fit's own covariance  : 1.09, 1.06, 1.10   (pooled std 1.08, max |t| 2.5 cam2.C3)
+  z RMS per camera against least squares' sandwich   : 1.08, 1.05, 1.09   (pooled std 1.07, max |t| 2.5 cam2.C3)
+  z RMS per camera against the weighted bound        : 1.22, 1.19, 1.19   (pooled std 1.20, max |t| 2.5 cam2.C3)
+  equal weights cost (sandwich sigma / weighted-bound sigma) per camera: 1.11, 1.13, 1.09
+  f_rel        realised RMS per camera 0.001255, 0.001052, 0.001122 | weighted bound 0.0008758, 0.0008091, 0.0008755 | sandwich 0.001023, 0.0009738, 0.001023
+  distance_mm  realised RMS per camera 1.353, 1.129, 1.212 | weighted bound 0.9433, 0.8641, 0.9428 | sandwich 1.102, 1.041, 1.101
+  azimuth_deg  realised RMS per camera 0, 0.004553, 0.007091 | weighted bound 0, 0.003719, 0.005731 | sandwich 0, 0.003799, 0.005856
+  height_mm    realised RMS per camera 0, 0.1137, 0.2226 | weighted bound 0, 0.1183, 0.2153 | sandwich 0, 0.1296, 0.2351
+  unseen 3-D: 30.07 um relative to the tube, 1.30 um after a rigid motion; held-out wand length 3.7 um (calibration share 0.38)
+  from scratch: 5/5 reach the truth-started answer
+time 87 s

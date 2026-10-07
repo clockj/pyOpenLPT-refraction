@@ -6,8 +6,28 @@ from scipy.optimize import OptimizeResult
 from pathlib import Path
 from PySide6.QtCore import QThread, Signal, QWaitCondition, QMutex
 import concurrent.futures
+import contextlib
 import multiprocessing
 import os
+
+
+@contextlib.contextmanager
+def _one_blas_thread_for_workers():
+    """Worker processes started inside this block load numpy with one BLAS thread.  Otherwise each detection worker
+    commits OpenBLAS's buffers for every core: 4.2 GB on a 32-core PC, so the pool of 25 asks for 105 GB and fails
+    with "The paging file is too small" (tests/cylinder_wand_gui P2; 0.33 GB with one thread).  The detection does
+    not use BLAS threads.  The variables are restored when the block ends."""
+    names = ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")
+    saved = {v: os.environ.get(v) for v in names}
+    os.environ.update({v: "1" for v in names})
+    try:
+        yield
+    finally:
+        for v, val in saved.items():
+            if val is None:
+                os.environ.pop(v, None)
+            else:
+                os.environ[v] = val
 
 
 # --- Robust Detection Constants ---
@@ -739,7 +759,8 @@ class WandCalibrator:
             # Autosave trigger count (e.g. every 50 frames * num_cameras)
             autosave_interval = 50 * num_cams 
             
-            with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
+            with _one_blas_thread_for_workers(), \
+                    concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
                 futures = [executor.submit(run_detection_task, t) for t in all_tasks]
                 
                 for future in concurrent.futures.as_completed(futures):
@@ -1140,7 +1161,8 @@ class WandCalibrator:
              # But using a persistent pool would be better? Creating pool has overhead (~50ms).
              # For 4 cores it is fine.
              max_workers = min(4, os.cpu_count() or 4)
-             with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
+             with _one_blas_thread_for_workers(), \
+                     concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
                 futures = [executor.submit(run_detection_task, t) for t in tasks]
                 
                 for future in concurrent.futures.as_completed(futures):

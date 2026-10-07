@@ -1,0 +1,64 @@
+T11e: 2 variants x 20 data sets (fixed and free wand length), 16 processes
+  [  1/40    12 s] e1  7: rms 0.1241 px | pattern 0.072 px, left 0.043, absorbed 0.057 px, f bias +0.13, +0.46, -0.10 % | |z crb| max 7.8, |z fit| max 6.7 | L free 10.0067 mm (+1.6 sigma)
+  [  2/40    12 s] e1  2: rms 0.1305 px | pattern 0.073 px, left 0.052, absorbed 0.052 px, f bias +0.29, -0.01, -0.11 % | |z crb| max 4.1, |z fit| max 3.4 | L free 10.0110 mm (+2.4 sigma)
+  [  3/40    12 s] e1 14: rms 0.1269 px | pattern 0.073 px, left 0.050, absorbed 0.053 px, f bias -0.29, -0.03, -0.11 % | |z crb| max 5.0, |z fit| max 4.2 | L free 9.9987 mm (-0.3 sigma)
+  [  4/40    13 s] e1  3: rms 0.1220 px | pattern 0.073 px, left 0.044, absorbed 0.058 px, f bias -0.31, -0.48, -0.33 % | |z crb| max 8.5, |z fit| max 7.6 | L free 10.0096 mm (+2.2 sigma)
+  [  5/40    13 s] e1 10: rms 0.1255 px | pattern 0.070 px, left 0.041, absorbed 0.057 px, f bias -0.47, -0.21, -0.02 % | |z crb| max 8.0, |z fit| max 6.9 | L free 10.0208 mm (+4.7 sigma)
+  [  6/40    13 s] e1  1: rms 0.1275 px | pattern 0.074 px, left 0.045, absorbed 0.059 px, f bias +0.21, +0.33, +0.07 % | |z crb| max 4.8, |z fit| max 4.0 | L free 9.9789 mm (-4.6 sigma)
+  [  7/40    13 s] e1 11: rms 0.1244 px | pattern 0.075 px, left 0.043, absorbed 0.061 px, f bias -0.11, +0.41, +0.58 % | |z crb| max 10.6, |z fit| max 9.1 | L free 9.9889 mm (-2.5 sigma)
+  [  8/40    13 s] e1  0: rms 0.1307 px | pattern 0.074 px, left 0.053, absorbed 0.052 px, f bias -0.28, -0.10, -0.17 % | |z crb| max 6.0, |z fit| max 5.0 | L free 10.0238 mm (+5.2 sigma)
+  [  9/40    13 s] e1  9: rms 0.1214 px | pattern 0.073 px, left 0.040, absorbed 0.061 px, f bias +0.06, +0.23, -0.17 % | |z crb| max 6.8, |z fit| max 6.1 | L free 10.0041 mm (+0.9 sigma)
+  [ 10/40    14 s] e1  8: rms 0.1306 px | pattern 0.073 px, left 0.051, absorbed 0.053 px, f bias +0.14, +0.02, -0.26 % | |z crb| max 2.9, |z fit| max 2.4 | L free 10.0112 mm (+2.5 sigma)
+  [ 11/40    14 s] e1 15: rms 0.1283 px | pattern 0.073 px, left 0.049, absorbed 0.054 px, f bias +0.13, +0.10, +0.14 % | |z crb| max 7.2, |z fit| max 6.0 | L free 9.9857 mm (-3.1 sigma)
+  [ 12/40    14 s] e1  5: rms 0.1266 px | pattern 0.074 px, left 0.048, absorbed 0.056 px, f bias +0.24, +0.24, +0.03 % | |z crb| max 4.1, |z fit| max 3.5 | L free 9.9995 mm (-0.1 sigma)
+  [ 13/40    14 s] e1 13: rms 0.1335 px | pattern 0.076 px, left 0.058, absorbed 0.048 px, f bias +0.16, -0.01, -0.28 % | |z crb| max 6.4, |z fit| max 5.2 | L free 10.0041 mm (+0.9 sigma)
+  [ 14/40    15 s] e1  6: rms 0.1200 px | pattern 0.069 px, left 0.039, absorbed 0.058 px, f bias -0.14, +0.02, -0.13 % | |z crb| max 4.5, |z fit| max 4.0 | L free 10.0171 mm (+4.2 sigma)
+  [ 15/40    15 s] e1  4: rms 0.1278 px | pattern 0.073 px, left 0.051, absorbed 0.052 px, f bias +0.18, +0.36, +0.16 % | |z crb| max 5.2, |z fit| max 4.3 | L free 10.0079 mm (+1.8 sigma)
+  [ 16/40    15 s] e1 12: rms 0.1279 px | pattern 0.070 px, left 0.046, absorbed 0.052 px, f bias +0.13, +0.34, +0.04 % | |z crb| max 6.2, |z fit| max 5.3 | L free 9.9992 mm (-0.2 sigma)
+  [ 17/40    24 s] e2  2: rms 0.1609 px | pattern 0.151 px, left 0.085, absorbed 0.125 px, f bias -0.61, -0.41, -0.27 % | |z crb| max 10.9, |z fit| max 7.3 | L free 9.9931 mm (-1.2 sigma)
+  [ 18/40    25 s] e1 18: rms 0.1236 px | pattern 0.075 px, left 0.043, absorbed 0.061 px, f bias +0.29, -0.19, -0.25 % | |z crb| max 7.1, |z fit| max 6.2 | L free 9.9785 mm (-5.0 sigma)
+  [ 19/40    25 s] e1 16: rms 0.1288 px | pattern 0.071 px, left 0.051, absorbed 0.050 px, f bias +0.13, -0.01, -0.17 % | |z crb| max 6.1, |z fit| max 5.1 | L free 10.0074 mm (+1.7 sigma)
+  [ 20/40    26 s] e1 19: rms 0.1251 px | pattern 0.073 px, left 0.046, absorbed 0.057 px, f bias +0.16, +0.03, -0.01 % | |z crb| max 2.8, |z fit| max 2.4 | L free 9.9664 mm (-7.7 sigma)
+  [ 21/40    27 s] e1 17: rms 0.1271 px | pattern 0.075 px, left 0.050, absorbed 0.056 px, f bias -0.10, -0.16, +0.08 % | |z crb| max 3.0, |z fit| max 2.5 | L free 9.9923 mm (-1.7 sigma)
+  [ 22/40    27 s] e2  4: rms 0.1732 px | pattern 0.146 px, left 0.097, absorbed 0.109 px, f bias -0.47, -0.79, +0.04 % | |z crb| max 13.7, |z fit| max 8.6 | L free 10.0046 mm (+0.7 sigma)
+  [ 23/40    28 s] e2  0: rms 0.1834 px | pattern 0.148 px, left 0.108, absorbed 0.101 px, f bias +0.92, +0.21, +0.60 % | |z crb| max 14.7, |z fit| max 8.5 | L free 9.9341 mm (-10.2 sigma)
+  [ 24/40    28 s] e2  7: rms 0.1656 px | pattern 0.146 px, left 0.092, absorbed 0.114 px, f bias +0.46, -0.25, +0.00 % | |z crb| max 6.7, |z fit| max 4.3 | L free 9.9841 mm (-2.6 sigma)
+  [ 25/40    28 s] e2 11: rms 0.1615 px | pattern 0.144 px, left 0.089, absorbed 0.114 px, f bias -0.22, +0.73, +0.80 % | |z crb| max 12.9, |z fit| max 8.6 | L free 9.9777 mm (-3.9 sigma)
+  [ 26/40    28 s] e2  3: rms 0.1557 px | pattern 0.144 px, left 0.086, absorbed 0.115 px, f bias -0.60, -0.17, +0.14 % | |z crb| max 12.2, |z fit| max 8.4 | L free 10.0596 mm (+11.0 sigma)
+  [ 27/40    28 s] e2  6: rms 0.1694 px | pattern 0.142 px, left 0.094, absorbed 0.106 px, f bias +0.48, +0.37, +0.55 % | |z crb| max 8.8, |z fit| max 5.6 | L free 9.9038 mm (-17.2 sigma)
+  [ 28/40    29 s] e2  1: rms 0.1521 px | pattern 0.151 px, left 0.080, absorbed 0.129 px, f bias -0.62, -0.52, -0.33 % | |z crb| max 9.8, |z fit| max 7.0 | L free 10.0636 mm (+12.2 sigma)
+  [ 29/40    29 s] e2  5: rms 0.1587 px | pattern 0.150 px, left 0.084, absorbed 0.124 px, f bias -0.19, -0.21, -0.38 % | |z crb| max 13.8, |z fit| max 9.3 | L free 10.0499 mm (+9.1 sigma)
+  [ 30/40    30 s] e2  9: rms 0.1411 px | pattern 0.147 px, left 0.067, absorbed 0.131 px, f bias -0.05, +0.29, -0.24 % | |z crb| max 4.8, |z fit| max 3.7 | L free 10.0421 mm (+8.3 sigma)
+  [ 31/40    31 s] e2  8: rms 0.1651 px | pattern 0.146 px, left 0.089, absorbed 0.116 px, f bias +0.48, -0.35, -0.16 % | |z crb| max 7.6, |z fit| max 4.9 | L free 9.9523 mm (-8.1 sigma)
+  [ 32/40    31 s] e2 10: rms 0.1742 px | pattern 0.149 px, left 0.102, absorbed 0.109 px, f bias +0.10, +0.49, +0.26 % | |z crb| max 10.3, |z fit| max 6.2 | L free 9.9493 mm (-8.3 sigma)
+  [ 33/40    36 s] e2 12: rms 0.1544 px | pattern 0.137 px, left 0.080, absorbed 0.111 px, f bias -0.09, +0.96, +1.18 % | |z crb| max 19.6, |z fit| max 13.5 | L free 9.9969 mm (-0.6 sigma)
+  [ 34/40    38 s] e2 16: rms 0.1649 px | pattern 0.147 px, left 0.090, absorbed 0.116 px, f bias +0.86, +0.94, +0.38 % | |z crb| max 13.6, |z fit| max 8.7 | L free 9.9769 mm (-3.9 sigma)
+  [ 35/40    38 s] e2 15: rms 0.1713 px | pattern 0.138 px, left 0.099, absorbed 0.096 px, f bias -0.44, -0.00, -0.05 % | |z crb| max 6.9, |z fit| max 4.3 | L free 10.0629 mm (+10.6 sigma)
+  [ 36/40    39 s] e2 13: rms 0.1692 px | pattern 0.139 px, left 0.094, absorbed 0.103 px, f bias -0.34, +0.02, +0.20 % | |z crb| max 10.1, |z fit| max 6.4 | L free 9.9899 mm (-1.6 sigma)
+  [ 37/40    39 s] e2 17: rms 0.1718 px | pattern 0.141 px, left 0.094, absorbed 0.105 px, f bias -0.83, -0.28, +0.36 % | |z crb| max 12.8, |z fit| max 8.1 | L free 9.9977 mm (-0.4 sigma)
+  [ 38/40    40 s] e2 18: rms 0.1686 px | pattern 0.141 px, left 0.092, absorbed 0.107 px, f bias -0.47, -0.15, +0.04 % | |z crb| max 11.8, |z fit| max 7.5 | L free 10.0593 mm (+9.9 sigma)
+  [ 39/40    41 s] e2 14: rms 0.1796 px | pattern 0.145 px, left 0.105, absorbed 0.100 px, f bias +0.11, +0.13, -0.39 % | |z crb| max 13.9, |z fit| max 8.3 | L free 10.0058 mm (+0.9 sigma)
+  [ 40/40    42 s] e2 19: rms 0.1606 px | pattern 0.146 px, left 0.088, absorbed 0.117 px, f bias +0.21, +0.17, +0.30 % | |z crb| max 14.9, |z fit| max 9.9 | L free 9.9980 mm (-0.4 sigma)
+
+== e1: pattern 0.1 px + noise 0.1 px (20 data sets) ==
+  pattern 0.073 px RMS at the detections: 0.056 px absorbed by the parameters (58 % of its variance), 0.047 px left in the residuals; fit RMS 0.1266 px (noise alone gives about 0.107)
+  bias the pattern alone puts into the parameters (exact, no noise): RMS 3.21 noise-only sigma; f 0.224 % RMS
+  z against the noise-only bound: RMS 3.41, max |t| 1.0; against the fit's own covariance: RMS 2.92
+  f_rel        RMS error per camera 0.002253, 0.002524, 0.002316 | noise-only sigma 0.0006405, 0.0006088, 0.0006394 | ratio 3.77
+  distance_mm  RMS error per camera 2.416, 2.712, 2.498 | noise-only sigma 0.6899, 0.6508, 0.6887 | ratio 3.78
+  azimuth_deg  RMS error per camera 0, 0.004727, 0.007259 | noise-only sigma 0, 0.00238, 0.003687 | ratio 1.98
+  height_mm    RMS error per camera 0, 0.3017, 0.5721 | noise-only sigma 0, 0.08139, 0.1475 | ratio 3.79
+  free wand length: offset RMS 3.3 sigma (mean +0.1); |offset| > 3 sigma in 7/20; length error RMS 14.6 um
+  unseen 3-D: 40.90 um relative to the tube, 1.97 um after a rigid motion; held-out wand length 2.7 um (calibration share 0.58, mean -0.06)
+
+== e2: pattern 0.2 px + noise 0.1 px (20 data sets) ==
+  pattern 0.145 px RMS at the detections: 0.113 px absorbed by the parameters (60 % of its variance), 0.091 px left in the residuals; fit RMS 0.1651 px (noise alone gives about 0.107)
+  bias the pattern alone puts into the parameters (exact, no noise): RMS 6.49 noise-only sigma; f 0.466 % RMS
+  z against the noise-only bound: RMS 6.49, max |t| 3.0; against the fit's own covariance: RMS 4.23
+  f_rel        RMS error per camera 0.00495, 0.004684, 0.004336 | noise-only sigma 0.0006439, 0.0006123, 0.0006418 | ratio 7.38
+  distance_mm  RMS error per camera 5.341, 5.013, 4.647 | noise-only sigma 0.6937, 0.6548, 0.6913 | ratio 7.37
+  azimuth_deg  RMS error per camera 0, 0.006621, 0.01021 | noise-only sigma 0, 0.002383, 0.003675 | ratio 2.78
+  height_mm    RMS error per camera 0, 0.4415, 0.9142 | noise-only sigma 0, 0.08193, 0.1481 | ratio 5.79
+  free wand length: offset RMS 7.8 sigma (mean +0.2); |offset| > 3 sigma in 12/20; length error RMS 44.3 um
+  unseen 3-D: 83.63 um relative to the tube, 3.94 um after a rigid motion; held-out wand length 3.6 um (calibration share 1.20, mean -0.13)
+time 43 s

@@ -1,0 +1,38 @@
+{
+ "t11a_noise_sweep": {
+  "seconds": 123.41265225410461,
+  "returncode": 0
+ },
+ "t11c_unequal_noise": {
+  "seconds": 87.55926942825317,
+  "returncode": 0
+ },
+ "t11d_heavy_tails": {
+  "seconds": 99.88938546180725,
+  "returncode": 0
+ },
+ "t11e_systematic": {
+  "seconds": 42.768798828125,
+  "returncode": 0
+ },
+ "t12a_weights_unequal": {
+  "seconds": 117.63492488861084,
+  "returncode": 0
+ },
+ "t12b_weights_equal": {
+  "seconds": 57.16295528411865,
+  "returncode": 0
+ },
+ "t12c_two_cameras": {
+  "seconds": 90.28450965881348,
+  "returncode": 0
+ },
+ "t12d_scratch_t5": {
+  "seconds": 240.33964610099792,
+  "returncode": 0
+ },
+ "t12e_scratch_5px": {
+  "seconds": 202.7530825138092,
+  "returncode": 0
+ }
+}

@@ -1,0 +1,20 @@
+F6: regression after the fixes
+
+g3_gui_path (57 s, exit 0): 13 of 13 checks passed; 56 s
+  before the fixes: 13 of 13 checks passed; 58 s
+
+g5_g9_stop_input_pinhole (9 s, exit 0): 8 of 8 checks passed; 9 s
+  before the fixes: 8 of 8 checks passed; 9 s
+
+g6_gui_launch (2 s, exit 3221226505): 6 of 6 checks passed; 2 s
+  before the fixes: 6 of 6 checks passed; 2 s
+
+g8_plate_gui (52 s, exit 0): 9 of 9 checks passed; 52 s
+  before the fixes: 9 of 9 checks passed; 59 s
+
+g4_pages (16 s, exit 0): 16 of 16 checks passed; 16 s
+  before the fixes: 16 of 16 checks passed; 13 s
+
+pytest (7 s, exit 2): (no verdict line)
+  before: 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 368.53s (0:06:08)
+  failures and errors now: ERROR tests/test_p0_bootstrap_failure.py; ERROR tests/test_plane_pipeline.py

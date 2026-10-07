@@ -449,7 +449,18 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
     rigs), which the iteration clamps and then corrects.  sigma_cam_px (px per camera) fixes the weights instead of
     estimating them.  The rounds go on until both the active set and every sigma (to sigma_tol, relative) are
     steady: a looser tolerance leaves runs from different starts on slightly different weights (1 %: 1e-3 sigma
-    apart, 1e-4: 2e-4 sigma, on T12e's rig 7 at 5 px, whose far camera is nearly telecentric)."""
+    apart, 1e-4: 2e-4 sigma, on T12e's rig 7 at 5 px, whose far camera is nearly telecentric).
+
+    Two loops are stopped (tests/cylinder_wand_gui, 2026-10-06-fixes-plan.md: on the first real two-camera data,
+    runs 20261006/T0 and T2, every start ran to max_rounds):
+      1. The noise estimate alternating between two states instead of converging (`_flips`: within 3 % of its
+         value two rounds earlier and more than 30 % off the last one; with two cameras the estimate follows the
+         weights it was computed with) falls back to equal weights at once, as when the groups cannot be separated.
+      2. The active set coming back to one it had after an earlier round, with the same weights.  A frame dropped
+         whole (with two cameras any rejection drops its frame) is re-triangulated from its own rays and re-tested
+         without the fit's correction, so it can pass, come back, fail in the fit and leave again.  The rounds then
+         stop, and the detections that alternate stay out: in the fit they fail the outlier test.
+    sol.info records both ("cycle"; noise_weights "flipped")."""
     sol = None
     t0 = time.time()
     usable = obs.active.copy()
@@ -465,6 +476,11 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
             raise ValueError("sigma_cam_px needs one positive value per camera")
     vc = {}
     fallback = False                          # estimated, but not separable at convergence: equal weights
+    flipped = None                            # loop 1: the round the estimate was found flipping, its two states
+    cycle = None                              # loop 2: the round the active set repeated, and what was left out
+    hist = []                                 # each round's noise estimate, sigma per group (px)
+    seen = {}                                 # active set -> (round, sigmas weighting the next round)
+    masks = []                                # the active set after each round
     converged = True
     changed = sig_changed = False
     rnd = 0
@@ -479,9 +495,14 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
             cur = np.ones(n_groups) if sig2 is None else sig2
             new, vc = variance_components(sol, groups, cur, min_group=min_group, max_rel_se=max_rel_se,
                                           max_ratio=max_ratio, floor_px=sigma_floor_px)
-            sig_changed = sig2 is None or float(np.max(np.abs(np.sqrt(new / sig2) - 1.0))) > sigma_tol
-            if sig_changed:                       # else keep the weights the last adjustment used
-                sig2 = new
+            hist.append(np.sqrt(new))
+            if _flips(hist):                      # loop 1: equal weights from the next round on
+                flipped = {"round": rnd, "sigma_px": [hist[-2].tolist(), hist[-1].tolist()]}
+                fallback, sig2, sig_changed = True, None, True
+            else:
+                sig_changed = sig2 is None or float(np.max(np.abs(np.sqrt(new / sig2) - 1.0))) > sigma_tol
+                if sig_changed:                   # else keep the weights the last adjustment used
+                    sig2 = new
         # the rejection is judged with the weights of the fit it looks at; the new variances weight the next round
         sig_obs = None if sig_fit is None else np.sqrt(sig_fit[groups])
         changed, n_out, n_back = _update_active(sol, usable, k_sigma, sigma_floor_px, sig_obs=sig_obs,
@@ -491,6 +512,31 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
             log(f"  round {rnd}: rms {sol.rms:.5f} px, {len(sol.history)} LM iterations, rejected {n_out}, "
                 f"re-admitted {n_back}" + ("" if sig2 is None else ", sigma per group " +
                                            ", ".join(f"{v:.4f}" for v in np.sqrt(sig2)) + " px"))
+            if flipped is not None and flipped["round"] == rnd:
+                log(f"  round {rnd}: the noise estimate flips between two states every round ("
+                    + " px and ".join(", ".join(f"{v:.4f}" for v in s) for s in flipped["sigma_px"])
+                    + " px per group): equal weights from the next round on")
+        # loop 2: the active set is one it had after an earlier round, with the same weights
+        sig_next = None if sig2 is None else np.sqrt(sig2)
+        key = obs.active.tobytes()
+        masks.append(obs.active.copy())
+        prev = seen.get(key)
+        if changed and prev is not None and _same_sigma(prev[1], sig_next, sigma_tol):
+            states = masks[prev[0]:]
+            probe = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids,
+                        np.logical_and.reduce(states))
+            _drop_thin_frames(probe)
+            left = int(np.sum(np.logical_or.reduce(states) & ~probe.active))
+            obs.active[:] = probe.active
+            cycle = {"round": rnd, "repeats_round": prev[0], "left_out": left}
+            if verbose:
+                log(f"  round {rnd}: the active set repeats round {prev[0]}'s: the {left} detections that alternate "
+                    "are left out")
+            if estimate and not fallback and sig2 is not None and not vc.get("separable", False):
+                fallback, sig2 = True, None       # as at convergence: not separable, equal weights again
+                continue
+            break
+        seen[key] = (rnd, sig_next)
         if not changed and not sig_changed:
             if estimate and not fallback and sig2 is not None and not vc.get("separable", False):
                 fallback, sig2 = True, None       # not separable even with converged weights: equal weights again
@@ -513,11 +559,30 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
         sol.info = {**kept, **sol.info}
     sol.info["guard_dropped"] = int(n_guard)
     sol.info["rounds"] = rnd + 1
+    sol.info["cycle"] = cycle
     sol.info["seconds"] = time.time() - t0
     sol.info["noise_weights"] = {"mode": noise_weights, "given": sigma_cam_px is not None, "estimated": estimate,
                                  "used": sig2 is not None, "fallback": fallback, "converged": converged,
-                                 "sigma_group_px": None if sig2 is None else np.sqrt(sig2).tolist(), **vc}
+                                 "sigma_group_px": None if sig2 is None else np.sqrt(sig2).tolist(), **vc,
+                                 "flipped": flipped}
     return covariance(sol, weights=weights)
+
+
+def _flips(hist, close: float = 0.03, jump: float = 0.30) -> bool:
+    """Loop 1 of `refine`: the newest noise estimate (sigma per group) is within `close` of the one two rounds
+    earlier in every group and more than `jump` off the last one in some group: it alternates between two states
+    instead of converging (tests/cylinder_wand_gui P1: runs 20261006/T0 and T2, from round 5 on)."""
+    if len(hist) < 3:
+        return False
+    a, b, c = hist[-1], hist[-2], hist[-3]
+    return bool(np.max(np.abs(a / c - 1.0)) < close and np.max(np.abs(a / b - 1.0)) > jump)
+
+
+def _same_sigma(a, b, tol: float) -> bool:
+    """Both equal weights (None), or the same sigmas to `tol` (relative)."""
+    if a is None or b is None:
+        return a is None and b is None
+    return bool(np.max(np.abs(np.asarray(b) / np.asarray(a) - 1.0)) <= tol)
 
 
 # ------------------------------------------------------------------ noise weights (variance components)
@@ -1397,7 +1462,7 @@ def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict =
 def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit_k1: bool = False,
               fit_L: bool = False, k_sigma: float = 5.0, guard_px: float = 30.0, n_final: int = 2,
               verbose: bool = False, log=print, noise_weights: str = "camera", sigma_cam_px=None,
-              more_starts_px: float = 1.0, log_fits: bool = False) -> Solution:
+              more_starts_px: float = 1.0, log_fits: bool = False, share_equal_starts: bool = True) -> Solution:
     """Stages 0-5: from the detections to the cameras, with no camera input (or from `start`, cameras in the
     gauge).  The best `n_final` bootstrap candidates are carried through stages 3 and 4; when the best of them
     still has a stage-3 RMS above more_starts_px (noisy data), every short-listed candidate is (T11b: at 5 px one rig
@@ -1407,7 +1472,11 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
     `refine`.  With fit_L the wand length is estimated too (stages 1-3 use the nominal data.L): the tube's radii fix
     the scale, so the fitted L against the nominal checks the tube's constants (tests/cylinder_wand T9).
     log_fits: also pass `log` to the start search's fits and to the stage-3 and stage-4 fits (one line per iteration
-    and round; the GUI's progress and Stop use it).  Off by default: the numbers do not depend on it."""
+    and round; the GUI's progress and Stop use it).  Off by default: the numbers do not depend on it.
+    share_equal_starts: a start whose stage-3 result has the same active set as an earlier start's, and a stage-3
+    RMS within 1e-5 of it (relative), is not refined again: it sits in the same minimum, and stage 4 is the costly
+    part (tests/cylinder_wand_gui P7: T0's six starts ended stage 3 up to 2e-4 apart in f along the flat f/D
+    valley, about 0.02 of f's standard error, and all reached the same stage-4 answer)."""
     obs = observations(data)
     layout = Layout(data.n_cams, fit_k1=fit_k1, fit_L=fit_L)
     t0 = time.time()
@@ -1420,18 +1489,28 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
         starts = [c for _cost, c in ranked]
     best = None
     active0 = obs.active.copy()
-    tried, stage3 = 0, []
+    tried, stage3, shared = 0, [], 0
+    refined = []                              # (stage-3 active set, stage-3 RMS, start) of the starts refined
     for k, cams0 in enumerate(starts):
         if k >= n_final and min(stage3, default=0.0) <= more_starts_px:
             break
         o = Obs(obs.frame, obs.cam, obs.end, obs.uv, obs.n_frames, obs.n_cams, obs.frame_ids, active0.copy())
         cams3, info3 = coarse_fit(cams0, tube, o, data.L, layout, verbose=log_fits, log=log)
         stage3.append(info3["rms_px"])
+        tried += 1
+        twin = next((r for r in refined if np.array_equal(r[0], o.active)
+                     and abs(info3["rms_px"] / r[1] - 1.0) <= 1e-5), None) if share_equal_starts else None
+        if twin is not None:
+            shared += 1
+            if verbose:
+                log(f"  start {k}: stage 3 rms {info3['rms_px']:.3f} px, as start {twin[2]}'s (the same detections, "
+                    "RMS within 1e-5): stage 4 not repeated")
+            continue
+        refined.append((o.active.copy(), info3["rms_px"], k))
         sol = refine(cams3, tube, initial_frames(cams3, tube, o, data.L), data.L, o, layout, k_sigma=k_sigma,
                      guard_px=guard_px, noise_weights=noise_weights, sigma_cam_px=sigma_cam_px, verbose=log_fits,
                      log=log)
         sol.info["stage3"] = info3
-        tried += 1
         n_act = int(o.active.sum())
         key = (-n_act, _log_likelihood_key(sol, noise_weights))
         if verbose:
@@ -1447,7 +1526,8 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
     sol.info["starts_tried"] = tried
     sol.info["starts"] = {"short_listed": len(starts), "tried": tried, "n_final": n_final,
                           "more_starts_px": more_starts_px, "extra_starts": tried > min(n_final, len(starts)),
-                          "stage3_rms_px": stage3, "start_given": start is not None}
+                          "stage3_rms_px": stage3, "start_given": start is not None,
+                          "stage4_shared": shared}
     sol.info["total_seconds"] = time.time() - t0
     return sol
 

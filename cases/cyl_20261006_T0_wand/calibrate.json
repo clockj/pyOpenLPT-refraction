@@ -1,55 +1,55 @@
 {
  "summary": {
-  "rms_px": 0.45335027637932807,
-  "sigma_px": 0.5538121629602664,
+  "rms_px": 0.4693299263677001,
+  "sigma_px": 0.5435513644359202,
   "frames": 1519,
-  "active": 5720,
+  "active": 6064,
   "observations": 6076,
   "wand_length_mm": 10.0,
   "L_sigma_mm": null,
-  "wand_free_rms_um": 22.0604121546247,
-  "wand_free_mean_um": 0.015197177899817692,
+  "wand_free_rms_um": 23.069617421238522,
+  "wand_free_mean_um": 0.031670761866293216,
   "cameras": [
    {
     "name": "cam1",
-    "f_px": 38678.17645152746,
-    "f_sigma_px": 307.63912210200374,
-    "distance_mm": 1010.1118638264029,
-    "distance_sigma_mm": 7.864330977014931,
-    "azimuth_deg": -2.0151777927107682e-16,
-    "azimuth_sigma_deg": 1.5689376302713638e-18,
+    "f_px": 38551.43696936687,
+    "f_sigma_px": 295.83218118980665,
+    "distance_mm": 1006.8149041666486,
+    "distance_sigma_mm": 7.563690394099318,
+    "azimuth_deg": 0.0,
+    "azimuth_sigma_deg": 0.0,
     "height_rel_mm": 0.0,
     "height_sigma_mm": 0.0,
     "viewing_direction": [
-     0.0024309093724529415,
-     0.04697927970347646,
-     -0.9988929061506878
+     0.0024879392719716546,
+     0.04650700496556016,
+     -0.9989148655652853
     ],
     "k1": 0.0,
     "k1_sigma": null,
-    "rms_px": 0.5123861188864678,
-    "n_active": 2860,
+    "rms_px": 0.5002424931230383,
+    "n_active": 3032,
     "n_total": 3038
    },
    {
     "name": "cam2",
-    "f_px": 36022.37440094788,
-    "f_sigma_px": 459.993136927036,
-    "distance_mm": 1042.1286301260684,
-    "distance_sigma_mm": 12.944250826284538,
-    "azimuth_deg": 60.83459909675998,
-    "azimuth_sigma_deg": 0.02812039661349097,
-    "height_rel_mm": 20.32884236179704,
-    "height_sigma_mm": 1.0546669820189118,
+    "f_px": 35812.03092337204,
+    "f_sigma_px": 424.60865652002053,
+    "distance_mm": 1036.0524588395663,
+    "distance_sigma_mm": 11.944895618752845,
+    "azimuth_deg": 60.82750887516394,
+    "azimuth_sigma_deg": 0.027138211567579916,
+    "height_rel_mm": 20.30881462387169,
+    "height_sigma_mm": 1.0102233787205996,
     "viewing_direction": [
-     -0.8745361803172925,
-     0.024166909380080974,
-     -0.4843577498162319
+     -0.8744915979902222,
+     0.023719612054567553,
+     -0.48446034414437494
     ],
     "k1": 0.0,
     "k1_sigma": null,
-    "rms_px": 0.38537437818164394,
-    "n_active": 2860,
+    "rms_px": 0.43623228633684213,
+    "n_active": 3032,
     "n_total": 3038
    }
   ]
@@ -104,7 +104,7 @@
    "workers": 48
   }
  },
- "seconds": 576.1310868263245,
+ "seconds": 80.00091671943665,
  "checks": [],
  "page": "X:\\Shijie Zhong\\Refraction\\Processed\\20261006\\T0\\Results\\calibration_report.html"
 }

@@ -1,0 +1,16 @@
+R1: the Radius Range in the ellipse mode; T2 frames 4000-5199, rod opening 95 px, rod mask 50 px
+
+[case] radius 40-120 px; background window 301 px; 148 s
+  frames with two or more blobs: cam1 376, cam2 566; paired: 159
+
+[default] radius 20-200 px; background window 501 px; 142 s
+  frames with two or more blobs: cam1 350, cam2 566; paired: 151
+
+[small] radius 20-60 px; background window 151 px; 142 s
+  frames with two or more blobs: cam1 192, cam2 554; paired: 108
+
+default against case: 151 frames paired by both; 8 only by case, 0 only by default
+  small ball's centre: RMS 0.022 px, largest 0.158 px; large ball's: RMS 0.036 px, largest 0.477 px; radius difference mean -0.006 px
+
+small against case: 108 frames paired by both; 51 only by case, 0 only by small
+  small ball's centre: RMS 0.021 px, largest 0.169 px; large ball's: RMS 0.013 px, largest 0.141 px; radius difference mean +0.013 px

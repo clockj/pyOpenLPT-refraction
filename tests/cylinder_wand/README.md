@@ -16,10 +16,106 @@ experiment.
 - That holds while PINCYL and the tube constants describe the optics exactly.
 - The main risk for real data is a model error fixed to each image (section 3, item 8). The real cam1 plate case
   already shows it.
-- **First real wand data (6 Oct, two long-lens cameras):** the calibration fits (0.45 px) and is usable inside the
-  wand's volume, but the recording did not determine f (its parts disagree by ±10 %). See the newest entry below.
+- **First real wand data (6 Oct, two long-lens cameras, runs T0 and T2):**
+  - **The fit:** 0.45–0.60 px, usable inside the wand's volume.
+  - **f is not determined:** the parts of each run disagree by ±10 %.
+  - **The cameras moved by about 1 px between the two runs**, so each run needs its own calibration.
+  - **The final fit looped on these runs** (10–14 min, and 356 good detections left out of T0's fit). Fixed on 6 Oct:
+    T0 now takes 96 s and T2 234 s with six starts, about 1 min with the GUI's default two. T0 is redelivered; its
+    checks agree with the first delivery within their noise.
+  - See the four newest entries below.
 
 ## 1. Progress log
+
+**2026-10-06 (later still): T0 redelivered; is it better; the radius range in the ellipse mode**
+- **T0 redelivered** on your OK, with every test of its case rerun and its page republished.
+  - **The change:** 6,064 of 6,076 detections; RMS 0.47 px; 23 µm.
+  - **Better?** Not measurably, and not worse. On all 1,519 frames the wand length is 23.4 µm RMS as before (D8). The
+    cross-run step to T2 is unchanged (+1.01 px). The halves and quarters still spread f by about ±10 %.
+  - **The real difference:** the fit now follows one rule for every detection. The first delivery's lower RMS came
+    from leaving out the 356 worst-fitting detections.
+- **Rebuild:** not needed. Your "OpenLPT (new)" shortcut runs the repo's `GUI.py`, so the GUI picks up the fixes at
+  its next start. The C++ exe and module are newer than every C++ source.
+- **The radius range does matter in the ellipse mode** (R1):
+  - **What it does:** it sizes the background window (2.5 × the largest radius) and filters blobs by area.
+  - **On 1,200 T2 frames:** 40–120 px paired 159 frames, 20–200 px 151, and 20–60 px (below the balls) 108. The
+    centres moved by only 0.01–0.04 px.
+- **Found while rerunning T0's variants:** a weight flip that repeats every four rounds (k1 free; one half) still runs
+  to the round limit. The fix's flip test only catches two-round flips. A further fix is proposed, waiting for your
+  OK (`tests/cylinder_wand_gui/2026-10-06-fixes-report.md`, section 8).
+
+**2026-10-06 (late night): the GUI's calibration looped and its wand points would not load; both fixed**
+- **Your questions:** how long a calibration from detected points takes; why the GUI "keeps going without too much
+  improvement"; why the GUI's saved wand points would not load ("the status is always Raw"); and what happens with
+  more than two cameras.
+- **Where:** `tests/cylinder_wand_gui/2026-10-06-fixes-plan.md` (approved) and `2026-10-06-fixes-report.md`, with
+  diagnoses P1–P7 and tests F1–F6 beside them. Uncommitted.
+- **Stage 4 was caught in two loops on T0 and T2,** so each of the six starts ran the full 20 rounds (10 and 14 min).
+  - **Loop 1:** the per-camera noise weights flipped every round between two states. T0's delivered fit left out 356
+    good detections (89 frames) because of it.
+  - **Loop 2:** two frames that fail the outlier test in the fit were dropped, re-tested from their own
+    re-triangulation without the fit's correction, passed, came back and failed again, with equal weights too.
+- **The fixes (`cylinder_wand.refine`, `calibrate`):**
+  - **A flip** falls back to equal weights at once.
+  - **A repeated active set** stops the rounds, with the alternating detections left out.
+  - **Starts that end stage 3 at the same point** share one stage 4.
+- **Now, on the real runs:**
+  - **Time:** T0 96 s (was 576 s) and T2 234 s (was 816 s) with six starts; 60 s and 65 s with the GUI's default two.
+    No start reaches the round limit.
+  - **T2:** its delivered result exactly.
+  - **T0:** 344 more detections. f −0.33 % / −0.58 % and the distances −3.3 / −6.0 mm against the delivered camFiles,
+    under half a standard error. Its camFiles and page await redelivery (your OK).
+- **More cameras:**
+  - **Loop 1** is a two-camera effect: no synthetic fit with three or four cameras ever flipped.
+  - **Loop 2** needs a frame dropped whole and also happens with three cameras: 32 synthetic fits ran to the round
+    limit, 27 of them with heavy-tailed noise (T11d).
+  - **On the synthetic campaign before and after (F4):**
+    - every fit that converged is unchanged;
+    - the 35 that looped now stop in 3–6 rounds, with the same accuracy;
+    - every test's verdict is the same.
+- **The wand points:**
+  - **Why they were all "Raw":** with the GUI's default rod opening (25 px) this wand's rod (76–105 px wide) joins
+    the balls into one blob. The detection then pairs no frame and saves only "Raw" rows, and the loader reported
+    "0 valid frames" as a success.
+  - **What works:** the case's settings (95 / 50 px, radius 40–120 px) pair 159 of 1,200 T2 frames, which load.
+  - **Now:** the GUI says when a detection pairs nothing, and why, and loading a raw-only file explains itself.
+  - **Memory:** the GUI's detection workers start with one BLAS thread, 0.33 GB each instead of 4.2 GB, so the
+    detection no longer runs out of memory on this PC.
+
+**2026-10-06 (night): the second recording, T2**
+- **The data:** run 20261006/T2, an hour after T0, with the same cameras and wand. 12,716 frames; 1,966 usable in both
+  cameras.
+  - **Case:** `cases/cyl_20261006_T2_wand/` (plan, report, P0, T0–T3, T5, T7, X1, D1, D8). It copies T0's code, with
+    T0's detector settings.
+  - **Results:** `X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results`, with an overview page (artifact
+    https://claude.ai/artifact/Mu8jHCGGPtcVAZ4F36MNhc).
+- **The calibration:**
+  - reprojection RMS 0.60 px;
+  - free-triangulation wand length 31 µm RMS;
+  - cam1 f 38,252 px at 1,001 mm, cam2 f 37,409 px at 1,085 mm.
+- **The cameras moved between T0 and T2 (X1, new):**
+  - **The test:** each run's calibration triangulates the other run's frames.
+  - **The step:** the two cameras' lines of sight miss each other by 1.0 px vertically (+1.01 / −1.05 px). The step
+    is level along all of T2, before and after the light changed mid-run, while the wand lengths barely notice
+    (+1.7 / −5.0 µm).
+  - **So:** a calibration holds only while the cameras stay untouched. Calibrate close to each experiment.
+- **f is still not determined (T3):**
+  - **The spread:** the parts give cam1 f 33,900–41,200 px, and one quarter's cam2 ran to 4.7 m.
+  - **One line per camera:** every fit of both runs lies on one f / distance line per camera. cam1's 30 Sep dot board
+    lies on it too (37.9 against 38.2 px/mm).
+  - **So:** a "hold f" option fed by the dot board would fix it. It is a library change, not built; it needs your
+    approval.
+- **Inside the volume, better than T0 (D8):** held-out wand lengths within 0.06 % on average, the halves within
+  0.01–0.02 %.
+- **k1 does not help (T5, your question):**
+  - **Barely lower:** the RMS falls by 4 %.
+  - **Implausible values:** k1 +18.8 (cam1, 3.5 px at the image's edge) and −2.9 (cam2), opposite signs.
+  - **The pattern stays:** the residual pattern is unchanged.
+- **Both overview pages now show each camera's 2-D reprojection-error distribution** (your request; the T0 page was
+  republished).
+  - **What it shows:** the errors are about twice as wide across the image as up and down, along the roughly level
+    rod.
+  - **Why:** the rod hides part of each ball's outline there.
 
 **2026-10-06 (evening): the first real wand data**
 - **The data:** run 20261006/T0, two cameras (VEO 710L, 180 mm macro, 100 frames/s) through your tube. The wand is

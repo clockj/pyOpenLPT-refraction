@@ -1,0 +1,8 @@
+P3: the GUI's detection, export and import on X:\Shijie Zhong\Refraction\Raw\20261006\T2, frames 4000-5199
+  detection: 159 frames paired (small and large ball in both cameras) of 1200
+  the autosaved CSV: 3510 rows, by status {'Raw': 2874, 'Filtered_Small': 318, 'Filtered_Large': 318}
+  the GUI's loader: True, "Loaded 159 valid frames."
+  the same frames and cameras: True (159 frames, cameras [0, 1]); largest centre difference 5.0e-04 px (the CSV keeps 3 decimals)
+  Pinhole+Cylinder's input check, as detected: accepted
+  Pinhole+Cylinder's input check, as loaded: accepted
+  the same CSV with only its Raw rows (as a rescue export after a failed detection): True, "Loaded 0 valid frames."

@@ -142,6 +142,11 @@ def noise_summary(sol: cw.Solution, names: Sequence[str] = None) -> Dict:
         why = "equal weights requested (noise_weights='none')"
     elif used:
         why = "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group"
+    elif nw.get("flipped"):
+        fl = nw["flipped"]
+        why = ("the estimated noise flipped between two states every round instead of converging (from round "
+               f"{fl['round']}: " + " px and ".join(", ".join(f"{v:.3f}" for v in s) for s in fl["sigma_px"])
+               + " px per group): equal weights, as without the weighting")
     else:
         rs = [x for x in (nw.get("rel_se_group") or []) if x is not None]
         why = ("the data could not separate the groups' noise (largest relative standard error "
@@ -170,12 +175,13 @@ def noise_summary(sol: cw.Solution, names: Sequence[str] = None) -> Dict:
     sig_list = [r["sigma_px"] for r in rows if r["sigma_px"]]
     return {"mode": mode, "given": given, "weights_used": used, "why": why, "groups": rows,
             "pooled_sigma_px": sol.sigma_px, "variance_factor": sol.info.get("variance_factor"),
-            "rounds": sol.info.get("rounds"),
+            "rounds": sol.info.get("rounds"), "cycle": sol.info.get("cycle"),
             "noisiest_over_quietest": (max(sig_list) / min(sig_list)) if len(sig_list) >= 2 else None,
             "max_rel_se": nw.get("max_rel_se"),
             "starts": {"short_listed": st.get("short_listed"), "tried": st.get("tried"),
                        "extra_starts": st.get("extra_starts"), "more_starts_px": st.get("more_starts_px"),
-                       "stage3_rms_px": st.get("stage3_rms_px"), "start_given": st.get("start_given")}}
+                       "stage3_rms_px": st.get("stage3_rms_px"), "start_given": st.get("start_given"),
+                       "stage4_shared": st.get("stage4_shared")}}
 
 
 def write_result(sol: cw.Solution, folder: str, names: Sequence[str] = None, pixel_mm: Sequence[float] = None,
@@ -282,6 +288,11 @@ def noise_text(nz: Dict) -> List[str]:
                + f"; {nz['rounds']} rounds"
                + (f"; noisiest / quietest group {nz['noisiest_over_quietest']:.2f}x"
                   if nz.get("noisiest_over_quietest") else ""))
+    cy = nz.get("cycle")
+    if cy:
+        out.append(f"  the rounds stopped at round {cy['round']}: the active set repeated round "
+                   f"{cy['repeats_round']}'s, and the {cy['left_out']} detections that alternated (rejected in the "
+                   "fit, re-admitted after it) are left out")
     out += ["  noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.",
             "  residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera",
             "    next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).",
@@ -295,5 +306,7 @@ def noise_text(nz: Dict) -> List[str]:
         out.append(f"  starts: {st['tried']} of {st['short_listed']} short-listed bootstrap starts carried through stages 3-4"
                    + (f" (extra starts: the best stage-3 RMS of the first ones exceeded {st['more_starts_px']:g} px)"
                       if st.get("extra_starts") else "")
-                   + (f"; stage-3 RMS {', '.join(f'{x:.3f}' for x in s3)} px" if s3 else ""))
+                   + (f"; stage-3 RMS {', '.join(f'{x:.3f}' for x in s3)} px" if s3 else "")
+                   + (f"; {st['stage4_shared']} of them ended stage 3 as an earlier one (the same detections, RMS "
+                      "within 1e-5) and share its stage 4" if st.get("stage4_shared") else ""))
     return out

@@ -11,6 +11,12 @@ data set for that calibration.
   is usable inside the wand's volume (0.1-0.2 % in scale), but this recording does not determine f: its halves and
   quarters give cam1 f from 32,800 to 40,200 px (T3). The 2 mm rod limits the ball centres (T1 b). Report sections 1
   and 6 (what to change for the next recording).
+- **Redelivered (6 Oct, night)** with the stage-4 fix (`tests/cylinder_wand_gui/2026-10-06-fixes-report.md`):
+  - **The change:** 6,064 of 6,076 detections instead of 5,720; RMS 0.47 px, 23 µm; f −0.33 % / −0.58 %, under half
+    a standard error.
+  - **Better?** Every independent check agrees with the first delivery within its noise (report, top).
+  - **Where things are:** every test rerun; the first delivery's outputs in `before_stage4_fix\` here and in
+    `Results\before_stage4_fix\`.
 - Raw images: `X:\Shijie Zhong\Refraction\Raw\20261006\T0\cam1`, `cam2`.
 - Outputs: `X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results` (its own `README.md` lists them).
 
@@ -49,4 +55,4 @@ the acceptance's settings, the calibration's options and the 30 Sep reference.
 | `detect.py` | S1, in parallel processes. |
 | `calibrate.py` | S2, the delivered result. |
 | `tests/` | P0, T0-T7, each writing `<name>_out.txt` (and `.json`, figures) beside itself. |
-| `make_page.py`, `page_template.html` | The results page, from the saved outputs only: `python make_page.py [--fragment PATH]` writes `<out_dir>\wand_calibration_20261006_T0.html` (standalone) and, with `--fragment`, the copy without its document wrapper that is published as the artifact https://claude.ai/artifact/BSQS8D25a9Fypt3wWoP6vB (republish the fragment, not the standalone file). |
+| `make_page.py`, `page_template.html` | The results page, from the saved outputs only: `python make_page.py [--fragment PATH]` writes `<out_dir>\wand_calibration_20261006_T0.html` (standalone) and, with `--fragment`, the copy without its document wrapper that is published as the artifact https://claude.ai/artifact/BSQS8D25a9Fypt3wWoP6vB (republish the fragment, not the standalone file). Since the evening of 6 Oct (your request, during run T2) it also shows each camera's 2-D reprojection-error distribution (`err2d`, the same chart as the T2 page). |

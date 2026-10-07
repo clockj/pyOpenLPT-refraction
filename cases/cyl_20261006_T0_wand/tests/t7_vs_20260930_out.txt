@@ -1,9 +1,9 @@
 T7: cam1 of today's wand calibration against the dot-board calibration of 30 Sep
   (only meaningful if cam1's lens and focus are unchanged; the camera may also have moved a little)
-  f: wand 38,678.2 +- 307.6 px; dot board 41,459.1 +- 69.1 px (in air: 41,610 px)
-     difference -2,780.9 px = -6.708 % (-8.82 combined sigma)
-  distance_from_axis_mm  wand  +1010.1119 mm   dot board  +1094.1259 mm   difference -84.0141
-  elevation_deg          wand     +2.6927 deg   dot board     -0.0955 deg   difference +2.7883
-  aim_deg                wand     -0.1394 deg   dot board     +0.6362 deg   difference -0.7757
-  roll_deg               wand     +0.0188 deg   dot board     +0.3346 deg   difference -0.3159
-  sigma of the wand fit's distance from the axis: 7.864 mm; the dot board's centre sigma [0.3672118344297549, 0.5462973253376229, 1.7849273436266806] mm (board frame)
+  f: wand 38,551.4 +- 295.8 px; dot board 41,459.1 +- 69.1 px (in air: 41,610 px)
+     difference -2,907.6 px = -7.013 % (-9.57 combined sigma)
+  distance_from_axis_mm  wand  +1006.8149 mm   dot board  +1094.1259 mm   difference -87.3110
+  elevation_deg          wand     +2.6656 deg   dot board     -0.0955 deg   difference +2.7612
+  aim_deg                wand     -0.1427 deg   dot board     +0.6362 deg   difference -0.7789
+  roll_deg               wand     +0.0268 deg   dot board     +0.3346 deg   difference -0.3079
+  sigma of the wand fit's distance from the axis: 7.564 mm; the dot board's centre sigma [0.3672118344297549, 0.5462973253376229, 1.7849273436266806] mm (board frame)

@@ -33,7 +33,7 @@
   {
    "check": "Stop ends the process within 2 s",
    "ok": true,
-   "detail": "0.19 s; status 'Flat-window calibration stopped.'"
+   "detail": "0.17 s; status 'Flat-window calibration stopped.'"
   },
   {
    "check": "refit from the last result: the same f (1e-6), and faster",
@@ -46,7 +46,7 @@
    "detail": "calls [(25.0, 0)]"
   }
  ],
- "seconds": 58.82938838005066,
+ "seconds": 51.74303197860718,
  "f_rel_err": [
   0.0006273290380800489,
   0.0011889244019249734,

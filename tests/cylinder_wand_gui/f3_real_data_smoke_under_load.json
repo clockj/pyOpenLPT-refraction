@@ -1,0 +1,442 @@
+{
+ "T0:none": {
+  "run": "T0",
+  "mode": "none",
+  "share": true,
+  "seconds": 80.4727087020874,
+  "starts": [
+   {
+    "start": 0,
+    "stage3_rms": 0.408,
+    "rounds": 3,
+    "seconds": 7.230980634689331,
+    "stage4_rms": 0.46933,
+    "active": 6064,
+    "shared_from": null,
+    "notes": [
+     "F-a2: round 2: the active set repeats round 0's: the 8 detections that alternate are left out"
+    ]
+   },
+   {
+    "start": 1,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 2,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 3,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 4,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 5,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   }
+  ],
+  "final": {
+   "rounds": 3,
+   "cycle": {
+    "round": 2,
+    "repeats_round": 0,
+    "left_out": 8
+   },
+   "flipped": null,
+   "weights_used": false,
+   "stage4_shared": 5,
+   "why": "equal weights requested (noise_weights='none')"
+  },
+  "summary": {
+   "rms_px": 0.46932992636772614,
+   "sigma_px": 0.5435513644359504,
+   "frames": 1519,
+   "active": 6064,
+   "observations": 6076,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 23.06961748697257,
+   "wand_free_mean_um": 0.03167077358510442,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38551.436743126695,
+     "f_sigma_px": 295.8321705756562,
+     "distance_mm": 1006.814897924572,
+     "distance_sigma_mm": 7.563690100625311,
+     "azimuth_deg": 0.0,
+     "azimuth_sigma_deg": 0.0,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.0024879399060530106,
+      0.04650700527246318,
+      -0.9989148655494181
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5002424926195014,
+     "n_active": 3032,
+     "n_total": 3038
+    },
+    {
+     "name": "cam2",
+     "f_px": 35812.03186070013,
+     "f_sigma_px": 424.6084170621455,
+     "distance_mm": 1036.0524848106027,
+     "distance_sigma_mm": 11.944888895720943,
+     "azimuth_deg": 60.82750892568501,
+     "azimuth_sigma_deg": 0.027138207694080454,
+     "height_rel_mm": 20.308813533569058,
+     "height_sigma_mm": 1.0102232540873848,
+     "viewing_direction": [
+      -0.8744915983449453,
+      0.023719612537499837,
+      -0.4844603434804289
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.43623228691432114,
+     "n_active": 3032,
+     "n_total": 3038
+    }
+   ]
+  }
+ },
+ "T0:camera": {
+  "run": "T0",
+  "mode": "camera",
+  "share": true,
+  "seconds": 124.00040078163147,
+  "starts": [
+   {
+    "start": 0,
+    "stage3_rms": 0.408,
+    "rounds": 9,
+    "seconds": 49.12520956993103,
+    "stage4_rms": 0.46933,
+    "active": 6064,
+    "shared_from": null,
+    "notes": [
+     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+    ]
+   },
+   {
+    "start": 1,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 2,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 3,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 4,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 5,
+    "stage3_rms": 0.408,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   }
+  ],
+  "final": {
+   "rounds": 9,
+   "cycle": {
+    "round": 8,
+    "repeats_round": 6,
+    "left_out": 8
+   },
+   "flipped": {
+    "round": 5,
+    "sigma_px": [
+     [
+      0.7815303408540127,
+      0.07815303408540127
+     ],
+     [
+      0.5758425264725333,
+      0.563155295143131
+     ]
+    ]
+   },
+   "weights_used": false,
+   "stage4_shared": 5,
+   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 0.782, 0.078 px and 0.576, 0.563 px per group): equal weights, as without the weighting"
+  },
+  "summary": {
+   "rms_px": 0.4693299263677001,
+   "sigma_px": 0.5435513644359202,
+   "frames": 1519,
+   "active": 6064,
+   "observations": 6076,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 23.069617421238522,
+   "wand_free_mean_um": 0.031670761866293216,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38551.43696936687,
+     "f_sigma_px": 295.83218118980665,
+     "distance_mm": 1006.8149041666486,
+     "distance_sigma_mm": 7.563690394099318,
+     "azimuth_deg": 0.0,
+     "azimuth_sigma_deg": 0.0,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.0024879392719716546,
+      0.04650700496556016,
+      -0.9989148655652853
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5002424931230383,
+     "n_active": 3032,
+     "n_total": 3038
+    },
+    {
+     "name": "cam2",
+     "f_px": 35812.03092337204,
+     "f_sigma_px": 424.60865652002053,
+     "distance_mm": 1036.0524588395663,
+     "distance_sigma_mm": 11.944895618752845,
+     "azimuth_deg": 60.82750887516394,
+     "azimuth_sigma_deg": 0.027138211567579916,
+     "height_rel_mm": 20.30881462387169,
+     "height_sigma_mm": 1.0102233787205996,
+     "viewing_direction": [
+      -0.8744915979902222,
+      0.023719612054567553,
+      -0.48446034414437494
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.43623228633684213,
+     "n_active": 3032,
+     "n_total": 3038
+    }
+   ]
+  }
+ },
+ "T2:camera": {
+  "run": "T2",
+  "mode": "camera",
+  "share": true,
+  "seconds": 341.30757546424866,
+  "starts": [
+   {
+    "start": 0,
+    "stage3_rms": 0.502,
+    "rounds": 10,
+    "seconds": 73.42917132377625,
+    "stage4_rms": 0.60051,
+    "active": 7856,
+    "shared_from": null,
+    "notes": [
+     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
+     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+    ]
+   },
+   {
+    "start": 1,
+    "stage3_rms": 0.502,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 2,
+    "stage3_rms": 0.502,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 3,
+    "stage3_rms": 0.502,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   },
+   {
+    "start": 4,
+    "stage3_rms": 0.703,
+    "rounds": 15,
+    "seconds": 114.93570113182068,
+    "stage4_rms": 0.60051,
+    "active": 7856,
+    "shared_from": null,
+    "notes": [
+     "F-a: round 8: the noise estimate flips between two states every round (1.0773, 0.1077 px and 0.5814, 0.8540 px per group): equal weights from the next round on",
+     "F-a2: round 14: the active set repeats round 12's: the 8 detections that alternate are left out"
+    ]
+   },
+   {
+    "start": 5,
+    "stage3_rms": 0.502,
+    "rounds": 0,
+    "seconds": 0.0,
+    "stage4_rms": null,
+    "active": null,
+    "shared_from": 0,
+    "notes": []
+   }
+  ],
+  "final": {
+   "rounds": 10,
+   "cycle": {
+    "round": 9,
+    "repeats_round": 7,
+    "left_out": 8
+   },
+   "flipped": {
+    "round": 5,
+    "sigma_px": [
+     [
+      1.0080923196949154,
+      0.10080923196949154
+     ],
+     [
+      0.5766076808784729,
+      0.8539347915265403
+     ]
+    ]
+   },
+   "weights_used": false,
+   "stage4_shared": 4,
+   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 1.008, 0.101 px and 0.577, 0.854 px per group): equal weights, as without the weighting"
+  },
+  "summary": {
+   "rms_px": 0.6005095822127539,
+   "sigma_px": 0.6947069257468392,
+   "frames": 1966,
+   "active": 7856,
+   "observations": 7864,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 31.290221729820335,
+   "wand_free_mean_um": 0.04768303329976054,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38252.360136235446,
+     "f_sigma_px": 354.7848590580633,
+     "distance_mm": 1001.2378474087704,
+     "distance_sigma_mm": 9.096092751688591,
+     "azimuth_deg": -1.2706490030095746e-17,
+     "azimuth_sigma_deg": 1.154365190661537e-19,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.004597500077197321,
+      0.02492216149931532,
+      -0.999678822852242
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.6258821839692402,
+     "n_active": 3928,
+     "n_total": 3932
+    },
+    {
+     "name": "cam2",
+     "f_px": 37409.28241876453,
+     "f_sigma_px": 523.4011900753859,
+     "distance_mm": 1085.1216488786588,
+     "distance_sigma_mm": 14.86724676720563,
+     "azimuth_deg": 60.66498389484128,
+     "azimuth_sigma_deg": 0.037700049871555445,
+     "height_rel_mm": 12.036066310360223,
+     "height_sigma_mm": 0.7445381640720666,
+     "viewing_direction": [
+      -0.8715026679473111,
+      0.01036875984354496,
+      -0.4902811321884863
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5740165576432151,
+     "n_active": 3928,
+     "n_total": 3932
+    }
+   ]
+  }
+ }
+}

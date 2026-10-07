@@ -191,8 +191,14 @@ footer { margin-top: 48px; color: var(--muted); font-size: 13px; display: grid; 
       <figure class="card"><h3>cam2 residuals</h3><svg id="ch-res2" viewBox="0 0 640 430" role="img" aria-label="cam2 mean residual per image cell"></svg></figure>
     </div>
     <p class="sub" style="font-size:14px">Mean residual in each image cell with 20 or more detections, the arrow drawn 500&times; (0.1 px = 50 px). The pattern changes from cell to cell rather than smoothly, so it is not a lens or tube error.</p>
+    <figure class="card"><h3>Reprojection errors in 2-D</h3><div class="legend" id="lg-err"></div>
+      <div class="figs">
+        <svg id="ch-err1" viewBox="0 0 450 470" role="img" aria-label="cam1 reprojection errors, du against dv"></svg>
+        <svg id="ch-err2" viewBox="0 0 450 470" role="img" aria-label="cam2 reprojection errors, du against dv"></svg>
+      </div>
+      <figcaption>{{err_caption}}</figcaption></figure>
     <figure class="card"><svg id="ch-len" viewBox="0 0 1000 300" role="img" aria-label="Wand length error along the recording"></svg>
-      <figcaption>The wand length from a free two-camera triangulation, minus 10 mm, frame by frame ({{wand_rms_um}} &micro;m RMS). Neighbouring frames share their error (correlation 0.92 after one frame, 0.14 after ten): it follows the wand's fast pose changes, not random noise.</figcaption></figure>
+      <figcaption>The wand length from a free two-camera triangulation, minus 10 mm, frame by frame ({{wand_rms_um}} &micro;m RMS). Neighbouring frames share their error (correlation {{d7_lag1}} after one frame, {{d7_lag10}} after ten): it follows the wand's fast pose changes, not random noise.</figcaption></figure>
   </section>
 
   <section id="valley">
@@ -490,6 +496,57 @@ footer { margin-top: 48px; color: var(--muted); font-size: 13px; display: grid; 
     sv(svg, "text", { x: 4, y: 11, class: "ax" }, "image 1280 × 800 px");
   }
 
+  // the reprojection errors in 2-D: counts per cell on a square-root scale in six steps of one ramp, shared by both
+  // cameras (the same colour means the same count); +dv is drawn downward, as in the image
+  const errStep = (n, mx) => Math.min(6, 1 + Math.floor(6 * Math.sqrt(n / mx) - 1e-9));
+  function drawErr(id, cam) {
+    const svg = document.getElementById(id); clear(svg);
+    const E = D.err, c = E.cams[cam], R = E.R, st = E.step, nb = Math.round(2 * R / st);
+    const L = 48, T = 96, S = 330, MG = 50, GAP = 6, cw = S / nb;
+    const x = lin(-R, R, L, L + S), y = lin(-R, R, T, T + S);
+    ticks(-R, R, 4).forEach(v => {
+      sv(svg, "line", { x1: x(v), x2: x(v), y1: T, y2: T + S, stroke: css("--grid") });
+      sv(svg, "line", { x1: L, x2: L + S, y1: y(v), y2: y(v), stroke: css("--grid") });
+      sv(svg, "text", { x: x(v), y: T + S + 15, "text-anchor": "middle", class: "ax" }, fmt(v, 0));
+      sv(svg, "text", { x: L - 6, y: y(v) + 4, "text-anchor": "end", class: "ax" }, fmt(v, 0));
+    });
+    sv(svg, "text", { x: L + S / 2, y: T + S + 33, "text-anchor": "middle", class: "lb" }, "du (px)");
+    const yl = sv(svg, "text", { x: 12, y: T + S / 2, "text-anchor": "middle", class: "lb" }, "dv (px, down)");
+    yl.setAttribute("transform", `rotate(-90 12 ${T + S / 2})`);
+    c.cells.forEach(([i, j, n]) => {
+      const r = sv(svg, "rect", { x: L + i * cw, y: T + j * cw, width: cw + 0.3, height: cw + 0.3, fill: css("--q" + errStep(n, E.max)) });
+      hover(r, [[`${n} detection${n > 1 ? "s" : ""}`, ""], [null, `du ${fmt(-R + i * st, 1)} to ${fmt(-R + (i + 1) * st, 1)} px`],
+        [null, `dv ${fmt(-R + j * st, 1)} to ${fmt(-R + (j + 1) * st, 1)} px`]]);
+    });
+    sv(svg, "line", { x1: x(0), x2: x(0), y1: T, y2: T + S, stroke: css("--axis"), "stroke-width": 1 });
+    sv(svg, "line", { x1: L, x2: L + S, y1: y(0), y2: y(0), stroke: css("--axis"), "stroke-width": 1 });
+    const rc = sv(svg, "circle", { cx: x(0), cy: y(0), r: c.rms * S / (2 * R), fill: "none", stroke: css("--muted"), "stroke-width": 2, "stroke-dasharray": "5 4" });
+    hover(rc, [[fmt(c.rms, 3) + " px", "RMS (2-D)"], [null, `du ${fmt(c.rms_u, 3)} px, dv ${fmt(c.rms_v, 3)} px`]]);
+    const mmax = Math.max(...c.mu, ...c.mv);
+    c.mu.forEach((n, i) => {
+      if (!n) return;
+      const hh = (MG - 4) * n / mmax;
+      const b = sv(svg, "rect", { x: L + i * cw + 0.5, y: T - GAP - hh, width: Math.max(cw - 1, 0.5), height: hh, fill: css("--ink-2"), rx: 1 });
+      hover(b, [[`${n} detections`, ""], [null, `du ${fmt(-R + i * st, 1)} to ${fmt(-R + (i + 1) * st, 1)} px`]]);
+    });
+    c.mv.forEach((n, j) => {
+      if (!n) return;
+      const ww = (MG - 4) * n / mmax;
+      const b = sv(svg, "rect", { x: L + S + GAP, y: T + j * cw + 0.5, width: ww, height: Math.max(cw - 1, 0.5), fill: css("--ink-2"), rx: 1 });
+      hover(b, [[`${n} detections`, ""], [null, `dv ${fmt(-R + j * st, 1)} to ${fmt(-R + (j + 1) * st, 1)} px`]]);
+    });
+    sv(svg, "text", { x: L, y: 16, class: "lb-strong" }, `${cam}: ${fmt(c.n, 0)} detections`);
+    sv(svg, "text", { x: L, y: 33, class: "lb" }, `RMS ${fmt(c.rms, 2)} px (du ${fmt(c.rms_u, 2)}, dv ${fmt(c.rms_v, 2)})`);
+  }
+  function errLegend() {
+    const mx = D.err.max, ranges = {};
+    for (let n = 1; n <= mx; n++) { const k = errStep(n, mx); if (!ranges[k]) ranges[k] = [n, n]; ranges[k][1] = n; }
+    const items = [{ nosw: true, label: "detections per 0.1 × 0.1 px cell:" }];
+    for (let k = 1; k <= 6; k++) if (ranges[k]) items.push({ color: css("--q" + k), label: ranges[k][0] === ranges[k][1] ? `${ranges[k][0]}` : `${ranges[k][0]}–${ranges[k][1]}` });
+    items.push({ line: true, label: "RMS (2-D)" }, { color: css("--ink-2"), label: "du (top), dv (right)" });
+    legend("lg-err", items);
+  }
+
   function drawLen() {
     const svg = document.getElementById("ch-len"); clear(svg);
     const W = 1000, H = 300, L = 56, R = 12, T = 12, B = 42;
@@ -581,6 +638,7 @@ footer { margin-top: 48px; color: var(--muted); font-size: 13px; display: grid; 
   function drawAll() {
     hideTip();
     drawUsable(); drawSens(); drawRig(); drawVol(); drawRes("ch-res1", "cam1"); drawRes("ch-res2", "cam2");
+    drawErr("ch-err1", "cam1"); drawErr("ch-err2", "cam2"); errLegend();
     drawLen(); drawValley(); drawHeld();
   }
   drawAll();

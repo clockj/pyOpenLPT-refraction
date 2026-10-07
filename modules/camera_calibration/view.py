@@ -2082,6 +2082,25 @@ class CameraCalibrationView(QWidget):
             return
             
         success, msg = self.wand_calibrator.load_wand_data_from_csv(file_path)
+        if success and not self.wand_calibrator.wand_points:
+            # raw detections only (a stopped or failed detection, or a pairing that found nothing): nothing to
+            # calibrate.  The loader itself accepts such files: Process All Frames / Resume reads them.
+            raw = self.wand_calibrator.wand_data_raw or {}
+            n_raw = sum(len(p) for v in raw.values() for p in v.values())
+            if n_raw:
+                text = (f"{file_path}\n\nThis file holds {n_raw} raw detections in {len(raw)} frames, but no paired "
+                        "wand points (no Filtered_Small / Filtered_Large rows), so there is nothing to calibrate.\n\n"
+                        "Either the detection was stopped or failed before it paired them, or its pairing found no "
+                        "frame with both balls in every camera.\n"
+                        "- Stopped or failed: load the images, then run Process All Frames / Resume and choose this "
+                        "file (the frames in it are not detected again).\n"
+                        "- Nothing paired: change the detection settings (check a frame with Test Detect) and detect "
+                        "again, answering No to Resume.")
+            else:
+                text = f"{file_path}\n\nThis file holds no wand points."
+            QMessageBox.warning(self, "No Wand Points", text)
+            self.status_label.setText("Loaded no wand points (raw detections only).")
+            return
         if success:
             self._wand_detect_mode_used = None          # not known for points read from a file
             self._wand_points_source = file_path
@@ -5459,62 +5478,104 @@ class CameraCalibrationView(QWidget):
         self._proc_dialog.exec() # Modal blocking
         
     def _on_process_finished(self, success, msg):
+        from PySide6.QtWidgets import QMessageBox, QFileDialog
         self._proc_dialog.close()
         self._busy_end('wand_process_all')
-        
-        if success:
-             self.status_label.setText(f"Done: {msg}")
-             self.populate_wand_table()
-             self.populate_wand_table()
-             
-             # Update Image Size UI if available (Note: these spinboxes are in the camera table now)
-             # if hasattr(self.wand_calibrator, 'image_size') and self.wand_calibrator.image_size != (0,0):
-             #     h, w = self.wand_calibrator.image_size
-             #     # Image size is now read from camera table, not separate spinboxes
-             
-             # Data is auto-saved, no need to prompt export here
-        else:
-             self.status_label.setText(f"Status: {msg}")
-             
-             # If stopped by user, don't show error popup (Data already saved by worker)
-             if "Stopped by user" in msg:
-                 self.populate_wand_table()
-                 return # Done
-             
-             # Check if we have partial data
-             has_data = False
-             if hasattr(self, 'wand_calibrator'):
-                 if hasattr(self.wand_calibrator, 'wand_data_raw') and len(self.wand_calibrator.wand_data_raw) > 0:
-                     has_data = True
-                 elif hasattr(self.wand_calibrator, 'wand_points') and len(self.wand_calibrator.wand_points) > 0:
-                     has_data = True
-             
-             if has_data:
-                 from PySide6.QtWidgets import QMessageBox, QFileDialog
-                 reply = QMessageBox.question(self, "Detection Failed", 
-                                              f"Error: {msg}\n\nHowever, partial data was captured ({len(self.wand_calibrator.wand_data_raw)} frames). Do you want to export it?",
-                                              QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-                 if reply == QMessageBox.StandardButton.Yes:
-                     path, _ = QFileDialog.getSaveFileName(self, "Save Rescue Data", "wand_rescue.csv", "CSV Files (*.csv)")
-                     if path:
-                         self.wand_calibrator.export_wand_data(path)
-             else:
-                 from PySide6.QtWidgets import QMessageBox
-                 QMessageBox.warning(self, "Detection Failed", msg)
-        from PySide6.QtWidgets import QMessageBox, QFileDialog
-        
-        reply = QMessageBox.question(self, "Export Data", "Detection complete. Do you want to export the point data?", 
+
+        if not success:
+            self.status_label.setText(f"Status: {msg}")
+
+            # If stopped by user, don't show error popup (Data already saved by worker)
+            if "Stopped by user" in msg:
+                self.populate_wand_table()
+                self.status_label.setText(f"Status: {msg} The saved file is not paired into wand points yet: run "
+                                          "Process All Frames / Resume with the same file to finish it.")
+                return # Done
+
+            # Check if we have partial data
+            has_data = False
+            if hasattr(self, 'wand_calibrator'):
+                if hasattr(self.wand_calibrator, 'wand_data_raw') and len(self.wand_calibrator.wand_data_raw) > 0:
+                    has_data = True
+                elif hasattr(self.wand_calibrator, 'wand_points') and len(self.wand_calibrator.wand_points) > 0:
+                    has_data = True
+
+            if has_data:
+                reply = QMessageBox.question(self, "Detection Failed",
+                                             f"Error: {msg}\n\nHowever, partial data was captured "
+                                             f"({len(self.wand_calibrator.wand_data_raw)} frames of raw detections, "
+                                             "not yet paired into wand points). Do you want to export it?\n\nTo "
+                                             "finish it later, run Process All Frames / Resume with the exported "
+                                             "file.",
+                                             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+                if reply == QMessageBox.StandardButton.Yes:
+                    path, _ = QFileDialog.getSaveFileName(self, "Save Rescue Data", "wand_rescue.csv", "CSV Files (*.csv)")
+                    if path:
+                        self.wand_calibrator.export_wand_data(path)
+            else:
+                QMessageBox.warning(self, "Detection Failed", msg)
+            return # a failed detection is not complete: no "Export Data" question
+
+        self.populate_wand_table()
+        n_pair, n_frames, per_cam = self._wand_pairing_counts()
+        self.status_label.setText(f"Done: {msg} {n_pair} of {n_frames} frames paired (both balls in every camera).")
+        if n_pair == 0:
+            QMessageBox.warning(self, "No Wand Points", self._wand_pairing_failure_text(n_frames, per_cam))
+            return
+
+        reply = QMessageBox.question(self, "Export Data",
+                                     f"Detection complete: {n_pair} of {n_frames} frames have both balls in every "
+                                     "camera.\n\nDo you want to export the point data?",
                                      QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-        
+
         if reply == QMessageBox.StandardButton.Yes:
-             path, _ = QFileDialog.getSaveFileName(self, "Save Wand Data", "wand_points.csv", "CSV Files (*.csv)")
-             if path:
-                 success, msg = self.wand_calibrator.export_wand_data(path)
-                 if success:
-                     QMessageBox.information(self, "Export", "Data exported successfully.")
-                 else:
-                     QMessageBox.warning(self, "Export Failed", msg)
-        
+            path, _ = QFileDialog.getSaveFileName(self, "Save Wand Data", "wand_points.csv", "CSV Files (*.csv)")
+            if path:
+                success, msg = self.wand_calibrator.export_wand_data(path)
+                if success:
+                    QMessageBox.information(self, "Export", "Data exported successfully.")
+                else:
+                    QMessageBox.warning(self, "Export Failed", msg)
+
+    def _wand_pairing_counts(self):
+        """After a detection: (frames paired into wand points, frames, per camera (frames with two or more blobs,
+        with one, with none)).  A frame is paired when every camera has both balls (WandCalibrator's pairing)."""
+        wc = self.wand_calibrator
+        raw = getattr(wc, 'wand_data_raw', None) or {}
+        images = {c: v for c, v in (getattr(self, 'wand_images', None) or {}).items() if len(v)}
+        n_frames = max([len(raw)] + [len(v) for v in images.values()])
+        cams = sorted(images) if images else sorted({c for v in raw.values() for c in v})
+        per_cam = {}
+        for c in cams:
+            n2 = n1 = 0
+            for v in raw.values():
+                k = len(v[c]) if v.get(c) is not None else 0
+                n2 += k >= 2
+                n1 += k == 1
+            per_cam[c] = (n2, n1, n_frames - n2 - n1)
+        return len(getattr(wc, 'wand_points', None) or {}), n_frames, per_cam
+
+    def _wand_pairing_failure_text(self, n_frames, per_cam):
+        """Why a detection paired no frame, and what to try (tests/cylinder_wand_gui P4: with the default rod opening
+        a thick rod joins the two balls into one blob in every camera)."""
+        lines = [f"The detection ran on {n_frames} frames but paired none: a frame is kept only when every camera "
+                 "finds both balls (a small one and a large one). Per camera:"]
+        for c, (n2, n1, n0) in per_cam.items():
+            lines.append(f"  Camera {c + 1}: two or more blobs in {n2} frames, one blob in {n1}, none in {n0}.")
+        lines.append("")
+        if any(n1 > n2 for n2, n1, _n0 in per_cam.values()):
+            lines.append("Most frames show one blob where there should be two: the rod probably joins the two balls.")
+        if getattr(self, '_wand_detect_mode_used', None) == "ellipse":
+            lines.append("In the ellipse mode, set Rod opening a little wider than the rod's image in pixels (and "
+                         "narrower than the small ball), then check a frame with Test Detect: each camera should show "
+                         "two balls. Check the Radius Range too.")
+        else:
+            lines.append("Check the Radius Range and Sensitivity on a frame with Test Detect: each camera should show "
+                         "both balls.")
+        lines.append("")
+        lines.append("The saved file holds only these raw detections ('Raw' rows) and cannot be calibrated as it is.")
+        return "\n".join(lines)
+
     def _apply_current_ui_filter(self):
         """Collect checked frames from table and apply to calibrator."""
         from PySide6.QtWidgets import QCheckBox

@@ -1,0 +1,54 @@
+P4: the GUI's detection and import with the settings a user starts from; X:\Shijie Zhong\Refraction\Raw\20261006\T2, frames 4000-5199
+
+[ellipse_defaults] mode ellipse, radius 20-200 px, ellipse options {'open_px': 25, 'rod_mask_px': 18.0, 'guard_px': 3.0, 'full': False}  (153 s)
+  raw detections: 573 in cam 0, 835 in cam 1; frames with any detection 1032 of 1200
+  | Cam 0 PeakFilter: S[92.7±13.2] L[94.5±10.0] (Ranges: 59.2-129.7, 70.3-118.5)
+  | Cam 0 Final Stats: Small(m=92.7, s=13.2), Large(m=94.5, s=10.0)
+  | Cam 1 PeakFilter: S[81.9±4.1] L[81.8±4.2] (Ranges: 73.1-93.4, 71.5-93.4)
+  | Cam 1 Final Stats: Small(m=81.9, s=4.1), Large(m=81.8, s=4.2)
+  | Pass1 Frame 0 rejected: Cam 0: No distinct Large after excluding Small
+  | Pass1 Frame 2 rejected: Cam 0: No distinct Large after excluding Small
+  | Pass1 Frame 1 rejected: Cam 0: No distinct Large after excluding Small
+  | Pass1 Frame 3 rejected: Camera 0 not in cam_data
+  | Pass1 Frame 4 rejected: Cam 0: No distinct Large after excluding Small
+  | Pass 1 Done. Valid Frames: 0 / 1200
+  | Refinement Done. Valid Frames: 0 / 1200
+  paired (wand_points): 0 frames
+  the saved CSV: 1408 rows, by status {'Raw': 1408}; first non-Raw row: line None
+  the GUI's loader on it: True, "Loaded 0 valid frames."
+
+[fast_defaults] mode fast, radius 20-200 px, ellipse options None  (1037 s)
+  raw detections: 1908 in cam 0, 2212 in cam 1; frames with any detection 1181 of 1200
+  | Cam 0 PeakFilter: S[63.5±9.8] L[71.4±5.1] (Ranges: 43.4-80.3, 61.2-80.3)
+  | Cam 0 Final Stats: Small(m=63.5, s=9.8), Large(m=71.4, s=5.1)
+  | Cam 1 PeakFilter: S[49.1±2.8] L[63.4±4.3] (Ranges: 42.2-54.8, 54.8-71.9)
+  | Cam 1 Final Stats: Small(m=49.1, s=2.8), Large(m=63.4, s=4.3)
+  | Pass 1 Done. Valid Frames: 345 / 1200
+  | Pass 2: Recalculating stats from filtered data...
+  | Cam 0 Refined: Small(m=55.8, s=7.1), Large(m=71.4, s=7.2)
+  | Cam 1 Refined: Small(m=48.8, s=3.0), Large(m=63.2, s=4.5)
+  | Pass 2 Done. Valid Frames: 398 / 1200
+  | Refinement Done. Valid Frames: 398 / 1200
+  paired (wand_points): 398 frames
+  the saved CSV: 5712 rows, by status {'Raw': 4120, 'Filtered_Small': 796, 'Filtered_Large': 796}; first non-Raw row: line 4121
+  the GUI's loader on it: True, "Loaded 398 valid frames."
+
+[ellipse_case] mode ellipse, radius 40-120 px, ellipse options {'open_px': 95, 'rod_mask_px': 50.0, 'guard_px': 3.0, 'full': False}  (163 s)
+  raw detections: 1264 in cam 0, 1610 in cam 1; frames with any detection 1169 of 1200
+  | Cam 0 PeakFilter: S[65.5±0.6] L[88.2±0.7] (Ranges: 63.9-66.8, 86.7-90.2)
+  | Cam 0 Final Stats: Small(m=65.5, s=0.6), Large(m=88.2, s=0.7)
+  | Cam 1 PeakFilter: S[58.5±0.6] L[79.2±0.6] (Ranges: 56.7-60.0, 77.2-80.5)
+  | Cam 1 Final Stats: Small(m=58.5, s=0.6), Large(m=79.2, s=0.6)
+  | Pass1 Frame 0 rejected: Cam 1: No candidates (s:0, l:1), pts=1
+  | Pass1 Frame 3 rejected: Cam 1: No candidates (s:0, l:0), pts=1
+  | Pass1 Frame 2 rejected: Cam 1: No candidates (s:0, l:0), pts=1
+  | Pass1 Frame 1 rejected: Cam 1: No candidates (s:0, l:0), pts=1
+  | Pass 1 Done. Valid Frames: 159 / 1200
+  | Pass 2: Recalculating stats from filtered data...
+  | Cam 0 Refined: Small(m=65.3, s=0.6), Large(m=87.9, s=0.5)
+  | Cam 1 Refined: Small(m=58.4, s=0.6), Large(m=79.0, s=0.5)
+  | Pass 2 Done. Valid Frames: 159 / 1200
+  | Refinement Done. Valid Frames: 159 / 1200
+  paired (wand_points): 159 frames
+  the saved CSV: 3510 rows, by status {'Raw': 2874, 'Filtered_Small': 318, 'Filtered_Large': 318}; first non-Raw row: line 2875
+  the GUI's loader on it: True, "Loaded 159 valid frames."

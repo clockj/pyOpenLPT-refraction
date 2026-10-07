@@ -7,7 +7,7 @@ Using Camera Settings: image_size=(800,1280), init_focal=9000.0
 [Filter] UI: no frames marked for removal, using all 300 frames
 [Wand] distortion_params=0
 Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
-  Run Calibration: 46 s (finished True); message ('info', 'Flat-Window Calibration')
+  Run Calibration: 40 s (finished True); message ('info', 'Flat-Window Calibration')
     4 cameras, 2 windows, 300 frames, 2400 of 2400 detections used.
     Reprojection RMS 0.116 px; wand length (free triangulation) RMS error 15.4 um over 300 frames.
       cam0: f 4,324 px +- 0.10 %, window 1, 582 mm from it, RMS 0.113 px
@@ -45,7 +45,7 @@ Using Camera Settings: image_size=(800,1280), init_focal=9000.0
 [Filter] UI: no frames marked for removal, using all 300 frames
 [Wand] distortion_params=0
 Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
-  PASS  Stop ends the process within 2 s  (0.19 s; status 'Flat-window calibration stopped.')
+  PASS  Stop ends the process within 2 s  (0.17 s; status 'Flat-window calibration stopped.')
 Using Camera Settings: image_size=(800,1280), init_focal=9000.0
   Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
 [Filter] UI: no frames marked for removal, using all 300 frames
@@ -59,4 +59,4 @@ Using Camera Settings: image_size=(800,1280), init_focal=9000.0
 Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
   PASS  'Use the previous calibrator' goes to the previous calibrator  (calls [(25.0, 0)])
 
-9 of 9 checks passed; 59 s
+9 of 9 checks passed; 52 s

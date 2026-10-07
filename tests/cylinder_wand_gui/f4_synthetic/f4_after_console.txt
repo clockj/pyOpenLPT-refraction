@@ -1,0 +1,9 @@
+after t11a_noise_sweep: exit 0, 123 s
+after t11c_unequal_noise: exit 0, 88 s
+after t11d_heavy_tails: exit 0, 100 s
+after t11e_systematic: exit 0, 43 s
+after t12a_weights_unequal: exit 0, 118 s
+after t12b_weights_equal: exit 0, 57 s
+after t12c_two_cameras: exit 0, 90 s
+after t12d_scratch_t5: exit 0, 240 s
+after t12e_scratch_5px: exit 0, 203 s

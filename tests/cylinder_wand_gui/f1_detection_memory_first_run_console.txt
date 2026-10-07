@@ -1,0 +1,6 @@
+F1: the GUI's detection with the fixed library, the BLAS thread variables unset as when the GUI starts
+  PASS  a: the variables are 1 inside the block and restored after it  (inside {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}; after (one set to 7 before) {'OPENBLAS_NUM_THREADS': '7', 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None}; after (unset before) {'OPENBLAS_NUM_THREADS': None, 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None})
+  FAIL  b: one worker started inside it commits <= 0.5 GB (P2: 4.22 GB without, 0.33 GB with one thread)  (4.22 GB; its variables {'OPENBLAS_NUM_THREADS': None, 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None})
+c: skipped (b failed: the pool would not fit in memory)
+
+1 of 2 checks passed; 2 s

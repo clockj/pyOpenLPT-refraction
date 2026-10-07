@@ -1,6 +1,6 @@
 G8: plate_wand behind the GUI's Pinhole+Refraction, offscreen
   300 frames; media 1.0, 1.49, 1.33, 12.7 mm; legacy box False
-  Run Calibration: 46 s (finished True); message ('info', 'Flat-Window Calibration')
+  Run Calibration: 40 s (finished True); message ('info', 'Flat-Window Calibration')
     4 cameras, 2 windows, 300 frames, 2400 of 2400 detections used.
     Reprojection RMS 0.116 px; wand length (free triangulation) RMS error 15.4 um over 300 frames.
       cam0: f 4,324 px +- 0.10 %, window 1, 582 mm from it, RMS 0.113 px
@@ -16,8 +16,8 @@ G8: plate_wand behind the GUI's Pinhole+Refraction, offscreen
   PASS  camFiles are PINPLATE, load in C++, and carry the GUI's window ids for VSC  (models {'PINPLATE'}, window ids [0, 0, 1, 1])
   PASS  error table, 3-D windows, the result's kind and the page  (300 rows, 2 planes, kind plate_wand, page True)
   PASS  tracking settings' hook copies the PINPLATE files  (['cam0.txt', 'cam1.txt', 'cam2.txt', 'cam3.txt'], byte-identical True)
-  PASS  Stop ends the process within 2 s  (0.19 s; status 'Flat-window calibration stopped.')
+  PASS  Stop ends the process within 2 s  (0.17 s; status 'Flat-window calibration stopped.')
   PASS  refit from the last result: the same f (1e-6), and faster  (3 s; largest change of f 2.7e-09)
   PASS  'Use the previous calibrator' goes to the previous calibrator  (calls [(25.0, 0)])
 
-9 of 9 checks passed; 59 s
+9 of 9 checks passed; 52 s

@@ -1,0 +1,63 @@
+F2: the GUI's messages after a detection and when loading wand points (offscreen)
+[ WARN:0@2.029] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@2.161] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Loaded 1408 raw, 0 filtered points. 0 valid frames ready for calibration.
+
+a. after the default-settings detection: 1 message(s); status: 'Done: Detection completed. 0 of 1200 frames paired (both balls in every camera).'
+   [warning] No Wand Points: The detection ran on 1200 frames but paired none: a frame is kept only when every camera finds both balls (a small one and a large one). Per camera:
+  Camera 1: two or more blobs in 8 frames, one blob in 557, none in 635.
+  Camera 2: two or more blobs in 0 frames, one blob in 835, none in 365.
+
+Most frames show one blob where there should be two: the rod probably joins the two balls.
+In the ellipse mode, set Rod opening a little wider than the rod's image in pixels (and narrower than the small ball), then check a frame with Test Detect: each camera should show two balls. Check the Radius Range too.
+
+The saved file holds only these raw detections ('Raw' rows) and cannot be calibrated as it is.
+  PASS  a: one warning, no question
+  PASS  a: it says no frame was paired, of 1200
+  PASS  a: per camera counts as P4 (cam1 8 / 557 / 635, cam2 0 / 835 / 365)
+  PASS  a: the rod and the Rod opening named, and the file's Raw rows
+  PASS  a: the status line says 0 of 1200 frames paired
+Loaded 2874 raw, 636 filtered points. 159 valid frames ready for calibration.
+
+b. after the case-settings detection: 1 message(s); status: 'Done: Detection completed. 159 of 1200 frames paired (both balls in every camera).'
+   [question] Export Data: Detection complete: 159 of 1200 frames have both balls in every camera.
+
+Do you want to export the point data?
+  PASS  b: only the export question, with 159 of 1200 frames
+Loaded 1408 raw, 0 filtered points. 0 valid frames ready for calibration.
+
+c. after a Stop: 0 message(s); status: 'Status: Stopped by user (Data Saved). The saved file is not paired into wand points yet: run Process All Frames / Resume with the same file to finish it.'
+  PASS  c: no message; the status line says the file is not paired yet and names Resume
+Loaded 1408 raw, 0 filtered points. 0 valid frames ready for calibration.
+
+d. after a failure with partial data: 1 message(s)
+   [question] Detection Failed: Error: Error: A process in the process pool was terminated abruptly while the future was running or pending.
+
+However, partial data was captured (1032 frames of raw detections, not yet paired into wand points). Do you want to export it?
+
+To finish it later, run Process All Frames / Resume with the exported file.
+  PASS  d: only the rescue question, naming the raw detections and Resume; no 'Detection complete'
+
+e. after a failure with no data: 1 message(s): [('warning', 'Detection Failed', 'Error: x')]
+  PASS  e: only the 'Detection Failed' warning
+Loaded 1408 raw, 0 filtered points. 0 valid frames ready for calibration.
+
+f. Load Wand Points on p4_ellipse_defaults.csv: 1 message(s); status: 'Loaded no wand points (raw detections only).'
+   [warning] No Wand Points: D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\p4_ellipse_defaults.csv
+
+This file holds 1408 raw detections in 1032 frames, but no paired wand points (no Filtered_Small / Filtered_Large rows), so there is nothing to calibrate.
+
+Either the detection was stopped or failed before it paired them, or its pairing found no frame with both balls in every camera.
+- Stopped or failed: load the images, then run Process All Frames / Resume and choose this file (the frames in it are not detected again).
+- Nothing paired: change the detection settings (check a frame with Test Detect) and detect again, answering No to Resume.
+  PASS  f: a warning with the raw count, the causes and what to do; no 'Success'
+Loaded 2874 raw, 636 filtered points. 159 valid frames ready for calibration.
+
+g. Load Wand Points on p3_wand_points_gui.csv: 1 message(s); status: 'Loaded 159 frames. Ready to calibrate.'
+   [info] Success: Loaded 159 valid frames.
+and make sure image size is inputed.
+  PASS  g: 'Success ... Loaded 159 valid frames', as before the fix
+
+11 of 11 checks passed; 2 s

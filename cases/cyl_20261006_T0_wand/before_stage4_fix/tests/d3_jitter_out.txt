@@ -1,0 +1,3 @@
+D3: frame-to-frame detection noise (quadratic over 7 frames), S1's centres
+  cam1 (2648 windows): noise sigma per coordinate, RMS (robust): Au 0.450 (0.453), Av 1.206 (0.562), Bu 0.403 (0.430), Bv 1.049 (0.536), AB 0.253 (0.158) px
+  cam2 (3642 windows): noise sigma per coordinate, RMS (robust): Au 0.342 (0.239), Av 1.256 (0.519), Bu 0.294 (0.208), Bv 1.091 (0.504), AB 0.262 (0.175) px

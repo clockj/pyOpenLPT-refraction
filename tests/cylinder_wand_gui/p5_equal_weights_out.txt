@@ -1,0 +1,27 @@
+P5: the delivered inputs of T0 and T2 with Noise weights "Equal" (noise_weights "none"), six starts
+
+T0: 1519 frames; whole calibration 495 s (delivered: see P1)
+  start  rounds  seconds  stage-4 rms  active       last rounds: rms (rejected/re-admitted)
+      0      20     68.6      0.47262   6072/6076   0.4693 (0/8); 0.4726 (8/0); 0.4693 (0/8)
+      1      20     63.3      0.47262   6072/6076   0.4693 (0/8); 0.4726 (8/0); 0.4693 (0/8)
+      2      20     66.0      0.47262   6072/6076   0.4693 (0/8); 0.4726 (8/0); 0.4693 (0/8)
+      3      20     65.7      0.47262   6072/6076   0.4693 (0/8); 0.4726 (8/0); 0.4693 (0/8)
+      4      20     67.6      0.47262   6072/6076   0.4693 (0/8); 0.4726 (8/0); 0.4693 (0/8)
+      5      20     65.0      0.47262   6072/6076   0.4693 (0/8); 0.4726 (8/0); 0.4693 (0/8)
+  result, Equal against the delivered (Per camera):
+    RMS 0.4726 px (delivered 0.4534); active 6072 of 6076 (delivered 5720); free wand length RMS 23.2 um (delivered 22.1)
+    cam1: f 38528 px (delivered 38678, -0.39 %), distance 1006.7 mm (delivered 1010.1)
+    cam2: f 35545 px (delivered 36022, -1.33 %), distance 1028.9 mm (delivered 1042.1)
+
+T2: 1966 frames; whole calibration 493 s (delivered: see P1)
+  start  rounds  seconds  stage-4 rms  active       last rounds: rms (rejected/re-admitted)
+      0      20     63.1      0.60202   7860/7864   0.6017 (4/4); 0.6020 (4/4); 0.6017 (4/4)
+      1      20     59.3      0.60202   7860/7864   0.6017 (4/4); 0.6020 (4/4); 0.6017 (4/4)
+      2      20     61.9      0.60202   7860/7864   0.6017 (4/4); 0.6020 (4/4); 0.6017 (4/4)
+      3      20     58.9      0.60202   7860/7864   0.6017 (4/4); 0.6020 (4/4); 0.6017 (4/4)
+      4      20     59.1      0.60202   7860/7864   0.6017 (4/4); 0.6020 (4/4); 0.6017 (4/4)
+      5      20     45.1      0.60202   7860/7864   0.6017 (4/4); 0.6020 (4/4); 0.6017 (4/4)
+  result, Equal against the delivered (Per camera):
+    RMS 0.6020 px (delivered 0.6005); active 7860 of 7864 (delivered 7856); free wand length RMS 31.5 um (delivered 31.3)
+    cam1: f 38256 px (delivered 38252, +0.01 %), distance 1001.3 mm (delivered 1001.2)
+    cam2: f 37306 px (delivered 37409, -0.28 %), distance 1082.1 mm (delivered 1085.1)

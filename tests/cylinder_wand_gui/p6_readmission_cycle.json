@@ -1,0 +1,111 @@
+{
+ "run": "T0",
+ "rounds": [
+  {
+   "limit": 2.762856984271307,
+   "rejected": 12,
+   "readmitted": 0,
+   "stale_frames": 0
+  },
+  {
+   "limit": 2.7389876741674306,
+   "rejected": 0,
+   "readmitted": 8,
+   "stale_frames": 3
+  },
+  {
+   "limit": 2.749288750086851,
+   "rejected": 8,
+   "readmitted": 0,
+   "stale_frames": 1
+  },
+  {
+   "limit": 2.7389876742221486,
+   "rejected": 0,
+   "readmitted": 8,
+   "stale_frames": 3
+  }
+ ],
+ "toggling": [
+  {
+   "frame": 272,
+   "cam": 0,
+   "end": 0,
+   "fit_d_over_lim": 1.1008985644993616,
+   "fit_lam_min": 0.06974223531515182,
+   "out_d_over_readmit_lim": 0.726099423481756,
+   "out_rnorm_px": 1.5910218969092857,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 272,
+   "cam": 0,
+   "end": 1,
+   "fit_d_over_lim": 1.1216829679415463,
+   "fit_lam_min": 0.07304888261815809,
+   "out_d_over_readmit_lim": 0.8409864410540628,
+   "out_rnorm_px": 1.84276119695121,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 272,
+   "cam": 1,
+   "end": 0,
+   "fit_d_over_lim": 1.1008985628947034,
+   "fit_lam_min": 0.23648954850800916,
+   "out_d_over_readmit_lim": 0.7718036361178617,
+   "out_rnorm_px": 1.6911685169635424,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 272,
+   "cam": 1,
+   "end": 1,
+   "fit_d_over_lim": 1.1216829660441694,
+   "fit_lam_min": 0.23252655609955386,
+   "out_d_over_readmit_lim": 0.6984939389431002,
+   "out_rnorm_px": 1.5305330313966474,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 284,
+   "cam": 0,
+   "end": 0,
+   "fit_d_over_lim": 1.1058994723467226,
+   "fit_lam_min": 0.09915699506909159,
+   "out_d_over_readmit_lim": 0.7183497209350967,
+   "out_rnorm_px": 1.5740408251062747,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 284,
+   "cam": 0,
+   "end": 1,
+   "fit_d_over_lim": 1.15043356045711,
+   "fit_lam_min": 0.10298882880900326,
+   "out_d_over_readmit_lim": 0.9026889249292003,
+   "out_rnorm_px": 1.977963071190823,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 284,
+   "cam": 1,
+   "end": 0,
+   "fit_d_over_lim": 1.1058994687149024,
+   "fit_lam_min": 0.21934729929430377,
+   "out_d_over_readmit_lim": 0.7727839966414313,
+   "out_rnorm_px": 1.6933166732757803,
+   "frame_stale_when_out": true
+  },
+  {
+   "frame": 284,
+   "cam": 1,
+   "end": 1,
+   "fit_d_over_lim": 1.1504335572462894,
+   "fit_lam_min": 0.21472563743437004,
+   "out_d_over_readmit_lim": 0.6653859231529659,
+   "out_rnorm_px": 1.4579870736643925,
+   "frame_stale_when_out": true
+  }
+ ]
+}

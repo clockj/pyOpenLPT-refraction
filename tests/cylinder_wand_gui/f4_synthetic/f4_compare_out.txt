@@ -1,0 +1,89 @@
+F4: the synthetic noise and weight tests, before (git HEAD) and after the fixes
+
+t11a_noise_sweep: 280 fits; converged before: 280 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0
+    the test's summary numbers: 1541; changed 0
+    the test's verdicts: 8 of 8 the same after
+
+t11c_unequal_noise: 80 fits; converged before: 77 identical after, 0 different; at the round limit before: 3; the fixes acted after: F-a 0, F-a2 3
+    looped before: /variants[0]/runs[15]: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 6}); rejected 1 -> 7; z RMS 2.818 -> 2.744, moved 0.218 RMS
+    looped before: /variants[1]/runs[7]: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 6}); rejected 7 -> 13; z RMS 1.097 -> 1.046, moved 0.117 RMS
+    looped before: /variants[1]/runs[39]: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 6}); rejected 2 -> 8; z RMS 1.509 -> 1.535, moved 0.049 RMS
+    the 3 that looped: rounds now 3-3 (were 20); mean z RMS 1.808 before, 1.775 after
+    the test's summary numbers: 645; changed 442; largest: /variants[0]/summary/rejected_per_cam[2] 0 -> 2; /variants[0]/summary/rejected_per_cam[0] 0 -> 2; /variants[0]/rejected_fraction_per_cam[2] 0 -> 5e-05; /variants[0]/rejected_fraction_per_cam[0] 0 -> 5e-05
+    the test's verdicts: 0 of 0 the same after
+
+t11d_heavy_tails: 80 fits; converged before: 53 identical after, 0 different; at the round limit before: 27; the fixes acted after: F-a 0, F-a2 27
+    looped before: /variants[0]/runs[0]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 123 -> 123; z RMS 1.027 -> 1.027, moved 0.000 RMS
+    looped before: /variants[0]/runs[5]: now 6 rounds (F-a2: {'round': 5, 'repeats_round': 3, 'left_out': 6}); rejected 124 -> 124; z RMS 0.876 -> 0.876, moved 0.000 RMS
+    looped before: /variants[0]/runs[6]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 111 -> 117; z RMS 1.082 -> 1.088, moved 0.154 RMS
+    looped before: /variants[0]/runs[9]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 156 -> 156; z RMS 0.514 -> 0.514, moved 0.000 RMS
+    looped before: /variants[0]/runs[11]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 111 -> 111; z RMS 1.361 -> 1.361, moved 0.000 RMS
+    looped before: /variants[0]/runs[13]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 104 -> 104; z RMS 1.157 -> 1.157, moved 0.000 RMS
+    looped before: /variants[0]/runs[16]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 12}); rejected 137 -> 143; z RMS 1.035 -> 1.055, moved 0.124 RMS
+    looped before: /variants[0]/runs[18]: now 6 rounds (F-a2: {'round': 5, 'repeats_round': 3, 'left_out': 12}); rejected 91 -> 91; z RMS 1.451 -> 1.451, moved 0.000 RMS
+    looped before: /variants[0]/runs[22]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 96 -> 96; z RMS 1.117 -> 1.117, moved 0.000 RMS
+    looped before: /variants[0]/runs[24]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 112 -> 118; z RMS 0.631 -> 0.597, moved 0.066 RMS
+    looped before: /variants[0]/runs[26]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 2}); rejected 96 -> 98; z RMS 1.350 -> 1.310, moved 0.171 RMS
+    looped before: /variants[0]/runs[27]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 127 -> 133; z RMS 1.329 -> 1.325, moved 0.100 RMS
+    looped before: /variants[0]/runs[31]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 1, 'left_out': 5}); rejected 117 -> 122; z RMS 0.968 -> 0.911, moved 0.150 RMS
+    looped before: /variants[0]/runs[33]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 132 -> 138; z RMS 1.132 -> 1.134, moved 0.068 RMS
+    looped before: /variants[0]/runs[34]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 104 -> 110; z RMS 1.273 -> 1.232, moved 0.079 RMS
+    looped before: /variants[0]/runs[38]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 116 -> 122; z RMS 0.806 -> 0.895, moved 0.179 RMS
+    looped before: /variants[1]/runs[2]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 37 -> 43; z RMS 0.683 -> 0.657, moved 0.058 RMS
+    looped before: /variants[1]/runs[3]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 12}); rejected 52 -> 64; z RMS 0.760 -> 0.779, moved 0.130 RMS
+    looped before: /variants[1]/runs[15]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 43 -> 49; z RMS 1.003 -> 1.007, moved 0.018 RMS
+    looped before: /variants[1]/runs[17]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 6}); rejected 52 -> 52; z RMS 0.675 -> 0.675, moved 0.000 RMS
+    looped before: /variants[1]/runs[19]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 39 -> 45; z RMS 0.641 -> 0.614, moved 0.070 RMS
+    looped before: /variants[1]/runs[22]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 34 -> 40; z RMS 0.862 -> 0.858, moved 0.116 RMS
+    looped before: /variants[1]/runs[25]: now 5 rounds (F-a2: {'round': 4, 'repeats_round': 2, 'left_out': 17}); rejected 45 -> 62; z RMS 1.007 -> 0.968, moved 0.130 RMS
+    looped before: /variants[1]/runs[30]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 12}); rejected 38 -> 50; z RMS 0.997 -> 1.022, moved 0.080 RMS
+    looped before: /variants[1]/runs[34]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 64 -> 64; z RMS 0.479 -> 0.479, moved 0.000 RMS
+    looped before: /variants[1]/runs[37]: now 6 rounds (F-a2: {'round': 5, 'repeats_round': 3, 'left_out': 6}); rejected 56 -> 62; z RMS 0.570 -> 0.571, moved 0.076 RMS
+    looped before: /variants[1]/runs[39]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 44 -> 50; z RMS 0.627 -> 0.621, moved 0.023 RMS
+    the 27 that looped: rounds now 4-6 (were 20); mean z RMS 0.941 before, 0.937 after
+    the test's summary numbers: 633; changed 439; largest: /variants[1]/summary/z_crb/mean_by_param[1] -0.001406 -> 6.82e-06; /variants[1]/summary/z_sand/mean_by_param[1] -0.001406 -> 6.82e-06; /variants[0]/scratch[4]/max_diff_sigma 4.251e-08 -> 2.587e-11; /variants[0]/scratch[2]/max_diff_sigma 7.087e-09 -> 1.84e-10
+    the test's verdicts: 0 of 0 the same after
+
+t11e_systematic: 40 fits; converged before: 38 identical after, 0 different; at the round limit before: 2; the fixes acted after: F-a 0, F-a2 2
+    looped before: /variants[1]/runs[14]: now 4 rounds (F-a2: {'round': 3, 'repeats_round': 1, 'left_out': 6}); rejected 3 -> 9; z RMS 6.426 -> 6.384, moved 0.212 RMS
+    looped before: /variants[1]/runs[19]: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 12}); rejected 10 -> 16; z RMS 6.842 -> 6.870, moved 0.252 RMS
+    the 2 that looped: rounds now 3-4 (were 20); mean z RMS 6.634 before, 6.627 after
+    the test's summary numbers: 460; changed 183; largest: /variants[1]/summary/rejected_per_cam[0] 26 -> 30; /variants[1]/summary/rejected_per_end[0] 43 -> 49; /variants[1]/summary/rejected_per_cam[1] 32 -> 36; /variants[1]/summary/rejected 4.95 -> 5.55
+    the test's verdicts: 0 of 0 the same after
+
+t12a_weights_unequal: 80 fits; converged before: 80 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0
+    the test's summary numbers: 654; changed 74; largest: /variants[0]/scratch[3]/rms_diff_px 3.439e-10 -> 1.835e-11; /variants[0]/scratch[3]/max_diff_sigma 3.731e-06 -> 2.077e-07; /variants[0]/scratch[0]/rms_diff_px 3.768e-12 -> 2.915e-11; /variants[1]/scratch[0]/max_diff_sigma 4.243e-06 -> 2.855e-05
+    the test's verdicts: 3 of 3 the same after
+
+t12b_weights_equal: 80 fits; converged before: 80 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0
+    the test's summary numbers: 466; changed 0
+    the test's verdicts: 3 of 3 the same after
+
+t12c_two_cameras: 320 fits; converged before: 317 identical after, 0 different; at the round limit before: 3; the fixes acted after: F-a 0, F-a2 3
+    looped before: /cases[2]/runs[4]/none: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 4}); rejected 0 -> 4; z RMS 0.978 -> 0.986, moved 0.055 RMS
+    looped before: /cases[2]/runs[5]/none: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 4}); rejected 0 -> 4; z RMS 1.011 -> 1.064, moved 0.142 RMS
+    looped before: /cases[2]/runs[25]/none: now 3 rounds (F-a2: {'round': 2, 'repeats_round': 0, 'left_out': 4}); rejected 0 -> 4; z RMS 1.334 -> 1.283, moved 0.172 RMS
+    the 3 that looped: rounds now 3-3 (were 20); mean z RMS 1.108 before, 1.111 after
+    the test's summary numbers: 540; changed 4; largest: /cases[2]/accuracy_ratio_per_cam[0] 0.6861 -> 0.6865; /cases[2]/accuracy_ratio_per_cam[1] 0.7457 -> 0.7453; /cases[2]/rms_z_equal 1.4 -> 1.4; /cases[2]/accuracy_ratio 0.7178 -> 0.7178
+    the test's verdicts: 5 of 5 the same after
+
+t12d_scratch_t5: 100 fits; converged before: 70 identical after, 30 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0
+    differs: /rigs[2]/weights: /sigma_group_px[0]: 3.9e-09 relative; rounds 5 -> 5
+    differs: /rigs[3]/weights: /sigma_group_px[0]: 5.5e-11 relative; rounds 4 -> 4
+    differs: /rigs[7]/weights: /rel_se[2]: 2.6e-08 relative; rounds 5 -> 5
+    differs: /rigs[11]/weights: /sigma_group_px[1]: 1.5e-08 relative; rounds 3 -> 3
+    differs: /rigs[12]/weights: /rel_se[2]: 5.3e-08 relative; rounds 6 -> 6
+    differs: /rigs[13]/weights: /sigma_group_px[1]: 5.9e-11 relative; rounds 4 -> 4
+    differs: /rigs[14]/weights: /sigma_group_px[1]: 1.1e-08 relative; rounds 6 -> 6
+    differs: /rigs[15]/weights: /sigma_group_px[1]: 9.1e-09 relative; rounds 5 -> 5
+    differs: /rigs[16]/weights: /sigma_group_px[3]: 1.2e-08 relative; rounds 5 -> 5
+    differs: /rigs[18]/weights: /rel_se[2]: 5.0e-07 relative; rounds 5 -> 5
+    differs: /rigs[19]/weights: /sigma_group_px[0]: 1.0e-07 relative; rounds 5 -> 5
+    differs: /rigs[21]/weights: /sigma_group_px[0]: 1.8e-07 relative; rounds 5 -> 5
+    ... and 18 more
+    the test's summary numbers: 355; changed 111; largest: /rigs[32]/max_diff_sigma 0.0002647 -> 6.343e-07; /rigs[18]/max_diff_sigma 6.8e-07 -> 0.0002447; /rigs[26]/max_diff_sigma 5.989e-07 -> 3.483e-05; /rigs[47]/max_diff_sigma 2.021e-06 -> 5.452e-05
+    the test's verdicts: 1 of 1 the same after
+
+t12e_scratch_5px: 0 fits; converged before: 0 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0
+    the test's summary numbers: 164; changed 63; largest: /runs[5]/max_diff_sigma 6.056e-07 -> 4.873e-12; /runs[5]/rms_diff_px 5.237e-11 -> 1.421e-14; /runs[0]/rms_diff_px 5.083e-10 -> 6.206e-11; /runs[0]/max_diff_sigma 2.397e-06 -> 3.053e-07
+    the test's verdicts: 1 of 1 the same after

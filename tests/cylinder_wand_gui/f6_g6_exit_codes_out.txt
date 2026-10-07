@@ -1,0 +1,9 @@
+G6 run 4 times on each code: exit code and verdict
+  fixed code, run 1: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  fixed code, run 2: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  fixed code, run 3: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  fixed code, run 4: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  before the fixes (git HEAD), run 1: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  before the fixes (git HEAD), run 2: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  before the fixes (git HEAD), run 3: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s
+  before the fixes (git HEAD), run 4: exit 3221226505 (0xC0000409); 6 of 6 checks passed; 2 s

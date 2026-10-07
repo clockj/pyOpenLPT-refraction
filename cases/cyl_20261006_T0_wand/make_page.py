@@ -7,6 +7,7 @@ Reads only saved results (no calibration is run): config.json, the detections an
 <out_dir>/checks/, and tests/*.json and tests/p0_survey_out.txt.  Draws four images from one raw frame pair (the
 example frame, chosen as the kept frame whose wand is longest in both images): the two frames with the fitted
 ellipses, the wand after the rod opening, and the small ball's edge points kept and dropped by the rod mask.
+Bins each camera's reprojection errors (du, dv) for the 2-D error chart (added on 6 Oct at your request).
 Writes <out_dir>/wand_calibration_20261006_T0.html (a standalone page) and, with --fragment, the same page without
 its document wrapper (for publishing as an artifact).
 """
@@ -134,6 +135,53 @@ def images(cfg, kept, f):
     out["mask"] = jpeg_uri(vis, 700)
     out["mask_counts"] = [int((~drop).sum()), int(drop.sum())]
     return out
+
+
+def err2d(data, R=2.0, step=0.1):
+    """Each camera's reprojection errors (du, dv: the model's position minus the detection) of the detections the
+    fit used, counted in step x step px cells over +-R px, with the marginal histograms and the statistics."""
+    ob = data["observations"]
+    cam = np.array(ob["cam_id"])
+    du = np.array([np.nan if x is None else x for x in ob["du"]], float)
+    dv = np.array([np.nan if x is None else x for x in ob["dv"]], float)
+    act = np.array(ob["active"], bool) & np.isfinite(du) & np.isfinite(dv)
+    nb = int(round(2 * R / step))
+    out = {"R": R, "step": step, "cams": {}}
+    for c in sorted(set(cam.tolist())):
+        s = act & (cam == c)
+        u, v = du[s], dv[s]
+        inside = (np.abs(u) < R) & (np.abs(v) < R)
+        H, _, _ = np.histogram2d(u[inside], v[inside], bins=nb, range=[[-R, R], [-R, R]])
+        out["cams"][f"cam{c}"] = {
+            "cells": [[int(i), int(j), int(H[i, j])] for i, j in zip(*np.nonzero(H))],
+            "mu": np.histogram(u[np.abs(u) < R], bins=nb, range=(-R, R))[0].tolist(),
+            "mv": np.histogram(v[np.abs(v) < R], bins=nb, range=(-R, R))[0].tolist(),
+            "n": int(s.sum()), "outside": int((~inside).sum()), "inactive": int(((cam == c) & ~act).sum()),
+            "rms_u": float(np.sqrt(np.mean(u ** 2))), "rms_v": float(np.sqrt(np.mean(v ** 2))),
+            "rms": float(np.sqrt(np.mean(u ** 2 + v ** 2))), "corr": float(np.corrcoef(u, v)[0, 1])}
+    out["max"] = max(max(q[2] for q in cc["cells"]) for cc in out["cams"].values())
+    return out
+
+
+def err_caption(err):
+    c1, c2 = err["cams"]["cam1"], err["cams"]["cam2"]
+    shape = lambda c: ("across" if c["rms_u"] > 1.2 * c["rms_v"] else "up and down" if c["rms_v"] > 1.2 * c["rms_u"]
+                       else "round")
+    ratio = lambda c: c["rms_u"] / c["rms_v"]
+    if shape(c1) == shape(c2) == "across":
+        spread = (f"Both cameras' errors are {min(ratio(c1), ratio(c2)):.1f}–{max(ratio(c1), ratio(c2)):.1f} times "
+                  f"wider across (du) than up and down (dv).")
+    else:
+        word = {"across": "wider across (du) than up and down (dv)", "up and down": "wider up and down (dv) than "
+                "across (du)", "round": "about as wide across as up and down"}
+        spread = f"cam1's errors are {word[shape(c1)]}; cam2's are {word[shape(c2)]}."
+    why = (" The wand hangs roughly level, so across is along the rod: there the rod hides part of each ball's "
+           "outline (T1 b), and each camera's image also jitters sideways on its own (D5)."
+           if "across" in (shape(c1), shape(c2)) else "")
+    return (f"du, dv: where the calibration puts each ball minus where the detector found it, for the {c1['n']:,} and "
+            f"{c2['n']:,} detections the fit used (it set aside {c1['inactive']} and {c2['inactive']} as outliers). "
+            f"Dashed: the 2-D RMS, {c1['rms']:.2f} px in cam1 and {c2['rms']:.2f} px in cam2. Bars: du (top) and dv "
+            f"(right). Beyond ±{err['R']:.0f} px, not drawn: {c1['outside']} and {c2['outside']}. " + spread + why)
 
 
 def cfg_rays(cfg):
@@ -279,6 +327,7 @@ def main():
         "f1_sig_pct": f"{100 * S2['cameras'][0]['f_sigma_px'] / S2['cameras'][0]['f_px']:.1f}",
         "rms_px": f"{S2['rms_px']:.2f}", "det_used": f"{S2['active']:,}", "det_total": f"{S2['observations']:,}",
         "wand_rms_um": f"{S2['wand_free_rms_um']:.0f}", "wand_rms_pct": f"{S2['wand_free_rms_um'] / 100:.2f}",
+        "d7_lag1": f"{d7['length']['1']:.2f}", "d7_lag10": f"{d7['length']['10']:.2f}",
         "f1_min_k": f"{f1min / 1000:.1f}", "f1_max_k": f"{f1max / 1000:.1f}", "f1_s2": f"{S2['cameras'][0]['f_px']:,.0f}",
         "example_frame": str(f), "bin": str(BIN),
         "open101_A": f"{t1['b']['101_50']['A_rms']:.2f}",
@@ -293,7 +342,10 @@ def main():
         "mask_kept": str(imgs["mask_counts"][0]), "mask_dropped": str(imgs["mask_counts"][1]),
         "mask_none": str(int(cfg_rays(cfg)) - sum(imgs["mask_counts"])),
     }
+    err = err2d(data)
+    fill["err_caption"] = err_caption(err)
     payload = {"images": {k: v for k, v in imgs.items() if k != "mask_counts"}, "scan": scan_rows(), "usable": usable,
+               "err": err,
                "sens": sens, "rig": {"cams": cams_out, "radii": res["tube"]["radii_mm"], "vol_centre": vc.tolist()},
                "vol": vol, "res": rescells, "len": lenp,
                "valley": {"points": pts, "board": board, "slope": slope}, "held": held, "ruled": ruled}
