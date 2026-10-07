@@ -1,3 +1,8 @@
+# OpenLPT's dependencies, in conda-forge's package names.
+# - The installers (install_windows.bat, install_linux.sh, install_mac.command, update_openlpt.bat) install them from
+#   conda-forge, except the lines marked pip-only: conda-forge does not have those, and pip installs them. The
+#   installers add qt6-webengine (the camera calibration's Report tab) and, on Windows, pywin32 and OpenBLAS.
+# - The CI workflows install this list with pip, with opencv renamed to opencv-python.
 numpy>=2.2.0
 pandas>=2.2.2
 pybind11>=2.13
@@ -13,4 +18,4 @@ cmake>=3.15
 cxx-compiler
 llvm-openmp
 requests>=2.31.0
-pycine>=0.3.2
+pycine>=0.3.2  # pip-only: not on conda-forge

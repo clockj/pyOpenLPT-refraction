@@ -1,0 +1,123 @@
+F7: the flip rule on the logged stage-4 runs (thresholds: close 0.03, jump 0.3, run 4)
+
+log                                start  rounds  limit  estimates  old rule  new: first  rule        max jump of the last 4
+T0_d2_shape_prior                      0      20  yes           20         -           6  jumps       114 %, 673 %, 30 %, 51 %
+T0_delivered                           0       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+T0_first_delivery                      0      20  yes           20         5           4  jumps       86 %, 612 %, 86 %, 611 %
+T0_first_delivery                      1      20  yes           20         5           4  jumps       86 %, 612 %, 86 %, 611 %
+T0_first_delivery                      2      20  yes           20         5           4  jumps       86 %, 612 %, 86 %, 611 %
+T0_first_delivery                      3      20  yes           20         5           4  jumps       86 %, 612 %, 86 %, 611 %
+T0_first_delivery                      4      20  yes           20         5           4  jumps       86 %, 612 %, 86 %, 611 %
+T0_first_delivery                      5      20  yes           20         5           4  jumps       86 %, 612 %, 86 %, 611 %
+T0_fit_L                               0      10  no             7         6           4  jumps       547 %, 86 %, 621 %, 86 %
+T0_fit_k1                              0      20  yes           20         -           4  jumps       79 %, 394 %, 86 %, 593 %
+T0_h1                                  0      14  no            12         -           4  jumps       85 %, 362 %, 45 %, 161 %
+T0_h2                                  0      20  yes           20         -           4  jumps       89 %, 874 %, 163 %, 661 %
+T0_h2                                  2      20  yes           20         -           4  jumps       668 %, 89 %, 857 %, 161 %
+T0_h2                                  4      20  yes           20         -           4  jumps       89 %, 874 %, 163 %, 661 %
+T0_q1                                  0       7  no             5         -           -  -           177 %, 68 %, 3 %, 0 %
+T0_q1                                  1      20  yes           20         -           -  -           2 %, 2 %, 2 %, 2 %
+T0_q1                                  2      13  no            11         -           7  jumps       76 %, 46 %, 1 %, 0 %
+T0_q1                                  3       7  no             5         -           -  -           177 %, 68 %, 3 %, 0 %
+T0_q1                                  5       7  no             5         -           -  -           129 %, 62 %, 1 %, 0 %
+T0_q2                                  0      18  no            16         -           8  jumps       57 %, 170 %, 117 %, 395 %
+T0_q2                                  3      18  no            16         -           8  jumps       57 %, 170 %, 117 %, 395 %
+T0_q2                                  4      18  no            16         -           8  jumps       57 %, 170 %, 117 %, 395 %
+T0_q3                                  0       4  no             3         2           2  alternates  451 %, 99 %
+T0_q3                                  3      20  yes           18        17           4  jumps       557 %, 215 %, 585 %, 123 %
+T0_q3                                  4      19  no            17        16           4  jumps       480 %, 103 %, 463 %, 108 %
+T0_q3                                  5      19  no            17        16           4  jumps       93 %, 83 %, 483 %, 124 %
+T0_q4                                  0      12  no             9         8           7  jumps       101 %, 988 %, 91 %, 1017 %
+T0_q4                                  1      12  no             9         8           7  jumps       101 %, 988 %, 91 %, 1017 %
+T0_q4                                  2      12  no             9         8           7  jumps       101 %, 988 %, 91 %, 1017 %
+T0_q4                                  3       9  no             4         3           3  alternates  548 %, 85 %, 579 %
+T0_q4                                  4      10  no             4         3           3  alternates  538 %, 85 %, 571 %
+T0_thinned                             0       9  no             6         5           4  jumps       119 %, 549 %, 86 %, 616 %
+T2_delivered                           0      20  yes           20         5           4  jumps       87 %, 692 %, 87 %, 693 %
+T2_delivered                           1      20  yes           20         5           4  jumps       87 %, 692 %, 87 %, 693 %
+T2_delivered                           2      20  yes           20         5           4  jumps       87 %, 692 %, 87 %, 693 %
+T2_delivered                           3      20  yes           20         5           4  jumps       87 %, 692 %, 87 %, 693 %
+T2_delivered                           4      20  yes           20         8           4  jumps       693 %, 87 %, 692 %, 87 %
+T2_delivered                           5      20  yes           20         5           4  jumps       87 %, 692 %, 87 %, 693 %
+T2_fit_k1                              0      20  yes           20         5           4  jumps       123 %, 726 %, 123 %, 722 %
+T2_fit_k1                              1      20  yes           20         5           4  jumps       123 %, 726 %, 123 %, 722 %
+T2_fit_k1                              2      20  yes           20         5           4  jumps       123 %, 726 %, 123 %, 722 %
+T2_fit_k1                              3      20  yes           20         8           4  jumps       724 %, 122 %, 723 %, 122 %
+T2_fit_k1                              4      20  yes           20         7           4  jumps       724 %, 122 %, 723 %, 122 %
+T2_fit_k1                              5      20  yes           20         5           4  jumps       123 %, 726 %, 123 %, 722 %
+T2_h1                                  0      20  yes           20         4           4  alternates  172 %, 813 %, 190 %, 818 %
+T2_h1                                  1      20  yes           20        11           4  jumps       808 %, 191 %, 830 %, 222 %
+T2_h1                                  2      20  yes           20         4           4  alternates  172 %, 813 %, 190 %, 818 %
+T2_h1                                  3      20  yes           20         4           4  alternates  172 %, 813 %, 190 %, 818 %
+T2_h1                                  4      20  yes           20         4           4  alternates  172 %, 813 %, 190 %, 818 %
+T2_h1                                  5      20  yes           20         4           4  alternates  172 %, 813 %, 190 %, 818 %
+T2_h2                                  0      20  yes           20         5           4  jumps       87 %, 642 %, 87 %, 643 %
+T2_h2                                  1      20  yes           20         5           4  jumps       87 %, 642 %, 87 %, 643 %
+T2_h2                                  2      20  yes           20         7           4  jumps       643 %, 87 %, 643 %, 87 %
+T2_h2                                  3      20  yes           20         5           4  jumps       87 %, 642 %, 87 %, 643 %
+T2_h2                                  4      20  yes           20         5           4  jumps       87 %, 642 %, 87 %, 643 %
+T2_h2                                  5      20  yes           20         5           4  jumps       87 %, 642 %, 87 %, 643 %
+T2_q1                                  0      20  yes           20         -           5  jumps       121 %, 237 %, 867 %, 35 %
+T2_q1                                  1      20  yes           20         -           5  jumps       121 %, 237 %, 867 %, 35 %
+T2_q1                                  2      20  yes           20         -           5  jumps       121 %, 237 %, 867 %, 35 %
+T2_q1                                  3      20  yes           20         -           5  jumps       121 %, 237 %, 867 %, 35 %
+T2_q1                                  4      20  yes           20         -           5  jumps       121 %, 237 %, 867 %, 35 %
+T2_q1                                  5      20  yes           20         -           5  jumps       121 %, 237 %, 867 %, 35 %
+T2_q2                                  0      20  yes           20         6           4  jumps       182 %, 705 %, 180 %, 718 %
+T2_q2                                  1      20  yes           20         -           5  jumps       1206 %, 885 %, 635 %, 226 %
+T2_q2                                  2      20  yes           20         6           4  jumps       182 %, 705 %, 180 %, 718 %
+T2_q2                                  3      20  yes           20         6           4  jumps       182 %, 705 %, 180 %, 718 %
+T2_q2                                  4      20  yes           20         6           4  jumps       182 %, 705 %, 180 %, 718 %
+T2_q2                                  5      20  yes           20         6           4  jumps       182 %, 705 %, 180 %, 718 %
+T2_q3                                  0      20  yes           20         7           4  jumps       86 %, 606 %, 86 %, 606 %
+T2_q3                                  1      20  yes           20         7           4  jumps       86 %, 606 %, 86 %, 606 %
+T2_q3                                  2      20  yes           20        14           4  jumps       86 %, 606 %, 86 %, 606 %
+T2_q3                                  3      20  yes           20         7           4  jumps       86 %, 606 %, 86 %, 606 %
+T2_q3                                  4      20  yes           20         7           4  jumps       86 %, 606 %, 86 %, 606 %
+T2_q3                                  5      20  yes           20         7           4  jumps       86 %, 606 %, 86 %, 606 %
+T2_q4                                  0      20  yes           20         5           4  jumps       87 %, 686 %, 87 %, 686 %
+T2_q4                                  1      20  yes           20         5           4  jumps       87 %, 686 %, 87 %, 686 %
+T2_q4                                  2      20  yes           20         5           4  jumps       87 %, 686 %, 87 %, 686 %
+T2_q4                                  3      20  yes           20         5           4  jumps       87 %, 686 %, 87 %, 686 %
+T2_q4                                  4      20  yes           20        10           8  jumps       686 %, 87 %, 686 %, 87 %
+T2_q4                                  5      20  yes           20         5           4  jumps       87 %, 686 %, 87 %, 686 %
+f3_T0_camera_before_flip4              0       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_n2_before_flip4           0       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_noshare_before_flip4      0       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_noshare_before_flip4      1       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_noshare_before_flip4      2       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_noshare_before_flip4      3       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_noshare_before_flip4      4       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_camera_noshare_before_flip4      5       9  no             6         5           4  jumps       119 %, 551 %, 86 %, 620 %
+f3_T0_none_before_flip4                0       3  no             0         -           -  -           
+f3_T2_camera_before_flip4              0      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_camera_before_flip4              4      15  no             9         8           4  jumps       95 %, 732 %, 87 %, 693 %
+f3_T2_camera_n2_before_flip4           0      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_camera_noshare_before_flip4      0      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_camera_noshare_before_flip4      1      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_camera_noshare_before_flip4      2      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_camera_noshare_before_flip4      3      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_camera_noshare_before_flip4      4      15  no             9         8           4  jumps       95 %, 732 %, 87 %, 693 %
+f3_T2_camera_noshare_before_flip4      5      10  no             6         5           4  jumps       251 %, 685 %, 88 %, 747 %
+f3_T2_none_before_flip4                0       3  no             0         -           -  -           
+f3_T2_none_before_flip4                4       6  no             0         -           -  -           
+
+starts that reached the round limit: 61; the new rule fires on 60 of them
+    not caught: T0_q1 start 1
+starts whose weights converged without a fallback: 0; the new rule fires on 0 of them
+starts that ended before the limit after the old rule fired: 28; the new rule fires 0 round(s) earlier on 3, 1 round(s) earlier on 20, 2 round(s) earlier on 1, 4 round(s) earlier on 2, 12 round(s) earlier on 2
+starts that ended before the limit without the old rule (stopped by the repeated active set, or settled and then not separable): 8; the new rule fires on 5 of them:
+    T0_h1 start 0: 14 rounds before; the new rule at round 4
+    T0_q1 start 2: 13 rounds before; the new rule at round 7
+    T0_q2 start 0: 18 rounds before; the new rule at round 8
+    T0_q2 start 3: 18 rounds before; the new rule at round 8
+    T0_q2 start 4: 18 rounds before; the new rule at round 8
+
+made-up sequences (two groups)
+  damped oscillation, factor 0.5 per round           fires at round - (never)
+  damped oscillation, factor 0.7 per round           fires at round 4 (jumps)
+  converging from a clamp (x0.1) without overshoot   fires at round - (never)
+  two states                                         fires at round 2 (alternates)
+  four-round cycle                                   fires at round 4 (jumps)
+
+F7 FAIL (criteria: every start that reached the limit is caught; no start whose weights converged is; the made-up sequences behave): 60 of 61 caught; 0 of 0 converged; made-up as expected; the slowly damped oscillation (factor 0.7) is caught too: a limit of the rule, see the report

@@ -453,9 +453,10 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
 
     Two loops are stopped (tests/cylinder_wand_gui, 2026-10-06-fixes-plan.md: on the first real two-camera data,
     runs 20261006/T0 and T2, every start ran to max_rounds):
-      1. The noise estimate alternating between two states instead of converging (`_flips`: within 3 % of its
-         value two rounds earlier and more than 30 % off the last one; with two cameras the estimate follows the
-         weights it was computed with) falls back to equal weights at once, as when the groups cannot be separated.
+      1. The noise estimate not converging (`_flips`: alternating between two states, within 3 % of its value two
+         rounds earlier and more than 30 % off the last one; or moving by more than 30 % in each of four rounds in
+         a row, as in a four-round cycle; with two cameras the estimate follows the weights it was computed with)
+         falls back to equal weights at once, as when the groups cannot be separated.
       2. The active set coming back to one it had after an earlier round, with the same weights.  A frame dropped
          whole (with two cameras any rejection drops its frame) is re-triangulated from its own rays and re-tested
          without the fit's correction, so it can pass, come back, fail in the fit and leave again.  The rounds then
@@ -476,7 +477,7 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
             raise ValueError("sigma_cam_px needs one positive value per camera")
     vc = {}
     fallback = False                          # estimated, but not separable at convergence: equal weights
-    flipped = None                            # loop 1: the round the estimate was found flipping, its two states
+    flipped = None                            # loop 1: the round it was found, the rule, the last two estimates
     cycle = None                              # loop 2: the round the active set repeated, and what was left out
     hist = []                                 # each round's noise estimate, sigma per group (px)
     seen = {}                                 # active set -> (round, sigmas weighting the next round)
@@ -496,8 +497,9 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
             new, vc = variance_components(sol, groups, cur, min_group=min_group, max_rel_se=max_rel_se,
                                           max_ratio=max_ratio, floor_px=sigma_floor_px)
             hist.append(np.sqrt(new))
-            if _flips(hist):                      # loop 1: equal weights from the next round on
-                flipped = {"round": rnd, "sigma_px": [hist[-2].tolist(), hist[-1].tolist()]}
+            kind = _flips(hist)
+            if kind:                              # loop 1: equal weights from the next round on
+                flipped = {"round": rnd, "kind": kind, "sigma_px": [hist[-2].tolist(), hist[-1].tolist()]}
                 fallback, sig2, sig_changed = True, None, True
             else:
                 sig_changed = sig2 is None or float(np.max(np.abs(np.sqrt(new / sig2) - 1.0))) > sigma_tol
@@ -513,8 +515,11 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
                 f"re-admitted {n_back}" + ("" if sig2 is None else ", sigma per group " +
                                            ", ".join(f"{v:.4f}" for v in np.sqrt(sig2)) + " px"))
             if flipped is not None and flipped["round"] == rnd:
-                log(f"  round {rnd}: the noise estimate flips between two states every round ("
-                    + " px and ".join(", ".join(f"{v:.4f}" for v in s) for s in flipped["sigma_px"])
+                states = " px and ".join(", ".join(f"{v:.4f}" for v in s) for s in flipped["sigma_px"])
+                log(f"  round {rnd}: the noise estimate "
+                    + (f"flips between two states every round ({states}" if flipped["kind"] == "alternates" else
+                       f"does not settle: it moved by more than {100 * FLIP_JUMP:.0f} % in each of the last "
+                       f"{FLIP_RUN} rounds (the last two: {states}")
                     + " px per group): equal weights from the next round on")
         # loop 2: the active set is one it had after an earlier round, with the same weights
         sig_next = None if sig2 is None else np.sqrt(sig2)
@@ -568,14 +573,23 @@ def refine(cams, tube: cm.Tube, frames: Frames, L: float, obs: Obs, layout: Layo
     return covariance(sol, weights=weights)
 
 
-def _flips(hist, close: float = 0.03, jump: float = 0.30) -> bool:
-    """Loop 1 of `refine`: the newest noise estimate (sigma per group) is within `close` of the one two rounds
-    earlier in every group and more than `jump` off the last one in some group: it alternates between two states
-    instead of converging (tests/cylinder_wand_gui P1: runs 20261006/T0 and T2, from round 5 on)."""
-    if len(hist) < 3:
-        return False
-    a, b, c = hist[-1], hist[-2], hist[-3]
-    return bool(np.max(np.abs(a / c - 1.0)) < close and np.max(np.abs(a / b - 1.0)) > jump)
+FLIP_CLOSE, FLIP_JUMP, FLIP_RUN = 0.03, 0.30, 4    # `_flips`' thresholds
+
+
+def _flips(hist, close: float = FLIP_CLOSE, jump: float = FLIP_JUMP, run: int = FLIP_RUN):
+    """Loop 1 of `refine`: whether the noise estimates (sigma per group, one per round) have stopped converging.
+    "alternates": the newest is within `close` of the one two rounds earlier in every group and more than `jump`
+    off the last one in some group (tests/cylinder_wand_gui P1: runs 20261006/T0 and T2, from round 5 on).
+    "jumps": it moved by more than `jump` in some group in each of the last `run` rounds (T0's variants with k1
+    free and its second half: a four-round cycle, and two states that differ from one visit to the next by more
+    than `close`).  None while neither holds."""
+    if len(hist) >= 3:
+        a, b, c = hist[-1], hist[-2], hist[-3]
+        if np.max(np.abs(a / c - 1.0)) < close and np.max(np.abs(a / b - 1.0)) > jump:
+            return "alternates"
+    if len(hist) > run and all(np.max(np.abs(hist[-k] / hist[-k - 1] - 1.0)) > jump for k in range(1, run + 1)):
+        return "jumps"
+    return None
 
 
 def _same_sigma(a, b, tol: float) -> bool:

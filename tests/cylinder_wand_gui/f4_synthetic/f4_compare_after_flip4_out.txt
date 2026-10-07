@@ -1,0 +1,37 @@
+F4: the synthetic noise and weight tests, run_after against run_flip4
+
+t11a_noise_sweep: 280 fits; converged before: 280 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0, F-a3 0
+    the test's summary numbers: 1541; changed 0
+    the test's verdicts: 8 of 8 the same after
+
+t11c_unequal_noise: 80 fits; converged before: 80 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 3, F-a3 0
+    the test's summary numbers: 645; changed 30; largest: /variants[1]/scratch[3]/bootstrap_s 32.53 -> 23.07; /variants[1]/scratch[1]/bootstrap_s 31.6 -> 22.48; /variants[0]/scratch[2]/bootstrap_s 30.82 -> 21.96; /variants[0]/scratch[0]/bootstrap_s 32.43 -> 23.2
+    the test's verdicts: 0 of 0 the same after
+
+t11d_heavy_tails: 80 fits; converged before: 80 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 27, F-a3 0
+    the test's summary numbers: 633; changed 30; largest: /variants[0]/scratch[0]/bootstrap_s 33.4 -> 25.28; /variants[0]/scratch[2]/bootstrap_s 29.25 -> 22.14; /variants[1]/scratch[3]/bootstrap_s 29.04 -> 22; /variants[1]/scratch[4]/bootstrap_s 31.18 -> 23.97
+    the test's verdicts: 0 of 0 the same after
+
+t11e_systematic: 40 fits; converged before: 40 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 2, F-a3 0
+    the test's summary numbers: 460; changed 0
+    the test's verdicts: 0 of 0 the same after
+
+t12a_weights_unequal: 80 fits; converged before: 80 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0, F-a3 0
+    the test's summary numbers: 654; changed 30; largest: /variants[0]/scratch[2]/bootstrap_s 30.9 -> 21.58; /variants[0]/scratch[1]/bootstrap_s 34.38 -> 24.27; /variants[1]/scratch[4]/bootstrap_s 32.37 -> 22.97; /variants[1]/scratch[3]/bootstrap_s 32.75 -> 23.23
+    the test's verdicts: 3 of 3 the same after
+
+t12b_weights_equal: 80 fits; converged before: 80 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0, F-a3 0
+    the test's summary numbers: 466; changed 0
+    the test's verdicts: 3 of 3 the same after
+
+t12c_two_cameras: 320 fits; converged before: 320 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 3, F-a3 0
+    the test's summary numbers: 540; changed 0
+    the test's verdicts: 5 of 5 the same after
+
+t12d_scratch_t5: 100 fits; converged before: 100 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0, F-a3 0
+    the test's summary numbers: 355; changed 51; largest: /rigs[49]/total_seconds 66.58 -> 55.08; /rigs[46]/total_seconds 47.8 -> 39.75; /rigs[42]/total_seconds 64.96 -> 54.39; /rigs[47]/total_seconds 53.33 -> 44.76
+    the test's verdicts: 1 of 1 the same after
+
+t12e_scratch_5px: 0 fits; converged before: 0 identical after, 0 different; at the round limit before: 0; the fixes acted after: F-a 0, F-a2 0, F-a3 0
+    the test's summary numbers: 164; changed 31; largest: /runs[1]/bootstrap_s 20.39 -> 14.4; /runs[6]/bootstrap_s 32.73 -> 24.02; /runs[9]/bootstrap_s 33.23 -> 24.48; /runs[3]/bootstrap_s 33.48 -> 24.69
+    the test's verdicts: 1 of 1 the same after

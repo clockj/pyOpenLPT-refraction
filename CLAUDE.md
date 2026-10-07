@@ -8,7 +8,9 @@ This document defines the development environment, build instructions, and manda
 - **Primary Entry Point**: `python GUI.py`
 
 ## Build & Installation
-- Install dependencies: `pip install -r requirements.txt`
+- Install dependencies: the installers (`install_windows.bat`, `install_linux.sh`, `install_mac.command`), or by
+  hand as in README.md, "Method 3". `requirements.txt` uses conda-forge's package names; its line marked pip-only
+  (pycine) is not on conda-forge.
 - Build C++ bindings: `python build_local.py` or `python setup.py install`
 - Run GUI: `python GUI.py`
 

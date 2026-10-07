@@ -3,7 +3,7 @@
   {
    "check": "Stop 3 s into the start search ends the run within 6 s; idle again; no camFile",
    "ok": true,
-   "detail": "3.5 s after Stop; status 'Cylinder calibration stopped.'; camFiles none"
+   "detail": "3.3 s after Stop; status 'Cylinder calibration stopped.'; camFiles none"
   },
   {
    "check": "bad input, one camera: a message, no run",
@@ -41,5 +41,5 @@
    "detail": "RMS 0.100 px; wand 43.0 um RMS over 300 frames; 3 residual panels"
   }
  ],
- "seconds": 8.93897271156311
+ "seconds": 8.845296621322632
 }

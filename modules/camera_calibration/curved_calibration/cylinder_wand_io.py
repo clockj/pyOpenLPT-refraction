@@ -144,9 +144,14 @@ def noise_summary(sol: cw.Solution, names: Sequence[str] = None) -> Dict:
         why = "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group"
     elif nw.get("flipped"):
         fl = nw["flipped"]
-        why = ("the estimated noise flipped between two states every round instead of converging (from round "
-               f"{fl['round']}: " + " px and ".join(", ".join(f"{v:.3f}" for v in s) for s in fl["sigma_px"])
-               + " px per group): equal weights, as without the weighting")
+        states = " px and ".join(", ".join(f"{v:.3f}" for v in s) for s in fl["sigma_px"])
+        if fl.get("kind", "alternates") == "alternates":
+            why = ("the estimated noise flipped between two states every round instead of converging (from round "
+                   f"{fl['round']}: {states} px per group): equal weights, as without the weighting")
+        else:
+            why = (f"the estimated noise did not converge: it moved by more than {100 * cw.FLIP_JUMP:.0f} % in each "
+                   f"of {cw.FLIP_RUN} rounds in a row (to round {fl['round']}; the last two: {states} px per group): "
+                   "equal weights, as without the weighting")
     else:
         rs = [x for x in (nw.get("rel_se_group") or []) if x is not None]
         why = ("the data could not separate the groups' noise (largest relative standard error "

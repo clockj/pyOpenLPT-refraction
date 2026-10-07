@@ -3,7 +3,7 @@ D2 (d2_shape_prior): shapes predicted by the calibration in X:\Shijie Zhong\Refr
   cam1 ball B: 1519 fits; free-fit aspect / predicted - 1: median +0.58 %, spread (16-84 %) 0.91 %; orientation difference median -1.12 deg, spread 0.98 deg; size / predicted - 1: median -1.46 %
   cam2 ball A: 1519 fits; free-fit aspect / predicted - 1: median +1.50 %, spread (16-84 %) 1.98 %; orientation difference median -0.96 deg, spread 1.09 deg; size / predicted - 1: median -3.33 %
   cam2 ball B: 1519 fits; free-fit aspect / predicted - 1: median +1.53 %, spread (16-84 %) 1.48 %; orientation difference median -1.86 deg, spread 0.72 deg; size / predicted - 1: median -1.77 %
-  refit 3038 camera-frames in 141 s
+  refit 3038 camera-frames in 152 s
   new centres for 3038 camera-frames (0 lost: too few edge points)
   ball A: shift from S1 RMS 1.526 px, median 1.110, 99th percentile 4.208, largest 5.814; edge RMS about the fixed-shape fit median 0.311 px
   ball B: shift from S1 RMS 1.343 px, median 1.017, 99th percentile 3.066, largest 3.624; edge RMS about the fixed-shape fit median 0.414 px
@@ -17,8 +17,8 @@ D2 (d2_shape_prior): shapes predicted by the calibration in X:\Shijie Zhong\Refr
         0.0 s  Start search (stages 1-2)
        14.4 s  Coarse fit (stage 3)
        15.2 s  Final fit (stage 4)
-       71.2 s  Coarse fit (stage 3)
-    2 cameras, 1519 frames, 6048 of 6076 detections used.
-    Reprojection RMS 0.637 px; wand length (free triangulation) RMS error 31.8 um over 1512 frames.
-      cam1: f 31,655 px (633.1 mm) +- 0.90 %, 835 mm from the axis, RMS 0.710 px
-      cam2: f 23,400 px (468.0 mm) +- 0.98 %, 687 mm from the axis, RMS 0.553 px
+       41.9 s  Coarse fit (stage 3)
+    2 cameras, 1519 frames, 6044 of 6076 detections used.
+    Reprojection RMS 0.619 px; wand length (free triangulation) RMS error 31.7 um over 1511 frames.
+      cam1: f 31,562 px (631.2 mm) +- 0.81 %, 833 mm from the axis, RMS 0.588 px
+      cam2: f 23,637 px (472.7 mm) +- 1.03 %, 694 mm from the axis, RMS 0.649 px

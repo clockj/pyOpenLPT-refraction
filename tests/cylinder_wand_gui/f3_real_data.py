@@ -11,8 +11,9 @@ turns off F-b (share_equal_starts=False) for F5; ":n2" carries two starts (the G
 off) instead of the cases' six.  The outputs go to data/f3_<run>_<mode>[_noshare][_n2]/ (not to X:):
 the GUI's files (cylinder_wand_gui.write_outputs) and calibration_log.txt.
 Per calibration: the time; per start the stage-4 rounds (from the log, as P1), whether stage 4 was shared (F-b),
-flipped (F-a) or stopped on a repeated active set (F-a2); the result against the delivered one (the case's
-calibrate.json) and, for "none", against P5 (the library before the fixes).
+flipped (F-a; F-a3, the four-jumps rule of 7 Oct: noted from runs made after that day's rerun of F3, whose own notes
+list only F-a2; its "final" record names the rule) or stopped on a repeated active set (F-a2); the result against the
+delivered one (the case's calibrate.json) and, for "none", against P5 (the library before the fixes).
 F3 passes when no start reaches the round limit (20) and every result is within the delivered one's standard errors
 or explained; F5 when the shared and unshared runs keep the same detections and their cameras agree within 0.01 of
 their standard errors.
@@ -101,6 +102,8 @@ def one(run, mode, share, n_final=None):
             k += 1
         elif "flips between two states" in text and k < len(starts):
             starts[k]["notes"].append("F-a: " + text)
+        elif "does not settle" in text and k < len(starts):       # the four-jumps rule (F7, 7 Oct)
+            starts[k]["notes"].append("F-a3: " + text)
         elif "the active set repeats" in text and k < len(starts):
             starts[k]["notes"].append("F-a2: " + text)
     nw = sol.info.get("noise_weights") or {}

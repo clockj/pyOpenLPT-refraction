@@ -128,13 +128,21 @@ If you prefer to set up the environment manually:
 1.  **Create Environment and Install**:
 
     ```bash
-    # Create environment
-    conda create -n OpenLPT python=3.10
+    # Create the environment from conda-forge, with requirements.txt's packages but its pip-only line
+    # (Windows: findstr /V pip-only requirements.txt > req_conda.txt)
+    grep -v pip-only requirements.txt > req_conda.txt
+    conda create -n OpenLPT --override-channels -c conda-forge python=3.11 qt6-webengine --file req_conda.txt
     conda activate OpenLPT
 
-    # Build and install the package
-    pip install .
+    # The pip-only dependency, then build and install the package
+    pip install "pycine>=0.3.2"
+    pip install . --no-build-isolation
     ```
+
+    - `qt6-webengine` shows the camera calibration's results page in its Report tab. conda-forge has none for Intel
+      Macs: leave it out there, and the tab opens the page in the browser.
+    - **Windows:** also add `pywin32 "libblas=*=*openblas"` to `conda create`. conda-forge picks MKL for numpy there,
+      with which numpy's linear algebra can crash the interpreter.
 
 #### Troubleshooting
 

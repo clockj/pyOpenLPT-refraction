@@ -1,0 +1,70 @@
+F3's outputs
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\f3_real_data.json -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\f3_real_data_before_flip4.json
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\f3_real_data_out.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\f3_real_data_before_flip4_out.txt
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\f3_real_data_console.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\f3_real_data_before_flip4_console.txt
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_camera -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_camera_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_camera_n2 -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_camera_n2_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_camera_noshare -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_camera_noshare_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_none -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T0_none_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_camera -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_camera_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_camera_n2 -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_camera_n2_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_camera_noshare -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_camera_noshare_before_flip4
+  D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_none -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f3_T2_none_before_flip4
+the calibration logs (F7's input)
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_delivered_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\d2_shape_prior\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_d2_shape_prior_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\fit_L\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_fit_L_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\fit_k1\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_fit_k1_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\h1\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_h1_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\h2\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_h2_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q1\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_q1_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q2\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_q2_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q3\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_q3_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q4\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_q4_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\thinned\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_thinned_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_delivered_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\fit_k1\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_fit_k1_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\h1\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_h1_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\h2\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_h2_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q1\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_q1_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q2\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_q2_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q3\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_q3_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q4\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T2_q4_calibration_log.txt
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_stage4_fix\calibration_log.txt -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\f7_logs\T0_first_delivery_calibration_log.txt
+the variants' results on X:
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\d2_shape_prior -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\d2_shape_prior
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\fit_L -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\fit_L
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\fit_k1 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\fit_k1
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\h1 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\h1
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\h2 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\h2
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q1 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\q1
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q2 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\q2
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q3 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\q3
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\q4 -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\q4
+  X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\checks\thinned -> X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\before_flip4\checks\thinned
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\fit_k1 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\fit_k1
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\h1 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\h1
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\h2 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\h2
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q1 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\q1
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q2 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\q2
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q3 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\q3
+  X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\q4 -> X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\before_flip4\checks\q4
+the cases' test outputs
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\t3_t6_variants.json -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\t3_t6_variants.json
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\t3_t6_variants_out.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\t3_t6_variants_out.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\t3_t6_variants_console.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\t3_t6_variants_console.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\d2_shape_prior.json -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\d2_shape_prior.json
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\d2_shape_prior_out.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\d2_shape_prior_out.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\d2_shape_prior_console.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\d2_shape_prior_console.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\d8_held_out.json -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\d8_held_out.json
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\d8_held_out_out.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\d8_held_out_out.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\tests\d8_held_out_console.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T0_wand\before_flip4\tests\d8_held_out_console.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\t3_variants.json -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\t3_variants.json
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\t3_variants_out.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\t3_variants_out.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\t3_variants_console.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\t3_variants_console.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\t5_k1.json -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\t5_k1.json
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\t5_k1_out.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\t5_k1_out.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\t5_k1_console.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\t5_k1_console.txt
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\d8_held_out.json -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\d8_held_out.json
+  D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\d8_held_out_out.txt -> D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\before_flip4\tests\d8_held_out_out.txt
+  missing: D:\Refraction\pyOpenLPT\cases\cyl_20261006_T2_wand\tests\d8_held_out_console.txt

@@ -1,0 +1,511 @@
+{
+ "t11a_noise_sweep": {
+  "fits": 280,
+  "converged_identical": 280,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 0,
+   "F-a3": 0
+  },
+  "verdicts_before": [
+   [
+    "/levels[0]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[1]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[2]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[3]/criteria",
+    {
+     "ratios": false,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": false,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[4]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[5]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[6]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/pass",
+    false
+   ]
+  ],
+  "verdicts_after": [
+   [
+    "/levels[0]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[1]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[2]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[3]/criteria",
+    {
+     "ratios": false,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": false,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[4]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[5]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/levels[6]/criteria",
+    {
+     "ratios": true,
+     "z_crb": true,
+     "z_fit": true,
+     "sigma_fit": true,
+     "rejections": true,
+     "pass": true,
+     "bias_flag": false
+    }
+   ],
+   [
+    "/pass",
+    false
+   ]
+  ]
+ },
+ "t11c_unequal_noise": {
+  "fits": 80,
+  "converged_identical": 80,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 3,
+   "F-a3": 0
+  },
+  "verdicts_before": [],
+  "verdicts_after": []
+ },
+ "t11d_heavy_tails": {
+  "fits": 80,
+  "converged_identical": 80,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 27,
+   "F-a3": 0
+  },
+  "verdicts_before": [],
+  "verdicts_after": []
+ },
+ "t11e_systematic": {
+  "fits": 40,
+  "converged_identical": 40,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 2,
+   "F-a3": 0
+  },
+  "verdicts_before": [],
+  "verdicts_after": []
+ },
+ "t12a_weights_unequal": {
+  "fits": 80,
+  "converged_identical": 80,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 0,
+   "F-a3": 0
+  },
+  "verdicts_before": [
+   [
+    "/variants[0]/criteria",
+    {
+     "bound": true,
+     "fit_bars": true,
+     "sigma": true,
+     "rejections": true,
+     "scratch": true,
+     "weights_used": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/variants[1]/criteria",
+    {
+     "bound": true,
+     "fit_bars": true,
+     "sigma": false,
+     "rejections": true,
+     "scratch": true,
+     "weights_used": true,
+     "errors": true,
+     "pass": false
+    }
+   ],
+   [
+    "/pass",
+    false
+   ]
+  ],
+  "verdicts_after": [
+   [
+    "/variants[0]/criteria",
+    {
+     "bound": true,
+     "fit_bars": true,
+     "sigma": true,
+     "rejections": true,
+     "scratch": true,
+     "weights_used": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/variants[1]/criteria",
+    {
+     "bound": true,
+     "fit_bars": true,
+     "sigma": false,
+     "rejections": true,
+     "scratch": true,
+     "weights_used": true,
+     "errors": true,
+     "pass": false
+    }
+   ],
+   [
+    "/pass",
+    false
+   ]
+  ]
+ },
+ "t12b_weights_equal": {
+  "fits": 80,
+  "converged_identical": 80,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 0,
+   "F-a3": 0
+  },
+  "verdicts_before": [
+   [
+    "/levels[0]/criteria",
+    {
+     "sigma": true,
+     "bound": true,
+     "z_fit": true,
+     "no_loss": true,
+     "rejections": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/levels[1]/criteria",
+    {
+     "sigma": true,
+     "bound": true,
+     "z_fit": true,
+     "no_loss": true,
+     "rejections": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/pass",
+    true
+   ]
+  ],
+  "verdicts_after": [
+   [
+    "/levels[0]/criteria",
+    {
+     "sigma": true,
+     "bound": true,
+     "z_fit": true,
+     "no_loss": true,
+     "rejections": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/levels[1]/criteria",
+    {
+     "sigma": true,
+     "bound": true,
+     "z_fit": true,
+     "no_loss": true,
+     "rejections": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/pass",
+    true
+   ]
+  ]
+ },
+ "t12c_two_cameras": {
+  "fits": 320,
+  "converged_identical": 320,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 3,
+   "F-a3": 0
+  },
+  "verdicts_before": [
+   [
+    "/cases[0]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/cases[1]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/cases[2]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/cases[3]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/pass",
+    true
+   ]
+  ],
+  "verdicts_after": [
+   [
+    "/cases[0]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/cases[1]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/cases[2]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/cases[3]/criteria",
+    {
+     "never_worse": true,
+     "errors": true,
+     "pass": true
+    }
+   ],
+   [
+    "/pass",
+    true
+   ]
+  ]
+ },
+ "t12d_scratch_t5": {
+  "fits": 100,
+  "converged_identical": 100,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 0,
+   "F-a3": 0
+  },
+  "verdicts_before": [
+   [
+    "/pass",
+    true
+   ]
+  ],
+  "verdicts_after": [
+   [
+    "/pass",
+    true
+   ]
+  ]
+ },
+ "t12e_scratch_5px": {
+  "fits": 0,
+  "converged_identical": 0,
+  "converged_different": [],
+  "looped_before": [],
+  "fixes_after": {
+   "F-a": 0,
+   "F-a2": 0,
+   "F-a3": 0
+  },
+  "verdicts_before": [
+   [
+    "/pass",
+    true
+   ]
+  ],
+  "verdicts_after": [
+   [
+    "/pass",
+    true
+   ]
+  ]
+ }
+}

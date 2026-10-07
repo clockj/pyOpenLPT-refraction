@@ -4,6 +4,10 @@
 `2026-10-06-fixes-report.md`.** One addition while testing: G4 (the results pages) joined F6, because the report's
 noise section changed.
 
+**7 October, addition F7** (report section 9): the flip test also counts four rounds in a row with a jump of more than
+30 %, rechecked with F3, F4 and the variants of both runs. Proposed in the report's section 8; approved: "go on and
+fix them".
+
 You asked:
 - how long a calibration from the detected points usually takes, and why in the GUI "it just keeps going without too
   much improvement";

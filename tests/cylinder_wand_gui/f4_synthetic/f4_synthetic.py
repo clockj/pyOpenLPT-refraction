@@ -1,7 +1,8 @@
 """F4 (fixes plan 2026-10-06-fixes-plan.md, section 3): tests/cylinder_wand's noise tests T11a, T11c-T11e and the
-weight tests T12a-T12e, run once on the library before the fixes and once after.
+weight tests T12a-T12e, run once on the library before the fixes and once after ("flip4", 7 Oct: once more after the
+four-round flip fix, F7, in its own folder run_flip4/; the library as it is now, like "after").
 
-    python f4_synthetic.py before|after [TEST ...]      (default: all nine, in order)
+    python f4_synthetic.py before|after|flip4 [TEST ...]      (default: all nine, in order)
 
 Each version runs in its own folder, run_before/ or run_after/ beside this script, so the campaign's saved outputs
 in tests/cylinder_wand are not touched:
@@ -67,8 +68,8 @@ def setup(folder: Path) -> None:
 
 def main():
     version = sys.argv[1] if len(sys.argv) > 1 else ""
-    if version not in ("before", "after"):
-        raise SystemExit("usage: python f4_synthetic.py before|after [TEST ...]")
+    if version not in ("before", "after", "flip4"):
+        raise SystemExit("usage: python f4_synthetic.py before|after|flip4 [TEST ...]")
     tests = sys.argv[2:] or TESTS
     folder = HERE / f"run_{version}"
     setup(folder)

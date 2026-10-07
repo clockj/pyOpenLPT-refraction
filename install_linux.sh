@@ -1,8 +1,12 @@
 #!/bin/bash
 # OpenLPT One-Click Installer for Linux
 # Author: Sinchy (Sinchy/pyOpenLPT)
+#
+# Usage: bash install_linux.sh [ENV_NAME]      (default: OpenLPT)
 
 set -e # Exit on error
+
+ENV_NAME="${1:-OpenLPT}"
 
 echo "=========================================="
 echo "      OpenLPT One-Click Installer (Linux)"
@@ -11,7 +15,7 @@ echo ""
 echo "This script will:"
 echo "1. Check for system build dependencies"
 echo "2. Install Miniforge3 (Conda + Mamba) if needed"
-echo "3. Create a Conda environment named 'OpenLPT'"
+echo "3. Create a Conda environment named '$ENV_NAME'"
 echo "4. Install all dependencies and the OpenLPT package"
 echo ""
 
@@ -66,28 +70,38 @@ else
     echo "[OK] Conda found."
 fi
 
-# --- STEP 2: Create Conda Environment ---
+# --- STEP 2: Create the Conda Environment with its Dependencies ---
 echo ""
-echo "[2/4] Creating Conda Environment 'OpenLPT'..."
-# Use 3.10 to match other platforms, but ensure it's compatible
-conda create -n OpenLPT python=3.10 -y || echo "[INFO] Environment might already exist."
-
-# --- STEP 3: Activate and Install Dependencies ---
-echo ""
-echo "[3/4] Activating Environment and Installing Dependencies..."
+echo "[2/4] Creating Conda Environment '$ENV_NAME' with the dependencies from conda-forge..."
 
 # Proper way to activate conda in a script
 CONDA_BASE=$(conda info --base)
 source "$CONDA_BASE/etc/profile.d/conda.sh"
-conda activate OpenLPT
 
-echo "Installing requirements via Mamba/Conda..."
 # Using mamba if available (installed by Miniforge), otherwise conda
-if command -v mamba &> /dev/null; then
-    mamba install -c conda-forge --file requirements.txt -y
+if command -v mamba &> /dev/null; then CONDA_CMD=mamba; else CONDA_CMD=conda; fi
+
+# requirements.txt without its pip-only lines (not on conda-forge; step 3), plus qt6-webengine (the camera
+# calibration's Report tab)
+CONDA_REQ="$(mktemp)"
+grep -v "pip-only" requirements.txt > "$CONDA_REQ"
+echo "qt6-webengine" >> "$CONDA_REQ"
+if conda env list | grep -q "^$ENV_NAME "; then
+    echo "[INFO] Environment '$ENV_NAME' exists: updating its packages."
+    $CONDA_CMD install -n "$ENV_NAME" --override-channels -c conda-forge --file "$CONDA_REQ" -y
 else
-    conda install -c conda-forge --file requirements.txt -y
+    $CONDA_CMD create -n "$ENV_NAME" --override-channels -c conda-forge python=3.11 --file "$CONDA_REQ" -y
 fi
+rm -f "$CONDA_REQ"
+
+# --- STEP 3: Activate; pip-only Dependencies ---
+echo ""
+echo "[3/4] Activating Environment and Installing the pip-only Dependencies..."
+conda activate "$ENV_NAME"
+# requirements.txt's lines marked pip-only (pycine)
+for spec in $(grep "pip-only" requirements.txt | grep -v "^#" | awk '{print $1}'); do
+    pip install "$spec"
+done
 
 # --- STEP 4: Build and Install OpenLPT ---
 echo ""
@@ -107,7 +121,7 @@ echo "      Installation Complete!"
 echo "=========================================="
 echo ""
 echo "To use OpenLPT:"
-echo "  1. Run: conda activate OpenLPT"
+echo "  1. Run: conda activate $ENV_NAME"
 echo "  2. Run: python GUI.py"
 echo ""
 echo "Note: If you are on a remote server/HPC without a GUI,"

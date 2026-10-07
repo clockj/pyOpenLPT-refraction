@@ -16,7 +16,7 @@ G8: plate_wand behind the GUI's Pinhole+Refraction, offscreen
   PASS  camFiles are PINPLATE, load in C++, and carry the GUI's window ids for VSC  (models {'PINPLATE'}, window ids [0, 0, 1, 1])
   PASS  error table, 3-D windows, the result's kind and the page  (300 rows, 2 planes, kind plate_wand, page True)
   PASS  tracking settings' hook copies the PINPLATE files  (['cam0.txt', 'cam1.txt', 'cam2.txt', 'cam3.txt'], byte-identical True)
-  PASS  Stop ends the process within 2 s  (0.17 s; status 'Flat-window calibration stopped.')
+  PASS  Stop ends the process within 2 s  (0.19 s; status 'Flat-window calibration stopped.')
   PASS  refit from the last result: the same f (1e-6), and faster  (3 s; largest change of f 2.7e-09)
   PASS  'Use the previous calibrator' goes to the previous calibrator  (calls [(25.0, 0)])
 

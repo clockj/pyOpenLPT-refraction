@@ -1,0 +1,9 @@
+flip4 t11a_noise_sweep: exit 0, 106 s
+flip4 t11c_unequal_noise: exit 0, 70 s
+flip4 t11d_heavy_tails: exit 0, 84 s
+flip4 t11e_systematic: exit 0, 37 s
+flip4 t12a_weights_unequal: exit 0, 98 s
+flip4 t12b_weights_equal: exit 0, 51 s
+flip4 t12c_two_cameras: exit 0, 79 s
+flip4 t12d_scratch_t5: exit 0, 208 s
+flip4 t12e_scratch_5px: exit 0, 169 s

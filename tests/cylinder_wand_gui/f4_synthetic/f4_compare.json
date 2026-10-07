@@ -6,7 +6,8 @@
   "looped_before": [],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 0
+   "F-a2": 0,
+   "F-a3": 0
   },
   "verdicts_before": [
    [
@@ -201,7 +202,7 @@
      1,
      7
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -220,7 +221,7 @@
      7,
      13
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -239,7 +240,7 @@
      2,
      8
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -254,7 +255,8 @@
   ],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 3
+   "F-a2": 3,
+   "F-a3": 0
   },
   "verdicts_before": [],
   "verdicts_after": []
@@ -271,7 +273,7 @@
      123,
      123
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -290,7 +292,7 @@
      124,
      124
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 5,
      "repeats_round": 3,
@@ -309,7 +311,7 @@
      111,
      117
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -328,7 +330,7 @@
      156,
      156
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -347,7 +349,7 @@
      111,
      111
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -366,7 +368,7 @@
      104,
      104
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -385,7 +387,7 @@
      137,
      143
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -404,7 +406,7 @@
      91,
      91
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 5,
      "repeats_round": 3,
@@ -423,7 +425,7 @@
      96,
      96
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -442,7 +444,7 @@
      112,
      118
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -461,7 +463,7 @@
      96,
      98
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -480,7 +482,7 @@
      127,
      133
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -499,7 +501,7 @@
      117,
      122
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 1,
@@ -518,7 +520,7 @@
      132,
      138
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -537,7 +539,7 @@
      104,
      110
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -556,7 +558,7 @@
      116,
      122
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -575,7 +577,7 @@
      37,
      43
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -594,7 +596,7 @@
      52,
      64
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -613,7 +615,7 @@
      43,
      49
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -632,7 +634,7 @@
      52,
      52
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -651,7 +653,7 @@
      39,
      45
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -670,7 +672,7 @@
      34,
      40
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -689,7 +691,7 @@
      45,
      62
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 4,
      "repeats_round": 2,
@@ -708,7 +710,7 @@
      38,
      50
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -727,7 +729,7 @@
      64,
      64
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -746,7 +748,7 @@
      56,
      62
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 5,
      "repeats_round": 3,
@@ -765,7 +767,7 @@
      44,
      50
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -780,7 +782,8 @@
   ],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 27
+   "F-a2": 27,
+   "F-a3": 0
   },
   "verdicts_before": [],
   "verdicts_after": []
@@ -797,7 +800,7 @@
      3,
      9
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 3,
      "repeats_round": 1,
@@ -816,7 +819,7 @@
      10,
      16
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -831,7 +834,8 @@
   ],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 2
+   "F-a2": 2,
+   "F-a3": 0
   },
   "verdicts_before": [],
   "verdicts_after": []
@@ -843,7 +847,8 @@
   "looped_before": [],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 0
+   "F-a2": 0,
+   "F-a3": 0
   },
   "verdicts_before": [
    [
@@ -917,7 +922,8 @@
   "looped_before": [],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 0
+   "F-a2": 0,
+   "F-a3": 0
   },
   "verdicts_before": [
    [
@@ -992,7 +998,7 @@
      0,
      4
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -1011,7 +1017,7 @@
      0,
      4
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -1030,7 +1036,7 @@
      0,
      4
     ],
-    "F-a": false,
+    "F-a": null,
     "F-a2": {
      "round": 2,
      "repeats_round": 0,
@@ -1045,7 +1051,8 @@
   ],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 3
+   "F-a2": 3,
+   "F-a3": 0
   },
   "verdicts_before": [
    [
@@ -1252,7 +1259,8 @@
   "looped_before": [],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 0
+   "F-a2": 0,
+   "F-a3": 0
   },
   "verdicts_before": [
    [
@@ -1274,7 +1282,8 @@
   "looped_before": [],
   "fixes_after": {
    "F-a": 0,
-   "F-a2": 0
+   "F-a2": 0,
+   "F-a3": 0
   },
   "verdicts_before": [
    [

@@ -1,10 +1,12 @@
 #!/bin/bash
+# Usage: bash install_mac.command [ENV_NAME]   (default: OpenLPT; OPENLPT_NO_LAUNCH=1 skips the GUI launch at the end)
+ENV_NAME="${1:-OpenLPT}"
 echo "=========================================="
 echo "      OpenLPT One-Click Installer"
 echo "=========================================="
 echo ""
 echo "This script will:"
-echo "1. Create a Conda environment named 'OpenLPT'"
+echo "1. Create a Conda environment named '$ENV_NAME'"
 echo "2. Install all dependencies"
 echo "3. Install the OpenLPT package"
 echo ""
@@ -75,29 +77,55 @@ if ! command -v conda &> /dev/null; then
 fi
 
 echo ""
-echo "[1/3] Creating Conda Environment 'OpenLPT'..."
-conda create -n OpenLPT python=3.10 -y
-
-echo ""
-echo "[2/3] Activating Environment..."
+echo "[1/3] Creating Conda Environment '$ENV_NAME' with the dependencies from conda-forge..."
 # Try to find conda hook
 CONDA_BASE=$(conda info --base)
 if [ -f "$CONDA_BASE/etc/profile.d/conda.sh" ]; then
     source "$CONDA_BASE/etc/profile.d/conda.sh"
-    conda activate OpenLPT
+fi
+# mamba if available (installed by Miniforge), otherwise conda
+if command -v mamba &> /dev/null; then CONDA_CMD=mamba; else CONDA_CMD=conda; fi
+# requirements.txt without its pip-only lines (not on conda-forge; step 3), plus qt6-webengine (the camera
+# calibration's Report tab) on Apple silicon. conda-forge has none for Intel Macs, where the Report tab opens the
+# page in the browser instead.
+CONDA_REQ="$(mktemp)"
+grep -v "pip-only" requirements.txt > "$CONDA_REQ"
+if [ "$(uname -m)" = "arm64" ]; then
+    echo "qt6-webengine" >> "$CONDA_REQ"
+fi
+if conda env list | grep -q "^$ENV_NAME "; then
+    echo "[INFO] Environment '$ENV_NAME' exists: updating its packages."
+    $CONDA_CMD install -n "$ENV_NAME" --override-channels -c conda-forge --file "$CONDA_REQ" -y
+else
+    $CONDA_CMD create -n "$ENV_NAME" --override-channels -c conda-forge python=3.11 --file "$CONDA_REQ" -y
+fi
+if [ $? -ne 0 ]; then
+    echo "[Error] Installing the conda-forge packages failed."
+    rm -f "$CONDA_REQ"
+    read -p "Press enter to exit"
+    exit 1
+fi
+rm -f "$CONDA_REQ"
+
+echo ""
+echo "[2/3] Activating Environment..."
+if [ -f "$CONDA_BASE/etc/profile.d/conda.sh" ]; then
+    conda activate "$ENV_NAME"
 else
     echo "[Warning] Could not find conda.sh. Assuming environment is correct or manual activation needed."
 fi
 
 echo ""
-echo "[3/3] Installing Dependencies..."
-mamba install -c conda-forge --file requirements.txt -y
-if [ $? -ne 0 ]; then
-    echo "[Error] Mamba install failed."
-    echo "NOTE: This project requires mamba."
-    read -p "Press enter to exit"
-    exit 1
-fi
+echo "[3/3] Installing the pip-only Dependencies..."
+# requirements.txt's lines marked pip-only (pycine)
+for spec in $(grep "pip-only" requirements.txt | grep -v "^#" | awk '{print $1}'); do
+    pip install "$spec"
+    if [ $? -ne 0 ]; then
+        echo "[Error] pip install $spec failed."
+        read -p "Press enter to exit"
+        exit 1
+    fi
+done
 
 echo ""
 echo "[3.5/4] Configuring Compiler Flags for macOS (OpenMP)..."
@@ -133,6 +161,8 @@ fi
 echo ""
 echo "=========================================="
 echo "      Installation Complete!"
-echo "      Launching OpenLPT GUI..."
 echo "=========================================="
-python GUI.py
+if [ "$OPENLPT_NO_LAUNCH" != "1" ]; then
+    echo "Launching OpenLPT GUI..."
+    python GUI.py
+fi

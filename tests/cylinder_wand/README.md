@@ -1,6 +1,6 @@
 # Cylinder wand calibration (PINCYL): summary and progress
 
-Last updated: 2026-10-06.
+Last updated: 2026-10-07.
 
 Start here to catch up. This file gathers what all the wand tests so far concluded, and what that means for a real
 experiment.
@@ -20,12 +20,47 @@ experiment.
   - **The fit:** 0.45–0.60 px, usable inside the wand's volume.
   - **f is not determined:** the parts of each run disagree by ±10 %.
   - **The cameras moved by about 1 px between the two runs**, so each run needs its own calibration.
-  - **The final fit looped on these runs** (10–14 min, and 356 good detections left out of T0's fit). Fixed on 6 Oct:
-    T0 now takes 96 s and T2 234 s with six starts, about 1 min with the GUI's default two. T0 is redelivered; its
-    checks agree with the first delivery within their noise.
-  - See the four newest entries below.
+  - **The final fit looped on these runs** (10–14 min, and 356 good detections left out of T0's fit). Fixed on 6 Oct,
+    with a four-round flip caught on 7 Oct: T0 now takes 72 s and T2 158 s with six starts, under 1 min with the
+    GUI's default two. T0 is redelivered; its checks agree with the first delivery within their noise. Both runs'
+    variants were rerun on 7 Oct.
+  - See the five newest entries below.
 
 ## 1. Progress log
+
+**2026-10-07: the four-round flip fixed; both runs' variants rerun; the install scripts fixed**
+- **The fix** (your OK: "go on and fix them"): the flip test of `cylinder_wand.refine` now also fires when the noise
+  estimate jumps by more than 30 % in each of four rounds in a row. See `tests/cylinder_wand_gui/2026-10-06-fixes-report.md`,
+  section 9 (test F7).
+  - **On the real runs' logs (100 starts):** it catches 60 of the 61 starts that ran to the round limit, most at
+    round 4.
+  - **The one it misses** (T0's q1, start 1) is not a loop but a slow fit: its RMS still falls every round. Its
+    result is not the one kept.
+  - **Synthetic (F4):** all 1,060 fits are unchanged, and the new rule never fires.
+  - **The delivered calibrations (F3):** unchanged; f is within 0.003 px.
+  - **Time:** T0 now takes 72 s and T2 158 s with six starts (96 s and 234 s last night). Part of that comes from a
+    quieter machine; the fair measure is the rounds per start, down from 9 to 8 (T0) and from 10 to 9 (T2).
+- **A correction to last night:**
+  - **More T0 variants looped:** besides the two I named, one start each of q1, q3 and D2 ran to the limit.
+  - **T2's own variants had never been rerun after the fixes of 6 Oct:** its halves, quarters and k1 fit. Every one of
+    their starts had looped.
+- **The reruns:**
+  - **T0:** two variants changed. h2: cam1 f 35,229 px (34,548 before). fit_k1: 6,060 detections kept (5,704
+    before), k1 +14.3 / +6.7. The rest changed only in the last digits.
+  - **T2:** the 2nd quarter no longer puts cam2 at 4.7 m and f 166,557 px. It now lies with the other parts, at
+    1.2 m and 41,408 px. T2's spread is cam1 36,500–40,900 px and cam2 32,100–41,400 px.
+  - **Both pages republished**, and the reports and READMEs updated. The earlier outputs are kept in `before_flip4\`.
+- **The install scripts (your question)** — see `tests/install_scripts/2026-10-07-plan.md` and `-report.md`.
+  - **What was wrong:**
+    - every installer stopped at its third step, because `requirements.txt` lists pycine, which is only on PyPI;
+    - the Windows and macOS installers needed mamba, and this PC has only conda;
+    - on Windows conda-forge's solve picks MKL, which crashes numpy here;
+    - QtWebEngine (the Report tab) was in no list;
+    - the scripts made Python 3.10, not the tested 3.11.
+  - **Fixed, with your change "keep pycine":** its line is marked pip-only, and the installers pip-install it.
+    - **Windows:** the installer works from scratch here in 2.7 min. The new environment has Python 3.11 and
+      OpenBLAS, the GUI opens, and the Report tab shows a results page. The updater works too.
+    - **Linux and macOS:** their package sets solve, and the scripts parse. They were not run.
 
 **2026-10-06 (later still): T0 redelivered; is it better; the radius range in the ellipse mode**
 - **T0 redelivered** on your OK, with every test of its case rerun and its page republished.

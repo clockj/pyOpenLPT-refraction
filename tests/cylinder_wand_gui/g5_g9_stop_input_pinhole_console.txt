@@ -6,7 +6,7 @@ Using Camera Settings: image_size=(2000,2600), init_focal=9000.0
 [Filter] UI: no frames marked for removal, using all 300 frames
 [Wand] distortion_params=0
 Running Wand Calibration with length 10.0mm, f0=9000.0px, dist_coeffs=0...
-  PASS  Stop 3 s into the start search ends the run within 6 s; idle again; no camFile  (3.5 s after Stop; status 'Cylinder calibration stopped.'; camFiles none)
+  PASS  Stop 3 s into the start search ends the run within 6 s; idle again; no camFile  (3.3 s after Stop; status 'Cylinder calibration stopped.'; camFiles none)
 Using Camera Settings: image_size=(2000,2600), init_focal=9000.0
   Per-camera focal lengths: [(0, 9000.0)]
 [Filter] UI: no frames marked for removal, using all 300 frames

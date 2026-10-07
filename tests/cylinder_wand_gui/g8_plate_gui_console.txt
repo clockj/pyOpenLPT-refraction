@@ -45,7 +45,7 @@ Using Camera Settings: image_size=(800,1280), init_focal=9000.0
 [Filter] UI: no frames marked for removal, using all 300 frames
 [Wand] distortion_params=0
 Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
-  PASS  Stop ends the process within 2 s  (0.17 s; status 'Flat-window calibration stopped.')
+  PASS  Stop ends the process within 2 s  (0.19 s; status 'Flat-window calibration stopped.')
 Using Camera Settings: image_size=(800,1280), init_focal=9000.0
   Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
 [Filter] UI: no frames marked for removal, using all 300 frames

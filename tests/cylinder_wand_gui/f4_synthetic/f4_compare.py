@@ -1,6 +1,9 @@
 """F4: compare the synthetic tests' outputs before and after the fixes (run_before/ and run_after/, f4_synthetic.py).
 
-    python f4_compare.py
+    python f4_compare.py [A B]      (default: before after; F7, 7 Oct: "before flip4" and "after flip4" too)
+
+A and B name the run folders run_A/ and run_B/; the output names carry them unless they are the default pair
+(f4_compare_<A>_<B>_out.txt and .json).  "F-a" counts the two-state flip rule, "F-a3" the four-jumps rule (F7).
 
 Every fit a test records (a dict with "rounds") is paired with the same fit of the other run, by its place in the
 test's JSON.  Per test:
@@ -77,27 +80,30 @@ def zs(rec):
 
 def main():
     lines, summary = [], {}
+    a_name, b_name = (sys.argv[1:3] if len(sys.argv) >= 3 else ["before", "after"])
+    stem = "f4_compare" if (a_name, b_name) == ("before", "after") else f"f4_compare_{a_name}_{b_name}"
 
     def say(s=""):
         print(s, flush=True)
         lines.append(s)
-    say("F4: the synthetic noise and weight tests, before (git HEAD) and after the fixes")
+    say(f"F4: the synthetic noise and weight tests, run_{a_name} against run_{b_name}"
+        + (" (before: git HEAD before the fixes)" if a_name == "before" else ""))
     for t in TESTS:
-        pb, pa = HERE / "run_before" / f"{t}.json", HERE / "run_after" / f"{t}.json"
+        pb, pa = HERE / f"run_{a_name}" / f"{t}.json", HERE / f"run_{b_name}" / f"{t}.json"
         if not (pb.exists() and pa.exists()):
             say(f"\n{t}: missing ({'before' if not pb.exists() else 'after'})")
             continue
         B, A = json.loads(pb.read_text(encoding="utf-8")), json.loads(pa.read_text(encoding="utf-8"))
         fb, fa = dict(fits(B)), dict(fits(A))
         conv_same, conv_diff, looped = 0, [], []
-        fixes = {"F-a": 0, "F-a2": 0}
+        fixes = {"F-a": 0, "F-a2": 0, "F-a3": 0}
         for path, rb in fb.items():
             ra = fa.get(path)
             if ra is None:
                 conv_diff.append((path, "missing after"))
                 continue
             if ra.get("flipped"):
-                fixes["F-a"] += 1
+                fixes["F-a" if ra["flipped"].get("kind", "alternates") == "alternates" else "F-a3"] += 1
             if ra.get("cycle"):
                 fixes["F-a2"] += 1
             if rb["rounds"] < LIMIT:
@@ -120,20 +126,23 @@ def main():
                 zb, za = zs(rb), zs(ra)
                 dz = (math.sqrt(sum((x - y) ** 2 for x, y in zip(zb, za)) / len(zb)) if zb and za else None)
                 looped.append({"path": path, "rounds_after": ra["rounds"], "rejected": [rb.get("rejected"), ra.get("rejected")],
-                               "F-a": bool(ra.get("flipped")), "F-a2": ra.get("cycle"),
+                               "F-a": (None if not ra.get("flipped") else
+                                       "F-a" if ra["flipped"].get("kind", "alternates") == "alternates" else "F-a3"),
+                               "F-a2": ra.get("cycle"),
                                "z_rms": [math.sqrt(sum(x * x for x in zb) / len(zb)) if zb else None,
                                          math.sqrt(sum(x * x for x in za) / len(za)) if za else None],
                                "dz_rms": dz})
         vb, va = verdicts(B), verdicts(A)
         say(f"\n{t}: {len(fb)} fits; converged before: {conv_same} identical after, {len(conv_diff)} different; "
-            f"at the round limit before: {len(looped)}; the fixes acted after: F-a {fixes['F-a']}, F-a2 {fixes['F-a2']}")
+            f"at the round limit before: {len(looped)}; the fixes acted after: F-a {fixes['F-a']}, F-a2 {fixes['F-a2']}"
+            f", F-a3 {fixes['F-a3']}")
         for p, why in conv_diff[:12]:
             say(f"    differs: {p}: {why}")
         if len(conv_diff) > 12:
             say(f"    ... and {len(conv_diff) - 12} more")
         for r in looped:
             say(f"    looped before: {r['path']}: now {r['rounds_after']} rounds"
-                + (" (F-a)" if r["F-a"] else "") + (f" (F-a2: {r['F-a2']})" if r["F-a2"] else "")
+                + (f" ({r['F-a']})" if r["F-a"] else "") + (f" (F-a2: {r['F-a2']})" if r["F-a2"] else "")
                 + f"; rejected {r['rejected'][0]} -> {r['rejected'][1]}"
                 + (f"; z RMS {r['z_rms'][0]:.3f} -> {r['z_rms'][1]:.3f}, moved {r['dz_rms']:.3f} RMS"
                    if r["dz_rms"] is not None else ""))
@@ -164,8 +173,8 @@ def main():
         summary[t] = {"fits": len(fb), "converged_identical": conv_same, "converged_different": conv_diff,
                       "looped_before": looped, "fixes_after": fixes,
                       "verdicts_before": vb, "verdicts_after": va}
-    (HERE / "f4_compare_out.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    (HERE / "f4_compare.json").write_text(json.dumps(summary, indent=1, default=str), encoding="utf-8")
+    (HERE / f"{stem}_out.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (HERE / f"{stem}.json").write_text(json.dumps(summary, indent=1, default=str), encoding="utf-8")
 
 
 if __name__ == "__main__":

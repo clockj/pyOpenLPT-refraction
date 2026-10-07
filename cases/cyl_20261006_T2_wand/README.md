@@ -11,10 +11,16 @@ calibrated with `cylinder_wand` exactly as the GUI's "Pinhole+Cylinder" runs it.
   - **The calibration:** 1,966 usable frames; it fits with 0.60 px RMS and 31 µm wand-length scatter.
   - **Usable inside the wand's volume:** held-out wand lengths within 0.06 % (D8).
   - **The cameras moved by about 1 px between T0 and T2 (X1):** use each run's own camFiles.
-  - **f is still not determined (T3):** cam1 f 33,900–41,200 px over the parts, along one f / distance line on
+  - **f is still not determined (T3):** cam1 f 36,500–40,900 px over the parts, along one f / distance line on
     which the 30 Sep dot board also lies.
-  - **k1 does not help (T5):** −4 % RMS, implausible values.
+  - **k1 does not help (T5):** −3.5 % RMS, implausible values.
   - **Where to read:** report sections 1 and 6.
+- **T3, T5 and D8 rerun (7 Oct):**
+  - **Why:** they had run on the library before the stage-4 fixes, and every start had looped (the fixes report,
+    `tests/cylinder_wand_gui/2026-10-06-fixes-report.md`, section 9).
+  - **What changed:** the 2nd quarter no longer puts cam2 at 4.7 m.
+  - **Where things are:** the earlier outputs in `before_flip4\` here and in `Results\before_flip4\`; the page is
+    republished (version 3).
 - Raw images: `X:\Shijie Zhong\Refraction\Raw\20261006\T2\cam1`, `cam2`.
 - Outputs: `X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results` (its own `README.md` lists them).
 

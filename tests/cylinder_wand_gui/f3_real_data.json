@@ -4,19 +4,18 @@
   "mode": "camera",
   "share": true,
   "n_final": 6,
-  "seconds": 96.05305767059326,
+  "seconds": 72.0660948753357,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 33.995126485824585,
+    "rounds": 8,
+    "seconds": 23.167545557022095,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
@@ -71,79 +70,80 @@
    }
   ],
   "final": {
-   "rounds": 9,
+   "rounds": 8,
    "cycle": {
-    "round": 8,
-    "repeats_round": 6,
+    "round": 7,
+    "repeats_round": 5,
     "left_out": 8
    },
    "flipped": {
-    "round": 5,
+    "round": 4,
+    "kind": "jumps",
     "sigma_px": [
+     [
+      0.5595754489772428,
+      0.5635237577788639
+     ],
      [
       0.7815303408540127,
       0.07815303408540127
-     ],
-     [
-      0.5758425264725333,
-      0.563155295143131
      ]
     ]
    },
    "weights_used": false,
    "stage4_shared": 5,
-   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 0.782, 0.078 px and 0.576, 0.563 px per group): equal weights, as without the weighting"
+   "why": "the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.560, 0.564 px and 0.782, 0.078 px per group): equal weights, as without the weighting"
   },
   "summary": {
-   "rms_px": 0.4693299263677001,
-   "sigma_px": 0.5435513644359202,
+   "rms_px": 0.46932992636770604,
+   "sigma_px": 0.5435513644359271,
    "frames": 1519,
    "active": 6064,
    "observations": 6076,
    "wand_length_mm": 10.0,
    "L_sigma_mm": null,
-   "wand_free_rms_um": 23.069617421238522,
-   "wand_free_mean_um": 0.031670761866293216,
+   "wand_free_rms_um": 23.069617487004535,
+   "wand_free_mean_um": 0.03167077358512082,
    "cameras": [
     {
      "name": "cam1",
-     "f_px": 38551.43696936687,
-     "f_sigma_px": 295.83218118980665,
-     "distance_mm": 1006.8149041666486,
-     "distance_sigma_mm": 7.563690394099318,
+     "f_px": 38551.436743013575,
+     "f_sigma_px": 295.8321633520131,
+     "distance_mm": 1006.8148979216315,
+     "distance_sigma_mm": 7.563689906558583,
      "azimuth_deg": 0.0,
      "azimuth_sigma_deg": 0.0,
      "height_rel_mm": 0.0,
      "height_sigma_mm": 0.0,
      "viewing_direction": [
-      0.0024879392719716546,
-      0.04650700496556016,
-      -0.9989148655652853
+      0.0024879399063194403,
+      0.04650700527261241,
+      -0.9989148655494104
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.5002424931230383,
+     "rms_px": 0.5002424926191259,
      "n_active": 3032,
      "n_total": 3038
     },
     {
      "name": "cam2",
-     "f_px": 35812.03092337204,
-     "f_sigma_px": 424.60865652002053,
-     "distance_mm": 1036.0524588395663,
-     "distance_sigma_mm": 11.944895618752845,
-     "azimuth_deg": 60.82750887516394,
-     "azimuth_sigma_deg": 0.027138211567579916,
-     "height_rel_mm": 20.30881462387169,
-     "height_sigma_mm": 1.0102233787205996,
+     "f_px": 35812.03186136389,
+     "f_sigma_px": 424.6082113905765,
+     "distance_mm": 1036.0524848292778,
+     "distance_sigma_mm": 11.944883121985816,
+     "azimuth_deg": 60.82750892570234,
+     "azimuth_sigma_deg": 0.027138205003781293,
+     "height_rel_mm": 20.30881353279907,
+     "height_sigma_mm": 1.0102231446076069,
      "viewing_direction": [
-      -0.8744915979902222,
-      0.023719612054567553,
-      -0.48446034414437494
+      -0.8744915983449996,
+      0.023719612537836273,
+      -0.48446034348031214
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.43623228633684213,
+     "rms_px": 0.43623228691470844,
      "n_active": 3032,
      "n_total": 3038
     }
@@ -155,13 +155,13 @@
   "mode": "none",
   "share": true,
   "n_final": 6,
-  "seconds": 67.15867638587952,
+  "seconds": 55.231425523757935,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.408,
     "rounds": 3,
-    "seconds": 6.830887794494629,
+    "seconds": 6.24448823928833,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
@@ -293,161 +293,156 @@
   "mode": "camera",
   "share": false,
   "n_final": 6,
-  "seconds": 265.0626177787781,
+  "seconds": 197.61138677597046,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 31.27664828300476,
+    "rounds": 8,
+    "seconds": 23.471734046936035,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 1,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 29.781773805618286,
+    "rounds": 8,
+    "seconds": 22.439789056777954,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 2,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 30.4840087890625,
+    "rounds": 8,
+    "seconds": 22.83106517791748,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 3,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 33.30889630317688,
+    "rounds": 8,
+    "seconds": 22.88128352165222,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 4,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 32.93548822402954,
+    "rounds": 8,
+    "seconds": 22.621979475021362,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 5,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 33.58170533180237,
+    "rounds": 8,
+    "seconds": 22.58097004890442,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    }
   ],
   "final": {
-   "rounds": 9,
+   "rounds": 8,
    "cycle": {
-    "round": 8,
-    "repeats_round": 6,
+    "round": 7,
+    "repeats_round": 5,
     "left_out": 8
    },
    "flipped": {
-    "round": 5,
+    "round": 4,
+    "kind": "jumps",
     "sigma_px": [
      [
-      0.7815303408540127,
-      0.07815303408540127
+      0.55957546161699,
+      0.5635237585382454
      ],
      [
-      0.5758425264725333,
-      0.563155295143131
+      0.7815303355964018,
+      0.07815303355964019
      ]
     ]
    },
    "weights_used": false,
    "stage4_shared": 0,
-   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 0.782, 0.078 px and 0.576, 0.563 px per group): equal weights, as without the weighting"
+   "why": "the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.560, 0.564 px and 0.782, 0.078 px per group): equal weights, as without the weighting"
   },
   "summary": {
-   "rms_px": 0.4693299263677001,
-   "sigma_px": 0.5435513644359202,
+   "rms_px": 0.46932992636769866,
+   "sigma_px": 0.5435513644359186,
    "frames": 1519,
    "active": 6064,
    "observations": 6076,
    "wand_length_mm": 10.0,
    "L_sigma_mm": null,
-   "wand_free_rms_um": 23.069617421238522,
-   "wand_free_mean_um": 0.031670761866293216,
+   "wand_free_rms_um": 23.069617421242672,
+   "wand_free_mean_um": 0.031670761782485735,
    "cameras": [
     {
      "name": "cam1",
-     "f_px": 38551.43696936687,
-     "f_sigma_px": 295.83218118980665,
-     "distance_mm": 1006.8149041666486,
-     "distance_sigma_mm": 7.563690394099318,
-     "azimuth_deg": 0.0,
-     "azimuth_sigma_deg": 0.0,
+     "f_px": 38551.4369693476,
+     "f_sigma_px": 295.83218634041316,
+     "distance_mm": 1006.8149041662234,
+     "distance_sigma_mm": 7.563690510810442,
+     "azimuth_deg": -2.0217767811277693e-16,
+     "azimuth_sigma_deg": 1.5188585102498929e-18,
      "height_rel_mm": 0.0,
      "height_sigma_mm": 0.0,
      "viewing_direction": [
-      0.0024879392719716546,
-      0.04650700496556016,
-      -0.9989148655652853
+      0.0024879392718918487,
+      0.046507004965475204,
+      -0.9989148655652895
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.5002424931230383,
+     "rms_px": 0.5002424931230242,
      "n_active": 3032,
      "n_total": 3038
     },
     {
      "name": "cam2",
-     "f_px": 35812.03092337204,
-     "f_sigma_px": 424.60865652002053,
-     "distance_mm": 1036.0524588395663,
-     "distance_sigma_mm": 11.944895618752845,
-     "azimuth_deg": 60.82750887516394,
-     "azimuth_sigma_deg": 0.027138211567579916,
-     "height_rel_mm": 20.30881462387169,
-     "height_sigma_mm": 1.0102233787205996,
+     "f_px": 35812.03092337906,
+     "f_sigma_px": 424.6086882978665,
+     "distance_mm": 1036.052458839843,
+     "distance_sigma_mm": 11.944896569253826,
+     "azimuth_deg": 60.82750887516309,
+     "azimuth_sigma_deg": 0.027138210007216123,
+     "height_rel_mm": 20.308814623821664,
+     "height_sigma_mm": 1.0102234519430888,
      "viewing_direction": [
-      -0.8744915979902222,
-      0.023719612054567553,
-      -0.48446034414437494
+      -0.8744915979902148,
+      0.023719612054508333,
+      -0.48446034414439165
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.43623228633684213,
+     "rms_px": 0.43623228633685524,
      "n_active": 3032,
      "n_total": 3038
     }
@@ -459,19 +454,18 @@
   "mode": "camera",
   "share": true,
   "n_final": 2,
-  "seconds": 60.2162127494812,
+  "seconds": 43.77682185173035,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.408,
-    "rounds": 9,
-    "seconds": 33.64432120323181,
+    "rounds": 8,
+    "seconds": 23.259460926055908,
     "stage4_rms": 0.46933,
     "active": 6064,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (0.7815, 0.0782 px and 0.5758, 0.5632 px per group): equal weights from the next round on",
-     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
+     "F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out"
     ]
    },
    {
@@ -486,79 +480,80 @@
    }
   ],
   "final": {
-   "rounds": 9,
+   "rounds": 8,
    "cycle": {
-    "round": 8,
-    "repeats_round": 6,
+    "round": 7,
+    "repeats_round": 5,
     "left_out": 8
    },
    "flipped": {
-    "round": 5,
+    "round": 4,
+    "kind": "jumps",
     "sigma_px": [
+     [
+      0.5595754489772428,
+      0.5635237577788639
+     ],
      [
       0.7815303408540127,
       0.07815303408540127
-     ],
-     [
-      0.5758425264725333,
-      0.563155295143131
      ]
     ]
    },
    "weights_used": false,
    "stage4_shared": 1,
-   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 0.782, 0.078 px and 0.576, 0.563 px per group): equal weights, as without the weighting"
+   "why": "the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.560, 0.564 px and 0.782, 0.078 px per group): equal weights, as without the weighting"
   },
   "summary": {
-   "rms_px": 0.4693299263677001,
-   "sigma_px": 0.5435513644359202,
+   "rms_px": 0.46932992636770604,
+   "sigma_px": 0.5435513644359271,
    "frames": 1519,
    "active": 6064,
    "observations": 6076,
    "wand_length_mm": 10.0,
    "L_sigma_mm": null,
-   "wand_free_rms_um": 23.069617421238522,
-   "wand_free_mean_um": 0.031670761866293216,
+   "wand_free_rms_um": 23.069617487004535,
+   "wand_free_mean_um": 0.03167077358512082,
    "cameras": [
     {
      "name": "cam1",
-     "f_px": 38551.43696936687,
-     "f_sigma_px": 295.83218118980665,
-     "distance_mm": 1006.8149041666486,
-     "distance_sigma_mm": 7.563690394099318,
+     "f_px": 38551.436743013575,
+     "f_sigma_px": 295.8321633520131,
+     "distance_mm": 1006.8148979216315,
+     "distance_sigma_mm": 7.563689906558583,
      "azimuth_deg": 0.0,
      "azimuth_sigma_deg": 0.0,
      "height_rel_mm": 0.0,
      "height_sigma_mm": 0.0,
      "viewing_direction": [
-      0.0024879392719716546,
-      0.04650700496556016,
-      -0.9989148655652853
+      0.0024879399063194403,
+      0.04650700527261241,
+      -0.9989148655494104
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.5002424931230383,
+     "rms_px": 0.5002424926191259,
      "n_active": 3032,
      "n_total": 3038
     },
     {
      "name": "cam2",
-     "f_px": 35812.03092337204,
-     "f_sigma_px": 424.60865652002053,
-     "distance_mm": 1036.0524588395663,
-     "distance_sigma_mm": 11.944895618752845,
-     "azimuth_deg": 60.82750887516394,
-     "azimuth_sigma_deg": 0.027138211567579916,
-     "height_rel_mm": 20.30881462387169,
-     "height_sigma_mm": 1.0102233787205996,
+     "f_px": 35812.03186136389,
+     "f_sigma_px": 424.6082113905765,
+     "distance_mm": 1036.0524848292778,
+     "distance_sigma_mm": 11.944883121985816,
+     "azimuth_deg": 60.82750892570234,
+     "azimuth_sigma_deg": 0.027138205003781293,
+     "height_rel_mm": 20.30881353279907,
+     "height_sigma_mm": 1.0102231446076069,
      "viewing_direction": [
-      -0.8744915979902222,
-      0.023719612054567553,
-      -0.48446034414437494
+      -0.8744915983449996,
+      0.023719612537836273,
+      -0.48446034348031214
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.43623228633684213,
+     "rms_px": 0.43623228691470844,
      "n_active": 3032,
      "n_total": 3038
     }
@@ -570,19 +565,18 @@
   "mode": "camera",
   "share": true,
   "n_final": 6,
-  "seconds": 233.9399209022522,
+  "seconds": 157.70598459243774,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 48.64694333076477,
+    "rounds": 9,
+    "seconds": 32.285468339920044,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    },
    {
@@ -618,14 +612,13 @@
    {
     "start": 4,
     "stage3_rms": 0.703,
-    "rounds": 15,
-    "seconds": 78.30294561386108,
+    "rounds": 10,
+    "seconds": 39.83448839187622,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 8: the noise estimate flips between two states every round (1.0773, 0.1077 px and 0.5814, 0.8540 px per group): equal weights from the next round on",
-     "F-a2: round 14: the active set repeats round 12's: the 8 detections that alternate are left out"
+     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
     ]
    },
    {
@@ -640,79 +633,80 @@
    }
   ],
   "final": {
-   "rounds": 10,
+   "rounds": 9,
    "cycle": {
-    "round": 9,
-    "repeats_round": 7,
+    "round": 8,
+    "repeats_round": 6,
     "left_out": 8
    },
    "flipped": {
-    "round": 5,
+    "round": 4,
+    "kind": "jumps",
     "sigma_px": [
+     [
+      0.5674205086718664,
+      0.8535299898618821
+     ],
      [
       1.0080923196949154,
       0.10080923196949154
-     ],
-     [
-      0.5766076808784729,
-      0.8539347915265403
      ]
     ]
    },
    "weights_used": false,
    "stage4_shared": 4,
-   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 1.008, 0.101 px and 0.577, 0.854 px per group): equal weights, as without the weighting"
+   "why": "the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.567, 0.854 px and 1.008, 0.101 px per group): equal weights, as without the weighting"
   },
   "summary": {
-   "rms_px": 0.6005095822127539,
-   "sigma_px": 0.6947069257468392,
+   "rms_px": 0.6005095822127494,
+   "sigma_px": 0.694706925746834,
    "frames": 1966,
    "active": 7856,
    "observations": 7864,
    "wand_length_mm": 10.0,
    "L_sigma_mm": null,
-   "wand_free_rms_um": 31.290221729820335,
-   "wand_free_mean_um": 0.04768303329976054,
+   "wand_free_rms_um": 31.29022180290301,
+   "wand_free_mean_um": 0.047683062978604224,
    "cameras": [
     {
      "name": "cam1",
-     "f_px": 38252.360136235446,
-     "f_sigma_px": 354.7848590580633,
-     "distance_mm": 1001.2378474087704,
-     "distance_sigma_mm": 9.096092751688591,
-     "azimuth_deg": -1.2706490030095746e-17,
-     "azimuth_sigma_deg": 1.154365190661537e-19,
+     "f_px": 38252.360078181286,
+     "f_sigma_px": 354.78486055803654,
+     "distance_mm": 1001.2378446238046,
+     "distance_sigma_mm": 9.096092778529803,
+     "azimuth_deg": -1.2706490065439138e-17,
+     "azimuth_sigma_deg": 1.154365200489683e-19,
      "height_rel_mm": 0.0,
      "height_sigma_mm": 0.0,
      "viewing_direction": [
-      0.004597500077197321,
-      0.02492216149931532,
-      -0.999678822852242
+      0.004597501036759836,
+      0.024922161940013537,
+      -0.9996788228368417
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.6258821839692402,
+     "rms_px": 0.6258821837220178,
      "n_active": 3928,
      "n_total": 3932
     },
     {
      "name": "cam2",
-     "f_px": 37409.28241876453,
-     "f_sigma_px": 523.4011900753859,
-     "distance_mm": 1085.1216488786588,
-     "distance_sigma_mm": 14.86724676720563,
-     "azimuth_deg": 60.66498389484128,
-     "azimuth_sigma_deg": 0.037700049871555445,
-     "height_rel_mm": 12.036066310360223,
-     "height_sigma_mm": 0.7445381640720666,
+     "f_px": 37409.283331021645,
+     "f_sigma_px": 523.4017513314496,
+     "distance_mm": 1085.1216733918582,
+     "distance_sigma_mm": 14.86726278511681,
+     "azimuth_deg": 60.66498399822341,
+     "azimuth_sigma_deg": 0.0377000507055748,
+     "height_rel_mm": 12.036065833765324,
+     "height_sigma_mm": 0.744538331870559,
      "viewing_direction": [
-      -0.8715026679473111,
-      0.01036875984354496,
-      -0.4902811321884863
+      -0.8715026689841303,
+      0.010368760392465521,
+      -0.49028113033387183
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.5740165576432151,
+     "rms_px": 0.5740165579127662,
      "n_active": 3928,
      "n_total": 3932
     }
@@ -724,13 +718,13 @@
   "mode": "none",
   "share": true,
   "n_final": 6,
-  "seconds": 141.04846668243408,
+  "seconds": 113.793625831604,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.502,
     "rounds": 3,
-    "seconds": 7.613178968429565,
+    "seconds": 5.926379680633545,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
@@ -772,7 +766,7 @@
     "start": 4,
     "stage3_rms": 0.703,
     "rounds": 6,
-    "seconds": 26.4838387966156,
+    "seconds": 23.130513668060303,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
@@ -864,161 +858,156 @@
   "mode": "camera",
   "share": false,
   "n_final": 6,
-  "seconds": 432.19220638275146,
+  "seconds": 295.16615772247314,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 47.26945996284485,
+    "rounds": 9,
+    "seconds": 31.77529764175415,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 1,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 46.68497157096863,
+    "rounds": 9,
+    "seconds": 31.91451668739319,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 2,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 48.533348083496094,
+    "rounds": 9,
+    "seconds": 31.430169343948364,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 3,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 51.40486478805542,
+    "rounds": 9,
+    "seconds": 32.38762092590332,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 4,
     "stage3_rms": 0.703,
-    "rounds": 15,
-    "seconds": 68.94960474967957,
+    "rounds": 10,
+    "seconds": 39.658557176589966,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 8: the noise estimate flips between two states every round (1.0773, 0.1077 px and 0.5814, 0.8540 px per group): equal weights from the next round on",
-     "F-a2: round 14: the active set repeats round 12's: the 8 detections that alternate are left out"
+     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
     ]
    },
    {
     "start": 5,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 49.17654871940613,
+    "rounds": 9,
+    "seconds": 31.60030770301819,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    }
   ],
   "final": {
-   "rounds": 10,
+   "rounds": 9,
    "cycle": {
-    "round": 9,
-    "repeats_round": 7,
+    "round": 8,
+    "repeats_round": 6,
     "left_out": 8
    },
    "flipped": {
-    "round": 5,
+    "round": 4,
+    "kind": "jumps",
     "sigma_px": [
      [
-      1.0080923193449498,
-      0.10080923193449497
+      0.5674205145740779,
+      0.8535299888762934
      ],
      [
-      0.5766077180718643,
-      0.8539347854581252
+      1.008092318992235,
+      0.1008092318992235
      ]
     ]
    },
    "weights_used": false,
    "stage4_shared": 0,
-   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 1.008, 0.101 px and 0.577, 0.854 px per group): equal weights, as without the weighting"
+   "why": "the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.567, 0.854 px and 1.008, 0.101 px per group): equal weights, as without the weighting"
   },
   "summary": {
-   "rms_px": 0.6005095822127504,
-   "sigma_px": 0.6947069257468352,
+   "rms_px": 0.6005095822127539,
+   "sigma_px": 0.6947069257468391,
    "frames": 1966,
    "active": 7856,
    "observations": 7864,
    "wand_length_mm": 10.0,
    "L_sigma_mm": null,
-   "wand_free_rms_um": 31.29022172982246,
-   "wand_free_mean_um": 0.047683033300081626,
+   "wand_free_rms_um": 31.29022180246499,
+   "wand_free_mean_um": 0.047683062872589,
    "cameras": [
     {
      "name": "cam1",
-     "f_px": 38252.36013623555,
-     "f_sigma_px": 354.7848592410225,
-     "distance_mm": 1001.2378474087378,
-     "distance_sigma_mm": 9.096092758407343,
+     "f_px": 38252.3600797754,
+     "f_sigma_px": 354.7848593291571,
+     "distance_mm": 1001.2378446666493,
+     "distance_sigma_mm": 9.096092749406681,
      "azimuth_deg": 0.0,
      "azimuth_sigma_deg": 0.0,
      "height_rel_mm": 0.0,
      "height_sigma_mm": 0.0,
      "viewing_direction": [
-      0.004597500077209805,
-      0.024922161499333774,
-      -0.9996788228522403
+      0.004597501020757675,
+      0.024922161938843723,
+      -0.9996788228369434
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.62588218396926,
+     "rms_px": 0.6258821837520768,
      "n_active": 3928,
      "n_total": 3932
     },
     {
      "name": "cam2",
-     "f_px": 37409.28241876036,
-     "f_sigma_px": 523.4014857870641,
-     "distance_mm": 1085.1216488785049,
-     "distance_sigma_mm": 14.867255098455583,
-     "azimuth_deg": 60.664983894843616,
-     "azimuth_sigma_deg": 0.037700051821837055,
-     "height_rel_mm": 12.036066310368208,
-     "height_sigma_mm": 0.7445382288815503,
+     "f_px": 37409.283289249935,
+     "f_sigma_px": 523.4013735690029,
+     "distance_mm": 1085.121672204693,
+     "distance_sigma_mm": 14.867251985160337,
+     "azimuth_deg": 60.66498399769957,
+     "azimuth_sigma_deg": 0.037700050212642854,
+     "height_rel_mm": 12.036065859152906,
+     "height_sigma_mm": 0.7445382287908566,
      "viewing_direction": [
-      -0.8715026679473373,
-      0.010368759843555076,
-      -0.4902811321884386
+      -0.8715026689827198,
+      0.010368760379950494,
+      -0.49028113033664866
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.5740165576431865,
+     "rms_px": 0.5740165578800002,
      "n_active": 3928,
      "n_total": 3932
     }
@@ -1030,19 +1019,18 @@
   "mode": "camera",
   "share": true,
   "n_final": 2,
-  "seconds": 65.10916137695312,
+  "seconds": 55.33201885223389,
   "starts": [
    {
     "start": 0,
     "stage3_rms": 0.502,
-    "rounds": 10,
-    "seconds": 41.509520053863525,
+    "rounds": 9,
+    "seconds": 31.87496829032898,
     "stage4_rms": 0.60051,
     "active": 7856,
     "shared_from": null,
     "notes": [
-     "F-a: round 5: the noise estimate flips between two states every round (1.0081, 0.1008 px and 0.5766, 0.8539 px per group): equal weights from the next round on",
-     "F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out"
+     "F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out"
     ]
    },
    {
@@ -1057,79 +1045,80 @@
    }
   ],
   "final": {
-   "rounds": 10,
+   "rounds": 9,
    "cycle": {
-    "round": 9,
-    "repeats_round": 7,
+    "round": 8,
+    "repeats_round": 6,
     "left_out": 8
    },
    "flipped": {
-    "round": 5,
+    "round": 4,
+    "kind": "jumps",
     "sigma_px": [
+     [
+      0.5674205086718664,
+      0.8535299898618821
+     ],
      [
       1.0080923196949154,
       0.10080923196949154
-     ],
-     [
-      0.5766076808784729,
-      0.8539347915265403
      ]
     ]
    },
    "weights_used": false,
    "stage4_shared": 1,
-   "why": "the estimated noise flipped between two states every round instead of converging (from round 5: 1.008, 0.101 px and 0.577, 0.854 px per group): equal weights, as without the weighting"
+   "why": "the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.567, 0.854 px and 1.008, 0.101 px per group): equal weights, as without the weighting"
   },
   "summary": {
-   "rms_px": 0.6005095822127539,
-   "sigma_px": 0.6947069257468392,
+   "rms_px": 0.6005095822127494,
+   "sigma_px": 0.694706925746834,
    "frames": 1966,
    "active": 7856,
    "observations": 7864,
    "wand_length_mm": 10.0,
    "L_sigma_mm": null,
-   "wand_free_rms_um": 31.290221729820335,
-   "wand_free_mean_um": 0.04768303329976054,
+   "wand_free_rms_um": 31.29022180290301,
+   "wand_free_mean_um": 0.047683062978604224,
    "cameras": [
     {
      "name": "cam1",
-     "f_px": 38252.360136235446,
-     "f_sigma_px": 354.7848590580633,
-     "distance_mm": 1001.2378474087704,
-     "distance_sigma_mm": 9.096092751688591,
-     "azimuth_deg": -1.2706490030095746e-17,
-     "azimuth_sigma_deg": 1.154365190661537e-19,
+     "f_px": 38252.360078181286,
+     "f_sigma_px": 354.78486055803654,
+     "distance_mm": 1001.2378446238046,
+     "distance_sigma_mm": 9.096092778529803,
+     "azimuth_deg": -1.2706490065439138e-17,
+     "azimuth_sigma_deg": 1.154365200489683e-19,
      "height_rel_mm": 0.0,
      "height_sigma_mm": 0.0,
      "viewing_direction": [
-      0.004597500077197321,
-      0.02492216149931532,
-      -0.999678822852242
+      0.004597501036759836,
+      0.024922161940013537,
+      -0.9996788228368417
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.6258821839692402,
+     "rms_px": 0.6258821837220178,
      "n_active": 3928,
      "n_total": 3932
     },
     {
      "name": "cam2",
-     "f_px": 37409.28241876453,
-     "f_sigma_px": 523.4011900753859,
-     "distance_mm": 1085.1216488786588,
-     "distance_sigma_mm": 14.86724676720563,
-     "azimuth_deg": 60.66498389484128,
-     "azimuth_sigma_deg": 0.037700049871555445,
-     "height_rel_mm": 12.036066310360223,
-     "height_sigma_mm": 0.7445381640720666,
+     "f_px": 37409.283331021645,
+     "f_sigma_px": 523.4017513314496,
+     "distance_mm": 1085.1216733918582,
+     "distance_sigma_mm": 14.86726278511681,
+     "azimuth_deg": 60.66498399822341,
+     "azimuth_sigma_deg": 0.0377000507055748,
+     "height_rel_mm": 12.036065833765324,
+     "height_sigma_mm": 0.744538331870559,
      "viewing_direction": [
-      -0.8715026679473111,
-      0.01036875984354496,
-      -0.4902811321884863
+      -0.8715026689841303,
+      0.010368760392465521,
+      -0.49028113033387183
      ],
      "k1": 0.0,
      "k1_sigma": null,
-     "rms_px": 0.5740165576432151,
+     "rms_px": 0.5740165579127662,
      "n_active": 3928,
      "n_total": 3932
     }

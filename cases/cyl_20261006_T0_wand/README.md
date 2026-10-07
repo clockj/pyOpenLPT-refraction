@@ -17,6 +17,11 @@ data set for that calibration.
   - **Better?** Every independent check agrees with the first delivery within its noise (report, top).
   - **Where things are:** every test rerun; the first delivery's outputs in `before_stage4_fix\` here and in
     `Results\before_stage4_fix\`.
+- **Variants rerun (7 Oct)** with the four-round flip fix (fixes report, section 9):
+  - **What changed:** h2 and fit_k1, which had still looped, and D2's calibration; the rest only in the last digits.
+  - **The delivered camFiles:** unchanged.
+  - **Where things are:** the earlier outputs in `before_flip4\` here and in `Results\before_flip4\`; the page is
+    republished (version 5).
 - Raw images: `X:\Shijie Zhong\Refraction\Raw\20261006\T0\cam1`, `cam2`.
 - Outputs: `X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results` (its own `README.md` lists them).
 

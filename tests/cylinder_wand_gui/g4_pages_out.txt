@@ -21,4 +21,4 @@ pinhole: D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g5_run\pinhole\cal
   PASS  pinhole dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
   PASS  pinhole: no console error, no request but the local page  (0 console messages, errors []; non-file requests [])
 
-16 of 16 checks passed; 16 s
+16 of 16 checks passed; 14 s

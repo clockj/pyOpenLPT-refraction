@@ -1,6 +1,7 @@
 # Report: the GUI's cylinder wand calibration on real data — the slow final fit and the wand-point import
 
 **Date:** 2026-10-06 (night). **Plan:** `2026-10-06-fixes-plan.md` (approved: "Go ahead"). **Nothing is committed.**
+**7 October:** section 9 adds F7, the fix of a flip that repeats every four rounds, and reruns both runs' variants.
 
 ---
 
@@ -224,7 +225,7 @@ we set radius range for ellipse case? i thought that was useless?"
   than every C++ source (the newest, `src\srcSTB\STB.cpp`, 9:17). These fixes changed no C++.
 
 **T0 redelivered** (`cases/cyl_20261006_T0_wand`: calibrate.py, every test rerun, the page republished; the first
-delivery kept in `Resultsefore_stage4_fix\` and the case's `before_stage4_fix\`):
+delivery kept in `Results\before_stage4_fix\` and the case's `before_stage4_fix\`):
 
 | check | first delivery | redelivered |
 |---|---|---|
@@ -274,3 +275,77 @@ delivery kept in `Resultsefore_stage4_fix\` and the case's `before_stage4_fix\`
   repeat every two rounds, caught at round 5).
 - **The proposed fix,** not made (it needs your OK): also count as a flip four rounds in a row with a jump of more than
   30 %, and recheck with F3, F4 and these variants.
+
+## 9. 7 October: the four-round flip (F7)
+
+**You said:** "go on and fix them" (section 8's proposal).
+
+**The change** (`cylinder_wand.py`, `cylinder_wand_io.py`):
+- **The new rule:** `_flips` now also fires when the noise estimate moved by more than 30 % in some group in each of
+  the last four rounds.
+- **What it returns:** which rule fired: "alternates" (F-a, unchanged) or "jumps" (the new one, called F-a3 in the
+  tests). The thresholds are module constants: `FLIP_CLOSE`, `FLIP_JUMP` and `FLIP_RUN` (0.03, 0.30, 4).
+- **What it records:** noise_weights "flipped" has the rule as its "kind". The log line and the report's noise section
+  name the rule: "did not converge: it moved by more than 30 % in each of 4 rounds in a row".
+- Nothing else changed.
+
+**A correction to section 8 first:**
+- **Other T0 variants hit the limit too:** besides fit_k1 and h2, one start each of q1, q3 and D2 (the shape-prior
+  calibration) reached the round limit.
+- **T2's own variants had never been rerun after the fixes of 6 Oct.** Its halves, quarters and k1 fit had run on the
+  library of 6 Oct afternoon, and every start of each had looped. I reran only T2's X1 and T7 after T0's
+  redelivery.
+
+**Tests** (outputs beside this report; everything the reruns overwrite was kept first by `f7_keep_before.py`, as
+`*_before_flip4*` here and `before_flip4\` in the cases and on X:):
+
+| test | what | result |
+|---|---|---|
+| F7 the rule offline (`f7_flip_rule.py`) | `_flips` on the noise estimates of every logged stage-4 start of T0 and T2 (100 starts in 28 logs: the delivered fits, T0's first delivery, every variant, F3's runs), and on made-up sequences | **FAIL by its own criteria** (set before the run), for a reason outside the rule: **60 of the 61 starts that reached the limit are caught**, 51 at round 4, 7 at round 5, one each at 6 and 8. The 61st (T0 q1, start 1) is not a flip: its weights sit at the 10:1 clamp, every round's fit stops at its 100-iteration cap, and the RMS still falls (0.71 → 0.60 px). It is a slow fit in the f/D valley, not a loop. The criterion "no converged start is caught" could not be tested: with two cameras every run ends on equal weights. The made-up sequences behave, except that an oscillation damped by only 0.7 per round is caught at round 4 (a damping of 0.5 is not), a limit of the rule. |
+| F4 synthetic (`f4_synthetic.py flip4`, `f4_compare.py after flip4`, `before flip4`) | the campaign's T11a, T11c–e and T12a–e on the library with the new rule | **pass**: all 1,060 fits identical to F4's run after the fixes of 6 Oct (to 1e-12); **the new rule never fired**, including on T12c's 320 two-camera fits whose weights take up to 12 rounds to converge; every verdict the same; against the library before all fixes, the comparison is line for line F4's |
+| F3 real data (rerun) | F3's eight calibrations (`f3_real_data.py`) | **pass**: no start runs more than 10 rounds. Every result equals the delivered one (T0 and T2; per-camera and equal weights; six and two starts): 0.00σ, f within 0.003 px (8e-8). F5 passes again (0.0000σ). The new rule fired at round 4 in every per-camera run (the old one at round 5). Rounds per start: T0 9 → 8, T2 10 → 9, T2's start 4 15 → 10. Times: T0 72 s (96), T2 158 s (234); with two starts 44 s (60) and 55 s (65); not shared 198 s (265) and 295 s (432). The equal-weight runs, whose code did not change, also ran 17–19 % faster (55 s against 67, 114 s against 141): part of every gain is a quieter machine, and the rounds are the fair measure. |
+| T0's variants (`cases/cyl_20261006_T0_wand/tests/t3_t6_variants.py`, `d8_held_out.py`) | all nine, then D8 | **no start at the limit except q1's start 1** (the slow fit). h2: 3,796 of 3,836 detections (3,724), cam1 f 35,229 px (34,548), largest \|z\| 19.4 (26.8). fit_k1: 6,060 of 6,076 detections (5,704), RMS 0.449 px (0.427), k1 +14.3 / +6.7 (+13.8 / +8.7). The others moved in the last digits. All nine took 159 s (290 s). D8: h2's held-out length 36.4 µm RMS (38.2). |
+| T2's variants (`cases/cyl_20261006_T2_wand/tests/t3_variants.py`, `t5_k1.py`, `d8_held_out.py`) | all six parts and the k1 fit, then D8 | **no start at the limit** (every start had reached it before). q2 had put cam2 at f 166,557 px and 4.7 m; now f 41,408 px and 1,201 mm, 2.1σ from the full fit. The spread over the parts is cam1 36,521–40,908 px (33,927–41,152) and cam2 32,137–41,408 px (32,137–166,557). k1: +18.5 / −2.9 (+18.8 / −2.9), RMS 0.5795 px (0.5769). Six parts in 128 s (432 s); k1 252 s (884 s). D8: held-out RMS 32–34 µm (32–44), reprojection 0.24–0.30 px (0.24–0.37). |
+| T0's D2 (`d2_shape_prior.py`) | the shape-prior calibration, rerun | **no start at the limit** (one had been): the new rule caught it, then a repeated active set stopped it. RMS 0.619 px (0.637), wand length 31.7 µm (31.8); still worse than S2's 0.47 px and 23 µm, so D2's conclusion stands. |
+| F7 regression (`f7_regression.py`, `f7_regression_out.txt`) | F6's GUI tests and pytest, rerun | **pass**: G3 13/13, G5/G9 8/8, G6 6/6 (exit 0xC0000409 at shutdown, as before), G8 9/9, G4 16/16, each as in F6; pytest 254 passed with the same 2 failures and 2 collection errors as F6 and the baseline |
+
+**What this means:**
+- **No real calibration loops any more,** except the one slow fit below. The real runs finish in 8–10 rounds per start.
+- **The delivered calibrations need no redelivery:** the fixed library gives the same camFiles. Only the wording of
+  the noise section in their reports would now differ: "did not converge … to round 4" instead of "flipped … from
+  round 5".
+- **The variants of both runs are now consistent with the library.** T0's page (version 5) and T2's (version 3) were
+  republished, and both cases' reports and READMEs and the X: READMEs were updated.
+- **T2's page caption** about an off-chart part is now written from the data. It named q2's runaway, which no longer
+  exists.
+
+**Limits:**
+- **A slowly damped oscillation would be cut short.** If the weights oscillate while converging slowly (damped by about
+  0.7 per round or less), the new rule falls back to equal weights. Neither the 1,060 synthetic fits nor the real
+  runs show one.
+- **The slow fit still runs to the limit.** In T0's q1, start 1 has its weights at the 10:1 clamp, and every round's
+  fit stops at its 100-iteration cap. On 184 frames that costs about 20 s; on a full recording it could cost minutes.
+  It is a different problem from the loops and is not changed here. A rule for it (for example, equal weights once
+  the estimate stays at the clamp for some rounds) would need its own plan.
+- **The thresholds** (30 %, four rounds) come from T0 and T2, like the earlier ones.
+
+**Files (F7):**
+- **Here:**
+  - **New scripts and their outputs:**
+    - `f7_keep_before.py`, which keeps every output before it is overwritten, with its output;
+    - `f7_flip_rule.py` and its outputs;
+    - `f7_regression.py`, with `f7_regression_out.txt` and `f7_pytest_out.txt`.
+  - **The earlier outputs, kept:**
+    - the GUI tests' outputs from F6, as `*_before_flip4*`;
+    - F3's outputs, as `f3_real_data_before_flip4*` and `data/f3_*_before_flip4/`;
+    - every real calibration log, in `data/f7_logs/` (F7's input).
+- **In `f4_synthetic/`:**
+  - the new run, `run_flip4/`, with `f4_flip4_console.txt`;
+  - the comparisons `f4_compare_after_flip4_*` and `f4_compare_before_flip4_*`;
+  - `f4_compare.py` now takes the two runs to compare.
+- **The cases:**
+  - in each, `before_flip4/tests/`;
+  - T2's `make_page.py`, whose caption is now written from the data.
+- **On X:** each run's `Results\before_flip4\`.
+- **Library:** `cylinder_wand.py` (`_flips` and the `FLIP_*` constants, `refine`'s record and log line) and
+  `cylinder_wand_io.py` (the "why" text).

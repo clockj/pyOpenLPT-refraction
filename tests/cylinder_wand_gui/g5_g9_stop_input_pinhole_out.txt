@@ -1,5 +1,5 @@
 G5: Stop and bad input (cylinder model)
-  PASS  Stop 3 s into the start search ends the run within 6 s; idle again; no camFile  (3.5 s after Stop; status 'Cylinder calibration stopped.'; camFiles none)
+  PASS  Stop 3 s into the start search ends the run within 6 s; idle again; no camFile  (3.3 s after Stop; status 'Cylinder calibration stopped.'; camFiles none)
   PASS  bad input, one camera: a message, no run  (The cylinder calibration needs at least two cameras; the wand points have 1.)
   PASS  bad input, 8 frames: a message, no run  (Only 8 frames show both balls in every camera; the calibration's start needs at least 12 (several hundred are )
   PASS  bad input, a camera without a row in the camera table: a message, no run  (The camera table has no row for camera(s) [2]: set Num Cameras.)

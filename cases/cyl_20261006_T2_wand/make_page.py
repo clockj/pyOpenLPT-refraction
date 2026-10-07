@@ -418,14 +418,19 @@ def page_text(fill, S2, S0, f1s, f2s, t0f1, zmax, hm, hr, hrms, dv_cross, dv_bac
     t["lead_valley"] = ("Long lenses looking at a 30 mm volume from 1 m see almost no perspective, so a camera farther "
                         "away with a longer lens makes nearly the same image. T2's wand covered about T0's volume, with "
                         "no more depth, so it cannot separate the two any better.")
-    q2c2 = next(p for p in parts["q2"]["cameras"] if p["name"] == "cam2")
+    ref = {c["name"]: c for c in S2["cameras"]}     # off the chart: the rule of the chart's points (main)
+    off = [(name, c) for name, s in parts.items() for c in s["cameras"]
+           if c["f_px"] > 1.5 * ref[c["name"]]["f_px"] or c["distance_mm"] > 1.5 * ref[c["name"]]["distance_mm"]]
+    names = {"h1": "first half", "h2": "second half", "q1": "1st quarter", "q2": "2nd quarter", "q3": "3rd quarter",
+             "q4": "4th quarter"}
+    off_text = " ".join(f"T2's {names[name]}, with only {parts[name]['frames']} frames, put {c['name']} at f "
+                        f"{c['f_px']:,.0f} px and {c['distance_mm'] / 1000:.1f} m, far along the same line (noted at "
+                        f"the top, off the chart)." for name, c in off)
     t["valley_caption"] = (f"Every calibration of both recordings: the full fits and their halves and quarters. Bars: "
                            f"T2's fits' own ±1σ. All lie along lines through the origin (dashed: T2's full fit's "
                            f"f / distance), so f and the distance trade against each other; the parts differ from the "
-                           f"full fit by up to {max(zmax.values()):.1f}σ. T2's 2nd quarter, with only "
-                           f"{parts['q2']['frames']} frames, put cam2 at f {q2c2['f_px']:,.0f} px and "
-                           f"{q2c2['distance_mm'] / 1000:.1f} m, far along the same line (noted at the top, off the "
-                           f"chart). The 30 Sep dot-board calibration of cam1 (star) lies on cam1's line too (f / "
+                           f"full fit by up to {max(zmax.values()):.1f}σ. " + (off_text + " " if off else "") +
+                           f"The 30 Sep dot-board calibration of cam1 (star) lies on cam1's line too (f / "
                            f"distance {tv['f']['dot_board'] / tv['geometry']['dot_board']['distance_from_axis_mm']:.1f} "
                            f"against {S2['cameras'][0]['f_px'] / S2['cameras'][0]['distance_mm']:.1f} px/mm). So the "
                            f"wand fixes f / distance, and an f measured with the dot board (if the lens and focus are "
