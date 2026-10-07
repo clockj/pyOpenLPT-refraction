@@ -24,9 +24,61 @@ experiment.
     with a four-round flip caught on 7 Oct: T0 now takes 72 s and T2 158 s with six starts, under 1 min with the
     GUI's default two. T0 is redelivered; its checks agree with the first delivery within their noise. Both runs'
     variants were rerun on 7 Oct.
-  - See the five newest entries below.
+  - See the entries of 6–7 Oct below.
+- **The GUI's wand tab (7 Oct):** ten bugs are fixed, and then the two Pinhole-model bugs found with them (the
+  progress log's two newest entries). The "fast" detection mode is kept, and now repeatable (your choice).
 
 ## 1. Progress log
+
+**2026-10-07 (evening): the Pinhole model's two bugs fixed; the "fast" mode measured** (your message: "fix B11 to
+make it able to accept different size of image. For B12, fix it. for the "Fast" detection, shall we just remove
+it?")
+- **Where:** `tests/wand_gui_fixes/2026-10-07-plan-b11-b12.md` and `-report-b11-b12.md`.
+- **Cameras of different image sizes now calibrate** (B11). A camera of 1024 × 768 px among cameras of 1280 × 800 px
+  gives the answer of the rig of one size with the same noise, within the calibrator's own numerical noise. Cameras
+  of one size are unchanged to the bit.
+- **Cameras numbered with a gap now calibrate** (B12): the ids 0, 2, 3 give the answer of 0, 1, 2 to the bit.
+- **The "fast" mode, measured on synthetic images of a wand in air:**
+  - **fast:** 0.07 px median centre error, 0.13 s per image, two runs within 0.04 px;
+  - **reliable:** 0.16 px and 4.2 s;
+  - **ellipse:** 0.02 px and 0.16 s.
+
+  Its big jumps (up to 27 px) appear only on tube images, where "ellipse" is the mode to use. **My answer: keep
+  it,** and optionally make it repeatable with a fixed seed.
+- **Your choice, "use 2.": done (B13).** The fast mode now draws its RANSAC samples with a fixed seed.
+  - **Repeatable:** an image gives the same points every run, in any process, in Test Detect and in Process All
+    Frames.
+  - **The change, once:** its points moved by 0.04–0.06 px, as much as two unseeded runs differed.
+  - **Accuracy:** unchanged (0.072 px median on D2's images).
+- **The regression is as before:** the pinhole page and the results pages pass, and pytest has the same four old
+  failures.
+
+**2026-10-07 (later): the wand tab's bugs fixed** (your OK: "please go on and fix those bugs. for the
+Precalibration, i think we should just remove that or show the results from the start stage?").
+- **Where:** `tests/wand_gui_fixes/2026-10-07-plan.md` and `-report.md`.
+- **All ten fixes are in.** Every test passes (W0–W11), and the regression matches F7's.
+  - **"Bright on Dark" now detects bright balls.** It had run as "Dark on Bright". On inverted T2 frames it gives
+    the originals' detections exactly (reliable, ellipse).
+  - **The flat-window "Precalibrate to Check" is plate_wand's own check.** It runs the start search and coarse fit
+    (stages 1–3) in a separate process, about 40 s, and writes no files. plate_wand's answers are bit-identical after
+    the change.
+  - **Deleted frames can be restored,** with a new button. New points start with none deleted, and a Del box clicked
+    by hand survives a filter change.
+  - **Pause pauses the detection:** during a 10 s pause only the 26 tasks in flight finished. Before the fix, 587 ran.
+  - **The smaller fixes:**
+    - Num Cameras keeps the remaining cameras' settings.
+    - The indices take four decimals.
+    - The panels fit their column.
+    - Pinhole camFiles carry each camera's own image size.
+    - The Pinhole error table shows the red crosses.
+    - The axis-point notes are right.
+- **Found, not fixed (your decision):**
+  - **The Pinhole model cannot calibrate cameras of different image sizes:** it stops with an error (B11).
+  - **It also fails when the cameras are not numbered 0, 1, 2, … without gaps** (B12).
+  - **The "fast" detector is not repeatable:** two runs differ by up to 4.4 px.
+  - Fixes are proposed in the report. (B11 and B12 were fixed that evening, and the fast mode measured: see the entry
+    above.)
+- **The user guide** is updated, with its screenshots retaken.
 
 **2026-10-07: the four-round flip fixed; both runs' variants rerun; the install scripts fixed**
 - **The fix** (your OK: "go on and fix them"): the flip test of `cylinder_wand.refine` now also fires when the noise
@@ -61,6 +113,18 @@ experiment.
     - **Windows:** the installer works from scratch here in 2.7 min. The new environment has Python 3.11 and
       OpenBLAS, the GUI opens, and the Report tab shows a results page. The updater works too.
     - **Linux and macOS:** their package sets solve, and the scripts parse. They were not run.
+- **The GUI's wand calibration user guide, rewritten** (your request).
+  - **What it is:** `modules/camera_calibration/wand_calibration/WAND_CALIBRATION_USER_GUIDE.md` and its HTML, which
+    the wand tab's Tutorial opens.
+  - **What it covers:** every setting (what it is, its default, how to set it) for detection (fast / reliable /
+    ellipse, rod opening and mask), the three camera models and the results.
+  - **Screenshots:** six, taken from the real GUI on run T2 by `make_user_guide.py`.
+  - **Your question:** the GUI's "Pinhole+Refraction" runs plate_wand, unless "Use the previous calibrator" is ticked
+    (test G8). Its "Precalibrate to Check" still runs the plain pinhole check, and the Plate Calibration (dot target)
+    tab keeps its own calibration.
+  - **GUI bugs found while writing it (not fixed; proposals):** "Bright on Dark" behaves as "Dark on Bright"; the
+    flat-window result's note about axis points is wrong; and smaller ones. They are listed in the guide's "Known
+    issues". (Fixed later that day: see the entry above.)
 
 **2026-10-06 (later still): T0 redelivered; is it better; the radius range in the ellipse mode**
 - **T0 redelivered** on your OK, with every test of its case rerun and its page republished.

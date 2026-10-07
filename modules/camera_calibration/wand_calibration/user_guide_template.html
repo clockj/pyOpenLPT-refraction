@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Generated from WAND_CALIBRATION_USER_GUIDE.md by make_user_guide.py (pandoc, this template): edit the .md. -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$pagetitle$</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #1e1e1e;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #252526;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #00bcd4;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #4dd0e1;
+            margin-top: 44px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #80deea;
+            margin-top: 28px;
+        }
+
+        h4 {
+            color: #b2ebf2;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #4dd0e1;
+        }
+
+        img {
+            max-width: 100%;
+            border: 1px solid #444;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        figure {
+            margin: 22px 0;
+        }
+
+        figcaption {
+            color: #a0a0a0;
+            font-size: 0.92em;
+            margin-top: 6px;
+        }
+
+        ul,
+        ol {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        code {
+            background-color: #333;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+            color: #ff9800;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 14px 0 20px;
+            font-size: 0.94em;
+        }
+
+        th,
+        td {
+            border: 1px solid #3e3e42;
+            padding: 6px 9px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #2d2d30;
+            color: #80deea;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #2a2a2d;
+        }
+
+        /* GitHub-style callouts ("> [!TIP]" in the .md) */
+        .note,
+        .tip,
+        .important,
+        .warning,
+        .caution {
+            background-color: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-left: 4px solid #00bcd4;
+            border-radius: 5px;
+            padding: 4px 15px;
+            margin: 16px 0;
+        }
+
+        .tip {
+            border-left-color: #00e676;
+        }
+
+        .important {
+            border-left-color: #b388ff;
+        }
+
+        .warning {
+            border-left-color: #ffb300;
+        }
+
+        .caution {
+            border-left-color: #ff5252;
+        }
+
+        .title p {
+            margin: 6px 0 0;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        nav#TOC {
+            background-color: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            padding: 6px 18px;
+            margin: 18px 0 8px;
+        }
+
+        nav#TOC ul {
+            padding-left: 20px;
+        }
+
+        nav#TOC li {
+            margin-bottom: 2px;
+        }
+
+        details {
+            background-color: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            padding: 6px 14px;
+            margin: 12px 0;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #80deea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+$if(toc)$
+        <nav id="TOC">
+            <p><strong>Contents</strong></p>
+$table-of-contents$
+        </nav>
+$endif$
+$body$
+    </div>
+</body>
+
+</html>

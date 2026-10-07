@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Generated from WAND_CALIBRATION_USER_GUIDE.md by make_user_guide.py (pandoc, this template): edit the .md. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +11,16 @@
             line-height: 1.6;
             color: #e0e0e0;
             background-color: #1e1e1e;
-            max-width: 1000px;
+            max-width: 1040px;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        .container {
+            background-color: #252526;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
@@ -24,29 +31,40 @@
 
         h2 {
             color: #4dd0e1;
-            margin-top: 40px;
+            margin-top: 44px;
             border-bottom: 1px solid #333;
             padding-bottom: 5px;
         }
 
         h3 {
             color: #80deea;
-            margin-top: 25px;
+            margin-top: 28px;
+        }
+
+        h4 {
+            color: #b2ebf2;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #4dd0e1;
         }
 
         img {
             max-width: 100%;
             border: 1px solid #444;
             border-radius: 5px;
-            margin: 20px 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .container {
-            background-color: #252526;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        figure {
+            margin: 22px 0;
+        }
+
+        figcaption {
+            color: #a0a0a0;
+            font-size: 0.92em;
+            margin-top: 6px;
         }
 
         ul,
@@ -55,7 +73,7 @@
         }
 
         li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         strong {
@@ -70,330 +88,1296 @@
             color: #ff9800;
         }
 
-        .step-block {
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 3px solid #00bcd4;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 14px 0 20px;
+            font-size: 0.94em;
         }
 
-        .highlight {
-            background-color: #2d2d30;
-            padding: 15px;
-            border-radius: 5px;
+        th,
+        td {
             border: 1px solid #3e3e42;
+            padding: 6px 9px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #2d2d30;
+            color: #80deea;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #2a2a2d;
+        }
+
+        /* GitHub-style callouts ("> [!TIP]" in the .md) */
+        .note,
+        .tip,
+        .important,
+        .warning,
+        .caution {
+            background-color: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-left: 4px solid #00bcd4;
+            border-radius: 5px;
+            padding: 4px 15px;
+            margin: 16px 0;
+        }
+
+        .tip {
+            border-left-color: #00e676;
         }
 
         .important {
-            color: #ff5252;
+            border-left-color: #b388ff;
+        }
+
+        .warning {
+            border-left-color: #ffb300;
+        }
+
+        .caution {
+            border-left-color: #ff5252;
+        }
+
+        .title p {
+            margin: 6px 0 0;
             font-weight: bold;
+            color: #ffffff;
+        }
+
+        nav#TOC {
+            background-color: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            padding: 6px 18px;
+            margin: 18px 0 8px;
+        }
+
+        nav#TOC ul {
+            padding-left: 20px;
+        }
+
+        nav#TOC li {
+            margin-bottom: 2px;
+        }
+
+        details {
+            background-color: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            padding: 6px 14px;
+            margin: 12px 0;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #80deea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <div class="container">
-        <h1>Wand Calibration User Guide</h1>
-        <p>This guide walks you through the camera calibration process using a calibration wand in OpenLPT. The process
-            consists of three main stages: <strong>Point Detection</strong>, <strong>Axis Points & Coordinate
-                Definition</strong>, and <strong>Calibration</strong>.</p>
+<!-- Maintainers: edit this file, then `python make_user_guide.py html` rebuilds WAND_CALIBRATION_USER_GUIDE.html
+     (the page the GUI opens; needs pandoc), and `python make_user_guide.py shots` retakes the guide_*.png screenshots
+     from the real GUI. -->
 
-        <div class="highlight" style="border-left: 3px solid #00e676;">
-            <span class="important" style="color: #00e676;">Hardware Setup Recommendation:</span>
-            <p style="margin-top: 5px;"><strong>Non-coplanar Views:</strong> It is highly recommended that the viewing
-                axes of your cameras are <strong>NOT</strong> in the same plane. Non-coplanar views significantly
-                improve the speed and reliability of stereo matching and 3D reconstruction.</p>
-            <p>If your cameras must be arranged in a single plane, try to adjust their angles slightly so they have an
-                angular difference of at least <strong>5 degrees</strong> relative to the plane.</p>
-        </div>
+<h1 id="wand-calibration-user-guide">Wand Calibration User Guide</h1>
+<p>A wand calibration finds every camera's position, orientation and
+focal length (and, if asked, its lens distortion) from images of a
+<strong>wand</strong> moved through the measurement volume: two balls of
+different sizes, a known distance apart. Behind windows or a tube it
+also accounts for the refraction. The result is one camera file per
+camera (<code>camFile/cam&lt;id&gt;.txt</code>), which tracking
+uses.</p>
+<p>In the GUI: <strong>Calibration</strong> (left bar) → <strong>Wand
+Calibration</strong> tab.</p>
+<ul>
+<li><strong>Right side, three sub-tabs:</strong> <strong>Point
+Detection</strong> (find the balls in every image),
+<strong>Calibration</strong> (fit the cameras),
+<strong>Tutorial</strong> (opens this guide).</li>
+<li><strong>Left side:</strong> <strong>Cam 1 … Cam N</strong> (each
+camera's images), <strong>3D View</strong> (the fitted rig) and
+<strong>Report</strong> (the results page of the last calibration).</li>
+</ul>
+<p><strong>The steps:</strong></p>
+<ol type="1">
+<li>Record the wand (<a href="#1-recording-the-wand">section
+1</a>).</li>
+<li>Choose the camera model that matches your setup (<a
+href="#2-choosing-the-camera-model">section 2</a>).</li>
+<li>Detect the balls in every frame (<a
+href="#3-point-detection">section 3</a>).</li>
+<li>Optionally, define the world axes with an axis target (<a
+href="#4-axis-points-optional-pinhole-model-only">section 4</a>).</li>
+<li>Run the calibration (<a href="#5-calibration">section 5</a>).</li>
+<li>Check the result (<a href="#6-checking-the-result">section 6</a>).
+Then use the camera files for tracking.</li>
+</ol>
+<p><strong>Contents:</strong> <a href="#1-recording-the-wand">1.
+Recording the wand</a> · <a href="#2-choosing-the-camera-model">2.
+Choosing the camera model</a> · <a href="#3-point-detection">3. Point
+detection</a> · <a href="#4-axis-points-optional-pinhole-model-only">4.
+Axis points</a> · <a href="#5-calibration">5. Calibration</a> · <a
+href="#6-checking-the-result">6. Checking the result</a> · <a
+href="#7-troubleshooting">7. Troubleshooting</a> · <a
+href="#8-known-issues-october-2026">8. Known issues</a> · <a
+href="#9-further-reading">9. Further reading</a></p>
+<hr />
+<h2 id="1-recording-the-wand">1. Recording the wand</h2>
+<p align="center">
+  <img src="wand_calibrator_target.png" alt="Wand calibrator target" width="25%" />
+</p>
 
-        <!-- Point Detection Section -->
-        <h2>1. Point Detection</h2>
-        <p>First, select the <strong>Wand Calibration</strong> tab and ensure you are on the <strong>Point
-                Detection</strong> sub-tab.</p>
+<p><strong>The wand</strong></p>
+<ul>
+<li><strong>Two balls of clearly different sizes.</strong> The GUI tells
+the balls apart by their image size: the small one is ball A, the large
+one ball B. Balls of about the same size cannot be paired.</li>
+<li><strong>A known length.</strong> Measure the distance between the
+two ball centres as accurately as you can: it sets the scale of the
+whole calibration.</li>
+<li><strong>A thin rod.</strong> The detector removes the rod before it
+separates the balls, which works only when the rod's image is clearly
+narrower than the small ball's. A thick rod also biases the ball
+centres. On the October 2026 tube recordings a 2 mm rod, about 75 % of
+the small ball's height in the image, limited the precision.</li>
+</ul>
+<p><strong>The images</strong></p>
+<ul>
+<li><strong>Dark balls on a bright background</strong> (backlight), or
+bright balls on a dark background: set the <strong>Wand Type</strong> to
+match (<a href="#32-the-settings">3.2</a>).</li>
+<li><strong>Every camera must see both balls, apart, in as many frames
+as possible.</strong> A frame is used only when every camera sees both.
+When the wand points along a camera's line of sight the balls overlap,
+and that frame is dropped.</li>
+<li><strong>Cover the whole measurement volume:</strong> all positions,
+also towards and away from the cameras (depth), and many orientations of
+the wand.</li>
+<li><strong>No motion blur:</strong> move the wand slowly enough for the
+exposure time.</li>
+<li><strong>Several hundred to a few thousand usable frames.</strong>
+The tube and window models need at least 12; their reports warn below
+200 (tube) or 300 (windows).</li>
+<li><strong>Synchronized cameras, one folder per camera, the same number
+of images in each.</strong> The GUI pairs the cameras' images by their
+position in each folder's sorted file list, sorted as text: use
+zero-padded numbers (<code>frame000001.tif</code>, not
+<code>frame1.tif</code>).</li>
+</ul>
+<p><strong>The rig</strong></p>
+<ul>
+<li><strong>Keep the cameras' viewing directions out of one
+plane.</strong> Non-coplanar views make stereo matching and 3D
+reconstruction much more reliable. If the cameras must be nearly
+coplanar, keep at least about 5° between them.</li>
+<li><strong>Record the wand right before or after the experiment,
+without touching the cameras in between.</strong> A calibration holds
+only while nothing moves: between two recordings an hour apart on 6
+October 2026, the cameras moved by about 1 px.</li>
+<li><strong>Long lenses looking at a small volume</strong> (focal
+lengths of tens of thousands of pixels) see almost no perspective. The
+wand alone then cannot separate the focal length from the camera's
+distance; see <a href="#64-is-the-calibration-good">section
+6.4</a>.</li>
+</ul>
+<hr />
+<h2 id="2-choosing-the-camera-model">2. Choosing the camera model</h2>
+<table>
+<thead>
+<tr>
+<th>Your setup</th>
+<th>Camera Model</th>
+<th>What calibrates the cameras</th>
+<th>Detection Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The cameras look through air, or through a flat window almost
+head-on</td>
+<td><strong>Pinhole</strong></td>
+<td>OpenLPT's wand bundle adjustment. Uses your Focal (px) values as its
+start.</td>
+<td>fast or reliable</td>
+</tr>
+<tr>
+<td>The cameras look through flat windows (tank or channel walls) at an
+angle; one or more windows</td>
+<td><strong>Pinhole+Refraction</strong></td>
+<td><strong>plate_wand</strong> (since October 2026): every camera's
+pose, f and k1, and every window's plane, from the wand alone; no start
+values needed. The previous calibrator remains available as an
+option.</td>
+<td>reliable (or fast)</td>
+</tr>
+<tr>
+<td>The cameras look through the side wall of a water-filled tube</td>
+<td><strong>Pinhole+Cylinder</strong></td>
+<td><strong>cylinder_wand</strong> (since October 2026): every camera's
+pose, f and k1 from the wand, with the tube's diameter, wall and
+refractive indices given.</td>
+<td><strong>ellipse</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<div class="title">
+<p>Note</p>
+</div>
+<p>The <strong>Plate Calibration</strong> tab (a dot target) is a
+separate calibration with its own models; this guide covers the wand tab
+only.</p>
+</div>
+<hr />
+<h2 id="3-point-detection">3. Point detection</h2>
+<p><img src="guide_detection.png"
+alt="The Point Detection sub-tab: the ellipse mode on a frame of a tube recording, with both balls found" /></p>
+<p><em>The Point Detection sub-tab. Here the "ellipse" mode is set for
+balls seen through a tube, and Test Detect has fitted an ellipse to each
+ball of frame 4069.</em></p>
+<h3 id="31-steps">3.1 Steps</h3>
+<ol type="1">
+<li><strong>Set Num Cameras.</strong> Changing it later keeps the
+cameras that remain (their folders, Focal, Width, Height and window); a
+camera added starts empty.</li>
+<li><strong>Load each camera's folder:</strong> click the camera's
+<strong>Load</strong> button in the Camera Images table.
+<ul>
+<li>The button then shows the number of images.</li>
+<li>Width and Height are filled in from the first image: check
+them.</li>
+</ul></li>
+<li><strong>Choose the Wand Type, the Detection Mode</strong> (and, for
+"ellipse", the Rod opening and Rod mask) <strong>and the Radius
+Range</strong> (sections <a href="#32-the-settings">3.2</a> to <a
+href="#34-setting-rod-opening-and-rod-mask-ellipse-mode">3.4</a>).</li>
+<li><strong>Test on single frames.</strong> Click a frame in the Frame
+List, then <strong>Test Detect (Current Frame)</strong>. Look at every
+Cam tab: each ball should carry exactly one circle (or ellipse).
+<ul>
+<li>Try several frames: the wand tilted, near the image edges, far and
+near.</li>
+<li>Adjust the settings until it is right everywhere.</li>
+<li>Test Detect stores nothing.</li>
+</ul></li>
+<li><strong>Click Process All Frames / Resume.</strong>
+<ul>
+<li><strong>Choose the file</strong> for the results
+(<code>wand_points.csv</code>). It is also the autosave. Choosing an
+existing file offers to <strong>resume</strong> it.</li>
+<li><strong>The progress dialog</strong> has <strong>Pause</strong> and
+<strong>Stop</strong>.
+<ul>
+<li><strong>Pause</strong> halts the detection once the images already
+started are done, and frees the processors; <strong>Resume</strong> (the
+same button) goes on.</li>
+<li><strong>Stop</strong> saves what was detected; Process All Frames /
+Resume with the same file finishes it later.</li>
+</ul></li>
+<li><strong>At the end</strong> the status line says how many frames
+were paired (both balls found in every camera). The GUI then offers to
+export the points; the autosave file already holds the same data.</li>
+</ul></li>
+<li><strong>Check the Frame List.</strong> Frames that were detected but
+not paired are red and struck through. Clicking a frame shows its raw
+detections (blue), the small ball (green) and the large ball (dark
+green).</li>
+</ol>
+<h3 id="32-the-settings">3.2 The settings</h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it is and how to set it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Num Cameras</strong></td>
+<td>4</td>
+<td>The number of cameras (1–16). Changing it keeps the cameras that
+remain (their folders, Focal, Width, Height and window); a camera added
+starts empty. Every camera row needs its images: a camera without images
+pairs no frame.</td>
+</tr>
+<tr>
+<td><strong>Wand Type</strong></td>
+<td>Dark on Bright</td>
+<td>Dark balls on a bright background (backlight), or bright balls on a
+dark background: choose the one that matches the images, and check it
+with Test Detect.</td>
+</tr>
+<tr>
+<td><strong>Radius Range</strong></td>
+<td>20–200 px</td>
+<td>The balls' image radii, in pixels: set the minimum a little below
+the small ball's radius and the maximum a little above the large ball's.
+After a folder is loaded the maximum is limited to a quarter of the
+image's shorter side. In the ellipse mode it also sizes the background
+window (2.5 × the maximum, at least 101 px), which must be wider than a
+ball. Too small a maximum loses frames; the centres hardly move
+(0.01–0.04 px on a tube recording).</td>
+</tr>
+<tr>
+<td><strong>Sensitivity</strong></td>
+<td>0.85</td>
+<td>The C++ circle finder's sensitivity (0.50–1.00), used by "reliable",
+by "fast" when its own search finds fewer than two circles, and by the
+axis-point detection. Not used by "ellipse". Raise it when balls are
+missed, lower it when noise is found as circles.</td>
+</tr>
+<tr>
+<td><strong>Load</strong> (camera table)</td>
+<td>–</td>
+<td>Loads all <code>.png .jpg .bmp .tif .tiff .jpeg</code> images of a
+folder, sorted by name.</td>
+</tr>
+<tr>
+<td><strong>Cam ID</strong></td>
+<td>0, 1, …</td>
+<td>The camera's number in the files (<code>cam0.txt</code>, CSV column
+Camera). The left tabs count from 1: Cam 1 is Cam ID 0.</td>
+</tr>
+<tr>
+<td><strong>Focal (px)</strong></td>
+<td>9000</td>
+<td>The focal length in pixels (lens focal length in mm divided by the
+pixel size in mm). <strong>Only a start value, and only for the Pinhole
+model and the previous refraction calibrator</strong>: plate_wand and
+the tube model find f from the wand and ignore it (the column is greyed
+for "Pinhole+Cylinder").</td>
+</tr>
+<tr>
+<td><strong>Width, Height</strong></td>
+<td>1280, 800</td>
+<td>Each camera's image size in pixels (the cameras may differ), filled
+in from the first image of its folder. After loading points from a CSV
+file, set them by hand. The tube and window models put the principal
+point at the image centre; the Pinhole model starts it there.</td>
+</tr>
+<tr>
+<td><strong>Frame List</strong></td>
+<td>–</td>
+<td>All frames, numbered from 1. Click to preview; the selected frame is
+the one Test Detect uses.</td>
+</tr>
+<tr>
+<td><strong>Detection Mode</strong></td>
+<td>fast</td>
+<td>How each ball's centre is found: see <a
+href="#33-choosing-the-detection-mode">3.3</a>.</td>
+</tr>
+<tr>
+<td><strong>Rod opening</strong></td>
+<td>25 px</td>
+<td>Ellipse mode only. Removes the rod before the balls are separated: a
+little <strong>wider than the rod's image</strong>, narrower than the
+small ball's. 0: none. See <a
+href="#34-setting-rod-opening-and-rod-mask-ellipse-mode">3.4</a>.</td>
+</tr>
+<tr>
+<td><strong>Rod mask</strong></td>
+<td>18.0 px</td>
+<td>Ellipse mode only. Edge points within this distance of the line
+joining the balls, on the side facing the other ball, are left out of
+the ellipse fit (the rod pulls them): about the rod's half-width plus
+twice its edge blur. 0: none.</td>
+</tr>
+<tr>
+<td><strong>Axis direction</strong></td>
+<td>Default</td>
+<td>At the bottom: Custom opens the axis-point tools (<a
+href="#4-axis-points-optional-pinhole-model-only">section 4</a>).</td>
+</tr>
+</tbody>
+</table>
+<p>The ellipse mode also drops a pair whose two ellipses come within 3
+px of each other (fixed, not shown).</p>
+<h3 id="33-choosing-the-detection-mode">3.3 Choosing the detection
+mode</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>How it finds a ball</th>
+<th>Use it for</th>
+<th>Settings it uses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>fast</strong></td>
+<td>Otsu threshold, then a circle fitted to the edge around each blob
+(RANSAC, with fixed random draws: an image always gives the same
+points). Keeps the two best circles; falls back to "reliable" when it
+finds fewer than two.</td>
+<td>Clear images without refraction or distortion: cameras in air. Not
+through a tube: there it can even keep another blob than the ball.</td>
+<td>Radius Range (Sensitivity in the fallback)</td>
+</tr>
+<tr>
+<td><strong>reliable</strong></td>
+<td>OpenLPT's C++ circle finder; returns every circle it finds.
+Slower.</td>
+<td>Cameras behind flat windows; images where "fast" misses balls.</td>
+<td>Radius Range, Sensitivity</td>
+</tr>
+<tr>
+<td><strong>ellipse</strong></td>
+<td>Removes the rod, finds each ball's edge along 96 rays, fits an
+ellipse while ignoring the rod's side, and refits once.</td>
+<td><strong>Balls seen through a tube</strong>, whose images are
+ellipses about 1.3 times wider than tall. The circle detectors miss the
+centre by several pixels there, and the calibration's f by a few to tens
+of per cent.</td>
+<td>Radius Range, Rod opening, Rod mask</td>
+</tr>
+</tbody>
+</table>
+<p>The ellipse detector was also much faster on a tube recording: 1,200
+frames in under 3 min, against 17 min with "fast".</p>
+<p><strong>On images of a wand in air</strong> (60 synthetic images with
+known centres, 1280 × 800 px, balls of 22–50 px radius, a 6 px rod, blur
+and noise; test D2 of <code>tests/wand_gui_fixes</code>):</p>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>both balls found</th>
+<th>centre error, median / largest</th>
+<th>time per image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fast</td>
+<td>60 of 60</td>
+<td>0.07 / 0.29 px</td>
+<td>0.08 s</td>
+</tr>
+<tr>
+<td>reliable</td>
+<td>60 of 60</td>
+<td>0.16 / 0.45 px</td>
+<td>4.0 s</td>
+</tr>
+<tr>
+<td>ellipse</td>
+<td>60 of 60</td>
+<td>0.02 / 0.06 px</td>
+<td>0.10 s</td>
+</tr>
+</tbody>
+</table>
+<p>The times are for one process on this PC. Real images can differ:
+check a few frames with Test Detect.</p>
+<h3 id="34-setting-rod-opening-and-rod-mask-ellipse-mode">3.4 Setting
+Rod opening and Rod mask (ellipse mode)</h3>
+<ol type="1">
+<li>Zoom into a frame (mouse wheel; right-drag pans) and measure, in
+pixels, <strong>the rod's width</strong> and <strong>the small ball's
+diameter</strong>.</li>
+<li><strong>Rod opening:</strong> a little wider than the rod's width,
+and narrower than the small ball's diameter.</li>
+<li><strong>Rod mask:</strong> about half the rod's width plus twice its
+edge blur (the blur: how many pixels its edge takes to go from dark to
+bright).</li>
+<li>Test Detect on several frames: every camera must show two balls with
+their ellipses, and none on the rod.</li>
+</ol>
+<p><strong>Example (the October 2026 tube recordings):</strong></p>
+<ul>
+<li><strong>What was measured:</strong> the rod 76–105 px wide, the
+balls' radii about 58–66 px and 79–88 px.</li>
+<li><strong>Settings that worked:</strong> Rod opening 95 px, Rod mask
+50 px, Radius Range 40–120 px.</li>
+</ul>
+<p>The defaults (25 / 18 px) suit a thin rod, about a quarter of the
+ball's image; with them that thick rod joined the balls into one blob,
+and no frame was paired.</p>
+<h3 id="35-how-frames-are-paired-and-the-wand-point-file">3.5 How frames
+are paired, and the wand-point file</h3>
+<p><strong>Pairing:</strong></p>
+<ul>
+<li><strong>Per camera,</strong> the radii of all detections are
+histogrammed. Their two peaks give the small and the large ball's
+sizes.</li>
+<li><strong>In every frame and every camera,</strong> the best-scoring
+detection near each size is taken.</li>
+<li><strong>A frame is kept only when every camera has both
+balls.</strong> With more than 100 kept frames the sizes are estimated
+again from those frames and every frame is paired again.</li>
+</ul>
+<p><strong>The file</strong> (<code>wand_points.csv</code>): columns
+<code>Frame, Camera, Status, PointIdx, X, Y, Radius, Metric</code>.</p>
+<ul>
+<li><strong>Frame and Camera</strong> count from 0. <strong>X</strong>
+is the image column and <strong>Y</strong> the row, in pixels.</li>
+<li><strong>Status "Raw":</strong> every blob found.</li>
+<li><strong>Status "Filtered_Small" / "Filtered_Large":</strong> the
+paired balls A and B.</li>
+<li><strong>Load Wand Points (from CSV)</strong> uses only the Filtered
+rows. A frame loads when at least two cameras each have both balls.</li>
+</ul>
+<p><strong>"No Wand Points":</strong> when a detection pairs no frame,
+the GUI says so and counts, per camera, the frames with two or more
+blobs, one blob and none.</p>
+<ul>
+<li><strong>Mostly one blob:</strong> the rod joins the balls. Raise the
+Rod opening (ellipse mode), or check the Radius Range and Sensitivity on
+a frame with Test Detect.</li>
+<li><strong>The saved file then holds only Raw rows</strong> and cannot
+be calibrated. Loading such a file explains this too.</li>
+</ul>
+<p><strong>Resume and Stop:</strong></p>
+<ul>
+<li><strong>Resume</strong> keeps the detections already in the file,
+made with the settings of that time, detects only the missing frames,
+and pairs all of them again.</li>
+<li>To redo everything with new settings, choose <strong>No</strong>
+(overwrite) when asked to resume, or choose a new file.</li>
+</ul>
+<hr />
+<h2 id="4-axis-points-optional-pinhole-model-only">4. Axis points
+(optional; Pinhole model only)</h2>
+<p>Axis points give the world frame a chosen origin and +X / +Y / +Z
+directions. <strong>Only the Pinhole model applies them.</strong> The
+tube model uses the tube's own frame and plate_wand the windows'; both,
+and the previous refraction calibrator, say so in their results.</p>
+<p align="center">
+  <img src="axis_calibrator_endpoint_sizes.png" alt="Axis calibrator endpoint size groups" width="25%" />
+</p>
 
-        <img src="wand_detection_ui.png" alt="Point Detection Interface">
+<p><strong>The axis target</strong> has three pairs of end points in
+three sizes (small, medium, large), one pair per axis.</p>
+<ul>
+<li><strong>Detect</strong> finds the circular end points and sorts them
+into three size groups.</li>
+<li><strong>In each group</strong> the two points farthest apart are one
+axis's ends.</li>
+<li><strong>The origin</strong> is the mean of the three pairs'
+midpoints.</li>
+</ul>
+<p><strong>Steps:</strong></p>
+<ol type="1">
+<li>At the bottom of <strong>Point Detection</strong>, set <strong>Axis
+direction</strong> to <strong>Custom</strong>.</li>
+<li>Per camera, <strong>Load</strong> one or more images of the axis
+target.</li>
+<li>Click <strong>Detect</strong>. It runs the "reliable" detector with
+the current Radius Range and Sensitivity. If too few circles are found
+(6 per image are needed), adjust them and detect again.</li>
+<li>Per camera, click <strong>Select</strong>, then click
+<strong>+X</strong>, <strong>+Y</strong> and <strong>+Z</strong> in that
+order on the camera's first axis image. Each click snaps to the nearest
+detected end point.</li>
+<li>Click <strong>Save</strong>: the directions are kept in memory and
+can be written to a file (<code>axis_directions.csv</code>).</li>
+<li>Later, the <strong>Load Axis Points (Optional)</strong> button
+(Calibration sub-tab) reads such a file. It disables itself after one
+load.</li>
+<li>Calibrate with the Pinhole model (<a href="#53-pinhole">5.3</a>).
+The cameras triangulate the origin, +X, +Y and +Z, and the world frame
+is turned onto them. The 3D View shows the measured directions (dashed)
+and the right-angled axes used (solid).</li>
+</ol>
+<div class="note">
+<div class="title">
+<p>Note</p>
+</div>
+<p>Once set or loaded, the axis points stay in use for the rest of the
+session (setting "Default" only hides the tools).</p>
+</div>
+<hr />
+<h2 id="5-calibration">5. Calibration</h2>
+<p><img src="guide_calibration.png"
+alt="The Calibration sub-tab with the tube model, and the fitted rig in the 3D View" /></p>
+<p><em>The Calibration sub-tab with the "Pinhole+Cylinder" model and its
+Tube Settings; the 3D View shows the two fitted cameras and the
+tube.</em></p>
+<h3 id="51-steps-all-models">5.1 Steps (all models)</h3>
+<ol type="1">
+<li>Open the <strong>Calibration</strong> sub-tab and choose the
+<strong>Camera Model</strong>, the <strong>Wand Length</strong> and the
+<strong>Distortion params</strong> (<a
+href="#52-the-common-settings">5.2</a>); then fill in the model's panel
+(<a href="#54-pinholerefraction-flat-windows-plate_wand">5.4</a>
+windows, <a href="#55-pinholecylinder-a-tube-cylinder_wand">5.5</a>
+tube).</li>
+<li><strong>If you detected the points earlier,</strong> click
+<strong>Load Wand Points (from CSV)</strong>. The file holds no image
+sizes, so set Num Cameras and each camera's Width and Height in Point
+Detection.</li>
+<li>Optionally, click <strong>Precalibrate to Check</strong>: a quick
+fit that fills the error table, to find bad frames before the real run.
+What it is depends on the model (see each model's section).</li>
+<li>Click <strong>Run Calibration</strong>.
+<ul>
+<li><strong>Tube and window models:</strong> the GUI first asks for an
+output folder (the camera files and the report go there), then shows a
+progress dialog with a <strong>Stop</strong> button.</li>
+<li><strong>Pinhole:</strong> the GUI asks for the folder at the end (<a
+href="#53-pinhole">5.3</a>).</li>
+</ul></li>
+<li>Check the result (<a href="#6-checking-the-result">section 6</a>).
+If needed, delete bad frames and run again.</li>
+</ol>
+<h3 id="52-the-common-settings">5.2 The common settings</h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it is and how to set it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Camera Model</strong></td>
+<td>Pinhole</td>
+<td><a href="#2-choosing-the-camera-model">Section 2</a>. It shows the
+model's panel: <strong>Refraction Settings</strong> (flat windows) or
+<strong>Tube Settings</strong> (tube).</td>
+</tr>
+<tr>
+<td><strong>Wand Length</strong></td>
+<td>10.00 mm</td>
+<td>The distance between the two ball centres (1–5000 mm, two decimals).
+It sets the scale of the result: measure it accurately.</td>
+</tr>
+<tr>
+<td><strong>Distortion params</strong></td>
+<td>None (0)</td>
+<td>The radial lens distortion fitted per camera: None, Radial k1, or
+Radial k1+k2 (Pinhole only; the tube and window models fit k1 at most).
+<strong>Pinhole:</strong> start with None, add terms for lenses that
+distort. <strong>Flat windows:</strong> choose <strong>Radial
+k1</strong> if the lens may distort at all. On a real 4-camera channel
+rig k1 was needed (about 6 px at the corners), and leaving it out barely
+shows in the RMS but raised the 3D error 1.3–1.9×.
+<strong>Tube:</strong> None, unless the lens is known to distort. On two
+macro lenses k1 lowered the RMS by only 4 % and took implausible
+values.</td>
+</tr>
+<tr>
+<td><strong>Load Wand Points (from CSV)</strong></td>
+<td>–</td>
+<td>Reads a wand-point file (<a
+href="#35-how-frames-are-paired-and-the-wand-point-file">3.5</a>).
+Replaces the points in memory.</td>
+</tr>
+<tr>
+<td><strong>Load Axis Points (Optional)</strong></td>
+<td>–</td>
+<td>Reads an axis-direction file (<a
+href="#4-axis-points-optional-pinhole-model-only">section 4</a>).</td>
+</tr>
+<tr>
+<td><strong>Precalibrate to Check</strong></td>
+<td>–</td>
+<td>A quick check that fills the error table; per model in 5.3–5.5.</td>
+</tr>
+<tr>
+<td><strong>Run Calibration</strong></td>
+<td>–</td>
+<td>The full calibration.</td>
+</tr>
+<tr>
+<td><strong>Delete when proj error &gt;</strong></td>
+<td>off, 5.00 px</td>
+<td>Marks for deletion every frame in which a camera's reprojection
+error exceeds this. Changing a filter re-marks the rows, except those
+whose Del box you clicked yourself.</td>
+</tr>
+<tr>
+<td><strong>Delete when wand len error &gt;</strong></td>
+<td>off, 1.00 mm</td>
+<td>Marks every frame whose wand length is off by more than this.</td>
+</tr>
+<tr>
+<td><strong>Del</strong> (error table)</td>
+<td>–</td>
+<td>Marks a frame for deletion; applied at the next Precalibrate, Run or
+Save. Deleted frames stay deleted until <strong>Restore Deleted
+Frames</strong>, or until new points are loaded or detected.</td>
+</tr>
+<tr>
+<td><strong>Restore Deleted Frames</strong></td>
+<td>–</td>
+<td>Uses every frame again from the next Precalibrate or Run: forgets
+the deleted frames and the Del marks.</td>
+</tr>
+<tr>
+<td><strong>Save Filtered Points</strong></td>
+<td>–</td>
+<td>Writes the points without the deleted frames to a CSV
+(<code>wandpoints_filtered.csv</code>); the deleted frames stay in it as
+Raw rows only.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-pinhole">5.3 Pinhole</h3>
+<ol type="1">
+<li><strong>Check the Focal (px) values</strong> in Point Detection:
+they are the start, and the check keeps them fixed.</li>
+<li><strong>Precalibrate to Check</strong> fits the poses with f, the
+principal point and the distortion held at their start values. It is
+fast, and its errors are only for finding bad frames. It writes no
+files.</li>
+<li><strong>Clean the data.</strong> In the error table, high
+reprojection errors (red) and high length errors point to bad
+detections.
+<ul>
+<li>Click a cell to see that frame's detections in the camera's
+tab.</li>
+<li>Mark wrong frames in <strong>Del</strong> (or use the filters).</li>
+<li>Check again, until the errors are low (for example under 1 px).</li>
+</ul></li>
+<li><strong>Run Calibration.</strong> It runs a bundle adjustment on the
+best camera pair first, then on all cameras (skipped with two). It needs
+at least 5 frames and 2 cameras.
+<ul>
+<li><strong>Stop</strong> is available in the final phase (and with two
+cameras); it keeps the partial result.</li>
+</ul></li>
+<li><strong>Save the result.</strong> When it ends, choose
+<strong>Save</strong> and a folder:
+<code>camFile/cam&lt;id&gt;.txt</code> (PINHOLE) and
+<code>calibration_report.html</code> are written there. The Report tab
+shows the page.</li>
+</ol>
+<p><strong>The world frame:</strong> origin at the centre of the wand
+positions; axes those of the first camera of the start pair, unless axis
+points are set.</p>
+<h3 id="54-pinholerefraction-flat-windows-plate_wand">5.4
+Pinhole+Refraction (flat windows; plate_wand)</h3>
+<p align="center">
+  <img src="guide_refraction_settings.png" alt="The Refraction Settings panel" width="40%" />
+</p>
 
-        <div class="step-block">
-            <h3>Wand Calibrator Target</h3>
-            <p style="text-align: center;">
-                <img src="wand_calibrator_target.png" alt="Wand Calibrator Target" style="max-width: 25%;">
-            </p>
-            <p>The wand calibrator is a two-endpoint rigid target with different endpoint sizes. The size difference
-                helps identify endpoint correspondence among cameras, and the two endpoint centers are used with the
-                known wand length constraint.</p>
-        </div>
+<p><em>Refraction Settings for four cameras behind two windows: cameras
+0 and 1 behind window 0, cameras 2 and 3 behind window 1.</em></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it is and how to set it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Number of Windows</strong></td>
+<td>1</td>
+<td>The number of flat windows the cameras look through (1–10). Changing
+it keeps each camera's window while that window exists; a camera whose
+window is removed goes to Window 0.</td>
+</tr>
+<tr>
+<td><strong>Camera-Window Mapping</strong></td>
+<td>Window 0</td>
+<td>Which window each camera looks through. Two or more cameras per
+window are strongly recommended.</td>
+</tr>
+<tr>
+<td><strong>Camera side</strong></td>
+<td>Air, 1.0000</td>
+<td>The medium on the cameras' side and its refractive index. "Other"
+makes the index editable.</td>
+</tr>
+<tr>
+<td><strong>Window</strong></td>
+<td>Acrylic, 1.4900</td>
+<td>The window's material and index (Acrylic 1.49, Glass 1.52, or
+Other).</td>
+</tr>
+<tr>
+<td><strong>Thickness</strong></td>
+<td>10.00 mm</td>
+<td>The window's thickness. One thickness and one set of indices for all
+windows. In tests a plate 10 % too thick or a water index 0.002 off
+hardly changed the answer.</td>
+</tr>
+<tr>
+<td><strong>Object side</strong></td>
+<td>Water, 1.3330</td>
+<td>The medium the wand is in and its index (water 1.333). The indices
+take four decimals.</td>
+</tr>
+<tr>
+<td><strong>Use the previous calibrator</strong></td>
+<td>off</td>
+<td>Off: plate_wand. On: the GUI's previous refraction calibrator, the
+one used before October 2026 (below).</td>
+</tr>
+<tr>
+<td><strong>Thorough start search</strong></td>
+<td>off</td>
+<td>Slower; for noisy data. Carries six candidate starts through the fit
+instead of two.</td>
+</tr>
+<tr>
+<td><strong>Refit from the last result</strong></td>
+<td>off</td>
+<td>Skips the start search. After deleting frames: starts from the last
+flat-window result of the same cameras and windows, in seconds.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What plate_wand needs and does:</strong></p>
+<ul>
+<li><strong>No start values:</strong> it finds each window's plane and
+each camera's pose, f and k1 (if chosen) from the wand alone. The Focal
+column is not used.</li>
+<li><strong>At least 2 cameras and 12 frames.</strong> The report warns
+below 300 frames.</li>
+<li><strong>Precalibrate to Check</strong> runs plate_wand's start
+search and coarse fit (stages 1–3), with the windows, in a separate
+process. It reports their RMS and each camera's f and window, fills the
+error table and the 3D View, and writes no files (about 40 s for four
+cameras behind two windows and 300 frames). It rejects no outliers: the
+run does. With "Use the previous calibrator" ticked it is the pinhole
+check (5.3).</li>
+<li><strong>Run Calibration</strong> asks for the output folder, then
+works in a separate process. Stop ends it at once.</li>
+<li><strong>How long:</strong>
+<ul>
+<li>with 1,000 frames from scratch, a median of 35 s for one window and
+2 min (up to 6 min) for several;</li>
+<li>its start search can stay silent for minutes;</li>
+<li>a refit takes seconds.</li>
+</ul></li>
+<li><strong>The world frame:</strong>
+<ul>
+<li><strong>Z</strong> along the first used window's normal, from the
+cameras into the water;</li>
+<li><strong>Y</strong> along the windows' intersection (two windows), or
+with one window, camera 1's image "up" within the window's plane;</li>
+<li>the <strong>origin</strong> at the mean wand position.</li>
+</ul></li>
+<li><strong>Files in the folder:</strong>
+<ul>
+<li><code>camFile/cam&lt;id&gt;.txt</code> (PINPLATE, with each camera's
+window);</li>
+<li><code>calibration_result.json</code>,
+<code>calibration_report.txt</code>,
+<code>calibration_data.json</code>;</li>
+<li><code>calibration_report.html</code> (also shown in the Report
+tab).</li>
+</ul></li>
+<li><strong>Checks on the results page:</strong>
+<ul>
+<li><strong>a weak window:</strong> seen only by cameras that see the
+wand under small angles (a long lens or a far camera). Its tilt shows
+only weakly, and the fit can end in a wrong solution: every wrong answer
+in the tests had such a window. The remedy is a camera with a wider view
+behind it.</li>
+<li><strong>pinned:</strong> a wand end lies on a window's water-side
+surface, so the fit may be pinned against the window.</li>
+<li><strong>the same way:</strong> every camera's line of sight within
+10° of the others'. f, the distances and the 3D shape are then poorly
+determined: spread the cameras.</li>
+<li><strong>noisy:</strong> above 0.5 px with several windows.</li>
+<li>fewer than 300 frames; an unknown detection mode.</li>
+</ul></li>
+</ul>
+<details>
+<summary>The previous refraction calibrator ("Use the previous calibrator")</summary>
 
-        <div class="step-block">
-            <h3>Step 1: Configure Settings</h3>
-            <p>Set the detection parameters in the <strong>Detection Settings</strong> panel on the right:</p>
-            <ul>
-                <li><strong>Num Cameras</strong>: Enter the number of cameras in your setup (e.g., <code>2</code>).</li>
-                <li><strong>Wand Type</strong>: Choose <strong>Dark on Bright</strong> (dark balls on a bright
-                    background) or <strong>Bright on Dark</strong>.</li>
-                <li><strong>Radius Range</strong>: Adjust the slider to cover the expected radius (in pixels) of the
-                    wand balls in your images (e.g., <code>45</code> to <code>120</code>).</li>
-                <li><strong>Sensitivity</strong>: Set the detection sensitivity (default is around <code>0.85</code>).
-                </li>
-            </ul>
-        </div>
+<ul>
+<li><strong>What it needs:</strong>
+<ul>
+<li>the <strong>Focal (px)</strong>, <strong>Width</strong> and
+<strong>Height</strong> of every camera, used as its start (f at least
+100 px);</li>
+<li>only the cameras that see the wand in <strong>every</strong>
+frame.</li>
+</ul></li>
+<li><strong>The folder:</strong> it asks for a folder and writes
+<code>camFile/</code> in it. If the folder holds a
+<code>bundle_cache.json</code> from an earlier run, it offers to load
+that instead of calibrating.</li>
+<li><strong>Stop:</strong> its progress dialog has none.</li>
+<li><strong>Axis points:</strong> it does not apply them, and its result
+says so.</li>
+</ul>
+</details>
 
-        <div class="step-block">
-            <h3>Step 2: Load Camera Images</h3>
-            <p>In the <strong>Camera Images</strong> table:</p>
-            <ol>
-                <li>For each <strong>Cam ID</strong>, load the corresponding folder of calibration images (click the
-                    cell or a load button if available).</li>
-                <li>Enter the initial <strong>Focal Length (px)</strong> (e.g., <code>9000</code>).</li>
-                <li>Enter the detection <strong>Width</strong> and <strong>Height</strong> (e.g., <code>1280</code> x
-                    <code>800</code>).
-                </li>
-            </ol>
-        </div>
+<h3 id="55-pinholecylinder-a-tube-cylinder_wand">5.5 Pinhole+Cylinder (a
+tube; cylinder_wand)</h3>
+<p align="center">
+  <img src="guide_tube_settings.png" alt="The Tube Settings panel" width="40%" />
+</p>
 
-        <div class="step-block">
-            <h3>Step 3: Verify and Process</h3>
-            <ol>
-                <li>Select a frame from the <strong>Frame List</strong>.</li>
-                <li>Click <strong>Test Detect (Current Frame)</strong>.
-                    <ul>
-                        <li><em>Verification</em>: Look at the image view on the left. You should see <strong>green
-                                circles</strong> identifying the two balls on the wand. If not, adjust the <em>Radius
-                                Range</em> or <em>Sensitivity</em>.</li>
-                    </ul>
-                </li>
-                <li>Once satisfied with the detection test, click <strong>Process All Frames / Resume</strong> to detect
-                    points in all loaded images.</li>
-            </ol>
-        </div>
-
-        <hr style="border-color: #444; margin: 40px 0;">
-
-        <!-- Axis Points and Coordinate Definition Section -->
-        <h2>2. Axis Points & Coordinate Definition (Optional but Recommended)</h2>
-        <p>If you want a physically meaningful world frame (origin and +X/+Y/+Z directions), define axis points before
-            the final calibration run.</p>
-
-        <div class="step-block">
-            <h3>Axis Calibrator (Endpoint Sizes)</h3>
-            <p style="text-align: center;">
-                <img src="axis_calibrator_endpoint_sizes.png" alt="Axis Calibrator Endpoint Size Groups" style="max-width: 25%;">
-            </p>
-            <p>Use an axis calibrator with three endpoint-size groups (small, medium, and large), with one opposite
-                endpoint pair per axis.</p>
-            <p>How the axis-point workflow uses these endpoint sizes:</p>
-            <ul>
-                <li>The <strong>Detect</strong> step finds circular endpoints and estimates each circle radius in
-                    pixels.</li>
-                <li>Detected points are grouped into three size bins based on radius ranking.</li>
-                <li>In each size bin, the farthest two points are treated as one axis endpoint pair.</li>
-                <li>The world-frame <strong>center</strong> is computed as the mean of the three pair midpoints.</li>
-                <li>When you select <strong>+X</strong>, <strong>+Y</strong>, and <strong>+Z</strong>, each click snaps
-                    to the nearest detected endpoint, and the corresponding pair is used for that axis direction.</li>
-            </ul>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 4: Enable Custom Axis Direction</h3>
-            <ol>
-                <li>In the <strong>Calibration</strong> sub-tab, locate the <strong>Axis direction</strong> setting.</li>
-                <li>Switch from <strong>Default</strong> to <strong>Custom</strong>.</li>
-                <li>A per-camera axis workflow becomes available (axis image loading, detection, and point selection).</li>
-            </ol>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 5: Load Axis Images and Detect Candidate Points</h3>
-            <ol>
-                <li>For each camera, load one or more axis-reference images (the images that show your axis target).</li>
-                <li>Click <strong>Detect</strong> to run reliable circle detection on the loaded axis images.</li>
-                <li>Verify that the detected circles are reasonable before selection.</li>
-            </ol>
-            <div class="highlight">
-                <strong>Tip:</strong> If too few circles are detected, adjust <strong>Radius Range</strong> and
-                <strong>Sensitivity</strong>, then run <strong>Detect</strong> again.
-            </div>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 6: Select +X, +Y, +Z for Each Camera and Save</h3>
-            <ol>
-                <li>For each camera row, click <strong>Select</strong> and then click points in order:
-                    <strong>+X</strong>, <strong>+Y</strong>, <strong>+Z</strong>.</li>
-                <li>The tool computes <strong>center</strong> automatically from the detected axis pairs.</li>
-                <li>When all cameras are complete, click <strong>Save</strong> to store axis direction data.</li>
-                <li>To reuse previous selections, click <strong>Load Axis Points (Optional)</strong> and import the CSV.</li>
-            </ol>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 7: Use Axis Points to Define the World Coordinate Frame</h3>
-            <ol>
-                <li>Click <strong>Precalibrate to Check</strong> (or run full calibration) after axis points are set.</li>
-                <li>The system triangulates <strong>center</strong>, <strong>+X</strong>, <strong>+Y</strong>, and
-                    <strong>+Z</strong> across cameras and applies world-frame alignment automatically.</li>
-                <li>Verify in the 3D view:
-                    <ul>
-                        <li>Axis landmarks (center, +X, +Y, +Z) are shown.</li>
-                        <li>Dashed lines show measured landmark directions.</li>
-                        <li>Solid lines show corrected orthonormal axes used for world coordinates.</li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
-
-        <hr style="border-color: #444; margin: 40px 0;">
-
-        <!-- Calibration Section -->
-        <h2>3. Calibration</h2>
-        <p>After extracting points, switch to the <strong>Calibration</strong> sub-tab.</p>
-
-        <div class="highlight">
-            <span class="important">Pinhole Model: Note on Refracted Interfaces:</span>
-            <p style="margin-top: 5px;">The pinhole calibration model assumes a homogeneous medium without refractive
-                interfaces. For setups with observation windows (e.g., glass or acrylic), orient cameras as close to
-                the window normal as possible and keep viewing angles small (paraxial condition). If your camera views
-                are nearly normal to the plate, it is still recommended to use the <strong>Pinhole</strong> model.</p>
-        </div>
-
-        <!-- Updated Image -->
-        <img src="wand_calibration_ui_v2.png" alt="Calibration Interface">
-
-        <div class="step-block">
-            <h3>Step 8: Calibration Settings</h3>
-            <p>Configure the physical model in <strong>Calibration Settings</strong>:</p>
-            <ul>
-                <li><strong>Camera Model</strong>: Select <strong>Pinhole</strong> (standard).</li>
-                <li><strong>Wand Length</strong>: Enter the exact physical distance between the centers of the two wand
-                    balls (e.g., <code>10.00 mm</code>). <span style="color: #ff5252;"><strong>Accurate measurement is
-                            critical.</strong></span></li>
-                <li><strong>Dist Coeffs</strong>: Number of distortion coefficients to optimize (typically
-                    <code>0</code> for initial testing, or higher for complex lenses).
-                </li>
-            </ul>
-        </div>
-
-        <!-- NEW Step: Precalibration -->
-        <div class="step-block">
-            <h3>Step 9: Precalibration & Data Cleaning</h3>
-            <p>Before running the full optimization, it is crucial to clean your data to remove outliers (errors in
-                detection).</p>
-            <ol>
-                <li>Click the orange <strong>Precalibrate to Check</strong> button.</li>
-                <li>The system will perform a fast, global optimization to estimate the error of each frame.</li>
-                <li>Check the <strong>Error Analysis</strong> table usage below:
-                    <ul>
-                        <li>High <strong>Reprojection Errors</strong> (red) indicate bad detections.</li>
-                        <li>High <strong>Length Errors</strong> indicate points that don't match the physical wand
-                            length.</li>
-                    </ul>
-                </li>
-                <li><strong>Visual Verification</strong>:
-                    <ul>
-                        <li>Click on any cell in the table (e.g., a high error value).</li>
-                        <li>Look at the <strong>Left View</strong>: It will show the original camera image overlaid with
-                            the detected points (green circles).</li>
-                        <li>Check if the detection is correct. If the system detected a reflection or noise instead of a
-                            wand, click the checkbox in the <strong>Del</strong> column to mark it for removal.</li>
-                    </ul>
-                </li>
-                <li><strong>Iterative Cleaning</strong>:
-                    <ul>
-                        <li>Use the filter buttons (e.g., "Delete when proj error > X") or manual Del checkboxes to
-                            exclude bad frames.</li>
-                        <li>Click <strong>Precalibrate to Check</strong> AGAIN.</li>
-                        <li>Repeat until errors are low (e.g., &lt; 1.0 px).</li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 10: Run Full Calibration</h3>
-            <ol>
-                <li>Click the blue <strong>Run Calibration</strong> button.</li>
-                <li>The system will perform the final Bundle Adjustment (BA) with 4-stage optimization (Geometry Init ->
-                    Intrinsics -> Triangulation -> Final Tune).</li>
-                <li>The <strong>3D View</strong> on the left will visualize the optimized camera positions and wand
-                    points.</li>
-            </ol>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 11: Final Analysis</h3>
-            <p>Review the final results in the <strong>Error Analysis</strong> table:</p>
-            <ul>
-                <li><strong>Reprojection Error</strong>: Should be very low (e.g., &lt; 0.5 px).</li>
-                <li><strong>Length Error</strong>: Should be close to 0.</li>
-            </ul>
-            <div class="highlight">
-                <strong>Stopping & Refining:</strong>
-                <ul>
-                    <li>If the process takes too long or results look wrong, click the <strong>Stop</strong> button to
-                        get partial results.</li>
-                    <li>If errors are still high, perform another round of cleaning (Step 9) or adjust the <em>Wand
-                            Length</em> setting.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 12: Save Results</h3>
-            <p>When the "Calibration Successful" message appears, your parameters are ready. You can save the intrinsic
-                and extrinsic parameters to file for use in tracking.</p>
-        </div>
-
-        <hr style="border-color: #444; margin: 40px 0;">
-
-        <h2>4. Calibration Model: Pinhole + Refraction</h2>
-        <p>Use this model when refractive interfaces are non-negligible and you need to model camera-side medium,
-            window material/thickness, and object-side medium explicitly.</p>
-
-        <div class="highlight">
-            <span class="important">Refraction Model Notes:</span>
-            <p style="margin-top: 5px;">It is highly recommended to use <strong>2 or more cameras per refraction
-                    plate/window</strong> for better calibration robustness. If your camera viewing angle is nearly
-                normal to the refraction plate, it is still recommended to use the <strong>Pinhole</strong> model.</p>
-        </div>
-
-        <div class="step-block">
-            <p style="text-align: center;">
-                <img src="refraction_settings_panel.png" alt="Refraction Settings Panel" style="max-width: 32%;">
-            </p>
-            <h3>Step 13: Select the Refraction Model</h3>
-            <ol>
-                <li>In <strong>Calibration Settings</strong>, set <strong>Camera Model</strong> to
-                    <strong>Pinhole+Refraction</strong>.</li>
-                <li>Enter a valid <strong>Wand Length</strong> and the number of <strong>Dist Coeffs</strong>.</li>
-            </ol>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 14: Configure Refraction Settings</h3>
-            <ol>
-                <li>Set <strong>Number of Windows</strong>.</li>
-                <li>In <strong>Camera-Window Mapping</strong>, assign each camera to its corresponding window.</li>
-                <li>In <strong>Window Configuration</strong>, set media/material parameters for each layer:
-                    <ul>
-                        <li><strong>Camera side</strong> (e.g., Air, refractive index)</li>
-                        <li><strong>Window</strong> (material index and thickness)</li>
-                        <li><strong>Object side</strong> (e.g., Water, refractive index)</li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
-
-        <div class="step-block">
-            <h3>Step 15: Run and Refine</h3>
-            <ol>
-                <li>Click <strong>Precalibrate to Check</strong> for data cleaning and outlier removal.</li>
-                <li>Iterate filtering based on error metrics.</li>
-                <li>Click <strong>Run Calibration</strong> for final optimization with refraction enabled.</li>
-            </ol>
-        </div>
-
+<p><em>Tube Settings, with the defaults: a 7.9375 in acrylic tube with a
+0.125 in wall, filled with water.</em></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it is and how to set it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Camera side</strong></td>
+<td>Air, 1.0000</td>
+<td>The medium outside the tube and its refractive index.</td>
+</tr>
+<tr>
+<td><strong>Wall</strong></td>
+<td>Acrylic, 1.4900</td>
+<td>The wall's material and index (Acrylic 1.49, Glass 1.52, or
+Other).</td>
+</tr>
+<tr>
+<td><strong>Outer diameter</strong></td>
+<td>201.6125 mm</td>
+<td>The tube's outer diameter (7.9375 in). Measure your tube.</td>
+</tr>
+<tr>
+<td><strong>Wall thickness</strong></td>
+<td>3.1750 mm</td>
+<td>The wall thickness (0.125 in); it must be less than the outer
+radius.</td>
+</tr>
+<tr>
+<td><strong>Inside</strong></td>
+<td>Water, 1.3330</td>
+<td>The liquid in the tube and its index. The tube's radii set the
+scale, so an error in an index shows in f and in the wand length.</td>
+</tr>
+<tr>
+<td><strong>Noise weights</strong></td>
+<td>Per camera</td>
+<td>How each detection is weighted. <strong>Per camera:</strong> by its
+camera's noise, estimated from the residuals. <strong>Per camera and
+ball:</strong> also separately for the two ball sizes.
+<strong>Equal:</strong> no weighting. With two cameras the noise of each
+camera usually cannot be told apart, and the fit falls back to equal
+weights. The report's "Noise and weights" section says what
+happened.</td>
+</tr>
+<tr>
+<td><strong>Pixel size</strong></td>
+<td>not set</td>
+<td>The sensor's pixel size in µm; only used to also print f in mm.</td>
+</tr>
+<tr>
+<td><strong>Fit the wand length</strong></td>
+<td>off</td>
+<td>Fits the wand length instead of holding it: a check of the tube's
+size and indices, not for the result you keep. A fitted length far from
+the real one points to wrong tube numbers (or data that cannot tell).
+The report warns beyond 3 standard errors.</td>
+</tr>
+<tr>
+<td><strong>Thorough start search</strong></td>
+<td>off</td>
+<td>Slower; for noisy data. Carries six candidate starts through the fit
+instead of two. Above 1 px all candidates are carried anyway.</td>
+</tr>
+<tr>
+<td><strong>Refit from the last result</strong></td>
+<td>off</td>
+<td>Skips the start search. After deleting frames: starts from the last
+tube result of the same cameras.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What the tube model needs and does:</strong></p>
+<ul>
+<li><strong>Detect the balls with the "ellipse" mode.</strong> The
+results page warns when the points came from "fast" or "reliable", or
+when the mode is unknown (points loaded from a file).</li>
+<li><strong>No start values:</strong> each camera's pose, f and k1 (if
+chosen) come from the wand. The Focal column is greyed.</li>
+<li><strong>At least 2 cameras and 12 frames</strong> in which every
+camera sees both balls. Several hundred are better; the report warns
+below 200.</li>
+<li><strong>Precalibrate to Check</strong> runs the start search and the
+coarse fit (stages 1–3) and reports their RMS and each camera's f and
+distance from the axis. It writes no files.</li>
+<li><strong>Run Calibration</strong> asks for the output folder, then
+runs the full fit. Stop ends it at the next step, without writing
+files.</li>
+<li><strong>How long:</strong> about 1 min for two cameras and
+1,500–2,000 frames with the default two starts, and 1–4 min with the
+thorough search.</li>
+<li><strong>The world frame:</strong>
+<ul>
+<li>the tube's axis is <strong>Y</strong>, through the origin;</li>
+<li><strong>Z</strong> points towards the lowest-numbered camera;</li>
+<li>the origin is at the wand's mean height along the axis.</li>
+</ul></li>
+<li><strong>Files in the folder:</strong>
+<ul>
+<li><code>camFile/cam&lt;id&gt;.txt</code> (PINCYL);</li>
+<li><code>calibration_result.json</code>,
+<code>calibration_report.txt</code> (with a Checks section),
+<code>calibration_data.json</code>;</li>
+<li><code>calibration_report.html</code> (also shown in the Report
+tab).</li>
+</ul></li>
+<li><strong>Checks on the results page:</strong>
+<ul>
+<li>RMS above 1 px; under 80 % of a camera's detections used; fewer than
+200 frames;</li>
+<li>wand ends beyond the fold radius (where a point can have two
+images);</li>
+<li>a fitted wand length off by more than 3σ.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="6-checking-the-result">6. Checking the result</h2>
+<h3 id="61-the-error-table">6.1 The error table</h3>
+<p><img src="guide_error_table.png"
+alt="The error table and a frame&#39;s overlay: the detections (green) and the fitted model&#39;s projections (red crosses)" /></p>
+<p><em>Clicking a row shows that frame in the camera's tab: the detected
+balls (green) and where the fitted model puts them (red
+crosses).</em></p>
+<ul>
+<li><strong>One row per frame used.</strong> Each camera column holds
+the larger reprojection error of the two balls (px). <strong>Len Err
+(mm)</strong> is how far the frame's wand length is from the true
+one.</li>
+<li><strong>Red cells</strong> exceed the filter thresholds. Click a
+header to sort; click a cell to see the frame in that camera's tab (the
+image folders must be loaded).</li>
+<li><strong>A few frames with large errors</strong> usually have a wrong
+detection: check them, mark them in <strong>Del</strong>, and run again.
+For the tube and window models tick <strong>Refit from the last
+result</strong>, which takes seconds. <strong>Restore Deleted
+Frames</strong> brings every deleted frame back.</li>
+</ul>
+<h3 id="62-the-3d-view">6.2 The 3D View</h3>
+<p>The fitted rig, in metres:</p>
+<ul>
+<li>the cameras: black squares labelled with their Cam ID, a yellow line
+for the viewing direction;</li>
+<li>the wand positions: blue;</li>
+<li>the model's geometry: the window planes, or the tube with its axis
+and lines of sight.</li>
+</ul>
+<p>Mouse wheel zooms; drag rotates.</p>
+<h3 id="63-the-report-tab">6.3 The Report tab</h3>
+<p><img src="guide_report.png"
+alt="The Report tab: the results page of a tube calibration inside the GUI" /></p>
+<p><em>The Report tab shows the results page of the last calibration;
+Open in browser and Open folder are above it.</em></p>
+<p>The page shows the result and how to read it:</p>
+<ul>
+<li><strong>Summary</strong>, with the <strong>Checks</strong> (each a
+warning when something often means a wrong or weak answer, or a tick
+when none fired);</li>
+<li>the rig from above and in 3D; how well each camera fits (its
+residuals over the image);</li>
+<li>the wand length; the cameras; noise and weights; the settings and
+the files written.</li>
+</ul>
+<p>Hover over the figures for numbers. Without QtWebEngine the tab shows
+a short summary, and <strong>Open in browser</strong> shows the page
+(the installers add QtWebEngine).</p>
+<h3 id="64-is-the-calibration-good">6.4 Is the calibration good?</h3>
+<ul>
+<li><strong>Reprojection RMS:</strong> a few tenths of a pixel is
+typical for real data; above 1 px, look for detection problems first.
+The value depends on the detection noise: compare calibrations of the
+same rig rather than different rigs.</li>
+<li><strong>The wand length error:</strong> the scatter of the
+free-triangulated wand length (in µm), against the wand length.</li>
+<li><strong>The Checks:</strong> read every warning on the results
+page.</li>
+<li><strong>Consistency, for long lenses:</strong> calibrate two parts
+of the recording separately and compare.
+<ul>
+<li><strong>When f and the cameras' distances differ by several per cent
+between the parts, in proportion,</strong> the recording does not fix
+the focal length.</li>
+<li><strong>The cameras still agree inside the volume the wand
+covered,</strong> and can be used there; do not rely on them outside
+it.</li>
+<li><strong>Measure f independently</strong> (a dot target through the
+window or tube) and record the wand over more depth.</li>
+</ul></li>
+<li><strong>Recalibrate</strong> whenever a camera, lens or mount was
+touched.</li>
+</ul>
+<h3 id="65-the-files-and-tracking">6.5 The files and tracking</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>When the files are written</th>
+<th>Camera files</th>
+<th>Also written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pinhole</td>
+<td>after the run, when you choose Save</td>
+<td><code>camFile/cam&lt;id&gt;.txt</code> (PINHOLE)</td>
+<td><code>calibration_report.html</code></td>
+</tr>
+<tr>
+<td>Pinhole+Refraction (plate_wand)</td>
+<td>at the end of the run, in the folder chosen before it</td>
+<td><code>camFile/cam&lt;id&gt;.txt</code> (PINPLATE)</td>
+<td><code>calibration_result.json</code>,
+<code>calibration_report.txt</code>, <code>calibration_data.json</code>,
+<code>calibration_report.html</code></td>
+</tr>
+<tr>
+<td>Previous refraction calibrator</td>
+<td>at the end of the run</td>
+<td><code>camFile/cam&lt;id&gt;.txt</code> (PINPLATE)</td>
+<td><code>bundle_cache.json</code>, <code>bootstrap_cache.json</code>,
+<code>triangulation_report.json</code></td>
+</tr>
+<tr>
+<td>Pinhole+Cylinder</td>
+<td>at the end of the run, in the folder chosen before it</td>
+<td><code>camFile/cam&lt;id&gt;.txt</code> (PINCYL)</td>
+<td><code>calibration_result.json</code>,
+<code>calibration_report.txt</code>, <code>calibration_data.json</code>,
+<code>calibration_report.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>When the project's camera folder is set or updated in
+<strong>Tracking Settings</strong>, the latest calibration's camera
+files are copied there.</p>
+<hr />
+<h2 id="7-troubleshooting">7. Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"No Wand Points" after a detection; the file has only "Raw"
+rows</td>
+<td>The rod joins the balls into one blob, or the Radius Range misses a
+ball</td>
+<td>Ellipse mode: raise the Rod opening above the rod's width (<a
+href="#34-setting-rod-opening-and-rod-mask-ellipse-mode">3.4</a>).
+Otherwise check the Radius Range and Sensitivity with Test Detect. Every
+camera row needs its images.</td>
+</tr>
+<tr>
+<td>Few frames paired</td>
+<td>A camera often sees only one ball, or the balls overlap</td>
+<td>Record with every camera seeing both balls apart; check the frames
+that are struck through.</td>
+</tr>
+<tr>
+<td>Bright balls on a dark background are not found</td>
+<td>Wand Type is "Dark on Bright"</td>
+<td>Set Wand Type to "Bright on Dark".</td>
+</tr>
+<tr>
+<td>Frames mismatched between cameras</td>
+<td>File names sort differently, or the folders hold different numbers
+of images</td>
+<td>Zero-padded names, the same number of images per camera.</td>
+</tr>
+<tr>
+<td>"The camera table has no row for camera(s) …"</td>
+<td>The points have more cameras than the table</td>
+<td>Set Num Cameras to the points' camera count.</td>
+</tr>
+<tr>
+<td>"Only N frames show both balls in every camera …"</td>
+<td>Too few complete frames</td>
+<td>Improve the detection or record more.</td>
+</tr>
+<tr>
+<td>Wrong image size after loading a CSV</td>
+<td>The file holds no image sizes</td>
+<td>Set Width and Height in Point Detection.</td>
+</tr>
+<tr>
+<td>The calibration seems to run long</td>
+<td>The tube and window models take about a minute, the thorough search
+longer; the window model's start search can be silent for minutes</td>
+<td>Wait, or Stop and use the default two starts. After deleting frames,
+use Refit from the last result.</td>
+</tr>
+<tr>
+<td>RMS above 1 px</td>
+<td>Wrong detections, the wrong detection mode, or wrong rig
+numbers</td>
+<td>Click the worst rows and delete wrong frames. Tube: use "ellipse"
+and check the tube's numbers. Windows: check the mapping.</td>
+</tr>
+<tr>
+<td>f differs between parts of the recording</td>
+<td>Long lenses, little depth: the wand cannot fix f</td>
+<td><a href="#64-is-the-calibration-good">6.4</a>.</td>
+</tr>
+<tr>
+<td>The Report tab shows only a summary</td>
+<td>QtWebEngine is not installed</td>
+<td>Open in browser; or reinstall with the installer, which adds
+it.</td>
+</tr>
+<tr>
+<td>"CRITICAL: No cameras found that consistently see the wand in all
+frames."</td>
+<td>The previous refraction calibrator needs every camera in every
+frame</td>
+<td>Use plate_wand (untick "Use the previous calibrator").</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-known-issues-october-2026">8. Known issues (October 2026)</h2>
+<ul>
+<li><strong>Axis points are applied by the Pinhole model only</strong>
+(<a href="#4-axis-points-optional-pinhole-model-only">section
+4</a>).</li>
+</ul>
+<hr />
+<h2 id="9-further-reading">9. Further reading</h2>
+<ul>
+<li><a
+href="../curved_calibration/guide/WAND_CALIBRATION_GUIDE.html">How the
+tube and flat-window wand calibrations work</a>: an illustrated guide to
+the two models and their tests.</li>
+<li><code>tests/cylinder_wand/README.md</code> and
+<code>tests/plate_wand/README.md</code> in the repository: what the test
+campaigns found, with every number.</li>
+</ul>
     </div>
-
 </body>
 
 </html>

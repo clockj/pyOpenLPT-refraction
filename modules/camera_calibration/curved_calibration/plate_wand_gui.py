@@ -140,6 +140,74 @@ def run(job: Job, progress: Callable = None, stop: Callable = None) -> pw.Soluti
     return sol
 
 
+def precheck(job: Job, progress: Callable = None, stop: Callable = None) -> pw.Solution:
+    """Stages 1-3 only (the start search with its coarse fit), for the GUI's "Precalibrate to Check", as
+    cylinder_wand_gui.precheck: the first start calibrate would refine (`plate_wand.start_candidates`), moved into the
+    output frame, with its residuals.  No outlier rejection and no stage 4: a check of the data before the full
+    calibration."""
+    job.check()
+    data = job.data()
+    log = _logger(progress, stop)
+    rig = job.rig()
+    obs = pw.observations(data)
+    if progress is not None:
+        progress("Start search", float("nan"),
+                 f"{data.n_frames} frames, {data.n_cams} cameras, {len(job.windows)} windows")
+    starts, binfo = pw.start_candidates(obs, rig, data, hints=job.hints or None, verbose=True, log=log)
+    if not starts:
+        raise ValueError("The start search found no start: check the detections and the Camera-Window Mapping.")
+    _cost, rms3, cams3, rig3 = starts[0]
+    cams3, rig3 = [c.copy() for c in cams3], rig3.copy()
+    frames = pw.initial_frames(cams3, rig3, obs, data.L)
+    sol = pw.Solution(cams=cams3, rig=rig3, frames=frames, L=data.L, obs=obs,
+                      layout=pw.Layout(data.n_cams, len(rig3.windows), fit_k1=bool(job.fit_k1)))
+    try:
+        sol = pw.to_output_frame(sol)        # the frame of the full calibration's results
+    except (np.linalg.LinAlgError, ValueError):
+        pass
+    ev = pw.evaluate(sol.cams, sol.rig, sol.frames, sol.L, obs)
+    ok = ev.ok & np.all(np.isfinite(ev.r), axis=1)
+    sol.rms = float(np.sqrt(np.mean(np.sum(ev.r[ok] ** 2, axis=1)))) if ok.any() else float("nan")
+    sol.info.update({"precheck": True, "bootstrap": binfo, "stage3_rms_px": float(rms3)})
+    return sol
+
+
+def precheck_lines(sol: pw.Solution, job: Job) -> List[str]:
+    """A few lines for the GUI's message box after stages 1-3."""
+    r, ok, _p = residuals(sol)
+    out = [f"Start and coarse fit (stages 1-3) on {sol.obs.n_frames} frames: RMS {sol.rms:.3f} px.",
+           "This is only the start; run the calibration for the final answer."]
+    norm = np.linalg.norm(np.where(ok[:, None], r, np.nan), axis=1)
+    for c, cam in enumerate(sol.cams):
+        sel = (sol.obs.cam == c) & ok
+        rms = float(np.sqrt(np.mean(norm[sel] ** 2))) if sel.any() else float("nan")
+        w = sol.rig.cam_win[c]
+        out.append(f"  cam{job.cam_ids[c]}: f {cam.f:,.0f} px, window {job.window_ids[w] if job.window_ids else w}, "
+                   f"RMS {rms:.3f} px")
+    return out
+
+
+def child_precheck(job: Job, folder, queue) -> None:
+    """`precheck` in a separate process (the GUI's ProcessCalibWorker, as `child_run`): ("progress", ...) messages,
+    then ("done", payload) with the error table, the message box's lines and the 3D View's cameras, windows and wand
+    ends, or ("failed", message).  Writes nothing; `folder` is not used."""
+    import traceback
+    try:
+        def prog(stage, rms, text):
+            queue.put(("progress", str(stage), float(rms), str(text)))
+        sol = precheck(job, progress=prog)
+        XA, XB = sol.frames.ends(sol.L)
+        plot = {"cameras": [{"R": c.R.tolist(), "tvec": c.tvec.tolist()} for c in sol.cams],
+                "windows": [{"normal": w.n.tolist(), "d_mm": float(w.d)} for w in sol.rig.windows],
+                "ends_A_mm": XA.tolist(), "ends_B_mm": XB.tolist()}
+        queue.put(("done", {"precheck": True, "rms_px": float(sol.rms), "per_frame": per_frame_errors(sol, job),
+                            "lines": precheck_lines(sol, job), "plot": plot}))
+    except ValueError as e:
+        queue.put(("failed", str(e)))
+    except Exception:
+        queue.put(("failed", traceback.format_exc()))
+
+
 def residuals(sol: pw.Solution):
     obs = sol.obs
     ev = pw.evaluate(sol.cams, sol.rig, sol.frames, sol.L, obs)

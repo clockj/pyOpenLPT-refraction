@@ -7,6 +7,7 @@ from pathlib import Path
 from PySide6.QtCore import QThread, Signal, QWaitCondition, QMutex
 import concurrent.futures
 import contextlib
+import itertools
 import multiprocessing
 import os
 
@@ -35,6 +36,8 @@ RANSAC_THRESH = 3.0
 RANSAC_ITERS = 500
 FAST_ANNULUS_LOW = 0.7
 FAST_ANNULUS_HIGH = 1.3
+FAST_RANSAC_SEED = 0      # the fast mode's RANSAC draws: the same for every circle, so an image's points do not depend
+                          # on the run or the process (they came from numpy's global random state)
 
 # --- Robust Detection Helpers ---
 def thin_by_angle(pts, cx, cy, r_init, nbin=360):
@@ -77,10 +80,11 @@ def refine_circle_with_edges(img_gray, cx_init, cy_init, r_init, exclusion_mask=
     best_score = -1.0
     best_model = None 
     
+    rng = np.random.default_rng(FAST_RANSAC_SEED)           # repeatable draws, numpy's global state left alone
     for _ in range(RANSAC_ITERS):
         if n_points < 3: break
         try:
-            sample_idx = np.random.choice(n_points, 3, replace=False)
+            sample_idx = rng.choice(n_points, 3, replace=False)
         except ValueError: break
         
         p1, p2, p3 = pts[sample_idx]
@@ -538,6 +542,7 @@ class WandCalibrator:
             
             # Per-camera reprojection error and triangulation error (3D residual)
             cam_errors = {}
+            proj_pts = {}
             tri_errors = []
             for cam_idx, uv_obs in obs.items():
                 if cam_idx not in self.final_params:
@@ -560,6 +565,7 @@ class WandCalibrator:
                 err_B = np.linalg.norm(proj_B.flatten()[:2] - np.array(uv_obs[1][:2]))
                 
                 cam_errors[cam_idx] = max(err_A, err_B)
+                proj_pts[cam_idx] = (proj_A.flatten()[:2], proj_B.flatten()[:2])
 
                 # 3D Triangulation Residual (distance to ray)
                 for pt3d, uv in [(pt3d_A, uv_obs[0]), (pt3d_B, uv_obs[1])]:
@@ -577,9 +583,10 @@ class WandCalibrator:
                     tri_errors.append(dist_3d)
             
             self.per_frame_errors[fid] = {
-                'cam_errors': cam_errors, 
+                'cam_errors': cam_errors,
                 'len_error': len_err,
-                'tri_errors': tri_errors # Actual 3D residuals in mm
+                'tri_errors': tri_errors, # Actual 3D residuals in mm
+                'proj_pts': proj_pts      # where the model puts the two balls: the frame overlay's red crosses
             }
         
         return self.per_frame_errors
@@ -761,42 +768,53 @@ class WandCalibrator:
             
             with _one_blas_thread_for_workers(), \
                     concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
-                futures = [executor.submit(run_detection_task, t) for t in all_tasks]
-                
-                for future in concurrent.futures.as_completed(futures):
-                    # Check for stop request BEFORE processing result
-                    if stop_check and stop_check():
-                        print("Stop requested. Cancelling remaining tasks...")
-                        executor.shutdown(wait=False, cancel_futures=True)
-                        # Autosave before exit
-                        if autosave_path:
+                # At most 2 tasks per worker in flight: a task is submitted only when a result has been read, so while
+                # the reader waits (Pause in the GUI) the workers stop once the tasks in flight are done.  (All the tasks
+                # were submitted at the start, and Pause only paused the progress bar.)
+                todo = iter(all_tasks)
+                pending = {executor.submit(run_detection_task, t) for t in itertools.islice(todo, 2 * max_workers)}
+
+                while pending:
+                    done, pending = concurrent.futures.wait(pending, return_when=concurrent.futures.FIRST_COMPLETED)
+                    for future in done:
+                        # Check for stop request BEFORE processing result
+                        if stop_check and stop_check():
+                            print("Stop requested. Cancelling remaining tasks...")
+                            executor.shutdown(wait=False, cancel_futures=True)
+                            # Autosave before exit
+                            if autosave_path:
+                                self.export_wand_data(autosave_path)
+                            yield len(self.wand_data_raw), num_frames # Final yield
+                            return # Exit generator early
+
+                        res_f_idx, res_c_idx, pts = future.result()
+
+                        # Store Result
+                        if pts is not None:
+                            if res_f_idx not in self.wand_data_raw:
+                                self.wand_data_raw[res_f_idx] = {}
+                            self.wand_data_raw[res_f_idx][res_c_idx] = pts
+                        else:
+                            # Ensure we mark as processed even if None found
+                            if res_f_idx not in self.wand_data_raw:
+                                self.wand_data_raw[res_f_idx] = {}
+
+                        tasks_done += 1
+
+                        # Yield progress periodically
+                        if tasks_done % num_cams == 0:
+                             # Yield valid update for progress bar
+                             yield len(self.wand_data_raw), num_frames
+
+                        # Autosave logic (Main Thread - Safe)
+                        if autosave_path and tasks_done % autosave_interval == 0:
+                            print(f"Autosaving at {tasks_done} tasks...")
                             self.export_wand_data(autosave_path)
-                        yield len(self.wand_data_raw), num_frames # Final yield
-                        return # Exit generator early
-                    
-                    res_f_idx, res_c_idx, pts = future.result()
-                    
-                    # Store Result
-                    if pts is not None:
-                        if res_f_idx not in self.wand_data_raw:
-                            self.wand_data_raw[res_f_idx] = {}
-                        self.wand_data_raw[res_f_idx][res_c_idx] = pts
-                    else:
-                        # Ensure we mark as processed even if None found
-                        if res_f_idx not in self.wand_data_raw:
-                            self.wand_data_raw[res_f_idx] = {}
 
-                    tasks_done += 1
-                    
-                    # Yield progress periodically
-                    if tasks_done % num_cams == 0:
-                         # Yield valid update for progress bar
-                         yield len(self.wand_data_raw), num_frames
-
-                    # Autosave logic (Main Thread - Safe)
-                    if autosave_path and tasks_done % autosave_interval == 0:
-                        print(f"Autosaving at {tasks_done} tasks...")
-                        self.export_wand_data(autosave_path)
+                        # the next task, once this result has been read
+                        nxt = next(todo, None)
+                        if nxt is not None:
+                            pending.add(executor.submit(run_detection_task, nxt))
             
         # Ensure we yield final 100% and autosave
         yield num_frames, num_frames
@@ -1557,8 +1575,13 @@ class WandCalibrator:
         n_cam_params_total = num_cams * n_cam_params
         
         # Skip Stage 1-3 if using pre-optimized params from Phase 1 & 2
-        img_h, img_w = self.image_size
-        cx_c, cy_c = img_w/2.0, img_h/2.0
+        # Each camera's principal point is bounded around its own image centre, where its start puts it
+        # (_get_cam_setting): the cameras may differ in size.  cam_id_map is {camera id: internal index}.
+        cam_of = {i: cid for cid, i in cam_id_map.items()}
+        centres = []
+        for i in range(num_cams):
+            _f, w_i, h_i = self._get_cam_setting(cam_of[i])
+            centres.append((w_i / 2.0, h_i / 2.0))
         
         if skip_early_stages:
             print("    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...")
@@ -1574,10 +1597,10 @@ class WandCalibrator:
             margin = 50.0
             for i in range(num_cams):
                 base = i * n_cam_params
-                lb_s4[base+7] = cx_c - margin
-                ub_s4[base+7] = cx_c + margin
-                lb_s4[base+8] = cy_c - margin
-                ub_s4[base+8] = cy_c + margin
+                lb_s4[base+7] = centres[i][0] - margin
+                ub_s4[base+7] = centres[i][0] + margin
+                lb_s4[base+8] = centres[i][1] - margin
+                ub_s4[base+8] = centres[i][1] + margin
             
             # Setup kwargs for Stage 4
             kwargs_s4 = dict(
@@ -1639,10 +1662,10 @@ class WandCalibrator:
             
             for i in range(num_cams):
                 base = i * n_cam_params
-                lb_s2[base+7] = cx_c - 0.1
-                ub_s2[base+7] = cx_c + 0.1
-                lb_s2[base+8] = cy_c - 0.1
-                ub_s2[base+8] = cy_c + 0.1
+                lb_s2[base+7] = centres[i][0] - 0.1
+                ub_s2[base+7] = centres[i][0] + 0.1
+                lb_s2[base+8] = centres[i][1] - 0.1
+                ub_s2[base+8] = centres[i][1] + 0.1
                 
             kwargs_s2 = dict(
                 jac_sparsity=A_sparsity, verbose=0, method='trf', x_scale='jac', f_scale=1.0, 
@@ -1699,10 +1722,10 @@ class WandCalibrator:
             margin = 50.0
             for i in range(num_cams):
                 base = i * n_cam_params
-                lb_s4[base+7] = cx_c - margin
-                ub_s4[base+7] = cx_c + margin
-                lb_s4[base+8] = cy_c - margin
-                ub_s4[base+8] = cy_c + margin
+                lb_s4[base+7] = centres[i][0] - margin
+                ub_s4[base+7] = centres[i][0] + margin
+                lb_s4[base+8] = centres[i][1] - margin
+                ub_s4[base+8] = centres[i][1] + margin
                 
             kwargs_s4 = kwargs_s3.copy()
             kwargs_s4.update(dict(bounds=(lb_s4, ub_s4)))
@@ -3249,6 +3272,7 @@ class WandCalibrator:
 
     def _parse_results(self, params, cam_id_map):
         num_cams = len(cam_id_map)
+        cam_of = {i: cid for cid, i in cam_id_map.items()}     # cam_id_map is {camera id: internal index}
         n_cam_params = 11
         cam_params = params[:num_cams*n_cam_params].reshape((num_cams, n_cam_params))
         
@@ -3265,7 +3289,7 @@ class WandCalibrator:
             k1 = cp[9] if self.dist_coeff_num >= 1 else 0.0
             k2 = cp[10] if self.dist_coeff_num >= 2 else 0.0
             
-            c_idx = cam_id_map[i]
+            c_idx = cam_of[i]                                      # the camera's id
             
             R, _ = cv2.Rodrigues(rvec)
             if c_idx not in self.cameras:
@@ -3362,7 +3386,7 @@ class WandCalibrator:
             f.write("# Pose Calibration Error: \n")
             f.write(f"{tri_error_mean},{tri_error_std}\n")
             f.write("# Image Size: (n_row,n_col)\n")
-            f.write(f"{self.image_size[0]},{self.image_size[1]}\n") # H, W
+            f.write(f"{h},{w}\n") # H, W of this camera (self.image_size is the first camera's)
             
             f.write("# Camera Matrix: \n")
             f.write(f"{K_out[0,0]},{K_out[0,1]},{K_out[0,2]}\n")

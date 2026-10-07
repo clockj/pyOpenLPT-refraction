@@ -1786,9 +1786,10 @@ class CameraCalibrationView(QWidget):
         self.media1_combo.addItems(["Air", "Other"])
         self.media1_index = QDoubleSpinBox()
         self.media1_index.setRange(1.0, 2.0)
+        self.media1_index.setDecimals(4)
         self.media1_index.setValue(1.0)
-        self._apply_input_style(self.media1_combo)
-        self._apply_input_style(self.media1_index)
+        self._apply_input_style(self.media1_combo, max_width=60)
+        self._apply_input_style(self.media1_index, max_width=60)
         seg1_layout.addWidget(self.media1_combo)
         seg1_layout.addWidget(self.media1_index)
         diagram_layout.addWidget(seg1)
@@ -1813,14 +1814,15 @@ class CameraCalibrationView(QWidget):
         self.media2_combo.addItems(["Acrylic", "Glass", "Other"])
         self.media2_index = QDoubleSpinBox()
         self.media2_index.setRange(1.0, 2.5)
+        self.media2_index.setDecimals(4)
         self.media2_index.setValue(1.49)
         self.media2_thick = QDoubleSpinBox()
         self.media2_thick.setRange(0.1, 100.0)
         self.media2_thick.setValue(10.0)
         self.media2_thick.setSuffix(" mm")
-        self._apply_input_style(self.media2_combo)
-        self._apply_input_style(self.media2_index)
-        self._apply_input_style(self.media2_thick)
+        self._apply_input_style(self.media2_combo, max_width=60)
+        self._apply_input_style(self.media2_index, max_width=60)
+        self._apply_input_style(self.media2_thick, max_width=72)
         seg2_layout.addWidget(self.media2_combo)
         seg2_layout.addWidget(self.media2_index)
         
@@ -1839,9 +1841,10 @@ class CameraCalibrationView(QWidget):
         self.media3_combo.addItems(["Water", "Other"])
         self.media3_index = QDoubleSpinBox()
         self.media3_index.setRange(1.0, 2.0)
-        self.media3_index.setValue(1.33)
-        self._apply_input_style(self.media3_combo)
-        self._apply_input_style(self.media3_index)
+        self.media3_index.setDecimals(4)
+        self.media3_index.setValue(1.333)
+        self._apply_input_style(self.media3_combo, max_width=60)
+        self._apply_input_style(self.media3_index, max_width=60)
         seg3_layout.addWidget(self.media3_combo)
         seg3_layout.addWidget(self.media3_index)
         diagram_layout.addWidget(seg3)
@@ -1849,16 +1852,17 @@ class CameraCalibrationView(QWidget):
         ref_layout.addLayout(diagram_layout)
 
         # the calibrator (plate_wand by default; curved_calibration/plate_wand_gui.py)
-        self.refr_legacy_check = QCheckBox("Use the previous calibrator (before October 2026)")
+        self.refr_legacy_check = QCheckBox("Use the previous calibrator")
         self.refr_legacy_check.setToolTip(
             "Off: the flat-window wand calibration plate_wand finds the windows' planes and every camera's pose, f "
-            "and k1 from the wand (faster and more robust in the tests). On: the GUI's previous calibrator."
+            "and k1 from the wand (faster and more robust in the tests). On: the GUI's previous calibrator (the one "
+            "used before October 2026)."
         )
-        self.refr_thorough_check = QCheckBox("Thorough start search (slower; for noisy data)")
-        self.refr_thorough_check.setToolTip("Carry six starts through the fit instead of two.")
-        self.refr_refit_check = QCheckBox("Refit from the last result (skips the start search)")
-        self.refr_refit_check.setToolTip("After deleting frames: start from the last flat-window calibration of the "
-                                         "same cameras and windows.")
+        self.refr_thorough_check = QCheckBox("Thorough start search")
+        self.refr_thorough_check.setToolTip("Slower; for noisy data: carry six starts through the fit instead of two.")
+        self.refr_refit_check = QCheckBox("Refit from the last result")
+        self.refr_refit_check.setToolTip("Skips the start search. After deleting frames: start from the last "
+                                         "flat-window calibration of the same cameras and windows.")
         for w in (self.refr_legacy_check, self.refr_thorough_check, self.refr_refit_check):
             w.setStyleSheet("border: none;")
             ref_layout.addWidget(w)
@@ -1978,7 +1982,7 @@ class CameraCalibrationView(QWidget):
         self.filter_proj_spin.setValue(5.0)
         self.filter_proj_spin.setSuffix(" px")
         self.filter_proj_spin.valueChanged.connect(self._auto_update_filter_marks)
-        self._apply_input_style(self.filter_proj_spin)
+        self._apply_input_style(self.filter_proj_spin, max_width=70)
         filter_row1.addWidget(self.filter_proj_check)
         filter_row1.addWidget(self.filter_proj_spin)
         filter_row1.addStretch()
@@ -1992,15 +1996,21 @@ class CameraCalibrationView(QWidget):
         self.filter_len_spin.setValue(1.0)
         self.filter_len_spin.setSuffix(" mm")
         self.filter_len_spin.valueChanged.connect(self._auto_update_filter_marks)
-        self._apply_input_style(self.filter_len_spin)
+        self._apply_input_style(self.filter_len_spin, max_width=70)
         filter_row2.addWidget(self.filter_len_check)
         filter_row2.addWidget(self.filter_len_spin)
         filter_row2.addStretch()
         cal_layout.addLayout(filter_row2)
 
-        # Save Button (Relocated to bottom)
+        # Save Button (Relocated to bottom), and the button that brings deleted frames back
         save_row = QHBoxLayout()
         save_row.addStretch()
+        self.btn_restore_frames = QPushButton("Restore Deleted Frames")
+        self.btn_restore_frames.setStyleSheet("background-color: #2a3f5f; color: white; font-size: 12px; padding: 6px 10px; border-radius: 4px;")
+        self.btn_restore_frames.setToolTip("Use every frame again: the frames deleted so far (Del, filters) come back "
+                                           "at the next check or calibration.")
+        self.btn_restore_frames.clicked.connect(lambda: self._restore_deleted_frames())
+        save_row.addWidget(self.btn_restore_frames)
         self.btn_save_points = QPushButton("Save Filtered Points")
         # Make it slightly more prominent
         self.btn_save_points.setStyleSheet("background-color: #2a3f5f; color: white; font-size: 12px; padding: 6px 20px; border-radius: 4px;")
@@ -2104,6 +2114,7 @@ class CameraCalibrationView(QWidget):
         if success:
             self._wand_detect_mode_used = None          # not known for points read from a file
             self._wand_points_source = file_path
+            self._restore_deleted_frames(quiet=True)    # new points: no frame of the earlier ones stays deleted
             self.error_table.setRowCount(0)
             self._update_3d_viz()
             # Ensure calibrator has access to cameras/size
@@ -2264,17 +2275,18 @@ class CameraCalibrationView(QWidget):
         self.tabs.addTab(self.create_wand_tab_v2(), "Wand Calibration")
         layout.addWidget(self.tabs)
 
-    def _apply_input_style(self, widget):
-        """Force style on input widgets to ensure background color."""
+    def _apply_input_style(self, widget, max_width=140):
+        """Force style on input widgets to ensure background color.  max_width: the widest the text area gets (the
+        padding and border add 22 px); fields that sit side by side get less, so that the panel fits its column."""
         # Note: We apply this to specific widgets to override any parent transparency issues
-        widget.setStyleSheet("""
+        widget.setStyleSheet(f"""
             background-color: #2d3a4a;
             border: 1px solid #3d4a5a;
             border-radius: 6px;
             padding: 6px 10px;
             color: #eaeaea;
             selection-background-color: #0f3460;
-            max-width: 140px;
+            max-width: {int(max_width)}px;
         """)
         if isinstance(widget, (QSpinBox, QDoubleSpinBox)):
             widget.setStyleSheet(widget.styleSheet() + """
@@ -3459,8 +3471,15 @@ class CameraCalibrationView(QWidget):
             self.plate_vis_tabs.setCurrentIndex(idx)
 
     def _update_wand_table(self, count):
+        # the cameras that remain keep their images, Focal, Width and Height; a new camera starts empty
+        old_images = dict(getattr(self, 'wand_images', None) or {})
+        old_vals = {}
+        for i in range(self.wand_cam_table.rowCount()):
+            cells = [self.wand_cam_table.cellWidget(i, k) for k in (2, 3, 4)]
+            if all(c is not None for c in cells):
+                old_vals[i] = [c.value() for c in cells]
         self.wand_cam_table.setRowCount(count)
-        self.wand_images = {i: [] for i in range(count)}
+        self.wand_images = {i: list(old_images.get(i, [])) for i in range(count)}
         
         # Update Vis Tabs (Wand)
         try:
@@ -3491,6 +3510,8 @@ class CameraCalibrationView(QWidget):
             btn = QPushButton("Load")
             btn.setStyleSheet("background-color: #2a3f5f; padding: 2px 6px; font-size: 10px;")
             btn.clicked.connect(lambda checked=False, idx=i: self._load_wand_folder_for_cam(idx))
+            if self.wand_images.get(i):
+                btn.setText(f"{len(self.wand_images[i])}")
             self.wand_cam_table.setCellWidget(i, 0, btn)
             
             # Col 1: Cam ID (read-only)
@@ -3502,14 +3523,14 @@ class CameraCalibrationView(QWidget):
             # Col 2: Focal Length (editable spinbox)
             focal_spin = QSpinBox()
             focal_spin.setRange(100, 1000000)
-            focal_spin.setValue(9000)
+            focal_spin.setValue(old_vals[i][0] if i in old_vals else 9000)
             focal_spin.setStyleSheet("background: #222; color: white; border: none;")
             self.wand_cam_table.setCellWidget(i, 2, focal_spin)
-            
+
             # Col 3: Width (editable spinbox)
             width_spin = QSpinBox()
             width_spin.setRange(1, 10000)
-            width_spin.setValue(1280)
+            width_spin.setValue(old_vals[i][1] if i in old_vals else 1280)
             width_spin.setStyleSheet("background: #222; color: white; border: none;")
             width_spin.valueChanged.connect(lambda _v: self._refresh_wand_radius_range_limit())
             self.wand_cam_table.setCellWidget(i, 3, width_spin)
@@ -3517,7 +3538,7 @@ class CameraCalibrationView(QWidget):
             # Col 4: Height (editable spinbox)
             height_spin = QSpinBox()
             height_spin.setRange(1, 10000)
-            height_spin.setValue(800)
+            height_spin.setValue(old_vals[i][2] if i in old_vals else 800)
             height_spin.setStyleSheet("background: #222; color: white; border: none;")
             height_spin.valueChanged.connect(lambda _v: self._refresh_wand_radius_range_limit())
             self.wand_cam_table.setCellWidget(i, 4, height_spin)
@@ -3530,6 +3551,8 @@ class CameraCalibrationView(QWidget):
 
         self._refresh_wand_radius_range_limit()
         self._apply_cylinder_focal_state()
+        if hasattr(self, 'frame_table') and any(self.wand_images.values()):
+            self.populate_wand_table()                 # the frame list of the cameras that kept their images
 
     def _update_axis_cam_table(self, count):
         if not hasattr(self, 'axis_cam_table'):
@@ -3637,7 +3660,7 @@ class CameraCalibrationView(QWidget):
 
         min_r, max_r = self.radius_range.value()
         sensitivity = self.sensitivity_slider.value()
-        wand_type = "dark" if "Dark" in self.wand_type_combo.currentText() else "bright"
+        wand_type = self._wand_type()
 
         total_images = sum(len(v) for v in self.axis_images.values()) if hasattr(self, 'axis_images') else 0
         if total_images == 0:
@@ -4298,6 +4321,11 @@ class CameraCalibrationView(QWidget):
             max_r = 200
 
         self.radius_range.setRange(1, max_r)
+
+    def _wand_type(self):
+        """"dark" (Dark on Bright) or "bright" (Bright on Dark): the detection inverts dark balls.  (The test was
+        `"Dark" in text`, which both texts pass, so "Bright on Dark" behaved as "Dark on Bright".)"""
+        return "bright" if self.wand_type_combo.currentText().startswith("Bright") else "dark"
 
     def _get_wand_detect_mode(self):
         if hasattr(self, 'detect_mode_ellipse') and self.detect_mode_ellipse.isChecked():
@@ -5274,7 +5302,7 @@ class CameraCalibrationView(QWidget):
             self.status_label.setText("Please select a frame first.")
             return
 
-        wand_type = "dark" if "Dark" in self.wand_type_combo.currentText() else "bright"
+        wand_type = self._wand_type()
         min_r, max_r = self.radius_range.value()
         sensitivity = self.sensitivity_slider.value()
         detect_mode = self._get_wand_detect_mode()
@@ -5443,7 +5471,7 @@ class CameraCalibrationView(QWidget):
                 # Data loading moved to Worker thread to prevent UI freeze
         
         # Get UI parameters
-        wand_type = "dark" if "Dark" in self.wand_type_combo.currentText() else "bright"
+        wand_type = self._wand_type()
         min_r, max_r = self.radius_range.value()
         sensitivity = self.sensitivity_slider.value()
         detect_mode = self._get_wand_detect_mode()
@@ -5517,6 +5545,7 @@ class CameraCalibrationView(QWidget):
             return # a failed detection is not complete: no "Export Data" question
 
         self.populate_wand_table()
+        self._restore_deleted_frames(quiet=True)      # new points: no frame of the earlier ones stays deleted
         n_pair, n_frames, per_cam = self._wand_pairing_counts()
         self.status_label.setText(f"Done: {msg} {n_pair} of {n_frames} frames paired (both balls in every camera).")
         if n_pair == 0:
@@ -5657,8 +5686,9 @@ class CameraCalibrationView(QWidget):
             self._run_cylinder_wand_calibration(wand_len, dist_coeff_num, precalibrate)
             return
 
-        if model_name == "Pinhole+Refraction" and not precalibrate and not self.refr_legacy_check.isChecked():
-            self._run_plate_wand_calibration(wand_len, dist_coeff_num)
+        if model_name == "Pinhole+Refraction" and not self.refr_legacy_check.isChecked():
+            # plate_wand; Precalibrate to Check: its start search and coarse fit (stages 1-3), as the tube's
+            self._run_plate_wand_calibration(wand_len, dist_coeff_num, precalibrate)
             return
 
         if model_name == "Pinhole+Refraction" and not precalibrate:
@@ -6199,9 +6229,10 @@ class CameraCalibrationView(QWidget):
             chk_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
             chk = QCheckBox()
             chk.setProperty('frame_id', fid)
+            chk.clicked.connect(lambda on, f=fid: self._on_del_clicked(f, on))
             chk_layout.addWidget(chk)
             self.frozen_table.setCellWidget(row, 0, chk_widget)
-            
+
             # --- Right Table: Frame ID (Col 0) ---
             item = NumericTableWidgetItem(str(fid))
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
@@ -6317,6 +6348,7 @@ class CameraCalibrationView(QWidget):
             chk.setProperty('frame_id', fid)
             if checkbox_states.get(fid, False):
                 chk.setChecked(True)
+            chk.clicked.connect(lambda on, f=fid: self._on_del_clicked(f, on))
             chk_layout.addWidget(chk)
             self.frozen_table.setCellWidget(row, 0, chk_widget)
             
@@ -6467,6 +6499,30 @@ class CameraCalibrationView(QWidget):
             if switch_cam in self.cam_vis_labels:
                 self.vis_tabs.setCurrentIndex(switch_cam)
     
+    def _on_del_clicked(self, fid, on):
+        """A Del box clicked by hand: remembered, so that the filters do not overwrite it."""
+        if not hasattr(self, '_manual_del'):
+            self._manual_del = {}
+        self._manual_del[int(fid)] = bool(on)
+
+    def _restore_deleted_frames(self, quiet=False):
+        """Every frame is used again: forget the frames deleted so far (applied ones and the Del marks), as when new
+        wand points are loaded or detected (quiet: no status message)."""
+        from PySide6.QtWidgets import QCheckBox
+        n = len(getattr(self, '_removed_frames', set()) or set())
+        self._removed_frames = set()
+        self._manual_del = {}
+        self.wand_calibrator.reset_filter()
+        if hasattr(self, 'frozen_table'):
+            for row in range(self.frozen_table.rowCount()):
+                widget = self.frozen_table.cellWidget(row, 0)
+                chk = widget.findChild(QCheckBox) if widget else None
+                if chk:
+                    chk.setChecked(False)
+        if not quiet:
+            self.status_label.setText(f"Restored {n} deleted frames: every frame is used at the next check or "
+                                      f"calibration.")
+
     def _auto_update_filter_marks(self, *args):
         """Auto-update Remove checkboxes when filter criteria change."""
         if not hasattr(self.wand_calibrator, 'per_frame_errors') or not self.wand_calibrator.per_frame_errors:
@@ -6492,9 +6548,12 @@ class CameraCalibrationView(QWidget):
             len_err = err.get('len_error', 0)
             
             should_remove = bool((max_proj > proj_thresh) or (len_err > len_thresh))
+            manual = getattr(self, '_manual_del', {}).get(fid)
+            if manual is not None:                  # a Del box clicked by hand keeps its state
+                should_remove = manual
             if should_remove:
                 marked_count += 1
-            
+
             # Checkbox is in frozen_table column 0 (not error_table!)
             widget = self.frozen_table.cellWidget(row, 0)
             if widget:
@@ -7804,7 +7863,7 @@ class CameraCalibrationView(QWidget):
 
         # Media 3: Measure Side
         if self.media3_combo.currentText() == "Water":
-            self.media3_index.setValue(1.33)
+            self.media3_index.setValue(1.333)
             self.media3_index.setReadOnly(True)
         else:
             self.media3_index.setReadOnly(False)
@@ -8375,6 +8434,10 @@ class CameraCalibrationView(QWidget):
                             mean_err = float(np.mean(vals))
                             msg_lines.append(f"  Cam {cid}: {mean_err:.3f} px")
 
+            if getattr(self, 'axis_direction_map', None) and not getattr(self, '_refr_cams_cpp', None):
+                # the alignment below needs C++ cameras this calibrator does not provide: it is skipped
+                msg_lines.append("Axis points were not applied: this calibrator does not align the world to them "
+                                 "(only the Pinhole model does).")
             QMessageBox.information(self, "Success", "\n".join(msg_lines))
             
             # 3D Visualization
@@ -8558,7 +8621,13 @@ class CameraCalibrationView(QWidget):
         """Sync refraction camera table with current cameras and window options."""
         if not hasattr(self, 'cam_window_table') or self.cam_window_table is None:
             return
-            
+        # the cameras that remain keep their window while it exists
+        old_win = {}
+        for i in range(self.cam_window_table.rowCount()):
+            combo = self.cam_window_table.cellWidget(i, 1)
+            if combo is not None:
+                old_win[i] = combo.currentIndex()
+
         self.cam_window_table.setRowCount(cam_count)
         win_count = self.window_count_spin.value()
         window_options = [f"Window {i}" for i in range(win_count)]
@@ -8575,6 +8644,8 @@ class CameraCalibrationView(QWidget):
             win_combo = QComboBox()
             self._apply_input_style(win_combo)
             win_combo.addItems(window_options)
+            if 0 <= old_win.get(i, -1) < win_count:
+                win_combo.setCurrentIndex(old_win[i])
             self.cam_window_table.setCellWidget(i, 1, win_combo)
 
     # ------------------------------------------------------------------ the cylinder model (PINCYL)
@@ -8592,14 +8663,14 @@ class CameraCalibrationView(QWidget):
         note.setStyleSheet("color: #aaa; font-size: 11px; border: none;")
         lay.addWidget(note)
 
-        def dspin(lo, hi, val, decimals, suffix=""):
+        def dspin(lo, hi, val, decimals, suffix="", max_width=140):
             w = QDoubleSpinBox()
             w.setRange(lo, hi)
             w.setDecimals(decimals)
             w.setValue(val)
             if suffix:
                 w.setSuffix(suffix)
-            self._apply_input_style(w)
+            self._apply_input_style(w, max_width=max_width)
             return w
 
         def combo(items):
@@ -8618,11 +8689,11 @@ class CameraCalibrationView(QWidget):
             return box
 
         self.cyl_out_combo = combo(["Air", "Other"])
-        self.cyl_out_index = dspin(1.0, 3.0, 1.0, 4)
+        self.cyl_out_index = dspin(1.0, 3.0, 1.0, 4, max_width=60)
         self.cyl_wall_combo = combo(["Acrylic", "Glass", "Other"])
-        self.cyl_wall_index = dspin(1.0, 3.0, 1.49, 4)
+        self.cyl_wall_index = dspin(1.0, 3.0, 1.49, 4, max_width=60)
         self.cyl_in_combo = combo(["Water", "Other"])
-        self.cyl_in_index = dspin(1.0, 3.0, 1.333, 4)
+        self.cyl_in_index = dspin(1.0, 3.0, 1.333, 4, max_width=60)
         self.cyl_od_spin = dspin(1.0, 5000.0, 201.6125, 4, " mm")
         self.cyl_od_spin.setToolTip("Outer diameter of the tube (7.9375 in = 201.6125 mm).")
         self.cyl_wall_spin = dspin(0.01, 1000.0, 3.175, 4, " mm")
@@ -8638,15 +8709,17 @@ class CameraCalibrationView(QWidget):
         form.addRow("Inside:", pair(self.cyl_in_combo, self.cyl_in_index))
         lay.addLayout(form)
 
-        self.cyl_fit_L_check = QCheckBox("Fit the wand length (checks the tube's size and indices)")
+        self.cyl_fit_L_check = QCheckBox("Fit the wand length")
+        self.cyl_fit_L_check.setToolTip("Fit the wand's length too, as a check of the tube's size and indices: a "
+                                        "fitted length far from the true one means that they are off.")
         self.cyl_noise_combo = combo(["Per camera", "Per camera and ball", "Equal"])
         self.cyl_noise_combo.setToolTip("How each detection is weighted: by its camera's noise level (estimated from "
                                         "the residuals), by camera and ball size, or equally.")
-        self.cyl_thorough_check = QCheckBox("Thorough start search (slower; for noisy data)")
-        self.cyl_thorough_check.setToolTip("Carry six starts through the fit instead of two.")
-        self.cyl_refit_check = QCheckBox("Refit from the last result (skips the start search)")
-        self.cyl_refit_check.setToolTip("After deleting frames: start from the last cylinder calibration of the same "
-                                        "cameras instead of searching for a start.")
+        self.cyl_thorough_check = QCheckBox("Thorough start search")
+        self.cyl_thorough_check.setToolTip("Slower; for noisy data: carry six starts through the fit instead of two.")
+        self.cyl_refit_check = QCheckBox("Refit from the last result")
+        self.cyl_refit_check.setToolTip("Skips the start search. After deleting frames: start from the last cylinder "
+                                        "calibration of the same cameras instead of searching for a start.")
         self.cyl_pixel_spin = dspin(0.0, 100.0, 0.0, 2, " um")
         self.cyl_pixel_spin.setSpecialValueText("not set")
         self.cyl_pixel_spin.setToolTip("Pixel size, only used to print f in mm.")
@@ -8922,9 +8995,11 @@ class CameraCalibrationView(QWidget):
             self.vis_tabs.setCurrentWidget(self.calib_3d_view)
 
     # ------------------------------------------------------------------ flat windows with plate_wand (PINPLATE)
-    def _run_plate_wand_calibration(self, wand_len, dist_coeff_num):
+    def _run_plate_wand_calibration(self, wand_len, dist_coeff_num, precalibrate=False):
         """The "Pinhole+Refraction" model with plate_wand: check the inputs, ask for the output folder, run
-        plate_wand_gui.child_run in a separate process (ProcessCalibWorker)."""
+        plate_wand_gui.child_run in a separate process (ProcessCalibWorker).  precalibrate ("Precalibrate to Check"):
+        plate_wand_gui.child_precheck instead, the start search and coarse fit (stages 1-3), with no folder and no
+        files."""
         from .curved_calibration import plate_wand_gui as pg
         try:
             if dist_coeff_num > 1:
@@ -8957,7 +9032,7 @@ class CameraCalibrationView(QWidget):
             cam_to_window = [index[gui_win[c]] for c in cids]
             start = None
             notes = []
-            if self.refr_refit_check.isChecked():
+            if self.refr_refit_check.isChecked() and not precalibrate:
                 last = getattr(self, '_plate_last', None)
                 if last and list(last["job"].cam_ids) == list(cids) and list(last["job"].cam_to_window) == cam_to_window:
                     start = last["start"]
@@ -8973,16 +9048,31 @@ class CameraCalibrationView(QWidget):
             QMessageBox.warning(self, "Flat-Window Calibration", str(e))
             self._busy_end('wand_calibration')
             return
+        if getattr(self, 'axis_direction_map', None):
+            notes.append("Axis points are not applied to the flat-window model: its frame is plate_wand's (Z along "
+                         "window 1's normal, the origin at the wand's mean position). Only the Pinhole model applies "
+                         "them.")
+        self._cyl_notes = notes
+        if precalibrate:
+            self._plate_job = job
+            self._cyl_worker = ProcessCalibWorker(pg.child_precheck, job, None)
+            self._cyl_worker.progress.connect(self._on_cylinder_progress)
+            self._cyl_worker.finished_ok.connect(self._on_plate_precheck_finished)
+            self._cyl_worker.failed.connect(self._on_plate_failed)
+            self._cyl_worker.stopped.connect(self._on_plate_stopped)
+            self._create_cylinder_progress_dialog(True)
+            self._cyl_dialog.setWindowTitle("Flat-Window Check")
+            for b in (getattr(self, 'btn_calibrate_wand', None), getattr(self, 'btn_precalibrate', None)):
+                if b is not None:
+                    b.setEnabled(False)
+            self.status_label.setText("Flat-window check running (stages 1-3)...")
+            self._cyl_worker.start()
+            return
         folder = QFileDialog.getExistingDirectory(
             self, "Select the folder for the flat-window calibration (camFile/ and the report go there)")
         if not folder:
             self._busy_end('wand_calibration')
             return
-        if getattr(self, 'axis_direction_map', None):
-            notes.append("Axis points are not applied by this calibrator: its frame is plate_wand's (Z along window "
-                         "1's normal, the origin at the wand's mean position). Tick 'Use the previous calibrator' "
-                         "to align the world to axis points.")
-        self._cyl_notes = notes
         self._plate_job = job
         self._cyl_worker = ProcessCalibWorker(pg.child_run, job, folder)
         self._cyl_worker.progress.connect(self._on_cylinder_progress)
@@ -9025,6 +9115,25 @@ class CameraCalibrationView(QWidget):
         QMessageBox.information(self, "Flat-Window Calibration", "\n".join(lines) + f"\n\nSaved to:\n{payload['folder']}")
         self._busy_end('wand_calibration')
 
+    def _on_plate_precheck_finished(self, payload):
+        """Precalibrate to Check with plate_wand: the start's residuals in the error table, its cameras and windows in
+        the 3D View, and a summary; nothing is written and it is not a result (no camFiles for tracking)."""
+        self._cylinder_cleanup()
+        job = self._plate_job
+        try:
+            self.wand_calibrator.per_frame_errors = payload["per_frame"]
+            self._populate_error_table()
+        except Exception as e:
+            print(f"[Plate] Error table population failed: {e}")
+        try:
+            self._show_plate_in_3d(payload["plot"], None, job, data=payload["plot"])
+        except Exception as e:
+            print(f"[Plate] 3-D view failed: {e}")
+        self.status_label.setText(f"Flat-window check done: RMS {payload['rms_px']:.3f} px (stages 1-3).")
+        QMessageBox.information(self, "Check Complete",
+                                "\n".join(list(payload["lines"]) + list(getattr(self, '_cyl_notes', []) or [])))
+        self._busy_end('wand_calibration')
+
     def _on_plate_failed(self, msg):
         self._cylinder_cleanup()
         self.status_label.setText("Flat-window calibration failed.")
@@ -9036,13 +9145,15 @@ class CameraCalibrationView(QWidget):
         self.status_label.setText("Flat-window calibration stopped.")
         self._busy_end('wand_calibration')
 
-    def _show_plate_in_3d(self, result, folder, job):
-        """The cameras, the windows' planes and the wand ends in the 3D View tab (as the previous calibrator's)."""
+    def _show_plate_in_3d(self, result, folder, job, data=None):
+        """The cameras, the windows' planes and the wand ends in the 3D View tab (as the previous calibrator's).  The
+        wand ends come from `data` or else from the folder's calibration_data.json."""
         import json as _json
         if not hasattr(self, 'calib_3d_view'):
             return
-        with open(os.path.join(folder, "calibration_data.json"), "r", encoding="utf-8") as fh:
-            data = _json.load(fh)
+        if data is None:
+            with open(os.path.join(folder, "calibration_data.json"), "r", encoding="utf-8") as fh:
+                data = _json.load(fh)
         pts = np.vstack([np.asarray(data["ends_A_mm"], float), np.asarray(data["ends_B_mm"], float)])
         if len(pts) > 3000:
             pts = pts[np.random.default_rng(0).choice(len(pts), 3000, replace=False)]

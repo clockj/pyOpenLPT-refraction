@@ -1,6 +1,6 @@
 # Flat-window wand calibration (PINPLATE): summary and progress
 
-Last updated: 2026-10-06.
+Last updated: 2026-10-07.
 
 Start here to catch up. This file gathers what the flat-window wand tests concluded, and what that means for a real
 experiment.
@@ -72,10 +72,28 @@ experiment.
       channel, the cameras' aim, a camera's distance to its wall).
     - **The fix:** with the principal point fitted and the channel held, the wall is in place, and the fit is better
       on held-out frames too (progress log, 2026-10-04).
-- The GUI does not call this calibration yet. Section 4 says how to run and check a real experiment; the full report
-  has the same advice (`2026-10-02-plate-wand-report.md`, section 6).
+- **The GUI** runs this calibration behind its "Pinhole+Refraction" model (since 6 Oct), and its "Precalibrate to
+  Check" too (since 7 Oct). Section 4 says how to run and check a real experiment; the full report has the same
+  advice (`2026-10-02-plate-wand-report.md`, section 6).
 
 ## 1. Progress log
+
+**2026-10-07**
+- **The GUI's "Precalibrate to Check" with "Pinhole+Refraction" now runs this calibration's start search and coarse
+  fit** (stages 1–3). Before, it ran the plain pinhole check, without the windows.
+  - **Your choice:** "show the results from the start stage".
+  - **What it shows:** it runs in a separate process, then shows the error table, the 3D View with the windows, and
+    a box with the RMS and each camera's f and window.
+  - **What it does not do:** no folder, no files, no result for tracking.
+  - **Tests:** `tests/wand_gui_fixes/` W3, on rig B: 38 s for 300 frames; RMS 0.120 px, identical to a direct run of
+    the same stages; Stop in 0.13 s.
+- **The library change:** `calibrate`'s nested start search is now the module-level `start_candidates`, which the GUI
+  calls. It is a pure move:
+  - W0: the syntax trees are equal.
+  - `calibrate` gives bit-identical answers on rig A, on rig B, and on rig B with hints, which runs the hint-held and
+    hint-searched start paths.
+- Part of the wand tab's fixes of 7 Oct (`tests/wand_gui_fixes/2026-10-07-report.md`). The panel also takes four
+  decimals now (water 1.333), and its notes on axis points are right.
 
 **2026-10-06**
 - **The GUI's "Pinhole+Refraction" now runs this calibration** (`curved_calibration/plate_wand_gui.py`).

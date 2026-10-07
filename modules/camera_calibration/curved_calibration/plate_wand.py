@@ -2998,6 +2998,50 @@ def _choose(results: List[Solution], noise_weights: str) -> Solution:
     return min(pool, key=lambda s: (-int(s.obs.active.sum()), _log_likelihood_key(s, noise_weights)))
 
 
+def start_candidates(obs: Obs, rig: Rig, data: WandData, hints: dict = None, theta_cap: float = 50.0,
+                     dtheta: float = 9.0, hold: bool = False, widen: bool = False, verbose: bool = False, log=print):
+    """Stages 1-3 of `calibrate`: the starts, each (cost, coarse-fit RMS, cameras, rig), in the order calibrate tries
+    them, and the search's info.  A rig with one window is started whole (`bootstrap`); one with several windows of
+    which some have two or more cameras window by window (`bootstrap_groups`); one whose windows have one camera each
+    by alternating placements (`bootstrap_singles`).  hold: the hint-held start; widen: the hint-searched start.  Also
+    the GUI's "Precalibrate to Check" (plate_wand_gui.precheck)."""
+    hints = hints or {}
+    multi = sum(1 for w in range(len(rig.windows)) if len(rig.cams_of(w)) >= 2)
+    used = sum(1 for w in range(len(rig.windows)) if rig.cams_of(w))
+    few = any(1 <= len(rig.cams_of(w)) <= 2 for w in range(len(rig.windows)))
+    searches = ("length", "fixed") if few else ("fixed",)
+    if used > 1:
+        # several windows: each search's starts are pooled (neither is right on every rig with a window of one or
+        # two cameras; the final costs decide)
+        per_search, binfo, cache = [], {}, {}
+        for sr in searches:
+            try:
+                if multi >= 1:
+                    st, inf = bootstrap_groups(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
+                                               dtheta=dtheta, search=sr, cache=cache, hold=hold, widen=widen,
+                                               verbose=verbose, log=log)
+                else:
+                    st, inf = bootstrap_singles(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
+                                                dtheta=dtheta, search=sr, hold=hold, widen=widen,
+                                                verbose=verbose, log=log)
+            except (ValueError, np.linalg.LinAlgError) as exc:
+                # e.g. a window's cameras that never see the same frames cannot be calibrated as a group
+                t_f = time.time()
+                st, inf = bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
+                                    dtheta=dtheta, search=sr, hold=hold, widen=widen, verbose=verbose, log=log)
+                inf = {**inf, "fallback_from": repr(exc)}
+                inf["seconds"]["total"] = inf["seconds"].get("total", time.time() - t_f)
+            per_search.append(sorted(st, key=lambda s_: s_[0]))
+            binfo[sr] = inf
+        # the searches' starts taken in turn, each search's best first: their costs are not comparable enough to
+        # rank one search's starts behind the other's (W5 seed 1031: the right start ranked seventh)
+        starts = [x for tup in itertools.zip_longest(*per_search) for x in tup if x is not None]
+        binfo["seconds"] = {"total": sum(v["seconds"]["total"] for v in binfo.values())}
+        return starts, binfo
+    return bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap, dtheta=dtheta, hold=hold,
+                     widen=widen, verbose=verbose, log=log)
+
+
 def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: bool = False, fit_L: bool = False,
               k_sigma: float = 5.0, n_final: int = 2, noise_weights: str = "camera", sigma_cam_px=None,
               more_starts_px: float = 1.0, theta_cap: float = 50.0, dtheta: float = 9.0, output_frame: bool = True,
@@ -3049,43 +3093,10 @@ def calibrate(data: WandData, rig: Rig, start=None, hints: dict = None, fit_k1: 
     hints = hints or {}
     obs = observations(data)
     t0 = time.time()
-    multi = sum(1 for w in range(len(rig.windows)) if len(rig.cams_of(w)) >= 2)
-    used = sum(1 for w in range(len(rig.windows)) if rig.cams_of(w))
-    few = any(1 <= len(rig.cams_of(w)) <= 2 for w in range(len(rig.windows)))
-    searches = ("length", "fixed") if few else ("fixed",)
-
     def make_starts(hold: bool = False, widen: bool = False):
-        """Stages 1-3 (hold: the hint-held start; widen: the hint-searched start)."""
-        if used > 1:
-            # several windows: each search's starts are pooled (neither is right on every rig with a window of one or
-            # two cameras; the final costs decide)
-            per_search, binfo_, cache = [], {}, {}
-            for sr in searches:
-                try:
-                    if multi >= 1:
-                        st, inf = bootstrap_groups(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
-                                                   dtheta=dtheta, search=sr, cache=cache, hold=hold, widen=widen,
-                                                   verbose=verbose, log=log)
-                    else:
-                        st, inf = bootstrap_singles(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
-                                                    dtheta=dtheta, search=sr, hold=hold, widen=widen,
-                                                    verbose=verbose, log=log)
-                except (ValueError, np.linalg.LinAlgError) as exc:
-                    # e.g. a window's cameras that never see the same frames cannot be calibrated as a group
-                    t_f = time.time()
-                    st, inf = bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap,
-                                        dtheta=dtheta, search=sr, hold=hold, widen=widen, verbose=verbose, log=log)
-                    inf = {**inf, "fallback_from": repr(exc)}
-                    inf["seconds"]["total"] = inf["seconds"].get("total", time.time() - t_f)
-                per_search.append(sorted(st, key=lambda s_: s_[0]))
-                binfo_[sr] = inf
-            # the searches' starts taken in turn, each search's best first: their costs are not comparable enough to
-            # rank one search's starts behind the other's (W5 seed 1031: the right start ranked seventh)
-            starts_ = [x for tup in itertools.zip_longest(*per_search) for x in tup if x is not None]
-            binfo_["seconds"] = {"total": sum(v["seconds"]["total"] for v in binfo_.values())}
-            return starts_, binfo_
-        return bootstrap(obs, rig, data.L, data.sizes, hints=hints, theta_cap=theta_cap, dtheta=dtheta, hold=hold,
-                         widen=widen, verbose=verbose, log=log)
+        """Stages 1-3 (hold: the hint-held start; widen: the hint-searched start): `start_candidates`."""
+        return start_candidates(obs, rig, data, hints=hints, theta_cap=theta_cap, dtheta=dtheta, hold=hold,
+                                widen=widen, verbose=verbose, log=log)
 
     binfo = {}
     if start is not None:
