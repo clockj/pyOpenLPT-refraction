@@ -1,0 +1,111 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Rig B: 300 frames; media 1.0, 1.49, 1.333, 12.7 mm; legacy box False
+W3: Precalibrate to Check with the flat-window model
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  38 s; messages [('info', 'Check Complete')]
+    Start and coarse fit (stages 1-3) on 300 frames: RMS 0.120 px.
+    This is only the start; run the calibration for the final answer.
+      cam0: f 4,303 px, window 0, RMS 0.119 px
+      cam1: f 4,300 px, window 0, RMS 0.122 px
+      cam2: f 3,978 px, window 1, RMS 0.120 px
+      cam3: f 3,972 px, window 1, RMS 0.120 px
+  PASS  it ran plate_wand_gui.child_precheck in a separate process, with no folder  (ProcessCalibWorker, target child_precheck, folder None, folder prompts 0)
+  PASS  the error table lists every frame and the 3D View shows the two windows  (300 rows, 300 frames in the payload, 300 frames; 2 planes)
+  PASS  a 'Check Complete' box with the RMS of stages 1-3; the status line says so  (RMS 0.120 px; status 'Flat-window check done: RMS 0.120 px (stages 1-3).')
+  PASS  nothing written, nothing a result (no camFiles to export)  (files []; has result False)
+  PASS  the RMS is that of plate_wand_gui.precheck on the GUI's job (in this process)  (GUI 0.1203615519764593, here 0.1203615519764593; stage-3 RMS 0.120497 px)
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  Stop 2 s into the check ends it within 2 s, with no box  (0.13 s; status 'Flat-window calibration stopped.'; messages [])
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 4 [0, 1, 2, 3]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 4 [0, 1, 2, 3]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 3: shared_count=600, median_disparity=163.430
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=162.885
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=131.493
+  Cam 1 <-> Cam 3: shared_count=600, median_disparity=128.672
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=51.154
+  Cam 2 <-> Cam 3: shared_count=600, median_disparity=43.500
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 3 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0097 units. Scale Factor=2588.1690
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+  Initialized Cam 2 via PnP (600 points).
+  Optimizing Cam 2...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+Pre-Calibration: Triangulating all frames with initialized cameras...
+Pre-Calibration: Optimization with 300 frames...
+Pre-Calibration: Building Sparsity Matrix for 1844 params...
+Running Pre-Calibration Optimization (Relaxed)...
+   Iteration     Total nfev        Cost      Cost reduction    Step norm     Optimality   
+       0              1         1.5386e+04                                    6.35e+05    
+       1              2         1.5237e+04      1.49e+02       1.24e-04       2.70e+05    
+`xtol` termination condition is satisfied.
+Function evaluations 2, initial cost 1.5386e+04, final cost 1.5237e+04, first-order optimality 2.70e+05.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [   -1.90015739    -1.9947287  -1483.22385113]
+  Camera 1: Center = [  464.78646429    -6.75542131 -1173.28412746]
+  Camera 2: Center = [1097.77612654 -220.8666625   459.19542274]
+  Camera 3: Center = [1459.37194503  268.61013188  635.75597865]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 3.7829 px
+  - Cam 0: 2.3328 px
+  - Cam 1: 4.9003 px
+  - Cam 2: 4.6177 px
+  - Cam 3: 2.5420 px
+Wand Length RMS: 1.4360 mm
+Total Frames: 300
+  PASS  with 'Use the previous calibrator', Precalibrate to Check runs the pinhole check (as before)  (CalibrationWorker, precalibrate True; messages [('info', 'Check Complete')])
+
+W2: the notes on axis points
+  PASS  no text tells to tick the previous calibrator to align axis points  ([])
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  axis points loaded: the flat-window check's box says they are not applied  (Axis points are not applied to the flat-window model: its frame is plate_wand's (Z along window 1's normal, the origin at the wand's mean position). Only the Pinhole model applies them.)
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  the flat-window calibration: 41 s; messages [('info', 'Flat-Window Calibration')]
+  PASS  axis points loaded: the flat-window calibration's box says they are not applied, and tells nothing to tick  (Axis points are not applied to the flat-window model: its frame is plate_wand's (Z along window 1's normal, the origin at the wand's mean position). Only the Pinhole model applies them.)
+Using Camera Settings: image_size=(2000,2600), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  axis points loaded: the tube's check box says they are not applied to the tube model  (Axis points are not applied to the cylinder model: its frame is the tube's (Y along the axis, Z towards the first camera).)
+D:\Refraction\pyOpenLPT\modules\camera_calibration\view.py:1078: UserWarning: Attempting to set identical low and high xlims makes transformation singular; automatically expanding.
+  self.ax.set_xlim(mid_x - max_range, mid_x + max_range)
+D:\Refraction\pyOpenLPT\modules\camera_calibration\view.py:1079: UserWarning: Attempting to set identical low and high ylims makes transformation singular; automatically expanding.
+  self.ax.set_ylim(mid_y - max_range, mid_y + max_range)
+D:\Refraction\pyOpenLPT\modules\camera_calibration\view.py:1080: UserWarning: Attempting to set identical low and high zlims makes transformation singular; automatically expanding.
+  self.ax.set_zlim(mid_z - max_range, mid_z + max_range)
+[Axis Alignment] Refractive C++ camera objects not available; alignment skipped.
+  PASS  the previous calibrator's box: says axis points were not applied when they are loaded, nothing otherwise  (Axis points were not applied: this calibrator does not align the world to them (only the Pinhole model does).)
+
+12 of 12 checks passed; 182 s
+exit 0

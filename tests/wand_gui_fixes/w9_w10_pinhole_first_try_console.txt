@@ -1,0 +1,63 @@
+W9/W10: 3 cameras (1280x800, 1024x768, 1280x800), 300 frames; every detection on its sensor: [np.True_, np.True_, np.True_]
+Traceback (most recent call last):
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 452, in run
+    ret, msg, res = self.calibrator.calibrate_wand(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 2486, in calibrate_wand
+    cam_params, cam_id_map, best_pair, points_3d = self._initialize_system(wand_length_mm, initial_focal_len_px)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 2281, in _initialize_system
+    cam_params, cam_id_map, best_pair, points_3d = self._geometric_init_and_pnp(
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 2106, in _geometric_init_and_pnp
+    res_prim = self._run_optimization_pipeline(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 1677, in _run_optimization_pipeline
+    res2 = scipy.optimize.least_squares(self._residuals, X1, **kwargs_s2)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\scipy\_lib\_util.py", line 717, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\scipy\optimize\_lsq\least_squares.py", line 901, in least_squares
+    raise ValueError("Initial guess is outside of provided bounds")
+ValueError: Initial guess is outside of provided bounds
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=131.061
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=130.980
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+[Phase 1] Auto-selected best pair: Cam 1 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0346 units. Scale Factor=288.6618
+
+=== PHASE 1: Optimizing Primary Pair (1, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 6.89e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+Calibration Result: False, Calibration crashed: Initial guess is outside of provided bounds
+  calibration and save: 0 s; messages [('critical', 'Calibration Failed')]
+  fitted f: 
+  FAIL  each camFile's Image Size is its own camera's (rows,cols)  ({})
+Traceback (most recent call last):
+  File "D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\w9_w10_pinhole.py", line 183, in <module>
+    sys.exit(0 if main() else 1)
+                  ^^^^^^
+  File "D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\w9_w10_pinhole.py", line 141, in main
+    old_got[k] = image_size_line(p)
+                 ^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\w9_w10_pinhole.py", line 73, in image_size_line
+    lines = open(path, encoding="utf-8").read().splitlines()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Refraction\\pyOpenLPT\\tests\\wand_gui_fixes\\data\\w9_run\\camFile_before_fix\\cam0.txt'
+exit 1

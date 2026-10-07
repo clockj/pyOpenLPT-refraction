@@ -1,0 +1,25 @@
+{
+ "checks": [
+  {
+   "check": "Del boxes clicked by hand keep their state when the filter re-marks the rows",
+   "ok": true,
+   "detail": "at 5 px [3, 10, 12, 13, 14]; at 9 px [3]; at 5 px again [3, 10, 12, 13, 14]"
+  },
+  {
+   "check": "the next run deletes the marked frames; the table after it lists the others",
+   "ok": true,
+   "detail": "deleted [3, 10, 12, 13, 14]; 295 frames used; 295 rows"
+  },
+  {
+   "check": "Restore Deleted Frames brings every frame back (no deletion, no mark, no box ticked); the next run uses every frame",
+   "ok": true,
+   "detail": "deleted [], marks {}, filtered None, ticked []; next run 300 frames; status 'Restored 5 deleted frames: every frame is used at the next check or calibration.'"
+  },
+  {
+   "check": "new points (Load Wand Points from CSV) start with no deleted frame",
+   "ok": true,
+   "detail": "deleted before [3, 20]; after loading: deleted [], marks {}, filtered None; next run 300 of 300 frames; messages [('info', 'Success')]"
+  }
+ ],
+ "seconds": 2.250149965286255
+}

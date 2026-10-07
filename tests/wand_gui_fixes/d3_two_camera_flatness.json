@@ -1,0 +1,58 @@
+{
+ "checks": [
+  {
+   "check": "two cameras: the 1024 x 768 camera moves the answer no more than the data's rounding-sized changes do (within 3x the larger of the +-1e-9 and +-1e-6 px runs, in every quantity)",
+   "ok": true,
+   "detail": "f_rel 1.9e-05 against 4.5e-04; pp_px 4.3e-01 against 1.9e+00; baseline_rel 1.2e-05 against 2.3e-04; rotation_rad 3.2e-04 against 6.4e-04"
+  }
+ ],
+ "seconds": 170.01821851730347,
+ "differences": {
+  "two cameras": {
+   "data +-1e-9 px": {
+    "f_rel": 2.67700532898818e-05,
+    "pp_px": 0.02699586368433729,
+    "baseline_rel": 1.9226862534305056e-05,
+    "rotation_rad": 1.6889754663062395e-05,
+    "rms_px": 0.0
+   },
+   "data +-1e-6 px": {
+    "f_rel": 0.0004461968878141098,
+    "pp_px": 1.854200583651206,
+    "baseline_rel": 0.00023305878854185114,
+    "rotation_rad": 0.0006380012733546896,
+    "rms_px": 0.0
+   },
+   "camera 1 of 1024 x 768 (X2)": {
+    "f_rel": 1.869760201755888e-05,
+    "pp_px": 0.4341430950535952,
+    "baseline_rel": 1.2205796328101925e-05,
+    "rotation_rad": 0.0003166599797134434,
+    "rms_px": 0.0
+   }
+  },
+  "three cameras": {
+   "data +-1e-9 px": {
+    "f_rel": 2.310581585263094e-05,
+    "pp_px": 0.32443924874196084,
+    "baseline_rel": 2.0111485586449263e-05,
+    "rotation_rad": 0.00019831128881008246,
+    "rms_px": 0.0
+   },
+   "data +-1e-6 px": {
+    "f_rel": 1.9202033342491376e-05,
+    "pp_px": 0.05419516521965831,
+    "baseline_rel": 1.211948314505662e-05,
+    "rotation_rad": 3.660020045790185e-05,
+    "rms_px": 0.0
+   },
+   "camera 1 of 1024 x 768 (X2)": {
+    "f_rel": 3.508688806164173e-05,
+    "pp_px": 0.031125332158700017,
+    "baseline_rel": 3.310143941925858e-05,
+    "rotation_rad": 2.6338602255979978e-05,
+    "rms_px": 0.0
+   }
+  }
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "checks": [
+  {
+   "check": "cameras 0 and 1 keep their images, Focal, Width, Height and window through 2 -> 3 -> 2",
+   "ok": true,
+   "detail": "[{'images': 6, 'button': '6', 'focal': 41500, 'width': 1280, 'height': 800}, {'images': 6, 'button': '6', 'focal': 42000, 'width': 1024, 'height': 768}], windows ['Window 1', 'Window 0']"
+  },
+  {
+   "check": "camera 2 starts empty, with the defaults",
+   "ok": true,
+   "detail": "{'images': 0, 'button': 'Load', 'focal': 9000, 'width': 1280, 'height': 800}, windows ['Window 1', 'Window 0', 'Window 0']"
+  },
+  {
+   "check": "Number of Windows 2 -> 1 -> 2: a camera keeps its window while it exists",
+   "ok": true,
+   "detail": "at 1 window ['Window 0', 'Window 0']; at 2 again ['Window 0', 'Window 0']"
+  },
+  {
+   "check": "Number of Windows 2 -> 3: the cameras keep their windows",
+   "ok": true,
+   "detail": "['Window 1', 'Window 0']"
+  },
+  {
+   "check": "the three indices take four decimals",
+   "ok": true,
+   "detail": "[4, 4, 4]"
+  },
+  {
+   "check": "1.3330 and 1.4905 are kept as typed",
+   "ok": true,
+   "detail": "1.333 '1.3330', 1.4905 '1.4905'"
+  },
+  {
+   "check": "the presets: Air 1.0, Acrylic 1.49, Glass 1.52, Water 1.333 (= the Tube panel's water), read-only",
+   "ok": true,
+   "detail": "{'Air': (1.0, True), 'Acrylic': (1.49, True), 'Glass': (1.52, True), 'Water': (1.333, True)}; tube water 1.333"
+  }
+ ],
+ "seconds": 3.5306413173675537
+}

@@ -1,0 +1,14 @@
+W6: before: [{'images': 6, 'button': '6', 'focal': 41500, 'width': 1280, 'height': 800}, {'images': 6, 'button': '6', 'focal': 42000, 'width': 1024, 'height': 768}]; windows ['Window 1', 'Window 0']; frame table 6 rows
+  at 3 cameras: [{'images': 6, 'button': '6', 'focal': 41500, 'width': 1280, 'height': 800}, {'images': 6, 'button': '6', 'focal': 42000, 'width': 1024, 'height': 768}, {'images': 0, 'button': 'Load', 'focal': 9000, 'width': 1280, 'height': 800}]; windows ['Window 1', 'Window 0', 'Window 0']
+  back at 2: [{'images': 6, 'button': '6', 'focal': 41500, 'width': 1280, 'height': 800}, {'images': 6, 'button': '6', 'focal': 42000, 'width': 1024, 'height': 768}]; windows ['Window 1', 'Window 0']; frame table 6 rows
+  PASS  cameras 0 and 1 keep their images, Focal, Width, Height and window through 2 -> 3 -> 2  ([{'images': 6, 'button': '6', 'focal': 41500, 'width': 1280, 'height': 800}, {'images': 6, 'button': '6', 'focal': 42000, 'width': 1024, 'height': 768}], windows ['Window 1', 'Window 0'])
+  PASS  camera 2 starts empty, with the defaults  ({'images': 0, 'button': 'Load', 'focal': 9000, 'width': 1280, 'height': 800}, windows ['Window 1', 'Window 0', 'Window 0'])
+  PASS  Number of Windows 2 -> 1 -> 2: a camera keeps its window while it exists  (at 1 window ['Window 0', 'Window 0']; at 2 again ['Window 0', 'Window 0'])
+  PASS  Number of Windows 2 -> 3: the cameras keep their windows  (['Window 1', 'Window 0'])
+
+W7: the Refraction panel's indices
+  PASS  the three indices take four decimals  ([4, 4, 4])
+  PASS  1.3330 and 1.4905 are kept as typed  (1.333 '1.3330', 1.4905 '1.4905')
+  PASS  the presets: Air 1.0, Acrylic 1.49, Glass 1.52, Water 1.333 (= the Tube panel's water), read-only  ({'Air': (1.0, True), 'Acrylic': (1.49, True), 'Glass': (1.52, True), 'Water': (1.333, True)}; tube water 1.333)
+
+7 of 7 checks passed; 4 s

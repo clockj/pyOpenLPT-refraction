@@ -1,0 +1,11 @@
+two cameras: reference (all 1280 x 800, seed 1315): ok True, RMS 0.0509 px
+  data +-1e-9 px              : f 2.7e-05, principal point 0.027 px, baseline 1.9e-05, rotation 1.7e-05 rad, RMS 0.0e+00 px
+  data +-1e-6 px              : f 4.5e-04, principal point 1.854 px, baseline 2.3e-04, rotation 6.4e-04 rad, RMS 0.0e+00 px
+  camera 1 of 1024 x 768 (X2) : f 1.9e-05, principal point 0.434 px, baseline 1.2e-05, rotation 3.2e-04 rad, RMS 0.0e+00 px
+three cameras: reference (all 1280 x 800, seed 1315): ok True, RMS 0.0711 px
+  data +-1e-9 px              : f 2.3e-05, principal point 0.324 px, baseline 2.0e-05, rotation 2.0e-04 rad, RMS 0.0e+00 px
+  data +-1e-6 px              : f 1.9e-05, principal point 0.054 px, baseline 1.2e-05, rotation 3.7e-05 rad, RMS 0.0e+00 px
+  camera 1 of 1024 x 768 (X2) : f 3.5e-05, principal point 0.031 px, baseline 3.3e-05, rotation 2.6e-05 rad, RMS 0.0e+00 px
+  PASS  two cameras: the 1024 x 768 camera moves the answer no more than the data's rounding-sized changes do (within 3x the larger of the +-1e-9 and +-1e-6 px runs, in every quantity)  (f_rel 1.9e-05 against 4.5e-04; pp_px 4.3e-01 against 1.9e+00; baseline_rel 1.2e-05 against 2.3e-04; rotation_rad 3.2e-04 against 6.4e-04)
+
+1 of 1 checks passed; 170 s

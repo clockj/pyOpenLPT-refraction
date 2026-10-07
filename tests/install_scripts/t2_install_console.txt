@@ -1,0 +1,2176 @@
+==========================================
+      OpenLPT One-Click Installer
+==========================================
+
+This script will:
+1. Install Visual Studio Build Tools (if needed)
+2. Create a Conda environment named 'OpenLPT' (or the name given as the first argument)
+3. Install all dependencies
+4. Install the OpenLPT package
+
+Usage: install_windows.bat [ENV_NAME]   (set OPENLPT_NO_LAUNCH=1 to skip the GUI launch at the end)
+
+
+[0/4] Checking for Visual Studio Build Tools...
+[OK] Visual Studio C++ Tools found at: "C:\Program Files\Microsoft Visual Studio\2022\Community"
+
+[1/4] Checking for Conda/Mamba...
+[INFO] Using conda.
+
+[2/4] Creating Conda Environment 'OpenLPT_install_test' with the dependencies from conda-forge...
+Channels:
+ - conda-forge
+Platform: win-64
+Collecting package metadata (repodata.json): - \ | done
+Solving environment: - \ | done
+
+## Package Plan ##
+
+  environment location: C:\Users\zcloc\.conda\envs\OpenLPT_install_test
+
+  added / updated specs:
+    - cmake[version='>=3.15']
+    - cxx-compiler
+    - libblas[build=*openblas]
+    - llvm-openmp
+    - matplotlib[version='>=3.7.0']
+    - numba[version='>=0.60.0']
+    - numpy[version='>=2.2.0']
+    - opencv[version='>=4.8.0']
+    - pandas[version='>=2.2.2']
+    - pillow[version='>=10.0.0']
+    - pybind11[version='>=2.13']
+    - pyside6[version='>=6.6.0']
+    - python=3.11
+    - pywin32
+    - qt6-webengine
+    - qtawesome[version='>=1.3.0']
+    - requests[version='>=2.31.0']
+    - scikit-learn[version='>=1.0.0']
+    - scipy[version='>=1.11.0']
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    cairo-1.18.6               |       h477c42c_0         1.5 MB  conda-forge
+    charset-normalizer-3.5.2   |       h308a848_0         171 KB  conda-forge
+    cmake-4.4.4                |       hde52c71_0        17.1 MB  conda-forge
+    cpython-3.11.17            |  py311hd8ed1ab_1          48 KB  conda-forge
+    cxx-compiler-2.0.0         |       h1c1089f_0           7 KB  conda-forge
+    ffmpeg-9.0.2               | gpl_h51dc257_103        10.7 MB  conda-forge
+    fonttools-4.66.1           |  py311h3f79411_0         2.6 MB  conda-forge
+    fribidi-1.0.17             |       hfd05255_0          65 KB  conda-forge
+    idna-3.20                  |     pyh5ded981_0         174 KB  conda-forge
+    kiwisolver-1.5.1           |  py311h275cad7_3          71 KB  conda-forge
+    libclang13-23.1.2          |default_hacd6ee9_0        35.8 MB  conda-forge
+    libexpat-2.8.5             |       hac47afa_0          70 KB  conda-forge
+    libharfbuzz-14.6.0         |       h03b5201_1         1.1 MB  conda-forge
+    libhwloc-2.15.0            |default_hae90fe0_1001         2.3 MB  conda-forge
+    libhwy-1.4.0               |       h2419aca_2         554 KB  conda-forge
+    libjxl-0.12.0              |       h932607e_4         1.1 MB  conda-forge
+    libopencv-5.0.0            | qt6_h802e5fd_607        35.5 MB  conda-forge
+    libopenvino-2026.4.0       |       he10fbdf_0         3.9 MB  conda-forge
+    libopenvino-auto-batch-plugin-2026.4.0|       h57eb1fe_0         102 KB  conda-forge
+    libopenvino-auto-plugin-2026.4.0|       h57eb1fe_0         221 KB  conda-forge
+    libopenvino-gguf-frontend-2026.4.0|       h57eb1fe_0         429 KB  conda-forge
+    libopenvino-hetero-plugin-2026.4.0|       h54665e0_0         193 KB  conda-forge
+    libopenvino-intel-cpu-plugin-2026.4.0|       he10fbdf_0         8.4 MB  conda-forge
+    libopenvino-intel-gpu-plugin-2026.4.0|       he10fbdf_0         8.5 MB  conda-forge
+    libopenvino-ir-frontend-2026.4.0|       h54665e0_0         189 KB  conda-forge
+    libopenvino-onnx-frontend-2026.4.0|       h736cf9b_0         1.3 MB  conda-forge
+    libopenvino-paddle-frontend-2026.4.0|       h736cf9b_0         418 KB  conda-forge
+    libopenvino-pytorch-frontend-2026.4.0|       h7d67062_0         744 KB  conda-forge
+    libopenvino-tensorflow-frontend-2026.4.0|       h1ffcbaa_0         863 KB  conda-forge
+    libopenvino-tensorflow-lite-frontend-2026.4.0|       h7d67062_0         346 KB  conda-forge
+    libpng-1.6.59              |       hdc8cecf_0         377 KB  conda-forge
+    libpython-3.11.17          |hcc31f7b_1_cpython          48 KB  conda-forge
+    librsvg-2.62.4             |       h5506a08_0         5.6 MB  conda-forge
+    libsqlite-3.53.4           |     hf5d6505_103         1.3 MB  conda-forge
+    libusb-1.0.30              |       h6a83c73_0         120 KB  conda-forge
+    llvm-openmp-23.1.3         |       h49e36cd_0         334 KB  conda-forge
+    llvmlite-0.50.0            |  py311h6456a58_0        27.3 MB  conda-forge
+    matplotlib-3.11.2          |  py311hce7227b_1          15 KB  conda-forge
+    matplotlib-base-3.11.2     |  py311h1c8f1aa_1         8.4 MB  conda-forge
+    narwhals-2.27.0            |     pyh5ded981_0         296 KB  conda-forge
+    numba-0.68.0               |  py311h5dfdfe8_1         6.0 MB  conda-forge
+    opencv-5.0.0               | qt6_he7afa43_607          51 KB  conda-forge
+    openssl-3.6.5              |       hf411b9b_0         9.0 MB  conda-forge
+    pandas-3.0.6               |np2py311hd01f973_0        13.5 MB  conda-forge
+    py-opencv-5.0.0            | qt6_hd1f4775_607         2.9 MB  conda-forge
+    pyparsing-3.3.3            |     pyh5ded981_0         111 KB  conda-forge
+    python-3.11.17             |hb12b558_1_cpython        17.7 MB  conda-forge
+    python-gil-3.11.17         |       hd8ed1ab_1          48 KB  conda-forge
+    python-tzdata-2026.5       |     pyh5ded981_0         138 KB  conda-forge
+    pywin32-312                |  py311h0610301_2         4.3 MB  conda-forge
+    qt6-webengine-6.11.2       | pl5321h80dc20f_1       180.8 MB  conda-forge
+    scikit-learn-1.9.1         |np2py311hd01f973_1         8.9 MB  conda-forge
+    sdl3-3.4.18                |       h5112557_0         1.6 MB  conda-forge
+    snappy-1.2.2               |       h7fa0ca8_2          66 KB  conda-forge
+    spirv-tools-2026.4         |       h49e36cd_0         4.8 MB  conda-forge
+    tbb-2023.1.0               |       h272cf33_2         154 KB  conda-forge
+    tornado-6.5.10             |  py311h3485c13_0         898 KB  conda-forge
+    unicodedata2-18.0.0        |  py311h3485c13_0         408 KB  conda-forge
+    vs2022_win-64-19.44.35207  |      ha74f236_41          25 KB  conda-forge
+    vswhere-3.1.7              |       h40126e0_1         233 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:       429.5 MB
+
+The following NEW packages will be INSTALLED:
+
+  _libavif_api       conda-forge/win-64::_libavif_api-1.4.2-h11686cb_4 
+  _python_abi3_supp~ conda-forge/noarch::_python_abi3_support-1.0-hd8ed1ab_3 
+  aom                conda-forge/win-64::aom-3.14.1-pl5321h06fc181_2 
+  backports.zstd     conda-forge/win-64::backports.zstd-1.7.0-py311h71c1bcc_1 
+  brotli             conda-forge/win-64::brotli-1.2.0-hc8c2fe1_4 
+  brotli-bin         conda-forge/win-64::brotli-bin-1.2.0-hd477307_4 
+  brotli-python      conda-forge/win-64::brotli-python-1.2.0-py311h7862a2f_4 
+  bzip2              conda-forge/win-64::bzip2-1.0.8-h0ad9c76_10 
+  ca-certificates    conda-forge/noarch::ca-certificates-2026.7.22-h4c7d964_0 
+  cairo              conda-forge/win-64::cairo-1.18.6-h477c42c_0 
+  certifi            conda-forge/noarch::certifi-2026.7.22-pyhd8ed1ab_0 
+  charset-normalizer conda-forge/win-64::charset-normalizer-3.5.2-h308a848_0 
+  cloudpickle        conda-forge/noarch::cloudpickle-3.1.2-pyhcf101f3_1 
+  cmake              conda-forge/win-64::cmake-4.4.4-hde52c71_0 
+  contourpy          conda-forge/win-64::contourpy-1.3.3-py311h275cad7_4 
+  cpython            conda-forge/noarch::cpython-3.11.17-py311hd8ed1ab_1 
+  cxx-compiler       conda-forge/win-64::cxx-compiler-2.0.0-h1c1089f_0 
+  cycler             conda-forge/noarch::cycler-0.12.1-pyhcf101f3_2 
+  double-conversion  conda-forge/win-64::double-conversion-3.4.0-hac47afa_0 
+  ffmpeg             conda-forge/win-64::ffmpeg-9.0.2-gpl_h51dc257_103 
+  font-ttf-dejavu-s~ conda-forge/noarch::font-ttf-dejavu-sans-mono-2.37-hab24e00_0 
+  font-ttf-inconsol~ conda-forge/noarch::font-ttf-inconsolata-3.000-h77eed37_0 
+  font-ttf-source-c~ conda-forge/noarch::font-ttf-source-code-pro-2.038-h77eed37_0 
+  font-ttf-ubuntu    conda-forge/noarch::font-ttf-ubuntu-0.83-h77eed37_3 
+  fontconfig         conda-forge/win-64::fontconfig-2.18.3-hd47e2ca_1 
+  fonts-conda-ecosy~ conda-forge/noarch::fonts-conda-ecosystem-1-0 
+  fonts-conda-forge  conda-forge/noarch::fonts-conda-forge-1-hc364b38_1 
+  fonttools          conda-forge/win-64::fonttools-4.66.1-py311h3f79411_0 
+  freetype           conda-forge/win-64::freetype-2.14.3-h57928b3_2 
+  fribidi            conda-forge/win-64::fribidi-1.0.17-hfd05255_0 
+  gdk-pixbuf         conda-forge/win-64::gdk-pixbuf-2.44.8-h1f5b9c4_2 
+  graphite2          conda-forge/win-64::graphite2-1.3.15-h5112557_1 
+  h2                 conda-forge/noarch::h2-4.4.1-pyhcf101f3_0 
+  hdf5               conda-forge/win-64::hdf5-1.14.6-nompi_hae35d4c_110 
+  hpack              conda-forge/noarch::hpack-4.2.0-pyhd8ed1ab_0 
+  hyperframe         conda-forge/noarch::hyperframe-6.1.0-pyhd8ed1ab_0 
+  icu                conda-forge/win-64::icu-78.3-h5112557_2 
+  idna               conda-forge/noarch::idna-3.20-pyh5ded981_0 
+  imath              conda-forge/win-64::imath-3.2.2-h1608b31_0 
+  joblib             conda-forge/noarch::joblib-1.6.0-pyhcf101f3_0 
+  khronos-opencl-ic~ conda-forge/win-64::khronos-opencl-icd-loader-2024.10.24-hfd05255_2 
+  kiwisolver         conda-forge/win-64::kiwisolver-1.5.1-py311h275cad7_3 
+  krb5               conda-forge/win-64::krb5-1.22.2-h719d79b_2 
+  lame               conda-forge/win-64::lame-4.0-h0c5f640_1 
+  lcms2              conda-forge/win-64::lcms2-2.19.1-hf2c6c5f_3 
+  lerc               conda-forge/win-64::lerc-4.2.0-hd936e49_0 
+  libabseil          conda-forge/win-64::libabseil-20260526.0-cxx17_h04e5de1_2 
+  libaec             conda-forge/win-64::libaec-1.1.5-haf901d7_0 
+  libavif16          conda-forge/win-64::libavif16-1.4.2-h7f05e3c_4 
+  libblas            conda-forge/win-64::libblas-3.11.0-11_h0adab6e_openblas 
+  libbrotlicommon    conda-forge/win-64::libbrotlicommon-1.2.0-hf02afa3_4 
+  libbrotlidec       conda-forge/win-64::libbrotlidec-1.2.0-h84f9c24_4 
+  libbrotlienc       conda-forge/win-64::libbrotlienc-1.2.0-he2a975b_4 
+  libcblas           conda-forge/win-64::libcblas-3.11.0-11_h2a8eebe_openblas 
+  libclang13         conda-forge/win-64::libclang13-23.1.2-default_hacd6ee9_0 
+  libcurl            conda-forge/win-64::libcurl-8.22.0-hdb0ef4a_0 
+  libdav1d           conda-forge/win-64::libdav1d-1.5.4-h11686cb_4 
+  libdav1d7          conda-forge/win-64::libdav1d7-1.5.4-h6a83c73_4 
+  libdeflate         conda-forge/win-64::libdeflate-1.25-h1a1d4e4_1 
+  libevent           conda-forge/win-64::libevent-2.1.12-hc903f1e_2 
+  libexpat           conda-forge/win-64::libexpat-2.8.5-hac47afa_0 
+  libffi             conda-forge/win-64::libffi-3.7.0-h3d046cb_1 
+  libfreetype        conda-forge/win-64::libfreetype-2.14.3-h57928b3_2 
+  libfreetype6       conda-forge/win-64::libfreetype6-2.14.3-hdbac1cb_2 
+  libglib            conda-forge/win-64::libglib-2.90.0-ha564072_0 
+  libharfbuzz        conda-forge/win-64::libharfbuzz-14.6.0-h03b5201_1 
+  libhwloc           conda-forge/win-64::libhwloc-2.15.0-default_hae90fe0_1001 
+  libhwy             conda-forge/win-64::libhwy-1.4.0-h2419aca_2 
+  libiconv           conda-forge/win-64::libiconv-1.18-hc1393d2_3 
+  libintl            conda-forge/win-64::libintl-0.22.5-h5728263_4 
+  libjpeg-turbo      conda-forge/win-64::libjpeg-turbo-3.2.0-hfd05255_1 
+  libjxl             conda-forge/win-64::libjxl-0.12.0-h932607e_4 
+  liblapack          conda-forge/win-64::liblapack-3.11.0-11_hd232482_openblas 
+  liblapacke         conda-forge/win-64::liblapacke-3.11.0-11_hbb0e6ff_openblas 
+  liblzma            conda-forge/win-64::liblzma-5.8.3-hfd05255_1 
+  libogg             conda-forge/win-64::libogg-1.3.5-h2466b09_1 
+  libopenblas        conda-forge/win-64::libopenblas-0.3.34-pthreads_h952cde7_2 
+  libopencv          conda-forge/win-64::libopencv-5.0.0-qt6_h802e5fd_607 
+  libopenvino        conda-forge/win-64::libopenvino-2026.4.0-he10fbdf_0 
+  libopenvino-auto-~ conda-forge/win-64::libopenvino-auto-batch-plugin-2026.4.0-h57eb1fe_0 
+  libopenvino-auto-~ conda-forge/win-64::libopenvino-auto-plugin-2026.4.0-h57eb1fe_0 
+  libopenvino-gguf-~ conda-forge/win-64::libopenvino-gguf-frontend-2026.4.0-h57eb1fe_0 
+  libopenvino-heter~ conda-forge/win-64::libopenvino-hetero-plugin-2026.4.0-h54665e0_0 
+  libopenvino-intel~ conda-forge/win-64::libopenvino-intel-cpu-plugin-2026.4.0-he10fbdf_0 
+  libopenvino-intel~ conda-forge/win-64::libopenvino-intel-gpu-plugin-2026.4.0-he10fbdf_0 
+  libopenvino-ir-fr~ conda-forge/win-64::libopenvino-ir-frontend-2026.4.0-h54665e0_0 
+  libopenvino-onnx-~ conda-forge/win-64::libopenvino-onnx-frontend-2026.4.0-h736cf9b_0 
+  libopenvino-paddl~ conda-forge/win-64::libopenvino-paddle-frontend-2026.4.0-h736cf9b_0 
+  libopenvino-pytor~ conda-forge/win-64::libopenvino-pytorch-frontend-2026.4.0-h7d67062_0 
+  libopenvino-tenso~ conda-forge/win-64::libopenvino-tensorflow-frontend-2026.4.0-h1ffcbaa_0 
+  libopenvino-tenso~ conda-forge/win-64::libopenvino-tensorflow-lite-frontend-2026.4.0-h7d67062_0 
+  libopus            conda-forge/win-64::libopus-1.6.1-h6a83c73_1 
+  libpng             conda-forge/win-64::libpng-1.6.59-hdc8cecf_0 
+  libprotobuf        conda-forge/win-64::libprotobuf-7.35.1-h1a71995_3 
+  libpsl             conda-forge/win-64::libpsl-0.23.1-h9b16d47_1 
+  libpython          conda-forge/win-64::libpython-3.11.17-hcc31f7b_1_cpython 
+  libraqm            conda-forge/win-64::libraqm-0.11.0-h50d6d30_0 
+  libre2-11          conda-forge/win-64::libre2-11-2025.11.05-h45f70d9_2 
+  librsvg            conda-forge/win-64::librsvg-2.62.4-h5506a08_0 
+  libsqlite          conda-forge/win-64::libsqlite-3.53.4-hf5d6505_103 
+  libssh2            conda-forge/win-64::libssh2-1.11.1-h734d217_1 
+  libtiff            conda-forge/win-64::libtiff-4.7.2-h8f73337_1 
+  libusb             conda-forge/win-64::libusb-1.0.30-h6a83c73_0 
+  libuv              conda-forge/win-64::libuv-1.52.1-h6a83c73_1 
+  libvorbis          conda-forge/win-64::libvorbis-1.3.7-h5112557_2 
+  libvulkan-loader   conda-forge/win-64::libvulkan-loader-1.4.357.0-h477610d_2 
+  libwebp-base       conda-forge/win-64::libwebp-base-1.6.0-h4d5522a_1 
+  libwinpthread      conda-forge/win-64::libwinpthread-12.0.0.r4.gg4f2fc60ca-h57928b3_10 
+  libxml2            conda-forge/win-64::libxml2-2.15.4-he095d88_0 
+  libxml2-16         conda-forge/win-64::libxml2-16-2.15.4-h3cfd58e_0 
+  libxslt            conda-forge/win-64::libxslt-1.1.45-ha5384fd_1 
+  libzlib            conda-forge/win-64::libzlib-1.3.2-hfd05255_3 
+  llvm-openmp        conda-forge/win-64::llvm-openmp-23.1.3-h49e36cd_0 
+  llvmlite           conda-forge/win-64::llvmlite-0.50.0-py311h6456a58_0 
+  matplotlib         conda-forge/win-64::matplotlib-3.11.2-py311hce7227b_1 
+  matplotlib-base    conda-forge/win-64::matplotlib-base-3.11.2-py311h1c8f1aa_1 
+  minizip            conda-forge/win-64::minizip-4.2.2-hdc83b33_1 
+  mpg123             conda-forge/win-64::mpg123-1.33.7-ha58212f_1 
+  munkres            conda-forge/noarch::munkres-1.1.4-pyhd8ed1ab_1 
+  narwhals           conda-forge/noarch::narwhals-2.27.0-pyh5ded981_0 
+  numba              conda-forge/win-64::numba-0.68.0-py311h5dfdfe8_1 
+  numpy              conda-forge/win-64::numpy-2.4.6-py311h65cb7f3_0 
+  opencl-headers     conda-forge/win-64::opencl-headers-2025.06.13-h826ebb9_0 
+  opencv             conda-forge/win-64::opencv-5.0.0-qt6_he7afa43_607 
+  openexr            conda-forge/win-64::openexr-3.4.15-hea798b2_0 
+  openh264           conda-forge/win-64::openh264-2.6.0-h1eab103_2 
+  openjpeg           conda-forge/win-64::openjpeg-2.5.4-h90fa87c_2 
+  openjph            conda-forge/win-64::openjph-0.31.0-hf13a347_0 
+  openssl            conda-forge/win-64::openssl-3.6.5-hf411b9b_0 
+  packaging          conda-forge/noarch::packaging-26.3-pyhc364b38_0 
+  pandas             conda-forge/win-64::pandas-3.0.6-np2py311hd01f973_0 
+  pango              conda-forge/win-64::pango-1.58.2-h13911b6_1 
+  pcre2              conda-forge/win-64::pcre2-10.47-h8466c1e_1 
+  pillow             conda-forge/win-64::pillow-12.3.0-py311h36f029a_4 
+  pip                conda-forge/noarch::pip-26.2.1-pyh8b19718_0 
+  pixman             conda-forge/win-64::pixman-0.46.4-h5112557_3 
+  pugixml            conda-forge/win-64::pugixml-1.15-h372dad0_0 
+  py-opencv          conda-forge/win-64::py-opencv-5.0.0-qt6_hd1f4775_607 
+  pybind11           conda-forge/noarch::pybind11-3.1.0-pyh293190f_0 
+  pybind11-global    conda-forge/noarch::pybind11-global-3.1.0-pyhc8003f9_0 
+  pyparsing          conda-forge/noarch::pyparsing-3.3.3-pyh5ded981_0 
+  pyside6            conda-forge/win-64::pyside6-6.11.2-py311h700d311_1 
+  pysocks            conda-forge/noarch::pysocks-1.7.1-pyh09c184e_7 
+  python             conda-forge/win-64::python-3.11.17-hb12b558_1_cpython 
+  python-dateutil    conda-forge/noarch::python-dateutil-2.9.0.post0-pyhe01879c_2 
+  python-gil         conda-forge/noarch::python-gil-3.11.17-hd8ed1ab_1 
+  python-tzdata      conda-forge/noarch::python-tzdata-2026.5-pyh5ded981_0 
+  python_abi         conda-forge/noarch::python_abi-3.11-9_cp311 
+  pywin32            conda-forge/win-64::pywin32-312-py311h0610301_2 
+  qhull              conda-forge/win-64::qhull-2020.2-hc790b64_5 
+  qt6-main           conda-forge/win-64::qt6-main-6.11.2-pl5321hfcac499_0 
+  qt6-webengine      conda-forge/win-64::qt6-webengine-6.11.2-pl5321h80dc20f_1 
+  qtawesome          conda-forge/noarch::qtawesome-1.4.2-pyh9208f05_0 
+  qtpy               conda-forge/noarch::qtpy-2.4.3-pyhd8ed1ab_1 
+  rav1e              conda-forge/win-64::rav1e-0.8.1-h007690e_0 
+  re2                conda-forge/win-64::re2-2025.11.05-haef9524_2 
+  requests           conda-forge/noarch::requests-2.34.2-pyhcf101f3_0 
+  scikit-learn       conda-forge/win-64::scikit-learn-1.9.1-np2py311hd01f973_1 
+  scipy              conda-forge/win-64::scipy-1.17.1-py311h9c22a71_1 
+  sdl2               conda-forge/win-64::sdl2-2.32.56-h5112557_0 
+  sdl3               conda-forge/win-64::sdl3-3.4.18-h5112557_0 
+  setuptools         conda-forge/noarch::setuptools-84.0.0-pyh332efcf_0 
+  six                conda-forge/noarch::six-1.17.0-pyhe01879c_1 
+  snappy             conda-forge/win-64::snappy-1.2.2-h7fa0ca8_2 
+  spirv-tools        conda-forge/win-64::spirv-tools-2026.4-h49e36cd_0 
+  svt-av1            conda-forge/win-64::svt-av1-4.2.0-hac47afa_1 
+  tbb                conda-forge/win-64::tbb-2023.1.0-h272cf33_2 
+  threadpoolctl      conda-forge/noarch::threadpoolctl-3.7.0-pyhc455866_0 
+  tk                 conda-forge/win-64::tk-8.6.13-h967ab96_4 
+  tornado            conda-forge/win-64::tornado-6.5.10-py311h3485c13_0 
+  tzdata             conda-forge/noarch::tzdata-2026c-h151e31d_0 
+  ucrt               conda-forge/win-64::ucrt-10.0.26100.0-h57928b3_0 
+  unicodedata2       conda-forge/win-64::unicodedata2-18.0.0-py311h3485c13_0 
+  urllib3            conda-forge/noarch::urllib3-2.8.0-pyhd8ed1ab_0 
+  vc                 conda-forge/win-64::vc-14.5-ha367084_41 
+  vc14_runtime       conda-forge/win-64::vc14_runtime-14.51.36247-habf1de7_41 
+  vcomp14            conda-forge/win-64::vcomp14-14.51.36247-habf1de7_41 
+  vs2022_win-64      conda-forge/win-64::vs2022_win-64-19.44.35207-ha74f236_41 
+  vswhere            conda-forge/noarch::vswhere-3.1.7-h40126e0_1 
+  wheel              conda-forge/noarch::wheel-0.48.0-pyhd8ed1ab_0 
+  win_inet_pton      conda-forge/noarch::win_inet_pton-1.1.0-pyh7428d3b_8 
+  x264               conda-forge/win-64::x264-1!164.3095-hfd05255_3 
+  x265               conda-forge/win-64::x265-3.5-h3ee6617_4 
+  zlib               conda-forge/win-64::zlib-1.3.2-hfd05255_3 
+  zlib-ng            conda-forge/win-64::zlib-ng-2.3.3-h0261ad2_1 
+  zstd               conda-forge/win-64::zstd-1.5.7-h534d264_7 
+
+
+
+Downloading and Extracting Packages: ...working...qt6-webengine-6.11.2 | 180.8 MB  |            |   0% 
+libclang13-23.1.2    | 35.8 MB   |            |   0% [A
+
+libopencv-5.0.0      | 35.5 MB   |            |   0% [A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   |            |   0% [A[A[A
+
+
+
+python-3.11.17       | 17.7 MB   |            |   0% [A[A[A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   |            |   0% [A[A[A[A[A
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   |            |   0% [A[A[A[A[A[A
+
+
+
+
+
+
+ffmpeg-9.0.2         | 10.7 MB   |            |   0% [A[A[A[A[A[A[A
+
+
+
+
+
+
+
+openssl-3.6.5        | 9.0 MB    |            |   0% [A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+scikit-learn-1.9.1   | 8.9 MB    |            |   0% [A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+libopenvino-intel-gp | 8.5 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+libopenvino-intel-cp | 8.4 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+matplotlib-base-3.11 | 8.4 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+numba-0.68.0         | 6.0 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+librsvg-2.62.4       | 5.6 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spirv-tools-2026.4   | 4.8 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pywin32-312          | 4.3 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+libopenvino-2026.4.0 | 3.9 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+py-opencv-5.0.0      | 2.9 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ... (more hidden) ...[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  |            |   0% 
+libclang13-23.1.2    | 35.8 MB   |            |   0% [A
+
+
+
+python-3.11.17       | 17.7 MB   |            |   0% [A[A[A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   |            |   0% [A[A[A
+
+libopencv-5.0.0      | 35.5 MB   |            |   0% [A[Aqt6-webengine-6.11.2 | 180.8 MB  | 2          |   3% 
+libclang13-23.1.2    | 35.8 MB   | #1         |  12% [A
+
+
+
+python-3.11.17       | 17.7 MB   | ##6        |  27% [A[A[A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   | #5         |  15% [A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | #1         |  12% [A[Aqt6-webengine-6.11.2 | 180.8 MB  | 5          |   5% 
+libclang13-23.1.2    | 35.8 MB   | ##4        |  24% [A
+
+
+
+python-3.11.17       | 17.7 MB   | #####3     |  54% [A[A[A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   | ###1       |  31% [A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | ##3        |  23% [A[Aqt6-webengine-6.11.2 | 180.8 MB  | 7          |   8% 
+libclang13-23.1.2    | 35.8 MB   | ###6       |  36% [A
+
+
+
+python-3.11.17       | 17.7 MB   | ########   |  81% [A[A[A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   | ####7      |  47% [A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | ###4       |  35% [A[Aqt6-webengine-6.11.2 | 180.8 MB  | #          |  11% 
+
+
+
+python-3.11.17       | 17.7 MB   | ########## | 100% [A[A[A[A
+libclang13-23.1.2    | 35.8 MB   | ####7      |  48% [A
+
+
+llvmlite-0.50.0      | 27.3 MB   | ######3    |  63% [A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | ####6      |  47% [A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   |            |   0% [A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | #3         |  13% 
+libclang13-23.1.2    | 35.8 MB   | ######     |  60% [A
+
+
+llvmlite-0.50.0      | 27.3 MB   | #######8   |  78% [A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | #####8     |  59% [A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   | ##9        |  30% [A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | #5         |  16% 
+libclang13-23.1.2    | 35.8 MB   | #######2   |  72% [A
+
+libopencv-5.0.0      | 35.5 MB   | #######    |  70% [A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   | #########2 |  93% [A[A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   | #####7     |  58% [A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | #8         |  19% 
+libclang13-23.1.2    | 35.8 MB   | ########4  |  85% [A
+
+libopencv-5.0.0      | 35.5 MB   | ########2  |  82% [A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   | ########6  |  87% [A[A[A[A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   | ########## | 100% [A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ##1        |  21% 
+libclang13-23.1.2    | 35.8 MB   | #########6 |  97% [A
+
+libopencv-5.0.0      | 35.5 MB   | #########4 |  94% [A[A
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   |            |   0% [A[A[A[A[A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   | ########## | 100% [A[A[A[A[A
+
+
+
+
+
+
+ffmpeg-9.0.2         | 10.7 MB   |            |   0% [A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ##4        |  24% 
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   | ###2       |  33% [A[A[A[A[A[A
+
+
+
+
+
+
+ffmpeg-9.0.2         | 10.7 MB   | ####5      |  46% [A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ##6        |  27% 
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   | ######5    |  66% [A[A[A[A[A[A
+libclang13-23.1.2    | 35.8 MB   | ########## | 100% [A
+
+
+
+
+
+
+
+openssl-3.6.5        | 9.0 MB    |            |   0% [A[A[A[A[A[A[A[A
+
+
+
+
+
+
+ffmpeg-9.0.2         | 10.7 MB   | #########  |  90% [A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ##9        |  29% 
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   | #########8 |  98% [A[A[A[A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | ########## | 100% [A[A
+
+
+
+
+
+
+
+
+scikit-learn-1.9.1   | 8.9 MB    |            |   0% [A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+ffmpeg-9.0.2         | 10.7 MB   | ########## | 100% [A[A[A[A[A[A[A
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   | ########## | 100% [A[A[A[A[A[A
+
+
+
+
+
+
+
+openssl-3.6.5        | 9.0 MB    | ####9      |  49% [A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+libopenvino-intel-gp | 8.5 MB    |            |   0% [A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ###2       |  32% 
+
+
+
+
+
+
+
+
+
+
+libopenvino-intel-cp | 8.4 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+scikit-learn-1.9.1   | 8.9 MB    | ####9      |  50% [A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+openssl-3.6.5        | 9.0 MB    | #########6 |  97% [A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ###4       |  35% 
+
+
+
+
+
+
+
+
+
+libopenvino-intel-gp | 8.5 MB    | ####8      |  48% [A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+libopenvino-intel-cp | 8.4 MB    | #####4     |  55% [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+scikit-learn-1.9.1   | 8.9 MB    | #########8 |  99% [A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ###7       |  37% 
+
+
+
+
+
+
+
+openssl-3.6.5        | 9.0 MB    | ########## | 100% [A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+matplotlib-base-3.11 | 8.4 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+scikit-learn-1.9.1   | 8.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+libopenvino-intel-cp | 8.4 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+libopenvino-intel-cp | 8.4 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+libopenvino-intel-gp | 8.5 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+libopenvino-intel-gp | 8.5 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+numba-0.68.0         | 6.0 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ###9       |  40% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spirv-tools-2026.4   | 4.8 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+librsvg-2.62.4       | 5.6 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+matplotlib-base-3.11 | 8.4 MB    | #####3     |  53% [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+numba-0.68.0         | 6.0 MB    | #######    |  70% [A[A[A[A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ####2      |  43% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+librsvg-2.62.4       | 5.6 MB    | #######6   |  77% [A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spirv-tools-2026.4   | 4.8 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spirv-tools-2026.4   | 4.8 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+numba-0.68.0         | 6.0 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pywin32-312          | 4.3 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+matplotlib-base-3.11 | 8.4 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+matplotlib-base-3.11 | 8.4 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+librsvg-2.62.4       | 5.6 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+libopenvino-2026.4.0 | 3.9 MB    |            |   0% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ####5      |  45% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+py-opencv-5.0.0      | 2.9 MB    |            |   1% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ... (more hidden) ...[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+py-opencv-5.0.0      | 2.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pywin32-312          | 4.3 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pywin32-312          | 4.3 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ####8      |  48% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ... (more hidden) ...[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+libopenvino-2026.4.0 | 3.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+libopenvino-2026.4.0 | 3.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+llvmlite-0.50.0      | 27.3 MB   | ########## | 100% [A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | #####      |  51% qt6-webengine-6.11.2 | 180.8 MB  | #####3     |  53% qt6-webengine-6.11.2 | 180.8 MB  | #####6     |  56% qt6-webengine-6.11.2 | 180.8 MB  | #####8     |  59% qt6-webengine-6.11.2 | 180.8 MB  | ######1    |  62% qt6-webengine-6.11.2 | 180.8 MB  | ######4    |  64% qt6-webengine-6.11.2 | 180.8 MB  | ######7    |  67% qt6-webengine-6.11.2 | 180.8 MB  | ######9    |  70% 
+libclang13-23.1.2    | 35.8 MB   | ########## | 100% [Aqt6-webengine-6.11.2 | 180.8 MB  | #######2   |  72% qt6-webengine-6.11.2 | 180.8 MB  | #######5   |  75% qt6-webengine-6.11.2 | 180.8 MB  | #######7   |  78% qt6-webengine-6.11.2 | 180.8 MB  | ########   |  80% qt6-webengine-6.11.2 | 180.8 MB  | ########2  |  83% qt6-webengine-6.11.2 | 180.8 MB  | ########5  |  86% qt6-webengine-6.11.2 | 180.8 MB  | ########8  |  88% qt6-webengine-6.11.2 | 180.8 MB  | #########  |  91% 
+
+
+
+python-3.11.17       | 17.7 MB   | ########## | 100% [A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | #########3 |  93% qt6-webengine-6.11.2 | 180.8 MB  | #########5 |  96% qt6-webengine-6.11.2 | 180.8 MB  | #########8 |  99% 
+
+
+
+
+
+
+ffmpeg-9.0.2         | 10.7 MB   | ########## | 100% [A[A[A[A[A[A[A
+
+libopencv-5.0.0      | 35.5 MB   | ########## | 100% [A[Aqt6-webengine-6.11.2 | 180.8 MB  | ########## | 100% 
+
+
+
+
+
+
+
+openssl-3.6.5        | 9.0 MB    | ########## | 100% [A[A[A[A[A[A[A[A
+
+
+
+
+cmake-4.4.4          | 17.1 MB   | ########## | 100% [A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+libopenvino-intel-cp | 8.4 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+libopenvino-intel-gp | 8.5 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spirv-tools-2026.4   | 4.8 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+scikit-learn-1.9.1   | 8.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A
+
+
+
+
+
+pandas-3.0.6         | 13.5 MB   | ########## | 100% [A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+librsvg-2.62.4       | 5.6 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+py-opencv-5.0.0      | 2.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+py-opencv-5.0.0      | 2.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+matplotlib-base-3.11 | 8.4 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+numba-0.68.0         | 6.0 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+libopenvino-2026.4.0 | 3.9 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ... (more hidden) ...[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ... (more hidden) ...[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pywin32-312          | 4.3 MB    | ########## | 100% [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[Aqt6-webengine-6.11.2 | 180.8 MB  | ########## | 100% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A                                                     
+                                                     [A
+
+                                                     [A[A
+
+
+                                                     [A[A[A
+
+
+
+                                                     [A[A[A[A
+
+
+
+
+                                                     [A[A[A[A[A
+
+
+
+
+
+                                                     [A[A[A[A[A[A
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     [A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+[A
+
+[A[A
+
+
+[A[A[A
+
+
+
+[A[A[A[A
+
+
+
+
+[A[A[A[A[A
+
+
+
+
+
+[A[A[A[A[A[A
+
+
+
+
+
+
+[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+[A
+
+[A[A
+
+
+[A[A[A
+
+
+
+[A[A[A[A
+
+
+
+
+[A[A[A[A[A
+
+
+
+
+
+[A[A[A[A[A[A
+
+
+
+
+
+
+[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+[A
+
+[A[A done
+Preparing transaction: - \ | / - \ | / - \ | / - \ done
+Verifying transaction: / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - done
+Executing transaction: | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ 
+| / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ done
+#
+# To activate this environment, use
+#
+#     $ conda activate OpenLPT_install_test
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+
+[3/4] Activating Environment and Installing the pip-only Dependencies...
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET DISTUTILS_USE_SDK=1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET MSSdk=1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET "VS_VERSION=17.0" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET "VS_MAJOR=17" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET "VS_YEAR=2022" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "MSYS2_ARG_CONV_EXCL=/AI;/AL;/OUT;/out" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "MSYS2_ENV_CONV_EXCL=CL" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "PY_VCRUNTIME_REDIST=\bin\vcruntime140.dll" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CXX=cl.exe" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CC=cl.exe" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "VSINSTALLDIR=" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "NEWER_VS_WITH_OLDER_VC=0" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -products * -version [17.0,18.0) -property installationPath`) do (set "VSINSTALLDIR=%i\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>(set "VSINSTALLDIR=C:\Program Files\Microsoft Visual Studio\2022\Community\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -requires Microsoft.VisualStudio.Component.VC.14.44.17.14.x86.x64 -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -products * -requires Microsoft.VisualStudio.ComponentGroup.VC.Tools.143.x86.x64 -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -products * -requires Microsoft.VisualStudio.Component.VC.v143.x86.x64 -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Professional\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -latest -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF NOT "" == "" (
+set "INCLUDE=;"  
+ set "LIB=;"  
+ set "CMAKE_PREFIX_PATH=;" 
+)  else (
+set "INCLUDE=C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Library\include;"  
+ set "LIB=C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Library\lib;"  
+ set "CMAKE_PREFIX_PATH=C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Library;" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>call :GetWin10SdkDir 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>call :GetWin10SdkDirHelper HKLM\SOFTWARE\Wow6432Node  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 call :GetWin10SdkDirHelper HKCU\SOFTWARE\Wow6432Node  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 call :GetWin10SdkDirHelper HKLM\SOFTWARE  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 call :GetWin10SdkDirHelper HKCU\SOFTWARE  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 exit /B 1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>exit /B 0 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>for /F %i in ('dir /ON /B "C:\Program Files (x86)\Windows Kits\10\\include\10.*"') DO (SET WindowsSDKVer=%~i ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>(SET WindowsSDKVer=10.0.22621.0 ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 (echo "Didn't find any windows 10 SDK. I'm not sure if things will work, but let's try..." )  else (echo Windows SDK version found as: "10.0.22621.0" ) 
+Windows SDK version found as: "10.0.22621.0"
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CMAKE_PLAT=x64" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "VCVARSBAT=64" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "MESON_ARGS=-Dbuildtype=release" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "" == "1" (
+set "CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX= -DPython_FIND_REGISTRY=NEVER -DPython3_FIND_REGISTRY=NEVER -DCMAKE_PROGRAM_PATH=\bin;\Scripts;\Library\bin;\bin;\Scripts;\Library\bin"  
+ set "MESON_ARGS=-Dbuildtype=release --prefix= --pkg-config-path=\pkgconfig;\share\pkgconfig -Dlibdir=lib" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "" == "1" (
+ 
+ IF EXIST /python.exe (set "CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_DEFAULT_CMP0094=NEW" ) 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF 2022 GEQ 2019 (
+set "CMAKE_GEN=Visual Studio 17 2022"  
+ set "USE_NEW_CMAKE_GEN_SYNTAX=1" 
+)  ELSE (
+IF "win-64" == "win-64" (set "CMAKE_GEN=Visual Studio 17 2022 Win64" )  else (set "CMAKE_GEN=Visual Studio 17 2022" )  
+ set "USE_NEW_CMAKE_GEN_SYNTAX=0" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>echo "NEWER_VS_WITH_OLDER_VC=0" 
+"NEWER_VS_WITH_OLDER_VC=0"
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set /p LATEST_VS= 0<"C:\Program Files\Microsoft Visual Studio\2022\Community\\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>type "C:\Program Files\Microsoft Visual Studio\2022\Community\\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" 
+14.40.33807
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>dir "C:\Program Files\Microsoft Visual Studio\2022\Community\\VC\Redist\MSVC\" 
+ Volume in drive C has no label.
+ Volume Serial Number is F22D-505C
+
+ Directory of C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC
+
+07/09/2024  05:53 PM    <DIR>          .
+07/09/2024  05:51 PM    <DIR>          ..
+07/09/2024  05:53 PM    <DIR>          14.40.33807
+07/09/2024  05:53 PM    <DIR>          v143
+               0 File(s)              0 bytes
+               4 Dir(s)  467,691,524,096 bytes free
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if "0" == "1" (
+echo "14.40.33807"  
+ if "14.4" == "14.2" (set "CMAKE_GEN=Visual Studio 16 2019" )  else if "14.4" == "14.5" (set "CMAKE_GEN=Visual Studio 18 2026" )  else (set "CMAKE_GEN=Visual Studio 17 2022" )  
+ set "USE_NEW_CMAKE_GEN_SYNTAX=1" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "" == "" SET "CMAKE_GENERATOR=Visual Studio 17 2022" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "1" == "1" (
+IF "" == "" SET "CMAKE_GENERATOR_PLATFORM=x64"  
+ IF "" == "" SET "CMAKE_GENERATOR_TOOLSET=v143" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>pushd C:\Program Files\Microsoft Visual Studio\2022\Community\ 
+
+(OpenLPT_install_test) C:\Program Files\Microsoft Visual Studio\2022\Community>if "14.40" LSS "14.44" (
+ 
+ CALL "VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.40 10.0.22621.0 
+)  else (CALL "VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.44 10.0.22621.0 ) 
+The system cannot find the drive specified.
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.10.4
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+Collecting pycine>=0.3.2
+  Using cached pycine-0.3.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting click (from pycine>=0.3.2)
+  Using cached click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting docopt (from pycine>=0.3.2)
+  Using cached docopt-0.6.2-py2.py3-none-any.whl
+Requirement already satisfied: opencv-python in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2) (5.0.0)
+Collecting colorama (from pycine>=0.3.2)
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Using cached pycine-0.3.2-py3-none-any.whl (24 kB)
+Using cached click-8.5.0-py3-none-any.whl (125 kB)
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Installing collected packages: docopt, colorama, click, pycine
+
+Successfully installed click-8.5.0 colorama-0.4.6 docopt-0.6.2 pycine-0.3.2
+
+[4/4] Building and Installing OpenLPT...
+
+[INFO] Activating Visual Studio environment...
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.10.4
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+
+[INFO] Running pip install...
+Processing .\.
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: numpy>=2.2.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (2.4.6)
+Requirement already satisfied: pandas>=2.2.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (3.0.6)
+Requirement already satisfied: pybind11>=2.10 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (3.1.0)
+Requirement already satisfied: scipy>=1.11.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (1.17.1)
+Requirement already satisfied: opencv-python>=4.8.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (5.0.0)
+Requirement already satisfied: scikit-learn>=1.0.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (1.9.1)
+Requirement already satisfied: numba>=0.60.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (0.68.0)
+Requirement already satisfied: matplotlib>=3.7.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (3.11.2)
+Requirement already satisfied: requests>=2.31.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (2.34.2)
+Requirement already satisfied: Pillow>=10.0.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (12.3.0)
+Requirement already satisfied: pycine>=0.3.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (0.3.2)
+Requirement already satisfied: pywin32>=306 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (312)
+Requirement already satisfied: contourpy>=1.0.1 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (0.12.1)
+Requirement already satisfied: fonttools>=4.28.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (4.66.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (1.5.1)
+Requirement already satisfied: packaging>=20.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (26.3)
+Requirement already satisfied: pyparsing>=3 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (3.3.3)
+Requirement already satisfied: python-dateutil>=2.7 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (2.9.0.post0)
+Requirement already satisfied: llvmlite<0.51,>=0.50.0dev0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from numba>=0.60.0->openlpt==2.2.4) (0.50.0)
+Requirement already satisfied: tzdata in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pandas>=2.2.2->openlpt==2.2.4) (2026.5)
+Requirement already satisfied: click in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2->openlpt==2.2.4) (8.5.0)
+Requirement already satisfied: docopt in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2->openlpt==2.2.4) (0.6.2)
+Requirement already satisfied: colorama in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2->openlpt==2.2.4) (0.4.6)
+Requirement already satisfied: six>=1.5 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from python-dateutil>=2.7->matplotlib>=3.7.0->openlpt==2.2.4) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (3.5.2)
+Requirement already satisfied: idna<4,>=2.5 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (3.20)
+Requirement already satisfied: urllib3<3,>=1.26 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (2.8.0)
+Requirement already satisfied: certifi>=2023.5.7 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (2026.7.22)
+Requirement already satisfied: joblib>=1.4.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from scikit-learn>=1.0.0->openlpt==2.2.4) (1.6.0)
+Requirement already satisfied: narwhals>=2.0.1 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from scikit-learn>=1.0.0->openlpt==2.2.4) (2.27.0)
+Requirement already satisfied: threadpoolctl>=3.5.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from scikit-learn>=1.0.0->openlpt==2.2.4) (3.7.0)
+Requirement already satisfied: cloudpickle>=3.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from joblib>=1.4.0->scikit-learn>=1.0.0->openlpt==2.2.4) (3.1.2)
+Building wheels for collected packages: openlpt
+  Building wheel for openlpt (pyproject.toml): started
+  Building wheel for openlpt (pyproject.toml): still running...
+  Building wheel for openlpt (pyproject.toml): finished with status 'done'
+  Created wheel for openlpt: filename=openlpt-2.2.4-cp311-cp311-win_amd64.whl size=6461749 sha256=d40b4745f421846e25aae47baf60a07425ce983c92a811479d2dcd9f2e852813
+  Stored in directory: C:\Users\zcloc\AppData\Local\Temp\pip-ephem-wheel-cache-gzftwp7n\wheels\6f\7b\29\69a36284fc23b792842584d34893ede3f26ff5c73a36707b44
+Successfully built openlpt
+Installing collected packages: openlpt
+Successfully installed openlpt-2.2.4
+
+==========================================
+      Installation Complete!
+==========================================
+
+To use OpenLPT:
+  1. Open a new terminal
+  2. Run: conda activate OpenLPT_install_test
+  3. Run: python GUI.py
+
+Press any key to continue . . . 

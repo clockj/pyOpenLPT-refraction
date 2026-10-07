@@ -1,0 +1,1604 @@
+{
+ "checks": [
+  {
+   "check": "1500x900: Point Detection has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 336 px, viewport 358 px"
+  },
+  {
+   "check": "1500x900: Pinhole has no horizontal scroll bar",
+   "ok": false,
+   "detail": "content minimum 391 px, viewport 358 px"
+  },
+  {
+   "check": "1500x900: Pinhole+Refraction has no horizontal scroll bar",
+   "ok": false,
+   "detail": "content minimum 460 px, viewport 358 px"
+  },
+  {
+   "check": "1500x900: Pinhole+Cylinder has no horizontal scroll bar",
+   "ok": false,
+   "detail": "content minimum 411 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Point Detection has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 336 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Pinhole has no horizontal scroll bar",
+   "ok": false,
+   "detail": "content minimum 391 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Pinhole+Refraction has no horizontal scroll bar",
+   "ok": false,
+   "detail": "content minimum 460 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Pinhole+Cylinder has no horizontal scroll bar",
+   "ok": false,
+   "detail": "content minimum 411 px, viewport 358 px"
+  }
+ ],
+ "panels": {
+  "1500x900": {
+   "Point Detection": {
+    "viewport": 358,
+    "content_min": 336,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Detection Settings'",
+      "min_w": 316
+     }
+    ]
+   },
+   "Pinhole": {
+    "viewport": 358,
+    "content_min": 391,
+    "content_w": 391,
+    "hbar_visible": true,
+    "hbar_max": 33,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Wand Points (from CSV)",
+      "right": 381,
+      "min_w": 190,
+      "width": 371
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Axis Points (Optional)",
+      "right": 381,
+      "min_w": 175,
+      "width": 371
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Precalibrate to Check",
+      "right": 381,
+      "min_w": 151,
+      "width": 371
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Run Calibration",
+      "right": 381,
+      "min_w": 114,
+      "width": 371
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 381,
+      "min_w": 34,
+      "width": 329
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.00 mm",
+      "right": 381,
+      "min_w": 126,
+      "width": 152
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Save Filtered Points",
+      "right": 381,
+      "min_w": 142,
+      "width": 142
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 335
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when proj error >'",
+      "min_w": 176
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '5.00 px'",
+      "min_w": 144
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 371
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 152
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Refraction": {
+    "viewport": 358,
+    "content_min": 460,
+    "content_w": 460,
+    "hbar_visible": true,
+    "hbar_max": 102,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Wand Points (from CSV)",
+      "right": 450,
+      "min_w": 190,
+      "width": 440
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Axis Points (Optional)",
+      "right": 450,
+      "min_w": 175,
+      "width": 440
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Precalibrate to Check",
+      "right": 450,
+      "min_w": 151,
+      "width": 440
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Run Calibration",
+      "right": 450,
+      "min_w": 114,
+      "width": 440
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 450,
+      "min_w": 34,
+      "width": 398
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Save Filtered Points",
+      "right": 450,
+      "min_w": 142,
+      "width": 142
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "Camera-Window Mapping:",
+      "right": 428,
+      "min_w": 157,
+      "width": 396
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 428,
+      "min_w": 36,
+      "width": 396
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "Window Configuration (for selected type):",
+      "right": 428,
+      "min_w": 243,
+      "width": 396
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Use the previous calibrator (before October 2026)",
+      "right": 428,
+      "min_w": 323,
+      "width": 396
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Thorough start search (slower; for noisy data)",
+      "right": 428,
+      "min_w": 297,
+      "width": 396
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Refit from the last result (skips the start search)",
+      "right": 428,
+      "min_w": 305,
+      "width": 396
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Water",
+      "right": 426,
+      "min_w": 74,
+      "width": 112
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.33",
+      "right": 426,
+      "min_w": 112,
+      "width": 112
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "Object side",
+      "right": 403,
+      "min_w": 66,
+      "width": 66
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.00 mm",
+      "right": 381,
+      "min_w": 126,
+      "width": 152
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Refraction Settings'",
+      "min_w": 440
+     },
+     {
+      "depth": 1,
+      "item": "QHBoxLayout",
+      "min_w": 396
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 116
+     },
+     {
+      "depth": 2,
+      "item": "QFrame",
+      "min_w": 160
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 116
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Use the previous calibrator (before October 2026)'",
+      "min_w": 323
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Refit from the last result (skips the start search'",
+      "min_w": 305
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 335
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when proj error >'",
+      "min_w": 176
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '5.00 px'",
+      "min_w": 144
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 371
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 152
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Cylinder": {
+    "viewport": 358,
+    "content_min": 411,
+    "content_w": 411,
+    "hbar_visible": true,
+    "hbar_max": 53,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Wand Points (from CSV)",
+      "right": 401,
+      "min_w": 190,
+      "width": 391
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Axis Points (Optional)",
+      "right": 401,
+      "min_w": 175,
+      "width": 391
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Precalibrate to Check",
+      "right": 401,
+      "min_w": 151,
+      "width": 391
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Run Calibration",
+      "right": 401,
+      "min_w": 114,
+      "width": 391
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 401,
+      "min_w": 34,
+      "width": 349
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Save Filtered Points",
+      "right": 401,
+      "min_w": 142,
+      "width": 142
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.00 mm",
+      "right": 381,
+      "min_w": 126,
+      "width": 152
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "The cameras look through the tube's side wall. f, the poses ",
+      "right": 379,
+      "min_w": 43,
+      "width": 347
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.0000",
+      "right": 379,
+      "min_w": 126,
+      "width": 126
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.4900",
+      "right": 379,
+      "min_w": 126,
+      "width": 126
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.3330",
+      "right": 379,
+      "min_w": 126,
+      "width": 126
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Fit the wand length (checks the tube's size and indices)",
+      "right": 379,
+      "min_w": 347,
+      "width": 347
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Thorough start search (slower; for noisy data)",
+      "right": 379,
+      "min_w": 297,
+      "width": 347
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Refit from the last result (skips the start search)",
+      "right": 379,
+      "min_w": 305,
+      "width": 347
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Tube Settings'",
+      "min_w": 391
+     },
+     {
+      "depth": 1,
+      "item": "QFormLayout",
+      "min_w": 306
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Camera side:'",
+      "min_w": 76
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 204
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Wall:'",
+      "min_w": 27
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 208
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Outer diameter:'",
+      "min_w": 92
+     },
+     {
+      "depth": 2,
+      "item": "QDoubleSpinBox '201.6125 mm'",
+      "min_w": 162
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Wall thickness:'",
+      "min_w": 83
+     },
+     {
+      "depth": 2,
+      "item": "QDoubleSpinBox '3.1750 mm'",
+      "min_w": 162
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Inside:'",
+      "min_w": 37
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 206
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Fit the wand length (checks the tube's size and in'",
+      "min_w": 347
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Refit from the last result (skips the start search'",
+      "min_w": 305
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 335
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when proj error >'",
+      "min_w": 176
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '5.00 px'",
+      "min_w": 144
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 371
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 152
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   }
+  },
+  "1200x700": {
+   "Point Detection": {
+    "viewport": 358,
+    "content_min": 336,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Detection Settings'",
+      "min_w": 316
+     }
+    ]
+   },
+   "Pinhole": {
+    "viewport": 358,
+    "content_min": 391,
+    "content_w": 391,
+    "hbar_visible": true,
+    "hbar_max": 33,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Wand Points (from CSV)",
+      "right": 381,
+      "min_w": 190,
+      "width": 371
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Axis Points (Optional)",
+      "right": 381,
+      "min_w": 175,
+      "width": 371
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Precalibrate to Check",
+      "right": 381,
+      "min_w": 151,
+      "width": 371
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Run Calibration",
+      "right": 381,
+      "min_w": 114,
+      "width": 371
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 381,
+      "min_w": 34,
+      "width": 329
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.00 mm",
+      "right": 381,
+      "min_w": 126,
+      "width": 152
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Save Filtered Points",
+      "right": 381,
+      "min_w": 142,
+      "width": 142
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 335
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when proj error >'",
+      "min_w": 176
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '5.00 px'",
+      "min_w": 144
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 371
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 152
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Refraction": {
+    "viewport": 358,
+    "content_min": 460,
+    "content_w": 460,
+    "hbar_visible": true,
+    "hbar_max": 102,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Wand Points (from CSV)",
+      "right": 450,
+      "min_w": 190,
+      "width": 440
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Axis Points (Optional)",
+      "right": 450,
+      "min_w": 175,
+      "width": 440
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Precalibrate to Check",
+      "right": 450,
+      "min_w": 151,
+      "width": 440
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Run Calibration",
+      "right": 450,
+      "min_w": 114,
+      "width": 440
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 450,
+      "min_w": 34,
+      "width": 398
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Save Filtered Points",
+      "right": 450,
+      "min_w": 142,
+      "width": 142
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "Camera-Window Mapping:",
+      "right": 428,
+      "min_w": 157,
+      "width": 396
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 428,
+      "min_w": 36,
+      "width": 396
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "Window Configuration (for selected type):",
+      "right": 428,
+      "min_w": 243,
+      "width": 396
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Use the previous calibrator (before October 2026)",
+      "right": 428,
+      "min_w": 323,
+      "width": 396
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Thorough start search (slower; for noisy data)",
+      "right": 428,
+      "min_w": 297,
+      "width": 396
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Refit from the last result (skips the start search)",
+      "right": 428,
+      "min_w": 305,
+      "width": 396
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Water",
+      "right": 426,
+      "min_w": 74,
+      "width": 112
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.33",
+      "right": 426,
+      "min_w": 112,
+      "width": 112
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "Object side",
+      "right": 403,
+      "min_w": 66,
+      "width": 66
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QComboBox",
+      "name": "",
+      "text": "Window 0",
+      "right": 386,
+      "min_w": 97,
+      "width": 162
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.00 mm",
+      "right": 381,
+      "min_w": 126,
+      "width": 152
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Refraction Settings'",
+      "min_w": 440
+     },
+     {
+      "depth": 1,
+      "item": "QHBoxLayout",
+      "min_w": 396
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 116
+     },
+     {
+      "depth": 2,
+      "item": "QFrame",
+      "min_w": 160
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 116
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Use the previous calibrator (before October 2026)'",
+      "min_w": 323
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Refit from the last result (skips the start search'",
+      "min_w": 305
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 335
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when proj error >'",
+      "min_w": 176
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '5.00 px'",
+      "min_w": 144
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 371
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 152
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Cylinder": {
+    "viewport": 358,
+    "content_min": 411,
+    "content_w": 411,
+    "hbar_visible": true,
+    "hbar_max": 53,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Wand Points (from CSV)",
+      "right": 401,
+      "min_w": 190,
+      "width": 391
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Load Axis Points (Optional)",
+      "right": 401,
+      "min_w": 175,
+      "width": 391
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Precalibrate to Check",
+      "right": 401,
+      "min_w": 151,
+      "width": 391
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Run Calibration",
+      "right": 401,
+      "min_w": 114,
+      "width": 391
+     },
+     {
+      "widget": "QTableWidget",
+      "name": "",
+      "text": "",
+      "right": 401,
+      "min_w": 34,
+      "width": 349
+     },
+     {
+      "widget": "QPushButton",
+      "name": "",
+      "text": "Save Filtered Points",
+      "right": 401,
+      "min_w": 142,
+      "width": 142
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.00 mm",
+      "right": 381,
+      "min_w": 126,
+      "width": 152
+     },
+     {
+      "widget": "QLabel",
+      "name": "",
+      "text": "The cameras look through the tube's side wall. f, the poses ",
+      "right": 379,
+      "min_w": 43,
+      "width": 347
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.0000",
+      "right": 379,
+      "min_w": 126,
+      "width": 126
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.4900",
+      "right": 379,
+      "min_w": 126,
+      "width": 126
+     },
+     {
+      "widget": "QDoubleSpinBox",
+      "name": "",
+      "text": "1.3330",
+      "right": 379,
+      "min_w": 126,
+      "width": 126
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Fit the wand length (checks the tube's size and indices)",
+      "right": 379,
+      "min_w": 347,
+      "width": 347
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Thorough start search (slower; for noisy data)",
+      "right": 379,
+      "min_w": 297,
+      "width": 347
+     },
+     {
+      "widget": "QCheckBox",
+      "name": "",
+      "text": "Refit from the last result (skips the start search)",
+      "right": 379,
+      "min_w": 305,
+      "width": 347
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Tube Settings'",
+      "min_w": 391
+     },
+     {
+      "depth": 1,
+      "item": "QFormLayout",
+      "min_w": 306
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Camera side:'",
+      "min_w": 76
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 204
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Wall:'",
+      "min_w": 27
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 208
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Outer diameter:'",
+      "min_w": 92
+     },
+     {
+      "depth": 2,
+      "item": "QDoubleSpinBox '201.6125 mm'",
+      "min_w": 162
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Wall thickness:'",
+      "min_w": 83
+     },
+     {
+      "depth": 2,
+      "item": "QDoubleSpinBox '3.1750 mm'",
+      "min_w": 162
+     },
+     {
+      "depth": 2,
+      "item": "QLabel 'Inside:'",
+      "min_w": 37
+     },
+     {
+      "depth": 2,
+      "item": "QWidget",
+      "min_w": 206
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Fit the wand length (checks the tube's size and in'",
+      "min_w": 347
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Refit from the last result (skips the start search'",
+      "min_w": 305
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 335
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when proj error >'",
+      "min_w": 176
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '5.00 px'",
+      "min_w": 144
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 371
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 152
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   }
+  }
+ }
+}

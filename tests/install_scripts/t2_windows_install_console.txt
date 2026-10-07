@@ -1,0 +1,13 @@
+T2: install_windows.bat into a new environment 'OpenLPT_install_test', on a clone in C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc
+  --check-only; the installer, from the full run (t2_windows_install_full_run*): exit 0, 2.7 min; 'Installation Complete!' True; [Error] lines []
+    PASS  interpreter: 3.11.17 at C:\Users\zcloc\.conda\envs\OpenLPT_install_test\python.exe
+    PASS  libblas is OpenBLAS (conda-meta): ['libblas-3.11.0-11_h0adab6e_openblas.json']
+    PASS  numpy's linear algebra: numpy 2.4.6: solve, inv, lstsq, eigvals
+    PASS  the dependencies import: {'scipy': '1.17.1', 'cv2': '5.0.0', 'sklearn': '1.9.1', 'matplotlib': '3.11.2', 'pandas': '3.0.6', 'numba': '0.68.0', 'PIL': '12.3.0', 'requests': '2.34.2', 'qtawesome': '1.4.2', 'pycine': '0.3.2', 'win32api': 'ok', 'PySide6': '6.11.2'}
+    PASS  pyopenlpt and openlpt from site-packages: pyopenlpt C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages\pyopenlpt.cp311-win_amd64.pyd; openlpt C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages\openlpt.py (2.2.4)
+    PASS  QtWebEngine prepared (gui/app.py prepare_qtwebengine): ok
+    PASS  the Report tab loads the results page and draws it: loadFinished True, svg elements 7.0, 66 colours sampled
+    PASS  the main window builds: 1 Camera Calibration view
+    PASS  the GUI parts ran: {'report': (True, 7.0, 66)}
+
+T2 PASS

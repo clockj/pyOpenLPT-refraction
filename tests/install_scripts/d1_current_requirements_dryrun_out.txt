@@ -1,0 +1,22 @@
+Channels:
+ - conda-forge
+Platform: win-64
+Collecting package metadata (repodata.json): - \ | / - done
+Solving environment: | / - failed
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - pycine[version='>=0.3.2']
+
+Current channels:
+
+  - https://conda.anaconda.org/conda-forge
+
+To search for alternate channels that may provide the conda package you're
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+
+

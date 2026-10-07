@@ -107,6 +107,19 @@ tests/stb_improve/data/
 !tests/cylinder_wand_gui/**
 tests/cylinder_wand_gui/**/__pycache__/
 tests/cylinder_wand_gui/data/
+# the wand tab's fixes of 7 Oct 2026 (B1-B13): tests/wand_gui_fixes/ (data/ holds images and run outputs its scripts
+# write; before_lib/ is git 99e2d52's code, written by make_before_lib.py; w11*/*.png are page screenshots G4 redraws)
+!tests/wand_gui_fixes/
+!tests/wand_gui_fixes/**
+tests/wand_gui_fixes/**/__pycache__/
+tests/wand_gui_fixes/data/
+tests/wand_gui_fixes/before_lib/
+tests/wand_gui_fixes/w11*/*.png
+# the install scripts' tests of 7 Oct 2026: tests/install_scripts/ (t4_lf/ holds the copies its syntax test writes)
+!tests/install_scripts/
+!tests/install_scripts/**
+tests/install_scripts/**/__pycache__/
+tests/install_scripts/t4_lf/
 # the campaign's build trees and the saved baseline build
 build-stb/
 build-py-baseline/

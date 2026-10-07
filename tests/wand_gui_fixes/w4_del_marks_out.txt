@@ -1,0 +1,8 @@
+W4: 300 frames in the error table; frames (10, 11, 12, 13, 14) have 8 px on camera 0
+  their largest errors: 10: 7.91 px, 11: 7.90 px, 12: 8.17 px, 13: 8.00 px, 14: 8.01 px
+  PASS  Del boxes clicked by hand keep their state when the filter re-marks the rows  (at 5 px [3, 10, 12, 13, 14]; at 9 px [3]; at 5 px again [3, 10, 12, 13, 14])
+  PASS  the next run deletes the marked frames; the table after it lists the others  (deleted [3, 10, 12, 13, 14]; 295 frames used; 295 rows)
+  PASS  Restore Deleted Frames brings every frame back (no deletion, no mark, no box ticked); the next run uses every frame  (deleted [], marks {}, filtered None, ticked []; next run 300 frames; status 'Restored 5 deleted frames: every frame is used at the next check or calibration.')
+  PASS  new points (Load Wand Points from CSV) start with no deleted frame  (deleted before [3, 20]; after loading: deleted [], marks {}, filtered None; next run 300 of 300 frames; messages [('info', 'Success')])
+
+4 of 4 checks passed; 2 s

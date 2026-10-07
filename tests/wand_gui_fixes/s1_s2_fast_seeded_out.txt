@@ -1,0 +1,12 @@
+S1/S2: 60 D2 images, 12 T2 frames; fast mode, FAST_RANSAC_SEED = 0
+  PASS  D2: the same points with numpy's global seed 1 and 2, to the bit  (60 of 60)
+  PASS  D2: numpy's global random state unchanged by a call  (60 of 60)
+  PASS  D2: Test Detect's path (fresh worker processes) gives the same points, to the bit  (6 of 6 images)
+  PASS  T2: the same points with numpy's global seed 1 and 2, to the bit  (12 of 12)
+  PASS  T2: numpy's global random state unchanged by a call  (12 of 12)
+  PASS  T2: Test Detect's path (fresh worker processes) gives the same points, to the bit  (6 of 6 images)
+  PASS  D2: Process All Frames' path (the pool, two cameras of the same images) gives the same points, to the bit  (120 of 120)
+  PASS  D2: the seeded points differ from each unseeded run by no more than 1.5 x two unseeded runs do  (seeded against unseeded: 0.064, 0.042, 0.043, 0.064 px; between unseeded runs: 0.046, 0.044, 0.051, 0.043, 0.044, 0.044 px)
+  PASS  D2: the accuracy is as before (median, 95 %, largest centre error within the unseeded runs' range, give or take their spread); every ball found  (seeded 0.072 / 0.214 / 0.294 px (120 balls); unseeded 0.072 / 0.214 / 0.294; 0.071 / 0.214 / 0.294; 0.071 / 0.211 / 0.294; 0.070 / 0.211 / 0.294 px; spread 0.051 px)
+
+9 of 9 checks passed; 97 s

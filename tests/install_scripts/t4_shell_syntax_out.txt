@@ -1,0 +1,7 @@
+T4: the Linux and macOS installers (LF copies in t4_lf/, Git Bash)
+  install_linux.sh: bash -n exit 0; filters in the script {'conda filter': True, 'pip filter': True}: PASS
+  install_mac.command: bash -n exit 0; filters in the script {'conda filter': True, 'pip filter': True}: PASS
+  conda step's list: 19 lines, every requirement but pycine's: PASS
+  pip step's list: ['pycine>=0.3.2']: PASS
+
+T4 PASS

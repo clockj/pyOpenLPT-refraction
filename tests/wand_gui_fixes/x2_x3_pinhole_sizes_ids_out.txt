@@ -1,0 +1,23 @@
+  ref (seed 1314, sizes {0: [1280, 800], 1: [1280, 800], 2: [1280, 800]}): pair [0, 2], 27 s; RMS 0.0999 px; against the truth: f +0.43 %, +0.37 %, +0.21 %; principal point 9.8 px, 6.3 px, 4.6 px; baselines +0.41 %, +0.35 %, +0.32 %
+      camFiles {0: '800,1280', 1: '800,1280', 2: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1280, 800), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+  refS (seed 1315, sizes {0: [1280, 800], 1: [1280, 800], 2: [1280, 800]}): pair [0, 2], 24 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.16 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '800,1280', 1: '800,1280', 2: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1280, 800), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+  ref2S (seed 1315, sizes {0: [1280, 800], 1: [1280, 800]}): pair [0, 1], 16 s; RMS 0.0720 px; against the truth: f +0.45 %, +0.23 %; principal point 15.8 px, 14.0 px; baselines +0.73 %
+      camFiles {0: '800,1280', 1: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Len Err (mm)']
+  X2a (seed 1315, sizes {0: [1280, 800], 1: [1024, 768], 2: [1280, 800]}): pair [1, 2], 52 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.17 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '800,1280', 1: '768,1024', 2: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1024, 768), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+  X2b (seed 1315, sizes {0: [1024, 768], 1: [1280, 800], 2: [1280, 800]}): pair [0, 2], 37 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.17 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '768,1024', 1: '800,1280', 2: '800,1280'}; page [('cam0', 1024, 768), ('cam1', 1280, 800), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+  X2c (seed 1315, sizes {0: [1280, 800], 1: [1024, 768]}): pair [0, 1], 15 s; RMS 0.0720 px; against the truth: f +0.45 %, +0.23 %; principal point 15.4 px, 14.3 px; baselines +0.73 %
+      camFiles {0: '800,1280', 1: '768,1024'}; page [('cam0', 1280, 800), ('cam1', 1024, 768)]; table ['Frame', 'Cam 1', 'Cam 2', 'Len Err (mm)']
+  X3a (seed 1314, sizes {0: [1280, 800], 2: [1280, 800], 3: [1280, 800]}): pair [0, 3], 27 s; RMS 0.0999 px; against the truth: f +0.43 %, +0.37 %, +0.21 %; principal point 9.8 px, 6.3 px, 4.6 px; baselines +0.41 %, +0.35 %, +0.32 %
+      camFiles {0: '800,1280', 2: '800,1280', 3: '800,1280'}; page [('cam0', 1280, 800), ('cam2', 1280, 800), ('cam3', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']
+  X3b (seed 1315, sizes {0: [1280, 800], 2: [1024, 768], 3: [1280, 800]}): pair [2, 3], 52 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.17 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '800,1280', 2: '768,1024', 3: '800,1280'}; page [('cam0', 1280, 800), ('cam2', 1024, 768), ('cam3', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']
+  PASS  X2a: calibrates, with the answer of the large cameras with the same noise (refS); own sizes in the camFiles and on the page; projections in the table  (pairs [1, 2] / [0, 2]; against refS: f 3.5e-05, principal point 0.031 px, baselines 3.3e-05, rotations 2.6e-05 rad, RMS 1.8e-07 px; own sizes, projections True)
+  PASS  X2b: calibrates, with the answer of the large cameras with the same noise (refS); own sizes in the camFiles and on the page; projections in the table  (pairs [0, 2] / [0, 2]; against refS: f 3.9e-05, principal point 0.088 px, baselines 3.0e-05, rotations 5.4e-05 rad, RMS 1.4e-06 px; own sizes, projections True)
+  FAIL  X2c: calibrates, with the answer of the large cameras with the same noise (ref2S); own sizes in the camFiles and on the page; projections in the table  (pairs [0, 1] / [0, 1]; against ref2S: f 1.9e-05, principal point 0.434 px, baselines 1.2e-05, rotations 3.2e-04 rad, RMS 2.3e-05 px; own sizes, projections True)
+  PASS  X3a: ids 0, 2, 3 give ref's answer (ids 0, 1, 2) to the bit  (parameters identical True; camFiles identical True; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']; page ['cam0', 'cam2', 'cam3']; sizes {0: '800,1280', 2: '800,1280', 3: '800,1280'})
+  PASS  X3b: ids 0, 2, 3 give X2a's answer (ids 0, 1, 2) to the bit  (parameters identical True; camFiles identical True; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']; page ['cam0', 'cam2', 'cam3']; sizes {0: '800,1280', 2: '768,1024', 3: '800,1280'})
+
+4 of 5 checks passed; 256 s

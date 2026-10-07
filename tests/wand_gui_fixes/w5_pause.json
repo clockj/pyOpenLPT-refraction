@@ -1,0 +1,62 @@
+{
+ "checks": [
+  {
+   "check": "during the pause at most 2 x workers tasks start (those in flight), none in its last 7 s",
+   "ok": true,
+   "detail": "26 started (limit 50), 0 in the last 7 s"
+  },
+  {
+   "check": "the paused run completes with the unpaused run's raw detections and wand points, to the bit",
+   "ok": true,
+   "detail": "600 frames detected, 100 paired (unpaused: 600, 100)"
+  },
+  {
+   "check": "before the fix, tasks kept starting through the pause (the bug, for the record)",
+   "ok": true,
+   "detail": "587 started during the pause, 427 in its last 7 s"
+  },
+  {
+   "check": "the end of a detection clears the frames deleted before (new points start with none deleted)",
+   "ok": true,
+   "detail": "deleted [], marks {}, filtered None; status 'Done: Detection completed. 100 of 600 frames paired (both balls in every camera).'; messages [('question', 'Export Data')]"
+  }
+ ],
+ "seconds": 80.66547799110413,
+ "unpaused": {
+  "seconds": 23.756767511367798,
+  "tasks": 1200,
+  "finished": {
+   "ok": true,
+   "msg": "Detection completed.",
+   "t": 1791387238.153133
+  }
+ },
+ "paused": {
+  "seconds": 31.530361890792847,
+  "tasks": 1200,
+  "finished": {
+   "ok": true,
+   "msg": "Detection completed.",
+   "t": 1791387269.7818987
+  },
+  "started_in_pause": 26,
+  "started_in_last_7s": 0,
+  "finished_in_pause": 51,
+  "done_before_pause": 100,
+  "last_start_after_pause_s": 0.520965576171875
+ },
+ "paused_before_fix": {
+  "seconds": 23.13094472885132,
+  "tasks": 1200,
+  "finished": {
+   "ok": true,
+   "msg": "Detection completed.",
+   "t": 1791387293.0547278
+  },
+  "started_in_pause": 587,
+  "started_in_last_7s": 427,
+  "finished_in_pause": 588,
+  "done_before_pause": 100,
+  "last_start_after_pause_s": 9.980138063430786
+ }
+}

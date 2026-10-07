@@ -1,0 +1,241 @@
+{
+ "checks": [
+  {
+   "check": "the mapping: 'Dark on Bright' -> dark, 'Bright on Dark' -> bright (the combo's only items)",
+   "ok": true,
+   "detail": "{'Dark on Bright': 'dark', 'Bright on Dark': 'bright'}; items ['Dark on Bright', 'Bright on Dark']"
+  },
+  {
+   "check": "fast: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit",
+   "ok": false,
+   "detail": "0 of 6 frames; 10 of 12 images with both balls found"
+  },
+  {
+   "check": "reliable: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames; 9 of 12 images with both balls found"
+  },
+  {
+   "check": "ellipse: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames; 7 of 12 images with both balls found"
+  }
+ ],
+ "seconds": 224.68198084831238,
+ "mapping": {
+  "Dark on Bright": "dark",
+  "Bright on Dark": "bright"
+ },
+ "results": {
+  "fast": {
+   "frames_same": 0,
+   "counts": [
+    [
+     1000,
+     {
+      "1": 2
+     },
+     {
+      "1": 2
+     }
+    ],
+    [
+     2000,
+     {
+      "1": 2,
+      "0": 4
+     },
+     {
+      "1": 2,
+      "0": 4
+     }
+    ],
+    [
+     3000,
+     {
+      "1": 2,
+      "0": 2
+     },
+     {
+      "1": 2,
+      "0": 2
+     }
+    ],
+    [
+     4069,
+     {
+      "0": 2,
+      "1": 2
+     },
+     {
+      "0": 2,
+      "1": 2
+     }
+    ],
+    [
+     5000,
+     {
+      "1": 2,
+      "0": 1
+     },
+     {
+      "1": 2,
+      "0": 1
+     }
+    ],
+    [
+     8000,
+     {
+      "1": 2,
+      "0": 2
+     },
+     {
+      "1": 2,
+      "0": 2
+     }
+    ]
+   ],
+   "old_mapping_differs": 6
+  },
+  "reliable": {
+   "frames_same": 6,
+   "counts": [
+    [
+     1000,
+     {
+      "1": 2
+     },
+     {
+      "1": 2
+     }
+    ],
+    [
+     2000,
+     {
+      "1": 2,
+      "0": 4
+     },
+     {
+      "1": 2,
+      "0": 4
+     }
+    ],
+    [
+     3000,
+     {
+      "1": 5,
+      "0": 2
+     },
+     {
+      "1": 5,
+      "0": 2
+     }
+    ],
+    [
+     4069,
+     {
+      "1": 5,
+      "0": 3
+     },
+     {
+      "1": 5,
+      "0": 3
+     }
+    ],
+    [
+     5000,
+     {
+      "1": 1,
+      "0": 1
+     },
+     {
+      "1": 1,
+      "0": 1
+     }
+    ],
+    [
+     8000,
+     {
+      "1": 2,
+      "0": 2
+     },
+     {
+      "1": 2,
+      "0": 2
+     }
+    ]
+   ],
+   "old_mapping_differs": 6
+  },
+  "ellipse": {
+   "frames_same": 6,
+   "counts": [
+    [
+     1000,
+     {
+      "1": 2
+     },
+     {
+      "1": 2
+     }
+    ],
+    [
+     2000,
+     {
+      "0": 1,
+      "1": 2
+     },
+     {
+      "0": 1,
+      "1": 2
+     }
+    ],
+    [
+     3000,
+     {
+      "0": 1,
+      "1": 2
+     },
+     {
+      "0": 1,
+      "1": 2
+     }
+    ],
+    [
+     4069,
+     {
+      "0": 2,
+      "1": 2
+     },
+     {
+      "0": 2,
+      "1": 2
+     }
+    ],
+    [
+     5000,
+     {
+      "0": 1,
+      "1": 2
+     },
+     {
+      "0": 1,
+      "1": 2
+     }
+    ],
+    [
+     8000,
+     {
+      "1": 1,
+      "0": 2
+     },
+     {
+      "1": 1,
+      "0": 2
+     }
+    ]
+   ],
+   "old_mapping_differs": 6
+  }
+ }
+}

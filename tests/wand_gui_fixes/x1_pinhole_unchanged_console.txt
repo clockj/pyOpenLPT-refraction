@@ -1,0 +1,316 @@
+X1: W10's rig, 3 cameras of 1280 x 800 px, 300 frames (on the sensors: True)
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 7.80e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 3.77e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 3.31e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.30e+01
+  Primary Optimization Done. Cost: 3.30e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1497 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.58e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ 5.38379448e+00  3.50410817e-01 -6.06803181e+02]
+  Camera 1: Center = [ 305.75109803    9.88574889 -523.47643219]
+  Camera 2: Center = [ 523.42814061   37.63361497 -302.26896272]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 7.80e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 3.77e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 3.31e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.30e+01
+  Primary Optimization Done. Cost: 3.30e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1497 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.58e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ 5.38379448e+00  3.50410817e-01 -6.06803181e+02]
+  Camera 1: Center = [ 305.75109803    9.88574889 -523.47643219]
+  Camera 2: Center = [ 523.42814061   37.63361497 -302.26896272]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 7.80e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 3.77e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 3.31e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.30e+01
+  Primary Optimization Done. Cost: 3.30e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1497 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.58e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ 5.38379448e+00  3.50410817e-01 -6.06803181e+02]
+  Camera 1: Center = [ 305.75109803    9.88574889 -523.47643219]
+  Camera 2: Center = [ 523.42814061   37.63361497 -302.26896272]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+  PASS  three cameras, calibration: the fixed code gives git HEAD's answer to the bit (control: the same twice)  (ok True/True/True; control 0 differences, against HEAD 0; f 2,008.67, 2,007.38, 2,004.24; 22 s old, 22 s new)
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 2 [0, 1]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 1 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0335 units. Scale Factor=298.0732
+
+=== PHASE 1: Optimizing Primary Pair (0, 1) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 3.18e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 1.89e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 7.90e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 7.87e+01
+  Primary Optimization Done. Cost: 7.87e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+
+=== Only 2 Cameras: Phase 3 Skipped (Data already optimized) ===
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [  -8.20609994    1.44624064 -607.03978385]
+  Camera 1: Center = [ 290.54481458    9.62276972 -522.628533  ]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 2 [0, 1]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 1 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0335 units. Scale Factor=298.0732
+
+=== PHASE 1: Optimizing Primary Pair (0, 1) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 3.18e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 1.89e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 7.90e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 7.87e+01
+  Primary Optimization Done. Cost: 7.87e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+
+=== Only 2 Cameras: Phase 3 Skipped (Data already optimized) ===
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [  -8.20609994    1.44624064 -607.03978385]
+  Camera 1: Center = [ 290.54481458    9.62276972 -522.628533  ]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 2 [0, 1]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 1 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0335 units. Scale Factor=298.0732
+
+=== PHASE 1: Optimizing Primary Pair (0, 1) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 3.18e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 1.89e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 7.90e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 7.87e+01
+  Primary Optimization Done. Cost: 7.87e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+
+=== Only 2 Cameras: Phase 3 Skipped (Data already optimized) ===
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [  -8.20609994    1.44624064 -607.03978385]
+  Camera 1: Center = [ 290.54481458    9.62276972 -522.628533  ]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+  PASS  two cameras, calibration: the fixed code gives git HEAD's answer to the bit (control: the same twice)  (ok True/True/True; control 0 differences, against HEAD 0; f 2,008.95, 1,978.90; 10 s old, 10 s new)
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+Pre-Calibration: Triangulating all frames with initialized cameras...
+Pre-Calibration: Optimization with 300 frames...
+Pre-Calibration: Building Sparsity Matrix for 1833 params...
+Running Pre-Calibration Optimization (Relaxed)...
+   Iteration     Total nfev        Cost      Cost reduction    Step norm     Optimality   
+       0              1         6.9499e+02                                    1.85e+04    
+       1              2         6.9499e+02      0.00e+00       0.00e+00       1.85e+04    
+`xtol` termination condition is satisfied.
+Function evaluations 2, initial cost 6.9499e+02, final cost 6.9499e+02, first-order optimality 1.85e+04.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-5.61544535e-01 -1.63657824e+00 -6.09017271e+02]
+  Camera 1: Center = [ 328.83187245   11.33018892 -532.23353173]
+  Camera 2: Center = [ 544.7573128    39.85672864 -271.84947606]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+Pre-Calibration: Triangulating all frames with initialized cameras...
+Pre-Calibration: Optimization with 300 frames...
+Pre-Calibration: Building Sparsity Matrix for 1833 params...
+Running Pre-Calibration Optimization (Relaxed)...
+   Iteration     Total nfev        Cost      Cost reduction    Step norm     Optimality   
+       0              1         6.9499e+02                                    1.85e+04    
+       1              2         6.9499e+02      0.00e+00       0.00e+00       1.85e+04    
+`xtol` termination condition is satisfied.
+Function evaluations 2, initial cost 6.9499e+02, final cost 6.9499e+02, first-order optimality 1.85e+04.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-5.61544535e-01 -1.63657824e+00 -6.09017271e+02]
+  Camera 1: Center = [ 328.83187245   11.33018892 -532.23353173]
+  Camera 2: Center = [ 544.7573128    39.85672864 -271.84947606]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+Pre-Calibration: Triangulating all frames with initialized cameras...
+Pre-Calibration: Optimization with 300 frames...
+Pre-Calibration: Building Sparsity Matrix for 1833 params...
+Running Pre-Calibration Optimization (Relaxed)...
+   Iteration     Total nfev        Cost      Cost reduction    Step norm     Optimality   
+       0              1         6.9499e+02                                    1.85e+04    
+       1              2         6.9499e+02      0.00e+00       0.00e+00       1.85e+04    
+`xtol` termination condition is satisfied.
+Function evaluations 2, initial cost 6.9499e+02, final cost 6.9499e+02, first-order optimality 1.85e+04.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-5.61544535e-01 -1.63657824e+00 -6.09017271e+02]
+  Camera 1: Center = [ 328.83187245   11.33018892 -532.23353173]
+  Camera 2: Center = [ 544.7573128    39.85672864 -271.84947606]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+  PASS  three cameras, Precalibrate's check: the fixed code gives git HEAD's answer to the bit (control: the same twice)  (ok True/True/True; control 0 differences, against HEAD 0; f 2,000.00, 2,032.94, 2,000.00; 0 s old, 0 s new)
+
+3 of 3 checks passed; 97 s
+exit 0

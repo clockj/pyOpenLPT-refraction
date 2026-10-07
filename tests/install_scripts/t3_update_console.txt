@@ -1,0 +1,256 @@
+==========================================
+      OpenLPT Auto-Updater
+==========================================
+
+Usage: update_openlpt.bat [ENV_NAME]   (default: OpenLPT)
+
+
+NOTE: If the process pauses below, please type your password (SSH passphrase or Git account password) and press Enter.
+
+[1/4] Pulling latest code from git...
+Already up to date.
+
+[2/4] Updating the dependencies of 'OpenLPT_install_test' from conda-forge...
+Channels:
+ - conda-forge
+Platform: win-64
+Collecting package metadata (repodata.json): - \ | done
+Solving environment: - \ | done
+
+# All requested packages already installed.
+
+"You seem to have a system wide installation of MSMPI. "
+"Due to the way DLL loading works on windows, system wide installation "
+"will probably overshadow the conda installation. Uninstalling "
+"the system wide installation and forced deleting C:\Windows\System32\msmpi*.dll"
+"will help, but may break other software using the system wide installation."
+
+[3/4] Activating Conda Environment 'OpenLPT_install_test'...
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET DISTUTILS_USE_SDK=1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET MSSdk=1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET "VS_VERSION=17.0" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET "VS_MAJOR=17" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>SET "VS_YEAR=2022" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "MSYS2_ARG_CONV_EXCL=/AI;/AL;/OUT;/out" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "MSYS2_ENV_CONV_EXCL=CL" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "PY_VCRUNTIME_REDIST=\bin\vcruntime140.dll" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CXX=cl.exe" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CC=cl.exe" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "VSINSTALLDIR=" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "NEWER_VS_WITH_OLDER_VC=0" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -products * -version [17.0,18.0) -property installationPath`) do (set "VSINSTALLDIR=%i\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>(set "VSINSTALLDIR=C:\Program Files\Microsoft Visual Studio\2022\Community\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -requires Microsoft.VisualStudio.Component.VC.14.44.17.14.x86.x64 -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -products * -requires Microsoft.VisualStudio.ComponentGroup.VC.Tools.143.x86.x64 -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -products * -requires Microsoft.VisualStudio.Component.VC.v143.x86.x64 -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Professional\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (set "VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\" ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if not exist "C:\Program Files\Microsoft Visual Studio\2022\Community\" (for /F "usebackq tokens=*" %i in (`vswhere.exe -nologo -latest -property installationPath`) do (
+set "VSINSTALLDIR=%i\"  
+ set "NEWER_VS_WITH_OLDER_VC=1" 
+) ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF NOT "" == "" (
+set "INCLUDE=;"  
+ set "LIB=;"  
+ set "CMAKE_PREFIX_PATH=;" 
+)  else (
+set "INCLUDE=C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Library\include;"  
+ set "LIB=C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Library\lib;"  
+ set "CMAKE_PREFIX_PATH=C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Library;" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>call :GetWin10SdkDir 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>call :GetWin10SdkDirHelper HKLM\SOFTWARE\Wow6432Node  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 call :GetWin10SdkDirHelper HKCU\SOFTWARE\Wow6432Node  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 call :GetWin10SdkDirHelper HKLM\SOFTWARE  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 call :GetWin10SdkDirHelper HKCU\SOFTWARE  1>nul 2>&1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 exit /B 1 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>exit /B 0 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>for /F %i in ('dir /ON /B "C:\Program Files (x86)\Windows Kits\10\\include\10.*"') DO (SET WindowsSDKVer=%~i ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>(SET WindowsSDKVer=10.0.22621.0 ) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if errorlevel 1 (echo "Didn't find any windows 10 SDK. I'm not sure if things will work, but let's try..." )  else (echo Windows SDK version found as: "10.0.22621.0" ) 
+Windows SDK version found as: "10.0.22621.0"
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CMAKE_PLAT=x64" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "VCVARSBAT=64" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set "MESON_ARGS=-Dbuildtype=release" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "" == "1" (
+set "CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX= -DPython_FIND_REGISTRY=NEVER -DPython3_FIND_REGISTRY=NEVER -DCMAKE_PROGRAM_PATH=\bin;\Scripts;\Library\bin;\bin;\Scripts;\Library\bin"  
+ set "MESON_ARGS=-Dbuildtype=release --prefix= --pkg-config-path=\pkgconfig;\share\pkgconfig -Dlibdir=lib" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "" == "1" (
+ 
+ IF EXIST /python.exe (set "CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_DEFAULT_CMP0094=NEW" ) 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF 2022 GEQ 2019 (
+set "CMAKE_GEN=Visual Studio 17 2022"  
+ set "USE_NEW_CMAKE_GEN_SYNTAX=1" 
+)  ELSE (
+IF "win-64" == "win-64" (set "CMAKE_GEN=Visual Studio 17 2022 Win64" )  else (set "CMAKE_GEN=Visual Studio 17 2022" )  
+ set "USE_NEW_CMAKE_GEN_SYNTAX=0" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>echo "NEWER_VS_WITH_OLDER_VC=0" 
+"NEWER_VS_WITH_OLDER_VC=0"
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>set /p LATEST_VS= 0<"C:\Program Files\Microsoft Visual Studio\2022\Community\\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>type "C:\Program Files\Microsoft Visual Studio\2022\Community\\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" 
+14.40.33807
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>dir "C:\Program Files\Microsoft Visual Studio\2022\Community\\VC\Redist\MSVC\" 
+ Volume in drive C has no label.
+ Volume Serial Number is F22D-505C
+
+ Directory of C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC
+
+07/09/2024  05:53 PM    <DIR>          .
+07/09/2024  05:51 PM    <DIR>          ..
+07/09/2024  05:53 PM    <DIR>          14.40.33807
+07/09/2024  05:53 PM    <DIR>          v143
+               0 File(s)              0 bytes
+               4 Dir(s)  467,270,635,520 bytes free
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>if "0" == "1" (
+echo "14.40.33807"  
+ if "14.4" == "14.2" (set "CMAKE_GEN=Visual Studio 16 2019" )  else if "14.4" == "14.5" (set "CMAKE_GEN=Visual Studio 18 2026" )  else (set "CMAKE_GEN=Visual Studio 17 2022" )  
+ set "USE_NEW_CMAKE_GEN_SYNTAX=1" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "" == "" SET "CMAKE_GENERATOR=Visual Studio 17 2022" 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>IF "1" == "1" (
+IF "" == "" SET "CMAKE_GENERATOR_PLATFORM=x64"  
+ IF "" == "" SET "CMAKE_GENERATOR_TOOLSET=v143" 
+) 
+
+(OpenLPT_install_test) C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc>pushd C:\Program Files\Microsoft Visual Studio\2022\Community\ 
+
+(OpenLPT_install_test) C:\Program Files\Microsoft Visual Studio\2022\Community>if "14.40" LSS "14.44" (
+ 
+ CALL "VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.40 10.0.22621.0 
+)  else (CALL "VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.44 10.0.22621.0 ) 
+The system cannot find the drive specified.
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.10.4
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+Requirement already satisfied: pycine>=0.3.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (0.3.2)
+Requirement already satisfied: click in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2) (8.5.0)
+Requirement already satisfied: docopt in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2) (0.6.2)
+Requirement already satisfied: opencv-python in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2) (5.0.0)
+Requirement already satisfied: colorama in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2) (0.4.6)
+[INFO] Activating Visual Studio environment...
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.10.4
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+
+[4/4] Re-installing OpenLPT package...
+Processing .\.
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: numpy>=2.2.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (2.4.6)
+Requirement already satisfied: pandas>=2.2.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (3.0.6)
+Requirement already satisfied: pybind11>=2.10 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (3.1.0)
+Requirement already satisfied: scipy>=1.11.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (1.17.1)
+Requirement already satisfied: opencv-python>=4.8.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (5.0.0)
+Requirement already satisfied: scikit-learn>=1.0.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (1.9.1)
+Requirement already satisfied: numba>=0.60.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (0.68.0)
+Requirement already satisfied: matplotlib>=3.7.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (3.11.2)
+Requirement already satisfied: requests>=2.31.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (2.34.2)
+Requirement already satisfied: Pillow>=10.0.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (12.3.0)
+Requirement already satisfied: pycine>=0.3.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (0.3.2)
+Requirement already satisfied: pywin32>=306 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from openlpt==2.2.4) (312)
+Requirement already satisfied: contourpy>=1.0.1 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (0.12.1)
+Requirement already satisfied: fonttools>=4.28.2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (4.66.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (1.5.1)
+Requirement already satisfied: packaging>=20.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (26.3)
+Requirement already satisfied: pyparsing>=3 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (3.3.3)
+Requirement already satisfied: python-dateutil>=2.7 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from matplotlib>=3.7.0->openlpt==2.2.4) (2.9.0.post0)
+Requirement already satisfied: llvmlite<0.51,>=0.50.0dev0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from numba>=0.60.0->openlpt==2.2.4) (0.50.0)
+Requirement already satisfied: tzdata in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pandas>=2.2.2->openlpt==2.2.4) (2026.5)
+Requirement already satisfied: click in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2->openlpt==2.2.4) (8.5.0)
+Requirement already satisfied: docopt in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2->openlpt==2.2.4) (0.6.2)
+Requirement already satisfied: colorama in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from pycine>=0.3.2->openlpt==2.2.4) (0.4.6)
+Requirement already satisfied: six>=1.5 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from python-dateutil>=2.7->matplotlib>=3.7.0->openlpt==2.2.4) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (3.5.2)
+Requirement already satisfied: idna<4,>=2.5 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (3.20)
+Requirement already satisfied: urllib3<3,>=1.26 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (2.8.0)
+Requirement already satisfied: certifi>=2023.5.7 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from requests>=2.31.0->openlpt==2.2.4) (2026.7.22)
+Requirement already satisfied: joblib>=1.4.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from scikit-learn>=1.0.0->openlpt==2.2.4) (1.6.0)
+Requirement already satisfied: narwhals>=2.0.1 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from scikit-learn>=1.0.0->openlpt==2.2.4) (2.27.0)
+Requirement already satisfied: threadpoolctl>=3.5.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from scikit-learn>=1.0.0->openlpt==2.2.4) (3.7.0)
+Requirement already satisfied: cloudpickle>=3.0 in C:\Users\zcloc\.conda\envs\OpenLPT_install_test\Lib\site-packages (from joblib>=1.4.0->scikit-learn>=1.0.0->openlpt==2.2.4) (3.1.2)
+Building wheels for collected packages: openlpt
+  Building wheel for openlpt (pyproject.toml): started
+  Building wheel for openlpt (pyproject.toml): still running...
+  Building wheel for openlpt (pyproject.toml): finished with status 'done'
+  Created wheel for openlpt: filename=openlpt-2.2.4-cp311-cp311-win_amd64.whl size=6461751 sha256=55387cb1892c38edd94ce24604eb3db25bb3acf392bc04e8a5b6eb17670504b9
+  Stored in directory: C:\Users\zcloc\AppData\Local\Temp\pip-ephem-wheel-cache-9kzrf1z8\wheels\6f\7b\29\69a36284fc23b792842584d34893ede3f26ff5c73a36707b44
+Successfully built openlpt
+Installing collected packages: openlpt
+  Attempting uninstall: openlpt
+    Found existing installation: openlpt 2.2.4
+    Uninstalling openlpt-2.2.4:
+      Successfully uninstalled openlpt-2.2.4
+Successfully installed openlpt-2.2.4
+
+==========================================
+      Update Successful! 
+==========================================
+Please restart OpenLPT manually.
+Press any key to continue . . . 

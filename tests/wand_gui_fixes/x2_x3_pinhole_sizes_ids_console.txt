@@ -1,0 +1,478 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 7.80e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 3.77e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 3.31e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.30e+01
+  Primary Optimization Done. Cost: 3.30e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1497 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.58e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ 5.38379448e+00  3.50410817e-01 -6.06803181e+02]
+  Camera 1: Center = [ 305.75109803    9.88574889 -523.47643219]
+  Camera 2: Center = [ 523.42814061   37.63361497 -302.26896272]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0706 px
+  - Cam 0: 0.0652 px
+  - Cam 1: 0.0811 px
+  - Cam 2: 0.0644 px
+Wand Length RMS: 0.0428 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\ref\camFile
+  ref (seed 1314, sizes {0: [1280, 800], 1: [1280, 800], 2: [1280, 800]}): pair [0, 2], 27 s; RMS 0.0999 px; against the truth: f +0.43 %, +0.37 %, +0.21 %; principal point 9.8 px, 6.3 px, 4.6 px; baselines +0.41 %, +0.35 %, +0.32 %
+      camFiles {0: '800,1280', 1: '800,1280', 2: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1280, 800), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=72.629
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=37.048
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.447
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0189 units. Scale Factor=528.6120
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 2.96e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 8.43e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 2.90e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 2.89e+01
+  Primary Optimization Done. Cost: 2.89e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1417 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.27e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-1.05240234e+01  2.29854081e-01 -6.07673901e+02]
+  Camera 1: Center = [ 291.47169351   12.45864556 -532.04034052]
+  Camera 2: Center = [ 515.50919729   42.58062908 -317.70865368]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0711 px
+  - Cam 0: 0.0658 px
+  - Cam 1: 0.0810 px
+  - Cam 2: 0.0655 px
+Wand Length RMS: 0.0397 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\refS\camFile
+  refS (seed 1315, sizes {0: [1280, 800], 1: [1280, 800], 2: [1280, 800]}): pair [0, 2], 24 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.16 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '800,1280', 1: '800,1280', 2: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1280, 800), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 2 [0, 1]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 2 [0, 1]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.447
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 1 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0392 units. Scale Factor=254.8652
+
+=== PHASE 1: Optimizing Primary Pair (0, 1) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 5.26e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 1.18e+03
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 7.45e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 7.43e+01
+  Primary Optimization Done. Cost: 7.43e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+
+=== Only 2 Cameras: Phase 3 Skipped (Data already optimized) ===
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ -16.31072638   -4.9480853  -609.26765029]
+  Camera 1: Center = [ 287.53532541    5.41178595 -535.42462032]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0509 px
+  - Cam 0: 0.0508 px
+  - Cam 1: 0.0510 px
+Wand Length RMS: 0.0725 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\ref2S\camFile
+  ref2S (seed 1315, sizes {0: [1280, 800], 1: [1280, 800]}): pair [0, 1], 16 s; RMS 0.0720 px; against the truth: f +0.45 %, +0.23 %; principal point 15.8 px, 14.0 px; baselines +0.73 %
+      camFiles {0: '800,1280', 1: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=134.622
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=127.040
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=72.629
+[Phase 1] Auto-selected best pair: Cam 1 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0369 units. Scale Factor=271.2969
+
+=== PHASE 1: Optimizing Primary Pair (1, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 2.59e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 7.68e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 8.46e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 8.43e+01
+  Primary Optimization Done. Cost: 8.43e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 0 via PnP (600 points).
+  Optimizing Cam 0...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.2447 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.27e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-315.649679      9.18405907 -519.31229538]
+  Camera 1: Center = [ -16.64246802    1.47735871 -606.5654492 ]
+  Camera 2: Center = [ 286.2837658    14.6071972  -535.10839746]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0711 px
+  - Cam 0: 0.0658 px
+  - Cam 1: 0.0810 px
+  - Cam 2: 0.0655 px
+Wand Length RMS: 0.0397 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\X2a\camFile
+  X2a (seed 1315, sizes {0: [1280, 800], 1: [1024, 768], 2: [1280, 800]}): pair [1, 2], 52 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.17 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '800,1280', 1: '768,1024', 2: '800,1280'}; page [('cam0', 1280, 800), ('cam1', 1024, 768), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(768,1024), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=138.482
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=130.972
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=37.048
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0189 units. Scale Factor=528.6120
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 2.96e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 8.43e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 2.90e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 2.89e+01
+  Primary Optimization Done. Cost: 2.89e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1417 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.27e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-8.25386357e+00 -1.16812242e-01 -6.07732682e+02]
+  Camera 1: Center = [ 293.41040111   13.40320273 -530.96556157]
+  Camera 2: Center = [ 516.51643769   44.56172169 -315.80510766]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0711 px
+  - Cam 0: 0.0658 px
+  - Cam 1: 0.0810 px
+  - Cam 2: 0.0655 px
+Wand Length RMS: 0.0397 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\X2b\camFile
+  X2b (seed 1315, sizes {0: [1024, 768], 1: [1280, 800], 2: [1280, 800]}): pair [0, 2], 37 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.17 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '768,1024', 1: '800,1280', 2: '800,1280'}; page [('cam0', 1024, 768), ('cam1', 1280, 800), ('cam2', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 2', 'Cam 3', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 2 [0, 1]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 2 [0, 1]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=127.040
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 1 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0392 units. Scale Factor=254.8652
+
+=== PHASE 1: Optimizing Primary Pair (0, 1) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 5.26e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 1.18e+03
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 7.45e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 7.43e+01
+  Primary Optimization Done. Cost: 7.43e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+
+=== Only 2 Cameras: Phase 3 Skipped (Data already optimized) ===
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ -17.49842337   -4.93367346 -609.22868678]
+  Camera 1: Center = [ 286.48460515    5.47727506 -535.97512532]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0509 px
+  - Cam 0: 0.0508 px
+  - Cam 1: 0.0510 px
+Wand Length RMS: 0.0725 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\X2c\camFile
+  X2c (seed 1315, sizes {0: [1280, 800], 1: [1024, 768]}): pair [0, 1], 15 s; RMS 0.0720 px; against the truth: f +0.45 %, +0.23 %; principal point 15.4 px, 14.3 px; baselines +0.73 %
+      camFiles {0: '800,1280', 1: '768,1024'}; page [('cam0', 1280, 800), ('cam1', 1024, 768)]; table ['Frame', 'Cam 1', 'Cam 2', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0), (3, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 2, 3]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 2, 3]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 3: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=35.347
+  Cam 2 <-> Cam 3: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 3 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 1: Optimizing Primary Pair (0, 3) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 7.80e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 3.77e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 3.31e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.30e+01
+  Primary Optimization Done. Cost: 3.30e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 2 via PnP (600 points).
+  Optimizing Cam 2...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1497 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.58e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ 5.38379448e+00  3.50410817e-01 -6.06803181e+02]
+  Camera 2: Center = [ 305.75109803    9.88574889 -523.47643219]
+  Camera 3: Center = [ 523.42814061   37.63361497 -302.26896272]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0706 px
+  - Cam 0: 0.0652 px
+  - Cam 2: 0.0811 px
+  - Cam 3: 0.0644 px
+Wand Length RMS: 0.0428 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\X3a\camFile
+  X3a (seed 1314, sizes {0: [1280, 800], 2: [1280, 800], 3: [1280, 800]}): pair [0, 3], 27 s; RMS 0.0999 px; against the truth: f +0.43 %, +0.37 %, +0.21 %; principal point 9.8 px, 6.3 px, 4.6 px; baselines +0.41 %, +0.35 %, +0.32 %
+      camFiles {0: '800,1280', 2: '800,1280', 3: '800,1280'}; page [('cam0', 1280, 800), ('cam2', 1280, 800), ('cam3', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0), (3, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 2, 3]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 2, 3]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 2 <-> Cam 3: shared_count=600, median_disparity=134.622
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=127.040
+  Cam 0 <-> Cam 3: shared_count=600, median_disparity=72.629
+[Phase 1] Auto-selected best pair: Cam 2 <-> Cam 3 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0369 units. Scale Factor=271.2969
+
+=== PHASE 1: Optimizing Primary Pair (2, 3) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 2.59e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 7.68e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 8.46e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 8.43e+01
+  Primary Optimization Done. Cost: 8.43e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 0 via PnP (600 points).
+  Optimizing Cam 0...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.2447 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.27e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [-315.649679      9.18405907 -519.31229538]
+  Camera 2: Center = [ -16.64246802    1.47735871 -606.5654492 ]
+  Camera 3: Center = [ 286.2837658    14.6071972  -535.10839746]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0711 px
+  - Cam 0: 0.0658 px
+  - Cam 2: 0.0810 px
+  - Cam 3: 0.0655 px
+Wand Length RMS: 0.0397 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\x2_x3_run\X3b\camFile
+  X3b (seed 1315, sizes {0: [1280, 800], 2: [1024, 768], 3: [1280, 800]}): pair [2, 3], 52 s; RMS 0.1006 px; against the truth: f +0.29 %, +0.17 %, +0.28 %; principal point 5.2 px, 11.2 px, 8.6 px; baselines +0.32 %, +0.36 %, +0.30 %
+      camFiles {0: '800,1280', 2: '768,1024', 3: '800,1280'}; page [('cam0', 1280, 800), ('cam2', 1024, 768), ('cam3', 1280, 800)]; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']
+  PASS  X2a: calibrates, with the answer of the large cameras with the same noise (refS); own sizes in the camFiles and on the page; projections in the table  (pairs [1, 2] / [0, 2]; against refS: f 3.5e-05, principal point 0.031 px, baselines 3.3e-05, rotations 2.6e-05 rad, RMS 1.8e-07 px; own sizes, projections True)
+  PASS  X2b: calibrates, with the answer of the large cameras with the same noise (refS); own sizes in the camFiles and on the page; projections in the table  (pairs [0, 2] / [0, 2]; against refS: f 3.9e-05, principal point 0.088 px, baselines 3.0e-05, rotations 5.4e-05 rad, RMS 1.4e-06 px; own sizes, projections True)
+  FAIL  X2c: calibrates, with the answer of the large cameras with the same noise (ref2S); own sizes in the camFiles and on the page; projections in the table  (pairs [0, 1] / [0, 1]; against ref2S: f 1.9e-05, principal point 0.434 px, baselines 1.2e-05, rotations 3.2e-04 rad, RMS 2.3e-05 px; own sizes, projections True)
+  PASS  X3a: ids 0, 2, 3 give ref's answer (ids 0, 1, 2) to the bit  (parameters identical True; camFiles identical True; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']; page ['cam0', 'cam2', 'cam3']; sizes {0: '800,1280', 2: '800,1280', 3: '800,1280'})
+  PASS  X3b: ids 0, 2, 3 give X2a's answer (ids 0, 1, 2) to the bit  (parameters identical True; camFiles identical True; table ['Frame', 'Cam 1', 'Cam 3', 'Cam 4', 'Len Err (mm)']; page ['cam0', 'cam2', 'cam3']; sizes {0: '800,1280', 2: '768,1024', 3: '800,1280'})
+
+4 of 5 checks passed; 256 s
+exit 1

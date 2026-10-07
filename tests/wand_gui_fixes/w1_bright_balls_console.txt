@@ -1,0 +1,71 @@
+W1: Wand Type 'Bright on Dark' on bright balls (B1)
+[ WARN:0@0.092] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.485] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.601] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.725] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.824] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.970] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.112] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.222] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.360] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.472] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.616] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.753] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+  frames (1000, 2000, 3000, 4069, 5000, 8000) of T2, cameras 1 and 2: originals (dark balls) and inverted copies (bright balls)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  PASS  the mapping: 'Dark on Bright' -> dark, 'Bright on Dark' -> bright (the combo's only items)  ({'Dark on Bright': 'dark', 'Bright on Dark': 'bright'}; items ['Dark on Bright', 'Bright on Dark'])
+  PASS  fast, the detector (seeded): bright balls as 'bright' = dark balls as 'dark', to the bit  (6 of 6 frames)
+      the old mapping ('dark' on the bright-ball images) differs on 6 of 6 frames
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 0, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 1, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 2, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 3, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 4, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 5, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+  PASS  fast, Test Detect: 'Bright on Dark' on the inverted frames finds the points of 'Dark on Bright' on the originals, as close as a second run on the originals  (same counts True; largest difference 0.00 px against 0.00 px between two runs on the originals; 6 of 6 frames identical; 10 of 12 images with two or more points)
+  PASS  reliable, the detector (seeded): bright balls as 'bright' = dark balls as 'dark', to the bit  (6 of 6 frames)
+      the old mapping ('dark' on the bright-ball images) differs on 6 of 6 frames
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 0, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 1, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 2, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 3, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 4, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 5, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+  PASS  reliable, Test Detect: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit  (6 of 6 frames; 9 of 12 images with two or more points)
+  PASS  ellipse, the detector (seeded): bright balls as 'bright' = dark balls as 'dark', to the bit  (6 of 6 frames)
+      the old mapping ('dark' on the bright-ball images) differs on 6 of 6 frames
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 0, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 1, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 2, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 3, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 4, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 5, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+  PASS  ellipse, Test Detect: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit  (6 of 6 frames; 7 of 12 images with two or more points)
+
+7 of 7 checks passed; 385 s
+exit 0

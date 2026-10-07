@@ -1,0 +1,34 @@
+W11: regression after the wand-tab fixes (B1-B10)
+
+g3_gui_path (56 s, exit 0): 13 of 13 checks passed; 55 s
+  F7 (git HEAD, the folder's outputs): 13 of 13 checks passed; 64 s
+  moved here: g3_gui_path.json, g3_gui_path_out.txt; folder restored byte for byte: True
+
+g5_g9_stop_input_pinhole (9 s, exit 0): (missing)
+  F7 (git HEAD, the folder's outputs): 8 of 8 checks passed; 9 s
+  moved here: g5_g9_stop_input_pinhole.json; folder restored byte for byte: True
+
+g6_gui_launch (5 s, exit 3221226505): (missing)
+  F7 (git HEAD, the folder's outputs): 6 of 6 checks passed; 2 s
+  moved here: g6_gui_launch.json; folder restored byte for byte: True
+
+g8_plate_gui (53 s, exit 0): 9 of 9 checks passed; 52 s
+  F7 (git HEAD, the folder's outputs): 9 of 9 checks passed; 52 s
+  moved here: g8_plate_gui.json, g8_plate_gui_out.txt; folder restored byte for byte: True
+
+g4_pages (14 s, exit 0): 16 of 16 checks passed; 14 s
+  F7 (git HEAD, the folder's outputs): 16 of 16 checks passed; 14 s
+  moved here: g4_cylinder_dark_1200.png, g4_cylinder_dark_390.png, g4_cylinder_light_1200.png, g4_pages.json, g4_pages_out.txt, g4_pinhole_dark_1200.png, g4_pinhole_dark_390.png, g4_pinhole_light_1200.png, g4_plate_dark_1200.png, g4_plate_dark_390.png, g4_plate_light_1200.png; folder restored byte for byte: True
+
+pytest (341 s, exit 1): 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 340.39s (0:05:40)
+  F7: 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 322.53s (0:05:22)
+  failures and errors now: FAILED tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates; FAILED tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo; ERROR tests/test_p0_bootstrap_failure.py; ERROR tests/test_plane_pipeline.py
+W11: regression after the wand-tab fixes (B1-B10)
+
+g5_g9_stop_input_pinhole (9 s, exit 0): 8 of 8 checks passed; 9 s
+  F7 (git HEAD, the folder's outputs): 8 of 8 checks passed; 9 s
+  moved here: g5_g9_stop_input_pinhole.json, g5_g9_stop_input_pinhole_out.txt; folder restored byte for byte: True
+
+g6_gui_launch (2 s, exit 3221226505): 6 of 6 checks passed; 2 s
+  F7 (git HEAD, the folder's outputs): 6 of 6 checks passed; 2 s
+  moved here: g6_gui_launch.json, g6_gui_launch_out.txt; folder restored byte for byte: True

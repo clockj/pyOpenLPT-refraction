@@ -1,0 +1,56 @@
+{
+ "checks": [
+  {
+   "check": "the calibration ran in a separate process (ProcessCalibWorker)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "f of every camera within 0.5 % of the truth",
+   "ok": true,
+   "detail": "cam0 4,315.1 (-0.136 %), cam1 4,317.4 (-0.082 %), cam2 3,973.0 (-0.102 %), cam3 3,970.0 (-0.177 %)"
+  },
+  {
+   "check": "every detection used",
+   "ok": true,
+   "detail": "2400/2400"
+  },
+  {
+   "check": "camFiles are PINPLATE, load in C++, and carry the GUI's window ids for VSC",
+   "ok": true,
+   "detail": "models {'PINPLATE'}, window ids [0, 0, 1, 1]"
+  },
+  {
+   "check": "error table, 3-D windows, the result's kind and the page",
+   "ok": true,
+   "detail": "300 rows, 2 planes, kind plate_wand, page True"
+  },
+  {
+   "check": "tracking settings' hook copies the PINPLATE files",
+   "ok": true,
+   "detail": "['cam0.txt', 'cam1.txt', 'cam2.txt', 'cam3.txt'], byte-identical True"
+  },
+  {
+   "check": "Stop ends the process within 2 s",
+   "ok": true,
+   "detail": "0.06 s; status 'Flat-window calibration stopped.'"
+  },
+  {
+   "check": "refit from the last result: the same f (1e-6), and faster",
+   "ok": true,
+   "detail": "3 s; largest change of f 5.8e-09"
+  },
+  {
+   "check": "'Use the previous calibrator' goes to the previous calibrator",
+   "ok": true,
+   "detail": "calls [(25.0, 0)]"
+  }
+ ],
+ "seconds": 52.095577239990234,
+ "f_rel_err": [
+  -0.0013649185146585863,
+  -0.0008170451799973666,
+  -0.0010235821352290175,
+  -0.0017664177240097612
+ ]
+}

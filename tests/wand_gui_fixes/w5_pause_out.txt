@@ -1,0 +1,10 @@
+W5: 600 frames x 2 cameras (1200 tasks), ellipse mode, 25 worker processes; pause 10 s once 50 frames are detected
+  unpaused: 23.8 s, 1200 tasks, Detection completed.
+  paused: 31.5 s, 1200 tasks, Detection completed.; 100 done before the pause; during it 26 started (the last 0.52 s after it began; 0 in its last 7 s) and 51 finished
+  paused_before_fix: 23.1 s, 1200 tasks, Detection completed.; 100 done before the pause; during it 587 started (the last 9.98 s after it began; 427 in its last 7 s) and 588 finished
+  PASS  during the pause at most 2 x workers tasks start (those in flight), none in its last 7 s  (26 started (limit 50), 0 in the last 7 s)
+  PASS  the paused run completes with the unpaused run's raw detections and wand points, to the bit  (600 frames detected, 100 paired (unpaused: 600, 100))
+  PASS  before the fix, tasks kept starting through the pause (the bug, for the record)  (587 started during the pause, 427 in its last 7 s)
+  PASS  the end of a detection clears the frames deleted before (new points start with none deleted)  (deleted [], marks {}, filtered None; status 'Done: Detection completed. 100 of 600 frames paired (both balls in every camera).'; messages [('question', 'Export Data')])
+
+4 of 4 checks passed; 81 s
