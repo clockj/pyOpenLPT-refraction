@@ -1,0 +1,3 @@
+synth_study gallm: build p4c
+  rendered 1 sets (160 camera-frames) in 471 s
+  G-all matched to T1: rho 0.06, flux held beyond 8 px, scatter 0.19; kept 16394 (2848 central); noise measured [8.79, 6.47]

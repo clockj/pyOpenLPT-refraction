@@ -1,0 +1,109 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "aim_point_mm": [
+  11.048249646954353,
+  1.4712169751094173,
+  -7.773311786518041
+ ],
+ "central_points_sampled": 157108,
+ "cam3": {
+  "source": "cam2",
+  "azimuth_deg": 30.0,
+  "elevation_deg": 25.0,
+  "distance_mm": 829.4243165895203,
+  "pinhole_mm": [
+   386.9051080882712,
+   352.00107989764007,
+   643.2298634070661
+  ],
+  "f_px": 28305.537659249578,
+  "T_pixel": [
+   639.500000001609,
+   399.5
+  ],
+  "T_pixel_error_px": 1.6090098142740317e-09,
+  "first_aim_error_px": 467.6643223137106
+ },
+ "cam4": {
+  "source": "cam1",
+  "azimuth_deg": 30.0,
+  "elevation_deg": -25.0,
+  "distance_mm": 1186.8146500147839,
+  "pinhole_mm": [
+   548.8579291857418,
+   -500.0983274225351,
+   923.7403779769978
+  ],
+  "f_px": 48494.25217145786,
+  "T_pixel": [
+   639.5000000082697,
+   399.50000000275656
+  ],
+  "T_pixel_error_px": 8.717023141128117e-09,
+  "first_aim_error_px": 553.5699338561117
+ },
+ "central": {
+  "cam1": 0.09374443058278381,
+  "cam2": 0.13101178806935357,
+  "cam3": 0.13283219186801437,
+  "cam4": 0.09602311785523335
+ },
+ "view_volume": {
+  "points": 14838,
+  "rig2_both": 0.6020353147324438,
+  "rig3_ge2": 0.7832591993530126,
+  "rig3_all": 0.5634182504380645,
+  "rig4_ge2": 0.8224828143954711,
+  "rig4_ge3": 0.6789324706833805,
+  "rig4_all": 0.46973985712360156
+ },
+ "certificate": {
+  "cam1": {
+   "points": 4692,
+   "certified": 1.0,
+   "rest_status": {}
+  },
+  "cam2": {
+   "points": 4380,
+   "certified": 1.0,
+   "rest_status": {}
+  },
+  "cam3": {
+   "points": 4698,
+   "certified": 1.0,
+   "rest_status": {}
+  },
+  "cam4": {
+   "points": 3838,
+   "certified": 1.0,
+   "rest_status": {}
+  }
+ },
+ "epipolar_angle_deg": {
+  "cam1_in_cam2": 179.86336087534295,
+  "cam1_in_cam3": 155.999757578378,
+  "cam1_in_cam4": 21.218935810280637,
+  "cam2_in_cam1": 0.10920550645082017,
+  "cam2_in_cam3": 21.82595116406577,
+  "cam2_in_cam4": 160.03132325369359,
+  "cam3_in_cam1": 152.41698431449143,
+  "cam3_in_cam2": 30.623942033139052,
+  "cam3_in_cam4": 89.96431068650506,
+  "cam4_in_cam1": 25.22869517907037,
+  "cam4_in_cam2": 151.93014072478363,
+  "cam4_in_cam3": 89.44265353407918
+ },
+ "axis_image_angle_deg": {
+  "cam1": 89.95792509571207,
+  "cam2": 90.49118442253503,
+  "cam3": 89.6896231425002,
+  "cam4": 90.21398696212606
+ }
+}

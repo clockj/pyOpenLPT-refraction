@@ -1,0 +1,28 @@
+synth_study main: build p4c
+  population: sampled in 11879, outA 114204, outB 114306; kept (seen by a camera) in 4118, outA 12930, outB 13059; swirl 2.379e-03 rad per frame, axial drift 15.2 um per frame; 52 s
+  tracks projected in the four cameras: 100 s
+  cam1: z_f 1165.4 mm (least confusion; the central particles' median z_tan 1177.7, z_sag 1153.6 mm)
+    clean, noise 8: in: 1743 images per frame; |L_h| 10/50/90 % 1.7/8.7/23.2 px, |L_v| 1.3/6.4/15.2 px; peak (model) 24/62/108, median peak / noise 8: 7.8
+    clean, noise 8: outA: 2185 images per frame; |L_h| 10/50/90 % 18.2/39.0/76.1 px, |L_v| 10.4/25.6/42.7 px; peak (model) 1/3/13, median peak / noise 8: 0.4
+    clean, noise 8: outB: 2196 images per frame; |L_h| 10/50/90 % 18.6/39.6/76.6 px, |L_v| 10.6/25.4/43.2 px; peak (model) 1/3/12, median peak / noise 8: 0.4
+    t1, noise 8.06: in: 1743 images per frame; |L_h| 10/50/90 % 2.2/11.0/30.5 px, |L_v| 1.5/8.9/22.7 px; peak (model) 21/47/82, median peak / noise 8.05875: 5.8
+    t1, noise 8.06: outA: 2185 images per frame; |L_h| 10/50/90 % 23.1/50.8/100.6 px, |L_v| 11.5/32.4/60.5 px; peak (model) 2/5/15, median peak / noise 8.05875: 0.6
+    t1, noise 8.06: outB: 2196 images per frame; |L_h| 10/50/90 % 23.0/51.4/101.0 px, |L_v| 11.9/32.7/60.5 px; peak (model) 2/5/15, median peak / noise 8.05875: 0.6
+  cam2: z_f 821.2 mm (least confusion; the central particles' median z_tan 833.3, z_sag 809.6 mm)
+    clean, noise 8: in: 2374 images per frame; |L_h| 10/50/90 % 1.9/10.2/26.1 px, |L_v| 1.3/7.5/17.8 px; peak (model) 18/51/89, median peak / noise 8: 6.3
+    clean, noise 8: outA: 3163 images per frame; |L_h| 10/50/90 % 22.9/46.4/85.2 px, |L_v| 12.1/29.9/50.8 px; peak (model) 1/2/9, median peak / noise 8: 0.3
+    clean, noise 8: outB: 3123 images per frame; |L_h| 10/50/90 % 21.3/46.6/84.7 px, |L_v| 11.3/28.3/50.4 px; peak (model) 1/2/10, median peak / noise 8: 0.3
+    t1, noise 5.92: in: 2374 images per frame; |L_h| 10/50/90 % 1.8/10.0/26.5 px, |L_v| 1.3/7.8/19.4 px; peak (model) 28/44/65, median peak / noise 5.92015: 7.5
+    t1, noise 5.92: outA: 3163 images per frame; |L_h| 10/50/90 % 20.8/45.5/86.3 px, |L_v| 10.4/28.8/54.7 px; peak (model) 7/12/25, median peak / noise 5.92015: 2.0
+    t1, noise 5.92: outB: 3123 images per frame; |L_h| 10/50/90 % 19.9/45.9/88.2 px, |L_v| 10.4/28.1/53.1 px; peak (model) 7/12/26, median peak / noise 5.92015: 2.1
+  cam3: z_f 813.8 mm (least confusion; the central particles' median z_tan 832.4, z_sag 795.6 mm)
+    clean, noise 8: in: 2408 images per frame; |L_h| 10/50/90 % 2.2/12.3/33.0 px, |L_v| 2.3/12.1/22.6 px; peak (model) 15/27/53, median peak / noise 8: 3.4
+    clean, noise 8: outA: 3298 images per frame; |L_h| 10/50/90 % 22.0/52.4/104.2 px, |L_v| 7.5/29.3/55.9 px; peak (model) 1/2/11, median peak / noise 8: 0.3
+    clean, noise 8: outB: 3329 images per frame; |L_h| 10/50/90 % 21.1/51.5/104.5 px, |L_v| 7.2/29.8/56.1 px; peak (model) 1/2/11, median peak / noise 8: 0.3
+  cam4: z_f 1170.4 mm (least confusion; the central particles' median z_tan 1189.1, z_sag 1152.5 mm)
+    clean, noise 8: in: 1722 images per frame; |L_h| 10/50/90 % 2.0/10.4/28.3 px, |L_v| 1.5/9.6/17.9 px; peak (model) 23/38/71, median peak / noise 8: 4.8
+    clean, noise 8: outA: 2282 images per frame; |L_h| 10/50/90 % 17.0/41.8/89.2 px, |L_v| 7.0/25.2/44.9 px; peak (model) 1/3/15, median peak / noise 8: 0.4
+    clean, noise 8: outB: 2389 images per frame; |L_h| 10/50/90 % 16.5/41.5/89.1 px, |L_v| 6.8/24.8/44.7 px; peak (model) 1/3/15, median peak / noise 8: 0.4
+  OTF tables written: 105 s
+  rendered 7 sets (160 camera-frames) in 351 s
+exit 0

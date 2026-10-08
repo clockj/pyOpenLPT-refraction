@@ -1,14 +1,16 @@
 """S1 (plan, Phase 6): T1's frames for tracking, preprocessed as L1 does (lines.preprocess).
 
     python tests/s1_preprocess.py [--step 4] [--to-x]
+    python tests/s1_preprocess.py --median 15         # the study's D1 setting (tests/cylinder_stb_study): local only
 
 From the local copy of the raw frames (data/T1raw), every STEP-th frame (P0c: 4, so that particles move 1-3 px per
 step) of both cameras: (the 90th-percentile background of all 1,001 frames, data/T1bg/<cam>_p90.npy) - frame, minus
-its 31 px median, times L1's gain (cam1 6, cam2 4: l1_preprocess.json), clipped to 8 bits.  Writes them to
+its 31 px median (--median), times L1's gain (cam1 6, cam2 4: l1_preprocess.json), clipped to 8 bits.  Writes them to
 data/T1pre_s<STEP>/<cam>/frame%06d.tif (git-ignored, for the runs) and, with --to-x, to
 <tracers.out_dir>\\images\\<cam>\\ (the deliverable), with a manifest (frames, gain, noise of each frame in the 8-bit
 counts = gain x lines.noise_left(hp)) and image lists for OpenLPT (one per camera, local and X:).
-Writes s1_preprocess_out.txt and s1_preprocess.json beside itself.
+Writes s1_preprocess_out.txt and s1_preprocess.json beside itself.  With another median M: data/T1pre_s<STEP>_m<M>
+and s1_preprocess_m<M>_out.txt, .json (the runs read it with CYL_T1_PRE=T1pre_s<STEP>_m<M>: t1_setup.py).
 """
 import argparse
 import json
@@ -32,19 +34,23 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--step", type=int, default=4)
     ap.add_argument("--to-x", action="store_true")
+    ap.add_argument("--median", type=int, default=31, help="the high-pass's median window [px]")
     args = ap.parse_args()
+    sfx = "" if args.median == 31 else f"_m{args.median}"
+    if sfx and args.to_x:
+        raise SystemExit("--to-x writes the deliverable (X:\\...\\T1\\images, the 31 px median); not with --median")
     cfg = t1.load_config()
-    log = case.Log(os.path.join(HERE, "s1_preprocess"))
+    log = case.Log(os.path.join(HERE, f"s1_preprocess{sfx}"))
     with open(os.path.join(HERE, "l1_preprocess.json"), encoding="utf-8") as fh:
         l1 = json.load(fh)["T1"]
     frames = t1.frames(cfg)[::args.step]
-    local = os.path.join(t1.DATA, f"T1pre_s{args.step}")
+    local = os.path.join(t1.DATA, f"T1pre_s{args.step}{sfx}")
     xdir = os.path.join(cfg["tracers"]["out_dir"], "images")
     log(f"S1: T1 preprocessed, every {args.step}th frame ({len(frames)} frames per camera: {frames[0]}..{frames[-1]}),"
-        f" into {local}" + (f" and {xdir}" if args.to_x else ""))
-    man = {"step": args.step, "frames": frames, "cameras": {}, "method":
-           "lines.preprocess: (p90 background of all 1,001 frames - frame) - median_31, minus the noise level, x gain, "
-           "clipped to 0..255"}
+        f" median {args.median} px, into {local}" + (f" and {xdir}" if args.to_x else ""))
+    man = {"step": args.step, "frames": frames, "median_px": args.median, "cameras": {}, "method":
+           f"lines.preprocess: (p90 background of all 1,001 frames - frame) - median_{args.median}, minus the noise "
+           "level, x gain, clipped to 0..255"}
     t0 = time.time()
     for cam in t1.CAMS:
         gain = float(l1[cam]["gain"])
@@ -54,7 +60,7 @@ def main():
             os.makedirs(os.path.join(xdir, cam), exist_ok=True)
         noises, paths_local, paths_x = [], [], []
         for k in frames:
-            hp, img8 = lines.preprocess(t1.read(cam, k), bg, gain)
+            hp, img8 = lines.preprocess(t1.read(cam, k), bg, gain, size=args.median)
             noises.append(float(gain * lines.noise_left(hp)))
             name = t1.name(k, cfg)
             p = os.path.join(local, cam, name)

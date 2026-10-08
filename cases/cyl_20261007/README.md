@@ -12,7 +12,8 @@ The recordings of 7 October 2026 through the water-filled acrylic tube, with the
   `2026-10-07-lines-report.md` (T1's images, preprocessing, the detector's prototype).
 - **Raw images:** `X:\Shijie Zhong\Refraction\Raw\20261007\{T0,Planes,T1}`.
 - **Results:** `X:\Shijie Zhong\Refraction\Processed\20261007\{T0,Planes,T1}`, each with a `README.md`. Use
-  `T0\camFile_track\` for tracking; T1's tracks are in `T1\Results\`.
+  `T0\camFile_track\` for tracking; T1's tracks are in `T1\Results\`. Since 8 Oct these are the rerun with a 15 px
+  median (below); the first run is in `T1\run_31px\`.
 - **`p0_evidence/`:** the scratch probes behind the plan, with their outputs and figures.
 
 The library work (fast projection, image statuses, curved epipolar lines, the OTF segment model, the line detector,
@@ -66,6 +67,22 @@ local copies in `data/` (git-ignored):
     python tests/t1_checks.py              # T1-a to T1-d (--run s3_today for today's run)
     python tests/t1e_ghost_control.py      # T1-e
     python tests/s3_track.py copy-to-x     # the final run, the model and the checks to T1\ on X:
+
+The rerun with a 15 px median (decision D3 of `tests/cylinder_stb_study/2026-10-08-plan.md`; compared there by
+`r1_t1_rerun.py`, report section 7). Result, 8 Oct: about twice the real tracks at the same ghost share, the same
+quality; with k 5 as well, nearly three times, slightly rougher. The m15 run is T1's deliverable on X: since 8 Oct
+(the last command below; the first run moved to `T1\run_31px\`). The
+variant's runs and outputs carry its tag and leave the case's own untouched:
+
+    python tests/s1_preprocess.py --median 15                     # data/T1pre_s4_m15
+    set CYL_T1_PRE=T1pre_s4_m15                                    # (bash: export) the runs and checks read these frames
+    python tests/s3_track.py final --tol2d 1.5 --tag m15           # OMP_NUM_THREADS sets the threads
+    python tests/s3_track.py control --tol2d 1.5 --tag m15
+    python tests/s3_track.py final --tol2d 1.5 --tag m15k5 --k-detect 5
+    python tests/s3_track.py control --tol2d 1.5 --tag m15k5 --k-detect 5
+    python tests/t1_checks.py --run s3_final_m15                   # and s3_final_m15k5
+    python tests/t1e_ghost_control.py --final s3_final_m15 --control s3_control_m15     # and m15k5
+    python tests/s3_track.py copy-to-x --tag m15 --archive run_31px   # m15 to T1\ on X:, the 31 px run to T1\run_31px\
 
 | code | does |
 |---|---|

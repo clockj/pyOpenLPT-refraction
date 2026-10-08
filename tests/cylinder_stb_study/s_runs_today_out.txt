@@ -1,0 +1,4 @@
+Parts S and O: 3 runs, OMP_NUM_THREADS 16: today_S_n8_r2, today_S_n8_r3, today_S_n8_r4
+  today_S_n8_r2: recall (central, seen by all) 0.184, >= 2 0.184; reconstructed 2693 per frame, ghosts 2459 (91.3 %), duplicates 40.4; position RMS 59.2, 24.5, 58.4 um; long tracks 3449 (ghost 2886), purity 0.090, track recall 0.176; 25.43 s per frame; exit 0, wall 1019 s
+  today_S_n8_r3: recall (central, seen by all) 0.213, >= n-1 0.181, >= 2 0.181; reconstructed 4148 per frame, ghosts 3822 (92.1 %), duplicates 83.0; position RMS 58.8, 32.9, 57.6 um; long tracks 5595 (ghost 4751), purity 0.083, track recall 0.174; 57.33 s per frame; exit 0, wall 2296 s
+  today_S_n8_r4: recall (central, seen by all) 0.104, >= n-1 0.147, >= 2 0.125; reconstructed 1416 per frame, ghosts 1108 (78.2 %), duplicates 130.4; position RMS 46.7, 34.0, 47.1 um; long tracks 2113 (ghost 1424), purity 0.223, track recall 0.123; 36.76 s per frame; exit 0, wall 1473 s

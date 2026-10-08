@@ -133,6 +133,12 @@ tests/wand_report_error_pdf/data/
 tests/cylinder_stb/**/__pycache__/
 tests/cylinder_stb/data/
 tests/cylinder_stb/runs/
+# its follow-up study (8 Oct 2026): detection on T1, 2-4 camera synthetic tracking, the real-vs-synthetic gap
+!tests/cylinder_stb_study/
+!tests/cylinder_stb_study/**
+tests/cylinder_stb_study/**/__pycache__/
+tests/cylinder_stb_study/data/
+tests/cylinder_stb_study/runs/
 # the case cases/cyl_20261007: data/ holds local copies of the raw and preprocessed images and run outputs
 cases/cyl_20261007/data/
 # the campaign's build trees and the saved baseline build

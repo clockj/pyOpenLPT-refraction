@@ -1,0 +1,1015 @@
+{
+ "runs": {
+  "Gcal_n8_r2_tol1.0": {
+   "case": "main",
+   "set": "Gcal_n8",
+   "tol_2d_px": 1.0,
+   "otf": "otf_r2.txt",
+   "cam2_shift": 0,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gcal_n8_r2_tol1.0.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 717.28,
+    "end": "2026-10-08T02:29:06",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 746.1111111111111,
+    "matched_per_frame": 601.4722222222222,
+    "ghosts_per_frame": 144.44444444444446,
+    "duplicates_per_frame": 0.19444444444444445,
+    "ghost_share": 0.193596425912137,
+    "present_ge2_in_volume_per_frame": 1053.8055555555557,
+    "recall": {
+     "all_in": 0.5707620528771384,
+     "all_out": null,
+     "ge2_in": 0.5707620528771384,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1053.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1053.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     20.726624957740082,
+     9.82877423559724,
+     18.830450850491957
+    ],
+    "long_tracks": 897,
+    "long_track_mean_length": 31.477146042363433,
+    "long_track_purity_mean": 0.7877397266516535,
+    "long_track_purity_ge_0.9": 0.7302118171683389,
+    "long_tracks_ghost": 140,
+    "track_recall": 0.5694440783404064,
+    "frame_time_s_mean": 17.901249999999997
+   }
+  },
+  "Gcal_n8_r2_tol1.5": {
+   "case": "main",
+   "set": "Gcal_n8",
+   "tol_2d_px": 1.5,
+   "otf": "otf_r2.txt",
+   "cam2_shift": 0,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gcal_n8_r2_tol1.5.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 455.79,
+    "end": "2026-10-08T02:36:42",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 784.0,
+    "matched_per_frame": 611.7777777777778,
+    "ghosts_per_frame": 172.0,
+    "duplicates_per_frame": 0.2222222222222222,
+    "ghost_share": 0.2193877551020408,
+    "present_ge2_in_volume_per_frame": 1053.8055555555557,
+    "recall": {
+     "all_in": 0.5805414239396894,
+     "all_out": null,
+     "ge2_in": 0.5805414239396894,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1053.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1053.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     20.498565899936786,
+     10.194443123029922,
+     18.91018255746338
+    ],
+    "long_tracks": 933,
+    "long_track_mean_length": 31.779206859592712,
+    "long_track_purity_mean": 0.7607885344507994,
+    "long_track_purity_ge_0.9": 0.7041800643086816,
+    "long_tracks_ghost": 169,
+    "track_recall": 0.5786699000975302,
+    "frame_time_s_mean": 11.36875
+   }
+  },
+  "Gshape_nT1_r2": {
+   "case": "main",
+   "set": "Gshape_nT1",
+   "tol_2d_px": 1.0,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gshape_nT1_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 494.32,
+    "end": "2026-10-08T02:44:58",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 266.25,
+    "matched_per_frame": 193.75,
+    "ghosts_per_frame": 72.41666666666667,
+    "duplicates_per_frame": 0.08333333333333333,
+    "ghost_share": 0.27198748043818466,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.183683143286019,
+     "all_out": null,
+     "ge2_in": 0.183683143286019,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     25.026094478137402,
+     9.584688018444322,
+     21.136347728808012
+    ],
+    "long_tracks": 376,
+    "long_track_mean_length": 25.845744680851062,
+    "long_track_purity_mean": 0.7214423239224389,
+    "long_track_purity_ge_0.9": 0.6808510638297872,
+    "long_tracks_ghost": 90,
+    "track_recall": 0.1816027177204856,
+    "frame_time_s_mean": 12.335249999999998
+   }
+  },
+  "Gall_r2": {
+   "case": "gall",
+   "set": "Gall",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 597.17,
+    "end": "2026-10-08T02:54:56",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 76,
+    "cameras": 2,
+    "reconstructed_per_frame": 42.53947368421053,
+    "matched_per_frame": 33.76315789473684,
+    "ghosts_per_frame": 8.776315789473685,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.20630992885864521,
+    "present_ge2_in_volume_per_frame": 492.2105263157895,
+    "recall": {
+     "all_in": 0.06859495295124038,
+     "all_out": null,
+     "ge2_in": 0.06859495295124038,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 492.2105263157895,
+     "all_out": 0.0,
+     "ge2_in": 492.2105263157895,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     22.98565532082508,
+     13.97979310127968,
+     19.316046741459704
+    ],
+    "long_tracks": 124,
+    "long_track_mean_length": 26.35483870967742,
+    "long_track_purity_mean": 0.7638568868407577,
+    "long_track_purity_ge_0.9": 0.7338709677419355,
+    "long_tracks_ghost": 27,
+    "track_recall": 0.0677127887082977,
+    "frame_time_s_mean": 14.895499999999998
+   }
+  },
+  "Gshape_nT1_r2_nocue": {
+   "case": "main",
+   "set": "Gshape_nT1",
+   "tol_2d_px": 1.0,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {
+    "shape_check": false
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gshape_nT1_r2_nocue.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "8"
+    },
+    "returncode": 0,
+    "wall_s": 648.01,
+    "end": "2026-10-08T02:57:33",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 832.5,
+    "matched_per_frame": 229.97222222222223,
+    "ghosts_per_frame": 599.8888888888889,
+    "duplicates_per_frame": 2.638888888888889,
+    "ghost_share": 0.7205872539205872,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.21802333236773497,
+     "all_out": null,
+     "ge2_in": 0.21802333236773497,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     36.34203550054296,
+     12.265665869674653,
+     31.659632238413593
+    ],
+    "long_tracks": 1171,
+    "long_track_mean_length": 23.366353543979503,
+    "long_track_purity_mean": 0.2712771862792899,
+    "long_track_purity_ge_0.9": 0.22886421861656703,
+    "long_tracks_ghost": 791,
+    "track_recall": 0.21362547072920232,
+    "frame_time_s_mean": 16.1735
+   }
+  },
+  "Gall_r2_control": {
+   "case": "gall",
+   "set": "Gall",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 40,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall_r2_control.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 717.56,
+    "end": "2026-10-08T03:06:54",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   }
+  },
+  "Gshape0_nT1_r2": {
+   "case": "main",
+   "set": "Gshape0_nT1",
+   "tol_2d_px": 1.0,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {},
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gshape0_nT1_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "8"
+    },
+    "returncode": 0,
+    "wall_s": 910.01,
+    "end": "2026-10-08T03:12:44",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 608.8055555555555,
+    "matched_per_frame": 541.2777777777778,
+    "ghosts_per_frame": 67.47222222222223,
+    "duplicates_per_frame": 0.05555555555555555,
+    "ghost_share": 0.11082721175343341,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.5131540831643536,
+     "all_out": null,
+     "ge2_in": 0.5131540831643536,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     22.8809276357672,
+     10.44577725270931,
+     20.48181925536224
+    ],
+    "long_tracks": 789,
+    "long_track_mean_length": 28.711026615969583,
+    "long_track_purity_mean": 0.8939992008390575,
+    "long_track_purity_ge_0.9": 0.8301647655259823,
+    "long_tracks_ghost": 43,
+    "track_recall": 0.5103099570747637,
+    "frame_time_s_mean": 22.684
+   }
+  },
+  "Gshape12_nT1_r2": {
+   "case": "main",
+   "set": "Gshape12_nT1",
+   "tol_2d_px": 1.0,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {},
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gshape12_nT1_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "8"
+    },
+    "returncode": 0,
+    "wall_s": 1288.4,
+    "end": "2026-10-08T04:03:15",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 508.3333333333333,
+    "matched_per_frame": 433.19444444444446,
+    "ghosts_per_frame": 74.69444444444444,
+    "duplicates_per_frame": 0.4444444444444444,
+    "ghost_share": 0.14693989071038252,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.410686540436626,
+     "all_out": null,
+     "ge2_in": 0.410686540436626,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     24.22652018626139,
+     12.161953784692372,
+     21.210029169296647
+    ],
+    "long_tracks": 679,
+    "long_track_mean_length": 27.646539027982328,
+    "long_track_purity_mean": 0.851177726945952,
+    "long_track_purity_ge_0.9": 0.7893961708394698,
+    "long_tracks_ghost": 63,
+    "track_recall": 0.4072367208279567,
+    "frame_time_s_mean": 32.0995
+   }
+  },
+  "Gall12_r2": {
+   "case": "gall",
+   "set": "Gall12",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {},
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 754.4,
+    "end": "2026-10-08T04:45:26",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 76,
+    "cameras": 2,
+    "reconstructed_per_frame": 88.88157894736842,
+    "matched_per_frame": 78.19736842105263,
+    "ghosts_per_frame": 10.68421052631579,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.12020725388601036,
+    "present_ge2_in_volume_per_frame": 492.2105263157895,
+    "recall": {
+     "all_in": 0.15886976047904192,
+     "all_out": null,
+     "ge2_in": 0.15886976047904192,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 492.2105263157895,
+     "all_out": 0.0,
+     "ge2_in": 492.2105263157895,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     20.813835870025024,
+     13.278984760425246,
+     17.998010712626662
+    ],
+    "long_tracks": 241,
+    "long_track_mean_length": 29.0,
+    "long_track_purity_mean": 0.8832906783386211,
+    "long_track_purity_ge_0.9": 0.8506224066390041,
+    "long_tracks_ghost": 19,
+    "track_recall": 0.15806779298545764,
+    "frame_time_s_mean": 18.801499999999997
+   }
+  },
+  "Gall12_r2_control": {
+   "case": "gall",
+   "set": "Gall12",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 40,
+   "tracer_overrides": {},
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12_r2_control.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 744.27,
+    "end": "2026-10-08T04:57:51",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   }
+  },
+  "Gall12m15_r2": {
+   "case": "gall",
+   "set": "Gall12_m15",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {
+    "lines": "measured"
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.882936091499582,
+      8.575769957038716
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gall\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12m15_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 1017.03,
+    "end": "2026-10-08T05:28:59",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 76,
+    "cameras": 2,
+    "reconstructed_per_frame": 117.6842105263158,
+    "matched_per_frame": 106.28947368421052,
+    "ghosts_per_frame": 11.394736842105264,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.096824686940966,
+    "present_ge2_in_volume_per_frame": 492.2105263157895,
+    "recall": {
+     "all_in": 0.2159431137724551,
+     "all_out": null,
+     "ge2_in": 0.2159431137724551,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 492.2105263157895,
+     "all_out": 0.0,
+     "ge2_in": 492.2105263157895,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     17.00456211622255,
+     11.83067289343482,
+     14.997962965982731
+    ],
+    "long_tracks": 305,
+    "long_track_mean_length": 30.354098360655737,
+    "long_track_purity_mean": 0.8918746549745775,
+    "long_track_purity_ge_0.9": 0.8754098360655738,
+    "long_tracks_ghost": 28,
+    "track_recall": 0.21495402053036783,
+    "frame_time_s_mean": 25.35375
+   }
+  },
+  "Gall12m15k5_r2": {
+   "case": "gall",
+   "set": "Gall12_m15",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {
+    "lines": "measured",
+    "k_detect": 5.0
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.882936091499582,
+      8.575769957038716
+     ],
+     "k_detect": 5.0
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gall\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12m15k5_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 1508.96,
+    "end": "2026-10-08T05:54:09",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 76,
+    "cameras": 2,
+    "reconstructed_per_frame": 132.17105263157896,
+    "matched_per_frame": 118.35526315789474,
+    "ghosts_per_frame": 13.81578947368421,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.10452961672473868,
+    "present_ge2_in_volume_per_frame": 492.2105263157895,
+    "recall": {
+     "all_in": 0.2404565868263473,
+     "all_out": null,
+     "ge2_in": 0.2404565868263473,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 492.2105263157895,
+     "all_out": 0.0,
+     "ge2_in": 492.2105263157895,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     17.77392560798538,
+     11.6783929824146,
+     14.975963356143067
+    ],
+    "long_tracks": 338,
+    "long_track_mean_length": 30.742603550295858,
+    "long_track_purity_mean": 0.8882083669076795,
+    "long_track_purity_ge_0.9": 0.8727810650887574,
+    "long_tracks_ghost": 32,
+    "track_recall": 0.23941402908468776,
+    "frame_time_s_mean": 37.69525
+   }
+  },
+  "Gallm_r2": {
+   "case": "gallm",
+   "set": "Gallm",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {
+    "lines": "measured"
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.789823040987432,
+      6.470760554366976
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gallm\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gallm_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 959.67,
+    "end": "2026-10-08T06:08:13",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 76,
+    "cameras": 2,
+    "reconstructed_per_frame": 166.46052631578948,
+    "matched_per_frame": 122.89473684210526,
+    "ghosts_per_frame": 43.56578947368421,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.2617184412299423,
+    "present_ge2_in_volume_per_frame": 934.8947368421053,
+    "recall": {
+     "all_in": 0.13145302032314363,
+     "all_out": null,
+     "ge2_in": 0.13145302032314363,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 934.8947368421053,
+     "all_out": 0.0,
+     "ge2_in": 934.8947368421053,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     25.550884818229495,
+     13.511761002067917,
+     22.78276226118612
+    ],
+    "long_tracks": 454,
+    "long_track_mean_length": 28.636563876651984,
+    "long_track_purity_mean": 0.7366396994335651,
+    "long_track_purity_ge_0.9": 0.6762114537444934,
+    "long_tracks_ghost": 95,
+    "track_recall": 0.1302285649946518,
+    "frame_time_s_mean": 23.926750000000002
+   }
+  },
+  "Gall12mn_r2": {
+   "case": "gall",
+   "set": "Gall12",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 0,
+   "tracer_overrides": {
+    "lines": "measured"
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      9.08,
+      9.73
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gall\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12mn_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 966.9,
+    "end": "2026-10-08T06:10:23",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 76,
+    "cameras": 2,
+    "reconstructed_per_frame": 79.4342105263158,
+    "matched_per_frame": 69.27631578947368,
+    "ghosts_per_frame": 10.157894736842104,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.12787808514162663,
+    "present_ge2_in_volume_per_frame": 492.2105263157895,
+    "recall": {
+     "all_in": 0.14074529512403763,
+     "all_out": null,
+     "ge2_in": 0.14074529512403763,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 492.2105263157895,
+     "all_out": 0.0,
+     "ge2_in": 492.2105263157895,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     19.67393415536928,
+     12.764663334807226,
+     17.912637240019567
+    ],
+    "long_tracks": 218,
+    "long_track_mean_length": 28.48165137614679,
+    "long_track_purity_mean": 0.8664789324125534,
+    "long_track_purity_ge_0.9": 0.8486238532110092,
+    "long_tracks_ghost": 23,
+    "track_recall": 0.14007698887938408,
+    "frame_time_s_mean": 24.1465
+   }
+  },
+  "Gallm_r2_control": {
+   "case": "gallm",
+   "set": "Gallm",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 40,
+   "tracer_overrides": {
+    "lines": "measured"
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.789823040987432,
+      6.470760554366976
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gallm\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gallm_r2_control.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 910.8,
+    "end": "2026-10-08T06:23:25",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   }
+  },
+  "Gall12mn_r2_control": {
+   "case": "gall",
+   "set": "Gall12",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 40,
+   "tracer_overrides": {
+    "lines": "measured"
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      9.08,
+      9.73
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gall\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12mn_r2_control.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 598.04,
+    "end": "2026-10-08T08:48:42",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   }
+  },
+  "Gall12m15_r2_control": {
+   "case": "gall",
+   "set": "Gall12_m15",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 40,
+   "tracer_overrides": {
+    "lines": "measured"
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.882936091499582,
+      8.575769957038716
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gall\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12m15_r2_control.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 585.51,
+    "end": "2026-10-08T08:58:28",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   }
+  },
+  "Gall12m15k5_r2_control": {
+   "case": "gall",
+   "set": "Gall12_m15",
+   "tol_2d_px": 1.5,
+   "otf": "otf_t1.txt",
+   "cam2_shift": 40,
+   "tracer_overrides": {
+    "lines": "measured",
+    "k_detect": 5.0
+   },
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.882936091499582,
+      8.575769957038716
+     ],
+     "k_detect": 5.0
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\gall\\otf_t1.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\Gall12m15k5_r2_control.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 605.72,
+    "end": "2026-10-08T09:08:33",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   }
+  }
+ }
+}

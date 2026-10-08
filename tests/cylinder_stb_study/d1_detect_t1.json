@@ -1,0 +1,1427 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "frames": [
+  0,
+  25,
+  50,
+  75,
+  100,
+  125,
+  150,
+  175,
+  200,
+  225
+ ],
+ "settings": {
+  "base": {
+   "param": {},
+   "median_px": 31
+  },
+  "sigma1.4": {
+   "param": {
+    "sigma0": 1.4
+   },
+   "median_px": 31
+  },
+  "k5": {
+   "param": {
+    "k_detect": 5.0
+   },
+   "median_px": 31
+  },
+  "k7": {
+   "param": {
+    "k_detect": 7.0
+   },
+   "median_px": 31
+  },
+  "deblend3": {
+   "param": {
+    "deblend_passes": 3
+   },
+   "median_px": 31
+  },
+  "nosecond": {
+   "param": {
+    "second_pass": false
+   },
+   "median_px": 31
+  },
+  "med15": {
+   "param": {},
+   "median_px": 15
+  },
+  "med51": {
+   "param": {},
+   "median_px": 51
+  },
+  "med15_k5": {
+   "param": {
+    "k_detect": 5.0
+   },
+   "median_px": 15
+  }
+ },
+ "results": {
+  "base": {
+   "frames": 10,
+   "detections_per_frame": [
+    1001.9,
+    864.9
+   ],
+   "true_pairs_per_frame": 190.1125,
+   "true_pairs_se_per_frame": 21.45913631183697,
+   "signal_pairs_per_frame": 3400.9,
+   "background_pairs_per_frame": 8562.1,
+   "true_share_of_signal": 0.05590064394719045,
+   "detections_with_partner": [
+    0.18975197125461624,
+    0.21980864839865882
+   ],
+   "shape_true_pairs_per_frame": 98.025,
+   "shape_true_pairs_se_per_frame": 5.0034050905358445,
+   "shape_signal_pairs_per_frame": 208.8,
+   "shape_true_share_of_signal": 0.4694683908045977,
+   "shape_true_kept": 0.515615753829969,
+   "shape_random_kept": 0.034500881793018065,
+   "epipolar_true_within": {
+    "0.50": 0.35142803981765747,
+    "0.75": 0.4722532328588706,
+    "1.00": 0.5800539585077682,
+    "1.25": 0.6513861754581821,
+    "1.50": 0.7074611591775979,
+    "2.00": 0.883617080658666,
+    "2.50": 0.9533444971625268
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      971,
+      840
+     ],
+     "true_est": 103.375,
+     "signal": 3172,
+     "background": 8183
+    },
+    {
+     "i": 25,
+     "detections": [
+      1007,
+      840
+     ],
+     "true_est": 265.125,
+     "signal": 3372,
+     "background": 8285
+    },
+    {
+     "i": 50,
+     "detections": [
+      997,
+      899
+     ],
+     "true_est": 81.75,
+     "signal": 3405,
+     "background": 8862
+    },
+    {
+     "i": 75,
+     "detections": [
+      1027,
+      887
+     ],
+     "true_est": 174.0,
+     "signal": 3537,
+     "background": 8968
+    },
+    {
+     "i": 100,
+     "detections": [
+      1004,
+      841
+     ],
+     "true_est": 205.875,
+     "signal": 3303,
+     "background": 8259
+    },
+    {
+     "i": 125,
+     "detections": [
+      1016,
+      871
+     ],
+     "true_est": 213.875,
+     "signal": 3476,
+     "background": 8699
+    },
+    {
+     "i": 150,
+     "detections": [
+      1011,
+      882
+     ],
+     "true_est": 227.125,
+     "signal": 3532,
+     "background": 8813
+    },
+    {
+     "i": 175,
+     "detections": [
+      983,
+      845
+     ],
+     "true_est": 153.125,
+     "signal": 3212,
+     "background": 8157
+    },
+    {
+     "i": 200,
+     "detections": [
+      1018,
+      852
+     ],
+     "true_est": 317.375,
+     "signal": 3566,
+     "background": 8663
+    },
+    {
+     "i": 225,
+     "detections": [
+      985,
+      892
+     ],
+     "true_est": 159.5,
+     "signal": 3434,
+     "background": 8732
+    }
+   ],
+   "seconds": 517.3641545772552
+  },
+  "sigma1.4": {
+   "frames": 10,
+   "detections_per_frame": [
+    701.7,
+    567.3
+   ],
+   "true_pairs_per_frame": 126.1125,
+   "true_pairs_se_per_frame": 14.59270472702028,
+   "signal_pairs_per_frame": 1583.1,
+   "background_pairs_per_frame": 3885.3,
+   "true_share_of_signal": 0.07966173962478681,
+   "detections_with_partner": [
+    0.17972424112868746,
+    0.2223030142781597
+   ],
+   "shape_true_pairs_per_frame": 67.425,
+   "shape_true_pairs_se_per_frame": 3.682263230677568,
+   "shape_signal_pairs_per_frame": 117.0,
+   "shape_true_share_of_signal": 0.5762820512820512,
+   "shape_true_kept": 0.5346416889681832,
+   "shape_random_kept": 0.03402568656217023,
+   "epipolar_true_within": {
+    "0.50": 0.411860718171926,
+    "0.75": 0.5484610601585574,
+    "1.00": 0.6651639981346184,
+    "1.25": 0.7327452199595834,
+    "1.50": 0.78415980102596,
+    "2.00": 0.951655526193067,
+    "2.50": 0.9947924762941085
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      713,
+      561
+     ],
+     "true_est": 90.75,
+     "signal": 1587,
+     "background": 3990
+    },
+    {
+     "i": 25,
+     "detections": [
+      700,
+      526
+     ],
+     "true_est": 144.25,
+     "signal": 1471,
+     "background": 3538
+    },
+    {
+     "i": 50,
+     "detections": [
+      724,
+      591
+     ],
+     "true_est": 106.875,
+     "signal": 1677,
+     "background": 4187
+    },
+    {
+     "i": 75,
+     "detections": [
+      723,
+      585
+     ],
+     "true_est": 89.875,
+     "signal": 1618,
+     "background": 4075
+    },
+    {
+     "i": 100,
+     "detections": [
+      715,
+      541
+     ],
+     "true_est": 136.5,
+     "signal": 1500,
+     "background": 3636
+    },
+    {
+     "i": 125,
+     "detections": [
+      701,
+      558
+     ],
+     "true_est": 172.125,
+     "signal": 1566,
+     "background": 3717
+    },
+    {
+     "i": 150,
+     "detections": [
+      708,
+      566
+     ],
+     "true_est": 120.125,
+     "signal": 1640,
+     "background": 4053
+    },
+    {
+     "i": 175,
+     "detections": [
+      659,
+      563
+     ],
+     "true_est": 117.625,
+     "signal": 1462,
+     "background": 3585
+    },
+    {
+     "i": 200,
+     "detections": [
+      683,
+      583
+     ],
+     "true_est": 178.625,
+     "signal": 1661,
+     "background": 3953
+    },
+    {
+     "i": 225,
+     "detections": [
+      691,
+      599
+     ],
+     "true_est": 104.375,
+     "signal": 1649,
+     "background": 4119
+    }
+   ],
+   "seconds": 459.40426754951477
+  },
+  "k5": {
+   "frames": 10,
+   "detections_per_frame": [
+    1360.8,
+    1258.6
+   ],
+   "true_pairs_per_frame": 347.6,
+   "true_pairs_se_per_frame": 30.18675206112774,
+   "signal_pairs_per_frame": 6722.0,
+   "background_pairs_per_frame": 16998.4,
+   "true_share_of_signal": 0.051710800357036596,
+   "detections_with_partner": [
+    0.25543797766019993,
+    0.27617988240902597
+   ],
+   "shape_true_pairs_per_frame": 152.875,
+   "shape_true_pairs_se_per_frame": 6.588602848859537,
+   "shape_signal_pairs_per_frame": 357.4,
+   "shape_true_share_of_signal": 0.42774202574146614,
+   "shape_true_kept": 0.43980149597238205,
+   "shape_random_kept": 0.032085372740963854,
+   "epipolar_true_within": {
+    "0.50": 0.3573674752920036,
+    "0.75": 0.4716981132075472,
+    "1.00": 0.5909703504043127,
+    "1.25": 0.7174303683737646,
+    "1.50": 0.7807726864330637,
+    "2.00": 0.89937106918239,
+    "2.50": 0.9784366576819407
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      1306,
+      1251
+     ],
+     "true_est": 300.875,
+     "signal": 6323,
+     "background": 16059
+    },
+    {
+     "i": 25,
+     "detections": [
+      1335,
+      1239
+     ],
+     "true_est": 350.0,
+     "signal": 6512,
+     "background": 16432
+    },
+    {
+     "i": 50,
+     "detections": [
+      1386,
+      1306
+     ],
+     "true_est": 293.625,
+     "signal": 6951,
+     "background": 17753
+    },
+    {
+     "i": 75,
+     "detections": [
+      1369,
+      1255
+     ],
+     "true_est": 316.375,
+     "signal": 6709,
+     "background": 17047
+    },
+    {
+     "i": 100,
+     "detections": [
+      1374,
+      1278
+     ],
+     "true_est": 374.25,
+     "signal": 6921,
+     "background": 17458
+    },
+    {
+     "i": 125,
+     "detections": [
+      1411,
+      1239
+     ],
+     "true_est": 363.0,
+     "signal": 6828,
+     "background": 17240
+    },
+    {
+     "i": 150,
+     "detections": [
+      1363,
+      1259
+     ],
+     "true_est": 418.125,
+     "signal": 6792,
+     "background": 16997
+    },
+    {
+     "i": 175,
+     "detections": [
+      1352,
+      1265
+     ],
+     "true_est": 305.75,
+     "signal": 6680,
+     "background": 16998
+    },
+    {
+     "i": 200,
+     "detections": [
+      1379,
+      1249
+     ],
+     "true_est": 377.5,
+     "signal": 6910,
+     "background": 17420
+    },
+    {
+     "i": 225,
+     "detections": [
+      1333,
+      1245
+     ],
+     "true_est": 376.5,
+     "signal": 6594,
+     "background": 16580
+    }
+   ],
+   "seconds": 705.0957896709442
+  },
+  "k7": {
+   "frames": 10,
+   "detections_per_frame": [
+    716.0,
+    595.4
+   ],
+   "true_pairs_per_frame": 129.6125,
+   "true_pairs_se_per_frame": 15.125005165288375,
+   "signal_pairs_per_frame": 1699.1,
+   "background_pairs_per_frame": 4185.3,
+   "true_share_of_signal": 0.07628303219351422,
+   "detections_with_partner": [
+    0.18102304469273744,
+    0.21768978837756134
+   ],
+   "shape_true_pairs_per_frame": 66.7125,
+   "shape_true_pairs_se_per_frame": 3.7743583891835177,
+   "shape_signal_pairs_per_frame": 121.8,
+   "shape_true_share_of_signal": 0.5477216748768473,
+   "shape_true_kept": 0.5147073006075803,
+   "shape_random_kept": 0.035099037106061694,
+   "epipolar_true_within": {
+    "0.50": 0.38017950635751685,
+    "0.75": 0.5155198204936425,
+    "1.00": 0.6191473448017951,
+    "1.25": 0.7137995512341062,
+    "1.50": 0.775542258788332,
+    "2.00": 0.9552729992520569,
+    "2.50": 0.9752430815258041
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      725,
+      575
+     ],
+     "true_est": 126.125,
+     "signal": 1685,
+     "background": 4157
+    },
+    {
+     "i": 25,
+     "detections": [
+      701,
+      565
+     ],
+     "true_est": 188.625,
+     "signal": 1611,
+     "background": 3793
+    },
+    {
+     "i": 50,
+     "detections": [
+      749,
+      630
+     ],
+     "true_est": 96.25,
+     "signal": 1858,
+     "background": 4698
+    },
+    {
+     "i": 75,
+     "detections": [
+      731,
+      606
+     ],
+     "true_est": 115.0,
+     "signal": 1705,
+     "background": 4240
+    },
+    {
+     "i": 100,
+     "detections": [
+      719,
+      585
+     ],
+     "true_est": 130.5,
+     "signal": 1653,
+     "background": 4060
+    },
+    {
+     "i": 125,
+     "detections": [
+      721,
+      590
+     ],
+     "true_est": 188.125,
+     "signal": 1711,
+     "background": 4061
+    },
+    {
+     "i": 150,
+     "detections": [
+      730,
+      596
+     ],
+     "true_est": 83.5,
+     "signal": 1753,
+     "background": 4452
+    },
+    {
+     "i": 175,
+     "detections": [
+      685,
+      584
+     ],
+     "true_est": 88.875,
+     "signal": 1536,
+     "background": 3859
+    },
+    {
+     "i": 200,
+     "detections": [
+      698,
+      613
+     ],
+     "true_est": 166.0,
+     "signal": 1753,
+     "background": 4232
+    },
+    {
+     "i": 225,
+     "detections": [
+      701,
+      610
+     ],
+     "true_est": 113.125,
+     "signal": 1726,
+     "background": 4301
+    }
+   ],
+   "seconds": 381.30060172080994
+  },
+  "deblend3": {
+   "frames": 10,
+   "detections_per_frame": [
+    970.2,
+    846.1
+   ],
+   "true_pairs_per_frame": 186.475,
+   "true_pairs_se_per_frame": 20.899484144351508,
+   "signal_pairs_per_frame": 3227.5,
+   "background_pairs_per_frame": 8109.4,
+   "true_share_of_signal": 0.05777691711851278,
+   "detections_with_partner": [
+    0.19220263863121004,
+    0.2203935704999409
+   ],
+   "shape_true_pairs_per_frame": 94.675,
+   "shape_true_pairs_se_per_frame": 4.896650640999416,
+   "shape_signal_pairs_per_frame": 200.2,
+   "shape_true_share_of_signal": 0.4729020979020979,
+   "shape_true_kept": 0.5077088081512267,
+   "shape_random_kept": 0.034700471058278046,
+   "epipolar_true_within": {
+    "0.50": 0.35148910653607834,
+    "0.75": 0.5192384569258445,
+    "1.00": 0.5950429742154707,
+    "1.25": 0.6600539676194284,
+    "1.50": 0.7454527283629823,
+    "2.00": 0.9354387367579452,
+    "2.50": 0.9863082150709575
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      953,
+      810
+     ],
+     "true_est": 115.125,
+     "signal": 2997,
+     "background": 7685
+    },
+    {
+     "i": 25,
+     "detections": [
+      977,
+      836
+     ],
+     "true_est": 222.5,
+     "signal": 3221,
+     "background": 7996
+    },
+    {
+     "i": 50,
+     "detections": [
+      970,
+      883
+     ],
+     "true_est": 95.125,
+     "signal": 3298,
+     "background": 8541
+    },
+    {
+     "i": 75,
+     "detections": [
+      975,
+      852
+     ],
+     "true_est": 190.75,
+     "signal": 3259,
+     "background": 8182
+    },
+    {
+     "i": 100,
+     "detections": [
+      972,
+      824
+     ],
+     "true_est": 238.875,
+     "signal": 3168,
+     "background": 7811
+    },
+    {
+     "i": 125,
+     "detections": [
+      978,
+      857
+     ],
+     "true_est": 193.25,
+     "signal": 3293,
+     "background": 8266
+    },
+    {
+     "i": 150,
+     "detections": [
+      973,
+      862
+     ],
+     "true_est": 206.25,
+     "signal": 3306,
+     "background": 8266
+    },
+    {
+     "i": 175,
+     "detections": [
+      972,
+      833
+     ],
+     "true_est": 160.5,
+     "signal": 3138,
+     "background": 7940
+    },
+    {
+     "i": 200,
+     "detections": [
+      987,
+      829
+     ],
+     "true_est": 269.75,
+     "signal": 3341,
+     "background": 8190
+    },
+    {
+     "i": 225,
+     "detections": [
+      945,
+      875
+     ],
+     "true_est": 172.625,
+     "signal": 3254,
+     "background": 8217
+    }
+   ],
+   "seconds": 587.4877557754517
+  },
+  "nosecond": {
+   "frames": 10,
+   "detections_per_frame": [
+    977.0,
+    843.3
+   ],
+   "true_pairs_per_frame": 195.2,
+   "true_pairs_se_per_frame": 20.930450305714878,
+   "signal_pairs_per_frame": 3239.3,
+   "background_pairs_per_frame": 8117.6,
+   "true_share_of_signal": 0.06025993270150959,
+   "detections_with_partner": [
+    0.1997952917093142,
+    0.23147159966797107
+   ],
+   "shape_true_pairs_per_frame": 94.9375,
+   "shape_true_pairs_se_per_frame": 4.895645386463362,
+   "shape_signal_pairs_per_frame": 200.2,
+   "shape_true_share_of_signal": 0.4742132867132867,
+   "shape_true_kept": 0.48636014344262296,
+   "shape_random_kept": 0.03457918596629546,
+   "epipolar_true_within": {
+    "0.50": 0.3406238795267121,
+    "0.75": 0.4670132664037289,
+    "1.00": 0.5657941914664755,
+    "1.25": 0.6423449264969523,
+    "1.50": 0.69989243456436,
+    "2.00": 0.8784510577267838,
+    "2.50": 0.9666547149515956
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      952,
+      819
+     ],
+     "true_est": 121.875,
+     "signal": 3051,
+     "background": 7811
+    },
+    {
+     "i": 25,
+     "detections": [
+      980,
+      820
+     ],
+     "true_est": 245.375,
+     "signal": 3188,
+     "background": 7847
+    },
+    {
+     "i": 50,
+     "detections": [
+      977,
+      872
+     ],
+     "true_est": 64.375,
+     "signal": 3232,
+     "background": 8447
+    },
+    {
+     "i": 75,
+     "detections": [
+      991,
+      860
+     ],
+     "true_est": 181.5,
+     "signal": 3321,
+     "background": 8372
+    },
+    {
+     "i": 100,
+     "detections": [
+      990,
+      811
+     ],
+     "true_est": 193.625,
+     "signal": 3116,
+     "background": 7793
+    },
+    {
+     "i": 125,
+     "detections": [
+      997,
+      843
+     ],
+     "true_est": 243.5,
+     "signal": 3335,
+     "background": 8244
+    },
+    {
+     "i": 150,
+     "detections": [
+      983,
+      863
+     ],
+     "true_est": 210.0,
+     "signal": 3348,
+     "background": 8368
+    },
+    {
+     "i": 175,
+     "detections": [
+      956,
+      828
+     ],
+     "true_est": 203.125,
+     "signal": 3106,
+     "background": 7741
+    },
+    {
+     "i": 200,
+     "detections": [
+      984,
+      837
+     ],
+     "true_est": 331.0,
+     "signal": 3388,
+     "background": 8152
+    },
+    {
+     "i": 225,
+     "detections": [
+      960,
+      880
+     ],
+     "true_est": 157.625,
+     "signal": 3308,
+     "background": 8401
+    }
+   ],
+   "seconds": 395.7389533519745
+  },
+  "med15": {
+   "frames": 10,
+   "detections_per_frame": [
+    1102.7,
+    987.9
+   ],
+   "true_pairs_per_frame": 281.8125,
+   "true_pairs_se_per_frame": 24.15775302568515,
+   "signal_pairs_per_frame": 4321.2,
+   "background_pairs_per_frame": 10771.7,
+   "true_share_of_signal": 0.06521625937239656,
+   "detections_with_partner": [
+    0.2555658837399111,
+    0.2852641967810507
+   ],
+   "shape_true_pairs_per_frame": 141.9375,
+   "shape_true_pairs_se_per_frame": 5.858207383662685,
+   "shape_signal_pairs_per_frame": 288.3,
+   "shape_true_share_of_signal": 0.4923257023933403,
+   "shape_true_kept": 0.5036593479707252,
+   "shape_random_kept": 0.036233834956413566,
+   "epipolar_true_within": {
+    "0.50": 0.38108607576942216,
+    "0.75": 0.5009773260359656,
+    "1.00": 0.6424763664794939,
+    "1.25": 0.7464460871419433,
+    "1.50": 0.8012296538488877,
+    "2.00": 0.9491790461297889,
+    "2.50": 0.9413248987134836
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      1065,
+      988
+     ],
+     "true_est": 184.375,
+     "signal": 4069,
+     "background": 10359
+    },
+    {
+     "i": 25,
+     "detections": [
+      1130,
+      972
+     ],
+     "true_est": 327.875,
+     "signal": 4388,
+     "background": 10827
+    },
+    {
+     "i": 50,
+     "detections": [
+      1117,
+      992
+     ],
+     "true_est": 232.75,
+     "signal": 4315,
+     "background": 10886
+    },
+    {
+     "i": 75,
+     "detections": [
+      1124,
+      997
+     ],
+     "true_est": 250.375,
+     "signal": 4408,
+     "background": 11087
+    },
+    {
+     "i": 100,
+     "detections": [
+      1120,
+      982
+     ],
+     "true_est": 296.0,
+     "signal": 4361,
+     "background": 10840
+    },
+    {
+     "i": 125,
+     "detections": [
+      1095,
+      991
+     ],
+     "true_est": 313.875,
+     "signal": 4305,
+     "background": 10643
+    },
+    {
+     "i": 150,
+     "detections": [
+      1094,
+      1005
+     ],
+     "true_est": 404.875,
+     "signal": 4498,
+     "background": 10915
+    },
+    {
+     "i": 175,
+     "detections": [
+      1086,
+      969
+     ],
+     "true_est": 272.0,
+     "signal": 4184,
+     "background": 10432
+    },
+    {
+     "i": 200,
+     "detections": [
+      1131,
+      978
+     ],
+     "true_est": 318.375,
+     "signal": 4482,
+     "background": 11103
+    },
+    {
+     "i": 225,
+     "detections": [
+      1065,
+      1005
+     ],
+     "true_est": 217.625,
+     "signal": 4202,
+     "background": 10625
+    }
+   ],
+   "seconds": 593.763206243515
+  },
+  "med51": {
+   "frames": 10,
+   "detections_per_frame": [
+    982.1,
+    824.0
+   ],
+   "true_pairs_per_frame": 179.0625,
+   "true_pairs_se_per_frame": 20.73343088468476,
+   "signal_pairs_per_frame": 3175.2,
+   "background_pairs_per_frame": 7989.7,
+   "true_share_of_signal": 0.05639408541194255,
+   "detections_with_partner": [
+    0.18232613786783422,
+    0.21730885922330098
+   ],
+   "shape_true_pairs_per_frame": 88.55,
+   "shape_true_pairs_se_per_frame": 4.75519452809241,
+   "shape_signal_pairs_per_frame": 188.6,
+   "shape_true_share_of_signal": 0.4695121951219512,
+   "shape_true_kept": 0.49452006980802793,
+   "shape_random_kept": 0.03339299347910435,
+   "epipolar_true_within": {
+    "0.50": 0.36165766133143035,
+    "0.75": 0.478463655826282,
+    "1.00": 0.5699867468651239,
+    "1.25": 0.6782291772861657,
+    "1.50": 0.730196758079315,
+    "2.00": 0.8773575288000816,
+    "2.50": 0.938474870017331
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      958,
+      826
+     ],
+     "true_est": 83.125,
+     "signal": 2998,
+     "background": 7773
+    },
+    {
+     "i": 25,
+     "detections": [
+      1001,
+      792
+     ],
+     "true_est": 280.25,
+     "signal": 3152,
+     "background": 7658
+    },
+    {
+     "i": 50,
+     "detections": [
+      1013,
+      884
+     ],
+     "true_est": 145.125,
+     "signal": 3471,
+     "background": 8869
+    },
+    {
+     "i": 75,
+     "detections": [
+      1007,
+      824
+     ],
+     "true_est": 236.75,
+     "signal": 3299,
+     "background": 8166
+    },
+    {
+     "i": 100,
+     "detections": [
+      964,
+      781
+     ],
+     "true_est": 178.75,
+     "signal": 2878,
+     "background": 7198
+    },
+    {
+     "i": 125,
+     "detections": [
+      994,
+      826
+     ],
+     "true_est": 192.25,
+     "signal": 3244,
+     "background": 8138
+    },
+    {
+     "i": 150,
+     "detections": [
+      990,
+      803
+     ],
+     "true_est": 176.375,
+     "signal": 3134,
+     "background": 7887
+    },
+    {
+     "i": 175,
+     "detections": [
+      953,
+      830
+     ],
+     "true_est": 135.5,
+     "signal": 3074,
+     "background": 7836
+    },
+    {
+     "i": 200,
+     "detections": [
+      1000,
+      835
+     ],
+     "true_est": 195.125,
+     "signal": 3359,
+     "background": 8437
+    },
+    {
+     "i": 225,
+     "detections": [
+      941,
+      839
+     ],
+     "true_est": 167.375,
+     "signal": 3143,
+     "background": 7935
+    }
+   ],
+   "seconds": 592.8403050899506
+  },
+  "best": {
+   "frames": 10,
+   "detections_per_frame": [
+    1102.7,
+    987.9
+   ],
+   "true_pairs_per_frame": 281.8125,
+   "true_pairs_se_per_frame": 24.15775302568515,
+   "signal_pairs_per_frame": 4321.2,
+   "background_pairs_per_frame": 10771.7,
+   "true_share_of_signal": 0.06521625937239656,
+   "detections_with_partner": [
+    0.2555658837399111,
+    0.2852641967810507
+   ],
+   "shape_true_pairs_per_frame": 141.9375,
+   "shape_true_pairs_se_per_frame": 5.858207383662685,
+   "shape_signal_pairs_per_frame": 288.3,
+   "shape_true_share_of_signal": 0.4923257023933403,
+   "shape_true_kept": 0.5036593479707252,
+   "shape_random_kept": 0.036233834956413566,
+   "epipolar_true_within": {
+    "0.50": 0.38108607576942216,
+    "0.75": 0.5009773260359656,
+    "1.00": 0.6424763664794939,
+    "1.25": 0.7464460871419433,
+    "1.50": 0.8012296538488877,
+    "2.00": 0.9491790461297889,
+    "2.50": 0.9413248987134836
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      1065,
+      988
+     ],
+     "true_est": 184.375,
+     "signal": 4069,
+     "background": 10359
+    },
+    {
+     "i": 25,
+     "detections": [
+      1130,
+      972
+     ],
+     "true_est": 327.875,
+     "signal": 4388,
+     "background": 10827
+    },
+    {
+     "i": 50,
+     "detections": [
+      1117,
+      992
+     ],
+     "true_est": 232.75,
+     "signal": 4315,
+     "background": 10886
+    },
+    {
+     "i": 75,
+     "detections": [
+      1124,
+      997
+     ],
+     "true_est": 250.375,
+     "signal": 4408,
+     "background": 11087
+    },
+    {
+     "i": 100,
+     "detections": [
+      1120,
+      982
+     ],
+     "true_est": 296.0,
+     "signal": 4361,
+     "background": 10840
+    },
+    {
+     "i": 125,
+     "detections": [
+      1095,
+      991
+     ],
+     "true_est": 313.875,
+     "signal": 4305,
+     "background": 10643
+    },
+    {
+     "i": 150,
+     "detections": [
+      1094,
+      1005
+     ],
+     "true_est": 404.875,
+     "signal": 4498,
+     "background": 10915
+    },
+    {
+     "i": 175,
+     "detections": [
+      1086,
+      969
+     ],
+     "true_est": 272.0,
+     "signal": 4184,
+     "background": 10432
+    },
+    {
+     "i": 200,
+     "detections": [
+      1131,
+      978
+     ],
+     "true_est": 318.375,
+     "signal": 4482,
+     "background": 11103
+    },
+    {
+     "i": 225,
+     "detections": [
+      1065,
+      1005
+     ],
+     "true_est": 217.625,
+     "signal": 4202,
+     "background": 10625
+    }
+   ],
+   "seconds": 573.3269724845886
+  },
+  "med15_k5": {
+   "frames": 10,
+   "detections_per_frame": [
+    1472.9,
+    1418.3
+   ],
+   "true_pairs_per_frame": 448.05,
+   "true_pairs_se_per_frame": 33.372696549724594,
+   "signal_pairs_per_frame": 8222.1,
+   "background_pairs_per_frame": 20730.8,
+   "true_share_of_signal": 0.054493377604261685,
+   "detections_with_partner": [
+    0.30419580419580416,
+    0.3159063667771276
+   ],
+   "shape_true_pairs_per_frame": 223.8875,
+   "shape_true_pairs_se_per_frame": 7.707494323708582,
+   "shape_signal_pairs_per_frame": 493.1,
+   "shape_true_share_of_signal": 0.45404076252281483,
+   "shape_true_kept": 0.4996931146077447,
+   "shape_random_kept": 0.03462963320277076,
+   "epipolar_true_within": {
+    "0.50": 0.3904194809811589,
+    "0.75": 0.5200408816210451,
+    "1.00": 0.6325986491290437,
+    "1.25": 0.7462228937077853,
+    "1.50": 0.7963917525773195,
+    "2.00": 0.9331674369001066,
+    "2.50": 0.9792925702097405
+   },
+   "per_frame": [
+    {
+     "i": 0,
+     "detections": [
+      1457,
+      1415
+     ],
+     "true_est": 487.375,
+     "signal": 8071,
+     "background": 20223
+    },
+    {
+     "i": 25,
+     "detections": [
+      1472,
+      1417
+     ],
+     "true_est": 412.25,
+     "signal": 8201,
+     "background": 20770
+    },
+    {
+     "i": 50,
+     "detections": [
+      1503,
+      1428
+     ],
+     "true_est": 354.875,
+     "signal": 8267,
+     "background": 21099
+    },
+    {
+     "i": 75,
+     "detections": [
+      1506,
+      1430
+     ],
+     "true_est": 425.125,
+     "signal": 8416,
+     "background": 21309
+    },
+    {
+     "i": 100,
+     "detections": [
+      1493,
+      1413
+     ],
+     "true_est": 346.875,
+     "signal": 8298,
+     "background": 21203
+    },
+    {
+     "i": 125,
+     "detections": [
+      1458,
+      1354
+     ],
+     "true_est": 487.125,
+     "signal": 7761,
+     "background": 19397
+    },
+    {
+     "i": 150,
+     "detections": [
+      1447,
+      1457
+     ],
+     "true_est": 570.0,
+     "signal": 8418,
+     "background": 20928
+    },
+    {
+     "i": 175,
+     "detections": [
+      1472,
+      1416
+     ],
+     "true_est": 392.75,
+     "signal": 8192,
+     "background": 20798
+    },
+    {
+     "i": 200,
+     "detections": [
+      1476,
+      1424
+     ],
+     "true_est": 559.75,
+     "signal": 8437,
+     "background": 21006
+    },
+    {
+     "i": 225,
+     "detections": [
+      1445,
+      1429
+     ],
+     "true_est": 444.375,
+     "signal": 8160,
+     "background": 20575
+    }
+   ],
+   "seconds": 835.3883261680603
+  }
+ },
+ "best": {
+  "from": [
+   "med15"
+  ],
+  "param": {},
+  "median_px": 15
+ },
+ "qualifying": [
+  "med15"
+ ],
+ "qualifying_with_depth_cue": [
+  "med15"
+ ]
+}

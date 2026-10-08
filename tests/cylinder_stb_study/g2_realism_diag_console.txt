@@ -1,0 +1,4 @@
+G2: Gshape_nT1_r2_nocue, Gshape0_nT1_r2; OMP_NUM_THREADS 8
+  Gshape_nT1_r2_nocue: recall (central, seen by all) 0.218, >= 2 0.218; reconstructed 832 per frame, ghosts 600 (72.1 %), duplicates 2.6; position RMS 36.3, 12.3, 31.7 um; long tracks 1171 (ghost 791), purity 0.271, track recall 0.214; 16.17 s per frame; exit 0, wall 648 s
+  Gshape0_nT1_r2: recall (central, seen by all) 0.513, >= 2 0.513; reconstructed 609 per frame, ghosts 67 (11.1 %), duplicates 0.1; position RMS 22.9, 10.4, 20.5 um; long tracks 789 (ghost 43), purity 0.894, track recall 0.510; 22.68 s per frame; exit 0, wall 910 s
+exit 0

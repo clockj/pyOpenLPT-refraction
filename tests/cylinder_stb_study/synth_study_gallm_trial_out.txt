@@ -1,0 +1,13 @@
+synth_study gallm-trial: build p4c
+  rho 0.035, flux held beyond |b|+|c| = 8 px: kept 6737; images [2979, 4241]; noise measured [8.45, 6.28] (T1 8.06, 5.88); detections [669, 850] (T1 1002, 865)
+  rho 0.035, flux held beyond |b|+|c| = 15 px: kept 6737; images [2979, 4241]; noise measured [8.61, 6.62] (T1 8.06, 5.88); detections [683, 892] (T1 1002, 865)
+  rho 0.035, flux held beyond |b|+|c| = 25 px: kept 6737; images [2979, 4241]; noise measured [8.78, 7.27] (T1 8.06, 5.88); detections [697, 888] (T1 1002, 865)
+  rho 0.05, flux held beyond |b|+|c| = 8 px: kept 9637; images [4236, 6089]; noise measured [8.63, 6.38] (T1 8.06, 5.88); detections [815, 1004] (T1 1002, 865)
+  rho 0.05, flux held beyond |b|+|c| = 15 px: kept 9637; images [4236, 6089]; noise measured [8.84, 6.88] (T1 8.06, 5.88); detections [812, 1055] (T1 1002, 865)
+  rho 0.05, flux held beyond |b|+|c| = 25 px: kept 9637; images [4236, 6089]; noise measured [9.08, 7.99] (T1 8.06, 5.88); detections [828, 893] (T1 1002, 865)
+  rho 0.07, flux held beyond |b|+|c| = 8 px: kept 13563; images [5974, 8539]; noise measured [8.9, 6.58] (T1 8.06, 5.88); detections [910, 1053] (T1 1002, 865)
+  rho 0.07, flux held beyond |b|+|c| = 15 px: kept 13563; images [5974, 8539]; noise measured [9.24, 7.39] (T1 8.06, 5.88); detections [918, 1058] (T1 1002, 865)
+  rho 0.07, flux held beyond |b|+|c| = 25 px: kept 13563; images [5974, 8539]; noise measured [9.66, 8.98] (T1 8.06, 5.88); detections [912, 715] (T1 1002, 865)
+  rho 0.1, flux held beyond |b|+|c| = 8 px: kept 19472; images [8605, 12287]; noise measured [9.43, 6.95] (T1 8.06, 5.88); detections [959, 1033] (T1 1002, 865)
+  rho 0.1, flux held beyond |b|+|c| = 15 px: kept 19472; images [8605, 12287]; noise measured [9.98, 8.14] (T1 8.06, 5.88); detections [932, 882] (T1 1002, 865)
+  rho 0.1, flux held beyond |b|+|c| = 25 px: kept 19472; images [8605, 12287]; noise measured [10.61, 10.36] (T1 8.06, 5.88); detections [847, 542] (T1 1002, 865)

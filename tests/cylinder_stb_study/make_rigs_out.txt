@@ -1,0 +1,14 @@
+The study's rigs; build p4c
+  aim point T (centroid of the 8933 of 157108 central points both real cameras see): (11.05, 1.47, -7.77) mm
+  cam3: cam2's lens (f 28306 px) at 829.4 mm from T, azimuth 30 deg, elevation +25 deg; pinhole (386.9, 352.0, 643.2) mm; T images at (639.500000, 399.500000) (principal point (639.5, 399.5): 1.6e-09 px off; aimed in air 468 px off)
+  cam4: cam1's lens (f 48494 px) at 1186.8 mm from T, azimuth 30 deg, elevation -25 deg; pinhole (548.9, -500.1, 923.7) mm; T images at (639.500000, 399.500000) (principal point (639.5, 399.5): 8.7e-09 px off; aimed in air 554 px off)
+  share of the central region's points (r < 30 mm, |y| < 45 mm) each camera sees: cam1 9.4 %, cam2 13.1 %, cam3 13.3 %, cam4 9.6 %
+  T1's view volume (x [-1.7 24.4], y [-9.2 12.6], z [-30.3  15.8] mm), 14838 of the sampled points inside the water's central region: seen by both real cameras 60.2 %; 3-camera rig: >= 2 78.3 %, all 3 56.3 %; 4-camera rig: >= 2 82.2 %, >= 3 67.9 %, all 4 47.0 %
+  cam1: 4692 points of the view volume on its sensor; certified single image 100.00 %; the rest's imageStatus (up to 500): {}
+  cam2: 4380 points of the view volume on its sensor; certified single image 100.00 %; the rest's imageStatus (up to 500): {}
+  cam3: 4698 points of the view volume on its sensor; certified single image 100.00 %; the rest's imageStatus (up to 500): {}
+  cam4: 3838 points of the view volume on its sensor; certified single image 100.00 %; the rest's imageStatus (up to 500): {}
+  in cam1 (image angles from the u axis, mod 180; the tube's axis at 90.0 deg): cam2's lines 0.1 deg, cam3's lines 152.4 deg, cam4's lines 25.2 deg
+  in cam2 (image angles from the u axis, mod 180; the tube's axis at 90.5 deg): cam1's lines 179.9 deg, cam3's lines 30.6 deg, cam4's lines 151.9 deg
+  in cam3 (image angles from the u axis, mod 180; the tube's axis at 89.7 deg): cam1's lines 156.0 deg, cam2's lines 21.8 deg, cam4's lines 89.4 deg
+  in cam4 (image angles from the u axis, mod 180; the tube's axis at 90.2 deg): cam1's lines 21.2 deg, cam2's lines 160.0 deg, cam3's lines 90.0 deg

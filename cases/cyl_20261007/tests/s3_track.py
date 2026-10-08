@@ -4,6 +4,8 @@
     python tests/s3_track.py control [--frames 0 100] [--shift 100]
     python tests/s3_track.py today [--frames 0 60]
     python tests/s3_track.py copy-to-x
+    python tests/s3_track.py final|control ... --tag TAG [--k-detect K]   # a variant beside the runs above
+    python tests/s3_track.py copy-to-x --tag TAG [--archive NAME]         # a variant as T1's deliverable on X:
 
 S1's preprocessed frames (every 4th raw frame: frame index i = raw frame 4 i), T0's tracking cameras (camFile_track),
 the view volume both cameras see (t1_setup.view_volume), voxel 0.03 mm (about 1 px in both cameras).
@@ -20,8 +22,16 @@ Runs in data/runs/s3_<name>/ (git-ignored), each with its config.json, log.txt a
 final run to <tracers.out_dir> (config.json, log.txt, Results/, the OTF table and the model) and the checks' outputs
 (S2, S2b, T1-a to T1-e, the runs' summaries) to its checks\.  Writes s3_track_<name>_out.txt
 and .json beside itself (frames, time per frame, objects per frame from the log).
+A variant (--tag TAG) runs on the frames t1_setup.PRE names (CYL_T1_PRE, e.g. T1pre_s4_m15 from s1_preprocess.py
+--median 15), with that folder's noise, and the line detector's threshold k_detect (--k-detect; default 6), into
+data/runs/s3_<name>_TAG/ and s3_track_<name>_TAG_out.txt, .json; OMP_NUM_THREADS sets its threads.
+copy-to-x --tag TAG copies the variant's final run instead, with its frames (t1_setup.PRE, as images\\; S1's --to-x
+writes only the 31 px frames) and its checks. --archive NAME first moves the deliverable on X: (its run's files,
+images and checks) into <out_dir>\\NAME\\, which still reruns as it is. copy-to-x refuses to overwrite another run.
 """
 import argparse
+import datetime
+import glob
 import json
 import os
 import re
@@ -56,6 +66,70 @@ def parse_log(path):
             "detections_first_ipr_loop": dets[:3]}
 
 
+def archive_deliverable(dst, name):
+    """Move T1's deliverable on X: (its run's files, images and checks) into dst\\name\\, a folder that reruns as it
+    is: its config's image lists, and the frames' paths in them, point to the moved images. The shape model's files
+    and checks (S2, S2b, T1-a) are copied, not moved: the next deliverable uses the same model."""
+    arc = os.path.join(dst, name)
+    if os.path.exists(arc):
+        raise SystemExit(f"{arc} exists already")
+    os.makedirs(os.path.join(arc, "checks"))
+    for n in ("Results", "images", "config.json", "config_local.json", "log.txt", "run_info.json", "README.md"):
+        if os.path.exists(os.path.join(dst, n)):
+            shutil.move(os.path.join(dst, n), os.path.join(arc, n))
+    for n in ("otf_shape.txt", "shape_model.json"):
+        shutil.copy2(os.path.join(dst, n), os.path.join(arc, n))
+    chk = os.path.join(dst, "checks")
+    for n in sorted(os.listdir(chk)):
+        shared = n.startswith(("s2_shape_fit", "s2b_planes_check", "t1a_epipolar_offset"))
+        (shutil.copy2 if shared else shutil.move)(os.path.join(chk, n), os.path.join(arc, "checks", n))
+    old, new = os.path.join(dst, "images") + os.sep, os.path.join(arc, "images") + os.sep
+    for lst in glob.glob(os.path.join(arc, "images", "cam*ImageNames.txt")):
+        with open(lst, encoding="utf-8") as fh:
+            text = fh.read()
+        with open(lst, "w", encoding="utf-8") as fh:
+            fh.write(text.replace(old, new))
+    with open(os.path.join(arc, "config.json"), encoding="utf-8") as fh:
+        c = json.load(fh)
+    c["image_lists"] = [p.replace(old, new) for p in c["image_lists"]]
+    c["_comment"] += f" Archived into {name}\\ on {datetime.date.today().isoformat()}, with the image paths updated."
+    with open(os.path.join(arc, "config.json"), "w", encoding="utf-8") as fh:
+        json.dump(c, fh, indent=1)
+    readme = os.path.join(arc, "README.md")
+    if os.path.exists(readme):
+        with open(readme, encoding="utf-8") as fh:
+            text = fh.read()
+        note = (f"> **Archived {datetime.date.today().isoformat()}.** This was T1's deliverable until then. T1's results are "
+                f"now in the folder above (`..\\`). This folder still reruns as it is: its `config.json` and image lists "
+                f"point here. Relative paths in the text below are from the folder above.\n\n")
+        with open(readme, "w", encoding="utf-8") as fh:
+            fh.write(note + text)
+    print(f"archived the deliverable into {arc}")
+
+
+def copy_images(dst_images):
+    """The frames t1_setup.PRE holds (S1's), into dst_images\\cam*\\, with image lists that point to the copies."""
+    with open(os.path.join(ts.PRE, "manifest.json"), encoding="utf-8") as fh:
+        man = json.load(fh)
+    p = os.path.join(dst_images, "manifest.json")
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as fh:
+            if json.load(fh).get("median_px", 31) != man.get("median_px", 31):
+                raise SystemExit(f"{dst_images} holds another preprocessing's frames: --archive NAME first")
+    for c in (1, 2):
+        os.makedirs(os.path.join(dst_images, f"cam{c}"), exist_ok=True)
+        with open(os.path.join(ts.PRE, f"cam{c}ImageNames.txt"), encoding="utf-8") as fh:
+            paths = [ln for ln in fh.read().splitlines() if ln.strip()]
+        out = []
+        for q in paths:
+            out.append(os.path.join(dst_images, f"cam{c}", os.path.basename(q)))
+            shutil.copy2(q, out[-1])
+        with open(os.path.join(dst_images, f"cam{c}ImageNames.txt"), "w", encoding="utf-8") as fh:
+            fh.write("\n".join(out) + "\n")
+    shutil.copy2(os.path.join(ts.PRE, "manifest.json"), p)
+    return man
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("what", choices=["final", "control", "today", "copy-to-x"])
@@ -63,15 +137,44 @@ def main():
     ap.add_argument("--build", default=None)
     ap.add_argument("--tol2d", type=float, default=1.0, help="final, control: IPR's 2D tolerance [px]")
     ap.add_argument("--shift", type=int, default=100, help="control: cam2's images SHIFT steps later")
+    ap.add_argument("--tag", default="", help="final, control, copy-to-x: a variant's name (its runs and outputs get _TAG)")
+    ap.add_argument("--k-detect", type=float, default=None, help="final, control: the line detector's k_detect")
+    ap.add_argument("--archive", default=None, help="copy-to-x: first move X:'s deliverable into this subfolder")
     args = ap.parse_args()
+    if args.k_detect is not None and args.what not in ("final", "control"):
+        raise SystemExit("--k-detect is for final and control")
+    if args.tag and args.what == "today":
+        raise SystemExit("--tag is for final, control and copy-to-x")
+    if args.archive and args.what != "copy-to-x":
+        raise SystemExit("--archive is for copy-to-x")
+    if args.k_detect is not None and not args.tag:
+        raise SystemExit("--k-detect needs --tag (the runs without a tag are the case's)")
+    tag = f"_{args.tag}" if args.tag else ""
+    if os.path.normcase(ts.PRE) != os.path.normcase(os.path.join(ts.DATA, "T1pre_s4")) and not tag:
+        raise SystemExit(f"CYL_T1_PRE ({ts.PRE}) needs --tag (the runs without a tag are the case's)")
     cfg = case.load_config()
     if args.what == "copy-to-x":
-        src = os.path.join(ts.DATA, "runs", "s3_final")
+        src = os.path.join(ts.DATA, "runs", f"s3_final{tag}")
         dst = cfg["tracers"]["out_dir"]
+        cfg_name = f"config_final{tag}.json"
+        with open(os.path.join(src, cfg_name), encoding="utf-8") as fh:
+            run_cfg = json.load(fh)
+        ran_on = os.path.dirname(run_cfg["image_lists"][0])
+        if tag and os.path.normcase(ran_on) != os.path.normcase(ts.PRE):
+            raise SystemExit(f"{src} ran on {ran_on}, not on {ts.PRE}: set CYL_T1_PRE to its frames")
+        # never overwrite another run's deliverable: archive it first (--archive)
+        if args.archive:
+            archive_deliverable(dst, args.archive)
+        info_x = os.path.join(dst, "run_info.json")
+        if os.path.exists(info_x):
+            with open(info_x, encoding="utf-8") as fh:
+                there = os.path.basename(json.load(fh)["config"])
+            if there != cfg_name:
+                raise SystemExit(f"X: holds another run ({there}): use --archive NAME to move it aside first")
+        if tag:
+            man = copy_images(os.path.join(dst, "images"))
         # config.json on X: the run's settings with paths to the copies there (images\, otf_shape.txt) and to T0's
         # tracking camFiles, so that the folder reruns as it is; the run's own config (local paths): config_local.json
-        with open(os.path.join(src, "config_final.json"), encoding="utf-8") as fh:
-            run_cfg = json.load(fh)
         t0_track = os.path.join(os.path.dirname(dst), "T0", "camFile_track")
         run_cfg["_comment"] += " Copied to X: with the paths of the copies there."
         run_cfg["cameras"] = [{**c, "file": os.path.join(t0_track, os.path.basename(c["file"]))}
@@ -82,7 +185,7 @@ def main():
         run_cfg["output_dir"] = "Results"
         with open(os.path.join(dst, "config.json"), "w", encoding="utf-8") as fh:
             json.dump(run_cfg, fh, indent=1)
-        shutil.copy2(os.path.join(src, "config_final.json"), os.path.join(dst, "config_local.json"))
+        shutil.copy2(os.path.join(src, cfg_name), os.path.join(dst, "config_local.json"))
         for name in ("log.txt", "run_info.json"):
             shutil.copy2(os.path.join(src, name), os.path.join(dst, name))
         if os.path.isdir(os.path.join(dst, "Results")):
@@ -100,15 +203,26 @@ def main():
                  for ext in ("_out.txt", ".json", ".png")]
         names += ["s2_shape_fit_console.txt", "t1_tracks.png", "t1_flow.png", "t1_tracks_s3_today.png",
                   "t1_flow_s3_today.png"]
-        copied = [n for n in names if os.path.exists(os.path.join(HERE, n))]
-        for n in copied:
-            shutil.copy2(os.path.join(HERE, n), os.path.join(chk, n))
+        files = [os.path.join(HERE, n) for n in names]
+        if tag:   # the variant's own checks (with its run's suffix), the model's, and the study's comparison
+            run = f"s3_final{tag}"
+            s1 = "s1_preprocess" + ("" if man.get("median_px", 31) == 31 else f"_m{man['median_px']}")
+            stems = ("s2_shape_fit", "s2b_planes_check", "t1a_epipolar_offset", f"t1_checks_{run}",
+                     f"t1e_ghost_control_{run}", f"s3_track_final{tag}", f"s3_track_control{tag}", s1)
+            files = [os.path.join(HERE, f"{stem}{ext}") for stem in stems for ext in ("_out.txt", ".json", ".png")]
+            files += [os.path.join(HERE, n) for n in ("s2_shape_fit_console.txt", f"t1_tracks_{run}.png",
+                                                      f"t1_flow_{run}.png")]
+            files += [os.path.join(ts.REPO, "tests", "cylinder_stb_study", f"r1_t1_rerun{ext}")
+                      for ext in ("_out.txt", ".json", ".png")]
+        copied = [f for f in files if os.path.exists(f)]
+        for f in copied:
+            shutil.copy2(f, os.path.join(chk, os.path.basename(f)))
         print(f"copied {src} -> {dst}; {len(copied)} check files -> {chk}")
         return
     lpt = ts.lib()
     vol = ts.view_volume(lpt)
-    log = case.Log(os.path.join(HERE, f"s3_track_{args.what}"))
-    rd = os.path.join(ts.DATA, "runs", f"s3_{args.what}")
+    log = case.Log(os.path.join(HERE, f"s3_track_{args.what}{tag}"))
+    rd = os.path.join(ts.DATA, "runs", f"s3_{args.what}{tag}")
     ipr, extra = None, None
     if args.what in ("final", "control"):
         frames = args.frames or ((0, 250) if args.what == "final" else (0, 100))
@@ -118,13 +232,15 @@ def main():
                   "lines": {"noise": ts.noise_per_camera()},
                   "otf_file": os.path.join(ts.DATA, "T1_otf_shape.txt"), "roi_from_otf": True, "roi_sigma": 3.0,
                   "shape_check": True, **tol}
+        if args.k_detect is not None:
+            tracer["lines"]["k_detect"] = args.k_detect
         ipr = {"loops": 3, "reduced_cameras": 0, "reduced_loops": 0, "tol_2d_px": args.tol2d, "tol_3d_vox": 2.0}
         if args.what == "control":
             with open(os.path.join(ts.PRE, "cam2ImageNames.txt"), encoding="utf-8") as fh:
                 names = [ln for ln in fh.read().splitlines() if ln.strip()]
             if frames[1] + args.shift >= len(names):
                 raise SystemExit(f"frames {frames} + shift {args.shift} pass the {len(names)} images")
-            lst = os.path.join(ts.DATA, "s3", f"cam2ImageNames_shift{args.shift}.txt")
+            lst = os.path.join(ts.DATA, "s3", f"cam2ImageNames_shift{args.shift}{tag}.txt")
             os.makedirs(os.path.dirname(lst), exist_ok=True)
             with open(lst, "w", encoding="utf-8") as fh:
                 fh.write("\n".join(names[args.shift:]) + "\n")
@@ -133,10 +249,12 @@ def main():
         frames = args.frames or (0, 60)
         build = args.build or "head1007"
         tracer = {"intensity_threshold": 28, "radius_px": 2.0}
-    cfg_path = os.path.join(ts.DATA, "s3", f"config_{args.what}.json")
+    cfg_path = os.path.join(ts.DATA, "s3", f"config_{args.what}{tag}.json")
     ts.stb_config(cfg_path, frames, vol, tracer, ipr=ipr, extra=extra)
     log(f"S3 {args.what}: build {build}, frames {frames[0]}-{frames[1]} (raw {4 * frames[0]}-{4 * frames[1]}), "
-        f"tracer {tracer}, ipr {ipr}" + (f", cam2 shifted by {args.shift} steps" if args.what == "control" else ""))
+        f"tracer {tracer}, ipr {ipr}" + (f", cam2 shifted by {args.shift} steps" if args.what == "control" else "")
+        + (f"; variant {args.tag}: images {ts.PRE}, OMP_NUM_THREADS {os.environ.get('OMP_NUM_THREADS')}" if tag
+           else ""))
     info = stbruns.run(cfg_path, rd, build)
     res = parse_log(os.path.join(rd, "log.txt"))
     log(f"  exit {info['returncode']}, wall {info['wall_s']:.0f} s; {res['frames_done']} frames, "

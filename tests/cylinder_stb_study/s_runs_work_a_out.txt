@@ -1,0 +1,16 @@
+Parts S and O: 15 runs, OMP_NUM_THREADS 12: S_n4_r2, S_n4_r3, S_n8_r2, O10_n8_r2, S_n8_r3, S_n8_r4, O05_n8_r2, O10_n8_r3, O10_n8_r4, O05_n8_r3, O05_n8_r4, S_n4_r4, S_n16_r2, S_n16_r3, S_n16_r4
+  S_n4_r2: scored or claimed by another stream, skipped
+  S_n4_r3: scored or claimed by another stream, skipped
+  S_n8_r2: recall (central, seen by all) 0.705, >= 2 0.705; reconstructed 833 per frame, ghosts 89 (10.7 %), duplicates 0.2; position RMS 18.0, 7.6, 16.1 um; long tracks 980 (ghost 54), purity 0.890, track recall 0.704; 22.86 s per frame; exit 0, wall 915 s
+  O10_n8_r2: scored or claimed by another stream, skipped
+  S_n8_r3: recall (central, seen by all) 0.877, >= n-1 0.785, >= 2 0.785; reconstructed 1118 per frame, ghosts 61 (5.5 %), duplicates 0.7; position RMS 18.5, 7.6, 16.0 um; long tracks 1268 (ghost 32), purity 0.943, track recall 0.783; 98.79 s per frame; exit 0, wall 3954 s
+  S_n8_r4: scored or claimed by another stream, skipped
+  O05_n8_r2: recall (central, seen by all) 0.635, >= 2 0.635; reconstructed 747 per frame, ghosts 76 (10.2 %), duplicates 0.3; position RMS 18.0, 7.4, 16.6 um; long tracks 907 (ghost 49), purity 0.900, track recall 0.634; 28.49 s per frame; exit 0, wall 1141 s
+  O10_n8_r3: scored or claimed by another stream, skipped
+  O10_n8_r4: recall (central, seen by all) 0.332, >= n-1 0.267, >= 2 0.224, outside the central region, >= 2: 0.000 of 22; reconstructed 316 per frame, ghosts 2 (0.6 %), duplicates 0.0; position RMS 9.5, 6.8, 10.4 um; long tracks 410 (ghost 0), purity 0.995, track recall 0.219; 149.39 s per frame; exit 0, wall 5979 s
+  O05_n8_r3: scored or claimed by another stream, skipped
+  O05_n8_r4: scored or claimed by another stream, skipped
+  S_n4_r4: scored or claimed by another stream, skipped
+  S_n16_r2: scored or claimed by another stream, skipped
+  S_n16_r3: recall (central, seen by all) 0.758, >= n-1 0.646, >= 2 0.646; reconstructed 908 per frame, ghosts 40 (4.4 %), duplicates 0.2; position RMS 17.0, 7.5, 15.8 um; long tracks 1079 (ghost 21), purity 0.957, track recall 0.643; 63.30 s per frame; exit 0, wall 2535 s
+  S_n16_r4: scored or claimed by another stream, skipped

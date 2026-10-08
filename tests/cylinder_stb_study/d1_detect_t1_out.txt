@@ -1,0 +1,12 @@
+D1: the line detector's settings on T1, frames i = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225] (raw 4 i); build p4c; pairs within 8.0 px, signal band <= 1.5 px, background 4.0-8.0 px (k = 0.375); depth cue T1's model, tolerances (0.8, 0.2)
+  med15_k5 : detections 1473 / 1418 per frame; true pairs 448 +- 33 per frame (5.4 % of the 8222 signal-band pairs); with the depth cue 224 +- 8 (45.4 % of 493); true within 1 px 63 %; 835 s
+  against base:
+    sigma1.4 : true pairs -33.7 %, share +2.4 points; with the depth cue -31.2 %, share +10.7 points; qualifies: no (with the depth cue: no)
+    k5       : true pairs +82.8 %, share -0.4 points; with the depth cue +56.0 %, share -4.2 points; qualifies: no (with the depth cue: no)
+    k7       : true pairs -31.8 %, share +2.0 points; with the depth cue -31.9 %, share +7.8 points; qualifies: no (with the depth cue: no)
+    deblend3 : true pairs -1.9 %, share +0.2 points; with the depth cue -3.4 %, share +0.3 points; qualifies: no (with the depth cue: no)
+    nosecond : true pairs +2.7 %, share +0.4 points; with the depth cue -3.1 %, share +0.5 points; qualifies: no (with the depth cue: no)
+    med15    : true pairs +48.2 %, share +0.9 points; with the depth cue +44.8 %, share +2.3 points; qualifies: yes (with the depth cue: yes)
+    med51    : true pairs -5.8 %, share +0.0 points; with the depth cue -9.7 %, share +0.0 points; qualifies: no (with the depth cue: no)
+    best     : true pairs +48.2 %, share +0.9 points; with the depth cue +44.8 %, share +2.3 points; qualifies: yes (with the depth cue: yes)
+    med15_k5 : true pairs +135.7 %, share -0.1 points; with the depth cue +128.4 %, share -1.5 points; qualifies: no (with the depth cue: no)

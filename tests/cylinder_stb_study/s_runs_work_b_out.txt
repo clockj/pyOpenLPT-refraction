@@ -1,0 +1,16 @@
+Parts S and O: 15 runs, OMP_NUM_THREADS 12: S_n4_r2, S_n4_r3, S_n8_r2, O10_n8_r2, S_n8_r3, S_n8_r4, O05_n8_r2, O10_n8_r3, O10_n8_r4, O05_n8_r3, O05_n8_r4, S_n4_r4, S_n16_r2, S_n16_r3, S_n16_r4
+  S_n4_r2: scored or claimed by another stream, skipped
+  S_n4_r3: scored or claimed by another stream, skipped
+  S_n8_r2: scored or claimed by another stream, skipped
+  O10_n8_r2: recall (central, seen by all) 0.549, >= 2 0.549; reconstructed 642 per frame, ghosts 63 (9.9 %), duplicates 0.2; position RMS 18.4, 7.5, 16.7 um; long tracks 788 (ghost 41), purity 0.903, track recall 0.546; 23.44 s per frame; exit 0, wall 939 s
+  S_n8_r3: scored or claimed by another stream, skipped
+  S_n8_r4: recall (central, seen by all) 0.770, >= n-1 0.642, >= 2 0.540; reconstructed 770 per frame, ghosts 11 (1.4 %), duplicates 0.1; position RMS 11.9, 6.0, 11.4 um; long tracks 927 (ghost 0), purity 0.988, track recall 0.539; 154.30 s per frame; exit 0, wall 6175 s
+  O05_n8_r2: scored or claimed by another stream, skipped
+  O10_n8_r3: scored or claimed by another stream, skipped
+  O10_n8_r4: scored or claimed by another stream, skipped
+  O05_n8_r3: recall (central, seen by all) 0.776, >= n-1 0.656, >= 2 0.656, outside the central region, >= 2: 0.110 of 9; reconstructed 943 per frame, ghosts 58 (6.2 %), duplicates 0.6; position RMS 17.7, 8.2, 16.0 um; long tracks 1114 (ghost 38), purity 0.937, track recall 0.651; 96.51 s per frame; exit 0, wall 3864 s
+  O05_n8_r4: scored or claimed by another stream, skipped
+  S_n4_r4: recall (central, seen by all) 0.712, >= n-1 0.558, >= 2 0.469; reconstructed 665 per frame, ghosts 7 (1.0 %), duplicates 0.0; position RMS 11.0, 5.9, 10.9 um; long tracks 849 (ghost 0), purity 0.991, track recall 0.467; 106.15 s per frame; exit 0, wall 4250 s
+  S_n16_r2: scored or claimed by another stream, skipped
+  S_n16_r3: scored or claimed by another stream, skipped
+  S_n16_r4: scored or claimed by another stream, skipped

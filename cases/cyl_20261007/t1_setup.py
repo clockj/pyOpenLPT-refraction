@@ -17,8 +17,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 DATA = os.path.join(HERE, "data")
 CAMS = [os.path.join(DATA, "cams_T0", f"cam{c}.txt") for c in (1, 2)]
-PRE = os.path.join(DATA, "T1pre_s4")          # S1's frames (every 4th)
-BUILD = os.environ.get("CYL_STB_BUILD", "p4c")
+PRE = os.path.join(DATA, os.environ.get("CYL_T1_PRE", "T1pre_s4"))   # S1's frames (every 4th); or another folder
+BUILD = os.environ.get("CYL_STB_BUILD", "p4c")                        # of data/ (e.g. T1pre_s4_m15: a 15 px median)
 
 
 def lib():

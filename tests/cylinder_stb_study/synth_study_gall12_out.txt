@@ -1,0 +1,2 @@
+synth_study gall12: build p4c
+  rendered 1 sets (160 camera-frames) in 245 s

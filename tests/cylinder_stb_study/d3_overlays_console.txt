@@ -1,0 +1,7 @@
+D3: base (magenta) against best (cyan: {}, median 15 px); build p4c
+  T1 cam1 frame i = 100: base 1004, best 1120 detections
+  T1 cam2 frame i = 100: base 841, best 982 detections
+  G-all cam1 frame 20: base 706, best 716 detections; 494 images of particles in the volume seen by both cameras
+  G-all cam2 frame 20: base 657, best 788 detections; 494 images of particles in the volume seen by both cameras
+  wrote d3_overlays.png (1800 x 2400 px)
+exit 0

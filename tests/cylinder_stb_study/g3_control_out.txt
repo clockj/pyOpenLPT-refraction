@@ -1,0 +1,9 @@
+G3: the control's ghost estimate on G-all; run Gall_r2 (36 frames logged), control Gall_r2_control (36)
+  log entry 10: active long tracks run 54, control 22: counts estimate 0.407; truth (frame 9): 9 ghosts of 48 long tracks (18.8 %)
+  log entry 20: active long tracks run 93, control 49: counts estimate 0.527; truth (frame 19): 14 ghosts of 77 long tracks (18.2 %)
+  log entry 30: active long tracks run 109, control 58: counts estimate 0.532; truth (frame 29): 21 ghosts of 102 long tracks (20.6 %)
+  log entry 36: active long tracks run 119, control 63: counts estimate 0.529; truth (frame 35): 24 ghosts of 113 long tracks (21.2 %)
+  swirl, run: 97 long tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.059, 0.135, 0.317]; above 0.3: 13.4 %
+  swirl, control: 56 long tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.112, 0.258, 0.52]; above 0.3: 39.3 %
+  ghosts among the run's long tracks: from the swirl 34 %, from the counts (last frame) 53 %; the truth (long tracks at frame 39, >= 4 frames, purity < 0.5) 23 %
+  the swirl test by the truth: real tracks above 0.3: 8.2 % of 73; ghost tracks above 0.3: 29.2 % of 24
