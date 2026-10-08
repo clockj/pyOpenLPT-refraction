@@ -1780,6 +1780,25 @@ Status PolynomialCamera::commitUpdate() {
 // Curved refractive ports (cylinder, sphere)
 // ===========================================================================
 
+ImageStatus Camera::imageStatus(const Pt3D& pt_world, double margin_px,
+                                double merge_px, Pt2D* pt) const {
+    (void)merge_px;
+    auto st = project(pt_world);
+    if (!st) {
+        return ImageStatus::None;
+    }
+    const Pt2D p = st.value();
+    const bool on = p[0] >= -margin_px && p[0] < getNCol() + margin_px &&
+                    p[1] >= -margin_px && p[1] < getNRow() + margin_px;
+    if (!on) {
+        return ImageStatus::None;
+    }
+    if (pt) {
+        *pt = p;
+    }
+    return ImageStatus::One;
+}
+
 // Single-valued models inherit this, so callers can use projectAll() uniformly.
 StatusOr<std::vector<ImageRay>> Camera::projectAll(
     const Pt3D& pt_world, ProjectionCoverage* coverage) const {
@@ -1938,6 +1957,79 @@ bool refractAt(double d[3], const double nrm[3], double n_from, double n_to) {
     return true;
 }
 
+/**
+  * @brief project()'s choice among the images: on the sensor first, then the
+  *        near branch, then the smallest |Lambda|; rings skipped (`ring` is set
+  *        when there was one). Null when no image carries a pixel.
+  */
+const ImageRay* primaryImage(const std::vector<ImageRay>& rays, int n_col, int n_row,
+                             bool& ring) {
+    // The primary image must be picked by a property of the ray, not by the
+    // order the search happened to find it in. A point can have two images on
+    // the SAME branch; taking "the first" then makes the answer depend on the
+    // enumeration order of the targets, so two nearly identical cameras can
+    // return the two images in opposite order and appear to disagree by hundreds
+    // of pixels while actually agreeing. Prefer the near branch, then the
+    // smallest |Lambda| -- the most direct ray, which is geometric and stable.
+    //
+    // An image on the sensor comes first: next to a caustic the preferred image
+    // can fall off the sensor while the other is on it, and a caller testing the
+    // pixel would then take a visible point for an unseen one (audit C3). The
+    // answer changes only there.
+    auto on_sensor = [&](const ImageRay& r) {
+        const double u = r.pt_img_dist[0], v = r.pt_img_dist[1];
+        return u >= 0.0 && u < n_col && v >= 0.0 && v < n_row;
+    };
+    auto preferred = [](const ImageRay& a, const ImageRay& b) {
+        if (a.is_far != b.is_far) {
+            return !a.is_far; // a near-branch image always wins
+        }
+        return std::abs(a.lambda) < std::abs(b.lambda);
+    };
+    const ImageRay* best = nullptr;
+    bool best_on = false;
+    ring = false;
+    for (const ImageRay& r : rays) {
+        if (r.is_ring) {
+            ring = true;
+            continue;
+        }
+        const bool on = on_sensor(r);
+        if (best == nullptr || (on && !best_on) ||
+            (on == best_on && preferred(r, *best))) {
+            best = &r;
+            best_on = on;
+        }
+    }
+    return best;
+}
+
+const char* noImageMessage(bool ring) {
+    return ring ? "project failed: the point's only image is a ring (the axial line "
+                  "of a sphere); use projectAll()"
+                : "project failed: the point has no image (no ray reaches it, or "
+                  "every ray leaves behind the camera)";
+}
+
+// OPENLPT_PROJECTION_HINTS=0 turns the projection hints off, so that a run can
+// be compared with one on the full search alone.
+bool projectionHintsEnabled() {
+    static const bool on = [] {
+        const char* v = std::getenv("OPENLPT_PROJECTION_HINTS");
+        return !(v != nullptr && v[0] == '0' && v[1] == '\0');
+    }();
+    return on;
+}
+
+// OPENLPT_CURVED_LINES=0 draws a curved port's image lines straight, as before.
+bool curvedLinesEnabled() {
+    static const bool on = [] {
+        const char* v = std::getenv("OPENLPT_CURVED_LINES");
+        return !(v != nullptr && v[0] == '0' && v[1] == '\0');
+    }();
+    return on;
+}
+
 } // namespace refraction_curved
 } // namespace
 
@@ -2047,52 +2139,230 @@ StatusOr<Pt2D> RefractionCurvedCamera::project(const Pt3D& pt_world,
         std::cout << "RefractionCurvedCamera::project found " << rays.size()
                   << " image(s)" << std::endl;
     }
-    // The primary image must be picked by a property of the ray, not by the
-    // order the search happened to find it in. A point can have two images on
-    // the SAME branch; taking "the first" then makes the answer depend on the
-    // enumeration order of the targets, so two nearly identical cameras can
-    // return the two images in opposite order and appear to disagree by hundreds
-    // of pixels while actually agreeing. Prefer the near branch, then the
-    // smallest |Lambda| -- the most direct ray, which is geometric and stable.
-    //
-    // An image on the sensor comes first: next to a caustic the preferred image
-    // can fall off the sensor while the other is on it, and a caller testing the
-    // pixel would then take a visible point for an unseen one (audit C3). The
-    // answer changes only there.
-    auto on_sensor = [&](const ImageRay& r) {
-        const double u = r.pt_img_dist[0], v = r.pt_img_dist[1];
-        return u >= 0.0 && u < _param.n_col && v >= 0.0 && v < _param.n_row;
-    };
-    auto preferred = [](const ImageRay& a, const ImageRay& b) {
-        if (a.is_far != b.is_far) {
-            return !a.is_far; // a near-branch image always wins
-        }
-        return std::abs(a.lambda) < std::abs(b.lambda);
-    };
-    const ImageRay* best = nullptr;
-    bool best_on = false;
     bool ring = false;
-    for (const ImageRay& r : rays) {
-        if (r.is_ring) {
-            ring = true;
-            continue;
-        }
-        const bool on = on_sensor(r);
-        if (best == nullptr || (on && !best_on) ||
-            (on == best_on && preferred(r, *best))) {
-            best = &r;
-            best_on = on;
-        }
-    }
+    const ImageRay* best =
+        refraction_curved::primaryImage(rays, _param.n_col, _param.n_row, ring);
     if (best == nullptr) {
-        return STATUS_OR_ERR(
-            Pt2D, ErrorCode::GeometryFailure,
-            ring ? "project failed: the point's only image is a ring (the axial line "
-                   "of a sphere); use projectAll()"
-                 : "project failed: the point has no image (no ray reaches it, or "
-                   "every ray leaves behind the camera)");
+        return STATUS_OR_ERR(Pt2D, ErrorCode::GeometryFailure,
+                             refraction_curved::noImageMessage(ring));
     }
     return normalizeProjectResult(best->pt_img_dist);
+}
+
+bool RefractionCurvedCamera::usesProjectionHint() const {
+    return !isSphere() && refraction_curved::projectionHintsEnabled();
+}
+
+StatusOr<Pt2D> RefractionCurvedCamera::projectWithHint(const Pt3D& pt_world,
+                                                       ProjectionHint& hint) const {
+    using namespace refraction_curved;
+    if (isSphere()) {
+        return project(pt_world);
+    }
+    if (hint.valid) {
+        try {
+            const PortFrame frame = buildFrame(_param, false);
+            const ::refract_curved::Stack stack = toStack(_param);
+            double pinhole_local[3], point_local[3];
+            toLocal(frame, _param.t_vec_inv, pinhole_local);
+            toLocal(frame, pt_world, point_local);
+            const auto ray = ::refract_curved::projectCylinderFrom(
+                stack, pinhole_local, point_local, hint.lambda, hint.c_z, hint.is_far,
+                _param.proj_tol, _param.proj_nmax);
+            if (ray) {
+                // As projectAll(): the pixel of a point one unit along the ray,
+                // when the ray leaves the pinhole towards the viewing direction.
+                const Pt3D dir_world = dirToWorld(frame, ray->dir);
+                const double depth = _param.r_mtx(2, 0) * dir_world[0] +
+                                     _param.r_mtx(2, 1) * dir_world[1] +
+                                     _param.r_mtx(2, 2) * dir_world[2];
+                if (depth > 0.0) {
+                    const Pt3D along(_param.t_vec_inv[0] + dir_world[0],
+                                     _param.t_vec_inv[1] + dir_world[1],
+                                     _param.t_vec_inv[2] + dir_world[2]);
+                    StatusOr<Pt2D> px = normalizeProjectResult(
+                        RefractionCurvedCamera::distort(
+                            RefractionCurvedCamera::worldToUndistImg(along, _param),
+                            _param));
+                    if (px) {
+                        hint.lambda = ray->lambda;
+                        hint.c_z = ray->c_z;
+                        hint.is_far = (ray->branch == ::refract_curved::Branch::Far);
+                        return px;
+                    }
+                }
+            }
+        } catch (const std::exception&) {
+            // the full search below decides
+        }
+    }
+
+    auto all = projectAll(pt_world, nullptr);
+    if (!all) {
+        hint.valid = false;
+        return STATUS_OR_ERR(Pt2D, all.status().err.code, all.status().err.message);
+    }
+    bool ring = false;
+    const ImageRay* best = primaryImage(all.value(), _param.n_col, _param.n_row, ring);
+    if (best == nullptr) {
+        hint.valid = false;
+        return STATUS_OR_ERR(Pt2D, ErrorCode::GeometryFailure, noImageMessage(ring));
+    }
+    hint.lambda = best->lambda;
+    hint.c_z = best->c_z;
+    hint.is_far = best->is_far;
+    hint.valid = true;
+    return normalizeProjectResult(best->pt_img_dist);
+}
+
+bool RefractionCurvedCamera::provablySingleImage(const Pt3D& pt_world) const {
+    using namespace refraction_curved;
+    if (isSphere()) {
+        return false;
+    }
+    const PortFrame frame = buildFrame(_param, false);
+    const ::refract_curved::Stack stack = toStack(_param);
+    double p[3], x[3];
+    toLocal(frame, _param.t_vec_inv, p);
+    toLocal(frame, pt_world, x);
+    return ::refract_curved::singleImage(stack, std::hypot(p[0], p[1]),
+                                         std::hypot(x[0], x[1]), x[2] - p[2]);
+}
+
+ImageStatus RefractionCurvedCamera::imageStatus(const Pt3D& pt_world, double margin_px,
+                                                double merge_px, Pt2D* pt) const {
+    if (provablySingleImage(pt_world)) {
+        return Camera::imageStatus(pt_world, margin_px, merge_px, pt);
+    }
+    auto all = projectAll(pt_world, nullptr);
+    if (!all) {
+        return ImageStatus::None;
+    }
+    const std::vector<ImageRay>& rays = all.value();
+    const ImageRay* one = nullptr;
+    int n_on = 0;
+    for (const ImageRay& r : rays) {
+        if (r.is_ring) {
+            return ImageStatus::Ambiguous; // a circle of images
+        }
+        const double u = r.pt_img_dist[0], v = r.pt_img_dist[1];
+        if (u >= -margin_px && u < _param.n_col + margin_px && v >= -margin_px &&
+            v < _param.n_row + margin_px) {
+            ++n_on;
+            one = &r;
+        }
+    }
+    if (n_on == 0) {
+        return ImageStatus::None;
+    }
+    if (n_on > 1) {
+        return ImageStatus::Ambiguous;
+    }
+    for (const ImageRay& r : rays) {
+        if (&r == one) {
+            continue;
+        }
+        const double du = r.pt_img_dist[0] - one->pt_img_dist[0];
+        const double dv = r.pt_img_dist[1] - one->pt_img_dist[1];
+        if (du * du + dv * dv <= merge_px * merge_px) {
+            return ImageStatus::Ambiguous; // a merged pair next to a fold
+        }
+    }
+    // Tracking draws the point where project() puts it: the one image must be
+    // that one (it is, unless it lies in the margin and project() prefers
+    // another image off the sensor).
+    bool ring = false;
+    const ImageRay* primary =
+        refraction_curved::primaryImage(rays, _param.n_col, _param.n_row, ring);
+    if (primary != one) {
+        return ImageStatus::Ambiguous;
+    }
+    if (pt) {
+        *pt = one->pt_img_dist;
+    }
+    return ImageStatus::One;
+}
+
+bool RefractionCurvedCamera::lineImagesCurve() const {
+    return refraction_curved::curvedLinesEnabled();
+}
+
+bool RefractionCurvedCamera::clipToModel(const Line3D& los, double& t_in,
+                                         double& t_out) const {
+    using namespace refraction_curved;
+    if (!(t_in <= t_out)) {
+        return false;
+    }
+    if (_param.radius_array.empty()) {
+        return true; // one medium: no interface
+    }
+    const bool sphere = isSphere();
+    const PortFrame frame = buildFrame(_param, sphere);
+    double p[3], d[3];
+    toLocal(frame, los.pt, p);
+    dirToLocal(frame, los.unit_vector, d);
+    const double R = _param.radius_array.back() * (1.0 - 1e-9);
+    // |p + t d|^2 < R^2 (over x, y for the cylinder): a t^2 + 2 b t + c < 0
+    const int dims = sphere ? 3 : 2;
+    double a = 0.0, b = 0.0, c = -R * R;
+    for (int i = 0; i < dims; ++i) {
+        a += d[i] * d[i];
+        b += p[i] * d[i];
+        c += p[i] * p[i];
+    }
+    if (!(a > 0.0)) {
+        return c < 0.0; // along the axis: inside everywhere or nowhere
+    }
+    const double disc = b * b - a * c;
+    if (!(disc > 0.0)) {
+        return false;
+    }
+    const double sq = std::sqrt(disc);
+    // the stable pair of roots
+    const double q = -(b + std::copysign(sq, b));
+    double t1 = q / a, t2 = (q != 0.0) ? c / q : -b / a;
+    if (t1 > t2) {
+        std::swap(t1, t2);
+    }
+    t_in = std::max(t_in, t1);
+    t_out = std::min(t_out, t2);
+    return t_in <= t_out;
+}
+
+bool RefractionCurvedCamera::hintFromLineOfSight(const Line3D& los,
+                                                 const Pt3D& pt_world,
+                                                 ProjectionHint& hint) const {
+    using namespace refraction_curved;
+    if (isSphere() || _param.refract_array.empty()) {
+        return false;
+    }
+    const PortFrame frame = buildFrame(_param, false);
+    double p[3], d[3], x[3];
+    toLocal(frame, los.pt, p);
+    dirToLocal(frame, los.unit_vector, d);
+    toLocal(frame, pt_world, x);
+    const double dd = d[0] * d[0] + d[1] * d[1];
+    const double len = std::sqrt(dd + d[2] * d[2]);
+    if (!(dd > 0.0) || !(len > 0.0)) {
+        return false; // along the axis: no azimuth
+    }
+    // Both invariants are the same in every medium, so the line of sight's
+    // segment gives the ray's: C_z = n d_z, Lambda = n (x d_y - y d_x).
+    const double n_in = _param.refract_array.back();
+    const double lam = n_in * (p[0] * d[1] - p[1] * d[0]) / len;
+    const double c_z = n_in * d[2] / len;
+    if (!std::isfinite(lam) || !std::isfinite(c_z)) {
+        return false;
+    }
+    // Along p + t d: the closest approach to the axis, and the point's foot.
+    const double t_close = -(p[0] * d[0] + p[1] * d[1]) / dd;
+    const double t_pt = ((x[0] - p[0]) * d[0] + (x[1] - p[1]) * d[1] +
+                         (x[2] - p[2]) * d[2]) / (len * len);
+    hint.lambda = lam;
+    hint.c_z = c_z;
+    hint.is_far = t_pt > t_close;
+    hint.valid = true;
+    return true;
 }
 
 StatusOr<Line3D> RefractionCurvedCamera::lineOfSight(const Pt2D& pt_img_dist) const {

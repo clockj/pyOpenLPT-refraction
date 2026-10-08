@@ -114,6 +114,7 @@ class Job:
     noise_weights: str = "camera"          # cylinder_wand's: "camera", "camera_end" or "none"
     n_final: int = 2                       # starts carried through stages 3-4 (6: the thorough search)
     start: Optional[list] = None           # cameras of an earlier result (in the fit's gauge): skip the start search
+    fix_f: Optional[List[int]] = None      # indices of the cameras whose f is held at its value in `start`
     pixel_mm: Optional[float] = None       # pixel size, only to print f in mm
     detect_mode: Optional[str] = None      # how the points were found ("ellipse", "fast", "reliable"; None: unknown)
     source: str = ""                       # where the points came from (for the report)
@@ -138,7 +139,8 @@ class Job:
                 "refit_from_last_result": self.start is not None, "pixel_mm": self.pixel_mm,
                 "detect_mode": self.detect_mode, "source": self.source,
                 "frame_ids": [int(f) for f in self.frame_ids], "cam_ids": [int(c) for c in self.cam_ids],
-                "sizes": [[int(w), int(h)] for (w, h) in self.sizes]}
+                "sizes": [[int(w), int(h)] for (w, h) in self.sizes],
+                **({"fix_f": [int(c) for c in self.fix_f]} if self.fix_f else {})}
 
     def check(self) -> None:
         """Raise ValueError with a message for the user when the inputs cannot work."""
@@ -208,7 +210,8 @@ def run(job: Job, progress: Callable = None, stop: Callable = None) -> cw.Soluti
     if stop is not None and stop():
         raise Stopped()
     sol = cw.calibrate(data, tube, start=start, fit_k1=bool(job.fit_k1), fit_L=bool(job.fit_L),
-                       n_final=int(job.n_final), noise_weights=job.noise_weights, verbose=True, log=log, log_fits=True)
+                       n_final=int(job.n_final), noise_weights=job.noise_weights, verbose=True, log=log, log_fits=True,
+                       fix_f=tuple(job.fix_f or ()))
     if stop is not None and stop():
         raise Stopped()
     return sol

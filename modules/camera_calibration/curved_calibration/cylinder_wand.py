@@ -171,18 +171,25 @@ def frames_from_ends(XA: np.ndarray, XB: np.ndarray) -> Frames:
 # ------------------------------------------------------------------ parameter layout (gauge)
 class Layout:
     """The free camera parameters: per camera the columns of CAM_COLS (+ k1), camera 1 without C1, C2 (the
-    gauge); optionally the wand length L as one more global parameter."""
+    gauge); optionally the wand length L as one more global parameter.  fix_f: indices of the cameras whose f is
+    held at the value they come with (their log f column is left out)."""
 
-    def __init__(self, n_cams: int, fit_k1: bool = False, fit_L: bool = False, gauge: bool = True):
+    def __init__(self, n_cams: int, fit_k1: bool = False, fit_L: bool = False, gauge: bool = True,
+                 fix_f: Sequence[int] = ()):
         self.cols = list(CAM_COLS) + (["k1"] if fit_k1 else [])
         self.model_idx = [cm.CAM_PARAMS.index(c) for c in self.cols]
         self.n_cams, self.fit_k1, self.fit_L, self.gauge = n_cams, fit_k1, fit_L, gauge
+        self.fix_f = tuple(sorted({int(c) for c in fix_f}))
+        if any(c < 0 or c >= n_cams for c in self.fix_f):
+            raise ValueError(f"fix_f: camera indices must be 0..{n_cams - 1}, got {list(fix_f)}")
         self.pos = np.full((n_cams, len(self.cols)), -1, int)
         self.names: List[str] = []
         k = 0
         for c in range(n_cams):
             for j, name in enumerate(self.cols):
                 if gauge and c == 0 and name in GAUGE_FIXED:
+                    continue
+                if name == "logf" and c in self.fix_f:
                     continue
                 self.pos[c, j] = k
                 self.names.append(f"cam{c + 1}.{name}")
@@ -885,7 +892,7 @@ def coarse_fit(cams, tube: cm.Tube, obs: Obs, L: float, layout: Layout, max_oute
     triangulation), re-anchored after every round.  Returns (cameras, info)."""
     from scipy.optimize import least_squares
     rows = np.flatnonzero(obs.active) if rows is None else rows
-    lay = Layout(layout.n_cams, fit_k1=layout.fit_k1, fit_L=False, gauge=layout.gauge)
+    lay = Layout(layout.n_cams, fit_k1=layout.fit_k1, fit_L=False, gauge=layout.gauge, fix_f=layout.fix_f)
     anchor = [c.copy() for c in cams]
     hist = []
     for outer in range(max_outer):
@@ -1476,7 +1483,8 @@ def bootstrap(obs: Obs, tube: cm.Tube, L: float, sizes, cxcy=None, hints: dict =
 def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit_k1: bool = False,
               fit_L: bool = False, k_sigma: float = 5.0, guard_px: float = 30.0, n_final: int = 2,
               verbose: bool = False, log=print, noise_weights: str = "camera", sigma_cam_px=None,
-              more_starts_px: float = 1.0, log_fits: bool = False, share_equal_starts: bool = True) -> Solution:
+              more_starts_px: float = 1.0, log_fits: bool = False, share_equal_starts: bool = True,
+              fix_f: Sequence[int] = ()) -> Solution:
     """Stages 0-5: from the detections to the cameras, with no camera input (or from `start`, cameras in the
     gauge).  The best `n_final` bootstrap candidates are carried through stages 3 and 4; when the best of them
     still has a stage-3 RMS above more_starts_px (noisy data), every short-listed candidate is (T11b: at 5 px one rig
@@ -1490,9 +1498,15 @@ def calibrate(data: WandData, tube: cm.Tube, start=None, hints: dict = None, fit
     share_equal_starts: a start whose stage-3 result has the same active set as an earlier start's, and a stage-3
     RMS within 1e-5 of it (relative), is not refined again: it sits in the same minimum, and stage 4 is the costly
     part (tests/cylinder_wand_gui P7: T0's six starts ended stage 3 up to 2e-4 apart in f along the flat f/D
-    valley, about 0.02 of f's standard error, and all reached the same stage-4 answer)."""
+    valley, about 0.02 of f's standard error, and all reached the same stage-4 answer).
+    fix_f: indices of the cameras whose f is held at its value in `start` (needed: without a start the bootstrap's
+    own estimate would be held).  With two long-lens cameras the wand alone leaves f along a near-telecentric
+    valley (cases/cyl_20261006_T0_wand T3); f from another source (a dot board) can then be held here.  Default:
+    none held."""
     obs = observations(data)
-    layout = Layout(data.n_cams, fit_k1=fit_k1, fit_L=fit_L)
+    if fix_f and start is None:
+        raise ValueError("fix_f needs start: the cameras whose f is held must come with that f")
+    layout = Layout(data.n_cams, fit_k1=fit_k1, fit_L=fit_L, fix_f=fix_f)
     t0 = time.time()
     binfo = {}
     if start is not None:

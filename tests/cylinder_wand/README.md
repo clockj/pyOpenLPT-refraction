@@ -28,8 +28,35 @@ experiment.
 - **The GUI's wand tab (7 Oct):** ten bugs are fixed, and then the two Pinhole-model bugs found with them (the
   progress log's entries of 7 Oct). The "fast" detection mode is kept, and now repeatable (your choice). The results
   page now shows the distribution of the reprojection errors.
+- **Third real run (20261007/T0, 7 Oct, `cases/cyl_20261007`):** 0.600 px, f again undetermined (±12–16 % over the
+  parts), the rig changed since 6 Oct. Two new things: a **hold-f option** (`fix_f`), and a **selection problem**
+  with six starts, where a wrong minimum won (the entry of 7 Oct, late night).
 
 ## 1. Progress log
+
+**2026-10-07 (late night): the third real run, 20261007/T0; a hold-f option; a selection problem** (the tracking
+case's plan, Phase C: `cases/cyl_20261007/2026-10-07-plan.md`; report `cases/cyl_20261007/2026-10-07-phaseC-report.md`)
+- **The calibration:** 3,036 frames, 0.600 px, wand length RMS 34.4 µm; cam1 f 48,494 px at 1,179 mm, cam2 28,306 px
+  at 835 mm, 60.3° apart. Results in `X:\Shijie Zhong\Refraction\Processed\20261007\T0`.
+- **f is undetermined again:** the halves and quarters give cam1 41,351–53,010 px and cam2 23,639–30,417 px. Inside
+  the wand's volume each part's cameras measure the others' wand lengths to 0.02–0.12 %.
+- **The rig changed since 6 Oct:** 6 Oct T2's cameras disagree by 9 px on this run's frames and measure the wand
+  4.9 % long. The f / distance ratio of cam1 is 7.5 % higher than on 6 Oct.
+- **A selection problem with the thorough start search** (six starts): a start reached a wrong minimum (cam1 f
+  10,995 px at 253 mm, RMS 1.38 px) but kept 12,088 of 12,144 detections, against 11,876 for the right one (RMS
+  0.600 px). `calibrate` ranks by the detections kept first, so the wrong one won: its larger residuals widen its
+  outlier limit. The case used the GUI's default two starts. **Not fixed** (a library change for you to decide; GUI
+  users with "Thorough start search" ticked are exposed). Section 6, item 9.
+- **The hold-f option** (approved as the plan's C3): `calibrate(..., fix_f=(camera indices))` holds those cameras'
+  f at their value in `start`; `Layout(fix_f=...)` leaves their log f out, `coarse_fit` keeps it, and
+  `cylinder_wand_gui.Job.fix_f` passes it from a GUI job. Default empty: nothing changes (`test_cylinder_wand.py` 7
+  passed). **T14** (`t14_hold_f.py`, 2 cameras like the real rig, 4 seeds): with f held at the truth the distances
+  are within |z| ≤ 1.21 and the centres ≤ 1.83; held 1 % high, the distances move +0.98 % (along the valley) and
+  the RMS and held-out wand lengths do not change.
+- **On the real run,** the dot board (three stage positions, triangulated with the wand's cameras) is square only
+  for one value of cam2's f: 29,035 px, 2.6 % above the free fit. Held there (and cam1 at the line's 48,306 px), the
+  halves and quarters still disagree (distances ±2.2 %), so the free fit was delivered.
+- **The board and the wand disagree in scale by 0.4–0.5 %** (the board's 3 mm pitch reads 3.011–3.015 mm).
 
 **2026-10-07 (night): the results page shows the reprojection errors' distributions** (your message: "for the gui,
 please add 2d projection error pdf for your wand calibration reports: du, dv, 2d magnitude"; then "do the optional
@@ -683,6 +710,12 @@ None of these is started; each needs your go-ahead.
    - `multi_image_guard` checks only points beyond r_c at zero tilt. The fix is to take the census of every
      observation, as the paper's variant will: a few seconds per round.
    - Not urgent: no wand rig so far is affected. On 4 Oct you chose to leave the code as it is for now.
+9. **The answer's selection when several starts are carried** (progress log, 2026-10-07 late night). `calibrate`
+   ranks the starts' answers by the detections kept, then by the likelihood. A worse minimum keeps more (its larger
+   residuals widen its 5σ limit), and on 20261007/T0 it won with six starts. Options: rank by the likelihood over the
+   detections common to both answers, or drop an answer whose RMS is well above another's.
+10. **f from another source, held:** the option exists (`fix_f`, T14). What is still missing is a reliable f: on
+    20261007 the dot board fixed only cam2's f (to about ±3 %), and holding it did not make the parts agree.
 
 ## 7. Files
 
@@ -698,6 +731,7 @@ All in this folder unless stated.
 | `2026-10-01-noise-plan.md`, `2026-10-01-noise-report.md` | T11: detection noise |
 | `2026-10-02-weights-plan.md`, `2026-10-02-weights-report.md` | T12: noise weights, more starts, the report's noise section |
 | `2026-10-02-ball-centres-plan.md`, `2026-10-02-ball-centres-report.md` | T13: wand balls' centres through the tube (detectors, effect on the calibration, model-based correction); pre-plan sizing `t13_pre_sizing.py` |
+| `t14_hold_f.py`, `t14_hold_f_out.txt`, `.json` | T14 (7 Oct): the hold-f option on synthetic data; its plan and report are the tracking case's (`cases/cyl_20261007/2026-10-07-plan.md` step C3, `2026-10-07-phaseC-report.md` section 5) |
 
 **Figures:**
 - `figures/cylinder_wand_results.html` (open it in a browser), also at

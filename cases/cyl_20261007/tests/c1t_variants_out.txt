@@ -1,0 +1,57 @@
+C1-T: 6 parts of the recording against C1 (RMS 0.6003 px, 3036 frames)
+  all parts ran in 154 s
+  h1 (frames 0-7499): 1540 frames, RMS 0.6281 px, 6056/6160 used, 151 s; largest |z| 15.88
+      cam1 f_px             41886.2916  C1   48494.2522  diff -6607.9606  (sigma 443.3964, z -14.90)
+      cam1 distance_mm       1005.5080  C1    1178.6538  diff  -173.1458  (sigma 10.9028, z -15.88)
+      cam1 viewing direction (deg) diff 0.5509
+      cam2 f_px             30253.3667  C1   28305.5377  diff +1947.8291  (sigma 401.9671, z +4.85)
+      cam2 distance_mm        879.2745  C1     835.0009  diff   +44.2735  (sigma 11.1640, z +3.97)
+      cam2 azimuth_deg         61.0360  C1      60.2988  diff    +0.7372  (sigma 0.0652, z +11.31)
+      cam2 height_rel_mm        6.5733  C1      16.8328  diff   -10.2595  (sigma 0.9451, z -10.86)
+      cam2 viewing direction (deg) diff 1.1037
+  h2 (frames 7500-15000): 1496 frames, RMS 0.5677 px, 5876/5984 used, 123 s; largest |z| 18.17
+      cam1 f_px             53009.8668  C1   48494.2522  diff +4515.6146  (sigma 579.2850, z +7.80)
+      cam1 distance_mm       1306.1355  C1    1178.6538  diff  +127.4817  (sigma 13.6895, z +9.31)
+      cam1 viewing direction (deg) diff 0.4246
+      cam2 f_px             26709.8020  C1   28305.5377  diff -1595.7356  (sigma 223.4907, z -7.14)
+      cam2 distance_mm        798.1147  C1     835.0009  diff   -36.8862  (sigma 6.4410, z -5.73)
+      cam2 azimuth_deg         59.5075  C1      60.2988  diff    -0.7914  (sigma 0.0435, z -18.17)
+      cam2 height_rel_mm       19.7101  C1      16.8328  diff    +2.8773  (sigma 0.8685, z +3.31)
+      cam2 viewing direction (deg) diff 1.1575
+  q1 (frames 0-3749): 749 frames, RMS 0.6245 px, 2952/2996 used, 53 s; largest |z| 11.37
+      cam1 f_px             41350.7920  C1   48494.2522  diff -7143.4602  (sigma 640.7238, z -11.15)
+      cam1 distance_mm        997.0751  C1    1178.6538  diff  -181.5787  (sigma 15.9683, z -11.37)
+      cam1 viewing direction (deg) diff 0.4378
+      cam2 f_px             29074.3958  C1   28305.5377  diff  +768.8582  (sigma 563.3878, z +1.36)
+      cam2 distance_mm        849.3063  C1     835.0009  diff   +14.3053  (sigma 15.5172, z +0.92)
+      cam2 azimuth_deg         60.7571  C1      60.2988  diff    +0.4583  (sigma 0.1261, z +3.63)
+      cam2 height_rel_mm        5.1431  C1      16.8328  diff   -11.6897  (sigma 1.7294, z -6.76)
+      cam2 viewing direction (deg) diff 0.7458
+  q2 (frames 3750-7499): 791 frames, RMS 0.5772 px, 3036/3164 used, 55 s; largest |z| 11.36
+      cam1 f_px             43354.8631  C1   48494.2522  diff -5139.3891  (sigma 956.9102, z -5.37)
+      cam1 distance_mm       1034.4000  C1    1178.6538  diff  -144.2537  (sigma 23.3002, z -6.19)
+      cam1 viewing direction (deg) diff 0.7902
+      cam2 f_px             30417.3983  C1   28305.5377  diff +2111.8606  (sigma 653.4653, z +3.23)
+      cam2 distance_mm        880.1673  C1     835.0009  diff   +45.1663  (sigma 18.2773, z +2.47)
+      cam2 azimuth_deg         61.4339  C1      60.2988  diff    +1.1350  (sigma 0.0999, z +11.36)
+      cam2 height_rel_mm       11.6898  C1      16.8328  diff    -5.1430  (sigma 1.7630, z -2.92)
+      cam2 viewing direction (deg) diff 1.6456
+  q3 (frames 7500-11249): 963 frames, RMS 0.5316 px, 3772/3852 used, 58 s; largest |z| 5.15
+      cam1 f_px             44937.0637  C1   48494.2522  diff -3557.1885  (sigma 690.6070, z -5.15)
+      cam1 distance_mm       1090.4802  C1    1178.6538  diff   -88.1736  (sigma 17.3721, z -5.08)
+      cam1 viewing direction (deg) diff 0.2835
+      cam2 f_px             28105.8033  C1   28305.5377  diff  -199.7343  (sigma 364.1718, z -0.55)
+      cam2 distance_mm        827.7262  C1     835.0009  diff    -7.2747  (sigma 10.0435, z -0.72)
+      cam2 azimuth_deg         60.4464  C1      60.2988  diff    +0.1475  (sigma 0.0971, z +1.52)
+      cam2 height_rel_mm       12.8345  C1      16.8328  diff    -3.9984  (sigma 0.8902, z -4.49)
+      cam2 viewing direction (deg) diff 0.2299
+  q4 (frames 11250-15000): 533 frames, RMS 0.5488 px, 2072/2132 used, 46 s; largest |z| 31.58
+      cam1 f_px             48417.0240  C1   48494.2522  diff   -77.2282  (sigma 840.7777, z -0.09)
+      cam1 distance_mm       1218.9174  C1    1178.6538  diff   +40.2637  (sigma 20.8698, z +1.93)
+      cam1 viewing direction (deg) diff 0.8214
+      cam2 f_px             23639.0560  C1   28305.5377  diff -4666.4817  (sigma 355.9148, z -13.11)
+      cam2 distance_mm        719.1162  C1     835.0009  diff  -115.8847  (sigma 10.8879, z -10.64)
+      cam2 azimuth_deg         58.2727  C1      60.2988  diff    -2.0261  (sigma 0.0642, z -31.58)
+      cam2 height_rel_mm       16.6133  C1      16.8328  diff    -0.2195  (sigma 1.6003, z -0.14)
+      cam2 viewing direction (deg) diff 3.2916
+  f over the parts: cam1 41351-53010 px (C1 48494), cam2 23639-30417 px (C1 28306)

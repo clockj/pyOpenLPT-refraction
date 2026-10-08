@@ -1,0 +1,115 @@
+{
+ "build": {
+  "name": "p1",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "434749e4033e0fd6a3227fe9323f9f78175c229dbd7bc0b48e19ee480034f62d",
+  "start": "2026-10-07T18:13:32",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p1\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "cams": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\cams_T2",
+ "base": 20000,
+ "moves": 10,
+ "box": [
+  [
+   -20.0,
+   -15.0,
+   -30.0
+  ],
+  [
+   25.0,
+   15.0,
+   35.0
+  ]
+ ],
+ "passes": [
+  {
+   "tag": "tol 1e-9 (tracking)",
+   "tol": 1e-09,
+   "pairs": 400000,
+   "both_ok": 400000,
+   "slow_fail_fast_ok": 0,
+   "slow_ok_fast_fail": 0,
+   "both_fail": 0,
+   "fast_path": 400000,
+   "fallback_not_single": 0,
+   "fallback_solve": 0,
+   "max_dpx": 3.4372324100606466e-06,
+   "dpx_hist": {
+    "[0, 1e-12)": 296698,
+    "[1e-12, 1e-10)": 19721,
+    "[1e-10, 1e-08)": 59162,
+    "[1e-08, 1e-07)": 23752,
+    "[1e-07, 1e-06)": 639,
+    "[1e-06, 0.0001)": 28,
+    "[0.0001, inf)": 0
+   },
+   "worst": {
+    "X": [
+     3.174900055470748,
+     -4.564233922349844,
+     1.7752980049205327
+    ],
+    "cam": 2,
+    "step_mm": 0.16103807499605224,
+    "slow": [
+     620.8106297594018,
+     562.6172822484202
+    ],
+    "fast": [
+     620.8106298083196,
+     562.6172788115359
+    ],
+    "fast_path": true
+   },
+   "dpx_median": 0.0,
+   "dpx_p99": 4.8919855750756106e-08,
+   "seconds": 89.22342801094055,
+   "pass": false
+  },
+  {
+   "tag": "tol 1e-12 (as delivered)",
+   "tol": 1e-12,
+   "pairs": 99990,
+   "both_ok": 99989,
+   "slow_fail_fast_ok": 0,
+   "slow_ok_fast_fail": 0,
+   "both_fail": 1,
+   "fast_path": 99989,
+   "fallback_not_single": 0,
+   "fallback_solve": 1,
+   "max_dpx": 2.3125778625399107e-08,
+   "dpx_hist": {
+    "[0, 1e-12)": 92263,
+    "[1e-12, 1e-10)": 4339,
+    "[1e-10, 1e-08)": 3380,
+    "[1e-08, 1e-07)": 7,
+    "[1e-07, 1e-06)": 0,
+    "[1e-06, 0.0001)": 0,
+    "[0.0001, inf)": 0
+   },
+   "worst": {
+    "X": [
+     15.355850892834706,
+     5.830775356174948,
+     8.429768428524296
+    ],
+    "cam": 2,
+    "step_mm": 0.006195856732286252,
+    "slow": [
+     633.2559009337477,
+     188.9868922597936
+    ],
+    "fast": [
+     633.2559009337477,
+     188.9868922366678
+    ],
+    "fast_path": true
+   },
+   "dpx_median": 0.0,
+   "dpx_p99": 3.736886355909519e-10,
+   "seconds": 22.848361015319824,
+   "pass": true
+  }
+ ]
+}

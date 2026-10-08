@@ -1,0 +1,5 @@
+  frame 0: 969 / 841 detections; offsets within 15.0 px: cam1 -> cam2 30158, cam2 -> cam1 25582
+  frame 400: 1011 / 842 detections; offsets within 15.0 px: cam1 -> cam2 31493, cam2 -> cam1 26401
+  frame 800: 1017 / 854 detections; offsets within 15.0 px: cam1 -> cam2 33504, cam2 -> cam1 28224
+  cam1 -> cam2: 95155 offsets; floor 792 per 0.25 px bin; peak 912 at -0.12 px, centre -0.186 px, RMS width 0.678 px, 607 pairs above the floor within +-1.5 px
+  cam2 -> cam1: 80207 offsets; floor 666 per 0.25 px bin; peak 773 at +0.12 px, centre +0.142 px, RMS width 0.761 px, 576 pairs above the floor within +-1.5 px

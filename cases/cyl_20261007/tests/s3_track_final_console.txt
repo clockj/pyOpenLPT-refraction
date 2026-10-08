@@ -1,0 +1,2 @@
+S3 final: build p4c, frames 0-250 (raw 0-1000), tracer {'intensity_threshold': 28, 'radius_px': 2.0, 'detector': 'lines', 'lines': {'noise': [8.058751135183766, 5.920146272161428]}, 'otf_file': 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\T1_otf_shape.txt', 'roi_from_otf': True, 'roi_sigma': 3.0, 'shape_check': True, 'shape_tol_px': 0.8, 'shape_tol_rel': 0.2}, ipr {'loops': 3, 'reduced_cameras': 0, 'reduced_loops': 0, 'tol_2d_px': 1.5, 'tol_3d_vox': 2.0}
+  exit 0, wall 2274 s; 251 frames, 9.04 s per frame; active long tracks at the end 328

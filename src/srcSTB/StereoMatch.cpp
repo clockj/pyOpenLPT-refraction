@@ -266,7 +266,10 @@ void StereoMatch::buildTables() const {
       if (t == c || !active(t))
         continue;
       LineEntry &le = _line_tab[c][t][pid];
-      le.ok = makeLine2DFromLOS3D(t, e.los, le.line);
+      if (_cam_list[t]->lineImagesCurve())
+        le.ok = makeCurve2DFromLOS3D(t, e.los, le.line, le.poly);
+      else
+        le.ok = makeLine2DFromLOS3D(t, e.los, le.line);
     }
   }
 }
@@ -446,16 +449,24 @@ void StereoMatch::enumerateCandidatesOnCam(
   // 1) The chosen observations' image lines on this camera (from the table)
   std::vector<Line2D> &lines_px = s.lines;
   lines_px.clear();
+  s.curves.clear();
+  bool any_poly = false;
   for (size_t i = 0; i < chosen_cams.size(); ++i) {
     const LineEntry &le = _line_tab[chosen_cams[i]][target_cam][chosen_ids[i]];
     if (!le.ok)
       return;
     lines_px.push_back(le.line);
+    s.curves.push_back(ImageCurve{&le.line, le.poly.empty() ? nullptr : &le.poly});
+    any_poly = any_poly || !le.poly.empty();
   }
 
   // 2) Compute per-row strip intersection in CELL indices
   std::vector<IDMap::RowSpan> &spans = s.spans;
-  idm->computeStripIntersection(lines_px, _obj_cfg._sm_param.tol_2d_px, spans);
+  if (any_poly)
+    idm->computeStripIntersection(s.curves, _obj_cfg._sm_param.tol_2d_px, spans);
+  else
+    idm->computeStripIntersection(lines_px, _obj_cfg._sm_param.tol_2d_px,
+                                  spans);
 
   bool any_valid = false;
   for (const auto &sp : spans) {
@@ -468,8 +479,12 @@ void StereoMatch::enumerateCandidatesOnCam(
     return;
 
   // 3) Visit-and-collect with precise distance test
-  idm->visitPointsInRowSpans(spans, lines_px, _obj_cfg._sm_param.tol_2d_px,
-                             out_candidates, s.dirs);
+  if (any_poly)
+    idm->visitPointsInRowSpans(spans, s.curves, _obj_cfg._sm_param.tol_2d_px,
+                               out_candidates);
+  else
+    idm->visitPointsInRowSpans(spans, lines_px, _obj_cfg._sm_param.tol_2d_px,
+                               out_candidates, s.dirs);
   SM_PROFILE_ADD(strip_points, static_cast<long long>(out_candidates.size()));
   if (out_candidates.empty())
     return;
@@ -1043,6 +1058,19 @@ std::vector<std::unique_ptr<Object3D>> StereoMatch::triangulateMatch(
       continue;
     obj3d->_is_tracked = false;
 
+    // 6) for cameras that start their projection from a ray (the cylindrical
+    // port): the rays of its detections, whose lines of sight carry their
+    // invariants
+    for (int c = 0; c < n_cams; ++c) {
+      const int pid = ids[c];
+      if (pid < 0 || !_cam_list[c] || !_cam_list[c]->usesProjectionHint())
+        continue;
+      if (obj3d->_proj_hint.size() != static_cast<size_t>(n_cams))
+        obj3d->_proj_hint.resize(n_cams);
+      _cam_list[c]->hintFromLineOfSight(_los_tab[c][pid].los, pt_world,
+                                        obj3d->_proj_hint[c]);
+    }
+
     out.emplace_back(std::move(obj3d));
   }
 
@@ -1101,6 +1129,128 @@ bool StereoMatch::makeLine2DFromLOS3D(int cam_id, const Line3D &los,
   L.pt = a;
   L.unit_vector = myMATH::createUnitVector(a, b); // assumed normalized
   out_line = L;
+  return true;
+}
+
+// ---- helper: the image of a 3D LOS on a camera whose line images curve ----
+bool StereoMatch::makeCurve2DFromLOS3D(int cam_id, const Line3D &los,
+                                       Line2D &out_chord,
+                                       std::vector<Pt2D> &out_poly) const {
+  // Where the curve is drawn (cases/cyl_20261007/2026-10-07-plan.md, Phase 3):
+  // the line of sight between where it enters and leaves the view volume, as
+  // makeLine2DFromLOS3D, and only where the camera's model applies (a curved
+  // port: inside its innermost interface; beyond it a point has no image). A
+  // point outside that segment is never matched.
+  constexpr double kCurveTolPx = 0.05; // largest gap between a chord and the curve
+  constexpr int kStartSegments = 8;
+  constexpr int kMaxVertices = 257;
+  out_poly.clear();
+  const AxisLimit &lim = _obj_cfg._sm_param.limit;
+  const double lo[3] = {lim.x_min, lim.y_min, lim.z_min};
+  const double hi[3] = {lim.x_max, lim.y_max, lim.z_max};
+  double t_in = 0.0, t_out = std::numeric_limits<double>::infinity();
+  for (int d = 0; d < 3; ++d) { // the slab method, for los.pt + t * u, t >= 0
+    const double o = los.pt[d], u = los.unit_vector[d];
+    if (std::fabs(u) < 1e-15) {
+      if (o < lo[d] || o > hi[d])
+        return false;
+      continue;
+    }
+    double ta = (lo[d] - o) / u, tb = (hi[d] - o) / u;
+    if (ta > tb)
+      std::swap(ta, tb);
+    t_in = std::max(t_in, ta);
+    t_out = std::min(t_out, tb);
+    if (t_in > t_out)
+      return false;
+  }
+  const Camera &cam = *_cam_list[cam_id];
+  if (!cam.clipToModel(los, t_in, t_out) || !(t_out - t_in > 1e-9))
+    return false;
+
+  // Vertices in order of t, each projected from its left neighbour's ray.
+  struct Vert {
+    double t;
+    Pt2D p;
+    ProjectionHint h;
+    bool ok;
+  };
+  auto at = [&](double t) {
+    return Pt3D{los.pt[0] + t * los.unit_vector[0],
+                los.pt[1] + t * los.unit_vector[1],
+                los.pt[2] + t * los.unit_vector[2]};
+  };
+  std::vector<Vert> v;
+  v.reserve(64);
+  ProjectionHint h;
+  for (int k = 0; k <= kStartSegments; ++k) {
+    const double t = t_in + (t_out - t_in) * k / kStartSegments;
+    auto st = cam.projectWithHint(at(t), h);
+    SM_PROFILE_ADD(proj, 1);
+    v.push_back(Vert{t, st ? st.value() : Pt2D{}, h, static_cast<bool>(st)});
+    if (!st)
+      h = ProjectionHint{};
+  }
+  // Halve every segment whose midpoint's image is more than kCurveTolPx from
+  // its chord, until none is (or the cap).
+  std::vector<Vert> next;
+  int total = static_cast<int>(v.size());
+  for (bool split = true; split && total < kMaxVertices;) {
+    split = false;
+    next.clear();
+    for (size_t i = 0; i + 1 < v.size(); ++i) {
+      next.push_back(v[i]);
+      const Vert &a = v[i], &b = v[i + 1];
+      if (!a.ok || !b.ok || total >= kMaxVertices)
+        continue;
+      const double tm = 0.5 * (a.t + b.t);
+      ProjectionHint hm = a.h;
+      auto st = cam.projectWithHint(at(tm), hm);
+      SM_PROFILE_ADD(proj, 1);
+      if (!st) {
+        // no image here: keep the point, unprojected, so the polyline breaks
+        next.push_back(Vert{tm, Pt2D{}, ProjectionHint{}, false});
+        ++total;
+        split = true;
+        continue;
+      }
+      const Pt2D m = st.value();
+      const double cx = b.p[0] - a.p[0], cy = b.p[1] - a.p[1];
+      const double len = std::sqrt(cx * cx + cy * cy);
+      const double gap =
+          len > 1e-12
+              ? std::fabs((m[0] - a.p[0]) * cy - (m[1] - a.p[1]) * cx) / len
+              : std::sqrt((m[0] - a.p[0]) * (m[0] - a.p[0]) +
+                          (m[1] - a.p[1]) * (m[1] - a.p[1]));
+      if (gap > kCurveTolPx) {
+        next.push_back(Vert{tm, m, hm, true});
+        ++total;
+        split = true;
+      }
+    }
+    next.push_back(v.back());
+    v.swap(next);
+  }
+
+  // The polyline (NaN where a vertex has no image) and its chord.
+  const double nan = std::numeric_limits<double>::quiet_NaN();
+  int first = -1, last = -1, n_ok = 0;
+  out_poly.reserve(v.size());
+  for (size_t i = 0; i < v.size(); ++i) {
+    out_poly.push_back(v[i].ok ? v[i].p : Pt2D{nan, nan});
+    if (v[i].ok) {
+      if (first < 0)
+        first = static_cast<int>(i);
+      last = static_cast<int>(i);
+      ++n_ok;
+    }
+  }
+  if (n_ok < 2 || first == last) {
+    out_poly.clear();
+    return false;
+  }
+  out_chord.pt = v[first].p;
+  out_chord.unit_vector = myMATH::createUnitVector(v[first].p, v[last].p);
   return true;
 }
 
@@ -1251,7 +1401,9 @@ bool StereoMatch::checkBackProjection(
     const LineEntry &le = _line_tab[target_cam][ci][pid];
     if (!le.ok)
       return false;
-    if (myMATH::dist2(qi, le.line) > tol2)
+    const double d2 = le.poly.empty() ? myMATH::dist2(qi, le.line)
+                                      : dist2ToPolyline(qi, le.poly);
+    if (d2 > tol2)
       return false;
   }
   return true;
@@ -1270,9 +1422,55 @@ bool StereoMatch::objectEarlyCheck(const std::vector<int> &cams_in_path,
   }
 }
 
-// Tracer: no extra early rule in build stage.
-bool StereoMatch::tracerEarlyCheck(const std::vector<int> &,
-                                   const std::vector<int> &) const {
+// Tracer: with tracer.shape_check (the cylinder STB plan, Phase 4, the depth
+// cue), the detections' measured RMS widths must agree with the OTF's segment
+// model at the point the path's lines of sight triangulate to; otherwise no
+// extra rule.
+bool StereoMatch::tracerEarlyCheck(const std::vector<int> &cams_in_path,
+                                   const std::vector<int> &ids_in_path) const {
+  const auto &tc = static_cast<const TracerConfig &>(_obj_cfg);
+  if (!tc._shape_check || tc._otf._param.model != 1)
+    return true;
+  const size_t k = std::min(cams_in_path.size(), ids_in_path.size());
+  if (k < 2)
+    return true;
+  std::vector<Line3D> los;
+  los.reserve(k);
+  for (size_t i = 0; i < k; ++i) {
+    const LosEntry &le = _los_tab[cams_in_path[i]][ids_in_path[i]];
+    if (!le.ok)
+      return true;
+    los.push_back(le.los);
+  }
+  Pt3D X;
+  double err = 0.0;
+  try {
+    myMATH::triangulation(X, err, los);
+  } catch (...) {
+    return true;
+  }
+  for (size_t i = 0; i < k; ++i) {
+    const auto *tr = static_cast<const Tracer2D *>(
+        _obj2d_list[cams_in_path[i]][ids_in_path[i]]);
+    if (!tr || !tr->_has_shape)
+      continue;
+    const std::vector<double> p = tc._otf.getOTFParam(cams_in_path[i], X);
+    // the predicted RMS widths along the image's axes: the box's variance
+    // L^2/12 along each of its sides (turned by alpha) plus the Gaussian's
+    const double cs = p[3], sn = p[4];
+    const double sig = p.size() > 5 ? p[5] : 1.0;
+    const double vx = p[1] * p[1] / 12.0, vy = p[2] * p[2] / 12.0;
+    const double wh = std::sqrt(cs * cs * vx + sn * sn * vy + sig * sig);
+    const double wv = std::sqrt(sn * sn * vx + cs * cs * vy + sig * sig);
+    const double mh = std::sqrt(tr->_len_h_px * tr->_len_h_px / 12.0 +
+                                tr->_sigma_h_px * tr->_sigma_h_px);
+    const double mv = std::sqrt(tr->_len_v_px * tr->_len_v_px / 12.0 +
+                                tr->_sigma_v_px * tr->_sigma_v_px);
+    const double tol_h = std::max(tc._shape_tol_px, tc._shape_tol_rel * wh);
+    const double tol_v = std::max(tc._shape_tol_px, tc._shape_tol_rel * wv);
+    if (std::fabs(mh - wh) > tol_h || std::fabs(mv - wv) > tol_v)
+      return false;
+  }
   return true;
 }
 
@@ -1503,6 +1701,24 @@ void IDMap::rebuild(const std::vector<const Object2D *> &objs) {
 
 static inline double hypot2(double x, double y) { return x * x + y * y; }
 
+double dist2ToPolyline(const Pt2D &q, const std::vector<Pt2D> &poly) {
+  double best = std::numeric_limits<double>::infinity();
+  for (size_t i = 0; i + 1 < poly.size(); ++i) {
+    const double ax = poly[i][0], ay = poly[i][1];
+    const double bx = poly[i + 1][0], by = poly[i + 1][1];
+    if (!std::isfinite(ax) || !std::isfinite(bx))
+      continue; // a break
+    const double ex = bx - ax, ey = by - ay;
+    const double e2 = ex * ex + ey * ey;
+    double t = e2 > 0.0 ? ((q[0] - ax) * ex + (q[1] - ay) * ey) / e2 : 0.0;
+    t = std::clamp(t, 0.0, 1.0);
+    const double d2 = hypot2(q[0] - (ax + t * ex), q[1] - (ay + t * ey));
+    if (d2 < best)
+      best = d2;
+  }
+  return best;
+}
+
 Pt2D IDMap::normalized(const Pt2D &v) {
   const double nx = v[0], ny = v[1];
   const double n2 = nx * nx + ny * ny;
@@ -1635,6 +1851,130 @@ void IDMap::visitPointsInRowSpans(const std::vector<RowSpan> &spans,
                                   std::vector<int> &out_indices) const {
   std::vector<Pt2D> dirs;
   visitPointsInRowSpans(spans, lines_px, tol_px, out_indices, dirs);
+}
+
+// For curves: a straight one as computeStripIntersection(lines) does it; a
+// polyline row by row as the hull of its segments' strips, each segment's strip
+// cut to the rows and columns its points within tol can fall in (widened by the
+// cell's half-size, so the cell-centre test stays conservative, as above).
+void IDMap::computeStripIntersection(const std::vector<ImageCurve> &curves,
+                                     double tol_px,
+                                     std::vector<RowSpan> &spans) const {
+  spans.assign(_rows_cell, RowSpan{0, _cols_cell - 1});
+  const double hw = 0.5 * _cell_px, hh = 0.5 * _cell_px;
+  const double to_index = 1.0 / _cell_px;
+  const double eps = 1e-12, eps_c = 1e-9;
+  const double tol_px_grow = tol_px + 1e-6;
+  std::vector<RowSpan> cur;
+  std::vector<Line2D> one(1);
+  std::vector<RowSpan> line_spans;
+  for (const ImageCurve &cv : curves) {
+    if (!cv.poly || cv.poly->size() < 2) {
+      one[0] = *cv.line;
+      computeStripIntersection(one, tol_px, line_spans);
+      for (int cy = 0; cy < _rows_cell; ++cy) {
+        spans[cy].x_min = std::max(spans[cy].x_min, line_spans[cy].x_min);
+        spans[cy].x_max = std::min(spans[cy].x_max, line_spans[cy].x_max);
+      }
+      continue;
+    }
+    const std::vector<Pt2D> &P = *cv.poly;
+    cur.assign(_rows_cell, RowSpan{1, 0});
+    for (size_t i = 0; i + 1 < P.size(); ++i) {
+      const double ax = P[i][0], ay = P[i][1], bx = P[i + 1][0], by = P[i + 1][1];
+      if (!std::isfinite(ax) || !std::isfinite(bx))
+        continue;
+      const Pt2D u = normalized(Pt2D{bx - ax, by - ay});
+      const Pt2D n{-u[1], u[0]};
+      const double d = -(n[0] * ax + n[1] * ay);
+      const double T = tol_px_grow + std::fabs(n[0]) * hw + std::fabs(n[1]) * hh;
+      const double ylo = std::min(ay, by) - (tol_px_grow + hh);
+      const double yhi = std::max(ay, by) + (tol_px_grow + hh);
+      const double xlo = std::min(ax, bx) - (tol_px_grow + hw);
+      const double xhi = std::max(ax, bx) + (tol_px_grow + hw);
+      const int cy0 = std::max(0, static_cast<int>(std::ceil(ylo * to_index - 0.5 - eps_c)));
+      const int cy1 = std::min(_rows_cell - 1,
+                               static_cast<int>(std::floor(yhi * to_index - 0.5 + eps_c)));
+      for (int cy = cy0; cy <= cy1; ++cy) {
+        const double y_c = (cy + 0.5) * _cell_px;
+        const double C = n[1] * y_c + d;
+        double x_left = xlo, x_right = xhi;
+        if (std::fabs(n[0]) < eps) {
+          if (std::fabs(C) > T)
+            continue;
+        } else {
+          double l = (-T - C) / n[0], r = (T - C) / n[0];
+          if (l > r)
+            std::swap(l, r);
+          x_left = std::max(x_left, l);
+          x_right = std::min(x_right, r);
+        }
+        int a = static_cast<int>(std::ceil(x_left * to_index - 0.5 - eps_c));
+        int b = static_cast<int>(std::floor(x_right * to_index - 0.5 + eps_c));
+        a = std::max(0, a);
+        b = std::min(_cols_cell - 1, b);
+        if (a > b)
+          continue;
+        RowSpan &row = cur[cy];
+        if (row.x_min > row.x_max) {
+          row.x_min = a;
+          row.x_max = b;
+        } else {
+          row.x_min = std::min(row.x_min, a);
+          row.x_max = std::max(row.x_max, b);
+        }
+      }
+    }
+    for (int cy = 0; cy < _rows_cell; ++cy) {
+      if (cur[cy].x_min > cur[cy].x_max) {
+        spans[cy].x_min = 1;
+        spans[cy].x_max = 0;
+      } else {
+        spans[cy].x_min = std::max(spans[cy].x_min, cur[cy].x_min);
+        spans[cy].x_max = std::min(spans[cy].x_max, cur[cy].x_max);
+      }
+    }
+  }
+}
+
+void IDMap::visitPointsInRowSpans(const std::vector<RowSpan> &spans,
+                                  const std::vector<ImageCurve> &curves,
+                                  double tol_px,
+                                  std::vector<int> &out_indices) const {
+  out_indices.clear();
+  if (!_objs || curves.empty() || spans.empty())
+    return;
+  const double tol2 = tol_px * tol_px;
+  const auto &objs = *_objs;
+  for (int cy = 0; cy < _rows_cell; ++cy) {
+    const RowSpan &row = spans[cy];
+    if (row.x_min > row.x_max)
+      continue;
+    for (int cx = row.x_min; cx <= row.x_max; ++cx) {
+      for (int pid : _buckets[idx(cy, cx)]) {
+        if (pid < 0 || static_cast<size_t>(pid) >= objs.size())
+          continue;
+        const Pt2D &q = objs[pid]->_pt_center;
+        bool ok = true;
+        for (const ImageCurve &cv : curves) {
+          double d2;
+          if (cv.poly && cv.poly->size() >= 2) {
+            d2 = dist2ToPolyline(q, *cv.poly);
+          } else {
+            const Pt2D u = normalized(cv.line->unit_vector);
+            const double z = (q[1] - cv.line->pt[1]) * u[0] - (q[0] - cv.line->pt[0]) * u[1];
+            d2 = z * z;
+          }
+          if (d2 > tol2) {
+            ok = false;
+            break;
+          }
+        }
+        if (ok)
+          out_indices.push_back(pid);
+      }
+    }
+  }
 }
 
 // Each observation is in exactly one cell (rebuild), and each cell is visited

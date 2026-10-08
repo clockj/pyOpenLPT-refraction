@@ -1,0 +1,211 @@
+{
+ "T0/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\T0\\cam1",
+  "frames": 15001,
+  "first": "frame000000.tif",
+  "last": "frame015000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:33:46",
+  "time_last": "2026-10-07 15:36:42",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 109.0,
+  "header": {
+   "serial": 29199,
+   "fps": 100,
+   "exposure_us": 100,
+   "bytes": 310812
+  }
+ },
+ "T0/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\T0\\cam2",
+  "frames": 15001,
+  "first": "frame000000.tif",
+  "last": "frame015000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:33:46",
+  "time_last": "2026-10-07 15:36:40",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 157.0,
+  "header": {
+   "serial": 23752,
+   "fps": 100,
+   "exposure_us": 100,
+   "bytes": 310812
+  }
+ },
+ "Planes/0/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes\\0\\cam1",
+  "frames": 1,
+  "first": "frame000000.tif",
+  "last": "frame000000.tif",
+  "other_files": [],
+  "time_first": "2026-10-07 15:44:20",
+  "time_last": "2026-10-07 15:44:20",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 108.0,
+  "header": null
+ },
+ "Planes/0/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes\\0\\cam2",
+  "frames": 1,
+  "first": "frame000000.tif",
+  "last": "frame000000.tif",
+  "other_files": [],
+  "time_first": "2026-10-07 15:44:22",
+  "time_last": "2026-10-07 15:44:22",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 147.0,
+  "header": null
+ },
+ "Planes/1/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes\\1\\cam1",
+  "frames": 1,
+  "first": "frame000000.tif",
+  "last": "frame000000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:46:20",
+  "time_last": "2026-10-07 15:46:20",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 108.0,
+  "header": {
+   "serial": 29199,
+   "fps": 100,
+   "exposure_us": 100,
+   "bytes": 10812
+  }
+ },
+ "Planes/1/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes\\1\\cam2",
+  "frames": 1,
+  "first": "frame000000.tif",
+  "last": "frame000000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:46:20",
+  "time_last": "2026-10-07 15:46:20",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 145.0,
+  "header": {
+   "serial": 23752,
+   "fps": 100,
+   "exposure_us": 100,
+   "bytes": 10812
+  }
+ },
+ "Planes/2/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes\\2\\cam1",
+  "frames": 1,
+  "first": "frame000000.tif",
+  "last": "frame000000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:47:16",
+  "time_last": "2026-10-07 15:47:16",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 110.0,
+  "header": {
+   "serial": 29199,
+   "fps": 100,
+   "exposure_us": 100,
+   "bytes": 10812
+  }
+ },
+ "Planes/2/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes\\2\\cam2",
+  "frames": 1,
+  "first": "frame000000.tif",
+  "last": "frame000000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:47:16",
+  "time_last": "2026-10-07 15:47:16",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 144.0,
+  "header": {
+   "serial": 23752,
+   "fps": 100,
+   "exposure_us": 100,
+   "bytes": 10812
+  }
+ },
+ "T1/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\T1\\cam1",
+  "frames": 1001,
+  "first": "frame000000.tif",
+  "last": "frame001000.tif",
+  "other_files": [],
+  "time_first": "2026-10-07 15:59:18",
+  "time_last": "2026-10-07 15:59:26",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 105.0,
+  "header": null
+ },
+ "T1/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\T1\\cam2",
+  "frames": 1001,
+  "first": "frame000000.tif",
+  "last": "frame001000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-07 15:59:20",
+  "time_last": "2026-10-07 15:59:28",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 146.0,
+  "header": {
+   "serial": 23752,
+   "fps": 4000,
+   "exposure_us": 100,
+   "bytes": 30812
+  }
+ }
+}

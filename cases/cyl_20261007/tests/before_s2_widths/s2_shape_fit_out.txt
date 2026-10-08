@@ -1,0 +1,39 @@
+S2: T1's shape model; cameras ['D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam1.txt', 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam2.txt']; view volume x [-1.7 24.4], y [-9.2 12.6], z [-30.3  15.8] mm (r <= 29.3); noise [8.06 5.92]; tol 1.2 px
+  fitting frames:
+    frame    0: detections 969 / 841; candidate pairs 2544 (2.63 per cam1 detection, 16 % with exactly one)
+    frame   80: detections 1027 / 840; candidate pairs 2779 (2.71 per cam1 detection, 21 % with exactly one)
+    frame  160: detections 993 / 849; candidate pairs 2666 (2.68 per cam1 detection, 18 % with exactly one)
+    frame  240: detections 999 / 866; candidate pairs 2761 (2.76 per cam1 detection, 19 % with exactly one)
+    frame  320: detections 1013 / 831; candidate pairs 2661 (2.63 per cam1 detection, 19 % with exactly one)
+    frame  400: detections 1011 / 842; candidate pairs 2707 (2.68 per cam1 detection, 19 % with exactly one)
+    frame  480: detections 984 / 883; candidate pairs 2841 (2.89 per cam1 detection, 15 % with exactly one)
+    frame  560: detections 949 / 852; candidate pairs 2653 (2.80 per cam1 detection, 14 % with exactly one)
+    frame  640: detections 983 / 868; candidate pairs 2801 (2.85 per cam1 detection, 17 % with exactly one)
+    frame  720: detections 983 / 861; candidate pairs 2784 (2.83 per cam1 detection, 19 % with exactly one)
+    frame  800: detections 1017 / 854; candidate pairs 2896 (2.85 per cam1 detection, 17 % with exactly one)
+    frame  880: detections 969 / 874; candidate pairs 2752 (2.84 per cam1 detection, 15 % with exactly one)
+    frame  960: detections 943 / 869; candidate pairs 2684 (2.85 per cam1 detection, 16 % with exactly one)
+  held-out frames:
+    frame   40: detections 981 / 844; candidate pairs 2629 (2.68 per cam1 detection, 17 % with exactly one)
+    frame  120: detections 965 / 874; candidate pairs 2592 (2.69 per cam1 detection, 19 % with exactly one)
+    frame  200: detections 1001 / 907; candidate pairs 2802 (2.80 per cam1 detection, 15 % with exactly one)
+    frame  280: detections 1046 / 901; candidate pairs 3034 (2.90 per cam1 detection, 17 % with exactly one)
+    frame  360: detections 999 / 852; candidate pairs 2740 (2.74 per cam1 detection, 17 % with exactly one)
+    frame  440: detections 986 / 892; candidate pairs 2816 (2.86 per cam1 detection, 17 % with exactly one)
+    frame  520: detections 1023 / 856; candidate pairs 2792 (2.73 per cam1 detection, 20 % with exactly one)
+    frame  600: detections 1014 / 888; candidate pairs 2824 (2.79 per cam1 detection, 17 % with exactly one)
+    frame  680: detections 1024 / 874; candidate pairs 2756 (2.69 per cam1 detection, 17 % with exactly one)
+    frame  760: detections 963 / 854; candidate pairs 2660 (2.76 per cam1 detection, 19 % with exactly one)
+    frame  840: detections 967 / 892; candidate pairs 2667 (2.76 per cam1 detection, 18 % with exactly one)
+    frame  920: detections 966 / 837; candidate pairs 2509 (2.60 per cam1 detection, 20 % with exactly one)
+  pairs: 35529 fitting, 32821 held out; focal depths in 583 s
+  1. cam1 grid: A 1.00 mm, z_f 1201.2 mm: 1155 of 8000 pairs agree (14.4 %)
+  1. cam2 grid: A 1.00 mm, z_f 838.5 mm: 1585 of 8000 pairs agree (19.8 %)
+  2. round 1: 988 joint inliers; A1 0.145 mm, z_f1 1229.81 mm, A2 0.304 mm, z_f2 838.29 mm
+  2. round 2: 773 joint inliers; A1 0.047 mm, z_f1 1285.07 mm, A2 0.140 mm, z_f2 854.35 mm
+  3-4. cam1: sigma0 1.000 px (0 horizontal, 0 vertical lines); flux = 220098.2 x (|L_h| + |L_v| + 2)^-5.568
+  3-4. cam2: sigma0 1.000 px (0 horizontal, 0 vertical lines); flux = 1666.1 x (|L_h| + |L_v| + 2)^-0.379
+  held out, cam1: 648 joint inliers of 32821 pairs; residual RMS L_h 0.40, L_v 0.52 px (means +0.04, +0.06); slope against depth +0.0027 +- 0.0012, -0.0031 +- 0.0015 px/mm
+  held out, cam2: 648 joint inliers of 32821 pairs; residual RMS L_h 0.39, L_v 0.62 px (means -0.01, +0.07); slope against depth +0.0072 +- 0.0013, +0.0031 +- 0.0021 px/mm
+  judged (held-out RMS <= 1.5 px, no trend with depth): FAIL (largest RMS 0.62 px; trend yes)
+  written data/T1_shape.json and data/T1_otf_shape.txt (15 x 11 x 17 nodes); 597 s

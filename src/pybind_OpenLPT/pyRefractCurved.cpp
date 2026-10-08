@@ -377,6 +377,35 @@ void bind_RefractCurved(py::module_& m) {
         "reached its cap.");
 
     sub.def(
+        "single_image",
+        [](const std::vector<double>& n, const std::vector<double>& R, double r_p,
+           double r_x, double dz) { return singleImage(makeStack(n, R), r_p, r_x, dz); },
+        py::arg("n"), py::arg("R"), py::arg("r_p"), py::arg("r_x"), py::arg("dz"),
+        "A sufficient condition for exactly one image (one densifying interface, "
+        "r_X below r_c, |dz| below Z_0 of the folding tilt).");
+
+    sub.def(
+        "project_cylinder_from",
+        [](const std::vector<double>& n, const std::vector<double>& R,
+           const std::vector<double>& pinhole, const std::vector<double>& point,
+           double lam0, double cz0, bool far0, double tol, int itmax) -> py::object {
+            const auto p = toArray3(pinhole, "pinhole");
+            const auto x = toArray3(point, "point");
+            const auto r = projectCylinderFrom(makeStack(n, R), p.data(), x.data(),
+                                               lam0, cz0, far0, tol, itmax);
+            if (!r) {
+                return py::none();
+            }
+            return py::make_tuple(r->branch == Branch::Far ? "far" : "near", r->lambda,
+                                  r->c_z, std::vector<double>(r->dir, r->dir + 3));
+        },
+        py::arg("n"), py::arg("R"), py::arg("pinhole"), py::arg("point"),
+        py::arg("lam0"), py::arg("cz0"), py::arg("far0") = false,
+        py::arg("tol") = 1e-9, py::arg("itmax") = -1,
+        "The single image solved from a nearby ray's invariants, as "
+        "(branch, Lambda, C_z, direction), or None (then run project_cylinder).");
+
+    sub.def(
         "direction_from_invariants",
         [](const std::vector<double>& pinhole, double lam, double c_z, double n1,
            double nu1) {

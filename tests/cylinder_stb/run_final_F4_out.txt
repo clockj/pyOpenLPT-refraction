@@ -1,0 +1,3 @@
+The cylinder STB tests on build p4c
+  F4: exit 0, 17 s
+      judged: hinted call <= 3 us (from Python, call overhead included): PASS

@@ -1,0 +1,95 @@
+{
+ "source": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T0\\camFile",
+ "target": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T0\\camFile_track",
+ "tol": 1e-09,
+ "files": {
+  "cam1.txt": {
+   "old_value": "9.9999999999999998e-13",
+   "new_value": "1.0000000000000001e-09",
+   "changed_lines": [
+    37
+   ],
+   "n_lines": 41,
+   "same_length": true
+  },
+  "cam2.txt": {
+   "old_value": "9.9999999999999998e-13",
+   "new_value": "1.0000000000000001e-09",
+   "changed_lines": [
+    37
+   ],
+   "n_lines": 41,
+   "same_length": true
+  }
+ },
+ "checks": {
+  "box": {
+   "points": 20000,
+   "cam1.txt": {
+    "image_1e-12": 20000,
+    "image_1e-9": 20000,
+    "both": 20000,
+    "only_1e-12": 0,
+    "only_1e-9": 0,
+    "on_sensor_both": 11028,
+    "max_px_diff": 0.0
+   },
+   "cam2.txt": {
+    "image_1e-12": 20000,
+    "image_1e-9": 20000,
+    "both": 20000,
+    "only_1e-12": 0,
+    "only_1e-9": 0,
+    "on_sensor_both": 12337,
+    "max_px_diff": 0.0
+   }
+  },
+  "junction plane of cam1": {
+   "points": 4000,
+   "cam1.txt": {
+    "image_1e-12": 4000,
+    "image_1e-9": 4000,
+    "both": 4000,
+    "only_1e-12": 0,
+    "only_1e-9": 0,
+    "on_sensor_both": 2889,
+    "max_px_diff": 0.0
+   },
+   "cam2.txt": {
+    "image_1e-12": 3553,
+    "image_1e-9": 3553,
+    "both": 3553,
+    "only_1e-12": 0,
+    "only_1e-9": 0,
+    "on_sensor_both": 554,
+    "max_px_diff": 0.0
+   }
+  },
+  "junction plane of cam2": {
+   "points": 4000,
+   "cam1.txt": {
+    "image_1e-12": 3574,
+    "image_1e-9": 3574,
+    "both": 3574,
+    "only_1e-12": 0,
+    "only_1e-9": 0,
+    "on_sensor_both": 406,
+    "max_px_diff": 0.0
+   },
+   "cam2.txt": {
+    "image_1e-12": 4000,
+    "image_1e-9": 4000,
+    "both": 4000,
+    "only_1e-12": 0,
+    "only_1e-9": 0,
+    "on_sensor_both": 3411,
+    "max_px_diff": 0.0
+   }
+  }
+ },
+ "verdict": {
+  "one_line_changed": true,
+  "same_pixels_1e-6": true,
+  "nothing_lost_at_1e-9": true
+ }
+}

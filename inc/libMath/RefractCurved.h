@@ -376,4 +376,43 @@ std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
                                  CylinderCoverage* coverage = nullptr,
                                  double tol = 1e-9, int itmax = -1);
 
+/**
+  * @brief A sufficient condition for a point to have exactly one image through
+  *        coaxial cylinders.
+  *
+  * With at most one densifying interface (n_k < n_{k+1}; nu keeps the order of
+  * n at every tilt), eq. (cert) holds wherever k* = N (Property onedens), i.e.
+  * wherever r_X < r_c(C_z) (eq. rc). r_c falls with |C_z|; C1 is the first tilt
+  * at which it reaches r_X. Below C1 the branches join at Lmax and cover
+  * [0, pi] once at every tilt (Property shadow), so the level curve
+  * Phi = dphi is one strand, and zeta rises along it on both branches
+  * (Properties zeta and farfold): exactly one ray reaches every dz it spans.
+  * Steeper rays cover at least Z_0(C1) along the axis (Property zbound), so a
+  * point with |dz| < Z_0(C1) has exactly that one image, and no ray sweeps
+  * past pi. Lengths in any common unit; `dz` is the point's axial offset from
+  * the pinhole. False when the stack or the radii fail the conditions, with a
+  * relative margin of 1e-9 at both edges.
+  */
+bool singleImage(const Stack& s, double r_p, double r_x, double dz);
+
+/**
+  * @brief The image of `point` solved from the invariants of a nearby ray,
+  *        when the point provably has only that one.
+  *
+  * For tracking, where each projection is of a point that moved little since
+  * the last one. The step-(4) solvers start from (|lam0|, cz0): first on the
+  * branch whose reach at that tilt covers the target, then on the other. A
+  * converged solve (the residual below `tol`, inside the domain: the test of
+  * projectCylinder()) is returned when singleImage() holds; projectCylinder()
+  * would then return that ray alone. `lam0` is signed and in the caller's
+  * units, as Ray::lambda; `far0` is the hint's branch, used only when the
+  * reach cannot be evaluated. Same frame, units and scaling as
+  * projectCylinder(); `itmax` caps each solve (-1: 30). Nullopt otherwise, and
+  * the caller runs the full search.
+  */
+std::optional<Ray> projectCylinderFrom(const Stack& s, const double pinhole[3],
+                                       const double point[3], double lam0,
+                                       double cz0, bool far0, double tol = 1e-9,
+                                       int itmax = -1);
+
 } // namespace refract_curved

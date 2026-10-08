@@ -1,0 +1,6 @@
+V1: image statuses on a wide-view rig; build p123 (d9b20b4 + diff 28c13622a400); margin 2.0 px, merge 8.0 px; r_c = 75.62 mm
+  r < r_c: statuses {'one': 29762, 'none': 3}; images per point {0: 3, 1: 29762}
+  r > r_c: statuses {'ambiguous': 1019, 'one': 13910, 'none': 5306}; images per point {0: 5306, 1: 13910, 2: 1019}
+  agreement with the rule from projectAll: 50000 of 50000
+  provablySingleImage: 29626 points, of which 0 have other than one image; points inside r_c without the certificate: 139
+  judged: PASS

@@ -1,0 +1,2 @@
+S3 today: build head1007, frames 0-60 (raw 0-240), tracer {'intensity_threshold': 28, 'radius_px': 2.0}
+  exit 0, wall 1287 s; 61 frames, 21.06 s per frame; active long tracks at the end 1667

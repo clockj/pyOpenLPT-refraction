@@ -141,7 +141,14 @@ void bind_Config(py::module_& m) {
         .def_property_readonly("kind", &TracerConfig::kind)
         .def_readwrite("_min_obj_int", &TracerConfig::_min_obj_int)
         .def_readwrite("_radius_obj", &TracerConfig::_radius_obj)
-        .def_readwrite("_otf", &TracerConfig::_otf);
+        .def_readwrite("_otf", &TracerConfig::_otf)
+        .def_readwrite("_roi_from_otf", &TracerConfig::_roi_from_otf)
+        .def_readwrite("_roi_sigma", &TracerConfig::_roi_sigma)
+        .def_readwrite("_otf_file", &TracerConfig::_otf_file)
+        .def_readwrite("_detector", &TracerConfig::_detector)
+        .def_readwrite("_shape_check", &TracerConfig::_shape_check)
+        .def_readwrite("_shape_tol_px", &TracerConfig::_shape_tol_px)
+        .def_readwrite("_shape_tol_rel", &TracerConfig::_shape_tol_rel);
 
     // -------- BubbleConfig --------
     py::class_<BubbleConfig, ObjectConfig>(m, "BubbleConfig")

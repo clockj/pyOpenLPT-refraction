@@ -1,0 +1,4 @@
+V2: a shake next to camera A's shadow; X0 = [80.091, -2.08, -8.358] mm (r = 80.53 mm), A loses its image 0.155 mm along e = [0.995, 0.0, -0.104]
+  p3: cost where A sees it: min 7.10, at the last such position 12.91; in the shadow: min 20.35, max 102.12; shake from +0.5 e_s ends 2.2 um from X0 (s = +2.2 um)
+  p4c: cost where A sees it: min 1.14, at the last such position 7.29; in the shadow: min 346.51, max 402.48; shake from +0.5 e_s ends 2.3 um from X0 (s = +2.3 um)
+  judged (p123: no lower cost in the shadow; the shake ends at X0): PASS

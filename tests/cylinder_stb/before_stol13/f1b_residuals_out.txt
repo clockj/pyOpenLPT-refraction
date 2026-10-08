@@ -1,0 +1,17 @@
+F1b: residuals behind F1's largest pixel differences; build p1; cameras D:\Refraction\pyOpenLPT\tests\cylinder_stb\data\cams_T2 at tol 1e-9
+  400000 point-camera pairs; 189 more than 3e-7 px apart
+  cam2 r_X 3.64 mm, dz 6.34 mm: |d| 3.44e-06 px (du 4.89e-08, dv -3.44e-06); residuals slow (phi 1.07e-16, z 0.00e+00), fast (phi -9.48e-12, z 9.48e-11); predicted (du, dv) (-4.51e-08, 3.44e-06); ratio 1.00
+  cam2 r_X 15.18 mm, dz 15.76 mm: |d| 2.61e-06 px (du -2.14e-09, dv -2.61e-06); residuals slow (phi 6.25e-17, z 0.00e+00), fast (phi 5.82e-11, z 7.15e-11); predicted (du, dv) (-7.48e-08, 2.61e-06); ratio 1.00
+  cam2 r_X 8.81 mm, dz 20.89 mm: |d| 2.4e-06 px (du 5.53e-08, dv -2.40e-06); residuals slow (phi 0.00e+00, z 3.47e-18), fast (phi -6.08e-11, z 6.69e-11); predicted (du, dv) (-5.75e-08, 2.40e-06); ratio 1.00
+  cam2 r_X 18.14 mm, dz 19.17 mm: |d| 2.3e-06 px (du -8.51e-09, dv -2.30e-06); residuals slow (phi 5.04e-17, z 0.00e+00), fast (phi -5.13e-11, z 6.29e-11); predicted (du, dv) (9.98e-09, 2.30e-06); ratio 1.00
+  cam2 r_X 9.28 mm, dz 17.04 mm: |d| 1.93e-06 px (du 3.61e-08, dv -1.93e-06); residuals slow (phi 3.47e-18, z -3.47e-18), fast (phi 2.81e-11, z 5.30e-11); predicted (du, dv) (-3.79e-08, 1.93e-06); ratio 1.00
+  cam1 r_X 8.29 mm, dz 27.57 mm: |d| 1.87e-06 px (du -7.38e-09, dv -1.87e-06); residuals slow (phi 1.71e-16, z 0.00e+00), fast (phi 2.77e-11, z 9.26e-11); predicted (du, dv) (-1.56e-08, 1.87e-06); ratio 1.00
+  cam2 r_X 15.80 mm, dz 19.53 mm: |d| 1.76e-06 px (du 1.49e-08, dv -1.76e-06); residuals slow (phi -1.14e-16, z -3.47e-18), fast (phi 1.73e-11, z 4.81e-11); predicted (du, dv) (-3.61e-08, 1.76e-06); ratio 1.00
+  cam1 r_X 15.23 mm, dz 18.65 mm: |d| 1.53e-06 px (du -1.44e-08, dv -1.53e-06); residuals slow (phi -4.44e-16, z 0.00e+00), fast (phi -2.21e-11, z 7.71e-11); predicted (du, dv) (-2.11e-08, 1.53e-06); ratio 1.00
+  cam1 r_X 15.10 mm, dz 30.17 mm: |d| 1.48e-06 px (du -1.47e-09, dv -1.48e-06); residuals slow (phi 8.88e-16, z -1.39e-17), fast (phi -5.97e-12, z 7.45e-11); predicted (du, dv) (-7.99e-09, 1.48e-06); ratio 1.00
+  cam1 r_X 13.53 mm, dz 19.88 mm: |d| 1.48e-06 px (du 4.84e-09, dv -1.48e-06); residuals slow (phi 6.25e-17, z 0.00e+00), fast (phi 2.42e-12, z 7.28e-11); predicted (du, dv) (-4.88e-09, 1.48e-06); ratio 1.00
+  cam2 r_X 15.32 mm, dz 12.15 mm: |d| 1.46e-06 px (du 2.34e-08, dv -1.46e-06); residuals slow (phi -2.05e-16, z -1.73e-18), fast (phi 1.19e-11, z 4.00e-11); predicted (du, dv) (-2.79e-08, 1.46e-06); ratio 1.00
+  cam1 r_X 14.38 mm, dz 33.19 mm: |d| 1.45e-06 px (du -2.39e-09, dv -1.45e-06); residuals slow (phi -4.44e-16, z 1.39e-17), fast (phi 7.48e-12, z 7.32e-11); predicted (du, dv) (2.44e-09, 1.45e-06); ratio 1.00
+
+  explained (predicted within a factor 2): 189 of 189; largest residual of either ray 9.9e-11 (the tolerance 1e-9)
+  judged: PASS

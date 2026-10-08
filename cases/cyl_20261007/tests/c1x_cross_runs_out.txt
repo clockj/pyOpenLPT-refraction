@@ -1,0 +1,11 @@
+C1-X: the calibrations of 6 Oct T2 and 7 Oct T0 on each other's frames (T2: 1966 kept frames, T0: 3036)
+
+ cameras  frames   wand length error: mean, RMS (um)   residual per camera: mean (du, dv), RMS about it (px)
+ T2 cams      T2     -0.1 +- 0.7,  31.6            cam1 (+0.000, +0.000), 0.237; cam2 (-0.000, -0.000), 0.263
+                   vertical disagreement cam1 - cam2: mean +0.000 px, trend -0.0034 +- 0.0022 px per 1000 frames; before the light change -0.040 (298 frames); after -0.008 (1394 frames)
+ T2 cams      T0   +485.2 +- 6.8, 611.9            cam1 (+0.003, -4.197), 3.773; cam2 (-0.010, +4.651), 4.180
+                   vertical disagreement cam1 - cam2: mean -8.848 px, trend -0.2309 +- 0.0337 px per 1000 frames
+ T0 cams      T2   -402.0 +- 7.5, 523.0            cam1 (+0.003, +4.205), 4.345; cam2 (-0.008, -5.009), 5.176
+                   vertical disagreement cam1 - cam2: mean +9.214 px, trend -0.8378 +- 0.0521 px per 1000 frames; before the light change +13.394 (298 frames); after +7.676 (1394 frames)
+ T0 cams      T0     +2.6 +- 0.7,  38.6            cam1 (-0.000, +0.000), 0.163; cam2 (+0.000, -0.001), 0.194
+                   vertical disagreement cam1 - cam2: mean +0.001 px, trend -0.0124 +- 0.0013 px per 1000 frames

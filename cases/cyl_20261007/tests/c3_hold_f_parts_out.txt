@@ -1,0 +1,16 @@
+C3 parts: the halves and quarters refitted with f held at {1: 29035.0, 0: 48306.0} (camera index: f)
+  6 fits in 46 s
+  c3_f1_48306_f2_29035_h1: f    48306 /    29035 px, D  1161.9 /   848.4 mm, f/D 41.574 / 34.224; RMS 0.6410 px (6076/6160), wand length RMS 36.7 um (35 s)
+  c3_f1_48306_f2_29035_h2: f    48306 /    29035 px, D  1186.1 /   863.2 mm, f/D 40.728 / 33.638; RMS 0.5693 px (5864/5984), wand length RMS 32.6 um (39 s)
+  c3_f1_48306_f2_29035_q1: f    48306 /    29035 px, D  1167.5 /   851.7 mm, f/D 41.376 / 34.089; RMS 0.6360 px (2956/2996), wand length RMS 36.1 um (17 s)
+  c3_f1_48306_f2_29035_q2: f    48306 /    29035 px, D  1155.1 /   844.7 mm, f/D 41.821 / 34.374; RMS 0.5904 px (3052/3164), wand length RMS 34.1 um (23 s)
+  c3_f1_48306_f2_29035_q3: f    48306 /    29035 px, D  1172.1 /   854.9 mm, f/D 41.212 / 33.962; RMS 0.5299 px (3764/3852), wand length RMS 31.2 um (27 s)
+  c3_f1_48306_f2_29035_q4: f    48306 /    29035 px, D  1205.6 /   875.1 mm, f/D 40.068 / 33.178; RMS 0.5694 px (2080/2132), wand length RMS 31.3 um (23 s)
+
+  The board on each fit (c2b_valley_board's measures; a square board has B - A = 0 and angle 90 deg):
+    c3_f1_48306_f2_29035_h1: pitch A +0.426 %, B -0.838 %, B - A -1.264 %; angle 89.849 deg; flatness RMS 17.4 39.5 47.9 um; steps 2.537 2.459 mm; reprojection 0.35/0.41 0.35/0.41 0.32/0.38 px
+    c3_f1_48306_f2_29035_h2: pitch A +0.335 %, B +1.805 %, B - A +1.470 %; angle 90.216 deg; flatness RMS 19.9 38.4 45.4 um; steps 2.542 2.463 mm; reprojection 0.35/0.42 0.34/0.41 0.31/0.37 px
+    c3_f1_48306_f2_29035_q1: pitch A +0.404 %, B -0.207 %, B - A -0.611 %; angle 89.851 deg; flatness RMS 18.0 39.1 47.2 um; steps 2.537 2.460 mm; reprojection 0.30/0.36 0.31/0.37 0.30/0.35 px
+    c3_f1_48306_f2_29035_q2: pitch A +0.441 %, B -1.566 %, B - A -2.007 %; angle 89.856 deg; flatness RMS 16.7 40.0 48.9 um; steps 2.539 2.461 mm; reprojection 0.40/0.47 0.39/0.46 0.35/0.42 px
+    c3_f1_48306_f2_29035_q3: pitch A +0.449 %, B +0.258 %, B - A -0.191 %; angle 90.032 deg; flatness RMS 18.5 39.0 46.8 um; steps 2.541 2.463 mm; reprojection 0.37/0.44 0.36/0.42 0.32/0.38 px
+    c3_f1_48306_f2_29035_q4: pitch A +0.194 %, B +3.988 %, B - A +3.794 %; angle 90.432 deg; flatness RMS 21.6 37.9 43.9 um; steps 2.546 2.466 mm; reprojection 0.37/0.44 0.35/0.42 0.32/0.38 px

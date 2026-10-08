@@ -1,0 +1,96 @@
+S2: T1's shape model; build p4c; cameras ['D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam1.txt', 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam2.txt']; view volume x [-1.7 24.4], y [-9.2 12.6], z [-30.3  15.8] mm (r <= 29.3); noise [8.06 5.92]; pairs within 8.0 px; signal band d <= 1.5 px, background 4.0 to 8.0 px
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 76.5085,0.294811,0.44403,0
+
+Camera 1 (a,b,c,alpha) = 72.5612,0.356523,0.398474,0
+
+  fitting frames:
+    frame    0: detections 969 / 841; pairs within 8.0 px 16328
+    frame   40: detections 981 / 844; pairs within 8.0 px 16579
+    frame   80: detections 1027 / 840; pairs within 8.0 px 17477
+    frame  120: detections 965 / 874; pairs within 8.0 px 16946
+    frame  160: detections 993 / 849; pairs within 8.0 px 16525
+    frame  200: detections 1001 / 907; pairs within 8.0 px 18052
+    frame  240: detections 999 / 866; pairs within 8.0 px 17593
+    frame  280: detections 1046 / 901; pairs within 8.0 px 18861
+    frame  320: detections 1013 / 831; pairs within 8.0 px 16664
+    frame  360: detections 999 / 852; pairs within 8.0 px 17455
+    frame  400: detections 1011 / 842; pairs within 8.0 px 16966
+    frame  440: detections 986 / 892; pairs within 8.0 px 17734
+    frame  480: detections 984 / 883; pairs within 8.0 px 17653
+    frame  520: detections 1023 / 856; pairs within 8.0 px 17510
+    frame  560: detections 949 / 852; pairs within 8.0 px 16346
+    frame  600: detections 1014 / 888; pairs within 8.0 px 18009
+    frame  640: detections 983 / 868; pairs within 8.0 px 17179
+    frame  680: detections 1024 / 874; pairs within 8.0 px 17793
+    frame  720: detections 983 / 861; pairs within 8.0 px 17310
+    frame  760: detections 963 / 854; pairs within 8.0 px 16651
+    frame  800: detections 1017 / 854; pairs within 8.0 px 17981
+    frame  840: detections 967 / 892; pairs within 8.0 px 17464
+    frame  880: detections 969 / 874; pairs within 8.0 px 17367
+    frame  920: detections 966 / 837; pairs within 8.0 px 16185
+    frame  960: detections 943 / 869; pairs within 8.0 px 16542
+    frame 1000: detections 934 / 873; pairs within 8.0 px 16390
+  held-out frames:
+    frame   20: detections 992 / 840; pairs within 8.0 px 16691
+    frame   60: detections 949 / 851; pairs within 8.0 px 16186
+    frame  100: detections 1008 / 839; pairs within 8.0 px 16920
+    frame  140: detections 993 / 840; pairs within 8.0 px 16161
+    frame  180: detections 1018 / 835; pairs within 8.0 px 16848
+    frame  220: detections 967 / 815; pairs within 8.0 px 15867
+    frame  260: detections 989 / 836; pairs within 8.0 px 16456
+    frame  300: detections 1035 / 885; pairs within 8.0 px 18214
+    frame  340: detections 1028 / 862; pairs within 8.0 px 17437
+    frame  380: detections 1047 / 849; pairs within 8.0 px 17767
+    frame  420: detections 1030 / 862; pairs within 8.0 px 17783
+    frame  460: detections 990 / 864; pairs within 8.0 px 17147
+    frame  500: detections 1018 / 873; pairs within 8.0 px 18001
+    frame  540: detections 1024 / 852; pairs within 8.0 px 17912
+    frame  580: detections 978 / 890; pairs within 8.0 px 17438
+    frame  620: detections 982 / 826; pairs within 8.0 px 16482
+    frame  660: detections 978 / 807; pairs within 8.0 px 16108
+    frame  700: detections 980 / 849; pairs within 8.0 px 16558
+    frame  740: detections 974 / 885; pairs within 8.0 px 17578
+    frame  780: detections 972 / 850; pairs within 8.0 px 17200
+    frame  820: detections 956 / 879; pairs within 8.0 px 16913
+    frame  860: detections 949 / 845; pairs within 8.0 px 16260
+    frame  900: detections 984 / 883; pairs within 8.0 px 17466
+    frame  940: detections 964 / 873; pairs within 8.0 px 17306
+    frame  980: detections 1018 / 845; pairs within 8.0 px 17204
+  focal depths in 328 s (0 pairs without)
+  pairs: 447560 fitting, 425903 held out (1921 s)
+  fitting: signal band 88173, background band 220188 (k = 0.3750); estimated true pairs in the signal band 5602 +- 345 (6.4 % of it)
+  held out: signal band 83415, background band 209719 (k = 0.3750); estimated true pairs in the signal band 4770 +- 336 (5.7 % of it)
+  true pairs within d (of those within 3 px): 0.50 px 37 %, 0.75 px 52 %, 1.00 px 65 %, 1.25 px 74 %, 1.50 px 81 %, 2.00 px 90 %, 2.50 px 97 %; floor 26869 pairs per 0.25 px; true pairs within 3 px 12874 (252 per frame)
+  cam1 coarse grid (delta free): A 17.50 mm, z_f 1092 mm, sigma0 1.2 px, delta -75 mm: 2728 true pairs agree (351 s)
+  cam1 coarse grid (delta 0): A 20.00 mm, z_f 1167 mm, sigma0 1.2 px: 2728 true pairs agree
+  cam1 fine grid: model A: A 20.00 mm, z_f 1167.1 mm, sigma0 1.200 px (2728); model B: A 17.50 mm, z_f 1092.1 mm, sigma0 1.200 px, delta -75 mm (2728)
+  cam2 coarse grid (delta free): A 24.05 mm, z_f 1022 mm, sigma0 1.2 px, delta +200 mm: 3131 true pairs agree (318 s)
+  cam2 coarse grid (delta 0): A 15.70 mm, z_f 822 mm, sigma0 1.2 px: 3113 true pairs agree
+  cam2 fine grid: model A: A 15.25 mm, z_f 822.3 mm, sigma0 1.225 px (3147); model B: A 23.80 mm, z_f 1026.3 mm, sigma0 1.225 px, delta +204 mm (3158)
+  cam1, held out: model B keeps +12 +- 8 true pairs more than A -> A
+  cam2, held out: model B keeps +14 +- 15 true pairs more than A -> A
+  model A, held out: estimated true pairs 4770 +- 336; kept: cam1 49 +- 2 % of true, 10.4 % of random; cam2 60 +- 3 % of true, 12.8 % of random; joint 29 +- 1 % of true, 1.3 % of random
+    cam1 wh: |residual| of true pairs: 50 % <= 0.60, 68 % <= 0.94, 90 % <= 2.06 px (agreeing in the other camera: 0.56, 0.88, 2.14); bias -0.112 px; slope with depth -0.0211 +- 0.0033 px/mm (-0.88 px over the depths)
+    cam1 wv: |residual| of true pairs: 50 % <= 0.35, 68 % <= 0.50, 90 % <= 1.59 px (agreeing in the other camera: 0.32, 0.47, 0.87); bias +0.106 px; slope with depth +0.0150 +- 0.0042 px/mm (+0.66 px over the depths)
+    cam2 wh: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.42, 90 % <= 0.78 px (agreeing in the other camera: 0.34, 0.55, 1.26); bias +0.015 px; slope with depth -0.0176 +- 0.0060 px/mm (-0.65 px over the depths)
+    cam2 wv: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.43, 90 % <= 0.71 px (agreeing in the other camera: 0.29, 0.43, 0.73); bias -0.094 px; slope with depth +0.0103 +- 0.0055 px/mm (+0.37 px over the depths)
+  model B, held out: estimated true pairs 4770 +- 336; kept: cam1 49 +- 2 % of true, 10.4 % of random; cam2 60 +- 3 % of true, 12.8 % of random; joint 29 +- 1 % of true, 1.3 % of random
+    cam1 wh: |residual| of true pairs: 50 % <= 0.59, 68 % <= 0.93, 90 % <= 2.06 px (agreeing in the other camera: 0.55, 0.87, 2.26); bias -0.102 px; slope with depth -0.0216 +- 0.0033 px/mm (-0.90 px over the depths)
+    cam1 wv: |residual| of true pairs: 50 % <= 0.35, 68 % <= 0.50, 90 % <= 1.59 px (agreeing in the other camera: 0.33, 0.47, 0.88); bias +0.097 px; slope with depth +0.0154 +- 0.0041 px/mm (+0.68 px over the depths)
+    cam2 wh: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.42, 90 % <= 0.73 px (agreeing in the other camera: 0.34, 0.54, 1.22); bias +0.011 px; slope with depth -0.0183 +- 0.0060 px/mm (-0.67 px over the depths)
+    cam2 wv: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.43, 90 % <= 0.71 px (agreeing in the other camera: 0.29, 0.44, 0.73); bias -0.086 px; slope with depth +0.0096 +- 0.0055 px/mm (+0.35 px over the depths)
+  chosen: model A; judged (68 % of true pairs' residuals within 1.5 px, no trend with depth): FAIL (largest q68 0.94 px; trend yes)
+  shape_check tolerances, held out (joint: true kept / random kept):
+    tol_px 0.3: rel 0.10   6/ 0.1  rel 0.15  10/ 0.3  rel 0.20  16/ 0.6  rel 0.25  27/ 1.4  rel 0.30  40/ 2.7  rel 0.40  64/ 7.1
+    tol_px 0.4: rel 0.10  11/ 0.3  rel 0.15  16/ 0.5  rel 0.20  22/ 0.9  rel 0.25  31/ 1.6  rel 0.30  41/ 2.8  rel 0.40  64/ 7.1
+    tol_px 0.5: rel 0.10  20/ 0.7  rel 0.15  23/ 0.8  rel 0.20  29/ 1.3  rel 0.25  37/ 2.0  rel 0.30  46/ 3.1  rel 0.40  64/ 7.1
+    tol_px 0.6: rel 0.10  29/ 1.2  rel 0.15  31/ 1.3  rel 0.20  35/ 1.8  rel 0.25  43/ 2.5  rel 0.30  50/ 3.7  rel 0.40  66/ 7.4
+    tol_px 0.8: rel 0.10  46/ 3.1  rel 0.15  47/ 3.1  rel 0.20  49/ 3.3  rel 0.25  53/ 4.0  rel 0.30  59/ 5.2  rel 0.40  70/ 8.7
+    tol_px 1.0: rel 0.10  61/ 5.9  rel 0.15  61/ 5.9  rel 0.20  62/ 6.0  rel 0.25  64/ 6.4  rel 0.30  67/ 7.4  rel 0.40  75/10.8
+    tol_px 1.2: rel 0.10  70/ 9.5  rel 0.15  70/ 9.5  rel 0.20  70/ 9.6  rel 0.25  72/ 9.8  rel 0.30  74/10.4  rel 0.40  78/13.5
+    tol_px 1.5: rel 0.10  76/16.1  rel 0.15  76/16.1  rel 0.20  76/16.1  rel 0.25  77/16.2  rel 0.30  79/16.5  rel 0.40  81/18.8
+  recommended: tol_px 1.5, tol_rel 0.4: keeps 81 +- 3 % of true pairs and 18.8 % of random ones
+  amplitude, cam1: flux = 787.5 x (|b| + |c| + 2)^0.468 (by moments over 2517 signal and 2860 background pairs; b, c the box lengths)
+  amplitude, cam2: flux = 83.9 x (|b| + |c| + 2)^1.165 (by moments over 2517 signal and 2860 background pairs; b, c the box lengths)
+  written data/T1_shape.json and data/T1_otf_shape.txt (15 x 11 x 17 nodes); 2715 s

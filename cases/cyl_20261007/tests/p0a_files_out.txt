@@ -1,0 +1,19 @@
+P0a: the files of X:\Shijie Zhong\Refraction\Raw\20261007 (read-only)
+
+T0
+  T0\cam1: 15001 frames (frame000000.tif ... frame015000.tif), written 2026-10-07 15:33:46 ... 2026-10-07 15:36:42, [1280, 800] uint8, median grey (frame 0) 109.0; header: serial 29199, 100 frames/s, exposure 100 us
+  T0\cam2: 15001 frames (frame000000.tif ... frame015000.tif), written 2026-10-07 15:33:46 ... 2026-10-07 15:36:40, [1280, 800] uint8, median grey (frame 0) 157.0; header: serial 23752, 100 frames/s, exposure 100 us
+
+Planes
+  files in Planes: ['README.txt']
+    README.txt: '0,1,2: Far from cam1'
+  Planes\0\cam1: 1 frames (frame000000.tif ... frame000000.tif), written 2026-10-07 15:44:20 ... 2026-10-07 15:44:20, [1280, 800] uint8, median grey (frame 0) 108.0; no .chd header
+  Planes\0\cam2: 1 frames (frame000000.tif ... frame000000.tif), written 2026-10-07 15:44:22 ... 2026-10-07 15:44:22, [1280, 800] uint8, median grey (frame 0) 147.0; no .chd header
+  Planes\1\cam1: 1 frames (frame000000.tif ... frame000000.tif), written 2026-10-07 15:46:20 ... 2026-10-07 15:46:20, [1280, 800] uint8, median grey (frame 0) 108.0; header: serial 29199, 100 frames/s, exposure 100 us
+  Planes\1\cam2: 1 frames (frame000000.tif ... frame000000.tif), written 2026-10-07 15:46:20 ... 2026-10-07 15:46:20, [1280, 800] uint8, median grey (frame 0) 145.0; header: serial 23752, 100 frames/s, exposure 100 us
+  Planes\2\cam1: 1 frames (frame000000.tif ... frame000000.tif), written 2026-10-07 15:47:16 ... 2026-10-07 15:47:16, [1280, 800] uint8, median grey (frame 0) 110.0; header: serial 29199, 100 frames/s, exposure 100 us
+  Planes\2\cam2: 1 frames (frame000000.tif ... frame000000.tif), written 2026-10-07 15:47:16 ... 2026-10-07 15:47:16, [1280, 800] uint8, median grey (frame 0) 144.0; header: serial 23752, 100 frames/s, exposure 100 us
+
+T1
+  T1\cam1: 1001 frames (frame000000.tif ... frame001000.tif), written 2026-10-07 15:59:18 ... 2026-10-07 15:59:26, [1280, 800] uint8, median grey (frame 0) 105.0; no .chd header
+  T1\cam2: 1001 frames (frame000000.tif ... frame001000.tif), written 2026-10-07 15:59:20 ... 2026-10-07 15:59:28, [1280, 800] uint8, median grey (frame 0) 146.0; header: serial 23752, 4000 frames/s, exposure 100 us

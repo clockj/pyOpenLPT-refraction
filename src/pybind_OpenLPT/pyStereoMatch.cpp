@@ -68,6 +68,11 @@ struct DebugAccess_StereoMatch {
                                   const Line3D &los, Line2D &out_line) {
     return m.makeLine2DFromLOS3D(cam_id, los, out_line);
   }
+  static bool makeCurve2DFromLOS3D(const StereoMatch &m, int cam_id,
+                                   const Line3D &los, Line2D &out_chord,
+                                   std::vector<Pt2D> &out_poly) {
+    return m.makeCurve2DFromLOS3D(cam_id, los, out_chord, out_poly);
+  }
   // the image lines of a set of lines of sight on one camera (the search
   // itself reads them from the tables)
   static bool buildLinesOnCam(const StereoMatch &m,
@@ -298,6 +303,18 @@ void bind_StereoMatch(py::module_ &m) {
           },
           py::arg("cam_id"), py::arg("los"))
       .def(
+          "makeCurve2DFromLOS3D",
+          [](const StereoMatch &self, int cam_id, const Line3D &los) {
+            Line2D chord;
+            std::vector<Pt2D> poly;
+            bool ok = DebugAccess_StereoMatch::makeCurve2DFromLOS3D(
+                self, cam_id, los, chord, poly);
+            return py::make_tuple(ok, chord, poly);
+          },
+          py::arg("cam_id"), py::arg("los"),
+          "The image of a line of sight on a camera whose line images curve: "
+          "(ok, chord, polyline vertices).")
+      .def(
           "selectSecondCameraByLineLength",
           [](const StereoMatch &self, int ref_cam, int ref_id,
              const std::vector<int> &remaining_cams) {
@@ -385,6 +402,9 @@ void bind_StereoMatch(py::module_ &m) {
             return vec[cam_id].get();
           },
           py::arg("cam_id"), py::return_value_policy::reference_internal);
+
+  m.def("dist2ToPolyline", &dist2ToPolyline, py::arg("q"), py::arg("poly"),
+        "Squared distance from a point to a polyline (NaN vertices break it).");
 
   // ===== IDMap =====
   py::class_<IDMap::RowSpan>(m, "RowSpan")

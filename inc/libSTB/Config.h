@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "ImageIO.h"
 #include "OTF.h"
+#include "LineFinder.h"
 #include "ObjectInfo.h"
 #include "PredField.h"
 
@@ -209,6 +210,32 @@ public:
   double _radius_obj; // radius of the object in pixels;
 
   OTF _otf; // OTF parameters for tracer projection
+
+  // config.json only (the cylinder STB plan, Phase 2); the defaults keep
+  // today's behaviour:
+  //  tracer.roi_from_otf: size each image's region (shake window, score,
+  //    residual) from the OTF at the object, out to roi_sigma standard
+  //    deviations, instead of the square of radius_px;
+  //  tracer.otf_file: load the OTF from this file (OTF::saveParam's format,
+  //    e.g. the segment model) instead of estimating it from the first images.
+  bool _roi_from_otf = false;
+  double _roi_sigma = 3.0;
+  std::string _otf_file;
+  //  tracer.detector: "peaks" (today's local maxima) or "lines" (the line
+  //    detector for astigmatic line images, ObjectFinder2D::findTracerLines2D,
+  //    with the settings of tracer.lines);
+  //  tracer.shape_check: stereo matching keeps a candidate only when every
+  //    detection's measured RMS widths sqrt(L^2/12 + s^2) agree with the OTF's
+  //    (segment model) at the triangulated point, within max(shape_tol_px,
+  //    shape_tol_rel x the predicted width) on each image axis: the depth cue.
+  std::string _detector = "peaks";
+  bool _shape_check = false;
+  double _shape_tol_px = 0.8;
+  double _shape_tol_rel = 0.25;
+  LineFinderParam _lines; // tracer.lines: the line detector's settings (LineFinder.h)
+  // tracer.lines.noise: the images' noise sigma (one number, or one per camera);
+  // empty: estimated from each image (LineFinder::estimateNoiseClipped)
+  std::vector<double> _lines_noise;
 
   bool readConfig(const std::string &filepath, BasicSetting &settings) override;
 

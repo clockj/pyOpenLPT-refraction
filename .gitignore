@@ -125,6 +125,16 @@ tests/install_scripts/t4_lf/
 !tests/wand_report_error_pdf/**
 tests/wand_report_error_pdf/**/__pycache__/
 tests/wand_report_error_pdf/data/
+# tracking through the tube (7 Oct 2026): the library tests in tests/cylinder_stb/ and their pytest subset
+# (data/ and runs/ hold rendered images, local copies and run outputs, regenerable with its scripts)
+!tests/test_cylinder_stb.py
+!tests/cylinder_stb/
+!tests/cylinder_stb/**
+tests/cylinder_stb/**/__pycache__/
+tests/cylinder_stb/data/
+tests/cylinder_stb/runs/
+# the case cases/cyl_20261007: data/ holds local copies of the raw and preprocessed images and run outputs
+cases/cyl_20261007/data/
 # the campaign's build trees and the saved baseline build
 build-stb/
 build-py-baseline/

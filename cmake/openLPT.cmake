@@ -185,7 +185,8 @@ target_link_libraries(BubbleRefImg PUBLIC
 openlpt_apply_warnings(BubbleRefImg)
 
 # ObjectFinder (.cpp) — depends privately on nanoflann to avoid exporting it
-add_library(ObjectFinder STATIC "${PROJECT_SOURCE_DIR}/src/srcObject/ObjectFinder.cpp")
+add_library(ObjectFinder STATIC "${PROJECT_SOURCE_DIR}/src/srcObject/ObjectFinder.cpp"
+                                "${PROJECT_SOURCE_DIR}/src/srcObject/LineFinder.cpp")
 openlpt_public_includes(ObjectFinder)
 target_link_libraries(ObjectFinder
   PUBLIC Matrix myMath CircleIdentifier

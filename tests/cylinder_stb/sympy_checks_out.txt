@@ -1,0 +1,20 @@
+PROVED     A1 du = u(h) - u(0) = -f h / z                  cancel; 40 samples
+PROVED     A2 z = -2 f h / (u(+h) - u(-h)) is the depth    cancel; 40 samples
+PROVED     B1a the ray passes through the point (s = z)    cancel; 40 samples
+PROVED     B1b the ray passes through the pupil point (s = 0)  cancel; 40 samples
+PROVED     B2 spread in the plane in focus = A (1 - z_f / z)  cancel; 40 samples
+PROVED     B3 blur on the sensor = f A (1/z_f - 1/z) [px] (signed; |.| is the length)  cancel; 40 samples
+PROVED     B4 in focus (z = z_f) there is no blur          cancel; 40 samples
+PROVED     C1 the peak: g(0) = 1                           cancel; 40 samples
+PROVED     C2 2 Phi(L / 2 sigma) - 1 = erf(L / (2 sqrt2 sigma))  cancel; 40 samples
+PROVED     C3 G(u) = u Phi(u) + phi(u) is an antiderivative of Phi  cancel; 40 samples
+PROVED     C4 d/dT of the integral over [-T, T] is the integrand at both ends  simplify; 40 samples
+PROVED     C5 the integral of the unnormalised profile over the line -> L  sp.limit; 40 samples
+PROVED     C6 w(L) -> sigma sqrt(2 pi) as L -> 0           sp.limit; 40 samples
+PROVED     D1 the image a g(x; L_h) g(y; L_v) integrates to a w_h w_v = F  cancel; 40 samples
+PROVED     E1 a uniform segment of length L has variance L^2 / 12  cancel; 40 samples
+PROVED     E2 a uniform disk of diameter D has variance D^2 / 16 along any axis  cancel; 40 samples
+SKIPPED    E3 a convolution adds the variances (segment or disk blurred by sigma0: + sigma0^2)  a property of independent sums, not a derivation of this model
+SKIPPED    F1 alpha: the image direction across the tube's axis  a definition (the projected axis turned by 90 deg), computed from the camera, not derived
+
+18 checks: 16 PROVED, 2 SKIPPED

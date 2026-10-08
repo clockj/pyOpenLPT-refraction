@@ -720,9 +720,75 @@ bool TracerConfig::readConfig(const std::string &filepath,
       o.fail(where + ".type", "is not \"Tracer\"");
     read_common_json(*this, o, settings);
     JsonReader t = o.child("tracer");
-    t.warnUnknown({"intensity_threshold", "radius_px"});
+    t.warnUnknown({"intensity_threshold", "radius_px", "roi_from_otf", "roi_sigma",
+                   "otf_file", "detector", "shape_check", "shape_tol_px",
+                   "shape_tol_rel", "lines"});
     _min_obj_int = t.integer("intensity_threshold");
     _radius_obj = t.num("radius_px");
+    if (t.has("roi_from_otf"))
+      _roi_from_otf = t.boolean("roi_from_otf");
+    if (t.has("roi_sigma"))
+      _roi_sigma = t.num("roi_sigma");
+    if (t.has("detector")) {
+      _detector = t.str("detector");
+      if (_detector != "peaks" && _detector != "lines")
+        t.fail("objects[" + std::to_string(json_index) + "].tracer.detector",
+               "must be \"peaks\" or \"lines\"");
+    }
+    if (t.has("shape_check"))
+      _shape_check = t.boolean("shape_check");
+    if (t.has("shape_tol_px"))
+      _shape_tol_px = t.num("shape_tol_px");
+    if (t.has("shape_tol_rel"))
+      _shape_tol_rel = t.num("shape_tol_rel");
+    if (t.has("lines")) {
+      // every setting optional; the names of lines.py's DET (LineFinder.h)
+      JsonReader l = t.child("lines");
+      l.warnUnknown({"lengths_x", "lengths_y", "sigma0", "bg_guard", "noise_sub",
+                     "k_detect", "core_px", "fit_margin_sigma", "fit_max_half",
+                     "fit_iters", "deblend_passes", "second_pass", "validate",
+                     "L_min", "L_max", "sigma_min", "sigma_max", "centre_box_frac",
+                     "dynamic_bounds", "length_growth", "length_margin", "nms_symmetric",
+                     "c_max_sigma", "clipped", "noise"});
+      LineFinderParam &q = _lines;
+      if (l.has("lengths_x")) q.lengths_x = l.numbers("lengths_x", -1);
+      if (l.has("lengths_y")) q.lengths_y = l.numbers("lengths_y", -1);
+      if (l.has("sigma0")) q.sigma0 = l.num("sigma0");
+      if (l.has("bg_guard")) q.bg_guard = l.integer("bg_guard");
+      if (l.has("noise_sub")) q.noise_sub = l.integer("noise_sub");
+      if (l.has("k_detect")) q.k_detect = l.num("k_detect");
+      if (l.has("core_px")) q.core_px = l.num("core_px");
+      if (l.has("fit_margin_sigma")) q.fit_margin_sigma = l.num("fit_margin_sigma");
+      if (l.has("fit_max_half")) q.fit_max_half = l.integer("fit_max_half");
+      if (l.has("fit_iters")) q.fit_iters = l.integer("fit_iters");
+      if (l.has("deblend_passes")) q.deblend_passes = l.integer("deblend_passes");
+      if (l.has("second_pass")) q.second_pass = l.boolean("second_pass");
+      if (l.has("validate")) q.validate = l.boolean("validate");
+      if (l.has("L_min")) q.L_min = l.num("L_min");
+      if (l.has("L_max")) q.L_max = l.num("L_max");
+      if (l.has("sigma_min")) q.sigma_min = l.num("sigma_min");
+      if (l.has("sigma_max")) q.sigma_max = l.num("sigma_max");
+      if (l.has("centre_box_frac")) q.centre_box_frac = l.num("centre_box_frac");
+      if (l.has("dynamic_bounds")) q.dynamic_bounds = l.boolean("dynamic_bounds");
+      if (l.has("length_growth")) q.length_growth = l.num("length_growth");
+      if (l.has("length_margin")) q.length_margin = l.num("length_margin");
+      if (l.has("nms_symmetric")) q.nms_symmetric = l.boolean("nms_symmetric");
+      if (l.has("c_max_sigma")) q.c_max_sigma = l.num("c_max_sigma");
+      if (l.has("clipped")) q.clipped = l.boolean("clipped");
+      if (l.has("noise")) {
+        // a number for every camera, or one per camera
+        if (l.req("noise").is_number())
+          _lines_noise = {l.num("noise")};
+        else
+          _lines_noise = l.numbers("noise", settings._n_cam);
+      }
+    }
+    if (t.has("otf_file")) {
+      // relative to the config file's folder
+      _otf_file = t.str("otf_file");
+      if (!_otf_file.empty() && !std::filesystem::path(_otf_file).is_absolute())
+        _otf_file = (std::filesystem::path(json_file).parent_path() / _otf_file).string();
+    }
   } else {
     std::tie(lines, id) = readCommonConfig(filepath, settings);
   }
@@ -733,7 +799,17 @@ bool TracerConfig::readConfig(const std::string &filepath,
       _radius_obj = std::stod(lines[id++]);
     }
 
-    // Initialize OTF
+    // Initialize OTF: from tracer.otf_file when given (config.json only)
+    if (!_otf_file.empty()) {
+      _otf.loadParam(_otf_file);
+      _otf._output_path = settings._output_path;
+      REQUIRE_CTX(_otf._param.n_cam == settings._n_cam, ErrorCode::InvalidArgument,
+                  "The OTF file's camera count differs from the config's: ",
+                  _otf_file);
+      std::cout << "Loaded the OTF from " << _otf_file << " (model "
+                << (_otf._param.model == 1 ? "segment" : "gauss") << ")\n";
+      return true;
+    }
     _otf.loadParam(settings._n_cam, 5, 5, 5, settings._axis_limit,
                    settings._cam_list);
     _otf._output_path = settings._output_path;

@@ -1,0 +1,12 @@
+L1: shadowgraph preprocessing (lines.preprocess)
+
+1. synthetic recording: 201 frames, 640 x 512 px, the density of T1 (about 1,500 objects per Mpx)
+  noise: true 1.59 counts at the background (with the rounding); noise_left(hp) 1.64; MAD 1.48; background level of hp (noise_level) +0.00
+  recovered flux / true flux (hp summed over each particle's footprint, the other particles' truth removed), particles with peak > 6 sigma:
+    semi-axis 0-4 px: n 130, median 0.882 (10-90 %: 0.523-1.109)
+    semi-axis 4-8 px: n 16, median 0.906 (10-90 %: 0.666-1.061)
+  flatness: 64 px tile means of hp away from particles scatter 0.074 counts about -0.067 (noise alone: 0.028); before the high-pass (background - frame): 0.608 (drifting clouds up to 7.4 counts deep)
+
+2. T1: the gain of the 8-bit output
+  cam1: object peaks 99.9 % 36.7 counts -> gain 6; noise after the gain 8.1 counts; saturated pixels 0.0000 % (max 0.0000 %)
+  cam2: object peaks 99.9 % 46.7 counts -> gain 4; noise after the gain 5.9 counts; saturated pixels 0.0000 % (max 0.0004 %)

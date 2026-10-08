@@ -4,12 +4,12 @@
 
 
 std::vector<std::unique_ptr<Object2D>>
-ObjectFinder2D::findObject2D(Image const& img, ObjectConfig const& obj_cfg)
+ObjectFinder2D::findObject2D(Image const& img, ObjectConfig const& obj_cfg, int cam_id)
 {
     switch (obj_cfg.kind())
     {
     case ObjectKind::Tracer:
-        return findTracer2D(img, static_cast<TracerConfig const&>(obj_cfg));
+        return findTracer2D(img, static_cast<TracerConfig const&>(obj_cfg), cam_id);
 
     case ObjectKind::Bubble:
         return findBubble2D(img, static_cast<BubbleConfig const&>(obj_cfg));
@@ -35,8 +35,42 @@ ObjectFinder2D::findObject2D(Image const& img, ObjectConfig const& obj_cfg)
  * @return      A vector of unique_ptr<Object2D> pointing to detected Tracer2D objects.
  */
 std::vector<std::unique_ptr<Object2D>>
-ObjectFinder2D::findTracer2D(Image const& img, TracerConfig const& cfg)
+ObjectFinder2D::findTracerLines2D(Image const& img, TracerConfig const& cfg, int cam_id)
 {
+    // tracer.lines.noise: one value, or the camera's; else estimated from the image
+    double noise = 0.0;
+    if (cfg._lines_noise.size() == 1)
+        noise = cfg._lines_noise[0];
+    else if (cam_id >= 0 && cam_id < static_cast<int>(cfg._lines_noise.size()))
+        noise = cfg._lines_noise[cam_id];
+    if (!(noise > 0.0))
+        noise = LineFinder::estimateNoiseClipped(img);
+    const std::vector<LineObject> found = LineFinder::detect(img, noise, cfg._lines);
+    std::vector<std::unique_ptr<Object2D>> out;
+    out.reserve(found.size());
+    for (const LineObject& o : found) {
+        auto tracer = std::make_unique<Tracer2D>();
+        tracer->_r_px = cfg._radius_obj;
+        tracer->_pt_center[0] = o.u;
+        tracer->_pt_center[1] = o.v;
+        tracer->_has_shape = true;
+        tracer->_len_h_px = o.Lx;
+        tracer->_len_v_px = o.Ly;
+        tracer->_sigma_px = std::sqrt(o.sx * o.sy);
+        tracer->_sigma_h_px = o.sx;
+        tracer->_sigma_v_px = o.sy;
+        tracer->_amp = o.peak;
+        out.emplace_back(std::move(tracer));
+    }
+    return out;
+}
+
+std::vector<std::unique_ptr<Object2D>>
+ObjectFinder2D::findTracer2D(Image const& img, TracerConfig const& cfg, int cam_id)
+{
+    if (cfg._detector == "lines")
+        return findTracerLines2D(img, cfg, cam_id);
+
     const int rows = img.getDimRow();
     const int cols = img.getDimCol();
     const double r_px = cfg._radius_obj;

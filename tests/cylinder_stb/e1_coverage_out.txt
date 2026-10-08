@@ -1,0 +1,13 @@
+E1/E2: curved against straight image lines; build p4c (d9b20b4 + diff a5bb41a79aa4); case f5_spots, view volume ((-11.34, -9.46, -20.39), (18.99, 12.32, 24.64))
+
+  cam1 -> cam2: 50000 points (0 without a line)
+    polyline: median 0.0065, p99 0.0152, p99.9 0.0165, max 0.0178 px; within 0.25 px 100.000 %; vertices median 9, max 9
+    straight: median 0.5084, p99 0.9746, p99.9 1.0124, max 1.0352 px; within 0.25 px 10.03 %, within 1 px 99.73 %
+    E2 at T1's density (1465 per Mpx), curve length on the sensor 1280 px: polyline tol 0.25 px -> 0.94 other candidates; straight tol 1.01 px -> 3.80
+    E1 judged (>= 99.9 % within 0.25 px): PASS
+
+  cam2 -> cam1: 50000 points (0 without a line)
+    polyline: median 0.0039, p99 0.0095, p99.9 0.0102, max 0.0107 px; within 0.25 px 100.000 %; vertices median 9, max 9
+    straight: median 0.2890, p99 0.6135, p99.9 0.6524, max 0.6740 px; within 0.25 px 39.91 %, within 1 px 100.00 %
+    E2 at T1's density (1465 per Mpx), curve length on the sensor 1280 px: polyline tol 0.25 px -> 0.94 other candidates; straight tol 0.65 px -> 2.45
+    E1 judged (>= 99.9 % within 0.25 px): PASS

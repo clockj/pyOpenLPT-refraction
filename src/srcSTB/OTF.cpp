@@ -189,6 +189,8 @@ void OTF::loadParam(int n_cam, int nx, int ny, int nz,
   _param.b = Matrix<double>(n_cam, _param.n_grid, 1.5);
   _param.c = Matrix<double>(n_cam, _param.n_grid, 1.5);
   _param.alpha = Matrix<double>(n_cam, _param.n_grid, 0);
+  _param.model = 0;
+  _param.sigma = Matrix<double>();
 
   setGrid();
 }
@@ -240,6 +242,21 @@ void OTF::loadParam(std::string otf_file) {
   _param.c = Matrix<double>(_param.n_cam, _param.n_grid, file_content);
   _param.alpha = Matrix<double>(_param.n_cam, _param.n_grid, file_content);
 
+  // Optional, after alpha (files written before the segment model end here):
+  // the model's name and, for "segment", sigma.
+  _param.model = 0;
+  _param.sigma = Matrix<double>();
+  std::string model;
+  if (file_content >> model) {
+    if (model == "segment") {
+      _param.model = 1;
+      _param.sigma = Matrix<double>(_param.n_cam, _param.n_grid, file_content);
+    } else {
+      REQUIRE_CTX(model == "gauss", ErrorCode::IOfailure,
+                  "Unknown OTF model (gauss or segment) in ", otf_file);
+    }
+  }
+
   setGrid();
 }
 
@@ -269,6 +286,62 @@ void OTF::saveParam(std::string otf_file) {
 
   outfile << "# alpha: (n_cam,n_grid)" << std::endl;
   _param.alpha.write(outfile);
+
+  if (_param.model == 1) {
+    outfile << "# Model: (gauss or segment; segment: b, c are lengths [px])" << std::endl;
+    outfile << "segment" << std::endl;
+    outfile << "# sigma: (n_cam,n_grid)" << std::endl;
+    _param.sigma.write(outfile);
+  }
+}
+
+namespace {
+// g(t; L) of the segment model: a segment of length L blurred by sigma, peak 1.
+inline double segmentProfile(double t, double L, double sigma) {
+  const double s = sigma > 1e-12 ? sigma : 1e-12;
+  if (L < 1e-3 * s)
+    return std::exp(-0.5 * t * t / (s * s));
+  const double k = 1.0 / (s * std::sqrt(2.0));
+  const double num = std::erf((t + 0.5 * L) * k) - std::erf((t - 0.5 * L) * k);
+  const double den = 2.0 * std::erf(0.5 * L * k);
+  return num / den;
+}
+} // namespace
+
+void OTF::halfExtent(int model, const std::vector<double> &p, double k,
+                     double &dx, double &dy) {
+  const double cs = p[3], sn = p[4];
+  if (model == 1) {
+    const double sigma = p.size() > 5 ? p[5] : 1.0;
+    const double hx = 0.5 * std::fabs(p[1]) + k * sigma;
+    const double hy = 0.5 * std::fabs(p[2]) + k * sigma;
+    dx = std::fabs(cs) * hx + std::fabs(sn) * hy;
+    dy = std::fabs(sn) * hx + std::fabs(cs) * hy;
+    return;
+  }
+  // exp(-(b xx^2 + c yy^2)): sigma_x = 1/sqrt(2b), sigma_y = 1/sqrt(2c)
+  const double sx2 = p[1] > 0.0 ? 0.5 / p[1] : 0.0;
+  const double sy2 = p[2] > 0.0 ? 0.5 / p[2] : 0.0;
+  dx = k * std::sqrt(sx2 * cs * cs + sy2 * sn * sn);
+  dy = k * std::sqrt(sx2 * sn * sn + sy2 * cs * cs);
+}
+
+void OTF::halfExtent(int cam_id, Pt3D const &pt_world, double k, double &dx,
+                     double &dy) const {
+  halfExtent(_param.model, getOTFParam(cam_id, pt_world), k, dx, dy);
+}
+
+double OTF::intensity(int model, double x, double y, double x0, double y0,
+                      const std::vector<double> &p) {
+  const double dx = x - x0, dy = y - y0;
+  const double xx = dx * p[3] + dy * p[4];
+  const double yy = -dx * p[4] + dy * p[3];
+  if (model == 1) {
+    const double sigma = p.size() > 5 ? p[5] : 1.0;
+    return std::max(0.0, p[0] * segmentProfile(xx, std::fabs(p[1]), sigma) *
+                             segmentProfile(yy, std::fabs(p[2]), sigma));
+  }
+  return std::max(0.0, p[0] * std::exp(-(p[1] * xx * xx + p[2] * yy * yy)));
 }
 
 std::vector<double> OTF::getOTFParam(int cam_id, Pt3D const &pt3d) const {
@@ -334,6 +407,15 @@ std::vector<double> OTF::getOTFParam(int cam_id, Pt3D const &pt3d) const {
   double alpha = myMATH::triLinearInterp(grid_limit, alpha_value, pt_vec);
   res[3] = std::cos(alpha);
   res[4] = std::sin(alpha);
+
+  if (_param.model == 1) { // the segment model's sigma
+    std::vector<double> s_value = {
+        _param.sigma(cam_id, i_000), _param.sigma(cam_id, i_100),
+        _param.sigma(cam_id, i_101), _param.sigma(cam_id, i_001),
+        _param.sigma(cam_id, i_010), _param.sigma(cam_id, i_110),
+        _param.sigma(cam_id, i_111), _param.sigma(cam_id, i_011)};
+    res.push_back(myMATH::triLinearInterp(grid_limit, s_value, pt_vec));
+  }
 
   return res;
 }

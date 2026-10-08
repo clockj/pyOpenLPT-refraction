@@ -1,0 +1,33 @@
+L2 on T1: every 100th frame (11 frames per camera), lines.detect with 6.0 sigma
+  cam1 frame    0: noise 8.1 counts; lines.detect 967 objects (H 269, V 434, ellipse 104, round 160; 16 from the second pass) in 31.1 s; C++ finder 18008 at 3 sigma, 10171 at 4 sigma
+  cam1 frame  100: noise 8.0 counts; lines.detect 1008 objects (H 288, V 482, ellipse 93, round 145; 23 from the second pass) in 36.1 s; C++ finder 17836 at 3 sigma, 10200 at 4 sigma
+  cam1 frame  200: noise 8.1 counts; lines.detect 995 objects (H 249, V 484, ellipse 102, round 160; 23 from the second pass) in 38.0 s; C++ finder 17877 at 3 sigma, 10286 at 4 sigma
+  cam1 frame  300: noise 8.0 counts; lines.detect 1023 objects (H 275, V 485, ellipse 87, round 176; 24 from the second pass) in 40.1 s; C++ finder 17840 at 3 sigma, 10357 at 4 sigma
+  cam1 frame  400: noise 8.1 counts; lines.detect 1001 objects (H 286, V 459, ellipse 79, round 177; 23 from the second pass) in 36.5 s; C++ finder 17553 at 3 sigma, 10127 at 4 sigma
+  cam1 frame  500: noise 8.1 counts; lines.detect 1016 objects (H 266, V 473, ellipse 96, round 181; 18 from the second pass) in 37.1 s; C++ finder 18132 at 3 sigma, 10375 at 4 sigma
+  cam1 frame  600: noise 8.0 counts; lines.detect 1012 objects (H 289, V 475, ellipse 95, round 153; 18 from the second pass) in 37.0 s; C++ finder 17989 at 3 sigma, 10154 at 4 sigma
+  cam1 frame  700: noise 8.1 counts; lines.detect 983 objects (H 279, V 442, ellipse 92, round 170; 25 from the second pass) in 26.9 s; C++ finder 18278 at 3 sigma, 10361 at 4 sigma
+  cam1 frame  800: noise 8.1 counts; lines.detect 1015 objects (H 277, V 463, ellipse 88, round 187; 27 from the second pass) in 27.1 s; C++ finder 18101 at 3 sigma, 10080 at 4 sigma
+  cam1 frame  900: noise 8.1 counts; lines.detect 986 objects (H 258, V 464, ellipse 90, round 174; 23 from the second pass) in 26.3 s; C++ finder 18609 at 3 sigma, 10777 at 4 sigma
+  cam1 frame 1000: noise 8.2 counts; lines.detect 938 objects (H 240, V 451, ellipse 84, round 163; 31 from the second pass) in 26.2 s; C++ finder 18495 at 3 sigma, 10159 at 4 sigma
+  cam1: median 1001 objects per frame (C++ finder: 18008 at 3 sigma, 10200 at 4 sigma); classes H 27 %, V 47 %, ellipse 9 %, round 17 %; 36.1 s per frame
+    shapes (score >= 10, n 5336): blur s0 1.48 px; H lines full length (fitted box) 10/50/90 % 6.7/12.2/19.9 px, V lines 6.1/8.9/12.2 px; semi-axes a_H 8.7 px (10-90 % 4.6-13.2), b_V 5.4 px (3.6-8.4)
+    ellipses: q = a/a_H + b/b_V 10/50/90 % 0.73/1.34/1.92 (38 % in 0.7-1.3); r = |a/a_H - b/b_V| 0.10/0.57/1.08
+    field (3 x 3 cells, left to right, top to bottom): (0,0) n 510 H 24 % V 47 % a_H 8.1 b_V 5.8; (1,0) n 587 H 20 % V 49 % a_H 8.6 b_V 5.4; (2,0) n 522 H 22 % V 41 % a_H 8.4 b_V 5.3; (0,1) n 647 H 26 % V 45 % a_H 9.0 b_V 5.6; (1,1) n 543 H 22 % V 51 % a_H 8.6 b_V 5.1; (2,1) n 748 H 23 % V 45 % a_H 8.9 b_V 5.1; (0,2) n 579 H 29 % V 42 % a_H 9.0 b_V 5.7; (1,2) n 490 H 27 % V 50 % a_H 8.5 b_V 5.3; (2,2) n 707 H 23 % V 44 % a_H 8.7 b_V 5.1
+    flux against the larger semi-axis: 0-2 px: n 123, flux 1047, peak 87.8; 2-4 px: n 535, flux 1614, peak 63.4; 4-7 px: n 2851, flux 2605, peak 65.7; 7-11 px: n 1497, flux 3813, peak 66.2; 11-16 px: n 284, flux 4674, peak 60.7; 16-30 px: n 46, flux 6240, peak 47.8
+  cam2 frame    0: noise 5.9 counts; lines.detect 840 objects (H 201, V 386, ellipse 64, round 189; 24 from the second pass) in 21.5 s; C++ finder 19113 at 3 sigma, 12422 at 4 sigma
+  cam2 frame  100: noise 5.9 counts; lines.detect 840 objects (H 168, V 406, ellipse 71, round 195; 21 from the second pass) in 20.5 s; C++ finder 19226 at 3 sigma, 12500 at 4 sigma
+  cam2 frame  200: noise 6.0 counts; lines.detect 897 objects (H 187, V 414, ellipse 79, round 217; 29 from the second pass) in 21.0 s; C++ finder 18769 at 3 sigma, 12195 at 4 sigma
+  cam2 frame  300: noise 6.0 counts; lines.detect 887 objects (H 201, V 402, ellipse 68, round 216; 24 from the second pass) in 20.9 s; C++ finder 18735 at 3 sigma, 12131 at 4 sigma
+  cam2 frame  400: noise 5.9 counts; lines.detect 839 objects (H 185, V 395, ellipse 65, round 194; 21 from the second pass) in 21.8 s; C++ finder 19148 at 3 sigma, 12496 at 4 sigma
+  cam2 frame  500: noise 5.9 counts; lines.detect 870 objects (H 185, V 407, ellipse 62, round 216; 26 from the second pass) in 21.6 s; C++ finder 18865 at 3 sigma, 12328 at 4 sigma
+  cam2 frame  600: noise 5.9 counts; lines.detect 882 objects (H 185, V 426, ellipse 73, round 198; 20 from the second pass) in 22.6 s; C++ finder 18738 at 3 sigma, 12199 at 4 sigma
+  cam2 frame  700: noise 5.9 counts; lines.detect 848 objects (H 153, V 388, ellipse 82, round 225; 22 from the second pass) in 21.5 s; C++ finder 18908 at 3 sigma, 12135 at 4 sigma
+  cam2 frame  800: noise 5.9 counts; lines.detect 851 objects (H 201, V 352, ellipse 71, round 227; 17 from the second pass) in 20.3 s; C++ finder 18810 at 3 sigma, 12114 at 4 sigma
+  cam2 frame  900: noise 6.0 counts; lines.detect 891 objects (H 230, V 416, ellipse 59, round 186; 14 from the second pass) in 22.0 s; C++ finder 18778 at 3 sigma, 12259 at 4 sigma
+  cam2 frame 1000: noise 5.9 counts; lines.detect 862 objects (H 193, V 394, ellipse 71, round 204; 16 from the second pass) in 21.4 s; C++ finder 18871 at 3 sigma, 12241 at 4 sigma
+  cam2: median 862 objects per frame (C++ finder: 18865 at 3 sigma, 12241 at 4 sigma); classes H 22 %, V 46 %, ellipse 8 %, round 24 %; 21.5 s per frame
+    shapes (score >= 10, n 4083): blur s0 1.40 px; H lines full length (fitted box) 10/50/90 % 6.0/12.0/19.9 px, V lines 5.8/8.8/12.4 px; semi-axes a_H 8.8 px (10-90 % 3.8-12.8), b_V 5.5 px (3.5-8.4)
+    ellipses: q = a/a_H + b/b_V 10/50/90 % 0.69/1.23/1.81 (45 % in 0.7-1.3); r = |a/a_H - b/b_V| 0.12/0.50/0.99
+    field (3 x 3 cells, left to right, top to bottom): (0,0) n 549 H 24 % V 45 % a_H 8.4 b_V 5.6; (1,0) n 458 H 23 % V 31 % a_H 8.8 b_V 5.7; (2,0) n 298 H 31 % V 41 % a_H 9.1 b_V 5.0; (0,1) n 551 H 24 % V 41 % a_H 8.7 b_V 5.0; (1,1) n 532 H 20 % V 30 % a_H 9.1 b_V 5.4; (2,1) n 330 H 29 % V 45 % a_H 9.6 b_V 5.5; (0,2) n 417 H 27 % V 41 % a_H 8.6 b_V 5.8; (1,2) n 532 H 15 % V 36 % a_H 8.6 b_V 5.7; (2,2) n 413 H 22 % V 49 % a_H 9.3 b_V 5.4
+    flux against the larger semi-axis: 0-2 px: n 390, flux 759, peak 96.6; 2-4 px: n 437, flux 1502, peak 63.8; 4-7 px: n 1981, flux 2368, peak 64.8; 7-11 px: n 1015, flux 3179, peak 60.2; 11-16 px: n 225, flux 4467, peak 60.0; 16-30 px: n 34, flux 6830, peak 51.8

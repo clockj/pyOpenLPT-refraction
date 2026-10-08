@@ -1,0 +1,15 @@
+F3b: next to the junction; build p4c; F3's records (p4c)
+  cam1 path B, worst |d| 9.98e-06 px at +0.00 mm from the closest approach: slow near delta 1.11e-16 residuals (2.9e-15, 3.6e-12); fast far delta 1.11e-16 residuals (1.8e-13, 5.0e-10); rounding scale eps/sqrt(delta) 2.1e-08; 1 ray(s) from the full search
+  cam2 path B, worst |d| 1.96e-05 px at +0.00 mm from the closest approach: slow near delta 1.11e-16 residuals (0.0e+00, 4.5e-13); fast far delta 1.11e-16 residuals (8.8e-14, 5.4e-10); rounding scale eps/sqrt(delta) 2.1e-08; 1 ray(s) from the full search
+
+  fallbacks analysed: 160
+    single_image false: 0; distance from the closest approach: max 1.58 mm, median 0.000 mm
+    delta of the image's ray: median 2.40e-10, max 1.29e-09; delta of the hint: median 1.00e-09
+    cam2 path B at +1.58 mm: image near delta 3.39e-10; near solve from the hint ok False res 2.8e-05 (80 it); far solve ok False res 2.6e-05 (34 it); hint delta 7.58e-04
+    cam2 path B at +1.57 mm: image near delta 2.70e-10; near solve from the hint ok True res 1.4e-12 (8 it); far solve ok False res 2.3e-05 (29 it); hint delta 7.58e-04
+    cam2 path B at +1.56 mm: image near delta 2.09e-10; near solve from the hint ok False res 2.7e-05 (80 it); far solve ok False res 2.0e-05 (36 it); hint delta 7.59e-04
+    cam2 path B at -0.16 mm: image near delta 1.29e-09; near solve from the hint ok False res 7.3e-05 (80 it); far solve ok False res 5.1e-05 (40 it); hint delta 8.73e-04
+    cam2 path B at -0.06 mm: image near delta 1.57e-10; near solve from the hint ok False res 2.4e-05 (80 it); far solve ok False res 1.8e-05 (40 it); hint delta 8.65e-04
+    cam1 path B at -0.01 mm: image near delta 3.40e-11; near solve from the hint ok False res 1.5e-05 (80 it); far solve ok False res 8.3e-06 (28 it); hint delta 7.75e-04
+
+  judged (worst cases at the rounding scale of the grazing ray): PASS

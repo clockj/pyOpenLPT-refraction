@@ -1,0 +1,32 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "n": 4000,
+ "per_call_us": {
+  "cam1": {
+   "pinhole_project": 0.4137499490752816,
+   "pinhole_projectWithHint": 0.59525016695261,
+   "pincyl_project": 185.17925054766238,
+   "pincyl_projectWithHint": 2.300000051036477
+  },
+  "cam2": {
+   "pinhole_project": 0.4272500518709421,
+   "pinhole_projectWithHint": 0.6227497942745684,
+   "pincyl_project": 222.45025029405951,
+   "pincyl_projectWithHint": 2.2562500089406967
+  }
+ },
+ "shake_like": {
+  "particles": 1000,
+  "positions_per_particle": 48,
+  "us_per_position_both_cams_hinted": 14.536981247753527,
+  "us_per_position_both_cams_full": 469.02593749109656
+ },
+ "pass": true
+}

@@ -38,6 +38,21 @@
  */
 // IDMap.hpp
 
+/**
+ * @brief An observation's image curve in another camera: the straight line
+ *        `line`, or, for cameras whose line images curve (curved ports), the
+ *        polyline `poly` (vertices in order along the line of sight; a NaN
+ *        vertex breaks it), with `line` then its chord. Views, not owners.
+ */
+struct ImageCurve {
+  const Line2D *line = nullptr;
+  const std::vector<Pt2D> *poly = nullptr; // null or empty: the straight line
+};
+
+/** @brief Squared distance from q to a polyline (NaN vertices break it);
+ *         infinity when it has no segment. */
+double dist2ToPolyline(const Pt2D &q, const std::vector<Pt2D> &poly);
+
 class IDMap {
 public:
   struct RowSpan {
@@ -70,6 +85,19 @@ public:
                              const std::vector<Line2D> &lines_px, double tol_px,
                              std::vector<int> &out_indices,
                              std::vector<Pt2D> &dirs) const;
+
+  // The same two for image curves: a straight curve as above, a polyline by
+  // the union of its segments' strips (each limited to the segment's extent)
+  // and the distance to its nearest segment. Used when any curve is a
+  // polyline; with straight lines only the functions above are called, so
+  // their results do not change.
+  void computeStripIntersection(const std::vector<ImageCurve> &curves,
+                                double tol_px,
+                                std::vector<RowSpan> &spans) const;
+  void visitPointsInRowSpans(const std::vector<RowSpan> &spans,
+                             const std::vector<ImageCurve> &curves,
+                             double tol_px,
+                             std::vector<int> &out_indices) const;
 
   // ---- small helpers (inline) ----
   inline int rowsCell() const { return _rows_cell; }
@@ -150,6 +178,9 @@ private:
   struct LineEntry {
     Line2D line;
     bool ok = false; // false: the projection failed
+    // Cameras whose line images curve (Camera::lineImagesCurve): the image as
+    // a polyline (makeCurve2DFromLOS3D), `line` its chord. Empty otherwise.
+    std::vector<Pt2D> poly;
   };
   mutable std::vector<std::vector<LosEntry>> _los_tab; // [cam][pid]
   mutable std::vector<std::vector<std::vector<LineEntry>>>
@@ -167,6 +198,7 @@ private:
     std::vector<std::vector<int>> rem, cand;
     // enumerateCandidatesOnCam
     std::vector<Line2D> lines;
+    std::vector<ImageCurve> curves;
     std::vector<IDMap::RowSpan> spans;
     std::vector<Pt2D> dirs;
     // checkMatch
@@ -231,6 +263,11 @@ private:
 
   // ---- LOS→image line helper (fills the tables) ----
   bool makeLine2DFromLOS3D(int cam_id, const Line3D &los, Line2D &out_line) const;
+  // The same for a camera whose line images curve: the line of sight clipped
+  // to the view volume and to where the camera's model applies, projected at
+  // points subdivided until every chord stays within kCurveTolPx of the curve.
+  bool makeCurve2DFromLOS3D(int cam_id, const Line3D &los, Line2D &out_chord,
+                            std::vector<Pt2D> &out_poly) const;
 
   // ---- early checks & tolerances (decl only; you已有实现或后续实现) ----
   double computeMinParallaxDeg(const std::vector<Line3D> &los3d) const;

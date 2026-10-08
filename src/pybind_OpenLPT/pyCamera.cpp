@@ -21,6 +21,20 @@ namespace {
 } // namespace
 
 void bind_Camera(py::module_& m) {
+  py::class_<ProjectionHint>(m, "ProjectionHint",
+                             "The ray of a point's last image (Camera.projectWithHint).")
+      .def(py::init<>())
+      .def_readwrite("lam", &ProjectionHint::lambda)
+      .def_readwrite("c_z", &ProjectionHint::c_z)
+      .def_readwrite("is_far", &ProjectionHint::is_far)
+      .def_readwrite("valid", &ProjectionHint::valid)
+      .def("__repr__", [](const ProjectionHint& h) {
+        return "ProjectionHint(lam=" + std::to_string(h.lambda) +
+               ", c_z=" + std::to_string(h.c_z) +
+               ", is_far=" + (h.is_far ? std::string("True") : std::string("False")) +
+               ", valid=" + (h.valid ? std::string("True") : std::string("False")) + ")";
+      });
+
   py::class_<Camera, std::shared_ptr<Camera>>(m, "CameraModel")
       .def_property(
           "is_active", [](const Camera& c) { return c.is_active; },
@@ -83,6 +97,41 @@ void bind_Camera(py::module_& m) {
             return st.value();
           },
           py::arg("pt_img_dist"))
+      .def("usesProjectionHint", &Camera::usesProjectionHint)
+      .def("lineImagesCurve", &Camera::lineImagesCurve)
+      .def("multiValued", &Camera::multiValued)
+      .def("provablySingleImage", &Camera::provablySingleImage, py::arg("pt_world"))
+      .def(
+          "imageStatus",
+          [](const Camera& c, const Pt3D& pt_world, double margin_px, double merge_px) {
+            Pt2D pt;
+            const ImageStatus st = c.imageStatus(pt_world, margin_px, merge_px, &pt);
+            const char* name = st == ImageStatus::None
+                                   ? "none"
+                                   : (st == ImageStatus::One ? "one" : "ambiguous");
+            return py::make_tuple(std::string(name), pt);
+          },
+          py::arg("pt_world"), py::arg("margin_px") = 0.0, py::arg("merge_px") = 0.0,
+          "Phase 2's status: ('none' | 'one' | 'ambiguous', the one image).")
+      .def(
+          "projectWithHint",
+          [](const Camera& c, const Pt3D& pt_world, ProjectionHint hint) -> py::tuple {
+            auto st = c.projectWithHint(pt_world, hint);
+            if (!st)
+              return py::make_tuple(false, Pt2D(), hint, st.status().err.toString());
+            return py::make_tuple(true, st.value(), hint, std::string());
+          },
+          py::arg("pt_world"), py::arg("hint"),
+          "project() started from a hint: (ok, pt, updated hint, error).")
+      .def(
+          "hintFromLineOfSight",
+          [](const Camera& c, const Line3D& los, const Pt3D& pt_world) {
+            ProjectionHint h;
+            const bool ok = c.hintFromLineOfSight(los, pt_world, h);
+            return py::make_tuple(ok, h);
+          },
+          py::arg("los"), py::arg("pt_world"),
+          "A hint from a line of sight passing near the point: (ok, hint).")
       .def(
           "projectBatchStatus",
           [](const Camera& c, const std::vector<Pt3D>& pts_world,

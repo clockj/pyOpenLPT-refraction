@@ -28,7 +28,14 @@ void bind_ObjectInfo(py::module_& m) {
         .def(py::init<>())
         .def(py::init<const Tracer2D&>())
         .def(py::init<const Pt2D&>(), py::arg("pt_center"))
-        .def_readwrite("_r_px", &Tracer2D::_r_px);
+        .def_readwrite("_r_px", &Tracer2D::_r_px)
+        .def_readwrite("_has_shape", &Tracer2D::_has_shape)
+        .def_readwrite("_len_h_px", &Tracer2D::_len_h_px)
+        .def_readwrite("_len_v_px", &Tracer2D::_len_v_px)
+        .def_readwrite("_sigma_px", &Tracer2D::_sigma_px)
+        .def_readwrite("_sigma_h_px", &Tracer2D::_sigma_h_px)
+        .def_readwrite("_sigma_v_px", &Tracer2D::_sigma_v_px)
+        .def_readwrite("_amp", &Tracer2D::_amp);
 
     py::class_<Bubble2D, Object2D, std::unique_ptr<Bubble2D>>(m, "Bubble2D")
         .def(py::init<>())
@@ -40,6 +47,7 @@ void bind_ObjectInfo(py::module_& m) {
     py::class_<Object3D, std::unique_ptr<Object3D>>(m, "Object3D")
         .def_readwrite("_pt_center",  &Object3D::_pt_center)
         .def_readwrite("_is_tracked", &Object3D::_is_tracked)
+        .def_readwrite("_proj_hint", &Object3D::_proj_hint)
         // Python property: _obj2d_list as list[Object2D*] (read-only view)
         .def_property_readonly("_obj2d_list",
             [](Object3D& self) {

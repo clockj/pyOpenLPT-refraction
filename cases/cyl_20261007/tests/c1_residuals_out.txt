@@ -1,0 +1,14 @@
+C1: residuals of X:\Shijie Zhong\Refraction\Processed\20261007\T0: 3036 frames, 11876 of 12144 detections used, RMS 0.6003 px
+  cam1: 5938 detections, RMS 0.5343 px
+    ball A: n 2969, RMS 0.5318 px, mean (du, dv) (-0.0024, +0.0030) px (SE 0.0069); along the wand, outward +0.0060 px (SE 0.0093), across -0.0168 px
+    ball B: n 2969, RMS 0.5368 px, mean (du, dv) (+0.0024, -0.0030) px (SE 0.0070); along the wand, outward +0.0033 px (SE 0.0093), across -0.0055 px
+    cells (10 x 6, >= 20 detections): 41; largest mean 0.4617 px at cell [7, 5] (n 23, 9.6 standard errors); cells above 0.1 px: 35
+  cam2: 5938 detections, RMS 0.6597 px
+    ball A: n 2969, RMS 0.6614 px, mean (du, dv) (-0.0008, -0.0055) px (SE 0.0086); along the wand, outward +0.0069 px (SE 0.0116), across +0.0363 px
+    ball B: n 2969, RMS 0.6580 px, mean (du, dv) (+0.0008, +0.0055) px (SE 0.0085); along the wand, outward +0.0123 px (SE 0.0115), across -0.0007 px
+    cells (10 x 6, >= 20 detections): 37; largest mean 0.9589 px at cell [9, 2] (n 22, 7.8 standard errors); cells above 0.1 px: 36
+  wand length (free triangulation), 2969 frames: mean error -0.00 um, SD 34.39 um, RMS 34.39 um
+    trend with frame: -0.214 +- 0.156 um per 1000 frames (-1.4 SE); range 98.0 to 14918.0
+    trend with X: -1.302 +- 0.216 um per mm (-6.0 SE); range 3.2 to 18.5
+    trend with Y: -0.324 +- 0.228 um per mm (-1.4 SE); range -5.3 to 8.5
+    trend with Z: +0.610 +- 0.124 um per mm (+4.9 SE); range -22.4 to 5.6

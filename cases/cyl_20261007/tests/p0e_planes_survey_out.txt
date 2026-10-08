@@ -1,0 +1,31 @@
+P0e: the Planes (X:\Shijie Zhong\Refraction\Raw\20261007\Planes), read-only; detector settings config.planes.detect (the 30 Sep case's)
+
+  position 0, cam1: 48 dark regions: 45 dot, 3 border
+    usable dots 45, u 51-1229, v 39-729 px; outline a 38.3, b 29.2 px (median), edge RMS 0.614 px
+    outline blur (erf sigma, median): along the rows 3.13 px, along the columns 2.00 px; trend with u per 100 px: +0.029 (rows), -0.004 (columns)
+    fitted line at u = 200 / 640 / 1080 px: rows 3.29 / 3.42 / 3.55, columns 2.03 / 2.01 / 1.99 px
+
+  position 0, cam2: 113 dark regions: 103 dot, 10 border; 65801 px masked (the board's edge)
+    usable dots 103, u 103-1260, v 36-625 px; outline a 23.5, b 15.7 px (median), edge RMS 0.396 px
+    outline blur (erf sigma, median): along the rows 3.49 px, along the columns 5.75 px; trend with u per 100 px: +0.293 (rows), +0.786 (columns)
+    fitted line at u = 200 / 640 / 1080 px: rows 2.01 / 3.30 / 4.59, columns 2.27 / 5.73 / 9.19 px
+
+  position 1, cam1: 48 dark regions: 44 dot, 4 border
+    usable dots 44, u 54-1227, v 41-729 px; outline a 38.7, b 29.2 px (median), edge RMS 0.612 px
+    outline blur (erf sigma, median): along the rows 3.55 px, along the columns 1.87 px; trend with u per 100 px: -0.002 (rows), -0.000 (columns)
+    fitted line at u = 200 / 640 / 1080 px: rows 3.87 / 3.86 / 3.85, columns 1.86 / 1.86 / 1.86 px
+
+  position 1, cam2: 105 dark regions: 94 dot, 11 border; 141957 px masked (the board's edge)
+    usable dots 94, u 207-1243, v 37-625 px; outline a 23.7, b 15.8 px (median), edge RMS 0.453 px
+    outline blur (erf sigma, median): along the rows 2.95 px, along the columns 4.59 px; trend with u per 100 px: +0.506 (rows), +0.715 (columns)
+    fitted line at u = 200 / 640 / 1080 px: rows 0.95 / 3.18 / 5.40, columns 1.52 / 4.66 / 7.81 px
+
+  position 2, cam1: 48 dark regions: 44 dot, 4 border
+    usable dots 44, u 46-1228, v 42-729 px; outline a 39.1, b 29.1 px (median), edge RMS 0.642 px
+    outline blur (erf sigma, median): along the rows 4.32 px, along the columns 1.79 px; trend with u per 100 px: -0.056 (rows), +0.005 (columns)
+    fitted line at u = 200 / 640 / 1080 px: rows 4.76 / 4.52 / 4.27, columns 1.75 / 1.78 / 1.80 px
+
+  position 2, cam2: 100 dark regions: 85 dot, 15 border; 217779 px masked (the board's edge)
+    usable dots 85, u 306-1220, v 29-625 px; outline a 23.9, b 16.4 px (median), edge RMS 0.489 px
+    outline blur (erf sigma, median): along the rows 2.59 px, along the columns 4.08 px; trend with u per 100 px: +0.335 (rows), +0.652 (columns)
+    fitted line at u = 200 / 640 / 1080 px: rows 1.16 / 2.64 / 4.11, columns 0.91 / 3.77 / 6.64 px

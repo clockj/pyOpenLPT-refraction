@@ -24,7 +24,19 @@ struct OTFParam
     //  yy = -(x-x0) * sin(alpha) + (y-y0) * cos(alpha)
     //  img[y,x] = a * exp(-b * xx^2 - c * yy^2) 
     // default: a = 125, b = 1.5, c = 1.5, alpha = 0   
-    Matrix<double> a, b, c, alpha; 
+    Matrix<double> a, b, c, alpha;
+
+    // The image model (the cylinder STB plan, Phase 2):
+    //  0, "gauss": the Gaussian above;
+    //  1, "segment": a rectangle of length |b| along xx and |c| along yy [px]
+    //     (signed lengths, so that the table interpolates through focus),
+    //     blurred by an isotropic Gaussian of standard deviation sigma [px]:
+    //     img = a * g(xx; b) * g(yy; c), g(t; L) = [Phi((t + L/2)/sigma) -
+    //     Phi((t - L/2)/sigma)] / [2 Phi(L/(2 sigma)) - 1], which is
+    //     exp(-t^2/(2 sigma^2)) as L -> 0; a is the peak. Lines (b or c about
+    //     0) and round spots are both its cases.
+    int model = 0;
+    Matrix<double> sigma; // model 1 only 
     
     AxisLimit boundary;
     std::vector<double> grid_x, grid_y, grid_z;
@@ -74,8 +86,22 @@ public:
 
     void saveParam (std::string otf_file);
 
-    // Output: (a,b,c,alpha)
+    // Output: (a, b, c, cos(alpha), sin(alpha)), and sigma for the segment model
     std::vector<double> getOTFParam(int cam_id, Pt3D const& pt_world) const;
+
+    // Half-width and half-height [px] of the box around the image centre that
+    // holds the image out to k standard deviations of its blur (Gaussian: the
+    // k-sigma ellipse; segment: the rectangle grown by k sigma), rotated by
+    // alpha, at pt_world. params: getOTFParam()'s output.
+    static void halfExtent(int model, const std::vector<double>& params, double k,
+                           double& dx, double& dy);
+    void halfExtent(int cam_id, Pt3D const& pt_world, double k, double& dx,
+                    double& dy) const;
+
+    // The image intensity at (x, y) of an image centred at (x0, y0) with
+    // getOTFParam()'s params, for either model.
+    static double intensity(int model, double x, double y, double x0, double y0,
+                            const std::vector<double>& params);
 
 };
 

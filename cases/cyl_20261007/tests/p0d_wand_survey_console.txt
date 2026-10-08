@@ -1,0 +1,38 @@
+P0d: run 20261007/T0 (X:\Shijie Zhong\Refraction\Raw\20261007\T0), read-only, with the 6 Oct T2 case's settings
+
+Background grey level (the image's median) along the recording
+  cam1, every 500th frame: 109 110 110 110 110 109 110 110 109 109 111 111 109 111 111 110 110 110 111 110 110 111 111 111 110 111 110 110 111 111 110
+  cam2, every 500th frame: 157 157 157 158 158 158 158 159 158 158 159 158 158 159 159 158 159 159 160 159 159 159 160 159 159 159 158 159 159 160 159
+
+Opening scan: blobs > 500 px^2 left after an opening of k px (1 = rod kept or a ball lost, 2 = separated)
+  frame     0 cam1: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:2 121:2 141:1
+  frame     0 cam2: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:1 121:1 141:0
+  frame  3000 cam1: 21:1 41:1 61:1 71:1 81:1 91:1 101:1 111:1 121:1 141:0
+  frame  3000 cam2: 21:1 41:1 61:1 71:1 81:1 91:1 101:2 111:1 121:1 141:0
+  frame  6000 cam1: 21:1 41:1 61:1 71:1 81:1 91:3 101:2 111:2 121:2 141:1
+  frame  6000 cam2: 21:1 41:1 61:1 71:1 81:1 91:1 101:1 111:0 121:0 141:0
+  frame  9000 cam1: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:2 121:2 141:1
+  frame  9000 cam2: 21:1 41:1 61:1 71:1 81:2 91:2 101:2 111:1 121:1 141:0
+  frame 12000 cam1: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:2 121:2 141:1
+  frame 12000 cam2: 21:1 41:1 61:1 71:1 81:2 91:2 101:2 111:1 121:1 141:0
+  frame 15000 cam1: 21:1 41:1 61:1 71:1 81:1 91:2 101:2 111:2 121:2 141:0
+  frame 15000 cam2: 21:1 41:1 61:1 71:1 81:1 91:1 101:1 111:1 121:1 141:1
+
+Survey: every 50th frame (301 frames), opening 95 px, mask 50 px
+  cam1: kept 114; rejected: 140 one ball, 47 no ball; median r (A, B) 70.8, 95.2 px; edge RMS median 0.257 px, 90th percentile 0.395 px
+  cam2: kept 164; rejected: 117 one ball, 11 no ball, 5 balls overlap (guard), 4 aspect; median r (A, B) 57.8, 78.0 px; edge RMS median 0.203 px, 90th percentile 0.433 px
+  kept in both cameras: 63 of 301 frames (21 %), about 3100 over the whole recording
+  kept in both, per 1000 frames: 0k 4/20 1k 8/20 2k 1/20 3k 6/20 4k 4/20 5k 4/20 6k 1/20 7k 4/20 8k 4/20 9k 6/20 10k 8/20 11k 5/20 12k 8/20 13k 0/20 14k 0/20 15k 0/1
+  cam1, the kept balls' centres: u 107-1166, v 139-692 px
+  cam2, the kept balls' centres: u 101-1124, v 133-594 px
+
+One-ball camera-frames, by where the ball found is and its size (r > 75 px: the large ball):
+  cam1: inside the image, large ball: 90
+  cam1: inside the image, small ball: 36
+  cam1: touches the image's edge, large ball: 9
+  cam1: touches the image's edge, small ball: 5
+  cam2: inside the image, large ball: 87
+  cam2: inside the image, small ball: 27
+  cam2: touches the image's edge, large ball: 2
+  cam2: touches the image's edge, small ball: 1
+  examples inside the image: p0d_one_ball.jpg

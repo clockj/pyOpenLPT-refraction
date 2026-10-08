@@ -1,0 +1,7 @@
+C3 fit: the whole recording with f held at {1: 29035.0, 0: 48306.0} (camera index: f) -> checks/c3_held_f
+  1 fits in 72 s
+  c3_held_f: f    48306 /    29035 px, D  1173.0 /   855.2 mm, f/D 41.183 / 33.951; RMS 0.6026 px (11888/12144), wand length RMS 34.6 um (69 s)
+
+  The board on each fit (c2b_valley_board's measures; a square board has B - A = 0 and angle 90 deg):
+    c3_held_f: pitch A +0.391 %, B +0.369 %, B - A -0.022 %; angle 90.041 deg; flatness RMS 18.6 38.9 46.7 um; steps 2.539 2.461 mm; reprojection 0.34/0.40 0.34/0.40 0.32/0.38 px
+EXIT 0

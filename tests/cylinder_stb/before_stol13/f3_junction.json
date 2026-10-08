@@ -1,0 +1,85 @@
+{
+ "build": {
+  "name": "p1",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "434749e4033e0fd6a3227fe9323f9f78175c229dbd7bc0b48e19ee480034f62d",
+  "start": "2026-10-07T18:13:32",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p1\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "lines": 200,
+ "cams": [
+  {
+   "cam": 1,
+   "paths": {
+    "A": {
+     "points": 80200,
+     "with_hint": 80000,
+     "fast_path": 79652,
+     "both_ok": 80003,
+     "new_failures": 0,
+     "max_dpx_vs_project": 7.479621258378551e-08,
+     "fallbacks": 175,
+     "fallback_dist_mm_max": 0.0,
+     "branches_seen": [
+      0,
+      1
+     ],
+     "max_dpx_from_line_pixel": 7.452461146961574e-08,
+     "pass": true
+    },
+    "B": {
+     "points": 80200,
+     "with_hint": 80000,
+     "fast_path": 79607,
+     "both_ok": 80003,
+     "new_failures": 0,
+     "max_dpx_vs_project": 9.98088022045228e-06,
+     "fallbacks": 198,
+     "fallback_dist_mm_max": 0.01,
+     "branches_seen": [
+      0,
+      1
+     ],
+     "pass": false
+    }
+   }
+  },
+  {
+   "cam": 2,
+   "paths": {
+    "A": {
+     "points": 80200,
+     "with_hint": 80000,
+     "fast_path": 79635,
+     "both_ok": 80007,
+     "new_failures": 0,
+     "max_dpx_vs_project": 8.42998173929726e-08,
+     "fallbacks": 185,
+     "fallback_dist_mm_max": 0.0,
+     "branches_seen": [
+      0,
+      1
+     ],
+     "max_dpx_from_line_pixel": 6.83190251038468e-08,
+     "pass": true
+    },
+    "B": {
+     "points": 80200,
+     "with_hint": 80000,
+     "fast_path": 79617,
+     "both_ok": 80007,
+     "new_failures": 0,
+     "max_dpx_vs_project": 1.9586416065596064e-05,
+     "fallbacks": 197,
+     "fallback_dist_mm_max": 1.58,
+     "branches_seen": [
+      0,
+      1
+     ],
+     "pass": false
+    }
+   }
+  }
+ ]
+}

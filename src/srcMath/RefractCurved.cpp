@@ -1991,6 +1991,120 @@ std::vector<Ray> projectCylinder(const Stack& s, const double pinhole[3],
     return out;
 }
 
+bool singleImage(const Stack& s, double r_p, double r_x, double dz) {
+    const std::size_t N = s.nMedia();
+    if (!s.isValid() || N < 2 || !(r_x > 0.0) || !(r_p > s.R.front()) ||
+        !(r_x < s.R.back()) || !std::isfinite(dz)) {
+        return false;
+    }
+    // Property onedens: one densifying interface at most.
+    int densifying = 0;
+    for (std::size_t k = 0; k + 1 < N; ++k) {
+        if (s.n[k] < s.n[k + 1]) {
+            ++densifying;
+        }
+    }
+    if (densifying > 1) {
+        return false;
+    }
+    // k* = N while nu_k R_k > nu_N r_X for every k < N, and
+    // nu_k^2 R_k^2 - nu_N^2 r_X^2 = (n_k^2 R_k^2 - n_N^2 r_X^2) - C_z^2 (R_k^2 - r_X^2),
+    // which falls with C_z^2 and reaches 0 at C_z^2 = (n_k^2 R_k^2 - n_N^2 r_X^2) / (R_k^2 - r_X^2).
+    const double nN = s.n[N - 1];
+    double c1sq = std::numeric_limits<double>::infinity();
+    for (std::size_t k = 0; k + 1 < N; ++k) {
+        const double R = s.R[k];
+        const double g0 = s.n[k] * s.n[k] * R * R - nN * nN * r_x * r_x;
+        const double den = R * R - r_x * r_x;
+        if (!(g0 > 1e-9 * s.n[k] * s.n[k] * R * R) || !(den > 0.0)) {
+            return false; // r_X >= r_c(0), to the margin
+        }
+        c1sq = std::min(c1sq, g0 / den);
+    }
+    const double n_min = *std::min_element(s.n.begin(), s.n.end());
+    const double c1 = std::sqrt(std::min(c1sq, n_min * n_min));
+    // Property zbound; z0 is infinite when C1 reaches the least index.
+    return std::abs(dz) < (1.0 - 1e-9) * z0(c1, s, r_p, r_x);
+}
+
+std::optional<Ray> projectCylinderFrom(const Stack& s, const double pinhole[3],
+                                       const double point[3], double lam0,
+                                       double cz0, bool far0, double tol,
+                                       int itmax) {
+    constexpr int kHintIters = 30;
+    const double r_p = std::hypot(pinhole[0], pinhole[1]);
+    const double r_x = std::hypot(point[0], point[1]);
+    const bool applies = s.isValid() && !s.R.empty() && r_p > 0.0 &&
+                         std::isfinite(r_p) && std::isfinite(r_x) &&
+                         std::isfinite(point[2]) && std::isfinite(pinhole[2]) &&
+                         std::isfinite(lam0) && std::isfinite(cz0) &&
+                         r_p > s.R.front() && r_x < s.R.back();
+    if (!applies) {
+        return std::nullopt;
+    }
+    // The units of projectCylinder(), so that `tol` means the same there and here.
+    const double u = std::ldexp(1.0, std::ilogb(r_p));
+    Stack unit = s;
+    for (double& R : unit.R) {
+        R /= u;
+    }
+    const double p[3] = {pinhole[0] / u, pinhole[1] / u, pinhole[2] / u};
+    const double x[3] = {point[0] / u, point[1] / u, point[2] / u};
+    const double rp = std::hypot(p[0], p[1]);
+    const double rx = std::hypot(x[0], x[1]);
+    const double dz = x[2] - p[2];
+    if (rx < 1e-15) {
+        return std::nullopt; // on the axis: step (1) of the full search
+    }
+    // Step (1): the signed azimuth from the pinhole to the point, as there.
+    const double d = std::remainder(std::atan2(x[1], x[0]) - std::atan2(p[1], p[0]),
+                                    2.0 * kPi);
+    const double dphi = std::abs(d);
+    const double turn = d >= 0.0 ? 1.0 : -1.0;
+    if (std::abs(dphi - kPi) <= 8.0 * std::numeric_limits<double>::epsilon()) {
+        return std::nullopt; // opposite the pinhole: both senses, left to the full search
+    }
+    if (!singleImage(unit, rp, rx, dz)) {
+        return std::nullopt;
+    }
+
+    // The start, inside the domain.
+    const double n_min = *std::min_element(unit.n.begin(), unit.n.end());
+    const double c0 = std::abs(cz0) < n_min - 1e-12 ? cz0 : 0.0;
+    const double lmax0 = lmaxKstar(unit, rx, c0).lmax;
+    const double l0 = std::min(std::abs(lam0) / u, lmax0 * (1.0 - 1e-9));
+    // The near branch reaches dphi at this tilt iff its reach does (it is
+    // increasing in Lambda, Property convexnear).
+    bool far_first = far0;
+    if (const auto reach = phiZ(lmax0, c0, unit, rp, rx, Branch::Near)) {
+        far_first = dphi > reach->phi;
+    }
+    // From a start this close, Newton stops at its first residual below its
+    // target, which a step later would be at rounding; projectCylinder()'s
+    // longer solves usually end there. Aim lower, so that both give the same
+    // ray to rounding (F1b: a stop at 1e-10 alone is 2e-6 px along the axis).
+    const double stol = std::min(1e-13, tol);
+    const int it = itmax >= 0 ? std::min(itmax, kHintIters) : kHintIters;
+    for (int pass = 0; pass < 2; ++pass) {
+        const bool far = (pass == 0) ? far_first : !far_first;
+        const SolveResult sol =
+            far ? solveFar(unit, rp, rx, dphi, dz, l0, c0, it, stol)
+                : solveCylinder(unit, rp, rx, dphi, dz, l0, c0, Branch::Near, it, stol);
+        // The acceptance test of projectCylinder().
+        if (sol.residual < tol && inDomain(sol.lambda, sol.c_z, unit, rx)) {
+            Ray r;
+            r.branch = far ? Branch::Far : Branch::Near;
+            r.c_z = sol.c_z;
+            const double lam = turn * sol.lambda;
+            const std::vector<double> nu = nus(unit.n, sol.c_z);
+            directionFromInvariants(p, lam, sol.c_z, unit.n[0], nu[0], r.dir);
+            r.lambda = lam * u;
+            return r;
+        }
+    }
+    return std::nullopt;
+}
+
 void directionFromInvariants(const double pinhole[3], double lam, double c_z,
                              double n1, double nu1, double out[3]) {
     const double r_p = std::hypot(pinhole[0], pinhole[1]);

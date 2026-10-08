@@ -1,0 +1,10 @@
+L5b: the C++ fit against the Python fit, step by step; build p4b
+  1. profile on 4,000 points: max |C++ - Python| 1.06e-14 (relative 3.48e-11)
+  2. isolated objects, deblend 1, no second pass, no validation: Python 178, C++ 178, paired 178; centres within 1e-6 px 99.4 %, within 1e-3 px 100.0 %, max 5.06e-06 px; lengths max 2.79e-03, blurs max 2.27e-04
+  2. isolated objects, full settings: Python 174, C++ 174, paired 174; centres within 1e-6 px 99.4 %, within 1e-3 px 100.0 %, max 2.74e-06 px; lengths max 5.57e-05, blurs max 1.65e-05
+  4. lines.detect on the same frame + 1e-9 noise: 967 and 968 objects, paired 967; centres within 1e-3 px 96.79 %, max 0.235 px (the prototype's own sensitivity)
+  3. T1 cam1 frame 0: 44 pairs more than 1e-3 px apart; chi2(C++) / chi2(Python) on the same window: min 0.7422, median 1.0000, max 1.6783 (< 1: the C++ solution fits better)
+     Python [135.467, 726.492, 101.73, 0.05, 8.86, 0.996, 1.363, -3.784] chi2 68.5; C++ [135.267, 726.492, 101.731, 0.05, 8.848, 0.993, 1.361, -3.655] chi2 68.4
+     Python [159.279, 363.133, 20.238, 3.456, 9.695, 0.907, 1.577, 1.094] chi2 230.5; C++ [158.479, 363.133, 20.237, 3.455, 9.706, 0.913, 1.582, 1.032] chi2 230.5
+     Python [40.567, 465.836, 503.069, 2.033, 2.262, 4.0, 2.581, -4.186] chi2 182.9; C++ [44.372, 465.837, 503.067, 2.638, 4.026, 4.0, 2.398, -4.417] chi2 193.1
+     Python [155.33, 108.972, 328.985, 6.054, 0.05, 1.444, 2.694, 4.151] chi2 774.2; C++ [155.183, 108.972, 328.983, 6.056, 0.05, 1.442, 2.701, 4.151] chi2 774.2

@@ -1,0 +1,14 @@
+L5: the C++ line detector against lines.detect; build p4dev (d9b20b4 + diff 1a9282c8b864); settings lines.DET
+  synthetic r5_lines cam1 frame 0: noise 7.00; Python 1298 objects in 32.5 s, C++ 1298 in 2.90 s; paired 1298, unpaired 0 / 0
+    largest differences: centre u 1.58e-01, v 1.22e-01 px; Lx 1.69e+00, Ly 9.75e-01; sx 2.61e-01, sy 1.27e-01; A 6.39e+01; score 5.80e-03; centres within 1e-3 px 96.22 %
+    noise estimate of the clipped image: C++ 7.8076, Python 7.8076 (true 7)
+  synthetic r5_lines cam2 frame 0: noise 7.00; Python 1649 objects in 42.6 s, C++ 1651 in 3.49 s; paired 1645, unpaired 4 / 6
+    largest differences: centre u 2.66e-01, v 1.56e-01 px; Lx 4.96e+00, Ly 1.07e+00; sx 1.04e+00, sy 3.59e-01; A 2.01e+02; score 3.06e-03; centres within 1e-3 px 95.50 %
+    unpaired scores: Python [19.23154067993164, 13.694003105163574, 8.411481857299805, 6.875418663024902], C++ [19.23154067993164, 13.694003105163574, 10.48969554901123, 8.411481857299805, 8.105834007263184, 6.619421005249023]
+    noise estimate of the clipped image: C++ 7.5728, Python 7.5728 (true 7)
+  T1 cam1 frame 0: noise 8.06; Python 1108 objects in 38.5 s, C++ 1108 in 1.39 s; paired 1108, unpaired 0 / 0
+    largest differences: centre u 2.29e-02, v 1.85e-02 px; Lx 2.37e+00, Ly 8.05e-01; sx 2.95e-01, sy 2.18e-01; A 2.32e+01; score 6.16e-03; centres within 1e-3 px 96.84 %
+  T1 cam2 frame 0: noise 5.88; Python 910 objects in 31.3 s, C++ 909 in 1.29 s; paired 906, unpaired 4 / 3
+    largest differences: centre u 6.32e-02, v 4.41e-01 px; Lx 1.93e+00, Ly 5.79e+00; sx 7.21e-02, sy 1.60e+00; A 1.29e+02; score 4.55e-04; centres within 1e-3 px 97.90 %
+    unpaired scores: Python [18.05984115600586, 9.65554428100586, 7.474306583404541, 6.592129707336426], C++ [18.05984115600586, 9.65554428100586, 7.782207012176514]
+  judged (every detection paired, centres within 1e-3 px): FAIL

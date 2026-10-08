@@ -1,0 +1,15 @@
+F5: STB on data/f5_spots with the projection hints on and off; builds p1, head1007
+  full: build p1 with {'OPENLPT_PROJECTION_HINTS': '0'}: exit 0, wall 100.1 s
+  hints: build p1: exit 0, wall 7.6 s
+  base: build head1007: exit 0, wall 99.6 s
+
+  base vs full: 11 of 11 files identical; only in one: []
+  full vs hints: 3 of 11 files identical; only in one: []
+    ConvergeTrack\ExitTrack_29.csv: rows [540, 540], largest differences cam0_x(col) 1e-06, cam1_y(row) 1e-06
+    ConvergeTrack\LongTrackActive_29.csv: rows [17834, 17834], largest differences WorldX 1e-06, WorldY 1e-06, WorldZ 1e-06, cam0_x(col) 2.4e-05, cam0_y(row) 1e-05, cam1_x(col) 1.1e-05, cam1_y(row) 9e-06
+    ConvergeTrack\LongTrackInactive_29.csv: rows [2399, 2399], largest differences cam0_x(col) 3e-06, cam0_y(row) 1e-06, cam1_x(col) 1e-06, cam1_y(row) 1e-06
+    ConvergeTrack\ShortTrackActive_29.csv: rows [484, 484], largest differences cam0_x(col) 1e-06, cam0_y(row) 1e-06, cam1_x(col) 1e-06, cam1_y(row) 1e-06
+    InitialTrack\ShortTrackActive_3.csv: rows [2399, 2399], largest differences cam1_x(col) 1e-06
+    PredField_1_2.csv: rows [132651, 132651], largest differences 0.00000000e+00 1e-10
+    PredField_2_3.csv: rows [132651, 132651], largest differences 0.00000000e+00 1e-10
+    PredField_3_4.csv: rows [132651, 132651], largest differences 0.00000000e+00 1.1e-10

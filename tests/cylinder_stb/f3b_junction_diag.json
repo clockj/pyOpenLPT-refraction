@@ -1,0 +1,3837 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "worst": [
+  {
+   "r_x_mm": 9.035774542028328,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": 12.043963288637986,
+     "c_z": 0.014617155973471359,
+     "delta": 1.1102230246251565e-16,
+     "res_phi": 2.886579864025407e-15,
+     "res_z": 3.6108824263969552e-12,
+     "rounding_scale": 2.1073424255447014e-08
+    }
+   ],
+   "fast": {
+    "branch": "far",
+    "lam": 12.043963288612138,
+    "c_z": 0.014617156234328247,
+    "delta": 1.1102230246251565e-16,
+    "res_phi": 1.8252066524837574e-13,
+    "res_z": 5.0109817684163e-10,
+    "rounding_scale": 2.1073424255447014e-08
+   },
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 7.614833544966839e-07,
+    "iters": 80,
+    "delta": 2.773337115513641e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 5.010634392873679e-10,
+    "iters": 38,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0005524595774081265,
+   "cam": 1,
+   "path": "B",
+   "dpx": 9.98088022045228e-06,
+   "j": 0
+  },
+  {
+   "r_x_mm": 5.359237866917676,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": 7.143791936577804,
+     "c_z": 0.005990534850240481,
+     "delta": 1.1102230246251565e-16,
+     "res_phi": 0.0,
+     "res_z": 4.5308548579647834e-13,
+     "rounding_scale": 2.1073424255447014e-08
+    }
+   ],
+   "fast": {
+    "branch": "far",
+    "lam": 7.143791936565194,
+    "c_z": 0.005990535373780997,
+    "delta": 1.1102230246251565e-16,
+    "res_phi": 8.770761894538737e-14,
+    "res_z": 5.423305112287058e-10,
+    "rounding_scale": 2.1073424255447014e-08
+   },
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.0764922973296505e-06,
+    "iters": 80,
+    "delta": 5.578870698741412e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 5.423285086437792e-10,
+    "iters": 37,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0007156961003002005,
+   "cam": 2,
+   "path": "B",
+   "dpx": 1.9586416065596064e-05,
+   "j": 0
+  }
+ ],
+ "fallbacks": [
+  {
+   "r_x_mm": 10.768919083933483,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.58095710966412e-08,
+    "iters": 80,
+    "delta": 2.220446049250313e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.49011639024817e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.048194517117508,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073425034187245e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073427246865976e-08,
+    "iters": 6,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.3499469746062496,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073423260138574e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107342548086249e-08,
+    "iters": 22,
+    "delta": 3.3306690738754696e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.7319549497281435,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.330127517831278e-05,
+    "iters": 80,
+    "delta": 9.374999665467953e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073429247084997e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.608044661693918,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.0671227239108517e-05,
+    "iters": 80,
+    "delta": 2.1364965352432819e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.49011614368816e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.632857464009944,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.1618934502531925e-05,
+    "iters": 80,
+    "delta": 4.998780278597792e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425934804142e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.3311656940570058,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.3301271936713156e-05,
+    "iters": 80,
+    "delta": 9.374999665467953e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425265789866e-08,
+    "iters": 9,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 11.807370230640572,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.182791948203479e-05,
+    "iters": 80,
+    "delta": 8.747863544655843e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160273952645e-08,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.857992309571394,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.6500246162345486e-08,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901162607357713e-08,
+    "iters": 24,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.600745560211141,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.3320012720402654e-08,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424401133964e-08,
+    "iters": 11,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.720897270014921,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073427208768426e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073423654830278e-08,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.8614830968740268,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2505812614756466e-05,
+    "iters": 80,
+    "delta": 7.81976705610532e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490116188686187e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 0.39814946329671247,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.370549507169873e-05,
+    "iters": 80,
+    "delta": 2.809752430721346e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160751115188e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.10461650838282,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.5809571417948866e-08,
+    "iters": 80,
+    "delta": 2.220446049250313e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490116505709636e-08,
+    "iters": 15,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.858709472922255,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.980232339298191e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.9802324722958855e-08,
+    "iters": 21,
+    "delta": 4.440892098500626e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.069633964921039,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.9802323257716344e-08,
+    "iters": 80,
+    "delta": 4.440892098500626e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073426708782886e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.0343618103188104,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.436518490686488e-05,
+    "iters": 80,
+    "delta": 9.841345516292677e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490116501303016e-08,
+    "iters": 22,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.4162458562365505,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073429511885426e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073419297834182e-08,
+    "iters": 7,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 14.473342563462461,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.650024921874786e-08,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073427339554442e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 0.12478951793183556,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.3834972010437833e-05,
+    "iters": 80,
+    "delta": 9.570311210183036e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107329288877496e-08,
+    "iters": 25,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.3087339863261527,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073429675764262e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073419017978745e-08,
+    "iters": 10,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 14.225755528070883,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.162280344067394e-05,
+    "iters": 80,
+    "delta": 5.00000152392488e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901161417280522e-08,
+    "iters": 24,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.1126920791173338,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073405470790358e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073443218912047e-08,
+    "iters": 9,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 15.300467538938959,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.2355251000948733e-05,
+    "iters": 80,
+    "delta": 2.4987822921929137e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901164118994985e-08,
+    "iters": 36,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.514808889735203,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.980232578759202e-08,
+    "iters": 80,
+    "delta": 4.440892098500626e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901162561849277e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.932910110859366,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.958041044165952e-05,
+    "iters": 80,
+    "delta": 4.375000361989123e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107342576236529e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.1880951135322197,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.126572567163404e-06,
+    "iters": 80,
+    "delta": 8.514189353547863e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073426175361783e-08,
+    "iters": 18,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 15.111022481932679,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.867235326408835e-05,
+    "iters": 80,
+    "delta": 7.477742869355097e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425881585998e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 11.537273270824453,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.65002432814762e-08,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901163027846256e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.1525484939352544,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073421291147672e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073427508306427e-08,
+    "iters": 1,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.744340922832442,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.5809570896388362e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160763328798e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.686162793074123,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.2141945933166662e-05,
+    "iters": 80,
+    "delta": 2.451324698782287e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425972138264e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.4736228426888514,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073431258419205e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.10734174921145e-08,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.73034997497564,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.910745165193522e-05,
+    "iters": 80,
+    "delta": 4.236214712349806e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073427764018567e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.7568663412244256,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.4901160217915602e-08,
+    "iters": 80,
+    "delta": 2.220446049250313e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901162440321314e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 0.24111212102695254,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.7365961441361484e-05,
+    "iters": 80,
+    "delta": 3.7444780609519057e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073394141881118e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.710024717512376,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073422197633216e-08,
+    "iters": 80,
+    "delta": 2.220446049250313e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073427084993827e-08,
+    "iters": 22,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.5721564253724627,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.694431130349069e-05,
+    "iters": 80,
+    "delta": 1.4355472366389677e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901158578916504e-08,
+    "iters": 38,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.43709604329241,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073426580486617e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424577172504e-08,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.392642894243199,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 7.842726735667703e-06,
+    "iters": 80,
+    "delta": 3.0754065960536536e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901164130580645e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.885210742887773,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": 17.17488053545661,
+     "c_z": 0.015122860777791448,
+     "delta": 3.399081016652872e-11,
+     "res_phi": 1.6147083670148277e-12,
+     "res_z": 2.959438250016433e-15,
+     "rounding_scale": 3.808548297875405e-11
+    }
+   ],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.4530762000011768e-05,
+    "iters": 80,
+    "delta": 2.5936830461148475e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 8.260013784935206e-06,
+    "iters": 28,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0007753792055184006,
+   "cam": 1,
+   "path": "B",
+   "j": -1,
+   "slow_ok": true
+  },
+  {
+   "r_x_mm": 10.768919083933483,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.498955567415678e-06,
+    "iters": 80,
+    "delta": 3.0975222387041867e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.1235423182656642e-06,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.422156767479741,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.76861968490026e-06,
+    "iters": 80,
+    "delta": 1.8174350913113813e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.0543033619212836e-09,
+    "iters": 38,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0006275277686890179,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.048194517117508,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.7096257445959539e-06,
+    "iters": 80,
+    "delta": 1.378785974281982e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 9.9609256783005e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.3499469746062496,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 9.183427152665196e-07,
+    "iters": 80,
+    "delta": 1.944000516118649e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.5407984207211115e-08,
+    "iters": 31,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0017865460873911498,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.7319549497281435,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.861990032028983e-07,
+    "iters": 80,
+    "delta": 2.1094237467877974e-15
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.6311596010644637e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.608044661693918,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 6.92630803293528e-06,
+    "iters": 80,
+    "delta": 2.3968049767120192e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.258391914467129e-08,
+    "iters": 20,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.632857464009944,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.707724622723171e-05,
+    "iters": 80,
+    "delta": 1.4562528960482268e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.7700521974261244e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.00020150459819490152,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.3311656940570058,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.4486637613772014e-06,
+    "iters": 80,
+    "delta": 5.882516695976392e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.5382826655423808e-09,
+    "iters": 36,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.006292524357369711,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 11.807370230640572,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 5.37618090443091e-06,
+    "iters": 80,
+    "delta": 1.4432899320127035e-15
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.1762343898615169e-08,
+    "iters": 35,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0004255828981278853,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.857992309571394,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.7979448101972345e-06,
+    "iters": 80,
+    "delta": 1.5661916208387083e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.492511869206277e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0007116178785909755,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.600745560211141,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.5849416285920252e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.899430865356232e-09,
+    "iters": 14,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.404899670795406,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.4215599197118868e-06,
+    "iters": 80,
+    "delta": 9.595657601835228e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.0981952530058722e-06,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.720897270014921,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.255828645227818e-06,
+    "iters": 80,
+    "delta": 5.299649608048185e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 7.495832268927924e-09,
+    "iters": 39,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.00038268502223903766,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.8614830968740268,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.970936318845986e-06,
+    "iters": 80,
+    "delta": 1.918132319644883e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.0978150443269495e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 0.39814946329671247,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 7.700113895717931e-08,
+    "iters": 80,
+    "delta": 2.220446049250313e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.0113064109063102e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.010314654087136166,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.10461650838282,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.9809660000899395e-06,
+    "iters": 80,
+    "delta": 1.63202784619898e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.804074194009565e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0003451113213274182,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.858709472922255,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.7536969336444538e-06,
+    "iters": 80,
+    "delta": 3.777866908194483e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 9.597211673649203e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.069633964921039,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.714027284965759e-06,
+    "iters": 80,
+    "delta": 1.4559464744934303e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.831542265084585e-07,
+    "iters": 25,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.0343618103188104,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.5854013751219357e-07,
+    "iters": 80,
+    "delta": 3.6193270602780103e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.439314799035616e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.4162458562365505,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 6.043511845069188e-07,
+    "iters": 80,
+    "delta": 1.8207657603852567e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.7637968305501675e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 14.473342563462461,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.3908154607465862e-06,
+    "iters": 80,
+    "delta": 5.6311622032012565e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.500689067838995e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0006560711972585231,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.0338642491734875,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2060502452271942e-06,
+    "iters": 80,
+    "delta": 6.783462680459706e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.264027402726766e-07,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 0.12478951793183556,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2945688914369627e-06,
+    "iters": 80,
+    "delta": 8.301137555122295e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.7882857610632966e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.02576357785469685,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.3087339863261527,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.6236146021964456e-07,
+    "iters": 80,
+    "delta": 8.826273045769994e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.4062619134163992e-09,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.005839558419375002,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 14.225755528070883,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.3398894408908955e-06,
+    "iters": 80,
+    "delta": 9.57012247226885e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.6207432324537275e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0003041426157068816,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.1126920791173338,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.204520517517796e-06,
+    "iters": 80,
+    "delta": 8.831491093985733e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 6.194298539296921e-09,
+    "iters": 38,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 15.300467538938959,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.284233384531878e-06,
+    "iters": 80,
+    "delta": 7.12430114901963e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.0450321393682816e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.00042577028047841026,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.514808889735203,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.7105750440233178e-06,
+    "iters": 80,
+    "delta": 6.87805368215777e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.9980095712506727e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.3633798063183988e-05,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.932910110859366,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.4663540164392815e-06,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.5580837496562775e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0004925370288162423,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.1880951135322197,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.0248752441839104e-06,
+    "iters": 80,
+    "delta": 5.069278330438465e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.3811126013483338e-07,
+    "iters": 30,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 15.111022481932679,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.707758850816587e-06,
+    "iters": 80,
+    "delta": 3.551825500380801e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 9.879779769307988e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 11.537273270824453,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.002879127030201e-06,
+    "iters": 80,
+    "delta": 7.768008458697295e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.2213840390611887e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.1525484939352544,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2312473998028132e-06,
+    "iters": 80,
+    "delta": 7.022160630754115e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.696226963596478e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.744340922832442,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1361772080444734e-06,
+    "iters": 80,
+    "delta": 9.605649609056854e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.56414129471312e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0011165452229269235,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.686162793074123,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.8638368098480515e-06,
+    "iters": 80,
+    "delta": 4.098499317706228e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.3025011410909192e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.00021791030275275514,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.4736228426888514,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.951095960586838e-06,
+    "iters": 80,
+    "delta": 1.6434631433526192e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.3057278403184674e-07,
+    "iters": 39,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.73034997497564,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.244403386541411e-06,
+    "iters": 80,
+    "delta": 5.293543381412746e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 8.715805140120934e-09,
+    "iters": 31,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0006681376266525207,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.7568663412244256,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 8.262688432625904e-07,
+    "iters": 80,
+    "delta": 2.6756374893466273e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.6918880957887836e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 0.24111212102695254,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.3139634526495344e-06,
+    "iters": 80,
+    "delta": 5.482281295599023e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.7741224855663397e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0008196365203756439,
+   "cam": 1,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.002752847056881,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.918051212540338e-05,
+    "iters": 80,
+    "delta": 1.839459695673895e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490115906827939e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.0168842838495498,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": true,
+    "residual": 3.997860222371716e-15,
+    "iters": 1,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": true,
+    "residual": 4.3389308650905134e-15,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.269642555160281,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.4901160544257247e-08,
+    "iters": 80,
+    "delta": 2.220446049250313e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901161877780684e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.978067958062809,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.4901161862891185e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160531135974e-08,
+    "iters": 5,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.05724140885175,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073423683498353e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107342501678345e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.310753708632161,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.6770517819485157e-05,
+    "iters": 80,
+    "delta": 1.406250671465159e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901161152267833e-08,
+    "iters": 37,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.63670255622995,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073423685270743e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425018166136e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.686469204588644,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.162279634883097e-05,
+    "iters": 80,
+    "delta": 5.00000152392488e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901161937184024e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.935154642206763,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.5809569181112385e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160340430646e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.392873693349214,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073425793449493e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107342312854e-08,
+    "iters": 21,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.901972363841805,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.9802323960653435e-08,
+    "iters": 80,
+    "delta": 4.440892098500626e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160047873108e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.463973188644944,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.3320009501670215e-08,
+    "iters": 80,
+    "delta": 4.440892098500626e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490116175348561e-08,
+    "iters": 23,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.215323329333666,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073423972371068e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424860341382e-08,
+    "iters": 19,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.377047320632643,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.162279162870425e-05,
+    "iters": 80,
+    "delta": 5.00000152392488e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490116237595801e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.332941176140729,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073424905922148e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424018583545e-08,
+    "iters": 5,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.511414000958855,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.9802323357615e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073423509222952e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.0082451752355857,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.2316290185530598e-05,
+    "iters": 80,
+    "delta": 2.4900814743489263e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.580956448740809e-08,
+    "iters": 22,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.743125964403857,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.5016187975084e-05,
+    "iters": 80,
+    "delta": 3.1290459112653934e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901160136073964e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.0029424403886666,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.352464341049208e-05,
+    "iters": 80,
+    "delta": 5.619505971665717e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073422562693935e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.283116936609257,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073424645838087e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424202608794e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.159129448200337,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.332001076320916e-08,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901159870809538e-08,
+    "iters": 34,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.804952911722015,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.9802322219102388e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.9802322663662346e-08,
+    "iters": 21,
+    "delta": 4.440892098500626e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.515641198929264,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.060367946292782e-05,
+    "iters": 80,
+    "delta": 4.68292293831496e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073421234504722e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.5513767814972064,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.4389429683693136e-05,
+    "iters": 80,
+    "delta": 2.974219759366292e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901165204668864e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.198596128811515,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.107342352251649e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425298702426e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.00386497089814,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.980232107775968e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.980232352006179e-08,
+    "iters": 21,
+    "delta": 4.440892098500626e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.589025162888149,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 7.048359913746959e-06,
+    "iters": 80,
+    "delta": 2.483957484145094e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425281594498e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.0724633772719265,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.467767360126241e-05,
+    "iters": 80,
+    "delta": 9.980469783954504e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901162972421932e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.513338828084638,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.980232224352138e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107342461704718e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.7286376194025026,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.236068706786874e-05,
+    "iters": 80,
+    "delta": 2.5000002068509275e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.490116631213285e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 11.45636470811848,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.65002437758211e-08,
+    "iters": 80,
+    "delta": 5.551115123125783e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901158997547403e-08,
+    "iters": 18,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.3241639366022815,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.233338217770653e-05,
+    "iters": 80,
+    "delta": 2.4938995313306123e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107341967753655e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.249636744769602,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073413017577203e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.107343566612626e-08,
+    "iters": 22,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.71046117413229,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.980232160508541e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073425302189628e-08,
+    "iters": 23,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 4.833019009580399,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.2360002980391297e-05,
+    "iters": 80,
+    "delta": 2.499846996073529e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073422579602297e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.605499698117692,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.332000900196557e-08,
+    "iters": 80,
+    "delta": 4.440892098500626e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424805059933e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.347172127164178,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.107342730580529e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073421532876915e-08,
+    "iters": 22,
+    "delta": 3.3306690738754696e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.863923640290509,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.0305788635466471e-05,
+    "iters": 80,
+    "delta": 5.3104520780777875e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901164550787014e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.925371299070349,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.332000764386703e-08,
+    "iters": 80,
+    "delta": 3.3306690738754696e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073426116574325e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 4.2038147557004795,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.1073424587046457e-08,
+    "iters": 80,
+    "delta": 1.1102230246251565e-16
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073424142883194e-08,
+    "iters": 22,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "A",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.07424268323791,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": -17.427749469812497,
+     "c_z": 0.006636948855171172,
+     "delta": 3.3938163390700993e-10,
+     "res_phi": 9.448442028769932e-12,
+     "res_z": 0.0,
+     "rounding_scale": 1.2053025000465785e-11
+    }
+   ],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.840983053401557e-05,
+    "iters": 80,
+    "delta": 1.483095424248404e-09
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.6068007944147203e-05,
+    "iters": 34,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0007578340060077071,
+   "cam": 2,
+   "path": "B",
+   "j": 158,
+   "slow_ok": true
+  },
+  {
+   "r_x_mm": 13.064334581059615,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": -17.414542052451647,
+     "c_z": 0.006638210498519344,
+     "delta": 2.701904255886234e-10,
+     "res_phi": -1.3740120152760937e-12,
+     "res_z": 4.544975507059235e-16,
+     "rounding_scale": 1.3508441544167923e-11
+    }
+   ],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": true,
+    "residual": 1.3740120157822877e-12,
+    "iters": 8,
+    "delta": 2.701904255886234e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.326100783372791e-05,
+    "iters": 29,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0007584083481014803,
+   "cam": 2,
+   "path": "B",
+   "j": 157,
+   "slow_ok": true
+  },
+  {
+   "r_x_mm": 13.054426483385734,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": -17.401334641054476,
+     "c_z": 0.006639472140947801,
+     "delta": 2.0949109114098974e-10,
+     "res_phi": -3.773426016095982e-12,
+     "res_z": -8.673617379884035e-19,
+     "rounding_scale": 1.534113338869362e-11
+    }
+   ],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.7449264782276265e-05,
+    "iters": 80,
+    "delta": 1.148071193668443e-09
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.0483959411736034e-05,
+    "iters": 36,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0007589835693094793,
+   "cam": 2,
+   "path": "B",
+   "j": 156,
+   "slow_ok": true
+  },
+  {
+   "r_x_mm": 11.35031087918876,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": -15.129764234864277,
+     "c_z": 0.006856459465548971,
+     "delta": 1.290814899412851e-09,
+     "res_phi": -3.2516211945221585e-12,
+     "res_z": -1.240327285323417e-16,
+     "rounding_scale": 6.180281269716352e-12
+    }
+   ],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 7.31655961980332e-05,
+    "iters": 80,
+    "delta": 7.68490948654943e-09
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 5.080977442233276e-05,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0008728526189785146,
+   "cam": 2,
+   "path": "B",
+   "j": -16,
+   "slow_ok": true
+  },
+  {
+   "r_x_mm": 11.449382572251123,
+   "single_image": true,
+   "slow": [
+    {
+     "branch": "near",
+     "lam": -15.261825814065736,
+     "c_z": 0.006843844826318309,
+     "delta": 1.574891328459671e-10,
+     "res_phi": -1.1320500092892871e-11,
+     "res_z": -3.5128150388530344e-16,
+     "rounding_scale": 1.769354804215405e-11
+    }
+   ],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.3615932920986712e-05,
+    "iters": 80,
+    "delta": 8.554615904543539e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.7747620924334042e-05,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0008653044943556232,
+   "cam": 2,
+   "path": "B",
+   "j": -6,
+   "slow_ok": true
+  },
+  {
+   "r_x_mm": 7.002752847056881,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.710912941140114e-06,
+    "iters": 80,
+    "delta": 1.4593881658697683e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 9.381805943972403e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.0168842838495498,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.5783257639105165e-06,
+    "iters": 80,
+    "delta": 1.1083356454832938e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.987620385570309e-09,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.003078886988678531,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.4449687670917994,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 6.673216684959947e-07,
+    "iters": 80,
+    "delta": 2.1938006966593093e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.0473174340170526e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.269642555160281,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2649877401348567e-07,
+    "iters": 80,
+    "delta": 5.662137425588298e-15
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.491815047392565e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.00020561922866646487,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.978067958062809,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 5.949759234361006e-07,
+    "iters": 80,
+    "delta": 1.6930901125533637e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.3698537769013074e-08,
+    "iters": 34,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.310753708632161,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2837553292745746e-06,
+    "iters": 80,
+    "delta": 7.508438315539934e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.5191233072325812e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0005273702427431859,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.63670255622995,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 5.854936808278661e-06,
+    "iters": 80,
+    "delta": 1.713318376062034e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.493810351004264e-09,
+    "iters": 28,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.686469204588644,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 6.349123375155062e-07,
+    "iters": 80,
+    "delta": 1.7130741269966165e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.274442466028992e-09,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0006661079887636534,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.935154642206763,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.208840293677049e-06,
+    "iters": 80,
+    "delta": 5.116018719775184e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.135842112782567e-08,
+    "iters": 34,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.392873693349214,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.1546726451358013e-05,
+    "iters": 80,
+    "delta": 6.66444677221989e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.1160352697005346e-09,
+    "iters": 35,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0002575229548008595,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 12.901972363841805,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 5.367492969933491e-07,
+    "iters": 80,
+    "delta": 1.4133139103478243e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.491540389453722e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0002758642355555896,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.463973188644944,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 4.100135482562629e-07,
+    "iters": 80,
+    "delta": 5.329070518200751e-15
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.349803657452515e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.215323329333666,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.7697970645908505e-07,
+    "iters": 80,
+    "delta": 3.530509218307998e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.021540903811635e-09,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0005719695571674288,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.377047320632643,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 9.450351375794858e-07,
+    "iters": 80,
+    "delta": 4.430900091279e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4964414919182046e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0009749227334507893,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 10.332941176140729,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.5920226444032134e-06,
+    "iters": 80,
+    "delta": 3.217759392271091e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.349103121002523e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.511414000958855,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.2312033188409279e-06,
+    "iters": 80,
+    "delta": 7.09432512735475e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.285286684714619e-10,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.000594752150173461,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.0082451752355857,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.1867167192092836e-06,
+    "iters": 80,
+    "delta": 6.755707104844078e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.64426231434622e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 4.391307672457625,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.888499754163939e-07,
+    "iters": 80,
+    "delta": 7.51620987671231e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 9.116151465602962e-09,
+    "iters": 38,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.001676373710644108,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.743125964403857,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.7207812491027283e-06,
+    "iters": 80,
+    "delta": 1.4331869024886146e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.5562982687868686e-07,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.0029424403886666,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.0175511524050603e-06,
+    "iters": 80,
+    "delta": 4.698463840213662e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 5.493666205423097e-09,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 1.000000082740371e-09,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.283116936609257,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.550266078993967e-05,
+    "iters": 80,
+    "delta": 3.2513669534495193e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 4.892968116237419e-09,
+    "iters": 32,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0004612766249828537,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 13.159129448200337,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.069316582669748e-06,
+    "iters": 80,
+    "delta": 5.688782778179302e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.9802320557722647e-08,
+    "iters": 40,
+    "delta": 4.440892098500626e-16
+   },
+   "hint_delta": 0.0004673812492667073,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.804952911722015,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.815498265137153e-06,
+    "iters": 80,
+    "delta": 7.239875365883108e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.7761750675661953e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 6.515641198929264,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 7.067514383829032e-07,
+    "iters": 80,
+    "delta": 1.439959262938828e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.491305343875724e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0010810459304232412,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.5513767814972064,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.2919500326598814e-05,
+    "iters": 80,
+    "delta": 2.6264201924419694e-10
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.690744166367041e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 9.99999860695766e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 9.198596128811515,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.6740435435710966e-06,
+    "iters": 80,
+    "delta": 1.3644640972643174e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.5914350788665034e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.00386497089814,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 9.597804924976329e-06,
+    "iters": 80,
+    "delta": 4.605682502045738e-11
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 2.1073825649515337e-08,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.00022189840571884556,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 7.589025162888149,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.498846970772049e-06,
+    "iters": 80,
+    "delta": 3.1218361229434777e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4901258194120544e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.0013109876046757396,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 5.503142691387738,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.973577182974235e-07,
+    "iters": 80,
+    "delta": 7.127631818093505e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 6.482833668643804e-10,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0013213927058367547,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 3.0724633772719265,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 2.3297865701060162e-06,
+    "iters": 80,
+    "delta": 2.7090552023878445e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.4908174396864962e-08,
+    "iters": 40,
+    "delta": 2.220446049250313e-16
+   },
+   "hint_delta": 0.00022512380151284983,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 8.513338828084638,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.3882070269914607e-06,
+    "iters": 80,
+    "delta": 8.952838470577262e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.8677935975510392e-07,
+    "iters": 40,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.7286376194025026,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.3147207359535643e-06,
+    "iters": 80,
+    "delta": 8.335554468885675e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 8.232625317273647e-08,
+    "iters": 31,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 11.45636470811848,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 1.4863593831326939e-06,
+    "iters": 80,
+    "delta": 1.0803580252627398e-12
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.9090006213722834e-10,
+    "iters": 38,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 0.0006102096731381845,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 2.3241639366022815,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 9.927135602753072e-07,
+    "iters": 80,
+    "delta": 4.761746552617296e-13
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 1.7461202651337163e-08,
+    "iters": 34,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  },
+  {
+   "r_x_mm": 1.249636744769602,
+   "single_image": true,
+   "slow": [],
+   "fast": null,
+   "solve_near_from_hint": {
+    "ok": false,
+    "residual": 3.9335725259111164e-07,
+    "iters": 80,
+    "delta": 7.616129948928574e-14
+   },
+   "solve_far_from_hint": {
+    "ok": false,
+    "residual": 3.93814847495123e-08,
+    "iters": 31,
+    "delta": 1.1102230246251565e-16
+   },
+   "hint_delta": 9.999999717180685e-10,
+   "cam": 2,
+   "path": "B",
+   "j": 0,
+   "slow_ok": false
+  }
+ ],
+ "pass": true
+}

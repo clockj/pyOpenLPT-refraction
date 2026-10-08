@@ -1,0 +1,6 @@
+E3: a view volume past the wall (x, z in +-150 mm; inner wall radius 97.6 mm); case f5_spots, 5000 points; builds ['head1007', 'p4c']
+  head1007 cam1->cam2: lines built for 65 of 5000 points; true pixel from the line: median 14.0936, max 24.2329 px
+  head1007 cam2->cam1: lines built for 22 of 5000 points; true pixel from the line: median 18.6127, max 26.6148 px
+  p4c cam1->cam2: lines built for 5000 of 5000 points; true pixel from the line: median 0.0147, max 0.0499 px
+  p4c cam2->cam1: lines built for 5000 of 5000 points; true pixel from the line: median 0.0146, max 0.0499 px
+  judged (every line built with the wide volume, build p4c): PASS

@@ -1,0 +1,50 @@
+S2: the delivered calibration
+  detections: X:\Shijie Zhong\Refraction\Processed\20261007\T0\detection\detections_all.csv
+  cam1: kept 5966 of 15001 camera-frames; median r (sqrt(a b)) A 70.8 px, B 95.2 px; rejected: 6492 one ball, 2541 no ball, 2 edge RMS
+  cam2: kept 8334 of 15001 camera-frames; median r (sqrt(a b)) A 57.7 px, B 78.0 px; rejected: 5589 one ball, 741 no ball, 174 aspect, 162 balls overlap (guard), 1 edge RMS
+  frames kept in both cameras: 3036 of 15001
+  written X:\Shijie Zhong\Refraction\Processed\20261007\T0\wand_points.csv (the GUI's format; cam1, cam2 = the GUI's cameras 0, 1)
+  calibration: 3036 frames, wand 10.0 mm, tube radii (100.80625, 97.63125) mm, n (1.0, 1.49, 1.333), fit_k1 False, fit_L False, noise weights camera, n_final 6
+        0.0 s  Start search (stages 1-2)
+       21.9 s  Coarse fit (stage 3)
+       22.4 s  Final fit (stage 4)
+       88.1 s  Coarse fit (stage 3)
+      170.7 s  Final fit (stage 4)
+      299.9 s  Coarse fit (stage 3)
+      396.1 s  Final fit (stage 4)
+      492.6 s  Coarse fit (stage 3)
+      494.9 s  Final fit (stage 4)
+      613.9 s  Coarse fit (stage 3)
+  done in 624 s; written to X:\Shijie Zhong\Refraction\Processed\20261007\T0
+  2 cameras, 3036 frames, 12088 of 12144 detections used.
+  Reprojection RMS 1.380 px; wand length (free triangulation) RMS error 53.4 um over 3022 frames.
+    cam1: f 10,995 px (219.9 mm) +- 0.49 %, 253 mm from the axis, RMS 1.667 px
+    cam2: f 7,709 px (154.2 mm) +- 0.37 %, 210 mm from the axis, RMS 1.014 px
+  WARNING: Large residuals: RMS 1.38 px
+
+  | Cylinder wand calibration (PINCYL), 2 cameras
+  | tube: radii [100.80625, 97.63125] mm, n [1.0, 1.49, 1.333]; wand 10.0000 mm
+  | frames 3036, observations 12088 active of 12144; reprojection RMS 1.3799 px (2-D), sigma 1.6006 px per coordinate
+  | wand length, free triangulation: mean error +0.82 um, RMS 53.36 um over 3022 frames
+  | frame: tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height (slid +1.611 mm)
+  | 
+  | cam1: f 10995.3 px (219.905 mm) +- 0.493 %; distance from the axis 253.06 mm +- 1.451; azimuth 0.000 deg; height -1.611 mm; reprojection RMS 1.6674 px (6044/6072 active); camFile camFile\cam1.txt
+  | cam2: f 7709.0 px (154.180 mm) +- 0.371 %; distance from the axis 209.59 mm +- 0.879; azimuth -65.166 deg; height -2.319 mm; reprojection RMS 1.0140 px (6044/6072 active); camFile camFile\cam2.txt
+  | 
+  | Noise levels and weights (noise_weights='camera')
+  |   weights APPLIED: estimated from the residuals; each detection weighted by 1 / sigma^2 of its group
+  |   group          noise sigma  +- rel. SE    used / total  not used  residual RMS  outlier scale
+  |                         (px)                                         (px/coord.)           (px)
+  |   cam1                1.7935       1.7 %    6044 / 6072         28        1.1790              -
+  |   cam2                1.2716       2.1 %    6044 / 6072         28        0.7170              -
+  |   pooled sigma 1.6006 px per coordinate (unweighted); variance factor 1.009 (about 1 when the weights match the data); 17 rounds; noisiest / quietest group 1.41x
+  |   the rounds stopped at round 16: the active set repeated round 12's, and the 16 detections that alternated (rejected in the fit, re-admitted after it) are left out
+  |   noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.
+  |   residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera
+  |     next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).
+  |   not used: rejected as outliers, or dropped with their frame when an end was left in fewer than two cameras.
+  |   outlier scale: the robust scale each detection was judged against (rejected beyond 5 of it).
+  |   starts: 6 of 6 short-listed bootstrap starts carried through stages 3-4; stage-3 RMS 0.548, 0.758, 0.705, 1.105, 1.105, 1.105 px; 2 of them ended stage 3 as an earlier one (the same detections, RMS within 1e-5) and share its stage 4
+  | 
+  | Checks
+  |   WARNING: Large residuals: RMS 1.38 px. Detections this noisy can lead the start search to a wrong answer. What to do: Check the detections in a few frames ('Test Detect'); tick 'Thorough start search'. (T11b: at 5 px one rig in ten took a wrong minimum from the top two starts.)

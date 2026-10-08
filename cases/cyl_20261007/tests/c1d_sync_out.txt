@@ -1,0 +1,4 @@
+C1-D: residuals against the ball's image velocity; 7174 of 11876 used detections have both neighbouring frames kept
+  cam1: n 3688; offset k = -0.0001 +- 0.0002 frames (-0.8 SE); residual RMS per coordinate 0.403 -> 0.403 px with the velocity term; ball speed median 22.2 px/frame; residual RMS (2-D) slowest third 0.569 px, fastest third 0.550 px
+  cam2: n 3486; offset k = +0.0004 +- 0.0003 frames (+1.6 SE); residual RMS per coordinate 0.503 -> 0.503 px with the velocity term; ball speed median 21.5 px/frame; residual RMS (2-D) slowest third 0.783 px, fastest third 0.618 px
+  offset between the cameras (cam1 - cam2): -0.0006 +- 0.0003 frames

@@ -1,0 +1,11 @@
+C2b: f of each camera from the board alone (start: the cameras of X:\Shijie Zhong\Refraction\Processed\20261007\T0, the board of C2a)
+
+  cam1: 133 detections of 46 dots over 3 positions; wand calibration: f 48494 px, D 1178.7 mm, f / D 41.144 px/mm
+    t free        : f     46319 +-     33 px, D   1117.2 +-   1.1 mm (corr -0.137), f / D 41.461 px/mm; RMS 0.824 px (133/133 projected, 14 parameters); step 2.6997 +- 0.0874 mm; f vs the wand -4.49 %
+    t held        : f     38032 +-     80 px, D    918.5 +-   2.2 mm (corr +0.774), f / D 41.405 px/mm; RMS 0.841 px (133/133 projected, 13 parameters); step 3.1750 (held) mm; f vs the wand -21.57 %
+    t free + dots : f     43404 +-    220 px, D    963.0 +-   2.5 mm (corr +1.011), f / D 45.073 px/mm; RMS 0.167 px (133/133 projected, 100 parameters); step 2.2108 +- 0.0655 mm; dot corrections RMS 21.1 um; f vs the wand -10.50 %
+
+  cam2: 282 detections of 104 dots over 3 positions; wand calibration: f 28306 px, D 835.0 mm, f / D 33.899 px/mm
+    t free        : f     33292 +-    758 px, D    800.3 +-  20.5 mm (corr +0.751), f / D 41.598 px/mm; RMS 1.357 px (282/282 projected, 14 parameters); step 1.2100 +- 0.0678 mm; f vs the wand +17.62 %
+    t held        : f     31750 +-   1297 px, D    959.2 +-  38.6 mm (corr +0.987), f / D 33.099 px/mm; RMS 1.590 px (282/282 projected, 13 parameters); step 3.1750 (held) mm; f vs the wand +12.17 %
+    t free + dots : f     13000 +-   1684 px, D    140.4 +-   6.5 mm (corr +0.779), f / D 92.606 px/mm; RMS 1.060 px (282/282 projected, 216 parameters); step 2.0250 +- 0.0817 mm; dot corrections RMS 366.3 um; f vs the wand -54.07 %

@@ -1,0 +1,18 @@
+{
+ "build": "p4c",
+ "tests": {
+  "F4": {
+   "cmd": [
+    "f4_speed.py",
+    "--build",
+    "p4c"
+   ],
+   "returncode": 0,
+   "seconds": 16.7,
+   "verdict": [
+    "  judged: hinted call <= 3 us (from Python, call overhead included): PASS"
+   ],
+   "stderr_tail": ""
+  }
+ }
+}

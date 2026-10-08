@@ -129,6 +129,27 @@ struct ProjectionCoverage {
     bool far_branch = true;
 };
 
+/**
+  * @brief How a point appears in one camera (the rule of the cylinder STB plan,
+  *        Phase 2): no image on the sensor, exactly one, or more than one (or
+  *        one with another image close enough to merge with it).
+  */
+enum class ImageStatus { None, One, Ambiguous };
+
+/**
+  * @brief The ray of a point's last image, to start the projection of the
+  *        point after a small move (tracking).
+  *
+  * Used only by models whose projection is solved iteratively (the cylindrical
+  * port, see Camera::usesProjectionHint); the others ignore it.
+  */
+struct ProjectionHint {
+    double lambda = 0.0;  // The ray's azimuthal invariant, signed, as ImageRay::lambda.
+    double c_z = 0.0;     // Its axial invariant.
+    bool is_far = false;  // Its branch.
+    bool valid = false;   // False: no ray yet; the projection runs the full search.
+};
+
 class Camera {
 public:
     virtual ~Camera() = default;
@@ -164,6 +185,76 @@ public:
       */
     virtual StatusOr<std::vector<ImageRay>> projectAll(
         const Pt3D& pt_world, ProjectionCoverage* coverage = nullptr) const;
+
+    /**
+      * @brief project(), started from the ray of a nearby point's image.
+      *
+      * Returns the image project() returns. Models that solve no equations
+      * ignore the hint and call project(). The cylindrical port solves from the
+      * hint when it can prove the point has a single image, and otherwise runs
+      * the full search. Either way `hint` is left holding the ray of the image
+      * returned, for the next nearby point, or is invalidated when there is
+      * none (models without hints leave it untouched).
+      */
+    virtual StatusOr<Pt2D> projectWithHint(const Pt3D& pt_world,
+                                           ProjectionHint& hint) const {
+        (void)hint;
+        return project(pt_world);
+    }
+    /** @brief True when projectWithHint() uses the hint, so that callers keep
+      *        one only for such cameras. */
+    virtual bool usesProjectionHint() const { return false; }
+    /**
+      * @brief A hint for `pt_world` from a line of sight of this camera that
+      *        passes near it, e.g. that of the detection the point was
+      *        triangulated from. False, with `hint` untouched, for models that
+      *        take no hint.
+      */
+    virtual bool hintFromLineOfSight(const Line3D& los, const Pt3D& pt_world,
+                                     ProjectionHint& hint) const {
+        (void)los;
+        (void)pt_world;
+        (void)hint;
+        return false;
+    }
+    /**
+      * @brief True when the image of a straight line in object space is
+      *        curved enough to be drawn as a polyline (stereo matching's
+      *        image lines). False for the pinhole and the flat window, whose
+      *        straight lines are kept.
+      */
+    virtual bool lineImagesCurve() const { return false; }
+    /**
+      * @brief True for models whose projection can give a point no image or
+      *        several (the curved ports). The per-camera image statuses of
+      *        tracking apply to these only; the others behave as before.
+      */
+    virtual bool multiValued() const { return false; }
+    /** @brief True when the model proves `pt_world` has exactly one image
+      *        (single-valued models: always). */
+    virtual bool provablySingleImage(const Pt3D& pt_world) const {
+        (void)pt_world;
+        return true;
+    }
+    /**
+      * @brief The point's status: None when no image lies on the sensor
+      *        enlarged by `margin_px` on every side; One when exactly one does
+      *        and no other image lies within `merge_px` of it; Ambiguous
+      *        otherwise. `pt`, when given, receives the one image. This default
+      *        (single-valued models) is project() and the enlarged sensor.
+      */
+    virtual ImageStatus imageStatus(const Pt3D& pt_world, double margin_px,
+                                    double merge_px, Pt2D* pt = nullptr) const;
+    /**
+      * @brief Restricts [t_in, t_out] along `los` (los.pt + t los.unit_vector,
+      *        another camera's line of sight) to where this model's projection
+      *        applies. False when nothing is left. Models that apply
+      *        everywhere only check t_in <= t_out.
+      */
+    virtual bool clipToModel(const Line3D& los, double& t_in, double& t_out) const {
+        (void)los;
+        return t_in <= t_out;
+    }
 
     /** @brief Image height in pixels. */
     virtual int getNRow() const = 0;
@@ -393,6 +484,41 @@ public:
     /** @brief Back-project by tracing the pixel ray through the quadrics; single-valued.
       *        An InvalidArgument error when the pinhole is not outside the outermost interface. */
     StatusOr<Line3D> lineOfSight(const Pt2D& pt_img_dist) const override;
+    /**
+      * @brief project() for a point that moved little since its last image.
+      *
+      * Cylinder: refract_curved::projectCylinderFrom() from the hint's ray,
+      * when the hint is valid and the point provably has one image; otherwise
+      * projectAll() and project()'s rule. The hint is then set to the ray of
+      * the image returned, or invalidated when there is none. Sphere: project(),
+      * the hint untouched.
+      */
+    StatusOr<Pt2D> projectWithHint(const Pt3D& pt_world,
+                                   ProjectionHint& hint) const override;
+    /** @brief True for the cylinder, unless the environment variable
+      *        OPENLPT_PROJECTION_HINTS is "0" (to compare a run with the full
+      *        search alone). */
+    bool usesProjectionHint() const override;
+    /** @brief The invariants of the line of sight (a segment in the innermost
+      *        medium, as lineOfSight() returns), and the branch on which
+      *        `pt_world`'s foot on it lies: far beyond the ray's closest
+      *        approach to the axis. Cylinder only. */
+    bool hintFromLineOfSight(const Line3D& los, const Pt3D& pt_world,
+                             ProjectionHint& hint) const override;
+    /** @brief True, unless the environment variable OPENLPT_CURVED_LINES is
+      *        "0" (straight lines, as before, for comparison). */
+    bool lineImagesCurve() const override;
+    /** @brief Inside the innermost interface: the object medium, where every
+      *        projected point must lie (with a relative margin of 1e-9). */
+    bool clipToModel(const Line3D& los, double& t_in, double& t_out) const override;
+    bool multiValued() const override { return true; }
+    /** @brief Cylinder: refract_curved::singleImage(); sphere: false. */
+    bool provablySingleImage(const Pt3D& pt_world) const override;
+    /** @brief project() when provablySingleImage(); otherwise the census of
+      *        projectAll(). A ring, or an image that project() would not
+      *        return, makes the status Ambiguous. */
+    ImageStatus imageStatus(const Pt3D& pt_world, double margin_px,
+                            double merge_px, Pt2D* pt = nullptr) const override;
     int getNRow() const override;
     int getNCol() const override;
 
