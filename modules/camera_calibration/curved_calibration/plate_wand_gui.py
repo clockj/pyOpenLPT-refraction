@@ -1,10 +1,11 @@
 """The GUI's flat-window wand calibration (camera model "Pinhole+Refraction"): from the GUI's wand points to PINPLATE
 camFiles with plate_wand (tests/plate_wand), as cylinder_wand_gui does for the tube.
 
-No Qt here, so that it can be tested alone (tests/cylinder_wand_gui).  The GUI collects the windows (thickness and
-indices, the same for every window as its panel has them) and which window each camera looks through into a `Job`,
-runs `run` in a worker thread, writes the outputs with `write_outputs` and fills its error table and frame overlays
-from `per_frame_errors`.
+No Qt here, so that it can be tested alone (tests/cylinder_wand_gui, tests/plate_wand_gui).  The GUI collects the
+windows (each window's thickness and plate index; the camera-side and object-side indices), which window each camera
+looks through, and the options of the real case (tests/plate_wand_gui: a start from a saved fit, constraints, lens
+terms, window-normal hints) into a `Job`, runs `run` in a worker process, writes the outputs with `write_outputs`
+and fills its error table and frame overlays from `per_frame_errors`.
 
 The calibration itself is plate_wand.calibrate, unchanged: no camera or window input; each camera's pose, f and
 optionally k1, and each window's plane, from the wand alone.  The outputs' frame is plate_wand's (to_output_frame):
@@ -64,6 +65,10 @@ class Job:
     source: str = ""
     hints: Dict = field(default_factory=dict)
     window_ids: Optional[List[int]] = None  # the GUI's number of each window (for the camFiles' WINDOW_ID)
+    fit_lens: tuple = ()                   # plate_wand.LENS_TERMS freed in stage 4: "pp", "k2", "tangential"
+    constraints: Optional[Dict] = None     # plate_wand.calibrate's constraints (rig indices, mm)
+    start_source: str = ""                 # where `start` came from: "last result" or a folder
+    hints_source: str = ""                 # where `hints` came from
 
     @property
     def names(self) -> List[str]:
@@ -83,7 +88,11 @@ class Job:
         return {"wand_length_mm": float(self.wand_length), "windows": self.windows,
                 "cam_to_window": [int(k) for k in self.cam_to_window], "fit_k1": bool(self.fit_k1),
                 "noise_weights": self.noise_weights, "n_final": int(self.n_final),
-                "refit_from_last_result": self.start is not None, "pixel_mm": self.pixel_mm,
+                "refit_from_last_result": self.start is not None and self.start_source == "last result",
+                "start": ("search" if self.start is None else (self.start_source or "given")),
+                "fit_lens": list(self.fit_lens), "constraints": self.constraints,
+                "hints": ({"source": self.hints_source or "given", **self.hints} if self.hints else None),
+                "pixel_mm": self.pixel_mm,
                 "detect_mode": self.detect_mode, "source": self.source,
                 "frame_ids": [int(f) for f in self.frame_ids], "cam_ids": [int(c) for c in self.cam_ids],
                 "sizes": [[int(w), int(h)] for (w, h) in self.sizes]}
@@ -108,6 +117,10 @@ class Job:
                 raise ValueError("Window thicknesses must be positive.")
             if not all(float(v) >= 1.0 for v in w["n"]):
                 raise ValueError("Refractive indices must be at least 1.")
+        bad = [t for t in self.fit_lens if t not in pw.LENS_TERMS]
+        if bad:
+            raise ValueError(f"Unknown lens terms {bad}: choose from {sorted(pw.LENS_TERMS)}.")
+        check_constraints(self.constraints, Nc, len(self.windows))
         self.rig()
         seen = np.all(np.isfinite(uv), axis=3)
         usable = int(np.sum(np.all(seen.sum(axis=1) >= 2, axis=1)))
@@ -119,25 +132,71 @@ class Job:
 def run(job: Job, progress: Callable = None, stop: Callable = None) -> pw.Solution:
     """plate_wand.calibrate (stages 0-5).  progress(stage, rms_px, text) gets one call per log line; stop() is polled
     at every line and raises Stopped when it returns True."""
+    t0 = time.time()
     job.check()
     data = job.data()
     log = _logger(progress, stop)
     rig = job.rig()
     start = None
     if job.start is not None:
-        cams0, rig0 = job.start
-        if len(cams0) == data.n_cams and list(rig0.cam_win) == list(rig.cam_win):
-            start, rig = [c.copy() for c in cams0], rig0.copy()
+        start, rig = start_with_windows(job.start, rig)
     if progress is not None:
-        progress("Refit from the last result" if start is not None else "Start search", float("nan"),
-                 f"{data.n_frames} frames, {data.n_cams} cameras, {len(job.windows)} windows")
+        label = "Start search" if start is None else ("Refit from the last result" if job.start_source == "last result"
+                                                    else "Refit from a saved fit")
+        progress(label, float("nan"), f"{data.n_frames} frames, {data.n_cams} cameras, {len(job.windows)} windows")
     if stop is not None and stop():
         raise Stopped()
     sol = pw.calibrate(data, rig, start=start, hints=job.hints or None, fit_k1=bool(job.fit_k1),
-                       n_final=int(job.n_final), noise_weights=job.noise_weights, verbose=True, log=log)
+                       n_final=int(job.n_final), noise_weights=job.noise_weights, fit_lens=tuple(job.fit_lens),
+                       constraints=job.constraints or None, verbose=True, log=log)
     if stop is not None and stop():
         raise Stopped()
+    sol.info.setdefault("total_seconds", time.time() - t0)
     return sol
+
+
+def start_with_windows(start: tuple, rig: pw.Rig) -> tuple:
+    """A start (cameras, rig) with the panel's windows: the start's planes, the job's thicknesses and indices (as
+    the real case's run_calibration.py did).  The start must group the cameras into windows as the job does."""
+    cams0, rig0 = start
+    if len(cams0) != len(rig.cam_win) or list(rig0.cam_win) != list(rig.cam_win):
+        raise ValueError("The start's cameras or windows do not match these cameras and the Camera-Window "
+                         "Mapping.")
+    wins = [pm.Window(w0.n.copy(), float(w0.d), tuple(w.t), tuple(w.idx), w.name or w0.name)
+            for w0, w in zip(rig0.windows, rig.windows)]
+    return [c.copy() for c in cams0], pw.Rig(wins, list(rig.cam_win))
+
+
+def check_constraints(cons: Optional[Dict], n_cams: int, n_windows: int) -> None:
+    """The constraints' form (plate_wand.set_constraints reads them): rig indices in range, lengths positive."""
+    if not cons:
+        return
+    unknown = set(cons) - {"channel", "aim", "distance"}
+    if unknown:
+        raise ValueError(f"Unknown constraints {sorted(unknown)}.")
+    ch = cons.get("channel")
+    if ch:
+        widths = list(ch.get("width_mm") or [])
+        if len(widths) != n_windows or not any(w is not None for w in widths):
+            raise ValueError("The channel needs an inside width for at least one window.")
+        if any(w is not None and not float(w) > 0 for w in widths):
+            raise ValueError("The channel's widths must be positive.")
+        balls = ch.get("ball_radius_mm", 0.0)
+        balls = list(balls) if isinstance(balls, (list, tuple)) else [balls, balls]
+        if len(balls) != 2 or any(float(b) < 0 for b in balls) or float(ch.get("tolerance_mm", 0.0)) < 0:
+            raise ValueError("The channel's tolerance and ball radii must not be negative.")
+    for a in cons.get("aim") or []:
+        if not a.get("cams") or any(not 0 <= int(c) < n_cams for c in a["cams"]):
+            raise ValueError("An aim names a camera that is not in this calibration.")
+        if not 0 <= int(a.get("wall", -1)) < n_windows:
+            raise ValueError("An aim names a window that no camera looks through.")
+        if not float(a.get("mm", 0.0)) > 0 or float(a.get("sigma_mm", 1.0)) <= 0:
+            raise ValueError("An aim's depth and sigma must be positive.")
+    for d in cons.get("distance") or []:
+        if not 0 <= int(d.get("cam", -1)) < n_cams:
+            raise ValueError("A distance names a camera that is not in this calibration.")
+        if not float(d.get("mm", 0.0)) > 0 or float(d.get("sigma_mm", 1.0)) <= 0:
+            raise ValueError("A distance and its sigma must be positive.")
 
 
 def precheck(job: Job, progress: Callable = None, stop: Callable = None) -> pw.Solution:
@@ -322,6 +381,12 @@ def checks(result: Dict, job: Job) -> List[Dict]:
         out.append({"level": "note" if w.get("code") == "few_frames" else "warning",
                     "title": WARNING_TITLES.get(w.get("code"), str(w.get("code"))), "detail": w.get("text", ""),
                     "what_to_do": "", "evidence": "tests/plate_wand (plate_wand_io.assess)"})
+    if not job.fit_k1:
+        out.append({"level": "note", "title": "k1 not fitted",
+                    "detail": "Radial distortion was held at zero. Real lenses usually need k1: the 20260727 "
+                              "flat-window case did (cases/plate_20260727_T0).",
+                    "what_to_do": "Choose 'Radial k1' unless the lenses are known to be distortion-free.",
+                    "evidence": "cases/plate_20260727_T0"})
     if job.detect_mode is None:
         out.append({"level": "note", "title": "Detection mode unknown",
                     "detail": "These wand points were loaded from a file, so it is not known how the balls were found.",
@@ -427,6 +492,23 @@ def summary_lines(result: Dict) -> List[str]:
                    + (f", window {c['window'] + 1}, {c['distance_to_window_mm']:.0f} mm from it"
                       if c.get("window") is not None and c["window"] >= 0 else "")
                    + f", RMS {c['residuals']['rms_px']:.3f} px")
+    out += constraint_lines(result)
     for ck in result.get("checks", []):
         out.append(("WARNING: " if ck["level"] == "warning" else "Note: ") + ck["title"])
+    return out
+
+
+def constraint_lines(result: Dict) -> List[str]:
+    """The constraints at the answer (plate_wand.constraint_report in the result's info), in a line or two."""
+    rep = (result.get("info") or {}).get("constraints") or {}
+    out = []
+    ch = rep.get("channel")
+    if ch:
+        out.append(f"Channel held (tolerance {ch.get('tol', 0):.1f} mm): the largest breach {ch.get('max_breach_mm', 0):.3f} mm.")
+    for pr in rep.get("priors") or []:
+        kind = pr.get("kind")
+        if kind not in ("aim", "distance"):
+            continue
+        out.append(f"{kind.capitalize()} held at {pr.get('mean', float('nan')):.1f} mm: "
+                   f"{pr.get('value', float('nan')):.2f} mm at the answer ({pr.get('residual_sigmas', float('nan')):+.2f} sigma).")
     return out

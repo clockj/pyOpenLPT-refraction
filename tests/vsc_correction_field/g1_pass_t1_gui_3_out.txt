@@ -1,0 +1,17 @@
+G1 on D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_gui via service (pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd)
+============================================================
+Volume Self-Calibration (VSC) Started
+============================================================
+Project: D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_gui
+
+[Step 1] Cameras behind curved windows: fitting an image correction per camera
+  Found Particle radius: 2.0 px
+  Object type: Tracer
+  Object radius: 2.0 px
+  Field VSC (image corrections) for 2 cameras: PINCYL, PINCYL
+    cam1: D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\cams_T0\cam1.txt (1280 x 800), corrected by D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_gui\camFile_VSC\vsc_cam1_corr_p2.txt
+    cam2: D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\cams_T0\cam2.txt (1280 x 800), corrected by D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_gui\camFile_VSC\vsc_cam2_corr_p2.txt
+
+Field VSC stopped: the tracks in D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_gui\Results\ConvergeTrack are older than the correction vsc_cam1_corr_p2.txt: rerun tracking with it first (each pass fits the tracks found with the last one)
+  -> refused/failed: the tracks in D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_gui\Results\ConvergeTrack are older than the correction vsc_cam1_corr_p2.txt: rerun tracking with it first (each pass fits the tracks found with the last one)
+G1 guard: PASS (refused: True; config.json unchanged: True)

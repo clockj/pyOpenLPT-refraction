@@ -1,0 +1,150 @@
+S2: today's page D:\Refraction\pyOpenLPT\tests\vsc_correction_field\data\ref\tracking_settings_today_cffed7d.py, the change D:\Refraction\pyOpenLPT\gui\views\tracking_settings_view.py; pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[ 14.76236926   1.34376447 -10.26121989]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.68  -9.94 -31.04] to [24.49 12.87 16.7 ] mm
+T1, 2 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.1 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.9], z [-31.0, 16.7]; the reference (projection, h = 1.0 mm, 14290 of 111800 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  tracked points of s3_final_m15: 112666 of 112666 inside the change's box; tolerances 2-D 1.5849 px, 3-D 4.3165 vox (today 1.5849, 100.0) -> PASS
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: step=20.00mm, span=(63.5,39.7,1115.3), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=2: step=20.00mm, span=(82.6,51.6,892.2), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=3: step=20.00mm, span=(121.3,100.0,713.8), rel_change=0.937
+[TrackingSettings] adaptive coarse iter=4: step=20.00mm, span=(120.4,100.0,571.0), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=5: step=19.03mm, span=(116.3,96.1,456.8), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=6: step=15.23mm, span=(110.7,93.0,365.4), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=7: step=12.18mm, span=(110.3,75.3,292.4), rel_change=0.200
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [-30.19 -24.7  -59.24] to [24.59 19.86 66.2 ] mm
+20261008, 3 cameras: today's page set x [-40.0, 35.0], y [-25.0, 20.0], z [-85.0, 75.0] (0.0 s); the change x [-35.0, 25.0], y [-25.0, 20.0], z [-60.0, 70.0], voxel 0.0600 mm (2.1 s)
+  the change's box before rounding x [-30.2, 24.6], y [-24.7, 19.9], z [-59.2, 66.2]; the reference (projection, h = 2.0 mm, 15261 of 80352 points, complete True) x [-26.2, 21.8], y [-22.7, 17.3], z [-57.2, 62.8]; holds it True, wider by 2.00 to 4.00 mm
+  tracked points of s3_final_c3: 69868 of 69868 inside the change's box, 69868 inside today's; tolerances 2-D 1.685 px, 3-D 3.783 vox (today 1.685, 3.0264) -> PASS
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[ 14.76236926   1.34376447 -10.26121989]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.68  -9.94 -31.04] to [24.49 12.87 16.7 ] mm
+synthetic, 2 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.1 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.9], z [-31.0, 16.7]; the reference (projection, h = 1.0 mm, 14290 of 111800 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  true particles seen by all 2 cameras (Gcal4_n8, every frame): 42122 of 42122 inside the change's box; tolerances 2-D 1.5849 px, 3-D 4.3165 vox (today 1.5849, 100.0) -> PASS
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[18.57207512 -1.93668826 -1.12301031]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.68  -9.87 -31.04] to [24.49 12.56 16.7 ] mm
+synthetic, 3 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.2 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.6], z [-31.0, 16.7]; the reference (projection, h = 1.0 mm, 13369 of 109005 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  true particles seen by all 3 cameras (Gcal4_n8, every frame): 39308 of 39308 inside the change's box; tolerances 2-D 1.0566 px, 3-D 2.8776 vox (today 1.0566, 86.3294) -> PASS
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[21.36618617  1.00343747 -0.16288884]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.67  -9.87 -31.  ] to [24.47 12.55 16.64] mm
+synthetic, 4 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.2 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.6], z [-31.0, 16.6]; the reference (projection, h = 1.0 mm, 11215 of 109005 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  true particles seen by all 4 cameras (Gcal4_n8, every frame): 32571 of 32571 inside the change's box; tolerances 2-D 0.7924 px, 3-D 2.1582 vox (today 0.7924, 64.7471) -> PASS
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: step=20.00mm, span=(102.7,97.9,1359.7), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=2: step=20.00mm, span=(133.5,127.2,1087.8), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=3: step=20.00mm, span=(173.5,143.6,870.2), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=4: step=20.00mm, span=(188.5,162.1,696.2), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=5: step=20.00mm, span=(163.8,140.8,556.9), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=6: step=18.56mm, span=(176.6,154.7,445.5), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=7: step=14.85mm, span=(155.7,136.8,356.4), rel_change=0.200
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: step=20.00mm, span=(102.7,97.9,1359.7), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=2: step=20.00mm, span=(133.5,127.2,1087.8), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=3: step=20.00mm, span=(173.5,143.6,870.2), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=4: step=20.00mm, span=(188.5,162.1,696.2), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=5: step=20.00mm, span=(163.8,140.8,556.9), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=6: step=18.56mm, span=(176.6,154.7,445.5), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=7: step=14.85mm, span=(155.7,136.8,356.4), rel_change=0.200
+plate, 4 cameras (PINPLATE): today estimated [-75.0, 50.0, -40.0, 55.0, -35.0, 65.0, 0.125] (1.8 s), the change equal (1.8 s) -> PASS
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[ 14.76236926   1.34376447 -10.26121989]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[ 14.76236926   1.34376447 -10.26121989]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+pinhole, 2 cameras: today found no volume (0.0 s), the change equal (0.0 s) -> PASS
+S2: PASS

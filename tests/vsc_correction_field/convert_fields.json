@@ -1,0 +1,106 @@
+{
+ "t1_vc2_total_cam1": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\t1_vc2_total_cam1.txt",
+  "max_dev_px": 0.015252527283259468,
+  "rms_dev_px": 0.0002977335035251679,
+  "field_rms_px": 0.39130338882732335,
+  "field_max_px": 1.3485610641369083,
+  "slope_bound": 0.007777441838661431
+ },
+ "t1_vc2_total_cam2": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\t1_vc2_total_cam2.txt",
+  "max_dev_px": 0.11096013964130431,
+  "rms_dev_px": 0.0025215991799482696,
+  "field_rms_px": 0.48001286433337387,
+  "field_max_px": 2.2129714075807674,
+  "slope_bound": 0.02939186224674535
+ },
+ "t1_m15_all_cam1": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\t1_m15_all_cam1.txt",
+  "max_dev_px": 0.004569693650478741,
+  "rms_dev_px": 0.0002441792541608134,
+  "field_rms_px": 0.29009338213496166,
+  "field_max_px": 1.0443966435860117,
+  "slope_bound": 0.005991365349121539
+ },
+ "t1_m15_all_cam2": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\t1_m15_all_cam2.txt",
+  "max_dev_px": 0.1109715684232372,
+  "rms_dev_px": 0.00240901173447433,
+  "field_rms_px": 0.39597407343467156,
+  "field_max_px": 1.8208944788827444,
+  "slope_bound": 0.030185542827377697
+ },
+ "cal4_r2_cam1": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r2_cam1.txt",
+  "max_dev_px": 0.08803062988096962,
+  "rms_dev_px": 0.0007151452620896555,
+  "field_rms_px": 0.5780019931786959,
+  "field_max_px": 3.1042595882843953,
+  "slope_bound": 0.036360981593816205
+ },
+ "cal4_r2_cam2": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r2_cam2.txt",
+  "max_dev_px": 0.441121934830084,
+  "rms_dev_px": 0.006670138279162071,
+  "field_rms_px": 0.5712358269062885,
+  "field_max_px": 1.6583190211433574,
+  "slope_bound": 0.07358560922497903
+ },
+ "cal4_r3_cam1": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r3_cam1.txt",
+  "max_dev_px": 0.012767187972605764,
+  "rms_dev_px": 0.0006863754392788787,
+  "field_rms_px": 0.671808181368109,
+  "field_max_px": 1.9053906483461556,
+  "slope_bound": 0.01640660244588655
+ },
+ "cal4_r3_cam2": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r3_cam2.txt",
+  "max_dev_px": 0.40169630830194464,
+  "rms_dev_px": 0.007905939164635082,
+  "field_rms_px": 0.7610110478226335,
+  "field_max_px": 1.7546972447211582,
+  "slope_bound": 0.07831125606683505
+ },
+ "cal4_r3_cam3": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r3_cam3.txt",
+  "max_dev_px": 0.7093302905855761,
+  "rms_dev_px": 0.007521353597967474,
+  "field_rms_px": 0.6178194740168741,
+  "field_max_px": 1.7688107691158996,
+  "slope_bound": 0.15375141676805834
+ },
+ "cal4_r4_cam1": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r4_cam1.txt",
+  "max_dev_px": 0.15996765713090466,
+  "rms_dev_px": 0.0017549047475267604,
+  "field_rms_px": 0.8317264029308382,
+  "field_max_px": 2.1319645155278084,
+  "slope_bound": 0.03822092175957318
+ },
+ "cal4_r4_cam2": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r4_cam2.txt",
+  "max_dev_px": 0.5230579880902839,
+  "rms_dev_px": 0.00810172206062518,
+  "field_rms_px": 0.649823622100957,
+  "field_max_px": 1.3938661233982985,
+  "slope_bound": 0.10240266180960737
+ },
+ "cal4_r4_cam3": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r4_cam3.txt",
+  "max_dev_px": 0.4222838803329402,
+  "rms_dev_px": 0.008180825851473205,
+  "field_rms_px": 0.6754400744012926,
+  "field_max_px": 2.076652470827999,
+  "slope_bound": 0.09349208972640662
+ },
+ "cal4_r4_cam4": {
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\fields\\cal4_r4_cam4.txt",
+  "max_dev_px": 0.23258280321950986,
+  "rms_dev_px": 0.0029787653142432655,
+  "field_rms_px": 0.7599578024821864,
+  "field_max_px": 2.1093388763867797,
+  "slope_bound": 0.04936487801170018
+ }
+}

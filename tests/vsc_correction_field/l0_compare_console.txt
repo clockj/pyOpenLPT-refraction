@@ -1,0 +1,5 @@
+T1, p4c twice (does a run repeat?): 11/11 files identical; only in t1_p4c_a: 0, only in t1_p4c_b: 0 -> IDENTICAL
+T1, p4c against vcf: 11/11 files identical; only in t1_p4c_a: 0, only in t1_vcf: 0 -> IDENTICAL
+synthetic, p4c against vcf: 11/11 files identical; only in syn_p4c: 0, only in syn_vcf: 0 -> IDENTICAL
+pytest: p4c '', vcf ''; the same failures: True
+L0: PASS

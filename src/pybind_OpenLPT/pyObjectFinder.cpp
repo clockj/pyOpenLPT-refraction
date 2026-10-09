@@ -15,11 +15,13 @@ void bind_ObjectFinder(py::module_& m) {
         .def(py::init<>())
 
         // 直接返回 std::vector<std::unique_ptr<Object2D>>
+        // cam_id: the camera's index in the config, as the tracking run passes it (IPR); it picks the
+        // per-camera settings (the line detector's noise). -1: none (the noise is estimated from the image)
         .def("findObject2D",
-             [](ObjectFinder2D& self, const Image& image, const ObjectConfig& obj_cfg) {
-                 return self.findObject2D(image, obj_cfg);
+             [](ObjectFinder2D& self, const Image& image, const ObjectConfig& obj_cfg, int cam_id) {
+                 return self.findObject2D(image, obj_cfg, cam_id);
              },
-             py::arg("image"), py::arg("obj_cfg"));
+             py::arg("image"), py::arg("obj_cfg"), py::arg("cam_id") = -1);
 
     // the line detector (LineFinder.h), for tests against its Python prototype
     py::class_<LineFinderParam>(m, "LineFinderParam")

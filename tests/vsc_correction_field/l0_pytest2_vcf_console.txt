@@ -1,0 +1,3 @@
+pytest with vcf's module: exit 1; 2 failed, 267 passed, 7 skipped in 1892.43s (0:31:32)
+  tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates
+  tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo

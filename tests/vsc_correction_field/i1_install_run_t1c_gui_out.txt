@@ -1,0 +1,1 @@
+t1c_gui: D:\Refraction\pyOpenLPT\build\Release\OpenLPT.exe on D:\Refraction\pyOpenLPT\tests\vsc_correction_field\runs\i1_t1c_gui\i1_t1c.json: exit 0, 482 s

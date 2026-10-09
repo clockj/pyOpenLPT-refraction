@@ -1,0 +1,391 @@
+{
+ "scores": {
+  "lib_r2": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 807.6944444444445,
+   "matched_per_frame": 693.0,
+   "ghosts_per_frame": 114.55555555555556,
+   "duplicates_per_frame": 0.1388888888888889,
+   "ghost_share": 0.1418303126182206,
+   "present_ge2_in_volume_per_frame": 1053.8055555555557,
+   "recall": {
+    "all_in": 0.6576165748477739,
+    "all_out": null,
+    "ge2_in": 0.6576165748477739,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1053.8055555555557,
+    "all_out": 0.0,
+    "ge2_in": 1053.8055555555557,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    20.36231278040682,
+    10.109639307741588,
+    18.03451451185845
+   ],
+   "long_tracks": 951,
+   "long_track_mean_length": 32.31125131440589,
+   "long_track_purity_mean": 0.8481595662772963,
+   "long_track_purity_ge_0.9": 0.7907465825446898,
+   "long_tracks_ghost": 96,
+   "track_recall": 0.6555605345704721,
+   "frame_time_s_mean": 10.65725
+  },
+  "rerendered_r2": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 822.5555555555555,
+   "matched_per_frame": 701.4166666666666,
+   "ghosts_per_frame": 120.75,
+   "duplicates_per_frame": 0.3888888888888889,
+   "ghost_share": 0.14679859516412266,
+   "present_ge2_in_volume_per_frame": 1054.9444444444443,
+   "recall": {
+    "all_in": 0.6648849333824846,
+    "all_out": null,
+    "ge2_in": 0.6648849333824846,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1054.9444444444443,
+    "all_out": 0.0,
+    "ge2_in": 1054.9444444444443,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    19.935405754858238,
+    10.272524540227497,
+    18.19983595207547
+   ],
+   "long_tracks": 967,
+   "long_track_mean_length": 32.316442605997935,
+   "long_track_purity_mean": 0.843603682515303,
+   "long_track_purity_ge_0.9": 0.7859358841778697,
+   "long_tracks_ghost": 95,
+   "track_recall": 0.663410395492127,
+   "frame_time_s_mean": 14.31825
+  },
+  "lib_r3": {
+   "frames_scored": 36,
+   "cameras": 3,
+   "reconstructed_per_frame": 1110.2222222222222,
+   "matched_per_frame": 1037.0277777777778,
+   "ghosts_per_frame": 72.61111111111111,
+   "duplicates_per_frame": 0.5833333333333334,
+   "ghost_share": 0.06540232185748598,
+   "present_ge2_in_volume_per_frame": 1346.3333333333333,
+   "recall": {
+    "all_in": 0.8645503840939901,
+    "all_out": null,
+    "ge2_in": 0.7699925724189156,
+    "ge2_out": null,
+    "n-1_in": 0.7699925724189156,
+    "n-1_out": null
+   },
+   "present_per_frame": {
+    "all_in": 983.5555555555555,
+    "all_out": 0.0,
+    "ge2_in": 1346.3333333333333,
+    "ge2_out": 0.0,
+    "n-1_in": 1346.3333333333333,
+    "n-1_out": 0.0
+   },
+   "pos_rms_um": [
+    20.286370350757377,
+    9.591526970382134,
+    19.502757318523443
+   ],
+   "long_tracks": 1262,
+   "long_track_mean_length": 33.52852614896989,
+   "long_track_purity_mean": 0.9305103997540076,
+   "long_track_purity_ge_0.9": 0.901743264659271,
+   "long_tracks_ghost": 52,
+   "track_recall": 0.7684038953536354,
+   "frame_time_s_mean": 38.48125
+  },
+  "rerendered_r3": {
+   "frames_scored": 36,
+   "cameras": 3,
+   "reconstructed_per_frame": 1115.75,
+   "matched_per_frame": 1049.1944444444443,
+   "ghosts_per_frame": 65.47222222222223,
+   "duplicates_per_frame": 1.0833333333333333,
+   "ghost_share": 0.05868001095426594,
+   "present_ge2_in_volume_per_frame": 1346.5277777777778,
+   "recall": {
+    "all_in": 0.8692591445386196,
+    "all_out": null,
+    "ge2_in": 0.7789169675090253,
+    "ge2_out": null,
+    "n-1_in": 0.7789169675090253,
+    "n-1_out": null
+   },
+   "present_per_frame": {
+    "all_in": 986.4722222222222,
+    "all_out": 0.0,
+    "ge2_in": 1346.5277777777778,
+    "ge2_out": 0.0,
+    "n-1_in": 1346.5277777777778,
+    "n-1_out": 0.0
+   },
+   "pos_rms_um": [
+    19.66022404130477,
+    8.987620578069704,
+    19.30576913893519
+   ],
+   "long_tracks": 1262,
+   "long_track_mean_length": 33.7337559429477,
+   "long_track_purity_mean": 0.9374763972756972,
+   "long_track_purity_ge_0.9": 0.904120443740095,
+   "long_tracks_ghost": 45,
+   "track_recall": 0.7778029912325941,
+   "frame_time_s_mean": 55.82775
+  },
+  "lib_r4": {
+   "frames_scored": 36,
+   "cameras": 4,
+   "reconstructed_per_frame": 771.8888888888889,
+   "matched_per_frame": 760.8888888888889,
+   "ghosts_per_frame": 10.88888888888889,
+   "duplicates_per_frame": 0.1111111111111111,
+   "ghost_share": 0.014106808694400461,
+   "present_ge2_in_volume_per_frame": 1406.111111111111,
+   "recall": {
+    "all_in": 0.7729348418756816,
+    "all_out": null,
+    "ge2_in": 0.5410904780719084,
+    "ge2_out": null,
+    "n-1_in": 0.6433083347133833,
+    "n-1_out": null
+   },
+   "present_per_frame": {
+    "all_in": 815.1111111111111,
+    "all_out": 0.0,
+    "ge2_in": 1406.111111111111,
+    "ge2_out": 0.0,
+    "n-1_in": 1174.138888888889,
+    "n-1_out": 0.0
+   },
+   "pos_rms_um": [
+    13.83099613696745,
+    6.5758199823962675,
+    16.236852588571665
+   ],
+   "long_tracks": 925,
+   "long_track_mean_length": 31.43891891891892,
+   "long_track_purity_mean": 0.9873737640066894,
+   "long_track_purity_ge_0.9": 0.9740540540540541,
+   "long_tracks_ghost": 0,
+   "track_recall": 0.5393915448439353,
+   "frame_time_s_mean": 62.64375
+  },
+  "rerendered_r4": {
+   "frames_scored": 36,
+   "cameras": 4,
+   "reconstructed_per_frame": 776.6388888888889,
+   "matched_per_frame": 766.9444444444445,
+   "ghosts_per_frame": 9.555555555555555,
+   "duplicates_per_frame": 0.1388888888888889,
+   "ghost_share": 0.012303730462462891,
+   "present_ge2_in_volume_per_frame": 1405.9166666666667,
+   "recall": {
+    "all_in": 0.7782497875955819,
+    "all_out": null,
+    "ge2_in": 0.5454725070634027,
+    "ge2_out": null,
+    "n-1_in": 0.6478540366799017,
+    "n-1_out": null
+   },
+   "present_per_frame": {
+    "all_in": 817.3611111111111,
+    "all_out": 0.0,
+    "ge2_in": 1405.9166666666667,
+    "ge2_out": 0.0,
+    "n-1_in": 1175.3333333333333,
+    "n-1_out": 0.0
+   },
+   "pos_rms_um": [
+    13.94989107289745,
+    6.629000056002791,
+    16.059511668773784
+   ],
+   "long_tracks": 926,
+   "long_track_mean_length": 31.61123110151188,
+   "long_track_purity_mean": 0.9887750411139385,
+   "long_track_purity_ge_0.9": 0.9719222462203023,
+   "long_tracks_ghost": 0,
+   "track_recall": 0.5439314010234525,
+   "frame_time_s_mean": 83.9315
+  },
+  "uncorrected_r2_tol1.0": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 746.1111111111111,
+   "matched_per_frame": 601.4722222222222,
+   "ghosts_per_frame": 144.44444444444446,
+   "duplicates_per_frame": 0.19444444444444445,
+   "ghost_share": 0.193596425912137,
+   "present_ge2_in_volume_per_frame": 1053.8055555555557,
+   "recall": {
+    "all_in": 0.5707620528771384,
+    "all_out": null,
+    "ge2_in": 0.5707620528771384,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1053.8055555555557,
+    "all_out": 0.0,
+    "ge2_in": 1053.8055555555557,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    20.726624957740082,
+    9.82877423559724,
+    18.830450850491957
+   ],
+   "long_tracks": 897,
+   "long_track_mean_length": 31.477146042363433,
+   "long_track_purity_mean": 0.7877397266516535,
+   "long_track_purity_ge_0.9": 0.7302118171683389,
+   "long_tracks_ghost": 140,
+   "track_recall": 0.5694440783404064,
+   "frame_time_s_mean": 17.901249999999997
+  },
+  "uncorrected_r3_tol1.5": {
+   "frames_scored": 36,
+   "cameras": 3,
+   "reconstructed_per_frame": 1077.0833333333333,
+   "matched_per_frame": 962.9722222222222,
+   "ghosts_per_frame": 113.05555555555556,
+   "duplicates_per_frame": 1.0555555555555556,
+   "ghost_share": 0.1049645390070922,
+   "present_ge2_in_volume_per_frame": 1346.3333333333333,
+   "recall": {
+    "all_in": 0.8126412110257569,
+    "all_out": null,
+    "ge2_in": 0.7151110010728728,
+    "ge2_out": null,
+    "n-1_in": 0.7151110010728728,
+    "n-1_out": null
+   },
+   "present_per_frame": {
+    "all_in": 983.5555555555555,
+    "all_out": 0.0,
+    "ge2_in": 1346.3333333333333,
+    "ge2_out": 0.0,
+    "n-1_in": 1346.3333333333333,
+    "n-1_out": 0.0
+   },
+   "pos_rms_um": [
+    20.56175017920307,
+    12.032996329105426,
+    20.567169043556607
+   ],
+   "long_tracks": 1229,
+   "long_track_mean_length": 33.22538649308381,
+   "long_track_purity_mean": 0.8875575751536376,
+   "long_track_purity_ge_0.9": 0.8519121236777868,
+   "long_tracks_ghost": 96,
+   "track_recall": 0.713295370141124,
+   "frame_time_s_mean": 48.606
+  },
+  "uncorrected_r4_tol1.5": {
+   "frames_scored": 36,
+   "cameras": 4,
+   "reconstructed_per_frame": 749.9166666666666,
+   "matched_per_frame": 740.6388888888889,
+   "ghosts_per_frame": 9.083333333333334,
+   "duplicates_per_frame": 0.19444444444444445,
+   "ghost_share": 0.012112456939659962,
+   "present_ge2_in_volume_per_frame": 1406.111111111111,
+   "recall": {
+    "all_in": 0.7618593238822247,
+    "all_out": null,
+    "ge2_in": 0.5267088107467404,
+    "ge2_out": null,
+    "n-1_in": 0.628805980742388,
+    "n-1_out": null
+   },
+   "present_per_frame": {
+    "all_in": 815.1111111111111,
+    "all_out": 0.0,
+    "ge2_in": 1406.111111111111,
+    "ge2_out": 0.0,
+    "n-1_in": 1174.138888888889,
+    "n-1_out": 0.0
+   },
+   "pos_rms_um": [
+    13.654220738195527,
+    9.350093371047802,
+    15.317766726660325
+   ],
+   "long_tracks": 896,
+   "long_track_mean_length": 31.587053571428573,
+   "long_track_purity_mean": 0.9883183011356118,
+   "long_track_purity_ge_0.9": 0.9743303571428571,
+   "long_tracks_ghost": 1,
+   "track_recall": 0.5250296325563019,
+   "frame_time_s_mean": 79.44175
+  }
+ },
+ "checks": {
+  "r2": {
+   "recall": [
+    0.6576165748477739,
+    0.6648849333824846,
+    true
+   ],
+   "ghost_share": [
+    0.1418303126182206,
+    0.14679859516412266,
+    true
+   ],
+   "pos_rms_um_max": [
+    20.36231278040682,
+    19.935405754858238,
+    true
+   ],
+   "pass": true
+  },
+  "r3": {
+   "recall": [
+    0.8645503840939901,
+    0.8692591445386196,
+    true
+   ],
+   "ghost_share": [
+    0.06540232185748598,
+    0.05868001095426594,
+    true
+   ],
+   "pos_rms_um_max": [
+    20.286370350757377,
+    19.66022404130477,
+    false
+   ],
+   "pass": false
+  },
+  "r4": {
+   "recall": [
+    0.7729348418756816,
+    0.7782497875955819,
+    true
+   ],
+   "ghost_share": [
+    0.014106808694400461,
+    0.012303730462462891,
+    true
+   ],
+   "pos_rms_um_max": [
+    16.236852588571665,
+    16.059511668773784,
+    true
+   ],
+   "pass": true
+  }
+ },
+ "pass": false
+}

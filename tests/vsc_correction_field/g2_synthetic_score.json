@@ -1,0 +1,175 @@
+{
+ "scores": {
+  "uncorrected_1.0": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 746.1111111111111,
+   "matched_per_frame": 601.4722222222222,
+   "ghosts_per_frame": 144.44444444444446,
+   "duplicates_per_frame": 0.19444444444444445,
+   "ghost_share": 0.193596425912137,
+   "present_ge2_in_volume_per_frame": 1053.8055555555557,
+   "recall": {
+    "all_in": 0.5707620528771384,
+    "all_out": null,
+    "ge2_in": 0.5707620528771384,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1053.8055555555557,
+    "all_out": 0.0,
+    "ge2_in": 1053.8055555555557,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    20.726624957740082,
+    9.82877423559724,
+    18.830450850491957
+   ],
+   "long_tracks": 897,
+   "long_track_mean_length": 31.477146042363433,
+   "long_track_purity_mean": 0.7877397266516535,
+   "long_track_purity_ge_0.9": 0.7302118171683389,
+   "long_tracks_ghost": 140,
+   "track_recall": 0.5694440783404064,
+   "frame_time_s_mean": 17.901249999999997
+  },
+  "gui_pass1": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 815.7222222222222,
+   "matched_per_frame": 704.2777777777778,
+   "ghosts_per_frame": 111.27777777777777,
+   "duplicates_per_frame": 0.16666666666666666,
+   "ghost_share": 0.13641626370632703,
+   "present_ge2_in_volume_per_frame": 1053.8055555555557,
+   "recall": {
+    "all_in": 0.6683185280860374,
+    "all_out": null,
+    "ge2_in": 0.6683185280860374,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1053.8055555555557,
+    "all_out": 0.0,
+    "ge2_in": 1053.8055555555557,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    20.32364042140749,
+    10.350917803275873,
+    18.331157917462583
+   ],
+   "long_tracks": 958,
+   "long_track_mean_length": 32.372651356993735,
+   "long_track_purity_mean": 0.8572904616561946,
+   "long_track_purity_ge_0.9": 0.8006263048016702,
+   "long_tracks_ghost": 86,
+   "track_recall": 0.6664997232253473,
+   "frame_time_s_mean": 8.700750000000001
+  },
+  "gui_pass2": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 819.6388888888889,
+   "matched_per_frame": 713.1388888888889,
+   "ghosts_per_frame": 106.38888888888889,
+   "duplicates_per_frame": 0.1111111111111111,
+   "ghost_share": 0.12979970854373538,
+   "present_ge2_in_volume_per_frame": 1053.8055555555557,
+   "recall": {
+    "all_in": 0.6767272056303872,
+    "all_out": null,
+    "ge2_in": 0.6767272056303872,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1053.8055555555557,
+    "all_out": 0.0,
+    "ge2_in": 1053.8055555555557,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    20.143514545035597,
+    14.906064526411042,
+    17.721849985859677
+   ],
+   "long_tracks": 964,
+   "long_track_mean_length": 32.36099585062241,
+   "long_track_purity_mean": 0.8635519313970142,
+   "long_track_purity_ge_0.9": 0.808091286307054,
+   "long_tracks_ghost": 84,
+   "track_recall": 0.6751456361863089,
+   "frame_time_s_mean": 7.22225
+  },
+  "v2_rerendered_pass1": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 822.5555555555555,
+   "matched_per_frame": 701.4166666666666,
+   "ghosts_per_frame": 120.75,
+   "duplicates_per_frame": 0.3888888888888889,
+   "ghost_share": 0.14679859516412266,
+   "present_ge2_in_volume_per_frame": 1054.9444444444443,
+   "recall": {
+    "all_in": 0.6648849333824846,
+    "all_out": null,
+    "ge2_in": 0.6648849333824846,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1054.9444444444443,
+    "all_out": 0.0,
+    "ge2_in": 1054.9444444444443,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    19.935405754858238,
+    10.272524540227497,
+    18.19983595207547
+   ],
+   "long_tracks": 967,
+   "long_track_mean_length": 32.316442605997935,
+   "long_track_purity_mean": 0.843603682515303,
+   "long_track_purity_ge_0.9": 0.7859358841778697,
+   "long_tracks_ghost": 95,
+   "track_recall": 0.663410395492127,
+   "frame_time_s_mean": 14.31825
+  },
+  "v2_rerendered_pass2": {
+   "frames_scored": 36,
+   "cameras": 2,
+   "reconstructed_per_frame": 828.1388888888889,
+   "matched_per_frame": 729.75,
+   "ghosts_per_frame": 98.05555555555556,
+   "duplicates_per_frame": 0.3333333333333333,
+   "ghost_share": 0.11840472277194512,
+   "present_ge2_in_volume_per_frame": 1056.611111111111,
+   "recall": {
+    "all_in": 0.6906514538093486,
+    "all_out": null,
+    "ge2_in": 0.6906514538093486,
+    "ge2_out": null
+   },
+   "present_per_frame": {
+    "all_in": 1056.611111111111,
+    "all_out": 0.0,
+    "ge2_in": 1056.611111111111,
+    "ge2_out": 0.0
+   },
+   "pos_rms_um": [
+    19.514183824666453,
+    14.122769992739753,
+    17.469291826562397
+   ],
+   "long_tracks": 963,
+   "long_track_mean_length": 32.75077881619938,
+   "long_track_purity_mean": 0.8787140645027526,
+   "long_track_purity_ge_0.9": 0.8255451713395638,
+   "long_tracks_ghost": 68,
+   "track_recall": 0.6889689258110311,
+   "frame_time_s_mean": 11.902000000000001
+  }
+ },
+ "pass": true
+}

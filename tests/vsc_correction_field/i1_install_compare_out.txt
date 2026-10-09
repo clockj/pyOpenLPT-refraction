@@ -1,0 +1,3 @@
+t1_gui against L0's vcf run: 11 result files, 11 identical, 0 different, 0 unpaired -> PASS
+t1c_gui against t1c_vcf: 11 result files, 11 identical, 0 different, 0 unpaired -> PASS
+the installed exe's log on the corrected config: ['Camera 0: image correction D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/t1_gui/camFile_VSC/vsc_cam1_corr_p2.txt', 'Camera 1: image correction D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/t1_gui/camFile_VSC/vsc_cam2_corr_p2.txt']

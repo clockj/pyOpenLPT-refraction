@@ -112,7 +112,13 @@ class VSCService:
             self._log("Volume Self-Calibration (VSC) Started")
             self._log("=" * 60)
             self._log(f"Project: {self.proj_dir}")
-            
+
+            # Cameras behind curved windows (PINCYL, PINSPH): VSC fits each camera's image correction instead of
+            # its parameters (field_vsc.py)
+            from .field_vsc import is_field_project
+            if is_field_project(self.proj_dir):
+                return self._run_field_vsc()
+
             # Step 1: Load cameras
             self._log("\n[Step 1] Loading camera parameters...")
             success, msg = self._load_cameras()
@@ -221,6 +227,26 @@ class VSCService:
                 self.log_file.close()
                 self.log_file = None
     
+    def _run_field_vsc(self) -> Tuple[bool, str, Dict]:
+        """VSC for cameras behind curved windows: an image correction per camera, fitted from the run's long tracks
+        (field_vsc.FieldVSC), written to camFile_VSC/ and set as the cameras' "correction" in config.json. The
+        camera files and the tolerances are left as they are."""
+        from .field_vsc import FieldVSC
+        self._log("\n[Step 1] Cameras behind curved windows: fitting an image correction per camera")
+        self._load_object_config()
+        fvsc = FieldVSC(self.proj_dir, self._log, self.min_track_len, self.sample_points, self.min_valid_points,
+                        self.tolerance_mode, self.tolerance_value)
+        ok, msg, data = fvsc.run()
+        if ok:
+            data['tracks'] = self._load_tracks()        # for the tracking view's 3-D plot
+            self.tracks = data['tracks']
+            self._log("\n" + "=" * 60)
+            self._log("VSC Completed Successfully!")
+            self._log("=" * 60)
+        else:
+            self._log(f"\nField VSC stopped: {msg}")
+        return ok, msg, data
+
     def _read_project_config(self, inline_objects=False):
         """(path, settings) of the project's tracking config (config.json, else config.txt); (None, None) if there is
         none or it cannot be read (logged)."""
@@ -1911,8 +1937,12 @@ def process_frame_task(frame_id: int, points: List[Tuple],
                             if r < n_row and c < n_col:
                                 roi_img[i, j] = full_img[r, c]
                     
-                    detections = finder.findObject2D(roi_img, obj_cfg)
-                    
+                    # the camera's index picks its settings, as in the tracking run (the line detector's noise)
+                    try:
+                        detections = finder.findObject2D(roi_img, obj_cfg, cam_idx)
+                    except TypeError:  # a module built before findObject2D took the camera's index
+                        detections = finder.findObject2D(roi_img, obj_cfg)
+
                     if len(detections) == 0:
                         all_valid = False
                         fail_reason = "no_detection"

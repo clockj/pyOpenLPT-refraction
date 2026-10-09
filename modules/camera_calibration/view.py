@@ -17,7 +17,7 @@ from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
                               QCheckBox, QFileDialog, QScrollArea, QFrame,
                               QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox,
                               QSizePolicy, QGridLayout, QRadioButton, QButtonGroup, QProgressDialog, QApplication,
-                              QAbstractSpinBox)
+                              QAbstractSpinBox, QLineEdit)
 from PySide6.QtCore import Qt
 from .widgets import RangeSlider
 from .wand_calibration.wand_calibrator import WandCalibrator
@@ -1749,6 +1749,7 @@ class CameraCalibrationView(QWidget):
         self._apply_input_style(self.dist_model_combo)
         self.dist_model_combo.addItems(["None (0)", "Radial k1 (1)", "Radial k1+k2 (2)"])
         self.dist_model_combo.setCurrentIndex(0)
+        self.dist_model_combo.activated.connect(self._on_dist_model_chosen)
 
         cal_form.addRow("Camera Model:", self.wand_model_combo)
         cal_form.addRow("Wand Length:", self.wand_len_spin)
@@ -1861,6 +1862,7 @@ class CameraCalibrationView(QWidget):
         diagram_layout.addWidget(seg3)
 
         ref_layout.addLayout(diagram_layout)
+        self._build_plate_options(ref_layout)
 
         # the calibrator (plate_wand by default; curved_calibration/plate_wand_gui.py)
         self.refr_legacy_check = QCheckBox("Use the previous calibrator")
@@ -1874,9 +1876,11 @@ class CameraCalibrationView(QWidget):
         self.refr_refit_check = QCheckBox("Refit from the last result")
         self.refr_refit_check.setToolTip("Skips the start search. After deleting frames: start from the last "
                                          "flat-window calibration of the same cameras and windows.")
-        for w in (self.refr_legacy_check, self.refr_thorough_check, self.refr_refit_check):
+        for w in (self.refr_legacy_check, self.refr_thorough_check):
             w.setStyleSheet("border: none;")
             ref_layout.addWidget(w)
+        # "Refit from the last result" is now Start: Last result; the checkbox stays, unshown, for scripts and tests
+        self.refr_refit_check.setVisible(False)
         cal_layout.addWidget(self.refraction_group)
         self.refraction_group.setVisible(False) # Hidden by default
 
@@ -7826,6 +7830,17 @@ class CameraCalibrationView(QWidget):
             item.setEnabled(not is_cylinder)
         if is_cylinder and self.dist_model_combo.currentIndex() == 2:
             self.dist_model_combo.setCurrentIndex(1)
+        # "Radial k1" is Pinhole+Refraction's default (the real flat-window case, cases/plate_20260727_T0, needed it;
+        # tests/plate_wand_gui): set when that model is chosen while the box shows the plain default and the user has
+        # not picked one; leaving the model puts "None" back if the box still shows what was set
+        if hasattr(self, 'dist_model_combo') and not getattr(self, '_dist_user_set', False):
+            if is_refraction and self.dist_model_combo.currentIndex() == 0:
+                self.dist_model_combo.setCurrentIndex(1)
+                self._dist_auto_k1 = True
+            elif not is_refraction and getattr(self, '_dist_auto_k1', False):
+                if self.dist_model_combo.currentIndex() == 1:
+                    self.dist_model_combo.setCurrentIndex(0)
+                self._dist_auto_k1 = False
         self._apply_cylinder_focal_state()
 
     def _default_plate_refraction_setting(self):
@@ -8754,6 +8769,268 @@ class CameraCalibrationView(QWidget):
                 win_combo.setCurrentIndex(old_win[i])
             self.cam_window_table.setCellWidget(i, 1, win_combo)
 
+    # ------------------------------------------------------------------ the flat-window model's options
+    def _build_plate_options(self, ref_layout):
+        """The options of plate_wand that the real flat-window case used (cases/plate_20260727_T0;
+        tests/plate_wand_gui): per-window values, lens terms, the start, window-normal hints and constraints."""
+        ref_layout.addSpacing(6)
+        ref_layout.addWidget(QLabel("Windows (each its own):"))
+        self.refr_window_table = QTableWidget()
+        self.refr_window_table.setColumnCount(4)
+        self.refr_window_table.setHorizontalHeaderLabels(["Window", "t (mm)", "Plate n", "Channel"])
+        self.refr_window_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.refr_window_table.verticalHeader().setVisible(False)
+        self.refr_window_table.setFixedHeight(100)
+        self.refr_window_table.setStyleSheet("background-color: transparent; border: 1px solid #333;")
+        self.refr_window_table.horizontalHeaderItem(1).setToolTip(
+            "The window's thickness. The diagram's thickness above sets every window's.")
+        self.refr_window_table.horizontalHeaderItem(2).setToolTip(
+            "The window's (plate's) refractive index. The diagram's index above sets every window's.")
+        self.refr_window_table.horizontalHeaderItem(3).setToolTip(
+            "For the optional channel constraint: the inside width (mm) behind this window, from its water-side "
+            "surface to the opposite wall. Empty: no width for this window.")
+        ref_layout.addWidget(self.refr_window_table)
+        self.media2_thick.valueChanged.connect(lambda v: self._set_refr_window_column(1, v))
+        self.media2_index.valueChanged.connect(lambda v: self._set_refr_window_column(2, v))
+        self.window_count_spin.valueChanged.connect(self._sync_refr_window_table)
+        self._sync_refr_window_table()
+
+        self.refr_pp_check = QCheckBox("Fit principal point (cx, cy)")
+        self.refr_pp_check.setToolTip("Off: cx and cy stay at the image centre (or the start's).")
+        self.refr_tangential_check = QCheckBox("Fit tangential (p1, p2)")
+        self.refr_tangential_check.setToolTip("Tangential distortion p1, p2.")
+        for w in (self.refr_pp_check, self.refr_tangential_check):
+            w.setStyleSheet("border: none;")
+            ref_layout.addWidget(w)
+
+        def folder_row(edit, title):
+            row = QHBoxLayout()
+            self._apply_input_style(edit, max_width=190)
+            btn = QPushButton("...")
+            btn.setFixedWidth(28)
+            btn.setStyleSheet("padding: 0px;")      # the panel's button padding would hide the dots
+            btn.clicked.connect(lambda: self._browse_folder_into(edit, title))
+            row.addWidget(edit)
+            row.addWidget(btn)
+            return row, btn
+
+        form = QFormLayout()
+        self.refr_start_combo = QComboBox()
+        self.refr_start_combo.addItems(["Search", "Last result", "Saved fit"])
+        self.refr_start_combo.setToolTip(
+            "Search: find the cameras and windows from scratch. Last result: refit this session's last "
+            "flat-window result (after deleting frames). Saved fit: start from a saved calibration (a result "
+            "folder with calibration_result.json, or a folder of PINPLATE camFiles). A start skips the search; "
+            "the windows' thicknesses and indices are always this panel's.")
+        self._apply_input_style(self.refr_start_combo, max_width=110)
+        form.addRow("Start:", self.refr_start_combo)
+        self.refr_start_folder = QLineEdit()
+        self.refr_start_folder.setPlaceholderText("the saved fit's folder")
+        row, self.refr_start_browse = folder_row(self.refr_start_folder, "Select the saved flat-window fit's folder")
+        form.addRow("", row)
+        self.refr_hints_combo = QComboBox()
+        self.refr_hints_combo.addItems(["None", "Windows face the cameras", "From camFiles"])
+        self.refr_hints_combo.setToolTip(
+            "Window-normal hints for the start search: each camera's window normal in its own frame. Windows face "
+            "the cameras: every normal along the camera's axis. From camFiles: from an earlier calibration's "
+            "PINPLATE camFiles. Hints steer the search; the fit still decides.")
+        self._apply_input_style(self.refr_hints_combo, max_width=170)
+        form.addRow("Hints:", self.refr_hints_combo)
+        self.refr_hints_folder = QLineEdit()
+        self.refr_hints_folder.setPlaceholderText("the earlier calibration's camFile folder")
+        row, self.refr_hints_browse = folder_row(self.refr_hints_folder, "Select the earlier calibration's camFile folder")
+        form.addRow("", row)
+        ref_layout.addLayout(form)
+        self.refr_start_combo.currentIndexChanged.connect(self._on_refr_start_changed)
+        self.refr_hints_combo.currentIndexChanged.connect(self._on_refr_start_changed)
+
+        self.refr_cons_group = QGroupBox("Constraints (optional)")
+        self.refr_cons_group.setCheckable(True)
+        self.refr_cons_group.setChecked(False)
+        self.refr_cons_group.setToolTip("Facts about the rig that the fit must keep (plate_wand's constraints).")
+        cl = QVBoxLayout(self.refr_cons_group)
+        cl.setContentsMargins(5, 15, 5, 5)
+        self.refr_channel_check = QCheckBox("Channel (widths in the table)")
+        self.refr_channel_check.setToolTip(
+            "Every wand end stays inside the channel: below each window's water-side surface and within the inside "
+            "width behind it (plus the tolerance), its ball's radius inside.")
+        self.refr_channel_check.setStyleSheet("border: none;")
+        cl.addWidget(self.refr_channel_check)
+        cf = QFormLayout()
+        self.refr_channel_tol = QDoubleSpinBox()
+        self.refr_channel_tol.setRange(0.0, 100.0)
+        self.refr_channel_tol.setDecimals(2)
+        self.refr_channel_tol.setValue(1.0)
+        self.refr_channel_tol.setSuffix(" mm")
+        self.refr_channel_tol.setToolTip("How far the widths may be off.")
+        self._apply_input_style(self.refr_channel_tol, max_width=64)
+        cf.addRow("Tolerance:", self.refr_channel_tol)
+        balls = QHBoxLayout()
+        self.refr_ball_a = QDoubleSpinBox()
+        self.refr_ball_b = QDoubleSpinBox()
+        for sp, tip in ((self.refr_ball_a, "The small ball's radius (end A)."),
+                        (self.refr_ball_b, "The large ball's radius (end B).")):
+            sp.setRange(0.0, 50.0)
+            sp.setDecimals(2)
+            sp.setToolTip(tip)
+            self._apply_input_style(sp, max_width=56)
+            balls.addWidget(sp)
+        cf.addRow("Balls (mm):", balls)
+        cl.addLayout(cf)
+
+        def table(headers, tips, add_text):
+            t = QTableWidget(0, len(headers))
+            t.setHorizontalHeaderLabels(headers)
+            for j, tip in enumerate(tips):
+                t.horizontalHeaderItem(j).setToolTip(tip)
+            t.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            t.verticalHeader().setVisible(False)
+            t.setFixedHeight(80)
+            t.setStyleSheet("background-color: transparent; border: 1px solid #333;")
+            row = QHBoxLayout()
+            add, rem = QPushButton(add_text), QPushButton("Remove")
+            add.clicked.connect(lambda: t.insertRow(t.rowCount()))
+            rem.clicked.connect(lambda: t.removeRow(t.currentRow() if t.currentRow() >= 0 else t.rowCount() - 1))
+            row.addWidget(add)
+            row.addWidget(rem)
+            cl.addWidget(t)
+            cl.addLayout(row)
+            return t
+
+        sigma_tip = "Empty: held. A number: how far it may be off (mm)."
+        self.refr_aim_table = table(
+            ["Cams", "Win", "Depth", "Sigma"],
+            ["Camera IDs, e.g. 0,1: their optical axes meet...", "...this window's... (its number, as in the "
+             "Camera-Window Mapping)", "...at this mean depth (mm) below its water-side surface.", sigma_tip],
+            "Add aim")
+        self.refr_dist_table = table(
+            ["Cam", "Dist.", "Sigma"],
+            ["A camera ID", "Its centre's distance (mm) from its window's camera-side surface.", sigma_tip],
+            "Add distance")
+        ref_layout.addWidget(self.refr_cons_group)
+        self._on_refr_start_changed()
+
+    def _on_dist_model_chosen(self, _index):
+        """The user picked a distortion model: the per-model defaults (_on_model_changed) no longer apply."""
+        self._dist_user_set = True
+
+    def _sync_refr_window_table(self, *_):
+        """One row per window (Number of Windows): rows kept keep their values; new rows take the diagram's."""
+        tbl = getattr(self, 'refr_window_table', None)
+        if tbl is None:
+            return
+        n, old = self.window_count_spin.value(), tbl.rowCount()
+        tbl.setRowCount(n)
+        for r in range(old, n):
+            for col, text in ((0, f"Window {r}"), (1, f"{self.media2_thick.value():g}"),
+                              (2, f"{self.media2_index.value():g}"), (3, "")):
+                item = QTableWidgetItem(text)
+                if col == 0:
+                    item.setFlags(Qt.ItemFlag.NoItemFlags)
+                item.setForeground(Qt.GlobalColor.white)
+                item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                tbl.setItem(r, col, item)
+
+    def _set_refr_window_column(self, col, value):
+        """The diagram's window values set every window's."""
+        tbl = getattr(self, 'refr_window_table', None)
+        for r in range(tbl.rowCount() if tbl is not None else 0):
+            item = tbl.item(r, col)
+            if item is not None:
+                item.setText(f"{float(value):g}")
+
+    def _refr_window_values(self):
+        """GUI window number -> (thickness mm, plate index, channel width mm or 0), from the Windows table."""
+        out = {}
+        for r in range(self.refr_window_table.rowCount()):
+            t, n, ch = (self._cell_text(self.refr_window_table, r, c) for c in (1, 2, 3))
+            try:
+                out[r] = (float(t), float(n), float(ch) if ch else 0.0)
+            except ValueError:
+                raise ValueError(f"Windows table, window {r}: the thickness, the plate index and the channel width "
+                                 "must be numbers (the width may be empty).") from None
+            if not out[r][0] > 0 or not out[r][1] >= 1.0 or out[r][2] < 0:
+                raise ValueError(f"Windows table, window {r}: the thickness must be positive, the plate index at "
+                                 "least 1 and the channel width not negative.")
+        return out
+
+    def _on_refr_start_changed(self, *_):
+        """The folder fields only where they apply; hints only for a searched start."""
+        k = self.refr_start_combo.currentIndex()
+        for w in (self.refr_start_folder, self.refr_start_browse):
+            w.setEnabled(k == 2)
+        self.refr_hints_combo.setEnabled(k == 0)
+        for w in (self.refr_hints_folder, self.refr_hints_browse):
+            w.setEnabled(k == 0 and self.refr_hints_combo.currentIndex() == 2)
+
+    def _browse_folder_into(self, edit, title):
+        folder = QFileDialog.getExistingDirectory(self, title, edit.text().strip())
+        if folder:
+            edit.setText(folder)
+
+    @staticmethod
+    def _cell_text(table, r, c):
+        item = table.item(r, c)
+        return item.text().strip() if item is not None and item.text() else ""
+
+    def _plate_hints(self, cids):
+        """The window-normal hints for the start search: ({"normals": per camera, in its own frame}, source)."""
+        k = self.refr_hints_combo.currentIndex()
+        if k == 1:
+            return {"normals": [[0.0, 0.0, 1.0] for _c in cids]}, "windows face the cameras"
+        if k == 2:
+            folder = self.refr_hints_folder.text().strip()
+            if not folder or not os.path.isdir(folder):
+                raise ValueError("Hints: choose the folder of the earlier calibration's camFiles.")
+            from .curved_calibration import plate_wand_io as pio
+            return {"normals": pio.camfile_normals(folder, cids)}, folder
+        return {}, ""
+
+    def _plate_constraints(self, cids, used, index, per_win):
+        """The Constraints group as plate_wand.calibrate's constraints (rig indices: cameras in cids' order, windows
+        in used's): the channel, the aims and the distances; None when nothing is set."""
+        cons = {}
+        pos = {int(c): k for k, c in enumerate(cids)}
+        if self.refr_channel_check.isChecked():
+            widths = [per_win[w][2] or None for w in used]
+            if not any(widths):
+                raise ValueError("The channel needs an inside width (Windows table, Channel mm) for a window that "
+                                 "has cameras.")
+            cons["channel"] = {"width_mm": widths, "tolerance_mm": float(self.refr_channel_tol.value()),
+                               "ball_radius_mm": [float(self.refr_ball_a.value()), float(self.refr_ball_b.value())]}
+        aims = []
+        for r in range(self.refr_aim_table.rowCount()):
+            cells = [self._cell_text(self.refr_aim_table, r, j) for j in range(4)]
+            if not any(cells):
+                continue
+            try:
+                a = {"cams": [pos[int(x)] for x in cells[0].replace(";", ",").split(",") if x.strip()],
+                     "wall": index[int(cells[1])], "mm": float(cells[2])}
+                if cells[3]:
+                    a["sigma_mm"] = float(cells[3])
+            except (ValueError, KeyError):
+                raise ValueError(f"Aim {r + 1}: give camera IDs of this calibration (e.g. 0,1), a window that has "
+                                 "cameras, a depth in mm and, optionally, a sigma in mm.") from None
+            aims.append(a)
+        if aims:
+            cons["aim"] = aims
+        dists = []
+        for r in range(self.refr_dist_table.rowCount()):
+            cells = [self._cell_text(self.refr_dist_table, r, j) for j in range(3)]
+            if not any(cells):
+                continue
+            try:
+                d = {"cam": pos[int(cells[0])], "mm": float(cells[1])}
+                if cells[2]:
+                    d["sigma_mm"] = float(cells[2])
+            except (ValueError, KeyError):
+                raise ValueError(f"Distance {r + 1}: give a camera ID of this calibration, a distance in mm and, "
+                                 "optionally, a sigma in mm.") from None
+            dists.append(d)
+        if dists:
+            cons["distance"] = dists
+        return cons or None
+
     # ------------------------------------------------------------------ the cylinder model (PINCYL)
     def _build_cylinder_group(self):
         """The tube's settings for the "Pinhole+Cylinder" model: one wall between the camera side and the liquid
@@ -9102,9 +9379,8 @@ class CameraCalibrationView(QWidget):
         plate_wand_gui.child_precheck instead, the start search and coarse fit (stages 1-3), with no folder and no
         files."""
         from .curved_calibration import plate_wand_gui as pg
+        from .curved_calibration import plate_wand_io as pio
         try:
-            if dist_coeff_num > 1:
-                raise ValueError("The flat-window calibration fits k1 at most: choose 'None' or 'Radial k1'.")
             pts = self.wand_calibrator.wand_points_filtered
             if pts is None:
                 pts = self.wand_calibrator.wand_points
@@ -9127,20 +9403,51 @@ class CameraCalibrationView(QWidget):
                 raise ValueError(f"Camera(s) {no_win} have no window in the Camera-Window Mapping.")
             used = sorted({gui_win[c] for c in cids})                 # the windows that have cameras
             index = {w: k for k, w in enumerate(used)}
-            windows = [{"name": f"window {w}", "thickness_mm": [float(self.media2_thick.value())],
-                        "n": [float(self.media1_index.value()), float(self.media2_index.value()),
-                              float(self.media3_index.value())]} for w in used]
+            per_win = self._refr_window_values()                      # each window's thickness, index, channel
+            missing_win = [w for w in used if w not in per_win]
+            if missing_win:
+                raise ValueError(f"Window {missing_win[0]} has no row in the Windows table: set Number of Windows.")
+            windows = [{"name": f"window {w}", "thickness_mm": [per_win[w][0]],
+                        "n": [float(self.media1_index.value()), per_win[w][1], float(self.media3_index.value())]}
+                       for w in used]
             cam_to_window = [index[gui_win[c]] for c in cids]
-            start = None
+            fit_lens = tuple(t for t, on in (("pp", self.refr_pp_check.isChecked()), ("k2", dist_coeff_num == 2),
+                                             ("tangential", self.refr_tangential_check.isChecked())) if on)
+            start, start_source = None, ""
             notes = []
-            if self.refr_refit_check.isChecked() and not precalibrate:
+            choice = self.refr_start_combo.currentIndex()
+            if choice == 0 and self.refr_refit_check.isChecked():   # the former checkbox (scripts and tests)
+                choice = 1
+            if precalibrate:
+                if choice:
+                    notes.append("Precalibrate searches from scratch; the chosen start is used by Run.")
+            elif choice == 1:
                 last = getattr(self, '_plate_last', None)
                 if last and list(last["job"].cam_ids) == list(cids) and list(last["job"].cam_to_window) == cam_to_window:
-                    start = last["start"]
+                    start, start_source = last["start"], "last result"
                 else:
                     notes.append("No earlier flat-window result for these cameras and windows: the start is searched.")
+            elif choice == 2:
+                folder0 = self.refr_start_folder.text().strip()
+                if not folder0 or not os.path.isdir(folder0):
+                    raise ValueError("Start: choose the saved fit's folder.")
+                cams0, rig0, desc = pio.load_start(folder0, cids, cam_to_window)
+                start, start_source = (cams0, rig0), folder0
+                notes.append(f"Start: {desc}.")
+            hints, hints_source = {}, ""
+            if start is None:
+                hints, hints_source = self._plate_hints(cids)
+            elif self.refr_hints_combo.currentIndex() > 0:
+                notes.append("Window-normal hints apply only to a searched start; not used.")
+            constraints = (self._plate_constraints(cids, used, index, per_win)
+                           if self.refr_cons_group.isChecked() else None)
+            if precalibrate and constraints:
+                notes.append("Precalibrate does not apply the constraints (the start search takes none).")
+                constraints = None
             job = pg.Job(uv=uv, frame_ids=fids, cam_ids=cids, sizes=sizes, wand_length=float(wand_len),
-                         windows=windows, cam_to_window=cam_to_window, fit_k1=(dist_coeff_num == 1),
+                         windows=windows, cam_to_window=cam_to_window, fit_k1=(dist_coeff_num >= 1),
+                         fit_lens=fit_lens, constraints=constraints, start_source=start_source,
+                         hints=hints, hints_source=hints_source,
                          n_final=6 if self.refr_thorough_check.isChecked() else 2, start=start,
                          pixel_mm=self._wand_pixel_mm_for(cids, settings),
                          detect_mode=getattr(self, '_wand_detect_mode_used', None),

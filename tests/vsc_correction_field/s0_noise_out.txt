@@ -1,0 +1,3 @@
+T1 project D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_selfcalproto, frame 0, detector lines
+  camera 0: noise configured 7.515, estimated from the frame 10.859 (+44.5 %); detections: Validate's call 1047, detectLines with the frame's estimate 1047, with the configured noise (the run) 1067 (-1.9 %); of the run's, 984 found by both
+  camera 1: noise configured 5.502, estimated from the frame 10.145 (+84.4 %); detections: Validate's call 949, detectLines with the frame's estimate 949, with the configured noise (the run) 985 (-3.7 %); of the run's, 887 found by both

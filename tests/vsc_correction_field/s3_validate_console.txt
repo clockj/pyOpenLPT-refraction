@@ -1,0 +1,62 @@
+S3: today's page D:\Refraction\pyOpenLPT\tests\vsc_correction_field\data\ref\tracking_settings_today_cffed7d.py, the change D:\Refraction\pyOpenLPT\gui\views\tracking_settings_view.py; pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd
+Camera 0: image correction D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_today/camFile_VSC/vsc_cam1_corr_p1.txt
+Camera 1: image correction D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_today/camFile_VSC/vsc_cam2_corr_p1.txt
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.4059,0.361773,0.559434,0
+
+Camera 1 (a,b,c,alpha) = 67.185,0.457826,0.506103,0
+
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[ 14.76236926   1.34376447 -10.26121989]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] Coarse search center=robust, P0=[ 14.76236926   1.34376447 -10.26121989]
+[TrackingSettings] adaptive coarse iter=1: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=2: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=3: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=4: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=5: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=6: empty, expanding bbox (x1.5)
+[TrackingSettings] adaptive coarse iter=7: empty, expanding bbox (x1.5)
+[TrackingSettings] No coarse common FOV found.
+[TrackingSettings] Loaded the settings of D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\s3_run_today\config.json
+[TrackingSettings] Saved D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_today/config.json
+[Validation] Frame 0, Camera 0: found 11554 2D objects.
+[Validation] Frame 0, Camera 1: found 7641 2D objects.
+[Validation] Frame 0 Initial Match: found 6168 3D objects.
+today's page: Validate 1.1 s; 2-D counts [11554, 7641] (the tracking run on this frame: [1067, 985]); 3-D matches [6168]; config.json after: tracer settings kept 0 of 8 (lost: detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel), 2-D tolerance 1.0 px, corrections kept True
+  box 'Validation Result': Validation Successful! |  | Validated Frame: 0 | 3D Objects: 6168 | Average 2D Objects: 9597.5 | Per-camera 2D counts: Cam 0: 11554, Cam 1: 7641
+Camera 0: image correction D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_change/camFile_VSC/vsc_cam1_corr_p1.txt
+Camera 1: image correction D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_change/camFile_VSC/vsc_cam2_corr_p1.txt
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.68  -9.94 -31.04] to [24.49 12.87 16.7 ] mm
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.68  -9.94 -31.04] to [24.49 12.87 16.7 ] mm
+[TrackingSettings] Loaded the settings of D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\s3_run_change\config.json
+[TrackingSettings] Saved D:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_change/config.json
+[Validation] Frame 0, Camera 0: found 1067 2D objects.
+[Validation] Frame 0, Camera 1: found 985 2D objects.
+[Validation] Frame 0 Initial Match: found 636 3D objects.
+change's page: Validate 3.8 s; 2-D counts [1067, 985] (the tracking run on this frame: [1067, 985]); 3-D matches [636]; config.json after: tracer settings kept 8 of 8, 2-D tolerance 1.0 px, corrections kept True
+  box 'Validation Result': Validation Successful! |  | Validated Frame: 0 | 3D Objects: 636 | Average 2D Objects: 1026.0 | Per-camera 2D counts: Cam 0: 1067, Cam 1: 985
+S3: PASS
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)

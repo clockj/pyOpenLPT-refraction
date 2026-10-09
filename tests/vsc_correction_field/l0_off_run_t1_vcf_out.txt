@@ -1,0 +1,1 @@
+t1_vcf: D:\Refraction\pyOpenLPT\tests\vsc_correction_field\runs\configs\l0_t1.json with build vcf -> D:\Refraction\pyOpenLPT\tests\vsc_correction_field\runs\l0_t1_vcf: exit 0, 677 s

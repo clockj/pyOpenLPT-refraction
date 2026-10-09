@@ -1,0 +1,38 @@
+============================================================
+Volume Self-Calibration (VSC) Started
+============================================================
+Project: D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_g3
+
+[Step 1] Cameras behind curved windows: fitting an image correction per camera
+  Found Particle radius: 2.0 px
+  Object type: Tracer
+  Object radius: 2.0 px
+  Field VSC (image corrections) for 2 cameras: PINCYL, PINCYL
+    cam1: D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\cams_T0\cam1.txt (1280 x 800), no correction yet
+    cam2: D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\cams_T0\cam2.txt (1280 x 800), no correction yet
+
+[Step 2] Tracks: 1172 long tracks of >= 15 points; one frame in 5: 51 frames, 22597 track points
+  detector: lines (noise 7.51, 5.50); pairing within 3.00, 3.00 px
+
+[Step 3] Detections, projections and Jacobians on 51 frames (8 processes)...
+  7616 points paired in at least two cameras; per camera [7616, 7616]
+
+[Step 4] Fitting the correction (projected least squares; held-out frames choose the bending)...
+    round 1: bending weight 10000 (held-out loss), noise model s_f 0.347 px, beta 0.0732
+    round 2: bending weight 10000 (held-out loss), noise model s_f 0.363 px, beta 0.0737
+  bending weight 10000, noise s_f 0.363 px, beta 0.0737; 15.0 % of the points down-weighted
+  the residual no 3-D move explains: median +0.070 -> -0.001 px, robust SD 0.724 -> 0.592 px
+
+[Step 5] Writing the corrections and config.json...
+  cam1: pass 1, 7616 points; the correction now 0.300 px RMS (1.117 max) near the data, this pass changed it by 0.300 px RMS -> camFile_VSC/vsc_cam1_corr_p1.txt
+  cam2: pass 1, 7616 points; the correction now 0.401 px RMS (1.815 max) near the data, this pass changed it by 0.401 px RMS -> camFile_VSC/vsc_cam2_corr_p1.txt
+  Backup saved to config_backup.json
+  config.json: every camera's "correction" points at its new file
+  The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px, set in config.json (objects[0].ipr.tol_2d_px): a Save in the tracking settings would drop the tracer's settings that page does not show (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel).
+  Rerun tracking with the corrected cameras, then VSC again for a second pass (two or three passes).
+
+============================================================
+VSC Completed Successfully!
+============================================================
+
+[SUCCESS] Field VSC pass 1: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.724 -> 0.592 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px, set in config.json (objects[0].ipr.tol_2d_px): a Save in the tracking settings would drop the tracer's settings that page does not show (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel). Rerun tracking with the corrected cameras, then VSC again for a second pass (two or three passes).

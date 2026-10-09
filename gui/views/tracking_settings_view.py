@@ -20,6 +20,121 @@ import cv2
 from modules import stb_config
 
 
+# Tube and sphere ports: their projects get the page's tube handling (Save keeps the object's settings the form does
+# not show; the view volume comes from the cameras' rays). Plate and pinhole projects keep theirs.
+CURVED_PORT_MODELS = ("PINCYL", "PINSPH")
+
+
+def camera_model_of(path):
+    """The model a camera file names on its first data line (PINHOLE, PINPLATE, PINCYL, ...), upper case; "" if the
+    file cannot be read."""
+    try:
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                s = line.strip()
+                if s and not s.startswith("#"):
+                    return s.split(",")[0].strip().upper()
+    except OSError:
+        pass
+    return ""
+
+
+def port_geometry(path):
+    """A tube or sphere camera file's port: (model, centre, unit axis, innermost radius); None for another camera or
+    a file that cannot be read."""
+    model = camera_model_of(path)
+    if model not in CURVED_PORT_MODELS:
+        return None
+    try:
+        with open(path, encoding="utf-8", errors="replace") as f:
+            lines = [ln.strip() for ln in f]
+    except OSError:
+        return None
+
+    def numbers(title):
+        for i, ln in enumerate(lines):
+            if ln.startswith("#") and title in ln:
+                nxt = next((x for x in lines[i + 1:] if x), "#")
+                try:
+                    return None if nxt.startswith("#") else [float(x) for x in nxt.replace(",", " ").split()]
+                except ValueError:
+                    return None
+        return None
+
+    centre, axis, radii = numbers("Port Center"), numbers("Port Axis"), numbers("Interface Radii")
+    if not centre or len(centre) < 3 or not radii:
+        return None
+    a = np.array((axis or [0.0, 0.0, 0.0])[:3], dtype=np.float64)
+    if model == "PINCYL":
+        n = np.linalg.norm(a)
+        if not n > 0:
+            return None
+        a = a / n
+    return model, np.array(centre[:3], dtype=np.float64), a, float(radii[-1])
+
+
+def chord_spans(P, D, port):
+    """Where rays P + t D (D unit) run inside the port's inner surface: arrays (t_in, t_out), nan where they miss."""
+    model, c, a, r = port
+    W = P - c
+    if model == "PINCYL":  # the distance from the axis
+        W = W - (W @ a)[:, None] * a
+        D = D - (D @ a)[:, None] * a
+    qa = np.einsum('ij,ij->i', D, D)
+    qb = 2.0 * np.einsum('ij,ij->i', W, D)
+    qc = np.einsum('ij,ij->i', W, W) - r * r
+    disc = qb * qb - 4.0 * qa * qc
+    with np.errstate(invalid='ignore', divide='ignore'):
+        root = np.sqrt(disc)
+        t_in = np.maximum((-qb - root) / (2.0 * qa), 0.0)
+        t_out = (-qb + root) / (2.0 * qa)
+    hit = (disc >= 0) & (qa > 0) & (t_out > t_in)
+    return np.where(hit, t_in, np.nan), np.where(hit, t_out, np.nan)
+
+
+def point_line_distance(X, P, D):
+    """The distance of points X from the lines P + t D (D unit), elementwise over the leading axes."""
+    V = X - P
+    return np.linalg.norm(V - np.sum(V * D, axis=-1, keepdims=True) * D, axis=-1)
+
+
+def port_rays(lpt, camera, port, W, H, n_u, n_v):
+    """A tube or sphere camera's lines of sight through n_u x n_v pixels (the sensor's edges included), cut to the
+    stretch inside the port's inner surface: (starts, unit directions, t_in, t_out, spacing) of the rays that enter,
+    the spacing being how far a ray's ends lie from its neighbours' lines at most. None if fewer than two enter."""
+    st = camera.lineOfSightBatchStatus([lpt.Pt2D(float(u), float(v)) for v in np.linspace(0.5, H - 0.5, n_v)
+                                        for u in np.linspace(0.5, W - 0.5, n_u)])
+    P = np.full((len(st), 3), np.nan)
+    D = np.full((len(st), 3), np.nan)
+    for i, (ok, line, _msg) in enumerate(st):
+        if ok:
+            P[i] = [line.pt[0], line.pt[1], line.pt[2]]
+            D[i] = [line.unit_vector[0], line.unit_vector[1], line.unit_vector[2]]
+    t_in, t_out = chord_spans(P, D, port)
+    Pg, Dg = P.reshape(n_v, n_u, 3), D.reshape(n_v, n_u, 3)
+    sep = []
+    for t in (t_in, t_out):
+        Eg = (P + t[:, None] * D).reshape(n_v, n_u, 3)
+        sep += [point_line_distance(Eg[:, :-1], Pg[:, 1:], Dg[:, 1:]).ravel(),
+                point_line_distance(Eg[:-1], Pg[1:], Dg[1:]).ravel()]
+    sep = np.concatenate(sep)
+    good = np.isfinite(t_in)
+    if good.sum() < 2 or not np.isfinite(sep).any():
+        return None
+    return P[good], D[good], t_in[good], t_out[good], float(np.nanmax(sep))
+
+
+def merge_unshown(shown, saved):
+    """The form's settings `shown`, with the settings of `saved` that it does not hold added, at every level."""
+    out = copy.deepcopy(shown)
+    for k, v in saved.items():
+        if k not in out:
+            out[k] = copy.deepcopy(v)
+        elif isinstance(out[k], dict) and isinstance(v, dict):
+            out[k] = merge_unshown(out[k], v)
+    return out
+
+
 class TrackingSettingsView(QWidget):
     """View for configuring tracking parameters."""
     
@@ -963,6 +1078,13 @@ class TrackingSettingsView(QWidget):
             for k, v in lcfg.items():
                 if k not in cfg:
                     cfg[k] = copy.deepcopy(v)
+            # A tube or sphere project also keeps the object's settings that the form does not show, at every level
+            # (the tracer's line detector, OTF table and depth cue). The form's values win; an object of another
+            # type is the form's alone. Plate and pinhole projects keep the object as the form builds it.
+            lobj = lcfg["objects"][0] if lcfg.get("objects") else None
+            if isinstance(lobj, dict) and lobj.get("type") == obj_type and \
+                    self._has_curved_port_camera(cfg["cameras"], config_path_abs):
+                cfg["objects"][0] = merge_unshown(obj, lobj)
 
         try:
             stb_config.write_json(cfg, config_path_abs, keep_unknown=True)
@@ -976,6 +1098,13 @@ class TrackingSettingsView(QWidget):
                     "whenever both exist.")
         QMessageBox.information(self, "Success", msg)
         print(f"[TrackingSettings] Saved {config_path_abs}")
+
+    @staticmethod
+    def _has_curved_port_camera(cameras, config_path):
+        """Whether a camera of a config's list (its "file" relative to the config's folder) has a tube or sphere
+        port."""
+        return any(camera_model_of(stb_config.resolve(config_path, c["file"])) in CURVED_PORT_MODELS
+                   for c in cameras if isinstance(c, dict) and c.get("file"))
 
     def _update_object_tab(self, index):
         """Update Object tab content based on selected Object Type."""
@@ -1287,7 +1416,26 @@ class TrackingSettingsView(QWidget):
         Priority of initial center candidates:
         1) world origin [0,0,0]
         2) robust center from camera axes intersections
+
+        Tube and sphere rigs (every camera PINCYL or PINSPH) use their cameras' rays instead (_curved_port_common_box):
+        the grid search misses the narrow region a long lens sees, and takes a tube camera for a plain pinhole.
         """
+        models = [str(c.get('model', '')).strip().upper() for c in cams_data]
+        if len(models) >= 2 and all(m in CURVED_PORT_MODELS for m in models):
+            box = self._curved_port_common_box(cams_data)
+            if box is None:
+                print("[TrackingSettings] No region seen by every tube / sphere camera found; view volume unchanged.")
+                return
+            # as the grid search below sets it: outward to multiples of 5 mm, 1000 voxels across x
+            lo = np.floor(box[0] / 5.0) * 5.0
+            hi = np.ceil(box[1] / 5.0) * 5.0
+            for w, x in zip((self.vol_x_min, self.vol_y_min, self.vol_z_min, self.vol_x_max, self.vol_y_max,
+                             self.vol_z_max), (*lo, *hi)):
+                w.setValue(float(x))
+            self.voxel_spin.setValue(float(hi[0] - lo[0]) / 1000.0)
+            print(f"[TrackingSettings] Tube / sphere cameras: the region every camera sees spans "
+                  f"{np.round(box[0], 2)} to {np.round(box[1], 2)} mm")
+            return
 
         def get_center(cam):
             if 't_inv' in cam:
@@ -1431,6 +1579,84 @@ class TrackingSettingsView(QWidget):
 
             voxel_size = (x_max - x_min) / 1000.0
             self.voxel_spin.setValue(voxel_size)
+
+    def _curved_port_common_box(self, cams_data, spacing_mm=1.0):
+        """The box around the points every camera of a tube or sphere rig sees, from the cameras' rays alone.
+
+        Each camera's lines of sight through a grid of pixels (the sensor's edges included; dense enough that
+        neighbouring rays lie about spacing_mm apart, up to 129 x 81) are cut to the stretch inside the port's inner
+        surface. The closest approaches of the two most oblique cameras' rays that pass within the rays' spacing sample
+        the region both see. A sample counts for a further camera when one of its rays passes within that camera's
+        spacing; samples are tested from the outside in until each side's outermost one is found. Returns
+        (bbox_min, bbox_max), widened by the largest spacing, or None."""
+        try:
+            import pyopenlpt as lpt
+        except Exception:
+            return None
+        rays = []
+        for cam in cams_data:
+            path = cam.get('cam_file_path', '')
+            port = port_geometry(path)
+            H, W = cam.get('h'), cam.get('w')
+            if port is None or not H or not W:
+                return None
+            try:
+                camera = lpt.Camera(path)
+                r = port_rays(lpt, camera, port, W, H, 33, 21)
+                if r is not None and r[4] > spacing_mm:
+                    f = r[4] / spacing_mm
+                    r = port_rays(lpt, camera, port, W, H, min(129, int(np.ceil(32 * f)) + 1),
+                                  min(81, int(np.ceil(20 * f)) + 1))
+            except Exception:
+                return None
+            if r is None:
+                return None
+            rays.append(r)
+
+        # the base pair: the two cameras whose mean viewing directions differ most
+        mean_dir = [r[1].mean(axis=0) / np.linalg.norm(r[1].mean(axis=0)) for r in rays]
+        i0, i1 = min(((i, j) for i in range(len(rays)) for j in range(i + 1, len(rays))),
+                     key=lambda ij: abs(float(mean_dir[ij[0]] @ mean_dir[ij[1]])))
+        (P0, D0, a0, b0, s0), (P1, D1, a1, b1, s1) = rays[i0], rays[i1]
+        pts = []
+        for k in range(0, len(P0), 64):  # every pair of rays, its closest approach
+            p, d, a, b = P0[k:k + 64], D0[k:k + 64], a0[k:k + 64], b0[k:k + 64]
+            dot = d @ D1.T
+            W0 = p[:, None, :] - P1[None, :, :]
+            e0 = np.einsum('ik,ijk->ij', d, W0)
+            e1 = np.einsum('jk,ijk->ij', D1, W0)
+            den = 1.0 - dot * dot
+            with np.errstate(divide='ignore', invalid='ignore'):
+                s = (dot * e1 - e0) / den
+                t = (e1 - dot * e0) / den
+            X0 = p[:, None, :] + s[..., None] * d[:, None, :]
+            X1 = P1[None, :, :] + t[..., None] * D1[None, :, :]
+            near = ((den > 1e-12) & (np.linalg.norm(X0 - X1, axis=2) <= 0.75 * (s0 + s1))
+                    & (s >= a[:, None]) & (s <= b[:, None]) & (t >= a1[None, :]) & (t <= b1[None, :]))
+            pts.append(0.5 * (X0 + X1)[near])
+        pts = np.concatenate(pts)
+        others = [r for k, r in enumerate(rays) if k not in (i0, i1)]
+        if others and len(pts):
+            verdict = np.zeros(len(pts), dtype=np.int8)  # 0 untested, 1 seen by every further camera, -1 not
+            for ax in range(3):
+                for order in (np.argsort(pts[:, ax]), np.argsort(-pts[:, ax])):
+                    for k in range(0, len(order), 128):
+                        batch = order[k:k + 128]
+                        todo = batch[verdict[batch] == 0]
+                        if len(todo):
+                            seen = np.ones(len(todo), dtype=bool)
+                            for P, D, a, b, sp in others:
+                                V = pts[todo, None, :] - P[None, :, :]
+                                tt = np.clip(np.einsum('ijk,jk->ij', V, D), a[None, :], b[None, :])
+                                seen &= np.linalg.norm(V - tt[..., None] * D[None, :, :], axis=2).min(axis=1) <= sp
+                            verdict[todo] = np.where(seen, 1, -1)
+                        if (verdict[batch] == 1).any():
+                            break
+            pts = pts[verdict == 1]
+        if not len(pts):
+            return None
+        spacing = max(r[4] for r in rays)
+        return pts.min(axis=0) - spacing, pts.max(axis=0) + spacing
 
     def _on_voxel_scale_changed(self):
         """Update 3D tolerance in voxels if scale changes."""
@@ -1701,7 +1927,14 @@ class TrackingSettingsView(QWidget):
             total_2d_count = 0
             per_camera_2d_counts = []
             for cam_id in range(num_cams):
-                obj2ds = obj_finder.findObject2D(image_list[cam_id], obj_cfg)
+                # as the tracking run detects (IPR): with the camera's index, which picks its settings (the line
+                # detector's noise); a module built before findObject2D took it detects without
+                try:
+                    obj2ds = obj_finder.findObject2D(image_list[cam_id], obj_cfg, cam_id)
+                except TypeError:
+                    print("[Validation] Warning: this pyopenlpt's findObject2D takes no camera index; rebuild it "
+                          "(build_local.py) to detect as the tracking run does.")
+                    obj2ds = obj_finder.findObject2D(image_list[cam_id], obj_cfg)
                 obj2d_list.append(obj2ds)
                 count = len(obj2ds)
                 per_camera_2d_counts.append(count)

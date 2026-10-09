@@ -1,0 +1,42 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  PASS  D1: Radial k1 for Pinhole+Refraction, None for Pinhole and Pinhole+Cylinder, until the user picks  ({'Pinhole': ['None (0)'], 'Pinhole+Refraction': ['Radial k1 (1)', 'Radial k1 (1)'], 'Pinhole+Cylinder': ['None (0)']})
+  PASS  after the user's pick, switching models keeps it  (None (0))
+  PASS  the Windows table follows Number of Windows and the diagram's values  (rows 2; {0: (12.7, 1.49, 0.0), 1: (12.7, 1.49, 0.0)}; 3 windows {0: (12.7, 1.52, 0.0), 1: (12.7, 1.52, 0.0), 2: (12.7, 1.52, 0.0)}; edited {0: (12.7, 1.52, 100.0), 1: (10.0, 1.52, 150.0)})
+  PASS  folder fields only where they apply; hints only for a searched start; the refit box not shown  ([(False, True, True), (False, False, False), (True, False, False)])
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 120 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  PASS  Run builds the Job: per-window windows, k1, no lens terms, no start, hints or constraints  (target child_run; windows [{'name': 'window 0', 'thickness_mm': [12.7], 'n': [1.0, 1.52, 1.333]}, {'name': 'window 1', 'thickness_mm': [10.0], 'n': [1.0, 1.52, 1.333]}]; fit_k1 True)
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 120 frames
+[Wand] distortion_params=2
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=2...
+  PASS  the options reach the Job: k1 + k2, pp, tangential, the constraints in rig indices, the hints  (fit_lens ('pp', 'k2', 'tangential'); constraints {'channel': {'width_mm': [100.0, 150.0], 'tolerance_mm': 3.0, 'ball_radius_mm': [1.5, 2.0]}, 'aim': [{'cams': [0, 1], 'wall': 1, 'mm': 75.0}], 'distance': [{'cam': 3, 'mm': 250.0, 'sigma_mm': 5.0}]}; hints windows face the cameras)
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 120 frames
+[Wand] distortion_params=2
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=2...
+  PASS  Precalibrate: no constraints (with a note), the hints kept  (notes ['Precalibrate does not apply the constraints (the start search takes none).'])
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 120 frames
+[Wand] distortion_params=2
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=2...
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 120 frames
+[Wand] distortion_params=2
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=2...
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 120 frames
+[Wand] distortion_params=2
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=2...
+  PASS  bad inputs refused with a message (aim camera, channel without widths, missing start folder)  ([True, True, True]; last messages ['Aim 1: give camera IDs of this calibration (e.g. 0,1), a window that has cameras', 'The channel needs an inside width (Windows table, Channel mm) for a window that ', "Start: choose the saved fit's folder."])
+
+8 of 8 checks passed; 2 s

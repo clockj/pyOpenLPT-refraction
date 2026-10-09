@@ -1,0 +1,6 @@
+settings page on D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_set: loaded, 2-D tolerance set to 1.0 px, saved; message boxes ['Success']
+  the cameras' corrections kept: True (['camFile_VSC/vsc_cam1_corr_p1.txt', 'camFile_VSC/vsc_cam2_corr_p1.txt'])
+  ipr.tol_2d_px: 1.5 -> 1.0
+  the tracer's settings dropped by the save: ['detector', 'lines', 'otf_file', 'roi_from_otf', 'roi_sigma', 'shape_check', 'shape_tol_px', 'shape_tol_rel']; changed: []
+  the object's other settings unchanged: True
+  the top-level keys: before ['_comment', 'cameras', 'fps', 'frames', 'image_lists', 'objects', 'output_dir', 'threads', 'view_volume_mm', 'voxel_mm'], after ['_comment', 'cameras', 'fps', 'frames', 'image_lists', 'load_tracks', 'objects', 'output_dir', 'save_interval', 'threads', 'view_volume_mm', 'voxel_mm']

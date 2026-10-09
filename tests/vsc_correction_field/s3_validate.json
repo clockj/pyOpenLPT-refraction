@@ -1,0 +1,89 @@
+{
+ "run_counts": [
+  1067,
+  985
+ ],
+ "today": {
+  "seconds": 1.1,
+  "counts_2d": [
+   11554,
+   7641
+  ],
+  "matches_3d": [
+   6168
+  ],
+  "boxes": [
+   {
+    "kind": "information",
+    "title": "Success",
+    "text": "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_today/config.json"
+   },
+   {
+    "kind": "information",
+    "title": "Validation Result",
+    "text": "Validation Successful!\n\nValidated Frame: 0\n3D Objects: 6168\nAverage 2D Objects: 9597.5\nPer-camera 2D counts: Cam 0: 11554, Cam 1: 7641"
+   }
+  ],
+  "form_tol_2d_px": 1.0,
+  "tracer_keys_kept": [],
+  "tracer_keys_lost": [
+   "detector",
+   "lines",
+   "otf_file",
+   "roi_from_otf",
+   "roi_sigma",
+   "shape_check",
+   "shape_tol_px",
+   "shape_tol_rel"
+  ],
+  "tol_2d_px_saved": 1.0,
+  "corrections": [
+   "camFile_VSC/vsc_cam1_corr_p1.txt",
+   "camFile_VSC/vsc_cam2_corr_p1.txt"
+  ],
+  "corrections_kept": true,
+  "counts_as_run": false
+ },
+ "change": {
+  "seconds": 3.8,
+  "counts_2d": [
+   1067,
+   985
+  ],
+  "matches_3d": [
+   636
+  ],
+  "boxes": [
+   {
+    "kind": "information",
+    "title": "Success",
+    "text": "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/s3_run_change/config.json"
+   },
+   {
+    "kind": "information",
+    "title": "Validation Result",
+    "text": "Validation Successful!\n\nValidated Frame: 0\n3D Objects: 636\nAverage 2D Objects: 1026.0\nPer-camera 2D counts: Cam 0: 1067, Cam 1: 985"
+   }
+  ],
+  "form_tol_2d_px": 1.0,
+  "tracer_keys_kept": [
+   "detector",
+   "lines",
+   "otf_file",
+   "roi_from_otf",
+   "roi_sigma",
+   "shape_check",
+   "shape_tol_px",
+   "shape_tol_rel"
+  ],
+  "tracer_keys_lost": [],
+  "tol_2d_px_saved": 1.0,
+  "corrections": [
+   "camFile_VSC/vsc_cam1_corr_p1.txt",
+   "camFile_VSC/vsc_cam2_corr_p1.txt"
+  ],
+  "corrections_kept": true,
+  "counts_as_run": true
+ },
+ "pass": true
+}

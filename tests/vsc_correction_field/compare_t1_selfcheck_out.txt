@@ -1,0 +1,4 @@
+today: s3_final_m15 / s3_control_m15; 251 frames, 16.3 s per frame; detections [1151.6, 987.2]; active long tracks at 100: 447 (control 222): ghosts by the counts 50 %, by the swirl 53 %; long tracks at 100 589: real 296 (counts), 278 (swirl); whole run 1228 long tracks, 112383 points
+vc2: s3_final_m15vc2 / s3_control_m15vc2; 251 frames, 22.9 s per frame; detections [1144.2, 979.8]; active long tracks at 100: 414 (control 161): ghosts by the counts 39 %, by the swirl 48 %; long tracks at 100 538: real 329 (counts), 279 (swirl); whole run 1132 long tracks, 105885 points
+  recurrence frames 0-100: vc2's 538 tracks in today: 371 (69 %); today's 589 in vc2: 380 (65 %)
+  recurrence whole run: vc2's 1132 tracks in today: 628 (55 %); today's 1228 in vc2: 642 (52 %)

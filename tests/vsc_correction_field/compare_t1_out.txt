@@ -1,0 +1,22 @@
+today_1.5: s3_final_m15 / s3_control_m15; 251 frames, 16.3 s per frame; detections [1151.6, 987.2]; active long tracks at 100: 447 (control 222): ghosts by the counts 50 %, by the swirl 53 %; long tracks at 100 589: real 296 (counts), 278 (swirl); whole run 1228 long tracks, 112383 points
+  the residual no 3-D move explains (7653 points on 51 frames): median +0.070 px, robust SD 0.726 px, RMS 0.939 px; within 1 px 76 %
+uncorrected_1.0: s3_final_m15t10 / s3_control_m15t10; 251 frames, 13.8 s per frame; detections [1142.4, 984.3]; active long tracks at 100: 369 (control 169): ghosts by the counts 46 %, by the swirl 53 %; long tracks at 100 494: real 268 (counts), 230 (swirl); whole run 1046 long tracks, 96444 points
+  the residual no 3-D move explains (7203 points on 51 frames): median +0.071 px, robust SD 0.687 px, RMS 0.908 px; within 1 px 78 %
+warped_2pass: s3_final_m15vc2 / s3_control_m15vc2; 251 frames, 22.9 s per frame; detections [1144.2, 979.8]; active long tracks at 100: 414 (control 161): ghosts by the counts 39 %, by the swirl 48 %; long tracks at 100 538: real 329 (counts), 279 (swirl); whole run 1132 long tracks, 105885 points
+  the residual no 3-D move explains (7848 points on 51 frames): median -0.010 px, robust SD 0.565 px, RMS 0.863 px; within 1 px 81 %
+library_2pass: s3_final_lc2 / s3_control_lc2; 251 frames, 16.6 s per frame; detections [1151.2, 985.0]; active long tracks at 100: 418 (control 145): ghosts by the counts 35 %, by the swirl 50 %; long tracks at 100 545: real 356 (counts), 271 (swirl); whole run 1150 long tracks, 108023 points
+  the residual no 3-D move explains (7825 points on 51 frames): median -0.010 px, robust SD 0.564 px, RMS 0.864 px; within 1 px 81 %
+gui_pass1: s3_final_lp1; 251 frames, 15.0 s per frame; detections [1146.5, 985.3]; active long tracks at 100: 412; long tracks at 100 530 (no control); whole run 1106 long tracks, 105586 points
+  the residual no 3-D move explains (7759 points on 51 frames): median -0.008 px, robust SD 0.578 px, RMS 0.861 px; within 1 px 80 %
+gui_pass2: s3_final_lp2 / s3_control_lp2; 251 frames, 10.7 s per frame; detections [1149.4, 984.7]; active long tracks at 100: 416 (control 150): ghosts by the counts 36 %, by the swirl 49 %; long tracks at 100 536: real 343 (counts), 273 (swirl); whole run 1128 long tracks, 106632 points
+  the residual no 3-D move explains (7742 points on 51 frames): median -0.006 px, robust SD 0.567 px, RMS 0.856 px; within 1 px 81 %
+  recurrence frames 0-100: today_1.5's 589 tracks in warped_2pass: 380 (65 %); warped_2pass's 538 in today_1.5: 371 (69 %)
+  recurrence whole run: today_1.5's 1228 tracks in warped_2pass: 642 (52 %); warped_2pass's 1132 in today_1.5: 628 (55 %)
+  recurrence frames 0-100: uncorrected_1.0's 494 tracks in warped_2pass: 348 (70 %); warped_2pass's 538 in uncorrected_1.0: 339 (63 %)
+  recurrence whole run: uncorrected_1.0's 1046 tracks in warped_2pass: 613 (59 %); warped_2pass's 1132 in uncorrected_1.0: 597 (53 %)
+  recurrence frames 0-100: library_2pass's 545 tracks in warped_2pass: 408 (75 %); warped_2pass's 538 in library_2pass: 404 (75 %)
+  recurrence whole run: library_2pass's 1150 tracks in warped_2pass: 735 (64 %); warped_2pass's 1132 in library_2pass: 723 (64 %)
+  recurrence frames 0-100: gui_pass1's 530 tracks in warped_2pass: 396 (75 %); warped_2pass's 538 in gui_pass1: 389 (72 %)
+  recurrence whole run: gui_pass1's 1106 tracks in warped_2pass: 706 (64 %); warped_2pass's 1132 in gui_pass1: 695 (61 %)
+  recurrence frames 0-100: gui_pass2's 536 tracks in warped_2pass: 398 (74 %); warped_2pass's 538 in gui_pass2: 395 (73 %)
+  recurrence whole run: gui_pass2's 1128 tracks in warped_2pass: 718 (64 %); warped_2pass's 1132 in gui_pass2: 726 (64 %)

@@ -709,7 +709,7 @@ def _far_residual_mp(st, th, C, k, dphi, dz):
         return [phi - mpm.mpf(float(dphi)), z - mpm.mpf(float(dz))]
 
 
-def classify_far(n, R, rP, rX, dphi, dz, tol=1e-13, stats=None, maxboxes=200000):
+def classify_far(n, R, rP, rX, dphi, dz, tol=1e-13, stats=None, maxboxes=200000, box_trace=None):
     """Steps (3) and (4), far branch: every (Lambda, C_z) with Phi_far = dphi and Z_far = dz, polished.
 
     Boxes in (theta*, C_z), Lambda = Lmax(C_z) sin(theta*), cover [0, pi/2] x [0, C_max] between the cuts of (cuts); no
@@ -721,7 +721,8 @@ def classify_far(n, R, rP, rX, dphi, dz, tol=1e-13, stats=None, maxboxes=200000)
     undecided at width tol either holds a ray on the edge of its piece (Lambda = 0 at dphi = pi, or a cut) or lies
     within rounding of a caustic; Newton is run from its centre and a ray it converges to is kept unless already found.
     stats, if a dict, receives the numbers of boxes examined, of residuals recomputed to 34 digits, of undecided boxes
-    and of rays found from them."""
+    and of rays found from them.  If supplied, box_trace records each examined box as
+    (theta_lo, theta_hi, C_lo, C_hi, outcome) for the paper's classification figure."""
     sgn, dz = (1.0 if dz >= 0 else -1.0), abs(dz)
     if dz == 0.0:
         return [(L, 0.0) for L, _, _ in far_roots(0.0, n, R, rP, rX, dphi)]
@@ -742,6 +743,9 @@ def classify_far(n, R, rP, rX, dphi, dz, tol=1e-13, stats=None, maxboxes=200000)
             break
         plo, phi, zlo, zhi = box_bounds(st, ta, tb, ca, cb, ks)
         keep = (plo <= dphi) & (dphi <= phi) & (zlo <= dz) & (dz <= zhi)
+        if box_trace is not None:
+            box_trace.extend((float(ta[k]), float(tb[k]), float(ca[k]), float(cb[k]), "bounds")
+                             for k in np.flatnonzero(~keep))
         ta, tb, ca, cb, pa, pb, ks = (a[keep] for a in (ta, tb, ca, cb, pa, pb, ks))
         if not ta.size:
             break
@@ -782,6 +786,10 @@ def classify_far(n, R, rP, rX, dphi, dz, tol=1e-13, stats=None, maxboxes=200000)
             found.append((tm[k], cm[k], Ta[k], Tb[k], Ca[k], Cb[k], ks[k], Y[k]))
         open_ = ~one & ~none
         small = open_ & (wt < tol) & (wc < tol)
+        if box_trace is not None:
+            outcomes = np.where(one, "ray", np.where(none, "krawczyk", np.where(small, "limit", "split")))
+            box_trace.extend((float(a), float(b), float(c), float(d), str(outcome))
+                             for a, b, c, d, outcome in zip(ta, tb, ca, cb, outcomes))
         loose += [(tm[k], cm[k], pa[k], pb[k], ks[k]) for k in np.flatnonzero(small)]
         split = open_ & ~small
         ta, tb, ca, cb, pa, pb, ks, tm, cm, wt, wc, J = (a[split] for a in (ta, tb, ca, cb, pa, pb, ks, tm, cm, wt, wc, J))

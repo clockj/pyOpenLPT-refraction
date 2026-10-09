@@ -14,22 +14,67 @@ class PyCameraHandle {
 public:
   PyCameraHandle() = default;
   explicit PyCameraHandle(const std::string& file_name) { loadParameters(file_name); }
-  explicit PyCameraHandle(std::shared_ptr<Camera> model)
-      : _model(std::move(model)) {
+  explicit PyCameraHandle(std::shared_ptr<Camera> model) {
+    // A corrected camera keeps its correction: the handle holds its model.
+    if (auto* w = dynamic_cast<CorrectedCamera*>(model.get())) {
+      _model = w->inner();
+      _correction = w->correction();
+    } else {
+      _model = model;
+    }
+    _view = std::move(model);
     syncCacheFromModel();
   }
 
   bool hasModel() const { return static_cast<bool>(_model); }
-  const std::shared_ptr<Camera>& model() const { return _model; }
+  /** The camera as tracking uses it: the model, corrected when a correction is set. */
+  const std::shared_ptr<Camera>& model() const { return _view; }
 
+  /** Loads a camera model; a correction set before is dropped. */
   void loadParameters(const std::string& file_name) {
     auto st = CameraFactory::loadFromFile(file_name);
     if (!st) {
       throw std::runtime_error(st.status().err.toString());
     }
     _model = st.value();
+    _correction.reset();
+    _view = _model;
     syncCacheFromModel();
   }
+
+  /** Corrects the camera's image positions by the file's field (an ImageCorrection):
+      project() and lineOfSight() then go through it, while the parameter calls keep
+      acting on the model. */
+  void setCorrection(const std::string& file_name) {
+    requireModel("Camera.setCorrection");
+    auto st = ImageCorrection::loadFromFile(file_name);
+    if (!st) {
+      throw std::runtime_error(st.status().err.toString());
+    }
+    setCorrectionObject(st.value());
+  }
+
+  void setCorrectionObject(std::shared_ptr<const ImageCorrection> correction) {
+    requireModel("Camera.setCorrection");
+    auto st = CorrectedCamera::create(_model, std::move(correction));
+    if (!st) {
+      throw std::runtime_error(st.status().err.toString());
+    }
+    std::shared_ptr<CorrectedCamera> view = st.value();
+    view->is_active = _is_active_cache;
+    view->max_intensity = _max_intensity_cache;
+    _correction = view->correction();
+    _view = view;
+  }
+
+  void clearCorrection() {
+    _correction.reset();
+    _view = _model;
+  }
+
+  bool hasCorrection() const { return static_cast<bool>(_correction); }
+  std::string correctionFile() const { return _correction ? _correction->source() : std::string(); }
+  const std::shared_ptr<const ImageCorrection>& correction() const { return _correction; }
 
   void saveParameters(const std::string& file_name) {
     auto& m = requireModelMutable("Camera.saveParameters");
@@ -107,6 +152,9 @@ public:
     if (_model) {
       _model->is_active = v;
     }
+    if (_view) {
+      _view->is_active = v;
+    }
   }
 
   double maxIntensity() const {
@@ -116,6 +164,9 @@ public:
     _max_intensity_cache = v;
     if (_model) {
       _model->max_intensity = v;
+    }
+    if (_view) {
+      _view->max_intensity = v;
     }
   }
 
@@ -176,6 +227,10 @@ public:
     cam.is_active = is_active;
     cam.max_intensity = max_intensity;
     requireStatus(cam.commitUpdate(), "Camera.commitPinplateUpdate");
+    if (_view) {
+      _view->is_active = is_active;
+      _view->max_intensity = max_intensity;
+    }
     syncCacheFromModel();
   }
 
@@ -211,12 +266,13 @@ private:
     }
   }
 
+  // The camera as it projects: the model, through its correction when one is set.
   const Camera& requireModel(const char* where) const {
     if (!_model) {
       throw std::runtime_error(std::string(where) +
                                ": Camera is not initialized; call loadParameters(...) first or use setPinplate* to initialize a pinplate model.");
     }
-    return *_model;
+    return _view ? *_view : *_model;
   }
 
   Camera& requireModelMutable(const char* where) {
@@ -233,6 +289,7 @@ private:
       cam->is_active = _is_active_cache;
       cam->max_intensity = _max_intensity_cache;
       _model = std::move(cam);
+      _view = _model;
       _type_cache = CameraType::RefractionPinhole;
       return *static_cast<RefractionPinholeCamera*>(_model.get());
     }
@@ -254,7 +311,9 @@ private:
     _type_cache = legacyType();
   }
 
-  std::shared_ptr<Camera> _model;
+  std::shared_ptr<Camera> _model;                     // the camera model (parameters)
+  std::shared_ptr<const ImageCorrection> _correction;  // optional image correction
+  std::shared_ptr<Camera> _view;                      // _model, or _model corrected
   bool _is_active_cache = true;
   double _max_intensity_cache = 255.0;
   CameraType _type_cache = CameraType::RefractionPinhole;

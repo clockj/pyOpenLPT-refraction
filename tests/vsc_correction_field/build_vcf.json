@@ -1,0 +1,20 @@
+{
+ "name": "vcf",
+ "config": "Release",
+ "src": "D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source",
+ "copied_from": "D:\\Refraction\\pyOpenLPT",
+ "git_head": "cffed7d",
+ "git_diff_stat": ".gitignore                            |   8 +\n cases/cyl_wand_paper/README.md        |  21 +-\n gui/views/tracking_settings_view.py   | 235 +++++++++++++++++++-\n gui/views/tracking_view.py            | 128 ++++++++++-\n inc/libMath/Camera.h                  | 144 ++++++++++++\n modules/vsc/vsc_service.py            |  36 ++-\n src/pybind_OpenLPT/pyCamera.cpp       | 100 ++++++++-\n src/pybind_OpenLPT/pyObjectFinder.cpp |   8 +-\n src/pybind_OpenLPT/py_camera_handle.h |  69 +++++-\n src/srcMath/Camera.cpp                | 401 ++++++++++++++++++++++++++++++----\n src/srcObject/ObjectInfo.cpp          |   5 +-\n src/srcSTB/Config.cpp                 |  25 ++-\n test/refs/project_cylinder.py         |  12 +-\n 13 files changed, 1118 insertions(+), 74 deletions(-)",
+ "git_diff_sha256": "0b6bae7c6488d3e1e88f575af796caacc1c33c7b1c83d3f7855f82c4740b1435",
+ "untracked": [],
+ "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc",
+ "start": "2026-10-09T09:46:28",
+ "minutes": 0.5,
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 128,
+ "products": [
+  "OpenLPT.exe",
+  "pyopenlpt.cp311-win_amd64.pyd"
+ ]
+}

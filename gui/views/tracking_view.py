@@ -339,6 +339,7 @@ class TrackingView(QWidget):
         self._vsc_lpt_unavailable = False
         self._vsc_cpp_cam_cache_init = {}
         self._vsc_cpp_cam_cache_optim = {}
+        self.vsc_corr_widget = None
         self._busy_tokens = {}
         
         self._setup_ui()
@@ -887,6 +888,18 @@ class TrackingView(QWidget):
         self.vsc_frame_table.itemClicked.connect(self._on_vsc_frame_selected)
         vsc_layout.addWidget(self.vsc_frame_table, 6, 0, 1, 2)
 
+        # Cameras behind a tube or a sphere: VSC fits an image correction per camera (modules/vsc/field_vsc.py)
+        self.vsc_field_note = QLabel(
+            "Tube / sphere cameras (PINCYL, PINSPH): VSC fits a smooth image correction per camera from the long "
+            "tracks and sets it as the camera's \"correction\" in config.json; the camera files stay as they are. "
+            "Then rerun tracking and VSC again: two passes. The 2-D tolerance is left to you (on the tube run the "
+            "correction paid at 1.0 px).")
+        self.vsc_field_note.setWordWrap(True)
+        self.vsc_field_note.setStyleSheet("color: #8a9aaa; font-size: 11px;")
+        self.vsc_field_note.setVisible(False)
+        vsc_layout.addWidget(self.vsc_field_note, 7, 0, 1, 2)
+        self.proj_path_edit.textChanged.connect(self._update_vsc_field_note)
+
         
         layout.addWidget(vsc_group)
 
@@ -895,6 +908,15 @@ class TrackingView(QWidget):
     def showEvent(self, event):
         super().showEvent(event)
         self._sync_project_path()
+
+    def _update_vsc_field_note(self, *_args):
+        """Show the field VSC's note for projects whose cameras look through a tube or a sphere."""
+        try:
+            from modules.vsc.field_vsc import is_field_project
+            proj_dir = self.proj_path_edit.text().strip()
+            self.vsc_field_note.setVisible(bool(proj_dir) and is_field_project(proj_dir))
+        except Exception:
+            self.vsc_field_note.setVisible(False)
 
     def _sync_project_path(self):
         """Fetch project path from settings view."""
@@ -1141,7 +1163,15 @@ class TrackingView(QWidget):
             self._discover_cameras()
             self._update_vsc_visualization(vsc_data)
 
-        if success:
+        if success and vsc_data.get('mode') == 'field':
+            # tube / sphere cameras: image corrections, not new camera files
+            self._append_log(f"\n[SUCCESS] {message}\n")
+            QMessageBox.information(
+                self,
+                "VSC Complete",
+                f"{message}\n\nLog saved to VSC_log.txt",
+            )
+        elif success:
             self._append_log(f"\n[SUCCESS] {message}\n")
             QMessageBox.information(
                 self,
@@ -1154,9 +1184,21 @@ class TrackingView(QWidget):
             self._append_log(f"\n[FAILED] {message}\n")
             QMessageBox.warning(self, "VSC Failed", f"Volume Self-Calibration failed:\n{message}")
 
+        self._release_vsc_thread()
+        self._busy_end('run_vsc')
+
+    def _release_vsc_thread(self):
+        """Let go of the VSC worker and its thread once the thread has ended: a QThread destroyed while it runs aborts
+        the process. The worker has sent its last signal, so the thread ends at once."""
+        thread = self.vsc_thread
+        if thread is not None:
+            try:
+                thread.quit()
+                thread.wait()
+            except RuntimeError:  # already deleted (its deleteLater ran)
+                pass
         self.vsc_worker = None
         self.vsc_thread = None
-        self._busy_end('run_vsc')
 
     @Slot(str)
     def _on_vsc_log(self, message):
@@ -1169,8 +1211,7 @@ class TrackingView(QWidget):
         self.vsc_btn.setText(" Run VSC")
         self._append_log(f"\n[Error] VSC worker crashed: {message}\n")
         QMessageBox.warning(self, "VSC Error", f"VSC execution error:\n{message}")
-        self.vsc_worker = None
-        self.vsc_thread = None
+        self._release_vsc_thread()
         self._busy_end('run_vsc')
 
     def _update_vsc_visualization(self, vsc_data):
@@ -1199,9 +1240,75 @@ class TrackingView(QWidget):
         # Plot all tracks (semi-transparent blue)
         # Plot valid points (bright green)
         self._show_vsc_3d_plot(valid_points)
-        
-        # 3. Switch to 3D tab
-        self.vis_tabs.setCurrentIndex(0)
+
+        # 3. Switch to 3D tab (the field VSC: to its correction plot)
+        if vsc_data.get('mode') == 'field':
+            self._show_vsc_correction_plot(vsc_data)
+        else:
+            self.vis_tabs.setCurrentIndex(0)
+
+    def _show_vsc_correction_plot(self, vsc_data):
+        """The field VSC's corrections, one panel per camera, in a "Correction" tab (added once, after the others):
+        |c| in colour over the sensor, arrows (c, enlarged), the detections the fit used, and the pass."""
+        try:
+            from modules.vsc.correction_io import Correction
+            res = vsc_data.get('field_vsc', {})
+            cams = res.get('cameras', [])
+            if not cams:
+                return
+            if getattr(self, 'vsc_corr_widget', None) is None:
+                self.vsc_corr_widget = QWidget()
+                self.vsc_corr_layout = QVBoxLayout(self.vsc_corr_widget)
+                self.vsc_corr_layout.setContentsMargins(0, 0, 0, 0)
+                self.vis_tabs.addTab(self.vsc_corr_widget, "Correction")
+            while self.vsc_corr_layout.count():
+                item = self.vsc_corr_layout.takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
+            n = len(cams)
+            ncols = 2 if n > 1 else 1
+            nrows = (n + ncols - 1) // ncols
+            fig = Figure(figsize=(6.5 * ncols, 4.6 * nrows), facecolor='black')
+            pts = vsc_data.get('valid_points', [])
+            for k, st in enumerate(cams):
+                ax = fig.add_subplot(nrows, ncols, k + 1)
+                ax.set_facecolor('black')
+                corr = Correction.read(st['file'])
+                mag = corr.magnitude()
+                ext = (corr.u0 - corr.step / 2, corr.u0 + corr.step * (corr.nu - 0.5),
+                       corr.v0 + corr.step * (corr.nv - 0.5), corr.v0 - corr.step / 2)
+                im = ax.imshow(mag, extent=ext, cmap='magma', vmin=0.0, vmax=max(float(mag.max()), 1e-6))
+                cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+                cb.set_label('|c| [px]', color='white')
+                cb.ax.tick_params(colors='white', labelsize=8)
+                det = np.array([p['2d_per_cam'][k] for p in pts if k in p.get('2d_per_cam', {})], float)
+                if len(det):
+                    ax.plot(det[:, 0], det[:, 1], ',', color='#38c8ff', alpha=0.35)
+                sub = max(1, int(round(80.0 / corr.step)))
+                nodes = corr.nodes().reshape(corr.nv, corr.nu, 2)[::sub, ::sub].reshape(-1, 2)
+                du = corr.du[::sub, ::sub].ravel()
+                dv = corr.dv[::sub, ::sub].ravel()
+                spacing = sub * corr.step
+                scale = 0.9 * spacing / max(float(mag.max()), 1e-6)   # the largest arrow 90 % of their spacing
+                ax.quiver(nodes[:, 0], nodes[:, 1], du * scale, dv * scale, angles='xy', scale_units='xy', scale=1,
+                          color='white', width=0.004, alpha=0.9)
+                ax.set_xlim(0, corr.n_col)
+                ax.set_ylim(corr.n_row, 0)
+                ax.set_title(f"cam {k}: pass {st['pass']}, {st['total_rms_px']:.2f} px RMS ({st['total_max_px']:.2f} "
+                             f"max) near the data; this pass changed {st['change_rms_px']:.2f} px",
+                             color='white', fontsize=9)
+                ax.tick_params(colors='white', labelsize=8)
+            fig.text(0.01, 0.005, "arrows: the correction c, enlarged (the largest drawn 90 % of the arrows' spacing); "
+                     "colour: |c|; blue dots: the detections the fit used", color='#aaaaaa', fontsize=8)
+            fig.tight_layout(rect=(0, 0.03, 1, 1))
+            canvas = FigureCanvas(fig)
+            self.vsc_corr_layout.addWidget(canvas)
+            canvas.draw()
+            self.vis_tabs.setCurrentWidget(self.vsc_corr_widget)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print(f"VSC correction plot error: {e}")
 
     def _show_vsc_3d_plot(self, valid_points):
         """Plot all tracks (sampled) and VSC effective points using standard Matplotlib calls."""
@@ -2577,7 +2684,12 @@ class TrackingView(QWidget):
                          pt3d_optim = pt3d
                      
                      # 3. Green (After VSC) -> Plus '+'
-                     if cam_idx in cameras_optim:
+                     if vsc_data.get('mode') == 'field':
+                          # tube / sphere cameras: the projections through the corrected cameras
+                          p_new = pt.get('2d_corrected_per_cam', {}).get(cam_idx)
+                          if p_new is not None:
+                              markers.append((p_new[0], p_new[1], QColor(0, 255, 0), "plus"))
+                     elif cam_idx in cameras_optim:
                           params = cameras_optim[cam_idx]
                           proj_2d = project_point_model_aware(cam_idx, params, pt3d_optim, stage="optim")
                           if proj_2d is not None:

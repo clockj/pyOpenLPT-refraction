@@ -1,6 +1,6 @@
 # Flat-window wand calibration (PINPLATE): summary and progress
 
-Last updated: 2026-10-07.
+Last updated: 2026-10-09.
 
 Start here to catch up. This file gathers what the flat-window wand tests concluded, and what that means for a real
 experiment.
@@ -73,10 +73,34 @@ experiment.
     - **The fix:** with the principal point fitted and the channel held, the wall is in place, and the fit is better
       on held-out frames too (progress log, 2026-10-04).
 - **The GUI** runs this calibration behind its "Pinhole+Refraction" model (since 6 Oct), and its "Precalibrate to
-  Check" too (since 7 Oct). Section 4 says how to run and check a real experiment; the full report has the same
+  Check" too (since 7 Oct). Since 9 Oct its panel also takes the real case's options (a saved start, constraints,
+  lens terms, hints, per-window values; k1 by default) and reproduces the delivered fit exactly. Section 4 says how to run and check a real experiment; the full report has the same
   advice (`2026-10-02-plate-wand-report.md`, section 6).
 
 ## 1. Progress log
+
+**2026-10-09**
+- **The GUI's Pinhole+Refraction panel now takes the options the real case used** (`tests/plate_wand_gui/`,
+  plan and report 2026-10-09; your request "Improve gui for refract+plate").
+  - **The new controls:**
+    - a Windows table (each window's thickness, plate index and the channel's inside width);
+    - lens terms (principal point, tangential, k1 + k2);
+    - Start: Search, Last result, or a saved fit (a result folder or PINPLATE camFiles);
+    - window-normal hints;
+    - optional constraints (channel, aims, distances).
+  - **The distortion box** shows "Radial k1" for Pinhole+Refraction until you pick (your D1).
+  - **Every start** takes the panel's thickness and indices over its planes (your D3).
+- **The real case's delivered fit, W4c** (`calib_plate_wand_ref_centre`), made through the GUI's path: bit for bit
+  the same (RMS 0.2772928826 px, 87,234 of 87,488 detections, every parameter).
+- **Unchanged by default:** with no new option set, today's code and the change give bit-identical results (k1 off
+  and on, Precalibrate too).
+- **Regression:** the wand tab's GUI tests pass, and pytest has only the known failure.
+- **Learned: the wand cannot see a window's thickness.**
+  - **The test:** on a synthetic rig, 12.7 mm entered for a 10 mm window.
+  - **What stays the same:** the cameras, f, the residuals and the wand ends in the water, to the last digit.
+  - **What moves:** the fitted water-side surface, 3.1 mm.
+  - **So:** enter each window's measured thickness. It matters for the channel constraint and for reported
+    depths, not for positions in the water.
 
 **2026-10-07**
 - **The GUI's "Precalibrate to Check" with "Pinhole+Refraction" now runs this calibration's start search and coarse

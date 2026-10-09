@@ -1,0 +1,19 @@
+  PASS  T2's saved folder holds W4c's start (tests/states/t2_all.pkl) value for value  (largest difference 0.0)
+  Load CSV: 10936 frames in 1 s; message ('info', 'Success')
+  distortion: Radial k1 (1) (the default)
+  PASS  the view's Job: k1, no lens terms, the saved start, the constraints as the case's  (constraints {'channel': {'width_mm': [100.0, 150.0], 'tolerance_mm': 3.0, 'ball_radius_mm': [1.5, 2.0]}, 'aim': [{'cams': [0, 1], 'wall': 1, 'mm': 75.0}]}; case {'channel': {'width_mm': [100.0, 150.0], 'tolerance_mm': 3.0, 'ball_radius_mm': [1.5, 2.0]}, 'aim': [{'cams': [0, 1], 'wall': 1, 'mm': 75.0}]})
+  run: 216 s; RMS 0.2772928826 px (W4c 0.2772928826); active 87234 of 87488 (W4c 87234 of 87488)
+  PASS  W4c reproduced through the GUI's path: cameras, windows, RMS and detections used  (bit for bit; largest differences {'f_rel': 0.0, 'C_mm': 0.0, 'R': 0.0, 'pp_px': 0.0, 'dist': 0.0, 'n': 0.0, 'd_mm': 0.0, 'rms_px': 0.0})
+  PASS  the record and the page list the start, the constraints and k1  (start X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\calib_plate_wand; run time 216.2065510749817)
+  the GUI's message:
+    4 cameras, 2 windows, 10936 frames, 87234 of 87488 detections used.
+    Reprojection RMS 0.277 px; wand length (free triangulation) RMS error 10.3 um over 10936 frames.
+      cam0: f 18,784 px +- 0.05 %, window 1, 1058 mm from it, RMS 0.263 px
+      cam1: f 19,159 px +- 0.04 %, window 1, 1023 mm from it, RMS 0.260 px
+      cam2: f 21,653 px +- 0.03 %, window 2, 855 mm from it, RMS 0.298 px
+      cam3: f 22,033 px +- 0.03 %, window 2, 920 mm from it, RMS 0.287 px
+    Channel held (tolerance 3.0 mm): the largest breach 0.000 mm.
+    Aim held at 75.0 mm: 75.00 mm at the answer (+0.02 sigma).
+    Note: Detection mode unknown
+
+4 of 4 checks passed; 220 s

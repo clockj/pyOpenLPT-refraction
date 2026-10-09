@@ -1,0 +1,24 @@
+
+cylinder: D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g3_run\results\calibration_report.html
+  PASS  cylinder: the page's numbers are the result's  (RMS 0.016847 px, 1039/1062, wand 0.5765 um)
+  PASS  cylinder: its lines of sight are physical (on the interfaces, Snell) within 1e-9  (15 lines; surfaces 2.2e-12 mm, Snell 3.8e-14)
+  PASS  cylinder dark 1200 px: loads, every figure drawn, theme applied  (svg 13, theme dark)
+  PASS  cylinder light 1200 px: loads, every figure drawn, theme applied  (svg 13, theme light)
+  PASS  cylinder dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  cylinder: no console error, no request but the local page  (0 console messages, errors []; non-file requests [])
+
+plate: D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g8_run\results\calibration_report.html
+  PASS  plate: the page's numbers are the result's  (RMS 0.116304 px, 2400/2400, wand 15.4139 um)
+  PASS  plate: its lines of sight are physical (on the interfaces, Snell) within 1e-9  (20 lines; surfaces 2.8e-14 mm, Snell 1.0e-15)
+  PASS  plate dark 1200 px: loads, every figure drawn, theme applied  (svg 15, theme dark)
+  PASS  plate light 1200 px: loads, every figure drawn, theme applied  (svg 15, theme light)
+  PASS  plate dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  plate: no console error, no request but the local page  (0 console messages, errors []; non-file requests [])
+
+pinhole: D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g5_run\pinhole\calibration_report.html
+  PASS  pinhole dark 1200 px: loads, every figure drawn, theme applied  (svg 13, theme dark)
+  PASS  pinhole light 1200 px: loads, every figure drawn, theme applied  (svg 13, theme light)
+  PASS  pinhole dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  pinhole: no console error, no request but the local page  (0 console messages, errors []; non-file requests [])
+
+16 of 16 checks passed; 14 s

@@ -1,0 +1,73 @@
+P2: rig B' (window 1 10 mm), 200 frames
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  FAIL  A: window 1 at 10 mm in the Windows table: f within 0.5 % of the truth; both at 12.7 mm fits worse  (f error 0.299 % (12.7 for both: 0.299 %); RMS 0.1165 px against 0.1165 px; active 1600 of 1600)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  PASS  B: started from A's folder (its JSON, its camFiles alone), the answer is A's  ({'calibration_result.json': {'rms_diff': 4.302294631663983e-12, 'f_rel': 2.0428117863957596e-08, 'start': 'D:\\Refraction\\pyOpenLPT\\tests\\plate_wand_gui\\data\\p2_A'}, 'camFiles alone': {'rms_diff': 1.856291509394481e-11, 'f_rel': 1.012752481877044e-08, 'start': 'D:\\Refraction\\pyOpenLPT\\tests\\plate_wand_gui\\data\\p2_A_camfiles'}})
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  PASS  D3: a start keeps its planes and takes the panel's thickness (11 mm, saved 10 mm)  (run's window 1 t (11.0,), saved (10.0,))
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  PASS  C: the channel and the aim at the truth: A's answer, the constraints met, recorded and on the page  (widths [204.2, 207.2] mm; aim 152.700 -> 152.700 mm; f error 0.297 %; breach 0.0; lines ['Channel held (tolerance 1.0 mm): the largest breach 0.000 mm.', 'Aim held at 152.7 mm: 152.70 mm at the answer (-0.00 sigma).'])
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=2
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=2...
+  PASS  D: Radial k1+k2, the principal point and tangential reach the fit and the record; f within 1 %  (fit_lens ['pp', 'k2', 'tangential']; f error 0.487 %; principal point at most 51.9 px from the centre; RMS 0.1157 px)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  PASS  E: hints (windows face the cameras; from A's camFiles) reach the search and the record; f within 0.5 %  ({'windows face the cameras': {'f_err': np.float64(0.002987553841196644), 'recorded': 'windows face the cameras', 'normals': [[0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0]]}, 'D:\\Refraction\\pyOpenLPT\\tests\\plate_wand_gui\\data\\p2_A_camfiles': {'f_err': np.float64(0.002987553841196644), 'recorded': 'D:\\Refraction\\pyOpenLPT\\tests\\plate_wand_gui\\data\\p2_A_camfiles', 'normals': [[-0.259, -0.0, 0.966], [0.258, -0.0, 0.966], [0.0, -0.258, 0.966], [0.0, 0.26, 0.966]]}})
+  PASS  F: bad constraints and a saved fit with another camera grouping are refused with a message  (An aim names a camera that is not in this calibration.; An aim names a window that no camera looks through.; The channel needs an inside width for at least one window.; A distance and its sigma must be positive.; D:\Refraction\pyOpenLPT\tests\plate_wand_gui\data\p2_A\calibration_res)
+
+6 of 7 checks passed; 374 s

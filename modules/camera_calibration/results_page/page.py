@@ -343,6 +343,39 @@ def _noise_table(nz: Dict) -> Optional[Dict]:
 
 
 # ------------------------------------------------------------------ flat windows (PINPLATE)
+def _hints_text(hints) -> str:
+    """The window-normal hints of a flat-window run, in a few words."""
+    if not hints:
+        return "none"
+    n = sum(1 for v in hints.get("normals") or [] if v is not None)
+    return f"{hints.get('source', 'given')}: window normals for {n} camera(s)"
+
+
+def _constraints_text(cons, report) -> str:
+    """A flat-window run's constraints (rig indices, 1-based here) and, from plate_wand.constraint_report, how they hold
+    at the answer."""
+    if not cons:
+        return "none"
+    parts = []
+    ch = cons.get("channel")
+    if ch:
+        widths = ", ".join(f"{k + 1}: {w:g} mm" for k, w in enumerate(ch.get("width_mm") or []) if w is not None)
+        balls = ch.get("ball_radius_mm", 0.0)
+        balls = "/".join(f"{b:g}" for b in (balls if isinstance(balls, (list, tuple)) else [balls]))
+        brk = ((report or {}).get("channel") or {}).get("max_breach_mm")
+        parts.append(f"channel (inside width per window {widths}; tolerance {ch.get('tolerance_mm', 0):g} mm; balls "
+                     f"{balls} mm" + (f"; largest breach {brk:.3f} mm" if brk is not None else "") + ")")
+    held = {(p.get("kind"), tuple(np.atleast_1d(p.get("cam", [])).tolist()), p.get("wall")): p
+            for p in (report or {}).get("priors") or []}
+    for a in cons.get("aim") or []:
+        p = held.get(("aim", tuple(a["cams"]), a["wall"]))
+        parts.append(f"aim of camera(s) {', '.join(str(c + 1) for c in a['cams'])} at {a['mm']:g} mm behind window "
+                     f"{a['wall'] + 1}" + (f" ({p['value']:.2f} mm at the answer)" if p else ""))
+    for d in cons.get("distance") or []:
+        parts.append(f"camera {d['cam'] + 1} at {d['mm']:g} mm from its window")
+    return "; ".join(parts)
+
+
 def report_from_plate(result: Dict, data: Dict, folder: str = None) -> Dict:
     """The report of a flat-window wand calibration: plate_wand_gui.write_outputs's result dictionary
     (plate_wand_io.write_result) and calibration_data.json (plate_wand_gui.plot_data)."""
@@ -395,10 +428,14 @@ def report_from_plate(result: Dict, data: Dict, folder: str = None) -> Dict:
                                       + ", ".join(f"{v:.4f}" for v in w["n"]) for k, w in enumerate(wins))],
                 ["Cameras per window", "; ".join(f"{k + 1}: " + ", ".join(names[c] for c in w.get("cameras", []))
                                                  for k, w in enumerate(wins))],
-                ["Lens distortion", "k1 fitted" if result.get("fit_k1") else "none"],
+                ["Lens terms", ", ".join((["k1"] if result.get("fit_k1") else []) + list(result.get("fit_lens") or []))
+                 or "none (k1 held at 0)"],
                 ["Noise weights", str(gui.get("noise_weights", "camera"))],
+                ["Start", str(gui.get("start") or ("last result" if gui.get("refit_from_last_result") else "search"))],
                 ["Starts carried", str(gui.get("n_final", 2)) + (" (refit from the last result)"
                                                                   if gui.get("refit_from_last_result") else "")],
+                ["Window-normal hints", _hints_text(gui.get("hints"))],
+                ["Constraints", _constraints_text(gui.get("constraints"), result.get("info", {}).get("constraints"))],
                 ["Detection", str(gui.get("detect_mode") or "unknown (points read from a file)")],
                 ["Points from", str(gui.get("source") or "-")],
                 ["Frame", result.get("frame", "")],

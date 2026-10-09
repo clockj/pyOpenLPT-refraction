@@ -1,0 +1,121 @@
+rig.cameras                                        Phantom VEO 710L 1280x800 px of 20 um, Phantom VEO 710L 1280x800 px of 20 um, Phantom v2640 2048x1952 px of 13.5 um <- cases/cyl_20261008/config.json cameras[] (the .chd headers; pixel sizes from the Phantom data sheets)
+rig.lenses                                         every camera has the 180 mm lens, at roughly the same distance from the tube. <- config.json _cameras (the user, 8 Oct)
+rig.tube_od_mm                                     201.6125                                       <- config.json tube.outer_diameter_in x 25.4
+rig.tube_wall_mm                                   3.175                                          <- config.json tube.wall_in x 25.4
+rig.radii_mm                                       100.80625, 97.63125                            <- config.json tube.radii_mm
+rig.n_air_acrylic_water                            1.000, 1.490, 1.333                            <- config.json tube.n
+rig.wand_length_mm                                 10.0                                           <- config.json wand.length_mm (the user: the wand of 6-7 Oct)
+rig.wand_balls_mm                                  3, 4                                           <- config.json wand.ball_diameters_mm
+rig.t0_frames_fps_exposure_us                      13001, 100, 100                                <- cases/cyl_20261008/tests/p0a_files.json T0/cam1 (cam2 the same)
+rig.t0_seconds                                     130.0                                          <- frames / fps
+rig.t0_first_image_per_camera                      0, 0, 2396                                     <- p0a_files.json T0/cam<c>.header.first_image_no (cam3 saved images 2396-13000)
+rig.t1_frames_fps_exposure_us                      1001, 4000, 100                                <- p0a_files.json T1/cam1 (all three alike, one trigger)
+rig.t1_tracked_raw_frames                          0, 249                                         <- config.json tracers.track_raw_frames (the user, 8 Oct: the first 250 frames)
+cal.model                                          PINCYL                                         <- T0/calibration_result.json model
+cal.frames                                         7212                                           <- T0/calibration_result.json frames (kept by at least two cameras)
+cal.frames_kept_in_2_3_cameras                     7212, 3495                                     <- T0/detection/selection.json frames_kept_in_min_cameras, frames_kept_in_all_three
+cal.camera_frames_kept                             7922, 7439, 7050                               <- selection.json cameras.<c>.kept (two clean ball fits)
+cal.camera_frames_recorded                         13001, 13001, 10605                            <- selection.json cameras.<c>.camera_frames
+cal.detections_used_of                             35654, 35838                                   <- calibration_result.json active/observations
+cal.multi_image_or_beyond_fold_observations        0, 0                                           <- calibration_result.json info.multi_image_observations, beyond_fold_observations
+cal.rms_px                                         0.703                                          <- calibration_result.json rms_px
+cal.rms_px_per_camera                              0.742, 0.531, 0.780                            <- calibration_result.json cameras[].residuals.rms_px
+cal.distance_from_axis_mm                          788.2, 929.2, 871.0                            <- calibration_result.json cameras[].distance_from_axis_mm
+cal.azimuth_deg                                    -0.0, 42.3, -3.1                               <- calibration_result.json cameras[].azimuth_deg
+cal.height_above_wand_mean_mm                      320.4, 11.0, 21.6                              <- calibration_result.json cameras[].height_mm (the origin: the wand's mean height)
+cal.height_above_camera1_mm                        0.0, -309.3, -298.7                            <- the same, against camera 1's
+cal.looks_down_deg                                 23.1, 0.8, 1.6                                 <- calibration_result.json cameras[].viewing_direction: its angle below the plane across the axis
+cal.f_px_(not_quoted)                              16331, 18258, 25188                            <- calibration_result.json cameras[].f_px; f and distance trade off (case report, C1-T)
+cal.f_mm_(not_quoted)                              326.6, 365.2, 340.0                            <- calibration_result.json cameras[].f_mm
+cal.wand_length_fixed_mm                           10.0, False                                    <- calibration_result.json wand_length_mm, fit_L
+cal.free_wand_length_frames                        7175                                           <- calibration_result.json wand_length_free_triangulation.frames
+cal.free_wand_length_rms_um                        60.5                                           <- ... .rms_mm (the mean is held by the fit)
+cal.free_wand_length_mean_um                       -2.1                                           <- ... .mean_mm
+cal.free_wand_length_rms_pct                       0.61                                           <- ... .rms_mm / wand_length_mm
+cal.held_out_camera_frames                         3495                                           <- cases/cyl_20261008/tests/c1h_third_camera.json frames (kept by all three cameras)
+cal.held_out_camera_rms_px                         1.12, 2.16, 1.56                               <- c1h_third_camera.json held_out.<c>.rms_px (each camera's balls from the other two's triangulation)
+cal.held_out_camera_median_px                      0.81, 1.41, 1.11                               <- c1h_third_camera.json held_out.<c>.median_px
+cal.residual_cell_max_px                           0.76, 1.00, 1.19                               <- c1_residuals.json cameras.<c>.largest_cell.mean_px (10 x 6 cells)
+cal.residual_cell_median_px                        0.29, 0.27, 0.33                               <- c1_residuals.json cameras.<c>.cells[].mean_px, median over the cells
+cal.wand_length_slope_across_um_per_mm_z           2.6, 26.6                                      <- c1_residuals.json wand_length.slopes.X (run X = paper y: across the axis, across camera 1's view)
+cal.parts                                          h1, h2, q1, q2, q3, q4                         <- cases/cyl_20261008/tests/c1t_variants.json variants (halves and quarters of images 2396-13000)
+cal.parts_f_rel_pct_cam1                           -10.9, +4.3                                    <- c1t_variants.json <part>.summary.cameras[].f_px against the whole recording's
+cal.parts_f_over_distance_rel_pct_cam1             -0.54, +0.25                                   <- the same for f_px / distance_mm
+cal.parts_f_rel_pct_cam2                           -13.5, +9.2                                    <- c1t_variants.json <part>.summary.cameras[].f_px against the whole recording's
+cal.parts_f_over_distance_rel_pct_cam2             -0.70, +0.24                                   <- the same for f_px / distance_mm
+cal.parts_f_rel_pct_cam3                           -9.6, +4.2                                     <- c1t_variants.json <part>.summary.cameras[].f_px against the whole recording's
+cal.parts_f_over_distance_rel_pct_cam3             -0.38, +0.08                                   <- the same for f_px / distance_mm
+cal.ball_image_aspect_median                       1.325, 1.232, 1.231                            <- T0/detection/detections_all.csv a / b, the balls of the frames in the fit, per camera
+fig.wand_frame_image_number                        3265                                           <- the rule above, over T0's detections_all.csv and calibration_data.json
+fig.wand_frame_candidates                          3175                                           <- frames in the fit that all three cameras keep with the balls inside
+fig.wand_detections_used_per_camera                13891, 10021, 11742                            <- calibration_data.json observations, active, per camera
+cal.wand_tilt_from_cross_section_deg_50_90_max     31.5, 42.9, 50.6                               <- calibration_data.json ends_A_mm / ends_B_mm, active frames: angle between the wand and the plane across the axis
+cal.wand_ends_r_mm_95_max                          32.9, 41.7                                     <- the same ends: distance from the axis
+cal.wand_ends_z_mm_5_95                            -15.0, +15.2                                   <- the same ends: along the axis from their mean height
+fig.wand_length_values                             7175                                           <- calibration_data.json wand_length_free_mm, active frames
+fig.wand_length_rms_um_check                       60.9                                           <- the same values (cf. cal.free_wand_length_rms_um)
+fig.wand_length_sd_um_and_excess_kurtosis          60.88, 2.92                                    <- the same values: standard deviation, excess kurtosis (0 for a Gaussian)
+fig.wand_length_share_within_1_2_3_sd              0.736, 0.954, 0.989                            <- the same values (a Gaussian: 0.683, 0.954, 0.997)
+rig.traced_rays_reprojected_px_max                 5.45e-09                                       <- the traced lines of sight, projected back with camFile_track (pyopenlpt p4c)
+trk.deliverable_equals_local_run                   True                                           <- sha256 of T1/Results/ConvergeTrack/*.csv against data/runs/s3_final_c3
+trk.build                                          p4c                                            <- T1/run_info.json build
+trk.frames_processed                               250                                            <- Results/ConvergeTrack/*_<last>.csv: frames 0..last
+trk.step_ms                                        0.25                                           <- every raw frame at 4,000 frames/s
+trk.ipr_all_three_cameras_tol_px                   0, 2.0, 2                                      <- tests/s3_track_final_c3.json ipr.reduced_cameras (0: every match in all three), tol_2d_px, loops
+trk.depth_cue_tol_px_rel                           0.8, 0.2                                       <- s3_track_final_c3.json tracer.shape_tol_px, shape_tol_rel (the three image widths must agree)
+trk.log_deliverable_equals_local_run               True                                           <- sha256 of T1/log.txt against data/runs/s3_final_c3/log.txt
+trk.first_ipr_loop_detections_mean_(not_quoted)    376, 853, 3385                                 <- data/runs/s3_final_c3/log.txt: each frame's first IPR loop, mean over frames 0-249; from frame 4 on, IPR detects on the residual image (the tracked particles' images removed), so these undercount
+trk.long_tracks                                    425                                            <- long tracks: active + inactive + exited at the last frame
+trk.positions                                      69846                                          <- their rows
+trk.length_pcts_10_50_90                           41, 184, 250                                   <- positions per long track
+trk.length_min_max                                 4, 250                                         <- positions per long track
+trk.tracks_ge_100_200                              320, 190                                       <- long tracks with >= 100, 200 positions
+trk.tracks_full_length                             48                                             <- long tracks spanning every frame
+trk.particles_per_frame_150_249                    343                                            <- long-track positions per frame, mean over frames 150-249
+trk.particles_per_frame_at_50_100_149_200_249      217, 279, 321, 341, 359                        <- long-track positions at those frames
+trk.image_residual_rms_px                          0.74, 0.84, 0.27, 0.64, 0.41, 0.38             <- T1/checks/t1_checks_s3_final_c3.json T1a_cam<c>.rms_du/rms_dv (detection - the track's image; cam1 du, dv, cam2, cam3)
+trk.image_residual_rms_px_range                    0.27, 0.84                                     <- the same: range
+trk.image_residual_points                          859, 1349, 1576                                <- t1_checks_s3_final_c3.json T1a_cam<c>.n (the sample frames' long-track points with a detection within 2 px)
+trk.speed_stride_mm_s_10_50_90                     113, 207, 249                                  <- t1_checks T1d.speed_mm_s_pcts (over 20 frames, unsmoothed)
+ghost.control_vs_final_active_long_at_50_100_149   [12, 213], [13, 275], [12, 319]                <- T1/checks/t1_compare.json today.ghost_estimate_final (control: cam2 50 and cam3 100 frames late)
+ghost.bound_three_cameras_at_50_100_149            0.056, 0.047, 0.038                            <- the same: control / final
+ghost.bound_cams12_only_at_50_100_149              0.754, 0.811, 0.836                            <- t1_compare.json today.ghost_estimate_pair12 (the same tracking with cams 1-2 alone, its own control)
+ghost.cams12_only_vs_control_active_long_at_50_100_149 [227, 301], [326, 402], [381, 456]             <- the same: control, run
+ghost.swirl_estimate_(rough)                       0.093                                          <- t1e_ghost_control_s3_final_c3.json swirl.ghost_share_estimate (16 control tracks)
+trk.position_noise_um_median                       5.5                                            <- t1e_ghost_control_s3_final_c3.json stats_final.jitter_um_pcts (median)
+trk.preprocess_median_px                           15, 15, 23                                     <- T1/images/manifest.json median_px
+trk.preprocess_method                              lines.preprocess: (p90 background of frames 0-249 - frame) - median, minus the noise level, x gain, clipped to 0..255; cam3 cropped to rows 360-1575 (s1b_crop_cam3.py) <- T1/images/manifest.json method
+trk.cam3_rows                                      360, 1576                                      <- T1/images/manifest.json cam3_crop_rows (end exclusive)
+smooth.filter_width_steps                          3                                              <- the author (2026-10-08); processor.py's filter_width
+smooth.half_width_steps                            9                                              <- ceil(3 w): kernel support and the points dropped at each end
+smooth.tracks_kept                                 411                                            <- long tracks with >= 19 positions (all drawn in Fig. 17)
+smooth.positions_kept                              62278                                          <- their smoothed positions
+smooth.speed_pcts_10_50_90_mm_s                    113, 206, 252                                  <- smoothed speed, all points
+swirl.sense_seen_from_plus_z                       clockwise                                      <- sign of the median azimuthal velocity in the paper's frame
+swirl.radius_pcts_5_50_95_mm                       3.5, 12.7, 22.8                                <- distance from the axis, all points
+swirl.z_pcts_5_95_mm                               -18.3, +15.3                                   <- along the axis, all points
+swirl.bins_rmedian_mm                              2.4, 4.7, 7.9, 10.3, 13.6, 16.1, 19.6, 22.3, 24.9, 28.3, 31.4 <- 3 mm bins of r with >= 200 points: median r
+swirl.bins_points                                  2107, 6085, 9874, 10933, 9604, 9467, 7171, 5343, 1063, 205, 426 <- points per bin
+swirl.vtheta_median_mm_s                           26.1, 96.5, 141.7, 169.1, 203.1, 227.5, 240.0, 243.2, 251.3, 248.4, 242.5 <- median azimuthal velocity per bin
+swirl.vr_median_mm_s                               5.8, -17.1, -1.4, 6.4, -4.5, 6.9, 5.5, 12.8, -9.5, -16.5, -11.9 <- median radial velocity per bin
+swirl.vz_median_mm_s                               19.4, 26.4, 32.9, 37.2, 42.5, 32.1, 17.1, 23.0, 22.2, 5.1, -10.3 <- median axial velocity per bin
+swirl.vtheta_over_r_per_s                          11.0, 20.6, 18.0, 16.3, 14.9, 14.1, 12.3, 10.9, 10.1, 8.8, 7.7 <- median v_theta / median r per bin
+swirl.vr_abs_median_over_vtheta_median             0.22, 0.18, 0.01, 0.04, 0.02, 0.03, 0.02, 0.05, 0.04, 0.07, 0.05 <- |median v_r| / median v_theta per bin
+swirl.vz_abs_median_over_vtheta_median             0.74, 0.27, 0.23, 0.22, 0.21, 0.14, 0.07, 0.09, 0.09, 0.02, 0.04 <- |median v_z| / median v_theta per bin
+swirl.core_centre_xy_mm_(not_quoted)               +2.43, +0.80                                   <- least squares, points within 8 mm of the axis
+trk.detector_noise                                 10.215, 5.886, 5.375                           <- data/runs/s3_final_c3/config_final_c3.json objects[0].tracer.lines.noise
+trk.detector_k                                     6                                              <- LineFinderParam() default k_detect (the run's)
+trk.detections_per_frame                           459, 959, 3387                                 <- detectLines on the run's frames 0, 25, ..., 225 (whole frames; cam3: rows 360-1575), mean
+trk.detections_per_frame_range                     [414, 497], [927, 994], [3292, 3488]           <- the same frames: range per camera
+fig.t1_detections_cam1                             497, 405                                       <- detectLines on the run's frame 200 against the run's first IPR loop
+fig.t1_crop_cam1_u0_v0_w_h                         375, 445, 200, 125                             <- the crop rule above (full-frame pixels)
+fig.t1_tracked_in_crop_cam1                        23                                             <- tracked particles inside the crop
+fig.t1_detections_in_crop_cam1                     30                                             <- detections centred in the crop
+fig.t1_detections_cam2                             994, 895                                       <- detectLines on the run's frame 200 against the run's first IPR loop
+fig.t1_crop_cam2_u0_v0_w_h                         385, 545, 200, 125                             <- the crop rule above (full-frame pixels)
+fig.t1_tracked_in_crop_cam2                        24                                             <- tracked particles inside the crop
+fig.t1_detections_in_crop_cam2                     30                                             <- detections centred in the crop
+fig.t1_detections_cam3                             3414, 3424                                     <- detectLines on the run's frame 200 against the run's first IPR loop
+fig.t1_crop_cam3_u0_v0_w_h                         745, 1105, 200, 125                            <- the crop rule above (full-frame pixels)
+fig.t1_tracked_in_crop_cam3                        13                                             <- tracked particles inside the crop
+fig.t1_detections_in_crop_cam3                     41                                             <- detections centred in the crop

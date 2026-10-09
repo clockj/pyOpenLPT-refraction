@@ -1,0 +1,13 @@
+  lib_r2: recall (central, seen by all) 0.658, >= 2 0.658; reconstructed 808 per frame, ghosts 115 (14.2 %), duplicates 0.1; position RMS 20.4, 10.1, 18.0 um; long tracks 951 (ghost 96), purity 0.848, track recall 0.656; 10.66 s per frame
+  rerendered_r2: recall (central, seen by all) 0.665, >= 2 0.665; reconstructed 823 per frame, ghosts 121 (14.7 %), duplicates 0.4; position RMS 19.9, 10.3, 18.2 um; long tracks 967 (ghost 95), purity 0.844, track recall 0.663; 14.32 s per frame
+  lib_r3: recall (central, seen by all) 0.865, >= n-1 0.770, >= 2 0.770; reconstructed 1110 per frame, ghosts 73 (6.5 %), duplicates 0.6; position RMS 20.3, 9.6, 19.5 um; long tracks 1262 (ghost 52), purity 0.931, track recall 0.768; 38.48 s per frame
+  rerendered_r3: recall (central, seen by all) 0.869, >= n-1 0.779, >= 2 0.779; reconstructed 1116 per frame, ghosts 65 (5.9 %), duplicates 1.1; position RMS 19.7, 9.0, 19.3 um; long tracks 1262 (ghost 45), purity 0.937, track recall 0.778; 55.83 s per frame
+  lib_r4: recall (central, seen by all) 0.773, >= n-1 0.643, >= 2 0.541; reconstructed 772 per frame, ghosts 11 (1.4 %), duplicates 0.1; position RMS 13.8, 6.6, 16.2 um; long tracks 925 (ghost 0), purity 0.987, track recall 0.539; 62.64 s per frame
+  rerendered_r4: recall (central, seen by all) 0.778, >= n-1 0.648, >= 2 0.545; reconstructed 777 per frame, ghosts 10 (1.2 %), duplicates 0.1; position RMS 13.9, 6.6, 16.1 um; long tracks 926 (ghost 0), purity 0.989, track recall 0.544; 83.93 s per frame
+  uncorrected_r2_tol1.0: recall (central, seen by all) 0.571, >= 2 0.571; reconstructed 746 per frame, ghosts 144 (19.4 %), duplicates 0.2; position RMS 20.7, 9.8, 18.8 um; long tracks 897 (ghost 140), purity 0.788, track recall 0.569; 17.90 s per frame
+  uncorrected_r3_tol1.5: recall (central, seen by all) 0.813, >= n-1 0.715, >= 2 0.715; reconstructed 1077 per frame, ghosts 113 (10.5 %), duplicates 1.1; position RMS 20.6, 12.0, 20.6 um; long tracks 1229 (ghost 96), purity 0.888, track recall 0.713; 48.61 s per frame
+  uncorrected_r4_tol1.5: recall (central, seen by all) 0.762, >= n-1 0.629, >= 2 0.527; reconstructed 750 per frame, ghosts 9 (1.2 %), duplicates 0.2; position RMS 13.7, 9.4, 15.3 um; long tracks 896 (ghost 1), purity 0.988, track recall 0.525; 79.44 s per frame
+2 cameras: library 0.658 recall, 14.2 % ghosts, position RMS (largest axis) 20.4 um; re-rendered 0.665, 14.7 %, 19.9 um -> PASS
+3 cameras: library 0.865 recall, 6.5 % ghosts, position RMS (largest axis) 20.3 um; re-rendered 0.869, 5.9 %, 19.7 um -> FAIL
+4 cameras: library 0.773 recall, 1.4 % ghosts, position RMS (largest axis) 16.2 um; re-rendered 0.778, 1.2 %, 16.1 um -> PASS
+L3: FAIL

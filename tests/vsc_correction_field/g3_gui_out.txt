@@ -1,0 +1,9 @@
+G3 on D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_g3; pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd
+  the field VSC note under the VSC group: shown
+  message box (information) 'VSC Complete': Field VSC pass 1: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.724 -> 0.592 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px, set in config.json (objects[0].ipr.tol_2d_px): a Save in the tracking settings would drop the tracer's settings that page does not show (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel). Rerun tracking with the corrected cameras, then VSC again for a second pass (two or three passes).
+
+Log saved to VSC_log.txt
+  the Correction tab: present; frames in the VSC table: 51
+  config.json's corrections: ['camFile_VSC/vsc_cam1_corr_p1.txt', 'camFile_VSC/vsc_cam2_corr_p1.txt']; errors on stderr: 0
+  screenshots: g3_before.png, g3_correction.png, g3_overlay.png, g3_3d.png
+G3: PASS (the screenshots still need a look)

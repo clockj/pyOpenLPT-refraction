@@ -1,0 +1,10 @@
+t1_m15 (the self-calibration's gather): 7653 points in both cameras, frames 0-250
+    round 1: bending weight 10000 (held-out loss), noise model s_f 0.351 px, beta 0.0731
+    round 2: bending weight 10000 (held-out loss), noise model s_f 0.371 px, beta 0.0731
+a. V0's protocol: bending weight 10000 (V0 10000); noise [0.3714154282426184, 0.07309049512689911] (V0 [0.3714154282426184, 0.07309049512689911], largest difference 0.0e+00); coefficients differ by <= 0.00e+00; the field at the data by <= 0.00e+00 px -> PASS
+    round 1: bending weight 10000 (held-out loss), noise model s_f 0.351 px, beta 0.0731
+    round 2: bending weight 10000 (held-out loss), noise model s_f 0.371 px, beta 0.0731
+b. the module's grid (100.0, 1000.0, 10000.0, 100000.0, 1000000.0, 10000000.0): bending weight 10000 (held-out loss per weight {100.0: 0.63992, 1000.0: 0.63963, 10000.0: 0.63868, 100000.0: 0.64161, 1000000.0: 0.65914, 10000000.0: 0.68823}); its field departs from (a)'s at the data by 0.000 px RMS, 0.000 max (the field there: 0.289 px RMS)
+c. cam1: 16260 of 16261 nodes near the data; the correction against V0's dense map: near the data 0.0002 px RMS (0.009 max); beyond (the fills differ) 0.005 px RMS (0.008 max); slope bound 0.0060
+c. cam2: 14467 of 16261 nodes near the data; the correction against V0's dense map: near the data 0.0004 px RMS (0.026 max); beyond (the fills differ) 0.039 px RMS (0.148 max); slope bound 0.0098
+G0: PASS

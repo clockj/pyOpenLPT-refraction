@@ -215,7 +215,8 @@ bool extractPinholeData(const Camera& camera_model,
 {
     switch (camera_model.type()) {
     case CameraType::Pinhole: {
-        const auto* pinhole = dynamic_cast<const PinholeCamera*>(&camera_model);
+        // a corrected camera's parameters are its model's
+        const auto* pinhole = dynamic_cast<const PinholeCamera*>(&baseCamera(camera_model));
         if (!pinhole) {
             return false;
         }
@@ -226,7 +227,7 @@ bool extractPinholeData(const Camera& camera_model,
         return true;
     }
     case CameraType::RefractionPinhole: {
-        const auto* pinplate = dynamic_cast<const RefractionPinholeCamera*>(&camera_model);
+        const auto* pinplate = dynamic_cast<const RefractionPinholeCamera*>(&baseCamera(camera_model));
         if (!pinplate) {
             return false;
         }

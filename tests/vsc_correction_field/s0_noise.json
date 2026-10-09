@@ -1,0 +1,24 @@
+{
+ "project": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\t1_selfcalproto",
+ "frame": 0,
+ "cameras": [
+  {
+   "camera": 0,
+   "noise_config": 7.514877384110587,
+   "noise_image": 10.858611614572858,
+   "findObject2D": 1047,
+   "detectLines_image_noise": 1047,
+   "detectLines_config_noise": 1067,
+   "run_detections_also_found": 984
+  },
+  {
+   "camera": 1,
+   "noise_config": 5.502475966380505,
+   "noise_image": 10.144841672837744,
+   "findObject2D": 949,
+   "detectLines_image_noise": 949,
+   "detectLines_config_noise": 985,
+   "run_detections_also_found": 887
+  }
+ ]
+}

@@ -263,7 +263,7 @@ bool read_basic_json(BasicSetting &s, const fs::path &config_abs,
   s._cam_list.reserve(cams.size());
   for (size_t i = 0; i < cams.size(); ++i) {
     JsonReader c(cams[i], "cameras[" + std::to_string(i) + "]", file);
-    c.warnUnknown({"file", "max_intensity"});
+    c.warnUnknown({"file", "max_intensity", "correction"});
     const std::string cam_path =
         resolve_path_from_config_root(config_root, c.str("file"));
     const int max_intensity =
@@ -274,6 +274,29 @@ bool read_basic_json(BasicSetting &s, const fs::path &config_abs,
                       "Failed to load camera model from:", cam_path);
     }
     auto cam_model = cam_model_st.value();
+    // Optional: the camera's image correction (VSC's field, fitted between
+    // runs). Without it the camera is used as loaded.
+    if (c.has("correction") && !c.str("correction").empty()) {
+      const std::string corr_path =
+          resolve_path_from_config_root(config_root, c.str("correction"));
+      auto corr_st = ImageCorrection::loadFromFile(corr_path);
+      if (!corr_st) {
+        THROW_FATAL_CTX(ErrorCode::InvalidCameraState,
+                        "Failed to load the image correction of cameras[" +
+                            std::to_string(i) + "]:",
+                        corr_st.status().err.toString());
+      }
+      auto wrapped_st = CorrectedCamera::create(cam_model, corr_st.value());
+      if (!wrapped_st) {
+        THROW_FATAL_CTX(ErrorCode::InvalidCameraState,
+                        "Cannot apply the image correction of cameras[" +
+                            std::to_string(i) + "]:",
+                        wrapped_st.status().err.toString());
+      }
+      cam_model = wrapped_st.value();
+      std::cout << "Camera " << i << ": image correction " << corr_path
+                << std::endl;
+    }
     cam_model->max_intensity = max_intensity;
     cam_model->is_active = true;
     s._cam_list.emplace_back(std::move(cam_model));

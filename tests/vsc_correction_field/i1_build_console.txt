@@ -1,0 +1,305 @@
+-- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.26200.
+-- OpenMP CXX found
+-- Found pybind11: C:/Users/zcloc/.conda/envs/refract/Lib/site-packages/pybind11/include (found version "3.1.0")
+-- [PY] pyopenlpt include dirs = D:/Refraction/pyOpenLPT/inc
+-- Configuring done (0.3s)
+-- Generating done (0.7s)
+-- Build files have been written to: D:/Refraction/pyOpenLPT/build-py
+MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  myMath.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\myMath.lib
+  tiff.vcxproj -> D:\Refraction\pyOpenLPT\build-py\_deps\tiff\Release\tiff.lib
+  RefractCurved.cpp
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  PredField.cpp
+  ObjectInfo.cpp
+  ImageIO.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\ImageIO.lib
+  Compiling...
+  RefractCurved.cpp
+  Compiling...
+  Compiling...
+  ObjectInfo.cpp
+  PredField.cpp
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(30,17): warning C4849: OpenMP 'collapse' clause ignored in 'parallel for' directive [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(211,24): warning C4101: 'distsqr': unreferenced local variable [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(260,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(261,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(262,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(345,17): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(391,17): warning C4849: OpenMP 'collapse' clause ignored in 'parallel for' directive [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(417,17): warning C4849: OpenMP 'collapse' clause ignored in 'parallel for' directive [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(442,17): warning C4849: OpenMP 'collapse' clause ignored in 'parallel for' directive [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(472,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(473,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\PredField.cpp(474,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\ObjectInfo.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\ObjectInfo.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\PredField.vcxproj]
+  PredField.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\PredField.lib
+  ObjectInfo.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\ObjectInfo.lib
+  RefractCurved.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\RefractCurved.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  BubbleResize.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\BubbleResize.lib
+  Camera.cpp
+  Scanning sources for module dependencies...
+  CircleIdentifier.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\CircleIdentifier.lib
+  Compiling...
+  Scanning sources for module dependencies...
+  Camera.cpp
+  BubbleRefImg.cpp
+  LineFinder.cpp
+  ObjectFinder.cpp
+  Compiling...
+  BubbleRefImg.cpp
+  Compiling...
+  LineFinder.cpp
+  ObjectFinder.cpp
+D:\Refraction\pyOpenLPT\src\srcMath\Camera.cpp(2073,30): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [D:\Refraction\pyOpenLPT\build-py\Camera.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Camera.cpp(2082,30): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [D:\Refraction\pyOpenLPT\build-py\Camera.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Camera.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Camera.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcObject\ObjectFinder.cpp(260,21): warning C4849: OpenMP 'collapse' clause ignored in 'for' directive [D:\Refraction\pyOpenLPT\build-py\ObjectFinder.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\ObjectFinder.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\ObjectFinder.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\ObjectFinder.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\ObjectFinder.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcObject\BubbleRefImg.cpp(250,18): warning C4189: 'cy': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\BubbleRefImg.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcObject\BubbleRefImg.cpp(251,18): warning C4189: 'rr': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\BubbleRefImg.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcObject\BubbleRefImg.cpp(249,18): warning C4189: 'cx': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\BubbleRefImg.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\BubbleRefImg.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\BubbleRefImg.vcxproj]
+  ObjectFinder.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\ObjectFinder.lib
+  Camera.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Camera.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  OTF.cpp
+  StereoMatch.cpp
+  BubbleRefImg.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\BubbleRefImg.lib
+  Compiling...
+  Compiling...
+  OTF.cpp
+  StereoMatch.cpp
+D:\Refraction\pyOpenLPT\src\srcSTB\OTF.cpp(102,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OTF.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\OTF.cpp(113,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OTF.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OTF.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OTF.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\StereoMatch.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\StereoMatch.vcxproj]
+  OTF.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\OTF.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  Config.cpp
+  Shake.cpp
+  Compiling...
+  Compiling...
+  Config.cpp
+  Shake.cpp
+  StereoMatch.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\StereoMatch.lib
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(159,44): warning C4100: 'imgOrig': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,67): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,34): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(167,63): warning C4100: 'shakecam': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(166,60): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(165,54): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(103,27): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(325,47): warning C4100: 'img_orig': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(831,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(909,14): warning C4189: 'inside': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(918,14): warning C4189: 'inside': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(927,14): warning C4189: 'inside': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(937,14): warning C4189: 'inside': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1117,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1118,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1119,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1120,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1400,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1402,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1406,33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1406,21): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1458,33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1458,21): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1465,52): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\Shake.cpp(1456,23): warning C4189: 'range_corrmap': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\nanoflann\nanoflann.hpp(1552,13): warning C4127: conditional expression is constant [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\inc\nanoflann\nanoflann.hpp(633,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Shake.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Config.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Config.vcxproj]
+  Shake.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Shake.lib
+  Scanning sources for module dependencies...
+  IPR.cpp
+  Compiling...
+  IPR.cpp
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(159,44): warning C4100: 'imgOrig': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,67): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,34): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(167,63): warning C4100: 'shakecam': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(166,60): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(165,54): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\IPR.vcxproj]
+  Config.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Config.lib
+  Scanning sources for module dependencies...
+  Track.cpp
+  Compiling...
+  Track.cpp
+  IPR.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\IPR.lib
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244: 'return': conversion from 'T' to 'float', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         with [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         [ [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:             T=double [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         ] [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\Track.vcxproj]
+  Track.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Track.lib
+  Scanning sources for module dependencies...
+  VSC.cpp
+  Compiling...
+  VSC.cpp
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244: 'return': conversion from 'T' to 'float', possible loss of data [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         with [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         [ [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:             T=double [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         ] [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\VSC.cpp(55,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\VSC.cpp(1851,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\VSC.cpp(1857,14): warning C4189: 'old_a': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+D:\Refraction\pyOpenLPT\inc\nanoflann\nanoflann.hpp(1552,13): warning C4127: conditional expression is constant [D:\Refraction\pyOpenLPT\build-py\VSC.vcxproj]
+  VSC.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\VSC.lib
+  Scanning sources for module dependencies...
+  STB.cpp
+  Compiling...
+  STB.cpp
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(159,44): warning C4100: 'imgOrig': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,67): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,34): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(167,63): warning C4100: 'shakecam': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(166,60): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(165,54): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244: 'return': conversion from 'T' to 'float', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         with [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         [ [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:             T=double [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         ] [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(184,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(303,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(304,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(305,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(306,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(437,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(864,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcSTB\STB.cpp(904,10): warning C4189: 'err_min': local variable is initialized but not referenced [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\nanoflann\nanoflann.hpp(1552,13): warning C4127: conditional expression is constant [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+D:\Refraction\pyOpenLPT\inc\nanoflann\nanoflann.hpp(633,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\STB.vcxproj]
+  STB.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\STB.lib
+  Scanning sources for module dependencies...
+  main.cpp
+  pyConfig.cpp
+  pyCamera.cpp
+  pyObjectFinder.cpp
+  pyObjectInfo.cpp
+  pyRefractCurved.cpp
+  pyBubbleRefImg.cpp
+  pyTrack.cpp
+  pyOTF.cpp
+  pySTB.cpp
+  pyStereoMatch.cpp
+  pyShake.cpp
+  pyIPR.cpp
+  pyPredField.cpp
+  Compiling...
+  pyConfig.cpp
+  pyBubbleRefImg.cpp
+  pyObjectInfo.cpp
+  pyShake.cpp
+  pyObjectFinder.cpp
+  main.cpp
+  pyRefractCurved.cpp
+  pyCamera.cpp
+  pyIPR.cpp
+  pyStereoMatch.cpp
+  pyPredField.cpp
+  pyOTF.cpp
+  pySTB.cpp
+  pyTrack.cpp
+D:\Refraction\pyOpenLPT\src\pybind_OpenLPT\pyStereoMatch.cpp(7,9): warning C4005: 'OPENLPT_EXPOSE_PRIVATE': macro redefinition [D:\Refraction\pyOpenLPT\build-py\pyopenlpt.vcxproj]
+     Creating library D:/Refraction/pyOpenLPT/build-py/Release/pyopenlpt.lib and object D:/Refraction/pyOpenLPT/build-py/Release/pyopenlpt.exp
+  Generating code
+  Finished generating code
+  pyopenlpt.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  myMath.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\myMath.lib
+  tiff.vcxproj -> D:\Refraction\pyOpenLPT\build-py\_deps\tiff\Release\tiff.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  ImageIO.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\ImageIO.lib
+  RefractCurved.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\RefractCurved.lib
+  ObjectInfo.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\ObjectInfo.lib
+  PredField.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\PredField.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  BubbleResize.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\BubbleResize.lib
+  CircleIdentifier.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\CircleIdentifier.lib
+  Scanning sources for module dependencies...
+  Camera.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Camera.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  ObjectFinder.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\ObjectFinder.lib
+  OTF.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\OTF.lib
+  BubbleRefImg.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\BubbleRefImg.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  StereoMatch.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\StereoMatch.lib
+  Config.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Config.lib
+  Shake.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Shake.lib
+  Scanning sources for module dependencies...
+  Scanning sources for module dependencies...
+  IPR.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\IPR.lib
+  Track.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\Track.lib
+  Scanning sources for module dependencies...
+  VSC.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\VSC.lib
+  Scanning sources for module dependencies...
+  STB.vcxproj -> D:\Refraction\pyOpenLPT\build-py\Release\STB.lib
+  Scanning sources for module dependencies...
+  main.cpp
+  Compiling...
+  main.cpp
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(159,44): warning C4100: 'imgOrig': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,67): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(158,34): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(167,63): warning C4100: 'shakecam': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(166,60): warning C4100: 'roi_info': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Shake.h(165,54): warning C4100: 'obj': unreferenced formal parameter [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244: 'return': conversion from 'T' to 'float', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         with [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         [ [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:             T=double [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\inc\libSTB\Track.h(58,95): warning C4244:         ] [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+D:\Refraction\pyOpenLPT\src\srcMath\Matrix.hpp(33,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [D:\Refraction\pyOpenLPT\build-py\OpenLPT.vcxproj]
+  OpenLPT.vcxproj -> D:\Refraction\pyOpenLPT\build\Release\OpenLPT.exe
+  OpenLPT exe: D:/Refraction/pyOpenLPT/build/Release/OpenLPT.exe
+>> cmake -S D:\Refraction\pyOpenLPT -B D:\Refraction\pyOpenLPT\build-py -G Visual Studio 17 2022 -A x64 -DPYOPENLPT=ON -DPython_EXECUTABLE=C:\Users\zcloc\.conda\envs\refract\python.exe -Dpybind11_DIR=C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\pybind11\share\cmake\pybind11 -DOPENLPT_PYBIND11_PROVIDER=pip
+>> cmake --build D:\Refraction\pyOpenLPT\build-py --config Release --target pyopenlpt OpenLPT -- /m
+
+Build done. Module at: D:\Refraction\pyOpenLPT\build-py\Release
+
+exit 0

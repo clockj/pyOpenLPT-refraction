@@ -1,0 +1,13 @@
+t1_vc2_total cam1: 0.391 px RMS, 1.349 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0003 px RMS, 0.0153 px max; slope bound 0.0078 -> data\fields\t1_vc2_total_cam1.txt
+t1_vc2_total cam2: 0.480 px RMS, 2.213 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0025 px RMS, 0.1110 px max; slope bound 0.0294 -> data\fields\t1_vc2_total_cam2.txt
+t1_m15_all cam1: 0.290 px RMS, 1.044 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0002 px RMS, 0.0046 px max; slope bound 0.0060 -> data\fields\t1_m15_all_cam1.txt
+t1_m15_all cam2: 0.396 px RMS, 1.821 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0024 px RMS, 0.1110 px max; slope bound 0.0302 -> data\fields\t1_m15_all_cam2.txt
+cal4_r2 cam1: 0.578 px RMS, 3.104 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0007 px RMS, 0.0880 px max; slope bound 0.0364 -> data\fields\cal4_r2_cam1.txt
+cal4_r2 cam2: 0.571 px RMS, 1.658 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0067 px RMS, 0.4411 px max; slope bound 0.0736 -> data\fields\cal4_r2_cam2.txt
+cal4_r3 cam1: 0.672 px RMS, 1.905 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0007 px RMS, 0.0128 px max; slope bound 0.0164 -> data\fields\cal4_r3_cam1.txt
+cal4_r3 cam2: 0.761 px RMS, 1.755 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0079 px RMS, 0.4017 px max; slope bound 0.0783 -> data\fields\cal4_r3_cam2.txt
+cal4_r3 cam3: 0.618 px RMS, 1.769 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0075 px RMS, 0.7093 px max; slope bound 0.1538 -> data\fields\cal4_r3_cam3.txt
+cal4_r4 cam1: 0.832 px RMS, 2.132 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0018 px RMS, 0.1600 px max; slope bound 0.0382 -> data\fields\cal4_r4_cam1.txt
+cal4_r4 cam2: 0.650 px RMS, 1.394 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0081 px RMS, 0.5231 px max; slope bound 0.1024 -> data\fields\cal4_r4_cam2.txt
+cal4_r4 cam3: 0.675 px RMS, 2.077 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0082 px RMS, 0.4223 px max; slope bound 0.0935 -> data\fields\cal4_r4_cam3.txt
+cal4_r4 cam4: 0.760 px RMS, 2.109 px max; the 8 px nodes read bilinearly depart from the dense map by 0.0030 px RMS, 0.2326 px max; slope bound 0.0494 -> data\fields\cal4_r4_cam4.txt

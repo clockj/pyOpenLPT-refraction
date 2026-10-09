@@ -25,13 +25,20 @@ Fig. 14, S8) in C++. A module of its own compiles OpenLPT's search unmodified, t
 methods of the paper's `code/paper_baselines.py`, and times them alike. See its `2026-10-06-plan.md` and
 `2026-10-06-report.md`. Nothing outside that folder is changed or built.
 
-**`experiment/` (2026-10-08):** the paper's experiment (Section 9.3, Figs. 16 and 17, Table 3, S8's paragraph "The
-experiment"), from run 20261007 (case `cases/cyl_20261007`; its deliverables on X:). `experiment_numbers.py` prints
-every number the section quotes with its source (`experiment_numbers_out.txt`, `.json`) and writes the figures' data
-(`experiment_data.npz`, copied into the paper by `code/make_paper_experiment_figs.py --refresh`). Nothing is fitted
-or tracked afresh; it smooths the tracks with the group's Gaussian filter (width 3 steps, the author's choice) and
-reruns the line detector on one sample frame. Run it with the refract interpreter; `CYL_EXPERIMENT_PYD` names a folder
-with a copy of `build-stb/p4c/out`'s `.pyd`, so that the build is not locked.
+**`experiment/` (2026-10-08):** the paper's experiment (Section 9.3, Figs. 16 and 17, Table 3, S8's paragraphs on
+the experiment).
+- **The paper's run, 20261008 (three cameras):** case `cases/cyl_20261008`, its deliverables on X:.
+  `experiment_numbers_20261008.py` prints every number the section quotes with its source
+  (`experiment_numbers_20261008_out.txt`, `.json`). It also writes the figures' data (`experiment_data_20261008.npz`,
+  copied into the paper by `code/make_paper_experiment_figs.py --refresh`).
+- **What it computes:** nothing is fitted or tracked afresh. It smooths the tracks with the group's Gaussian filter
+  (width 3 steps, the author's choice), reruns the line detector on ten frames (the particles detected per frame,
+  and one sample frame), and traces the rig figure's lines of sight.
+- **Running it:** use the refract interpreter, on one core (about 12 min). `CYL_EXPERIMENT_PYD` names a folder with
+  a copy of `build-stb/p4c/out`'s `.pyd`, so that the build is not locked.
+- **Run 20261007 (two cameras), which the section quoted first:** `experiment_numbers.py` (`experiment_numbers_out.txt`,
+  `experiment_data.npz`), and `ghost_filter.py`, the neighbour and swirl tests its track figure used
+  (`ghost_filter_check*_out.txt`).
 
 **History:**
 - `2026-10-03-plan.md`: the first plan, with P0–P5 reruns and a single-image rule. It is superseded: the paper

@@ -1,0 +1,2 @@
+build\Release\OpenLPT.exe: 1297e855769a294e..., 1291776 bytes, 2026-10-06 10:31:25
+build-py\Release\pyopenlpt.cp311-win_amd64.pyd: 7a5dec248055f23c..., 2395648 bytes, 2026-10-06 10:31:24

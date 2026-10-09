@@ -1,0 +1,12 @@
+{
+ "name": "vcf",
+ "git_head": "cffed7d",
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 128,
+ "minutes": 0.5,
+ "products": [
+  "OpenLPT.exe",
+  "pyopenlpt.cp311-win_amd64.pyd"
+ ]
+}

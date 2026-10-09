@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <cstdlib>
 #include <fstream>
 #include <iomanip>
@@ -2004,6 +2005,60 @@ const ImageRay* primaryImage(const std::vector<ImageRay>& rays, int n_col, int n
     return best;
 }
 
+/**
+  * @brief imageStatus()'s census of a multi-valued model's images `rays`, at
+  *        the pixels the camera reports, where `primary` indexes the image
+  *        project() returns (-1 for none): None when no image lies on the
+  *        sensor enlarged by `margin_px`; One when exactly one does, no other
+  *        lies within `merge_px` of it and it is the primary; Ambiguous
+  *        otherwise, and for any ring.
+  */
+ImageStatus statusOfImages(const std::vector<ImageRay>& rays, std::ptrdiff_t primary,
+                           int n_col, int n_row, double margin_px, double merge_px,
+                           Pt2D* pt) {
+    std::ptrdiff_t one = -1;
+    int n_on = 0;
+    for (std::size_t i = 0; i < rays.size(); ++i) {
+        const ImageRay& r = rays[i];
+        if (r.is_ring) {
+            return ImageStatus::Ambiguous; // a circle of images
+        }
+        const double u = r.pt_img_dist[0], v = r.pt_img_dist[1];
+        if (u >= -margin_px && u < n_col + margin_px && v >= -margin_px &&
+            v < n_row + margin_px) {
+            ++n_on;
+            one = static_cast<std::ptrdiff_t>(i);
+        }
+    }
+    if (n_on == 0) {
+        return ImageStatus::None;
+    }
+    if (n_on > 1) {
+        return ImageStatus::Ambiguous;
+    }
+    const ImageRay& the_one = rays[static_cast<std::size_t>(one)];
+    for (std::size_t i = 0; i < rays.size(); ++i) {
+        if (static_cast<std::ptrdiff_t>(i) == one) {
+            continue;
+        }
+        const double du = rays[i].pt_img_dist[0] - the_one.pt_img_dist[0];
+        const double dv = rays[i].pt_img_dist[1] - the_one.pt_img_dist[1];
+        if (du * du + dv * dv <= merge_px * merge_px) {
+            return ImageStatus::Ambiguous; // a merged pair next to a fold
+        }
+    }
+    // Tracking draws the point where project() puts it: the one image must be
+    // that one (it is, unless it lies in the margin and project() prefers
+    // another image off the sensor).
+    if (primary != one) {
+        return ImageStatus::Ambiguous;
+    }
+    if (pt) {
+        *pt = the_one.pt_img_dist;
+    }
+    return ImageStatus::One;
+}
+
 const char* noImageMessage(bool ring) {
     return ring ? "project failed: the point's only image is a ring (the axial line "
                   "of a sphere); use projectAll()"
@@ -2239,48 +2294,12 @@ ImageStatus RefractionCurvedCamera::imageStatus(const Pt3D& pt_world, double mar
         return ImageStatus::None;
     }
     const std::vector<ImageRay>& rays = all.value();
-    const ImageRay* one = nullptr;
-    int n_on = 0;
-    for (const ImageRay& r : rays) {
-        if (r.is_ring) {
-            return ImageStatus::Ambiguous; // a circle of images
-        }
-        const double u = r.pt_img_dist[0], v = r.pt_img_dist[1];
-        if (u >= -margin_px && u < _param.n_col + margin_px && v >= -margin_px &&
-            v < _param.n_row + margin_px) {
-            ++n_on;
-            one = &r;
-        }
-    }
-    if (n_on == 0) {
-        return ImageStatus::None;
-    }
-    if (n_on > 1) {
-        return ImageStatus::Ambiguous;
-    }
-    for (const ImageRay& r : rays) {
-        if (&r == one) {
-            continue;
-        }
-        const double du = r.pt_img_dist[0] - one->pt_img_dist[0];
-        const double dv = r.pt_img_dist[1] - one->pt_img_dist[1];
-        if (du * du + dv * dv <= merge_px * merge_px) {
-            return ImageStatus::Ambiguous; // a merged pair next to a fold
-        }
-    }
-    // Tracking draws the point where project() puts it: the one image must be
-    // that one (it is, unless it lies in the margin and project() prefers
-    // another image off the sensor).
     bool ring = false;
     const ImageRay* primary =
         refraction_curved::primaryImage(rays, _param.n_col, _param.n_row, ring);
-    if (primary != one) {
-        return ImageStatus::Ambiguous;
-    }
-    if (pt) {
-        *pt = one->pt_img_dist;
-    }
-    return ImageStatus::One;
+    return refraction_curved::statusOfImages(rays, primary ? primary - rays.data() : -1,
+                                             _param.n_col, _param.n_row, margin_px,
+                                             merge_px, pt);
 }
 
 bool RefractionCurvedCamera::lineImagesCurve() const {
@@ -2887,4 +2906,308 @@ StatusOr<std::shared_ptr<Camera>> CameraFactory::loadFromFile(
         return STATUS_OR_ERR_CTX(std::shared_ptr<Camera>, ErrorCode::IOfailure,
                                                           "CameraFactory::loadFromFile failed", e.what());
     }
+}
+
+// ===========================================================================
+// Image corrections (VSC's field) and the corrected camera
+// ===========================================================================
+
+StatusOr<std::shared_ptr<const ImageCorrection>> ImageCorrection::loadFromFile(
+    const std::string& file_name) {
+    using Ptr = std::shared_ptr<const ImageCorrection>;
+    std::ifstream in(file_name);
+    if (!in) {
+        return STATUS_OR_ERR_CTX(Ptr, ErrorCode::IOfailure,
+                                 "cannot open the image correction file", file_name);
+    }
+    // Comments out, then a stream of keywords and numbers.
+    std::stringstream body;
+    std::string line;
+    while (std::getline(in, line)) {
+        const std::size_t hash = line.find('#');
+        if (hash != std::string::npos) {
+            line.erase(hash);
+        }
+        body << line << '\n';
+    }
+    auto fail = [&](const std::string& what) {
+        return STATUS_OR_ERR_CTX(Ptr, ErrorCode::InvalidArgument,
+                                 "invalid image correction file: " + what, file_name);
+    };
+    std::string key;
+    int version = 0;
+    if (!(body >> key) || key != "VERSION" || !(body >> version) || version != 1) {
+        return fail("expected VERSION 1");
+    }
+    int n_col = 0, n_row = 0;
+    if (!(body >> key) || key != "IMAGE_SIZE" || !(body >> n_col >> n_row)) {
+        return fail("expected IMAGE_SIZE n_col n_row");
+    }
+    double grid_u0 = 0.0, grid_v0 = 0.0, grid_step = 0.0;
+    int grid_nu = 0, grid_nv = 0;
+    if (!(body >> key) || key != "GRID" || !(body >> grid_u0 >> grid_v0 >> grid_step >> grid_nu >> grid_nv)) {
+        return fail("expected GRID u0 v0 step nu nv");
+    }
+    if (grid_nu < 2 || grid_nv < 2 || grid_nu > 100000 || grid_nv > 100000) {
+        return fail("the grid needs 2 to 100000 nodes each way");
+    }
+    const std::size_t n = static_cast<std::size_t>(grid_nu) * static_cast<std::size_t>(grid_nv);
+    std::vector<double> du(n), dv(n);
+    if (!(body >> key) || key != "DU") {
+        return fail("expected DU");
+    }
+    for (double& x : du) {
+        if (!(body >> x)) {
+            return fail("DU needs nu * nv numbers");
+        }
+    }
+    if (!(body >> key) || key != "DV") {
+        return fail("expected DV after nu * nv numbers of DU");
+    }
+    for (double& x : dv) {
+        if (!(body >> x)) {
+            return fail("DV needs nu * nv numbers");
+        }
+    }
+    if (body >> key) {
+        return fail("unexpected text after DV: " + key);
+    }
+    return fromGrid(n_col, n_row, grid_u0, grid_v0, grid_step, grid_nu, grid_nv, du, dv, file_name);
+}
+
+StatusOr<std::shared_ptr<const ImageCorrection>> ImageCorrection::fromGrid(
+    int n_col, int n_row, double grid_u0, double grid_v0, double grid_step, int grid_nu, int grid_nv,
+    const std::vector<double>& du, const std::vector<double>& dv,
+    const std::string& source) {
+    using Ptr = std::shared_ptr<const ImageCorrection>;
+    auto fail = [&](const std::string& what) {
+        return STATUS_OR_ERR_CTX(Ptr, ErrorCode::InvalidArgument,
+                                 "invalid image correction: " + what, source);
+    };
+    if (n_col <= 0 || n_row <= 0) {
+        return fail("the image size must be positive");
+    }
+    if (!std::isfinite(grid_u0) || !std::isfinite(grid_v0) || !std::isfinite(grid_step) || !(grid_step > 0.0)) {
+        return fail("the grid's origin and step must be finite, and the step positive");
+    }
+    if (grid_nu < 2 || grid_nv < 2 || grid_nu > 100000 || grid_nv > 100000) {
+        return fail("the grid needs 2 to 100000 nodes each way");
+    }
+    const std::size_t n = static_cast<std::size_t>(grid_nu) * static_cast<std::size_t>(grid_nv);
+    if (du.size() != n || dv.size() != n) {
+        return fail("du and dv need nu * nv values each");
+    }
+    for (std::size_t k = 0; k < n; ++k) {
+        if (!std::isfinite(du[k]) || !std::isfinite(dv[k])) {
+            return fail("a value is not finite (node " + std::to_string(k) + ")");
+        }
+    }
+    // In a cell, the derivative of the bilinear field along u lies between its
+    // values on the cell's two edges, and likewise along v; the Frobenius norm
+    // of the largest entries bounds the derivative's norm. Beyond the grid the
+    // field is its edge value, which only drops derivatives.
+    double slope = 0.0;
+    for (int j = 0; j + 1 < grid_nv; ++j) {
+        for (int i = 0; i + 1 < grid_nu; ++i) {
+            const std::size_t k00 = static_cast<std::size_t>(j) * grid_nu + i;
+            const std::size_t k10 = k00 + 1, k01 = k00 + grid_nu, k11 = k01 + 1;
+            double g = 0.0;
+            for (const std::vector<double>* a : {&du, &dv}) {
+                const std::vector<double>& c = *a;
+                const double gu =
+                    std::max(std::abs(c[k10] - c[k00]), std::abs(c[k11] - c[k01])) / grid_step;
+                const double gv =
+                    std::max(std::abs(c[k01] - c[k00]), std::abs(c[k11] - c[k10])) / grid_step;
+                g += gu * gu + gv * gv;
+            }
+            slope = std::max(slope, std::sqrt(g));
+        }
+    }
+    if (!(slope < 0.5)) {
+        return fail("too steep: its slope bound is " + std::to_string(slope) +
+                    "; it must be below 0.5");
+    }
+    std::shared_ptr<ImageCorrection> c(new ImageCorrection());
+    c->_n_col = n_col;
+    c->_n_row = n_row;
+    c->_u0 = grid_u0;
+    c->_v0 = grid_v0;
+    c->_step = grid_step;
+    c->_nu = grid_nu;
+    c->_nv = grid_nv;
+    c->_du = du;
+    c->_dv = dv;
+    c->_slope = slope;
+    c->_source = source;
+    return Ptr(c);
+}
+
+void ImageCorrection::eval(double u, double v, double& cu, double& cv) const {
+    // Grid coordinates, held to the grid: beyond it, the edge value.
+    double s = (u - _u0) / _step;
+    double t = (v - _v0) / _step;
+    s = s < 0.0 ? 0.0 : (s > _nu - 1 ? static_cast<double>(_nu - 1) : s);
+    t = t < 0.0 ? 0.0 : (t > _nv - 1 ? static_cast<double>(_nv - 1) : t);
+    const int i = std::min(static_cast<int>(s), _nu - 2);
+    const int j = std::min(static_cast<int>(t), _nv - 2);
+    const double fs = s - i, ft = t - j;
+    const std::size_t k00 = static_cast<std::size_t>(j) * _nu + i;
+    const std::size_t k10 = k00 + 1, k01 = k00 + _nu, k11 = k01 + 1;
+    const double w00 = (1.0 - fs) * (1.0 - ft), w10 = fs * (1.0 - ft);
+    const double w01 = (1.0 - fs) * ft, w11 = fs * ft;
+    cu = w00 * _du[k00] + w10 * _du[k10] + w01 * _du[k01] + w11 * _du[k11];
+    cv = w00 * _dv[k00] + w10 * _dv[k10] + w01 * _dv[k01] + w11 * _dv[k11];
+}
+
+Pt2D ImageCorrection::at(const Pt2D& pt) const {
+    const double u = pt[0], v = pt[1];
+    if (!std::isfinite(u) || !std::isfinite(v)) {
+        const double nan = std::numeric_limits<double>::quiet_NaN();
+        return Pt2D(nan, nan);
+    }
+    double cu = 0.0, cv = 0.0;
+    eval(u, v, cu, cv);
+    return Pt2D(cu, cv);
+}
+
+Pt2D ImageCorrection::toModel(const Pt2D& pt_img) const {
+    const double u = pt_img[0], v = pt_img[1];
+    if (!std::isfinite(u) || !std::isfinite(v)) {
+        return pt_img;
+    }
+    double cu = 0.0, cv = 0.0;
+    eval(u, v, cu, cv);
+    return Pt2D(u - cu, v - cv);
+}
+
+Pt2D ImageCorrection::toImage(const Pt2D& pt_model) const {
+    const double qu = pt_model[0], qv = pt_model[1];
+    if (!std::isfinite(qu) || !std::isfinite(qv)) {
+        return pt_model;
+    }
+    double cu = 0.0, cv = 0.0;
+    eval(qu, qv, cu, cv);
+    double du = qu + cu, dv = qv + cv;
+    // d <- q + c(d) shrinks its error by slopeBound() < 1/2 per step, so 60
+    // steps take any start of the field's size well below the tolerance.
+    for (int k = 0; k < 60; ++k) {
+        eval(du, dv, cu, cv);
+        const double next_u = qu + cu, next_v = qv + cv;
+        const double change = std::abs(next_u - du) + std::abs(next_v - dv);
+        du = next_u;
+        dv = next_v;
+        if (change <= 1e-11) {
+            break;
+        }
+    }
+    return Pt2D(du, dv);
+}
+
+CorrectedCamera::CorrectedCamera(std::shared_ptr<Camera> inner,
+                                 std::shared_ptr<const ImageCorrection> correction)
+    : _inner(std::move(inner)), _correction(std::move(correction)) {
+    is_active = _inner->is_active;
+    max_intensity = _inner->max_intensity;
+}
+
+StatusOr<std::shared_ptr<CorrectedCamera>> CorrectedCamera::create(
+    std::shared_ptr<Camera> inner, std::shared_ptr<const ImageCorrection> correction) {
+    using Ptr = std::shared_ptr<CorrectedCamera>;
+    if (!inner || !correction) {
+        return STATUS_OR_ERR(Ptr, ErrorCode::InvalidArgument,
+                             "CorrectedCamera needs a camera and a correction");
+    }
+    if (correction->nCol() != inner->getNCol() || correction->nRow() != inner->getNRow()) {
+        return STATUS_OR_ERR_CTX(
+            Ptr, ErrorCode::InvalidArgument,
+            "the correction's image size (" + std::to_string(correction->nCol()) + " x " +
+                std::to_string(correction->nRow()) + ") is not the camera's (" +
+                std::to_string(inner->getNCol()) + " x " + std::to_string(inner->getNRow()) +
+                ")",
+            correction->source());
+    }
+    return Ptr(new CorrectedCamera(std::move(inner), std::move(correction)));
+}
+
+StatusOr<Pt2D> CorrectedCamera::project(const Pt3D& pt_world, bool is_print_detail) const {
+    auto q = _inner->project(pt_world, is_print_detail);
+    if (!q) {
+        return q;
+    }
+    return normalizeProjectResult(_correction->toImage(q.value()));
+}
+
+StatusOr<Line3D> CorrectedCamera::lineOfSight(const Pt2D& pt_img_dist) const {
+    return _inner->lineOfSight(_correction->toModel(pt_img_dist));
+}
+
+StatusOr<std::vector<ImageRay>> CorrectedCamera::projectAll(
+    const Pt3D& pt_world, ProjectionCoverage* coverage) const {
+    auto all = _inner->projectAll(pt_world, coverage);
+    if (!all) {
+        return all;
+    }
+    for (ImageRay& r : all.value()) {
+        if (!r.is_ring) {
+            r.pt_img_dist = _correction->toImage(r.pt_img_dist);
+        }
+    }
+    return all;
+}
+
+StatusOr<Pt2D> CorrectedCamera::projectWithHint(const Pt3D& pt_world,
+                                                ProjectionHint& hint) const {
+    auto q = _inner->projectWithHint(pt_world, hint);
+    if (!q) {
+        return q;
+    }
+    return normalizeProjectResult(_correction->toImage(q.value()));
+}
+
+bool CorrectedCamera::lineImagesCurve() const {
+    return _inner->multiValued() ? _inner->lineImagesCurve() : true;
+}
+
+ImageStatus CorrectedCamera::imageStatus(const Pt3D& pt_world, double margin_px,
+                                         double merge_px, Pt2D* pt) const {
+    if (!_inner->multiValued() || _inner->provablySingleImage(pt_world)) {
+        // project() and the sensor, project() being this camera's
+        return Camera::imageStatus(pt_world, margin_px, merge_px, pt);
+    }
+    auto all = _inner->projectAll(pt_world, nullptr);
+    if (!all) {
+        return ImageStatus::None;
+    }
+    std::vector<ImageRay> rays = all.value();
+    // The primary is the inner model's choice, as project() returns it.
+    bool ring = false;
+    const ImageRay* primary = refraction_curved::primaryImage(
+        rays, _inner->getNCol(), _inner->getNRow(), ring);
+    const std::ptrdiff_t k = primary ? primary - rays.data() : -1;
+    for (ImageRay& r : rays) {
+        if (!r.is_ring) {
+            r.pt_img_dist = _correction->toImage(r.pt_img_dist);
+        }
+    }
+    return refraction_curved::statusOfImages(rays, k, getNCol(), getNRow(), margin_px,
+                                             merge_px, pt);
+}
+
+Status CorrectedCamera::saveParameters(const std::string& file_name) const {
+    return _inner->saveParameters(file_name);
+}
+
+std::shared_ptr<Camera> CorrectedCamera::clone() const {
+    std::shared_ptr<CorrectedCamera> c(new CorrectedCamera(_inner->clone(), _correction));
+    c->is_active = is_active;
+    c->max_intensity = max_intensity;
+    return c;
+}
+
+const Camera& baseCamera(const Camera& cam) {
+    const Camera* c = &cam;
+    while (const auto* w = dynamic_cast<const CorrectedCamera*>(c)) {
+        c = w->inner().get();
+    }
+    return *c;
 }

@@ -1,0 +1,9 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+picture p3b_panel_1.png: 358 x 1063 px (scroll 216 of 1088)
+picture p3b_panel_2.png: 358 x 1063 px (scroll 337 of 1088)
+picture p3b_panel_3.png: 358 x 1063 px (scroll 458 of 1088)
+the Refraction Settings group: 338 x 1305 px
+viewport 358 px; widgets reaching past it (right edge, type, text, minimum width): []
+
+0 of 0 checks passed; 6 s

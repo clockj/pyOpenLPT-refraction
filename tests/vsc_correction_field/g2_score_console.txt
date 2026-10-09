@@ -1,0 +1,6 @@
+  uncorrected_1.0: recall (central, seen by all) 0.571, >= 2 0.571; reconstructed 746 per frame, ghosts 144 (19.4 %), duplicates 0.2; position RMS 20.7, 9.8, 18.8 um; long tracks 897 (ghost 140), purity 0.788, track recall 0.569; 17.90 s per frame
+  gui_pass1: recall (central, seen by all) 0.668, >= 2 0.668; reconstructed 816 per frame, ghosts 111 (13.6 %), duplicates 0.2; position RMS 20.3, 10.4, 18.3 um; long tracks 958 (ghost 86), purity 0.857, track recall 0.666; 8.70 s per frame
+  gui_pass2: recall (central, seen by all) 0.677, >= 2 0.677; reconstructed 820 per frame, ghosts 106 (13.0 %), duplicates 0.1; position RMS 20.1, 14.9, 17.7 um; long tracks 964 (ghost 84), purity 0.864, track recall 0.675; 7.22 s per frame
+  v2_rerendered_pass1: recall (central, seen by all) 0.665, >= 2 0.665; reconstructed 823 per frame, ghosts 121 (14.7 %), duplicates 0.4; position RMS 19.9, 10.3, 18.2 um; long tracks 967 (ghost 95), purity 0.844, track recall 0.663; 14.32 s per frame
+  v2_rerendered_pass2: recall (central, seen by all) 0.691, >= 2 0.691; reconstructed 828 per frame, ghosts 98 (11.8 %), duplicates 0.3; position RMS 19.5, 14.1, 17.5 um; long tracks 963 (ghost 68), purity 0.879, track recall 0.689; 11.90 s per frame
+2 cameras, two passes through the GUI's VSC: recall 0.677, ghosts 13.0 %; V2's two passes on re-rendered images 0.691, 11.8 % -> PASS

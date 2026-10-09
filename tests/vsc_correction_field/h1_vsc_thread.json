@@ -1,0 +1,46 @@
+{
+ "cases": [
+  {
+   "code": "today",
+   "mode": "fake",
+   "rounds_asked": 1,
+   "rounds_done": 0,
+   "exit": 3221226505,
+   "finished": false,
+   "qt_messages": [],
+   "seconds": 5.1,
+   "boxes": []
+  },
+  {
+   "code": "change",
+   "mode": "fake",
+   "rounds_asked": 5,
+   "rounds_done": 5,
+   "exit": 0,
+   "finished": true,
+   "qt_messages": [],
+   "seconds": 2.9,
+   "boxes": [
+    "[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:",
+    "[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:",
+    "[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:",
+    "[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:",
+    "[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:"
+   ]
+  },
+  {
+   "code": "change",
+   "mode": "real",
+   "rounds_asked": 1,
+   "rounds_done": 1,
+   "exit": 0,
+   "finished": true,
+   "qt_messages": [],
+   "seconds": 270.5,
+   "boxes": [
+    "[h1] box (information) 'VSC Complete': Field VSC pass 1: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.724 -> 0.592 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed n"
+   ]
+  }
+ ],
+ "pass": true
+}

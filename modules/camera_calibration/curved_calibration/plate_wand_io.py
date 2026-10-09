@@ -202,6 +202,75 @@ def load_camfile(path: str) -> Tuple[pm.Camera, pm.Window]:
     return pm.from_cpp(lpt.Camera(path))
 
 
+def find_camfile(folder: str, cam_id: int) -> Optional[str]:
+    """Camera cam_id's camFile in a calibration folder: camFile/cam<id>.txt, else cam<id>.txt; None if neither."""
+    for p in (os.path.join(folder, "camFile", f"cam{int(cam_id)}.txt"), os.path.join(folder, f"cam{int(cam_id)}.txt")):
+        if os.path.isfile(p):
+            return p
+    return None
+
+
+def load_start(folder: str, cam_ids: Sequence[int], cam_to_window: Sequence[int]):
+    """A start for plate_wand.calibrate from a saved fit: (cameras in cam_ids' order, their rig, a description).
+
+    - A plate_wand result folder (calibration_result.json, written by the GUI or by a case's scripts): its cameras and
+      windows exactly as fitted; cameras matched by name (cam<id>).
+    - Otherwise PINPLATE camFiles (camFile/cam<id>.txt or cam<id>.txt, e.g. an earlier calibration of the GUI): each
+      camera with its window; a window's plane from its first camera's file.
+    The saved fit must group the cameras into windows as cam_to_window does (rig indices); the windows come back in
+    that order.  Thicknesses and indices are the saved ones: the caller applies its own (plate_wand_gui.run)."""
+    cam_ids = [int(c) for c in cam_ids]
+    cam_to_window = [int(k) for k in cam_to_window]
+    n_win = max(cam_to_window) + 1
+    groups = [sorted(c for c in range(len(cam_ids)) if cam_to_window[c] == k) for k in range(n_win)]
+    path = os.path.join(folder, "calibration_result.json")
+    if os.path.isfile(path):
+        with open(path, encoding="utf-8") as fh:
+            res = json.load(fh)
+        by_name = {c.get("name"): c for c in res.get("cameras", [])}
+        missing = [c for c in cam_ids if f"cam{c}" not in by_name]
+        if missing:
+            raise ValueError(f"{path} has no camera named cam{missing[0]} (it has {sorted(by_name)}).")
+        rows = [by_name[f"cam{c}"] for c in cam_ids]
+        cams = [pm.Camera(np.asarray(r["R"], float), np.asarray(r["centre_mm"], float), r["f_px"], r["cx"], r["cy"],
+                          int(r["width"]), int(r["height"]), np.asarray(r["dist"], float)) for r in rows]
+        saved = [int(r["window"]) for r in rows]
+        wins = []
+        for k, grp in enumerate(groups):
+            ws = {saved[c] for c in grp}
+            if len(ws) != 1 or any(saved[c] in ws for c in range(len(cam_ids)) if c not in grp):
+                raise ValueError(f"{path} groups these cameras into windows differently from the Camera-Window "
+                                 "Mapping.")
+            w = res["windows"][ws.pop()]
+            wins.append(pm.Window(np.asarray(w["normal"], float), float(w["d_mm"]), tuple(w["thickness_mm"]),
+                                  tuple(w["n"]), w.get("name", "")))
+        return cams, pw.Rig(wins, cam_to_window), f"{path} (RMS {res.get('rms_px', float('nan')):.4f} px)"
+    files = [find_camfile(folder, c) for c in cam_ids]
+    missing = [c for c, f in zip(cam_ids, files) if f is None]
+    if missing:
+        raise ValueError(f"{folder} has neither calibration_result.json nor camFile/cam{missing[0]}.txt.")
+    loaded = [load_camfile(f) for f in files]
+    cams = [cam for cam, _w in loaded]
+    wins = []
+    for grp in groups:
+        w = loaded[grp[0]][1]
+        wins.append(pm.Window(w.n.copy(), float(w.d), tuple(w.t), tuple(w.idx), w.name))
+    return cams, pw.Rig(wins, cam_to_window), f"{len(files)} camFiles in {folder}"
+
+
+def camfile_normals(folder: str, cam_ids: Sequence[int]) -> List[List[float]]:
+    """Window-normal hints from an earlier calibration's camFiles: each camera's window normal in its own frame
+    (R n), as the real case's --hints gui:<calibration> (cases/plate_20260727_T0/run_calibration.py)."""
+    out = []
+    for c in cam_ids:
+        f = find_camfile(folder, c)
+        if f is None:
+            raise ValueError(f"{folder} has no camFile for camera {c} (camFile/cam{c}.txt or cam{c}.txt).")
+        cam, win = load_camfile(f)
+        out.append([float(v) for v in cam.R @ win.n])
+    return out
+
+
 # ------------------------------------------------------------------ warnings: when to doubt the answer
 WEAK_VIEW_DEG = pw.WEAK_VIEW_DEG   # a window whose one or two cameras all see the wand under less than this
 PINNED_MM = 1e-6             # a wand end this close to a window's water-side surface: the answer may be pinned

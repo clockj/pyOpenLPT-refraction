@@ -1,0 +1,82 @@
+{
+ "T1 (its tracking config as config.json)": {
+  "project": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\dispatch\\t1_json",
+  "config": "config.json",
+  "cameras": [
+   "PINCYL",
+   "PINCYL"
+  ],
+  "field_vsc": true,
+  "expected": true,
+  "pass": true
+ },
+ "three cameras (cases/cyl_20261008/data/s2)": {
+  "project": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261008\\data\\s2",
+  "config": "config.json",
+  "cameras": [
+   "PINCYL",
+   "PINCYL",
+   "PINCYL"
+  ],
+  "field_vsc": true,
+  "expected": true,
+  "pass": true
+ },
+ "synthetic tube (tests/cylinder_stb/data/v2)": {
+  "project": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\v2",
+  "config": "config.json",
+  "cameras": [
+   "PINCYL",
+   "PINCYL",
+   "PINCYL"
+  ],
+  "field_vsc": true,
+  "expected": true,
+  "pass": true
+ },
+ "plate (tests/cylinder_stb/data/reg_plate, config.txt)": {
+  "project": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\reg_plate",
+  "config": "config.txt",
+  "cameras": [
+   "PINPLATE",
+   "PINPLATE",
+   "PINPLATE",
+   "PINPLATE"
+  ],
+  "field_vsc": false,
+  "expected": false,
+  "pass": true
+ },
+ "plate, its config as config.json": {
+  "project": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\data\\dispatch\\plate_json",
+  "config": "config.json",
+  "cameras": [
+   "PINPLATE",
+   "PINPLATE",
+   "PINPLATE",
+   "PINPLATE"
+  ],
+  "field_vsc": false,
+  "expected": false,
+  "pass": true
+ },
+ "pinhole (tests/cylinder_stb/data/reg_pinhole, config.txt)": {
+  "project": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\reg_pinhole",
+  "config": "config.txt",
+  "cameras": [
+   "PINHOLE",
+   "PINHOLE",
+   "PINHOLE",
+   "PINHOLE"
+  ],
+  "field_vsc": false,
+  "expected": false,
+  "pass": true
+ },
+ "tube project with config.txt": {
+  "field_vsc": true,
+  "message": "VSC for tube / sphere cameras writes each camera's correction into config.json, and this project has only config.txt: convert it first (python -m modules.stb_config convert config.txt writes config.json beside it, with every setting)",
+  "pass": true
+ },
+ "pass": true
+}

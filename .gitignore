@@ -115,6 +115,11 @@ tests/wand_gui_fixes/**/__pycache__/
 tests/wand_gui_fixes/data/
 tests/wand_gui_fixes/before_lib/
 tests/wand_gui_fixes/w11*/*.png
+# the flat-window calibration's options in the GUI, 9 Oct 2026: tests/plate_wand_gui/ (data/ holds its runs' outputs)
+!tests/plate_wand_gui/
+!tests/plate_wand_gui/**
+tests/plate_wand_gui/**/__pycache__/
+tests/plate_wand_gui/data/
 # the install scripts' tests of 7 Oct 2026: tests/install_scripts/ (t4_lf/ holds the copies its syntax test writes)
 !tests/install_scripts/
 !tests/install_scripts/**
@@ -151,6 +156,14 @@ tests/wand_gui_pixel_size/data/
 tests/cylinder_selfcal/**/__pycache__/
 tests/cylinder_selfcal/data/
 tests/cylinder_selfcal/runs/
+# the library's image correction and the GUI's VSC for tube / sphere cameras (8 Oct 2026): tests/vsc_correction_field/
+# (data/, runs/ and projects/ hold correction files, run outputs and test projects, regenerable with its scripts)
+!tests/vsc_correction_field/
+!tests/vsc_correction_field/**
+tests/vsc_correction_field/**/__pycache__/
+tests/vsc_correction_field/data/
+tests/vsc_correction_field/runs/
+tests/vsc_correction_field/projects/
 # the case cases/cyl_20261007: data/ holds local copies of the raw and preprocessed images and run outputs
 cases/cyl_20261007/data/
 # the case cases/cyl_20261008 (three cameras): the same

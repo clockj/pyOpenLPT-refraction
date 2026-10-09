@@ -643,3 +643,147 @@ private:
 
     PolyParam _param;
 };
+
+/**
+  * @brief A smooth correction of a camera's image positions, in pixels (VSC's
+  *        correction field, fitted from tracks between runs).
+  *
+  * A detection at pixel d has the image point d - c(d) in the camera model the
+  * correction belongs to: c says where the camera's images sit relative to
+  * where the model puts them. c = (du, dv) is held at the nodes of a regular
+  * grid, read bilinearly between them and as the nearest edge value beyond
+  * the grid. Read-only once built, so clones of a camera share one.
+  *
+  * The file is text; '#' starts a comment:
+  *   VERSION 1
+  *   IMAGE_SIZE n_col n_row     the camera's image size, checked when wrapped
+  *   GRID u0 v0 step nu nv      node (i, j) at pixel (u0 + i step, v0 + j step)
+  *   DU                         then nv rows of nu values (v outer)
+  *   DV                         the same for dv
+  */
+class ImageCorrection {
+public:
+    /** @brief Read a correction file. An IOfailure error when it cannot be
+      *        opened; InvalidArgument when its layout or values are wrong. */
+    static StatusOr<std::shared_ptr<const ImageCorrection>> loadFromFile(
+        const std::string& file_name);
+    /**
+      * @brief The same from values in memory, du and dv row by row (v outer).
+      *        Checks: positive sizes, at least 2 x 2 finite nodes, a positive
+      *        step, and a slope bound below 1/2, which makes toImage() a
+      *        contraction. `source` names the correction in messages.
+      */
+    static StatusOr<std::shared_ptr<const ImageCorrection>> fromGrid(
+        int n_col, int n_row, double grid_u0, double grid_v0, double grid_step,
+        int grid_nu, int grid_nv,
+        const std::vector<double>& du, const std::vector<double>& dv,
+        const std::string& source = "");
+
+    /** @brief c at pixel `pt`; NaN for a non-finite pixel. */
+    Pt2D at(const Pt2D& pt) const;
+    /** @brief The model's image point of a detection at `pt_img`: pt_img - c(pt_img).
+      *        A non-finite pixel is returned unchanged. */
+    Pt2D toModel(const Pt2D& pt_img) const;
+    /** @brief The pixel d whose model point is `pt_model` (d - c(d) = pt_model),
+      *        by the fixed point d <- pt_model + c(d) to 1e-11 px. A non-finite
+      *        point is returned unchanged. */
+    Pt2D toImage(const Pt2D& pt_model) const;
+
+    int nCol() const { return _n_col; }
+    int nRow() const { return _n_row; }
+    double u0() const { return _u0; }
+    double v0() const { return _v0; }
+    double step() const { return _step; }
+    int nu() const { return _nu; }
+    int nv() const { return _nv; }
+    const std::vector<double>& du() const { return _du; }
+    const std::vector<double>& dv() const { return _dv; }
+    /** @brief A bound on the norm of c's derivative: the fixed point of
+      *        toImage() shrinks its error at least this much per step. */
+    double slopeBound() const { return _slope; }
+    /** @brief The file it was read from, or fromGrid()'s `source`. */
+    const std::string& source() const { return _source; }
+
+private:
+    ImageCorrection() = default;
+    void eval(double u, double v, double& cu, double& cv) const;
+
+    int _n_col = 0, _n_row = 0;
+    double _u0 = 0.0, _v0 = 0.0, _step = 1.0;
+    int _nu = 0, _nv = 0;
+    std::vector<double> _du, _dv;
+    double _slope = 0.0;
+    std::string _source;
+};
+
+/**
+  * @brief A camera model with its image positions corrected by an
+  *        ImageCorrection.
+  *
+  * A projection moves the model's image point q to the pixel d with
+  * d - c(d) = q, and a pixel's line of sight is the model's line of sight of
+  * d - c(d). Built only when a camera of config.json has a "correction"; other
+  * cameras are not wrapped, so they behave exactly as before.
+  *
+  * Which image of a multi-valued model project() returns is the inner model's
+  * choice, made on its own (uncorrected) positions, and hints are the inner
+  * model's rays; the correction then moves every image. type() and the other
+  * properties are the inner model's. Code that reads a concrete model's
+  * parameters goes through baseCamera().
+  */
+class CorrectedCamera final : public Camera {
+public:
+    /** @brief Wrap `inner`. An InvalidArgument error when either is missing or
+      *        the correction's image size is not the camera's. */
+    static StatusOr<std::shared_ptr<CorrectedCamera>> create(
+        std::shared_ptr<Camera> inner, std::shared_ptr<const ImageCorrection> correction);
+
+    const std::shared_ptr<Camera>& inner() const { return _inner; }
+    const std::shared_ptr<const ImageCorrection>& correction() const { return _correction; }
+
+    CameraType type() const override { return _inner->type(); }
+    StatusOr<Pt2D> project(const Pt3D& pt_world,
+                           bool is_print_detail = false) const override;
+    StatusOr<Line3D> lineOfSight(const Pt2D& pt_img_dist) const override;
+    StatusOr<std::vector<ImageRay>> projectAll(
+        const Pt3D& pt_world, ProjectionCoverage* coverage = nullptr) const override;
+    StatusOr<Pt2D> projectWithHint(const Pt3D& pt_world,
+                                   ProjectionHint& hint) const override;
+    bool usesProjectionHint() const override { return _inner->usesProjectionHint(); }
+    bool hintFromLineOfSight(const Line3D& los, const Pt3D& pt_world,
+                             ProjectionHint& hint) const override {
+        return _inner->hintFromLineOfSight(los, pt_world, hint);
+    }
+    /** @brief The curved ports' own setting; true for the single-valued models,
+      *        whose straight line images a varying shift bends. */
+    bool lineImagesCurve() const override;
+    bool multiValued() const override { return _inner->multiValued(); }
+    bool provablySingleImage(const Pt3D& pt_world) const override {
+        return _inner->provablySingleImage(pt_world);
+    }
+    /** @brief The inner model's rule on the corrected images: project() and
+      *        the sensor when the point provably has one image, otherwise the
+      *        census of the moved images, the primary being the inner model's. */
+    ImageStatus imageStatus(const Pt3D& pt_world, double margin_px,
+                            double merge_px, Pt2D* pt = nullptr) const override;
+    bool clipToModel(const Line3D& los, double& t_in, double& t_out) const override {
+        return _inner->clipToModel(los, t_in, t_out);
+    }
+    int getNRow() const override { return _inner->getNRow(); }
+    int getNCol() const override { return _inner->getNCol(); }
+    /** @brief The inner model's file; the correction stays in its own file. */
+    Status saveParameters(const std::string& file_name) const override;
+    /** @brief Clones the inner model and shares the (read-only) correction. */
+    std::shared_ptr<Camera> clone() const override;
+
+private:
+    CorrectedCamera(std::shared_ptr<Camera> inner,
+                    std::shared_ptr<const ImageCorrection> correction);
+
+    std::shared_ptr<Camera> _inner;
+    std::shared_ptr<const ImageCorrection> _correction;
+};
+
+/** @brief The model a CorrectedCamera wraps (through any number of wrappers),
+  *        or `cam` itself: for code that reads a concrete model's parameters. */
+const Camera& baseCamera(const Camera& cam);

@@ -53,6 +53,7 @@ void bind_Camera(py::module_& m) {
           },
           py::arg("file_name"))
       .def("type", &Camera::type)
+      .def("clone", &Camera::clone, "A deep copy of the camera model.")
       .def(
           "project",
           [](const Camera& c, const Pt3D& pt_world, bool is_print_detail) {
@@ -238,16 +239,93 @@ void bind_Camera(py::module_& m) {
       m, "RefractionSphereCameraModel")
       .def(py::init<>());
 
+  // A camera's image correction (VSC's field) and the camera it corrects. The
+  // correction is read-only in C++; pybind holds it without const.
+  py::class_<ImageCorrection, std::shared_ptr<ImageCorrection>>(
+      m, "ImageCorrection",
+      "A smooth correction of a camera's image positions: a detection at pixel d has "
+      "the model's image point d - c(d). Built by load() or fromGrid().")
+      .def_static(
+          "load",
+          [](const std::string& file_name) {
+            auto st = ImageCorrection::loadFromFile(file_name);
+            if (!st) throw std::runtime_error(st.status().err.toString());
+            return std::const_pointer_cast<ImageCorrection>(st.value());
+          },
+          py::arg("file_name"))
+      .def_static(
+          "fromGrid",
+          [](int n_col, int n_row, double u0, double v0, double step, int nu, int nv,
+             const std::vector<double>& du, const std::vector<double>& dv,
+             const std::string& source) {
+            auto st = ImageCorrection::fromGrid(n_col, n_row, u0, v0, step, nu, nv, du,
+                                                dv, source);
+            if (!st) throw std::runtime_error(st.status().err.toString());
+            return std::const_pointer_cast<ImageCorrection>(st.value());
+          },
+          py::arg("n_col"), py::arg("n_row"), py::arg("u0"), py::arg("v0"),
+          py::arg("step"), py::arg("nu"), py::arg("nv"), py::arg("du"), py::arg("dv"),
+          py::arg("source") = "",
+          "du and dv row by row (v outer), nu * nv values each.")
+      .def("at", &ImageCorrection::at, py::arg("pt"), "c at a pixel.")
+      .def("toModel", &ImageCorrection::toModel, py::arg("pt_img"),
+           "The model's image point of a detection: pt_img - c(pt_img).")
+      .def("toImage", &ImageCorrection::toImage, py::arg("pt_model"),
+           "The pixel d with d - c(d) = pt_model.")
+      .def_property_readonly("n_col", &ImageCorrection::nCol)
+      .def_property_readonly("n_row", &ImageCorrection::nRow)
+      .def_property_readonly("u0", &ImageCorrection::u0)
+      .def_property_readonly("v0", &ImageCorrection::v0)
+      .def_property_readonly("step", &ImageCorrection::step)
+      .def_property_readonly("nu", &ImageCorrection::nu)
+      .def_property_readonly("nv", &ImageCorrection::nv)
+      .def_property_readonly("du", &ImageCorrection::du)
+      .def_property_readonly("dv", &ImageCorrection::dv)
+      .def_property_readonly("slope_bound", &ImageCorrection::slopeBound)
+      .def_property_readonly("source", &ImageCorrection::source);
+
+  py::class_<CorrectedCamera, Camera, std::shared_ptr<CorrectedCamera>>(
+      m, "CorrectedCameraModel",
+      "A camera model with its image positions corrected by an ImageCorrection.")
+      .def_static(
+          "create",
+          [](std::shared_ptr<Camera> inner, std::shared_ptr<ImageCorrection> correction) {
+            auto st = CorrectedCamera::create(std::move(inner), std::move(correction));
+            if (!st) throw std::runtime_error(st.status().err.toString());
+            return st.value();
+          },
+          py::arg("inner"), py::arg("correction"))
+      .def("inner", &CorrectedCamera::inner, "The camera model it corrects.")
+      .def(
+          "correction",
+          [](const CorrectedCamera& c) {
+            return std::const_pointer_cast<ImageCorrection>(c.correction());
+          },
+          "Its ImageCorrection.");
+
   m.def(
       "loadCameraModel",
-      [](const std::string& file_name) {
+      [](const std::string& file_name, const std::string& correction) {
         auto st = CameraFactory::loadFromFile(file_name);
         if (!st) {
           throw std::runtime_error(st.status().err.toString());
         }
-        return st.value();
+        if (correction.empty()) {
+          return st.value();
+        }
+        // As config.json's "correction": the model wrapped in its image correction.
+        auto corr = ImageCorrection::loadFromFile(correction);
+        if (!corr) {
+          throw std::runtime_error(corr.status().err.toString());
+        }
+        auto wrapped = CorrectedCamera::create(st.value(), corr.value());
+        if (!wrapped) {
+          throw std::runtime_error(wrapped.status().err.toString());
+        }
+        return std::static_pointer_cast<Camera>(wrapped.value());
       },
-      py::arg("file_name"));
+      py::arg("file_name"), py::arg("correction") = "",
+      "A camera model from its file; with `correction`, wrapped in that image correction.");
 
   py::enum_<CameraType>(m, "CameraType")
       .value("PINHOLE", CameraType::Pinhole)
@@ -308,6 +386,22 @@ void bind_Camera(py::module_& m) {
       .def(py::init<const PyCameraHandle&>(), py::arg("other"))
       .def("loadParameters", &PyCameraHandle::loadParameters,
            py::arg("file_name"))
+      .def("setCorrection", &PyCameraHandle::setCorrection, py::arg("file_name"),
+           "Correct the image positions by an image correction file (config.json's "
+           "\"correction\"); project() and lineOfSight() then go through it.")
+      .def(
+          "setCorrectionObject",
+          [](PyCameraHandle& c, std::shared_ptr<ImageCorrection> correction) {
+            c.setCorrectionObject(std::move(correction));
+          },
+          py::arg("correction"))
+      .def("clearCorrection", &PyCameraHandle::clearCorrection)
+      .def("hasCorrection", &PyCameraHandle::hasCorrection)
+      .def("correctionFile", &PyCameraHandle::correctionFile,
+           "The correction's file, or '' without one.")
+      .def(
+          "cameraModel", [](const PyCameraHandle& c) { return c.model(); },
+          "The camera as tracking uses it (a CameraModel; corrected when a correction is set).")
       .def("saveParameters", &PyCameraHandle::saveParameters,
            py::arg("file_name"))
       .def_property("_type", &PyCameraHandle::legacyType,

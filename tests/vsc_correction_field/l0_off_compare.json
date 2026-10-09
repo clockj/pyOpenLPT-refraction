@@ -1,0 +1,64 @@
+{
+ "t1_p4c_a_vs_t1_p4c_b": {
+  "only_a": [],
+  "only_b": [],
+  "files": {
+   "ConvergeTrack\\ExitTrack_60.csv": "identical",
+   "ConvergeTrack\\LongTrackActive_60.csv": "identical",
+   "ConvergeTrack\\LongTrackInactive_60.csv": "identical",
+   "ConvergeTrack\\ShortTrackActive_60.csv": "identical",
+   "InitialTrack\\ExitTrack_3.csv": "identical",
+   "InitialTrack\\LongTrackActive_3.csv": "identical",
+   "InitialTrack\\LongTrackInactive_3.csv": "identical",
+   "InitialTrack\\ShortTrackActive_3.csv": "identical",
+   "PredField_1_2.csv": "identical",
+   "PredField_2_3.csv": "identical",
+   "PredField_3_4.csv": "identical"
+  },
+  "identical_files": 11,
+  "compared_files": 11,
+  "all_identical": true
+ },
+ "t1_p4c_a_vs_t1_vcf": {
+  "only_a": [],
+  "only_b": [],
+  "files": {
+   "ConvergeTrack\\ExitTrack_60.csv": "identical",
+   "ConvergeTrack\\LongTrackActive_60.csv": "identical",
+   "ConvergeTrack\\LongTrackInactive_60.csv": "identical",
+   "ConvergeTrack\\ShortTrackActive_60.csv": "identical",
+   "InitialTrack\\ExitTrack_3.csv": "identical",
+   "InitialTrack\\LongTrackActive_3.csv": "identical",
+   "InitialTrack\\LongTrackInactive_3.csv": "identical",
+   "InitialTrack\\ShortTrackActive_3.csv": "identical",
+   "PredField_1_2.csv": "identical",
+   "PredField_2_3.csv": "identical",
+   "PredField_3_4.csv": "identical"
+  },
+  "identical_files": 11,
+  "compared_files": 11,
+  "all_identical": true
+ },
+ "syn_p4c_vs_syn_vcf": {
+  "only_a": [],
+  "only_b": [],
+  "files": {
+   "ConvergeTrack\\ExitTrack_39.csv": "identical",
+   "ConvergeTrack\\LongTrackActive_39.csv": "identical",
+   "ConvergeTrack\\LongTrackInactive_39.csv": "identical",
+   "ConvergeTrack\\ShortTrackActive_39.csv": "identical",
+   "InitialTrack\\ExitTrack_3.csv": "identical",
+   "InitialTrack\\LongTrackActive_3.csv": "identical",
+   "InitialTrack\\LongTrackInactive_3.csv": "identical",
+   "InitialTrack\\ShortTrackActive_3.csv": "identical",
+   "PredField_1_2.csv": "identical",
+   "PredField_2_3.csv": "identical",
+   "PredField_3_4.csv": "identical"
+  },
+  "identical_files": 11,
+  "compared_files": 11,
+  "all_identical": true
+ },
+ "pytest_same_failures": true,
+ "pass": true
+}

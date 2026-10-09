@@ -1,0 +1,19 @@
+S2: today's page D:\Refraction\pyOpenLPT\tests\vsc_correction_field\data\ref\tracking_settings_today_cffed7d.py, the change D:\Refraction\pyOpenLPT\gui\views\tracking_settings_view.py; pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd
+T1, 2 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.1 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.9], z [-31.0, 16.7]; the reference (projection, h = 1.0 mm, 14290 of 111800 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  tracked points of s3_final_m15: 112666 of 112666 inside the change's box; tolerances 2-D 1.5849 px, 3-D 4.3165 vox (today 1.5849, 100.0) -> PASS
+20261008, 3 cameras: today's page set x [-40.0, 35.0], y [-25.0, 20.0], z [-85.0, 75.0] (0.0 s); the change x [-35.0, 25.0], y [-25.0, 20.0], z [-60.0, 70.0], voxel 0.0600 mm (2.1 s)
+  the change's box before rounding x [-30.2, 24.6], y [-24.7, 19.9], z [-59.2, 66.2]; the reference (projection, h = 2.0 mm, 15261 of 80352 points, complete True) x [-26.2, 21.8], y [-22.7, 17.3], z [-57.2, 62.8]; holds it True, wider by 2.00 to 4.00 mm
+  tracked points of s3_final_c3: 69868 of 69868 inside the change's box, 69868 inside today's; tolerances 2-D 1.685 px, 3-D 3.783 vox (today 1.685, 3.0264) -> PASS
+synthetic, 2 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.1 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.9], z [-31.0, 16.7]; the reference (projection, h = 1.0 mm, 14290 of 111800 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  true particles seen by all 2 cameras (Gcal4_n8, every frame): 42122 of 42122 inside the change's box; tolerances 2-D 1.5849 px, 3-D 4.3165 vox (today 1.5849, 100.0) -> PASS
+synthetic, 3 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.2 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.6], z [-31.0, 16.7]; the reference (projection, h = 1.0 mm, 13369 of 109005 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  true particles seen by all 3 cameras (Gcal4_n8, every frame): 39308 of 39308 inside the change's box; tolerances 2-D 1.0566 px, 3-D 2.8776 vox (today 1.0566, 86.3294) -> PASS
+synthetic, 4 cameras: today's page found no volume (0.0 s); the change x [-5.0, 25.0], y [-10.0, 15.0], z [-35.0, 20.0], voxel 0.0300 mm (0.2 s)
+  the change's box before rounding x [-1.7, 24.5], y [-9.9, 12.6], z [-31.0, 16.6]; the reference (projection, h = 1.0 mm, 11215 of 109005 points, complete True) x [-0.7, 23.3], y [-7.9, 11.1], z [-29.0, 15.0]; holds it True, wider by 1.00 to 2.00 mm
+  true particles seen by all 4 cameras (Gcal4_n8, every frame): 32571 of 32571 inside the change's box; tolerances 2-D 0.7924 px, 3-D 2.1582 vox (today 0.7924, 64.7471) -> PASS
+plate, 4 cameras (PINPLATE): today estimated [-75.0, 50.0, -40.0, 55.0, -35.0, 65.0, 0.125] (1.8 s), the change equal (1.8 s) -> PASS
+pinhole, 2 cameras: today found no volume (0.0 s), the change equal (0.0 s) -> PASS
+S2: PASS
