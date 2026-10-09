@@ -1,0 +1,2 @@
+X:'s after_vsc config, frames 0-3: cameras ['X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T0\\camFile_track\\cam1.txt', 'X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T0\\camFile_track\\cam2.txt']; lists ['X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T1\\after_vsc\\images\\cam1ImageNames.txt', 'X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T1\\after_vsc\\images\\cam2ImageNames.txt']
+  exit 0; objects IPR found, frames 0-3: the rerun from X: [272, 264, 284, 289], the original run [272, 264, 284, 289]: equal

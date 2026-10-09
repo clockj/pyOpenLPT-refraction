@@ -1,0 +1,3 @@
+synth_sc corrected gallm Gallm Gallmc data/fields/gallm_r2.npz: build p4c, 10 processes
+  Gallmc: Gallm's images moved by -c(uv) of data/fields/gallm_r2.npz: correction RMS per camera [0.562, 0.471] px
+  rendered Gallmc: cameras [1, 2], 80 frames (160 images) in 801 s

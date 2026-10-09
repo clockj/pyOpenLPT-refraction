@@ -1,0 +1,5 @@
+T-copy: local copy of X:\Shijie Zhong\Refraction\Raw\20261008\T1 -> D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1raw
+  cam1: 250 frames (0 copied, 250 already there), 256 MB; sample sha256 match the share: True
+  cam2: 250 frames (186 copied, 64 already there), 256 MB; sample sha256 match the share: True
+  cam3: 250 frames (250 copied, 0 already there), 999 MB; sample sha256 match the share: True
+done in 140 s; manifest D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1raw\manifest.json

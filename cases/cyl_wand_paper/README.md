@@ -25,6 +25,14 @@ Fig. 14, S8) in C++. A module of its own compiles OpenLPT's search unmodified, t
 methods of the paper's `code/paper_baselines.py`, and times them alike. See its `2026-10-06-plan.md` and
 `2026-10-06-report.md`. Nothing outside that folder is changed or built.
 
+**`experiment/` (2026-10-08):** the paper's experiment (Section 9.3, Figs. 16 and 17, Table 3, S8's paragraph "The
+experiment"), from run 20261007 (case `cases/cyl_20261007`; its deliverables on X:). `experiment_numbers.py` prints
+every number the section quotes with its source (`experiment_numbers_out.txt`, `.json`) and writes the figures' data
+(`experiment_data.npz`, copied into the paper by `code/make_paper_experiment_figs.py --refresh`). Nothing is fitted
+or tracked afresh; it smooths the tracks with the group's Gaussian filter (width 3 steps, the author's choice) and
+reruns the line detector on one sample frame. Run it with the refract interpreter; `CYL_EXPERIMENT_PYD` names a folder
+with a copy of `build-stb/p4c/out`'s `.pyd`, so that the build is not locked.
+
 **History:**
 - `2026-10-03-plan.md`: the first plan, with P0–P5 reruns and a single-image rule. It is superseded: the paper
   dropped the rule, and the campaign already had the results.

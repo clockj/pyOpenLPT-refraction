@@ -1,0 +1,83 @@
+{
+ "checks": [
+  {
+   "check": "cam3's radius range, opening and mask are cams 1-2's x 20/13.5; the guard and 'full' unchanged",
+   "ok": true,
+   "detail": "scale 1.481481"
+  },
+  {
+   "check": "the caller's settings are not modified",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "scale None, 1 or 0: the same objects back",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "every camera-frame: bitwise the same rows",
+   "ok": true,
+   "detail": "72 camera-frames; different: []"
+  },
+  {
+   "check": "the generator's raw balls equal Test Detect's (u, v, r, metric)",
+   "ok": true,
+   "detail": "18 camera-frames; different: []"
+  },
+  {
+   "check": "the same frames kept, centres within 0.05 px",
+   "ok": false,
+   "detail": "19 frames"
+  },
+  {
+   "check": "scaling keeps more of cam3's frames than one setting for all cameras",
+   "ok": true,
+   "detail": "19 against 0"
+  }
+ ],
+ "seconds": 542.6097786426544,
+ "images": [
+  2600,
+  3000,
+  3400,
+  3800,
+  4200,
+  4600,
+  5000,
+  5400,
+  5800,
+  6200,
+  6600,
+  7000,
+  7400,
+  7800,
+  8200,
+  8600,
+  9000,
+  9400,
+  9800,
+  10200,
+  10600,
+  11000,
+  11400,
+  11800
+ ],
+ "scales": {
+  "0": 1.0,
+  "1": 1.0,
+  "2": 1.4814814814814814
+ },
+ "kept_scaled": {
+  "0": 20,
+  "1": 16,
+  "2": 19
+ },
+ "vs_case": {
+  "kept_case": 19,
+  "both": 19,
+  "max_px": 0.11231729827234664,
+  "median_px": 0.0003697356983744651
+ },
+ "cam3_unscaled_kept": 0
+}

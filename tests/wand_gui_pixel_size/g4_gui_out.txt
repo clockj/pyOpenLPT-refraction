@@ -1,0 +1,32 @@
+1. columns: ['', 'Cam ID', 'Focal (px)', 'Width', 'Height', 'Pixel (µm)']
+  PASS  the table has the Pixel (µm) column
+  loaded cam1: 13001 images, button '13001', size 1280 x 800
+  loaded cam2: 13001 images, button '13001', size 1280 x 800
+  loaded cam3: 10605 images, button '10605', size 2048 x 1952
+  first files ['frame002396.tif', 'frame002396.tif', 'frame000000.tif']; frame table 10605 rows; status: 'Cameras aligned by their Phantom headers: images 2396-13000 (10605 frames). Cam 1: 2396 dropped at the start, 0 at the end; Cam 2: 2396 dropped at the start, 0 at the end.'
+  PASS  aligned: 10,605 images each, cams 1-2 from frame002396.tif, cam3 from frame000000.tif  ([10605, 10605, 10605])
+  PASS  the Load buttons and the frame table show 10,605
+  PASS  the status line says the cameras were aligned  (Cameras aligned by their Phantom headers: images 2396-13000 (10605 frames). Cam 1: 2396 dropped at the start, 0 at the end; Cam 2: 2396 dropped at the start, 0 at the end.)
+  PASS  Width/Height from the images (cam3 2048 x 1952)
+
+2. pixel sizes 20 / 20 / 13.5
+  scales {0: 1.0, 1: 1.0, 2: 1.4814814814814814}; Radius Range limit 200; pixel_um [20.0, 20.0, 13.5]; job pixel_mm [0.02, 0.02, 0.0135]
+  PASS  scales {0: 1, 1: 1, 2: 20/13.5}
+  PASS  the Radius Range's limit stays 200 (camera 1's pixels: cam3's 1952 / 4 / 1.48 = 329 is larger)
+  PASS  the jobs get [0.02, 0.02, 0.0135] mm
+  PASS  every pixel size cleared: scales None, jobs' pixel_mm None
+  PASS  equal pixel sizes only: scales None (nothing to scale)
+
+3. Test Detect on image 5000 (row 2604), ellipse mode, 20-70 px, opening 51, mask 28
+  balls: cam1 2, cam2 2, cam3 2; files ['frame005000.tif', 'frame005000.tif', 'frame002604.tif']
+  PASS  the displayed result equals detect_single_frame with the same scales
+  PASS  cam3 shows two balls (with cams 1-2's settings scaled)
+
+4. Num Cameras 3 -> 2 -> 3
+  at 2: [(20.0, 13001), (20.0, 13001)]; back at 3: [(20.0, 13001), (20.0, 13001), (0.0, 0)]
+  PASS  cams 1-2 keep pixel size and folder, whole again without cam3; cam 3 starts empty
+
+5. dialogs: []
+  PASS  no warning or error dialog
+
+14 of 14 checks passed; 38 s

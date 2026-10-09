@@ -59,7 +59,7 @@ class Job:
     noise_weights: str = "camera"
     n_final: int = 2
     start: Optional[tuple] = None          # (cameras, rig) of an earlier result: skip the start search
-    pixel_mm: Optional[float] = None
+    pixel_mm: Optional[object] = None      # pixel size (mm), one number or one per camera: only to print f in mm
     detect_mode: Optional[str] = None
     source: str = ""
     hints: Dict = field(default_factory=dict)
@@ -347,12 +347,23 @@ def _append_meta(path: str, cam_id: int, window_id: int) -> None:
         fh.write(block)
 
 
+def pixel_mm_list(pixel_mm, n: int):
+    """Job.pixel_mm as one size per camera (None if none is known): a number is every camera's, a list gives each
+    camera's (None or 0 for a camera without one)."""
+    if pixel_mm is None:
+        return None
+    if isinstance(pixel_mm, (list, tuple)):
+        out = [float(p) if p else None for p in pixel_mm]
+        return out if any(out) else None
+    return [float(pixel_mm)] * n if pixel_mm else None
+
+
 def write_outputs(sol: pw.Solution, job: Job, folder: str) -> Dict:
     """camFile/cam<id>.txt (PINPLATE, C++ writer, plus the REFRACTION_META block), calibration_result.json and
     calibration_report.txt (plate_wand_io.write_result), calibration_data.json, the checks and the results page."""
     os.makedirs(folder, exist_ok=True)
     n = len(sol.cams)
-    pixel_mm = [float(job.pixel_mm)] * n if job.pixel_mm else None
+    pixel_mm = pixel_mm_list(job.pixel_mm, n)
     extra = {"gui": {"settings": job.settings(), "written": time.strftime("%Y-%m-%d %H:%M:%S"),
                      "seconds": sol.info.get("total_seconds")}}
     result = pio.write_result(sol, folder, names=job.names, pixel_mm=pixel_mm, extra=extra)

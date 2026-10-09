@@ -1,0 +1,48 @@
+{
+ "frames": [
+  0,
+  25,
+  50,
+  75,
+  100,
+  125,
+  150,
+  175,
+  200,
+  225
+ ],
+ "k_background": 0.375,
+ "detectors": {
+  "lines": {
+   "detections_median": [
+    462.5,
+    955.5,
+    5274.0
+   ],
+   "pairs_median": 7529.5,
+   "triplets_signal_median": 79.0,
+   "triplets_background_median": 40.0,
+   "true_triplets_per_frame": 61.475,
+   "true_triplets_per_frame_range": [
+    36.875,
+    71.25
+   ]
+  },
+  "peaks": {
+   "detections_median": [
+    9250.5,
+    17221.5,
+    52773.0
+   ],
+   "pairs_median": 2707630.0,
+   "triplets_signal_median": 44622.5,
+   "triplets_background_median": 114530.5,
+   "true_triplets_per_frame": 1578.7,
+   "true_triplets_per_frame_range": [
+    1053.625,
+    2075.25
+   ]
+  }
+ },
+ "better": "peaks"
+}

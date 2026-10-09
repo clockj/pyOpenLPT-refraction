@@ -16,7 +16,8 @@ from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
                               QDoubleSpinBox, QListWidget, QGroupBox, QFormLayout,
                               QCheckBox, QFileDialog, QScrollArea, QFrame,
                               QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox,
-                              QSizePolicy, QGridLayout, QRadioButton, QButtonGroup, QProgressDialog, QApplication)
+                              QSizePolicy, QGridLayout, QRadioButton, QButtonGroup, QProgressDialog, QApplication,
+                              QAbstractSpinBox)
 from PySide6.QtCore import Qt
 from .widgets import RangeSlider
 from .wand_calibration.wand_calibrator import WandCalibrator
@@ -1506,21 +1507,31 @@ class CameraCalibrationView(QWidget):
         # Table (with per-camera focal length and image size)
         det_layout.addWidget(QLabel("Camera Images:"))
         self.wand_cam_table = QTableWidget()
-        self.wand_cam_table.setColumnCount(5)
-        self.wand_cam_table.setHorizontalHeaderLabels(["", "Cam ID", "Focal (px)", "Width", "Height"])
-        
+        self.wand_cam_table.setColumnCount(6)
+        self.wand_cam_table.setHorizontalHeaderLabels(["", "Cam ID", "Focal (px)", "Width", "Height", "Pixel (µm)"])
+
         # Add Tooltip for Focal Length
         # Need to access the QTableWidgetItem for the header
         focal_header_item = self.wand_cam_table.horizontalHeaderItem(2)
         if focal_header_item:
             focal_header_item.setToolTip("Focal Length (px) = Focal Length (mm) / Sensor Pixel Size (mm)")
+        pixel_header_item = self.wand_cam_table.horizontalHeaderItem(5)
+        if pixel_header_item:
+            pixel_header_item.setToolTip(
+                "Sensor pixel size, for cameras whose pixels differ (e.g. Phantom VEO 710L 20 µm, v2640 13.5 µm). "
+                "Set it for every camera: the Radius Range, Rod opening and Rod mask are then in the first camera's "
+                "pixels, and each other camera's are scaled by its pixel size. The results page prints f in mm with "
+                "it. Empty: not used.")
 
         header = self.wand_cam_table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
-        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
-        header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+        # fixed widths (the cells have no spin buttons), the Pixel column takes the rest: every column fits the panel
+        # (the spin boxes' own widths, 85-140 px, put Width, Height and Pixel behind a scroll bar)
+        for col, w in ((2, 62), (3, 60), (4, 60)):
+            header.setSectionResizeMode(col, QHeaderView.ResizeMode.Fixed)
+            header.resizeSection(col, w)
+        header.setSectionResizeMode(5, QHeaderView.ResizeMode.Stretch)
         self.wand_cam_table.verticalHeader().setVisible(False)
         self.wand_cam_table.setSelectionMode(QTableWidget.SelectionMode.NoSelection)
         self.wand_cam_table.setShowGrid(True)
@@ -3471,15 +3482,23 @@ class CameraCalibrationView(QWidget):
             self.plate_vis_tabs.setCurrentIndex(idx)
 
     def _update_wand_table(self, count):
-        # the cameras that remain keep their images, Focal, Width and Height; a new camera starts empty
+        # the cameras that remain keep their images, Focal, Width, Height and Pixel; a new camera starts empty
         old_images = dict(getattr(self, 'wand_images', None) or {})
         old_vals = {}
+        old_pixel = {}
         for i in range(self.wand_cam_table.rowCount()):
             cells = [self.wand_cam_table.cellWidget(i, k) for k in (2, 3, 4)]
             if all(c is not None for c in cells):
                 old_vals[i] = [c.value() for c in cells]
+            pix = self.wand_cam_table.cellWidget(i, 5)
+            if pix is not None:
+                old_pixel[i] = pix.value()
         self.wand_cam_table.setRowCount(count)
         self.wand_images = {i: list(old_images.get(i, [])) for i in range(count)}
+        # each camera's whole folder and its first image number (Phantom header), from which wand_images is cut
+        self._wand_images_all = {i: v for i, v in (getattr(self, '_wand_images_all', None) or {}).items() if i < count}
+        self._wand_first_image = {i: v for i, v in (getattr(self, '_wand_first_image', None) or {}).items()
+                                  if i < count}
         
         # Update Vis Tabs (Wand)
         try:
@@ -3524,14 +3543,16 @@ class CameraCalibrationView(QWidget):
             focal_spin = QSpinBox()
             focal_spin.setRange(100, 1000000)
             focal_spin.setValue(old_vals[i][0] if i in old_vals else 9000)
-            focal_spin.setStyleSheet("background: #222; color: white; border: none;")
+            focal_spin.setStyleSheet("background: #222; color: white; border: none; padding: 0px;")
+            focal_spin.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)   # compact: the table fits the panel
             self.wand_cam_table.setCellWidget(i, 2, focal_spin)
 
             # Col 3: Width (editable spinbox)
             width_spin = QSpinBox()
             width_spin.setRange(1, 10000)
             width_spin.setValue(old_vals[i][1] if i in old_vals else 1280)
-            width_spin.setStyleSheet("background: #222; color: white; border: none;")
+            width_spin.setStyleSheet("background: #222; color: white; border: none; padding: 0px;")
+            width_spin.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
             width_spin.valueChanged.connect(lambda _v: self._refresh_wand_radius_range_limit())
             self.wand_cam_table.setCellWidget(i, 3, width_spin)
             
@@ -3539,16 +3560,31 @@ class CameraCalibrationView(QWidget):
             height_spin = QSpinBox()
             height_spin.setRange(1, 10000)
             height_spin.setValue(old_vals[i][2] if i in old_vals else 800)
-            height_spin.setStyleSheet("background: #222; color: white; border: none;")
+            height_spin.setStyleSheet("background: #222; color: white; border: none; padding: 0px;")
+            height_spin.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
             height_spin.valueChanged.connect(lambda _v: self._refresh_wand_radius_range_limit())
             self.wand_cam_table.setCellWidget(i, 4, height_spin)
-            
+
+            # Col 5: Pixel size (um; 0 = not set): scales the detection's pixel lengths per camera, prints f in mm
+            pixel_spin = TrimmedDoubleSpinBox()
+            pixel_spin.setRange(0.0, 100.0)
+            pixel_spin.setDecimals(2)
+            pixel_spin.setSpecialValueText(" ")
+            pixel_spin.setValue(old_pixel.get(i, 0.0))
+            pixel_spin.setStyleSheet("background: #222; color: white; border: none; padding: 0px;")
+            pixel_spin.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
+            pixel_spin.setToolTip("Sensor pixel size in µm (empty: not set); see the column's tooltip.")
+            pixel_spin.valueChanged.connect(lambda _v: self._refresh_wand_radius_range_limit())
+            self.wand_cam_table.setCellWidget(i, 5, pixel_spin)
+
         # Update refraction camera table if it exists
         if hasattr(self, 'cam_window_table'):
             self._update_refraction_cam_table(count)
 
         self._update_axis_cam_table(count)
 
+        if getattr(self, '_wand_images_all', None):
+            self._align_wand_images()                  # the cameras that remain, aligned among themselves
         self._refresh_wand_radius_range_limit()
         self._apply_cylinder_focal_state()
         if hasattr(self, 'frame_table') and any(self.wand_images.values()):
@@ -3691,6 +3727,7 @@ class CameraCalibrationView(QWidget):
                         max_radius=max_r,
                         sensitivity=sensitivity,
                         detect_mode="reliable",
+                        cam_scales=self._wand_cam_scales(),
                     )
                     pts = res.get(cam_idx)
                     if pts is None:
@@ -4264,15 +4301,42 @@ class CameraCalibrationView(QWidget):
             
             if files:
                 self.wand_images[cam_idx] = files
-                btn = self.wand_cam_table.cellWidget(cam_idx, 0)  # Column 0 now
-                if btn:
-                    btn.setText(f"{len(files)}")
+                # a Phantom header (.chd) beside the images gives the first image's number from the trigger
+                from .wand_calibration.wand_calibrator import phantom_image_numbers
+                hdr = phantom_image_numbers(str(p))
+                if not hasattr(self, '_wand_images_all'):
+                    self._wand_images_all, self._wand_first_image = {}, {}
+                self._wand_images_all[cam_idx] = list(files)
+                self._wand_first_image[cam_idx] = hdr[0] if hdr and hdr[1] == len(files) else None
+                self._align_wand_images()
 
                 self._update_wand_cam_size_from_first_image(cam_idx, files)
                 self._refresh_wand_radius_range_limit()
-                 
+
                 # Check consistency and update Frames Table
                 self.populate_wand_table()
+
+    def _align_wand_images(self):
+        """Cut the cameras' image lists to the images every camera saved, when every loaded camera's folder has a
+        Phantom header and their first image numbers differ (e.g. a camera that saved a shorter range), so that
+        the i-th images are simultaneous; otherwise each camera keeps its whole folder.  Updates the Load buttons."""
+        from .wand_calibration.wand_calibrator import align_by_image_numbers
+        full = {c: v for c, v in getattr(self, '_wand_images_all', {}).items() if v}
+        lists, info = align_by_image_numbers(full, getattr(self, '_wand_first_image', {}))
+        for c, files in lists.items():
+            self.wand_images[c] = list(files)
+            btn = self.wand_cam_table.cellWidget(c, 0)
+            if btn:
+                btn.setText(f"{len(files)}")
+        self._wand_alignment = info
+        if info:
+            parts = [f"Cam {c + 1}: {a} dropped at the start, {b} at the end"
+                     for c, (a, b) in sorted(info["dropped"].items()) if a or b]
+            msg = (f"Cameras aligned by their Phantom headers: images {info['start']}-{info['end']} "
+                   f"({info['end'] - info['start'] + 1} frames). " + "; ".join(parts) + ".")
+            print(msg)
+            if hasattr(self, 'status_label'):
+                self.status_label.setText(msg)
 
     def _update_wand_cam_size_from_first_image(self, cam_idx, files):
         """Read first image size and update Width/Height columns for this camera."""
@@ -4296,10 +4360,12 @@ class CameraCalibrationView(QWidget):
             height_spin.setValue(h)
 
     def _refresh_wand_radius_range_limit(self):
-        """Set radius max to min(image side)/4 across loaded cameras; default to 200."""
+        """Set radius max to min(image side)/4 across loaded cameras (in the first camera's pixels when pixel sizes
+        are set: each side divided by its camera's scale); default to 200."""
         if not hasattr(self, 'radius_range') or self.radius_range is None:
             return
 
+        scales = self._wand_cam_scales() or {}
         min_sides = []
         row_count = self.wand_cam_table.rowCount() if hasattr(self, 'wand_cam_table') else 0
         for row in range(row_count):
@@ -4313,7 +4379,7 @@ class CameraCalibrationView(QWidget):
             w = int(width_spin.value())
             h = int(height_spin.value())
             if w > 0 and h > 0:
-                min_sides.append(min(w, h))
+                min_sides.append(min(w, h) / scales.get(row, 1.0))
 
         if min_sides:
             max_r = max(1, int(min(min_sides) // 4))
@@ -4321,6 +4387,27 @@ class CameraCalibrationView(QWidget):
             max_r = 200
 
         self.radius_range.setRange(1, max_r)
+
+    def _wand_pixel_sizes(self):
+        """{camera row: pixel size in um} of the camera table's Pixel column (0: not set)."""
+        out = {}
+        if not hasattr(self, 'wand_cam_table'):
+            return out
+        for row in range(self.wand_cam_table.rowCount()):
+            w = self.wand_cam_table.cellWidget(row, 5)
+            out[row] = float(w.value()) if w is not None else 0.0
+        return out
+
+    def _wand_cam_scales(self):
+        """{camera row: scale} for the detection when the cameras' pixel sizes differ: the first camera with a pixel
+        size is the reference, and a camera with pixels p gets p_ref / p (a camera without one: 1).  None when no
+        camera's scale differs from 1, so that the detection runs exactly as without pixel sizes."""
+        pix = self._wand_pixel_sizes()
+        ref = next((p for _r, p in sorted(pix.items()) if p > 0), None)
+        if ref is None:
+            return None
+        scales = {r: (ref / p if p > 0 else 1.0) for r, p in pix.items()}
+        return scales if any(abs(s - 1.0) > 1e-12 for s in scales.values()) else None
 
     def _wand_type(self):
         """"dark" (Dark on Bright) or "bright" (Bright on Dark): the detection inverts dark balls.  (The test was
@@ -5318,15 +5405,18 @@ class CameraCalibrationView(QWidget):
 
         self._busy_begin('wand_detect_single', 'Detecting single frame')
 
+        cam_scales = self._wand_cam_scales()
         print(
             f"Detecting frame {idx}, mode='{wand_type}', radius=[{min_r},{max_r}], "
             f"sensitivity={sensitivity}, detect_mode='{detect_mode}'"
+            + (", per-camera scales " + ", ".join(f"cam {c + 1}: {s:.4f}" for c, s in sorted(cam_scales.items()))
+               if cam_scales else "")
         )
-        
+
         # Worker Setup
         self._single_detect_worker = WandDetectionSingleFrameWorker(
             self.wand_calibrator, single_frame_dict, wand_type, min_r, max_r, sensitivity, detect_mode,
-            detect_opts=self._get_wand_detect_opts(full=True),
+            detect_opts=self._get_wand_detect_opts(full=True), cam_scales=cam_scales,
         )
         self._single_detect_worker.finished_signal.connect(self._on_single_detection_finished)
         
@@ -5476,6 +5566,11 @@ class CameraCalibrationView(QWidget):
         sensitivity = self.sensitivity_slider.value()
         detect_mode = self._get_wand_detect_mode()
 
+        cam_scales = self._wand_cam_scales()
+        if cam_scales:
+            print("Per-camera detection scales (pixel sizes): "
+                  + ", ".join(f"cam {c + 1}: {s:.4f}" for c, s in sorted(cam_scales.items())))
+
         # Start Worker
         self._proc_thread = WandDetectionWorker(
             self.wand_calibrator,
@@ -5485,6 +5580,7 @@ class CameraCalibrationView(QWidget):
             resume=resume,
             detect_mode=detect_mode,
             detect_opts=self._get_wand_detect_opts(),
+            cam_scales=cam_scales,
         )
         # remembered for the cylinder calibration's checks (through a tube only "ellipse" measures the centres)
         self._wand_detect_mode_used = detect_mode
@@ -5730,7 +5826,7 @@ class CameraCalibrationView(QWidget):
         """Collect per-camera settings from detection table.
 
         Returns:
-            dict[int, dict]: {cam_id: {'focal': float, 'width': int, 'height': int}}
+            dict[int, dict]: {cam_id: {'focal': float, 'width': int, 'height': int, 'pixel_um': float (0: not set)}}
         """
         camera_settings = {}
         if not hasattr(self, 'wand_cam_table'):
@@ -5753,13 +5849,23 @@ class CameraCalibrationView(QWidget):
             focal = float(focal_spin.value()) if focal_spin else 9000.0
             width = int(width_spin.value()) if width_spin else 1280
             height = int(height_spin.value()) if height_spin else 800
+            pixel_spin = self.wand_cam_table.cellWidget(row, 5)
 
             camera_settings[cam_id] = {
                 'focal': focal,
                 'width': width,
                 'height': height,
+                'pixel_um': float(pixel_spin.value()) if pixel_spin else 0.0,
             }
         return camera_settings
+
+    def _wand_pixel_mm_for(self, cids, settings=None):
+        """The cameras' pixel sizes in mm, in cids order (None for a camera without one), for the results page's f
+        in mm; None when no camera has one."""
+        settings = settings if settings is not None else self._collect_camera_settings_from_table()
+        out = [settings[c]['pixel_um'] / 1000.0 if c in settings and settings[c].get('pixel_um', 0) > 0 else None
+               for c in cids]
+        return out if any(p is not None for p in out) else None
     
     def _save_filtered_points(self):
         """Save wand points to CSV. Includes all 'Raw' points and 'Filtered_Small/Large' for active frames."""
@@ -8720,12 +8826,8 @@ class CameraCalibrationView(QWidget):
         self.cyl_refit_check = QCheckBox("Refit from the last result")
         self.cyl_refit_check.setToolTip("Skips the start search. After deleting frames: start from the last cylinder "
                                         "calibration of the same cameras instead of searching for a start.")
-        self.cyl_pixel_spin = dspin(0.0, 100.0, 0.0, 2, " um")
-        self.cyl_pixel_spin.setSpecialValueText("not set")
-        self.cyl_pixel_spin.setToolTip("Pixel size, only used to print f in mm.")
         opt = QFormLayout()
         opt.addRow("Noise weights:", self.cyl_noise_combo)
-        opt.addRow("Pixel size:", self.cyl_pixel_spin)
         lay.addLayout(opt)
         for w in (self.cyl_fit_L_check, self.cyl_thorough_check, self.cyl_refit_check):
             w.setStyleSheet("border: none;")
@@ -8788,13 +8890,12 @@ class CameraCalibrationView(QWidget):
                     start = [c.copy() for c in last["sol"].cams]
                 else:
                     notes.append("No earlier cylinder result for these cameras: the start is searched.")
-            pixel_um = float(self.cyl_pixel_spin.value())
             job = cg.Job(uv=uv, frame_ids=fids, cam_ids=cids, sizes=sizes, wand_length=float(wand_len),
                          radii=tube.radii, n=tube.n, fit_k1=(dist_coeff_num == 1),
                          fit_L=self.cyl_fit_L_check.isChecked(),
                          noise_weights=cg.NOISE_WEIGHTS[self.cyl_noise_combo.currentText()],
                          n_final=6 if self.cyl_thorough_check.isChecked() else 2, start=start,
-                         pixel_mm=pixel_um / 1000.0 if pixel_um > 0 else None,
+                         pixel_mm=self._wand_pixel_mm_for(cids, settings),
                          detect_mode=getattr(self, '_wand_detect_mode_used', None),
                          source=str(getattr(self, '_wand_points_source', "") or ""))
             job.check()
@@ -9041,6 +9142,7 @@ class CameraCalibrationView(QWidget):
             job = pg.Job(uv=uv, frame_ids=fids, cam_ids=cids, sizes=sizes, wand_length=float(wand_len),
                          windows=windows, cam_to_window=cam_to_window, fit_k1=(dist_coeff_num == 1),
                          n_final=6 if self.refr_thorough_check.isChecked() else 2, start=start,
+                         pixel_mm=self._wand_pixel_mm_for(cids, settings),
                          detect_mode=getattr(self, '_wand_detect_mode_used', None),
                          source=str(getattr(self, '_wand_points_source', "") or ""), window_ids=used)
             job.check()

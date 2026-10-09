@@ -1,0 +1,29 @@
+T1 checks on D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\runs\s3_final_m15: 1228 long tracks (last frame 250); frames D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1pre_s4_m15
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 76.5085,0.294811,0.44403,0
+
+Camera 1 (a,b,c,alpha) = 72.5612,0.356523,0.398474,0
+
+  sample frames [20, 60, 100, 140, 180, 220]: 2629 long-track points with neighbours in time
+  T1-a cam1: 863 points; detection - track image: mean (-0.077, -0.013) px, RMS (0.512, 0.439) px
+  T1-c cam1: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.44 / 0.65 / 1.29 px (median -0.01); w_v 0.32 / 0.46 / 0.83 px (median -0.13)
+  T1-a cam2: 863 points; detection - track image: mean (+0.039, +0.065) px, RMS (0.238, 0.763) px
+  T1-c cam2: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.32 / 0.45 / 0.78 px (median -0.11); w_v 0.29 / 0.44 / 0.89 px (median -0.12)
+  T1-a epipolar residual (cam2 detection - cam1's curve, v): mean +0.069 +- 0.034 px, RMS 1.005 px (863 pairs)
+  T1-b sync: residual against cam2's dv per step: slope -0.1470 +- 0.0753 (a time offset of +0.1470 steps = +0.588 raw frames); dv RMS 0.453 px per step
+  T1-d cam1: the tracks' image step (du, dv) median (+0.623, -0.187) px per step
+  T1-d cam2: the tracks' image step (du, dv) median (-1.341, -0.158) px per step
+  T1-d: 1228 long tracks, length (10/50/90 %) [24.0, 77.0, 186.29999999999995] steps; speed (10/50/90 %) [0.0328, 0.0698, 0.1098] mm per step, median 69.8 mm/s; mean velocity [0.0129, 0.0049, 0.0333] mm per step; second difference RMS / step RMS 0.553
+T1-e: s3_final_m15 (247 frames logged) against s3_control_m15 (97 frames)
+  log entry 10: active long tracks final 132, control 50: control / final 0.379
+  log entry 20: active long tracks final 187, control 80: control / final 0.428
+  log entry 40: active long tracks final 281, control 125: control / final 0.445
+  log entry 60: active long tracks final 344, control 174: control / final 0.506
+  log entry 80: active long tracks final 407, control 201: control / final 0.494
+  log entry 97: active long tracks final 447, control 222: control / final 0.497
+  final, long tracks at frame 100 (>= 4 frames): 589; length 10/50/90 % [14.0, 49.0, 96.0]; speed [41.504, 75.437, 95.12] mm/s; second difference / step [0.25, 0.463, 0.833]
+  control, long tracks at frame 100 (>= 4 frames): 302; length 10/50/90 % [13.1, 46.0, 86.9]; speed [48.233, 72.153, 98.866] mm/s; second difference / step [0.271, 0.554, 0.873]
+  final's tracks at least as rough as the control's median ghost (0.554): 36.8 % (the control's own: 50 %)
+  swirl, final: 457 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.084, 0.182, 0.463]; above 0.3: 26.9 %
+  swirl, control: 222 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.114, 0.304, 0.636]; above 0.3: 50.9 %
+  ghosts among final's tracks, from the swirl (real tracks below 0.3): 53 %; from the counts (an upper bound): 50 %

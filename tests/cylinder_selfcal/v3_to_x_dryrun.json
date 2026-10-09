@@ -1,0 +1,6 @@
+{
+ "run": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\runs\\s3_final_m15vc2",
+ "control": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\runs\\s3_control_m15vc2",
+ "frames": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\data\\T1pre_s4_m15vc2",
+ "dst": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T1\\after_vsc"
+}

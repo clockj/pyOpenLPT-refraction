@@ -1,0 +1,21 @@
+V1: the held-out frames 5, 15, ..., 245 (25); variants none (t1_m15), detections (t1_m15_v1all), warped (t1_vcwarp)
+  none: detections per frame [1096.0, 981.0]; true pairs within 3 px 309 per frame; profile (share within d) 0.50 px 41 %, 0.75 px 52 %, 1.00 px 65 %, 1.25 px 75 %, 1.50 px 82 %, 2.00 px 90 %, 2.50 px 97 %
+    t = 0.50 px: true  126.8 +- 8.1, random 1333.5, true share 8.7 %; after the depth cue: true 70.8, random 47.4
+    t = 0.75 px: true  161.5 +- 10.1, random 2000.2, true share 7.5 %; after the depth cue: true 96.5, random 71.2
+    t = 1.00 px: true  200.4 +- 11.9, random 2666.9, true share 7.0 %; after the depth cue: true 115.7, random 94.9
+    t = 1.50 px: true  254.7 +- 15.2, random 4000.4, true share 6.0 %; after the depth cue: true 139.7, random 142.3
+    the depth cue (t = 1.5): keeps 55 % of the true pairs and 3.6 % of the random ones
+  detections: detections per frame [1096.0, 981.0]; true pairs within 3 px 311 per frame; profile (share within d) 0.50 px 48 %, 0.75 px 62 %, 1.00 px 72 %, 1.25 px 80 %, 1.50 px 85 %, 2.00 px 95 %, 2.50 px 100 %
+    t = 0.50 px: true  150.4 +- 8.1, random 1332.4, true share 10.1 %; after the depth cue: true 86.5, random 47.7
+    t = 0.75 px: true  193.6 +- 10.1, random 1998.6, true share 8.8 %; after the depth cue: true 110.4, random 71.6
+    t = 1.00 px: true  224.7 +- 11.9, random 2664.8, true share 7.8 %; after the depth cue: true 125.3, random 95.5
+    t = 1.50 px: true  265.9 +- 15.2, random 3997.2, true share 6.2 %; after the depth cue: true 143.2, random 143.2
+    the depth cue (t = 1.5): keeps 54 % of the true pairs and 3.6 % of the random ones
+  warped: detections per frame [1093.0, 980.0]; true pairs within 3 px 303 per frame; profile (share within d) 0.50 px 49 %, 0.75 px 64 %, 1.00 px 74 %, 1.25 px 83 %, 1.50 px 87 %, 2.00 px 94 %, 2.50 px 99 %
+    t = 0.50 px: true  147.3 +- 8.1, random 1325.1, true share 10.0 %; after the depth cue: true 85.2, random 47.6
+    t = 0.75 px: true  193.4 +- 10.1, random 1987.7, true share 8.9 %; after the depth cue: true 108.8, random 71.3
+    t = 1.00 px: true  225.3 +- 11.9, random 2650.3, true share 7.8 %; after the depth cue: true 122.7, random 95.1
+    t = 1.50 px: true  263.0 +- 15.1, random 3975.4, true share 6.2 %; after the depth cue: true 141.6, random 142.7
+    the depth cue (t = 1.5): keeps 54 % of the true pairs and 3.6 % of the random ones
+  detections against none: within 1 px 65 % -> 72 %; t 0.5: true 127 -> 150 (+18.6 %); t 0.75: true 161 -> 194 (+19.9 %); t 1.0: true 200 -> 225 (+12.1 %); t 1.5: true 255 -> 266 (+4.4 %)
+  warped against none: within 1 px 65 % -> 74 %; t 0.5: true 127 -> 147 (+16.2 %); t 0.75: true 161 -> 193 (+19.8 %); t 1.0: true 200 -> 225 (+12.4 %); t 1.5: true 255 -> 263 (+3.2 %)

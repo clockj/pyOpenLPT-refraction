@@ -1,0 +1,2 @@
+stream A2 done
+ne 19: unexpected EOF while looking for matching `"'

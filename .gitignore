@@ -139,8 +139,23 @@ tests/cylinder_stb/runs/
 tests/cylinder_stb_study/**/__pycache__/
 tests/cylinder_stb_study/data/
 tests/cylinder_stb_study/runs/
+# the wand tab's pixel size per camera and Phantom-header alignment (8 Oct 2026): tests/wand_gui_pixel_size/
+# (before_lib/ is git HEAD's wand_calibrator.py, written by g2; data/ is scratch)
+!tests/wand_gui_pixel_size/
+!tests/wand_gui_pixel_size/**
+tests/wand_gui_pixel_size/**/__pycache__/
+tests/wand_gui_pixel_size/before_lib/
+tests/wand_gui_pixel_size/data/
+!tests/cylinder_selfcal/
+!tests/cylinder_selfcal/**
+tests/cylinder_selfcal/**/__pycache__/
+tests/cylinder_selfcal/data/
+tests/cylinder_selfcal/runs/
 # the case cases/cyl_20261007: data/ holds local copies of the raw and preprocessed images and run outputs
 cases/cyl_20261007/data/
+# the case cases/cyl_20261008 (three cameras): the same
+cases/cyl_20261008/data/
+cases/cyl_20261008/**/__pycache__/
 # the campaign's build trees and the saved baseline build
 build-stb/
 build-py-baseline/

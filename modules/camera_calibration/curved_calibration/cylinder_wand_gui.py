@@ -115,7 +115,7 @@ class Job:
     n_final: int = 2                       # starts carried through stages 3-4 (6: the thorough search)
     start: Optional[list] = None           # cameras of an earlier result (in the fit's gauge): skip the start search
     fix_f: Optional[List[int]] = None      # indices of the cameras whose f is held at its value in `start`
-    pixel_mm: Optional[float] = None       # pixel size, only to print f in mm
+    pixel_mm: Optional[object] = None      # pixel size (mm), one number or one per camera: only to print f in mm
     detect_mode: Optional[str] = None      # how the points were found ("ellipse", "fast", "reliable"; None: unknown)
     source: str = ""                       # where the points came from (for the report)
 
@@ -428,6 +428,17 @@ def checks(result: Dict, data: Dict, job: Job) -> List[Dict]:
     return out
 
 
+def pixel_mm_list(pixel_mm, n: int):
+    """Job.pixel_mm as one size per camera (None if none is known): a number is every camera's, a list gives each
+    camera's (None or 0 for a camera without one)."""
+    if pixel_mm is None:
+        return None
+    if isinstance(pixel_mm, (list, tuple)):
+        out = [float(p) if p else None for p in pixel_mm]
+        return out if any(out) else None
+    return [float(pixel_mm)] * n if pixel_mm else None
+
+
 # ------------------------------------------------------------------ outputs
 def write_outputs(sol: cw.Solution, job: Job, folder: str) -> Dict:
     """camFile/cam<id>.txt (PINCYL, C++ writer), calibration_result.json and calibration_report.txt
@@ -436,7 +447,7 @@ def write_outputs(sol: cw.Solution, job: Job, folder: str) -> Dict:
     (with "checks", and "page": the page's path or None when it could not be written)."""
     os.makedirs(folder, exist_ok=True)
     n = len(sol.cams)
-    pixel_mm = [float(job.pixel_mm)] * n if job.pixel_mm else None
+    pixel_mm = pixel_mm_list(job.pixel_mm, n)
     extra = {"gui": {"settings": job.settings(), "written": time.strftime("%Y-%m-%d %H:%M:%S"),
                      "seconds": sol.info.get("total_seconds")}}
     result = cio.write_result(sol, folder, names=job.names, pixel_mm=pixel_mm, extra=extra)

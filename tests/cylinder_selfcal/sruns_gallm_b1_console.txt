@@ -1,0 +1,4 @@
+synthetic runs ['Gallm0_r2_tol1.5', 'Gallmw_r2_tol1.5', 'Gallmc_r2_tol1.5']: build p4c, OMP_NUM_THREADS 12
+  Gallm0_r2_tol1.5: recall (central, seen by all) 0.150, >= 2 0.150; reconstructed 171 per frame, ghosts 31 (18.2 %), duplicates 0.0; position RMS 23.5, 10.8, 19.0 um; long tracks 466 (ghost 71), purity 0.806, track recall 0.148; 11.12 s per frame; exit 0, wall 446 s
+  Gallmw_r2_tol1.5: recall (central, seen by all) 0.143, >= 2 0.143; reconstructed 173 per frame, ghosts 39 (22.5 %), duplicates 0.0; position RMS 23.9, 17.3, 20.5 um; long tracks 468 (ghost 82), purity 0.774, track recall 0.142; 11.86 s per frame; exit 0, wall 476 s
+  Gallmc_r2_tol1.5: recall (central, seen by all) 0.141, >= 2 0.141; reconstructed 174 per frame, ghosts 42 (24.3 %), duplicates 0.0; position RMS 24.3, 16.6, 20.8 um; long tracks 469 (ghost 92), purity 0.749, track recall 0.140; 12.37 s per frame; exit 0, wall 497 s

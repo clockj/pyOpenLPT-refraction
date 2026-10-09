@@ -1,0 +1,17 @@
+V0b on t1_m15: 1104618 candidate pairs in 51 frames; noise model (0.3599678773782613, 0.07446810161082634)
+  1. the null direction on 4032 nodes (4032 seen by both cameras); N at the volume's centre [0.0013, -0.6434, 0.0019, 0.7655]; on the track points the offset = projected / N_v2 to 0.0068 px (median), 0.0134 (95 %)
+  2. cells of 160 px: 36 cells; truth-free (ML) centres' RMS about their mean 0.559 px (0.501 with their noise (0.247) taken off), the tracks' 0.327 (0.318); correlation 0.48; RMS difference 0.542 px against 0.263 expected from the two estimates' standard errors
+  2. cells of 320 px: 11 cells; truth-free (ML) centres' RMS about their mean 0.300 px (0.244 with their noise (0.175) taken off), the tracks' 0.253 (0.249); correlation 0.97; RMS difference 0.122 px against 0.229 expected from the two estimates' standard errors
+  3. the truth-free field: 424316 pairs within +-3.0 px (216563 on frames 0, 10, ...)
+    lam 1000: true pairs 3309 (1.5 %), spread 0.170; held-out log-likelihood per pair -1.52513 -> -1.52518
+    lam 10000: true pairs 4035 (1.9 %), spread 0.358; held-out log-likelihood per pair -1.52461 -> -1.52459
+    lam 100000: true pairs 4428 (2.0 %), spread 0.668; held-out log-likelihood per pair -1.52437 -> -1.52427
+    lam 1e+06: true pairs 4275 (2.0 %), spread 0.798; held-out log-likelihood per pair -1.52435 -> -1.52433
+    mixture fit: 216563 candidate pairs within +-3.0 px, 400 passes; true pairs 4428 (2.0 %), their spread 0.668 x the noise model; mean log-likelihood -1.524192
+    mixture fit (warm start): 216563 candidate pairs within +-3.0 px, 400 passes; true pairs 4432 (2.0 %), their spread 0.669 x the noise model; mean log-likelihood -1.524193
+    frames 0, 10, ...: mean log-likelihood from zero -1.524192, from the tracks' field -1.524193: the cold start's maximum is kept
+    mixture fit: 424316 candidate pairs within +-3.0 px, 214 passes; true pairs 9148 (2.2 %), their spread 0.688 x the noise model; mean log-likelihood -1.524168
+    held out (frames 5, 15, ...), the mixture refitted with the field frozen: no field: true pairs 3987, spread 0.770; the truth-free field: 4175, 0.716; the tracks' field (v0_pattern, frames 0, 10, ...): 4729, 0.697
+    at the track points, the offset each field predicts (null direction): truth-free RMS 0.199 px, the tracks' 0.279; correlation 0.54, RMS difference 0.239 px; truth-free = 0.39 x tracks' -0.003
+    cam1 dv over the pixels both cover: truth-free RMS 0.201, tracks' 0.311 px; correlation 0.62
+    cam2 dv over the pixels both cover: truth-free RMS 0.256, tracks' 0.404 px; correlation 0.46

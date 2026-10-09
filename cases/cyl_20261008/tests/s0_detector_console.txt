@@ -1,0 +1,144 @@
+S0: the line detector against the standard tracer finder (threshold 4 x noise: [41, 24, 21]) on frames [0, 25, 50, 75, 100, 125, 150, 175, 200, 225]
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 72.2085,0.570993,0.624274,0
+
+Camera 1 (a,b,c,alpha) = 77.0263,0.654968,0.737193,0
+
+Camera 2 (a,b,c,alpha) = 74.8466,0.515564,0.598875,0
+
+  lines: detections per camera (median) [462, 956, 5274]; cam1-cam2 pairs within 8 px 7530; triplets in the signal band 79, background band 40; true triplets per frame 61 (37-71)
+  peaks: detections per camera (median) [9250, 17222, 52773]; cam1-cam2 pairs within 8 px 2707630; triplets in the signal band 44622, background band 114530; true triplets per frame 1579 (1054-2075)
+  more true three-camera matches per frame: peaks

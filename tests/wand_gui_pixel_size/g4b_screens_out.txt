@@ -1,0 +1,7 @@
+loaded: [10605, 10605, 10605] images; status: 'Cameras aligned by their Phantom headers: images 2396-13000 (10605 frames). Cam 1: 2396 dropped at the start, 0 at the end; Cam 2: 2396 dropped at the start, 0 at the end.'
+scales: {0: 1.0, 1: 1.0, 2: 1.4814814814814814}
+  picture: g4b_detection_panel.png (368 x 843)
+Test Detect: balls per camera [2, 2, 2]
+  picture: g4b_cam3_test_detect.png (1112 x 905)
+  picture: g4b_cam1_test_detect.png (1112 x 905)
+dialogs: []

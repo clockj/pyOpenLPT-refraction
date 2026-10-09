@@ -1,0 +1,137 @@
+{
+ "checks": [
+  {
+   "check": "the table has the Pixel (\u00b5m) column",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "aligned: 10,605 images each, cams 1-2 from frame002396.tif, cam3 from frame000000.tif",
+   "ok": true,
+   "detail": "[10605, 10605, 10605]"
+  },
+  {
+   "check": "the Load buttons and the frame table show 10,605",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the status line says the cameras were aligned",
+   "ok": true,
+   "detail": "Cameras aligned by their Phantom headers: images 2396-13000 (10605 frames). Cam 1: 2396 dropped at the start, 0 at the end; Cam 2: 2396 dropped at the start, 0 at the end."
+  },
+  {
+   "check": "Width/Height from the images (cam3 2048 x 1952)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "scales {0: 1, 1: 1, 2: 20/13.5}",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the Radius Range's limit stays 200 (camera 1's pixels: cam3's 1952 / 4 / 1.48 = 329 is larger)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the jobs get [0.02, 0.02, 0.0135] mm",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "every pixel size cleared: scales None, jobs' pixel_mm None",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "equal pixel sizes only: scales None (nothing to scale)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the displayed result equals detect_single_frame with the same scales",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "cam3 shows two balls (with cams 1-2's settings scaled)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "cams 1-2 keep pixel size and folder, whole again without cam3; cam 3 starts empty",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "no warning or error dialog",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "seconds": 37.632344245910645,
+ "loaded": {
+  "n": [
+   10605,
+   10605,
+   10605
+  ],
+  "first": [
+   "frame002396.tif",
+   "frame002396.tif",
+   "frame000000.tif"
+  ],
+  "status": "Cameras aligned by their Phantom headers: images 2396-13000 (10605 frames). Cam 1: 2396 dropped at the start, 0 at the end; Cam 2: 2396 dropped at the start, 0 at the end."
+ },
+ "scales": {
+  "0": 1.0,
+  "1": 1.0,
+  "2": 1.4814814814814814
+ },
+ "test_detect": {
+  "0": [
+   [
+    1180.7626220216168,
+    468.49111239608897,
+    31.32661107756392,
+    0.9433978523209533
+   ],
+   [
+    976.7727816975796,
+    593.2504316995295,
+    42.512929798515785,
+    0.8344099910780944
+   ]
+  ],
+  "1": [
+   [
+    679.6380908231521,
+    528.2392766641053,
+    32.59156743268557,
+    0.9204206491143716
+   ],
+   [
+    529.3729703943196,
+    623.7555207263483,
+    44.35632686621535,
+    0.875329894994372
+   ]
+  ],
+  "2": [
+   [
+    1888.0920239268903,
+    1166.5500204257592,
+    49.48274880452184,
+    0.8657665604749903
+   ],
+   [
+    1553.9345383992702,
+    1302.8353295650322,
+    66.12239751902446,
+    0.8700184085381715
+   ]
+  ]
+ }
+}

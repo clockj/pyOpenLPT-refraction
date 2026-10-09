@@ -1,0 +1,86 @@
+{
+ "checks": [
+  {
+   "check": "T0: cams 1-2 (0, 13001), cam3 (2396, 10605)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "T1: every camera (0, 1001)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "a folder without a .chd: None",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "every list has 10,605 files; cams 1-2 start at frame002396.tif, cam3 at frame000000.tif",
+   "ok": true,
+   "detail": "{0: 10605, 1: 10605, 2: 10605}"
+  },
+  {
+   "check": "the i-th files are the same image number in every camera",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the dropped counts: cams 1-2 2,396 at the start, none at the end; cam3 none",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "cam3's list is unchanged; the input lists are not modified",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "equal first numbers (T1): lists unchanged, no info",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "a camera without a header: lists unchanged, no info",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "one camera: unchanged",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "cut to images 10-99 in both",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "seconds": 604.7574462890625,
+ "headers": {
+  "T0/cam1": [
+   0,
+   13001
+  ],
+  "T0/cam2": [
+   0,
+   13001
+  ],
+  "T0/cam3": [
+   2396,
+   10605
+  ],
+  "T1/cam1": [
+   0,
+   1001
+  ],
+  "T1/cam2": [
+   0,
+   1001
+  ],
+  "T1/cam3": [
+   0,
+   1001
+  ]
+ }
+}

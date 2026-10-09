@@ -1,0 +1,29 @@
+1. phantom_image_numbers
+  T0 cam1: (0, 13001)
+  T0 cam2: (0, 13001)
+  T0 cam3: (2396, 10605)
+  T1 cam1: (0, 1001)
+  T1 cam2: (0, 1001)
+  T1 cam3: (0, 1001)
+  PASS  T0: cams 1-2 (0, 13001), cam3 (2396, 10605)
+  PASS  T1: every camera (0, 1001)
+  PASS  a folder without a .chd: None
+
+2. T0's file lists aligned
+  info: {'start': 2396, 'end': 13000, 'dropped': {0: (2396, 0), 1: (2396, 0), 2: (0, 0)}}
+  first files: cam1 frame002396.tif, cam2 frame002396.tif, cam3 frame000000.tif; last: cam1 frame013000.tif, cam2 frame013000.tif, cam3 frame010604.tif
+  PASS  every list has 10,605 files; cams 1-2 start at frame002396.tif, cam3 at frame000000.tif  ({0: 10605, 1: 10605, 2: 10605})
+  PASS  the i-th files are the same image number in every camera
+  PASS  the dropped counts: cams 1-2 2,396 at the start, none at the end; cam3 none
+  PASS  cam3's list is unchanged; the input lists are not modified
+
+3. no alignment when it is not needed or not possible
+  PASS  equal first numbers (T1): lists unchanged, no info
+  PASS  a camera without a header: lists unchanged, no info
+  PASS  one camera: unchanged
+
+4. a synthetic pair that also ends apart
+  info: {'start': 10, 'end': 99, 'dropped': {0: (10, 0), 1: (0, 20)}}; first a10, b0; last a99, b89
+  PASS  cut to images 10-99 in both
+
+11 of 11 checks passed; 605 s

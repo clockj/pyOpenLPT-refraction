@@ -1,0 +1,32 @@
+{
+ "rerun": [
+  272,
+  264,
+  284,
+  289
+ ],
+ "original": [
+  272,
+  264,
+  284,
+  289
+ ],
+ "equal": true,
+ "info": {
+  "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\runs\\xcheck\\config.json",
+  "build": "p4c",
+  "exe": false,
+  "env": {
+   "OMP_NUM_THREADS": "8"
+  },
+  "returncode": 0,
+  "wall_s": 30.69,
+  "end": "2026-10-08T21:13:16",
+  "build_info": {
+   "name": "p4c",
+   "git_head": "d9b20b4",
+   "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+   "start": "2026-10-07T20:28:06"
+  }
+ }
+}

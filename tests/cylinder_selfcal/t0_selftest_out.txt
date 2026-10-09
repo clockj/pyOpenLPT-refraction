@@ -1,0 +1,29 @@
+T0 self-tests of selfcal.py; build p4c (D:\Refraction\pyOpenLPT\build-stb\p4c\out\pyopenlpt.cp311-win_amd64.pyd)
+1. B-splines
+  [PASS] B-spline partition of unity: max |sum - 1| = 2.2e-16
+  [PASS] a plane: reproduced and zero bending energy: max error 8.9e-16 px, energy -6.6e-18
+  [PASS] a quadratic's bending energy: spline 0.04096 vs exact 0.04096 (ratio 1.00000000)
+2. the projected fit recovers a known field
+    lam 10: held-out cauchy loss 1.4940 -> 0.4117, projected MAD 2.589 -> 1.060
+    lam 1000: held-out cauchy loss 1.4940 -> 0.4115, projected MAD 2.589 -> 1.059
+    lam 100000: held-out cauchy loss 1.4940 -> 0.4055, projected MAD 2.589 -> 1.049
+    lam 1e+07: held-out cauchy loss 1.4940 -> 0.4023, projected MAD 2.589 -> 1.058
+    fit: lam 1e+07, 6000 points (6000 projected rows), 8 iterations; projected RMS 2.638 -> 1.010 (noise units); 4.4 % of the points down-weighted
+  [PASS] T1's 2 cameras: the fit recovers the field's observable part, and stays bounded where the data do not see: observable RMS 0.367 px, error 0.013 px (noise 0.15 px per axis); full field RMS 0.437, error 0.344 px (the unseen part: left at 0 by the prior)
+    lam 10: held-out cauchy loss 1.5854 -> 0.4444, projected MAD 2.318 -> 1.007
+    lam 1000: held-out cauchy loss 1.5854 -> 0.4443, projected MAD 2.318 -> 1.007
+    lam 100000: held-out cauchy loss 1.5854 -> 0.4387, projected MAD 2.318 -> 1.000
+    lam 1e+07: held-out cauchy loss 1.5854 -> 0.4341, projected MAD 2.318 -> 0.992
+    fit: lam 1e+07, 6000 points (30000 projected rows), 5 iterations; projected RMS 2.278 -> 0.994 (noise units); 0.2 % of the points down-weighted
+  [PASS] the study's 4-camera rig: the fit recovers the field's observable part, and stays bounded where the data do not see: observable RMS 0.306 px, error 0.011 px (noise 0.15 px per axis); full field RMS 0.453, error 0.312 px (the unseen part: left at 0 by the prior)
+3. the warp
+  [PASS] warp by a constant c moves content by -c: spot at [500.2, 300.6] -> [499.9, 301.3], expected [499.9, 301.3] (error 0.0001 px)
+  [PASS] warp by a smooth field moves content at p by -c(p): 20 spots: max error 0.0003 px (field RMS 0.27 px)
+4. one T1 frame
+  the 15 px run: 1228 long tracks, 112383 points, last frame 250
+  frame 100: 467 long-track points (>= 10 frames), detections 1124 / 979 (28.4 s); paired in cam1 300, cam2 235, both 155; Jacobians 0.6 s
+  [PASS] stored projections = the cameras' projections of the stored points: max difference 2.93e-05 px (the CSV keeps 6 decimals)
+  epipolar offsets of 200 paired points: median +0.296 px, RMS 1.204 px (1.2 ms per curve)
+  S2's candidate pairs within 8 px: 22171; signed offsets within 15 px: 41298 (4.4 s)
+  [PASS] the vectorised candidate pairs = S2's: 22171 vs 22171 pairs (0 differ); 4.4 s vs 3.5 s
+T0: all pass (5 of 5 groups)

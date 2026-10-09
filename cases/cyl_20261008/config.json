@@ -1,0 +1,80 @@
+{
+  "_comment": "Run 20261008 through the water-filled acrylic tube with three cameras: T0 = wand calibration, T1 = tracers. Lengths in mm, image coordinates in px (u = column, v = row, pixel centres at integers). Frames are counted by image number, the Phantom's count from the common trigger (the .chd header's FirstImageNo): a camera's file frame{k}.tif holds image number k + first_image. The top-level wand keys (raw_dir ... calibrate) are T0's, in the layout of the 6-7 Oct cases.",
+  "case": "cyl_20261008",
+  "raw_root": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008",
+  "out_root": "X:\\Shijie Zhong\\Refraction\\Processed\\20261008",
+  "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T0",
+  "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261008\\T0",
+  "cameras": [
+    {"id": 1, "folder": "cam1", "gui_index": 0, "width": 1280, "height": 800, "pixel_mm": 0.020,
+     "model": "Phantom VEO 710L", "serial": 29199, "first_image": {"T0": 0, "T1": 0}},
+    {"id": 2, "folder": "cam2", "gui_index": 1, "width": 1280, "height": 800, "pixel_mm": 0.020,
+     "model": "Phantom VEO 710L", "serial": 23752, "first_image": {"T0": 0, "T1": 0}},
+    {"id": 3, "folder": "cam3", "gui_index": 2, "width": 2048, "height": 1952, "pixel_mm": 0.0135,
+     "model": "Phantom v2640", "serial": 29198, "first_image": {"T0": 2396, "T1": 0}}
+  ],
+  "_cameras": "From the .chd headers (p0a_files): sizes, serials, FirstImageNo. cam3 saved T0's images 2396-13000 only; cams 1-2 saved 0-13000. Pixel sizes: VEO 710L 20 um, v2640 13.5 um (Phantom data sheets). The user (8 Oct): every camera has the 180 mm lens, at roughly the same distance from the tube.",
+  "frames": {"pattern": "frame{frame:06d}.tif", "first": 0, "last": 13000},
+  "wand": {
+    "_comment": "Assumed the wand of 6-7 Oct (10 mm, balls 3 and 4 mm); to confirm with the user.",
+    "length_mm": 10.0,
+    "ball_diameters_mm": [3.0, 4.0]
+  },
+  "tube": {
+    "_comment": "As on 6-7 Oct: OD 7.9375 in, wall 0.125 in.",
+    "outer_diameter_in": 7.9375,
+    "wall_in": 0.125,
+    "radii_mm": [100.80625, 97.63125],
+    "n": [1.0, 1.49, 1.333],
+    "media": ["air", "acrylic", "water"]
+  },
+  "detect": {
+    "_comment": "Cams 1-2, from the opening scan (p0d_wand_survey scan): ball radii about 32.5 and 46 px (7 Oct: 58-95 px), an opening of 51 px separates the rod (41-51 px in every frame, 61 loses the small ball); the opening and the rod mask scaled from 7 Oct's 95 / 50 px by the radii (x 0.55).",
+    "polarity": "dark",
+    "min_r_px": 20.0,
+    "max_r_px": 70.0,
+    "open_px": 51,
+    "rod_mask_px": 28.0,
+    "guard_px": 3.0,
+    "workers": 16
+  },
+  "detect_per_camera": {
+    "3": {
+      "_comment": "cam3 (v2640, 13.5 um pixels): its balls are 1.5-1.57x larger in px (radii about 51 and 69 px; pixel-size ratio 1.48); an opening of 71-81 px separates the rod. Cams 1-2's lengths x 1.5.",
+      "min_r_px": 30.0,
+      "max_r_px": 105.0,
+      "open_px": 77,
+      "rod_mask_px": 42.0
+    }
+  },
+  "accept": {
+    "_comment": "The 6-7 Oct rules: a camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame enters the fit when at least min_cameras cameras keep it.",
+    "edge_rms_max_px": 1.0,
+    "aspect_range": [1.15, 1.45],
+    "size_tol": 0.10,
+    "min_cameras": 2
+  },
+  "calibrate": {
+    "fit_k1": false,
+    "fit_L": false,
+    "noise_weights": "camera",
+    "n_final": 2
+  },
+  "tracking_camfiles": {
+    "folder": "camFile_track",
+    "proj_tol": 1e-9
+  },
+  "tracers": {
+    "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T1",
+    "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261008\\T1",
+    "frames": {"pattern": "frame{frame:06d}.tif", "first": 0, "last": 1000},
+    "track_raw_frames": [0, 249],
+    "_track_raw_frames": "The user (8 Oct): tracking the first 250 frames is enough, to save time. Only these are copied locally and preprocessed; the background is the median of every 16th frame of the whole recording (p0b).",
+    "fps": 4000,
+    "exposure_us": 100,
+    "preprocess": {
+      "_comment": "S1: the high-pass's median window per camera: 7 Oct's adopted 15 px (tests/cylinder_stb_study, report section 7) for cams 1-2; cam3's pixels are 1.48x smaller, so 15 x 1.48 = 22 -> 23 px (odd).",
+      "median_px": {"cam1": 15, "cam2": 15, "cam3": 23}
+    }
+  }
+}

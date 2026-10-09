@@ -1,0 +1,4 @@
+  s3_final_m15vc2: 105885 long-track points; 536 per frame from frame 150
+  s3_final_m15: 112383 long-track points; 571 per frame from frame 150
+  60192 points of s3_final_m15vc2 within 0.1 mm of s3_final_m15's at the same frame: difference median x/y/z +0.0 / +0.1 / +0.0 um, robust SD 0.9 / 5.8 / 1.2 um
+  the smooth part (medians in 54 cells of 4 x 4 x 4 over the view volume, >= 50 points): RMS x/y/z 0.4 / 7.8 / 0.4 um; largest |median| 21.9 um

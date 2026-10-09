@@ -1,0 +1,3 @@
+compose data/fields/gallm_r2.npz then data/fields/gallm_w1.npz -> data/fields/gallm_total2.npz
+  cam1 over its covered pixels: du RMS 0.004 + 0.003 -> 0.006, dv RMS 0.527 + 0.329 -> 0.666 px (pass 1 + pass 2 -> total)
+  cam2 over its covered pixels: du RMS 0.002 + 0.003 -> 0.004, dv RMS 0.456 + 0.245 -> 0.507 px (pass 1 + pass 2 -> total)

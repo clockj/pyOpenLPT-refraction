@@ -1,0 +1,22 @@
+1. scale_detect_settings
+  cam3: radius 29.6296-103.7037 px, opening 76 px, mask 41.4815 px, guard 3.0 px
+  PASS  cam3's radius range, opening and mask are cams 1-2's x 20/13.5; the guard and 'full' unchanged  (scale 1.481481)
+  PASS  the caller's settings are not modified
+  PASS  scale None, 1 or 0: the same objects back
+
+2. detect_single_frame with cam_scales against run_detection_task by hand
+  PASS  every camera-frame: bitwise the same rows  (72 camera-frames; different: [])
+  camera-frames with two balls (scaled): cam1 20, cam2 16, cam3 19 of 24
+
+3. detect_wand_points_generator with cam_scales, first 6 frames
+  PASS  the generator's raw balls equal Test Detect's (u, v, r, metric)  (18 camera-frames; different: [])
+
+4. cam3: the GUI's scaled settings against the case's (30-105 px, 77, 42)
+  frames with two balls: GUI scaled 19, case 19; both 19; centre differences: max 0.1123 px, median 0.0004 px
+  FAIL  the same frames kept, centres within 0.05 px  (19 frames)
+
+5. cam3 with cams 1-2's settings, unscaled (the GUI before this change)
+  cam3 frames with two balls: unscaled 0, scaled 19 of 24; balls found unscaled per frame: [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
+  PASS  scaling keeps more of cam3's frames than one setting for all cameras  (19 against 0)
+
+6 of 7 checks passed; 543 s

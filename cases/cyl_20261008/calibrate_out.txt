@@ -1,0 +1,43 @@
+S2: the delivered calibration
+  detections: X:\Shijie Zhong\Refraction\Processed\20261008\T0\detection\detections_all.csv
+  cam1: kept 7922 of 13001 camera-frames; median r (sqrt(a b)) A 31.2 px, B 42.8 px; rejected: 3848 one ball, 1076 no ball, 69 edge RMS, 68 aspect, 17 size, 1 balls overlap (guard)
+  cam2: kept 7439 of 13001 camera-frames; median r (sqrt(a b)) A 33.0 px, B 44.5 px; rejected: 4095 one ball, 1171 no ball, 288 aspect, 7 edge RMS, 1 size
+  cam3: kept 7050 of 10605 camera-frames; median r (sqrt(a b)) A 49.3 px, B 66.3 px; rejected: 3027 one ball, 469 no ball, 37 aspect, 22 edge RMS
+  frames kept in at least 2 cameras: 7212 of 13001; in all three: 3495
+  written X:\Shijie Zhong\Refraction\Processed\20261008\T0\wand_points.csv (the GUI's format; cam1, cam2, cam3 = the GUI's cameras 0, 1, 2)
+  calibration: 7212 frames, wand 10.0 mm, tube radii (100.80625, 97.63125) mm, n (1.0, 1.49, 1.333), fit_k1 False, fit_L False, noise weights camera, n_final 2
+        0.0 s  Start search (stages 1-2)
+      106.5 s  Coarse fit (stage 3)
+      239.2 s  Final fit (stage 4)
+     1046.2 s  Coarse fit (stage 3)
+  done in 1165 s; written to X:\Shijie Zhong\Refraction\Processed\20261008\T0
+  3 cameras, 7212 frames, 35654 of 35838 detections used.
+  Reprojection RMS 0.703 px; wand length (free triangulation) RMS error 60.5 um over 7175 frames.
+    cam1: f 16,331 px (326.6 mm) +- 0.25 %, 788 mm from the axis, RMS 0.742 px
+    cam2: f 18,258 px (365.2 mm) +- 0.28 %, 929 mm from the axis, RMS 0.531 px
+    cam3: f 25,188 px (340.0 mm) +- 0.27 %, 871 mm from the axis, RMS 0.780 px
+
+  | Cylinder wand calibration (PINCYL), 3 cameras
+  | tube: radii [100.80625, 97.63125] mm, n [1.0, 1.49, 1.333]; wand 10.0000 mm
+  | frames 7212, observations 35654 active of 35838; reprojection RMS 0.7030 px (2-D), sigma 0.7072 px per coordinate
+  | wand length, free triangulation: mean error -2.06 um, RMS 60.54 um over 7175 frames
+  | frame: tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height (slid -320.365 mm)
+  | 
+  | cam1: f 16330.7 px (326.614 mm) +- 0.247 %; distance from the axis 788.18 mm +- 1.896; azimuth -0.000 deg; height 320.365 mm; reprojection RMS 0.7423 px (13891/13962 active); camFile camFile\cam1.txt
+  | cam2: f 18257.5 px (365.150 mm) +- 0.282 %; distance from the axis 929.16 mm +- 2.557; azimuth 42.251 deg; height 11.039 mm; reprojection RMS 0.5308 px (10021/10062 active); camFile camFile\cam2.txt
+  | cam3: f 25187.9 px (340.037 mm) +- 0.268 %; distance from the axis 871.03 mm +- 2.254; azimuth -3.125 deg; height 21.620 mm; reprojection RMS 0.7799 px (11742/11814 active); camFile camFile\cam3.txt
+  | 
+  | Noise levels and weights (noise_weights='camera')
+  |   weights APPLIED: estimated from the residuals; each detection weighted by 1 / sigma^2 of its group
+  |   group          noise sigma  +- rel. SE    used / total  not used  residual RMS  outlier scale
+  |                         (px)                                         (px/coord.)           (px)
+  |   cam1                0.6857       0.7 %   13891 / 13962        71        0.5249              -
+  |   cam2                0.5796       1.0 %   10021 / 10062        41        0.3753              -
+  |   cam3                0.8186       1.0 %   11742 / 11814        72        0.5515              -
+  |   pooled sigma 0.7072 px per coordinate (unweighted); variance factor 1.003 (about 1 when the weights match the data); 20 rounds; noisiest / quietest group 1.41x
+  |   noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.
+  |   residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera
+  |     next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).
+  |   not used: rejected as outliers, or dropped with their frame when an end was left in fewer than two cameras.
+  |   outlier scale: the robust scale each detection was judged against (rejected beyond 5 of it).
+  |   starts: 2 of 6 short-listed bootstrap starts carried through stages 3-4; stage-3 RMS 0.743, 0.743 px; 1 of them ended stage 3 as an earlier one (the same detections, RMS within 1e-5) and share its stage 4

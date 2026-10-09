@@ -1,0 +1,86 @@
+{
+ "runs": {
+  "Gcal4c3_n8_r3_tol1.0": {
+   "case": "cal4",
+   "set": "Gcal4c3_n8",
+   "cameras": 3,
+   "tol_2d_px": 1.0,
+   "otf": "otf_r3.txt",
+   "cam2_shift": 0,
+   "tracer": {
+    "intensity_threshold": 30,
+    "radius_px": 2.0,
+    "detector": "lines",
+    "lines": {
+     "noise": [
+      8.0,
+      8.0,
+      8.0
+     ]
+    },
+    "otf_file": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\data\\cal4\\otf_r3.txt",
+    "roi_from_otf": true,
+    "roi_sigma": 3.0,
+    "shape_check": true,
+    "shape_tol_px": 0.8,
+    "shape_tol_rel": 0.2
+   },
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\runs\\configs\\Gcal4c3_n8_r3_tol1.0.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12",
+     "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "returncode": 0,
+    "wall_s": 2236.58,
+    "end": "2026-10-08T15:00:41",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 1115.75,
+    "matched_per_frame": 1049.1944444444443,
+    "ghosts_per_frame": 65.47222222222223,
+    "duplicates_per_frame": 1.0833333333333333,
+    "ghost_share": 0.05868001095426594,
+    "present_ge2_in_volume_per_frame": 1346.5277777777778,
+    "recall": {
+     "all_in": 0.8692591445386196,
+     "all_out": null,
+     "ge2_in": 0.7789169675090253,
+     "ge2_out": null,
+     "n-1_in": 0.7789169675090253,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 986.4722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1346.5277777777778,
+     "ge2_out": 0.0,
+     "n-1_in": 1346.5277777777778,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     19.66022404130477,
+     8.987620578069704,
+     19.30576913893519
+    ],
+    "long_tracks": 1262,
+    "long_track_mean_length": 33.7337559429477,
+    "long_track_purity_mean": 0.9374763972756972,
+    "long_track_purity_ge_0.9": 0.904120443740095,
+    "long_tracks_ghost": 45,
+    "track_recall": 0.7778029912325941,
+    "frame_time_s_mean": 55.82775
+   }
+  }
+ }
+}

@@ -1,0 +1,24 @@
+P0b: run 20261008/T1 (X:\Shijie Zhong\Refraction\Raw\20261008\T1), read-only
+  cam1: background from 63 frames -> D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1bg\cam1.npy
+
+  cam1: noise 2.97 grey levels; images above 5 noise per frame 46, 38, 41, 31, 46; above 10 noise 1, 1, 2, 0, 1
+    all above 5 noise: 202 images; sigma_u 3.05, sigma_v 3.22 px (medians); round (|e| < 0.4) 84 %, horizontal (e > 0.8) 0 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.37/-0.08/0.31
+    above 10 noise: 5 images; sigma_u 2.50, sigma_v 3.40 px (medians); round (|e| < 0.4) 40 %, horizontal (e > 0.8) 0 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.53/-0.40/-0.16
+  cam2: background from 63 frames -> D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1bg\cam2.npy
+
+  cam2: noise 2.97 grey levels; images above 5 noise per frame 510, 529, 518, 506, 516; above 10 noise 35, 24, 29, 30, 29
+    all above 5 noise: 2579 images; sigma_u 3.50, sigma_v 3.42 px (medians); round (|e| < 0.4) 92 %, horizontal (e > 0.8) 0 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.26/0.03/0.34
+    above 10 noise: 147 images; sigma_u 3.13, sigma_v 3.00 px (medians); round (|e| < 0.4) 95 %, horizontal (e > 0.8) 0 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.21/0.01/0.28
+  cam3: background from 63 frames -> D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1bg\cam3.npy
+
+  cam3: noise 4.45 grey levels; images above 5 noise per frame 721, 728, 735, 770, 775; above 10 noise 36, 33, 38, 30, 39
+    all above 5 noise: 3729 images; sigma_u 5.51, sigma_v 5.36 px (medians); round (|e| < 0.4) 94 %, horizontal (e > 0.8) 0 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.24/0.03/0.31
+    above 10 noise: 176 images; sigma_u 4.80, sigma_v 4.65 px (medians); round (|e| < 0.4) 94 %, horizontal (e > 0.8) 0 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.19/0.03/0.30
+
+7 Oct's T1 (cams 1-2, frames 100 and 500, background = median of every 16th frame of its local copy)
+  cam1: noise 1.48; images above 5 noise per frame 649, 641
+    all above 5 noise: 1290 images; sigma_u 3.30, sigma_v 3.24 px (medians); round (|e| < 0.4) 67 %, horizontal (e > 0.8) 2 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.45/0.01/0.59
+    above 10 noise: 105 images; sigma_u 2.97, sigma_v 3.02 px (medians); round (|e| < 0.4) 61 %, horizontal (e > 0.8) 1 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.58/-0.11/0.61
+  cam2: noise 2.97; images above 5 noise per frame 166, 141
+    all above 5 noise: 307 images; sigma_u 3.15, sigma_v 3.06 px (medians); round (|e| < 0.4) 60 %, horizontal (e > 0.8) 5 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.51/0.03/0.63
+    above 10 noise: 22 images; sigma_u 2.82, sigma_v 2.91 px (medians); round (|e| < 0.4) 64 %, horizontal (e > 0.8) 5 %, vertical (e < -0.8) 0 %; e p10/50/90 -0.50/-0.05/0.34

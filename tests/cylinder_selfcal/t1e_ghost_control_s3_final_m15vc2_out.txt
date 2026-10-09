@@ -1,0 +1,13 @@
+T1-e: s3_final_m15vc2 (247 frames logged) against s3_control_m15vc2 (97 frames)
+  log entry 10: active long tracks final 124, control 30: control / final 0.242
+  log entry 20: active long tracks final 179, control 54: control / final 0.302
+  log entry 40: active long tracks final 278, control 104: control / final 0.374
+  log entry 60: active long tracks final 342, control 129: control / final 0.377
+  log entry 80: active long tracks final 368, control 151: control / final 0.410
+  log entry 97: active long tracks final 414, control 161: control / final 0.389
+  final, long tracks at frame 100 (>= 4 frames): 538; length 10/50/90 % [14.0, 54.5, 95.3]; speed [40.973, 73.57, 93.614] mm/s; second difference / step [0.241, 0.471, 0.817]
+  control, long tracks at frame 100 (>= 4 frames): 228; length 10/50/90 % [13.7, 46.0, 85.0]; speed [48.373, 70.775, 97.331] mm/s; second difference / step [0.276, 0.579, 0.89]
+  final's tracks at least as rough as the control's median ghost (0.579): 32.7 % (the control's own: 50 %)
+  swirl, final: 425 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.084, 0.18, 0.459]; above 0.3: 25.9 %
+  swirl, control: 160 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.121, 0.316, 0.661]; above 0.3: 53.8 %
+  ghosts among final's tracks, from the swirl (real tracks below 0.3): 48 %; from the counts (an upper bound): 39 %

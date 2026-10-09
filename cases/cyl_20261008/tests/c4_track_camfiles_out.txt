@@ -1,0 +1,21 @@
+C4: X:\Shijie Zhong\Refraction\Processed\20261008\T0\camFile -> X:\Shijie Zhong\Refraction\Processed\20261008\T0\camFile_track, projection tolerance 1e-09
+  cam1.txt: tolerance 9.9999999999999998e-13 -> 1.0000000000000001e-09; lines changed [37] of 41
+    both load: CameraType.PINCYL / CameraType.PINCYL
+  cam2.txt: tolerance 9.9999999999999998e-13 -> 1.0000000000000001e-09; lines changed [37] of 41
+    both load: CameraType.PINCYL / CameraType.PINCYL
+  cam3.txt: tolerance 9.9999999999999998e-13 -> 1.0000000000000001e-09; lines changed [37] of 41
+    both load: CameraType.PINCYL / CameraType.PINCYL
+  box points: 20000 inside the water, box [-28.4, -26.0, -36.3] - [29.3, 30.6, 46.2] mm
+  box, cam1.txt: 20000 points; image at 1e-12 19998, at 1e-9 20000; only at 1e-12 0, only at 1e-9 2; on the sensor (both) 12375; largest pixel difference 0.00e+00 px
+  box, cam2.txt: 20000 points; image at 1e-12 19999, at 1e-9 20000; only at 1e-12 0, only at 1e-9 1; on the sensor (both) 10441; largest pixel difference 0.00e+00 px
+  box, cam3.txt: 20000 points; image at 1e-12 20000, at 1e-9 20000; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 5114; largest pixel difference 0.00e+00 px
+  junction plane of cam1, cam1.txt: 4000 points; image at 1e-12 4000, at 1e-9 4000; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 2374; largest pixel difference 0.00e+00 px
+  junction plane of cam1, cam2.txt: 4000 points; image at 1e-12 3661, at 1e-9 3661; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 1035; largest pixel difference 0.00e+00 px
+  junction plane of cam1, cam3.txt: 4000 points; image at 1e-12 4000, at 1e-9 4000; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 1671; largest pixel difference 0.00e+00 px
+  junction plane of cam2, cam1.txt: 4000 points; image at 1e-12 3620, at 1e-9 3620; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 1131; largest pixel difference 0.00e+00 px
+  junction plane of cam2, cam2.txt: 4000 points; image at 1e-12 4000, at 1e-9 4000; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 2770; largest pixel difference 0.00e+00 px
+  junction plane of cam2, cam3.txt: 4000 points; image at 1e-12 3647, at 1e-9 3647; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 451; largest pixel difference 0.00e+00 px
+  junction plane of cam3, cam1.txt: 4000 points; image at 1e-12 4000, at 1e-9 4000; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 2411; largest pixel difference 0.00e+00 px
+  junction plane of cam3, cam2.txt: 4000 points; image at 1e-12 3652, at 1e-9 3652; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 972; largest pixel difference 0.00e+00 px
+  junction plane of cam3, cam3.txt: 4000 points; image at 1e-12 4000, at 1e-9 4000; only at 1e-12 0, only at 1e-9 0; on the sensor (both) 1897; largest pixel difference 0.00e+00 px
+  verdict: one line changed per file True; same pixels (<= 1e-6 px) where both give one True; no point loses its image at 1e-9 True

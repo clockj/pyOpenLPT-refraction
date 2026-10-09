@@ -1,0 +1,7 @@
+C1 (file check): X:\Shijie Zhong\Refraction\Processed\20261008\T0\wand_points.csv: the GUI's loader says: True, Loaded 7212 valid frames.
+  PASS: every kept frame loaded 7212 of 7212
+  PASS: cameras 0, 1 and 2 [0, 1, 2]
+  PASS: the same cameras missing (NaN) as in the selection 
+  PASS: labels Filtered_Small / Filtered_Large in every camera-frame 
+  PASS: the same frames, in order 
+  PASS: centres equal the selection's within 5.1e-5 px largest 5.00e-05 px

@@ -1,0 +1,17 @@
+T1 checks on D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\runs\s3_final_c3: 425 long tracks (last frame 249), 3 cameras
+  sample frames [20, 60, 100, 140, 180, 220]: 1661 long-track points with neighbours in time
+  sample points with a detection within 2 px in k cameras: 3: 729, 2: 689, 1: 219, 0: 24
+  T1-a cam1: 859 points; detection - track image: mean (-0.121, -0.398) px, RMS (0.739, 0.842) px
+  T1-c cam1: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.24 / 0.34 / 0.55 px (median -0.09); w_v 0.25 / 0.36 / 0.76 px (median -0.03)
+  T1-a cam2: 1349 points; detection - track image: mean (-0.032, +0.287) px, RMS (0.273, 0.642) px
+  T1-c cam2: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.21 / 0.30 / 0.53 px (median -0.07); w_v 0.22 / 0.31 / 0.46 px (median -0.15)
+  T1-a cam3: 1576 points; detection - track image: mean (+0.004, -0.106) px, RMS (0.413, 0.376) px
+  T1-c cam3: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.24 / 0.35 / 0.66 px (median +0.02); w_v 0.25 / 0.34 / 0.52 px (median -0.13)
+  T1-a epipolar cam1-cam2: mean +0.716 +- 0.036 px, RMS 1.219 px, |d| 50/90 % 0.93/2.01 px (757 pairs); T1-b: slope on cam2's velocity across the curve -0.6059 +- 0.1328 (offset +0.606 frames; velocity RMS 0.267 px/frame)
+  T1-a epipolar cam1-cam3: mean -0.249 +- 0.048 px, RMS 1.407 px, |d| 50/90 % 0.89/2.43 px (825 pairs); T1-b: slope on cam3's velocity across the curve +0.1023 +- 0.0434 (offset -0.102 frames; velocity RMS 1.109 px/frame)
+  T1-a epipolar cam2-cam3: mean +0.526 +- 0.031 px, RMS 1.246 px, |d| 50/90 % 0.87/2.06 px (1294 pairs); T1-b: slope on cam3's velocity across the curve +0.9015 +- 0.1918 (offset -0.902 frames; velocity RMS 0.163 px/frame)
+  T1-d cam1: the tracks' image step (du, dv) median (-0.339, -0.130) px per frame; P0c's windows at k = 1: du -0.24318480491638184, dv 0.02627420425415039
+  T1-d cam2: the tracks' image step (du, dv) median (-0.217, -0.150) px per frame; P0c's windows at k = 1: du -0.3654595613479614, dv -0.05315375328063965
+  T1-d cam3: the tracks' image step (du, dv) median (-0.457, -0.226) px per frame; P0c's windows at k = 1: du -1.0171477794647217, dv -0.15734219551086426
+  T1-d: 425 long tracks, length (10/50/90 %) [40.80000000000001, 184.0, 250.0] frames, >= 100: 320, >= 200: 190; speed (10/50/90 %) [112.6, 206.8, 248.9] mm/s; mean velocity [-28.5, 29.8, -6.0] mm/s; second difference RMS / step RMS 0.157
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1_otf_shape.txt (model segment)
