@@ -1,0 +1,12 @@
+F2 io.read_cine_frames on the real videos against the stored frames at their file offsets
+
+PASS  35Hz_r_b_1 camera 0 (FirstImageNo 0, 12605 frames)
+      alone: 0 =, 1 =, 255 =, 256 =, 257 =, 12604 =
+      in chunks of 256: 256 =, 257 =, 12604 =
+      old call: frame 1 gives stored frame 0: True; frame 256 gives stored frame 255: True
+PASS  35Hz_r_b_1 camera 1 (FirstImageNo 0, 12605 frames)
+      alone: 0 =, 1 =, 255 =, 256 =, 257 =, 12604 =
+      in chunks of 256: 256 =, 257 =, 12604 =
+      old call: frame 1 gives stored frame 0: True; frame 256 gives stored frame 255: True
+
+PASS

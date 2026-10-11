@@ -23,6 +23,7 @@ from PySide6.QtGui import QPixmap, QImage, QPainter, QPen, QColor
 
 from .widgets import RangeSlider, ProcessingDialog
 from .core import imadjust_opencv, apply_processing_pipeline_with_settings
+from .io import read_cine_frames
 
 try:
     from pycine.raw import read_frames as pycine_read_frames
@@ -203,8 +204,7 @@ class PreprocessWorker(QObject):
                         try:
                             if not pycine:
                                 raise RuntimeError("pycine not available")
-                            raw_images, _, _ = pycine_read_frames(cine_file, start_frame=start_fr, count=cnt)
-                            imgs = list(raw_images)
+                            imgs = read_cine_frames(cine_file, start_fr, count=cnt)
                         except Exception:
                             # fallback frame-by-frame for this chunk
                             imgs = None
@@ -242,8 +242,7 @@ class PreprocessWorker(QObject):
                             for fr in frames[p:q + 1]:
                                 task = want[fr]
                                 try:
-                                    raw_images, _, _ = pycine_read_frames(cine_file, start_frame=fr, count=1)
-                                    one = list(raw_images)
+                                    one = read_cine_frames(cine_file, fr, count=1)
                                     if not one:
                                         failed += 1
                                         done += 1
@@ -409,8 +408,7 @@ class BackgroundWorker(QObject):
                     if not pycine:
                         break
                     chunk_count = end - start + 1
-                    raw_images, _, _ = pycine_read_frames(file_path, start_frame=start, count=chunk_count)
-                    imgs = list(raw_images)
+                    imgs = read_cine_frames(file_path, start, count=chunk_count)
 
                     if imgs:
                         for k, fr in enumerate(range(start, end + 1)):
@@ -435,8 +433,7 @@ class BackgroundWorker(QObject):
                     print(f"Error reading chunk {start}-{end} for cam {cam_idx}: {e}")
                     for fr, i_orig, _ in lst[p:q + 1]:
                         try:
-                            raw_images, _, _ = pycine_read_frames(file_path, start_frame=fr, count=1)
-                            one = list(raw_images)
+                            one = read_cine_frames(file_path, fr, count=1)
                             if one:
                                 raw = np.array(one[0])
                                 img = self._to_gray_float32(raw)
@@ -2190,8 +2187,7 @@ class ImagePreprocessingView(QWidget):
                 return None
             
             try:
-                raw_images, setup, bpp = pycine_read_frames(file_path, start_frame=frame_idx, count=1)
-                images = list(raw_images)
+                images = read_cine_frames(file_path, frame_idx, count=1)
                 if images and len(images) > 0:
                     # Return raw data (uint16 or uint8) - no bit shifting here
                     return np.array(images[0])

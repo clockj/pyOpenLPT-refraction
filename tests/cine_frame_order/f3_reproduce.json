@@ -1,0 +1,359 @@
+[
+ {
+  "run": "35Hz_r_b_1",
+  "cam": 0,
+  "settings": {
+   "bg_enabled": true,
+   "invert": true,
+   "cine_shifts": {
+    "0": 1,
+    "1": 2,
+    "2": 1,
+    "3": 2
+   },
+   "low_in": 0,
+   "high_in": 255,
+   "denoise": false
+  },
+  "tried": [
+   {
+    "low_in": 0,
+    "high_in": 255,
+    "denoise": false,
+    "equal_fraction": 1.0
+   }
+  ],
+  "n_tried": 1,
+  "rows": [
+   {
+    "new": 250,
+    "old": 250,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 251,
+    "old": 251,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 252,
+    "old": 252,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 253,
+    "old": 253,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 254,
+    "old": 254,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 255,
+    "old": 255,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 256,
+    "old": 257,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 257,
+    "old": 258,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 258,
+    "old": 259,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 259,
+    "old": 260,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 260,
+    "old": 261,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 261,
+    "old": 262,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 262,
+    "old": 263,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 12603,
+    "old": 12604,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 12604,
+    "old": null,
+    "equal": null,
+    "differs_from_new_12603": true
+   }
+  ],
+  "ok": true
+ },
+ {
+  "run": "35Hz_r_b_1",
+  "cam": 1,
+  "settings": {
+   "bg_enabled": true,
+   "invert": true,
+   "cine_shifts": {
+    "0": 1,
+    "1": 2,
+    "2": 1,
+    "3": 2
+   },
+   "low_in": 0,
+   "high_in": 255,
+   "denoise": false
+  },
+  "tried": [
+   {
+    "low_in": 0,
+    "high_in": 255,
+    "denoise": false,
+    "equal_fraction": 1.0
+   }
+  ],
+  "n_tried": 1,
+  "rows": [
+   {
+    "new": 250,
+    "old": 250,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 251,
+    "old": 251,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 252,
+    "old": 252,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 253,
+    "old": 253,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 254,
+    "old": 254,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 255,
+    "old": 255,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 256,
+    "old": 257,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 257,
+    "old": 258,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 258,
+    "old": 259,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 259,
+    "old": 260,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 260,
+    "old": 261,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 261,
+    "old": 262,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 262,
+    "old": 263,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 12603,
+    "old": 12604,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 12604,
+    "old": null,
+    "equal": null,
+    "differs_from_new_12603": true
+   }
+  ],
+  "ok": true
+ },
+ {
+  "run": "10Hz_r_b_1",
+  "cam": 0,
+  "settings": {
+   "bg_enabled": true,
+   "invert": true,
+   "cine_shifts": {
+    "0": 3,
+    "1": 4,
+    "2": 3,
+    "3": 3
+   },
+   "low_in": 0,
+   "high_in": 255,
+   "denoise": false
+  },
+  "tried": [
+   {
+    "low_in": 0,
+    "high_in": 255,
+    "denoise": false,
+    "equal_fraction": 1.0
+   }
+  ],
+  "n_tried": 1,
+  "rows": [
+   {
+    "new": 250,
+    "old": 250,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 251,
+    "old": 251,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 252,
+    "old": 252,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 253,
+    "old": 253,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 254,
+    "old": 254,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 255,
+    "old": 255,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 256,
+    "old": 257,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 257,
+    "old": 258,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 258,
+    "old": 259,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 259,
+    "old": 260,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 260,
+    "old": 261,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 261,
+    "old": 262,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 262,
+    "old": 263,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 12603,
+    "old": 12604,
+    "equal": true,
+    "max_abs_diff": 0
+   },
+   {
+    "new": 12604,
+    "old": null,
+    "equal": null,
+    "differs_from_new_12603": true
+   }
+  ],
+  "ok": true
+ }
+]
