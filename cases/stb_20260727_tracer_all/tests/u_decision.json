@@ -1,0 +1,39 @@
+{
+  "baseline_long_end": 5473,
+  "tests": {
+    "U1": {
+      "passed": false,
+      "why": [
+        "long tracks at 250 5705 < 1.05 x 5473"
+      ],
+      "long_end": 5705,
+      "changes": {
+        "convergence_phase.avg_spacing_vox": 10.0
+      }
+    },
+    "U2": {
+      "passed": true,
+      "why": [],
+      "long_end": 6578,
+      "changes": {
+        "convergence_phase.avg_spacing_vox": 5.0
+      }
+    },
+    "U3": {
+      "passed": false,
+      "why": [
+        "long tracks at 250 4660 < 1.05 x 5473",
+        "level-off 4811 not above 5901"
+      ],
+      "long_end": 4660,
+      "changes": {
+        "shake.width_vox": 0.5
+      }
+    }
+  },
+  "u4": null,
+  "chosen": "U2",
+  "chosen_changes": {
+    "convergence_phase.avg_spacing_vox": 5.0
+  }
+}

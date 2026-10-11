@@ -1,0 +1,5 @@
+C:\Users\zcloc\.conda\envs\refract\python.exe D:\Refraction\pyOpenLPT\cases\stb_20260727_tracer_all\run_stb.py D:\Shijie Zhong\STB_staging\20260727\smoke\s1_10Hz_r_b_1_f0-50\config.json --quiet
+2026-10-10T01:45:04 run D:\Shijie Zhong\STB_staging\20260727\smoke\s1_10Hz_r_b_1_f0-50\config.json
+          log D:\Shijie Zhong\STB_staging\20260727\smoke\s1_10Hz_r_b_1_f0-50\log.txt
+2026-10-10T01:48:32 ok, wall 207.9 s
+exit 0

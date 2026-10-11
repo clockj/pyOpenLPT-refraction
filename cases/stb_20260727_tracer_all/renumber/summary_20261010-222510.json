@@ -1,0 +1,1002 @@
+[
+ {
+  "unit": "15Hz_r_b_1 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1928.2,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_1\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.6,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_1\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1923.9,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_1\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.6,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_1\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.2
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1934.4
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1929.4
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1930.6
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1937.4
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.7
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1938.5
+ },
+ {
+  "unit": "15Hz_r_b_1 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1918.5
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1921.7,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_2\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1901.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_2\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1907.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_2\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1865.1,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\15Hz_r_b_2\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1893.0
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1922.9
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1920.3
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1936.3
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1925.8
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.1
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1931.7
+ },
+ {
+  "unit": "15Hz_r_b_2 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.7
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1934.8,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_1\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1937.1,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_1\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1920.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_1\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1932.8,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_1\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1918.4
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1923.1
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1909.9
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1914.9
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1904.0
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1938.5
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1945.2
+ },
+ {
+  "unit": "20Hz_r_b_1 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1937.0
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_2\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1965.4,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_2\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1954.5,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_2\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1951.5,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\20Hz_r_b_2\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1955.5
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1957.1
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1941.9
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1944.4
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1939.1
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1945.4
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.3
+ },
+ {
+  "unit": "20Hz_r_b_2 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1951.1
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1889.5,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_1\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1919.6,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_1\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1915.6,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_1\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.6,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_1\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.6
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1921.6
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1935.8
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1909.2
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.4
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1937.7
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1928.4
+ },
+ {
+  "unit": "25Hz_r_b_1 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.5
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1898.3,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_2\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1924.3,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_2\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1927.8,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_2\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1922.7,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\25Hz_r_b_2\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1888.2
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1923.3
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.0
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1916.4
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1911.8
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1927.9
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1927.0
+ },
+ {
+  "unit": "25Hz_r_b_2 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1928.8
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1910.2,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_1\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1920.4,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_1\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1915.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_1\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1921.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_1\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1925.5
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.7
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1899.2
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1918.0
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1891.5
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1911.7
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.8
+ },
+ {
+  "unit": "30Hz_r_b_1 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1913.6
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1915.8,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_2\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1914.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_2\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.7,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_2\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1913.6,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\30Hz_r_b_2\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1928.9
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1924.0
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1918.4
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1902.7
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1914.4
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1922.3
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1915.7
+ },
+ {
+  "unit": "30Hz_r_b_2 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1902.2
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1885.2,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_1\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.1,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_1\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1924.4,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_1\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1925.1,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_1\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1919.9
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1921.1
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1922.2
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1937.3
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1918.7
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.6
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1926.3
+ },
+ {
+  "unit": "35Hz_r_b_1 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1931.0
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1924.5,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_2\\imgFile\\cam0\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1917.9,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_2\\imgFile\\cam1\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1927.0,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_2\\imgFile\\cam2\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1919.2,
+  "last_frame": {
+   "written": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\35Hz_r_b_2\\imgFile\\cam3\\img012604.tif",
+   "differs_from_12603": true
+  }
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_bb cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1135.6
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_bb cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1027.1
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_bb cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1022.2
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_bb cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1015.7
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_mask cam0",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1015.5
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_mask cam1",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1008.9
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_mask cam2",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1004.2
+ },
+ {
+  "unit": "35Hz_r_b_2 imgFile_mask cam3",
+  "state": "renumbered",
+  "problems": [],
+  "renames": 12348,
+  "s": 1001.8
+ }
+]

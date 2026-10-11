@@ -1,0 +1,5 @@
+R1 image read speed, run 10Hz_r_b_2
+
+sequential reads from X:: 50 frames x 4 cameras, 482 MB in 63.2 s: 1.26 s per frame, 7.6 MB/s
+robocopy /MT:16 to D: (one call per camera): 50 frames x 4 cameras, 475 MB in 30.4 s: 0.61 s per frame, 15.7 MB/s
+sequential reads from D: (the copies): 0.147 s per frame

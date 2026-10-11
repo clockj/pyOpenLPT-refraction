@@ -1,0 +1,12 @@
+T3 400 frames at the best tested threshold (12 threads beside the batch; reference: the batch's 10Hz_r_b_1, threshold 20)
+
+run                       thr   long@50  long@100  long@200  long@255  long@260  long@300  long@400  lost 255-260  gain/fr 200-255  gain/fr 300-400  s/frame  h/run*
+10Hz_r_b_1 (the batch)     20     6,713    10,050    13,273    14,280    14,267    14,773    15,552           0 %             18.3              7.8        -       -
+t3_35Hz_r_b_2_th80         80     1,628     1,931     2,397     2,499     1,062     1,886     2,184          58 %              1.9              3.0     8.86      25
+t3_35Hz_r_b_1_th30         30     2,731     4,004     5,208     5,470     2,363     3,372     4,537          57 %              4.8             11.7    10.74      30
+
+long@N: active long tracks at the end of frame N; frame 256 is a byte copy of frame 255 in every camera of every run (D1, D2), so nothing moves for one frame and tracks are cut there; lost 255-260: the share of long tracks lost over those frames; gain/fr: net change per frame; s/frame: mean convergence frame (saves left out) on 12 threads beside the batch; h/run*: (its ratio to T1a's 3.55 s x 2.48 s + 1.03 s of image loading) x 12605 frames
+
+Tracks alive at the last saved frame (T2's measures):
+  t3_35Hz_r_b_2_th80         2184 tracks, step median 0.323 mm (p90 0.394), linear-fit residual median 0.0126 mm
+  t3_35Hz_r_b_1_th30         4537 tracks, step median 0.322 mm (p90 0.385), linear-fit residual median 0.0099 mm

@@ -1,0 +1,18 @@
+U0-U6: quality of the long tracks (track_quality.py): tracks alive at the end of frame 200, rebuilt from the saved files, and at the last frame (250, as saved)
+
+test                   frame  tracks  step med    p90  LF med     p90 nb cover  nb med    p90  > 0.5
+T3 35Hz_r_b_1 at 30      200    5181    0.3209  0.386  0.0090  0.0246    0.966   0.074  0.195   0.6%
+u1_35Hz_r_b_1            200    5319    0.3208  0.386  0.0089  0.0233    0.960   0.073  0.185   0.6%
+u1_35Hz_r_b_1            250    5705    0.3208  0.383  0.0091  0.0240    0.970   0.075  0.188   1.0%
+u2_35Hz_r_b_1            200    6293    0.3220  0.388  0.0091  0.0249    0.974   0.075  0.189   0.5%
+u2_35Hz_r_b_1            250    6578    0.3210  0.383  0.0093  0.0245    0.976   0.076  0.196   0.9%
+u3_35Hz_r_b_1            200    4379    0.3198  0.383  0.0081  0.0235    0.953   0.068  0.157   0.6%
+u3_35Hz_r_b_1            250    4660    0.3201  0.380  0.0082  0.0235    0.956   0.069  0.157   1.0%
+T3 35Hz_r_b_2 at 80      200    2374    0.3256  0.391  0.0118  0.0290    0.892   0.087  0.211   0.8%
+u5_35Hz_r_b_2            200    3039    0.3266  0.391  0.0118  0.0278    0.917   0.087  0.215   0.8%
+u5_35Hz_r_b_2            250    3150    0.3239  0.389  0.0129  0.0300    0.913   0.091  0.227   1.6%
+batch 10Hz_r_b_1         200   13259    0.0972  0.127  0.0056  0.0190    0.995   0.133  0.542  11.2%
+u6_10Hz_r_b_1            200   17746    0.0980  0.129  0.0058  0.0192    0.997   0.139  0.553  11.7%
+u6_10Hz_r_b_1            250   18762    0.0977  0.128  0.0059  0.0194    0.998   0.138  0.554  11.8%
+
+step: |p(k+1) - p(k)| in mm per frame; LF: STB's linear-fit residual of the last four points (limit 0.05 mm); nb: velocity against the median of the other tracks within 8 mm (tracks with 3+ such neighbours; cover = their share), relative difference

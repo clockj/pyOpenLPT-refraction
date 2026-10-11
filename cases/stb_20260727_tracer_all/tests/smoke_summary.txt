@@ -1,0 +1,4 @@
+name                       run         thr frames   s/init  s/conv   last5    detections per camera (1st round)  matched  shaken   found   long  short
+s1_10Hz_r_b_1_f0-50        10Hz_r_b_1   26 0-50       3.90    2.58    2.61     42037     6212    18446    17707      607     607   17263   6713  14160
+s2_35Hz_r_b_2_f0-20        35Hz_r_b_2   26 0-6      240.68  147.98  147.98    314797   343743   340432   316745   104085  103966  362049   2095 354314
+s/init, s/conv: mean time per frame in the initial and the convergence phase (frames that save left out); last5: the last five convergence frames; detections, matched, shaken: the first IPR round (all four cameras), mean over frames; found: objects IPR found; long/short: active tracks at the end

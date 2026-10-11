@@ -1,0 +1,794 @@
+[
+ {
+  "run": "35Hz_r_b_1",
+  "cam": 0,
+  "n_files": 12605,
+  "first": 0,
+  "last": 12604,
+  "rows": [
+   {
+    "frame": 256,
+    "jump_s": 43.1,
+    "copy_cam": true,
+    "copies": {
+     "imgFile/cam0": true,
+     "imgFile/cam1": true,
+     "imgFile/cam2": true,
+     "imgFile/cam3": true,
+     "imgFile_mask/cam0": true,
+     "imgFile_mask/cam1": true,
+     "imgFile_mask/cam2": true,
+     "imgFile_mask/cam3": true
+    }
+   },
+   {
+    "frame": 512,
+    "jump_s": 41.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 768,
+    "jump_s": 58.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 1024,
+    "jump_s": 50.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 1280,
+    "jump_s": 43.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 1536,
+    "jump_s": 32.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 1792,
+    "jump_s": 60.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 2048,
+    "jump_s": 26.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 2304,
+    "jump_s": 58.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 2560,
+    "jump_s": 48.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 2816,
+    "jump_s": 47.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 3072,
+    "jump_s": 42.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 3328,
+    "jump_s": 62.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 3584,
+    "jump_s": 50.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 3840,
+    "jump_s": 32.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 4096,
+    "jump_s": 49.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 4352,
+    "jump_s": 28.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 4608,
+    "jump_s": 60.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 4864,
+    "jump_s": 35.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 5120,
+    "jump_s": 22.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 5376,
+    "jump_s": 54.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 5632,
+    "jump_s": 26.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 5888,
+    "jump_s": 59.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 6144,
+    "jump_s": 30.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 6400,
+    "jump_s": 50.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 6656,
+    "jump_s": 28.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 6912,
+    "jump_s": 53.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 7168,
+    "jump_s": 43.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 7424,
+    "jump_s": 38.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 7680,
+    "jump_s": 32.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 7936,
+    "jump_s": 41.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 8192,
+    "jump_s": 19.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 8448,
+    "jump_s": 31.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 8704,
+    "jump_s": 30.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 8960,
+    "jump_s": 36.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 9216,
+    "jump_s": 38.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 9472,
+    "jump_s": 58.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 9728,
+    "jump_s": 31.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 9984,
+    "jump_s": 51.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 10240,
+    "jump_s": 62.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 10496,
+    "jump_s": 47.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 10752,
+    "jump_s": 48.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 11008,
+    "jump_s": 57.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 11264,
+    "jump_s": 51.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 11520,
+    "jump_s": 38.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 11776,
+    "jump_s": 61.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 12032,
+    "jump_s": 33.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 12288,
+    "jump_s": 34.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 12544,
+    "jump_s": 5.0,
+    "copy_cam": false
+   }
+  ]
+ },
+ {
+  "run": "35Hz_r_b_2",
+  "cam": 0,
+  "n_files": 12605,
+  "first": 0,
+  "last": 12604,
+  "rows": [
+   {
+    "frame": 256,
+    "jump_s": 38.1,
+    "copy_cam": true,
+    "copies": {
+     "imgFile/cam0": true,
+     "imgFile/cam1": true,
+     "imgFile/cam2": true,
+     "imgFile/cam3": true,
+     "imgFile_mask/cam0": true,
+     "imgFile_mask/cam1": true,
+     "imgFile_mask/cam2": true,
+     "imgFile_mask/cam3": true
+    }
+   },
+   {
+    "frame": 512,
+    "jump_s": 36.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 768,
+    "jump_s": 29.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 1024,
+    "jump_s": 19.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 1280,
+    "jump_s": 55.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 1536,
+    "jump_s": 43.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 1792,
+    "jump_s": 19.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 2048,
+    "jump_s": 54.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 2304,
+    "jump_s": 54.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 2560,
+    "jump_s": 50.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 2816,
+    "jump_s": 42.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 3072,
+    "jump_s": 54.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 3328,
+    "jump_s": 29.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 3584,
+    "jump_s": 39.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 3840,
+    "jump_s": 49.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 4096,
+    "jump_s": 32.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 4352,
+    "jump_s": 59.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 4608,
+    "jump_s": 52.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 4864,
+    "jump_s": 45.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 5120,
+    "jump_s": 47.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 5376,
+    "jump_s": 45.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 5632,
+    "jump_s": 58.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 5888,
+    "jump_s": 41.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 6144,
+    "jump_s": 49.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 6400,
+    "jump_s": 51.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 6656,
+    "jump_s": 49.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 6912,
+    "jump_s": 45.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 7168,
+    "jump_s": 39.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 7424,
+    "jump_s": 50.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 7680,
+    "jump_s": 32.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 7936,
+    "jump_s": 45.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 8192,
+    "jump_s": 53.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 8448,
+    "jump_s": 38.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 8704,
+    "jump_s": 62.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 8960,
+    "jump_s": 37.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 9216,
+    "jump_s": 49.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 9472,
+    "jump_s": 41.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 9728,
+    "jump_s": 44.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 9984,
+    "jump_s": 47.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 10240,
+    "jump_s": 38.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 10496,
+    "jump_s": 64.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 10752,
+    "jump_s": 49.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 11008,
+    "jump_s": 42.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 11264,
+    "jump_s": 32.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 11520,
+    "jump_s": 57.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 11776,
+    "jump_s": 55.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 12032,
+    "jump_s": 43.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 12288,
+    "jump_s": 57.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 12544,
+    "jump_s": 19.3,
+    "copy_cam": false
+   }
+  ]
+ },
+ {
+  "run": "10Hz_r_b_1",
+  "cam": 0,
+  "n_files": 12605,
+  "first": 0,
+  "last": 12604,
+  "rows": [
+   {
+    "frame": 256,
+    "jump_s": 31.1,
+    "copy_cam": true,
+    "copies": {
+     "imgFile/cam0": true,
+     "imgFile/cam1": true,
+     "imgFile/cam2": true,
+     "imgFile/cam3": true,
+     "imgFile_mask/cam0": true,
+     "imgFile_mask/cam1": true,
+     "imgFile_mask/cam2": true,
+     "imgFile_mask/cam3": true
+    }
+   },
+   {
+    "frame": 512,
+    "jump_s": 43.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 768,
+    "jump_s": 41.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 1024,
+    "jump_s": 43.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 1280,
+    "jump_s": 33.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 1536,
+    "jump_s": 33.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 1792,
+    "jump_s": 37.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 2048,
+    "jump_s": 32.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 2304,
+    "jump_s": 28.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 2560,
+    "jump_s": 35.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 2816,
+    "jump_s": 35.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 3072,
+    "jump_s": 38.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 3328,
+    "jump_s": 47.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 3584,
+    "jump_s": 24.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 3840,
+    "jump_s": 28.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 4096,
+    "jump_s": 43.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 4352,
+    "jump_s": 43.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 4608,
+    "jump_s": 39.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 4864,
+    "jump_s": 51.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 5120,
+    "jump_s": 46.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 5376,
+    "jump_s": 49.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 5632,
+    "jump_s": 41.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 5888,
+    "jump_s": 28.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 6144,
+    "jump_s": 22.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 6400,
+    "jump_s": 46.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 6656,
+    "jump_s": 35.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 6912,
+    "jump_s": 41.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 7168,
+    "jump_s": 44.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 7424,
+    "jump_s": 50.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 7680,
+    "jump_s": 25.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 7936,
+    "jump_s": 27.7,
+    "copy_cam": false
+   },
+   {
+    "frame": 8192,
+    "jump_s": 33.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 8448,
+    "jump_s": 47.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 8704,
+    "jump_s": 44.4,
+    "copy_cam": false
+   },
+   {
+    "frame": 8960,
+    "jump_s": 47.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 9216,
+    "jump_s": 45.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 9472,
+    "jump_s": 24.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 9728,
+    "jump_s": 36.8,
+    "copy_cam": false
+   },
+   {
+    "frame": 9984,
+    "jump_s": 32.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 10240,
+    "jump_s": 33.0,
+    "copy_cam": false
+   },
+   {
+    "frame": 10496,
+    "jump_s": 50.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 10752,
+    "jump_s": 49.9,
+    "copy_cam": false
+   },
+   {
+    "frame": 11008,
+    "jump_s": 31.2,
+    "copy_cam": false
+   },
+   {
+    "frame": 11264,
+    "jump_s": 36.6,
+    "copy_cam": false
+   },
+   {
+    "frame": 11520,
+    "jump_s": 35.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 11776,
+    "jump_s": 22.5,
+    "copy_cam": false
+   },
+   {
+    "frame": 12032,
+    "jump_s": 25.3,
+    "copy_cam": false
+   },
+   {
+    "frame": 12288,
+    "jump_s": 38.1,
+    "copy_cam": false
+   },
+   {
+    "frame": 12544,
+    "jump_s": 1.6,
+    "copy_cam": false
+   }
+  ]
+ }
+]

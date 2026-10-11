@@ -1,0 +1,14 @@
+R0 renumber.py on a local mock run (12,605 files, 256 a copy of 255)
+
+PASS  state before 
+PASS  state after the interruption is partial with one gap {'state': 'partial', 'gap': 3256, 'other': []}
+PASS  resumed and checked {'unit': 'mockrun imgFile_bb cam0', 'state': 'renumbered', 'problems': [], 'renames': 9348, 's': 1.0}
+PASS  file k holds old k (k < 256) and old k + 1 (256 <= k <= 12603) 
+PASS  12604 is gone 
+PASS  the copy is aside 
+PASS  state renumbered 
+PASS  a second run renames nothing {'unit': 'mockrun imgFile_bb cam0', 'state': 'renumbered', 'problems': [], 'renames': 0, 's': 0.0}
+PASS  undo restores every file 
+PASS  state after undo is original 
+
+PASS

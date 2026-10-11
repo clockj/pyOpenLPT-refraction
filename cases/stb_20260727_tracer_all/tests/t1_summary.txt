@@ -1,0 +1,12 @@
+T1 finder thresholds: frames 0-50 with the batch's settings, 12 threads beside the batch
+
+run          thr  frames    detections per camera (1st round)  IPR found  s/frame  x T1a  alone*  h/run  long min  long end short end
+10Hz_r_b_1    20    0-50     42037     6212    18446    17707     17,052     3.55   1.00    2.48     12     1,251     6,713    14,160
+35Hz_r_b_2   100    0-50     44572    41531    22042    21319     31,086     4.86   1.37    3.40     16       219     1,052    27,559
+35Hz_r_b_2    80    0-50     64872    69619    41573    36796     55,452     9.13   2.58    6.39     26       336     1,628    49,582
+35Hz_r_b_2    60    0-50    102843   120323    82155    71749    102,800    20.49   5.78   14.33     54       417     1,581    93,180
+35Hz_r_b_1    50    0-50     55651     5252    30441     3853      7,996     2.67   0.75    1.87     10       122       642     7,082
+35Hz_r_b_1    40    0-50     77340    14035    52077     9260     19,134     5.03   1.42    3.52     16       272     1,545    16,736
+35Hz_r_b_1    30    0-50    115768    35673    93194    20921     42,119    11.15   3.14    7.80     31       487     2,731    37,133
+
+detections: IPR's first round on all four cameras, mean over frames; IPR found: objects IPR finds per convergence frame (on the residual images); s/frame: mean convergence frame here; x T1a: its ratio to the 10 Hz reference run beside it; alone*: that ratio x 2.48 s (10Hz_r_b_1 alone at 26 threads), the expected tracking time per frame in the batch; h/run: (alone* + 1.03 s of image loading) x 12605 frames; long min / end: the fewest active long tracks after a convergence frame, and at frame 50

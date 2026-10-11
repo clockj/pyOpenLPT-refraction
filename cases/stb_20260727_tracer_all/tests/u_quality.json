@@ -1,0 +1,264 @@
+[
+  {
+    "name": "T3 35Hz_r_b_1 at 30",
+    "q200": {
+      "tracks": 5181,
+      "step_med": 0.3209308432217134,
+      "step_p90": 0.3855626998962552,
+      "lf_med": 0.008990261213668726,
+      "lf_p90": 0.02461504625772703,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9662227369233739,
+      "nb_med": 0.07446722146638093,
+      "nb_p90": 0.1950273334390227,
+      "nb_over_half": 0.005593288054334798,
+      "frame": 200,
+      "files": [
+        "ExitTrack_400.csv",
+        "LongTrackActive_400.csv",
+        "LongTrackInactive_400.csv"
+      ]
+    },
+    "q_last": null
+  },
+  {
+    "name": "u1_35Hz_r_b_1",
+    "q200": {
+      "tracks": 5319,
+      "step_med": 0.32080968708721946,
+      "step_p90": 0.38593037252074336,
+      "lf_med": 0.008933926309301721,
+      "lf_p90": 0.023340432774496656,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9597668734724573,
+      "nb_med": 0.07294619721469878,
+      "nb_p90": 0.18489876264826352,
+      "nb_over_half": 0.006268364348677767,
+      "frame": 200,
+      "files": [
+        "ExitTrack_250.csv",
+        "LongTrackActive_250.csv",
+        "LongTrackInactive_250.csv"
+      ]
+    },
+    "q_last": {
+      "tracks": 5705,
+      "step_med": 0.3207734079580185,
+      "step_p90": 0.3831698898778459,
+      "lf_med": 0.009067240242214383,
+      "lf_p90": 0.024005295282682432,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9696757230499562,
+      "nb_med": 0.07457164484276006,
+      "nb_p90": 0.18790019627337615,
+      "nb_over_half": 0.010484454085321764,
+      "frame": 250,
+      "files": [
+        "LongTrackActive_250.csv"
+      ]
+    }
+  },
+  {
+    "name": "u2_35Hz_r_b_1",
+    "q200": {
+      "tracks": 6293,
+      "step_med": 0.32204930268046517,
+      "step_p90": 0.3875740730391997,
+      "lf_med": 0.009110756645853499,
+      "lf_p90": 0.02489311943912889,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9737803909105355,
+      "nb_med": 0.07454215696917033,
+      "nb_p90": 0.18912002120059443,
+      "nb_over_half": 0.005221932114882507,
+      "frame": 200,
+      "files": [
+        "ExitTrack_250.csv",
+        "LongTrackActive_250.csv",
+        "LongTrackInactive_250.csv"
+      ]
+    },
+    "q_last": {
+      "tracks": 6578,
+      "step_med": 0.3210184468141975,
+      "step_p90": 0.38346827287047675,
+      "lf_med": 0.009323195985383562,
+      "lf_p90": 0.024544442282746312,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9756764974156279,
+      "nb_med": 0.07571643874440481,
+      "nb_p90": 0.19616038768363617,
+      "nb_over_half": 0.008569647865378623,
+      "frame": 250,
+      "files": [
+        "LongTrackActive_250.csv"
+      ]
+    }
+  },
+  {
+    "name": "u3_35Hz_r_b_1",
+    "q200": {
+      "tracks": 4379,
+      "step_med": 0.31983215826973543,
+      "step_p90": 0.382665605529457,
+      "lf_med": 0.008100545064377629,
+      "lf_p90": 0.023475417301132222,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9534140214660881,
+      "nb_med": 0.06834566290551314,
+      "nb_p90": 0.15652409554398847,
+      "nb_over_half": 0.005508982035928144,
+      "frame": 200,
+      "files": [
+        "ExitTrack_250.csv",
+        "LongTrackActive_250.csv",
+        "LongTrackInactive_250.csv"
+      ]
+    },
+    "q_last": {
+      "tracks": 4660,
+      "step_med": 0.32006723758141814,
+      "step_p90": 0.3802070337102814,
+      "lf_med": 0.008226827474649008,
+      "lf_p90": 0.023506581303942363,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.955793991416309,
+      "nb_med": 0.06896213452188024,
+      "nb_p90": 0.1570400477481873,
+      "nb_over_half": 0.009654243376740009,
+      "frame": 250,
+      "files": [
+        "LongTrackActive_250.csv"
+      ]
+    }
+  },
+  {
+    "name": "T3 35Hz_r_b_2 at 80",
+    "q200": {
+      "tracks": 2374,
+      "step_med": 0.3256008196715586,
+      "step_p90": 0.3910799397971556,
+      "lf_med": 0.01183106824801652,
+      "lf_p90": 0.02902425868211382,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.8917438921651222,
+      "nb_med": 0.08675124855104685,
+      "nb_p90": 0.2105418477396161,
+      "nb_over_half": 0.00803023145961266,
+      "frame": 200,
+      "files": [
+        "ExitTrack_400.csv",
+        "LongTrackActive_400.csv",
+        "LongTrackInactive_400.csv"
+      ]
+    },
+    "q_last": null
+  },
+  {
+    "name": "u5_35Hz_r_b_2",
+    "q200": {
+      "tracks": 3039,
+      "step_med": 0.32662537211485987,
+      "step_p90": 0.39104404363574563,
+      "lf_med": 0.011818503000381552,
+      "lf_p90": 0.027826894771048893,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9167489305692662,
+      "nb_med": 0.08718135654395728,
+      "nb_p90": 0.21460483434283067,
+      "nb_over_half": 0.007896625987078248,
+      "frame": 200,
+      "files": [
+        "ExitTrack_250.csv",
+        "LongTrackActive_250.csv",
+        "LongTrackInactive_250.csv"
+      ]
+    },
+    "q_last": {
+      "tracks": 3150,
+      "step_med": 0.323930497412639,
+      "step_p90": 0.3893886703043158,
+      "lf_med": 0.012909925216546221,
+      "lf_p90": 0.029963640562703675,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9126984126984127,
+      "nb_med": 0.09139641144804829,
+      "nb_p90": 0.22675122678661824,
+      "nb_over_half": 0.01634782608695652,
+      "frame": 250,
+      "files": [
+        "LongTrackActive_250.csv"
+      ]
+    }
+  },
+  {
+    "name": "batch 10Hz_r_b_1",
+    "q200": {
+      "tracks": 13259,
+      "step_med": 0.0972015127891529,
+      "step_p90": 0.12722223934909282,
+      "lf_med": 0.0055684190512206985,
+      "lf_p90": 0.01898832947444367,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.994795987631043,
+      "nb_med": 0.132860220624906,
+      "nb_p90": 0.5418095752081895,
+      "nb_over_half": 0.11235784685367703,
+      "frame": 200,
+      "files": [
+        "ExitTrack_400.csv",
+        "LongTrackInactive_400.csv",
+        "ExitTrack_600.csv",
+        "LongTrackInactive_600.csv",
+        "ExitTrack_800.csv",
+        "LongTrackInactive_800.csv",
+        "ExitTrack_1000.csv",
+        "LongTrackInactive_1000.csv",
+        "ExitTrack_1200.csv",
+        "LongTrackInactive_1200.csv",
+        "ExitTrack_1400.csv",
+        "LongTrackInactive_1400.csv",
+        "ExitTrack_1600.csv",
+        "LongTrackInactive_1600.csv"
+      ]
+    },
+    "q_last": null
+  },
+  {
+    "name": "u6_10Hz_r_b_1",
+    "q200": {
+      "tracks": 17746,
+      "step_med": 0.09797081313074646,
+      "step_p90": 0.1285360697135156,
+      "lf_med": 0.0058062095994320835,
+      "lf_p90": 0.01918119216936487,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9973515158345543,
+      "nb_med": 0.13915539853281844,
+      "nb_p90": 0.5532268866770933,
+      "nb_over_half": 0.11656025764167467,
+      "frame": 200,
+      "files": [
+        "ExitTrack_250.csv",
+        "LongTrackActive_250.csv",
+        "LongTrackInactive_250.csv"
+      ]
+    },
+    "q_last": {
+      "tracks": 18762,
+      "step_med": 0.09768169105057756,
+      "step_p90": 0.12813312686889275,
+      "lf_med": 0.005879915656326096,
+      "lf_p90": 0.019417315385756504,
+      "nb_radius_mm": 8.0,
+      "nb_coverage": 0.9979746295704083,
+      "nb_med": 0.13765869848537737,
+      "nb_p90": 0.5535026719918785,
+      "nb_over_half": 0.11845759453108311,
+      "frame": 250,
+      "files": [
+        "LongTrackActive_250.csv"
+      ]
+    }
+  }
+]

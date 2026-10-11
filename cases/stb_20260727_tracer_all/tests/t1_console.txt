@@ -1,0 +1,14 @@
+2026-10-10 08:01:20 t1_10Hz_r_b_1_th20: start (12 threads, threshold 20)
+2026-10-10 08:05:50 t1_10Hz_r_b_1_th20: exit 0, 51 frames, median 3.5 s per frame
+2026-10-10 08:05:50 t1_35Hz_r_b_2_th100: start (12 threads, threshold 100)
+2026-10-10 08:11:21 t1_35Hz_r_b_2_th100: exit 0, 51 frames, median 5.0 s per frame
+2026-10-10 08:11:21 t1_35Hz_r_b_2_th80: start (12 threads, threshold 80)
+2026-10-10 08:20:52 t1_35Hz_r_b_2_th80: exit 0, 51 frames, median 9.2 s per frame
+2026-10-10 08:20:52 t1_35Hz_r_b_2_th60: start (12 threads, threshold 60)
+2026-10-10 08:41:23 t1_35Hz_r_b_2_th60: exit 0, 51 frames, median 21.0 s per frame
+2026-10-10 08:41:23 t1_35Hz_r_b_1_th50: start (12 threads, threshold 50)
+2026-10-10 08:44:43 t1_35Hz_r_b_1_th50: exit 0, 51 frames, median 2.7 s per frame
+2026-10-10 08:44:43 t1_35Hz_r_b_1_th40: start (12 threads, threshold 40)
+2026-10-10 08:50:14 t1_35Hz_r_b_1_th40: exit 0, 51 frames, median 5.1 s per frame
+2026-10-10 08:50:14 t1_35Hz_r_b_1_th30: start (12 threads, threshold 30)
+2026-10-10 09:01:14 t1_35Hz_r_b_1_th30: exit 0, 51 frames, median 11.5 s per frame
