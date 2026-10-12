@@ -1,0 +1,12 @@
+{
+ "build\\Release\\OpenLPT.exe": {
+  "sha256": "1297e855769a294ea2e9c86f06e52c6e2eff4206f0c920bd53000c541d08090f",
+  "bytes": 1291776,
+  "modified": "2026-10-06 10:31:25"
+ },
+ "build-py\\Release\\pyopenlpt.cp311-win_amd64.pyd": {
+  "sha256": "7a5dec248055f23cd6cdba78903f1ead4f235a3607e5694b062984af4972ab13",
+  "bytes": 2395648,
+  "modified": "2026-10-06 10:31:24"
+ }
+}

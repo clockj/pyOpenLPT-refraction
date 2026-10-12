@@ -1,0 +1,3 @@
+8fc0c6c2dc179af1eedf84433927a72d736ee5f5dfeb7eec34602b12805c9a4f *build/Release/OpenLPT.exe
+8fc0c6c2dc179af1eedf84433927a72d736ee5f5dfeb7eec34602b12805c9a4f *build-stb/prev/OpenLPT.exe
+4448649738b11664d62417b63b47127490392dadfbe138dfc037dc6b64d50f1b *build-py/Release/pyopenlpt.cp311-win_amd64.pyd

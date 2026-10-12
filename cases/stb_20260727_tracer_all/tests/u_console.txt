@@ -1,0 +1,14 @@
+2026-10-11 01:51:52 queue starts (pid 43440, 12 threads)
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 113.281,1.16262,0.821927,0
+
+Camera 1 (a,b,c,alpha) = 61.1232,1.15023,0.492593,0
+
+Camera 2 (a,b,c,alpha) = 83.9337,0.990286,0.61413,0
+
+Camera 3 (a,b,c,alpha) = 64.8174,1.04368,0.419542,0
+
+2026-10-11 01:51:58 U0 u0_35Hz_r_b_1: start (12 threads, frames 0-30, threshold 30, changes none; C++ reads {'frames': [0, 30], 'threshold': 30, 'convergence_phase.avg_spacing_vox': 30.0, 'shake.width_vox': 0.25})
+2026-10-11 01:52:58 U0 u0_35Hz_r_b_1: exit 3221225501, 3 frames, median 10.3 s per frame, long tracks at the end None
+2026-10-11 01:52:58 U0: frames 0-30 of the new run against T3's log, every counter of every frame (timings left out): 3 of 31 identical -> FAIL; first differing frame 3: new None old {'frame': 3, 'phase': 'init', 'rounds': [{'cams': '0123', 'det': [121309, 37643, 96479, 21968], 'matched': 11861, 'tol': 2.0, 'after_shake': 11802}, {'cams': '0123', 'det': [114927, 27663, 86065, 12285], 'matched': 9567, 'tol': 3.0, 'after_shake': 9545}, {'cams': '012', 'det': [108834, 20746, 78430], 'matched': 14680, 'tol': 2.0, 'after_shake': 14638}, {'cams': '012', 'det': [97050, 7879, 62935], 'matched': 2746, 'tol': 3.0, 'after_shake': 2744}, {'cams': '013', 'det': [94817, 5687, 5502], 'matched': 247, 'tol': 2.0, 'after_shake': 247}, {'cams': '013', 'det': [94578, 5462, 5252], 'matched': 451, 'tol': 3.0, 'after_shake': 449}, {'cams': '023', 'det': [94196, 60068, 4818], 'matched': 4472, 'tol': 2.0, 'after_shake': 4466}, {'cams': '023', 'det': [90158, 55386, 827], 'matched': 764, 'tol': 3.0, 'after_shake': 762}, {'cams': '123', 'det': [5121, 54651, 173], 'matched': 1, 'tol': 2.0, 'after_shake': 1}, {'cams': '123', 'det': [5120, 54651, 172], 'matched': 7, 'tol': 3.0, 'after_shake': 7}], 'saved': True, 'ipr_found': 44661, 'sa_new': 47225, 'la_new': 10223}
+2026-10-11 01:52:58 queue stops: U0 does not repeat T3, so T3 cannot be the baseline

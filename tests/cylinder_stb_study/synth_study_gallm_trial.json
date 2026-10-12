@@ -1,0 +1,217 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "scatter": 0.15,
+ "trials": [
+  {
+   "rho": 0.035,
+   "bc_max": 8.0,
+   "kept": 6737,
+   "noise_measured": [
+    8.45,
+    6.28
+   ],
+   "detections": [
+    669,
+    850
+   ],
+   "images": [
+    2979,
+    4241
+   ]
+  },
+  {
+   "rho": 0.035,
+   "bc_max": 15.0,
+   "kept": 6737,
+   "noise_measured": [
+    8.61,
+    6.62
+   ],
+   "detections": [
+    683,
+    892
+   ],
+   "images": [
+    2979,
+    4241
+   ]
+  },
+  {
+   "rho": 0.035,
+   "bc_max": 25.0,
+   "kept": 6737,
+   "noise_measured": [
+    8.78,
+    7.27
+   ],
+   "detections": [
+    697,
+    888
+   ],
+   "images": [
+    2979,
+    4241
+   ]
+  },
+  {
+   "rho": 0.05,
+   "bc_max": 8.0,
+   "kept": 9637,
+   "noise_measured": [
+    8.63,
+    6.38
+   ],
+   "detections": [
+    815,
+    1004
+   ],
+   "images": [
+    4236,
+    6089
+   ]
+  },
+  {
+   "rho": 0.05,
+   "bc_max": 15.0,
+   "kept": 9637,
+   "noise_measured": [
+    8.84,
+    6.88
+   ],
+   "detections": [
+    812,
+    1055
+   ],
+   "images": [
+    4236,
+    6089
+   ]
+  },
+  {
+   "rho": 0.05,
+   "bc_max": 25.0,
+   "kept": 9637,
+   "noise_measured": [
+    9.08,
+    7.99
+   ],
+   "detections": [
+    828,
+    893
+   ],
+   "images": [
+    4236,
+    6089
+   ]
+  },
+  {
+   "rho": 0.07,
+   "bc_max": 8.0,
+   "kept": 13563,
+   "noise_measured": [
+    8.9,
+    6.58
+   ],
+   "detections": [
+    910,
+    1053
+   ],
+   "images": [
+    5974,
+    8539
+   ]
+  },
+  {
+   "rho": 0.07,
+   "bc_max": 15.0,
+   "kept": 13563,
+   "noise_measured": [
+    9.24,
+    7.39
+   ],
+   "detections": [
+    918,
+    1058
+   ],
+   "images": [
+    5974,
+    8539
+   ]
+  },
+  {
+   "rho": 0.07,
+   "bc_max": 25.0,
+   "kept": 13563,
+   "noise_measured": [
+    9.66,
+    8.98
+   ],
+   "detections": [
+    912,
+    715
+   ],
+   "images": [
+    5974,
+    8539
+   ]
+  },
+  {
+   "rho": 0.1,
+   "bc_max": 8.0,
+   "kept": 19472,
+   "noise_measured": [
+    9.43,
+    6.95
+   ],
+   "detections": [
+    959,
+    1033
+   ],
+   "images": [
+    8605,
+    12287
+   ]
+  },
+  {
+   "rho": 0.1,
+   "bc_max": 15.0,
+   "kept": 19472,
+   "noise_measured": [
+    9.98,
+    8.14
+   ],
+   "detections": [
+    932,
+    882
+   ],
+   "images": [
+    8605,
+    12287
+   ]
+  },
+  {
+   "rho": 0.1,
+   "bc_max": 25.0,
+   "kept": 19472,
+   "noise_measured": [
+    10.61,
+    10.36
+   ],
+   "detections": [
+    847,
+    542
+   ],
+   "images": [
+    8605,
+    12287
+   ]
+  }
+ ]
+}

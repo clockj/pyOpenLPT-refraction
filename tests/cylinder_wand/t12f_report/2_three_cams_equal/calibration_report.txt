@@ -1,0 +1,24 @@
+Cylinder wand calibration (PINCYL), 3 cameras
+tube: radii [100.80625, 97.63125] mm, n [1.0, 1.49, 1.333]; wand 10.0000 mm
+frames 500, observations 3000 active of 3000; reprojection RMS 0.1080 px (2-D), sigma 0.1003 px per coordinate
+wand length, free triangulation: mean error +0.01 um, RMS 2.31 um over 500 frames
+frame: tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height (slid -0.466 mm)
+
+cam1: f 41457.5 px +- 0.063 %; distance from the axis 1094.06 mm +- 0.679; azimuth 0.000 deg; height 0.466 mm; reprojection RMS 0.1080 px (1000/1000 active); camFile camFile\cam1.txt
+cam2: f 41464.7 px +- 0.060 %; distance from the axis 1094.23 mm +- 0.641; azimuth 45.003 deg; height 0.512 mm; reprojection RMS 0.1132 px (1000/1000 active); camFile camFile\cam2.txt
+cam3: f 41469.4 px +- 0.064 %; distance from the axis 1094.35 mm +- 0.687; azimuth 90.003 deg; height 0.462 mm; reprojection RMS 0.1025 px (1000/1000 active); camFile camFile\cam3.txt
+
+Noise levels and weights (noise_weights='camera')
+  weights APPLIED: estimated from the residuals; each detection weighted by 1 / sigma^2 of its group
+  group          noise sigma  +- rel. SE    used / total  not used  residual RMS  outlier scale
+                        (px)                                         (px/coord.)           (px)
+  cam1                0.1018       2.7 %    1000 / 1000          0        0.0764         0.1006
+  cam2                0.0998       2.5 %    1000 / 1000          0        0.0801         0.0997
+  cam3                0.0983       2.8 %    1000 / 1000          0        0.0725         0.0990
+  pooled sigma 0.1003 px per coordinate (unweighted); variance factor 1.005 (about 1 when the weights match the data); 4 rounds; noisiest / quietest group 1.04x
+  noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.
+  residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera
+    next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).
+  not used: rejected as outliers, or dropped with their frame when an end was left in fewer than two cameras.
+  outlier scale: the robust scale each detection was judged against (rejected beyond 5 of it).
+  starts: 2 of 6 short-listed bootstrap starts carried through stages 3-4; stage-3 RMS 0.097, 0.097 px

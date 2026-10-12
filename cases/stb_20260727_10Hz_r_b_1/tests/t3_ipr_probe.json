@@ -1,0 +1,2180 @@
+{
+  "frames": [
+    0,
+    1000,
+    2000,
+    3000,
+    3600,
+    4600
+  ],
+  "runs": {
+    "new_f0000": {
+      "set": "new",
+      "frame": 0,
+      "record": {
+        "frame": 0,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              6959,
+              19202,
+              19900,
+              44138
+            ],
+            "matched": 580,
+            "tol": 2.0,
+            "t_match": 0.6,
+            "after_shake": 580,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6473,
+              19534,
+              18821,
+              43716
+            ],
+            "matched": 1808,
+            "tol": 3.0,
+            "t_match": 0.92,
+            "after_shake": 1808,
+            "t_shake": 0.18
+          },
+          {
+            "cams": "012",
+            "det": [
+              5358,
+              18610,
+              42505
+            ],
+            "matched": 1405,
+            "tol": 2.0,
+            "t_match": 0.32,
+            "after_shake": 1405,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "012",
+            "det": [
+              4155,
+              17248,
+              41302
+            ],
+            "matched": 1535,
+            "tol": 3.0,
+            "t_match": 0.35,
+            "after_shake": 1535,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              3084,
+              17732,
+              40073
+            ],
+            "matched": 307,
+            "tol": 2.0,
+            "t_match": 0.14,
+            "after_shake": 307,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "013",
+            "det": [
+              2844,
+              17462,
+              39813
+            ],
+            "matched": 672,
+            "tol": 3.0,
+            "t_match": 0.21,
+            "after_shake": 672,
+            "t_shake": 0.11
+          },
+          {
+            "cams": "023",
+            "det": [
+              15887,
+              16897,
+              39282
+            ],
+            "matched": 5419,
+            "tol": 2.0,
+            "t_match": 0.64,
+            "after_shake": 5418,
+            "t_shake": 0.34
+          },
+          {
+            "cams": "023",
+            "det": [
+              11693,
+              12888,
+              34399
+            ],
+            "matched": 4534,
+            "tol": 3.0,
+            "t_match": 0.59,
+            "after_shake": 4532,
+            "t_shake": 0.29
+          },
+          {
+            "cams": "123",
+            "det": [
+              8868,
+              2377,
+              9785
+            ],
+            "matched": 6,
+            "tol": 2.0,
+            "t_match": 0.01,
+            "after_shake": 6,
+            "t_shake": 0.11
+          },
+          {
+            "cams": "123",
+            "det": [
+              9779,
+              8864,
+              2371
+            ],
+            "matched": 52,
+            "tol": 3.0,
+            "t_match": 0.02,
+            "after_shake": 52,
+            "t_shake": 0.12
+          }
+        ],
+        "saved": false,
+        "ipr_found": 16315,
+        "t_total": 5.85
+      },
+      "flat": {
+        "frame": 0,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 16315,
+        "t_total": 5.85,
+        "t_match_all": 3.8,
+        "t_shake_ipr": 1.6600000000000001,
+        "t_match_0123": 1.52,
+        "matched_0123": 2388,
+        "matched_0123_tol2": 580,
+        "matched_0123_tol3": 1808,
+        "t_match_012": 0.6699999999999999,
+        "matched_012": 2940,
+        "matched_012_tol2": 1405,
+        "matched_012_tol3": 1535,
+        "t_match_013": 0.35,
+        "matched_013": 979,
+        "matched_013_tol2": 307,
+        "matched_013_tol3": 672,
+        "t_match_023": 1.23,
+        "matched_023": 9953,
+        "matched_023_tol2": 5419,
+        "matched_023_tol3": 4534,
+        "t_match_123": 0.03,
+        "matched_123": 58,
+        "matched_123_tol2": 6,
+        "matched_123_tol3": 52,
+        "det_first": 90199
+      },
+      "wall_s": 11.50340749998577,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.68,1.11,1.09,0.00",
+        "Camera 1 (a,b,c,alpha) = 38.45,1.06,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 44.61,1.02,0.96,0.00",
+        "Camera 3 (a,b,c,alpha) = 51.69,1.03,0.99,0.00"
+      ]
+    },
+    "old_f0000": {
+      "set": "old",
+      "frame": 0,
+      "record": {
+        "frame": 0,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              6959,
+              19202,
+              19900,
+              44138
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.57
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6959,
+              19900,
+              19202,
+              44138
+            ],
+            "matched": 30,
+            "tol": 3.0,
+            "t_match": 1.03,
+            "after_shake": 30,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "012",
+            "det": [
+              6937,
+              19899,
+              44119
+            ],
+            "matched": 111,
+            "tol": 2.0,
+            "t_match": 0.46,
+            "after_shake": 111,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "012",
+            "det": [
+              6865,
+              19879,
+              44014
+            ],
+            "matched": 1419,
+            "tol": 3.0,
+            "t_match": 0.77,
+            "after_shake": 1419,
+            "t_shake": 0.15
+          },
+          {
+            "cams": "013",
+            "det": [
+              6040,
+              19175,
+              42975
+            ],
+            "matched": 1146,
+            "tol": 2.0,
+            "t_match": 0.43,
+            "after_shake": 1146,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              5021,
+              18183,
+              42018
+            ],
+            "matched": 2273,
+            "tol": 3.0,
+            "t_match": 0.58,
+            "after_shake": 2273,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "023",
+            "det": [
+              19446,
+              16305,
+              40374
+            ],
+            "matched": 24,
+            "tol": 2.0,
+            "t_match": 0.77,
+            "after_shake": 24,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "023",
+            "det": [
+              19444,
+              16286,
+              40353
+            ],
+            "matched": 2106,
+            "tol": 3.0,
+            "t_match": 1.19,
+            "after_shake": 2106,
+            "t_shake": 0.18
+          },
+          {
+            "cams": "123",
+            "det": [
+              3383,
+              14965,
+              19275
+            ],
+            "matched": 1,
+            "tol": 2.0,
+            "t_match": 0.03,
+            "after_shake": 1,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "123",
+            "det": [
+              3383,
+              19275,
+              14964
+            ],
+            "matched": 135,
+            "tol": 3.0,
+            "t_match": 0.06,
+            "after_shake": 135,
+            "t_shake": 0.08
+          }
+        ],
+        "saved": false,
+        "ipr_found": 7245,
+        "t_total": 7.24
+      },
+      "flat": {
+        "frame": 0,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 7245,
+        "t_total": 7.24,
+        "t_match_all": 5.890000000000001,
+        "t_shake_ipr": 1.01,
+        "t_match_0123": 1.6,
+        "matched_0123": 30,
+        "matched_0123_tol2": 0,
+        "matched_0123_tol3": 30,
+        "t_match_012": 1.23,
+        "matched_012": 1530,
+        "matched_012_tol2": 111,
+        "matched_012_tol3": 1419,
+        "t_match_013": 1.01,
+        "matched_013": 3419,
+        "matched_013_tol2": 1146,
+        "matched_013_tol3": 2273,
+        "t_match_023": 1.96,
+        "matched_023": 2130,
+        "matched_023_tol2": 24,
+        "matched_023_tol3": 2106,
+        "t_match_123": 0.09,
+        "matched_123": 136,
+        "matched_123_tol2": 1,
+        "matched_123_tol3": 135,
+        "det_first": 90199
+      },
+      "wall_s": 8.423194000031799,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.68,1.11,1.09,0.00",
+        "Camera 1 (a,b,c,alpha) = 38.45,1.06,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 44.61,1.02,0.96,0.00",
+        "Camera 3 (a,b,c,alpha) = 51.69,1.03,0.99,0.00"
+      ]
+    },
+    "new_f1000": {
+      "set": "new",
+      "frame": 1000,
+      "record": {
+        "frame": 1000,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              6917,
+              19582,
+              43667,
+              19152
+            ],
+            "matched": 550,
+            "tol": 2.0,
+            "t_match": 0.62,
+            "after_shake": 550,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6450,
+              19220,
+              43244,
+              18803
+            ],
+            "matched": 1804,
+            "tol": 3.0,
+            "t_match": 0.9,
+            "after_shake": 1803,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "012",
+            "det": [
+              5384,
+              18255,
+              41996
+            ],
+            "matched": 1410,
+            "tol": 2.0,
+            "t_match": 0.33,
+            "after_shake": 1409,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "012",
+            "det": [
+              4203,
+              16917,
+              40812
+            ],
+            "matched": 1614,
+            "tol": 3.0,
+            "t_match": 0.36,
+            "after_shake": 1614,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              3127,
+              17722,
+              39552
+            ],
+            "matched": 364,
+            "tol": 2.0,
+            "t_match": 0.15,
+            "after_shake": 364,
+            "t_shake": 0.11
+          },
+          {
+            "cams": "013",
+            "det": [
+              2833,
+              17415,
+              39235
+            ],
+            "matched": 646,
+            "tol": 3.0,
+            "t_match": 0.22,
+            "after_shake": 646,
+            "t_shake": 0.12
+          },
+          {
+            "cams": "023",
+            "det": [
+              15506,
+              16869,
+              38728
+            ],
+            "matched": 5353,
+            "tol": 2.0,
+            "t_match": 0.65,
+            "after_shake": 5352,
+            "t_shake": 0.29
+          },
+          {
+            "cams": "023",
+            "det": [
+              11332,
+              12829,
+              33879
+            ],
+            "matched": 4454,
+            "tol": 3.0,
+            "t_match": 0.57,
+            "after_shake": 4452,
+            "t_shake": 0.26
+          },
+          {
+            "cams": "123",
+            "det": [
+              2404,
+              9861,
+              8615
+            ],
+            "matched": 5,
+            "tol": 2.0,
+            "t_match": 0.01,
+            "after_shake": 5,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "123",
+            "det": [
+              2403,
+              8614,
+              9857
+            ],
+            "matched": 57,
+            "tol": 3.0,
+            "t_match": 0.01,
+            "after_shake": 57,
+            "t_shake": 0.1
+          }
+        ],
+        "saved": false,
+        "ipr_found": 16252,
+        "t_total": 5.61
+      },
+      "flat": {
+        "frame": 1000,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 16252,
+        "t_total": 5.61,
+        "t_match_all": 3.8199999999999994,
+        "t_shake_ipr": 1.4900000000000002,
+        "t_match_0123": 1.52,
+        "matched_0123": 2354,
+        "matched_0123_tol2": 550,
+        "matched_0123_tol3": 1804,
+        "t_match_012": 0.69,
+        "matched_012": 3024,
+        "matched_012_tol2": 1410,
+        "matched_012_tol3": 1614,
+        "t_match_013": 0.37,
+        "matched_013": 1010,
+        "matched_013_tol2": 364,
+        "matched_013_tol3": 646,
+        "t_match_023": 1.22,
+        "matched_023": 9807,
+        "matched_023_tol2": 5353,
+        "matched_023_tol3": 4454,
+        "t_match_123": 0.02,
+        "matched_123": 62,
+        "matched_123_tol2": 5,
+        "matched_123_tol3": 57,
+        "det_first": 89318
+      },
+      "wall_s": 10.877344699809328,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 58.01,1.11,1.09,0.00",
+        "Camera 1 (a,b,c,alpha) = 39.63,1.06,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 45.91,1.03,0.97,0.00",
+        "Camera 3 (a,b,c,alpha) = 52.62,1.06,0.99,0.00"
+      ]
+    },
+    "old_f1000": {
+      "set": "old",
+      "frame": 1000,
+      "record": {
+        "frame": 1000,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              6917,
+              19152,
+              19582,
+              43667
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.56
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6917,
+              19582,
+              19152,
+              43667
+            ],
+            "matched": 42,
+            "tol": 3.0,
+            "t_match": 1.06,
+            "after_shake": 42,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "012",
+            "det": [
+              6891,
+              43641,
+              19581
+            ],
+            "matched": 114,
+            "tol": 2.0,
+            "t_match": 0.43,
+            "after_shake": 114,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "012",
+            "det": [
+              6820,
+              19562,
+              43538
+            ],
+            "matched": 1308,
+            "tol": 3.0,
+            "t_match": 0.76,
+            "after_shake": 1308,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "013",
+            "det": [
+              6062,
+              42536,
+              19089
+            ],
+            "matched": 1180,
+            "tol": 2.0,
+            "t_match": 0.43,
+            "after_shake": 1180,
+            "t_shake": 0.12
+          },
+          {
+            "cams": "013",
+            "det": [
+              5009,
+              18064,
+              41537
+            ],
+            "matched": 2235,
+            "tol": 3.0,
+            "t_match": 0.55,
+            "after_shake": 2235,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "023",
+            "det": [
+              19211,
+              16209,
+              39935
+            ],
+            "matched": 19,
+            "tol": 2.0,
+            "t_match": 0.76,
+            "after_shake": 19,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "023",
+            "det": [
+              39920,
+              16193,
+              19211
+            ],
+            "matched": 1961,
+            "tol": 3.0,
+            "t_match": 1.15,
+            "after_shake": 1961,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "123",
+            "det": [
+              3364,
+              14938,
+              19039
+            ],
+            "matched": 2,
+            "tol": 2.0,
+            "t_match": 0.03,
+            "after_shake": 2,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "123",
+            "det": [
+              3362,
+              14936,
+              19039
+            ],
+            "matched": 157,
+            "tol": 3.0,
+            "t_match": 0.06,
+            "after_shake": 157,
+            "t_shake": 0.08
+          }
+        ],
+        "saved": false,
+        "ipr_found": 7018,
+        "t_total": 7.11
+      },
+      "flat": {
+        "frame": 1000,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 7018,
+        "t_total": 7.11,
+        "t_match_all": 5.790000000000001,
+        "t_shake_ipr": 1.01,
+        "t_match_0123": 1.62,
+        "matched_0123": 42,
+        "matched_0123_tol2": 0,
+        "matched_0123_tol3": 42,
+        "t_match_012": 1.19,
+        "matched_012": 1422,
+        "matched_012_tol2": 114,
+        "matched_012_tol3": 1308,
+        "t_match_013": 0.98,
+        "matched_013": 3415,
+        "matched_013_tol2": 1180,
+        "matched_013_tol3": 2235,
+        "t_match_023": 1.91,
+        "matched_023": 1980,
+        "matched_023_tol2": 19,
+        "matched_023_tol3": 1961,
+        "t_match_123": 0.09,
+        "matched_123": 159,
+        "matched_123_tol2": 2,
+        "matched_123_tol3": 157,
+        "det_first": 89318
+      },
+      "wall_s": 8.353297800058499,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 58.01,1.11,1.09,0.00",
+        "Camera 1 (a,b,c,alpha) = 39.63,1.06,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 45.91,1.03,0.97,0.00",
+        "Camera 3 (a,b,c,alpha) = 52.62,1.06,0.99,0.00"
+      ]
+    },
+    "new_f2000": {
+      "set": "new",
+      "frame": 2000,
+      "record": {
+        "frame": 2000,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              7040,
+              19815,
+              19329,
+              43826
+            ],
+            "matched": 632,
+            "tol": 2.0,
+            "t_match": 0.62,
+            "after_shake": 632,
+            "t_shake": 0.12
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6555,
+              19439,
+              18976,
+              43386
+            ],
+            "matched": 1879,
+            "tol": 3.0,
+            "t_match": 0.93,
+            "after_shake": 1879,
+            "t_shake": 0.18
+          },
+          {
+            "cams": "012",
+            "det": [
+              5390,
+              18481,
+              42141
+            ],
+            "matched": 1503,
+            "tol": 2.0,
+            "t_match": 0.33,
+            "after_shake": 1501,
+            "t_shake": 0.15
+          },
+          {
+            "cams": "012",
+            "det": [
+              4156,
+              17040,
+              40877
+            ],
+            "matched": 1609,
+            "tol": 3.0,
+            "t_match": 0.35,
+            "after_shake": 1606,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              3040,
+              17862,
+              39645
+            ],
+            "matched": 310,
+            "tol": 2.0,
+            "t_match": 0.14,
+            "after_shake": 310,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "013",
+            "det": [
+              2807,
+              17591,
+              39388
+            ],
+            "matched": 678,
+            "tol": 3.0,
+            "t_match": 0.21,
+            "after_shake": 678,
+            "t_shake": 0.11
+          },
+          {
+            "cams": "023",
+            "det": [
+              15648,
+              16991,
+              38849
+            ],
+            "matched": 5476,
+            "tol": 2.0,
+            "t_match": 0.65,
+            "after_shake": 5475,
+            "t_shake": 0.26
+          },
+          {
+            "cams": "023",
+            "det": [
+              11465,
+              12849,
+              33930
+            ],
+            "matched": 4503,
+            "tol": 3.0,
+            "t_match": 0.59,
+            "after_shake": 4501,
+            "t_shake": 0.28
+          },
+          {
+            "cams": "123",
+            "det": [
+              2364,
+              8682,
+              9814
+            ],
+            "matched": 11,
+            "tol": 2.0,
+            "t_match": 0.01,
+            "after_shake": 11,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "123",
+            "det": [
+              2354,
+              8678,
+              9806
+            ],
+            "matched": 36,
+            "tol": 3.0,
+            "t_match": 0.01,
+            "after_shake": 36,
+            "t_shake": 0.08
+          }
+        ],
+        "saved": false,
+        "ipr_found": 16629,
+        "t_total": 5.65
+      },
+      "flat": {
+        "frame": 2000,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 16629,
+        "t_total": 5.65,
+        "t_match_all": 3.8399999999999994,
+        "t_shake_ipr": 1.4900000000000002,
+        "t_match_0123": 1.55,
+        "matched_0123": 2511,
+        "matched_0123_tol2": 632,
+        "matched_0123_tol3": 1879,
+        "t_match_012": 0.6799999999999999,
+        "matched_012": 3112,
+        "matched_012_tol2": 1503,
+        "matched_012_tol3": 1609,
+        "t_match_013": 0.35,
+        "matched_013": 988,
+        "matched_013_tol2": 310,
+        "matched_013_tol3": 678,
+        "t_match_023": 1.24,
+        "matched_023": 9979,
+        "matched_023_tol2": 5476,
+        "matched_023_tol3": 4503,
+        "t_match_123": 0.02,
+        "matched_123": 47,
+        "matched_123_tol2": 11,
+        "matched_123_tol3": 36,
+        "det_first": 90010
+      },
+      "wall_s": 10.623679700074717,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.57,1.13,1.10,0.00",
+        "Camera 1 (a,b,c,alpha) = 37.57,1.07,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 46.08,1.03,0.98,0.00",
+        "Camera 3 (a,b,c,alpha) = 53.13,1.06,0.99,0.00"
+      ]
+    },
+    "old_f2000": {
+      "set": "old",
+      "frame": 2000,
+      "record": {
+        "frame": 2000,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              7040,
+              19815,
+              43826,
+              19329
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.58
+          },
+          {
+            "cams": "0123",
+            "det": [
+              7040,
+              19815,
+              19329,
+              43826
+            ],
+            "matched": 53,
+            "tol": 3.0,
+            "t_match": 1.06,
+            "after_shake": 53,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "012",
+            "det": [
+              7001,
+              19812,
+              43792
+            ],
+            "matched": 112,
+            "tol": 2.0,
+            "t_match": 0.47,
+            "after_shake": 112,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "012",
+            "det": [
+              6934,
+              19798,
+              43691
+            ],
+            "matched": 1432,
+            "tol": 3.0,
+            "t_match": 0.78,
+            "after_shake": 1432,
+            "t_shake": 0.15
+          },
+          {
+            "cams": "013",
+            "det": [
+              6164,
+              19254,
+              42611
+            ],
+            "matched": 1163,
+            "tol": 2.0,
+            "t_match": 0.41,
+            "after_shake": 1163,
+            "t_shake": 0.13
+          },
+          {
+            "cams": "013",
+            "det": [
+              5142,
+              18177,
+              41650
+            ],
+            "matched": 2291,
+            "tol": 3.0,
+            "t_match": 0.56,
+            "after_shake": 2290,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "023",
+            "det": [
+              16247,
+              19316,
+              40030
+            ],
+            "matched": 43,
+            "tol": 2.0,
+            "t_match": 0.69,
+            "after_shake": 43,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "023",
+            "det": [
+              16214,
+              19312,
+              39998
+            ],
+            "matched": 2039,
+            "tol": 3.0,
+            "t_match": 1.18,
+            "after_shake": 2038,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "123",
+            "det": [
+              3496,
+              19112,
+              14885
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.05
+          },
+          {
+            "cams": "123",
+            "det": [
+              3496,
+              14885,
+              19112
+            ],
+            "matched": 160,
+            "tol": 3.0,
+            "t_match": 0.08,
+            "after_shake": 160,
+            "t_shake": 0.08
+          }
+        ],
+        "saved": false,
+        "ipr_found": 7291,
+        "t_total": 7.12
+      },
+      "flat": {
+        "frame": 2000,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 7291,
+        "t_total": 7.12,
+        "t_match_all": 5.86,
+        "t_shake_ipr": 0.92,
+        "t_match_0123": 1.6400000000000001,
+        "matched_0123": 53,
+        "matched_0123_tol2": 0,
+        "matched_0123_tol3": 53,
+        "t_match_012": 1.25,
+        "matched_012": 1544,
+        "matched_012_tol2": 112,
+        "matched_012_tol3": 1432,
+        "t_match_013": 0.97,
+        "matched_013": 3454,
+        "matched_013_tol2": 1163,
+        "matched_013_tol3": 2291,
+        "t_match_023": 1.8699999999999999,
+        "matched_023": 2082,
+        "matched_023_tol2": 43,
+        "matched_023_tol3": 2039,
+        "t_match_123": 0.13,
+        "matched_123": 160,
+        "matched_123_tol2": 0,
+        "matched_123_tol3": 160,
+        "det_first": 90010
+      },
+      "wall_s": 8.296060799853876,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.57,1.13,1.10,0.00",
+        "Camera 1 (a,b,c,alpha) = 37.57,1.07,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 46.08,1.03,0.98,0.00",
+        "Camera 3 (a,b,c,alpha) = 53.13,1.06,0.99,0.00"
+      ]
+    },
+    "new_f3000": {
+      "set": "new",
+      "frame": 3000,
+      "record": {
+        "frame": 3000,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              7012,
+              19554,
+              19022,
+              43710
+            ],
+            "matched": 527,
+            "tol": 2.0,
+            "t_match": 0.63,
+            "after_shake": 527,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6593,
+              18688,
+              19207,
+              43344
+            ],
+            "matched": 1780,
+            "tol": 3.0,
+            "t_match": 0.92,
+            "after_shake": 1780,
+            "t_shake": 0.15
+          },
+          {
+            "cams": "012",
+            "det": [
+              5514,
+              18254,
+              42186
+            ],
+            "matched": 1406,
+            "tol": 2.0,
+            "t_match": 0.33,
+            "after_shake": 1406,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "012",
+            "det": [
+              4306,
+              16894,
+              41001
+            ],
+            "matched": 1544,
+            "tol": 3.0,
+            "t_match": 0.36,
+            "after_shake": 1544,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "013",
+            "det": [
+              3250,
+              17523,
+              39807
+            ],
+            "matched": 336,
+            "tol": 2.0,
+            "t_match": 0.16,
+            "after_shake": 335,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "013",
+            "det": [
+              2980,
+              39511,
+              17218
+            ],
+            "matched": 631,
+            "tol": 3.0,
+            "t_match": 0.21,
+            "after_shake": 631,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "023",
+            "det": [
+              15540,
+              39036,
+              16691
+            ],
+            "matched": 5348,
+            "tol": 2.0,
+            "t_match": 0.65,
+            "after_shake": 5347,
+            "t_shake": 0.29
+          },
+          {
+            "cams": "023",
+            "det": [
+              11351,
+              12618,
+              34216
+            ],
+            "matched": 4290,
+            "tol": 3.0,
+            "t_match": 0.56,
+            "after_shake": 4286,
+            "t_shake": 0.23
+          },
+          {
+            "cams": "123",
+            "det": [
+              2569,
+              8688,
+              9568
+            ],
+            "matched": 7,
+            "tol": 2.0,
+            "t_match": 0.01,
+            "after_shake": 7,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "123",
+            "det": [
+              2563,
+              8686,
+              9562
+            ],
+            "matched": 53,
+            "tol": 3.0,
+            "t_match": 0.02,
+            "after_shake": 53,
+            "t_shake": 0.07
+          }
+        ],
+        "saved": false,
+        "ipr_found": 15916,
+        "t_total": 5.61
+      },
+      "flat": {
+        "frame": 3000,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 15916,
+        "t_total": 5.61,
+        "t_match_all": 3.85,
+        "t_shake_ipr": 1.4200000000000002,
+        "t_match_0123": 1.55,
+        "matched_0123": 2307,
+        "matched_0123_tol2": 527,
+        "matched_0123_tol3": 1780,
+        "t_match_012": 0.69,
+        "matched_012": 2950,
+        "matched_012_tol2": 1406,
+        "matched_012_tol3": 1544,
+        "t_match_013": 0.37,
+        "matched_013": 967,
+        "matched_013_tol2": 336,
+        "matched_013_tol3": 631,
+        "t_match_023": 1.21,
+        "matched_023": 9638,
+        "matched_023_tol2": 5348,
+        "matched_023_tol3": 4290,
+        "t_match_123": 0.03,
+        "matched_123": 60,
+        "matched_123_tol2": 7,
+        "matched_123_tol3": 53,
+        "det_first": 89298
+      },
+      "wall_s": 10.602674999972805,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.13,1.12,1.10,0.00",
+        "Camera 1 (a,b,c,alpha) = 39.06,1.06,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 46.30,1.02,0.96,0.00",
+        "Camera 3 (a,b,c,alpha) = 54.22,1.05,0.97,0.00"
+      ]
+    },
+    "old_f3000": {
+      "set": "old",
+      "frame": 3000,
+      "record": {
+        "frame": 3000,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              7012,
+              19554,
+              43710,
+              19022
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.57
+          },
+          {
+            "cams": "0123",
+            "det": [
+              7012,
+              19554,
+              19022,
+              43710
+            ],
+            "matched": 34,
+            "tol": 3.0,
+            "t_match": 1.03,
+            "after_shake": 34,
+            "t_shake": 0.07
+          },
+          {
+            "cams": "012",
+            "det": [
+              6990,
+              43690,
+              19553
+            ],
+            "matched": 120,
+            "tol": 2.0,
+            "t_match": 0.45,
+            "after_shake": 120,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "012",
+            "det": [
+              6923,
+              19524,
+              43584
+            ],
+            "matched": 1456,
+            "tol": 3.0,
+            "t_match": 0.77,
+            "after_shake": 1456,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "013",
+            "det": [
+              6080,
+              18970,
+              42516
+            ],
+            "matched": 1243,
+            "tol": 2.0,
+            "t_match": 0.4,
+            "after_shake": 1243,
+            "t_shake": 0.13
+          },
+          {
+            "cams": "013",
+            "det": [
+              4949,
+              17862,
+              41503
+            ],
+            "matched": 2104,
+            "tol": 3.0,
+            "t_match": 0.54,
+            "after_shake": 2104,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "023",
+            "det": [
+              16045,
+              19108,
+              40042
+            ],
+            "matched": 20,
+            "tol": 2.0,
+            "t_match": 0.69,
+            "after_shake": 20,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "023",
+            "det": [
+              19107,
+              16025,
+              40026
+            ],
+            "matched": 1977,
+            "tol": 3.0,
+            "t_match": 1.15,
+            "after_shake": 1975,
+            "t_shake": 0.18
+          },
+          {
+            "cams": "123",
+            "det": [
+              3372,
+              18933,
+              14809
+            ],
+            "matched": 2,
+            "tol": 2.0,
+            "t_match": 0.04,
+            "after_shake": 2,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "123",
+            "det": [
+              3373,
+              14807,
+              18932
+            ],
+            "matched": 148,
+            "tol": 3.0,
+            "t_match": 0.07,
+            "after_shake": 147,
+            "t_shake": 0.1
+          }
+        ],
+        "saved": false,
+        "ipr_found": 7101,
+        "t_total": 7.11
+      },
+      "flat": {
+        "frame": 3000,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 7101,
+        "t_total": 7.11,
+        "t_match_all": 5.71,
+        "t_shake_ipr": 1.0599999999999998,
+        "t_match_0123": 1.6,
+        "matched_0123": 34,
+        "matched_0123_tol2": 0,
+        "matched_0123_tol3": 34,
+        "t_match_012": 1.22,
+        "matched_012": 1576,
+        "matched_012_tol2": 120,
+        "matched_012_tol3": 1456,
+        "t_match_013": 0.9400000000000001,
+        "matched_013": 3347,
+        "matched_013_tol2": 1243,
+        "matched_013_tol3": 2104,
+        "t_match_023": 1.8399999999999999,
+        "matched_023": 1997,
+        "matched_023_tol2": 20,
+        "matched_023_tol3": 1977,
+        "t_match_123": 0.11000000000000001,
+        "matched_123": 150,
+        "matched_123_tol2": 2,
+        "matched_123_tol3": 148,
+        "det_first": 89298
+      },
+      "wall_s": 8.269860500004143,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.13,1.12,1.10,0.00",
+        "Camera 1 (a,b,c,alpha) = 39.06,1.06,0.99,0.00",
+        "Camera 2 (a,b,c,alpha) = 46.30,1.02,0.96,0.00",
+        "Camera 3 (a,b,c,alpha) = 54.22,1.05,0.97,0.00"
+      ]
+    },
+    "new_f3600": {
+      "set": "new",
+      "frame": 3600,
+      "record": {
+        "frame": 3600,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              7061,
+              19481,
+              19968,
+              43672
+            ],
+            "matched": 560,
+            "tol": 2.0,
+            "t_match": 0.64,
+            "after_shake": 560,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6607,
+              19146,
+              19585,
+              43261
+            ],
+            "matched": 1930,
+            "tol": 3.0,
+            "t_match": 0.97,
+            "after_shake": 1930,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "012",
+            "det": [
+              5392,
+              18585,
+              42013
+            ],
+            "matched": 1472,
+            "tol": 2.0,
+            "t_match": 0.34,
+            "after_shake": 1472,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "012",
+            "det": [
+              4146,
+              17188,
+              40788
+            ],
+            "matched": 1524,
+            "tol": 3.0,
+            "t_match": 0.36,
+            "after_shake": 1524,
+            "t_shake": 0.13
+          },
+          {
+            "cams": "013",
+            "det": [
+              3101,
+              18046,
+              39625
+            ],
+            "matched": 317,
+            "tol": 2.0,
+            "t_match": 0.15,
+            "after_shake": 317,
+            "t_shake": 0.11
+          },
+          {
+            "cams": "013",
+            "det": [
+              2847,
+              17769,
+              39346
+            ],
+            "matched": 656,
+            "tol": 3.0,
+            "t_match": 0.21,
+            "after_shake": 655,
+            "t_shake": 0.12
+          },
+          {
+            "cams": "023",
+            "det": [
+              15845,
+              17218,
+              38858
+            ],
+            "matched": 5516,
+            "tol": 2.0,
+            "t_match": 0.69,
+            "after_shake": 5515,
+            "t_shake": 0.32
+          },
+          {
+            "cams": "023",
+            "det": [
+              11561,
+              13129,
+              33937
+            ],
+            "matched": 4505,
+            "tol": 3.0,
+            "t_match": 0.6,
+            "after_shake": 4500,
+            "t_shake": 0.26
+          },
+          {
+            "cams": "123",
+            "det": [
+              2416,
+              8700,
+              10056
+            ],
+            "matched": 8,
+            "tol": 2.0,
+            "t_match": 0.01,
+            "after_shake": 8,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "123",
+            "det": [
+              2409,
+              8693,
+              10051
+            ],
+            "matched": 52,
+            "tol": 3.0,
+            "t_match": 0.01,
+            "after_shake": 52,
+            "t_shake": 0.07
+          }
+        ],
+        "saved": false,
+        "ipr_found": 16533,
+        "t_total": 5.85
+      },
+      "flat": {
+        "frame": 3600,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 16533,
+        "t_total": 5.85,
+        "t_match_all": 3.9799999999999995,
+        "t_shake_ipr": 1.5200000000000002,
+        "t_match_0123": 1.6099999999999999,
+        "matched_0123": 2490,
+        "matched_0123_tol2": 560,
+        "matched_0123_tol3": 1930,
+        "t_match_012": 0.7,
+        "matched_012": 2996,
+        "matched_012_tol2": 1472,
+        "matched_012_tol3": 1524,
+        "t_match_013": 0.36,
+        "matched_013": 973,
+        "matched_013_tol2": 317,
+        "matched_013_tol3": 656,
+        "t_match_023": 1.29,
+        "matched_023": 10021,
+        "matched_023_tol2": 5516,
+        "matched_023_tol3": 4505,
+        "t_match_123": 0.02,
+        "matched_123": 60,
+        "matched_123_tol2": 8,
+        "matched_123_tol3": 52,
+        "det_first": 90182
+      },
+      "wall_s": 11.234692699974403,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 55.66,1.12,1.10,0.00",
+        "Camera 1 (a,b,c,alpha) = 37.85,1.07,0.98,0.00",
+        "Camera 2 (a,b,c,alpha) = 47.32,1.01,0.97,0.00",
+        "Camera 3 (a,b,c,alpha) = 52.91,1.03,0.97,0.00"
+      ]
+    },
+    "old_f3600": {
+      "set": "old",
+      "frame": 3600,
+      "record": {
+        "frame": 3600,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              7061,
+              19968,
+              43672,
+              19481
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.59
+          },
+          {
+            "cams": "0123",
+            "det": [
+              7061,
+              19968,
+              19481,
+              43672
+            ],
+            "matched": 32,
+            "tol": 3.0,
+            "t_match": 1.09,
+            "after_shake": 32,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "012",
+            "det": [
+              7039,
+              19958,
+              43657
+            ],
+            "matched": 125,
+            "tol": 2.0,
+            "t_match": 0.48,
+            "after_shake": 125,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "012",
+            "det": [
+              6971,
+              19937,
+              43555
+            ],
+            "matched": 1473,
+            "tol": 3.0,
+            "t_match": 0.81,
+            "after_shake": 1473,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "013",
+            "det": [
+              6163,
+              19429,
+              42451
+            ],
+            "matched": 1189,
+            "tol": 2.0,
+            "t_match": 0.42,
+            "after_shake": 1189,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              5061,
+              18364,
+              41487
+            ],
+            "matched": 2236,
+            "tol": 3.0,
+            "t_match": 0.58,
+            "after_shake": 2235,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "023",
+            "det": [
+              19488,
+              39949,
+              16532
+            ],
+            "matched": 13,
+            "tol": 2.0,
+            "t_match": 0.7,
+            "after_shake": 13,
+            "t_shake": 0.1
+          },
+          {
+            "cams": "023",
+            "det": [
+              16522,
+              19487,
+              39936
+            ],
+            "matched": 2012,
+            "tol": 3.0,
+            "t_match": 1.22,
+            "after_shake": 2012,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "123",
+            "det": [
+              3432,
+              19302,
+              15278
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.04
+          },
+          {
+            "cams": "123",
+            "det": [
+              3432,
+              15278,
+              19302
+            ],
+            "matched": 165,
+            "tol": 3.0,
+            "t_match": 0.07,
+            "after_shake": 165,
+            "t_shake": 0.08
+          }
+        ],
+        "saved": false,
+        "ipr_found": 7244,
+        "t_total": 7.3
+      },
+      "flat": {
+        "frame": 3600,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 7244,
+        "t_total": 7.3,
+        "t_match_all": 6.0,
+        "t_shake_ipr": 1.0,
+        "t_match_0123": 1.6800000000000002,
+        "matched_0123": 32,
+        "matched_0123_tol2": 0,
+        "matched_0123_tol3": 32,
+        "t_match_012": 1.29,
+        "matched_012": 1598,
+        "matched_012_tol2": 125,
+        "matched_012_tol3": 1473,
+        "t_match_013": 1.0,
+        "matched_013": 3425,
+        "matched_013_tol2": 1189,
+        "matched_013_tol3": 2236,
+        "t_match_023": 1.92,
+        "matched_023": 2025,
+        "matched_023_tol2": 13,
+        "matched_023_tol3": 2012,
+        "t_match_123": 0.11000000000000001,
+        "matched_123": 165,
+        "matched_123_tol2": 0,
+        "matched_123_tol3": 165,
+        "det_first": 90182
+      },
+      "wall_s": 8.600124499993399,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 55.66,1.12,1.10,0.00",
+        "Camera 1 (a,b,c,alpha) = 37.85,1.07,0.98,0.00",
+        "Camera 2 (a,b,c,alpha) = 47.32,1.01,0.97,0.00",
+        "Camera 3 (a,b,c,alpha) = 52.91,1.03,0.97,0.00"
+      ]
+    },
+    "new_f4600": {
+      "set": "new",
+      "frame": 4600,
+      "record": {
+        "frame": 4600,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              6911,
+              19245,
+              20016,
+              43923
+            ],
+            "matched": 541,
+            "tol": 2.0,
+            "t_match": 0.63,
+            "after_shake": 541,
+            "t_shake": 0.12
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6465,
+              19668,
+              43530,
+              18894
+            ],
+            "matched": 1814,
+            "tol": 3.0,
+            "t_match": 0.93,
+            "after_shake": 1814,
+            "t_shake": 0.16
+          },
+          {
+            "cams": "012",
+            "det": [
+              5364,
+              18800,
+              42351
+            ],
+            "matched": 1467,
+            "tol": 2.0,
+            "t_match": 0.34,
+            "after_shake": 1467,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "012",
+            "det": [
+              4136,
+              17412,
+              41155
+            ],
+            "matched": 1577,
+            "tol": 3.0,
+            "t_match": 0.37,
+            "after_shake": 1577,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              3052,
+              17776,
+              39940
+            ],
+            "matched": 300,
+            "tol": 2.0,
+            "t_match": 0.15,
+            "after_shake": 300,
+            "t_shake": 0.11
+          },
+          {
+            "cams": "013",
+            "det": [
+              2804,
+              17511,
+              39673
+            ],
+            "matched": 642,
+            "tol": 3.0,
+            "t_match": 0.22,
+            "after_shake": 642,
+            "t_shake": 0.12
+          },
+          {
+            "cams": "023",
+            "det": [
+              16992,
+              16033,
+              39195
+            ],
+            "matched": 5509,
+            "tol": 2.0,
+            "t_match": 0.68,
+            "after_shake": 5509,
+            "t_shake": 0.28
+          },
+          {
+            "cams": "023",
+            "det": [
+              11886,
+              12728,
+              34309
+            ],
+            "matched": 4640,
+            "tol": 3.0,
+            "t_match": 0.6,
+            "after_shake": 4639,
+            "t_shake": 0.27
+          },
+          {
+            "cams": "123",
+            "det": [
+              2372,
+              9042,
+              9449
+            ],
+            "matched": 6,
+            "tol": 2.0,
+            "t_match": 0.01,
+            "after_shake": 6,
+            "t_shake": 0.09
+          },
+          {
+            "cams": "123",
+            "det": [
+              2368,
+              9444,
+              9040
+            ],
+            "matched": 48,
+            "tol": 3.0,
+            "t_match": 0.02,
+            "after_shake": 48,
+            "t_shake": 0.09
+          }
+        ],
+        "saved": false,
+        "ipr_found": 16543,
+        "t_total": 5.76
+      },
+      "flat": {
+        "frame": 4600,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 16543,
+        "t_total": 5.76,
+        "t_match_all": 3.95,
+        "t_shake_ipr": 1.5200000000000002,
+        "t_match_0123": 1.56,
+        "matched_0123": 2355,
+        "matched_0123_tol2": 541,
+        "matched_0123_tol3": 1814,
+        "t_match_012": 0.71,
+        "matched_012": 3044,
+        "matched_012_tol2": 1467,
+        "matched_012_tol3": 1577,
+        "t_match_013": 0.37,
+        "matched_013": 942,
+        "matched_013_tol2": 300,
+        "matched_013_tol3": 642,
+        "t_match_023": 1.28,
+        "matched_023": 10149,
+        "matched_023_tol2": 5509,
+        "matched_023_tol3": 4640,
+        "t_match_123": 0.03,
+        "matched_123": 54,
+        "matched_123_tol2": 6,
+        "matched_123_tol3": 48,
+        "det_first": 90095
+      },
+      "wall_s": 11.017518599983305,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.04,1.12,1.09,0.00",
+        "Camera 1 (a,b,c,alpha) = 39.09,1.07,1.00,0.00",
+        "Camera 2 (a,b,c,alpha) = 45.02,1.02,0.97,0.00",
+        "Camera 3 (a,b,c,alpha) = 53.14,1.04,0.96,0.00"
+      ]
+    },
+    "old_f4600": {
+      "set": "old",
+      "frame": 4600,
+      "record": {
+        "frame": 4600,
+        "phase": "init",
+        "rounds": [
+          {
+            "cams": "0123",
+            "det": [
+              6911,
+              20016,
+              43923,
+              19245
+            ],
+            "matched": 0,
+            "tol": 2.0,
+            "t_match": 0.59
+          },
+          {
+            "cams": "0123",
+            "det": [
+              6911,
+              20016,
+              19245,
+              43923
+            ],
+            "matched": 41,
+            "tol": 3.0,
+            "t_match": 1.0,
+            "after_shake": 41,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "012",
+            "det": [
+              6885,
+              20014,
+              43893
+            ],
+            "matched": 143,
+            "tol": 2.0,
+            "t_match": 0.47,
+            "after_shake": 143,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "012",
+            "det": [
+              6809,
+              19990,
+              43781
+            ],
+            "matched": 1480,
+            "tol": 3.0,
+            "t_match": 0.82,
+            "after_shake": 1480,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "013",
+            "det": [
+              5993,
+              19194,
+              42672
+            ],
+            "matched": 1168,
+            "tol": 2.0,
+            "t_match": 0.41,
+            "after_shake": 1168,
+            "t_shake": 0.14
+          },
+          {
+            "cams": "013",
+            "det": [
+              4946,
+              18110,
+              41732
+            ],
+            "matched": 2146,
+            "tol": 3.0,
+            "t_match": 0.56,
+            "after_shake": 2146,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "023",
+            "det": [
+              19562,
+              16249,
+              40199
+            ],
+            "matched": 31,
+            "tol": 2.0,
+            "t_match": 0.72,
+            "after_shake": 31,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "023",
+            "det": [
+              19561,
+              16221,
+              40169
+            ],
+            "matched": 2066,
+            "tol": 3.0,
+            "t_match": 1.21,
+            "after_shake": 2065,
+            "t_shake": 0.17
+          },
+          {
+            "cams": "123",
+            "det": [
+              3386,
+              14896,
+              19404
+            ],
+            "matched": 2,
+            "tol": 2.0,
+            "t_match": 0.04,
+            "after_shake": 2,
+            "t_shake": 0.08
+          },
+          {
+            "cams": "123",
+            "det": [
+              3384,
+              14894,
+              19403
+            ],
+            "matched": 149,
+            "tol": 3.0,
+            "t_match": 0.07,
+            "after_shake": 149,
+            "t_shake": 0.11
+          }
+        ],
+        "saved": false,
+        "ipr_found": 7225,
+        "t_total": 7.35
+      },
+      "flat": {
+        "frame": 4600,
+        "phase": "init",
+        "saved": false,
+        "ipr_found": 7225,
+        "t_total": 7.35,
+        "t_match_all": 5.89,
+        "t_shake_ipr": 1.08,
+        "t_match_0123": 1.5899999999999999,
+        "matched_0123": 41,
+        "matched_0123_tol2": 0,
+        "matched_0123_tol3": 41,
+        "t_match_012": 1.29,
+        "matched_012": 1623,
+        "matched_012_tol2": 143,
+        "matched_012_tol3": 1480,
+        "t_match_013": 0.97,
+        "matched_013": 3314,
+        "matched_013_tol2": 1168,
+        "matched_013_tol3": 2146,
+        "t_match_023": 1.93,
+        "matched_023": 2097,
+        "matched_023_tol2": 31,
+        "matched_023_tol3": 2066,
+        "t_match_123": 0.11000000000000001,
+        "matched_123": 151,
+        "matched_123_tol2": 2,
+        "matched_123_tol3": 149,
+        "det_first": 90095
+      },
+      "wall_s": 8.645379100227728,
+      "otf": [
+        "Camera 0 (a,b,c,alpha) = 56.04,1.12,1.09,0.00",
+        "Camera 1 (a,b,c,alpha) = 39.09,1.07,1.00,0.00",
+        "Camera 2 (a,b,c,alpha) = 45.02,1.02,0.97,0.00",
+        "Camera 3 (a,b,c,alpha) = 53.14,1.04,0.96,0.00"
+      ]
+    }
+  }
+}

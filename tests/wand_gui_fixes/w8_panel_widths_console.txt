@@ -1,0 +1,95 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Window 1500 x 900 (control column 370 px)
+  Point Detection: viewport 358 px, content minimum 336 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       316  QGroupBox 'Detection Settings'
+  Calibration, Pinhole: viewport 358 px, content minimum 345 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       325  QGroupBox 'Calibration Settings'
+       311  QHBoxLayout
+         204  QCheckBox 'Delete when wand len error >'
+          92  QDoubleSpinBox '1.00 mm'
+           0  spacer
+       300  QHBoxLayout
+           0  spacer
+         143  QPushButton 'Restore Deleted Frames'
+         142  QPushButton 'Save Filtered Points'
+  Calibration, Pinhole+Refraction: viewport 358 px, content minimum 345 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       325  QGroupBox 'Calibration Settings'
+       322  QGroupBox 'Refraction Settings'
+       311  QHBoxLayout
+         204  QCheckBox 'Delete when wand len error >'
+          92  QDoubleSpinBox '1.00 mm'
+           0  spacer
+       300  QHBoxLayout
+           0  spacer
+         143  QPushButton 'Restore Deleted Frames'
+         142  QPushButton 'Save Filtered Points'
+  Calibration, Pinhole+Cylinder: viewport 358 px, content minimum 345 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       325  QGroupBox 'Calibration Settings'
+       306  QGroupBox 'Tube Settings'
+       311  QHBoxLayout
+         204  QCheckBox 'Delete when wand len error >'
+          92  QDoubleSpinBox '1.00 mm'
+           0  spacer
+       300  QHBoxLayout
+           0  spacer
+         143  QPushButton 'Restore Deleted Frames'
+         142  QPushButton 'Save Filtered Points'
+  PASS  1500x900: Point Detection has no horizontal scroll bar  (content minimum 336 px, viewport 358 px)
+  PASS  1500x900: Pinhole has no horizontal scroll bar  (content minimum 345 px, viewport 358 px)
+  PASS  1500x900: Pinhole+Refraction has no horizontal scroll bar  (content minimum 345 px, viewport 358 px)
+  PASS  1500x900: Pinhole+Cylinder has no horizontal scroll bar  (content minimum 345 px, viewport 358 px)
+
+Window 1200 x 700 (control column 370 px)
+  Point Detection: viewport 358 px, content minimum 336 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       316  QGroupBox 'Detection Settings'
+  Calibration, Pinhole: viewport 358 px, content minimum 345 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       325  QGroupBox 'Calibration Settings'
+       311  QHBoxLayout
+         204  QCheckBox 'Delete when wand len error >'
+          92  QDoubleSpinBox '1.00 mm'
+           0  spacer
+       300  QHBoxLayout
+           0  spacer
+         143  QPushButton 'Restore Deleted Frames'
+         142  QPushButton 'Save Filtered Points'
+  Calibration, Pinhole+Refraction: viewport 358 px, content minimum 345 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       325  QGroupBox 'Calibration Settings'
+       322  QGroupBox 'Refraction Settings'
+       311  QHBoxLayout
+         204  QCheckBox 'Delete when wand len error >'
+          92  QDoubleSpinBox '1.00 mm'
+           0  spacer
+       300  QHBoxLayout
+           0  spacer
+         143  QPushButton 'Restore Deleted Frames'
+         142  QPushButton 'Save Filtered Points'
+  Calibration, Pinhole+Cylinder: viewport 358 px, content minimum 345 px (width 358), horizontal bar hidden (range 0), vertical bar shown
+    layout items at least 298 px wide (minimum width):
+       325  QGroupBox 'Calibration Settings'
+       306  QGroupBox 'Tube Settings'
+       311  QHBoxLayout
+         204  QCheckBox 'Delete when wand len error >'
+          92  QDoubleSpinBox '1.00 mm'
+           0  spacer
+       300  QHBoxLayout
+           0  spacer
+         143  QPushButton 'Restore Deleted Frames'
+         142  QPushButton 'Save Filtered Points'
+  PASS  1200x700: Point Detection has no horizontal scroll bar  (content minimum 336 px, viewport 358 px)
+  PASS  1200x700: Pinhole has no horizontal scroll bar  (content minimum 345 px, viewport 358 px)
+  PASS  1200x700: Pinhole+Refraction has no horizontal scroll bar  (content minimum 345 px, viewport 358 px)
+  PASS  1200x700: Pinhole+Cylinder has no horizontal scroll bar  (content minimum 345 px, viewport 358 px)
+
+  picture: w8_panel_widths_pinhole.png (368 x 1063)
+  picture: w8_panel_widths_pinhole_refraction.png (358 x 1063)
+  picture: w8_panel_widths_pinhole_cylinder.png (358 x 1063)
+8 of 8 checks passed
+exit 0

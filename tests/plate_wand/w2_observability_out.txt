@@ -1,0 +1,49 @@
+rig A: 4 cameras, 1 window(s), f 3930, 3930, 3930, 3930 px, cond(S) 1.8e+12
+  cam 1: f 0.0636 % (2.50 px), rotation 0.00e+00 deg, centre 0.000 mm, distance to window 0.475 mm (of 559)
+  cam 2: f 0.0633 % (2.49 px), rotation 5.00e-03 deg, centre 0.466 mm, distance to window 0.474 mm (of 559)
+  cam 3: f 0.0629 % (2.47 px), rotation 3.55e-03 deg, centre 0.431 mm, distance to window 0.470 mm (of 559)
+  cam 4: f 0.0633 % (2.49 px), rotation 4.93e-03 deg, centre 0.473 mm, distance to window 0.472 mm (of 559)
+  window 1: normal 2.57e-02 deg, offset 0.454 mm
+  unseen points in the cloud (400): 3-D shape error 5.54 um (calibration), in the camera-1 gauge 476.28 um; triangulation noise 37.32 um; projection: fixed 1.0983 px, stabiliser 0.6473 px, retriangulated 0.0055 px
+  held-out wand length (25 mm): calibration 1.93 um, with the new detections' noise 30.41 um
+  unseen points box grown 1.5x (340): 3-D shape error 8.52 um (calibration), in the camera-1 gauge 476.42 um; triangulation noise 37.58 um; projection: fixed 1.1048 px, stabiliser 0.6517 px, retriangulated 0.0085 px
+  unseen points box grown 2x (249): 3-D shape error 10.87 um (calibration), in the camera-1 gauge 476.56 um; triangulation noise 37.81 um; projection: fixed 1.1045 px, stabiliser 0.6561 px, retriangulated 0.0111 px
+rig B: 4 cameras, 2 window(s), f 4321, 4321, 3977, 3977 px, cond(S) 5.7e+12
+  cam 1: f 0.0548 % (2.37 px), rotation 0.00e+00 deg, centre 0.000 mm, distance to window 0.945 mm (of 580)
+  cam 2: f 0.0559 % (2.41 px), rotation 2.19e-03 deg, centre 0.404 mm, distance to window 0.944 mm (of 580)
+  cam 3: f 0.0571 % (2.27 px), rotation 4.40e-03 deg, centre 0.496 mm, distance to window 0.962 mm (of 580)
+  cam 4: f 0.0562 % (2.24 px), rotation 4.39e-03 deg, centre 0.483 mm, distance to window 0.966 mm (of 580)
+  window 1: normal 1.80e-02 deg, offset 0.945 mm
+  window 2: normal 1.56e-02 deg, offset 1.159 mm
+  unseen points in the cloud (400): 3-D shape error 2.41 um (calibration), in the camera-1 gauge 433.33 um; triangulation noise 19.49 um; projection: fixed 1.7301 px, stabiliser 1.7295 px, retriangulated 0.0062 px
+  held-out wand length (25 mm): calibration 0.87 um, with the new detections' noise 15.80 um
+  unseen points box grown 1.5x (362): 3-D shape error 3.53 um (calibration), in the camera-1 gauge 433.35 um; triangulation noise 19.48 um; projection: fixed 1.7322 px, stabiliser 1.7317 px, retriangulated 0.0093 px
+  unseen points box grown 2x (241): 3-D shape error 4.74 um (calibration), in the camera-1 gauge 433.46 um; triangulation noise 19.55 um; projection: fixed 1.7354 px, stabiliser 1.7349 px, retriangulated 0.0125 px
+rig C: 3 cameras, 1 window(s), f 4373, 4350, 4355 px, cond(S) 7.5e+13
+  cam 1: f 0.1957 % (8.56 px), rotation 0.00e+00 deg, centre 0.000 mm, distance to window 4.429 mm (of 600)
+  cam 2: f 0.1973 % (8.58 px), rotation 3.34e-03 deg, centre 0.416 mm, distance to window 4.439 mm (of 598)
+  cam 3: f 0.1976 % (8.60 px), rotation 2.99e-03 deg, centre 0.419 mm, distance to window 4.426 mm (of 598)
+  window 1: normal 1.38e-01 deg, offset 4.431 mm
+  unseen points in the cloud (400): 3-D shape error 26.47 um (calibration), in the camera-1 gauge 1570.11 um; triangulation noise 197.75 um; projection: fixed 0.8954 px, stabiliser 0.6184 px, retriangulated 0.0051 px
+  held-out wand length (25 mm): calibration 8.92 um, with the new detections' noise 147.79 um
+  unseen points box grown 1.5x (344): 3-D shape error 40.31 um (calibration), in the camera-1 gauge 1574.88 um; triangulation noise 200.25 um; projection: fixed 0.9943 px, stabiliser 0.7440 px, retriangulated 0.0079 px
+  unseen points box grown 2x (261): 3-D shape error 54.78 um (calibration), in the camera-1 gauge 1580.22 um; triangulation noise 201.45 um; projection: fixed 1.0695 px, stabiliser 0.8461 px, retriangulated 0.0108 px
+rig D: 3 cameras, 1 window(s), f 4339, 4360, 3900 px, cond(S) 1.8e+12
+  cam 1: f 0.0591 % (2.57 px), rotation 0.00e+00 deg, centre 0.000 mm, distance to window 0.387 mm (of 491)
+  cam 2: f 0.0567 % (2.47 px), rotation 7.58e-03 deg, centre 0.453 mm, distance to window 0.371 mm (of 460)
+  cam 3: f 0.0589 % (2.30 px), rotation 6.26e-03 deg, centre 0.468 mm, distance to window 0.362 mm (of 424)
+  window 1: normal 1.46e-02 deg, offset 0.358 mm
+  unseen points in the cloud (400): 3-D shape error 4.29 um (calibration), in the camera-1 gauge 441.40 um; triangulation noise 28.82 um; projection: fixed 1.5526 px, stabiliser 0.8808 px, retriangulated 0.0054 px
+  held-out wand length (25 mm): calibration 1.51 um, with the new detections' noise 23.45 um
+  unseen points box grown 1.5x (340): 3-D shape error 6.22 um (calibration), in the camera-1 gauge 441.47 um; triangulation noise 29.01 um; projection: fixed 1.5508 px, stabiliser 0.8768 px, retriangulated 0.0081 px
+  unseen points box grown 2x (265): 3-D shape error 7.86 um (calibration), in the camera-1 gauge 441.48 um; triangulation noise 29.01 um; projection: fixed 1.5513 px, stabiliser 0.8786 px, retriangulated 0.0103 px
+rig E: 3 cameras, 1 window(s), f 40000, 40000, 40000 px, cond(S) 3.4e+16
+  cam 1: f 0.6086 % (243.45 px), rotation 0.00e+00 deg, centre 0.000 mm, distance to window 6.697 mm (of 1063)
+  cam 2: f 0.6046 % (241.82 px), rotation 2.69e-03 deg, centre 7.304 mm, distance to window 6.649 mm (of 1063)
+  cam 3: f 0.6064 % (242.56 px), rotation 1.98e-03 deg, centre 6.996 mm, distance to window 6.589 mm (of 1063)
+  window 1: normal 1.63e-02 deg, offset 6.688 mm
+  unseen points in the cloud (400): 3-D shape error 0.61 um (calibration), in the camera-1 gauge 7321.17 um; triangulation noise 9.78 um; projection: fixed 76.7918 px, stabiliser 43.2721 px, retriangulated 0.0050 px
+  held-out wand length (10 mm): calibration 0.57 um, with the new detections' noise 8.08 um
+  unseen points box grown 1.5x (384): 3-D shape error 0.93 um (calibration), in the camera-1 gauge 7321.22 um; triangulation noise 9.77 um; projection: fixed 76.9180 px, stabiliser 43.3165 px, retriangulated 0.0075 px
+  unseen points box grown 2x (282): 3-D shape error 1.32 um (calibration), in the camera-1 gauge 7321.24 um; triangulation noise 9.78 um; projection: fixed 76.8712 px, stabiliser 43.3170 px, retriangulated 0.0101 px
+W2 done (a study: no pass/fail criterion)

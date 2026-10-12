@@ -423,8 +423,33 @@ class OpenLPTMainWindow(QMainWindow):
             print(f"[App] Error showing dialog: {e}")
 
 
+def prepare_qtwebengine():
+    """Make QtWebEngine (the camera calibration's Report tab) work in a conda env that is not activated, and load it
+    before the QApplication exists, as Qt requires.  Its helper process (Library/lib/qt6/QtWebEngineProcess.exe)
+    needs the env's Library/bin first on PATH, as `conda activate` puts it (otherwise its Qt DLLs are not found, or
+    same-named DLLs elsewhere on PATH are loaded instead), and here no Chromium sandbox (the renderer is terminated
+    otherwise); the view only shows the calibration's own local page.  Does nothing without QtWebEngine."""
+    import os
+    import importlib.util
+    if importlib.util.find_spec("PySide6.QtWebEngineWidgets") is None:
+        return False
+    if os.name == "nt":
+        lib_bin = os.path.join(sys.prefix, "Library", "bin")
+        parts = os.environ.get("PATH", "").split(os.pathsep)
+        if os.path.isdir(lib_bin) and (not parts or os.path.normcase(parts[0].rstrip("\\/")) != os.path.normcase(lib_bin)):
+            os.environ["PATH"] = lib_bin + os.pathsep + os.environ.get("PATH", "")
+        os.environ.setdefault("QTWEBENGINE_DISABLE_SANDBOX", "1")
+    try:
+        from PySide6 import QtWebEngineWidgets  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 def main():
     """Main entry point."""
+    # QtWebEngine (the camera calibration's Report tab) must be loaded before the application object exists
+    prepare_qtwebengine()
     app = QApplication(sys.argv)
     app.setStyle("Fusion")  # Use Fusion style for better cross-platform look
     

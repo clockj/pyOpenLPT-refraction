@@ -1,0 +1,23 @@
+F1 .cine frame reading on synthetic videos (600 frames each), through the real pycine
+code tested: C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\91fca9d1-7378-404f-ab0b-7cb1b196c811\scratchpad\old_code\modules\image_preprocessing
+
+PASS  1 pycine start_frame 0, 1, 2 give stored frames: {"stored": [0, 0, 1], "expected": [0, 0, 1]}
+PASS  2 old GUI reading, FirstImageNo 0: file 256 = stored 255, file j = j - 1 after, last frame lost: {"files_255_258": [255, 255, 256, 257], "last_file": 598, "stored_599_in_files": false}
+PASS  2b old GUI reading, FirstImageNo -300 (shown, not required): {"files_0_3": [299, 300, 301, 302], "files_298_303": [597, 598, 599, 0, 1, 2]}
+SKIP  3 read_cine_frames: not in this code
+FAIL  4 GUI batch worker, FirstImageNo 0: {"ok": false, "n": 600, "n_wrong": 344, "first_wrong": [256, 257, 258, 259, 260], "got_at_first_wrong": [255, 256, 257, 258, 259], "worker": {"total": 600, "processed": 600, "failed": 0}}
+FAIL  4 GUI batch worker, FirstImageNo -300: {"ok": false, "n": 600, "n_wrong": 600, "first_wrong": [0, 1, 2, 3, 4], "got_at_first_wrong": [299, 300, 301, 302, 303], "worker": {"total": 600, "processed": 600, "failed": 0}}
+FAIL  5 GUI background average, every 20th frame, FirstImageNo 0: {"mean_of_stored": 289.1666564941406, "expected": 290.0, "count": 30}
+FAIL  5 GUI background average, every 20th frame, FirstImageNo 5: {"mean_of_stored": 294.0, "expected": 290.0, "count": 30}
+FAIL  6 command-line background, stride 1, FirstImageNo 0: {"mean_of_stored": 298.7133483886719, "expected": 299.5, "frames_averaged": 600}
+FAIL  6 command-line background, stride 20, FirstImageNo 0: {"mean_of_stored": 289.0333251953125, "expected": 290.0, "frames_averaged": 30}
+FAIL  6 command-line background, stride 1, FirstImageNo -300: {"mean_of_stored": 148.92666625976562, "expected": 449.5, "frames_averaged": 300}
+FAIL  6 command-line background, stride 20, FirstImageNo -300: {"mean_of_stored": 139.06666564941406, "expected": 440.0, "frames_averaged": 15}
+FAIL  7 command-line conversion, 1 worker(s), FirstImageNo 0: {"ok": false, "n": 600, "n_wrong": 599, "first_wrong": [1, 2, 3, 4, 5], "got_at_first_wrong": [0, 1, 2, 3, 4], "failures": []}
+FAIL  7 command-line conversion, 4 worker(s), FirstImageNo 0: {"ok": false, "n": 600, "n_wrong": 599, "first_wrong": [1, 2, 3, 4, 5], "got_at_first_wrong": [0, 1, 2, 3, 4], "failures": []}
+FAIL  7 command-line conversion, 1 worker(s), FirstImageNo -300: {"ok": false, "n": 600, "n_wrong": 600, "first_wrong": [0, 1, 2, 3, 4], "got_at_first_wrong": [299, 300, 301, 302, 303], "failures": []}
+FAIL  7 command-line conversion, 4 worker(s), FirstImageNo -300: {"ok": false, "n": 600, "n_wrong": 600, "first_wrong": [0, 1, 2, 3, 4], "got_at_first_wrong": [299, 300, 301, 302, 303], "failures": []}
+FAIL  8 GUI preview, FirstImageNo 0: {"frames": [0, 1, 255, 256, 257, 599], "stored": [0, 0, 254, 255, 256, 598]}
+FAIL  8 GUI preview, FirstImageNo -300: {"frames": [0, 1, 255, 256, 257, 599], "stored": [299, 300, 554, 555, 556, 298]}
+
+3 of 17 checks pass

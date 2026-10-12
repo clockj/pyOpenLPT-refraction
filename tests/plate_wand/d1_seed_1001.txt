@@ -1,0 +1,8 @@
+seed 1001: 2 cams, windows [0, 1], incidence [44, 9] deg, f [12323, 24485], h1 [192, 1340] mm, cloud 31 mm, 612 frames
+  pinhole start: 1 kept, votes {False: 0, True: 2}, rms [2.507], 0.5 s
+  window 1 (cameras [0]): guess 44.3 deg from the truth; best: [44.3 deg, d -357.9 mm, score 481.9] [44.3 deg, d -359.2 mm, score 486.4] [44.3 deg, d -271.2 mm, score 494.8]; 2.7 s
+  window 2 (cameras [1]): guess 5.6 deg from the truth; best: [4.6 deg, d -1804.8 mm, score 98.71] [5.6 deg, d -1811.5 mm, score 116.9] [4.6 deg, d -1378.5 mm, score 164.2]; 2.5 s
+  bootstrap 10.7 s: 5 starts, coarse rms [2.435, 2.469, 2.607, 2.65, 2.733]
+  start 0: coarse rms 2.435 -> stage 4 rms 3.80196 (truth start 0.08599), active per camera [1200, 1200], max |z| 6.46e+02 (win1.b), likelihood key 2462.1
+  start 1: coarse rms 2.469 -> stage 4 rms 3.85374 (truth start 0.08599), active per camera [1192, 1192], max |z| 5.50e+02 (win1.b), likelihood key 2018.0
+  start 2: coarse rms 2.607 -> stage 4 rms 3.90439 (truth start 0.08599), active per camera [1224, 1224], max |z| 4.26e+02 (win1.delta), likelihood key 1267.9

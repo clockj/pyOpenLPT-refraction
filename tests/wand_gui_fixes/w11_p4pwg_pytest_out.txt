@@ -1,0 +1,125 @@
+.............................................F.............s............ [ 27%]
+........................................................................ [ 54%]
+........................................................................ [ 82%]
+...............................................                          [100%]
+=================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_p0_bootstrap_failure.py _____________
+ImportError while importing test module 'D:\Refraction\pyOpenLPT\tests\test_p0_bootstrap_failure.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\zcloc\.conda\envs\refract\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_p0_bootstrap_failure.py:51: in <module>
+    from scripts.case_013_bootstrap_debug_loop import (
+E   ModuleNotFoundError: No module named 'scripts.case_013_bootstrap_debug_loop'
+________________ ERROR collecting tests/test_plane_pipeline.py ________________
+ImportError while importing test module 'D:\Refraction\pyOpenLPT\tests\test_plane_pipeline.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\zcloc\.conda\envs\refract\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_plane_pipeline.py:19: in <module>
+    import scripts.case_026_plane_debug_loop as case_026_plane_debug_loop
+E   ModuleNotFoundError: No module named 'scripts.case_026_plane_debug_loop'
+================================== FAILURES ===================================
+_ TestRadiusEstimationFrameMismatch.test_radius_estimation_frame_mismatch_inflates _
+
+self = <test_p1_round4_radius_frame_mismatch.TestRadiusEstimationFrameMismatch object at 0x0000029105BCC4D0>
+
+    def test_radius_estimation_frame_mismatch_inflates(self):
+        """Frame-mismatched cam_params + points inflate radii beyond plausibility.
+    
+        This test FAILS before the fix is applied because the current code
+        does not guard against the caller passing stale (bootstrap-frame)
+        X_A_scaled with post-BA cam_params.
+    
+        Mechanism:
+            X_cam = R_post @ X_bootstrap + tvec_post
+            Zc = X_cam[2]  \u2192 very different from the true ~500mm
+            R_mm = r_px * Zc / f  \u2192 inflated or collapsed
+    
+        The assertion checks that mismatched frames produce radii close
+        to the consistent-frame result.  Before the fix, they don't —
+        proving the bug.
+        """
+        calibrator = _make_calibrator()
+    
+        # Consistent baseline
+        cam_params_ok, X_A, X_B, dataset = _build_consistent_scenario()
+        r_small_ok, r_large_ok = calibrator._estimate_and_log_sphere_radii(
+            dataset, cam_params_ok, X_A, X_B, tag="TEST_BASELINE", cams_cpp=None,
+        )
+    
+        # Mismatched scenario (same points, wrong cam_params frame)
+        cam_params_bad, X_A_m, X_B_m, dataset_m = _build_mismatched_scenario()
+        r_small_bad, r_large_bad = calibrator._estimate_and_log_sphere_radii(
+            dataset_m, cam_params_bad, X_A_m, X_B_m, tag="TEST_MISMATCH", cams_cpp=None,
+        )
+    
+        # This assertion SHOULD fail before the fix: mismatched frames
+        # inflate radii far beyond the consistent result.
+        diff_small = abs(r_small_bad - r_small_ok)
+>       assert diff_small < 0.5, (
+            f"Frame mismatch inflated small-sphere radius from "
+            f"{r_small_ok:.2f}mm to {r_small_bad:.2f}mm "
+            f"(difference={diff_small:.2f}mm > 0.5mm). "
+            f"Root cause H1 confirmed: stale caller-side points after BA alignment."
+        )
+E       AssertionError: Frame mismatch inflated small-sphere radius from 1.50mm to 2.35mm (difference=0.85mm > 0.5mm). Root cause H1 confirmed: stale caller-side points after BA alignment.
+E       assert 0.8475209733132565 < 0.5
+
+tests\test_p1_round4_radius_frame_mismatch.py:246: AssertionError
+---------------------------- Captured stdout call -----------------------------
+
+SPHERE_RADIUS_ESTIMATION
+  Method: R_mm = r_px * Zc / fx
+  Computed at: TEST_BASELINE initialization (once per round)
+
+  Endpoint A (Small Sphere):
+    Global:
+      median = 1.50 mm
+      p10 / p90 = 1.50 / 1.50 mm
+      min / max = 1.50 / 1.50 mm
+
+    Per-camera medians:
+      Cam 0: 1.50 mm
+
+  Endpoint B (Large Sphere):
+    Global:
+      median = 2.00 mm
+      p10 / p90 = 2.00 / 2.00 mm
+      min / max = 2.00 / 2.00 mm
+
+    Per-camera medians:
+      Cam 0: 2.00 mm
+
+
+SPHERE_RADIUS_ESTIMATION
+  Method: R_mm = r_px * Zc / fx
+  Computed at: TEST_MISMATCH initialization (once per round)
+
+  Endpoint A (Small Sphere):
+    Global:
+      median = 2.35 mm
+      p10 / p90 = 2.35 / 2.35 mm
+      min / max = 2.35 / 2.35 mm
+
+    Per-camera medians:
+      Cam 0: 2.35 mm
+
+  Endpoint B (Large Sphere):
+    Global:
+      median = 3.12 mm
+      p10 / p90 = 3.12 / 3.13 mm
+      min / max = 3.12 / 3.13 mm
+
+    Per-camera medians:
+      Cam 0: 3.12 mm
+
+=========================== short test summary info ===========================
+FAILED tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates
+ERROR tests/test_p0_bootstrap_failure.py
+ERROR tests/test_plane_pipeline.py
+1 failed, 261 passed, 7 skipped, 7 deselected, 2 errors in 375.29s (0:06:15)

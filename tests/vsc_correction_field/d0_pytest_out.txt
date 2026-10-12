@@ -1,0 +1,3 @@
+pytest with the installed module: exit 1; 1 failed, 268 passed, 7 skipped in 1200.17s (0:20:00)
+[i1] pyopenlpt D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+  tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates

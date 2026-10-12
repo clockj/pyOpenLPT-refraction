@@ -1,0 +1,2 @@
+[profile] per camera combination, b300_base: mean per round (each combination runs 2 rounds per frame)
+combo  frames             refs           dfs         cands     strip_pts         built       checked      selected      t_tables t_build_check

@@ -3,6 +3,30 @@
 
 #include "Matrix.h"
 
+// Index checks for operator() and operator[]: a build option (define OPENLPT_MATRIX_CHECKS), off by default, for
+// finding out-of-range accesses; at() always checks. A failed check prints the access and aborts, because an
+// exception thrown inside an OpenMP region would end the program without a message.
+#ifdef OPENLPT_MATRIX_CHECKS
+#include <cstdio>
+#include <cstdlib>
+[[noreturn]] inline void matrixIndexAbort(const char *op, int i, int j,
+                                          int dim_row, int dim_col) {
+  std::fprintf(stderr, "Matrix index out of range: %s(%d,%d) on a %dx%d matrix\n",
+               op, i, j, dim_row, dim_col);
+  std::fflush(stderr);
+  std::abort();
+}
+#define OPENLPT_MATRIX_CHECK_RC(i, j)                                          \
+  if ((i) < 0 || (i) >= _dim_row || (j) < 0 || (j) >= _dim_col)                \
+  matrixIndexAbort("operator()", (i), (j), _dim_row, _dim_col)
+#define OPENLPT_MATRIX_CHECK_VEC(i)                                            \
+  if ((i) < 0 || (i) >= _n)                                                    \
+  matrixIndexAbort("operator[]", (i), -1, _dim_row, _dim_col)
+#else
+#define OPENLPT_MATRIX_CHECK_RC(i, j) ((void)0)
+#define OPENLPT_MATRIX_CHECK_VEC(i) ((void)0)
+#endif
+
 // test
 template <class T>
 Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> mtx) {
@@ -120,32 +144,33 @@ template <class T> Matrix<T>::~Matrix() { clear(); }
 
 // Create/clear space
 template <class T> void Matrix<T>::clear() {
-  // TODO: try to use nullptr for judge
   if (_is_space) {
     _dim_row = 0;
     _dim_col = 0;
     _n = 0;
     _is_space = 0;
 
-    delete[] _mtx;
+    if (_mtx != _buf) // inline storage is part of the object
+      delete[] _mtx;
     _mtx = nullptr;
-
-    // TODO: try to use nullptr for judge
-    // _mtx = nullptr;
   }
 }
 
+// The only place that chooses the storage: inline for at most kInline
+// elements, the heap otherwise.
 template <class T> void Matrix<T>::create(int dim_row, int dim_col) {
-  // TODO: try to use nullptr for judge
   if (!_is_space) {
-    _is_space = 1;
+    const int n = dim_row * dim_col;
+    if (n < 0) // as new T[n] did before the inline storage
+      throw std::bad_array_new_length();
 
+    // Allocate before changing any member, so that a failed allocation leaves
+    // the matrix empty.
+    _mtx = (n <= kInline) ? _buf : new T[n];
+    _is_space = 1;
     _dim_row = dim_row;
     _dim_col = dim_col;
-    _n = _dim_row * _dim_col;
-
-    _mtx = new T[_n];
-    // _mtx.resize(_n);
+    _n = n;
   } else {
     THROW_FATAL(ErrorCode::InvalidArgument,
                 "The space for _mtx is not cleared: Cannot claim more space!");
@@ -198,18 +223,26 @@ template <class T> T &Matrix<T>::at(int r, int c) {
 }
 
 template <class T> T Matrix<T>::operator()(int i, int j) const {
+  OPENLPT_MATRIX_CHECK_RC(i, j);
   return _mtx[mapID(i, j)];
 }
 
 template <class T> T &Matrix<T>::operator()(int i, int j) {
+  OPENLPT_MATRIX_CHECK_RC(i, j);
   return _mtx[mapID(i, j)];
 }
 
 // Just for vector
-template <class T> T Matrix<T>::operator[](int i) const { return _mtx[i]; }
+template <class T> T Matrix<T>::operator[](int i) const {
+  OPENLPT_MATRIX_CHECK_VEC(i);
+  return _mtx[i];
+}
 
 // Just for vector
-template <class T> T &Matrix<T>::operator[](int i) { return _mtx[i]; }
+template <class T> T &Matrix<T>::operator[](int i) {
+  OPENLPT_MATRIX_CHECK_VEC(i);
+  return _mtx[i];
+}
 
 //
 // Get matrix info
@@ -279,9 +312,12 @@ template <class T> void Matrix<T>::write(std::string file_name) {
 }
 
 template <class T> void Matrix<T>::write(std::ostream &os) {
+  write(os, SAVEPRECISION);
+}
+
+template <class T> void Matrix<T>::write(std::ostream &os, int precision) {
   os.setf(std::ios_base::scientific);
-  os.precision(SAVEPRECISION);
-  // os.precision(std::numeric_limits<double>::max_digits10);
+  os.precision(precision);
 
   for (int i = 0; i < _dim_row; i++) {
     for (int j = 0; j < _dim_col - 1; j++) {
@@ -296,6 +332,9 @@ template <class T> void Matrix<T>::write(std::ostream &os) {
 //
 
 template <class T> Matrix<T> &Matrix<T>::operator=(Matrix<T> const &mtx) {
+  if (this == &mtx)
+    return *this;
+
   if (_dim_row != mtx._dim_row || _dim_col != mtx._dim_col) {
     clear();
     create(mtx._dim_row, mtx._dim_col);
@@ -423,13 +462,10 @@ template <class T> Matrix<T> &Matrix<T>::operator*=(Matrix<T> const &mtx) {
   }
 
   if (_dim_col != res._dim_col) {
-    // _dim_row = res._dim_row;
-    _dim_col = res._dim_col;
-    _n = res._n;
-
-    delete[] _mtx;
-    _mtx = new T[_n];
-    // _mtx.resize(_n);
+    // the shape changes: re-create through create(), which picks the storage
+    const int dim_row = _dim_row;
+    clear();
+    create(dim_row, res._dim_col);
   }
 
   // for (int i = 0; i < _n; i ++)

@@ -1,0 +1,47 @@
+T13b3: one-sided against symmetric rod mask (ellipse_rodmask vs ellipse_sym, the latter with the overlap guard); T13b's first 150 frames, best focus
+  [  1/30   101 s] frames 145-: 156 detections
+  [  2/30   105 s] frames 35-: 168 detections
+  [  3/30   107 s] frames 20-: 168 detections
+  [  4/30   107 s] frames 5-: 168 detections
+  [  5/30   107 s] frames 130-: 168 detections
+  [  6/30   107 s] frames 90-: 168 detections
+  [  7/30   107 s] frames 65-: 168 detections
+  [  8/30   108 s] frames 105-: 168 detections
+  [  9/30   108 s] frames 110-: 168 detections
+  [ 10/30   108 s] frames 120-: 168 detections
+  [ 11/30   109 s] frames 50-: 168 detections
+  [ 12/30   109 s] frames 125-: 168 detections
+  [ 13/30   111 s] frames 75-: 180 detections
+  [ 14/30   111 s] frames 85-: 180 detections
+  [ 15/30   112 s] frames 0-: 180 detections
+  [ 16/30   112 s] frames 55-: 180 detections
+  [ 17/30   112 s] frames 40-: 180 detections
+  [ 18/30   112 s] frames 135-: 180 detections
+  [ 19/30   112 s] frames 10-: 180 detections
+  [ 20/30   112 s] frames 100-: 180 detections
+  [ 21/30   112 s] frames 15-: 180 detections
+  [ 22/30   112 s] frames 70-: 180 detections
+  [ 23/30   112 s] frames 80-: 180 detections
+  [ 24/30   113 s] frames 95-: 180 detections
+  [ 25/30   113 s] frames 45-: 180 detections
+  [ 26/30   113 s] frames 30-: 180 detections
+  [ 27/30   113 s] frames 140-: 180 detections
+  [ 28/30   113 s] frames 60-: 180 detections
+  [ 29/30   113 s] frames 25-: 180 detections
+  [ 30/30   113 s] frames 115-: 180 detections
+
+  lighting  detector          measured         bias u, v     RMS    max | systematic RMS                   per camera (u, v) mean |  random
+  backlit   ellipse_rodmask   423/423   +0.0006, -0.0002  0.0266  0.115 |         0.0105 (+0.001,-0.000) (+0.000,+0.000) (+0.000,+0.000) |  0.0245
+  backlit   ellipse_sym        98/423   -0.0000, -0.0003  0.0195  0.057 |         0.0034 (-0.000,-0.000) (-0.000,+0.000) (+0.000,+0.000) |  0.0193
+  backlit   ellipse_sym2      423/423   -0.0000, -0.0001  0.0294  0.144 |         0.0069 (+0.000,-0.000) (-0.000,+0.000) (+0.000,+0.000) |  0.0288
+  even      ellipse_rodmask   408/423   -0.0014, -0.0000  0.0279  0.180 |         0.0134 (+0.001,+0.000) (+0.000,+0.000) (-0.000,-0.000) |  0.0231
+  even      ellipse_sym       102/423   +0.0004, -0.0015  0.0198  0.074 |         0.0053 (+0.000,-0.000) (-0.000,-0.000) (-0.000,-0.001) |  0.0184
+  even      ellipse_sym2      389/423   -0.0010, -0.0004  0.0275  0.103 |         0.0085 (+0.000,+0.000) (-0.001,-0.000) (+0.000,-0.000) |  0.0258
+  side      ellipse_rodmask   407/423   +0.0937, -0.1730  0.2157  0.379 |         0.2175 (+0.158,-0.151) (+0.133,-0.183) (-0.001,-0.193) |  0.0266
+  side      ellipse_sym        82/423   +0.1031, -0.1952  0.2354  0.332 |         0.2395 (+0.171,-0.166) (+0.145,-0.204) (-0.001,-0.224) |  0.0194
+  side      ellipse_sym2      383/423   +0.0944, -0.1752  0.2173  0.406 |         0.2185 (+0.158,-0.152) (+0.133,-0.185) (-0.001,-0.196) |  0.0300
+  highlight ellipse_rodmask   408/423   +0.0218, +0.1370  0.3216  0.848 |         0.3260 (-0.232,+0.193) (+0.207,+0.208) (+0.097,+0.029) |  0.0371
+  highlight ellipse_sym        74/423   +0.0197, +0.1516  0.2072  0.432 |         0.2124 (-0.054,+0.147) (+0.063,+0.187) (+0.079,+0.132) |  0.0271
+  highlight ellipse_sym2      386/423   +0.0305, +0.1390  0.3235  0.774 |         0.3271 (-0.214,+0.188) (+0.194,+0.210) (+0.113,+0.040) |  0.0374
+
+done in 115 s

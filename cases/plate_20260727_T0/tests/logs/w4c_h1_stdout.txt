@@ -1,0 +1,20 @@
+lens terms none; constraints {"channel": {"width_mm": [100.0, 150.0], "tolerance_mm": 3.0, "ball_radius_mm": [1.5, 2.0]}, "aim": [{"cams": [0, 1], "wall": 1, "mm": 75.0}]}
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 5468 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+start: the cameras and walls of tests\states\t3k_h1.pkl (RMS 0.2730 px there)
+calibrate: done in 113 s; RMS 0.2736 px, sigma 0.2335 px, 43667 of 43744 detections active
+constraints at the answer: {"channel": {"width": [100.0, 150.0], "tol": 3.0, "ball": [1.5, 2.0], "sigma": 0.01, "windows": [{"depth_mm": [12.50872028764923, 80.900077913055], "width_mm": 100.0, "band_mm": [-20.599922086945, 11.00872028764923]}, {"depth_mm": [16.40000731911428, 131.75603882273415], "width_mm": 150.0, "band_mm": [-19.243961177265845, 14.90000731911428]}], "active_rows": 0, "max_breach_mm": 0.0}, "priors": [{"kind": "aim", "cam": [0, 1], "wall": 1, "mean": 75.0, "sigma": 0.01, "value": 75.00004892212485, "residual_sigmas": 0.004892212484719494}]}
+walls 90.208 deg apart
+  cam0: f 18827 +- 15 px (254.2 mm), 1062.1 mm from its wall, 0.77 deg to its normal, k1 0.814
+  cam1: f 19207 +- 15 px (259.3 mm), 1027.2 mm from its wall, 12.92 deg to its normal, k1 0.867
+  cam2: f 21581 +- 11 px (291.3 mm), 852.6 mm from its wall, 16.34 deg to its normal, k1 0.817
+  cam3: f 22032 +- 10 px (297.4 mm), 919.7 mm from its wall, 0.59 deg to its normal, k1 0.978
+  cams [0, 1]: baseline 243.5 mm, views 12.50 deg apart
+  cams [0, 2]: baseline 1507.5 mm, views 90.77 deg apart
+  cams [0, 3]: baseline 1525.1 mm, views 90.55 deg apart
+  cams [1, 2]: baseline 1541.8 mm, views 94.18 deg apart
+  cams [1, 3]: baseline 1515.0 mm, views 90.36 deg apart
+  cams [2, 3]: baseline 288.0 mm, views 16.84 deg apart
+residual along the wand (A, B), px: cam0: +0.064, -0.028; cam1: -0.004, +0.000; cam2: +0.003, +0.047; cam3: -0.020, -0.007
+warnings: weak_window: window 2 is seen only by cam2 and cam3, which see the wand under 5.7 and 5.2 deg (a long lens or a far camera): its tilt shows only weakly, and the cost can have several minima. Every wrong answer in 
+state saved to D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\tests\states\w4c_h1.pkl
+

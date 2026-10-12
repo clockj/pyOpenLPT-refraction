@@ -1,0 +1,53 @@
+(1) the LMS loop stops after one pass
+PROVED     (1) m=3: after one pass the fit of y_m is exact (error 0, the loop ends)  cancel; 40 samples
+PROVED     (1) m=3: prediction = y_m sum y_j y_j+1 / sum y_j^2  cancel; 40 samples
+PROVED     (1) m=4: after one pass the fit of y_m is exact (error 0, the loop ends)  cancel; 40 samples
+PROVED     (1) m=4: prediction = y_m sum y_j y_j+1 / sum y_j^2  cancel; 40 samples
+PROVED     (1) m=5: after one pass the fit of y_m is exact (error 0, the loop ends)  cancel; 40 samples
+PROVED     (1) m=5: prediction = y_m sum y_j y_j+1 / sum y_j^2  cancel; 40 samples
+
+(2) far from the origin: the mean step
+PROVED     (2) m=3: p(y + C) - C -> y_m + (y_m - y_0)/m as C -> oo  sp.limit; 40 samples
+PROVED     (2) m=4: p(y + C) - C -> y_m + (y_m - y_0)/m as C -> oo  sp.limit; 40 samples
+PROVED     (2) m=5: p(y + C) - C -> y_m + (y_m - y_0)/m as C -> oo  sp.limit; 40 samples
+
+(3) linear motion y_j = a + b j: the error near the origin
+PROVED     (3) m=3: error / b^2 -> (m+1)/(2a) as b -> 0    sp.limit; 40 samples
+    m=3: error = 2*b**2*(3*a + 2*b) / (3*a**2 + 6*a*b + 5*b**2)
+PROVED     (3) m=4: error / b^2 -> (m+1)/(2a) as b -> 0    sp.limit; 40 samples
+    m=4: error = 10*b**2*(a + b) / (2*(2*a**2 + 6*a*b + 7*b**2))
+PROVED     (3) m=5: error / b^2 -> (m+1)/(2a) as b -> 0    sp.limit; 40 samples
+    m=5: error = 5*b**2*(3*a + 4*b) / (5*(a**2 + 4*a*b + 6*b**2))
+PROVED     (3) any m: error / b^2 -> (m+1)/(2a) as b -> 0  sp.limit; 40 samples
+PROVED     (3) m=5: error = b^2 (3a + 4b) / ((a + 2b)^2 + 2b^2)  cancel; 40 samples
+PROVED     (3) m=5: 3a + 4b > 0 when y_0, y_5 > 0          assumptions; 40 samples
+PROVED     (3) m=5: (a + 2b)^2 + 2b^2 > 0 when y_0, y_5 > 0  assumptions; 40 samples
+PROVED     (3) m=5: so error >= 0 (away from 0; 0 only at rest) when y_0, y_5 > 0  assumptions; 40 samples
+NUMERIC    (3) largest error at 1-3 mm from 0, 0.1 mm/frame (plan: 0.037 mm)  computed 0.0372549, quoted 0.037
+NUMERIC    (3) smallest error at 1-3 mm from 0, 0.1 mm/frame (plan: 0.009 mm)  computed 0.00925756, quoted 0.009
+PROVED     (3) all those errors point away from 0          assumptions; 40 samples
+NUMERIC    (3) error at 10 mm, +0.1 mm/frame (plan: 0.003 mm)  computed 0.00307087, quoted 0.003
+NUMERIC    (3) error at 10 mm, -0.1 mm/frame (plan: 0.003 mm)  computed 0.00293092, quoted 0.003
+
+(4) constant acceleration: the misses
+PROVED     (4) mean step (m=5) misses by 3A                cancel; 40 samples
+PROVED     (4) 6-point least-squares line misses by 14A/3  cancel; 40 samples
+NUMERIC    (4) 3A at A = 0.008 mm/frame^2 (plan: 0.024 mm)  computed 0.0240000, quoted 0.024
+
+(5) noise: variance factors
+PROVED     (5) mean step, m=5: sum of squared weights = (1+1/m)^2 + 1/m^2  cancel; 40 samples
+PROVED     (5) 6-point line at one frame ahead: sum of squared weights = 13/15  cancel; 40 samples
+PROVED     (5) the line's weights sum to 1 (a constant is predicted exactly)  cancel; 40 samples
+
+(6) Kalman gains depend only on q/r
+PROVED     (6) CV gain K[0] unchanged when P, q, r are scaled by c  cancel; 40 samples
+PROVED     (6) CV gain K[1] unchanged when P, q, r are scaled by c  cancel; 40 samples
+PROVED     (6) CV predicted covariance P[0,0] scales by c  cancel; 40 samples
+PROVED     (6) CV predicted covariance P[0,1] scales by c  cancel; 40 samples
+PROVED     (6) CV predicted covariance P[1,1] scales by c  cancel; 40 samples
+SKIPPED    (6) diffuse start: P0 = kappa I with kappa -> oo for both scalings  an induction on the step above: P0 scaled by c is again diffuse, so every gain depends on q/r only (the same algebra holds for the constant-acceleration model; e1d checks both numerically)
+
+(7) the shake's first step
+NUMERIC    (7) 0.25 voxel x 0.129 mm (plan: 0.032 mm)      computed 0.0322500, quoted 0.032
+
+35 checks: 28 PROVED, 6 NUMERIC, 1 SKIPPED

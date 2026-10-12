@@ -1,0 +1,23 @@
+V2 fit cal4_c2: gather cal4_c2 (40 frames, 2 cameras), case cal4, set Gcal4c2_n8, truth err_cal4_Gcal4c2_n8; 22203 track points seen by >= 2 cameras (2 cameras: 22203)
+    lam 1000: held-out cauchy loss 0.4480 -> 0.4127, projected MAD 0.599 -> 0.561
+    lam 10000: held-out cauchy loss 0.4480 -> 0.4131, projected MAD 0.599 -> 0.560
+    lam 100000: held-out cauchy loss 0.4480 -> 0.4165, projected MAD 0.599 -> 0.562
+    lam 1e+06: held-out cauchy loss 0.4480 -> 0.4233, projected MAD 0.599 -> 0.571
+    lam 1e+07: held-out cauchy loss 0.4480 -> 0.4280, projected MAD 0.599 -> 0.585
+    lam 1e+08: held-out cauchy loss 0.4480 -> 0.4343, projected MAD 0.599 -> 0.613
+    round 1: lam 1000; noise model s_f 0.150 px, beta 0.0401 (from s_f 0.300, beta 0.0500; s_f held at >= 0.15)
+    lam 1000: held-out cauchy loss 0.7668 -> 0.7056, projected MAD 0.913 -> 0.815
+    lam 10000: held-out cauchy loss 0.7668 -> 0.7061, projected MAD 0.913 -> 0.820
+    lam 100000: held-out cauchy loss 0.7668 -> 0.7105, projected MAD 0.913 -> 0.831
+    lam 1e+06: held-out cauchy loss 0.7668 -> 0.7229, projected MAD 0.913 -> 0.855
+    lam 1e+07: held-out cauchy loss 0.7668 -> 0.7323, projected MAD 0.913 -> 0.878
+    lam 1e+08: held-out cauchy loss 0.7668 -> 0.7424, projected MAD 0.913 -> 0.904
+    round 2: lam 1000; noise model s_f 0.150 px, beta 0.0406 (from s_f 0.150, beta 0.0401; s_f held at >= 0.15)
+    fit: lam 1000, 11013 points (11013 projected rows), 8 iterations; projected RMS 1.949 -> 1.877 (noise units); 16.7 % of the points down-weighted
+    fit: lam 1000, 22203 points (22203 projected rows), 8 iterations; projected RMS 1.963 -> 1.892 (noise units); 16.9 % of the points down-weighted
+  the truth at frame 20: 1053 central particles in the view volume seen by >= 2 cameras
+  tracks field against the truth plus the detections' bias (observable RMS 0.164 px): 0.178 px, the fit's error 0.035 px (slope 0.93)
+  tracks field: the observable part: truth RMS 0.297 px, the fit's error 0.188 px (60 % explained); the fit = 0.46 x the truth
+    cam1: du true 0.351, fit 0.005, error 0.349 (corr 0.41); dv true 0.349, fit 0.330, error 0.543 (corr -0.36) px
+    cam2: du true 0.289, fit 0.004, error 0.290 (corr -0.12); dv true 0.388, fit 0.215, error 0.504 (corr -0.35) px
+    camera pairs, RMS offset across the curves before -> after: cams 1-2: 0.297 -> 0.188 px

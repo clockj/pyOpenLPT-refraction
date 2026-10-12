@@ -1,0 +1,45 @@
+{
+ "project": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\t1_set",
+ "corrections_kept": true,
+ "tol_before": 1.5,
+ "tol_after": 1.0,
+ "tracer_dropped": [
+  "detector",
+  "lines",
+  "otf_file",
+  "roi_from_otf",
+  "roi_sigma",
+  "shape_check",
+  "shape_tol_px",
+  "shape_tol_rel"
+ ],
+ "tracer_changed": [],
+ "tracer_before": {
+  "intensity_threshold": 28,
+  "radius_px": 2.0,
+  "detector": "lines",
+  "lines": {
+   "noise": [
+    7.514877384110587,
+    5.502475966380505
+   ]
+  },
+  "otf_file": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\T1_otf_shape.txt",
+  "roi_from_otf": true,
+  "roi_sigma": 3.0,
+  "shape_check": true,
+  "shape_tol_px": 0.8,
+  "shape_tol_rel": 0.2
+ },
+ "tracer_after": {
+  "intensity_threshold": 28,
+  "radius_px": 2.0
+ },
+ "messages": [
+  {
+   "kind": "information",
+   "title": "Success",
+   "text": "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/vsc_correction_field/projects/t1_set/config.json"
+  }
+ ]
+}

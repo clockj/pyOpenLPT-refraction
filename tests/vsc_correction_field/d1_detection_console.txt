@@ -1,0 +1,49 @@
+D1 with the installed module D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd; findObject2D: findObject2D(self: pyopenlpt.ObjectFinder2D, image: pyopenlpt.Image, obj_cfg: pyopenlpt.ObjectConfig, cam_id: typing.SupportsInt | typing.SupportsIndex = -1) -> list[pyopenlpt.Object2D]; OMP threads here 12
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+T1, 2 cameras, frame 0: the run's log 1067/985; the run's call here 1067/985; Validate before the fix 1047/949; the field VSC now: identical to the run's call; the field VSC before: identical, identical -> PASS
+  crops, camera 0: {'crops': 40, 'with_index_eq_configured_noise': 40, 'without_index_eq_configured_noise': 1, 'with_eq_without': 1}
+  crops, camera 1: {'crops': 40, 'with_index_eq_configured_noise': 40, 'without_index_eq_configured_noise': 3, 'with_eq_without': 3}
+T1, 2 cameras, frame 1: the run's log 1070/989; the run's call here 1070/989; Validate before the fix 1047/977; the field VSC now: identical to the run's call; the field VSC before: identical, identical -> PASS
+T1, 2 cameras, frame 2: the run's log 1068/979; the run's call here 1068/979; Validate before the fix 1070/950; the field VSC now: identical to the run's call; the field VSC before: identical, identical -> PASS
+T1, 2 cameras, frame 3: the run's log 1063/989; the run's call here 1063/989; Validate before the fix 1045/973; the field VSC now: identical to the run's call; the field VSC before: identical, identical -> PASS
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.68  -9.94 -31.04] to [24.49 12.87 16.7 ] mm
+[TrackingSettings] Loaded the settings of D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\d1_t1\config.json
+  Validate on the settings page (frame 0): 1067/985 against the log's 1067/985 -> PASS
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1_otf_shape.txt (model segment)
+20261008, 3 cameras, frame 0: the run's log 433/952/3340; the run's call here 433/952/3340; Validate before the fix 406/998/3741; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+20261008, 3 cameras, frame 1: the run's log 441/933/3402; the run's call here 441/933/3402; Validate before the fix 427/965/3844; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+20261008, 3 cameras, frame 2: the run's log 465/977/3405; the run's call here 465/977/3405; Validate before the fix 443/1002/3730; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+20261008, 3 cameras, frame 3: the run's log 441/925/3390; the run's call here 441/925/3390; Validate before the fix 414/933/3696; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [-30.19 -24.7  -59.24] to [24.59 19.86 66.2 ] mm
+[TrackingSettings] Loaded the settings of D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\d1_20261008\config.json
+  Validate on the settings page (frame 0): 433/952/3340 against the log's 433/952/3340 -> PASS
+Loaded the OTF from D:\Refraction\pyOpenLPT\tests\cylinder_selfcal\data\cal4\otf_r3.txt (model segment)
+synthetic, 3 cameras, frame 0: the run's log 1384/1400/781; the run's call here 1384/1400/781; Validate before the fix 1379/1388/767; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+synthetic, 3 cameras, frame 1: the run's log 1360/1397/773; the run's call here 1360/1397/773; Validate before the fix 1359/1389/756; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+synthetic, 3 cameras, frame 2: the run's log 1339/1381/799; the run's call here 1339/1381/799; Validate before the fix 1336/1385/773; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+synthetic, 3 cameras, frame 3: the run's log 1347/1398/801; the run's call here 1347/1398/801; Validate before the fix 1343/1401/785; the field VSC now: identical to the run's call; the field VSC before: identical, identical, identical -> PASS
+[TrackingSettings] Tube / sphere cameras: the region every camera sees spans [ -1.67  -9.87 -31.  ] to [24.47 12.55 16.64] mm
+[TrackingSettings] Loaded the settings of D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\d1_synthetic\config.json
+  Validate on the settings page (frame 0): 1384/1400/781 against the log's 1384/1400/781 -> PASS
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1_otf_shape.txt (model segment)
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1_otf_shape.txt (model segment)
+Loaded the OTF from D:\Refraction\pyOpenLPT\tests\cylinder_selfcal\data\cal4\otf_r3.txt (model segment)
+Loaded the OTF from D:\Refraction\pyOpenLPT\tests\cylinder_selfcal\data\cal4\otf_r3.txt (model segment)
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 56.6798,1.11169,1.0904,0
+
+Camera 1 (a,b,c,alpha) = 38.4499,1.06027,0.986362,0
+
+Camera 2 (a,b,c,alpha) = 44.6133,1.02321,0.964271,0
+
+Camera 3 (a,b,c,alpha) = 51.6881,1.03463,0.989149,0
+
+plate 20260727, 4 cameras, frame 0: the run's log 6959/19202/44138/19900; the run's call here 44138/6959/19900/19202; Validate before the fix 44138/6959/19900/19202 -> PASS
+  crops, camera 0: {'crops': 40, 'with_index_eq_configured_noise': 0, 'without_index_eq_configured_noise': 0, 'with_eq_without': 40}
+  crops, camera 1: {'crops': 40, 'with_index_eq_configured_noise': 0, 'without_index_eq_configured_noise': 0, 'with_eq_without': 40}
+  crops, camera 2: {'crops': 40, 'with_index_eq_configured_noise': 0, 'without_index_eq_configured_noise': 0, 'with_eq_without': 40}
+  crops, camera 3: {'crops': 40, 'with_index_eq_configured_noise': 0, 'without_index_eq_configured_noise': 0, 'with_eq_without': 40}
+plate 20260727, 4 cameras, frame 1: the run's log 6911/19950/19239/44223; the run's call here 44223/6911/19950/19239; Validate before the fix 44223/6911/19950/19239 -> PASS
+D1: PASS

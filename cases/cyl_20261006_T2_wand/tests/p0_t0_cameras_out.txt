@@ -1,0 +1,35 @@
+P0: T0's cameras on T0's 1519 kept frames and on the T2 survey's 43 (every 50th frame)
+
+Wand length and reprojection, free triangulation (no wand length, no fitted poses)
+   S2 (f  38678,  36022) on T0: length error mean   +0.3 um, RMS  23.4 um; reprojection RMS 0.214 px
+   S2 (f  38678,  36022) on T2: length error mean   -0.1 um, RMS  38.5 um; reprojection RMS 0.596 px
+   h1 (f  36764,  41263) on T0: length error mean   -4.4 um, RMS  26.1 um; reprojection RMS 0.217 px
+   h1 (f  36764,  41263) on T2: length error mean   -4.8 um, RMS  35.5 um; reprojection RMS 0.624 px
+   h2 (f  34548,  29992) on T0: length error mean   +5.2 um, RMS  27.9 um; reprojection RMS 0.217 px
+   h2 (f  34548,  29992) on T2: length error mean  +21.1 um, RMS  44.1 um; reprojection RMS 0.583 px
+   q1 (f  40242,  36392) on T0: length error mean  -54.7 um, RMS  71.2 um; reprojection RMS 0.299 px
+   q1 (f  40242,  36392) on T2: length error mean  -29.7 um, RMS  56.0 um; reprojection RMS 0.733 px
+   q2 (f  38119,  39248) on T0: length error mean   -7.5 um, RMS  29.3 um; reprojection RMS 0.250 px
+   q2 (f  38119,  39248) on T2: length error mean   -8.7 um, RMS  33.1 um; reprojection RMS 0.544 px
+   q3 (f  35373,  35991) on T0: length error mean  +10.4 um, RMS  29.6 um; reprojection RMS 0.208 px
+   q3 (f  35373,  35991) on T2: length error mean  +13.5 um, RMS  38.9 um; reprojection RMS 0.632 px
+   q4 (f  32776,  30318) on T0: length error mean   +6.3 um, RMS  29.8 um; reprojection RMS 0.208 px
+   q4 (f  32776,  30318) on T2: length error mean  +22.8 um, RMS  51.9 um; reprojection RMS 0.565 px
+
+T0's S2 cameras: the residual per camera (px): mean (u, v), RMS about the mean; RMS by ball and by the wand's angle to the camera's line of sight
+  T0 cam1: mean (+0.000, -0.000), RMS about it 0.203; ball A 0.226; ball B 0.176; 0-45 deg 0.173 (n 682); 45-70 deg 0.189 (n 1236); 70-90 deg 0.232 (n 1120)
+  T0 cam2: mean (-0.000, +0.000), RMS about it 0.224; ball A 0.250; ball B 0.194; 0-45 deg 0.281 (n 1034); 45-70 deg 0.196 (n 1076); 70-90 deg 0.178 (n 928)
+  T2 cam1: mean (-0.001, +0.489), RMS about it 0.281; ball A 0.561; ball B 0.567; 0-45 deg 0.580 (n 28); 45-70 deg 0.537 (n 20); 70-90 deg 0.566 (n 38)
+      before frame 2500: mean (-0.001, +0.416) over 8 frames
+      after frame 3000: mean (-0.001, +0.514) over 33 frames
+  T2 cam2: mean (+0.000, -0.542), RMS about it 0.313; ball A 0.623; ball B 0.629; 0-45 deg 0.561 (n 40); 45-70 deg 0.618 (n 30); 70-90 deg 0.775 (n 16)
+      before frame 2500: mean (+0.000, -0.462) over 8 frames
+      after frame 3000: mean (+0.000, -0.570) over 33 frames
+
+Where the balls are (T0's frame, mm; 5th-95th percentiles), from T0's S2 cameras
+  cam1 T0: depth along its line of sight   994.7 ..  1017.6 mm (span 22.8 mm); the wand's angle to it: median 60.4 deg, within 45 deg in 22.4 % of frames
+  cam1 T2: depth along its line of sight   999.6 ..  1018.0 mm (span 18.4 mm); the wand's angle to it: median 63.4 deg, within 45 deg in 32.6 % of frames
+  cam2 T0: depth along its line of sight  1026.9 ..  1047.6 mm (span 20.7 mm); the wand's angle to it: median 56.0 deg, within 45 deg in 34.0 % of frames
+  cam2 T2: depth along its line of sight  1031.9 ..  1050.3 mm (span 18.5 mm); the wand's angle to it: median 46.6 deg, within 45 deg in 46.5 % of frames
+  T0 extent: x   -5.2 ..  12.1, y (axis)   -6.2 ..   6.9, z   -6.4 ..  16.4 mm
+  T2 extent: x   -8.4 ..   8.3, y (axis)   -4.4 ..   6.4, z   -7.1 ..  11.7 mm

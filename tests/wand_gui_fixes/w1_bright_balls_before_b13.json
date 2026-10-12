@@ -1,0 +1,77 @@
+{
+ "checks": [
+  {
+   "check": "the mapping: 'Dark on Bright' -> dark, 'Bright on Dark' -> bright (the combo's only items)",
+   "ok": true,
+   "detail": "{'Dark on Bright': 'dark', 'Bright on Dark': 'bright'}; items ['Dark on Bright', 'Bright on Dark']"
+  },
+  {
+   "check": "fast, the detector (seeded): bright balls as 'bright' = dark balls as 'dark', to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames"
+  },
+  {
+   "check": "fast, Test Detect: 'Bright on Dark' on the inverted frames finds the points of 'Dark on Bright' on the originals, as close as a second run on the originals",
+   "ok": true,
+   "detail": "same counts True; largest difference 4.41 px against 4.43 px between two runs on the originals; 0 of 6 frames identical; 10 of 12 images with two or more points"
+  },
+  {
+   "check": "reliable, the detector (seeded): bright balls as 'bright' = dark balls as 'dark', to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames"
+  },
+  {
+   "check": "reliable, Test Detect: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames; 9 of 12 images with two or more points"
+  },
+  {
+   "check": "ellipse, the detector (seeded): bright balls as 'bright' = dark balls as 'dark', to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames"
+  },
+  {
+   "check": "ellipse, Test Detect: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit",
+   "ok": true,
+   "detail": "6 of 6 frames; 7 of 12 images with two or more points"
+  }
+ ],
+ "seconds": 410.45108556747437,
+ "mapping": {
+  "Dark on Bright": "dark",
+  "Bright on Dark": "bright"
+ },
+ "results": {
+  "fast": {
+   "frames_identical": 0,
+   "largest_shift_px": [
+    3.1906183910640022,
+    1.273420937205913,
+    1.7990571103704607,
+    4.412650893686859,
+    3.1980787826610695,
+    3.277248382921362
+   ],
+   "repeat_shift_px": [
+    3.407370392356772,
+    1.6036752573141082,
+    4.434814858771258,
+    2.5750521937249444,
+    1.2369389117533875,
+    3.057858594638113
+   ],
+   "old_mapping_differs": 6,
+   "seeded_identical": 6
+  },
+  "reliable": {
+   "frames_identical": 6,
+   "old_mapping_differs": 6,
+   "seeded_identical": 6
+  },
+  "ellipse": {
+   "frames_identical": 6,
+   "old_mapping_differs": 6,
+   "seeded_identical": 6
+  }
+ }
+}

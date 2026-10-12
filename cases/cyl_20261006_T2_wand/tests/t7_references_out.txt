@@ -1,0 +1,20 @@
+T7: T2's cameras against the earlier calibrations
+
+cam1 against the dot board of 30 Sep (only meaningful if cam1's lens and focus are unchanged)
+  f: T2 wand 38,252.4 +- 354.8 px; dot board 41,459.1 +- 69.1 px (in air: 41,610 px); difference -3,206.7 px = -7.735 % (-8.87 combined sigma)
+  distance_from_axis_mm  T2  +1001.2378 mm   dot board  +1094.1259 mm   difference -92.8881
+  elevation_deg          T2     +1.4281 deg   dot board     -0.0955 deg   difference +1.5236
+  aim_deg                T2     -0.2635 deg   dot board     +0.6362 deg   difference -0.8997
+  roll_deg               T2     +0.1197 deg   dot board     +0.3346 deg   difference -0.2150
+
+Both cameras against T0's delivered calibration (the same day)
+  cam1: f T2 38,252.4 +- 354.8 px, T0 38,551.4 +- 295.8 px; difference -299.1 px = -0.776 % (-0.65 combined sigma); f / distance T2 38.2051, T0 38.2905 px/mm
+      distance_from_axis_mm  T2  +1001.2378 mm   T0  +1006.8149 mm   difference -5.5771
+      elevation_deg          T2     +1.4281 deg   T0     +2.6656 deg   difference -1.2375
+      aim_deg                T2     -0.2635 deg   T0     -0.1427 deg   difference -0.1208
+      roll_deg               T2     +0.1197 deg   T0     +0.0268 deg   difference +0.0929
+  cam2: f T2 37,409.3 +- 523.4 px, T0 35,812.0 +- 424.6 px; difference +1,597.3 px = +4.460 % (+2.37 combined sigma); f / distance T2 34.4747, T0 34.5658 px/mm
+      distance_from_axis_mm  T2  +1085.1218 mm   T0  +1036.0525 mm   difference +49.0693
+      elevation_deg          T2     +0.5941 deg   T0     +1.3592 deg   difference -0.7651
+      aim_deg                T2     -0.0258 deg   T0     +0.1864 deg   difference -0.2122
+      roll_deg               T2     +0.7770 deg   T0     +1.3581 deg   difference -0.5811

@@ -1,0 +1,110 @@
+{
+ "summary": {
+  "rms_px": 0.4693299263677001,
+  "sigma_px": 0.5435513644359202,
+  "frames": 1519,
+  "active": 6064,
+  "observations": 6076,
+  "wand_length_mm": 10.0,
+  "L_sigma_mm": null,
+  "wand_free_rms_um": 23.069617421238522,
+  "wand_free_mean_um": 0.031670761866293216,
+  "cameras": [
+   {
+    "name": "cam1",
+    "f_px": 38551.43696936687,
+    "f_sigma_px": 295.83218118980665,
+    "distance_mm": 1006.8149041666486,
+    "distance_sigma_mm": 7.563690394099318,
+    "azimuth_deg": 0.0,
+    "azimuth_sigma_deg": 0.0,
+    "height_rel_mm": 0.0,
+    "height_sigma_mm": 0.0,
+    "viewing_direction": [
+     0.0024879392719716546,
+     0.04650700496556016,
+     -0.9989148655652853
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.5002424931230383,
+    "n_active": 3032,
+    "n_total": 3038
+   },
+   {
+    "name": "cam2",
+    "f_px": 35812.03092337204,
+    "f_sigma_px": 424.60865652002053,
+    "distance_mm": 1036.0524588395663,
+    "distance_sigma_mm": 11.944895618752845,
+    "azimuth_deg": 60.82750887516394,
+    "azimuth_sigma_deg": 0.027138211567579916,
+    "height_rel_mm": 20.30881462387169,
+    "height_sigma_mm": 1.0102233787205996,
+    "viewing_direction": [
+     -0.8744915979902222,
+     0.023719612054567553,
+     -0.48446034414437494
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.43623228633684213,
+    "n_active": 3032,
+    "n_total": 3038
+   }
+  ]
+ },
+ "selection": {
+  "cameras": {
+   "cam1": {
+    "camera_frames": 10640,
+    "kept": 3513,
+    "rejected": {
+     "one ball": 4847,
+     "no ball": 2280
+    },
+    "median_r_px": [
+     65.77122,
+     88.02057
+    ]
+   },
+   "cam2": {
+    "camera_frames": 10640,
+    "kept": 4522,
+    "rejected": {
+     "one ball": 4089,
+     "no ball": 2025,
+     "edge RMS": 2,
+     "aspect": 2
+    },
+    "median_r_px": [
+     58.231955,
+     78.715215
+    ]
+   }
+  },
+  "frames_kept_in_all_cameras": 1519,
+  "frames_total": 10640,
+  "accept": {
+   "_comment": "A camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame is kept when every camera keeps it.",
+   "edge_rms_max_px": 1.0,
+   "aspect_range": [
+    1.15,
+    1.45
+   ],
+   "size_tol": 0.1
+  },
+  "detect": {
+   "polarity": "dark",
+   "min_r_px": 40.0,
+   "max_r_px": 120.0,
+   "open_px": 95,
+   "rod_mask_px": 50.0,
+   "guard_px": 3.0,
+   "workers": 48
+  }
+ },
+ "seconds": 80.00091671943665,
+ "checks": [],
+ "page": "X:\\Shijie Zhong\\Refraction\\Processed\\20261006\\T0\\Results\\calibration_report.html"
+}

@@ -1,0 +1,2 @@
+synth_study gshape0: build p4c
+  rendered 1 sets (80 camera-frames) in 17 s

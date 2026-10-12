@@ -1,0 +1,16 @@
+cam0: C++ from the camFile vs C++ from the JSON's camera: 0.00e+00 px; Python vs C++: 2.75e-03 px; ends moved by up to 5e-6 mm: 2.87e-04 px
+  camFile cam0, its last two values (tolerance, iterations): 9.9999999999999998e-13 | 200
+cam1: C++ from the camFile vs C++ from the JSON's camera: 0.00e+00 px; Python vs C++: 6.68e-09 px; ends moved by up to 5e-6 mm: 3.40e-04 px
+cam2: C++ from the camFile vs C++ from the JSON's camera: 0.00e+00 px; Python vs C++: 1.26e-10 px; ends moved by up to 5e-6 mm: 3.03e-04 px
+frame 0: rows [0, 1, 2, 3, 4, 5]; u, v, du, dv as saved: cam0 end 0: (842.7976, 597.0802) + (-0.00864, 0.00993); cam0 end 1: (405.6972, 396.0399) + (0.00048, -0.0035); cam1 end 0: (1024.2231, 597.7374) + (0.00621, 0.00312); cam1 end 1: (731.6104, 396.0333) + (0.00487, 0.00605); cam2 end 0: (978.17, 598.5863) + (-0.00425, -0.01568); cam2 end 1: (1001.3482, 396.0294) + (-0.00363, 0.00051)
+frame 47 cam0: truth A (382.80, 670.59) B (751.16, 708.67); detected: (382.81, 670.58) r 22.1 dropped 0; (751.18, 708.66) r 33.1 dropped 0
+frame 47 cam1: truth A (759.75, 670.39) B (768.89, 709.09); detected: (766.09, 698.25) r 38.8 dropped 0
+frame 47 cam2: truth A (1062.94, 671.19) B (711.03, 709.46); detected: (1062.93, 671.20) r 22.1 dropped 0; (711.05, 709.47) r 33.0 dropped 0
+frame 136 cam0: truth A (712.32, 93.16) B (724.16, 125.59); detected: (720.81, 117.18) r 37.9 dropped 0
+frame 136 cam1: truth A (472.27, 93.33) B (834.25, 125.15); detected: (472.28, 93.32) r 21.9 dropped 0; (834.25, 125.15) r 33.1 dropped 0
+frame 136 cam2: truth A (327.58, 94.20) B (829.43, 124.55); detected: (327.54, 94.20) r 21.9 dropped 0; (829.41, 124.55) r 33.1 dropped 0
+frame 170 cam0: truth A (340.83, 210.40) B (331.14, 250.65); detected: (334.06, 239.54) r 38.9 dropped 0
+frame 170 cam1: truth A (69.80, 211.39) B (417.24, 251.10); detected: (69.78, 211.40) r 21.9 dropped 0; (417.25, 251.10) r 33.2 dropped 0
+frame 170 cam2: truth A (127.47, 212.55) B (636.30, 251.28); detected: (127.41, 212.54) r 22.0 dropped 0; (636.30, 251.28) r 33.2 dropped 0
+
+0 of 0 checks passed; 2 s

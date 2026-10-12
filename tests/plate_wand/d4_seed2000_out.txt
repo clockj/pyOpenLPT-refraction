@@ -1,0 +1,51 @@
+seed 2000: 4 cameras behind windows [1, 2, 1, 2], 769 frames, 1 px noise; cloud 136 mm, wand 37.9 mm, plates (6.0,) mm
+  cam1: window 1 (wall Z), incidence 24.4 deg, 754 mm from it, f 2529 px, sensor 1280 x 800, half-width field 14.2 deg
+  cam2: window 2 (wall X), incidence 35.0 deg, 227 mm from it, f 1988 px, sensor 1280 x 800, half-width field 17.8 deg
+  cam3: window 1 (wall Z), incidence 6.8 deg, 599 mm from it, f 3158 px, sensor 1280 x 800, half-width field 11.5 deg
+  cam4: window 2 (wall X), incidence 7.1 deg, 899 mm from it, f 11018 px, sensor 2048 x 2048, half-width field 5.3 deg
+  window 1: cameras 1 and 3, their lines of sight 28.2 deg apart in air, 20.9 deg in the water
+  window 2: cameras 2 and 4, their lines of sight 41.1 deg apart in air, 30.1 deg in the water
+  the two windows' normals are 90 deg apart
+fit from the truth (the global minimum): rms 1.15535 px, active 6152/6152, 4 s
+  sigma cam1: f 1.19 %, distance to its window 20.5 mm, centre 0.0 mm, rotation 0.000 deg
+  sigma cam2: f 0.55 %, distance to its window 3.2 mm, centre 11.3 mm, rotation 0.156 deg
+  sigma cam3: f 0.52 %, distance to its window 15.2 mm, centre 9.9 mm, rotation 0.031 deg
+  sigma cam4: f 0.74 %, distance to its window 8.3 mm, centre 11.3 mm, rotation 0.112 deg
+  sigma window 1: normal 0.416 deg, offset 18.6 mm
+  sigma window 2: normal 0.458 deg, offset 2.4 mm
+each window's two cameras calibrated on their own (bootstrap_groups' first step, search 'length'):
+  window 1, cameras [1, 3]: rms 0.8714 px, 16 s
+    window normal off by 1.06 deg (the pair's own sigma 1.03 deg; in the full rig 0.42 deg)
+    cam1: f off by +2.73 % (pair's sigma 2.07 %, full rig 1.19 %); distance to the window off by +69.3 mm (pair's sigma 44.1 mm, full rig 20.5 mm); centre off by 0.0 mm
+    cam3: f off by +0.87 % (pair's sigma 1.29 %, full rig 0.52 %); distance to the window off by +46.5 mm (pair's sigma 32.7 mm, full rig 15.2 mm); centre off by 19.8 mm
+  window 2, cameras [2, 4]: rms 0.8466 px, 15 s
+    window normal off by 0.95 deg (the pair's own sigma 1.07 deg; in the full rig 0.46 deg)
+    cam2: f off by -1.35 % (pair's sigma 0.68 %, full rig 0.55 %); distance to the window off by +1.1 mm (pair's sigma 5.2 mm, full rig 3.2 mm); centre off by 0.0 mm
+    cam4: f off by -1.63 % (pair's sigma 1.27 %, full rig 0.74 %); distance to the window off by -14.8 mm (pair's sigma 14.2 mm, full rig 8.3 mm); centre off by 13.0 mm
+calibrate (as W5): rms 1.15885 px against 1.15535, 47 s; starts {'available': 2, 'tried': 2, 'n_final': 2, 'more_starts_px': 1.0, 'stage3_rms_px': [1.1855405537870753, 1.1847676653923027], 'start_given': False, 'stage4_rms_px': [1.159289550950423, 1.1588482091375132]}; bootstrap methods: {'length': 'window groups', 'fixed': 'window groups'}
+  the same 6152 observations; their squared residuals sum to 50 px^2 more than at the global minimum
+  the parameters that differ most from the global minimum (camera 1's pose aligned):
+    cam3.C1       3.89 sigma (+2.23 mm; sigma 0.574 mm)
+    cam3.logf     3.76 sigma (+1.96 % in f; sigma 0.52 %)
+    cam3.w1       3.52 sigma (-0.001927 rad; sigma 0.000547 rad)
+    cam4.C1       2.85 sigma (+24.76 mm; sigma 8.68 mm)
+    cam4.logf     2.83 sigma (-2.08 % in f; sigma 0.74 %)
+    cam3.C2       2.21 sigma (+10.2 mm; sigma 4.62 mm)
+    cam2.w3       1.90 sigma (-0.005164 rad; sigma 0.00272 rad)
+    win2.b        1.88 sigma (+0.01082 rad; sigma 0.00576 rad)
+  its last LM round: 1 iterations, the last accepted, rms 1.158848 px
+stage 4 restarted from points between that answer (t = 0) and the global minimum (t = 1):
+  t = 0.00: rms 1.15775 px -> NOT the global minimum (max |z| 3.6, cam3.C1), 4 s
+  t = 0.25: rms 1.15535 px -> the global minimum (max |z| 5.7e-07, win2.b), 3 s
+  t = 0.50: rms 1.15535 px -> the global minimum (max |z| 1.7e-06, cam2.C3), 3 s
+  t = 0.75: rms 1.15535 px -> the global minimum (max |z| 1.8e-06, cam2.C3), 3 s
+the whole-rig start (bootstrap on all four cameras, W5 run 1's path), each start through stage 4:
+  search 'length': 3 starts, 75 s
+    start 0: coarse rms 1.3638 px -> stage 4 rms 1.33561 px: NOT the global minimum (max |z| 57)
+    start 1: coarse rms 1.3638 px -> stage 4 rms 1.33561 px: NOT the global minimum (max |z| 57)
+    start 2: coarse rms 1.3638 px -> stage 4 rms 1.33561 px: NOT the global minimum (max |z| 57)
+  search 'fixed': 3 starts, 22 s
+    start 0: coarse rms 18.3638 px -> stage 4 rms 18.52395 px: NOT the global minimum (max |z| 73)
+    start 1: coarse rms 20.3143 px -> stage 4 rms 20.68023 px: NOT the global minimum (max |z| 66)
+    start 2: coarse rms 20.5015 px -> stage 4 rms 20.82457 px: NOT the global minimum (max |z| 89)
+done, 227 s

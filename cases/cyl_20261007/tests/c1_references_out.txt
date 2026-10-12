@@ -1,0 +1,33 @@
+C1, references: this run's cameras (X:\Shijie Zhong\Refraction\Processed\20261007\T0) against the earlier calibrations
+
+cam1 against the dot board of 30 Sep (only meaningful if cam1's lens and focus are unchanged)
+  f: 7 Oct wand 48,494.3 +- 427.1 px; dot board 41,459.1 +- 69.1 px (in air: 41,610 px); difference +7,035.2 px = +16.969 % (+16.26 combined sigma)
+  f / distance: 7 Oct 41.1438, dot board 37.8924 px/mm
+  distance_from_axis_mm  7 Oct  +1178.6538 mm   dot board  +1094.1259 mm   difference +84.5278
+  elevation_deg          7 Oct     +1.4004 deg   dot board     -0.0955 deg   difference +1.4960
+  aim_deg                7 Oct     -0.7114 deg   dot board     +0.6362 deg   difference -1.3476
+  roll_deg               7 Oct     -0.0501 deg   dot board     +0.3346 deg   difference -0.3848
+
+Both cameras against 6 Oct T0's delivered calibration
+  cam1: f 7 Oct 48,494.3 +- 427.1 px, 6 Oct T0 38,551.4 +- 295.8 px; difference +9,942.8 px = +25.791 % (+19.14 combined sigma); f / distance 7 Oct 41.1438, 6 Oct T0 38.2905 px/mm (+7.452 %)
+      distance_from_axis_mm  7 Oct  +1178.6538 mm   6 Oct T0  +1006.8149 mm   difference +171.8389
+      elevation_deg          7 Oct     +1.4004 deg   6 Oct T0     +2.6656 deg   difference -1.2652
+      aim_deg                7 Oct     -0.7114 deg   6 Oct T0     -0.1427 deg   difference -0.5687
+      roll_deg               7 Oct     -0.0501 deg   6 Oct T0     +0.0268 deg   difference -0.0769
+  cam2: f 7 Oct 28,305.5 +- 284.4 px, 6 Oct T0 35,812.0 +- 424.6 px; difference -7,506.5 px = -20.961 % (-14.69 combined sigma); f / distance 7 Oct 33.8988, 6 Oct T0 34.5658 px/mm (-1.930 %)
+      distance_from_axis_mm  7 Oct   +835.0009 mm   6 Oct T0  +1036.0525 mm   difference -201.0515
+      elevation_deg          7 Oct     +0.7156 deg   6 Oct T0     +1.3592 deg   difference -0.6435
+      aim_deg                7 Oct     -1.1251 deg   6 Oct T0     +0.1864 deg   difference -1.3116
+      roll_deg               7 Oct     +0.4845 deg   6 Oct T0     +1.3581 deg   difference -0.8735
+
+Both cameras against 6 Oct T2's delivered calibration
+  cam1: f 7 Oct 48,494.3 +- 427.1 px, 6 Oct T2 38,252.4 +- 354.8 px; difference +10,241.9 px = +26.775 % (+18.45 combined sigma); f / distance 7 Oct 41.1438, 6 Oct T2 38.2051 px/mm (+7.692 %)
+      distance_from_axis_mm  7 Oct  +1178.6538 mm   6 Oct T2  +1001.2378 mm   difference +177.4159
+      elevation_deg          7 Oct     +1.4004 deg   6 Oct T2     +1.4281 deg   difference -0.0277
+      aim_deg                7 Oct     -0.7114 deg   6 Oct T2     -0.2635 deg   difference -0.4479
+      roll_deg               7 Oct     -0.0501 deg   6 Oct T2     +0.1197 deg   difference -0.1698
+  cam2: f 7 Oct 28,305.5 +- 284.4 px, 6 Oct T2 37,409.3 +- 523.4 px; difference -9,103.7 px = -24.336 % (-15.28 combined sigma); f / distance 7 Oct 33.8988, 6 Oct T2 34.4747 px/mm (-1.671 %)
+      distance_from_axis_mm  7 Oct   +835.0009 mm   6 Oct T2  +1085.1218 mm   difference -250.1208
+      elevation_deg          7 Oct     +0.7156 deg   6 Oct T2     +0.5941 deg   difference +0.1215
+      aim_deg                7 Oct     -1.1251 deg   6 Oct T2     -0.0258 deg   difference -1.0994
+      roll_deg               7 Oct     +0.4845 deg   6 Oct T2     +0.7770 deg   difference -0.2924

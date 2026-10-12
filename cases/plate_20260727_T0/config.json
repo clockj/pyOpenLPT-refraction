@@ -1,0 +1,53 @@
+{
+  "_comment": "Wand calibration of four cameras through two flat tank walls, run 20260727/T0 (2026-10-03-plan.md). Lengths in mm, image coordinates in px. Detections from the user's circle finder; the GUI calibrations calib, calib_2, calib_3 are kept for comparison only.",
+  "case": "plate_20260727_T0",
+  "image_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\T0",
+  "image_pattern": "{folder}\\{folder}frame{frame:06d}.tif",
+  "results_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0",
+  "out_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand",
+  "out_dir_ref": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref",
+  "out_dir_ref_centre": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref_centre",
+  "detections": {
+    "_comment": "Wand CSVs in results_dir (the GUI's format: Filtered_Small = end A, Filtered_Large = end B). all: the circle finder's table, 10,936 frames with both balls in all four cameras; gui_8962 and gui_5563: the GUI's filtered sets behind calib_2 and calib_3.",
+    "all": "circle_results_table_new.csv",
+    "gui_8962": "wandpoints_filtered.csv",
+    "gui_5563": "wandpoints_filtered_2.csv"
+  },
+  "gui_calibrations": {
+    "_comment": "The user's earlier GUI calibrations (PINPLATE camFiles cam0.txt ... cam3.txt), in results_dir.",
+    "calib": "calib\\camFile",
+    "calib_2": "calib_2\\camFile",
+    "calib_3": "calib_3\\camFile"
+  },
+  "setup": {
+    "_comment": "From the user (2026-10-03): 180 mm lenses, 13.5 um pixels (nominal f 13,333 px, not accurate), cameras in air, acrylic walls 0.5 in thick, water inside, the two walls about 90 deg apart; C1 above C2 behind one wall, C3 above C4 behind the other (photo).",
+    "lens_mm": 180.0,
+    "pixel_mm": 0.0135,
+    "walls_angle_deg": 90.0
+  },
+  "rig": {
+    "_comment": "plate_wand_io.RigConfig: indices camera side first (air, acrylic, water); cameras in the order of the CSV's camera numbers 0-3 (image folders cam1-cam4, photo C1-C4).",
+    "windows": [
+      {"name": "wall_C1C2", "thickness_mm": [12.7], "n": [1.0, 1.49, 1.333]},
+      {"name": "wall_C3C4", "thickness_mm": [12.7], "n": [1.0, 1.49, 1.333]}
+    ],
+    "cam_to_window": [0, 0, 1, 1],
+    "cameras": [
+      {"name": "cam0", "id": 0, "folder": "cam1", "photo": "C1", "width": 2048, "height": 1952, "pixel_mm": 0.0135},
+      {"name": "cam1", "id": 1, "folder": "cam2", "photo": "C2", "width": 2048, "height": 1952, "pixel_mm": 0.0135},
+      {"name": "cam2", "id": 2, "folder": "cam3", "photo": "C3", "width": 2048, "height": 1952, "pixel_mm": 0.0135},
+      {"name": "cam3", "id": 3, "folder": "cam4", "photo": "C4", "width": 2048, "height": 1952, "pixel_mm": 0.0135}
+    ],
+    "wand_length_mm": 10.0,
+    "hints": {}
+  },
+  "photo_hints": {
+    "_comment": "T5 only: each camera roughly square-on to its wall (its window's normal along its optical axis).",
+    "normals": [[0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0]]
+  },
+  "constraints": {
+    "_comment": "2026-10-03-walls-plan.md (W3, W4): plate_wand's optional constraints, from the user (2026-10-03). The channel is 15 x 10 cm inside ('not 100% accurate, it might have some small erros'); C1 and C2 look through its long side, so the inside width is 100 mm across wall_C1C2 and 150 mm across wall_C3C4 (windows in rig order). The balls' radii come from their image radii (26 and 34 px in C1 at about 17 px/mm). The cameras 'should somehow look at the center ... but no exactly accurate': aim_centre puts C1 and C2's aim (cameras 0-based) at the middle of the long side, 75 mm from wall_C3C4 (window 1).",
+    "channel": {"width_mm": [100.0, 150.0], "tolerance_mm": 3.0, "ball_radius_mm": [1.5, 2.0]},
+    "aim_centre": [{"cams": [0, 1], "wall": 1, "mm": 75.0}]
+  }
+}

@@ -1,0 +1,11 @@
+no distortion: 2000 points of 2000 cases (model failed 0, C++ ray failed 0); largest air angle 79.9 deg
+  projection vs C++ 6.48e-11 px, vs the pixel 3.68e-09 px (C++ closure 3.68e-09 px)
+  ray direction 1.25e-13, ray origin 4.51e-09 mm (5.64e-13 of the camera's distance)
+with distortion: 400 points of 400 cases (model failed 0, C++ ray failed 0); largest air angle 72.0 deg
+  projection vs C++ 3.96e-11 px, vs the pixel 9.98e-06 px (C++ closure 9.98e-06 px)
+  ray direction 4.82e-09, ray origin 3.11e-05 mm (8.04e-09 of the camera's distance)
+on / next to the camera's normal line (rho 0 .. 1e-6 mm): 800 points, worst 2.67e-07 px
+points inside plate (not in the object medium): 300; the C++ returned a pixel for 300, the model for 0
+points camera side (not in the object medium): 300; the C++ returned a pixel for 300, the model for 0
+  the C++ pixel is the image of the point mirrored in the object-side surface (worst 8.2e-11 px over 600): the C++ uses the unsigned distance to that surface (Camera.cpp, Snell1D step 1)
+W0 model vs C++: PASS

@@ -32,7 +32,9 @@ void bind_Config(py::module_& m) {
         .def_readwrite("_object_config_paths", &BasicSetting::_object_config_paths)
         .def_readwrite("_load_track", &BasicSetting::_load_track)
         .def_readwrite("_load_track_frame", &BasicSetting::_load_track_frame)
-        .def_readwrite("_load_track_path", &BasicSetting::_load_track_path);
+        .def_readwrite("_load_track_path", &BasicSetting::_load_track_path)
+        .def_readwrite("_save_interval", &BasicSetting::_save_interval)
+        .def_readwrite("_profile", &BasicSetting::_profile);
 
     // -------- ObjectKind --------
     py::enum_<ObjectKind>(m, "ObjectKind")
@@ -68,7 +70,8 @@ void bind_Config(py::module_& m) {
         .def_readwrite("match_cam_count", &SMParam::match_cam_count)
         .def_readwrite("idmap_cell_px", &SMParam::idmap_cell_px)
         .def_readwrite("tol_2d_px", &SMParam::tol_2d_px)
-        .def_readwrite("tol_3d_mm", &SMParam::tol_3d_mm);
+        .def_readwrite("tol_3d_mm", &SMParam::tol_3d_mm)
+        .def_readwrite("profile", &SMParam::profile);
 
     py::class_<ShakeParam>(m, "ShakeParam")
         .def(py::init<>())
@@ -138,7 +141,14 @@ void bind_Config(py::module_& m) {
         .def_property_readonly("kind", &TracerConfig::kind)
         .def_readwrite("_min_obj_int", &TracerConfig::_min_obj_int)
         .def_readwrite("_radius_obj", &TracerConfig::_radius_obj)
-        .def_readwrite("_otf", &TracerConfig::_otf);
+        .def_readwrite("_otf", &TracerConfig::_otf)
+        .def_readwrite("_roi_from_otf", &TracerConfig::_roi_from_otf)
+        .def_readwrite("_roi_sigma", &TracerConfig::_roi_sigma)
+        .def_readwrite("_otf_file", &TracerConfig::_otf_file)
+        .def_readwrite("_detector", &TracerConfig::_detector)
+        .def_readwrite("_shape_check", &TracerConfig::_shape_check)
+        .def_readwrite("_shape_tol_px", &TracerConfig::_shape_tol_px)
+        .def_readwrite("_shape_tol_rel", &TracerConfig::_shape_tol_rel);
 
     // -------- BubbleConfig --------
     py::class_<BubbleConfig, ObjectConfig>(m, "BubbleConfig")

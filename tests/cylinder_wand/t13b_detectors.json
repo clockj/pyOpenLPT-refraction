@@ -1,0 +1,2774 @@
+{
+ "n_frames": 400,
+ "camera_frames": 1164,
+ "crowded": 22,
+ "overlapping": 17,
+ "time_per_image_s": {
+  "pyopenlpt_fast": 0.22698894642370263,
+  "pyopenlpt_reliable": 0.8202150737586087,
+  "blob": 0.0050195662426375035,
+  "blob_open": 0.016976323887654597,
+  "ellipse": 0.2631569001119571,
+  "ellipse_rodmask": 0.2683247102238878
+ },
+ "blocks": {
+  "best/backlit/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 16,
+   "swapped": 0,
+   "wrong": 1126,
+   "missing": 0,
+   "bias_px": [
+    0.9891097541105296,
+    0.027534128035739514
+   ],
+   "rms_px": 3.953304223820941,
+   "max_px": 4.8166866473500605,
+   "sys_bias_px": [
+    0.04452967598552959,
+    -0.0006335965736354865
+   ],
+   "sys_rms_px": 2.726306425849,
+   "sys_max_px": 2.770468403243781,
+   "random_rms_px": 1.4513975901031702,
+   "n_balls": 2,
+   "sys_bias_A_px": [
+    -2.681373096801849,
+    -0.015381730273759331
+   ],
+   "sys_bias_B_px": [
+    2.770432448772908,
+    0.014114537126488358
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 5.747279142611659,
+   "nearest_p90_px": 9.705441001569215,
+   "nearest_max_px": 12.839361026539931,
+   "nearest_over_1px": 2122,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 20,
+    "missing": 0,
+    "bias_px": [
+     -0.5993240687129315,
+     -0.01987160468821969
+    ],
+    "rms_px": 3.537897793558839,
+    "max_px": 4.677229044020635,
+    "sys_bias_px": [
+     -0.12273868052933778,
+     0.00950156425709281
+    ],
+    "sys_rms_px": 3.4995819693574766,
+    "sys_max_px": 4.061466492591366,
+    "random_rms_px": 1.5351559512942512,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -3.6029204445956395,
+     -0.04274905613462465
+    ],
+    "sys_bias_B_px": [
+     3.357443083536964,
+     0.06175218464881027
+    ],
+    "nearest_found": 44,
+    "nearest_median_px": 7.188805423431709,
+    "nearest_p90_px": 12.549080133828635,
+    "nearest_max_px": 14.083877963516688,
+    "nearest_over_1px": 42
+   },
+   "overlap_wrong": 17,
+   "overlap_n": 17
+  },
+  "best/backlit/pyopenlpt_reliable": {
+   "camera_frames": 286,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 286,
+   "missing": 0,
+   "nearest_found": 523,
+   "nearest_median_px": 8.199278119060983,
+   "nearest_p90_px": 12.138431583019171,
+   "nearest_max_px": 14.366971531546408,
+   "nearest_over_1px": 523,
+   "crowded": {
+    "camera_frames": 6,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 0,
+    "nearest_found": 11,
+    "nearest_median_px": 9.77397711131802,
+    "nearest_p90_px": 13.756326413849628,
+    "nearest_max_px": 14.330319707073247,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 5
+  },
+  "best/backlit/blob": {
+   "camera_frames": 1142,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 1142,
+   "nearest_found": 1,
+   "nearest_median_px": 19.72088421763205,
+   "nearest_p90_px": 19.72088421763205,
+   "nearest_max_px": 19.72088421763205,
+   "nearest_over_1px": 1,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 22,
+    "nearest_found": 23,
+    "nearest_median_px": 12.12312223541326,
+    "nearest_p90_px": 17.92862084717125,
+    "nearest_max_px": 19.69507798458104,
+    "nearest_over_1px": 23
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/backlit/blob_open": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    0.00010385013339716985,
+    -0.00030827084478630507
+   ],
+   "rms_px": 0.42673913581839806,
+   "max_px": 0.8150150294019851,
+   "sys_bias_px": [
+    -0.00036310457313253557,
+    -0.0011432315579074396
+   ],
+   "sys_rms_px": 0.4224751130794164,
+   "sys_max_px": 0.7819989332452695,
+   "random_rms_px": 0.09293244244144344,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    0.009373945678022296,
+    0.0033882416471724265
+   ],
+   "sys_bias_B_px": [
+    -0.010100154824287368,
+    -0.005674704762987305
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.4059760796607538,
+   "nearest_p90_px": 0.5859046553201384,
+   "nearest_max_px": 0.8150150294019851,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 21,
+    "bias_px": [
+     -0.05230585994615922,
+     0.00409272010343642
+    ],
+    "rms_px": 0.4345948209167458,
+    "max_px": 0.44395425793651583,
+    "sys_bias_px": [
+     -0.01723936551195493,
+     0.03733249609530276
+    ],
+    "sys_rms_px": 0.4464194465982656,
+    "sys_max_px": 0.48099651531926885,
+    "random_rms_px": 0.09066969658506996,
+    "n_balls": 2,
+    "sys_bias_A_px": [
+     0.013085218381093,
+     0.48081849466217363
+    ],
+    "sys_bias_B_px": [
+     -0.04756394940500286,
+     -0.4061535024715681
+    ],
+    "nearest_found": 24,
+    "nearest_median_px": 11.562146803486243,
+    "nearest_p90_px": 16.2446787347744,
+    "nearest_max_px": 19.684665346771087,
+    "nearest_over_1px": 22
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/backlit/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    0.0011995345083784916,
+    0.00011516496587514282
+   ],
+   "rms_px": 0.07249154039603724,
+   "max_px": 0.23945308957568115,
+   "sys_bias_px": [
+    0.0011004906081569813,
+    2.0632317407110322e-05
+   ],
+   "sys_rms_px": 0.07083145651324231,
+   "sys_max_px": 0.23289309712611458,
+   "random_rms_px": 0.01958640174440466,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    0.002592015928496698,
+    0.00018796185219312515
+   ],
+   "sys_bias_B_px": [
+    -0.00039103471218273543,
+    -0.0001466972173789045
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.036397004368202784,
+   "nearest_p90_px": 0.1319591696488659,
+   "nearest_max_px": 0.23945308957568115,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 20,
+    "bias_px": [
+     -0.011316409585447218,
+     0.030616173000467484
+    ],
+    "rms_px": 0.0792924902864896,
+    "max_px": 0.1465171324260496,
+    "sys_bias_px": [
+     -0.006165021301995921,
+     0.02959006062553371
+    ],
+    "sys_rms_px": 0.07497220298234797,
+    "sys_max_px": 0.14070353237294528,
+    "random_rms_px": 0.008535374919996565,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -0.015753597472041747,
+     0.05728429865185802
+    ],
+    "sys_bias_B_px": [
+     0.003423554868049905,
+     0.0018958225992093958
+    ],
+    "nearest_found": 26,
+    "nearest_median_px": 8.02695420236767,
+    "nearest_p90_px": 12.468044161107585,
+    "nearest_max_px": 19.632707894357427,
+    "nearest_over_1px": 21
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/backlit/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -0.000907089377561513,
+    -0.00037527078627695243
+   ],
+   "rms_px": 0.026327081229334387,
+   "max_px": 0.13652282561661908,
+   "sys_bias_px": [
+    -0.0002516030439505705,
+    3.2137843417632285e-05
+   ],
+   "sys_rms_px": 0.01013934884137818,
+   "sys_max_px": 0.09131432406785084,
+   "random_rms_px": 0.024355891835661576,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    -0.00043713689409043827,
+    4.459390126934409e-06
+   ],
+   "sys_bias_B_px": [
+    -6.606919381070274e-05,
+    5.981629670833016e-05
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.014361873685165831,
+   "nearest_p90_px": 0.041407324803320336,
+   "nearest_max_px": 0.13652282561661908,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 20,
+    "bias_px": [
+     -0.0025825379736375,
+     0.00301437615308231
+    ],
+    "rms_px": 0.012825319338643408,
+    "max_px": 0.018278912703575536,
+    "sys_bias_px": [
+     -0.0035205571128358315,
+     -0.0020851372791526046
+    ],
+    "sys_rms_px": 0.008879618912214143,
+    "sys_max_px": 0.013558634434399587,
+    "random_rms_px": 0.014342832101413384,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -0.005541969199839514,
+     -0.0001231255923102026
+    ],
+    "sys_bias_B_px": [
+     -0.0014991450258321493,
+     -0.004047148965995007
+    ],
+    "nearest_found": 26,
+    "nearest_median_px": 8.02695420236767,
+    "nearest_p90_px": 12.468044161107585,
+    "nearest_max_px": 19.632707894357427,
+    "nearest_over_1px": 21
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/even/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 34,
+   "swapped": 0,
+   "wrong": 1108,
+   "missing": 0,
+   "bias_px": [
+    0.09912511294797924,
+    0.18888529408686736
+   ],
+   "rms_px": 2.928403232214141,
+   "max_px": 4.990497632696299,
+   "sys_bias_px": [
+    -0.5564176421789739,
+    0.10437703399572153
+   ],
+   "sys_rms_px": 3.2171363153237382,
+   "sys_max_px": 4.967982765647955,
+   "random_rms_px": 3.018261129614075,
+   "n_balls": 30,
+   "sys_bias_A_px": [
+    -0.14665949264450925,
+    -0.02827167003126192
+   ],
+   "sys_bias_B_px": [
+    -0.9661757917134385,
+    0.23702573802270496
+   ],
+   "nearest_found": 2279,
+   "nearest_median_px": 6.924946850117193,
+   "nearest_p90_px": 10.310571893701805,
+   "nearest_max_px": 19.91004044494132,
+   "nearest_over_1px": 1918,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 3,
+    "swapped": 0,
+    "wrong": 19,
+    "missing": 0,
+    "bias_px": [
+     -1.1954124781367597,
+     -0.004734885938219691
+    ],
+    "rms_px": 3.160696414571807,
+    "max_px": 4.250168180158216,
+    "sys_bias_px": [
+     -0.5764778467891034,
+     -0.01376808906321969
+    ],
+    "sys_rms_px": 2.7976559644225683,
+    "sys_max_px": 3.8276483244625066,
+    "random_rms_px": 0.8370932349134524,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -3.090995700943296,
+     -0.05172122410337465
+    ],
+    "sys_bias_B_px": [
+     1.938040007365089,
+     0.02418504597693527
+    ],
+    "nearest_found": 42,
+    "nearest_median_px": 7.352842305314138,
+    "nearest_p90_px": 13.411930585856476,
+    "nearest_max_px": 14.547020726942078,
+    "nearest_over_1px": 39
+   },
+   "overlap_wrong": 17,
+   "overlap_n": 17
+  },
+  "best/even/pyopenlpt_reliable": {
+   "camera_frames": 286,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 286,
+   "missing": 0,
+   "nearest_found": 425,
+   "nearest_median_px": 7.410198739397939,
+   "nearest_p90_px": 11.627002689404824,
+   "nearest_max_px": 14.264996923953392,
+   "nearest_over_1px": 421,
+   "crowded": {
+    "camera_frames": 6,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 0,
+    "nearest_found": 11,
+    "nearest_median_px": 9.242309851314142,
+    "nearest_p90_px": 13.716802647947468,
+    "nearest_max_px": 13.75520100632974,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 5
+  },
+  "best/even/blob": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -0.023282447666296446,
+    0.0025916297404881003
+   ],
+   "rms_px": 1.0264842718261733,
+   "max_px": 3.205058258056397,
+   "sys_bias_px": [
+    -0.022849062917512635,
+    0.0036715382782430057
+   ],
+   "sys_rms_px": 1.0263150606843718,
+   "sys_max_px": 3.1592662940418665,
+   "random_rms_px": 0.04815338578541377,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    -0.043830567096394754,
+    -0.017574246004989462
+   ],
+   "sys_bias_B_px": [
+    -0.0018675587386305188,
+    0.024917322561475472
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.10614864531632004,
+   "nearest_p90_px": 2.0228594514673888,
+   "nearest_max_px": 3.205058258056397,
+   "nearest_over_1px": 639,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 5,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 17,
+    "bias_px": [
+     -0.08790107718417631,
+     0.9007571364941824
+    ],
+    "rms_px": 1.6545180827870054,
+    "max_px": 2.7291598319922734,
+    "sys_bias_px": [
+     -0.09453539628761973,
+     0.9083932447429618
+    ],
+    "sys_rms_px": 1.6697695840430866,
+    "sys_max_px": 2.804751891228865,
+    "random_rms_px": 0.052142785689466155,
+    "n_balls": 10,
+    "sys_bias_A_px": [
+     0.4037831156075754,
+     0.7507799928622688
+    ],
+    "sys_bias_B_px": [
+     -0.5928539081828148,
+     1.0660064966236547
+    ],
+    "nearest_found": 29,
+    "nearest_median_px": 9.05859043979476,
+    "nearest_p90_px": 13.930272919551173,
+    "nearest_max_px": 19.539616394734065,
+    "nearest_over_1px": 24
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/even/blob_open": {
+   "camera_frames": 1142,
+   "ok": 927,
+   "swapped": 0,
+   "wrong": 181,
+   "missing": 34,
+   "bias_px": [
+    -0.03146895912044853,
+    0.028420935384561287
+   ],
+   "rms_px": 1.558175316509352,
+   "max_px": 4.99731880761666,
+   "sys_bias_px": [
+    -0.031102574449772696,
+    0.029397878785594786
+   ],
+   "sys_rms_px": 1.5510281270671378,
+   "sys_max_px": 4.961848845784025,
+   "random_rms_px": 0.10095060753934602,
+   "n_balls": 1848,
+   "sys_bias_A_px": [
+    -0.0653641313580521,
+    0.01464330452206338
+   ],
+   "sys_bias_B_px": [
+    0.0031589824585067042,
+    0.04415245304912619
+   ],
+   "nearest_found": 2250,
+   "nearest_median_px": 0.14294798795093538,
+   "nearest_p90_px": 4.41608148822356,
+   "nearest_max_px": 12.99797657894865,
+   "nearest_over_1px": 722,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 14,
+    "bias_px": [
+     -0.33342644818162626,
+     1.8160419079784091
+    ],
+    "rms_px": 2.6572932042569213,
+    "max_px": 4.023855613743904,
+    "sys_bias_px": [
+     -0.3082354273123258,
+     1.8249615501108956
+    ],
+    "sys_rms_px": 2.662762300522415,
+    "sys_max_px": 4.033965093993052,
+    "random_rms_px": 0.0480784183501109,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -0.006466989069565443,
+     0.04870708414731695
+    ],
+    "sys_bias_B_px": [
+     -0.6100038655550861,
+     3.601216016074474
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 1.7985778202090328,
+    "nearest_p90_px": 12.688303963371185,
+    "nearest_max_px": 19.574494700077814,
+    "nearest_over_1px": 22
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 17
+  },
+  "best/even/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1089,
+   "swapped": 0,
+   "wrong": 9,
+   "missing": 44,
+   "bias_px": [
+    0.0014041878016895918,
+    0.001308146479571177
+   ],
+   "rms_px": 0.15109931333139054,
+   "max_px": 4.902887356394931,
+   "sys_bias_px": [
+    -0.00010582101471421291,
+    0.001366369261565555
+   ],
+   "sys_rms_px": 0.13556714814900034,
+   "sys_max_px": 3.3749389833313983,
+   "random_rms_px": 0.1383869880448372,
+   "n_balls": 2176,
+   "sys_bias_A_px": [
+    -0.00030681415001149507,
+    0.0029893871649923336
+   ],
+   "sys_bias_B_px": [
+    9.517212058306925e-05,
+    -0.00025664864186122416
+   ],
+   "nearest_found": 2240,
+   "nearest_median_px": 0.015481641042851876,
+   "nearest_p90_px": 0.07714206947951202,
+   "nearest_max_px": 9.401103250828953,
+   "nearest_over_1px": 12,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 9,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 13,
+    "bias_px": [
+     0.022036172746865645,
+     0.02719315333335162
+    ],
+    "rms_px": 0.3072989149309765,
+    "max_px": 0.9824064987436477,
+    "sys_bias_px": [
+     0.003266167605600698,
+     0.0285756795754166
+    ],
+    "sys_rms_px": 0.3489137980312022,
+    "sys_max_px": 0.9629882645504805,
+    "random_rms_px": 0.08948197850976765,
+    "n_balls": 18,
+    "sys_bias_A_px": [
+     0.01915510241377976,
+     0.07232838253688259
+    ],
+    "sys_bias_B_px": [
+     -0.012622767202578366,
+     -0.01517702338604939
+    ],
+    "nearest_found": 33,
+    "nearest_median_px": 0.1394475387660551,
+    "nearest_p90_px": 8.804241604104716,
+    "nearest_max_px": 19.63371028114009,
+    "nearest_over_1px": 8
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/even/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1103,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 39,
+   "bias_px": [
+    0.00037962947401407764,
+    -0.0002131826050173742
+   ],
+   "rms_px": 0.02812758881871721,
+   "max_px": 0.1591224103997137,
+   "sys_bias_px": [
+    -0.00022306541653606084,
+    0.00018458329703013044
+   ],
+   "sys_rms_px": 0.012535417910016724,
+   "sys_max_px": 0.14681406346740947,
+   "random_rms_px": 0.02547721686380704,
+   "n_balls": 2202,
+   "sys_bias_A_px": [
+    -0.00039730379763023123,
+    0.0003808017185114036
+   ],
+   "sys_bias_B_px": [
+    -4.882703544189047e-05,
+    -1.1635124451142752e-05
+   ],
+   "nearest_found": 2245,
+   "nearest_median_px": 0.015279745945234695,
+   "nearest_p90_px": 0.04555444628814606,
+   "nearest_max_px": 0.1591224103997137,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 8,
+    "swapped": 0,
+    "wrong": 1,
+    "missing": 13,
+    "bias_px": [
+     -0.19361790849269234,
+     -0.03512289364265442
+    ],
+    "rms_px": 1.1701247310624003,
+    "max_px": 4.40858058547029,
+    "sys_bias_px": [
+     -0.20631339845157903,
+     -0.030757814592144328
+    ],
+    "sys_rms_px": 1.2239416442847812,
+    "sys_max_px": 4.572600674257013,
+    "random_rms_px": 0.07560588593958326,
+    "n_balls": 16,
+    "sys_bias_A_px": [
+     -0.44329898558751424,
+     -0.05842669338047557
+    ],
+    "sys_bias_B_px": [
+     0.030672188684356172,
+     -0.0030889358038130865
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 0.1062706417028475,
+    "nearest_p90_px": 8.856562645135856,
+    "nearest_max_px": 19.63371028114009,
+    "nearest_over_1px": 10
+   },
+   "overlap_wrong": 3,
+   "overlap_n": 17
+  },
+  "best/side/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 33,
+   "swapped": 0,
+   "wrong": 1109,
+   "missing": 0,
+   "bias_px": [
+    0.3917120079739978,
+    -0.09286697241419688
+   ],
+   "rms_px": 3.011213012714052,
+   "max_px": 4.969692188051904,
+   "sys_bias_px": [
+    -0.22281766528446573,
+    -0.07805806331588959
+   ],
+   "sys_rms_px": 3.180448435298939,
+   "sys_max_px": 4.540762872569177,
+   "random_rms_px": 2.2087882923729643,
+   "n_balls": 30,
+   "sys_bias_A_px": [
+    -0.6909307126820106,
+    -0.09479993029227292
+   ],
+   "sys_bias_B_px": [
+    0.24529538211307908,
+    -0.06131619633950625
+   ],
+   "nearest_found": 2280,
+   "nearest_median_px": 6.974311569694535,
+   "nearest_p90_px": 10.36141371374283,
+   "nearest_max_px": 18.240490486699752,
+   "nearest_over_1px": 1949,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 21,
+    "missing": 0,
+    "nearest_found": 43,
+    "nearest_median_px": 7.896740905068459,
+    "nearest_p90_px": 14.122241020046172,
+    "nearest_max_px": 14.955911776611241,
+    "nearest_over_1px": 41
+   },
+   "overlap_wrong": 17,
+   "overlap_n": 17
+  },
+  "best/side/pyopenlpt_reliable": {
+   "camera_frames": 286,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 286,
+   "missing": 0,
+   "nearest_found": 443,
+   "nearest_median_px": 7.62224345005183,
+   "nearest_p90_px": 12.189281664447117,
+   "nearest_max_px": 15.607768589609913,
+   "nearest_over_1px": 439,
+   "crowded": {
+    "camera_frames": 6,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 0,
+    "nearest_found": 11,
+    "nearest_median_px": 9.299930067446892,
+    "nearest_p90_px": 13.133336056001644,
+    "nearest_max_px": 14.163619260908442,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 5
+  },
+  "best/side/blob": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    0.17358300056820447,
+    -0.30692471182166636
+   ],
+   "rms_px": 1.0873143382776576,
+   "max_px": 3.2635394441644316,
+   "sys_bias_px": [
+    0.17356871261634238,
+    -0.30708452918876283
+   ],
+   "sys_rms_px": 1.0865887168507127,
+   "sys_max_px": 3.3194495136309476,
+   "random_rms_px": 0.048701159413940646,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    0.14659710134067713,
+    -0.3240621346597877
+   ],
+   "sys_bias_B_px": [
+    0.20054032389200765,
+    -0.2901069237177379
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.4609381293357354,
+   "nearest_p90_px": 2.0486228260762784,
+   "nearest_max_px": 3.2635394441644316,
+   "nearest_over_1px": 632,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 5,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 17,
+    "bias_px": [
+     0.26636773477191583,
+     0.5613790869635409
+    ],
+    "rms_px": 1.520050521765036,
+    "max_px": 2.894344486911888,
+    "sys_bias_px": [
+     0.25821957277685215,
+     0.5594142004751419
+    ],
+    "sys_rms_px": 1.5277779288731295,
+    "sys_max_px": 3.0200512703528197,
+    "random_rms_px": 0.07066781391240338,
+    "n_balls": 10,
+    "sys_bias_A_px": [
+     0.7415735196079367,
+     0.3926763313217748
+    ],
+    "sys_bias_B_px": [
+     -0.22513437405423248,
+     0.7261520696285089
+    ],
+    "nearest_found": 29,
+    "nearest_median_px": 9.119993884661731,
+    "nearest_p90_px": 13.693241016152038,
+    "nearest_max_px": 19.917572577315266,
+    "nearest_over_1px": 24
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/side/blob_open": {
+   "camera_frames": 1142,
+   "ok": 937,
+   "swapped": 0,
+   "wrong": 174,
+   "missing": 31,
+   "bias_px": [
+    0.13278478396740032,
+    -0.2774385344878037
+   ],
+   "rms_px": 1.6045899700667017,
+   "max_px": 4.998607670017955,
+   "sys_bias_px": [
+    0.12922403329223414,
+    -0.2741503169187951
+   ],
+   "sys_rms_px": 1.6023155476866424,
+   "sys_max_px": 4.990785613518757,
+   "random_rms_px": 0.09463435035809831,
+   "n_balls": 1864,
+   "sys_bias_A_px": [
+    0.09886216837411185,
+    -0.2866637067660857
+   ],
+   "sys_bias_B_px": [
+    0.15958589821035646,
+    -0.26163692707150443
+   ],
+   "nearest_found": 2253,
+   "nearest_median_px": 0.479033548445129,
+   "nearest_p90_px": 4.420060125741323,
+   "nearest_max_px": 13.36457222403009,
+   "nearest_over_1px": 743,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 14,
+    "bias_px": [
+     0.14366989709205313,
+     1.4829965335311819
+    ],
+    "rms_px": 2.4973554350081306,
+    "max_px": 3.5999983711860497,
+    "sys_bias_px": [
+     0.05948232191548186,
+     1.4484267146441852
+    ],
+    "sys_rms_px": 2.4245744546054895,
+    "sys_max_px": 3.583104655267781,
+    "random_rms_px": 0.13796206536436462,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     0.3293090890654753,
+     -0.3581961748570279
+    ],
+    "sys_bias_B_px": [
+     -0.21034444523451157,
+     3.2550496041453982
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 1.9144591036306924,
+    "nearest_p90_px": 13.012049943029995,
+    "nearest_max_px": 19.905657893579548,
+    "nearest_over_1px": 21
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 17
+  },
+  "best/side/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1092,
+   "swapped": 0,
+   "wrong": 10,
+   "missing": 40,
+   "bias_px": [
+    0.09577377012639376,
+    -0.17411751329607897
+   ],
+   "rms_px": 0.23017275450936872,
+   "max_px": 1.2438043307207254,
+   "sys_bias_px": [
+    0.09729144394893957,
+    -0.17636498882940946
+   ],
+   "sys_rms_px": 0.23237843022403618,
+   "sys_max_px": 1.2425114670337598,
+   "random_rms_px": 0.025699972506594466,
+   "n_balls": 2178,
+   "sys_bias_A_px": [
+    0.09547131533128327,
+    -0.17400625999245511
+   ],
+   "sys_bias_B_px": [
+    0.09911157256659586,
+    -0.1787237176663638
+   ],
+   "nearest_found": 2244,
+   "nearest_median_px": 0.21879292089728908,
+   "nearest_p90_px": 0.2608192960790776,
+   "nearest_max_px": 10.102446425915483,
+   "nearest_over_1px": 12,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 8,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 14,
+    "bias_px": [
+     0.10366817081568414,
+     -0.14692850636398447
+    ],
+    "rms_px": 0.2995381136031453,
+    "max_px": 0.5776885188082223,
+    "sys_bias_px": [
+     0.10439803090085853,
+     -0.15551365228713898
+    ],
+    "sys_rms_px": 0.30737126011410537,
+    "sys_max_px": 0.6316721077110214,
+    "random_rms_px": 0.06115648083991916,
+    "n_balls": 16,
+    "sys_bias_A_px": [
+     0.06716861796765627,
+     -0.14498292379360223
+    ],
+    "sys_bias_B_px": [
+     0.14162744383406078,
+     -0.16604438078067574
+    ],
+    "nearest_found": 31,
+    "nearest_median_px": 0.27978551210287195,
+    "nearest_p90_px": 8.692506861485692,
+    "nearest_max_px": 13.309788825253122,
+    "nearest_over_1px": 8
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/side/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1107,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 35,
+   "bias_px": [
+    0.09591221790571787,
+    -0.17199186859877916
+   ],
+   "rms_px": 0.2164258948086665,
+   "max_px": 0.4660411013332445,
+   "sys_bias_px": [
+    0.09778342603709426,
+    -0.174326960617232
+   ],
+   "sys_rms_px": 0.2182634232721128,
+   "sys_max_px": 0.4112860112842897,
+   "random_rms_px": 0.02672419589370532,
+   "n_balls": 2210,
+   "sys_bias_A_px": [
+    0.09610684623936981,
+    -0.17037375145115563
+   ],
+   "sys_bias_B_px": [
+    0.09946000583481872,
+    -0.17828016978330835
+   ],
+   "nearest_found": 2249,
+   "nearest_median_px": 0.2166053298627812,
+   "nearest_p90_px": 0.25272606079740356,
+   "nearest_max_px": 0.4660411013332445,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 8,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 14,
+    "bias_px": [
+     -0.09282483865703739,
+     -0.19003527517105656
+    ],
+    "rms_px": 1.2912188555967827,
+    "max_px": 4.491799019772449,
+    "sys_bias_px": [
+     -0.10401542760463656,
+     -0.1917131870966955
+    ],
+    "sys_rms_px": 1.2383226862259045,
+    "sys_max_px": 4.434652788713766,
+    "random_rms_px": 0.11099593861708187,
+    "n_balls": 16,
+    "sys_bias_A_px": [
+     -0.3361347453739185,
+     -0.22295327205130278
+    ],
+    "sys_bias_B_px": [
+     0.1281038901646454,
+     -0.1604731021420882
+    ],
+    "nearest_found": 31,
+    "nearest_median_px": 0.26912279210913437,
+    "nearest_p90_px": 8.692506861485692,
+    "nearest_max_px": 13.309788825253122,
+    "nearest_over_1px": 10
+   },
+   "overlap_wrong": 2,
+   "overlap_n": 17
+  },
+  "best/highlight/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 26,
+   "swapped": 0,
+   "wrong": 1116,
+   "missing": 0,
+   "bias_px": [
+    -1.2695409571635636,
+    -0.004328348245973501
+   ],
+   "rms_px": 2.8038401209813895,
+   "max_px": 4.738783735704536,
+   "sys_bias_px": [
+    -1.3576566493022355,
+    0.01969518462145814
+   ],
+   "sys_rms_px": 2.9359777533226556,
+   "sys_max_px": 4.979274806433638,
+   "random_rms_px": 0.5587137384988734,
+   "n_balls": 16,
+   "sys_bias_A_px": [
+    -0.04954257362473413,
+    -0.07076213724640468
+   ],
+   "sys_bias_B_px": [
+    -2.665770724979737,
+    0.11015250648932096
+   ],
+   "nearest_found": 2276,
+   "nearest_median_px": 6.819378241071197,
+   "nearest_p90_px": 10.343030437454226,
+   "nearest_max_px": 19.85449654244817,
+   "nearest_over_1px": 1912,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 20,
+    "missing": 0,
+    "bias_px": [
+     -1.0162666651484784,
+     0.05958090996021781
+    ],
+    "rms_px": 3.057861043393551,
+    "max_px": 4.289883370863679,
+    "sys_bias_px": [
+     -0.506657442736369,
+     -0.02490700507884469
+    ],
+    "sys_rms_px": 2.8222316255011846,
+    "sys_max_px": 3.9751818053333516,
+    "random_rms_px": 0.7107942893877324,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -3.0344389992831395,
+     -0.07566226414243715
+    ],
+    "sys_bias_B_px": [
+     2.0211241138104015,
+     0.02584825398474777
+    ],
+    "nearest_found": 42,
+    "nearest_median_px": 7.7796466275422524,
+    "nearest_p90_px": 13.984723844894528,
+    "nearest_max_px": 15.066233406778043,
+    "nearest_over_1px": 38
+   },
+   "overlap_wrong": 17,
+   "overlap_n": 17
+  },
+  "best/highlight/pyopenlpt_reliable": {
+   "camera_frames": 286,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 286,
+   "missing": 0,
+   "nearest_found": 417,
+   "nearest_median_px": 7.395460536789064,
+   "nearest_p90_px": 11.67663478002197,
+   "nearest_max_px": 14.38712244907409,
+   "nearest_over_1px": 412,
+   "crowded": {
+    "camera_frames": 6,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 0,
+    "nearest_found": 11,
+    "nearest_median_px": 8.953840843997042,
+    "nearest_p90_px": 13.95751792127129,
+    "nearest_max_px": 14.300410443893512,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 5
+  },
+  "best/highlight/blob": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -0.022823668720279192,
+    0.0028669443383465163
+   ],
+   "rms_px": 1.0288042838469469,
+   "max_px": 3.156438419255326,
+   "sys_bias_px": [
+    -0.023575841834279458,
+    0.0020103541573282826
+   ],
+   "sys_rms_px": 1.0277369859920031,
+   "sys_max_px": 3.1460385431688844,
+   "random_rms_px": 0.04885031767518922,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    -0.04517158347862832,
+    -0.019280609491236826
+   ],
+   "sys_bias_B_px": [
+    -0.0019801001899306015,
+    0.023301317805893392
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.10319047370030801,
+   "nearest_p90_px": 2.012642929332172,
+   "nearest_max_px": 3.156438419255326,
+   "nearest_over_1px": 636,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 5,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 17,
+    "bias_px": [
+     -0.07444234444456015,
+     0.9127944455638456
+    ],
+    "rms_px": 1.680845340389318,
+    "max_px": 2.791683383847164,
+    "sys_bias_px": [
+     -0.08960316995472795,
+     0.90613523444635
+    ],
+    "sys_rms_px": 1.662942682398758,
+    "sys_max_px": 2.804751891228865,
+    "random_rms_px": 0.04341698293603222,
+    "n_balls": 10,
+    "sys_bias_A_px": [
+     0.4063041240109442,
+     0.7565333148435656
+    ],
+    "sys_bias_B_px": [
+     -0.5855104639204001,
+     1.0557371540491345
+    ],
+    "nearest_found": 29,
+    "nearest_median_px": 9.01255400256538,
+    "nearest_p90_px": 13.916724663703631,
+    "nearest_max_px": 19.56904608185046,
+    "nearest_over_1px": 24
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/highlight/blob_open": {
+   "camera_frames": 1142,
+   "ok": 926,
+   "swapped": 0,
+   "wrong": 181,
+   "missing": 35,
+   "bias_px": [
+    -0.03434797340102947,
+    0.035133504958521064
+   ],
+   "rms_px": 1.5510941641646832,
+   "max_px": 4.921616114689345,
+   "sys_bias_px": [
+    -0.034946669738459946,
+    0.031151433476257945
+   ],
+   "sys_rms_px": 1.5422642457340796,
+   "sys_max_px": 4.96343641903829,
+   "random_rms_px": 0.10599790929045744,
+   "n_balls": 1844,
+   "sys_bias_A_px": [
+    -0.058800903017360066,
+    0.018871077990700834
+   ],
+   "sys_bias_B_px": [
+    -0.011092436459559823,
+    0.04343178896181506
+   ],
+   "nearest_found": 2249,
+   "nearest_median_px": 0.14101706376834156,
+   "nearest_p90_px": 4.414341670439855,
+   "nearest_max_px": 12.536624044344457,
+   "nearest_over_1px": 725,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 6,
+    "missing": 14,
+    "bias_px": [
+     -0.26283950875009054,
+     1.7967352407161812
+    ],
+    "rms_px": 2.6616778589148997,
+    "max_px": 4.050326080909804,
+    "sys_bias_px": [
+     -0.28121176826059013,
+     1.769335861264036
+    ],
+    "sys_rms_px": 2.588317341644254,
+    "sys_max_px": 4.0278129126732285,
+    "random_rms_px": 0.11516400182022794,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -0.006466989069565443,
+     0.061574687403016526
+    ],
+    "sys_bias_B_px": [
+     -0.5559565474516148,
+     3.4770970351250554
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 1.8570148514047649,
+    "nearest_p90_px": 12.477354570308586,
+    "nearest_max_px": 19.571932744195518,
+    "nearest_over_1px": 20
+   },
+   "overlap_wrong": 5,
+   "overlap_n": 17
+  },
+  "best/highlight/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1094,
+   "swapped": 0,
+   "wrong": 9,
+   "missing": 39,
+   "bias_px": [
+    0.03382423844605876,
+    0.14603378781844073
+   ],
+   "rms_px": 0.2843560301301836,
+   "max_px": 2.533909744695168,
+   "sys_bias_px": [
+    0.03339667612383339,
+    0.15054022137335815
+   ],
+   "sys_rms_px": 0.29622824051753793,
+   "sys_max_px": 2.9741253474613636,
+   "random_rms_px": 0.08012123933601649,
+   "n_balls": 2176,
+   "sys_bias_A_px": [
+    0.03406139320275679,
+    0.13831686347340083
+   ],
+   "sys_bias_B_px": [
+    0.032731959044909976,
+    0.1627635792733155
+   ],
+   "nearest_found": 2245,
+   "nearest_median_px": 0.22836727604404097,
+   "nearest_p90_px": 0.3883464740349348,
+   "nearest_max_px": 9.947297604946462,
+   "nearest_over_1px": 19,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 9,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 13,
+    "bias_px": [
+     0.04808021613890566,
+     0.13462627440509006
+    ],
+    "rms_px": 0.35228321267012275,
+    "max_px": 0.7884670447936317,
+    "sys_bias_px": [
+     0.03617058231508471,
+     0.13746672037561247
+    ],
+    "sys_rms_px": 0.3610858633125642,
+    "sys_max_px": 0.8370860879746256,
+    "random_rms_px": 0.0540119302232906,
+    "n_balls": 18,
+    "sys_bias_A_px": [
+     0.10838384311234803,
+     0.18824864296185873
+    ],
+    "sys_bias_B_px": [
+     -0.03604267848217862,
+     0.0866847977893662
+    ],
+    "nearest_found": 33,
+    "nearest_median_px": 0.3288666181223368,
+    "nearest_p90_px": 8.791336220071734,
+    "nearest_max_px": 19.56594973151593,
+    "nearest_over_1px": 7
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "best/highlight/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1104,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 38,
+   "bias_px": [
+    0.02799575209792731,
+    0.1369192220530283
+   ],
+   "rms_px": 0.3150003043799045,
+   "max_px": 0.90398561161645,
+   "sys_bias_px": [
+    0.027592441242084577,
+    0.14083518015182425
+   ],
+   "sys_rms_px": 0.3195266058519386,
+   "sys_max_px": 0.8023194227043017,
+   "random_rms_px": 0.04097162271207681,
+   "n_balls": 2206,
+   "sys_bias_A_px": [
+    0.03276691395775939,
+    0.12909119070230365
+   ],
+   "sys_bias_B_px": [
+    0.022417968526409763,
+    0.15257916960134482
+   ],
+   "nearest_found": 2246,
+   "nearest_median_px": 0.24606540209223782,
+   "nearest_p90_px": 0.5251856190232227,
+   "nearest_max_px": 0.90398561161645,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 7,
+    "swapped": 0,
+    "wrong": 2,
+    "missing": 13,
+    "bias_px": [
+     0.1489736432283085,
+     0.10885968186273942
+    ],
+    "rms_px": 0.5005841613979983,
+    "max_px": 1.5296451457136457,
+    "sys_bias_px": [
+     0.18852569505126635,
+     0.10557810433443697
+    ],
+    "sys_rms_px": 0.52015454728475,
+    "sys_max_px": 1.538033696246658,
+    "random_rms_px": 0.12388603274037642,
+    "n_balls": 14,
+    "sys_bias_A_px": [
+     0.3151116550337747,
+     0.10039786358191805
+    ],
+    "sys_bias_B_px": [
+     0.06193973506875799,
+     0.11075834508695591
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 0.35757214026486395,
+    "nearest_p90_px": 8.793605176207112,
+    "nearest_max_px": 19.56594973151593,
+    "nearest_over_1px": 9
+   },
+   "overlap_wrong": 3,
+   "overlap_n": 17
+  },
+  "defocused/backlit/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 52,
+   "swapped": 0,
+   "wrong": 1090,
+   "missing": 0,
+   "bias_px": [
+    0.3393452718052136,
+    0.05870992159083812
+   ],
+   "rms_px": 2.9450655859348034,
+   "max_px": 4.944100065623077,
+   "sys_bias_px": [
+    0.9546264404250053,
+    0.02742164746160635
+   ],
+   "sys_rms_px": 3.0345852988331137,
+   "sys_max_px": 4.958127148059643,
+   "random_rms_px": 1.9804615012640905,
+   "n_balls": 30,
+   "sys_bias_A_px": [
+    -0.3359469645551561,
+    -0.3082084062892136
+   ],
+   "sys_bias_B_px": [
+    2.2451998454051667,
+    0.3630517012124263
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 5.2436027403918,
+   "nearest_p90_px": 9.199759585905422,
+   "nearest_max_px": 11.697793310053132,
+   "nearest_over_1px": 2189,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 21,
+    "missing": 0,
+    "nearest_found": 44,
+    "nearest_median_px": 6.8280560257497855,
+    "nearest_p90_px": 11.219577122937261,
+    "nearest_max_px": 13.167102655641981,
+    "nearest_over_1px": 44
+   },
+   "overlap_wrong": 17,
+   "overlap_n": 17
+  },
+  "defocused/backlit/pyopenlpt_reliable": {
+   "camera_frames": 0,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "nearest_found": 0,
+   "crowded": null,
+   "overlap_wrong": 0,
+   "overlap_n": 0
+  },
+  "defocused/backlit/blob": {
+   "camera_frames": 1142,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 1142,
+   "nearest_found": 1,
+   "nearest_median_px": 19.86449400867265,
+   "nearest_p90_px": 19.86449400867265,
+   "nearest_max_px": 19.86449400867265,
+   "nearest_over_1px": 1,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 22,
+    "nearest_found": 23,
+    "nearest_median_px": 12.202170560559537,
+    "nearest_p90_px": 17.93975912217734,
+    "nearest_max_px": 19.598868754921135,
+    "nearest_over_1px": 23
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/backlit/blob_open": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -4.70745487092497e-05,
+    -0.002089552107381525
+   ],
+   "rms_px": 0.7108746811267542,
+   "max_px": 1.4875598558278158,
+   "sys_bias_px": [
+    0.0005890167157461495,
+    0.0012207039601656755
+   ],
+   "sys_rms_px": 0.7099313935357796,
+   "sys_max_px": 1.388639198219497,
+   "random_rms_px": 0.11751049976154061,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    0.027838653682603336,
+    0.009090770073163265
+   ],
+   "sys_bias_B_px": [
+    -0.026660620251111038,
+    -0.0066493621528319145
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.6654395781675662,
+   "nearest_p90_px": 0.9465561919860346,
+   "nearest_max_px": 1.4875598558278158,
+   "nearest_over_1px": 162,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 21,
+    "bias_px": [
+     -0.022032560440095494,
+     0.21953301995189634
+    ],
+    "rms_px": 0.8097780895352945,
+    "max_px": 0.9967819556700541,
+    "sys_bias_px": [
+     -0.009769792442227754,
+     0.2068740388395156
+    ],
+    "sys_rms_px": 0.792833516967543,
+    "sys_max_px": 0.9707760557383341,
+    "random_rms_px": 0.023187588574568683,
+    "n_balls": 2,
+    "sys_bias_A_px": [
+     0.06242235516015171,
+     0.9687670514479407
+    ],
+    "sys_bias_B_px": [
+     -0.08196194004460722,
+     -0.5550189737689095
+    ],
+    "nearest_found": 24,
+    "nearest_median_px": 11.532756933124858,
+    "nearest_p90_px": 16.25955628150998,
+    "nearest_max_px": 19.612328156994792,
+    "nearest_over_1px": 22
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/backlit/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    0.002896249369648607,
+    0.00039252799526294415
+   ],
+   "rms_px": 0.18075007554697262,
+   "max_px": 0.6208339394563952,
+   "sys_bias_px": [
+    0.00354491738862201,
+    0.0008127509732354503
+   ],
+   "sys_rms_px": 0.17713799367691482,
+   "sys_max_px": 0.5868279439476696,
+   "random_rms_px": 0.03164751076777948,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    0.009780031826013889,
+    0.001868117481700012
+   ],
+   "sys_bias_B_px": [
+    -0.0026901970487698693,
+    -0.0002426155352291113
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.09820555981137527,
+   "nearest_p90_px": 0.30765651726509574,
+   "nearest_max_px": 0.6208339394563952,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 21,
+    "bias_px": [
+     0.022487740910378307,
+     0.09565709422900426
+    ],
+    "rms_px": 0.16236873619303738,
+    "max_px": 0.2274291419933139,
+    "sys_bias_px": [
+     0.020725309585316154,
+     0.09389894578880842
+    ],
+    "sys_rms_px": 0.1651273602242913,
+    "sys_max_px": 0.230372228514826,
+    "random_rms_px": 0.0058317796543219825,
+    "n_balls": 2,
+    "sys_bias_A_px": [
+     0.04556081969712977,
+     0.22582199932560343
+    ],
+    "sys_bias_B_px": [
+     -0.004110200526497465,
+     -0.03802410774798659
+    ],
+    "nearest_found": 25,
+    "nearest_median_px": 8.648068718098237,
+    "nearest_p90_px": 12.645429010363541,
+    "nearest_max_px": 19.65236136520862,
+    "nearest_over_1px": 21
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/backlit/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -0.0013782751043347444,
+    0.0005139738086441152
+   ],
+   "rms_px": 0.04292342462811802,
+   "max_px": 0.2888701275795869,
+   "sys_bias_px": [
+    -0.000640161408237335,
+    7.93925379559552e-05
+   ],
+   "sys_rms_px": 0.014659701511327552,
+   "sys_max_px": 0.08513752383694549,
+   "random_rms_px": 0.03988248671095049,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    -0.001095043451063689,
+    4.369473978780509e-06
+   ],
+   "sys_bias_B_px": [
+    -0.00018527936541098107,
+    0.0001544156019331299
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.021507632840020934,
+   "nearest_p90_px": 0.06576668017453936,
+   "nearest_max_px": 0.2888701275795869,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 21,
+    "bias_px": [
+     -0.0013571375642982275,
+     0.011634135658276534
+    ],
+    "rms_px": 0.01570332793725576,
+    "max_px": 0.021859444499605887,
+    "sys_bias_px": [
+     0.0011770119924676692,
+     0.0029588413471017816
+    ],
+    "sys_rms_px": 0.0036884921284640907,
+    "sys_max_px": 0.004915176367496092,
+    "random_rms_px": 0.012573344494345055,
+    "n_balls": 2,
+    "sys_bias_A_px": [
+     0.0010018230152581964,
+     0.004811996401670626
+    ],
+    "sys_bias_B_px": [
+     0.001352200969677142,
+     0.001105686292532937
+    ],
+    "nearest_found": 25,
+    "nearest_median_px": 8.648068718098237,
+    "nearest_p90_px": 12.645429010363541,
+    "nearest_max_px": 19.65236136520862,
+    "nearest_over_1px": 21
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/even/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 47,
+   "swapped": 0,
+   "wrong": 1095,
+   "missing": 0,
+   "bias_px": [
+    -0.46753066507402896,
+    -0.1581500232634803
+   ],
+   "rms_px": 3.2464768646297033,
+   "max_px": 4.942537666374265,
+   "sys_bias_px": [
+    -0.6669314801707974,
+    -0.09273073948329563
+   ],
+   "sys_rms_px": 3.2194781237484387,
+   "sys_max_px": 4.828625036944001,
+   "random_rms_px": 2.116437672212663,
+   "n_balls": 22,
+   "sys_bias_A_px": [
+    -0.15421099349153297,
+    -0.0962709995921991
+   ],
+   "sys_bias_B_px": [
+    -1.179651966850062,
+    -0.08919047937439215
+   ],
+   "nearest_found": 2279,
+   "nearest_median_px": 6.106101934390459,
+   "nearest_p90_px": 9.81380913544867,
+   "nearest_max_px": 19.363386781707465,
+   "nearest_over_1px": 1835,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 21,
+    "missing": 1,
+    "nearest_found": 42,
+    "nearest_median_px": 7.063189152832508,
+    "nearest_p90_px": 12.632544028772854,
+    "nearest_max_px": 13.979045134694754,
+    "nearest_over_1px": 40
+   },
+   "overlap_wrong": 16,
+   "overlap_n": 17
+  },
+  "defocused/even/pyopenlpt_reliable": {
+   "camera_frames": 0,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "nearest_found": 0,
+   "crowded": null,
+   "overlap_wrong": 0,
+   "overlap_n": 0
+  },
+  "defocused/even/blob": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -0.021435442694671146,
+    0.0029685421677526753
+   ],
+   "rms_px": 1.027939867306077,
+   "max_px": 3.0854788039118883,
+   "sys_bias_px": [
+    -0.021488950988230598,
+    0.004210867805855405
+   ],
+   "sys_rms_px": 1.0271055529109259,
+   "sys_max_px": 3.0396075106050735,
+   "random_rms_px": 0.05760995765564502,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    -0.042988113762780486,
+    -0.017182286683259627
+   ],
+   "sys_bias_B_px": [
+    1.021178631928804e-05,
+    0.025604022294970438
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.10946329402351396,
+   "nearest_p90_px": 2.0150293605189313,
+   "nearest_max_px": 3.0854788039118883,
+   "nearest_over_1px": 638,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 3,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 19,
+    "bias_px": [
+     0.06914936133957401,
+     0.8637279401279704
+    ],
+    "rms_px": 1.759318215766753,
+    "max_px": 2.8748693209965523,
+    "sys_bias_px": [
+     0.09583534188023653,
+     0.8523332888697723
+    ],
+    "sys_rms_px": 1.7700011859343923,
+    "sys_max_px": 2.839477464433433,
+    "random_rms_px": 0.07657777779023206,
+    "n_balls": 6,
+    "sys_bias_A_px": [
+     0.7825524233100699,
+     0.5138727547142613
+    ],
+    "sys_bias_B_px": [
+     -0.5908817395495968,
+     1.1907938230252835
+    ],
+    "nearest_found": 27,
+    "nearest_median_px": 11.02958610061721,
+    "nearest_p90_px": 15.41579009496441,
+    "nearest_max_px": 19.564374581027696,
+    "nearest_over_1px": 24
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/even/blob_open": {
+   "camera_frames": 1142,
+   "ok": 960,
+   "swapped": 0,
+   "wrong": 161,
+   "missing": 21,
+   "bias_px": [
+    -0.04481098675314537,
+    0.030953591357050437
+   ],
+   "rms_px": 1.5135769529612,
+   "max_px": 4.981363542273329,
+   "sys_bias_px": [
+    -0.04163808838061964,
+    0.031012541903043468
+   ],
+   "sys_rms_px": 1.508257172253632,
+   "sys_max_px": 4.994954128984973,
+   "random_rms_px": 0.11787900404583503,
+   "n_balls": 1918,
+   "sys_bias_A_px": [
+    -0.0678923801998443,
+    0.015345868202777486
+   ],
+   "sys_bias_B_px": [
+    -0.015383796561394977,
+    0.046679215603309454
+   ],
+   "nearest_found": 2263,
+   "nearest_median_px": 0.1536212214091256,
+   "nearest_p90_px": 4.21048449368178,
+   "nearest_max_px": 13.189618536405264,
+   "nearest_over_1px": 713,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 4,
+    "missing": 16,
+    "bias_px": [
+     -0.39834967171856306,
+     1.9103505447956017
+    ],
+    "rms_px": 2.7470901939980634,
+    "max_px": 4.126150482550705,
+    "sys_bias_px": [
+     -0.30849612428903583,
+     1.7909509034813098
+    ],
+    "sys_rms_px": 2.59083955592003,
+    "sys_max_px": 3.703594245979638,
+    "random_rms_px": 0.23173593707005075,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -0.05431213784720512,
+     0.05645270925164425
+    ],
+    "sys_bias_B_px": [
+     -0.5626801107308665,
+     3.5254490977109754
+    ],
+    "nearest_found": 30,
+    "nearest_median_px": 4.877440509866164,
+    "nearest_p90_px": 12.658351411336012,
+    "nearest_max_px": 19.567671507221085,
+    "nearest_over_1px": 23
+   },
+   "overlap_wrong": 3,
+   "overlap_n": 17
+  },
+  "defocused/even/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1100,
+   "swapped": 0,
+   "wrong": 13,
+   "missing": 29,
+   "bias_px": [
+    -0.003933404149842695,
+    -0.0003122318632288798
+   ],
+   "rms_px": 0.11991349989458445,
+   "max_px": 1.6983513524374014,
+   "sys_bias_px": [
+    -0.0057842610454169625,
+    0.0004727688709864534
+   ],
+   "sys_rms_px": 0.1272698955102784,
+   "sys_max_px": 1.9263820118389727,
+   "random_rms_px": 0.07503182204011184,
+   "n_balls": 2188,
+   "sys_bias_A_px": [
+    -0.010884102735252872,
+    0.001975658165650075
+   ],
+   "sys_bias_B_px": [
+    -0.000684419355581053,
+    -0.0010301204236771683
+   ],
+   "nearest_found": 2255,
+   "nearest_median_px": 0.028294537869163177,
+   "nearest_p90_px": 0.18676718130721937,
+   "nearest_max_px": 9.733091866646705,
+   "nearest_over_1px": 16,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 8,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 14,
+    "bias_px": [
+     0.003450996329680933,
+     0.004381837551402867
+    ],
+    "rms_px": 0.38176855338941856,
+    "max_px": 0.9745600344582983,
+    "sys_bias_px": [
+     0.0021554344524137292,
+     -0.0011270586676150884
+    ],
+    "sys_rms_px": 0.36065616781731136,
+    "sys_max_px": 0.9026458490088093,
+    "random_rms_px": 0.07441286546262729,
+    "n_balls": 16,
+    "sys_bias_A_px": [
+     1.2364358365601902e-05,
+     0.02652905750125356
+    ],
+    "sys_bias_B_px": [
+     0.0042985045464618565,
+     -0.028783174836483738
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 0.2626817795105383,
+    "nearest_p90_px": 8.89925230410134,
+    "nearest_max_px": 19.64849090396679,
+    "nearest_over_1px": 10
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/even/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1114,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 28,
+   "bias_px": [
+    -0.0006495915412434455,
+    0.0005772928452445241
+   ],
+   "rms_px": 0.060978737137029095,
+   "max_px": 0.5311172569432537,
+   "sys_bias_px": [
+    -0.0005996176938183983,
+    0.0008009508784174548
+   ],
+   "sys_rms_px": 0.04506962194323345,
+   "sys_max_px": 0.5257270597510844,
+   "random_rms_px": 0.04108155012940927,
+   "n_balls": 2224,
+   "sys_bias_A_px": [
+    -0.000749931840406427,
+    0.0018151056097207678
+   ],
+   "sys_bias_B_px": [
+    -0.00044930354723036976,
+    -0.0002132038528858582
+   ],
+   "nearest_found": 2256,
+   "nearest_median_px": 0.023068182376209716,
+   "nearest_p90_px": 0.08364457174401277,
+   "nearest_max_px": 0.5854554384325259,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 8,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 14,
+    "bias_px": [
+     -0.12132598775310122,
+     -0.06868906758958282
+    ],
+    "rms_px": 1.4210895582040293,
+    "max_px": 4.462822249181707,
+    "sys_bias_px": [
+     -0.18098543558245694,
+     -0.05608054144636476
+    ],
+    "sys_rms_px": 1.374892578097989,
+    "sys_max_px": 4.873686925274522,
+    "random_rms_px": 0.26754414219747014,
+    "n_balls": 16,
+    "sys_bias_A_px": [
+     -0.36345742597278985,
+     -0.1107641227394538
+    ],
+    "sys_bias_B_px": [
+     0.0014865548078759616,
+     -0.001396960153275728
+    ],
+    "nearest_found": 32,
+    "nearest_median_px": 0.1518267022499446,
+    "nearest_p90_px": 8.89925230410134,
+    "nearest_max_px": 19.64849090396679,
+    "nearest_over_1px": 12
+   },
+   "overlap_wrong": 2,
+   "overlap_n": 17
+  },
+  "defocused/side/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 49,
+   "swapped": 0,
+   "wrong": 1093,
+   "missing": 0,
+   "bias_px": [
+    0.07194985914216108,
+    -0.2559641615681443
+   ],
+   "rms_px": 2.8969666450076126,
+   "max_px": 4.916060324871832,
+   "sys_bias_px": [
+    0.30552788085189664,
+    -0.17186886690918995
+   ],
+   "sys_rms_px": 2.8449860488010836,
+   "sys_max_px": 4.8806579833475805,
+   "random_rms_px": 2.1176760962070467,
+   "n_balls": 26,
+   "sys_bias_A_px": [
+    1.3944418168443262,
+    -0.10686048017756906
+   ],
+   "sys_bias_B_px": [
+    -0.7833860551405328,
+    -0.23687725364081083
+   ],
+   "nearest_found": 2280,
+   "nearest_median_px": 6.29893855472138,
+   "nearest_p90_px": 9.813805369751844,
+   "nearest_max_px": 19.343446418125588,
+   "nearest_over_1px": 1893,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 0,
+    "swapped": 0,
+    "wrong": 22,
+    "missing": 0,
+    "nearest_found": 43,
+    "nearest_median_px": 7.615176397258967,
+    "nearest_p90_px": 12.6061430566044,
+    "nearest_max_px": 16.940521612782195,
+    "nearest_over_1px": 41
+   },
+   "overlap_wrong": 17,
+   "overlap_n": 17
+  },
+  "defocused/side/pyopenlpt_reliable": {
+   "camera_frames": 0,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "nearest_found": 0,
+   "crowded": null,
+   "overlap_wrong": 0,
+   "overlap_n": 0
+  },
+  "defocused/side/blob": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    0.21378449531443727,
+    -0.47739903180258775
+   ],
+   "rms_px": 1.1643344025614986,
+   "max_px": 3.50961774129753,
+   "sys_bias_px": [
+    0.21409911581326938,
+    -0.47817511532569335
+   ],
+   "sys_rms_px": 1.1630985472279856,
+   "sys_max_px": 3.540564647331504,
+   "random_rms_px": 0.056564238383941395,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    0.18827913812662933,
+    -0.4847057328258716
+   ],
+   "sys_bias_B_px": [
+    0.23991909349990942,
+    -0.47164449782551504
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.6500337799143084,
+   "nearest_p90_px": 2.0794672782612817,
+   "nearest_max_px": 3.50961774129753,
+   "nearest_over_1px": 658,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 3,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 19,
+    "bias_px": [
+     0.4093563804091218,
+     0.3835849356364586
+    ],
+    "rms_px": 1.6014919088042758,
+    "max_px": 2.8104815537257566,
+    "sys_bias_px": [
+     0.3916188495308006,
+     0.376924693572479
+    ],
+    "sys_rms_px": 1.6156164009241474,
+    "sys_max_px": 2.8587889716871078,
+    "random_rms_px": 0.04296064328176511,
+    "n_balls": 6,
+    "sys_bias_A_px": [
+     1.0567885870060536,
+     0.08599103352045272
+    ],
+    "sys_bias_B_px": [
+     -0.27355088794445237,
+     0.6678583536245052
+    ],
+    "nearest_found": 26,
+    "nearest_median_px": 10.969928625023883,
+    "nearest_p90_px": 14.229987906228406,
+    "nearest_max_px": 17.13081763267249,
+    "nearest_over_1px": 23
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/side/blob_open": {
+   "camera_frames": 1142,
+   "ok": 964,
+   "swapped": 0,
+   "wrong": 156,
+   "missing": 22,
+   "bias_px": [
+    0.18095883278713581,
+    -0.44935637566957204
+   ],
+   "rms_px": 1.5988138799240856,
+   "max_px": 4.992131243627148,
+   "sys_bias_px": [
+    0.17911513601323814,
+    -0.44518000124394813
+   ],
+   "sys_rms_px": 1.5886175444772608,
+   "sys_max_px": 4.959937449240177,
+   "random_rms_px": 0.11397013562935628,
+   "n_balls": 1924,
+   "sys_bias_A_px": [
+    0.14569707951729619,
+    -0.45167386808560384
+   ],
+   "sys_bias_B_px": [
+    0.2125331925091801,
+    -0.4386861344022923
+   ],
+   "nearest_found": 2262,
+   "nearest_median_px": 0.670594916768369,
+   "nearest_p90_px": 4.178716642882709,
+   "nearest_max_px": 12.939969201905042,
+   "nearest_over_1px": 733,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 4,
+    "missing": 16,
+    "bias_px": [
+     0.08367490289415969,
+     1.3390177974462354
+    ],
+    "rms_px": 2.3627490964731095,
+    "max_px": 3.3127703004079816,
+    "sys_bias_px": [
+     0.06175488708583998,
+     1.372060467181079
+    ],
+    "sys_rms_px": 2.3485825295076457,
+    "sys_max_px": 3.3390810052353554,
+    "random_rms_px": 0.08087358291647524,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     0.37205308138481996,
+     -0.3856137911087245
+    ],
+    "sys_bias_B_px": [
+     -0.24854330721314,
+     3.1297347254708825
+    ],
+    "nearest_found": 29,
+    "nearest_median_px": 3.3127703004079816,
+    "nearest_p90_px": 11.065862948731137,
+    "nearest_max_px": 13.227927017425424,
+    "nearest_over_1px": 20
+   },
+   "overlap_wrong": 3,
+   "overlap_n": 17
+  },
+  "defocused/side/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1100,
+   "swapped": 0,
+   "wrong": 14,
+   "missing": 28,
+   "bias_px": [
+    0.13148995014843434,
+    -0.274907057719997
+   ],
+   "rms_px": 0.35896874264990164,
+   "max_px": 2.8268759560272096,
+   "sys_bias_px": [
+    0.13410439475912567,
+    -0.27927695515820095
+   ],
+   "sys_rms_px": 0.3568512762473936,
+   "sys_max_px": 2.690689665678901,
+   "random_rms_px": 0.06529959915606545,
+   "n_balls": 2184,
+   "sys_bias_A_px": [
+    0.13722895305316937,
+    -0.275834883901962
+   ],
+   "sys_bias_B_px": [
+    0.13097983646508196,
+    -0.28271902641443974
+   ],
+   "nearest_found": 2256,
+   "nearest_median_px": 0.32660387424633697,
+   "nearest_p90_px": 0.4247215969345929,
+   "nearest_max_px": 9.745412661305906,
+   "nearest_over_1px": 24,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 6,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 16,
+    "bias_px": [
+     0.1395813959115344,
+     -0.2405698004273802
+    ],
+    "rms_px": 0.34014466156581324,
+    "max_px": 0.5397310204577919,
+    "sys_bias_px": [
+     0.13649398954290368,
+     -0.24491663737217095
+    ],
+    "sys_rms_px": 0.34221074087151304,
+    "sys_max_px": 0.5252226567162016,
+    "random_rms_px": 0.01861947067562298,
+    "n_balls": 12,
+    "sys_bias_A_px": [
+     0.15411541903127576,
+     -0.21412132885862434
+    ],
+    "sys_bias_B_px": [
+     0.11887256005453158,
+     -0.27571194588571757
+    ],
+    "nearest_found": 29,
+    "nearest_median_px": 0.37445773821808426,
+    "nearest_p90_px": 9.33761978312469,
+    "nearest_max_px": 13.115811029819096,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/side/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1119,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 23,
+   "bias_px": [
+    0.13402791075669457,
+    -0.27749005283395706
+   ],
+   "rms_px": 0.3422849730013062,
+   "max_px": 0.8645543118241942,
+   "sys_bias_px": [
+    0.1359500449035154,
+    -0.2817193017256531
+   ],
+   "sys_rms_px": 0.3435400673969827,
+   "sys_max_px": 0.863418978113444,
+   "random_rms_px": 0.0429377521536879,
+   "n_balls": 2238,
+   "sys_bias_A_px": [
+    0.14151850732050245,
+    -0.2800056343921971
+   ],
+   "sys_bias_B_px": [
+    0.1303815824865283,
+    -0.28343296905910914
+   ],
+   "nearest_found": 2261,
+   "nearest_median_px": 0.3264287613937106,
+   "nearest_p90_px": 0.4204055453524862,
+   "nearest_max_px": 0.8645543118241942,
+   "nearest_over_1px": 0,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 6,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 16,
+    "bias_px": [
+     0.11137877443059334,
+     -0.24142590512369466
+    ],
+    "rms_px": 0.30227156471012595,
+    "max_px": 0.3772377287231108,
+    "sys_bias_px": [
+     0.10998050261684729,
+     -0.24216963992499055
+    ],
+    "sys_rms_px": 0.30411309207578213,
+    "sys_max_px": 0.3851828460739008,
+    "random_rms_px": 0.02458921119103871,
+    "n_balls": 12,
+    "sys_bias_A_px": [
+     0.10117907672861766,
+     -0.25332549330236515
+    ],
+    "sys_bias_B_px": [
+     0.11878192850507692,
+     -0.23101378654761598
+    ],
+    "nearest_found": 29,
+    "nearest_median_px": 0.3732422557482017,
+    "nearest_p90_px": 9.33761978312469,
+    "nearest_max_px": 13.115811029819096,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/highlight/pyopenlpt_fast": {
+   "camera_frames": 1142,
+   "ok": 58,
+   "swapped": 0,
+   "wrong": 1084,
+   "missing": 0,
+   "bias_px": [
+    0.10394181597555985,
+    -0.08662401727365482
+   ],
+   "rms_px": 3.2421958550100496,
+   "max_px": 4.857383681754969,
+   "sys_bias_px": [
+    -0.10993976333685138,
+    -0.10954150467821804
+   ],
+   "sys_rms_px": 3.1775947557490554,
+   "sys_max_px": 4.968521591020016,
+   "random_rms_px": 2.6206396229496662,
+   "n_balls": 44,
+   "sys_bias_A_px": [
+    -0.3357479882488509,
+    -0.03589563660216041
+   ],
+   "sys_bias_B_px": [
+    0.11586846157514814,
+    -0.18318737275427566
+   ],
+   "nearest_found": 2278,
+   "nearest_median_px": 6.0445840313605,
+   "nearest_p90_px": 9.904271120244243,
+   "nearest_max_px": 18.48094913973678,
+   "nearest_over_1px": 1858,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 1,
+    "swapped": 0,
+    "wrong": 20,
+    "missing": 1,
+    "nearest_found": 44,
+    "nearest_median_px": 7.01769372702061,
+    "nearest_p90_px": 13.16580678972133,
+    "nearest_max_px": 14.506203248046175,
+    "nearest_over_1px": 42
+   },
+   "overlap_wrong": 16,
+   "overlap_n": 17
+  },
+  "defocused/highlight/pyopenlpt_reliable": {
+   "camera_frames": 0,
+   "ok": 0,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "nearest_found": 0,
+   "crowded": null,
+   "overlap_wrong": 0,
+   "overlap_n": 0
+  },
+  "defocused/highlight/blob": {
+   "camera_frames": 1142,
+   "ok": 1142,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 0,
+   "bias_px": [
+    -0.02493044643690437,
+    -0.00042238692659870994
+   ],
+   "rms_px": 1.0304672746633317,
+   "max_px": 3.15715215572995,
+   "sys_bias_px": [
+    -0.023998864752029576,
+    -0.0003749219174706138
+   ],
+   "sys_rms_px": 1.0292374866204792,
+   "sys_max_px": 3.084422928720866,
+   "random_rms_px": 0.05781385623024898,
+   "n_balls": 2284,
+   "sys_bias_A_px": [
+    -0.046843098983153045,
+    -0.024283200157226768
+   ],
+   "sys_bias_B_px": [
+    -0.0011546305209061062,
+    0.02353335632228554
+   ],
+   "nearest_found": 2284,
+   "nearest_median_px": 0.11387960435898054,
+   "nearest_p90_px": 2.027042569273235,
+   "nearest_max_px": 3.15715215572995,
+   "nearest_over_1px": 633,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 3,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 19,
+    "bias_px": [
+     0.08063363891022846,
+     0.8271652287797527
+    ],
+    "rms_px": 1.7194586811529835,
+    "max_px": 2.7843171877986492,
+    "sys_bias_px": [
+     0.09850115076888717,
+     0.8564372191065507
+    ],
+    "sys_rms_px": 1.7602725531073062,
+    "sys_max_px": 2.856320406144729,
+    "random_rms_px": 0.06288763872469053,
+    "n_balls": 6,
+    "sys_bias_A_px": [
+     0.792978451187499,
+     0.529917259522018
+    ],
+    "sys_bias_B_px": [
+     -0.5959761496497246,
+     1.1829571786910833
+    ],
+    "nearest_found": 27,
+    "nearest_median_px": 10.905521979535594,
+    "nearest_p90_px": 15.423728436368098,
+    "nearest_max_px": 19.58295296291377,
+    "nearest_over_1px": 24
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/highlight/blob_open": {
+   "camera_frames": 1142,
+   "ok": 958,
+   "swapped": 0,
+   "wrong": 160,
+   "missing": 24,
+   "bias_px": [
+    -0.04499051147140558,
+    0.023744419440892485
+   ],
+   "rms_px": 1.4959733391185193,
+   "max_px": 4.964783603988075,
+   "sys_bias_px": [
+    -0.041675648956832616,
+    0.023786899207009195
+   ],
+   "sys_rms_px": 1.4915609713198552,
+   "sys_max_px": 4.906588963600762,
+   "random_rms_px": 0.11635195637759838,
+   "n_balls": 1910,
+   "sys_bias_A_px": [
+    -0.07396809978179249,
+    0.005838351293372778
+   ],
+   "sys_bias_B_px": [
+    -0.009383198131872746,
+    0.04173544712064561
+   ],
+   "nearest_found": 2260,
+   "nearest_median_px": 0.15394188391258623,
+   "nearest_p90_px": 4.1079933267281765,
+   "nearest_max_px": 13.237021363641318,
+   "nearest_over_1px": 706,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 2,
+    "swapped": 0,
+    "wrong": 4,
+    "missing": 16,
+    "bias_px": [
+     -0.34071964257441323,
+     1.8329685681208154
+    ],
+    "rms_px": 2.7076918589157453,
+    "max_px": 3.906091868323679,
+    "sys_bias_px": [
+     -0.2518065422075324,
+     1.7485092236917268
+    ],
+    "sys_rms_px": 2.547978884998872,
+    "sys_max_px": 3.703594245979638,
+    "random_rms_px": 0.19163829286764322,
+    "n_balls": 4,
+    "sys_bias_A_px": [
+     -0.03176940280445706,
+     0.04280574000122783
+    ],
+    "sys_bias_B_px": [
+     -0.47184368161060775,
+     3.4542127073822257
+    ],
+    "nearest_found": 30,
+    "nearest_median_px": 4.769950287200579,
+    "nearest_p90_px": 11.433730867385847,
+    "nearest_max_px": 19.562589776636038,
+    "nearest_over_1px": 22
+   },
+   "overlap_wrong": 3,
+   "overlap_n": 17
+  },
+  "defocused/highlight/ellipse": {
+   "camera_frames": 1142,
+   "ok": 1099,
+   "swapped": 0,
+   "wrong": 13,
+   "missing": 30,
+   "bias_px": [
+    0.03848646989519591,
+    0.1694412774334407
+   ],
+   "rms_px": 0.3261740193820417,
+   "max_px": 2.338634262081548,
+   "sys_bias_px": [
+    0.03660468602217856,
+    0.17291232298493658
+   ],
+   "sys_rms_px": 0.33496301697709635,
+   "sys_max_px": 3.5760309616142134,
+   "random_rms_px": 0.07958225318612674,
+   "n_balls": 2190,
+   "sys_bias_A_px": [
+    0.026818600299428494,
+    0.14176770023568042
+   ],
+   "sys_bias_B_px": [
+    0.04639077174492863,
+    0.20405694573419272
+   ],
+   "nearest_found": 2254,
+   "nearest_median_px": 0.2503355600445639,
+   "nearest_p90_px": 0.4748294234518253,
+   "nearest_max_px": 10.478535632379792,
+   "nearest_over_1px": 20,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 7,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 15,
+    "bias_px": [
+     0.10791751358203173,
+     0.1416342704401115
+    ],
+    "rms_px": 0.44504461313125887,
+    "max_px": 0.9142837543468048,
+    "sys_bias_px": [
+     0.08983165704802534,
+     0.1482529312053568
+    ],
+    "sys_rms_px": 0.4362885650195766,
+    "sys_max_px": 0.7424438463471686,
+    "random_rms_px": 0.06077601395585575,
+    "n_balls": 14,
+    "sys_bias_A_px": [
+     0.1378997789951565,
+     0.22881006703018766
+    ],
+    "sys_bias_B_px": [
+     0.04176353510089419,
+     0.06769579538052588
+    ],
+    "nearest_found": 31,
+    "nearest_median_px": 0.5519837591778932,
+    "nearest_p90_px": 9.116393435670066,
+    "nearest_max_px": 19.56829138523092,
+    "nearest_over_1px": 11
+   },
+   "overlap_wrong": 0,
+   "overlap_n": 17
+  },
+  "defocused/highlight/ellipse_rodmask": {
+   "camera_frames": 1142,
+   "ok": 1114,
+   "swapped": 0,
+   "wrong": 0,
+   "missing": 28,
+   "bias_px": [
+    0.0372550340407344,
+    0.16220973040520761
+   ],
+   "rms_px": 0.34040617842877585,
+   "max_px": 1.4056033478766436,
+   "sys_bias_px": [
+    0.03577562510652845,
+    0.16481162717416495
+   ],
+   "sys_rms_px": 0.3410878332620725,
+   "sys_max_px": 1.264276339674325,
+   "random_rms_px": 0.05364037432193823,
+   "n_balls": 2228,
+   "sys_bias_A_px": [
+    0.03134794008238998,
+    0.13614807478369653
+   ],
+   "sys_bias_B_px": [
+    0.04020331013066692,
+    0.19347517956463334
+   ],
+   "nearest_found": 2256,
+   "nearest_median_px": 0.27450081239737023,
+   "nearest_p90_px": 0.5373245152444381,
+   "nearest_max_px": 1.4056033478766436,
+   "nearest_over_1px": 2,
+   "crowded": {
+    "camera_frames": 22,
+    "ok": 7,
+    "swapped": 0,
+    "wrong": 0,
+    "missing": 15,
+    "bias_px": [
+     0.19536803778573691,
+     0.10725787675924993
+    ],
+    "rms_px": 0.5978181114600185,
+    "max_px": 1.8093439286272086,
+    "sys_bias_px": [
+     0.2871226839450876,
+     0.10181977016836592
+    ],
+    "sys_rms_px": 0.9356461636402956,
+    "sys_max_px": 3.2719741884665625,
+    "random_rms_px": 0.40721456768270425,
+    "n_balls": 14,
+    "sys_bias_A_px": [
+     0.5335922004473161,
+     0.08883577226848567
+    ],
+    "sys_bias_B_px": [
+     0.040653167442859024,
+     0.11480376806824617
+    ],
+    "nearest_found": 31,
+    "nearest_median_px": 0.6061195755111929,
+    "nearest_p90_px": 9.116393435670066,
+    "nearest_max_px": 19.56829138523092,
+    "nearest_over_1px": 12
+   },
+   "overlap_wrong": 1,
+   "overlap_n": 17
+  }
+ },
+ "verdict": {
+  "pyopenlpt_fast": false,
+  "pyopenlpt_reliable": false,
+  "blob": false,
+  "blob_open": false,
+  "ellipse": false,
+  "ellipse_rodmask": false
+ }
+}

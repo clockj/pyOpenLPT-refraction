@@ -1,0 +1,3 @@
+G2: Gall12_r2, Gall12_r2_control; OMP_NUM_THREADS 10
+  Gall12_r2: recall (central, seen by all) 0.159, >= 2 0.159; reconstructed 89 per frame, ghosts 11 (12.0 %), duplicates 0.0; position RMS 20.8, 13.3, 18.0 um; long tracks 241 (ghost 19), purity 0.883, track recall 0.158; 18.80 s per frame; exit 0, wall 754 s
+  Gall12_r2_control: exit 0, wall 744 s (scored by g3_control.py)

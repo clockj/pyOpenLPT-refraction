@@ -1,0 +1,28 @@
+F1: hinted projection against project(); build p1 (d9b20b4 + diff 89d864c56ab3); cameras D:\Refraction\pyOpenLPT\tests\cylinder_stb\data\cams_T2
+  20000 base points seen by both cameras; radius from the axis 0.1-30.8 mm, along it (y) -9.0 to 11.9 mm; 10 moves each
+    tol 1e-9 (tracking): 2000 / 20000 base points, 9 s
+    tol 1e-9 (tracking): 4000 / 20000 base points, 19 s
+    tol 1e-9 (tracking): 6000 / 20000 base points, 30 s
+    tol 1e-9 (tracking): 8000 / 20000 base points, 40 s
+    tol 1e-9 (tracking): 10000 / 20000 base points, 50 s
+    tol 1e-9 (tracking): 12000 / 20000 base points, 60 s
+    tol 1e-9 (tracking): 14000 / 20000 base points, 71 s
+    tol 1e-9 (tracking): 16000 / 20000 base points, 86 s
+    tol 1e-9 (tracking): 18000 / 20000 base points, 102 s
+    tol 1e-9 (tracking): 20000 / 20000 base points, 118 s
+
+  tol 1e-9 (tracking): 400000 point-camera pairs, 118 s
+    fast path taken: 400000 (100.000 %); fallbacks: 0 not certified single-image, 0 solve not converged
+    both succeed: 400000; slow fails, fast succeeds: 0; slow succeeds, fast fails: 0; both fail: 0
+    |pixel difference|: median 0, 99th percentile 3.4e-11, max 4.4e-09 px; histogram {'[0, 1e-12)': 389236, '[1e-12, 1e-10)': 10036, '[1e-10, 1e-08)': 728, '[1e-08, 1e-07)': 0, '[1e-07, 1e-06)': 0, '[1e-06, 0.0001)': 0, '[0.0001, inf)': 0}
+    worst: {'X': [13.636029032037559, -2.9079851988479013, 23.592854568066528], 'cam': 2, 'step_mm': 0.05437530292977935, 'slow': [13.008116754292246, 491.8024841645612], 'fast': [13.008116749896203, 491.8024841645157], 'fast_path': True}
+    judged: pixels within 1e-6 px and no new failure: PASS
+    tol 1e-12 (as delivered): 2000 / 5000 base points, 17 s
+    tol 1e-12 (as delivered): 4000 / 5000 base points, 35 s
+
+  tol 1e-12 (as delivered): 99990 point-camera pairs, 43 s
+    fast path taken: 99989 (99.999 %); fallbacks: 0 not certified single-image, 1 solve not converged
+    both succeed: 99989; slow fails, fast succeeds: 0; slow succeeds, fast fails: 0; both fail: 1
+    |pixel difference|: median 0, 99th percentile 3.4e-11, max 6.38e-09 px; histogram {'[0, 1e-12)': 97345, '[1e-12, 1e-10)': 2475, '[1e-10, 1e-08)': 169, '[1e-08, 1e-07)': 0, '[1e-07, 1e-06)': 0, '[1e-06, 0.0001)': 0, '[0.0001, inf)': 0}
+    worst: {'X': [11.201609388463378, 10.810207199058484, 13.97544781847082], 'cam': 2, 'step_mm': 0.031333903728559716, 'slow': [330.4420862148584, 7.477109705914074], 'fast': [330.44208620847843, 7.477109705781174], 'fast_path': True}
+    judged: pixels within 1e-6 px and no new failure: PASS

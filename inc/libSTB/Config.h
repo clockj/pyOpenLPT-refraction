@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "ImageIO.h"
 #include "OTF.h"
+#include "LineFinder.h"
 #include "ObjectInfo.h"
 #include "PredField.h"
 
@@ -35,6 +36,16 @@ public:
   bool _load_track = false;
   int _load_track_frame = _frame_start;
   std::string _load_track_path;
+
+  // Optional settings, written "key = value" after the fixed lines of
+  // config.txt:
+  // save_interval: frames between the convergence phase's track saves (the
+  // saves free the lost and exited tracks); a save happens when the frame
+  // number is a multiple of it, and at the last frame.
+  int _save_interval = 500;
+  // profile: print work counters and times of stereo matching for every IPR
+  // round (a diagnostic; off by default).
+  bool _profile = false;
 };
 
 // IPR parameters definition
@@ -78,6 +89,7 @@ struct SMParam {
   double tol_2d_px = 1.0;    // strip half-width in pixels (used inside IDMap)
   double tol_3d_mm = 2.4e-2; // final triangulation tolerance (mm)
   AxisLimit limit;
+  bool profile = false; // print work counters and times per match (BasicSetting::_profile)
   // ... add other knobs if needed
 };
 
@@ -198,6 +210,32 @@ public:
   double _radius_obj; // radius of the object in pixels;
 
   OTF _otf; // OTF parameters for tracer projection
+
+  // config.json only (the cylinder STB plan, Phase 2); the defaults keep
+  // today's behaviour:
+  //  tracer.roi_from_otf: size each image's region (shake window, score,
+  //    residual) from the OTF at the object, out to roi_sigma standard
+  //    deviations, instead of the square of radius_px;
+  //  tracer.otf_file: load the OTF from this file (OTF::saveParam's format,
+  //    e.g. the segment model) instead of estimating it from the first images.
+  bool _roi_from_otf = false;
+  double _roi_sigma = 3.0;
+  std::string _otf_file;
+  //  tracer.detector: "peaks" (today's local maxima) or "lines" (the line
+  //    detector for astigmatic line images, ObjectFinder2D::findTracerLines2D,
+  //    with the settings of tracer.lines);
+  //  tracer.shape_check: stereo matching keeps a candidate only when every
+  //    detection's measured RMS widths sqrt(L^2/12 + s^2) agree with the OTF's
+  //    (segment model) at the triangulated point, within max(shape_tol_px,
+  //    shape_tol_rel x the predicted width) on each image axis: the depth cue.
+  std::string _detector = "peaks";
+  bool _shape_check = false;
+  double _shape_tol_px = 0.8;
+  double _shape_tol_rel = 0.25;
+  LineFinderParam _lines; // tracer.lines: the line detector's settings (LineFinder.h)
+  // tracer.lines.noise: the images' noise sigma (one number, or one per camera);
+  // empty: estimated from each image (LineFinder::estimateNoiseClipped)
+  std::vector<double> _lines_noise;
 
   bool readConfig(const std::string &filepath, BasicSetting &settings) override;
 

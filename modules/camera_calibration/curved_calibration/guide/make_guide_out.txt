@@ -1,0 +1,51 @@
+make_guide.py, 2026-10-04 09:50
+T0: 10936 frames, 87488 detections; delivered fit RMS 0.2773 px, median 0.2177 px, wand 0.0068 mm; 32 rig parameters
+  3-D: 160 wand segments, 8 rays to 2 wand ends (traced rays meet their points within 3.4e-12 mm)
+  a wall's move: camera f 18784 px, 1058 mm from its wall (plate 12.7 mm, n (1.0, 1.49, 1.333)); field half-angle 3.12 deg; image change at the centre / across the row (max - min, px):
+    tilt  0.0 deg: centre +0.00e+00 px, across the row 1.19e-02 px, left after the best shift and scale 4.08e-03 px
+    tilt  1.0 deg: centre +1.96e-04 px, across the row 1.56e-02 px, left after the best shift and scale 8.29e-03 px
+    tilt  3.0 deg: centre +5.30e-03 px, across the row 4.50e-02 px, left after the best shift and scale 1.94e-02 px
+    tilt  5.0 deg: centre +2.45e-02 px, across the row 1.03e-01 px, left after the best shift and scale 3.07e-02 px
+    tilt 10.0 deg: centre +1.95e-01 px, across the row 3.74e-01 px, left after the best shift and scale 5.82e-02 px
+    tilt 13.0 deg: centre +4.25e-01 px, across the row 6.17e-01 px, left after the best shift and scale 7.39e-02 px
+    tilt 16.5 deg: centre +8.60e-01 px, across the row 9.70e-01 px, left after the best shift and scale 9.10e-02 px
+    tilt 20.0 deg: centre +1.51e+00 px, across the row 1.39e+00 px, left after the best shift and scale 1.06e-01 px
+    tilt 30.0 deg: centre +4.85e+00 px, across the row 2.84e+00 px, left after the best shift and scale 1.36e-01 px
+  incidence on their walls: C1 0.77 deg, C2 12.94 deg, C3 16.45 deg, C4 0.47 deg
+  stage 1: 10936 of 10936 frames seen whole by all cameras, 10813 kept; matrix 8 x 21626; singular values 1.088e+05, 8.338e+04, 7.415e+04, 1032, 374.8, 182.9, 108.7, 33.97; rank-3 residual 3.804 px; lengths |d|^2/L^2-1 RMS 0.0262; 0.09 s
+    mirror False: 28.165 mm RMS from the delivered fit's wand ends (cloud RMS radius 33.7 mm), scale 0.5513, rotations 29.54, 51.23, 177.77, 170.54 deg
+    mirror True : 0.382 mm RMS from the delivered fit's wand ends (cloud RMS radius 33.7 mm), scale 1.0022, rotations 0.77, 3.56, 3.85, 1.02 deg
+    C1 magnifications: affine 17.1158, 17.0335 px/mm; final model at the cloud's centre 17.0622, 17.0552
+    C2 magnifications: affine 17.6116, 17.3413 px/mm; final model at the cloud's centre 17.5558, 17.3845
+    C3 magnifications: affine 22.5489, 22.0130 px/mm; final model at the cloud's centre 22.3974, 22.0144
+    C4 magnifications: affine 22.4010, 22.1920 px/mm; final model at the cloud's centre 22.2487, 22.2311
+    perspective, mirror False, C1: 10708 wands, slope -3.904e-05 /px, intercept 5.8646e-02 mm/px -> D nan mm, f nan px (delivered f x n_water/n_air 25039 px)
+    perspective, mirror False, C2: 10336 wands, slope -3.715e-05 /px, intercept 5.7338e-02 mm/px -> D nan mm, f nan px (delivered f x n_water/n_air 25539 px)
+    perspective, mirror False, C3: 10004 wands, slope -2.906e-05 /px, intercept 4.5074e-02 mm/px -> D nan mm, f nan px (delivered f x n_water/n_air 28864 px)
+    perspective, mirror False, C4: 10694 wands, slope -2.964e-05 /px, intercept 4.4915e-02 mm/px -> D nan mm, f nan px (delivered f x n_water/n_air 29370 px)
+    perspective, mirror True , C1: 10708 wands, slope +3.904e-05 /px, intercept 5.8646e-02 mm/px -> D 1502.1 mm, f 25613 px (delivered f x n_water/n_air 25039 px)
+    perspective, mirror True , C2: 10336 wands, slope +3.715e-05 /px, intercept 5.7338e-02 mm/px -> D 1543.5 mm, f 26918 px (delivered f x n_water/n_air 25539 px)
+    perspective, mirror True , C3: 10004 wands, slope +2.906e-05 /px, intercept 4.5074e-02 mm/px -> D 1550.9 mm, f 34408 px (delivered f x n_water/n_air 28864 px)
+    perspective, mirror True , C4: 10694 wands, slope +2.964e-05 /px, intercept 4.4915e-02 mm/px -> D 1515.6 mm, f 33743 px (delivered f x n_water/n_air 29370 px)
+  pinhole start: kept 1 (mirror votes {'False': 0, 'True': 4}); RMS 1.825 px (mirror True); f 27069, 24215, 29174, 28537
+  window search, wall 1: 92 candidate normals x 3 offsets; the delivered normal is 6.70 deg from the cameras' mean view
+  window search, wall 2: 92 candidate normals x 3 offsets; the delivered normal is 8.03 deg from the cameras' mean view
+tube: radii (100.80625, 97.63125) mm, n (1.0, 1.49, 1.333); 3 cameras 1094.13 mm from the axis, f 41459.1 px, (2600, 2000) px; 500 frames (2966 detections, 0.1 px noise) in 0.0 s; fold radius 75.62 mm
+  3-D: 160 wand segments, 6 rays to 2 wand ends (within 5.6e-14 mm)
+  a 2 mm ball through the tube (camera 1): axis ratio 1.227-1.385 over +-20 mm (1.302-1.302 within 8 mm of the axis); image 101.0 x 77.6 px on the axis; centroid offsets up to 0.0113 px
+  placement search (replayed in 19.9 s, identical to cylinder_wand.bootstrap): 98 placements of 98 grid points; best: mirror False, axis at (+0.0, +16.5) mm from the cloud's centroid; quick cost 644.8, short cost 2.189
+  the true axis relative to the cloud's centroid: (+0.03, -0.45) mm; the other mirror image's best quick cost 1074; affine residual 4.927 px on 483 frames
+    short list: mirror False (  +0.0,  +16.5) mm: as placed 4006, quick 644.8, short 2.189
+    short list: mirror False ( +16.5,   +0.0) mm: as placed 3987, quick 475.8, short 2.189
+    short list: mirror False (  +0.0,   +0.0) mm: as placed 472.9, quick 24.75, short 2.189
+    short list: mirror False ( +16.5,  -16.5) mm: as placed 4425, quick 907.7, short 239.1
+    short list: mirror False (  +0.0,  -16.5) mm: as placed 4032, quick 638, short 668
+    short list: mirror False ( -16.5,   +0.0) mm: as placed 3671, quick 458.5, short 700.2
+    C1 at the chosen axis position: stretch ratio 1.3103 -> 496.8 mm along its principal ray, 480.3 mm from the axis (true 1094.13), f 18049 px (true 41459.1)
+    C1 at the true axis position: stretch ratio 1.3103 -> 1348.2 mm along its principal ray, 1348.7 mm from the axis (true 1094.13), f 51175 px (true 41459.1)
+    C2 at the chosen axis position: stretch ratio 1.3064 -> 549.1 mm along its principal ray, 537.5 mm from the axis (true 1094.13), f 20127 px (true 41459.1)
+    C2 at the true axis position: stretch ratio 1.3064 -> 1507.7 mm along its principal ray, 1508.0 mm from the axis (true 1094.13), f 57345 px (true 41459.1)
+    C3 at the chosen axis position: stretch ratio 1.3064 -> 1397.5 mm along its principal ray, 1397.7 mm from the axis (true 1094.13), f 53088 px (true 41459.1)
+    C3 at the true axis position: stretch ratio 1.3064 -> 1315.1 mm along its principal ray, 1315.0 mm from the axis (true 1094.13), f 49842 px (true 41459.1)
+  calibrate from scratch: 27.8 s, RMS 0.1065 px, f errors -0.066 %, -0.093 %, -0.064 %, distances to the axis -0.693 mm, -0.982 mm, -0.670 mm; 19 rig parameters, 2966/2966 detections kept
+wrote D:\Refraction\pyOpenLPT\modules\camera_calibration\curved_calibration\guide\guide_data.json (203 kB) in 72 s

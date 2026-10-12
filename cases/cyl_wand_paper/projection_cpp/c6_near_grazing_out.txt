@@ -1,0 +1,14 @@
+c6_near_grazing: started 2026-10-06 13:17:35; module projbench.cp311-win_amd64.pyd (SHA-256 01ab7737e3b8, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+reference port: n = [1.0, 1.49, 1.33], R = [100.0, 94.0] mm, r_P = 350.0 mm
+  near: Python 391 of 400, C++ 391 of 400
+  far : Python 248 of 250, C++ 248 of 250
+random stack 1 (N = 4): n = [1.0, np.float64(1.267), np.float64(2.0444), np.float64(1.8415)], R = [82.702, 70.397, 24.176] mm, r_P = 1098.2 mm
+  near: Python 400 of 400, C++ 400 of 400
+  far : Python 248 of 250, C++ 247 of 250
+random stack 2 (N = 4): n = [1.0, np.float64(1.7064), np.float64(2.341), np.float64(1.2896)], R = [114.638, 102.473, 61.432] mm, r_P = 1366.8 mm
+  near: Python 399 of 400, C++ 399 of 400
+  far : Python 250 of 250, C++ 250 of 250
+python: 1936 of 1950 near-grazing rays returned; missed 14, all with 1 - Lambda/Lmax <= 5.6e-14
+cpp: 1935 of 1950 near-grazing rays returned; missed 15, all with 1 - Lambda/Lmax <= 5.6e-14
+C6 PASS: C++ 1935 of 1950, Python 1936 of 1950; C++ rays lost outside the rounding band (1 - Lambda/Lmax > 2 eps^2/tol^2 = 9.9e-14): 0; 120 s
+c6_near_grazing: done in 120.4 s

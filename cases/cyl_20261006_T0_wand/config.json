@@ -1,0 +1,54 @@
+{
+  "_comment": "Wand calibration of cam1 and cam2 through the water-filled acrylic tube, run 20261006/T0. Lengths in mm, image coordinates in px (u = column, v = row, pixel centres at integers). See 2026-10-06-plan.md.",
+  "case": "cyl_20261006_T0_wand",
+  "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261006\\T0",
+  "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261006\\T0\\Results",
+  "cameras": [
+    {"id": 1, "folder": "cam1", "gui_index": 0},
+    {"id": 2, "folder": "cam2", "gui_index": 1}
+  ],
+  "frames": {"pattern": "Img{frame:06d}.tif", "first": 0, "last": 10639},
+  "image": {"width": 1280, "height": 800, "pixel_mm": 0.020, "camera": "Phantom VEO 710L (from the .chd header)"},
+  "wand": {
+    "_comment": "From the user, 6 Oct: the wand is 10 mm long (centre to centre), the balls are 3 mm and 4 mm. End A is the small ball.",
+    "length_mm": 10.0,
+    "ball_diameters_mm": [3.0, 4.0]
+  },
+  "tube": {
+    "_comment": "As in cases/cyl_20260930_T0_cam1/config.json (the same tube, assumed: the user did not say otherwise).",
+    "outer_diameter_in": 7.9375,
+    "wall_in": 0.125,
+    "radii_mm": [100.80625, 97.63125],
+    "n": [1.0, 1.49, 1.333],
+    "media": ["air", "acrylic", "water"]
+  },
+  "detect": {
+    "_comment": "ball_ellipses.detect_wand_balls, the GUI's 'ellipse' mode. Rod settings sized for this wand on the P0 survey (tests/p0_survey_out.txt): opening inside the window 91-101 px common to both cameras; mask about the rod's half-width plus twice its blur (checked in T1).",
+    "polarity": "dark",
+    "min_r_px": 40.0,
+    "max_r_px": 120.0,
+    "open_px": 95,
+    "rod_mask_px": 50.0,
+    "guard_px": 3.0,
+    "workers": 48,
+    "_workers": "48 processes: reading the images from the network drive, not the computing, limits the speed (one stream reads about 1.5 files/s; parallel reads add up)."
+  },
+  "accept": {
+    "_comment": "A camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame is kept when every camera keeps it.",
+    "edge_rms_max_px": 1.0,
+    "aspect_range": [1.15, 1.45],
+    "size_tol": 0.10
+  },
+  "calibrate": {
+    "fit_k1": false,
+    "fit_L": false,
+    "noise_weights": "camera",
+    "n_final": 6
+  },
+  "reference_20260930": {
+    "_comment": "cam1 in the dot-board case cyl_20260930_T0_cam1 (through the tube) and its focal check in air (5 Oct). Compared in T7 only if cam1's lens and focus are unchanged.",
+    "result_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20260930\\T0\\cam1",
+    "f_px": 41459,
+    "f_air_px": 41610
+  }
+}

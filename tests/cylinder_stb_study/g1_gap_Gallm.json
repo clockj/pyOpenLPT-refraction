@@ -1,0 +1,948 @@
+{
+ "sets": {
+  "T1": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1001.9,
+     864.9
+    ],
+    "true_pairs_per_frame": 190.1125,
+    "true_pairs_se_per_frame": 21.45913631183697,
+    "signal_pairs_per_frame": 3400.9,
+    "background_pairs_per_frame": 8562.1,
+    "true_share_of_signal": 0.05590064394719045,
+    "detections_with_partner": [
+     0.18975197125461624,
+     0.21980864839865882
+    ],
+    "shape_true_pairs_per_frame": 98.025,
+    "shape_true_pairs_se_per_frame": 5.0034050905358445,
+    "shape_signal_pairs_per_frame": 208.8,
+    "shape_true_share_of_signal": 0.4694683908045977,
+    "shape_true_kept": 0.515615753829969,
+    "shape_random_kept": 0.034500881793018065,
+    "epipolar_true_within": {
+     "0.50": 0.35142803981765747,
+     "0.75": 0.4722532328588706,
+     "1.00": 0.5800539585077682,
+     "1.25": 0.6513861754581821,
+     "1.50": 0.7074611591775979,
+     "2.00": 0.883617080658666,
+     "2.50": 0.9533444971625268
+    },
+    "per_frame": [
+     {
+      "i": 0,
+      "detections": [
+       971,
+       840
+      ],
+      "true_est": 103.375,
+      "signal": 3172,
+      "background": 8183
+     },
+     {
+      "i": 25,
+      "detections": [
+       1007,
+       840
+      ],
+      "true_est": 265.125,
+      "signal": 3372,
+      "background": 8285
+     },
+     {
+      "i": 50,
+      "detections": [
+       997,
+       899
+      ],
+      "true_est": 81.75,
+      "signal": 3405,
+      "background": 8862
+     },
+     {
+      "i": 75,
+      "detections": [
+       1027,
+       887
+      ],
+      "true_est": 174.0,
+      "signal": 3537,
+      "background": 8968
+     },
+     {
+      "i": 100,
+      "detections": [
+       1004,
+       841
+      ],
+      "true_est": 205.875,
+      "signal": 3303,
+      "background": 8259
+     },
+     {
+      "i": 125,
+      "detections": [
+       1016,
+       871
+      ],
+      "true_est": 213.875,
+      "signal": 3476,
+      "background": 8699
+     },
+     {
+      "i": 150,
+      "detections": [
+       1011,
+       882
+      ],
+      "true_est": 227.125,
+      "signal": 3532,
+      "background": 8813
+     },
+     {
+      "i": 175,
+      "detections": [
+       983,
+       845
+      ],
+      "true_est": 153.125,
+      "signal": 3212,
+      "background": 8157
+     },
+     {
+      "i": 200,
+      "detections": [
+       1018,
+       852
+      ],
+      "true_est": 317.375,
+      "signal": 3566,
+      "background": 8663
+     },
+     {
+      "i": 225,
+      "detections": [
+       985,
+       892
+      ],
+      "true_est": 159.5,
+      "signal": 3434,
+      "background": 8732
+     }
+    ],
+    "seconds": 517.3641545772552
+   }
+  },
+  "S_n8": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1358.4,
+     1394.9
+    ],
+    "true_pairs_per_frame": 628.4875,
+    "true_pairs_se_per_frame": 32.20350087723383,
+    "signal_pairs_per_frame": 7713.7,
+    "background_pairs_per_frame": 18893.9,
+    "true_share_of_signal": 0.0814767880524262,
+    "detections_with_partner": [
+     0.4626674764428739,
+     0.4505609721126962
+    ],
+    "shape_true_pairs_per_frame": 546.8625,
+    "shape_true_pairs_se_per_frame": 10.142554227116559,
+    "shape_signal_pairs_per_frame": 897.3,
+    "shape_true_share_of_signal": 0.6094533600802408,
+    "shape_true_kept": 0.8701247041508383,
+    "shape_random_kept": 0.04946040785650395,
+    "epipolar_true_within": {
+     "0.50": 0.9277575704456812,
+     "0.75": 1.0201915070774354,
+     "1.00": 1.10456198781717,
+     "1.25": 1.1009356238222534,
+     "1.50": 1.1016915728121301,
+     "2.00": 1.137560804592664,
+     "2.50": 1.0719356676453833
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.8390433709784568,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1358.4,
+     "false_per_frame": 73.0,
+     "centre_err_px_pcts": [
+      0.13965908605221655,
+      0.8480584395883816,
+      2.201875478768111
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.7257283856885262,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1394.9,
+     "false_per_frame": 118.7,
+     "centre_err_px_pcts": [
+      0.22289594679617947,
+      1.4175495203913462,
+      2.3406569077629062
+     ]
+    },
+    "paired_particles_per_frame": 638.7,
+    "paired_in_volume_per_frame": 638.7,
+    "detections_with_partner": [
+     0.4701855123674912,
+     0.45788228546849236
+    ],
+    "true_pairs_found_per_frame": 638.7,
+    "true_pairs_in_signal_band_per_frame": 602.7,
+    "true_epipolar_within": {
+     "0.50": 0.7472992015030531,
+     "0.75": 0.8290277125410991,
+     "1.00": 0.8824174103648035,
+     "1.25": 0.9174886488179114,
+     "1.50": 0.9436355096289337,
+     "2.00": 0.9804289963989353,
+     "2.50": 0.9984343197119149
+    },
+    "signal_band_true_share": 0.0781337101520671,
+    "shape_true_kept": 0.844864775178364,
+    "shape_random_kept": 0.05457741527211363,
+    "shape_signal_true_share": 0.567480218433077
+   },
+   "seconds": 769.3262836933136
+  },
+  "Gcal_n8": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1360.2,
+     1390.4
+    ],
+    "true_pairs_per_frame": 539.6625,
+    "true_pairs_se_per_frame": 32.00525591602104,
+    "signal_pairs_per_frame": 7596.9,
+    "background_pairs_per_frame": 18819.3,
+    "true_share_of_signal": 0.07103719938395925,
+    "detections_with_partner": [
+     0.3967523158359065,
+     0.3881347094361335
+    ],
+    "shape_true_pairs_per_frame": 461.85,
+    "shape_true_pairs_se_per_frame": 9.727955848995204,
+    "shape_signal_pairs_per_frame": 814.2,
+    "shape_true_share_of_signal": 0.567243920412675,
+    "shape_true_kept": 0.8558126606907095,
+    "shape_random_kept": 0.049927468077983775,
+    "epipolar_true_within": {
+     "0.50": 0.4690780605367428,
+     "0.75": 0.5911216862056289,
+     "1.00": 0.7337527061803031,
+     "1.25": 0.8183795596585107,
+     "1.50": 0.8817654507577305,
+     "2.00": 0.942690249581308,
+     "2.50": 1.0150524896858788
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.8416152019002375,
+     "present_per_frame": 1052.5,
+     "detections_per_frame": 1360.2,
+     "false_per_frame": 71.2,
+     "centre_err_px_pcts": [
+      0.14252015719833683,
+      0.8408326873649388,
+      2.1940414544631985
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.7231353919239905,
+     "present_per_frame": 1052.5,
+     "detections_per_frame": 1390.4,
+     "false_per_frame": 113.6,
+     "centre_err_px_pcts": [
+      0.22468199127671168,
+      1.4210533436298314,
+      2.329570507661198
+     ]
+    },
+    "paired_particles_per_frame": 638.7,
+    "paired_in_volume_per_frame": 638.7,
+    "detections_with_partner": [
+     0.46956329951477727,
+     0.4593642117376295
+    ],
+    "true_pairs_found_per_frame": 638.7,
+    "true_pairs_in_signal_band_per_frame": 527.3,
+    "true_epipolar_within": {
+     "0.50": 0.45639580397682794,
+     "0.75": 0.5805542508219822,
+     "1.00": 0.6798183810865821,
+     "1.25": 0.7590418036636919,
+     "1.50": 0.8255832159073118,
+     "2.00": 0.9206200093940817,
+     "2.50": 0.9707217786128073
+    },
+    "signal_band_true_share": 0.06940989087654174,
+    "shape_true_kept": 0.8380428598520766,
+    "shape_random_kept": 0.05266210252348082,
+    "shape_signal_true_share": 0.5427413411938099
+   },
+   "seconds": 766.9515619277954
+  },
+  "Gshape_nT1": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1079.9,
+     1228.8
+    ],
+    "true_pairs_per_frame": 387.2375,
+    "true_pairs_se_per_frame": 26.79904091101023,
+    "signal_pairs_per_frame": 5328.8,
+    "background_pairs_per_frame": 13177.5,
+    "true_share_of_signal": 0.0726687997297703,
+    "detections_with_partner": [
+     0.35858644318918415,
+     0.3151346842447917
+    ],
+    "shape_true_pairs_per_frame": 159.6875,
+    "shape_true_pairs_se_per_frame": 5.746343946371466,
+    "shape_signal_pairs_per_frame": 283.7,
+    "shape_true_share_of_signal": 0.5628745153330983,
+    "shape_true_kept": 0.4123761257626134,
+    "shape_random_kept": 0.02509580724720167,
+    "epipolar_true_within": {
+     "0.50": 0.6722836044639388,
+     "0.75": 0.7744572761090445,
+     "1.00": 0.8370995502748321,
+     "1.25": 0.8513269668535894,
+     "1.50": 0.860002220865027,
+     "2.00": 0.9419799011715063,
+     "2.50": 0.9699905613236356
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.6714434848628642,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1079.9,
+     "false_per_frame": 116.8,
+     "centre_err_px_pcts": [
+      0.223910115871309,
+      1.3596238166180572,
+      2.3254470454738154
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.49416342412451364,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1228.8,
+     "false_per_frame": 212.5,
+     "centre_err_px_pcts": [
+      0.28043045072876693,
+      1.7868331792527374,
+      2.4120385159655475
+     ]
+    },
+    "paired_particles_per_frame": 373.7,
+    "paired_in_volume_per_frame": 373.7,
+    "detections_with_partner": [
+     0.34605056023705894,
+     0.3041178385416667
+    ],
+    "true_pairs_found_per_frame": 373.7,
+    "true_pairs_in_signal_band_per_frame": 334.9,
+    "true_epipolar_within": {
+     "0.50": 0.6593524217286594,
+     "0.75": 0.7425742574257426,
+     "1.00": 0.8092052448488092,
+     "1.25": 0.8597805726518598,
+     "1.50": 0.8961734011238962,
+     "2.00": 0.9598608509499599,
+     "2.50": 0.9906341985549907
+    },
+    "signal_band_true_share": 0.06284717009458039,
+    "shape_true_kept": 0.3777246939384891,
+    "shape_random_kept": 0.031478403652455994,
+    "shape_signal_true_share": 0.4458935495241452
+   },
+   "seconds": 743.1013422012329
+  },
+  "O05_n8": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1273.2,
+     1295.4
+    ],
+    "true_pairs_per_frame": 568.9375,
+    "true_pairs_se_per_frame": 30.12550570114965,
+    "signal_pairs_per_frame": 6755.5,
+    "background_pairs_per_frame": 16497.5,
+    "true_share_of_signal": 0.08421841462512027,
+    "detections_with_partner": [
+     0.44685634621426323,
+     0.4391983171221244
+    ],
+    "shape_true_pairs_per_frame": 470.225,
+    "shape_true_pairs_se_per_frame": 9.468054842468964,
+    "shape_signal_pairs_per_frame": 780.2,
+    "shape_true_share_of_signal": 0.6026980261471417,
+    "shape_true_kept": 0.8264967593101176,
+    "shape_random_kept": 0.050104561297166235,
+    "epipolar_true_within": {
+     "0.50": 0.8596470193276102,
+     "0.75": 0.9776389621600883,
+     "1.00": 1.0430674787779963,
+     "1.25": 1.0687856697520504,
+     "1.50": 1.0914344635748885,
+     "2.00": 1.1004747973718287,
+     "2.50": 1.0602129394273656
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.7830502040428965,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1273.2,
+     "false_per_frame": 74.6,
+     "centre_err_px_pcts": [
+      0.18995482985156364,
+      1.0178110807581104,
+      2.2687507752075398
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.6793204897029516,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1295.4,
+     "false_per_frame": 112.9,
+     "centre_err_px_pcts": [
+      0.3059263157551523,
+      1.5080979063574043,
+      2.366757016790132
+     ]
+    },
+    "paired_particles_per_frame": 561.9,
+    "paired_in_volume_per_frame": 561.9,
+    "detections_with_partner": [
+     0.4413289349670122,
+     0.43376563223714676
+    ],
+    "true_pairs_found_per_frame": 561.9,
+    "true_pairs_in_signal_band_per_frame": 527.2,
+    "true_epipolar_within": {
+     "0.50": 0.7127602776294715,
+     "0.75": 0.805125467164976,
+     "1.00": 0.8681260010678057,
+     "1.25": 0.9065670048051254,
+     "1.50": 0.9382452393664353,
+     "2.00": 0.9809574657412351,
+     "2.50": 0.99715251824168
+    },
+    "signal_band_true_share": 0.07804011546147584,
+    "shape_true_kept": 0.8235963581183612,
+    "shape_random_kept": 0.05555287959796413,
+    "shape_signal_true_share": 0.5565239682132787
+   },
+   "seconds": 756.5645670890808
+  },
+  "O10_n8": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1205.7,
+     1195.6
+    ],
+    "true_pairs_per_frame": 489.8875,
+    "true_pairs_se_per_frame": 28.116818254382913,
+    "signal_pairs_per_frame": 5883.1,
+    "background_pairs_per_frame": 14381.9,
+    "true_share_of_signal": 0.08327029967194166,
+    "detections_with_partner": [
+     0.4063096126731359,
+     0.4097419705587153
+    ],
+    "shape_true_pairs_per_frame": 420.2,
+    "shape_true_pairs_se_per_frame": 8.91950110712477,
+    "shape_signal_pairs_per_frame": 693.2,
+    "shape_true_share_of_signal": 0.6061742642815926,
+    "shape_true_kept": 0.8577479523359955,
+    "shape_random_kept": 0.050619181053963666,
+    "epipolar_true_within": {
+     "0.50": 0.8399710564399421,
+     "0.75": 1.0079160636758322,
+     "1.00": 1.0996816208393632,
+     "1.25": 1.1303183791606368,
+     "1.50": 1.134327062228654,
+     "2.00": 1.102286541244573,
+     "2.50": 1.0565846599131694
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.7337951978741577,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1205.7,
+     "false_per_frame": 72.5,
+     "centre_err_px_pcts": [
+      0.22784176540407552,
+      1.126840686907242,
+      2.292163659518942
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.6310145202619342,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1195.6,
+     "false_per_frame": 95.5,
+     "centre_err_px_pcts": [
+      0.3777987203956197,
+      1.5615464778669113,
+      2.360689099846328
+     ]
+    },
+    "paired_particles_per_frame": 495.6,
+    "paired_in_volume_per_frame": 495.6,
+    "detections_with_partner": [
+     0.4110475242597661,
+     0.4145199063231851
+    ],
+    "true_pairs_found_per_frame": 495.6,
+    "true_pairs_in_signal_band_per_frame": 463.8,
+    "true_epipolar_within": {
+     "0.50": 0.6842211460855528,
+     "0.75": 0.7978208232445521,
+     "1.00": 0.8589588377723971,
+     "1.25": 0.9001210653753027,
+     "1.50": 0.9358353510895884,
+     "2.00": 0.9769975786924939,
+     "2.50": 0.9971751412429378
+    },
+    "signal_band_true_share": 0.07883598782954565,
+    "shape_true_kept": 0.8193186718413109,
+    "shape_random_kept": 0.05779344195744838,
+    "shape_signal_true_share": 0.5481823427582228
+   },
+   "seconds": 705.8000926971436
+  },
+  "Gall": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     691.0,
+     636.4
+    ],
+    "true_pairs_per_frame": 185.0375,
+    "true_pairs_se_per_frame": 15.627494800831002,
+    "signal_pairs_per_frame": 1826.6,
+    "background_pairs_per_frame": 4377.5,
+    "true_share_of_signal": 0.101301598598489,
+    "detections_with_partner": [
+     0.2677821997105644,
+     0.2907565996228787
+    ],
+    "shape_true_pairs_per_frame": 58.45,
+    "shape_true_pairs_se_per_frame": 3.20614644082269,
+    "shape_signal_pairs_per_frame": 90.7,
+    "shape_true_share_of_signal": 0.6444321940463065,
+    "shape_true_kept": 0.31588191582787273,
+    "shape_random_kept": 0.019645916619074815,
+    "epipolar_true_within": {
+     "0.50": 0.2734775715751189,
+     "0.75": 0.4156252914296372,
+     "1.00": 0.5089060897136995,
+     "1.25": 0.6144968758742889,
+     "1.50": 0.6902452671826914,
+     "2.00": 0.8178681339177469,
+     "2.50": 0.9190058752214866
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.7967233009708737,
+     "present_per_frame": 494.4,
+     "detections_per_frame": 691.0,
+     "false_per_frame": 84.2,
+     "centre_err_px_pcts": [
+      0.34112401554351834,
+      1.3370347139628074,
+      2.2986115604391544
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.46055825242718446,
+     "present_per_frame": 494.4,
+     "detections_per_frame": 636.4,
+     "false_per_frame": 117.9,
+     "centre_err_px_pcts": [
+      0.6666135767594589,
+      1.884899947755102,
+      2.4215063818545177
+     ]
+    },
+    "paired_particles_per_frame": 192.3,
+    "paired_in_volume_per_frame": 192.3,
+    "detections_with_partner": [
+     0.27829232995658465,
+     0.3021684475172848
+    ],
+    "true_pairs_found_per_frame": 192.3,
+    "true_pairs_in_signal_band_per_frame": 147.4,
+    "true_epipolar_within": {
+     "0.50": 0.3468538741549662,
+     "0.75": 0.4794591783671347,
+     "1.00": 0.5969838793551742,
+     "1.25": 0.6874674986999479,
+     "1.50": 0.766510660426417,
+     "2.00": 0.875715028601144,
+     "2.50": 0.9407176287051482
+    },
+    "signal_band_true_share": 0.08069637578013795,
+    "shape_true_kept": 0.3677069199457259,
+    "shape_random_kept": 0.021736541210100047,
+    "shape_signal_true_share": 0.597574421168688
+   },
+   "seconds": 457.02900195121765
+  },
+  "Gshape0_nT1": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1077.4,
+     1199.7
+    ],
+    "true_pairs_per_frame": 417.4625,
+    "true_pairs_se_per_frame": 26.52871380693003,
+    "signal_pairs_per_frame": 5232.2,
+    "background_pairs_per_frame": 12839.3,
+    "true_share_of_signal": 0.07978718321165093,
+    "detections_with_partner": [
+     0.3874721551884165,
+     0.3479724097691089
+    ],
+    "shape_true_pairs_per_frame": 279.5375,
+    "shape_true_pairs_se_per_frame": 6.978348210715771,
+    "shape_signal_pairs_per_frame": 430.4,
+    "shape_true_share_of_signal": 0.6494830390334573,
+    "shape_true_kept": 0.6696110429080456,
+    "shape_random_kept": 0.03133348391267437,
+    "epipolar_true_within": {
+     "0.50": 0.6678645049863502,
+     "0.75": 0.7557663379575463,
+     "1.00": 0.8458967073374561,
+     "1.25": 0.8729594963507716,
+     "1.50": 0.9303303805225918,
+     "2.00": 0.949022229650677,
+     "2.50": 1.0042620758816647
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.6801746227579007,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1077.4,
+     "false_per_frame": 121.9,
+     "centre_err_px_pcts": [
+      0.24190700081279928,
+      1.4607642902022415,
+      2.368526179564957
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.4889437221220461,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1199.7,
+     "false_per_frame": 222.2,
+     "centre_err_px_pcts": [
+      0.29030593058983306,
+      1.8024789035406887,
+      2.4327522792545384
+     ]
+    },
+    "paired_particles_per_frame": 374.0,
+    "paired_in_volume_per_frame": 374.0,
+    "detections_with_partner": [
+     0.34713198440690546,
+     0.311744602817371
+    ],
+    "true_pairs_found_per_frame": 374.0,
+    "true_pairs_in_signal_band_per_frame": 335.1,
+    "true_epipolar_within": {
+     "0.50": 0.6483957219251337,
+     "0.75": 0.7344919786096257,
+     "1.00": 0.8056149732620321,
+     "1.25": 0.8545454545454545,
+     "1.50": 0.8959893048128342,
+     "2.00": 0.9545454545454546,
+     "2.50": 0.9893048128342246
+    },
+    "signal_band_true_share": 0.06404571690684607,
+    "shape_true_kept": 0.7499253954043569,
+    "shape_random_kept": 0.03657266545506524,
+    "shape_signal_true_share": 0.5838754646840149
+   },
+   "seconds": 853.9910700321198
+  },
+  "Gshape12_nT1": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     1070.2,
+     1210.3
+    ],
+    "true_pairs_per_frame": 398.35,
+    "true_pairs_se_per_frame": 26.570695794427365,
+    "signal_pairs_per_frame": 5243.2,
+    "background_pairs_per_frame": 12919.6,
+    "true_share_of_signal": 0.07597459566676838,
+    "detections_with_partner": [
+     0.37222014576714635,
+     0.3291332727422953
+    ],
+    "shape_true_pairs_per_frame": 260.85,
+    "shape_true_pairs_se_per_frame": 6.772324194838873,
+    "shape_signal_pairs_per_frame": 404.7,
+    "shape_true_share_of_signal": 0.6445515196441809,
+    "shape_true_kept": 0.654826157901343,
+    "shape_random_kept": 0.029691321712746525,
+    "epipolar_true_within": {
+     "0.50": 0.6607101683191146,
+     "0.75": 0.7490777034816694,
+     "1.00": 0.8316808854046576,
+     "1.25": 0.8776227807240028,
+     "1.50": 0.9184920451925294,
+     "2.00": 0.9644915840442703,
+     "2.50": 0.9978095457689647
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.674765113409889,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1070.2,
+     "false_per_frame": 117.9,
+     "centre_err_px_pcts": [
+      0.23517005358104986,
+      1.4026573926111567,
+      2.3711532538845974
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.4948277498339186,
+     "present_per_frame": 1053.7,
+     "detections_per_frame": 1210.3,
+     "false_per_frame": 217.5,
+     "centre_err_px_pcts": [
+      0.27480302162660447,
+      1.7660226509066226,
+      2.4118991587430654
+     ]
+    },
+    "paired_particles_per_frame": 379.4,
+    "paired_in_volume_per_frame": 379.4,
+    "detections_with_partner": [
+     0.3545131751074565,
+     0.313475997686524
+    ],
+    "true_pairs_found_per_frame": 379.4,
+    "true_pairs_in_signal_band_per_frame": 342.9,
+    "true_epipolar_within": {
+     "0.50": 0.6510279388508171,
+     "0.75": 0.7393252503953611,
+     "1.00": 0.8139167105956774,
+     "1.25": 0.863995782814971,
+     "1.50": 0.9037954665260939,
+     "2.00": 0.9657353716394307,
+     "2.50": 0.9947285187137586
+    },
+    "signal_band_true_share": 0.06539899298138542,
+    "shape_true_kept": 0.6395450568678915,
+    "shape_random_kept": 0.03783441830092035,
+    "shape_signal_true_share": 0.541882876204596
+   },
+   "seconds": 705.0441062450409
+  },
+  "Gall12": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     684.4,
+     637.3
+    ],
+    "true_pairs_per_frame": 182.075,
+    "true_pairs_se_per_frame": 15.574207443719246,
+    "signal_pairs_per_frame": 1813.7,
+    "background_pairs_per_frame": 4351.0,
+    "true_share_of_signal": 0.10038870816562827,
+    "detections_with_partner": [
+     0.26603594389246055,
+     0.28569747371724463
+    ],
+    "shape_true_pairs_per_frame": 106.3875,
+    "shape_true_pairs_se_per_frame": 4.012383175869423,
+    "shape_signal_pairs_per_frame": 146.1,
+    "shape_true_share_of_signal": 0.7281827515400411,
+    "shape_true_kept": 0.584305917890979,
+    "shape_random_kept": 0.024339232360376925,
+    "epipolar_true_within": {
+     "0.50": 0.2904632680752084,
+     "0.75": 0.42832913355301416,
+     "1.00": 0.5297538282612909,
+     "1.25": 0.6199360341151386,
+     "1.50": 0.7058538476448925,
+     "2.00": 0.8276797829036635,
+     "2.50": 0.8820507850358597
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.8216019417475728,
+     "present_per_frame": 494.4,
+     "detections_per_frame": 684.4,
+     "false_per_frame": 77.2,
+     "centre_err_px_pcts": [
+      0.33674300113168487,
+      1.3107584216443613,
+      2.3254335611220958
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.46743527508090615,
+     "present_per_frame": 494.4,
+     "detections_per_frame": 637.3,
+     "false_per_frame": 119.7,
+     "centre_err_px_pcts": [
+      0.6748957168572017,
+      1.873527616179437,
+      2.4236480292632003
+     ]
+    },
+    "paired_particles_per_frame": 198.3,
+    "paired_in_volume_per_frame": 198.3,
+    "detections_with_partner": [
+     0.2897428404441847,
+     0.3111564412364664
+    ],
+    "true_pairs_found_per_frame": 198.3,
+    "true_pairs_in_signal_band_per_frame": 153.0,
+    "true_epipolar_within": {
+     "0.50": 0.3469490670700958,
+     "0.75": 0.4851235501765003,
+     "1.00": 0.5940494200706001,
+     "1.25": 0.6989409984871406,
+     "1.50": 0.7715582450832073,
+     "2.00": 0.8734241048915784,
+     "2.50": 0.9389813414019162
+    },
+    "signal_band_true_share": 0.08435794232783812,
+    "shape_true_kept": 0.6705882352941176,
+    "shape_random_kept": 0.026193773709881376,
+    "shape_signal_true_share": 0.702258726899384
+   },
+   "seconds": 451.0650706291199
+  },
+  "Gallm": {
+   "estimate": {
+    "frames": 10,
+    "detections_per_frame": [
+     899.1,
+     1091.5
+    ],
+    "true_pairs_per_frame": 379.8,
+    "true_pairs_se_per_frame": 23.256370095094375,
+    "signal_pairs_per_frame": 4037.1,
+    "background_pairs_per_frame": 9752.8,
+    "true_share_of_signal": 0.0940774318198707,
+    "detections_with_partner": [
+     0.42242242242242245,
+     0.3479615208428768
+    ],
+    "shape_true_pairs_per_frame": 194.025,
+    "shape_true_pairs_se_per_frame": 6.1991178807956215,
+    "shape_signal_pairs_per_frame": 332.4,
+    "shape_true_share_of_signal": 0.5837093862815884,
+    "shape_true_kept": 0.5108609794628752,
+    "shape_random_kept": 0.03783528832745468,
+    "epipolar_true_within": {
+     "0.50": 0.44625476089716465,
+     "0.75": 0.576491747778248,
+     "1.00": 0.6644096487515869,
+     "1.25": 0.7239737621667371,
+     "1.50": 0.803639441388066,
+     "2.00": 0.9100719424460432,
+     "2.50": 0.9925941599661448
+    }
+   },
+   "truth": {
+    "frames": 10,
+    "cam1": {
+     "recall_both_in_volume": 0.6687533729087966,
+     "present_per_frame": 926.5,
+     "detections_per_frame": 899.1,
+     "false_per_frame": 75.6,
+     "centre_err_px_pcts": [
+      0.37011657190562874,
+      1.4079272089618746,
+      2.34048679334579
+     ]
+    },
+    "cam2": {
+     "recall_both_in_volume": 0.6461953588774959,
+     "present_per_frame": 926.5,
+     "detections_per_frame": 1091.5,
+     "false_per_frame": 72.7,
+     "centre_err_px_pcts": [
+      0.42235808679396925,
+      1.5546234475736496,
+      2.33982392746335
+     ]
+    },
+    "paired_particles_per_frame": 407.8,
+    "paired_in_volume_per_frame": 407.8,
+    "detections_with_partner": [
+     0.453564675786898,
+     0.37361429225836007
+    ],
+    "true_pairs_found_per_frame": 407.8,
+    "true_pairs_in_signal_band_per_frame": 333.6,
+    "true_epipolar_within": {
+     "0.50": 0.4141736145169201,
+     "0.75": 0.5571358509073076,
+     "1.00": 0.663805787150564,
+     "1.25": 0.7479156449239823,
+     "1.50": 0.8180480627758705,
+     "2.00": 0.9090240313879353,
+     "2.50": 0.9622363903874448
+    },
+    "signal_band_true_share": 0.08263357360481534,
+    "shape_true_kept": 0.5386690647482014,
+    "shape_random_kept": 0.04123126771972459,
+    "shape_signal_true_share": 0.5406137184115524
+   },
+   "seconds": 555.3756396770477
+  }
+ },
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ }
+}

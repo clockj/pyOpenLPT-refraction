@@ -1,0 +1,47 @@
+D1 residual structure of X:\Shijie Zhong\Refraction\Processed\20260930\T0\cam1\fit_state.pkl (model M2b, 1029 dots): rms 0.2523 px (u 0.2044, v 0.1480)
+  f 41415.8 px; camera [ 6.27100e+01 -3.50000e-01  1.10559e+03] mm; camera-axis distance 1093.2 mm; axis at Y=0 [19.252  0.    13.296]; tilt -0.023 lean 0.055 deg
+
+per plane: n, rms, mean (du, dv), rms left after removing the plane's own affine map of (u, v)
+  z=   0 dz +0.000: n  48 rms 0.433 mean (+0.058, +0.291)  affine du/du -0.212 du/dv -0.284 dv/du +0.070 dv/dv +0.139 (x1e-3)  left 0.299
+  z=   2 dz +0.564: n  48 rms 0.254 mean (+0.026, -0.098)  affine du/du -0.111 du/dv -0.165 dv/du -0.004 dv/dv +0.057 (x1e-3)  left 0.227
+  z=   4 dz +1.335: n  48 rms 0.348 mean (+0.151, +0.032)  affine du/du -0.602 du/dv -0.013 dv/du +0.001 dv/dv +0.251 (x1e-3)  left 0.222
+  z=   6 dz +1.497: n  48 rms 0.278 mean (-0.087, +0.121)  affine du/du +0.365 du/dv -0.051 dv/du +0.002 dv/dv -0.034 (x1e-3)  left 0.196
+  z=   8 dz +1.980: n  48 rms 0.240 mean (-0.095, -0.003)  affine du/du +0.387 du/dv -0.004 dv/du -0.010 dv/dv -0.087 (x1e-3)  left 0.173
+  z=  10 dz +2.484: n  48 rms 0.344 mean (-0.134, -0.185)  affine du/du +0.529 du/dv +0.094 dv/du +0.021 dv/dv -0.212 (x1e-3)  left 0.173
+  z=  12 dz +3.366: n  48 rms 0.281 mean (+0.031, -0.233)  affine du/du -0.143 du/dv +0.071 dv/du -0.007 dv/dv +0.034 (x1e-3)  left 0.145
+  z=  14 dz +3.802: n  48 rms 0.143 mean (-0.034, -0.001)  affine du/du +0.133 du/dv +0.071 dv/du -0.011 dv/dv -0.105 (x1e-3)  left 0.129
+  z=  16 dz +4.569: n  51 rms 0.180 mean (+0.077, +0.061)  affine du/du -0.306 du/dv +0.087 dv/du -0.006 dv/dv +0.049 (x1e-3)  left 0.100
+  z=  18 dz +4.934: n  54 rms 0.116 mean (-0.047, +0.012)  affine du/du +0.172 du/dv +0.082 dv/du +0.000 dv/dv -0.118 (x1e-3)  left 0.077
+  z=  20 dz +5.711: n  54 rms 0.128 mean (+0.058, +0.012)  affine du/du -0.224 du/dv +0.007 dv/du -0.007 dv/dv +0.020 (x1e-3)  left 0.075
+  z=  22 dz +6.147: n  54 rms 0.099 mean (-0.018, -0.041)  affine du/du +0.062 du/dv +0.066 dv/du -0.013 dv/dv -0.061 (x1e-3)  left 0.083
+  z=  24 dz +6.659: n  54 rms 0.120 mean (-0.027, +0.057)  affine du/du +0.100 du/dv +0.098 dv/du -0.019 dv/dv -0.093 (x1e-3)  left 0.091
+  z=  26 dz +7.274: n  54 rms 0.216 mean (-0.021, -0.180)  affine du/du +0.070 du/dv +0.081 dv/du -0.031 dv/dv -0.018 (x1e-3)  left 0.113
+  z=  28 dz +7.996: n  54 rms 0.158 mean (+0.043, +0.039)  affine du/du -0.162 du/dv +0.009 dv/du -0.018 dv/dv +0.068 (x1e-3)  left 0.133
+  z=  30 dz +8.490: n  54 rms 0.213 mean (-0.002, -0.122)  affine du/du +0.004 du/dv +0.050 dv/du +0.003 dv/dv +0.035 (x1e-3)  left 0.174
+  z=  32 dz +8.980: n  54 rms 0.207 mean (-0.029, +0.011)  affine du/du +0.117 du/dv -0.001 dv/du +0.007 dv/dv -0.014 (x1e-3)  left 0.200
+  z=  34 dz +9.530: n  54 rms 0.261 mean (-0.036, -0.071)  affine du/du +0.142 du/dv -0.031 dv/du -0.003 dv/dv +0.002 (x1e-3)  left 0.243
+  z=  36 dz +10.204: n  54 rms 0.334 mean (+0.033, +0.129)  affine du/du -0.126 du/dv -0.090 dv/du +0.029 dv/dv -0.000 (x1e-3)  left 0.302
+  z=  38 dz +10.803: n  54 rms 0.380 mean (+0.046, +0.163)  affine du/du -0.166 du/dv -0.050 dv/du -0.006 dv/dv +0.089 (x1e-3)  left 0.334
+  -> removing each plane's mean leaves 0.2118 px; its affine map leaves 0.1901 px
+
+pooled over planes (image coordinates normalised by 640 px):
+  a global affine trend leaves 0.2523 px; adding one radial cubic term (k1-like, coefficient +0.005 px at r = 640 px) leaves 0.2523 px
+  a full polynomial of degree 2 in (u, v), the same for every plane, leaves 0.2523 px
+  a full polynomial of degree 3 in (u, v), the same for every plane, leaves 0.2522 px
+  a quadratic polynomial per plane leaves 0.1814 px (the floor for smooth per-plane errors)
+
+removing each dot's mean over the planes (a board error) leaves 0.2523 px
+  dot mean residuals (i, j): du, dv
+   j=+2 (+0.01,-0.00)  (-0.00,-0.00)  (-0.01,+0.00)  (-0.01,+0.00)  (-0.00,-0.00)  (+0.01,-0.00)  (+0.01,-0.00)  (-0.01,-0.00)  (-0.00,+0.00)
+   j=+1 (+0.00,-0.00)  (-0.00,-0.00)  (-0.01,-0.00)  (-0.01,+0.00)  (+0.00,-0.00)  (+0.01,-0.00)  (+0.00,-0.00)  (-0.00,+0.00)  (-0.00,-0.00)
+   j=+0 (+0.00,+0.00)  (-0.00,+0.00)  (-0.00,+0.00)  (-0.01,+0.00)  (+0.00,-0.00)  (+0.01,-0.00)  (+0.00,+0.00)  (-0.01,+0.00)  (+0.00,-0.00)
+   j=-1 (+0.00,+0.00)  (-0.00,+0.00)  (-0.00,+0.00)  (-0.00,+0.00)  (+0.00,+0.00)  (+0.00,+0.00)  (+0.00,+0.00)  (-0.00,+0.00)  (-0.00,+0.00)
+   j=-2 (+0.00,+0.00)  (-0.00,-0.00)  (-0.00,-0.00)  (-0.00,-0.00)  (-0.00,+0.00)  (+0.00,+0.00)  (+0.00,+0.00)  (-0.01,+0.00)  (+0.00,+0.00)
+   j=-3 (+0.01,-0.00)  (+0.00,-0.00)  (-0.01,-0.00)  (-0.00,-0.00)  (+0.00,-0.00)  (+0.01,-0.00)  (+0.00,+0.00)  (-0.01,+0.00)  (-0.00,+0.00)
+
+residual by image cell (u in 160-px bins, v in 160-px bins), pooled over planes: mean du, dv (n)
+  v   0-160: (+0.01,-0.00) (-0.00,-0.00) (-0.08,-0.01) (+0.04,+0.02) (+0.16,+0.02) (-0.07,-0.02) (-0.12,-0.03) (+0.08,+0.01)
+  v 160-320: (+0.00,+0.00) (-0.00,-0.00) (-0.05,-0.01) (+0.07,+0.04) (+0.10,-0.00) (-0.09,-0.01) (-0.04,-0.05) (+0.02,+0.04)
+  v 320-480: (+0.00,+0.00) (-0.00,+0.00) (-0.02,-0.01) (+0.06,-0.01) (+0.05,+0.01) (-0.06,-0.05) (-0.03,+0.03) (+0.02,+0.03)
+  v 480-640: (+0.00,+0.00) (-0.00,-0.00) (-0.02,+0.02) (+0.00,-0.03) (+0.06,-0.00) (-0.03,-0.01) (-0.03,-0.00) (+0.01,+0.04)
+  v 640-800: (+0.01,-0.00) (+0.00,-0.00) (-0.03,+0.03) (+0.03,+0.01) (+0.07,-0.04) (-0.06,-0.04) (-0.03,+0.00) (+0.03,+0.05)

@@ -1,0 +1,10 @@
+seed 1001 camera 2: window 2, incidence 9.1 deg, f 24485, h1 1340 mm, sensor 1280x800
+  candidate: score 5.006; normal error 18.37 deg, camera rotation 6.47 deg, centre 94.7 mm, f -10.32 %, h1 535 mm
+  candidate: score 8.204; normal error 18.79 deg, camera rotation 6.47 deg, centre 94.5 mm, f -11.52 %, h1 543 mm
+  candidate: score 13.34; normal error 8.29 deg, camera rotation 2.76 deg, centre 146.4 mm, f -7.25 %, h1 1333 mm
+  the truth resected: score 1.999 (at the truth itself, before resection: 2.009)
+  t = 0.00: normal 0.0 deg from the truth -> resected score 1.999
+  t = 0.25: normal 4.6 deg from the truth -> resected score 18.75
+  t = 0.50: normal 9.2 deg from the truth -> resected score 36.23
+  t = 0.75: normal 13.8 deg from the truth -> resected score 12.3
+  t = 1.00: normal 18.4 deg from the truth -> resected score 4.76

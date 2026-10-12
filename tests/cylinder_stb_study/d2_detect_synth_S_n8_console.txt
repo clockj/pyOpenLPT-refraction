@@ -1,0 +1,12 @@
+D2: D1's settings on synthetic sets ['S_n8'], frames [0, 4, 8, 12, 16, 20, 24, 28, 32, 36]; build p4c
+  S_n8:
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+    base     : recall 83.9 / 72.6 %, false 73 / 119 per frame, centre error median 0.14 / 0.22 px; true pairs in the signal band 603 per frame (7.8 %), estimated 628 +- 32 (8.1 %); after the depth cue (truth) 84 % of true, 5.5 % of random; 849 s
+    k5       : recall 85.8 / 76.0 %, false 96 / 160 per frame, centre error median 0.14 / 0.23 px; true pairs in the signal band 644 per frame (7.2 %), estimated 685 +- 35 (7.6 %); after the depth cue (truth) 85 % of true, 5.1 % of random; 816 s
+    med15    : recall 84.8 / 73.9 %, false 58 / 96 per frame, centre error median 0.15 / 0.23 px; true pairs in the signal band 629 per frame (8.0 %), estimated 663 +- 32 (8.5 %); after the depth cue (truth) 87 % of true, 5.6 % of random; 840 s
+    med15_k5 : recall 86.8 / 76.9 %, false 78 / 128 per frame, centre error median 0.15 / 0.24 px; true pairs in the signal band 667 per frame (7.4 %), estimated 736 +- 35 (8.2 %); after the depth cue (truth) 88 % of true, 5.2 % of random; 1036 s
+    against base (truth: true pairs in the signal band; estimate as D1):
+      k5       : truth +6.9 %, estimate +9.0 %
+      med15    : truth +4.3 %, estimate +5.6 %
+      med15_k5 : truth +10.7 %, estimate +17.2 %
+exit 0

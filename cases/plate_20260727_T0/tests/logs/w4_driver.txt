@@ -1,0 +1,13 @@
+  w4_ref: exit 0, 336 s
+  w4_h1: exit 0, 251 s
+  w4_h2: exit 0, 162 s
+W4: k1 and the principal point fitted, the channel held, C1 and C2 aiming at the middle of the long side
+  every frame (its own): T2 RMS 0.2734 px, w4_ref RMS 0.2661 px (sigma 0.2271), 87242 detections active, 330 s
+    t2_all          evaluate.py: median 0.2153 px, inliers RMS 0.1890; wand |dL| median 0.0067, p90 0.0170 mm, clean mean 9.9998, SD 0.0101 mm
+    w4_ref          evaluate.py: median 0.2100 px, inliers RMS 0.1845; wand |dL| median 0.0065, p90 0.0165 mm, clean mean 10.0000, SD 0.0099 mm
+  held out: each half's fit judged on the other half (evaluate.py), beside the plain fit (k1, no constraint) of the same half
+    t3k_h1          (fit RMS 0.2730) on the second half: median 0.2190 px, inliers RMS 0.1920; wand |dL| median 0.0066, p90 0.0170 mm, clean mean 9.9994, SD 0.0100
+    w4_h1           (fit RMS 0.2672) on the second half: median 0.2128 px, inliers RMS 0.1850; wand |dL| median 0.0065, p90 0.0169 mm, clean mean 9.9993, SD 0.0098
+    t3k_h2_from_h1  (fit RMS 0.2728) on the first half: median 0.2158 px, inliers RMS 0.1909; wand |dL| median 0.0069, p90 0.0171 mm, clean mean 10.0008, SD 0.0103
+    w4_h2           (fit RMS 0.2657) on the first half: median 0.2103 px, inliers RMS 0.1863; wand |dL| median 0.0067, p90 0.0165 mm, clean mean 10.0009, SD 0.0101
+  camFiles read back (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\calib_plate_wand_ref\camFile): median 0.2100 px, wand |dL| median 0.0065 mm; the principal points within 0.00e+00 px of the fit's: the same as the fit

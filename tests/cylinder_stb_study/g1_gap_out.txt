@@ -1,0 +1,27 @@
+G1: the gap table; frames [0, 4, 8, 12, 16, 20, 24, 28, 32, 36] of each synthetic set, T1 from D1's base; build p4c
+  T1 (D1's base):
+    estimated as on T1: detections 1002 / 865; true pairs 190 +- 21 per frame (5.6 % of the signal band); detections with a partner 19 / 22 %; true within 0.5 / 1 / 1.5 / 2 px 35, 58, 71, 88 %; depth cue keeps 52 % of true and 3.5 % of random pairs
+  S_n8:
+    estimated as on T1: detections 1358 / 1395; true pairs 628 +- 32 per frame (8.1 % of the signal band); detections with a partner 46 / 45 %; true within 0.5 / 1 / 1.5 / 2 px 93, 110, 110, 114 %; depth cue keeps 87 % of true and 4.9 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 83.9 / 72.6 % of 1054; false detections 73 / 119 per frame; centre error 50/90 % 0.14/0.85, 0.22/1.42 px
+      particles detected in both 639 per frame (639 inside the volume); detections with a partner 47 / 46 %; true pairs among the candidates 639 per frame, in the signal band 603 (7.8 % of it); true within 0.5 / 1 / 1.5 / 2 px 75, 88, 94, 98 %; depth cue keeps 84 % of true and 5.5 % of random pairs
+  Gcal_n8:
+    estimated as on T1: detections 1360 / 1390; true pairs 540 +- 32 per frame (7.1 % of the signal band); detections with a partner 40 / 39 %; true within 0.5 / 1 / 1.5 / 2 px 47, 73, 88, 94 %; depth cue keeps 86 % of true and 5.0 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 84.2 / 72.3 % of 1052; false detections 71 / 114 per frame; centre error 50/90 % 0.14/0.84, 0.22/1.42 px
+      particles detected in both 639 per frame (639 inside the volume); detections with a partner 47 / 46 %; true pairs among the candidates 639 per frame, in the signal band 527 (6.9 % of it); true within 0.5 / 1 / 1.5 / 2 px 46, 68, 83, 92 %; depth cue keeps 84 % of true and 5.3 % of random pairs
+  Gshape_nT1:
+    estimated as on T1: detections 1080 / 1229; true pairs 387 +- 27 per frame (7.3 % of the signal band); detections with a partner 36 / 32 %; true within 0.5 / 1 / 1.5 / 2 px 67, 84, 86, 94 %; depth cue keeps 41 % of true and 2.5 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 67.1 / 49.4 % of 1054; false detections 117 / 212 per frame; centre error 50/90 % 0.22/1.36, 0.28/1.79 px
+      particles detected in both 374 per frame (374 inside the volume); detections with a partner 35 / 30 %; true pairs among the candidates 374 per frame, in the signal band 335 (6.3 % of it); true within 0.5 / 1 / 1.5 / 2 px 66, 81, 90, 96 %; depth cue keeps 38 % of true and 3.1 % of random pairs
+  O05_n8:
+    estimated as on T1: detections 1273 / 1295; true pairs 569 +- 30 per frame (8.4 % of the signal band); detections with a partner 45 / 44 %; true within 0.5 / 1 / 1.5 / 2 px 86, 104, 109, 110 %; depth cue keeps 83 % of true and 5.0 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 78.3 / 67.9 % of 1054; false detections 75 / 113 per frame; centre error 50/90 % 0.19/1.02, 0.31/1.51 px
+      particles detected in both 562 per frame (562 inside the volume); detections with a partner 44 / 43 %; true pairs among the candidates 562 per frame, in the signal band 527 (7.8 % of it); true within 0.5 / 1 / 1.5 / 2 px 71, 87, 94, 98 %; depth cue keeps 82 % of true and 5.6 % of random pairs
+  O10_n8:
+    estimated as on T1: detections 1206 / 1196; true pairs 490 +- 28 per frame (8.3 % of the signal band); detections with a partner 41 / 41 %; true within 0.5 / 1 / 1.5 / 2 px 84, 110, 113, 110 %; depth cue keeps 86 % of true and 5.1 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 73.4 / 63.1 % of 1054; false detections 72 / 96 per frame; centre error 50/90 % 0.23/1.13, 0.38/1.56 px
+      particles detected in both 496 per frame (496 inside the volume); detections with a partner 41 / 41 %; true pairs among the candidates 496 per frame, in the signal band 464 (7.9 % of it); true within 0.5 / 1 / 1.5 / 2 px 68, 86, 94, 98 %; depth cue keeps 82 % of true and 5.8 % of random pairs
+  Gall:
+    estimated as on T1: detections 691 / 636; true pairs 185 +- 16 per frame (10.1 % of the signal band); detections with a partner 27 / 29 %; true within 0.5 / 1 / 1.5 / 2 px 27, 51, 69, 82 %; depth cue keeps 32 % of true and 2.0 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 79.7 / 46.1 % of 494; false detections 84 / 118 per frame; centre error 50/90 % 0.34/1.34, 0.67/1.88 px
+      particles detected in both 192 per frame (192 inside the volume); detections with a partner 28 / 30 %; true pairs among the candidates 192 per frame, in the signal band 147 (8.1 % of it); true within 0.5 / 1 / 1.5 / 2 px 35, 60, 77, 88 %; depth cue keeps 37 % of true and 2.2 % of random pairs

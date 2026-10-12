@@ -1,0 +1,6 @@
+T6 visibility, reload and centre bias; model M2b, 1029 calibration points
+  images per point: 1: 1029
+  reload of X:\Shijie Zhong\Refraction\Processed\20260930\T0\cam1\camFile\cam1.txt: type CameraType.PINCYL, max |projection difference| 0.00e+00 px
+  dot diameter from the detected half-height outlines: horizontal 1.468 mm, vertical 1.411 mm (user's guess 2 mm); per-plane ratio spread (std of det/model) h 0.0133, v 0.0157
+  centre bias (outline ellipse centre minus projected centre), d = 1.440 mm: mean (+0.0008, -0.0001) px, rms 0.0027 px, max 0.0088 px
+RESULT: PASS

@@ -1,0 +1,8 @@
+G-log: the GUI's log window (QTextEdit) fed b300_final3's log, one frame's lines (2.6 KB) per append, to 13.0 MB (5203 frames)
+  log at   0-1 MB:   400 appends, mean    1.94 ms, p99    2.17 ms, max  104.49 ms
+  log at   1-2 MB:   400 appends, mean    1.76 ms, p99    2.59 ms, max    3.10 ms
+  log at   4-5 MB:   400 appends, mean    1.83 ms, p99    3.71 ms, max    3.88 ms
+  log at   8-9 MB:   400 appends, mean    1.82 ms, p99    2.56 ms, max    3.46 ms
+  log at 12-13 MB:   400 appends, mean    3.88 ms, p99    5.96 ms, max    9.34 ms
+  all 5203 appends: 10.2 s; the worst append 104.5 ms against 2.5 s per frame of tracking (4.2 % of one frame)
+  PASS  every append takes less than a tenth of a frame (0.25 s)

@@ -1,0 +1,6 @@
+T1: the detection check; 1966 frames kept in both cameras
+a. cam1: 20 kept camera-frames drawn (7 before frame 2500), 6 rejected (2 before)
+a. cam2: 20 kept camera-frames drawn (7 before frame 2500), 7 rejected (2 before)
+   overlays written to X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\detection (t1_kept_cam*_*.png: both balls of each kept camera-frame; t1_rejected_cam*.png: whole frames with the reason)
+c. cam1: 3969 consecutive kept pairs, 0 A/B swaps; frame-to-frame motion of a ball: median 34.72 px, 99th percentile 86.98 px, largest 155.65 px
+c. cam2: 5748 consecutive kept pairs, 0 A/B swaps; frame-to-frame motion of a ball: median 34.65 px, 99th percentile 87.98 px, largest 117.17 px

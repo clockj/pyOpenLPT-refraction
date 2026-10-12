@@ -1,0 +1,2246 @@
+{
+  "threshold": 20,
+  "runs": {
+    "10Hz_r_b_1": {
+      "cameras": [
+        {
+          "run": "10Hz_r_b_1",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 29.001304784
+        },
+        {
+          "run": "10Hz_r_b_1",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 25.4411816
+        },
+        {
+          "run": "10Hz_r_b_1",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 27.291790468
+        },
+        {
+          "run": "10Hz_r_b_1",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 26.718440904
+        }
+      ],
+      "lists": [
+        {
+          "exists": true,
+          "n": 12605,
+          "matches_files": true,
+          "first": [
+            "imgFile_mask/cam0/img000000.tif"
+          ],
+          "last": [
+            "imgFile_mask/cam0/img012604.tif"
+          ]
+        },
+        {
+          "exists": true,
+          "n": 12605,
+          "matches_files": true,
+          "first": [
+            "imgFile_mask/cam1/img000000.tif"
+          ],
+          "last": [
+            "imgFile_mask/cam1/img012604.tif"
+          ]
+        },
+        {
+          "exists": true,
+          "n": 12605,
+          "matches_files": true,
+          "first": [
+            "imgFile_mask/cam2/img000000.tif"
+          ],
+          "last": [
+            "imgFile_mask/cam2/img012604.tif"
+          ]
+        },
+        {
+          "exists": true,
+          "n": 12605,
+          "matches_files": true,
+          "first": [
+            "imgFile_mask/cam3/img000000.tif"
+          ],
+          "last": [
+            "imgFile_mask/cam3/img012604.tif"
+          ]
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 2.2098218573898567,
+            "p99": 30.0,
+            "max": 223.0,
+            "frac_above": 0.02447784924116291,
+            "peaks": 40646
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 2.150755835361168,
+            "p99": 30.0,
+            "max": 195.0,
+            "frac_above": 0.02398406482133709,
+            "peaks": 40112
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.0262698814517162,
+            "p99": 14.0,
+            "max": 122.0,
+            "frac_above": 0.002435152647925205,
+            "peaks": 5639
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.0087167708600153,
+            "p99": 14.0,
+            "max": 121.0,
+            "frac_above": 0.0023671134573514346,
+            "peaks": 5432
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.6007535340356045,
+            "p99": 21.0,
+            "max": 131.0,
+            "frac_above": 0.010978573658427254,
+            "peaks": 17876
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.5745211741963372,
+            "p99": 21.0,
+            "max": 145.0,
+            "frac_above": 0.010852501040599385,
+            "peaks": 17678
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.6521656474129098,
+            "p99": 24.0,
+            "max": 157.0,
+            "frac_above": 0.014167160284323771,
+            "peaks": 17775
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.6327372066310195,
+            "p99": 24.0,
+            "max": 156.0,
+            "frac_above": 0.013984805247822746,
+            "peaks": 17393
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": true,
+        "tracerConfig.txt": true,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "10Hz_r_b_2": {
+      "cameras": [
+        {
+          "run": "10Hz_r_b_2",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 31.243520006
+        },
+        {
+          "run": "10Hz_r_b_2",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 31.04320195
+        },
+        {
+          "run": "10Hz_r_b_2",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 30.04096829
+        },
+        {
+          "run": "10Hz_r_b_2",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 29.462781636
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 2.364103473600794,
+            "p99": 32.0,
+            "max": 238.0,
+            "frac_above": 0.026754410540471313,
+            "peaks": 43011
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 2.3883564433113476,
+            "p99": 32.0,
+            "max": 255.0,
+            "frac_above": 0.02714263415727459,
+            "peaks": 43419
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 2.422510616114882,
+            "p99": 30.0,
+            "max": 231.0,
+            "frac_above": 0.02631290623399078,
+            "peaks": 40389
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 2.415704695904841,
+            "p99": 30.0,
+            "max": 233.0,
+            "frac_above": 0.026471747726690573,
+            "peaks": 40654
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.8482565957991803,
+            "p99": 23.0,
+            "max": 148.0,
+            "frac_above": 0.013649362032530738,
+            "peaks": 20665
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.8274078369140625,
+            "p99": 23.0,
+            "max": 155.0,
+            "frac_above": 0.013709646756531762,
+            "peaks": 20843
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.9079394731365267,
+            "p99": 26.0,
+            "max": 169.0,
+            "frac_above": 0.01687872214395492,
+            "peaks": 19584
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 1.89608639576396,
+            "p99": 26.0,
+            "max": 167.0,
+            "frac_above": 0.017132118100025615,
+            "peaks": 19823
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "15Hz_r_b_1": {
+      "cameras": [
+        {
+          "run": "15Hz_r_b_1",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.62456926
+        },
+        {
+          "run": "15Hz_r_b_1",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.569437478
+        },
+        {
+          "run": "15Hz_r_b_1",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.368178162
+        },
+        {
+          "run": "15Hz_r_b_1",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.849040068
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.779629816774461,
+            "p99": 125.0,
+            "max": 255.0,
+            "frac_above": 0.1629788758324795,
+            "peaks": 154994
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.833379276463242,
+            "p99": 125.0,
+            "max": 255.0,
+            "frac_above": 0.1637443167264344,
+            "peaks": 155151
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.712603459592726,
+            "p99": 115.0,
+            "max": 255.0,
+            "frac_above": 0.1705047107133709,
+            "peaks": 155214
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.790306216380635,
+            "p99": 115.0,
+            "max": 255.0,
+            "frac_above": 0.1717499279585041,
+            "peaks": 156384
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.690512735335552,
+            "p99": 90.0,
+            "max": 255.0,
+            "frac_above": 0.1429168200883709,
+            "peaks": 134090
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.600525652776,
+            "p99": 90.0,
+            "max": 255.0,
+            "frac_above": 0.14117231525358606,
+            "peaks": 132584
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.805087480388703,
+            "p99": 100.0,
+            "max": 255.0,
+            "frac_above": 0.13895128594070186,
+            "peaks": 126710
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.856274964379482,
+            "p99": 100.0,
+            "max": 255.0,
+            "frac_above": 0.13949760061795594,
+            "peaks": 128073
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "15Hz_r_b_2": {
+      "cameras": [
+        {
+          "run": "15Hz_r_b_2",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.676474044
+        },
+        {
+          "run": "15Hz_r_b_2",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.634583396
+        },
+        {
+          "run": "15Hz_r_b_2",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 33.817120386
+        },
+        {
+          "run": "15Hz_r_b_2",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.844768712
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.962661993308146,
+            "p99": 125.0,
+            "max": 255.0,
+            "frac_above": 0.16554610455622437,
+            "peaks": 157750
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.908290675429047,
+            "p99": 125.0,
+            "max": 255.0,
+            "frac_above": 0.1642851282338627,
+            "peaks": 155851
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.030392255939422,
+            "p99": 116.0,
+            "max": 255.0,
+            "frac_above": 0.17556412493596313,
+            "peaks": 159353
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.907204299676614,
+            "p99": 115.0,
+            "max": 255.0,
+            "frac_above": 0.1732002633516906,
+            "peaks": 157792
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.215071881403688,
+            "p99": 153.0,
+            "max": 255.0,
+            "frac_above": 0.2010162853803791,
+            "peaks": 203934
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.232241020827997,
+            "p99": 153.0,
+            "max": 255.0,
+            "frac_above": 0.20083693207287398,
+            "peaks": 203382
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.938830266233351,
+            "p99": 102.0,
+            "max": 255.0,
+            "frac_above": 0.14055971239433915,
+            "peaks": 128708
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.971981611408172,
+            "p99": 102.0,
+            "max": 255.0,
+            "frac_above": 0.14093167664574796,
+            "peaks": 128016
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "20Hz_r_b_1": {
+      "cameras": [
+        {
+          "run": "20Hz_r_b_1",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.933243736
+        },
+        {
+          "run": "20Hz_r_b_1",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 38.005302648
+        },
+        {
+          "run": "20Hz_r_b_1",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.77320533
+        },
+        {
+          "run": "20Hz_r_b_1",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.173302232
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.278782078477203,
+            "p99": 113.0,
+            "max": 255.0,
+            "frac_above": 0.1604854396132172,
+            "peaks": 151307
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.685037081358862,
+            "p99": 113.0,
+            "max": 255.0,
+            "frac_above": 0.14938104348104508,
+            "peaks": 141484
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.168256915983607,
+            "p99": 101.0,
+            "max": 255.0,
+            "frac_above": 0.16897082719646517,
+            "peaks": 157165
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.526221103355534,
+            "p99": 100.0,
+            "max": 255.0,
+            "frac_above": 0.15715552158043034,
+            "peaks": 147090
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.096606895571849,
+            "p99": 81.0,
+            "max": 255.0,
+            "frac_above": 0.1352754186411373,
+            "peaks": 130957
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 7.693107980196594,
+            "p99": 80.0,
+            "max": 255.0,
+            "frac_above": 0.12764502353355534,
+            "peaks": 123895
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.22224901543289,
+            "p99": 91.0,
+            "max": 255.0,
+            "frac_above": 0.13150549716636784,
+            "peaks": 123471
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 7.838053969086194,
+            "p99": 90.0,
+            "max": 255.0,
+            "frac_above": 0.12438464555584017,
+            "peaks": 116978
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "20Hz_r_b_2": {
+      "cameras": [
+        {
+          "run": "20Hz_r_b_2",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.038297606
+        },
+        {
+          "run": "20Hz_r_b_2",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.020148978
+        },
+        {
+          "run": "20Hz_r_b_2",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.839455702
+        },
+        {
+          "run": "20Hz_r_b_2",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.185132528
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.137010668144852,
+            "p99": 110.0,
+            "max": 255.0,
+            "frac_above": 0.14028155217405225,
+            "peaks": 132889
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.997690169537654,
+            "p99": 110.0,
+            "max": 255.0,
+            "frac_above": 0.13747918801229508,
+            "peaks": 129988
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.84871385918289,
+            "p99": 98.0,
+            "max": 255.0,
+            "frac_above": 0.1453312107774078,
+            "peaks": 135376
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.941141847704278,
+            "p99": 99.0,
+            "max": 255.0,
+            "frac_above": 0.14703619284707992,
+            "peaks": 137337
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.971909820056353,
+            "p99": 79.0,
+            "max": 255.0,
+            "frac_above": 0.114593505859375,
+            "peaks": 108884
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.976065463707095,
+            "p99": 79.0,
+            "max": 255.0,
+            "frac_above": 0.11470331911180841,
+            "peaks": 109202
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 7.1097889884573515,
+            "p99": 89.0,
+            "max": 255.0,
+            "frac_above": 0.11106422299244365,
+            "peaks": 102311
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 7.157502971711706,
+            "p99": 89.0,
+            "max": 255.0,
+            "frac_above": 0.11174561547451332,
+            "peaks": 103825
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "25Hz_r_b_1": {
+      "cameras": [
+        {
+          "run": "25Hz_r_b_1",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.553376454
+        },
+        {
+          "run": "25Hz_r_b_1",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.813393212
+        },
+        {
+          "run": "25Hz_r_b_1",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 34.58147525
+        },
+        {
+          "run": "25Hz_r_b_1",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.837931552
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.57268286533043,
+            "p99": 103.0,
+            "max": 255.0,
+            "frac_above": 0.15279976266329406,
+            "peaks": 143564
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.563906059890497,
+            "p99": 104.0,
+            "max": 255.0,
+            "frac_above": 0.1522704577836834,
+            "peaks": 143624
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.44974305199795,
+            "p99": 90.0,
+            "max": 255.0,
+            "frac_above": 0.16239804127177254,
+            "peaks": 159285
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.430623289014472,
+            "p99": 91.0,
+            "max": 255.0,
+            "frac_above": 0.16188449546939038,
+            "peaks": 157896
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.899192184698386,
+            "p99": 123.0,
+            "max": 255.0,
+            "frac_above": 0.19616524117891906,
+            "peaks": 212369
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.839216138495773,
+            "p99": 124.0,
+            "max": 255.0,
+            "frac_above": 0.1948002049180328,
+            "peaks": 211260
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 7.768182973392674,
+            "p99": 83.0,
+            "max": 255.0,
+            "frac_above": 0.1258329797963627,
+            "peaks": 122138
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 7.779471475569928,
+            "p99": 83.0,
+            "max": 255.0,
+            "frac_above": 0.12585924492507686,
+            "peaks": 122592
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "25Hz_r_b_2": {
+      "cameras": [
+        {
+          "run": "25Hz_r_b_2",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 38.6093609
+        },
+        {
+          "run": "25Hz_r_b_2",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 34.261212166
+        },
+        {
+          "run": "25Hz_r_b_2",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 35.410673168
+        },
+        {
+          "run": "25Hz_r_b_2",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 34.348882316
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.344984711193648,
+            "p99": 107.0,
+            "max": 255.0,
+            "frac_above": 0.1649139904585041,
+            "peaks": 153846
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.053289194576076,
+            "p99": 106.0,
+            "max": 255.0,
+            "frac_above": 0.15951688172387296,
+            "peaks": 149694
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 14.532215556160349,
+            "p99": 155.0,
+            "max": 255.0,
+            "frac_above": 0.21569999319608094,
+            "peaks": 221864
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 14.522920452180456,
+            "p99": 155.0,
+            "max": 255.0,
+            "frac_above": 0.2147424416463883,
+            "peaks": 220512
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 12.47270052550269,
+            "p99": 126.0,
+            "max": 255.0,
+            "frac_above": 0.20557891345414958,
+            "peaks": 221054
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 12.424910498447106,
+            "p99": 127.0,
+            "max": 255.0,
+            "frac_above": 0.20389844550461064,
+            "peaks": 219875
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 12.024198188156378,
+            "p99": 134.0,
+            "max": 255.0,
+            "frac_above": 0.19228950875704406,
+            "peaks": 214527
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.959198498335041,
+            "p99": 133.0,
+            "max": 255.0,
+            "frac_above": 0.1916929151191086,
+            "peaks": 214432
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "30Hz_r_b_1": {
+      "cameras": [
+        {
+          "run": "30Hz_r_b_1",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 38.061241848
+        },
+        {
+          "run": "30Hz_r_b_1",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 34.208520692
+        },
+        {
+          "run": "30Hz_r_b_1",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 35.352137728
+        },
+        {
+          "run": "30Hz_r_b_1",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 34.132998284
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.102488783539318,
+            "p99": 95.0,
+            "max": 255.0,
+            "frac_above": 0.1480690377657531,
+            "peaks": 141920
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 9.326863523389472,
+            "p99": 96.0,
+            "max": 255.0,
+            "frac_above": 0.1518837350313781,
+            "peaks": 145198
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.50660930696081,
+            "p99": 139.0,
+            "max": 255.0,
+            "frac_above": 0.20872772717085042,
+            "peaks": 224726
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.514872066310195,
+            "p99": 139.0,
+            "max": 255.0,
+            "frac_above": 0.20928604876408813,
+            "peaks": 225420
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.463843173668034,
+            "p99": 114.0,
+            "max": 255.0,
+            "frac_above": 0.19464536573066085,
+            "peaks": 220536
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.54503894243084,
+            "p99": 114.0,
+            "max": 255.0,
+            "frac_above": 0.19595937259861682,
+            "peaks": 220550
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.02237989081711,
+            "p99": 122.0,
+            "max": 255.0,
+            "frac_above": 0.18046419737768954,
+            "peaks": 209669
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.089642384013192,
+            "p99": 122.0,
+            "max": 255.0,
+            "frac_above": 0.18179171202612704,
+            "peaks": 211807
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "30Hz_r_b_2": {
+      "cameras": [
+        {
+          "run": "30Hz_r_b_2",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.499638166
+        },
+        {
+          "run": "30Hz_r_b_2",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.024630612
+        },
+        {
+          "run": "30Hz_r_b_2",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.585747284
+        },
+        {
+          "run": "30Hz_r_b_2",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 35.706892336
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.079396232229765,
+            "p99": 91.0,
+            "max": 255.0,
+            "frac_above": 0.13173312828189038,
+            "peaks": 128754
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.53580162173412,
+            "p99": 92.0,
+            "max": 255.0,
+            "frac_above": 0.13909711994108606,
+            "peaks": 135488
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 3.998288013896004,
+            "p99": 40.0,
+            "max": 251.0,
+            "frac_above": 0.05526858470478996,
+            "peaks": 66275
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 4.19013201604124,
+            "p99": 41.0,
+            "max": 253.0,
+            "frac_above": 0.05765721055327869,
+            "peaks": 68226
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.938887799372439,
+            "p99": 66.0,
+            "max": 255.0,
+            "frac_above": 0.11764276223104508,
+            "peaks": 127163
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.834568711577869,
+            "p99": 65.0,
+            "max": 255.0,
+            "frac_above": 0.11617966948962602,
+            "peaks": 125855
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.985045386142418,
+            "p99": 74.0,
+            "max": 255.0,
+            "frac_above": 0.11372250416239754,
+            "peaks": 117401
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.888900256547772,
+            "p99": 74.0,
+            "max": 255.0,
+            "frac_above": 0.1117923924180328,
+            "peaks": 115184
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "35Hz_r_b_1": {
+      "cameras": [
+        {
+          "run": "35Hz_r_b_1",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.607730928
+        },
+        {
+          "run": "35Hz_r_b_1",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.126746212
+        },
+        {
+          "run": "35Hz_r_b_1",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.789676408
+        },
+        {
+          "run": "35Hz_r_b_1",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 34.949287726
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.313352491034836,
+            "p99": 85.0,
+            "max": 255.0,
+            "frac_above": 0.14011545650294568,
+            "peaks": 143421
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 8.318028934666367,
+            "p99": 85.0,
+            "max": 255.0,
+            "frac_above": 0.13947883981173156,
+            "peaks": 142165
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 3.9791107177734375,
+            "p99": 37.0,
+            "max": 255.0,
+            "frac_above": 0.051071667280353485,
+            "peaks": 67961
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 4.035223788902408,
+            "p99": 38.0,
+            "max": 255.0,
+            "frac_above": 0.052100009605532786,
+            "peaks": 68178
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.4236857930167774,
+            "p99": 59.0,
+            "max": 236.0,
+            "frac_above": 0.10919439597207992,
+            "peaks": 128692
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 6.49426519675333,
+            "p99": 60.0,
+            "max": 245.0,
+            "frac_above": 0.1104703809394211,
+            "peaks": 128840
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 3.2520619376761015,
+            "p99": 34.0,
+            "max": 176.0,
+            "frac_above": 0.03588041712026127,
+            "peaks": 37409
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 3.286006239594006,
+            "p99": 34.0,
+            "max": 202.0,
+            "frac_above": 0.03628815197553791,
+            "peaks": 37601
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    },
+    "35Hz_r_b_2": {
+      "cameras": [
+        {
+          "run": "35Hz_r_b_2",
+          "cam": 0,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 36.116578148
+        },
+        {
+          "run": "35Hz_r_b_2",
+          "cam": 1,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 35.845602264
+        },
+        {
+          "run": "35Hz_r_b_2",
+          "cam": 2,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 37.228285374
+        },
+        {
+          "run": "35Hz_r_b_2",
+          "cam": 3,
+          "n": 12605,
+          "contiguous": true,
+          "first": 0,
+          "last": 12604,
+          "other": [],
+          "n_other": 0,
+          "GB": 35.887580736
+        }
+      ],
+      "lists": [
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        },
+        {
+          "exists": false
+        }
+      ],
+      "look": [
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.985157950979765,
+            "p99": 147.0,
+            "max": 255.0,
+            "frac_above": 0.21335038982453894,
+            "peaks": 226583
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.935526113041112,
+            "p99": 148.0,
+            "max": 255.0,
+            "frac_above": 0.2116153904649078,
+            "peaks": 225199
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.330430828157018,
+            "p99": 125.0,
+            "max": 255.0,
+            "frac_above": 0.2181941798475922,
+            "peaks": 246265
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 13.15037311491419,
+            "p99": 125.0,
+            "max": 255.0,
+            "frac_above": 0.214844000144083,
+            "peaks": 242995
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.455307757268187,
+            "p99": 103.0,
+            "max": 255.0,
+            "frac_above": 0.20322830950627563,
+            "peaks": 242756
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 11.543844504434555,
+            "p99": 103.0,
+            "max": 255.0,
+            "frac_above": 0.2053375244140625,
+            "peaks": 243654
+          }
+        ],
+        [
+          {
+            "frame": 0,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.917962246253841,
+            "p99": 110.0,
+            "max": 255.0,
+            "frac_above": 0.18721158387231046,
+            "peaks": 228565
+          },
+          {
+            "frame": 6000,
+            "dtype": "uint8",
+            "shape": [
+              1952,
+              2048
+            ],
+            "mean": 10.957745911645107,
+            "p99": 110.0,
+            "max": 255.0,
+            "frac_above": 0.18807583167904712,
+            "peaks": 229024
+          }
+        ]
+      ],
+      "holds": {
+        "config.json": false,
+        "config.txt": false,
+        "tracerConfig.txt": false,
+        "Results_tracer": false
+      },
+      "frames": 12605,
+      "ok": true
+    }
+  },
+  "ok": true
+}

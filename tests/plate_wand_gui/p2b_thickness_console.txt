@@ -1,0 +1,22 @@
+truth, cameras 2 and 3 behind window 1 (10 mm): camera side / water side cam2 579.555 / 589.555 mm; cam3 579.555 / 589.555 mm
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+window 1 at 10 mm: RMS 0.11654 px, f error 0.299 %; distance error camera side / water side cam2 +1.522 / +1.522 mm; cam3 +2.216 / +2.216 mm
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 200 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+window 1 at 12.7 mm: RMS 0.11654 px, f error 0.299 %; distance error camera side / water side cam2 +1.952 / +4.652 mm; cam3 +2.646 / +5.346 mm
+the wand ends in the output frame (Z along window 1's normal, origin at the wand's mean), 10 against 12.7 mm: they differ by 0.0 um median, 0.0 um at most
+  FAIL  the right thickness puts window 1 where it is (camera-side distance within 0.5 mm of the truth)  (largest error 2.216 mm)
+  FAIL  2.7 mm too thick: the same fit (RMS within 1 %), the window moved toward the cameras instead  (RMS 0.11654 / 0.11654 px; the camera-side surface moved +0.430 mm)
+
+0 of 2 checks passed; 76 s

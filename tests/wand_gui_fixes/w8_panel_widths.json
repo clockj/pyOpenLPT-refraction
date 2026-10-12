@@ -1,0 +1,632 @@
+{
+ "checks": [
+  {
+   "check": "1500x900: Point Detection has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 336 px, viewport 358 px"
+  },
+  {
+   "check": "1500x900: Pinhole has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 345 px, viewport 358 px"
+  },
+  {
+   "check": "1500x900: Pinhole+Refraction has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 345 px, viewport 358 px"
+  },
+  {
+   "check": "1500x900: Pinhole+Cylinder has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 345 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Point Detection has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 336 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Pinhole has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 345 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Pinhole+Refraction has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 345 px, viewport 358 px"
+  },
+  {
+   "check": "1200x700: Pinhole+Cylinder has no horizontal scroll bar",
+   "ok": true,
+   "detail": "content minimum 345 px, viewport 358 px"
+  }
+ ],
+ "panels": {
+  "1500x900": {
+   "Point Detection": {
+    "viewport": 358,
+    "content_min": 336,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Detection Settings'",
+      "min_w": 316
+     }
+    ]
+   },
+   "Pinhole": {
+    "viewport": 358,
+    "content_min": 345,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 311
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 92
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Refraction": {
+    "viewport": 358,
+    "content_min": 345,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Refraction Settings'",
+      "min_w": 322
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 311
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 92
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Cylinder": {
+    "viewport": 358,
+    "content_min": 345,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Tube Settings'",
+      "min_w": 306
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 311
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 92
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   }
+  },
+  "1200x700": {
+   "Point Detection": {
+    "viewport": 358,
+    "content_min": 336,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "800",
+      "right": 616,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "1280",
+      "right": 514,
+      "min_w": 125,
+      "width": 101
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     },
+     {
+      "widget": "QSpinBox",
+      "name": "",
+      "text": "9000",
+      "right": 412,
+      "min_w": 139,
+      "width": 266
+     }
+    ],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Detection Settings'",
+      "min_w": 316
+     }
+    ]
+   },
+   "Pinhole": {
+    "viewport": 358,
+    "content_min": 345,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 311
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 92
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Refraction": {
+    "viewport": 358,
+    "content_min": 345,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Refraction Settings'",
+      "min_w": 322
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 311
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 92
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   },
+   "Pinhole+Cylinder": {
+    "viewport": 358,
+    "content_min": 345,
+    "content_w": 358,
+    "hbar_visible": false,
+    "hbar_max": 0,
+    "vbar_visible": true,
+    "over": [],
+    "wide_rows": [
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Calibration Settings'",
+      "min_w": 325
+     },
+     {
+      "depth": 0,
+      "item": "QGroupBox 'Tube Settings'",
+      "min_w": 306
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 311
+     },
+     {
+      "depth": 1,
+      "item": "QCheckBox 'Delete when wand len error >'",
+      "min_w": 204
+     },
+     {
+      "depth": 1,
+      "item": "QDoubleSpinBox '1.00 mm'",
+      "min_w": 92
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 0,
+      "item": "QHBoxLayout",
+      "min_w": 300
+     },
+     {
+      "depth": 1,
+      "item": "spacer",
+      "min_w": 0
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Restore Deleted Frames'",
+      "min_w": 143
+     },
+     {
+      "depth": 1,
+      "item": "QPushButton 'Save Filtered Points'",
+      "min_w": 142
+     }
+    ]
+   }
+  }
+ }
+}

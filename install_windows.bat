@@ -6,12 +6,17 @@ echo ==========================================
 echo.
 echo This script will:
 echo 1. Install Visual Studio Build Tools (if needed)
-echo 2. Create a Conda environment named 'OpenLPT'
+echo 2. Create a Conda environment named 'OpenLPT' (or the name given as the first argument)
 echo 3. Install all dependencies
 echo 4. Install the OpenLPT package
 echo.
+echo Usage: install_windows.bat [ENV_NAME]   (set OPENLPT_NO_LAUNCH=1 to skip the GUI launch at the end)
+echo.
 
 cd /d "%~dp0"
+
+set "ENV_NAME=%~1"
+if "%ENV_NAME%"=="" set "ENV_NAME=OpenLPT"
 
 :: ============================================
 :: STEP 0: Visual Studio Build Tools Check
@@ -158,36 +163,59 @@ if errorlevel 1 (
     )
 )
 
+:: mamba where there is one (Miniforge), else conda (Anaconda, Miniconda)
+set "CONDA_CMD=conda"
+where mamba >nul 2>nul
+if not errorlevel 1 set "CONDA_CMD=mamba"
+echo [INFO] Using %CONDA_CMD%.
+
 :: ============================================
-:: STEP 2: Create Conda Environment
+:: STEP 2: Create the Conda Environment with its Dependencies
 :: ============================================
 
 echo.
-echo [2/4] Creating Conda Environment 'OpenLPT'...
-call conda create -n OpenLPT python=3.10 -y
+echo [2/4] Creating Conda Environment '%ENV_NAME%' with the dependencies from conda-forge...
+
+:: requirements.txt without its pip-only lines (not on conda-forge; step 3), plus qt6-webengine (the camera
+:: calibration's Report tab), pywin32, and OpenBLAS: on Windows conda-forge picks MKL by default, with which numpy's
+:: linear algebra can crash the interpreter.
+set "CONDA_REQ=%TEMP%\openlpt_conda_requirements.txt"
+findstr /V /C:"pip-only" requirements.txt > "%CONDA_REQ%"
+>>"%CONDA_REQ%" echo qt6-webengine
+>>"%CONDA_REQ%" echo pywin32
+>>"%CONDA_REQ%" echo libblas=*=*openblas
+
+call conda env list | findstr /B /C:"%ENV_NAME% " >nul
 if errorlevel 1 (
-    echo [Warning] Environment might already exist. Continuing...
+    call %CONDA_CMD% create -n %ENV_NAME% --override-channels -c conda-forge python=3.11 --file "%CONDA_REQ%" -y
+) else (
+    echo [INFO] Environment '%ENV_NAME%' exists: updating its packages.
+    call %CONDA_CMD% install -n %ENV_NAME% --override-channels -c conda-forge --file "%CONDA_REQ%" -y
 )
-
-echo.
-echo [3/4] Activating Environment and Installing Dependencies...
-call conda activate OpenLPT
 if errorlevel 1 (
-    echo [Error] Failed to activate 'OpenLPT' environment.
+    echo [Error] Installing the conda-forge packages failed.
     pause
     exit /b 1
 )
 
-:: Install dependencies
-call mamba install -c conda-forge --file requirements.txt -y
+echo.
+echo [3/4] Activating Environment and Installing the pip-only Dependencies...
+call conda activate %ENV_NAME%
 if errorlevel 1 (
-    echo [Error] Mamba install failed.
+    echo [Error] Failed to activate '%ENV_NAME%' environment.
     pause
     exit /b 1
 )
 
-:: Install Windows-specific packages
-call mamba install -c conda-forge pywin32 -y
+:: requirements.txt's lines marked pip-only (pycine)
+for /f "usebackq tokens=1" %%p in (`findstr /C:"pip-only" requirements.txt ^| findstr /V /B /C:"#"`) do (
+    pip install "%%p"
+    if errorlevel 1 (
+        echo [Error] pip install %%p failed.
+        pause
+        exit /b 1
+    )
+)
 
 :: ============================================
 :: STEP 4: Build and Install OpenLPT
@@ -232,10 +260,12 @@ echo ==========================================
 echo.
 echo To use OpenLPT:
 echo   1. Open a new terminal
-echo   2. Run: conda activate OpenLPT
+echo   2. Run: conda activate %ENV_NAME%
 echo   3. Run: python GUI.py
 echo.
+if "%OPENLPT_NO_LAUNCH%"=="1" goto :SkipLaunch
 echo Launching OpenLPT GUI...
 python GUI.py
+:SkipLaunch
 
 pause

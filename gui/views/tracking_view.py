@@ -15,6 +15,33 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QProcess, QIODevice, Signal, Slot, QObject, QThread, QCoreApplication, QSize, QTimer, QPoint, QPointF, QRectF
 from PySide6.QtGui import QPixmap, QImage, QPainter, QPen, QColor, QMouseEvent, QWheelEvent
 
+from modules import stb_config
+
+
+def _project_config(proj_dir, inline_objects=False):
+    """(path, settings) of the project's tracking config (config.json, else config.txt); (None, None) if there is
+    none or it cannot be read (the reason is printed)."""
+    if not proj_dir:
+        return None, None
+    try:
+        return stb_config.read_project(proj_dir, inline_objects)
+    except Exception as e:
+        print(f"[Tracking] Cannot read the tracking config in {proj_dir}: {e}")
+        return None, None
+
+
+def _output_dir(proj_dir, config_path, cfg):
+    """The output folder (absolute) that a config names, else proj_dir/Results."""
+    if cfg and cfg.get("output_dir"):
+        return stb_config.resolve(config_path, cfg["output_dir"])
+    return os.path.join(proj_dir, "Results")
+
+
+def _object_type(cfg):
+    """The type of the config's first object: "Bubble" or "Tracer" (also without a config)."""
+    objs = cfg.get("objects") if cfg else None
+    return "Bubble" if objs and objs[0].get("type") == "Bubble" else "Tracer"
+
 class ZoomableLabel(QLabel):
     """
     A QLabel that supports mouse interaction for Zooming and Panning.
@@ -102,25 +129,11 @@ class TrackLoaderWorker(QObject):
 
     def run(self):
         try:
-            # Read Output Folder Path from config.txt
-            config_path = os.path.join(self.proj_dir, "config.txt")
-            output_dir = os.path.join(self.proj_dir, "Results")  # Default fallback
-            obj_type = "Tracer"
-            
-            if os.path.exists(config_path):
-                with open(config_path, 'r') as f:
-                    lines = f.readlines()
-                    for i, line in enumerate(lines):
-                        line_stripped = line.strip()
-                        if "Output Folder Path" in line_stripped:
-                            # Next non-empty, non-comment line should be the path
-                            if i + 1 < len(lines):
-                                path_line = lines[i+1].strip()
-                                if path_line and not path_line.startswith('#'):
-                                    output_dir = path_line
-                        elif "bubble" in line_stripped.lower():
-                            obj_type = "Bubble"
-            
+            # Output folder and object type from the project's config (config.json or config.txt)
+            config_path, cfg = _project_config(self.proj_dir)
+            output_dir = _output_dir(self.proj_dir, config_path, cfg)
+            obj_type = _object_type(cfg)
+
             track_dir = os.path.join(output_dir, "ConvergeTrack")
             if not os.path.exists(track_dir):
                 # Fallback to default location
@@ -282,6 +295,7 @@ class TrackingView(QWidget):
         self.process.readyReadStandardError.connect(self._handle_stderr)
         self.process.finished.connect(self._on_process_finished)
         self.log_file = None
+        self._pending_cr = {}  # per output stream: a '\r' that ended the last chunk read
         
         # Cache for statistics
         self.cached_proj_path = None
@@ -325,6 +339,7 @@ class TrackingView(QWidget):
         self._vsc_lpt_unavailable = False
         self._vsc_cpp_cam_cache_init = {}
         self._vsc_cpp_cam_cache_optim = {}
+        self.vsc_corr_widget = None
         self._busy_tokens = {}
         
         self._setup_ui()
@@ -873,6 +888,18 @@ class TrackingView(QWidget):
         self.vsc_frame_table.itemClicked.connect(self._on_vsc_frame_selected)
         vsc_layout.addWidget(self.vsc_frame_table, 6, 0, 1, 2)
 
+        # Cameras behind a tube or a sphere: VSC fits an image correction per camera (modules/vsc/field_vsc.py)
+        self.vsc_field_note = QLabel(
+            "Tube / sphere cameras (PINCYL, PINSPH): VSC fits a smooth image correction per camera from the long "
+            "tracks and sets it as the camera's \"correction\" in config.json; the camera files stay as they are. "
+            "Then rerun tracking and VSC again: two passes. The 2-D tolerance is left to you (on the tube run the "
+            "correction paid at 1.0 px).")
+        self.vsc_field_note.setWordWrap(True)
+        self.vsc_field_note.setStyleSheet("color: #8a9aaa; font-size: 11px;")
+        self.vsc_field_note.setVisible(False)
+        vsc_layout.addWidget(self.vsc_field_note, 7, 0, 1, 2)
+        self.proj_path_edit.textChanged.connect(self._update_vsc_field_note)
+
         
         layout.addWidget(vsc_group)
 
@@ -881,6 +908,15 @@ class TrackingView(QWidget):
     def showEvent(self, event):
         super().showEvent(event)
         self._sync_project_path()
+
+    def _update_vsc_field_note(self, *_args):
+        """Show the field VSC's note for projects whose cameras look through a tube or a sphere."""
+        try:
+            from modules.vsc.field_vsc import is_field_project
+            proj_dir = self.proj_path_edit.text().strip()
+            self.vsc_field_note.setVisible(bool(proj_dir) and is_field_project(proj_dir))
+        except Exception:
+            self.vsc_field_note.setVisible(False)
 
     def _sync_project_path(self):
         """Fetch project path from settings view."""
@@ -918,8 +954,8 @@ class TrackingView(QWidget):
             )
             return
 
-        config_path = os.path.join(proj_dir, "config.txt")
-        
+        config_path = stb_config.find_config(proj_dir)  # config.json, else config.txt (checked above)
+
         # Find executable relative to GUI script
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
         exe_path = os.path.join(base_dir, "build", "Release", "OpenLPT.exe")
@@ -933,6 +969,7 @@ class TrackingView(QWidget):
         log_path = os.path.join(proj_dir, "log.txt")
         try:
             self.log_file = open(log_path, "w")
+            self._pending_cr = {}
             self.log_text.clear()
             self.vis_tabs.setCurrentWidget(self.log_text)
             if use_python_module:
@@ -956,70 +993,29 @@ class TrackingView(QWidget):
             self.process.start(exe_path, [config_path])
 
     def _check_project_files(self, proj_dir):
-        """Verify existence of mandatory files/folders by parsing config.txt."""
+        """Verify that the files named by the project's config (config.json or config.txt) exist."""
         errors = []
-        
-        config_path = os.path.join(proj_dir, "config.txt")
-        
-        # Check config.txt
-        if not os.path.exists(config_path):
-            errors.append("- Master config file (config.txt) is missing.")
+
+        config_path = stb_config.find_config(proj_dir)
+        if config_path is None:
+            errors.append("- Master config file (config.json or config.txt) is missing.")
             return False, "\n".join(errors)
-        
-        # Parse config.txt for paths
-        camera_paths = []
-        image_paths = []
-        sub_config_path = None
-        
-        current_section = None
-        
-        with open(config_path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                
-                # Detect section headers
-                if '# Camera File Path' in line:
-                    current_section = 'camera'
-                    continue
-                elif '# Image File Path' in line:
-                    current_section = 'image'
-                    continue
-                elif '# STB Config Files' in line:
-                    current_section = 'stb_config'
-                    continue
-                elif line.startswith('#'):
-                    current_section = None  # Other section
-                    continue
-                
-                # Parse content lines
-                if current_section == 'camera':
-                    parts = line.split(',')
-                    if parts:
-                        cam_path = parts[0].strip()
-                        if cam_path.endswith('.txt'):
-                            if not os.path.isabs(cam_path):
-                                cam_path = os.path.normpath(os.path.join(proj_dir, cam_path))
-                            camera_paths.append(cam_path)
-                
-                elif current_section == 'image':
-                    img_path = line.strip()
-                    if img_path.endswith('.txt'):
-                        if not os.path.isabs(img_path):
-                            img_path = os.path.normpath(os.path.join(proj_dir, img_path))
-                        image_paths.append(img_path)
-                
-                elif current_section == 'stb_config':
-                    cfg_path = line.strip()
-                    if cfg_path.endswith('.txt'):
-                        if not os.path.isabs(cfg_path):
-                            cfg_path = os.path.normpath(os.path.join(proj_dir, cfg_path))
-                        sub_config_path = cfg_path
-        
+        config_name = os.path.basename(config_path)
+        try:
+            cfg = stb_config.read(config_path, inline_objects=False)
+        except Exception as e:
+            errors.append(f"- {config_name} cannot be read: {e}")
+            return False, "\n".join(errors)
+
+        camera_paths = [stb_config.resolve(config_path, c["file"]) for c in cfg["cameras"]]
+        image_paths = [stb_config.resolve(config_path, p) for p in cfg["image_lists"]]
+        # a text config names the object config files; config.json holds the object settings itself
+        sub_config_paths = [stb_config.resolve(config_path, o["config_file"])
+                            for o in cfg["objects"] if "config_file" in o]
+
         # Check camera files
         if not camera_paths:
-            errors.append("- No camera file paths found in config.txt (# Camera File Path section).")
+            errors.append(f"- No camera files in {config_name}.")
         else:
             missing_cams = [p for p in camera_paths if not os.path.exists(p)]
             if missing_cams:
@@ -1027,10 +1023,10 @@ class TrackingView(QWidget):
                     errors.append(f"- Camera file not found: {p}")
                 if len(missing_cams) > 3:
                     errors.append(f"  ... and {len(missing_cams) - 3} more missing camera files.")
-        
+
         # Check image list files
         if not image_paths:
-            errors.append("- No image file paths found in config.txt (# Image File Path section).")
+            errors.append(f"- No image list files in {config_name}.")
         else:
             missing_imgs = [p for p in image_paths if not os.path.exists(p)]
             if missing_imgs:
@@ -1038,17 +1034,11 @@ class TrackingView(QWidget):
                     errors.append(f"- Image list file not found: {p}")
                 if len(missing_imgs) > 3:
                     errors.append(f"  ... and {len(missing_imgs) - 3} more missing image list files.")
-        
-        # Check sub-config (from config.txt or settings)
-        if sub_config_path:
-            if not os.path.exists(sub_config_path):
-                errors.append(f"- STB config file not found: {sub_config_path}")
-        elif self.settings_view:
-            obj_type = self.settings_view.obj_type_combo.currentText()
-            sub_config = f"{obj_type.lower()}Config.txt"
-            fallback_path = os.path.join(proj_dir, sub_config)
-            if not os.path.exists(fallback_path):
-                errors.append(f"- Sub-configuration file ({sub_config}) is missing. Please save configuration again.")
+
+        # Check the object config files
+        for p in sub_config_paths:
+            if not os.path.exists(p):
+                errors.append(f"- STB config file not found: {p}")
 
         if errors:
             return False, "\n".join(errors)
@@ -1067,24 +1057,10 @@ class TrackingView(QWidget):
             QMessageBox.warning(self, "Error", "Project directory not found. Please set it first.")
             return
         
-        # Check if tracks exist - read Output Folder Path from config.txt
-        config_path = os.path.join(proj_dir, "config.txt")
-        output_dir = os.path.join(proj_dir, "Results")  # Default fallback
-        
-        if os.path.exists(config_path):
-            with open(config_path, 'r') as f:
-                lines = f.readlines()
-                for i, line in enumerate(lines):
-                    if "Output Folder Path" in line:
-                        if i + 1 < len(lines):
-                            path_line = lines[i+1].strip()
-                            if path_line and not path_line.startswith('#'):
-                                if os.path.isabs(path_line):
-                                    output_dir = path_line
-                                else:
-                                    output_dir = os.path.normpath(os.path.join(proj_dir, path_line))
-                                break
-        
+        # Check if tracks exist: the output folder from the project's config (config.json or config.txt)
+        config_path, cfg = _project_config(proj_dir)
+        output_dir = _output_dir(proj_dir, config_path, cfg)
+
         track_dir = os.path.join(output_dir, "ConvergeTrack")
         if not os.path.exists(track_dir):
             # Fallback to default location
@@ -1187,7 +1163,15 @@ class TrackingView(QWidget):
             self._discover_cameras()
             self._update_vsc_visualization(vsc_data)
 
-        if success:
+        if success and vsc_data.get('mode') == 'field':
+            # tube / sphere cameras: image corrections, not new camera files
+            self._append_log(f"\n[SUCCESS] {message}\n")
+            QMessageBox.information(
+                self,
+                "VSC Complete",
+                f"{message}\n\nLog saved to VSC_log.txt",
+            )
+        elif success:
             self._append_log(f"\n[SUCCESS] {message}\n")
             QMessageBox.information(
                 self,
@@ -1200,9 +1184,21 @@ class TrackingView(QWidget):
             self._append_log(f"\n[FAILED] {message}\n")
             QMessageBox.warning(self, "VSC Failed", f"Volume Self-Calibration failed:\n{message}")
 
+        self._release_vsc_thread()
+        self._busy_end('run_vsc')
+
+    def _release_vsc_thread(self):
+        """Let go of the VSC worker and its thread once the thread has ended: a QThread destroyed while it runs aborts
+        the process. The worker has sent its last signal, so the thread ends at once."""
+        thread = self.vsc_thread
+        if thread is not None:
+            try:
+                thread.quit()
+                thread.wait()
+            except RuntimeError:  # already deleted (its deleteLater ran)
+                pass
         self.vsc_worker = None
         self.vsc_thread = None
-        self._busy_end('run_vsc')
 
     @Slot(str)
     def _on_vsc_log(self, message):
@@ -1215,8 +1211,7 @@ class TrackingView(QWidget):
         self.vsc_btn.setText(" Run VSC")
         self._append_log(f"\n[Error] VSC worker crashed: {message}\n")
         QMessageBox.warning(self, "VSC Error", f"VSC execution error:\n{message}")
-        self.vsc_worker = None
-        self.vsc_thread = None
+        self._release_vsc_thread()
         self._busy_end('run_vsc')
 
     def _update_vsc_visualization(self, vsc_data):
@@ -1245,9 +1240,75 @@ class TrackingView(QWidget):
         # Plot all tracks (semi-transparent blue)
         # Plot valid points (bright green)
         self._show_vsc_3d_plot(valid_points)
-        
-        # 3. Switch to 3D tab
-        self.vis_tabs.setCurrentIndex(0)
+
+        # 3. Switch to 3D tab (the field VSC: to its correction plot)
+        if vsc_data.get('mode') == 'field':
+            self._show_vsc_correction_plot(vsc_data)
+        else:
+            self.vis_tabs.setCurrentIndex(0)
+
+    def _show_vsc_correction_plot(self, vsc_data):
+        """The field VSC's corrections, one panel per camera, in a "Correction" tab (added once, after the others):
+        |c| in colour over the sensor, arrows (c, enlarged), the detections the fit used, and the pass."""
+        try:
+            from modules.vsc.correction_io import Correction
+            res = vsc_data.get('field_vsc', {})
+            cams = res.get('cameras', [])
+            if not cams:
+                return
+            if getattr(self, 'vsc_corr_widget', None) is None:
+                self.vsc_corr_widget = QWidget()
+                self.vsc_corr_layout = QVBoxLayout(self.vsc_corr_widget)
+                self.vsc_corr_layout.setContentsMargins(0, 0, 0, 0)
+                self.vis_tabs.addTab(self.vsc_corr_widget, "Correction")
+            while self.vsc_corr_layout.count():
+                item = self.vsc_corr_layout.takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
+            n = len(cams)
+            ncols = 2 if n > 1 else 1
+            nrows = (n + ncols - 1) // ncols
+            fig = Figure(figsize=(6.5 * ncols, 4.6 * nrows), facecolor='black')
+            pts = vsc_data.get('valid_points', [])
+            for k, st in enumerate(cams):
+                ax = fig.add_subplot(nrows, ncols, k + 1)
+                ax.set_facecolor('black')
+                corr = Correction.read(st['file'])
+                mag = corr.magnitude()
+                ext = (corr.u0 - corr.step / 2, corr.u0 + corr.step * (corr.nu - 0.5),
+                       corr.v0 + corr.step * (corr.nv - 0.5), corr.v0 - corr.step / 2)
+                im = ax.imshow(mag, extent=ext, cmap='magma', vmin=0.0, vmax=max(float(mag.max()), 1e-6))
+                cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+                cb.set_label('|c| [px]', color='white')
+                cb.ax.tick_params(colors='white', labelsize=8)
+                det = np.array([p['2d_per_cam'][k] for p in pts if k in p.get('2d_per_cam', {})], float)
+                if len(det):
+                    ax.plot(det[:, 0], det[:, 1], ',', color='#38c8ff', alpha=0.35)
+                sub = max(1, int(round(80.0 / corr.step)))
+                nodes = corr.nodes().reshape(corr.nv, corr.nu, 2)[::sub, ::sub].reshape(-1, 2)
+                du = corr.du[::sub, ::sub].ravel()
+                dv = corr.dv[::sub, ::sub].ravel()
+                spacing = sub * corr.step
+                scale = 0.9 * spacing / max(float(mag.max()), 1e-6)   # the largest arrow 90 % of their spacing
+                ax.quiver(nodes[:, 0], nodes[:, 1], du * scale, dv * scale, angles='xy', scale_units='xy', scale=1,
+                          color='white', width=0.004, alpha=0.9)
+                ax.set_xlim(0, corr.n_col)
+                ax.set_ylim(corr.n_row, 0)
+                ax.set_title(f"cam {k}: pass {st['pass']}, {st['total_rms_px']:.2f} px RMS ({st['total_max_px']:.2f} "
+                             f"max) near the data; this pass changed {st['change_rms_px']:.2f} px",
+                             color='white', fontsize=9)
+                ax.tick_params(colors='white', labelsize=8)
+            fig.text(0.01, 0.005, "arrows: the correction c, enlarged (the largest drawn 90 % of the arrows' spacing); "
+                     "colour: |c|; blue dots: the detections the fit used", color='#aaaaaa', fontsize=8)
+            fig.tight_layout(rect=(0, 0.03, 1, 1))
+            canvas = FigureCanvas(fig)
+            self.vsc_corr_layout.addWidget(canvas)
+            canvas.draw()
+            self.vis_tabs.setCurrentWidget(self.vsc_corr_widget)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print(f"VSC correction plot error: {e}")
 
     def _show_vsc_3d_plot(self, valid_points):
         """Plot all tracks (sampled) and VSC effective points using standard Matplotlib calls."""
@@ -1349,12 +1410,19 @@ class TrackingView(QWidget):
 
 
     def _handle_stdout(self):
-        data = self.process.readAllStandardOutput().data().decode(errors='replace')
-        self._append_log(data)
+        self._append_log(self._process_text(self.process.readAllStandardOutput().data(), "out"))
 
     def _handle_stderr(self):
-        data = self.process.readAllStandardError().data().decode(errors='replace')
-        self._append_log(data)
+        self._append_log(self._process_text(self.process.readAllStandardError().data(), "err"))
+
+    def _process_text(self, data, stream):
+        """The process's output with '\n' line ends: it writes '\r\n' (Windows text mode), and log.txt, opened in text
+        mode, adds the '\r' again.  A '\r' that ends a chunk waits for the next chunk, which may start with its '\n'."""
+        text = self._pending_cr.pop(stream, "") + data.decode(errors='replace')
+        if text.endswith("\r"):
+            self._pending_cr[stream] = "\r"
+            text = text[:-1]
+        return text.replace("\r\n", "\n")
 
     def _append_log(self, text):
         v_scroll = self.log_text.verticalScrollBar()
@@ -1408,24 +1476,10 @@ class TrackingView(QWidget):
         if self.cached_proj_path != proj_dir:
             self.ui_updated = False
 
-        # Read Output Folder Path from config.txt
-        config_path = os.path.join(proj_dir, "config.txt")
-        output_dir = os.path.join(proj_dir, "Results")  # Default fallback
-        
-        if os.path.exists(config_path):
-            with open(config_path, 'r') as f:
-                lines = f.readlines()
-                for i, line in enumerate(lines):
-                    if "Output Folder Path" in line:
-                        if i + 1 < len(lines):
-                            path_line = lines[i+1].strip()
-                            if path_line and not path_line.startswith('#'):
-                                if os.path.isabs(path_line):
-                                    output_dir = path_line
-                                else:
-                                    output_dir = os.path.normpath(os.path.join(proj_dir, path_line))
-                                break
-        
+        # The output folder from the project's config (config.json or config.txt)
+        config_path, cfg = _project_config(proj_dir)
+        output_dir = _output_dir(proj_dir, config_path, cfg)
+
         track_dir = os.path.join(output_dir, "ConvergeTrack")
         if not os.path.exists(track_dir):
             # Fallback to default location
@@ -1630,37 +1684,13 @@ class TrackingView(QWidget):
         self._busy_end('load_tracks')
 
     def _discover_cameras(self):
-        """Discover available cameras from config.txt and create checkboxes."""
+        """Discover available cameras from the project's config and create checkboxes."""
         proj_path = self.proj_path_edit.text()
-        
-        # 1. Try to load from config.txt first (User Preference)
-        config_path = os.path.join(proj_path, "config.txt") if proj_path else None
-        image_name_files = []
-        
-        if config_path and os.path.exists(config_path):
-            try:
-                with open(config_path, 'r') as f:
-                    lines = f.readlines()
-                    is_img_section = False
-                    for line in lines:
-                        line = line.strip()
-                        if not line: continue
-                        
-                        if line.startswith("# Image File Path"):
-                            is_img_section = True
-                            continue
-                        
-                        if is_img_section:
-                            if line.startswith("#"): # Next section
-                                break
-                            if not line.startswith("!"): # Valid path
-                                # Handle potential relative paths (though usually absolute)
-                                if not os.path.isabs(line) and proj_path:
-                                    line = os.path.normpath(os.path.join(proj_path, line))
-                                image_name_files.append(line)
-            except Exception as e:
-                print(f"Error parsing config.txt: {e}")
-        
+
+        # 1. The image lists of the project's config (config.json or config.txt) first (User Preference)
+        config_path, cfg = _project_config(proj_path)
+        image_name_files = [stb_config.resolve(config_path, p) for p in cfg["image_lists"]] if cfg else []
+
         # 2. Fallback to folder scan if config failed or found nothing
         if not image_name_files and proj_path:
             img_file_path = os.path.join(proj_path, "imgFile")
@@ -2048,32 +2078,19 @@ class TrackingView(QWidget):
             self.scatter_head = None
 
     def _read_tracer_radius(self, proj_path):
-        """Try to read particle radius used in tracking from tracerConfig.txt."""
-        try:
-            # Check project root first (standard structure)
-            config_path = os.path.join(proj_path, "tracerConfig.txt")
-            
-            if not os.path.exists(config_path):
-                # Fallback: check parent if proj_path was actually a subdir
-                parent_dir = os.path.dirname(proj_path)
-                config_path = os.path.join(parent_dir, "tracerConfig.txt")
-                
-            if not os.path.exists(config_path):
-                return
-                
-            with open(config_path, 'r') as f:
-                lines = f.readlines()
-                # Radius is typically the last line: "2 # Particle radius [px]..."
-                # Or we search for the comment
-                for line in lines:
-                    if "Particle radius" in line:
-                        parts = line.split('#')[0].strip()
-                        if parts:
-                            radius = float(parts)
-                            self.cached_tracer_radius = radius
-                            break
-        except Exception as e:
-            print(f"Error reading tracer config: {e}")
+        """Read the particle radius used in tracking from the project's config (config.json or tracerConfig.txt)."""
+        if not proj_path:
+            return
+        # Check project root first (standard structure), then its parent if proj_path was actually a subdir
+        for folder in (proj_path, os.path.dirname(proj_path)):
+            _, cfg = _project_config(folder, inline_objects=True)
+            if cfg is None:
+                continue
+            for obj in cfg["objects"]:
+                if obj.get("type") == "Tracer" and "tracer" in obj:
+                    self.cached_tracer_radius = float(obj["tracer"]["radius_px"])
+                    break
+            return
 
     def _update_animation_frame(self):
         """Rendering loop for the animation."""
@@ -2667,7 +2684,12 @@ class TrackingView(QWidget):
                          pt3d_optim = pt3d
                      
                      # 3. Green (After VSC) -> Plus '+'
-                     if cam_idx in cameras_optim:
+                     if vsc_data.get('mode') == 'field':
+                          # tube / sphere cameras: the projections through the corrected cameras
+                          p_new = pt.get('2d_corrected_per_cam', {}).get(cam_idx)
+                          if p_new is not None:
+                              markers.append((p_new[0], p_new[1], QColor(0, 255, 0), "plus"))
+                     elif cam_idx in cameras_optim:
                           params = cameras_optim[cam_idx]
                           proj_2d = project_point_model_aware(cam_idx, params, pt3d_optim, stage="optim")
                           if proj_2d is not None:

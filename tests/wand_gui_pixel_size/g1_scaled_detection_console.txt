@@ -1,0 +1,247 @@
+1. scale_detect_settings
+  cam3: radius 29.6296-103.7037 px, opening 76 px, mask 41.4815 px, guard 3.0 px
+  PASS  cam3's radius range, opening and mask are cams 1-2's x 20/13.5; the guard and 'full' unchanged  (scale 1.481481)
+  PASS  the caller's settings are not modified
+  PASS  scale None, 1 or 0: the same objects back
+
+2. detect_single_frame with cam_scales against run_detection_task by hand
+[ WARN:0@8.153] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@7.986] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@7.914] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@15.756] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@16.990] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@18.217] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.605] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.863] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.371] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@30.593] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@31.587] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@32.394] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.898] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.842] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.338] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@42.816] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@44.161] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@45.914] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.668] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.069] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.080] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@57.103] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@58.751] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@59.757] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.066] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.601] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.557] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@71.670] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@73.033] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@73.558] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.291] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.328] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.303] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@85.680] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@87.178] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@89.559] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.671] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.599] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.134] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@100.776] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@102.017] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@103.481] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.542] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.454] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.543] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@114.222] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@114.974] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@116.887] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.083] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.427] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.445] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@126.927] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@127.966] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@128.720] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.842] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.892] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.646] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@141.485] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@142.521] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@143.569] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.376] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.743] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.643] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@155.987] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@156.449] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@157.805] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.692] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.370] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.378] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@167.604] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@168.615] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@169.666] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.722] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.941] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@7.272] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@181.275] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@183.157] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@184.956] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.960] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.708] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.669] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@193.182] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@194.705] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@197.413] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.183] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.332] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.332] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@208.404] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@209.415] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@211.122] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.978] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.318] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.311] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@218.462] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@218.990] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@220.668] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.444] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.296] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.768] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@231.638] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@232.505] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@234.756] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.752] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.041] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.042] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@246.501] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@248.308] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@249.766] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.038] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.060] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.065] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@260.638] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@262.249] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@263.691] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.234] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.155] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.089] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@274.985] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@275.437] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@277.005] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.161] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.148] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@3.368] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@284.871] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@285.948] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@287.718] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.029] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.054] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.508] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@297.534] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@298.810] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@299.782] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.757] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.828] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.109] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@310.751] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@312.212] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@312.511] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.180] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.186] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.238] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@322.081] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@323.027] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@324.493] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+  PASS  every camera-frame: bitwise the same rows  (72 camera-frames; different: [])
+  camera-frames with two balls (scaled): cam1 20, cam2 16, cam3 19 of 24
+
+3. detect_wand_points_generator with cam_scales, first 6 frames
+[ WARN:0@326.954] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.136] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.306] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@4.975] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.359] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.848] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.384] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.242] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.392] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.156] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.789] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.156] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.790] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.376] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.581] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.391] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.969] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@6.525] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@5.766] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+Generator starting: 6 frames. Resume=False, Autosave=C:\Users\zcloc\AppData\Local\Temp\g1_0lkwi1bk\wand_points.csv
+Detected Image Size: (800, 1280)
+Parallel Execution: 18 tasks to run (Skipped 0)
+Parallel Execution: Using 25 processes (80% of 32 cores).
+Raw detection done. Calculating stats...
+Cam 0: Peak finding failed. Falling back to Median Zoning.
+Cam 0 Final Stats: Small(m=33.6, s=4.3), Large(m=43.9, s=0.7)
+Cam 1: Peak finding failed. Falling back to Median Zoning.
+Cam 1 Final Stats: Small(m=35.0, s=4.2), Large(m=45.3, s=0.9)
+Cam 2: Could not find 2 distinct peaks. Found 1.
+Cam 2: Peak finding failed. Falling back to Median Zoning.
+Cam 2 Final Stats: Small(m=52.6, s=6.1), Large(m=67.1, s=0.5)
+Pass 1 Done. Valid Frames: 2 / 6
+Refinement Done. Valid Frames: 2 / 6
+  PASS  the generator's raw balls equal Test Detect's (u, v, r, metric)  (18 camera-frames; different: [])
+
+4. cam3: the GUI's scaled settings against the case's (30-105 px, 77, 42)
+[ WARN:0@343.489] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@345.289] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@347.694] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@349.011] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@350.917] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@351.700] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@355.004] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@360.289] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@366.383] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@371.693] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@376.177] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@381.510] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@385.929] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@389.289] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@393.157] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@397.484] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@401.794] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@408.785] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@413.883] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@418.516] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@422.359] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@428.208] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@432.646] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@437.040] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+  frames with two balls: GUI scaled 19, case 19; both 19; centre differences: max 0.1123 px, median 0.0004 px
+  FAIL  the same frames kept, centres within 0.05 px  (19 frames)
+
+5. cam3 with cams 1-2's settings, unscaled (the GUI before this change)
+[ WARN:0@440.456] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@443.680] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@447.382] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@449.838] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@454.014] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@458.450] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@463.185] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@469.756] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@474.429] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@480.546] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@485.786] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@489.705] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@494.770] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@500.928] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@503.981] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@507.312] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@510.664] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@513.622] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@516.729] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@520.688] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@527.154] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@530.839] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@534.920] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@539.063] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+  cam3 frames with two balls: unscaled 0, scaled 19 of 24; balls found unscaled per frame: [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
+  PASS  scaling keeps more of cam3's frames than one setting for all cameras  (19 against 0)
+
+6 of 7 checks passed; 543 s

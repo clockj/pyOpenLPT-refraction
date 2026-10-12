@@ -1,0 +1,23 @@
+{
+ "checks": [
+  {
+   "check": "every camera-frame, both modes, both ways of 'no scaling': bitwise the same as HEAD",
+   "ok": true,
+   "detail": "72 comparisons; different: []"
+  },
+  {
+   "check": "the same raw balls in every camera-frame",
+   "ok": true,
+   "detail": "11 camera-frames with balls"
+  }
+ ],
+ "seconds": 263.9068183898926,
+ "images": [
+  3000,
+  4800,
+  6600,
+  8400,
+  10200,
+  12000
+ ]
+}

@@ -1,0 +1,114 @@
+T11d: 2 variants x (40 near-truth fits + 5 from scratch), 16 processes
+  [  1/90    10 s] d1 local    8: rms 0.1197 px, sigma fit 0.1125 (noise RMS 0.1443, kept 0.1163), rejected 91 (wide 53/145) | |z fit| max 1.24
+  [  2/90    10 s] d1 local    3: rms 0.1263 px, sigma fit 0.1185 (noise RMS 0.1414, kept 0.1201), rejected 83 (wide 40/146) | |z fit| max 1.28
+  [  3/90    11 s] d1 local   10: rms 0.1199 px, sigma fit 0.1126 (noise RMS 0.1441, kept 0.1170), rejected 86 (wide 52/155) | |z fit| max 1.90
+  [  4/90    11 s] d1 local   15: rms 0.1192 px, sigma fit 0.1119 (noise RMS 0.1461, kept 0.1147), rejected 91 (wide 55/148) | |z fit| max 1.70
+  [  5/90    11 s] d1 local   14: rms 0.1142 px, sigma fit 0.1075 (noise RMS 0.1461, kept 0.1122), rejected 110 (wide 61/140) | |z fit| max 2.04
+  [  6/90    11 s] d1 local    7: rms 0.1207 px, sigma fit 0.1132 (noise RMS 0.1446, kept 0.1174), rejected 79 (wide 46/142) | |z fit| max 1.31
+  [  7/90    12 s] d1 local   12: rms 0.1168 px, sigma fit 0.1100 (noise RMS 0.1480, kept 0.1165), rejected 108 (wide 57/146) | |z fit| max 2.58
+  [  8/90    12 s] d1 local    4: rms 0.1174 px, sigma fit 0.1103 (noise RMS 0.1455, kept 0.1166), rejected 99 (wide 59/159) | |z fit| max 1.29
+  [  9/90    12 s] d1 local    1: rms 0.1191 px, sigma fit 0.1120 (noise RMS 0.1440, kept 0.1120), rejected 104 (wide 50/135) | |z fit| max 1.97
+  [ 10/90    12 s] d1 local    2: rms 0.1165 px, sigma fit 0.1100 (noise RMS 0.1480, kept 0.1114), rejected 128 (wide 65/145) | |z fit| max 2.14
+  [ 11/90    12 s] d1 local   11: rms 0.1219 px, sigma fit 0.1148 (noise RMS 0.1507, kept 0.1167), rejected 111 (wide 60/152) | |z fit| max 2.58
+  [ 12/90    13 s] d1 local   13: rms 0.1202 px, sigma fit 0.1131 (noise RMS 0.1457, kept 0.1172), rejected 104 (wide 51/139) | |z fit| max 1.61
+  [ 13/90    13 s] d1 local    0: rms 0.1190 px, sigma fit 0.1122 (noise RMS 0.1482, kept 0.1153), rejected 123 (wide 65/151) | |z fit| max 1.64
+  [ 14/90    13 s] d1 local    9: rms 0.1191 px, sigma fit 0.1128 (noise RMS 0.1582, kept 0.1164), rejected 156 (wide 73/157) | |z fit| max 0.84
+  [ 15/90    14 s] d1 local    6: rms 0.1225 px, sigma fit 0.1154 (noise RMS 0.1527, kept 0.1175), rejected 117 (wide 68/175) | |z fit| max 1.75
+  [ 16/90    17 s] d1 local    5: rms 0.1193 px, sigma fit 0.1126 (noise RMS 0.1506, kept 0.1163), rejected 124 (wide 61/147) | |z fit| max 1.32
+  [ 17/90    21 s] d1 local   21: rms 0.1236 px, sigma fit 0.1162 (noise RMS 0.1586, kept 0.1201), rejected 100 (wide 63/167) | |z fit| max 3.09
+  [ 18/90    21 s] d1 local   25: rms 0.1236 px, sigma fit 0.1160 (noise RMS 0.1438, kept 0.1182), rejected 88 (wide 49/150) | |z fit| max 2.06
+  [ 19/90    21 s] d1 local   19: rms 0.1215 px, sigma fit 0.1142 (noise RMS 0.1527, kept 0.1175), rejected 95 (wide 59/159) | |z fit| max 1.38
+  [ 20/90    21 s] d1 local   20: rms 0.1189 px, sigma fit 0.1116 (noise RMS 0.1407, kept 0.1170), rejected 88 (wide 50/149) | |z fit| max 1.80
+  [ 21/90    21 s] d1 local   17: rms 0.1221 px, sigma fit 0.1147 (noise RMS 0.1501, kept 0.1194), rejected 96 (wide 57/157) | |z fit| max 2.57
+  [ 22/90    22 s] d1 local   28: rms 0.1184 px, sigma fit 0.1114 (noise RMS 0.1429, kept 0.1137), rejected 105 (wide 57/151) | |z fit| max 1.74
+  [ 23/90    22 s] d1 local   26: rms 0.1237 px, sigma fit 0.1163 (noise RMS 0.1498, kept 0.1194), rejected 98 (wide 48/156) | |z fit| max 1.87
+  [ 24/90    22 s] d1 local   22: rms 0.1155 px, sigma fit 0.1086 (noise RMS 0.1436, kept 0.1119), rejected 96 (wide 53/129) | |z fit| max 2.21
+  [ 25/90    22 s] d1 local   23: rms 0.1187 px, sigma fit 0.1117 (noise RMS 0.1567, kept 0.1141), rejected 107 (wide 70/163) | |z fit| max 2.22
+  [ 26/90    23 s] d1 local   29: rms 0.1179 px, sigma fit 0.1106 (noise RMS 0.1451, kept 0.1167), rejected 88 (wide 42/142) | |z fit| max 1.65
+  [ 27/90    23 s] d1 local   30: rms 0.1171 px, sigma fit 0.1101 (noise RMS 0.1420, kept 0.1122), rejected 93 (wide 52/141) | |z fit| max 2.44
+  [ 28/90    23 s] d1 local   16: rms 0.1186 px, sigma fit 0.1121 (noise RMS 0.1544, kept 0.1151), rejected 143 (wide 71/159) | |z fit| max 1.76
+  [ 29/90    23 s] d1 local   24: rms 0.1173 px, sigma fit 0.1105 (noise RMS 0.1493, kept 0.1119), rejected 118 (wide 57/131) | |z fit| max 1.31
+  [ 30/90    24 s] d1 local   27: rms 0.1211 px, sigma fit 0.1143 (noise RMS 0.1569, kept 0.1150), rejected 133 (wide 66/164) | |z fit| max 2.08
+  [ 31/90    25 s] d1 local   18: rms 0.1186 px, sigma fit 0.1114 (noise RMS 0.1449, kept 0.1142), rejected 91 (wide 62/135) | |z fit| max 2.43
+  [ 32/90    28 s] d1 local   31: rms 0.1207 px, sigma fit 0.1138 (noise RMS 0.1500, kept 0.1146), rejected 122 (wide 59/151) | |z fit| max 1.37
+  [ 33/90    29 s] d1 local   32: rms 0.1183 px, sigma fit 0.1116 (noise RMS 0.1487, kept 0.1138), rejected 125 (wide 58/152) | |z fit| max 1.69
+  [ 34/90    30 s] d1 local   37: rms 0.1220 px, sigma fit 0.1147 (noise RMS 0.1499, kept 0.1178), rejected 100 (wide 54/152) | |z fit| max 2.11
+  [ 35/90    31 s] d1 local   36: rms 0.1202 px, sigma fit 0.1134 (noise RMS 0.1532, kept 0.1150), rejected 125 (wide 57/137) | |z fit| max 1.54
+  [ 36/90    31 s] d2 local    0: rms 0.1521 px, sigma fit 0.1426 (noise RMS 0.1936, kept 0.1470), rejected 80 (wide 0/0) | |z fit| max 2.92
+  [ 37/90    31 s] d2 local    1: rms 0.1510 px, sigma fit 0.1407 (noise RMS 0.1629, kept 0.1447), rejected 31 (wide 0/0) | |z fit| max 1.72
+  [ 38/90    31 s] d1 local   33: rms 0.1226 px, sigma fit 0.1159 (noise RMS 0.1566, kept 0.1202), rejected 138 (wide 65/151) | |z fit| max 2.05
+  [ 39/90    32 s] d2 local    4: rms 0.1572 px, sigma fit 0.1469 (noise RMS 0.1711, kept 0.1473), rejected 54 (wide 0/0) | |z fit| max 2.32
+  [ 40/90    32 s] d1 local   34: rms 0.1199 px, sigma fit 0.1129 (noise RMS 0.1514, kept 0.1153), rejected 110 (wide 62/149) | |z fit| max 1.96
+  [ 41/90    33 s] d1 local   38: rms 0.1244 px, sigma fit 0.1173 (noise RMS 0.1511, kept 0.1192), rejected 122 (wide 58/172) | |z fit| max 1.42
+  [ 42/90    33 s] d2 local    2: rms 0.1567 px, sigma fit 0.1463 (noise RMS 0.1627, kept 0.1490), rejected 43 (wide 0/0) | |z fit| max 1.62
+  [ 43/90    33 s] d1 local   39: rms 0.1186 px, sigma fit 0.1115 (noise RMS 0.1472, kept 0.1141), rejected 98 (wide 62/152) | |z fit| max 2.85
+  [ 44/90    33 s] d2 local    6: rms 0.1508 px, sigma fit 0.1410 (noise RMS 0.1658, kept 0.1455), rejected 55 (wide 0/0) | |z fit| max 0.92
+  [ 45/90    34 s] d2 local    5: rms 0.1551 px, sigma fit 0.1449 (noise RMS 0.1690, kept 0.1468), rejected 51 (wide 0/0) | |z fit| max 1.39
+  [ 46/90    35 s] d2 local    3: rms 0.1494 px, sigma fit 0.1398 (noise RMS 0.1673, kept 0.1419), rejected 64 (wide 0/0) | |z fit| max 1.87
+  [ 47/90    35 s] d1 local   35: rms 0.1164 px, sigma fit 0.1095 (noise RMS 0.1454, kept 0.1131), rejected 103 (wide 66/151) | |z fit| max 2.55
+  [ 48/90    37 s] d2 local    7: rms 0.1545 px, sigma fit 0.1441 (noise RMS 0.2005, kept 0.1448), rejected 39 (wide 0/0) | |z fit| max 1.39
+  [ 49/90    39 s] d2 local    8: rms 0.1463 px, sigma fit 0.1371 (noise RMS 0.1727, kept 0.1424), rejected 75 (wide 0/0) | |z fit| max 1.96
+  [ 50/90    39 s] d2 local   13: rms 0.1561 px, sigma fit 0.1462 (noise RMS 0.1688, kept 0.1473), rejected 67 (wide 0/0) | |z fit| max 1.67
+  [ 51/90    40 s] d2 local   12: rms 0.1521 px, sigma fit 0.1420 (noise RMS 0.1635, kept 0.1444), rejected 43 (wide 0/0) | |z fit| max 1.91
+  [ 52/90    40 s] d2 local   11: rms 0.1526 px, sigma fit 0.1427 (noise RMS 0.1685, kept 0.1448), rejected 63 (wide 0/0) | |z fit| max 1.80
+  [ 53/90    40 s] d2 local   10: rms 0.1548 px, sigma fit 0.1450 (noise RMS 0.1809, kept 0.1468), rejected 70 (wide 0/0) | |z fit| max 2.28
+  [ 54/90    41 s] d2 local    9: rms 0.1553 px, sigma fit 0.1452 (noise RMS 0.1888, kept 0.1472), rejected 62 (wide 0/0) | |z fit| max 1.20
+  [ 55/90    41 s] d2 local   16: rms 0.1549 px, sigma fit 0.1448 (noise RMS 0.1732, kept 0.1454), rejected 55 (wide 0/0) | |z fit| max 2.00
+  [ 56/90    42 s] d2 local   18: rms 0.1523 px, sigma fit 0.1426 (noise RMS 0.1827, kept 0.1453), rejected 67 (wide 0/0) | |z fit| max 2.08
+  [ 57/90    43 s] d2 local   20: rms 0.1573 px, sigma fit 0.1472 (noise RMS 0.1713, kept 0.1491), rejected 65 (wide 0/0) | |z fit| max 1.66
+  [ 58/90    43 s] d2 local   19: rms 0.1627 px, sigma fit 0.1519 (noise RMS 0.1745, kept 0.1525), rejected 45 (wide 0/0) | |z fit| max 1.49
+  [ 59/90    43 s] d2 local   14: rms 0.1553 px, sigma fit 0.1450 (noise RMS 0.1745, kept 0.1475), rejected 49 (wide 0/0) | |z fit| max 2.59
+  [ 60/90    44 s] d2 local   15: rms 0.1554 px, sigma fit 0.1451 (noise RMS 0.1741, kept 0.1487), rejected 49 (wide 0/0) | |z fit| max 2.38
+  [ 61/90    45 s] d2 local   21: rms 0.1560 px, sigma fit 0.1462 (noise RMS 0.1771, kept 0.1455), rejected 78 (wide 0/0) | |z fit| max 1.65
+  [ 62/90    46 s] d2 local   22: rms 0.1599 px, sigma fit 0.1492 (noise RMS 0.1643, kept 0.1515), rejected 40 (wide 0/0) | |z fit| max 1.76
+  [ 63/90    46 s] d2 local   23: rms 0.1538 px, sigma fit 0.1439 (noise RMS 0.1698, kept 0.1472), rejected 63 (wide 0/0) | |z fit| max 1.91
+  [ 64/90    47 s] d2 local   17: rms 0.1576 px, sigma fit 0.1472 (noise RMS 0.1740, kept 0.1482), rejected 52 (wide 0/0) | |z fit| max 1.48
+  [ 65/90    48 s] d2 local   28: rms 0.1578 px, sigma fit 0.1475 (noise RMS 0.1804, kept 0.1508), rejected 55 (wide 0/0) | |z fit| max 1.80
+  [ 66/90    48 s] d2 local   27: rms 0.1543 px, sigma fit 0.1443 (noise RMS 0.1698, kept 0.1468), rejected 56 (wide 0/0) | |z fit| max 1.38
+  [ 67/90    48 s] d2 local   24: rms 0.1559 px, sigma fit 0.1457 (noise RMS 0.1693, kept 0.1468), rejected 49 (wide 0/0) | |z fit| max 1.92
+  [ 68/90    50 s] d2 local   31: rms 0.1545 px, sigma fit 0.1454 (noise RMS 0.2173, kept 0.1446), rejected 105 (wide 0/0) | |z fit| max 1.05
+  [ 69/90    50 s] d2 local   26: rms 0.1597 px, sigma fit 0.1492 (noise RMS 0.1749, kept 0.1489), rejected 52 (wide 0/0) | |z fit| max 1.62
+  [ 70/90    51 s] d2 local   25: rms 0.1558 px, sigma fit 0.1458 (noise RMS 0.1644, kept 0.1482), rejected 62 (wide 0/0) | |z fit| max 2.28
+  [ 71/90    51 s] d2 local   32: rms 0.1497 px, sigma fit 0.1405 (noise RMS 0.2570, kept 0.1435), rejected 89 (wide 0/0) | |z fit| max 0.67
+  [ 72/90    51 s] d2 local   30: rms 0.1588 px, sigma fit 0.1484 (noise RMS 0.1681, kept 0.1488), rejected 50 (wide 0/0) | |z fit| max 2.13
+  [ 73/90    51 s] d2 local   29: rms 0.1513 px, sigma fit 0.1412 (noise RMS 0.1639, kept 0.1454), rejected 42 (wide 0/0) | |z fit| max 1.48
+  [ 74/90    51 s] d2 local   33: rms 0.1583 px, sigma fit 0.1480 (noise RMS 0.1636, kept 0.1479), rejected 54 (wide 0/0) | |z fit| max 1.11
+  [ 75/90    53 s] d2 local   35: rms 0.1471 px, sigma fit 0.1377 (noise RMS 0.1666, kept 0.1405), rejected 62 (wide 0/0) | |z fit| max 2.11
+  [ 76/90    53 s] d2 local   36: rms 0.1487 px, sigma fit 0.1393 (noise RMS 0.1765, kept 0.1415), rejected 73 (wide 0/0) | |z fit| max 1.46
+  [ 77/90    54 s] d2 local   34: rms 0.1532 px, sigma fit 0.1434 (noise RMS 0.1607, kept 0.1432), rejected 64 (wide 0/0) | |z fit| max 0.94
+  [ 78/90    55 s] d2 local   38: rms 0.1496 px, sigma fit 0.1403 (noise RMS 0.1746, kept 0.1409), rejected 79 (wide 0/0) | |z fit| max 1.42
+  [ 79/90    56 s] d2 local   39: rms 0.1515 px, sigma fit 0.1415 (noise RMS 0.1688, kept 0.1458), rejected 50 (wide 0/0) | |z fit| max 1.76
+  [ 80/90    58 s] d2 local   37: rms 0.1516 px, sigma fit 0.1418 (noise RMS 0.1686, kept 0.1479), rejected 62 (wide 0/0) | |z fit| max 1.31
+  [ 81/90    93 s] d1 scratch  3: OK   from scratch: max diff 5.2e-06 sigma, active 2870/2870/3000 (37 s)
+  [ 82/90    94 s] d2 scratch  0: OK   from scratch: max diff 4.9e-08 sigma, active 2911/2911/3000 (37 s)
+  [ 83/90    96 s] d2 scratch  3: OK   from scratch: max diff 1.4e-06 sigma, active 2943/2943/3000 (38 s)
+  [ 84/90    96 s] d2 scratch  1: OK   from scratch: max diff 2.6e-06 sigma, active 2953/2953/2998 (37 s)
+  [ 85/90    96 s] d1 scratch  1: OK   from scratch: max diff 3.3e-06 sigma, active 2865/2865/3000 (39 s)
+  [ 86/90    96 s] d2 scratch  2: OK   from scratch: max diff 4.8e-07 sigma, active 2946/2946/3000 (37 s)
+  [ 87/90    96 s] d1 scratch  4: OK   from scratch: max diff 2.6e-11 sigma, active 2872/2872/2996 (38 s)
+  [ 88/90    97 s] d1 scratch  2: OK   from scratch: max diff 1.8e-10 sigma, active 2899/2899/3000 (37 s)
+  [ 89/90    98 s] d1 scratch  0: OK   from scratch: max diff 2.4e-05 sigma, active 2874/2874/3000 (41 s)
+  [ 90/90    99 s] d2 scratch  4: OK   from scratch: max diff 9.7e-06 sigma, active 2926/2926/3000 (39 s)
+
+== d1: 95 % at 0.1 px, 5 % at 0.5 px (40 near-truth fits; noise RMS 0.1483 px) ==
+  rejected 3.58 % of the detections: 38.5 % of the wide ones, 1.740 % of the others
+  sigma: fit 0.1127 px, robust 0.1048 px; noise RMS (all) 0.1486, (kept) 0.1158 px; fit RMS 0.1198 px
+  z against the fit's own covariance: mean -0.104, std 1.026, max |t| 3.3 (cam3.logf)
+  f_rel        realised / least squares 0.87, / oracle 1.23 (oracle / least squares 0.70)
+  distance_mm  realised / least squares 0.87, / oracle 1.23 (oracle / least squares 0.70)
+  azimuth_deg  realised / least squares 0.87, / oracle 1.24 (oracle / least squares 0.70)
+  height_mm    realised / least squares 0.76, / oracle 1.08 (oracle / least squares 0.70)
+  unseen 3-D: 20.34 um relative to the tube, 0.90 um after a rigid motion; held-out wand length 3.5 um (calibration share 0.27)
+  from scratch: 5/5 reach the truth-started answer
+
+== d2: Student-t, nu 3, scale 0.1 px (40 near-truth fits; noise RMS 0.1732 px) ==
+  rejected 1.97 % of the detections
+  sigma: fit 0.1442 px, robust 0.1273 px; noise RMS (all) 0.1754, (kept) 0.1463 px; fit RMS 0.1542 px
+  z against the fit's own covariance: mean +0.053, std 0.945, max |t| 1.7 (cam2.C1)
+  f_rel        realised / least squares 0.82, / oracle 1.20 (oracle / least squares 0.68)
+  distance_mm  realised / least squares 0.82, / oracle 1.20 (oracle / least squares 0.68)
+  azimuth_deg  realised / least squares 0.73, / oracle 1.06 (oracle / least squares 0.68)
+  height_mm    realised / least squares 0.90, / oracle 1.31 (oracle / least squares 0.68)
+  unseen 3-D: 23.70 um relative to the tube, 1.05 um after a rigid motion; held-out wand length 4.0 um (calibration share 0.32)
+  from scratch: 5/5 reach the truth-started answer
+time 100 s

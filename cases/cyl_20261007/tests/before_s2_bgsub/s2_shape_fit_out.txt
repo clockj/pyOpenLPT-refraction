@@ -1,0 +1,27 @@
+S2: T1's shape model; build p4b; cameras ['D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam1.txt', 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam2.txt']; view volume x [-1.7 24.4], y [-9.2 12.6], z [-30.3  15.8] mm (r <= 29.3); noise [8.06 5.92]; tol 1.2 px
+  pairs read from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\s2\pairs.npz
+  pairs: 35529 fitting, 32821 held out (0 s)
+    A grid, cam1: A 8.5 mm, z_f 1197 mm, sigma0 1.3 px, delta +0 mm: 1242 of 8000 pairs agree
+    A grid, cam2: A 11.5 mm, z_f 829 mm, sigma0 1.1 px, delta +0 mm: 1372 of 8000 pairs agree
+    A round 1: 991 joint inliers; cam1 A 8.348 mm, z_f 1197.3 mm, sigma0 1.231 px, delta +0.0 mm; cam2 A 11.147 mm, z_f 828.9 mm, sigma0 1.104 px, delta +0.0 mm
+    A round 2: 1012 joint inliers; cam1 A 8.251 mm, z_f 1196.9 mm, sigma0 1.216 px, delta +0.0 mm; cam2 A 10.923 mm, z_f 829.1 mm, sigma0 1.100 px, delta +0.0 mm
+    A round 3: 1037 joint inliers; cam1 A 8.183 mm, z_f 1196.4 mm, sigma0 1.212 px, delta +0.0 mm; cam2 A 10.690 mm, z_f 829.4 mm, sigma0 1.097 px, delta +0.0 mm
+  model A, held out: 968 joint inliers of 32821 pairs
+    cam1 wh: RMS 0.277 px, mean -0.061; slope against depth +0.00464 +- 0.00080 px/mm (+0.25 px over the depths)
+    cam1 wv: RMS 0.343 px, mean -0.026; slope against depth +0.00837 +- 0.00099 px/mm (+0.45 px over the depths)
+    cam2 wh: RMS 0.260 px, mean -0.027; slope against depth +0.00576 +- 0.00118 px/mm (+0.24 px over the depths)
+    cam2 wv: RMS 0.330 px, mean -0.001; slope against depth +0.01345 +- 0.00147 px/mm (+0.57 px over the depths)
+    B grid, cam1: A 9.0 mm, z_f 1238 mm, sigma0 1.3 px, delta +40 mm: 1245 of 8000 pairs agree
+    B grid, cam2: A 15.5 mm, z_f 990 mm, sigma0 1.1 px, delta +160 mm: 1375 of 8000 pairs agree
+    B round 1: 1009 joint inliers; cam1 A 1717.314 mm, z_f 16881.2 mm, sigma0 1.225 px, delta +15683.2 mm; cam2 A 2806.220 mm, z_f 13306.3 mm, sigma0 1.085 px, delta +12476.4 mm
+    B round 2: 1002 joint inliers; cam1 A 3819.150 mm, z_f 25389.3 mm, sigma0 1.195 px, delta +24191.5 mm; cam2 A 11502.673 mm, z_f 27224.2 mm, sigma0 1.077 px, delta +26393.9 mm
+    B round 3: 1016 joint inliers; cam1 A 6395.940 mm, z_f 33014.4 mm, sigma0 1.200 px, delta +31817.2 mm; cam2 A 29040.731 mm, z_f 43546.5 mm, sigma0 1.079 px, delta +42716.0 mm
+  model B, held out: 960 joint inliers of 32821 pairs
+    cam1 wh: RMS 0.268 px, mean -0.057; slope against depth +0.00446 +- 0.00077 px/mm (+0.26 px over the depths)
+    cam1 wv: RMS 0.349 px, mean -0.009; slope against depth +0.00754 +- 0.00101 px/mm (+0.43 px over the depths)
+    cam2 wh: RMS 0.263 px, mean -0.028; slope against depth +0.00703 +- 0.00117 px/mm (+0.31 px over the depths)
+    cam2 wv: RMS 0.321 px, mean +0.012; slope against depth +0.01197 +- 0.00141 px/mm (+0.52 px over the depths)
+  chosen: model A; judged (held-out RMS <= 1.5 px, no trend with depth): FAIL (largest RMS 0.343 px; trend yes)
+  amplitude, cam1: flux = 117.7 x (|b| + |c| + 2)^1.064 (1043 joint inliers; b, c the box lengths)
+  amplitude, cam2: flux = 78.7 x (|b| + |c| + 2)^1.127 (1043 joint inliers; b, c the box lengths)
+  written data/T1_shape.json and data/T1_otf_shape.txt (15 x 11 x 17 nodes); 470 s

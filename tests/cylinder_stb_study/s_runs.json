@@ -1,0 +1,1078 @@
+{
+ "runs": {
+  "S_n4_r2": {
+   "set": "S_n4",
+   "cameras": 2,
+   "build": "p4c",
+   "threads": 16,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n4_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 696.03,
+    "end": "2026-10-08T02:25:21",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 833.1944444444445,
+    "matched_per_frame": 740.0277777777778,
+    "ghosts_per_frame": 92.66666666666667,
+    "duplicates_per_frame": 0.5,
+    "ghost_share": 0.11121853642273712,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.7015774365996893,
+     "all_out": null,
+     "ge2_in": 0.7015774365996893,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     18.52143974488345,
+     6.608474934467109,
+     16.967523917911514
+    ],
+    "long_tracks": 993,
+    "long_track_mean_length": 31.75730110775428,
+    "long_track_purity_mean": 0.8873087005593989,
+    "long_track_purity_ge_0.9": 0.8338368580060423,
+    "long_tracks_ghost": 55,
+    "track_recall": 0.7001817080557238,
+    "frame_time_s_mean": 17.37425
+   }
+  },
+  "S_n4_r3": {
+   "set": "S_n4",
+   "cameras": 3,
+   "build": "p4c",
+   "threads": 16,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n4_r3.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 1833.99,
+    "end": "2026-10-08T02:55:56",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 1067.0833333333333,
+    "matched_per_frame": 1015.4444444444445,
+    "ghosts_per_frame": 50.30555555555556,
+    "duplicates_per_frame": 1.3333333333333333,
+    "ghost_share": 0.047143043082129375,
+    "present_ge2_in_volume_per_frame": 1345.2222222222222,
+    "recall": {
+     "all_in": 0.8627395636343109,
+     "all_out": null,
+     "ge2_in": 0.7547080201536301,
+     "ge2_out": null,
+     "n-1_in": 0.7547080201536301,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 984.1388888888889,
+     "all_out": 0.0,
+     "ge2_in": 1345.2222222222222,
+     "ge2_out": 0.0,
+     "n-1_in": 1345.2222222222222,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     17.10339402611096,
+     7.613145025064359,
+     15.149781268776856
+    ],
+    "long_tracks": 1242,
+    "long_track_mean_length": 32.389694041867955,
+    "long_track_purity_mean": 0.9514611354167432,
+    "long_track_purity_ge_0.9": 0.9210950080515298,
+    "long_tracks_ghost": 26,
+    "track_recall": 0.7532006277360205,
+    "frame_time_s_mean": 45.810500000000005
+   }
+  },
+  "S_n8_r2": {
+   "set": "S_n8",
+   "cameras": 2,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n8_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 915.48,
+    "end": "2026-10-08T03:13:19",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 833.4166666666666,
+    "matched_per_frame": 743.9722222222222,
+    "ghosts_per_frame": 89.22222222222223,
+    "duplicates_per_frame": 0.2222222222222222,
+    "ghost_share": 0.1070559610705596,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.7053169357174834,
+     "all_out": null,
+     "ge2_in": 0.7053169357174834,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     17.980574917496323,
+     7.6023369411252215,
+     16.125886591972222
+    ],
+    "long_tracks": 980,
+    "long_track_mean_length": 32.409183673469386,
+    "long_track_purity_mean": 0.8899649907979157,
+    "long_track_purity_ge_0.9": 0.8367346938775511,
+    "long_tracks_ghost": 54,
+    "track_recall": 0.7040002106760066,
+    "frame_time_s_mean": 22.855
+   }
+  },
+  "O10_n8_r2": {
+   "set": "O10_n8",
+   "cameras": 2,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\O10_n8_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 938.65,
+    "end": "2026-10-08T03:14:03",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 642.4166666666666,
+    "matched_per_frame": 578.75,
+    "ghosts_per_frame": 63.47222222222222,
+    "duplicates_per_frame": 0.19444444444444445,
+    "ghost_share": 0.0988022657499892,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.5486793247833988,
+     "all_out": null,
+     "ge2_in": 0.5486793247833988,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     18.369303543607106,
+     7.450621936541305,
+     16.677548189264982
+    ],
+    "long_tracks": 788,
+    "long_track_mean_length": 30.615482233502537,
+    "long_track_purity_mean": 0.9032986862103687,
+    "long_track_purity_ge_0.9": 0.8629441624365483,
+    "long_tracks_ghost": 41,
+    "track_recall": 0.5462565507070813,
+    "frame_time_s_mean": 23.437
+   }
+  },
+  "today_S_n8_r2": {
+   "set": "S_n8",
+   "cameras": 2,
+   "build": "head1007",
+   "threads": 16,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\today_S_n8_r2.json",
+    "build": "head1007",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 1018.98,
+    "end": "2026-10-08T03:23:54",
+    "build_info": {
+     "name": "head1007",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+     "start": "2026-10-07T18:09:52"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 2692.6666666666665,
+    "matched_per_frame": 193.69444444444446,
+    "ghosts_per_frame": 2458.5555555555557,
+    "duplicates_per_frame": 40.416666666666664,
+    "ghost_share": 0.9130560369728481,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.18363047428435994,
+     "all_out": null,
+     "ge2_in": 0.18363047428435994,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     59.23967034056693,
+     24.45896888272592,
+     58.394813806088834
+    ],
+    "long_tracks": 3449,
+    "long_track_mean_length": 26.856480139170774,
+    "long_track_purity_mean": 0.0895419701850893,
+    "long_track_purity_ge_0.9": 0.05914757900840823,
+    "long_tracks_ghost": 2886,
+    "track_recall": 0.17604613804545335,
+    "frame_time_s_mean": 25.43075
+   }
+  },
+  "today_S_n8_r3": {
+   "set": "S_n8",
+   "cameras": 3,
+   "build": "head1007",
+   "threads": 16,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\today_S_n8_r3.json",
+    "build": "head1007",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 2296.41,
+    "end": "2026-10-08T04:02:13",
+    "build_info": {
+     "name": "head1007",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+     "start": "2026-10-07T18:09:52"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 4148.305555555556,
+    "matched_per_frame": 243.66666666666666,
+    "ghosts_per_frame": 3821.6666666666665,
+    "duplicates_per_frame": 82.97222222222223,
+    "ghost_share": 0.9212596843423352,
+    "present_ge2_in_volume_per_frame": 1345.2222222222222,
+    "recall": {
+     "all_in": 0.21349741736995118,
+     "all_out": null,
+     "ge2_in": 0.18082514247955728,
+     "ge2_out": null,
+     "n-1_in": 0.18082514247955728,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 984.1388888888889,
+     "all_out": 0.0,
+     "ge2_in": 1345.2222222222222,
+     "ge2_out": 0.0,
+     "n-1_in": 1345.2222222222222,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     58.763214190928,
+     32.875696485427994,
+     57.59532726707778
+    ],
+    "long_tracks": 5595,
+    "long_track_mean_length": 25.97390527256479,
+    "long_track_purity_mean": 0.08271221235630632,
+    "long_track_purity_ge_0.9": 0.048793565683646116,
+    "long_tracks_ghost": 4751,
+    "track_recall": 0.1737837614603122,
+    "frame_time_s_mean": 57.33299999999999
+   }
+  },
+  "S_n8_r3": {
+   "set": "S_n8",
+   "cameras": 3,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n8_r3.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 3953.6,
+    "end": "2026-10-08T04:19:14",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 1118.2777777777778,
+    "matched_per_frame": 1056.138888888889,
+    "ghosts_per_frame": 61.44444444444444,
+    "duplicates_per_frame": 0.6944444444444444,
+    "ghost_share": 0.05494560087436037,
+    "present_ge2_in_volume_per_frame": 1345.2222222222222,
+    "recall": {
+     "all_in": 0.8768805216065935,
+     "all_out": null,
+     "ge2_in": 0.7848765177170232,
+     "ge2_out": null,
+     "n-1_in": 0.7848765177170232,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 984.1388888888889,
+     "all_out": 0.0,
+     "ge2_in": 1345.2222222222222,
+     "ge2_out": 0.0,
+     "n-1_in": 1345.2222222222222,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     18.487058060711366,
+     7.584496961092331,
+     15.965264543131754
+    ],
+    "long_tracks": 1268,
+    "long_track_mean_length": 33.66640378548896,
+    "long_track_purity_mean": 0.9431874989169216,
+    "long_track_purity_ge_0.9": 0.9148264984227129,
+    "long_tracks_ghost": 32,
+    "track_recall": 0.7832452300322128,
+    "frame_time_s_mean": 98.79275
+   }
+  },
+  "today_S_n8_r4": {
+   "set": "S_n8",
+   "cameras": 4,
+   "build": "head1007",
+   "threads": 16,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\today_S_n8_r4.json",
+    "build": "head1007",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "16"
+    },
+    "returncode": 0,
+    "wall_s": 1473.28,
+    "end": "2026-10-08T04:26:50",
+    "build_info": {
+     "name": "head1007",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+     "start": "2026-10-07T18:09:52"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 4,
+    "reconstructed_per_frame": 1415.8055555555557,
+    "matched_per_frame": 177.66666666666666,
+    "ghosts_per_frame": 1107.7777777777778,
+    "duplicates_per_frame": 130.36111111111111,
+    "ghost_share": 0.7824363828994094,
+    "present_ge2_in_volume_per_frame": 1404.888888888889,
+    "recall": {
+     "all_in": 0.1035481781928491,
+     "all_out": null,
+     "ge2_in": 0.12511863334387852,
+     "ge2_out": null,
+     "n-1_in": 0.14728498757837455,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 814.9722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1404.888888888889,
+     "ge2_out": 0.0,
+     "n-1_in": 1174.0277777777778,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     46.67528363202558,
+     34.02631676879374,
+     47.06595991342642
+    ],
+    "long_tracks": 2113,
+    "long_track_mean_length": 24.206341694273544,
+    "long_track_purity_mean": 0.22300884194797452,
+    "long_track_purity_ge_0.9": 0.16516800757217226,
+    "long_tracks_ghost": 1424,
+    "track_recall": 0.12312163872192344,
+    "frame_time_s_mean": 36.76125
+   }
+  },
+  "O05_n8_r2": {
+   "set": "O05_n8",
+   "cameras": 2,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\O05_n8_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 1140.93,
+    "end": "2026-10-08T04:38:16",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 746.9722222222222,
+    "matched_per_frame": 670.1944444444445,
+    "ghosts_per_frame": 76.44444444444444,
+    "duplicates_per_frame": 0.3333333333333333,
+    "ghost_share": 0.10233907255215499,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.6353725015142337,
+     "all_out": null,
+     "ge2_in": 0.6353725015142337,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     17.964687418517812,
+     7.398730091129053,
+     16.621696560275677
+    ],
+    "long_tracks": 907,
+    "long_track_mean_length": 31.15325248070562,
+    "long_track_purity_mean": 0.900111672509261,
+    "long_track_purity_ge_0.9": 0.8511576626240352,
+    "long_tracks_ghost": 49,
+    "track_recall": 0.6339504384694388,
+    "frame_time_s_mean": 28.486
+   }
+  },
+  "S_n8_r4": {
+   "set": "S_n8",
+   "cameras": 4,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n8_r4.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 6175.25,
+    "end": "2026-10-08T04:56:59",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 4,
+    "reconstructed_per_frame": 770.0,
+    "matched_per_frame": 759.2222222222222,
+    "ghosts_per_frame": 10.666666666666666,
+    "duplicates_per_frame": 0.1111111111111111,
+    "ghost_share": 0.013852813852813853,
+    "present_ge2_in_volume_per_frame": 1404.888888888889,
+    "recall": {
+     "all_in": 0.7699989774702615,
+     "all_out": null,
+     "ge2_in": 0.5404144258146156,
+     "ge2_out": null,
+     "n-1_in": 0.642162545841713,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 814.9722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1404.888888888889,
+     "ge2_out": 0.0,
+     "n-1_in": 1174.0277777777778,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     11.916761274397686,
+     5.992369753194341,
+     11.448788746316898
+    ],
+    "long_tracks": 927,
+    "long_track_mean_length": 31.207119741100325,
+    "long_track_purity_mean": 0.9875418259059123,
+    "long_track_purity_ge_0.9": 0.970873786407767,
+    "long_tracks_ghost": 0,
+    "track_recall": 0.5385756089844985,
+    "frame_time_s_mean": 154.3025
+   }
+  },
+  "O10_n8_r3": {
+   "set": "O10_n8",
+   "cameras": 3,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\O10_n8_r3.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 3095.02,
+    "end": "2026-10-08T05:18:41",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 805.0555555555555,
+    "matched_per_frame": 750.7222222222222,
+    "ghosts_per_frame": 54.0,
+    "duplicates_per_frame": 0.3333333333333333,
+    "ghost_share": 0.06707611621006142,
+    "present_ge2_in_volume_per_frame": 1363.7222222222222,
+    "recall": {
+     "all_in": 0.668209658754128,
+     "all_out": null,
+     "ge2_in": 0.5579416866275708,
+     "ge2_out": 0.0015015015015015015,
+     "n-1_in": 0.5579416866275708,
+     "n-1_out": 0.0015015015015015015
+    },
+    "present_per_frame": {
+     "all_in": 984.1388888888889,
+     "all_out": 0.0,
+     "ge2_in": 1345.2222222222222,
+     "ge2_out": 18.5,
+     "n-1_in": 1345.2222222222222,
+     "n-1_out": 18.5
+    },
+    "pos_rms_um": [
+     17.886960182208284,
+     8.444341654852552,
+     15.7892347514642
+    ],
+    "long_tracks": 979,
+    "long_track_mean_length": 30.80796731358529,
+    "long_track_purity_mean": 0.9369847907999991,
+    "long_track_purity_ge_0.9": 0.9080694586312564,
+    "long_tracks_ghost": 34,
+    "track_recall": 0.5479284637633927,
+    "frame_time_s_mean": 77.30225
+   }
+  },
+  "O05_n8_r3": {
+   "set": "O05_n8",
+   "cameras": 3,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\O05_n8_r3.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 3863.99,
+    "end": "2026-10-08T06:01:25",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 942.6111111111111,
+    "matched_per_frame": 884.0,
+    "ghosts_per_frame": 58.05555555555556,
+    "duplicates_per_frame": 0.5555555555555556,
+    "ghost_share": 0.06159014557670773,
+    "present_ge2_in_volume_per_frame": 1354.5833333333333,
+    "recall": {
+     "all_in": 0.7763414152248158,
+     "all_out": null,
+     "ge2_in": 0.6563558272074007,
+     "ge2_out": 0.10979228486646884,
+     "n-1_in": 0.6563558272074007,
+     "n-1_out": 0.10979228486646884
+    },
+    "present_per_frame": {
+     "all_in": 984.1388888888889,
+     "all_out": 0.0,
+     "ge2_in": 1345.2222222222222,
+     "ge2_out": 9.36111111111111,
+     "n-1_in": 1345.2222222222222,
+     "n-1_out": 9.36111111111111
+    },
+    "pos_rms_um": [
+     17.70059463691942,
+     8.21094052756511,
+     16.01310525251476
+    ],
+    "long_tracks": 1114,
+    "long_track_mean_length": 32.001795332136446,
+    "long_track_purity_mean": 0.936994742626912,
+    "long_track_purity_ge_0.9": 0.9048473967684022,
+    "long_tracks_ghost": 38,
+    "track_recall": 0.6510201989131549,
+    "frame_time_s_mean": 96.5115
+   }
+  },
+  "O10_n8_r4": {
+   "set": "O10_n8",
+   "cameras": 4,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\O10_n8_r4.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 5979.1,
+    "end": "2026-10-08T06:17:57",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 4,
+    "reconstructed_per_frame": 316.44444444444446,
+    "matched_per_frame": 314.6111111111111,
+    "ghosts_per_frame": 1.8333333333333333,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.005793539325842697,
+    "present_ge2_in_volume_per_frame": 1426.5,
+    "recall": {
+     "all_in": 0.33164047854391765,
+     "all_out": null,
+     "ge2_in": 0.22394020879468524,
+     "ge2_out": 0.0,
+     "n-1_in": 0.2670294569975157,
+     "n-1_out": 0.0
+    },
+    "present_per_frame": {
+     "all_in": 814.9722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1404.888888888889,
+     "ge2_out": 21.61111111111111,
+     "n-1_in": 1174.0277777777778,
+     "n-1_out": 5.194444444444445
+    },
+    "pos_rms_um": [
+     9.47407106144539,
+     6.7931294192352585,
+     10.446045847557963
+    ],
+    "long_tracks": 410,
+    "long_track_mean_length": 28.58780487804878,
+    "long_track_purity_mean": 0.9949659943714823,
+    "long_track_purity_ge_0.9": 0.9853658536585366,
+    "long_tracks_ghost": 0,
+    "track_recall": 0.21881450325193752,
+    "frame_time_s_mean": 149.388
+   }
+  },
+  "S_n16_r2": {
+   "set": "S_n16",
+   "cameras": 2,
+   "build": "p4c",
+   "threads": 10,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n16_r2.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 958.94,
+    "end": "2026-10-08T06:18:23",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 2,
+    "reconstructed_per_frame": 717.6666666666666,
+    "matched_per_frame": 660.1388888888889,
+    "ghosts_per_frame": 57.44444444444444,
+    "duplicates_per_frame": 0.08333333333333333,
+    "ghost_share": 0.08004335036383341,
+    "present_ge2_in_volume_per_frame": 1054.8055555555557,
+    "recall": {
+     "all_in": 0.6258394122139415,
+     "all_out": null,
+     "ge2_in": 0.6258394122139415,
+     "ge2_out": null
+    },
+    "present_per_frame": {
+     "all_in": 1054.8055555555557,
+     "all_out": 0.0,
+     "ge2_in": 1054.8055555555557,
+     "ge2_out": 0.0
+    },
+    "pos_rms_um": [
+     18.910697008399428,
+     6.8855509756786715,
+     16.602109410511392
+    ],
+    "long_tracks": 865,
+    "long_track_mean_length": 31.3514450867052,
+    "long_track_purity_mean": 0.9214588036133258,
+    "long_track_purity_ge_0.9": 0.8751445086705202,
+    "long_tracks_ghost": 31,
+    "track_recall": 0.6237589866484081,
+    "frame_time_s_mean": 23.90475
+   }
+  },
+  "O05_n8_r4": {
+   "set": "O05_n8",
+   "cameras": 4,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\O05_n8_r4.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 5744.91,
+    "end": "2026-10-08T06:54:27",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 4,
+    "reconstructed_per_frame": 507.3333333333333,
+    "matched_per_frame": 505.27777777777777,
+    "ghosts_per_frame": 2.0555555555555554,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.004051686377573368,
+    "present_ge2_in_volume_per_frame": 1416.361111111111,
+    "recall": {
+     "all_in": 0.5277957667268823,
+     "all_out": null,
+     "ge2_in": 0.3596567541917115,
+     "ge2_out": 0.0,
+     "n-1_in": 0.42758783863717026,
+     "n-1_out": 0.0
+    },
+    "present_per_frame": {
+     "all_in": 814.9722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1404.888888888889,
+     "ge2_out": 11.472222222222221,
+     "n-1_in": 1174.0277777777778,
+     "n-1_out": 2.1944444444444446
+    },
+    "pos_rms_um": [
+     9.275676869933896,
+     6.597134472841214,
+     10.303832438820953
+    ],
+    "long_tracks": 650,
+    "long_track_mean_length": 29.04,
+    "long_track_purity_mean": 0.9966798613572806,
+    "long_track_purity_ge_0.9": 0.9907692307692307,
+    "long_tracks_ghost": 0,
+    "track_recall": 0.3545078350232403,
+    "frame_time_s_mean": 143.54375
+   }
+  },
+  "S_n16_r3": {
+   "set": "S_n16",
+   "cameras": 3,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n16_r3.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 2534.56,
+    "end": "2026-10-08T07:00:12",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 3,
+    "reconstructed_per_frame": 908.3888888888889,
+    "matched_per_frame": 868.4444444444445,
+    "ghosts_per_frame": 39.77777777777778,
+    "duplicates_per_frame": 0.16666666666666666,
+    "ghost_share": 0.04378937068069231,
+    "present_ge2_in_volume_per_frame": 1345.2222222222222,
+    "recall": {
+     "all_in": 0.757712608315222,
+     "all_out": null,
+     "ge2_in": 0.6455562897497316,
+     "ge2_out": null,
+     "n-1_in": 0.6455562897497316,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 984.1388888888889,
+     "all_out": 0.0,
+     "ge2_in": 1345.2222222222222,
+     "ge2_out": 0.0,
+     "n-1_in": 1345.2222222222222,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     17.0472696754326,
+     7.506986552827548,
+     15.815295903862982
+    ],
+    "long_tracks": 1079,
+    "long_track_mean_length": 31.86468952734013,
+    "long_track_purity_mean": 0.9572362257476386,
+    "long_track_purity_ge_0.9": 0.933271547729379,
+    "long_tracks_ghost": 21,
+    "track_recall": 0.643429420996118,
+    "frame_time_s_mean": 63.3045
+   }
+  },
+  "S_n4_r4": {
+   "set": "S_n4",
+   "cameras": 4,
+   "build": "p4c",
+   "threads": 12,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n4_r4.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "12"
+    },
+    "returncode": 0,
+    "wall_s": 4249.79,
+    "end": "2026-10-08T07:12:16",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 4,
+    "reconstructed_per_frame": 665.4166666666666,
+    "matched_per_frame": 658.8333333333334,
+    "ghosts_per_frame": 6.583333333333333,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.00989355040701315,
+    "present_ge2_in_volume_per_frame": 1404.888888888889,
+    "recall": {
+     "all_in": 0.7124305531885886,
+     "all_out": null,
+     "ge2_in": 0.4689576083517874,
+     "ge2_out": null,
+     "n-1_in": 0.5583816396545606,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 814.9722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1404.888888888889,
+     "ge2_out": 0.0,
+     "n-1_in": 1174.0277777777778,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     10.991747540898913,
+     5.9284965814212836,
+     10.88959462737294
+    ],
+    "long_tracks": 849,
+    "long_track_mean_length": 29.07773851590106,
+    "long_track_purity_mean": 0.9909887154117927,
+    "long_track_purity_ge_0.9": 0.9776207302709069,
+    "long_tracks_ghost": 0,
+    "track_recall": 0.4670199304017716,
+    "frame_time_s_mean": 106.14825
+   }
+  },
+  "S_n16_r4": {
+   "set": "S_n16",
+   "cameras": 4,
+   "build": "p4c",
+   "threads": 10,
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\runs\\configs\\S_n16_r4.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {
+     "OMP_NUM_THREADS": "10"
+    },
+    "returncode": 0,
+    "wall_s": 3480.02,
+    "end": "2026-10-08T07:16:24",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "cameras": 4,
+    "reconstructed_per_frame": 546.2777777777778,
+    "matched_per_frame": 540.5,
+    "ghosts_per_frame": 5.777777777777778,
+    "duplicates_per_frame": 0.0,
+    "ghost_share": 0.010576629716261568,
+    "present_ge2_in_volume_per_frame": 1404.888888888889,
+    "recall": {
+     "all_in": 0.5618460070213709,
+     "all_out": null,
+     "ge2_in": 0.3847081619740588,
+     "ge2_out": null,
+     "n-1_in": 0.45612208683307703,
+     "n-1_out": null
+    },
+    "present_per_frame": {
+     "all_in": 814.9722222222222,
+     "all_out": 0.0,
+     "ge2_in": 1404.888888888889,
+     "ge2_out": 0.0,
+     "n-1_in": 1174.0277777777778,
+     "n-1_out": 0.0
+    },
+    "pos_rms_um": [
+     11.664193028581979,
+     6.453675840503557,
+     11.039438411227524
+    ],
+    "long_tracks": 683,
+    "long_track_mean_length": 29.951683748169838,
+    "long_track_purity_mean": 0.9914019118014182,
+    "long_track_purity_ge_0.9": 0.9838945827232797,
+    "long_tracks_ghost": 0,
+    "track_recall": 0.3825727617842455,
+    "frame_time_s_mean": 86.9375
+   }
+  }
+ }
+}

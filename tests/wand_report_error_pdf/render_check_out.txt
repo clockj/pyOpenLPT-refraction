@@ -1,0 +1,74 @@
+
+g3: du, dv over +-0.05 px in 40 bins of 0.0025 px; |e| to 0.06 px in 24 bins of 0.0025; joint 20 cells of 0.005 px, max 23 per cell
+  cam0: 349 of 354 used; du mean -0.00000 rms 0.01411; dv mean -0.00000 rms 0.00915; |e| median 0.01217 rms 0.01682 (cameras table 0.01682) p95 0.03160 max 0.05308; beyond du/dv/|e|/joint 1/0/0/1
+  cam1: 341 of 354 used; du mean -0.00000 rms 0.01445; dv mean -0.00000 rms 0.00982; |e| median 0.01227 rms 0.01747 (cameras table 0.01747) p95 0.03628 max 0.05685; beyond du/dv/|e|/joint 0/1/0/1
+  cam2: 349 of 354 used; du mean -0.00000 rms 0.01345; dv mean +0.00000 rms 0.00911; |e| median 0.01033 rms 0.01625 (cameras table 0.01625) p95 0.03201 max 0.04571; beyond du/dv/|e|/joint 0/0/0/0
+
+g8: du, dv over +-0.3 px in 24 bins of 0.025 px; |e| to 0.4 px in 20 bins of 0.02; joint 24 cells of 0.025 px, max 16 per cell
+  cam0: 600 of 600 used; du mean -0.00000 rms 0.07331; dv mean -0.00001 rms 0.08600; |e| median 0.09283 rms 0.11301 (cameras table 0.11301) p95 0.19971 max 0.27743; beyond du/dv/|e|/joint 0/0/0/0
+  cam1: 600 of 600 used; du mean -0.00000 rms 0.07696; dv mean -0.00000 rms 0.09184; |e| median 0.09725 rms 0.11983 (cameras table 0.11983) p95 0.20366 max 0.33769; beyond du/dv/|e|/joint 0/1/0/1
+  cam2: 600 of 600 used; du mean -0.00000 rms 0.07486; dv mean +0.00001 rms 0.09128; |e| median 0.09471 rms 0.11805 (cameras table 0.11805) p95 0.20324 max 0.29388; beyond du/dv/|e|/joint 0/0/0/0
+  cam3: 600 of 600 used; du mean -0.00000 rms 0.07140; dv mean +0.00000 rms 0.08913; |e| median 0.09341 rms 0.11420 (cameras table 0.11420) p95 0.20202 max 0.32069; beyond du/dv/|e|/joint 0/1/0/1
+
+t0: du, dv over +-1.5 px in 75 bins of 0.04 px; |e| to 2 px in 50 bins of 0.04; joint 30 cells of 0.1 px, max 146 per cell
+  cam1: 3032 of 3038 used; du mean -0.00001 rms 0.42938; dv mean +0.00000 rms 0.25667; |e| median 0.31977 rms 0.50024 (cameras table 0.50024) p95 1.00509 max 1.79331; beyond du/dv/|e|/joint 8/0/0/8
+  cam2: 3032 of 3038 used; du mean +0.00000 rms 0.35270; dv mean +0.00000 rms 0.25671; |e| median 0.31036 rms 0.43623 (cameras table 0.43623) p95 0.84796 max 1.60101; beyond du/dv/|e|/joint 0/0/0/0
+
+t2: du, dv over +-2 px in 100 bins of 0.04 px; |e| to 2 px in 40 bins of 0.05; joint 40 cells of 0.1 px, max 111 per cell
+  cam1: 3928 of 3932 used; du mean -0.00002 rms 0.56326; dv mean -0.00000 rms 0.27289; |e| median 0.41014 rms 0.62588 (cameras table 0.62588) p95 1.26812 max 1.89255; beyond du/dv/|e|/joint 0/0/0/0
+  cam2: 3928 of 3932 used; du mean -0.00000 rms 0.49657; dv mean -0.00000 rms 0.28795; |e| median 0.37416 rms 0.57402 (cameras table 0.57402) p95 1.15990 max 2.19212; beyond du/dv/|e|/joint 3/0/5/3
+
+pinhole: du, dv over +-0.25 px in 25 bins of 0.02 px; |e| to 0.3 px in 30 bins of 0.01; joint 20 cells of 0.025 px, max 18 per cell
+  cam0: 600 of 600 used; du mean -0.00029 rms 0.04732; dv mean -0.00310 rms 0.08487; |e| median 0.07652 rms 0.09717 (cameras table 0.09717) p95 0.17513 max 0.26769; beyond du/dv/|e|/joint 0/1/0/1
+  cam1: 600 of 600 used; du mean +0.00093 rms 0.08218; dv mean -0.00190 rms 0.08509; |e| median 0.09999 rms 0.11830 (cameras table 0.11830) p95 0.20239 max 0.29087; beyond du/dv/|e|/joint 0/1/0/1
+  cam2: 600 of 600 used; du mean -0.00014 rms 0.04760; dv mean +0.00503 rms 0.08049; |e| median 0.07731 rms 0.09351 (cameras table 0.09351) p95 0.16363 max 0.26389; beyond du/dv/|e|/joint 0/2/0/2
+
+old: no error_pdf
+
+g3: g3.html
+  PASS  g3 dark 1200 px: loads, the error section drawn (6 charts), theme applied  (charts 6, curves 9, theme dark)
+  PASS  g3 dark 1200 px: a pointer over the du chart shows the tooltip  (block|du 0.0000 to 0.0025 px / 33.2 /px cam0, 29 detections / 31.7 /px cam1, 27 detections / 43.6 /px cam2, 38 detections)
+  PASS  g3 dark 1200 px: the Log switch redraws the curves  (25.0 curves and points on the log scale)
+  PASS  g3 light 1200 px: loads, the error section drawn (6 charts), theme applied  (charts 6, curves 9, theme light)
+  PASS  g3 dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  g3: no console error, no request but the local page  (0 console messages, errors []; other requests [])
+
+g8: g8.html
+  PASS  g8 dark 1200 px: loads, the error section drawn (7 charts), theme applied  (charts 7, curves 12, theme dark)
+  PASS  g8 dark 1200 px: a pointer over the du chart shows the tooltip  (block|du 0.000 to 0.025 px / 5.47 /px cam0, 82 detections / 5.67 /px cam1, 85 detections / 4.93 /px cam2, 74 detections / 5.27 /px cam3, 79 detections)
+  PASS  g8 dark 1200 px: the Log switch redraws the curves  (15.0 curves and points on the log scale)
+  PASS  g8 light 1200 px: loads, the error section drawn (7 charts), theme applied  (charts 7, curves 12, theme light)
+  PASS  g8 dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  g8: no console error, no request but the local page  (0 console messages, errors []; other requests [])
+
+t0: t0.html
+  PASS  t0 dark 1200 px: loads, the error section drawn (5 charts), theme applied  (charts 5, curves 6, theme dark)
+  PASS  t0 dark 1200 px: a pointer over the du chart shows the tooltip  (block|du -0.02 to 0.02 px / 3.20 /px cam1, 388 detections / 2.55 /px cam2, 309 detections)
+  PASS  t0 dark 1200 px: the Log switch redraws the curves  (27.0 curves and points on the log scale)
+  PASS  t0 light 1200 px: loads, the error section drawn (5 charts), theme applied  (charts 5, curves 6, theme light)
+  PASS  t0 dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  t0: no console error, no request but the local page  (0 console messages, errors []; other requests [])
+
+t2: t2.html
+  PASS  t2 dark 1200 px: loads, the error section drawn (5 charts), theme applied  (charts 5, curves 6, theme dark)
+  PASS  t2 dark 1200 px: a pointer over the du chart shows the tooltip  (block|du 0.00 to 0.04 px / 1.68 /px cam1, 264 detections / 1.96 /px cam2, 308 detections)
+  PASS  t2 dark 1200 px: the Log switch redraws the curves  (27.0 curves and points on the log scale)
+  PASS  t2 light 1200 px: loads, the error section drawn (5 charts), theme applied  (charts 5, curves 6, theme light)
+  PASS  t2 dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  t2: no console error, no request but the local page  (0 console messages, errors []; other requests [])
+
+pinhole: pinhole.html
+  PASS  pinhole dark 1200 px: loads, the error section drawn (6 charts), theme applied  (charts 6, curves 9, theme dark)
+  PASS  pinhole dark 1200 px: a pointer over the du chart shows the tooltip  (block|du -0.01 to 0.01 px / 8.25 /px cam0, 99 detections / 5.00 /px cam1, 60 detections / 7.50 /px cam2, 90 detections)
+  PASS  pinhole dark 1200 px: the Log switch redraws the curves  (13.0 curves and points on the log scale)
+  PASS  pinhole light 1200 px: loads, the error section drawn (6 charts), theme applied  (charts 6, curves 9, theme light)
+  PASS  pinhole dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  pinhole: no console error, no request but the local page  (0 console messages, errors []; other requests [])
+
+old: old.html
+  PASS  old dark 1200 px: loads, the error section drawn (0 charts), theme applied  (charts 0, curves 0, theme dark)
+  PASS  old light 1200 px: loads, the error section drawn (0 charts), theme applied  (charts 0, curves 0, theme light)
+  PASS  old dark 390 px: nothing overflows horizontally  (scrollWidth 375, window 390)
+  PASS  old: no console error, no request but the local page  (0 console messages, errors []; other requests [])
+
+34 of 34 checks passed; 24 s

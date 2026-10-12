@@ -1,0 +1,756 @@
+{
+ "checks": [
+  {
+   "check": "31 forms (Tracer, Bubble, resume on/off, output folders): byte-identical after load and save",
+   "ok": true,
+   "detail": "31/31"
+  },
+  {
+   "check": "32 text configs (31 forms written before A4b and the benchmark's): the same C++ settings from the config.json the form writes, save interval and profile included",
+   "ok": true,
+   "detail": "32/32"
+  },
+  {
+   "check": "the benchmark's config: save_interval 200 and profile on survive the conversion",
+   "ok": true,
+   "detail": "200 True"
+  },
+  {
+   "check": "2D tolerance 1.5 and threads 'All' (0) saved; every other setting as loaded",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the threads field shows 'All' for 0",
+   "ok": true,
+   "detail": "All"
+  },
+  {
+   "check": "the form shows threads 0 ('All'), fps 20000, frame 150000, voxel 0.1234567, x min -81.125",
+   "ok": true,
+   "detail": "(0, 20000, 150000, 0.1234567, -81.125)"
+  },
+  {
+   "check": "saved unchanged: those values, profile, the comment key, the unknown key and the second object",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "no config: nothing reported, the form keeps its values (not marked as loaded)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "broken config.json: one warning that names it, no crash, the form not marked as loaded",
+   "ok": true,
+   "detail": "config.json in this project cannot be read: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1e_broken\\config.j"
+  },
+  {
+   "check": "incomplete config.json: one warning that names it, no crash, the form not marked as loaded",
+   "ok": true,
+   "detail": "config.json in this project cannot be read: the setting 'ipr' is missing  The form keeps the values it shows; "
+  },
+  {
+   "check": "the edit survives a show event",
+   "ok": true,
+   "detail": "3.25"
+  },
+  {
+   "check": "'\\r\\n' becomes '\\n', also split across two chunks; stdout and stderr kept apart",
+   "ok": true,
+   "detail": "'a\\nb\\nc\\nd\\n' 'e\\nf\\n'"
+  },
+  {
+   "check": "a GUI run of frames 0-5: log.txt has 319 line ends, all CRLF, none CRCRLF; 6 frames parsed",
+   "ok": true,
+   "detail": "exit 0; LF 319, CRLF 319, CRCRLF 0"
+  },
+  {
+   "check": "the log window holds no '\\r'",
+   "ok": true,
+   "detail": "False"
+  },
+  {
+   "check": "before the fix the check fails; after it, all pass",
+   "ok": true,
+   "detail": "before: 1 failed, 2 passed in 1.00s | after: 3 passed in 0.91s"
+  }
+ ],
+ "messages": [
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_case/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_case/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random00/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random00/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random01/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random01/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random02/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random02/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random03/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random03/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random04/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random04/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random05/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random05/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random06/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random06/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random07/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random07/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random08/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random08/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random09/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random09/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random10/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random10/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random11/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random11/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random12/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random12/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random13/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random13/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random14/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random14/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random15/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random15/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random16/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random16/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random17/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random17/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random18/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random18/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random19/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random19/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random20/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random20/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random21/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random21/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random22/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random22/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random23/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random23/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random24/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random24/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random25/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random25/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random26/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random26/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random27/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random27/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random28/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random28/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random29/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1a_random29/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_case/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_case/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_case/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random00/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random00/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random00/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random01/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random01/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random01/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random02/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random02/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random02/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random03/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random03/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random03/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random04/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random04/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random04/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random05/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random05/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random05/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random06/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random06/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random06/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random07/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random07/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random07/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random08/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random08/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random08/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random09/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random09/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random09/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random10/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random10/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random10/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random11/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random11/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random11/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random12/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random12/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random12/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random13/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random13/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random13/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random14/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random14/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random14/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random15/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random15/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random15/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random16/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random16/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random16/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random17/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random17/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random17/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random18/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random18/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random18/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random19/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random19/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random19/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random20/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random20/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random20/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random21/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random21/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random21/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random22/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random22/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random22/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random23/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random23/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random23/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random24/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random24/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random24/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random25/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random25/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random25/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random26/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random26/bubbleConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random26/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random27/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random27/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random27/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random28/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random28/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random28/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random29/config.txt\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random29/tracerConfig.txt"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_random29/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "warning",
+   "Camera Parameters Missing",
+   "No camera parameter files (cam*.txt) were found in the specified directory, and no calibrated parameters are available in the Calibration module.\n\nPlease provide camera parameters in the 'camFile' directory or use the Camera Calibration tab to calibrate your cameras first."
+  ],
+  [
+   "warning",
+   "Camera Parameters Missing",
+   "No camera parameter files (cam*.txt) were found in the specified directory, and no calibrated parameters are available in the Calibration module.\n\nPlease provide camera parameters in the 'camFile' directory or use the Camera Calibration tab to calibrate your cameras first."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1b_benchmark/config.json\n\nThe config.txt in this folder is no longer used: tracking reads config.json whenever both exist."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1c_edit/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1c_edit/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1d_special/config.json"
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1d_special/config.json"
+  ],
+  [
+   "warning",
+   "Tracking Config Not Loaded",
+   "config.json in this project cannot be read:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1e_broken\\config.json: invalid JSON: Expecting property name enclosed in double quotes: line 1 column 20 (char 19)\n\nThe form keeps the values it shows; Save Configuration will replace the file."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1e_incomplete/config.json"
+  ],
+  [
+   "warning",
+   "Tracking Config Not Loaded",
+   "config.json in this project cannot be read:\nthe setting 'ipr' is missing\n\nThe form keeps the values it shows; Save Configuration will replace the file."
+  ],
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1f_show/config.json"
+  ]
+ ]
+}

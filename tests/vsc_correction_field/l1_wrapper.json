@@ -1,0 +1,534 @@
+{
+ "fields": [
+  {
+   "file": "zero_T1cam1.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.0,
+   "ok": true
+  },
+  {
+   "file": "smooth_T1cam1.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.01794614607130636,
+   "ok": true
+  },
+  {
+   "file": "t1_vc2_total_T1cam1.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.007777441838661431,
+   "ok": true
+  },
+  {
+   "file": "smooth_T1cam2.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.01794614607130636,
+   "ok": true
+  },
+  {
+   "file": "t1_vc2_total_T1cam2.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.02939186224674535,
+   "ok": true
+  },
+  {
+   "file": "smooth_T1cam1_sphere.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.01794614607130636,
+   "ok": true
+  },
+  {
+   "file": "smooth_wide_cyl.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.01794614607130636,
+   "ok": true
+  },
+  {
+   "file": "smooth_pinhole.txt",
+   "values_ok": true,
+   "at": 3837,
+   "toModel": 3837,
+   "toImage": 3837,
+   "n": 3837,
+   "slope_bound": 0.01794614607130636,
+   "ok": true
+  },
+  {
+   "file": "smooth_pinplate.txt",
+   "values_ok": true,
+   "at": 6238,
+   "toModel": 6238,
+   "toImage": 6238,
+   "n": 6238,
+   "slope_bound": 0.00978705652437926,
+   "ok": true
+  }
+ ],
+ "cameras": [
+  {
+   "camera": "T1cam1",
+   "correction": "zero_T1cam1.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2300,
+   "projected": 2282,
+   "no_image": 18,
+   "project_exact": 2282,
+   "project_resid_max_px": 0.0,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "2300/2300",
+   "imageStatus_ok": "9200/9200",
+   "statuses": {
+    "one": 6545,
+    "none": 2655
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true,
+   "zero_field_project_same": "2300/2300"
+  },
+  {
+   "camera": "T1cam1",
+   "correction": "smooth_T1cam1.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2300,
+   "projected": 2282,
+   "no_image": 18,
+   "project_exact": 2282,
+   "project_resid_max_px": 2.3437142008433856e-13,
+   "roundtrip_extra_max_mm": 4.446196265246691e-15,
+   "projectAll_ok": "2300/2300",
+   "imageStatus_ok": "9200/9200",
+   "statuses": {
+    "one": 6522,
+    "none": 2678
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "T1cam1",
+   "correction": "t1_vc2_total_T1cam1.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2300,
+   "projected": 2282,
+   "no_image": 18,
+   "project_exact": 2282,
+   "project_resid_max_px": 1.1368683772161603e-13,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "2300/2300",
+   "imageStatus_ok": "9200/9200",
+   "statuses": {
+    "one": 6519,
+    "none": 2681
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "T1cam2",
+   "correction": "zero_T1cam2.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2300,
+   "projected": 2168,
+   "no_image": 132,
+   "project_exact": 2168,
+   "project_resid_max_px": 0.0,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "2300/2300",
+   "imageStatus_ok": "9200/9200",
+   "statuses": {
+    "one": 5180,
+    "none": 4020
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true,
+   "zero_field_project_same": "2300/2300"
+  },
+  {
+   "camera": "T1cam2",
+   "correction": "smooth_T1cam2.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2300,
+   "projected": 2168,
+   "no_image": 132,
+   "project_exact": 2168,
+   "project_resid_max_px": 4.547473508864641e-13,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "2300/2300",
+   "imageStatus_ok": "9200/9200",
+   "statuses": {
+    "one": 5168,
+    "none": 4032
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "T1cam2",
+   "correction": "t1_vc2_total_T1cam2.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2300,
+   "projected": 2168,
+   "no_image": 132,
+   "project_exact": 2168,
+   "project_resid_max_px": 1.1368683772161603e-13,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "2300/2300",
+   "imageStatus_ok": "9200/9200",
+   "statuses": {
+    "one": 5181,
+    "none": 4019
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "T1cam1_sphere",
+   "correction": "zero_T1cam1_sphere.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2500,
+   "projected": 2475,
+   "no_image": 25,
+   "project_exact": 2475,
+   "project_resid_max_px": 0.0,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "2500/2500",
+   "imageStatus_ok": "10000/10000",
+   "statuses": {
+    "one": 6499,
+    "none": 3501
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true,
+   "zero_field_project_same": "2500/2500"
+  },
+  {
+   "camera": "T1cam1_sphere",
+   "correction": "smooth_T1cam1_sphere.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 2500,
+   "projected": 2475,
+   "no_image": 25,
+   "project_exact": 2475,
+   "project_resid_max_px": 2.3437142008433856e-13,
+   "roundtrip_extra_max_mm": 5.5303098922554186e-15,
+   "projectAll_ok": "2500/2500",
+   "imageStatus_ok": "10000/10000",
+   "statuses": {
+    "one": 6481,
+    "none": 3519
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "wide_cyl",
+   "correction": "zero_wide_cyl.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 1800,
+   "projected": 1665,
+   "no_image": 135,
+   "project_exact": 1665,
+   "project_resid_max_px": 0.0,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "1800/1800",
+   "imageStatus_ok": "7200/7200",
+   "statuses": {
+    "none": 561,
+    "one": 5331,
+    "ambiguous": 1308
+   },
+   "points_with_several_images": 327,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true,
+   "zero_field_project_same": "1800/1800"
+  },
+  {
+   "camera": "wide_cyl",
+   "correction": "smooth_wide_cyl.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 1800,
+   "projected": 1665,
+   "no_image": 135,
+   "project_exact": 1665,
+   "project_resid_max_px": 2.5421149729252077e-13,
+   "roundtrip_extra_max_mm": 1.7669042509760284e-13,
+   "projectAll_ok": "1800/1800",
+   "imageStatus_ok": "7200/7200",
+   "statuses": {
+    "none": 560,
+    "one": 5332,
+    "ambiguous": 1308
+   },
+   "points_with_several_images": 327,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "pinhole",
+   "correction": "zero_pinhole.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 1500,
+   "projected": 1500,
+   "no_image": 0,
+   "project_exact": 1500,
+   "project_resid_max_px": 0.0,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "1500/1500",
+   "imageStatus_ok": "6000/6000",
+   "statuses": {
+    "one": 5466,
+    "none": 534
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true,
+   "zero_field_project_same": "1500/1500"
+  },
+  {
+   "camera": "pinhole",
+   "correction": "smooth_pinhole.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 1500,
+   "projected": 1500,
+   "no_image": 0,
+   "project_exact": 1500,
+   "project_resid_max_px": 2.3437142008433856e-13,
+   "roundtrip_extra_max_mm": 7.108895756049931e-15,
+   "projectAll_ok": "1500/1500",
+   "imageStatus_ok": "6000/6000",
+   "statuses": {
+    "one": 5462,
+    "none": 538
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  },
+  {
+   "camera": "pinplate",
+   "correction": "zero_pinplate.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 1500,
+   "projected": 1500,
+   "no_image": 0,
+   "project_exact": 1500,
+   "project_resid_max_px": 0.0,
+   "roundtrip_extra_max_mm": 0.0,
+   "projectAll_ok": "1500/1500",
+   "imageStatus_ok": "6000/6000",
+   "statuses": {
+    "one": 5707,
+    "none": 293
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true,
+   "zero_field_project_same": "1500/1500"
+  },
+  {
+   "camera": "pinplate",
+   "correction": "smooth_pinplate.txt",
+   "fails": [],
+   "properties_ok": true,
+   "points": 1500,
+   "projected": 1500,
+   "no_image": 0,
+   "project_exact": 1500,
+   "project_resid_max_px": 2.2914314707516465e-13,
+   "roundtrip_extra_max_mm": 2.5678549138685584e-13,
+   "projectAll_ok": "1500/1500",
+   "imageStatus_ok": "6000/6000",
+   "statuses": {
+    "one": 5706,
+    "none": 294
+   },
+   "points_with_several_images": 0,
+   "lineOfSight_ok": "500/500",
+   "projectWithHint_ok": "1600/1600",
+   "clone_ok": true,
+   "saveParameters_same": true
+  }
+ ],
+ "edge": [
+  {
+   "camera": "T1cam1",
+   "edge": "right",
+   "edge_images": 200,
+   "left_sensor": 200,
+   "shift_exact": 200,
+   "ok": true
+  },
+  {
+   "camera": "T1cam2",
+   "edge": "right",
+   "edge_images": 200,
+   "left_sensor": 200,
+   "shift_exact": 200,
+   "ok": true
+  },
+  {
+   "camera": "T1cam1_sphere",
+   "edge": "right",
+   "edge_images": 200,
+   "left_sensor": 200,
+   "shift_exact": 200,
+   "ok": true
+  },
+  {
+   "camera": "wide_cyl",
+   "edge": "bottom",
+   "edge_images": 198,
+   "left_sensor": 198,
+   "shift_exact": 200,
+   "ok": true
+  },
+  {
+   "camera": "pinhole",
+   "edge": "right",
+   "edge_images": 200,
+   "left_sensor": 200,
+   "shift_exact": 200,
+   "ok": true
+  },
+  {
+   "camera": "pinplate",
+   "edge": "right",
+   "edge_images": 200,
+   "left_sensor": 200,
+   "shift_exact": 200,
+   "ok": true
+  }
+ ],
+ "t1_field_dev": {
+  "T1cam1": {
+   "max_dev_px": 0.015252527283259468,
+   "rms_dev_px": 0.0002977335035251679,
+   "field_rms_px": 0.39130338882732335,
+   "field_max_px": 1.3485610641369083,
+   "slope_bound": 0.007777441838661431
+  },
+  "T1cam2": {
+   "max_dev_px": 0.11096013964130431,
+   "rms_dev_px": 0.0025215991799482696,
+   "field_rms_px": 0.48001286433337387,
+   "field_max_px": 2.2129714075807674,
+   "slope_bound": 0.02939186224674535
+  }
+ },
+ "config": {
+  "relative_path": {
+   "ok": true,
+   "error": null
+  },
+  "empty_means_none": {
+   "ok": true,
+   "error": null
+  },
+  "no_key": {
+   "ok": true,
+   "error": null
+  },
+  "missing": {
+   "ok": true,
+   "error": "[11] Failed to load the image correction of cameras[0]: | ctx: [4] cannot open the image correction file | ctx: D:/Refraction/pyOpenLPT/tests/vsc_correction_field/data/l1/no_such_correction.txt @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\inc\\libMath\\../error.hpp:150 (From) @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\src\\srcSTB\\Config.cpp:287 (read_basic_json)"
+  },
+  "wrong_size": {
+   "ok": true,
+   "error": "[11] Cannot apply the image correction of cameras[0]: | ctx: [1] the correction's image size (1280 x 801) is not the camera's (1280 x 800) | ctx: D:/Refraction/pyOpenLPT/tests/vsc_correction_field/data/l1/wrong_size.txt @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\inc\\libMath\\../error.hpp:150 (From) @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\src\\srcSTB\\Config.cpp:294 (read_basic_json)"
+  },
+  "malformed": {
+   "ok": true,
+   "error": "[11] Failed to load the image correction of cameras[0]: | ctx: [1] invalid image correction file: expected DV after nu * nv numbers of DU | ctx: D:/Refraction/pyOpenLPT/tests/vsc_correction_field/data/l1/malformed.txt @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\inc\\libMath\\../error.hpp:150 (From) @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\src\\srcSTB\\Config.cpp:287 (read_basic_json)"
+  },
+  "steep": {
+   "ok": true,
+   "error": "[11] Failed to load the image correction of cameras[0]: | ctx: [1] invalid image correction: too steep: its slope bound is 1.000000; it must be below 0.5 | ctx: D:/Refraction/pyOpenLPT/tests/vsc_correction_field/data/l1/steep.txt @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\inc\\libMath\\../error.hpp:150 (From) @ D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\source\\src\\srcSTB\\Config.cpp:287 (read_basic_json)"
+  },
+  "ok": true
+ },
+ "handle": {
+  "ok": true,
+  "project": true,
+  "lineOfSight": true,
+  "flags": true,
+  "clear": true,
+  "load_drops": true,
+  "params": true,
+  "wrong_size_raises": true
+ },
+ "pass": true
+}

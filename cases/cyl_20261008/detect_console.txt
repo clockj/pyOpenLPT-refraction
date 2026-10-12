@@ -1,0 +1,26 @@
+C1 detection: 13001 image numbers, 36607 camera-frames, 16 workers
+  cam1: first image 0, settings {'polarity': 'dark', 'min_r_px': 20.0, 'max_r_px': 70.0, 'open_px': 51, 'rod_mask_px': 28.0, 'guard_px': 3.0, 'workers': 16}
+  cam2: first image 0, settings {'polarity': 'dark', 'min_r_px': 20.0, 'max_r_px': 70.0, 'open_px': 51, 'rod_mask_px': 28.0, 'guard_px': 3.0, 'workers': 16}
+  cam3: first image 2396, settings {'polarity': 'dark', 'min_r_px': 30.0, 'max_r_px': 105.0, 'open_px': 77, 'rod_mask_px': 42.0, 'guard_px': 3.0, 'workers': 16}
+  2000 / 36607 images, 279 s (7.2 images/s)
+  4000 / 36607 images, 523 s (7.7 images/s)
+  6000 / 36607 images, 835 s (7.2 images/s)
+  8000 / 36607 images, 1237 s (6.5 images/s)
+  10000 / 36607 images, 1622 s (6.2 images/s)
+  12000 / 36607 images, 1978 s (6.1 images/s)
+  14000 / 36607 images, 2373 s (5.9 images/s)
+  16000 / 36607 images, 2818 s (5.7 images/s)
+  18000 / 36607 images, 3267 s (5.5 images/s)
+  20000 / 36607 images, 3731 s (5.4 images/s)
+  22000 / 36607 images, 4089 s (5.4 images/s)
+  24000 / 36607 images, 4491 s (5.3 images/s)
+  26000 / 36607 images, 4758 s (5.5 images/s)
+  28000 / 36607 images, 5044 s (5.6 images/s)
+  30000 / 36607 images, 5349 s (5.6 images/s)
+  32000 / 36607 images, 5630 s (5.7 images/s)
+  34000 / 36607 images, 5993 s (5.7 images/s)
+  36000 / 36607 images, 6327 s (5.7 images/s)
+  done in 6409 s (5.7 images/s); written X:\Shijie Zhong\Refraction\Processed\20261008\T0\detection\detections_all.csv
+  cam1: 0 unreadable, 1076 0 balls, 3848 1 balls, 8077 2 balls, 0 more, 1 pairs dropped by the guard
+  cam2: 0 unreadable, 1171 0 balls, 4095 1 balls, 7735 2 balls, 0 more, 0 pairs dropped by the guard
+  cam3: 0 unreadable, 469 0 balls, 3027 1 balls, 7109 2 balls, 0 more, 0 pairs dropped by the guard

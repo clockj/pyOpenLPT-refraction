@@ -1,0 +1,20 @@
+  w3_A_scratch: exit 0, 3321 s  (--fit-k1 --channel)
+W3: 1 fits in 3321 s
+W3: the constraints through the case's calibration, every frame; lens terms: none (f, k1); t2_all = the delivered fit, no constraint
+  fit              RMS px  sigma   active   f (px)                    k1                       to wall (mm)             walls deg   wand below wall 1 / wall 2 (mm)       aim C1C2 / C3C4 (mm)
+  t2_all           0.2734  0.2333   87242   18752 19146 21488 21936   0.759 0.840 0.782 1.063    1067  1034   772   845   90.169      -0.0.. 84.7 / 109.0..225.2       167.9 /  47.3
+  w3_A             0.2760  0.2355   87239   18793 19168 21622 22012   0.798 0.884 0.828 1.018    1058  1022   838   904   90.180      15.9..100.6 /  35.5..151.0        94.2 /  63.1
+  w3_AB            0.2773  0.2367   87234   18784 19159 21653 22033   0.810 0.895 0.844 1.013    1058  1023   855   920   90.183      14.3.. 99.0 /  16.4..131.8        75.0 /  61.5
+  w3_B             0.3148  0.2687   87228   18749 19136 21853 22153   0.849 0.945 0.894 1.175    1068  1034   859   925   90.166       0.0.. 84.0 /  16.3..132.0        75.0 /  46.6
+  w3_A_scratch     0.2760  0.2356   87240   18794 19168 21622 22013   0.798 0.884 0.828 1.019    1058  1022   838   904   90.180      16.1..100.7 /  35.5..151.0        94.2 /  63.2
+  fit              every frame: median px, inliers RMS, |dL| median (mm), clean mean L, SD, outliers;  baselines C1-C2, C3-C4 (mm)
+  t2_all           0.2153, 0.1890, 0.0067, 9.9998, 0.0101, 658;  242.57, 286.84
+  w3_A             0.2167, 0.1910, 0.0068, 10.0000, 0.0102, 658;  243.04, 287.96
+  w3_AB            0.2177, 0.1920, 0.0068, 10.0000, 0.0102, 658;  242.92, 288.24
+  w3_B             0.2417, 0.2185, 0.0069, 10.0002, 0.0105, 657;  242.73, 290.30
+  w3_A_scratch     0.2167, 0.1910, 0.0068, 10.0000, 0.0102, 658;  243.04, 287.96
+  constraints at the answers (plate_wand.constraint_report): per wall the band of shifts that keeps the wand inside (mm, + away from its cameras); the channel's ends on a limit; the aims
+  w3_A             wall 1 band -0.9..+14.4; wall 2 band +0.0..+34.0; 1 ends on a limit, largest breach 0.000 mm
+  w3_AB            wall 1 band -2.5..+12.8; wall 2 band -19.2..+14.9; 0 ends on a limit, largest breach 0.000 mm; aim 75.00 (given 75.00)
+  w3_B             aim 75.00 (given 75.00)
+  w3_A_scratch     wall 1 band -0.8..+14.6; wall 2 band +0.0..+34.0; 1 ends on a limit, largest breach 0.000 mm

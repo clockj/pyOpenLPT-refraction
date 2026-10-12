@@ -1,0 +1,48 @@
+T5/T6: 2187 frames, against t3k_s2: RMS 0.2814 px, sigma 0.2403 px
+  t3k_s2: f 18747, 19145, 21500, 21932 px; distance to wall 1067.2, 1033.9, 775.4, 848.0 mm; walls 90.182 deg; unused frames: median 0.2153 px, inliers RMS 0.1889, |dL| median 0.0067 mm, p90 0.0170, mean L (clean frames) 9.9995
+  t5k_hints_s2: RMS 0.2813 px, sigma 0.2402; warnings pinned, hint_far; answers apart chi2 0.04
+     f 18747 (+0.0 s), 19145 (-0.0 s), 21501 (+0.0 s), 21932 (+0.0 s); distance to wall 1067.2 (+0.0 s), 1033.9 (-0.0 s), 775.2 (-0.0 s), 847.8 (-0.0 s); walls 90.182 deg
+     baselines +0.00, +0.05, +0.04, +0.04, +0.04, +0.00 mm against the plain fit; k1 0.767, 0.836, 0.818, 1.06
+     unused frames: median 0.2153 px, inliers RMS 0.1889, outliers 521, |dL| median 0.0067 mm, p90 0.0170, mean L (clean) 9.9995, clean SD 0.0101
+     hints: normals off by 0.7, 12.8, 18.0, 1.2 deg from the answer; path chosen: searched
+  t6k_nw1.33_s2: RMS 0.2808 px, sigma 0.2398; warnings pinned; answers apart chi2 21.25
+     f 18755 (+0.4 s), 19148 (+0.1 s), 21554 (+3.2 s), 21977 (+2.9 s); distance to wall 1067.6 (+0.1 s), 1033.8 (-0.0 s), 779.0 (+1.0 s), 851.4 (+1.1 s); walls 90.205 deg
+     baselines -0.46, +1.30, +1.01, +0.98, +0.81, -0.01 mm against the plain fit; k1 0.765, 0.834, 0.826, 1.08
+     unused frames: median 0.2149 px, inliers RMS 0.1887, outliers 521, |dL| median 0.0067 mm, p90 0.0170, mean L (clean) 9.9995, clean SD 0.0101
+  t6k_t12.4_s2: RMS 0.2812 px, sigma 0.2402; warnings pinned; answers apart chi2 2.63
+     f 18753 (+0.3 s), 19149 (+0.2 s), 21497 (-0.2 s), 21930 (-0.1 s); distance to wall 1067.7 (+0.1 s), 1034.3 (+0.1 s), 774.7 (-0.2 s), 847.3 (-0.2 s); walls 90.181 deg
+     baselines +0.06, +0.17, +0.19, +0.06, +0.09, -0.03 mm against the plain fit; k1 0.768, 0.836, 0.817, 1.06
+     unused frames: median 0.2152 px, inliers RMS 0.1889, outliers 521, |dL| median 0.0067 mm, p90 0.0170, mean L (clean) 9.9995, clean SD 0.0101
+  t6k_t13.0_s2: RMS 0.2812 px, sigma 0.2402; warnings pinned; answers apart chi2 0.18
+     f 18749 (+0.1 s), 19146 (+0.0 s), 21500 (-0.0 s), 21932 (-0.0 s); distance to wall 1067.1 (-0.0 s), 1033.8 (-0.0 s), 775.2 (-0.1 s), 847.8 (-0.1 s); walls 90.182 deg
+     baselines +0.02, +0.20, +0.20, +0.17, +0.17, -0.00 mm against the plain fit; k1 0.767, 0.836, 0.817, 1.06
+     unused frames: median 0.2153 px, inliers RMS 0.1889, outliers 521, |dL| median 0.0067 mm, p90 0.0170, mean L (clean) 9.9995, clean SD 0.0101
+  t3_s2: RMS 0.3134 px, sigma 0.2676; warnings pinned; answers apart chi2 8502.09
+     f 18981 (+12.2 s), 19453 (+15.8 s), 21228 (-16.3 s), 21708 (-14.3 s); distance to wall 1079.4 (+2.3 s), 1049.3 (+2.7 s), 716.6 (-15.9 s), 794.8 (-16.4 s); walls 90.145 deg
+     baselines +3.07, +9.57, +10.23, +12.55, +13.52, -3.58 mm against the plain fit
+     unused frames: median 0.2338 px, inliers RMS 0.2097, outliers 517, |dL| median 0.0096 mm, p90 0.0239, mean L (clean) 10.0000, clean SD 0.0144
+
+T5/T6: 2188 frames, against t3_s0: RMS 0.6526 px, sigma 0.5593 px
+  t3_s0: f 18974, 19103, 21616, 20794 px; distance to wall 230.3, 235.5, 309.1, 232.3 mm; walls 94.122 deg; unused frames: median 0.4589 px, inliers RMS 0.4878, |dL| median 0.0195 mm, p90 0.0461, mean L (clean frames) 10.0010
+  t5_hints_s0: RMS 0.6526 px, sigma 0.5593; warnings hint_far, noisy; answers apart chi2 0.00
+     f 18974 (+0.0 s), 19103 (+0.0 s), 21616 (+0.0 s), 20794 (+0.0 s); distance to wall 230.3 (+0.0 s), 235.5 (+0.0 s), 309.1 (+0.0 s), 232.3 (+0.0 s); walls 94.122 deg
+     baselines +0.00, +0.00, +0.00, +0.00, +0.00, +0.00 mm against the plain fit
+     unused frames: median 0.4589 px, inliers RMS 0.4878, outliers 835, |dL| median 0.0195 mm, p90 0.0461, mean L (clean) 10.0010, clean SD 0.0275
+     hints: normals off by 16.3, 4.0, 6.5, 23.4 deg from the answer; path chosen: default
+  t6_nw1.33_s0: RMS 0.6526 px, sigma 0.5592; warnings noisy; answers apart chi2 4.39
+     f 19018 (+0.9 s), 19145 (+0.9 s), 21664 (+1.4 s), 20845 (+1.5 s); distance to wall 229.9 (-0.1 s), 235.2 (-0.0 s), 309.1 (+0.0 s), 232.2 (-0.0 s); walls 94.146 deg
+     baselines +0.03, +1.34, +1.40, +1.18, +1.27, -0.00 mm against the plain fit
+     unused frames: median 0.4588 px, inliers RMS 0.4877, outliers 835, |dL| median 0.0195 mm, p90 0.0462, mean L (clean) 10.0011, clean SD 0.0275
+  t6_t12.4_s0: RMS 0.6526 px, sigma 0.5593; warnings noisy; answers apart chi2 0.00
+     f 18974 (+0.0 s), 19103 (+0.0 s), 21616 (+0.0 s), 20794 (+0.0 s); distance to wall 230.2 (-0.0 s), 235.5 (-0.0 s), 309.0 (-0.0 s), 232.3 (-0.0 s); walls 94.121 deg
+     baselines +0.00, -0.02, -0.02, -0.02, -0.02, +0.00 mm against the plain fit
+     unused frames: median 0.4589 px, inliers RMS 0.4878, outliers 835, |dL| median 0.0195 mm, p90 0.0461, mean L (clean) 10.0010, clean SD 0.0275
+  t6_t13.0_s0: RMS 0.6526 px, sigma 0.5593; warnings noisy; answers apart chi2 0.00
+     f 18974 (-0.0 s), 19103 (-0.0 s), 21616 (-0.0 s), 20794 (-0.0 s); distance to wall 230.3 (+0.0 s), 235.6 (+0.0 s), 309.1 (+0.0 s), 232.3 (+0.0 s); walls 94.122 deg
+     baselines -0.00, +0.02, +0.02, +0.02, +0.02, -0.00 mm against the plain fit
+     unused frames: median 0.4589 px, inliers RMS 0.4878, outliers 835, |dL| median 0.0195 mm, p90 0.0461, mean L (clean) 10.0010, clean SD 0.0275
+  t3k_s0: RMS 0.2736 px, sigma 0.2336; warnings pinned; answers apart chi2 21189.45
+     f 18727 (-5.2 s), 19132 (+0.7 s), 21491 (-3.6 s), 21945 (+33.8 s); distance to wall 1066.1 (+119.4 s), 1033.4 (+90.5 s), 774.1 (+101.7 s), 847.9 (+201.1 s); walls 90.134 deg
+     baselines +0.05, -344.84, -314.12, -315.36, -292.92, +11.46 mm against the plain fit; k1 0.759, 0.84, 0.765, 1.05
+     unused frames: median 0.2150 px, inliers RMS 0.1890, outliers 553, |dL| median 0.0068 mm, p90 0.0171, mean L (clean) 9.9996, clean SD 0.0102
+

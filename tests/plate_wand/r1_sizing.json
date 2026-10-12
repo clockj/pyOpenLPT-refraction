@@ -1,0 +1,5496 @@
+{
+ "seed": 2000,
+ "scales": [
+  1.0,
+  2.0,
+  3.0,
+  4.0
+ ],
+ "n_draws": 20,
+ "draw_seed": 20261002,
+ "ref_rms": 1.1553527651106665,
+ "answer_rms": 1.158848209137512,
+ "answer_same": {
+  "rms_rel_diff": 0.003025434423494651,
+  "max_abs_z": 3.887648671060875,
+  "worst": "cam3.C1",
+  "active": 6152,
+  "active_ref": 6152,
+  "same": false
+ },
+ "cost_answer": 8261.700265044139,
+ "distance_sigma": {
+  "answer_to_global": 15.981189201947975,
+  "joined_to_global": 16.960005122337147,
+  "joined_to_answer": 4.9321617058398415
+ },
+ "control_global_screen_cost": 8208.106750494118,
+ "summary": {
+  "answer|1": {
+   "centre": "answer",
+   "scale": 1.0,
+   "n": 20,
+   "p_screen": 0.45,
+   "p_draw": 0.45,
+   "improving": 9,
+   "improving_global": 9,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.45,
+    "2": 0.7105263157894737,
+    "3": 0.8552631578947368,
+    "4": 0.9318885448916409,
+    "5": 0.9702012383900929,
+    "6": 0.9880804953560371,
+    "7": 0.9957430340557275,
+    "8": 0.9986901643248393
+   },
+   "screen_seconds_median": 3.7686041593551636,
+   "fit_seconds_median": 11.28182327747345
+  },
+  "answer|2": {
+   "centre": "answer",
+   "scale": 2.0,
+   "n": 20,
+   "p_screen": 0.45,
+   "p_draw": 0.45,
+   "improving": 9,
+   "improving_global": 9,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.45,
+    "2": 0.7105263157894737,
+    "3": 0.8552631578947368,
+    "4": 0.9318885448916409,
+    "5": 0.9702012383900929,
+    "6": 0.9880804953560371,
+    "7": 0.9957430340557275,
+    "8": 0.9986901643248393
+   },
+   "screen_seconds_median": 4.376815915107727,
+   "fit_seconds_median": 15.519030928611755
+  },
+  "answer|3": {
+   "centre": "answer",
+   "scale": 3.0,
+   "n": 20,
+   "p_screen": 0.45,
+   "p_draw": 0.45,
+   "improving": 9,
+   "improving_global": 9,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.45,
+    "2": 0.7105263157894737,
+    "3": 0.8552631578947368,
+    "4": 0.9318885448916409,
+    "5": 0.9702012383900929,
+    "6": 0.9880804953560371,
+    "7": 0.9957430340557275,
+    "8": 0.9986901643248393
+   },
+   "screen_seconds_median": 3.7294185161590576,
+   "fit_seconds_median": 17.125925421714783
+  },
+  "answer|4": {
+   "centre": "answer",
+   "scale": 4.0,
+   "n": 20,
+   "p_screen": 0.4,
+   "p_draw": 0.4,
+   "improving": 9,
+   "improving_global": 8,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.4,
+    "2": 0.6526315789473685,
+    "3": 0.8070175438596491,
+    "4": 0.8978328173374613,
+    "5": 0.9489164086687306,
+    "6": 0.9761609907120743,
+    "7": 0.9897832817337461,
+    "8": 0.9960704929745178
+   },
+   "screen_seconds_median": 3.7526214122772217,
+   "fit_seconds_median": 13.963987231254578
+  },
+  "joined start|1": {
+   "centre": "joined start",
+   "scale": 1.0,
+   "n": 20,
+   "p_screen": 0.45,
+   "p_draw": 0.45,
+   "improving": 9,
+   "improving_global": 9,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.45,
+    "2": 0.7105263157894737,
+    "3": 0.8552631578947368,
+    "4": 0.9318885448916409,
+    "5": 0.9702012383900929,
+    "6": 0.9880804953560371,
+    "7": 0.9957430340557275,
+    "8": 0.9986901643248393
+   },
+   "screen_seconds_median": 3.153085947036743,
+   "fit_seconds_median": 10.757598400115967
+  },
+  "joined start|2": {
+   "centre": "joined start",
+   "scale": 2.0,
+   "n": 20,
+   "p_screen": 0.45,
+   "p_draw": 0.45,
+   "improving": 9,
+   "improving_global": 9,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.45,
+    "2": 0.7105263157894737,
+    "3": 0.8552631578947368,
+    "4": 0.9318885448916409,
+    "5": 0.9702012383900929,
+    "6": 0.9880804953560371,
+    "7": 0.9957430340557275,
+    "8": 0.9986901643248393
+   },
+   "screen_seconds_median": 3.5693552494049072,
+   "fit_seconds_median": 10.4076327085495
+  },
+  "joined start|3": {
+   "centre": "joined start",
+   "scale": 3.0,
+   "n": 20,
+   "p_screen": 0.5,
+   "p_draw": 0.5,
+   "improving": 10,
+   "improving_global": 10,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.5,
+    "2": 0.7631578947368421,
+    "3": 0.8947368421052632,
+    "4": 0.9566563467492261,
+    "5": 0.9837461300309598,
+    "6": 0.9945820433436533,
+    "7": 0.9984520123839009,
+    "8": 0.9996427720885925
+   },
+   "screen_seconds_median": 3.3315482139587402,
+   "fit_seconds_median": 14.906932950019836
+  },
+  "joined start|4": {
+   "centre": "joined start",
+   "scale": 4.0,
+   "n": 20,
+   "p_screen": 0.4,
+   "p_draw": 0.4,
+   "improving": 9,
+   "improving_global": 8,
+   "ranked": true,
+   "p_rule": {
+    "1": 0.4,
+    "2": 0.6526315789473685,
+    "3": 0.8070175438596491,
+    "4": 0.8978328173374613,
+    "5": 0.9489164086687306,
+    "6": 0.9761609907120743,
+    "7": 0.9897832817337461,
+    "8": 0.9960704929745178
+   },
+   "screen_seconds_median": 3.8523991107940674,
+   "fit_seconds_median": 13.930196166038513
+  }
+ },
+ "choice": {
+  "scale": 1.0,
+  "p": 0.45,
+  "K_formula": 6,
+  "K_rule": 5,
+  "stop": false
+ },
+ "invalid": [],
+ "draws": [
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": 0.03682771990999632,
+   "norm": 5.930021808858674,
+   "screen": {
+    "cost": 7561.382702342654,
+    "n_fail": 432,
+    "rms": 1.1497478214187262,
+    "iters": 20,
+    "max_abs_z": 5.448736638216046,
+    "worst": "cam3.w1",
+    "seconds": 4.974796295166016
+   },
+   "from_screen": {
+    "rms": 1.1816588638089385,
+    "same": false,
+    "max_abs_z": 5.446889321851245,
+    "worst": "cam3.w1",
+    "active": 5637,
+    "seconds": 39.469972133636475
+   },
+   "from_draw": {
+    "rms": 1.1622262944067803,
+    "same": false,
+    "max_abs_z": 5.447190790338545,
+    "worst": "cam3.w1",
+    "active": 5634,
+    "seconds": 33.14660906791687
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.059269965696406496,
+   "norm": 5.646658660041956,
+   "screen": {
+    "cost": 8208.10675049416,
+    "n_fail": 0,
+    "rms": 1.155083378912091,
+    "iters": 18,
+    "max_abs_z": 0.026567874493510193,
+    "worst": "cam3.logf",
+    "seconds": 2.9369895458221436
+   },
+   "from_screen": {
+    "rms": 1.155352765110989,
+    "same": true,
+    "max_abs_z": 7.083001791451276e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.360974073410034
+   },
+   "from_draw": {
+    "rms": 1.1553527650911701,
+    "same": true,
+    "max_abs_z": 4.073941084203615e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 12.277292490005493
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.06975666428377673,
+   "norm": 4.419443159467662,
+   "screen": {
+    "cost": 8146.452949753351,
+    "n_fail": 78,
+    "rms": 1.158102190309401,
+    "iters": 23,
+    "max_abs_z": 3.534027911716528,
+    "worst": "cam4.C1",
+    "seconds": 5.373912811279297
+   },
+   "from_screen": {
+    "rms": 1.1538600240236134,
+    "same": false,
+    "max_abs_z": 3.5390638570276343,
+    "worst": "cam4.C1",
+    "active": 6072,
+    "seconds": 8.108764886856079
+   },
+   "from_draw": {
+    "rms": 1.158334784650527,
+    "same": false,
+    "max_abs_z": 3.5340227936875666,
+    "worst": "cam4.C1",
+    "active": 6070,
+    "seconds": 27.10736083984375
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.10496904111002137,
+   "norm": 5.237929593974818,
+   "screen": {
+    "cost": 7881.893066724871,
+    "n_fail": 172,
+    "rms": 1.1480602418210957,
+    "iters": 15,
+    "max_abs_z": 4.1532982369764575,
+    "worst": "cam3.C1",
+    "seconds": 3.8612821102142334
+   },
+   "from_screen": {
+    "rms": 1.148522909579388,
+    "same": false,
+    "max_abs_z": 4.148837724270128,
+    "worst": "cam3.C1",
+    "active": 5978,
+    "seconds": 11.45856499671936
+   },
+   "from_draw": {
+    "rms": 1.1480663739673596,
+    "same": false,
+    "max_abs_z": 4.153287348224502,
+    "worst": "cam3.C1",
+    "active": 5980,
+    "seconds": 8.119722604751587
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.03005168941957241,
+   "norm": 5.372943460761532,
+   "screen": {
+    "cost": 7369.282122233368,
+    "n_fail": 454,
+    "rms": 1.1372380163194782,
+    "iters": 22,
+    "max_abs_z": 5.593689069183069,
+    "worst": "cam3.logf",
+    "seconds": 5.582166910171509
+   },
+   "from_screen": {
+    "rms": 1.2148315576463107,
+    "same": false,
+    "max_abs_z": 5.595477838488048,
+    "worst": "cam3.logf",
+    "active": 5640,
+    "seconds": 39.71340274810791
+   },
+   "from_draw": {
+    "rms": 1.1373389807713936,
+    "same": false,
+    "max_abs_z": 5.593816817943573,
+    "worst": "cam3.logf",
+    "active": 5698,
+    "seconds": 8.978466987609863
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.060426802387153984,
+   "norm": 4.370474029478354,
+   "screen": {
+    "cost": 8208.106750494164,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 21,
+    "max_abs_z": 0.026568049839993193,
+    "worst": "cam3.logf",
+    "seconds": 3.0974438190460205
+   },
+   "from_screen": {
+    "rms": 1.1553527651099935,
+    "same": true,
+    "max_abs_z": 7.134967643063899e-07,
+    "worst": "cam3.C2",
+    "active": 6152,
+    "seconds": 11.182125329971313
+   },
+   "from_draw": {
+    "rms": 1.155352765013922,
+    "same": true,
+    "max_abs_z": 5.357090686661686e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.702297925949097
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.040844834920153145,
+   "norm": 4.873661073007859,
+   "screen": {
+    "cost": 8252.975350720968,
+    "n_fail": 6,
+    "rms": 1.1588013594854631,
+    "iters": 21,
+    "max_abs_z": 3.640697426289933,
+    "worst": "cam4.logf",
+    "seconds": 5.389373064041138
+   },
+   "from_screen": {
+    "rms": 1.1581104270663507,
+    "same": false,
+    "max_abs_z": 3.571100627068482,
+    "worst": "cam4.logf",
+    "active": 6144,
+    "seconds": 13.224379539489746
+   },
+   "from_draw": {
+    "rms": 1.1590006781185773,
+    "same": false,
+    "max_abs_z": 3.6380787240340764,
+    "worst": "cam4.logf",
+    "active": 6146,
+    "seconds": 12.869103193283081
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.05865298680931849,
+   "norm": 5.674752432685842,
+   "screen": {
+    "cost": 8208.106750494155,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 21,
+    "max_abs_z": 0.026567924048741816,
+    "worst": "cam3.logf",
+    "seconds": 3.1720733642578125
+   },
+   "from_screen": {
+    "rms": 1.155352765086442,
+    "same": true,
+    "max_abs_z": 1.9647111375987744e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.260059118270874
+   },
+   "from_draw": {
+    "rms": 1.1553527651004116,
+    "same": true,
+    "max_abs_z": 9.755667329499003e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.884086847305298
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.023735045124415495,
+   "norm": 6.146805378836597,
+   "screen": {
+    "cost": 7635.477814163769,
+    "n_fail": 286,
+    "rms": 1.1408986873921996,
+    "iters": 14,
+    "max_abs_z": 4.053380272627397,
+    "worst": "cam3.logf",
+    "seconds": 3.8181369304656982
+   },
+   "from_screen": {
+    "rms": 1.7242891452230509,
+    "same": false,
+    "max_abs_z": 4.06252846247475,
+    "worst": "cam3.logf",
+    "active": 5759,
+    "seconds": 31.2974214553833
+   },
+   "from_draw": {
+    "rms": 1.140972766321917,
+    "same": false,
+    "max_abs_z": 4.053332260737689,
+    "worst": "cam3.logf",
+    "active": 5866,
+    "seconds": 24.66559338569641
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.027190946501601178,
+   "norm": 5.497982204808372,
+   "screen": {
+    "cost": 8208.106750494175,
+    "n_fail": 0,
+    "rms": 1.1550833789120918,
+    "iters": 22,
+    "max_abs_z": 0.026567899153697352,
+    "worst": "cam3.logf",
+    "seconds": 3.51845121383667
+   },
+   "from_screen": {
+    "rms": 1.155352765097972,
+    "same": true,
+    "max_abs_z": 7.086243366229458e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 11.291498899459839
+   },
+   "from_draw": {
+    "rms": 1.155352765110489,
+    "same": true,
+    "max_abs_z": 2.0369555480114888e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.910316228866577
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.06204918846381959,
+   "norm": 5.117674327232534,
+   "screen": {
+    "cost": 8208.10675049416,
+    "n_fail": 0,
+    "rms": 1.155083378912091,
+    "iters": 20,
+    "max_abs_z": 0.0265680053784881,
+    "worst": "cam3.logf",
+    "seconds": 2.9289956092834473
+   },
+   "from_screen": {
+    "rms": 1.1553527650856434,
+    "same": true,
+    "max_abs_z": 1.690229306303821e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.67551040649414
+   },
+   "from_draw": {
+    "rms": 1.1553527651133526,
+    "same": true,
+    "max_abs_z": 1.0667336061081068e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.758845329284668
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.05808766048575599,
+   "norm": 5.249654285454844,
+   "screen": {
+    "cost": 7961.49141363267,
+    "n_fail": 126,
+    "rms": 1.14943032785732,
+    "iters": 16,
+    "max_abs_z": 2.836947685448546,
+    "worst": "cam3.w1",
+    "seconds": 3.719071388244629
+   },
+   "from_screen": {
+    "rms": 1.1497133873855692,
+    "same": false,
+    "max_abs_z": 2.828363499363526,
+    "worst": "cam3.w1",
+    "active": 6026,
+    "seconds": 8.259616613388062
+   },
+   "from_draw": {
+    "rms": 1.152751616943504,
+    "same": false,
+    "max_abs_z": 2.836282872109691,
+    "worst": "cam3.w1",
+    "active": 6026,
+    "seconds": 13.327179431915283
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.057791475806043435,
+   "norm": 5.86090758933415,
+   "screen": {
+    "cost": 8208.10675049415,
+    "n_fail": 0,
+    "rms": 1.15508337891209,
+    "iters": 20,
+    "max_abs_z": 0.026567901782724373,
+    "worst": "cam3.logf",
+    "seconds": 2.979332208633423
+   },
+   "from_screen": {
+    "rms": 1.155352765113368,
+    "same": true,
+    "max_abs_z": 7.159860064900665e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.494832277297974
+   },
+   "from_draw": {
+    "rms": 1.1553527651011144,
+    "same": true,
+    "max_abs_z": 9.835635753418643e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.443151235580444
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.07251170979061228,
+   "norm": 4.793153776863541,
+   "screen": {
+    "cost": 8194.947944832595,
+    "n_fail": 36,
+    "rms": 1.1575489390279365,
+    "iters": 15,
+    "max_abs_z": 3.761476800872656,
+    "worst": "cam3.w1",
+    "seconds": 3.9076743125915527
+   },
+   "from_screen": {
+    "rms": 1.1575181862827977,
+    "same": false,
+    "max_abs_z": 3.6753608557208293,
+    "worst": "cam3.w1",
+    "active": 6112,
+    "seconds": 11.789445400238037
+   },
+   "from_draw": {
+    "rms": 1.15782094716414,
+    "same": false,
+    "max_abs_z": 3.755116973123447,
+    "worst": "cam3.w1",
+    "active": 6116,
+    "seconds": 10.569824934005737
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.13464532896896286,
+   "norm": 6.123550719860446,
+   "screen": {
+    "cost": 7046.422259856401,
+    "n_fail": 816,
+    "rms": 1.1491492077933958,
+    "iters": 21,
+    "max_abs_z": 4.433045003936082,
+    "worst": "cam4.logf",
+    "seconds": 5.233715057373047
+   },
+   "from_screen": {
+    "rms": 1.1851718591079432,
+    "same": false,
+    "max_abs_z": 4.432756852709979,
+    "worst": "cam4.logf",
+    "active": 5246,
+    "seconds": 32.400532484054565
+   },
+   "from_draw": {
+    "rms": 1.151847266765732,
+    "same": false,
+    "max_abs_z": 4.4330533870167335,
+    "worst": "cam4.logf",
+    "active": 5238,
+    "seconds": 24.524725198745728
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.05669112053705167,
+   "norm": 5.265417805902497,
+   "screen": {
+    "cost": 8475.443122244349,
+    "n_fail": 198,
+    "rms": 1.193099851648393,
+    "iters": 18,
+    "max_abs_z": 4.3101759056019855,
+    "worst": "cam3.C1",
+    "seconds": 4.2731688022613525
+   },
+   "from_screen": {
+    "rms": 1.1943085434496976,
+    "same": false,
+    "max_abs_z": 4.310144548987654,
+    "worst": "cam3.C1",
+    "active": 5895,
+    "seconds": 25.996122360229492
+   },
+   "from_draw": {
+    "rms": 1.1948345720420959,
+    "same": false,
+    "max_abs_z": 4.31018817686691,
+    "worst": "cam3.C1",
+    "active": 5900,
+    "seconds": 26.840778827667236
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": -0.020845248609084373,
+   "norm": 5.085429838030955,
+   "screen": {
+    "cost": 8208.10675049416,
+    "n_fail": 0,
+    "rms": 1.155083378912091,
+    "iters": 20,
+    "max_abs_z": 0.0265678902377014,
+    "worst": "cam3.logf",
+    "seconds": 2.9034862518310547
+   },
+   "from_screen": {
+    "rms": 1.1553527651129725,
+    "same": true,
+    "max_abs_z": 1.7509913045359532e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.334874391555786
+   },
+   "from_draw": {
+    "rms": 1.1553527651098172,
+    "same": true,
+    "max_abs_z": 2.9948458630702336e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.547847509384155
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.1440732469099465,
+   "norm": 4.697323773612996,
+   "screen": {
+    "cost": 8208.106750494147,
+    "n_fail": 0,
+    "rms": 1.1550833789120898,
+    "iters": 19,
+    "max_abs_z": 0.026567972640977384,
+    "worst": "cam3.logf",
+    "seconds": 3.2414519786834717
+   },
+   "from_screen": {
+    "rms": 1.1553527651180489,
+    "same": true,
+    "max_abs_z": 4.876364549745712e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 12.082396507263184
+   },
+   "from_draw": {
+    "rms": 1.1553527651136988,
+    "same": true,
+    "max_abs_z": 9.185212282934244e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 11.791926860809326
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": -0.00895733989131291,
+   "norm": 5.3335670601089635,
+   "screen": {
+    "cost": 8208.106750494164,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 22,
+    "max_abs_z": 0.02656794859873688,
+    "worst": "cam3.logf",
+    "seconds": 3.3747775554656982
+   },
+   "from_screen": {
+    "rms": 1.1553527650779536,
+    "same": true,
+    "max_abs_z": 2.067712283469584e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 11.27214765548706
+   },
+   "from_draw": {
+    "rms": 1.1553527650979012,
+    "same": true,
+    "max_abs_z": 7.377181028913235e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.100936651229858
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 1.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.04378144401447023,
+   "norm": 5.3038721711522685,
+   "screen": {
+    "cost": 8244.353546806302,
+    "n_fail": 22,
+    "rms": 1.1597064337708816,
+    "iters": 21,
+    "max_abs_z": 4.348779108378777,
+    "worst": "cam3.w1",
+    "seconds": 5.082844972610474
+   },
+   "from_screen": {
+    "rms": 1.1595532605011818,
+    "same": false,
+    "max_abs_z": 4.30856443417391,
+    "worst": "cam3.C1",
+    "active": 6128,
+    "seconds": 8.635279893875122
+   },
+   "from_draw": {
+    "rms": 1.1599242137380141,
+    "same": false,
+    "max_abs_z": 4.337414103675792,
+    "worst": "cam3.w1",
+    "active": 6130,
+    "seconds": 9.468968629837036
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": 0.07365543981999265,
+   "norm": 11.860043617717348,
+   "screen": {
+    "cost": 7663.618690738618,
+    "n_fail": 1016,
+    "rms": 1.2215308410141745,
+    "iters": 20,
+    "max_abs_z": 7.401029825912193,
+    "worst": "cam3.w1",
+    "seconds": 4.954658031463623
+   },
+   "from_screen": {
+    "rms": 1.2311160526465912,
+    "same": false,
+    "max_abs_z": 7.400726348183785,
+    "worst": "cam3.w1",
+    "active": 5012,
+    "seconds": 23.170807361602783
+   },
+   "from_draw": {
+    "rms": 1.2250222426117499,
+    "same": false,
+    "max_abs_z": 7.401385355809433,
+    "worst": "cam3.w1",
+    "active": 5012,
+    "seconds": 23.712345361709595
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.11853993139281299,
+   "norm": 11.293317320083911,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 21,
+    "max_abs_z": 0.026567453646179334,
+    "worst": "cam3.logf",
+    "seconds": 3.474574327468872
+   },
+   "from_screen": {
+    "rms": 1.1553527651060642,
+    "same": true,
+    "max_abs_z": 8.510194686634741e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.46218752861023
+   },
+   "from_draw": {
+    "rms": 1.1553527650993503,
+    "same": true,
+    "max_abs_z": 1.1043593760112185e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.295184850692749
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.13951332856755347,
+   "norm": 8.838886318935325,
+   "screen": {
+    "cost": 8095.512327947354,
+    "n_fail": 184,
+    "rms": 1.164683068532048,
+    "iters": 24,
+    "max_abs_z": 4.210767134608943,
+    "worst": "cam4.C1",
+    "seconds": 5.5885045528411865
+   },
+   "from_screen": {
+    "rms": 1.1478285833530546,
+    "same": false,
+    "max_abs_z": 4.223613605488749,
+    "worst": "cam4.C1",
+    "active": 5952,
+    "seconds": 40.44582986831665
+   },
+   "from_draw": {
+    "rms": 1.1477468721634425,
+    "same": false,
+    "max_abs_z": 4.223136736558193,
+    "worst": "cam4.C1",
+    "active": 5946,
+    "seconds": 42.34095811843872
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.20993808222004273,
+   "norm": 10.475859187949636,
+   "screen": {
+    "cost": 8175.533016639012,
+    "n_fail": 396,
+    "rms": 1.19178426106402,
+    "iters": 18,
+    "max_abs_z": 4.4393960404431585,
+    "worst": "cam3.C1",
+    "seconds": 5.256956577301025
+   },
+   "from_screen": {
+    "rms": 1.2002874668936152,
+    "same": false,
+    "max_abs_z": 4.43897261624417,
+    "worst": "cam3.C1",
+    "active": 5679,
+    "seconds": 25.977683544158936
+   },
+   "from_draw": {
+    "rms": 1.1941189829545855,
+    "same": false,
+    "max_abs_z": 4.43943549122518,
+    "worst": "cam3.C1",
+    "active": 5680,
+    "seconds": 27.67718195915222
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.06010337883914482,
+   "norm": 10.745886921523065,
+   "screen": {
+    "cost": 7202.994090683005,
+    "n_fail": 1086,
+    "rms": 1.1924054065250902,
+    "iters": 21,
+    "max_abs_z": 7.470024490238199,
+    "worst": "cam3.logf",
+    "seconds": 5.188122749328613
+   },
+   "from_screen": {
+    "rms": 1.1920582881043982,
+    "same": false,
+    "max_abs_z": 7.467231239663517,
+    "worst": "cam3.logf",
+    "active": 4928,
+    "seconds": 26.474024772644043
+   },
+   "from_draw": {
+    "rms": 1.191181157739284,
+    "same": false,
+    "max_abs_z": 7.468122235264467,
+    "worst": "cam3.logf",
+    "active": 4928,
+    "seconds": 27.013132572174072
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.12085360477430797,
+   "norm": 8.740948058956707,
+   "screen": {
+    "cost": 8208.106750494146,
+    "n_fail": 0,
+    "rms": 1.1550833789120898,
+    "iters": 24,
+    "max_abs_z": 0.0265679264742913,
+    "worst": "cam3.logf",
+    "seconds": 3.6794981956481934
+   },
+   "from_screen": {
+    "rms": 1.1553527651032047,
+    "same": true,
+    "max_abs_z": 1.1996826960207193e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.80689263343811
+   },
+   "from_draw": {
+    "rms": 1.1553527650953253,
+    "same": true,
+    "max_abs_z": 1.3010481432927953e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 12.505610942840576
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.08168966984030629,
+   "norm": 9.747322146015717,
+   "screen": {
+    "cost": 8222.778155948728,
+    "n_fail": 18,
+    "rms": 1.157810279066967,
+    "iters": 19,
+    "max_abs_z": 4.389675682793052,
+    "worst": "cam4.logf",
+    "seconds": 4.875849008560181
+   },
+   "from_screen": {
+    "rms": 1.1577874093992633,
+    "same": false,
+    "max_abs_z": 4.363667313105706,
+    "worst": "cam4.logf",
+    "active": 6132,
+    "seconds": 11.252196073532104
+   },
+   "from_draw": {
+    "rms": 1.1577615114335276,
+    "same": false,
+    "max_abs_z": 4.384932408562514,
+    "worst": "cam4.logf",
+    "active": 6134,
+    "seconds": 12.347119569778442
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.11730597361863698,
+   "norm": 11.349504865371683,
+   "screen": {
+    "cost": 8208.106750494164,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 26,
+    "max_abs_z": 0.026567851247333883,
+    "worst": "cam3.logf",
+    "seconds": 3.8352630138397217
+   },
+   "from_screen": {
+    "rms": 1.15535276509725,
+    "same": true,
+    "max_abs_z": 2.932332140986746e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.166016578674316
+   },
+   "from_draw": {
+    "rms": 1.155352765100455,
+    "same": true,
+    "max_abs_z": 6.203992078860218e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.686646223068237
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.04747009024883099,
+   "norm": 12.293610757673195,
+   "screen": {
+    "cost": 7810.051632564344,
+    "n_fail": 676,
+    "rms": 1.1942499527742527,
+    "iters": 22,
+    "max_abs_z": 4.39498022974316,
+    "worst": "cam3.logf",
+    "seconds": 5.705644130706787
+   },
+   "from_screen": {
+    "rms": 1.1653606735016513,
+    "same": false,
+    "max_abs_z": 4.37934368464951,
+    "worst": "cam3.logf",
+    "active": 5360,
+    "seconds": 26.276716470718384
+   },
+   "from_draw": {
+    "rms": 1.1840863831212225,
+    "same": false,
+    "max_abs_z": 4.376931386473163,
+    "worst": "cam3.logf",
+    "active": 5328,
+    "seconds": 28.211880683898926
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.054381893003202356,
+   "norm": 10.995964409616745,
+   "screen": {
+    "cost": 8208.106750494151,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 21,
+    "max_abs_z": 0.026568018833194203,
+    "worst": "cam3.logf",
+    "seconds": 3.2414541244506836
+   },
+   "from_screen": {
+    "rms": 1.1553527651020536,
+    "same": true,
+    "max_abs_z": 5.53232299523222e-07,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.24523401260376
+   },
+   "from_draw": {
+    "rms": 1.1553527651000544,
+    "same": true,
+    "max_abs_z": 3.1108660179894696e-06,
+    "worst": "cam3.C2",
+    "active": 6152,
+    "seconds": 10.527393817901611
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.12409837692763918,
+   "norm": 10.235348654465067,
+   "screen": {
+    "cost": 8208.10675049415,
+    "n_fail": 0,
+    "rms": 1.15508337891209,
+    "iters": 23,
+    "max_abs_z": 0.026567913746912756,
+    "worst": "cam3.logf",
+    "seconds": 3.602736711502075
+   },
+   "from_screen": {
+    "rms": 1.1553527651047943,
+    "same": true,
+    "max_abs_z": 8.23668843851074e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.324916362762451
+   },
+   "from_draw": {
+    "rms": 1.1553527651185707,
+    "same": true,
+    "max_abs_z": 6.743389915518979e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.663835048675537
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.11617532097151198,
+   "norm": 10.499308570909688,
+   "screen": {
+    "cost": 8408.086107244242,
+    "n_fail": 300,
+    "rms": 1.1986611142102654,
+    "iters": 17,
+    "max_abs_z": 3.0097629296684,
+    "worst": "cam4.w2",
+    "seconds": 4.9377052783966064
+   },
+   "from_screen": {
+    "rms": 1.1998939749846087,
+    "same": false,
+    "max_abs_z": 3.00974741355373,
+    "worst": "cam4.w2",
+    "active": 5796,
+    "seconds": 24.99900531768799
+   },
+   "from_draw": {
+    "rms": 1.1973014185038013,
+    "same": false,
+    "max_abs_z": 3.009754628064387,
+    "worst": "cam4.w2",
+    "active": 5796,
+    "seconds": 24.082678079605103
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.11558295161208687,
+   "norm": 11.7218151786683,
+   "screen": {
+    "cost": 8208.10675049416,
+    "n_fail": 0,
+    "rms": 1.155083378912091,
+    "iters": 21,
+    "max_abs_z": 0.026567929387785537,
+    "worst": "cam3.logf",
+    "seconds": 2.927823543548584
+   },
+   "from_screen": {
+    "rms": 1.1553527651034459,
+    "same": true,
+    "max_abs_z": 9.017062138358752e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.360574960708618
+   },
+   "from_draw": {
+    "rms": 1.1553527651001094,
+    "same": true,
+    "max_abs_z": 1.0042324810459628e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.663334369659424
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.14502341958122456,
+   "norm": 9.586307553727082,
+   "screen": {
+    "cost": 8085.331414131771,
+    "n_fail": 82,
+    "rms": 1.154129568111293,
+    "iters": 20,
+    "max_abs_z": 3.714662937826055,
+    "worst": "cam3.w1",
+    "seconds": 4.200440406799316
+   },
+   "from_screen": {
+    "rms": 1.15502058863223,
+    "same": false,
+    "max_abs_z": 3.678898148737302,
+    "worst": "cam3.w1",
+    "active": 6068,
+    "seconds": 19.57587432861328
+   },
+   "from_draw": {
+    "rms": 1.1541280014328328,
+    "same": false,
+    "max_abs_z": 3.713580991314458,
+    "worst": "cam3.w1",
+    "active": 6070,
+    "seconds": 7.134067535400391
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.2692906579379257,
+   "norm": 12.247101439720891,
+   "screen": {
+    "cost": 6090.302469258681,
+    "n_fail": 1960,
+    "rms": 1.2053378486958464,
+    "iters": 21,
+    "max_abs_z": 6.038697523221399,
+    "worst": "cam4.logf",
+    "seconds": 4.797624826431274
+   },
+   "from_screen": {
+    "rms": 1.1060029994778378,
+    "same": false,
+    "max_abs_z": 6.044174684313445,
+    "worst": "cam4.logf",
+    "active": 3978,
+    "seconds": 25.007644176483154
+   },
+   "from_draw": {
+    "rms": 1.211242276372719,
+    "same": false,
+    "max_abs_z": 6.038747138116135,
+    "worst": "cam4.logf",
+    "active": 4061,
+    "seconds": 20.081101417541504
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.11338224107410334,
+   "norm": 10.530835611804994,
+   "screen": {
+    "cost": 7986.992962920898,
+    "n_fail": 458,
+    "rms": 1.1843577860843129,
+    "iters": 20,
+    "max_abs_z": 4.942735230153806,
+    "worst": "win1.a",
+    "seconds": 4.553191423416138
+   },
+   "from_screen": {
+    "rms": 1.202893445488566,
+    "same": false,
+    "max_abs_z": 4.945618317205435,
+    "worst": "win1.a",
+    "active": 5602,
+    "seconds": 26.190234899520874
+   },
+   "from_draw": {
+    "rms": 1.187536712007297,
+    "same": false,
+    "max_abs_z": 4.940718573327083,
+    "worst": "win1.a",
+    "active": 5600,
+    "seconds": 23.546885013580322
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": -0.04169049721816875,
+   "norm": 10.17085967606191,
+   "screen": {
+    "cost": 8208.106750494153,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 20,
+    "max_abs_z": 0.026568038075568005,
+    "worst": "cam3.logf",
+    "seconds": 2.376725673675537
+   },
+   "from_screen": {
+    "rms": 1.1553527651112407,
+    "same": true,
+    "max_abs_z": 1.3739883132392818e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.594695568084717
+   },
+   "from_draw": {
+    "rms": 1.155352765095487,
+    "same": true,
+    "max_abs_z": 1.0759643143911222e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.786532402038574
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.288146493819893,
+   "norm": 9.394647547225992,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 19,
+    "max_abs_z": 0.02656798993865932,
+    "worst": "cam3.logf",
+    "seconds": 2.760300874710083
+   },
+   "from_screen": {
+    "rms": 1.1553527651021782,
+    "same": true,
+    "max_abs_z": 5.905337374996754e-07,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 11.06989336013794
+   },
+   "from_draw": {
+    "rms": 1.1553527651022995,
+    "same": true,
+    "max_abs_z": 3.954975209036838e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 13.088818073272705
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": -0.01791467978262582,
+   "norm": 10.667134120217927,
+   "screen": {
+    "cost": 8208.106750494182,
+    "n_fail": 0,
+    "rms": 1.1550833789120922,
+    "iters": 23,
+    "max_abs_z": 0.026567959046449853,
+    "worst": "cam3.logf",
+    "seconds": 2.6678643226623535
+   },
+   "from_screen": {
+    "rms": 1.1553527651055584,
+    "same": true,
+    "max_abs_z": 4.744247191920316e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 9.918209552764893
+   },
+   "from_draw": {
+    "rms": 1.1553527650978617,
+    "same": true,
+    "max_abs_z": 1.0281161296195916e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 12.510510444641113
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 2.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.08756288802894047,
+   "norm": 10.607744342304537,
+   "screen": {
+    "cost": 8935.974105922736,
+    "n_fail": 68,
+    "rms": 1.211926684911013,
+    "iters": 25,
+    "max_abs_z": 5.2246136895306705,
+    "worst": "cam3.w1",
+    "seconds": 4.711315393447876
+   },
+   "from_screen": {
+    "rms": 1.2206356832566025,
+    "same": false,
+    "max_abs_z": 5.222628830820368,
+    "worst": "cam3.w1",
+    "active": 6072,
+    "seconds": 25.550889492034912
+   },
+   "from_draw": {
+    "rms": 1.2154104664230305,
+    "same": false,
+    "max_abs_z": 5.226664367952441,
+    "worst": "cam3.w1",
+    "active": 6072,
+    "seconds": 24.789368391036987
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": 0.11048315972998898,
+   "norm": 17.79006542657602,
+   "screen": {
+    "cost": 8617.650456884447,
+    "n_fail": 1624,
+    "rms": 1.3795620157568138,
+    "iters": 16,
+    "max_abs_z": 9.339652914086804,
+    "worst": "cam3.w1",
+    "seconds": 3.8053154945373535
+   },
+   "from_screen": {
+    "rms": 1.333768699222171,
+    "same": false,
+    "max_abs_z": 9.303421038607159,
+    "worst": "cam3.w1",
+    "active": 4411,
+    "seconds": 23.441075801849365
+   },
+   "from_draw": {
+    "rms": 1.2079083609893895,
+    "same": false,
+    "max_abs_z": 9.175979818499185,
+    "worst": "cam3.w1",
+    "active": 4412,
+    "seconds": 25.24350929260254
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.1778098970892195,
+   "norm": 16.939975980125865,
+   "screen": {
+    "cost": 8208.106750494151,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 25,
+    "max_abs_z": 0.026567723080313587,
+    "worst": "cam3.logf",
+    "seconds": 3.286738395690918
+   },
+   "from_screen": {
+    "rms": 1.1553527651001558,
+    "same": true,
+    "max_abs_z": 5.527150143694806e-07,
+    "worst": "win2.b",
+    "active": 6152,
+    "seconds": 11.314590215682983
+   },
+   "from_draw": {
+    "rms": 1.1553527651125362,
+    "same": true,
+    "max_abs_z": 3.800066209045579e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.07323145866394
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.2092699928513302,
+   "norm": 13.258329478402988,
+   "screen": {
+    "cost": 7732.762469049014,
+    "n_fail": 294,
+    "rms": 1.1489275707495412,
+    "iters": 16,
+    "max_abs_z": 5.154702203039643,
+    "worst": "cam2.w3",
+    "seconds": 3.78395414352417
+   },
+   "from_screen": {
+    "rms": 1.147853735570767,
+    "same": false,
+    "max_abs_z": 5.0244526831376195,
+    "worst": "cam2.w3",
+    "active": 5853,
+    "seconds": 38.51457715034485
+   },
+   "from_draw": {
+    "rms": 1.1491181250194586,
+    "same": false,
+    "max_abs_z": 5.154905824959091,
+    "worst": "cam2.w3",
+    "active": 5858,
+    "seconds": 23.9546480178833
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.3149071233300641,
+   "norm": 15.713788781924453,
+   "screen": {
+    "cost": 8476.06246907002,
+    "n_fail": 654,
+    "rms": 1.2416371739700325,
+    "iters": 18,
+    "max_abs_z": 5.29467909370971,
+    "worst": "cam3.w2",
+    "seconds": 4.429044008255005
+   },
+   "from_screen": {
+    "rms": 1.2453406346928833,
+    "same": false,
+    "max_abs_z": 5.2946807603093005,
+    "worst": "cam3.w2",
+    "active": 5416,
+    "seconds": 19.68320369720459
+   },
+   "from_draw": {
+    "rms": 1.2422977265689459,
+    "same": false,
+    "max_abs_z": 5.294598513376895,
+    "worst": "cam3.w2",
+    "active": 5416,
+    "seconds": 24.990474939346313
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.09015506825871723,
+   "norm": 16.118830382284596,
+   "screen": {
+    "cost": 5976.147229252245,
+    "n_fail": 1736,
+    "rms": 1.1633117421923929,
+    "iters": 21,
+    "max_abs_z": 9.295637246708447,
+    "worst": "cam3.logf",
+    "seconds": 3.7580807209014893
+   },
+   "from_screen": {
+    "rms": 1.1877221262818833,
+    "same": false,
+    "max_abs_z": 9.295626719196385,
+    "worst": "cam3.logf",
+    "active": 4278,
+    "seconds": 16.643598794937134
+   },
+   "from_draw": {
+    "rms": 1.2061229147858548,
+    "same": false,
+    "max_abs_z": 9.311418656824468,
+    "worst": "cam3.logf",
+    "active": 4274,
+    "seconds": 22.31884455680847
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.18128040716146196,
+   "norm": 13.111422088435061,
+   "screen": {
+    "cost": 8208.106750494153,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 26,
+    "max_abs_z": 0.02656817317427254,
+    "worst": "cam3.logf",
+    "seconds": 3.552910089492798
+   },
+   "from_screen": {
+    "rms": 1.1553527651008024,
+    "same": true,
+    "max_abs_z": 6.996813545206766e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.601405382156372
+   },
+   "from_draw": {
+    "rms": 1.155352765090148,
+    "same": true,
+    "max_abs_z": 1.5146715776262644e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 12.397047996520996
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.12253450476045942,
+   "norm": 14.620983219023575,
+   "screen": {
+    "cost": 9145.544671016987,
+    "n_fail": 32,
+    "rms": 1.2224442908712942,
+    "iters": 20,
+    "max_abs_z": 5.35228444470121,
+    "worst": "cam4.logf",
+    "seconds": 4.954471826553345
+   },
+   "from_screen": {
+    "rms": 1.2251702799194517,
+    "same": false,
+    "max_abs_z": 5.352314657120413,
+    "worst": "cam4.logf",
+    "active": 6106,
+    "seconds": 26.024217128753662
+   },
+   "from_draw": {
+    "rms": 1.22076240902204,
+    "same": false,
+    "max_abs_z": 5.352290002284361,
+    "worst": "cam4.logf",
+    "active": 6106,
+    "seconds": 24.194621324539185
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.17595896042795547,
+   "norm": 17.024257298057524,
+   "screen": {
+    "cost": 8208.10675049418,
+    "n_fail": 0,
+    "rms": 1.1550833789120922,
+    "iters": 31,
+    "max_abs_z": 0.026567849969857043,
+    "worst": "cam3.logf",
+    "seconds": 4.175121784210205
+   },
+   "from_screen": {
+    "rms": 1.1553527651160658,
+    "same": true,
+    "max_abs_z": 1.8189494980574276e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 9.125383138656616
+   },
+   "from_draw": {
+    "rms": 1.15535276510777,
+    "same": true,
+    "max_abs_z": 1.0270611440037851e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 12.841000318527222
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.07120513537324648,
+   "norm": 18.440416136509793,
+   "screen": {
+    "cost": 7587.138505629059,
+    "n_fail": 1122,
+    "rms": 1.2281601835700307,
+    "iters": 23,
+    "max_abs_z": 5.046209187778518,
+    "worst": "cam2.logf",
+    "seconds": 4.891907691955566
+   },
+   "from_screen": {
+    "rms": 1.2182420141577592,
+    "same": false,
+    "max_abs_z": 5.0425126423765745,
+    "worst": "cam2.logf",
+    "active": 4898,
+    "seconds": 25.07934832572937
+   },
+   "from_draw": {
+    "rms": 1.2160072291188377,
+    "same": false,
+    "max_abs_z": 5.0424203048005145,
+    "worst": "cam2.logf",
+    "active": 4894,
+    "seconds": 25.05098795890808
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.08157283950480354,
+   "norm": 16.493946614425116,
+   "screen": {
+    "cost": 8208.106750494177,
+    "n_fail": 0,
+    "rms": 1.155083378912092,
+    "iters": 23,
+    "max_abs_z": 0.02656786006790972,
+    "worst": "cam3.logf",
+    "seconds": 2.7975552082061768
+   },
+   "from_screen": {
+    "rms": 1.155352765110492,
+    "same": true,
+    "max_abs_z": 3.8783982698872596e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 8.973246812820435
+   },
+   "from_draw": {
+    "rms": 1.1553527651083748,
+    "same": true,
+    "max_abs_z": 1.1234593417149023e-06,
+    "worst": "cam3.C2",
+    "active": 6152,
+    "seconds": 11.868602991104126
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.18614756539145877,
+   "norm": 15.3530229816976,
+   "screen": {
+    "cost": 8208.106750494197,
+    "n_fail": 0,
+    "rms": 1.1550833789120933,
+    "iters": 25,
+    "max_abs_z": 0.02656806285627908,
+    "worst": "cam3.logf",
+    "seconds": 3.480304002761841
+   },
+   "from_screen": {
+    "rms": 1.1553527651178073,
+    "same": true,
+    "max_abs_z": 4.67187155996876e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 11.454252481460571
+   },
+   "from_draw": {
+    "rms": 1.1553527650934234,
+    "same": true,
+    "max_abs_z": 1.5051915215914662e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 12.601593255996704
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.17426298145726798,
+   "norm": 15.748962856364532,
+   "screen": {
+    "cost": 7772.315671075403,
+    "n_fail": 502,
+    "rms": 1.1728730077147036,
+    "iters": 23,
+    "max_abs_z": 4.2205626065998665,
+    "worst": "cam4.w2",
+    "seconds": 4.881742715835571
+   },
+   "from_screen": {
+    "rms": 1.175454790289557,
+    "same": false,
+    "max_abs_z": 4.220055949021031,
+    "worst": "cam4.w2",
+    "active": 5574,
+    "seconds": 24.660377502441406
+   },
+   "from_draw": {
+    "rms": 1.1727732602565484,
+    "same": false,
+    "max_abs_z": 4.2204686122,
+    "worst": "cam4.w2",
+    "active": 5577,
+    "seconds": 24.743755340576172
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.1733744274181303,
+   "norm": 17.582722768002448,
+   "screen": {
+    "cost": 8208.106750494166,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 24,
+    "max_abs_z": 0.026567902422957066,
+    "worst": "cam3.logf",
+    "seconds": 2.818418025970459
+   },
+   "from_screen": {
+    "rms": 1.1553527651000015,
+    "same": true,
+    "max_abs_z": 7.100240049073012e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 9.456708669662476
+   },
+   "from_draw": {
+    "rms": 1.155352765112654,
+    "same": true,
+    "max_abs_z": 7.132754651844836e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 11.683686256408691
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.2175351293718368,
+   "norm": 14.379461330590622,
+   "screen": {
+    "cost": 8020.482843873209,
+    "n_fail": 126,
+    "rms": 1.1536808755202583,
+    "iters": 17,
+    "max_abs_z": 4.1553860531376055,
+    "worst": "cam3.w1",
+    "seconds": 3.2102251052856445
+   },
+   "from_screen": {
+    "rms": 1.157689156443019,
+    "same": false,
+    "max_abs_z": 4.136434021248978,
+    "worst": "cam3.w1",
+    "active": 6026,
+    "seconds": 41.06548810005188
+   },
+   "from_draw": {
+    "rms": 1.1557044488356092,
+    "same": false,
+    "max_abs_z": 4.139610485568806,
+    "worst": "cam3.w1",
+    "active": 6026,
+    "seconds": 18.143601655960083
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.4039359869068886,
+   "norm": 18.370652159581336,
+   "screen": {
+    "cost": 5030.228254726588,
+    "n_fail": 2988,
+    "rms": 1.260885378975762,
+    "iters": 20,
+    "max_abs_z": 7.6448483807172165,
+    "worst": "cam4.logf",
+    "seconds": 4.7504823207855225
+   },
+   "from_screen": {
+    "rms": 1.3456574004620798,
+    "same": false,
+    "max_abs_z": 7.644855812514057,
+    "worst": "cam4.logf",
+    "active": 3036,
+    "seconds": 17.60825204849243
+   },
+   "from_draw": {
+    "rms": 1.2657505194036942,
+    "same": false,
+    "max_abs_z": 7.645068235219239,
+    "worst": "cam4.logf",
+    "active": 3030,
+    "seconds": 15.853555679321289
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.17007336161115502,
+   "norm": 15.79625341770749,
+   "screen": {
+    "cost": 9117.648072428257,
+    "n_fail": 742,
+    "rms": 1.2982035128948268,
+    "iters": 18,
+    "max_abs_z": 7.301154313500298,
+    "worst": "win1.a",
+    "seconds": 3.700756311416626
+   },
+   "from_screen": {
+    "rms": 1.2953123920194032,
+    "same": false,
+    "max_abs_z": 7.306239456328539,
+    "worst": "win1.a",
+    "active": 5291,
+    "seconds": 21.714425086975098
+   },
+   "from_draw": {
+    "rms": 1.2943145056349337,
+    "same": false,
+    "max_abs_z": 7.303283050193844,
+    "worst": "win1.a",
+    "active": 5297,
+    "seconds": 27.259133338928223
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": -0.06253574582725313,
+   "norm": 15.256289514092867,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 24,
+    "max_abs_z": 0.026567954747677525,
+    "worst": "cam3.logf",
+    "seconds": 3.338663339614868
+   },
+   "from_screen": {
+    "rms": 1.1553527651164222,
+    "same": true,
+    "max_abs_z": 2.783629366680827e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.125006675720215
+   },
+   "from_draw": {
+    "rms": 1.1553527650934377,
+    "same": true,
+    "max_abs_z": 1.249119546535897e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.274810314178467
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.4322197407298395,
+   "norm": 14.091971320838987,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 21,
+    "max_abs_z": 0.026567916566267682,
+    "worst": "cam3.logf",
+    "seconds": 2.8497984409332275
+   },
+   "from_screen": {
+    "rms": 1.1553527650916595,
+    "same": true,
+    "max_abs_z": 1.5300563363289387e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.627228260040283
+   },
+   "from_draw": {
+    "rms": 1.1553527650999678,
+    "same": true,
+    "max_abs_z": 4.134373972396925e-07,
+    "worst": "win1.b",
+    "active": 6152,
+    "seconds": 9.410502672195435
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": -0.026872019673938735,
+   "norm": 16.000701180326892,
+   "screen": {
+    "cost": 8208.106750494162,
+    "n_fail": 0,
+    "rms": 1.155083378912091,
+    "iters": 24,
+    "max_abs_z": 0.02656804681967966,
+    "worst": "cam3.logf",
+    "seconds": 3.3546440601348877
+   },
+   "from_screen": {
+    "rms": 1.155352765096271,
+    "same": true,
+    "max_abs_z": 1.24120079475305e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.482246160507202
+   },
+   "from_draw": {
+    "rms": 1.1553527651131068,
+    "same": true,
+    "max_abs_z": 7.150927095343981e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.147517442703247
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 3.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.1313443320434107,
+   "norm": 15.911616513456806,
+   "screen": {
+    "cost": 9086.242202377634,
+    "n_fail": 90,
+    "rms": 1.224289679688495,
+    "iters": 26,
+    "max_abs_z": 7.041478612659241,
+    "worst": "cam4.C2",
+    "seconds": 5.7545599937438965
+   },
+   "from_screen": {
+    "rms": 1.2472860454431218,
+    "same": false,
+    "max_abs_z": 7.041487446363177,
+    "worst": "cam4.C2",
+    "active": 6046,
+    "seconds": 26.449164152145386
+   },
+   "from_draw": {
+    "rms": 1.2308752642422256,
+    "same": false,
+    "max_abs_z": 7.04141950848873,
+    "worst": "cam4.C2",
+    "active": 6044,
+    "seconds": 27.11311435699463
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": 0.1473108796399853,
+   "norm": 23.720087235434697,
+   "screen": {
+    "cost": 9551.423828383906,
+    "n_fail": 2294,
+    "rms": 1.5734499995501843,
+    "iters": 24,
+    "max_abs_z": 11.255930312629586,
+    "worst": "cam3.w1",
+    "seconds": 4.370010137557983
+   },
+   "from_screen": {
+    "rms": 1.5898089131439919,
+    "same": false,
+    "max_abs_z": 11.246660957012256,
+    "worst": "cam3.w1",
+    "active": 3765,
+    "seconds": 16.80190110206604
+   },
+   "from_draw": {
+    "rms": 1.642516973150858,
+    "same": false,
+    "max_abs_z": 11.281602713964135,
+    "worst": "cam3.w1",
+    "active": 3750,
+    "seconds": 19.799728870391846
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.23707986278562598,
+   "norm": 22.586634640167823,
+   "screen": {
+    "cost": 8224.2179783952,
+    "n_fail": 0,
+    "rms": 1.1562164470508751,
+    "iters": 36,
+    "max_abs_z": 3.7900364961724353,
+    "worst": "cam4.C3",
+    "seconds": 5.125621318817139
+   },
+   "from_screen": {
+    "rms": 1.1705982705233746,
+    "same": false,
+    "max_abs_z": 3.772915634500301,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.675832748413086
+   },
+   "from_draw": {
+    "rms": 1.1565550706439096,
+    "same": false,
+    "max_abs_z": 3.7888753827459336,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 15.988366603851318
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.27902665713510694,
+   "norm": 17.67777263787065,
+   "screen": {
+    "cost": 7480.196687605777,
+    "n_fail": 444,
+    "rms": 1.1447602123891567,
+    "iters": 18,
+    "max_abs_z": 6.137063976516619,
+    "worst": "cam2.w3",
+    "seconds": 4.316748857498169
+   },
+   "from_screen": {
+    "rms": 1.5521304211120328,
+    "same": false,
+    "max_abs_z": 6.060718347839649,
+    "worst": "cam2.w3",
+    "active": 5695,
+    "seconds": 52.01318049430847
+   },
+   "from_draw": {
+    "rms": 1.1447826859606987,
+    "same": false,
+    "max_abs_z": 6.137818573089886,
+    "worst": "cam2.w3",
+    "active": 5708,
+    "seconds": 6.6820104122161865
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.41987616444008546,
+   "norm": 20.951718375899272,
+   "screen": {
+    "cost": 8755.44030113213,
+    "n_fail": 952,
+    "rms": 1.2975895034441696,
+    "iters": 17,
+    "max_abs_z": 6.604778216448509,
+    "worst": "cam3.w2",
+    "seconds": 4.000794887542725
+   },
+   "from_screen": {
+    "rms": 1.3060249042506045,
+    "same": false,
+    "max_abs_z": 6.606004162659688,
+    "worst": "cam3.w2",
+    "active": 5085,
+    "seconds": 19.906222343444824
+   },
+   "from_draw": {
+    "rms": 1.301292379054483,
+    "same": false,
+    "max_abs_z": 6.604064616675737,
+    "worst": "cam3.w2",
+    "active": 5081,
+    "seconds": 21.00738286972046
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.12020675767828964,
+   "norm": 21.49177384304613,
+   "screen": {
+    "cost": 7178.239453228288,
+    "n_fail": 2454,
+    "rms": 1.3932386614942094,
+    "iters": 27,
+    "max_abs_z": 11.178926149677945,
+    "worst": "cam3.logf",
+    "seconds": 5.331132411956787
+   },
+   "from_screen": {
+    "rms": 1.4065473128407524,
+    "same": false,
+    "max_abs_z": 11.178864919363798,
+    "worst": "cam3.logf",
+    "active": 3542,
+    "seconds": 16.25214171409607
+   },
+   "from_draw": {
+    "rms": 1.4150052553927068,
+    "same": false,
+    "max_abs_z": 11.182337494856238,
+    "worst": "cam3.logf",
+    "active": 3552,
+    "seconds": 14.843583106994629
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.24170720954861594,
+   "norm": 17.481896117913415,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 29,
+    "max_abs_z": 0.026567957778237512,
+    "worst": "cam3.logf",
+    "seconds": 3.603961944580078
+   },
+   "from_screen": {
+    "rms": 1.1553527651186146,
+    "same": true,
+    "max_abs_z": 6.078696701717146e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.57263731956482
+   },
+   "from_draw": {
+    "rms": 1.1553527651031477,
+    "same": true,
+    "max_abs_z": 7.055358298545768e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.606051921844482
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.16337933968061258,
+   "norm": 19.494644292031435,
+   "screen": {
+    "cost": 10015.13010463113,
+    "n_fail": 60,
+    "rms": 1.2821780872835233,
+    "iters": 19,
+    "max_abs_z": 6.192830927617642,
+    "worst": "cam4.logf",
+    "seconds": 4.26319432258606
+   },
+   "from_screen": {
+    "rms": 1.2389196893729375,
+    "same": false,
+    "max_abs_z": 6.1945253362854515,
+    "worst": "cam4.logf",
+    "active": 6066,
+    "seconds": 27.389655113220215
+   },
+   "from_draw": {
+    "rms": 1.2797740856519213,
+    "same": false,
+    "max_abs_z": 6.192835936867631,
+    "worst": "cam4.logf",
+    "active": 6068,
+    "seconds": 28.670281410217285
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.23461194723727397,
+   "norm": 22.699009730743366,
+   "screen": {
+    "cost": 8208.10675049414,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 35,
+    "max_abs_z": 0.02656783882948368,
+    "worst": "cam3.logf",
+    "seconds": 3.776496410369873
+   },
+   "from_screen": {
+    "rms": 1.1553527650960649,
+    "same": true,
+    "max_abs_z": 1.1784360873731698e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.82645583152771
+   },
+   "from_draw": {
+    "rms": 1.1553527650915651,
+    "same": true,
+    "max_abs_z": 2.0185527491575736e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 13.261438608169556
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.09494018049766198,
+   "norm": 24.58722151534639,
+   "screen": {
+    "cost": 8197.180920971325,
+    "n_fail": 1576,
+    "rms": 1.3384102452080973,
+    "iters": 18,
+    "max_abs_z": 6.726092371728006,
+    "worst": "cam3.w2",
+    "seconds": 4.149592876434326
+   },
+   "from_screen": {
+    "rms": 1.3299806564062238,
+    "same": false,
+    "max_abs_z": 6.726049128233425,
+    "worst": "cam3.w2",
+    "active": 4439,
+    "seconds": 18.151028871536255
+   },
+   "from_draw": {
+    "rms": 1.3295141670612751,
+    "same": false,
+    "max_abs_z": 6.7262925967749645,
+    "worst": "cam3.w2",
+    "active": 4439,
+    "seconds": 20.250861406326294
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.10876378600640471,
+   "norm": 21.99192881923349,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 26,
+    "max_abs_z": 0.026567864021163033,
+    "worst": "cam3.logf",
+    "seconds": 3.178030014038086
+   },
+   "from_screen": {
+    "rms": 1.155352765115725,
+    "same": true,
+    "max_abs_z": 3.346234623710318e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 10.583060264587402
+   },
+   "from_draw": {
+    "rms": 1.1553527651127111,
+    "same": true,
+    "max_abs_z": 7.937969776303692e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.573981761932373
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.24819675385527837,
+   "norm": 20.470697308930134,
+   "screen": {
+    "cost": 8208.106750494155,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 27,
+    "max_abs_z": 0.02656795378096714,
+    "worst": "cam3.logf",
+    "seconds": 3.4121956825256348
+   },
+   "from_screen": {
+    "rms": 1.1553527651122097,
+    "same": true,
+    "max_abs_z": 1.8914804701561207e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.563766241073608
+   },
+   "from_draw": {
+    "rms": 1.1553527651096351,
+    "same": true,
+    "max_abs_z": 7.412180880794278e-07,
+    "worst": "cam3.C2",
+    "active": 6152,
+    "seconds": 11.709820032119751
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.23235064194302396,
+   "norm": 20.998617141819377,
+   "screen": {
+    "cost": 9818.947686248308,
+    "n_fail": 728,
+    "rms": 1.345465705900282,
+    "iters": 20,
+    "max_abs_z": 5.497390498577254,
+    "worst": "win1.a",
+    "seconds": 4.21732497215271
+   },
+   "from_screen": {
+    "rms": 1.3497191267317172,
+    "same": false,
+    "max_abs_z": 5.498623668926785,
+    "worst": "win1.a",
+    "active": 5350,
+    "seconds": 23.05278778076172
+   },
+   "from_draw": {
+    "rms": 1.3444175340417142,
+    "same": false,
+    "max_abs_z": 5.501803207313954,
+    "worst": "win1.a",
+    "active": 5351,
+    "seconds": 21.59025740623474
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.23116590322417374,
+   "norm": 23.4436303573366,
+   "screen": {
+    "cost": 8208.106750494153,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 27,
+    "max_abs_z": 0.026567902399390216,
+    "worst": "cam3.logf",
+    "seconds": 3.7287464141845703
+   },
+   "from_screen": {
+    "rms": 1.1553527651154283,
+    "same": true,
+    "max_abs_z": 8.275984735925133e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 9.296865463256836
+   },
+   "from_draw": {
+    "rms": 1.1553527651001727,
+    "same": true,
+    "max_abs_z": 3.0454922605338165e-06,
+    "worst": "cam3.C2",
+    "active": 6152,
+    "seconds": 11.943254947662354
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.2900468391624491,
+   "norm": 19.172615107454163,
+   "screen": {
+    "cost": 7965.754979520143,
+    "n_fail": 186,
+    "rms": 1.155505048648535,
+    "iters": 19,
+    "max_abs_z": 4.8796347400951685,
+    "worst": "win2.delta",
+    "seconds": 4.1720781326293945
+   },
+   "from_screen": {
+    "rms": 1.1818449010487964,
+    "same": false,
+    "max_abs_z": 4.810344215861971,
+    "worst": "cam3.logf",
+    "active": 5958,
+    "seconds": 29.696261405944824
+   },
+   "from_draw": {
+    "rms": 1.1558073699918971,
+    "same": false,
+    "max_abs_z": 4.8616802571597155,
+    "worst": "win2.delta",
+    "active": 5966,
+    "seconds": 8.590762376785278
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.5385813158758515,
+   "norm": 24.494202879441783,
+   "screen": {
+    "cost": 9854.965858931282,
+    "n_fail": 3076,
+    "rms": 1.789923197142315,
+    "iters": 1,
+    "max_abs_z": 9.244667845615167,
+    "worst": "cam4.logf",
+    "seconds": 0.16167140007019043
+   },
+   "from_screen": {
+    "rms": 1.6704124140230534,
+    "same": false,
+    "max_abs_z": 9.244667845615167,
+    "worst": "cam4.logf",
+    "active": 3028,
+    "seconds": 4.532837867736816
+   },
+   "from_draw": {
+    "rms": 1.6704124140230534,
+    "same": false,
+    "max_abs_z": 9.244667845615167,
+    "worst": "cam4.logf",
+    "active": 3028,
+    "seconds": 4.095419645309448
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.2267644821482067,
+   "norm": 21.061671223609988,
+   "screen": {
+    "cost": 9920.84618370013,
+    "n_fail": 1090,
+    "rms": 1.3999524589560342,
+    "iters": 16,
+    "max_abs_z": 9.861914796232702,
+    "worst": "win1.a",
+    "seconds": 3.6967880725860596
+   },
+   "from_screen": {
+    "rms": 1.2973799602490579,
+    "same": false,
+    "max_abs_z": 10.07634477928876,
+    "worst": "win1.a",
+    "active": 4896,
+    "seconds": 27.032780170440674
+   },
+   "from_draw": {
+    "rms": 1.420364214789092,
+    "same": false,
+    "max_abs_z": 9.838970286646507,
+    "worst": "win1.a",
+    "active": 4953,
+    "seconds": 23.023014307022095
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": -0.0833809944363375,
+   "norm": 20.34171935212382,
+   "screen": {
+    "cost": 8208.106750494186,
+    "n_fail": 0,
+    "rms": 1.1550833789120927,
+    "iters": 28,
+    "max_abs_z": 0.026567964082411955,
+    "worst": "cam3.logf",
+    "seconds": 3.6603360176086426
+   },
+   "from_screen": {
+    "rms": 1.1553527651081383,
+    "same": true,
+    "max_abs_z": 7.544544235458078e-07,
+    "worst": "cam1.logf",
+    "active": 6152,
+    "seconds": 9.938616514205933
+   },
+   "from_draw": {
+    "rms": 1.1553527650923792,
+    "same": true,
+    "max_abs_z": 8.165444783955107e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.36882209777832
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.576292987639786,
+   "norm": 18.789295094451983,
+   "screen": {
+    "cost": 8208.106750494127,
+    "n_fail": 0,
+    "rms": 1.1550833789120885,
+    "iters": 23,
+    "max_abs_z": 0.026567886310277698,
+    "worst": "cam3.logf",
+    "seconds": 2.7860970497131348
+   },
+   "from_screen": {
+    "rms": 1.1553527651188509,
+    "same": true,
+    "max_abs_z": 5.682925230284702e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 8.72012972831726
+   },
+   "from_draw": {
+    "rms": 1.155352765085953,
+    "same": true,
+    "max_abs_z": 1.652104519914035e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.88921594619751
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": -0.03582935956525164,
+   "norm": 21.334268240435854,
+   "screen": {
+    "cost": 8208.106750494147,
+    "n_fail": 0,
+    "rms": 1.1550833789120898,
+    "iters": 25,
+    "max_abs_z": 0.026568175196282455,
+    "worst": "cam3.logf",
+    "seconds": 2.942450761795044
+   },
+   "from_screen": {
+    "rms": 1.155352765116593,
+    "same": true,
+    "max_abs_z": 7.039688807273741e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 8.731198787689209
+   },
+   "from_draw": {
+    "rms": 1.1553527650938968,
+    "same": true,
+    "max_abs_z": 2.3939793414568364e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.964949131011963
+   }
+  },
+  {
+   "centre": "answer",
+   "scale": 4.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.17512577605788093,
+   "norm": 21.215488684609074,
+   "screen": {
+    "cost": 11151.015821939476,
+    "n_fail": 126,
+    "rms": 1.3603249146942487,
+    "iters": 17,
+    "max_abs_z": 9.19509564798345,
+    "worst": "cam4.w3",
+    "seconds": 3.190852642059326
+   },
+   "from_screen": {
+    "rms": 1.36158601388778,
+    "same": false,
+    "max_abs_z": 9.194989653537414,
+    "worst": "cam4.w3",
+    "active": 5988,
+    "seconds": 25.486799001693726
+   },
+   "from_draw": {
+    "rms": 1.3560240457847421,
+    "same": false,
+    "max_abs_z": 9.195059415585654,
+    "worst": "cam4.w3",
+    "active": 5995,
+    "seconds": 27.770736694335938
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": -0.005089486379628811,
+   "norm": 5.930021808858674,
+   "screen": {
+    "cost": 7908.590024022459,
+    "n_fail": 418,
+    "rms": 1.1744125592988464,
+    "iters": 21,
+    "max_abs_z": 5.933496215124519,
+    "worst": "cam3.w1",
+    "seconds": 4.8944337368011475
+   },
+   "from_screen": {
+    "rms": 1.187277023418782,
+    "same": false,
+    "max_abs_z": 5.928243081389634,
+    "worst": "cam3.w1",
+    "active": 5657,
+    "seconds": 29.88072633743286
+   },
+   "from_draw": {
+    "rms": 1.1738366523301238,
+    "same": false,
+    "max_abs_z": 5.933610791627964,
+    "worst": "cam3.w1",
+    "active": 5652,
+    "seconds": 24.789388179779053
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.08181775526237671,
+   "norm": 5.646658660041956,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 17,
+    "max_abs_z": 0.026567822365607043,
+    "worst": "cam3.logf",
+    "seconds": 2.630673408508301
+   },
+   "from_screen": {
+    "rms": 1.1553527650994002,
+    "same": true,
+    "max_abs_z": 8.733388873023228e-07,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.540381669998169
+   },
+   "from_draw": {
+    "rms": 1.1553527651155158,
+    "same": true,
+    "max_abs_z": 1.104859369347146e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.905308485031128
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.07095897697002974,
+   "norm": 4.419443159467662,
+   "screen": {
+    "cost": 8084.990713664917,
+    "n_fail": 78,
+    "rms": 1.1537251739593275,
+    "iters": 19,
+    "max_abs_z": 3.5409749958051755,
+    "worst": "cam4.C1",
+    "seconds": 4.1901023387908936
+   },
+   "from_screen": {
+    "rms": 1.154436063274959,
+    "same": false,
+    "max_abs_z": 3.5426416441496653,
+    "worst": "cam4.C1",
+    "active": 6072,
+    "seconds": 9.748660802841187
+   },
+   "from_draw": {
+    "rms": 1.1539666141186657,
+    "same": false,
+    "max_abs_z": 3.5411045248469675,
+    "worst": "cam4.C1",
+    "active": 6074,
+    "seconds": 9.387706756591797
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.09659925464259919,
+   "norm": 5.237929593974818,
+   "screen": {
+    "cost": 8545.348075801141,
+    "n_fail": 160,
+    "rms": 1.194205250731502,
+    "iters": 20,
+    "max_abs_z": 4.2071536213170715,
+    "worst": "cam3.C1",
+    "seconds": 4.086182355880737
+   },
+   "from_screen": {
+    "rms": 1.1962337001114052,
+    "same": false,
+    "max_abs_z": 4.206842750898675,
+    "worst": "cam3.C1",
+    "active": 5947,
+    "seconds": 27.45880436897278
+   },
+   "from_draw": {
+    "rms": 1.1939622735256168,
+    "same": false,
+    "max_abs_z": 4.207156327259848,
+    "worst": "cam3.C1",
+    "active": 5949,
+    "seconds": 27.196029663085938
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.039765575492714506,
+   "norm": 5.372943460761532,
+   "screen": {
+    "cost": 7395.638968426201,
+    "n_fail": 448,
+    "rms": 1.138670561066077,
+    "iters": 18,
+    "max_abs_z": 5.566708094435374,
+    "worst": "cam3.logf",
+    "seconds": 4.006377220153809
+   },
+   "from_screen": {
+    "rms": 1.1388402033634994,
+    "same": false,
+    "max_abs_z": 5.567452424373711,
+    "worst": "cam3.logf",
+    "active": 5704,
+    "seconds": 23.93975043296814
+   },
+   "from_draw": {
+    "rms": 1.1387610607923104,
+    "same": false,
+    "max_abs_z": 5.566790853922738,
+    "worst": "cam3.logf",
+    "active": 5704,
+    "seconds": 11.34174919128418
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.08243219905871621,
+   "norm": 4.370474029478354,
+   "screen": {
+    "cost": 8208.106750494137,
+    "n_fail": 0,
+    "rms": 1.1550833789120891,
+    "iters": 22,
+    "max_abs_z": 0.026567907523984163,
+    "worst": "cam3.logf",
+    "seconds": 2.689763069152832
+   },
+   "from_screen": {
+    "rms": 1.155352765099076,
+    "same": true,
+    "max_abs_z": 7.530862603836106e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.846660375595093
+   },
+   "from_draw": {
+    "rms": 1.155352765110245,
+    "same": true,
+    "max_abs_z": 7.134654990654506e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.14020562171936
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.029656791746295375,
+   "norm": 4.873661073007859,
+   "screen": {
+    "cost": 8254.817329405567,
+    "n_fail": 4,
+    "rms": 1.1587421478592073,
+    "iters": 19,
+    "max_abs_z": 3.622553075733831,
+    "worst": "cam4.logf",
+    "seconds": 4.263930797576904
+   },
+   "from_screen": {
+    "rms": 1.1585911623476612,
+    "same": false,
+    "max_abs_z": 3.6047657109611295,
+    "worst": "cam4.logf",
+    "active": 6146,
+    "seconds": 11.650321960449219
+   },
+   "from_draw": {
+    "rms": 1.17194579209982,
+    "same": false,
+    "max_abs_z": 3.6149426017668866,
+    "worst": "cam4.logf",
+    "active": 6148,
+    "seconds": 29.36946177482605
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.06895145305630715,
+   "norm": 5.674752432685842,
+   "screen": {
+    "cost": 8208.106750494146,
+    "n_fail": 0,
+    "rms": 1.1550833789120898,
+    "iters": 21,
+    "max_abs_z": 0.026567924182073818,
+    "worst": "cam3.logf",
+    "seconds": 2.991461992263794
+   },
+   "from_screen": {
+    "rms": 1.1553527650923696,
+    "same": true,
+    "max_abs_z": 1.0272476503204162e-06,
+    "worst": "win2.b",
+    "active": 6152,
+    "seconds": 10.341517925262451
+   },
+   "from_draw": {
+    "rms": 1.1553527651140434,
+    "same": true,
+    "max_abs_z": 7.164260754517853e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.425002574920654
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.026425813874050467,
+   "norm": 6.146805378836597,
+   "screen": {
+    "cost": 7641.576262290906,
+    "n_fail": 282,
+    "rms": 1.1409652704008135,
+    "iters": 20,
+    "max_abs_z": 4.037716001761291,
+    "worst": "cam3.logf",
+    "seconds": 4.427969455718994
+   },
+   "from_screen": {
+    "rms": 1.1562949022692215,
+    "same": false,
+    "max_abs_z": 4.039330619896539,
+    "worst": "cam3.logf",
+    "active": 5864,
+    "seconds": 17.806024312973022
+   },
+   "from_draw": {
+    "rms": 1.141313550226536,
+    "same": false,
+    "max_abs_z": 4.037922764470533,
+    "worst": "cam3.logf",
+    "active": 5870,
+    "seconds": 10.727133512496948
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.004499309493234175,
+   "norm": 5.497982204808372,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 21,
+    "max_abs_z": 0.026568063629075295,
+    "worst": "cam3.logf",
+    "seconds": 2.9651455879211426
+   },
+   "from_screen": {
+    "rms": 1.1553527650834046,
+    "same": true,
+    "max_abs_z": 4.007699036379266e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.674603700637817
+   },
+   "from_draw": {
+    "rms": 1.1553527650896984,
+    "same": true,
+    "max_abs_z": 1.5064539598234628e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 11.523983001708984
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.06209354928525302,
+   "norm": 5.117674327232534,
+   "screen": {
+    "cost": 8208.106750494153,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 20,
+    "max_abs_z": 0.026568006090787532,
+    "worst": "cam3.logf",
+    "seconds": 2.4400036334991455
+   },
+   "from_screen": {
+    "rms": 1.1553527651094622,
+    "same": true,
+    "max_abs_z": 3.26102083927406e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.66853642463684
+   },
+   "from_draw": {
+    "rms": 1.1553527650335613,
+    "same": true,
+    "max_abs_z": 5.5707058421143525e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.679136991500854
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.040752478751229955,
+   "norm": 5.249654285454844,
+   "screen": {
+    "cost": 7974.458763532306,
+    "n_fail": 124,
+    "rms": 1.150175166510872,
+    "iters": 10,
+    "max_abs_z": 3.379139849625429,
+    "worst": "cam3.w1",
+    "seconds": 2.2513949871063232
+   },
+   "from_screen": {
+    "rms": 1.1534147344937948,
+    "same": false,
+    "max_abs_z": 2.632833326240317,
+    "worst": "cam3.w1",
+    "active": 6026,
+    "seconds": 13.80782699584961
+   },
+   "from_draw": {
+    "rms": 1.150459981184395,
+    "same": false,
+    "max_abs_z": 3.365112196952675,
+    "worst": "cam3.w1",
+    "active": 6028,
+    "seconds": 11.302132606506348
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.06783865929129945,
+   "norm": 5.86090758933415,
+   "screen": {
+    "cost": 8208.10675049415,
+    "n_fail": 0,
+    "rms": 1.15508337891209,
+    "iters": 20,
+    "max_abs_z": 0.026567900611597202,
+    "worst": "cam3.logf",
+    "seconds": 2.634763717651367
+   },
+   "from_screen": {
+    "rms": 1.1553527651160522,
+    "same": true,
+    "max_abs_z": 4.046922503419471e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 8.646870613098145
+   },
+   "from_draw": {
+    "rms": 1.1553527650882416,
+    "same": true,
+    "max_abs_z": 1.5891011089275072e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.619418144226074
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.0605348194586927,
+   "norm": 4.793153776863541,
+   "screen": {
+    "cost": 8215.725159731308,
+    "n_fail": 28,
+    "rms": 1.158258137781888,
+    "iters": 23,
+    "max_abs_z": 4.150989826678672,
+    "worst": "cam3.w1",
+    "seconds": 5.100130081176758
+   },
+   "from_screen": {
+    "rms": 1.158716630945398,
+    "same": false,
+    "max_abs_z": 4.146510952468585,
+    "worst": "cam3.w1",
+    "active": 6124,
+    "seconds": 8.988571166992188
+   },
+   "from_draw": {
+    "rms": 1.1585273101746212,
+    "same": false,
+    "max_abs_z": 4.146988255411192,
+    "worst": "cam3.w1",
+    "active": 6124,
+    "seconds": 12.723891735076904
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.10782900765613562,
+   "norm": 6.123550719860446,
+   "screen": {
+    "cost": 7063.217024045117,
+    "n_fail": 810,
+    "rms": 1.1498715621833564,
+    "iters": 20,
+    "max_abs_z": 4.451125195113598,
+    "worst": "cam4.logf",
+    "seconds": 3.8275647163391113
+   },
+   "from_screen": {
+    "rms": 1.1780110972785276,
+    "same": false,
+    "max_abs_z": 4.451095947912273,
+    "worst": "cam4.logf",
+    "active": 5230,
+    "seconds": 20.855390787124634
+   },
+   "from_draw": {
+    "rms": 1.1528721258737107,
+    "same": false,
+    "max_abs_z": 4.4511076809058165,
+    "worst": "cam4.logf",
+    "active": 5236,
+    "seconds": 22.990817308425903
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.0694289431977043,
+   "norm": 5.265417805902497,
+   "screen": {
+    "cost": 8056.429162376087,
+    "n_fail": 196,
+    "rms": 1.1630381263774936,
+    "iters": 16,
+    "max_abs_z": 4.3490368829929915,
+    "worst": "cam3.C1",
+    "seconds": 3.667102813720703
+   },
+   "from_screen": {
+    "rms": 1.1910585617317164,
+    "same": false,
+    "max_abs_z": 4.349171383436295,
+    "worst": "cam3.C1",
+    "active": 5896,
+    "seconds": 23.686177968978882
+   },
+   "from_draw": {
+    "rms": 1.196555324830253,
+    "same": false,
+    "max_abs_z": 4.237975432102802,
+    "worst": "cam3.C1",
+    "active": 5943,
+    "seconds": 40.13621473312378
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": 0.0025407413834601313,
+   "norm": 5.085429838030955,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 19,
+    "max_abs_z": 0.026567976772476323,
+    "worst": "cam3.logf",
+    "seconds": 2.1916348934173584
+   },
+   "from_screen": {
+    "rms": 1.1553527650989854,
+    "same": true,
+    "max_abs_z": 1.5452739896229131e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 8.96035122871399
+   },
+   "from_draw": {
+    "rms": 1.1553527650996807,
+    "same": true,
+    "max_abs_z": 1.067851780738346e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.310301065444946
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.1436874883205489,
+   "norm": 4.697323773612996,
+   "screen": {
+    "cost": 8208.10675049415,
+    "n_fail": 0,
+    "rms": 1.15508337891209,
+    "iters": 20,
+    "max_abs_z": 0.02656789017822927,
+    "worst": "cam3.logf",
+    "seconds": 2.83943510055542
+   },
+   "from_screen": {
+    "rms": 1.1553527651140076,
+    "same": true,
+    "max_abs_z": 7.260152728887851e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.462048530578613
+   },
+   "from_draw": {
+    "rms": 1.1553527651142224,
+    "same": true,
+    "max_abs_z": 7.265498555827658e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.417230367660522
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": 0.007620524886732616,
+   "norm": 5.3335670601089635,
+   "screen": {
+    "cost": 8208.106750494131,
+    "n_fail": 0,
+    "rms": 1.1550833789120887,
+    "iters": 23,
+    "max_abs_z": 0.026567887839091555,
+    "worst": "cam3.logf",
+    "seconds": 3.3147099018096924
+   },
+   "from_screen": {
+    "rms": 1.1553527651145634,
+    "same": true,
+    "max_abs_z": 3.1798365900335185e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 10.345025300979614
+   },
+   "from_draw": {
+    "rms": 1.1553527651041922,
+    "same": true,
+    "max_abs_z": 1.2257824612382917e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.812151908874512
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 1.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.05621614808319086,
+   "norm": 5.3038721711522685,
+   "screen": {
+    "cost": 8258.98150594511,
+    "n_fail": 18,
+    "rms": 1.1603562904948435,
+    "iters": 11,
+    "max_abs_z": 4.77285814907336,
+    "worst": "cam3.w1",
+    "seconds": 2.643397569656372
+   },
+   "from_screen": {
+    "rms": 1.211037581615132,
+    "same": false,
+    "max_abs_z": 4.708391434425519,
+    "worst": "cam3.w1",
+    "active": 6113,
+    "seconds": 38.72807216644287
+   },
+   "from_draw": {
+    "rms": 1.160586662426496,
+    "same": false,
+    "max_abs_z": 4.763926569634368,
+    "worst": "cam3.w1",
+    "active": 6134,
+    "seconds": 10.356233596801758
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": -0.010178972759257622,
+   "norm": 11.860043617717348,
+   "screen": {
+    "cost": 7236.410519961588,
+    "n_fail": 1010,
+    "rms": 1.186302817884969,
+    "iters": 19,
+    "max_abs_z": 7.847304283136551,
+    "worst": "cam3.w1",
+    "seconds": 4.501055479049683
+   },
+   "from_screen": {
+    "rms": 1.1878792777171496,
+    "same": false,
+    "max_abs_z": 7.833649428952511,
+    "worst": "cam3.w1",
+    "active": 5014,
+    "seconds": 26.064069032669067
+   },
+   "from_draw": {
+    "rms": 1.192563364662457,
+    "same": false,
+    "max_abs_z": 7.848145527259846,
+    "worst": "cam3.w1",
+    "active": 5014,
+    "seconds": 21.863286018371582
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.16363551052475342,
+   "norm": 11.293317320083911,
+   "screen": {
+    "cost": 8208.106750494178,
+    "n_fail": 0,
+    "rms": 1.155083378912092,
+    "iters": 22,
+    "max_abs_z": 0.02656783607527913,
+    "worst": "cam3.logf",
+    "seconds": 2.537334442138672
+   },
+   "from_screen": {
+    "rms": 1.155352765101562,
+    "same": true,
+    "max_abs_z": 9.273969841828784e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 8.641772508621216
+   },
+   "from_draw": {
+    "rms": 1.1553527651129634,
+    "same": true,
+    "max_abs_z": 7.215896351140169e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.671671867370605
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.1419179539400595,
+   "norm": 8.838886318935325,
+   "screen": {
+    "cost": 7898.320479078222,
+    "n_fail": 178,
+    "rms": 1.14983299460405,
+    "iters": 20,
+    "max_abs_z": 4.217384327643289,
+    "worst": "cam4.C1",
+    "seconds": 4.509580612182617
+   },
+   "from_screen": {
+    "rms": 1.1496559156616433,
+    "same": false,
+    "max_abs_z": 4.219870728371364,
+    "worst": "cam4.C1",
+    "active": 5972,
+    "seconds": 10.32036304473877
+   },
+   "from_draw": {
+    "rms": 1.1668974628029942,
+    "same": false,
+    "max_abs_z": 4.217597125507858,
+    "worst": "cam4.C1",
+    "active": 5970,
+    "seconds": 17.18004536628723
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.19319850928519838,
+   "norm": 10.475859187949636,
+   "screen": {
+    "cost": 7715.656587317184,
+    "n_fail": 396,
+    "rms": 1.1577800241475094,
+    "iters": 18,
+    "max_abs_z": 4.478368603451413,
+    "worst": "cam3.C1",
+    "seconds": 4.227746963500977
+   },
+   "from_screen": {
+    "rms": 1.1861638181304464,
+    "same": false,
+    "max_abs_z": 4.4780688929670855,
+    "worst": "cam3.C1",
+    "active": 5680,
+    "seconds": 24.192248344421387
+   },
+   "from_draw": {
+    "rms": 1.1612705466957218,
+    "same": false,
+    "max_abs_z": 4.4784060819785685,
+    "worst": "cam3.C1",
+    "active": 5684,
+    "seconds": 26.97395968437195
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.07953115098542901,
+   "norm": 10.745886921523065,
+   "screen": {
+    "cost": 6388.972482120653,
+    "n_fail": 1082,
+    "rms": 1.122565082005229,
+    "iters": 23,
+    "max_abs_z": 7.424317737024738,
+    "worst": "cam3.logf",
+    "seconds": 5.074427604675293
+   },
+   "from_screen": {
+    "rms": 1.1723322148811441,
+    "same": false,
+    "max_abs_z": 7.423370698581526,
+    "worst": "cam3.logf",
+    "active": 4932,
+    "seconds": 22.9463472366333
+   },
+   "from_draw": {
+    "rms": 1.1274176802238987,
+    "same": false,
+    "max_abs_z": 7.4271105417342005,
+    "worst": "cam3.logf",
+    "active": 4956,
+    "seconds": 20.685494661331177
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.16486439811743242,
+   "norm": 8.740948058956707,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 24,
+    "max_abs_z": 0.026567927402577473,
+    "worst": "cam3.logf",
+    "seconds": 3.335587978363037
+   },
+   "from_screen": {
+    "rms": 1.1553527651089686,
+    "same": true,
+    "max_abs_z": 1.1331809232690142e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.842702865600586
+   },
+   "from_draw": {
+    "rms": 1.1553527650898563,
+    "same": true,
+    "max_abs_z": 9.63468905739525e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.461095809936523
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.05931358349259075,
+   "norm": 9.747322146015717,
+   "screen": {
+    "cost": 8229.968900609652,
+    "n_fail": 14,
+    "rms": 1.1579389295004006,
+    "iters": 19,
+    "max_abs_z": 4.388258349610165,
+    "worst": "cam4.logf",
+    "seconds": 3.5916695594787598
+   },
+   "from_screen": {
+    "rms": 1.1580334177492424,
+    "same": false,
+    "max_abs_z": 4.38621455471843,
+    "worst": "cam4.logf",
+    "active": 6138,
+    "seconds": 12.001270532608032
+   },
+   "from_draw": {
+    "rms": 1.1581292126722647,
+    "same": false,
+    "max_abs_z": 4.38537784542052,
+    "worst": "cam4.logf",
+    "active": 6138,
+    "seconds": 11.07201099395752
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.1379029061126143,
+   "norm": 11.349504865371683,
+   "screen": {
+    "cost": 8208.106750494166,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 26,
+    "max_abs_z": 0.026567850363662483,
+    "worst": "cam3.logf",
+    "seconds": 3.1340999603271484
+   },
+   "from_screen": {
+    "rms": 1.1553527651001392,
+    "same": true,
+    "max_abs_z": 7.076821689418583e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 9.58899188041687
+   },
+   "from_draw": {
+    "rms": 1.1553527651144029,
+    "same": true,
+    "max_abs_z": 7.135401521150129e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.428720235824585
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.052851627748100934,
+   "norm": 12.293610757673195,
+   "screen": {
+    "cost": 7549.939128591644,
+    "n_fail": 666,
+    "rms": 1.1731237398049053,
+    "iters": 21,
+    "max_abs_z": 4.392381917338038,
+    "worst": "cam3.logf",
+    "seconds": 3.9812257289886475
+   },
+   "from_screen": {
+    "rms": 1.1908971819688976,
+    "same": false,
+    "max_abs_z": 4.391150554225977,
+    "worst": "cam3.logf",
+    "active": 5360,
+    "seconds": 21.521281242370605
+   },
+   "from_draw": {
+    "rms": 1.174647025808049,
+    "same": false,
+    "max_abs_z": 4.393230079107792,
+    "worst": "cam3.logf",
+    "active": 5360,
+    "seconds": 24.860952138900757
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.00899861898646835,
+   "norm": 10.995964409616745,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 21,
+    "max_abs_z": 0.026568020083774097,
+    "worst": "cam3.logf",
+    "seconds": 2.833240032196045
+   },
+   "from_screen": {
+    "rms": 1.1553527650774995,
+    "same": true,
+    "max_abs_z": 2.2384675952539927e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 8.538917541503906
+   },
+   "from_draw": {
+    "rms": 1.1553527650799773,
+    "same": true,
+    "max_abs_z": 1.9940011056697214e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 9.518675088882446
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.12418709857050604,
+   "norm": 10.235348654465067,
+   "screen": {
+    "cost": 8208.10675049416,
+    "n_fail": 0,
+    "rms": 1.155083378912091,
+    "iters": 23,
+    "max_abs_z": 0.02656791553090605,
+    "worst": "cam3.logf",
+    "seconds": 3.1110117435455322
+   },
+   "from_screen": {
+    "rms": 1.1553527650758562,
+    "same": true,
+    "max_abs_z": 2.27666747264543e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 9.550121307373047
+   },
+   "from_draw": {
+    "rms": 1.155352765115386,
+    "same": true,
+    "max_abs_z": 7.167388753808905e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.829480648040771
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.08150495750245991,
+   "norm": 10.499308570909688,
+   "screen": {
+    "cost": 7631.720048003195,
+    "n_fail": 296,
+    "rms": 1.1415913815872152,
+    "iters": 22,
+    "max_abs_z": 3.3919843324527807,
+    "worst": "cam3.w1",
+    "seconds": 4.063754320144653
+   },
+   "from_screen": {
+    "rms": 1.1411889546908809,
+    "same": false,
+    "max_abs_z": 3.0813108708773296,
+    "worst": "cam3.w1",
+    "active": 5854,
+    "seconds": 9.539581537246704
+   },
+   "from_draw": {
+    "rms": 1.141771989604283,
+    "same": false,
+    "max_abs_z": 3.37050736195545,
+    "worst": "cam3.w1",
+    "active": 5856,
+    "seconds": 9.408873081207275
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.1356773185825989,
+   "norm": 11.7218151786683,
+   "screen": {
+    "cost": 8208.106750494186,
+    "n_fail": 0,
+    "rms": 1.1550833789120927,
+    "iters": 21,
+    "max_abs_z": 0.026567929516592023,
+    "worst": "cam3.logf",
+    "seconds": 3.055685043334961
+   },
+   "from_screen": {
+    "rms": 1.1553527651137523,
+    "same": true,
+    "max_abs_z": 7.146439950666166e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.252092123031616
+   },
+   "from_draw": {
+    "rms": 1.1553527651185953,
+    "same": true,
+    "max_abs_z": 6.126058924466852e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.57863450050354
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.1210696389173854,
+   "norm": 9.586307553727082,
+   "screen": {
+    "cost": 8101.105200758384,
+    "n_fail": 80,
+    "rms": 1.1550645483248263,
+    "iters": 23,
+    "max_abs_z": 4.237524446368718,
+    "worst": "cam3.w1",
+    "seconds": 4.5198938846588135
+   },
+   "from_screen": {
+    "rms": 1.1540275022279591,
+    "same": false,
+    "max_abs_z": 3.7965211556206233,
+    "worst": "cam3.w1",
+    "active": 6070,
+    "seconds": 6.952696323394775
+   },
+   "from_draw": {
+    "rms": 1.1559002201402122,
+    "same": false,
+    "max_abs_z": 4.2339818864015575,
+    "worst": "cam3.w1",
+    "active": 6072,
+    "seconds": 10.681294441223145
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.21565801531227125,
+   "norm": 12.247101439720891,
+   "screen": {
+    "cost": 6588.421318584116,
+    "n_fail": 1952,
+    "rms": 1.2524662640247153,
+    "iters": 15,
+    "max_abs_z": 6.056914086752705,
+    "worst": "cam4.logf",
+    "seconds": 3.5470409393310547
+   },
+   "from_screen": {
+    "rms": 1.1625034015147404,
+    "same": false,
+    "max_abs_z": 6.0595415854559835,
+    "worst": "cam4.logf",
+    "active": 4059,
+    "seconds": 22.64200496673584
+   },
+   "from_draw": {
+    "rms": 1.0907100605399491,
+    "same": false,
+    "max_abs_z": 6.060884756102647,
+    "worst": "cam4.logf",
+    "active": 3820,
+    "seconds": 23.968140125274658
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.1388578863954086,
+   "norm": 10.530835611804994,
+   "screen": {
+    "cost": 7936.957345581215,
+    "n_fail": 452,
+    "rms": 1.1800206172434071,
+    "iters": 21,
+    "max_abs_z": 5.275499000102679,
+    "worst": "win1.a",
+    "seconds": 3.8852756023406982
+   },
+   "from_screen": {
+    "rms": 1.2032913750849814,
+    "same": false,
+    "max_abs_z": 5.276969403981155,
+    "worst": "win1.a",
+    "active": 5604,
+    "seconds": 26.48178267478943
+   },
+   "from_draw": {
+    "rms": 1.1826820805044556,
+    "same": false,
+    "max_abs_z": 5.273285667542417,
+    "worst": "win1.a",
+    "active": 5616,
+    "seconds": 25.421576261520386
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": 0.0050814827669202626,
+   "norm": 10.17085967606191,
+   "screen": {
+    "cost": 8208.106750494146,
+    "n_fail": 0,
+    "rms": 1.1550833789120898,
+    "iters": 20,
+    "max_abs_z": 0.02656804063188788,
+    "worst": "cam3.logf",
+    "seconds": 2.6819303035736084
+   },
+   "from_screen": {
+    "rms": 1.1553527651142925,
+    "same": true,
+    "max_abs_z": 2.821928560637864e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.49490237236023
+   },
+   "from_draw": {
+    "rms": 1.1553527651021112,
+    "same": true,
+    "max_abs_z": 1.191698982100379e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 9.889663696289062
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.2873749766410978,
+   "norm": 9.394647547225992,
+   "screen": {
+    "cost": 8208.106750494164,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 20,
+    "max_abs_z": 0.026567891818857565,
+    "worst": "cam3.logf",
+    "seconds": 2.8538596630096436
+   },
+   "from_screen": {
+    "rms": 1.1553527650890927,
+    "same": true,
+    "max_abs_z": 7.245681571389907e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.868781328201294
+   },
+   "from_draw": {
+    "rms": 1.15535276510741,
+    "same": true,
+    "max_abs_z": 1.1117924527126033e-06,
+    "worst": "cam3.C2",
+    "active": 6152,
+    "seconds": 9.05745530128479
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": 0.015241049773465232,
+   "norm": 10.667134120217927,
+   "screen": {
+    "cost": 8208.106750494118,
+    "n_fail": 0,
+    "rms": 1.1550833789120878,
+    "iters": 23,
+    "max_abs_z": 0.026567960548921774,
+    "worst": "cam3.logf",
+    "seconds": 2.9866528511047363
+   },
+   "from_screen": {
+    "rms": 1.155352765102602,
+    "same": true,
+    "max_abs_z": 2.647122522830841e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 9.500613689422607
+   },
+   "from_draw": {
+    "rms": 1.155352765096919,
+    "same": true,
+    "max_abs_z": 3.232389365424052e-07,
+    "worst": "win1.b",
+    "active": 6152,
+    "seconds": 11.536940574645996
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 2.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.11243229616638171,
+   "norm": 10.607744342304537,
+   "screen": {
+    "cost": 8448.918429617112,
+    "n_fail": 66,
+    "rms": 1.1782422303880409,
+    "iters": 17,
+    "max_abs_z": 5.685904326200193,
+    "worst": "cam3.w1",
+    "seconds": 3.839298725128174
+   },
+   "from_screen": {
+    "rms": 1.2066882836923913,
+    "same": false,
+    "max_abs_z": 5.684726965198906,
+    "worst": "cam3.w1",
+    "active": 6074,
+    "seconds": 29.115351915359497
+   },
+   "from_draw": {
+    "rms": 1.1779542461020025,
+    "same": false,
+    "max_abs_z": 5.686634189897225,
+    "worst": "cam3.w1",
+    "active": 6062,
+    "seconds": 25.321828842163086
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": -0.015268459138886433,
+   "norm": 17.79006542657602,
+   "screen": {
+    "cost": 8826.692644978024,
+    "n_fail": 1616,
+    "rms": 1.3949623275477163,
+    "iters": 21,
+    "max_abs_z": 9.816458452573725,
+    "worst": "cam3.w1",
+    "seconds": 4.19268798828125
+   },
+   "from_screen": {
+    "rms": 1.17035992006055,
+    "same": false,
+    "max_abs_z": 9.657288903698095,
+    "worst": "cam3.w1",
+    "active": 4242,
+    "seconds": 27.14498496055603
+   },
+   "from_draw": {
+    "rms": 1.2326805158877479,
+    "same": false,
+    "max_abs_z": 9.656005367737523,
+    "worst": "cam3.w1",
+    "active": 4425,
+    "seconds": 27.87328314781189
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.24545326578713014,
+   "norm": 16.939975980125865,
+   "screen": {
+    "cost": 8208.106750494164,
+    "n_fail": 0,
+    "rms": 1.1550833789120911,
+    "iters": 26,
+    "max_abs_z": 0.02656786097839268,
+    "worst": "cam3.logf",
+    "seconds": 3.4861032962799072
+   },
+   "from_screen": {
+    "rms": 1.155352765075184,
+    "same": true,
+    "max_abs_z": 2.417627380234994e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 10.434654951095581
+   },
+   "from_draw": {
+    "rms": 1.15535276509828,
+    "same": true,
+    "max_abs_z": 2.981431282962153e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.014098405838013
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.21287693091008925,
+   "norm": 13.258329478402988,
+   "screen": {
+    "cost": 7814.738026667731,
+    "n_fail": 290,
+    "rms": 1.1546073154960017,
+    "iters": 20,
+    "max_abs_z": 5.222523367358582,
+    "worst": "cam2.w3",
+    "seconds": 4.475614786148071
+   },
+   "from_screen": {
+    "rms": 1.5110159639502283,
+    "same": false,
+    "max_abs_z": 5.206274363328804,
+    "worst": "cam2.w3",
+    "active": 5839,
+    "seconds": 38.68657398223877
+   },
+   "from_draw": {
+    "rms": 1.3233930261657245,
+    "same": false,
+    "max_abs_z": 5.191917135871154,
+    "worst": "cam2.w3",
+    "active": 5845,
+    "seconds": 22.873807191848755
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.28979776392779755,
+   "norm": 15.713788781924453,
+   "screen": {
+    "cost": 8776.798500966772,
+    "n_fail": 644,
+    "rms": 1.2623247522456131,
+    "iters": 18,
+    "max_abs_z": 5.460445143687383,
+    "worst": "cam3.w2",
+    "seconds": 3.2645363807678223
+   },
+   "from_screen": {
+    "rms": 1.2345546080745196,
+    "same": false,
+    "max_abs_z": 5.475621183607339,
+    "worst": "cam3.w2",
+    "active": 5400,
+    "seconds": 20.444007873535156
+   },
+   "from_draw": {
+    "rms": 1.2648953285781173,
+    "same": false,
+    "max_abs_z": 5.460418955895357,
+    "worst": "cam3.w2",
+    "active": 5416,
+    "seconds": 25.242566108703613
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.11929672647814352,
+   "norm": 16.118830382284596,
+   "screen": {
+    "cost": 6705.719560901301,
+    "n_fail": 1722,
+    "rms": 1.230327780372389,
+    "iters": 15,
+    "max_abs_z": 9.324769562050157,
+    "worst": "cam3.logf",
+    "seconds": 2.8064827919006348
+   },
+   "from_screen": {
+    "rms": 1.2207058614053585,
+    "same": false,
+    "max_abs_z": 9.316380380880577,
+    "worst": "cam3.logf",
+    "active": 4280,
+    "seconds": 17.78101897239685
+   },
+   "from_draw": {
+    "rms": 1.2520827115935507,
+    "same": false,
+    "max_abs_z": 9.331937344142577,
+    "worst": "cam3.logf",
+    "active": 4284,
+    "seconds": 19.653894424438477
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.2472965971761486,
+   "norm": 13.111422088435061,
+   "screen": {
+    "cost": 8208.106750494186,
+    "n_fail": 0,
+    "rms": 1.1550833789120927,
+    "iters": 26,
+    "max_abs_z": 0.026568188477994224,
+    "worst": "cam3.logf",
+    "seconds": 3.4531826972961426
+   },
+   "from_screen": {
+    "rms": 1.1553527651002828,
+    "same": true,
+    "max_abs_z": 2.2918939031872977e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.032846927642822
+   },
+   "from_draw": {
+    "rms": 1.1553527651185485,
+    "same": true,
+    "max_abs_z": 1.119507323158395e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.233221530914307
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.08897037523888612,
+   "norm": 14.620983219023575,
+   "screen": {
+    "cost": 8919.505110350457,
+    "n_fail": 26,
+    "rms": 1.2066515722061406,
+    "iters": 20,
+    "max_abs_z": 5.372036742645198,
+    "worst": "cam4.logf",
+    "seconds": 4.181896448135376
+   },
+   "from_screen": {
+    "rms": 1.2908944359464358,
+    "same": false,
+    "max_abs_z": 5.057436886104392,
+    "worst": "cam4.logf",
+    "active": 6110,
+    "seconds": 35.54170751571655
+   },
+   "from_draw": {
+    "rms": 1.2162381555503101,
+    "same": false,
+    "max_abs_z": 5.176244168663978,
+    "worst": "cam4.logf",
+    "active": 6105,
+    "seconds": 22.24017024040222
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.20685435916892145,
+   "norm": 17.024257298057524,
+   "screen": {
+    "cost": 8208.10675049415,
+    "n_fail": 0,
+    "rms": 1.15508337891209,
+    "iters": 30,
+    "max_abs_z": 0.026567586475379767,
+    "worst": "cam3.logf",
+    "seconds": 3.210897922515869
+   },
+   "from_screen": {
+    "rms": 1.1553527650940618,
+    "same": true,
+    "max_abs_z": 3.389045729969442e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.480380773544312
+   },
+   "from_draw": {
+    "rms": 1.155352765107479,
+    "same": true,
+    "max_abs_z": 2.925185061912676e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 12.23132038116455
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.0792774416221514,
+   "norm": 18.440416136509793,
+   "screen": {
+    "cost": 7738.347659266082,
+    "n_fail": 1114,
+    "rms": 1.2393530419287024,
+    "iters": 24,
+    "max_abs_z": 5.086509962003123,
+    "worst": "cam2.logf",
+    "seconds": 4.298797845840454
+   },
+   "from_screen": {
+    "rms": 1.2496796447640963,
+    "same": false,
+    "max_abs_z": 5.086510733841932,
+    "worst": "cam2.logf",
+    "active": 4906,
+    "seconds": 19.12190890312195
+   },
+   "from_draw": {
+    "rms": 1.249017156320583,
+    "same": false,
+    "max_abs_z": 5.086506142744752,
+    "worst": "cam2.logf",
+    "active": 4906,
+    "seconds": 22.155473709106445
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.013497928479702525,
+   "norm": 16.493946614425116,
+   "screen": {
+    "cost": 8208.106750494153,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 23,
+    "max_abs_z": 0.02656785925681738,
+    "worst": "cam3.logf",
+    "seconds": 2.592756986618042
+   },
+   "from_screen": {
+    "rms": 1.1553527651059399,
+    "same": true,
+    "max_abs_z": 1.1210022037897352e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 8.833059549331665
+   },
+   "from_draw": {
+    "rms": 1.1553527650552418,
+    "same": true,
+    "max_abs_z": 3.827613023392676e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 11.067378520965576
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.18628064785575907,
+   "norm": 15.3530229816976,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 26,
+    "max_abs_z": 0.026567898465477097,
+    "worst": "cam3.logf",
+    "seconds": 2.8909451961517334
+   },
+   "from_screen": {
+    "rms": 1.1553527651118038,
+    "same": true,
+    "max_abs_z": 1.7079989829811012e-07,
+    "worst": "win1.b",
+    "active": 6152,
+    "seconds": 10.059472799301147
+   },
+   "from_draw": {
+    "rms": 1.1553527651019004,
+    "same": true,
+    "max_abs_z": 5.496155216731094e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 12.06590223312378
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.12225743625368986,
+   "norm": 15.748962856364532,
+   "screen": {
+    "cost": 8208.106750494147,
+    "n_fail": 0,
+    "rms": 1.1550833789120898,
+    "iters": 18,
+    "max_abs_z": 0.026567698335678527,
+    "worst": "cam3.logf",
+    "seconds": 2.638580322265625
+   },
+   "from_screen": {
+    "rms": 1.1553527651018203,
+    "same": true,
+    "max_abs_z": 1.4929176770503076e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 10.556470155715942
+   },
+   "from_draw": {
+    "rms": 1.1553527650753572,
+    "same": true,
+    "max_abs_z": 1.9048969551778844e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.170042037963867
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.20351597787389838,
+   "norm": 17.582722768002448,
+   "screen": {
+    "cost": 8208.106750494157,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 23,
+    "max_abs_z": 0.02656809107416365,
+    "worst": "cam3.logf",
+    "seconds": 3.199172258377075
+   },
+   "from_screen": {
+    "rms": 1.1553527651098634,
+    "same": true,
+    "max_abs_z": 2.0791644309819135e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.597348928451538
+   },
+   "from_draw": {
+    "rms": 1.1553527651083897,
+    "same": true,
+    "max_abs_z": 5.978518057073916e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 12.027482032775879
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.1816044583760781,
+   "norm": 14.379461330590622,
+   "screen": {
+    "cost": 8055.218639937657,
+    "n_fail": 122,
+    "rms": 1.155792868215805,
+    "iters": 16,
+    "max_abs_z": 4.9187753762502675,
+    "worst": "cam3.w1",
+    "seconds": 3.7848398685455322
+   },
+   "from_screen": {
+    "rms": 1.1580904821380742,
+    "same": false,
+    "max_abs_z": 4.910749511345047,
+    "worst": "cam3.w1",
+    "active": 6030,
+    "seconds": 30.24862837791443
+   },
+   "from_draw": {
+    "rms": 1.1561140585925975,
+    "same": false,
+    "max_abs_z": 4.907109222725664,
+    "worst": "cam3.w1",
+    "active": 6030,
+    "seconds": 7.0044896602630615
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.32348702296840687,
+   "norm": 18.370652159581336,
+   "screen": {
+    "cost": 6143.96624655327,
+    "n_fail": 2980,
+    "rms": 1.3917390763151853,
+    "iters": 14,
+    "max_abs_z": 7.660502097693223,
+    "worst": "cam4.logf",
+    "seconds": 2.939901828765869
+   },
+   "from_screen": {
+    "rms": 1.280197722047897,
+    "same": false,
+    "max_abs_z": 7.663860600539153,
+    "worst": "cam4.logf",
+    "active": 3018,
+    "seconds": 18.84431529045105
+   },
+   "from_draw": {
+    "rms": 1.307974038574886,
+    "same": false,
+    "max_abs_z": 7.663701064554126,
+    "worst": "cam4.logf",
+    "active": 2986,
+    "seconds": 17.04564595222473
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.20828682959311293,
+   "norm": 15.79625341770749,
+   "screen": {
+    "cost": 9376.068324425778,
+    "n_fail": 734,
+    "rms": 1.3155000876848093,
+    "iters": 22,
+    "max_abs_z": 7.59983550735746,
+    "worst": "win1.a",
+    "seconds": 5.090458631515503
+   },
+   "from_screen": {
+    "rms": 1.3144645979655276,
+    "same": false,
+    "max_abs_z": 7.6001167565384495,
+    "worst": "win1.a",
+    "active": 5307,
+    "seconds": 24.84969663619995
+   },
+   "from_draw": {
+    "rms": 1.3140990792538136,
+    "same": false,
+    "max_abs_z": 7.598431384957226,
+    "worst": "win1.a",
+    "active": 5307,
+    "seconds": 17.035333156585693
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": 0.007622224150380393,
+   "norm": 15.256289514092867,
+   "screen": {
+    "cost": 8208.10675049415,
+    "n_fail": 0,
+    "rms": 1.15508337891209,
+    "iters": 24,
+    "max_abs_z": 0.026567959330490134,
+    "worst": "cam3.logf",
+    "seconds": 3.26328182220459
+   },
+   "from_screen": {
+    "rms": 1.1553527651040132,
+    "same": true,
+    "max_abs_z": 8.99403138897114e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.877331972122192
+   },
+   "from_draw": {
+    "rms": 1.1553527650962307,
+    "same": true,
+    "max_abs_z": 3.382447423072255e-06,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 11.126408576965332
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.4310624649616467,
+   "norm": 14.091971320838987,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 21,
+    "max_abs_z": 0.026567916440407055,
+    "worst": "cam3.logf",
+    "seconds": 2.4778873920440674
+   },
+   "from_screen": {
+    "rms": 1.1553527651008455,
+    "same": true,
+    "max_abs_z": 2.2988402097187485e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 9.889859437942505
+   },
+   "from_draw": {
+    "rms": 1.1553527651159878,
+    "same": true,
+    "max_abs_z": 7.166988234972668e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.694401741027832
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": 0.02286157466019785,
+   "norm": 16.000701180326892,
+   "screen": {
+    "cost": 8208.106750494124,
+    "n_fail": 0,
+    "rms": 1.1550833789120882,
+    "iters": 24,
+    "max_abs_z": 0.02656805980304881,
+    "worst": "cam3.logf",
+    "seconds": 3.398560047149658
+   },
+   "from_screen": {
+    "rms": 1.1553527650685307,
+    "same": true,
+    "max_abs_z": 2.98081362508209e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 9.47160816192627
+   },
+   "from_draw": {
+    "rms": 1.1553527650763178,
+    "same": true,
+    "max_abs_z": 1.5296474683262802e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 12.562512874603271
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 3.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.16864844424957257,
+   "norm": 15.911616513456806,
+   "screen": {
+    "cost": 11160.4000916257,
+    "n_fail": 88,
+    "rms": 1.3566264671273027,
+    "iters": 21,
+    "max_abs_z": 7.04598831479905,
+    "worst": "cam4.C2",
+    "seconds": 5.00509238243103
+   },
+   "from_screen": {
+    "rms": 1.2175508457829374,
+    "same": false,
+    "max_abs_z": 7.047687139467654,
+    "worst": "cam4.C2",
+    "active": 6041,
+    "seconds": 31.092211723327637
+   },
+   "from_draw": {
+    "rms": 1.239419282307273,
+    "same": false,
+    "max_abs_z": 7.047987070507623,
+    "worst": "cam4.C2",
+    "active": 6032,
+    "seconds": 15.563058853149414
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 0,
+   "redraws": 0,
+   "along": -0.020357945518515243,
+   "norm": 23.720087235434697,
+   "screen": {
+    "cost": 8492.987873641354,
+    "n_fail": 2290,
+    "rms": 1.4829418354134487,
+    "iters": 18,
+    "max_abs_z": 11.681413773025884,
+    "worst": "cam3.w1",
+    "seconds": 4.13666844367981
+   },
+   "from_screen": {
+    "rms": 1.4954823019682035,
+    "same": false,
+    "max_abs_z": 11.658370633634151,
+    "worst": "cam3.w1",
+    "active": 3771,
+    "seconds": 17.250236988067627
+   },
+   "from_draw": {
+    "rms": 1.48674192561198,
+    "same": false,
+    "max_abs_z": 11.662173274554656,
+    "worst": "cam3.w1",
+    "active": 3781,
+    "seconds": 19.567781448364258
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 1,
+   "redraws": 0,
+   "along": -0.32727102104950684,
+   "norm": 22.586634640167823,
+   "screen": {
+    "cost": 8224.221498208612,
+    "n_fail": 0,
+    "rms": 1.156216694470492,
+    "iters": 37,
+    "max_abs_z": 3.790390798496395,
+    "worst": "cam4.C3",
+    "seconds": 6.464046001434326
+   },
+   "from_screen": {
+    "rms": 1.1705990590492337,
+    "same": false,
+    "max_abs_z": 3.773276536421872,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 11.80074429512024
+   },
+   "from_draw": {
+    "rms": 1.1565553053281994,
+    "same": false,
+    "max_abs_z": 3.7891910599669534,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 16.069977521896362
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 2,
+   "redraws": 0,
+   "along": 0.283835907880119,
+   "norm": 17.67777263787065,
+   "screen": {
+    "cost": 8439.747050859274,
+    "n_fail": 430,
+    "rms": 1.214481178027254,
+    "iters": 27,
+    "max_abs_z": 6.307842924789254,
+    "worst": "cam2.w3",
+    "seconds": 4.859316349029541
+   },
+   "from_screen": {
+    "rms": 1.2280881182268772,
+    "same": false,
+    "max_abs_z": 6.304169962933228,
+    "worst": "cam2.w3",
+    "active": 5614,
+    "seconds": 27.33228588104248
+   },
+   "from_draw": {
+    "rms": 1.2000168082560778,
+    "same": false,
+    "max_abs_z": 6.30248194016072,
+    "worst": "cam2.w3",
+    "active": 5602,
+    "seconds": 14.128732919692993
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 3,
+   "redraws": 0,
+   "along": 0.38639701857039677,
+   "norm": 20.951718375899272,
+   "screen": {
+    "cost": 9706.748095396624,
+    "n_fail": 940,
+    "rms": 1.3646920955355304,
+    "iters": 13,
+    "max_abs_z": 6.756934239009132,
+    "worst": "cam3.w2",
+    "seconds": 2.8288638591766357
+   },
+   "from_screen": {
+    "rms": 1.3102559247298078,
+    "same": false,
+    "max_abs_z": 6.7785026949032,
+    "worst": "cam3.w2",
+    "active": 5091,
+    "seconds": 23.870590925216675
+   },
+   "from_draw": {
+    "rms": 1.366074039150643,
+    "same": false,
+    "max_abs_z": 6.756740686675633,
+    "worst": "cam3.w2",
+    "active": 5104,
+    "seconds": 13.72714114189148
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 4,
+   "redraws": 0,
+   "along": -0.15906230197085802,
+   "norm": 21.49177384304613,
+   "screen": {
+    "cost": 6386.125647725416,
+    "n_fail": 2438,
+    "rms": 1.3112870729767379,
+    "iters": 15,
+    "max_abs_z": 11.164964897778997,
+    "worst": "cam3.logf",
+    "seconds": 3.568129777908325
+   },
+   "from_screen": {
+    "rms": 1.3466888134348876,
+    "same": false,
+    "max_abs_z": 11.164548649026946,
+    "worst": "cam3.logf",
+    "active": 3569,
+    "seconds": 16.696287155151367
+   },
+   "from_draw": {
+    "rms": 1.3869085725204848,
+    "same": false,
+    "max_abs_z": 11.184692008502587,
+    "worst": "cam3.logf",
+    "active": 3556,
+    "seconds": 11.001277923583984
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 5,
+   "redraws": 0,
+   "along": -0.32972879623486484,
+   "norm": 17.481896117913415,
+   "screen": {
+    "cost": 8208.106750494131,
+    "n_fail": 0,
+    "rms": 1.1550833789120887,
+    "iters": 29,
+    "max_abs_z": 0.02656797586519538,
+    "worst": "cam3.logf",
+    "seconds": 3.0858936309814453
+   },
+   "from_screen": {
+    "rms": 1.1553527651130602,
+    "same": true,
+    "max_abs_z": 2.5005395595475107e-07,
+    "worst": "cam2.w1",
+    "active": 6152,
+    "seconds": 10.325026750564575
+   },
+   "from_draw": {
+    "rms": 1.15535276510141,
+    "same": true,
+    "max_abs_z": 1.04761780215988e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.489003896713257
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 6,
+   "redraws": 0,
+   "along": 0.1186271669851815,
+   "norm": 19.494644292031435,
+   "screen": {
+    "cost": 9167.098024461775,
+    "n_fail": 54,
+    "rms": 1.226089653618912,
+    "iters": 23,
+    "max_abs_z": 6.213981542903725,
+    "worst": "cam4.logf",
+    "seconds": 5.335222482681274
+   },
+   "from_screen": {
+    "rms": 1.23693053883602,
+    "same": false,
+    "max_abs_z": 6.214010948301457,
+    "worst": "cam4.logf",
+    "active": 6078,
+    "seconds": 22.7717182636261
+   },
+   "from_draw": {
+    "rms": 1.2214660859964515,
+    "same": false,
+    "max_abs_z": 6.213998940408218,
+    "worst": "cam4.logf",
+    "active": 6072,
+    "seconds": 10.489721298217773
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 7,
+   "redraws": 0,
+   "along": -0.2758058122252286,
+   "norm": 22.699009730743366,
+   "screen": {
+    "cost": 8208.106750494153,
+    "n_fail": 0,
+    "rms": 1.1550833789120902,
+    "iters": 35,
+    "max_abs_z": 0.026567828523854888,
+    "worst": "cam3.logf",
+    "seconds": 4.720007658004761
+   },
+   "from_screen": {
+    "rms": 1.1553527651095372,
+    "same": true,
+    "max_abs_z": 3.5076202914488874e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 10.257475137710571
+   },
+   "from_draw": {
+    "rms": 1.1553527651036675,
+    "same": true,
+    "max_abs_z": 1.1098272451713647e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 10.494301080703735
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 8,
+   "redraws": 0,
+   "along": 0.10570325549620187,
+   "norm": 24.58722151534639,
+   "screen": {
+    "cost": 7385.283912978148,
+    "n_fail": 1574,
+    "rms": 1.270122775132231,
+    "iters": 20,
+    "max_abs_z": 6.721927895031666,
+    "worst": "cam2.logf",
+    "seconds": 4.361469268798828
+   },
+   "from_screen": {
+    "rms": 1.24574928220317,
+    "same": false,
+    "max_abs_z": 6.722198924744272,
+    "worst": "cam2.logf",
+    "active": 4434,
+    "seconds": 19.04203152656555
+   },
+   "from_draw": {
+    "rms": 1.280160108101877,
+    "same": false,
+    "max_abs_z": 6.721919238116558,
+    "worst": "cam2.logf",
+    "active": 4452,
+    "seconds": 8.864068508148193
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 9,
+   "redraws": 0,
+   "along": -0.0179972379729367,
+   "norm": 21.99192881923349,
+   "screen": {
+    "cost": 8208.106750494155,
+    "n_fail": 0,
+    "rms": 1.1550833789120905,
+    "iters": 26,
+    "max_abs_z": 0.02656781228283866,
+    "worst": "cam3.logf",
+    "seconds": 3.222283124923706
+   },
+   "from_screen": {
+    "rms": 1.1553527651013906,
+    "same": true,
+    "max_abs_z": 4.7255934195535304e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 9.596530199050903
+   },
+   "from_draw": {
+    "rms": 1.155352765107593,
+    "same": true,
+    "max_abs_z": 1.84183932856536e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.442083835601807
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 10,
+   "redraws": 0,
+   "along": 0.24837419714101208,
+   "norm": 20.470697308930134,
+   "screen": {
+    "cost": 8208.106750494138,
+    "n_fail": 0,
+    "rms": 1.1550833789120893,
+    "iters": 27,
+    "max_abs_z": 0.02656800248587102,
+    "worst": "cam3.logf",
+    "seconds": 2.8857262134552
+   },
+   "from_screen": {
+    "rms": 1.155352765107625,
+    "same": true,
+    "max_abs_z": 4.27872014259497e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 9.347051858901978
+   },
+   "from_draw": {
+    "rms": 1.15535276509395,
+    "same": true,
+    "max_abs_z": 1.1419667581775128e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 8.589100360870361
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 11,
+   "redraws": 0,
+   "along": 0.16300991500491982,
+   "norm": 20.998617141819377,
+   "screen": {
+    "cost": 8622.15017585724,
+    "n_fail": 726,
+    "rms": 1.2605726979023757,
+    "iters": 19,
+    "max_abs_z": 5.416838774570494,
+    "worst": "cam4.w2",
+    "seconds": 4.1963794231414795
+   },
+   "from_screen": {
+    "rms": 1.2755851562046219,
+    "same": false,
+    "max_abs_z": 5.416824644318549,
+    "worst": "cam4.w2",
+    "active": 5332,
+    "seconds": 17.399974584579468
+   },
+   "from_draw": {
+    "rms": 1.2553086008830299,
+    "same": false,
+    "max_abs_z": 5.41667689244511,
+    "worst": "cam4.w2",
+    "active": 5324,
+    "seconds": 9.353638887405396
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 12,
+   "redraws": 0,
+   "along": 0.2713546371651978,
+   "norm": 23.4436303573366,
+   "screen": {
+    "cost": 8208.106750494124,
+    "n_fail": 0,
+    "rms": 1.1550833789120882,
+    "iters": 28,
+    "max_abs_z": 0.02656788264247356,
+    "worst": "cam3.logf",
+    "seconds": 2.950801134109497
+   },
+   "from_screen": {
+    "rms": 1.155352765115854,
+    "same": true,
+    "max_abs_z": 4.1537926836480375e-07,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 9.311635255813599
+   },
+   "from_draw": {
+    "rms": 1.1553527650918713,
+    "same": true,
+    "max_abs_z": 7.942459259732938e-07,
+    "worst": "cam4.C2",
+    "active": 6152,
+    "seconds": 8.361654996871948
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 13,
+   "redraws": 0,
+   "along": 0.2421392778347708,
+   "norm": 19.172615107454163,
+   "screen": {
+    "cost": 7951.349443857032,
+    "n_fail": 186,
+    "rms": 1.1544597490072779,
+    "iters": 20,
+    "max_abs_z": 4.834466201222718,
+    "worst": "cam3.w1",
+    "seconds": 4.387315273284912
+   },
+   "from_screen": {
+    "rms": 1.1816616775364706,
+    "same": false,
+    "max_abs_z": 4.726026422641867,
+    "worst": "cam3.w1",
+    "active": 5957,
+    "seconds": 21.72988748550415
+   },
+   "from_draw": {
+    "rms": 1.1548085139530881,
+    "same": false,
+    "max_abs_z": 4.823671672068994,
+    "worst": "cam3.w1",
+    "active": 5966,
+    "seconds": 3.6537158489227295
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 14,
+   "redraws": 0,
+   "along": -0.4313160306245425,
+   "norm": 24.494202879441783,
+   "screen": {
+    "cost": 10006.165496768019,
+    "n_fail": 3076,
+    "rms": 1.8036018630378803,
+    "iters": 1,
+    "max_abs_z": 9.264168758193264,
+    "worst": "cam4.logf",
+    "seconds": 0.12841534614562988
+   },
+   "from_screen": {
+    "rms": 1.67317358863121,
+    "same": false,
+    "max_abs_z": 9.264168758193264,
+    "worst": "cam4.logf",
+    "active": 3020,
+    "seconds": 4.044798135757446
+   },
+   "from_draw": {
+    "rms": 1.67317358863121,
+    "same": false,
+    "max_abs_z": 9.264168758193264,
+    "worst": "cam4.logf",
+    "active": 3020,
+    "seconds": 4.364883899688721
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 15,
+   "redraws": 0,
+   "along": 0.2777157727908172,
+   "norm": 21.061671223609988,
+   "screen": {
+    "cost": 10566.46862133448,
+    "n_fail": 1086,
+    "rms": 1.444216628563732,
+    "iters": 18,
+    "max_abs_z": 10.126245058523587,
+    "worst": "win1.a",
+    "seconds": 3.3986976146698
+   },
+   "from_screen": {
+    "rms": 1.2578348952687033,
+    "same": false,
+    "max_abs_z": 10.491804515120245,
+    "worst": "win1.a",
+    "active": 4723,
+    "seconds": 21.230714082717896
+   },
+   "from_draw": {
+    "rms": 1.4582464928196148,
+    "same": false,
+    "max_abs_z": 10.114666904566294,
+    "worst": "win1.a",
+    "active": 4957,
+    "seconds": 8.778298377990723
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 16,
+   "redraws": 0,
+   "along": 0.010162965533840525,
+   "norm": 20.34171935212382,
+   "screen": {
+    "cost": 8208.106750494131,
+    "n_fail": 0,
+    "rms": 1.1550833789120887,
+    "iters": 29,
+    "max_abs_z": 0.02656789154139209,
+    "worst": "cam3.logf",
+    "seconds": 4.326967477798462
+   },
+   "from_screen": {
+    "rms": 1.1553527651154918,
+    "same": true,
+    "max_abs_z": 1.8383510506521151e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 9.652756929397583
+   },
+   "from_draw": {
+    "rms": 1.1553527650804665,
+    "same": true,
+    "max_abs_z": 1.5854070584148425e-06,
+    "worst": "win1.delta",
+    "active": 6152,
+    "seconds": 7.2508931159973145
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 17,
+   "redraws": 0,
+   "along": 0.5747499532821956,
+   "norm": 18.789295094451983,
+   "screen": {
+    "cost": 8208.106750494124,
+    "n_fail": 0,
+    "rms": 1.1550833789120882,
+    "iters": 22,
+    "max_abs_z": 0.026567938781266315,
+    "worst": "cam3.logf",
+    "seconds": 3.163447618484497
+   },
+   "from_screen": {
+    "rms": 1.1553527651135644,
+    "same": true,
+    "max_abs_z": 7.176301816725118e-07,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 9.262514114379883
+   },
+   "from_draw": {
+    "rms": 1.1553527651096158,
+    "same": true,
+    "max_abs_z": 1.77282990925089e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 7.591954946517944
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 18,
+   "redraws": 0,
+   "along": 0.030482099546930465,
+   "norm": 21.334268240435854,
+   "screen": {
+    "cost": 8208.106750494167,
+    "n_fail": 0,
+    "rms": 1.1550833789120913,
+    "iters": 26,
+    "max_abs_z": 0.02656791056146051,
+    "worst": "cam3.logf",
+    "seconds": 3.439436197280884
+   },
+   "from_screen": {
+    "rms": 1.1553527651125561,
+    "same": true,
+    "max_abs_z": 1.3203470268087068e-06,
+    "worst": "cam2.C3",
+    "active": 6152,
+    "seconds": 9.127930879592896
+   },
+   "from_draw": {
+    "rms": 1.1553527651191724,
+    "same": true,
+    "max_abs_z": 1.5241734000837964e-06,
+    "worst": "cam4.C3",
+    "active": 6152,
+    "seconds": 6.421192407608032
+   }
+  },
+  {
+   "centre": "joined start",
+   "scale": 4.0,
+   "draw": 19,
+   "redraws": 0,
+   "along": -0.22486459233276343,
+   "norm": 21.215488684609074,
+   "screen": {
+    "cost": 12434.67674919048,
+    "n_fail": 124,
+    "rms": 1.4362519393349058,
+    "iters": 21,
+    "max_abs_z": 9.205865245828692,
+    "worst": "cam4.w3",
+    "seconds": 4.3192362785339355
+   },
+   "from_screen": {
+    "rms": 1.2698523957823038,
+    "same": false,
+    "max_abs_z": 9.20414312810414,
+    "worst": "cam4.w3",
+    "active": 6004,
+    "seconds": 16.059648036956787
+   },
+   "from_draw": {
+    "rms": 1.4777477333271531,
+    "same": false,
+    "max_abs_z": 9.206261841712557,
+    "worst": "cam4.w3",
+    "active": 5992,
+    "seconds": 9.053537845611572
+   }
+  }
+ ]
+}

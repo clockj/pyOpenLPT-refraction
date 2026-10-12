@@ -1,0 +1,64 @@
+{
+  "_comment": "Calibration of cam1 through a water-filled acrylic tube, run 20260930/T0. Lengths in mm, image coordinates in px (u = column, v = row, pixel centres at integers). See 2026-09-30-plan.md and 2026-10-01-plan-redo.md.",
+  "case": "cyl_20260930_T0_cam1",
+  "camera_id": 1,
+  "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20260930\\T0\\cam1",
+  "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20260930\\T0\\cam1",
+  "image": {"width": 1280, "height": 800, "pixel_mm": 0.020},
+  "camera": {
+    "f_lens_mm": 180.0,
+    "principal_point": [639.5, 399.5],
+    "dist_coeff": [0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  "setup": {
+    "_comment": "From the user's photo of the rig (2026-10-01); recorded for the plausibility check only, not used by the fit. The lens is a 180 mm macro focused with its focus ring.",
+    "lens_front_to_tube_wall_mm": 200.0,
+    "camera_body_front_to_tube_wall_mm": 365.0
+  },
+  "port": {
+    "kind": "cylinder",
+    "outer_diameter_in": 7.9375,
+    "wall_in": 0.125,
+    "R": [100.80625, 97.63125],
+    "n": [1.0, 1.49, 1.333],
+    "media": ["air", "acrylic", "water"]
+  },
+  "target": {
+    "pitch_mm": [3.0, 3.0],
+    "dot_diameter_mm": 1.5,
+    "dots": "dark on bright"
+  },
+  "planes": {
+    "_comment": "The file labels are the stage readings as first reported; each step of 2 in the label is one 0.1 in (2.54 mm) step of the stage (user, 2026-10-01). z_mm are the plane positions used by the fit.",
+    "file_pattern": "z_{label}mm.tif",
+    "labels": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38],
+    "z_mm": [0.0, 2.54, 5.08, 7.62, 10.16, 12.7, 15.24, 17.78, 20.32, 22.86, 25.4, 27.94, 30.48, 33.02, 35.56, 38.1,
+             40.64, 43.18, 45.72, 48.26],
+    "z_grows_towards_camera": true
+  },
+  "frame": {
+    "origin": "dot in the leftmost complete column of plane z = 0, on the row nearest v = origin_row_v",
+    "origin_row_v": 318.0,
+    "X": "along the rows, image right",
+    "Y": "along the columns, image up",
+    "Z": "board normal, towards the camera"
+  },
+  "detect": {
+    "background_close_px": 101,
+    "background_sigma_px": 25.0,
+    "mask_dilate_px": 9,
+    "seg_fraction": 0.5,
+    "min_area_frac": 0.35,
+    "max_area_frac": 2.0,
+    "min_solidity": 0.85,
+    "border_margin_px": 3,
+    "rays": 96,
+    "ray_step_px": 0.25,
+    "edge_fraction": 0.5,
+    "smooth_sigma_px": 1.0
+  },
+  "index": {
+    "track_gate_px": 25.0,
+    "lattice_tol_frac": 0.25
+  }
+}

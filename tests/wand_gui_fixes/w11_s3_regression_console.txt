@@ -1,0 +1,6 @@
+W11: regression after the wand-tab fixes (B1-B10)
+
+pytest (324 s, exit 1): 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 323.82s (0:05:23)
+  F7: 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 322.53s (0:05:22)
+  failures and errors now: FAILED tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates; FAILED tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo; ERROR tests/test_p0_bootstrap_failure.py; ERROR tests/test_plane_pipeline.py
+exit 0

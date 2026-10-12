@@ -1,0 +1,8 @@
+columns: profile of image / background over board pixels: std 0.254 %, high-pass (removing an 8-px smooth trend) std 0.074 %
+  strongest periods (px): 32.0 (12.2 %), 10.7 (3.0 %), 8.0 (2.7 %), 21.3 (2.1 %), 21.7 (1.8 %), 3.2 (1.6 %)
+  period  8: phase-averaged amplitude (max - min) 0.051 %
+  period 16: phase-averaged amplitude (max - min) 0.077 %
+  period 32: phase-averaged amplitude (max - min) 0.196 %
+  period 64: phase-averaged amplitude (max - min) 0.209 %
+rows: profile of image / background over board pixels: std 0.502 %, high-pass (removing an 8-px smooth trend) std 0.091 %
+  strongest periods (px): 57.1 (9.9 %), 80.0 (6.0 %), 22.9 (5.7 %), 114.3 (4.4 %), 28.6 (4.4 %), 47.1 (4.3 %)

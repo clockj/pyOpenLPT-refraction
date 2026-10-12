@@ -116,19 +116,27 @@ runSingleIPRIteration(const std::vector<std::shared_ptr<Camera>> &camera_models,
 
   std::cout << "\t\t2D detections per active camera: ";
   const clock_t t_find2D_start = clock();
-#pragma omp parallel for schedule(static)
+  // the line detector parallelises inside; the peak finder over the cameras
+  const bool lines_detector =
+      cfg.kind() == ObjectKind::Tracer &&
+      static_cast<const TracerConfig &>(cfg)._detector == "lines";
+#pragma omp parallel for schedule(static) if (!lines_detector)
   for (int cam_id = 0; cam_id < static_cast<int>(n_cam); ++cam_id) {
     if (!camera_models[cam_id]->is_active)
       continue;
 
     // Implementation should branch internally by reading `cfg` (Tracer/Bubble).
     std::vector<std::unique_ptr<Object2D>> o2d_list =
-        finder.findObject2D(images[cam_id], cfg);
+        finder.findObject2D(images[cam_id], cfg, cam_id);
 
-    std::cout << o2d_list.size() << "  ";
     o2d_list_all[cam_id] = std::move(o2d_list);
   }
   const clock_t t_find2D_end = clock();
+  // printed after the parallel loop, in camera order (printing inside it
+  // interleaved the threads' digits)
+  for (int cam_id = 0; cam_id < static_cast<int>(n_cam); ++cam_id)
+    if (camera_models[cam_id]->is_active)
+      std::cout << o2d_list_all[cam_id].size() << "  ";
   std::cout << " (" << double(t_find2D_end - t_find2D_start) / CLOCKS_PER_SEC
             << " s)" << "\n";
 

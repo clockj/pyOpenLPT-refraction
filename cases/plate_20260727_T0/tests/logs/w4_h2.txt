@@ -1,0 +1,19 @@
+lens terms ['pp']; constraints {"channel": {"width_mm": [100.0, 150.0], "tolerance_mm": 3.0, "ball_radius_mm": [1.5, 2.0]}, "aim": [{"cams": [0, 1], "wall": 1, "mm": 75.0}]}
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 5468 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+start: the cameras and walls of tests\states\t3k_h2_from_h1.pkl (RMS 0.2728 px there)
+calibrate: done in 161 s; RMS 0.2657 px, sigma 0.2269 px, 43580 of 43744 detections active
+constraints at the answer: {"channel": {"width": [100.0, 150.0], "tol": 3.0, "ball": [1.5, 2.0], "sigma": 0.01, "windows": [{"depth_mm": [17.378433057984797, 101.50000081188826], "width_mm": 100.0, "band_mm": [8.11888256180282e-07, 15.523850843737836]}, {"depth_mm": [22.117624195357124, 130.06112307306915], "width_mm": 150.0, "band_mm": [-21.017414563416423, 20.348525240135032]}], "active_rows": 1, "max_breach_mm": 8.11888256180282e-07}, "priors": [{"kind": "aim", "cam": [0, 1], "wall": 1, "mean": 75.0, "sigma": 0.01, "value": 75.00000445330436, "residual_sigmas": 0.00044533043563887986}]}
+walls 90.228 deg apart
+  cam0: f 18959 +- 16 px (256.0 mm), 1066.6 mm from its wall, 0.70 deg to its normal, k1 0.794
+  cam1: f 19320 +- 17 px (260.8 mm), 1029.8 mm from its wall, 13.05 deg to its normal, k1 0.721
+  cam2: f 21434 +- 13 px (289.4 mm), 845.8 mm from its wall, 16.36 deg to its normal, k1 0.822
+  cam3: f 21792 +- 13 px (294.2 mm), 909.7 mm from its wall, 0.36 deg to its normal, k1 0.955
+  cams [0, 1]: baseline 245.1 mm, views 12.55 deg apart
+  cams [0, 2]: baseline 1509.7 mm, views 90.87 deg apart
+  cams [0, 3]: baseline 1524.4 mm, views 90.42 deg apart
+  cams [1, 2]: baseline 1542.9 mm, views 94.44 deg apart
+  cams [1, 3]: baseline 1513.3 mm, views 90.45 deg apart
+  cams [2, 3]: baseline 285.1 mm, views 16.56 deg apart
+residual along the wand (A, B), px: cam0: +0.069, -0.039; cam1: -0.004, +0.003; cam2: +0.004, +0.044; cam3: -0.030, +0.002
+warnings: none
+state saved to D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\tests\states\w4_h2.pkl

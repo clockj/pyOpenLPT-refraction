@@ -1,0 +1,26 @@
+T5 model comparison (start: the calibration, model M1bx); rms in px; train = even planes, held out = odd planes at the stage position (stage), with their sideways shift fitted (shift), with their z fitted (own z)
+(100 s)
+
+model                        fit   train   stage   shift   own z   parameters (all planes)
+pinhole fx=fy            44.1577 44.7730 43.8725 43.8474 43.8492   fx 17954476, fy 17954476 px, camera [8.213400e+03 1.648000e+02 3.906637e+05] mm
+pinhole fx,fy            11.4088 11.4433 11.4981 11.4932 11.4940   fx 54765868, fy 43506834 px, camera [2.530010e+04 6.807000e+02 1.112447e+06] mm
+M1                        0.8835  0.9018  0.8851  0.8351  0.8525   f 42700 px, camera-axis 1123.9 mm, camera X 3.9 mm, axis X,Z [ 1.36 13.2 ], lean 2.255 deg
+M1x                       0.8488  0.8689  0.8845  0.8350  0.8526   f 42718 px, camera-axis 1124.3 mm, camera X 3.9 mm, axis X,Z [ 1.38 13.2 ], lean 2.248 deg; plane shifts rms [4.3 3.2] um
+M1c (column/row board)    0.5257  0.5267  0.5482  0.4706  0.5060   f 43221 px, camera-axis 1137.4 mm, camera X 53.5 mm, axis X,Z [15.84 12.45], lean 2.506 deg
+M1b                       0.3030  0.2985  0.3429  0.2001  0.2795   f 41435 px, camera-axis 1093.5 mm, camera X 68.5 mm, axis X,Z [20.9  13.08], lean 0.026 deg
+M1bx                      0.1958  0.1937  0.3421  0.2000  0.2793   f 41459 px, camera-axis 1094.1 mm, camera X 68.5 mm, axis X,Z [20.87 13.08], lean 0.016 deg; plane shifts rms [4.  3.2] um
+M1bs (stage scale)        0.3004  0.2960  0.3406  0.1956  0.2781   f 41391 px, camera-axis 1092.5 mm, camera X 63.2 mm, axis X,Z [19.4  13.37], lean 0.041 deg; stage scale 1.01086
+M1bt (traverse tilt)      0.3002  0.2960  0.3402  0.1958  0.2783   f 41177 px, camera-axis 1086.1 mm, camera X -51.1 mm, axis X,Z [18.58 15.16], lean 0.101 deg; tau [-0.10614  0.00257]
+M1bk (k1)                 0.3012  0.2960  0.3421  0.1975  0.2756   f 41958 px, camera-axis 1105.2 mm, camera X 66.6 mm, axis X,Z [20.13 13.22], lean 0.076 deg; k1 -12.7051
+M1b, f = 9000 px          8.4346  8.3736  8.5771  8.5680  7.8060   f 9000 px, camera-axis 252.6 mm, camera X 56.3 mm, axis X,Z [64.67 18.98], lean -0.151 deg
+M1bx, iso centres         0.2138  0.2114  0.3662  0.2182  0.3067   f 41364 px, camera-axis 1091.5 mm, camera X 68.8 mm, axis X,Z [21.03 13.01], lean -0.057 deg; plane shifts rms [3.9 4.3] um
+M1bx, gradient centres    0.3591  0.3529  0.4808  0.3739  0.4364   f 41421 px, camera-axis 1093.0 mm, camera X 71.4 mm, axis X,Z [21.78 13.08], lean 0.217 deg; plane shifts rms [4.3 3.6] um
+M1bw (+ wall field)       0.2526  0.2544  0.2953  0.1283  0.2335   f 40913 px, camera-axis 1080.1 mm, camera X 65.8 mm, axis X,Z [20.32 13.29], lean 0.084 deg
+M1bxw (+ wall field)      0.1208  0.1183  0.3002  0.1263  0.2347   f 40883 px, camera-axis 1078.6 mm, camera X 75.7 mm, axis X,Z [23.39 13.8 ], lean 0.006 deg; plane shifts rms [3.9 3.2] um
+M2 (planes free)          0.8591  0.8780  0.9520  0.8680  0.8518   f 42328 px, camera-axis 1114.4 mm, camera X 7.1 mm, axis X,Z [ 2.38 13.37], lean 2.305 deg; travel 48.744 mm, step sd 0.178 mm
+M2b (planes free)         0.2517  0.2464  0.5106  0.3275  0.2783   f 41426 px, camera-axis 1093.4 mm, camera X 62.7 mm, axis X,Z [19.25 13.29], lean 0.044 deg; travel 48.795 mm, step sd 0.167 mm
+
+candidates (planes at the stage positions, PINCYL-loadable, primary centres, no k1), held-out at the stage position: M1bx 0.34206, M1b 0.34294, M1c (column/row board) 0.54821, M1x 0.88451, M1 0.88509
+tied within 0.002 px of the lowest: M1b (fit 0.3030), M1bx (fit 0.1958)
+not a candidate: M1bk (k1), held-out 0.34206; k1 -12.705 (at the image corner -3.09 px), f 41958 px
+CHOICE: M1bx

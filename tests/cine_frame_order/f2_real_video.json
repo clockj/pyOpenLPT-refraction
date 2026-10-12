@@ -1,0 +1,88 @@
+[
+ {
+  "run": "35Hz_r_b_1",
+  "cam": 0,
+  "cine": "X:\\Shijie Zhong\\Bubble Shear Project\\Raw_Data\\20260727\\35Hz_r_b_1\\CamC1.cine",
+  "FirstImageNo": 0,
+  "ImageCount": 12605,
+  "rows": [
+   {
+    "frame": 0,
+    "alone_equal": true
+   },
+   {
+    "frame": 1,
+    "alone_equal": true
+   },
+   {
+    "frame": 255,
+    "alone_equal": true
+   },
+   {
+    "frame": 256,
+    "alone_equal": true
+   },
+   {
+    "frame": 257,
+    "alone_equal": true
+   },
+   {
+    "frame": 12604,
+    "alone_equal": true
+   }
+  ],
+  "in_chunks_equal": {
+   "256": true,
+   "257": true,
+   "12604": true
+  },
+  "old_call": {
+   "frame_1_is_stored_0": true,
+   "frame_256_is_stored_255": true
+  },
+  "ok": true
+ },
+ {
+  "run": "35Hz_r_b_1",
+  "cam": 1,
+  "cine": "X:\\Shijie Zhong\\Bubble Shear Project\\Raw_Data\\20260727\\35Hz_r_b_1\\CamC2.cine",
+  "FirstImageNo": 0,
+  "ImageCount": 12605,
+  "rows": [
+   {
+    "frame": 0,
+    "alone_equal": true
+   },
+   {
+    "frame": 1,
+    "alone_equal": true
+   },
+   {
+    "frame": 255,
+    "alone_equal": true
+   },
+   {
+    "frame": 256,
+    "alone_equal": true
+   },
+   {
+    "frame": 257,
+    "alone_equal": true
+   },
+   {
+    "frame": 12604,
+    "alone_equal": true
+   }
+  ],
+  "in_chunks_equal": {
+   "256": true,
+   "257": true,
+   "12604": true
+  },
+  "old_call": {
+   "frame_1_is_stored_0": true,
+   "frame_256_is_stored_255": true
+  },
+  "ok": true
+ }
+]

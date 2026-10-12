@@ -1,0 +1,5 @@
+F4: projection cost; build p4c (d9b20b4 + diff a5bb41a79aa4); cameras D:\Refraction\pyOpenLPT\tests\cylinder_stb\data\cams_T2 at tol 1e-9
+  cam1, per call from Python (median of batches): pinhole project 0.41 us, pinhole projectWithHint 0.60 us; PINCYL project 185.2 us, PINCYL projectWithHint (0.05 mm) 2.30 us
+  cam2, per call from Python (median of batches): pinhole project 0.43 us, pinhole projectWithHint 0.62 us; PINCYL project 222.5 us, PINCYL projectWithHint (0.05 mm) 2.26 us
+  shake-like sequences (1000 particles x 48 positions, the first one without a hint): projectObject2D (2 cameras, hinted) 14.54 us per position; project() on both cameras 469.0 us per position (32x)
+  judged: hinted call <= 3 us (from Python, call overhead included): PASS

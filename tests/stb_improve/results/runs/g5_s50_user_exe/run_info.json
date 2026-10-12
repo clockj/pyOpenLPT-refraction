@@ -1,0 +1,26 @@
+{
+ "run": "g5_s50_user_exe",
+ "argv": [
+  "g5_s50_user_exe",
+  "--build",
+  "user",
+  "--exe",
+  "--frames",
+  "0",
+  "50",
+  "--force"
+ ],
+ "build": "user",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build\\Release",
+ "build_info": {},
+ "asan_options": "",
+ "host": "HELLOWORLD",
+ "start": "2026-10-06T10:34:17",
+ "end": "2026-10-06T10:36:33",
+ "wall_s": 135.1,
+ "returncode": 0,
+ "frames_done": 51,
+ "sum_frame_s": 129.6,
+ "peak_working_set_MB": 986,
+ "peak_private_MB": 870
+}

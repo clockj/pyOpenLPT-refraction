@@ -1,0 +1,14 @@
+Regression: build p4c against head1007, frames 0-50, sets ['plate', 'pinhole'], modes ['module', 'exe']
+  plate module head1007: exit 0, wall 139 s
+  plate module p4c: exit 0, wall 140 s
+    plate module: 11 of 11 files identical: IDENTICAL
+  plate exe head1007: exit 0, wall 138 s
+  plate exe p4c: exit 0, wall 142 s
+    plate exe: 11 of 11 files identical: IDENTICAL
+  pinhole module head1007: exit 0, wall 127 s
+  pinhole module p4c: exit 0, wall 132 s
+    pinhole module: 11 of 11 files identical: IDENTICAL
+  pinhole exe head1007: exit 0, wall 129 s
+  pinhole exe p4c: exit 0, wall 132 s
+    pinhole exe: 11 of 11 files identical: IDENTICAL
+  judged: PASS (bit-identical)

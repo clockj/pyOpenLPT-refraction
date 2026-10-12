@@ -1,0 +1,91 @@
+H1a: window-normal hints on W5 seeds 1001, 1031, 1034, 1045 (0.1 px) and R4 seed 3110 (1 px); every camera hinted, off by 0, 5, 10, 20, 30 deg (3 draws above 0), and without hints
+
+seed 3110 (1 px), 6 cameras, per window [2, 2, 2], f 20682, 34482, 8035, 16353, 4851, 11066 px; truth-started fit rms 1.25515 px
+  without hints: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg), 362 s; stored answer rms 1.266172: the same
+  hints off by    0 deg, draw 0: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 21.0, 0.1, 0.2, 21.1, 0.1, 0.2 deg from the hints; a hint's candidate won 4 of 6 searches), 446 s
+  hints off by    5 deg, draw 0: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 16.3, 4.9, 5.2, 25.3, 5.0, 5.0 deg from the hints; a hint's candidate won 4 of 6 searches), 453 s
+  hints off by    5 deg, draw 1: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 21.9, 5.1, 4.8, 16.2, 5.1, 4.8 deg from the hints; a hint's candidate won 4 of 6 searches), 450 s
+  hints off by    5 deg, draw 2: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 21.9, 5.1, 4.8, 16.1, 5.0, 5.2 deg from the hints; a hint's candidate won 4 of 6 searches), 450 s
+  hints off by   10 deg, draw 0: same (rms 1.255149, max |z| 2.7e-07 cam2.C3, normal errors 1.76, 0.13, 0.54 deg; the answer is 9.9, 10.0, 10.1, 9.1, 9.9, 10.0 deg from the hints; a hint's candidate won 4 of 6 searches), 460 s
+  hints off by   10 deg, draw 1: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 13.7, 9.9, 10.2, 20.6, 9.9, 9.8 deg from the hints; a hint's candidate won 4 of 6 searches), 450 s
+  hints off by   10 deg, draw 2: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 23.7, 10.0, 9.8, 30.5, 9.9, 9.8 deg from the hints; a hint's candidate won 4 of 6 searches), 449 s
+  hints off by   20 deg, draw 0: same (rms 1.255149, max |z| 2.8e-06 win1.a, normal errors 1.76, 0.13, 0.54 deg; the answer is 20.7, 19.9, 19.9, 18.8, 20.1, 20.2 deg from the hints; a hint's candidate won 5 of 6 searches), 446 s
+  hints off by   20 deg, draw 1: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 28.8, 19.9, 20.2, 38.0, 20.0, 20.2 deg from the hints; a hint's candidate won 5 of 6 searches), 437 s
+  hints off by   20 deg, draw 2: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 7.4, 20.1, 19.8, 32.8, 20.1, 19.8 deg from the hints; a hint's candidate won 4 of 6 searches), 447 s
+  hints off by   30 deg, draw 0: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 46.5, 29.9, 30.2, 35.9, 30.1, 30.0 deg from the hints; a hint's candidate won 3 of 6 searches), 454 s
+  hints off by   30 deg, draw 1: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 50.8, 29.9, 30.2, 42.8, 30.1, 29.8 deg from the hints; a hint's candidate won 5 of 6 searches), 450 s
+  hints off by   30 deg, draw 2: DIFFERENT (rms 1.266172, max |z| 4.7e+01 cam6.C1, normal errors 20.98, 2.30, 5.18 deg; the answer is 35.6, 29.9, 30.1, 33.1, 30.1, 30.0 deg from the hints; a hint's candidate won 5 of 6 searches), 431 s
+
+seed 1034 (0.1 px), 4 cameras, per window [2, 1, 1], f 28170, 4361, 23266, 37170 px; truth-started fit rms 0.11751 px
+  without hints: DIFFERENT (rms 0.178590, max |z| 1.4e+03 cam3.w3, normal errors 0.14, 0.62, 26.62 deg), 374 s; stored answer rms 0.178590: the same
+  hints off by    0 deg, draw 0: same (rms 0.117511, max |z| 4.3e-06 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 0.0, 0.0, 0.4, 0.0 deg from the hints; a hint's candidate won 2 of 6 searches), 267 s
+  hints off by    5 deg, draw 0: same (rms 0.117511, max |z| 7.0e-06 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 5.0, 5.0, 5.4, 5.0 deg from the hints; a hint's candidate won 2 of 6 searches), 314 s
+  hints off by    5 deg, draw 1: same (rms 0.117511, max |z| 4.1e-06 cam3.C3, normal errors 0.02, 0.04, 0.31 deg; the answer is 5.0, 5.0, 5.0, 5.0 deg from the hints; a hint's candidate won 1 of 6 searches), 275 s
+  hints off by    5 deg, draw 2: same (rms 0.117511, max |z| 2.7e-06 cam3.C3, normal errors 0.02, 0.04, 0.31 deg; the answer is 5.0, 5.0, 5.4, 5.0 deg from the hints; a hint's candidate won 1 of 6 searches), 303 s
+  hints off by   10 deg, draw 0: same (rms 0.117511, max |z| 1.7e-06 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 10.0, 10.0, 9.6, 10.0 deg from the hints; a hint's candidate won 2 of 6 searches), 289 s
+  hints off by   10 deg, draw 1: same (rms 0.117511, max |z| 4.8e-05 cam2.w1, normal errors 0.02, 0.04, 0.31 deg; the answer is 10.0, 10.0, 10.4, 10.0 deg from the hints; a hint's candidate won 1 of 6 searches), 288 s
+  hints off by   10 deg, draw 2: same (rms 0.117511, max |z| 1.8e-06 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 10.0, 10.0, 10.3, 10.0 deg from the hints; a hint's candidate won 3 of 6 searches), 284 s
+  hints off by   20 deg, draw 0: same (rms 0.117511, max |z| 1.7e-06 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 20.0, 20.0, 20.2, 20.0 deg from the hints; a hint's candidate won 2 of 6 searches), 317 s
+  hints off by   20 deg, draw 1: same (rms 0.117511, max |z| 4.9e-05 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 20.0, 20.0, 19.6, 20.0 deg from the hints; a hint's candidate won 3 of 6 searches), 243 s
+  hints off by   20 deg, draw 2: same (rms 0.117511, max |z| 1.2e-06 cam3.w3, normal errors 0.02, 0.04, 0.31 deg; the answer is 20.0, 20.0, 20.4, 20.0 deg from the hints; a hint's candidate won 3 of 6 searches), 291 s
+  hints off by   30 deg, draw 0: same (rms 0.117511, max |z| 5.7e-05 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 30.0, 30.0, 29.6, 30.0 deg from the hints; a hint's candidate won 3 of 6 searches), 345 s
+  hints off by   30 deg, draw 1: same (rms 0.117511, max |z| 5.7e-06 win1.b, normal errors 0.02, 0.04, 0.31 deg; the answer is 30.0, 30.0, 30.1, 30.0 deg from the hints; a hint's candidate won 3 of 6 searches), 323 s
+  hints off by   30 deg, draw 2: same (rms 0.117511, max |z| 1.1e-06 cam3.w3, normal errors 0.02, 0.04, 0.31 deg; the answer is 30.0, 30.0, 30.4, 30.0 deg from the hints; a hint's candidate won 3 of 6 searches), 311 s
+
+seed 1045 (0.1 px), 2 cameras, per window [1, 1], f 29095, 12698 px; truth-started fit rms 0.08615 px
+  without hints: DIFFERENT (rms 0.348817, max |z| 1.0e+03 cam2.C2, normal errors 48.77, 13.97 deg), 400 s; stored answer rms 0.348817: the same
+  hints off by    0 deg, draw 0: same (rms 0.086151, max |z| 1.2e-06 win2.a, normal errors 0.17, 0.07 deg; the answer is 0.2, 0.1 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 308 s
+  hints off by    5 deg, draw 0: DIFFERENT (WORSE than without) (rms 0.379580, max |z| 1.1e+03 cam2.C2, normal errors 48.81, 8.47 deg; the answer is 43.8, 2.8 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 399 s
+  hints off by    5 deg, draw 1: DIFFERENT (WORSE than without) (rms 0.379580, max |z| 1.1e+03 cam2.C2, normal errors 48.81, 8.47 deg; the answer is 51.4, 4.7 deg from the hints; a hint's candidate won 5 of 12 searches), 425 s
+  hints off by    5 deg, draw 2: DIFFERENT (WORSE than without) (rms 0.379580, max |z| 1.1e+03 cam2.C2, normal errors 48.81, 8.47 deg; the answer is 43.9, 12.6 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 400 s
+  hints off by   10 deg, draw 0: same (rms 0.086151, max |z| 7.1e-07 cam2.C3, normal errors 0.17, 0.07 deg; the answer is 10.2, 9.9 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 301 s
+  hints off by   10 deg, draw 1: DIFFERENT (WORSE than without) (rms 0.379580, max |z| 1.1e+03 cam2.C2, normal errors 48.81, 8.47 deg; the answer is 38.9, 15.1 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 336 s
+  hints off by   10 deg, draw 2: same (rms 0.086151, max |z| 7.4e-07 cam2.C3, normal errors 0.17, 0.07 deg; the answer is 10.0, 10.0 deg from the hints; a hint's candidate won 7 of 12 searches; the restarts improved it), 315 s
+  hints off by   20 deg, draw 0: same (rms 0.086151, max |z| 2.9e-03 cam2.C3, normal errors 0.17, 0.07 deg; the answer is 19.9, 20.1 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 323 s
+  hints off by   20 deg, draw 1: same (rms 0.086151, max |z| 2.9e-06 cam2.w1, normal errors 0.17, 0.07 deg; the answer is 19.8, 20.0 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 358 s
+  hints off by   20 deg, draw 2: DIFFERENT (WORSE than without) (rms 0.379580, max |z| 1.1e+03 cam2.C2, normal errors 48.81, 8.47 deg; the answer is 41.9, 18.8 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 392 s
+  hints off by   30 deg, draw 0: DIFFERENT (rms 0.348597, max |z| 1.0e+03 cam2.C2, normal errors 48.83, 13.98 deg; the answer is 20.1, 33.2 deg from the hints; a hint's candidate won 3 of 12 searches), 456 s
+  hints off by   30 deg, draw 1: DIFFERENT (rms 0.348817, max |z| 1.0e+03 cam2.C2, normal errors 48.77, 13.97 deg; the answer is 70.4, 25.9 deg from the hints; a hint's candidate won 5 of 12 searches), 424 s
+  hints off by   30 deg, draw 2: DIFFERENT (WORSE than without) (rms 0.379580, max |z| 1.1e+03 cam2.C2, normal errors 48.81, 8.47 deg; the answer is 35.5, 37.3 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 430 s
+
+seed 1031 (0.1 px), 3 cameras, per window [2, 1], f 13526, 6388, 31672 px; truth-started fit rms 0.10921 px
+  without hints: DIFFERENT (rms 3.588919, max |z| 1.6e+03 cam2.C2, normal errors 29.51, 10.41 deg), 258 s; stored answer rms 3.588919: the same
+  hints off by    0 deg, draw 0: DIFFERENT (rms 1.037723, max |z| 1.9e+03 win2.a, normal errors 1.04, 41.59 deg; the answer is 1.0, 56.6, 1.2 deg from the hints; a hint's candidate won 1 of 4 searches; the restarts improved it), 305 s
+  hints off by    5 deg, draw 0: DIFFERENT (rms 1.037800, max |z| 1.9e+03 win2.a, normal errors 1.04, 41.60 deg; the answer is 4.2, 54.3, 3.8 deg from the hints; a hint's candidate won 1 of 4 searches), 267 s
+  hints off by    5 deg, draw 1: DIFFERENT (WORSE than without) (rms 3.628321, max |z| 1.6e+03 cam2.C2, normal errors 28.82, 10.38 deg; the answer is 26.1, 10.2, 35.9 deg from the hints; a hint's candidate won 1 of 4 searches; the restarts improved it), 308 s
+  hints off by    5 deg, draw 2: DIFFERENT (WORSE than without) (rms 3.602656, max |z| 1.6e+03 cam2.C2, normal errors 28.84, 10.42 deg; the answer is 26.6, 15.4, 32.4 deg from the hints; a hint's candidate won 1 of 4 searches; the restarts improved it), 294 s
+  hints off by   10 deg, draw 0: DIFFERENT (WORSE than without) (rms 3.623337, max |z| 1.6e+03 cam2.C2, normal errors 28.82, 10.39 deg; the answer is 18.9, 14.8, 41.2 deg from the hints; a hint's candidate won 2 of 4 searches; the restarts improved it), 303 s
+  hints off by   10 deg, draw 1: DIFFERENT (rms 1.088337, max |z| 1.9e+03 win2.a, normal errors 1.10, 41.67 deg; the answer is 11.1, 61.0, 10.4 deg from the hints; a hint's candidate won 1 of 4 searches; the restarts improved it), 312 s
+  hints off by   10 deg, draw 2: DIFFERENT (rms 1.037723, max |z| 1.9e+03 win2.a, normal errors 1.04, 41.59 deg; the answer is 10.1, 52.4, 10.7 deg from the hints; a hint's candidate won 1 of 4 searches; the restarts improved it), 304 s
+  hints off by   20 deg, draw 0: DIFFERENT (rms 1.037800, max |z| 1.9e+03 win2.a, normal errors 1.04, 41.60 deg; the answer is 20.1, 37.4, 19.1 deg from the hints; a hint's candidate won 2 of 4 searches), 255 s
+  hints off by   20 deg, draw 1: DIFFERENT (rms 1.088337, max |z| 1.9e+03 win2.a, normal errors 1.10, 41.67 deg; the answer is 20.4, 49.9, 19.6 deg from the hints; a hint's candidate won 2 of 4 searches; the restarts improved it), 267 s
+  hints off by   20 deg, draw 2: DIFFERENT (rms 1.045115, max |z| 1.9e+03 win2.a, normal errors 1.07, 41.61 deg; the answer is 21.1, 47.9, 19.4 deg from the hints; a hint's candidate won 2 of 4 searches; the restarts improved it), 281 s
+  hints off by   30 deg, draw 0: DIFFERENT (rms 1.088337, max |z| 1.9e+03 win2.a, normal errors 1.10, 41.67 deg; the answer is 30.4, 84.5, 30.0 deg from the hints; a hint's candidate won 2 of 4 searches; the restarts improved it), 272 s
+  hints off by   30 deg, draw 1: DIFFERENT (rms 1.037800, max |z| 1.9e+03 win2.a, normal errors 1.04, 41.60 deg; the answer is 29.0, 50.0, 30.1 deg from the hints; a hint's candidate won 2 of 4 searches), 241 s
+  hints off by   30 deg, draw 2: DIFFERENT (WORSE than without) (rms 3.615164, max |z| 1.6e+03 cam2.C2, normal errors 29.09, 10.42 deg; the answer is 17.4, 29.4, 1.6 deg from the hints; a hint's candidate won 1 of 4 searches; the restarts improved it), 277 s
+
+seed 1001 (0.1 px), 2 cameras, per window [1, 1], f 12323, 24485 px; truth-started fit rms 0.08595 px
+  without hints: DIFFERENT (rms 0.087479, max |z| 4.9e+01 win2.a, normal errors 0.64, 11.22 deg), 157 s; stored answer rms 0.087479: the same
+  hints off by    0 deg, draw 0: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 0.6, 14.9 deg from the hints; a hint's candidate won 7 of 12 searches; the restarts improved it), 262 s
+  hints off by    5 deg, draw 0: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 5.3, 13.4 deg from the hints; a hint's candidate won 6 of 12 searches; the restarts improved it), 261 s
+  hints off by    5 deg, draw 1: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 5.2, 14.7 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 257 s
+  hints off by    5 deg, draw 2: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 5.1, 10.0 deg from the hints; a hint's candidate won 6 of 12 searches; the restarts improved it), 243 s
+  hints off by   10 deg, draw 0: equivalent (rms 0.085945, max |z| 2.3e-01 cam2.w2, normal errors 0.08, 0.36 deg; the answer is 10.0, 10.5 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 256 s
+  hints off by   10 deg, draw 1: DIFFERENT (WORSE than without) (rms 0.087480, max |z| 5.0e+01 win2.a, normal errors 0.64, 11.30 deg; the answer is 10.6, 23.0 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 259 s
+  hints off by   10 deg, draw 2: DIFFERENT (WORSE than without) (rms 0.087482, max |z| 5.0e+01 win2.a, normal errors 0.63, 11.39 deg; the answer is 9.7, 12.6 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 293 s
+  hints off by   20 deg, draw 0: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 19.4, 29.0 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 249 s
+  hints off by   20 deg, draw 1: DIFFERENT (WORSE than without) (rms 0.087480, max |z| 5.0e+01 win2.a, normal errors 0.64, 11.31 deg; the answer is 20.6, 22.0 deg from the hints; a hint's candidate won 7 of 12 searches; the restarts improved it), 214 s
+  hints off by   20 deg, draw 2: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 20.6, 22.0 deg from the hints; a hint's candidate won 4 of 12 searches; the restarts improved it), 248 s
+  hints off by   30 deg, draw 0: DIFFERENT (rms 0.087478, max |z| 4.9e+01 win2.a, normal errors 0.65, 11.13 deg; the answer is 30.4, 32.3 deg from the hints; a hint's candidate won 8 of 12 searches; the restarts improved it), 239 s
+  hints off by   30 deg, draw 1: DIFFERENT (WORSE than without) (rms 0.087480, max |z| 5.0e+01 win2.a, normal errors 0.64, 11.28 deg; the answer is 30.6, 35.4 deg from the hints; a hint's candidate won 5 of 12 searches; the restarts improved it), 230 s
+  hints off by   30 deg, draw 2: equivalent (rms 0.085945, max |z| 2.3e-01 cam2.w2, normal errors 0.08, 0.37 deg; the answer is 30.0, 29.5 deg from the hints; a hint's candidate won 8 of 12 searches; the restarts improved it), 194 s
+
+Summary (verdict per draw):
+  3110 at 1.0 px: without DIFFERENT; 0 deg: DIFFERENT; 5 deg: DIFFERENT, DIFFERENT, DIFFERENT; 10 deg: same, DIFFERENT, DIFFERENT; 20 deg: same, DIFFERENT, DIFFERENT; 30 deg: DIFFERENT, DIFFERENT, DIFFERENT; time 362 s without, median 450 s with hints
+  1034 at 0.1 px: without DIFFERENT; 0 deg: same; 5 deg: same, same, same; 10 deg: same, same, same; 20 deg: same, same, same; 30 deg: same, same, same; time 374 s without, median 291 s with hints
+  1045 at 0.1 px: without DIFFERENT; 0 deg: same; 5 deg: DIFFERENT, DIFFERENT, DIFFERENT; 10 deg: same, DIFFERENT, same; 20 deg: same, same, DIFFERENT; 30 deg: DIFFERENT, DIFFERENT, DIFFERENT; time 400 s without, median 392 s with hints
+  1031 at 0.1 px: without DIFFERENT; 0 deg: DIFFERENT; 5 deg: DIFFERENT, DIFFERENT, DIFFERENT; 10 deg: DIFFERENT, DIFFERENT, DIFFERENT; 20 deg: DIFFERENT, DIFFERENT, DIFFERENT; 30 deg: DIFFERENT, DIFFERENT, DIFFERENT; time 258 s without, median 281 s with hints
+  1001 at 0.1 px: without DIFFERENT; 0 deg: DIFFERENT; 5 deg: DIFFERENT, DIFFERENT, DIFFERENT; 10 deg: equivalent, DIFFERENT, DIFFERENT; 20 deg: DIFFERENT, DIFFERENT, DIFFERENT; 30 deg: DIFFERENT, DIFFERENT, equivalent; time 157 s without, median 249 s with hints
+wall time 857 s
+criteria: delta <= 10 deg all at least equivalent, 0.1 px cases the same: FAIL; delta 20-30 deg none worse: FAIL; without hints as stored: PASS
+H1a: FAIL

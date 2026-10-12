@@ -1,0 +1,6 @@
+X1: W10's rig, 3 cameras of 1280 x 800 px, 300 frames (on the sensors: True)
+  PASS  three cameras, calibration: the fixed code gives git HEAD's answer to the bit (control: the same twice)  (ok True/True/True; control 0 differences, against HEAD 0; f 2,008.67, 2,007.38, 2,004.24; 22 s old, 22 s new)
+  PASS  two cameras, calibration: the fixed code gives git HEAD's answer to the bit (control: the same twice)  (ok True/True/True; control 0 differences, against HEAD 0; f 2,008.95, 1,978.90; 10 s old, 10 s new)
+  PASS  three cameras, Precalibrate's check: the fixed code gives git HEAD's answer to the bit (control: the same twice)  (ok True/True/True; control 0 differences, against HEAD 0; f 2,000.00, 2,032.94, 2,000.00; 0 s old, 0 s new)
+
+3 of 3 checks passed; 97 s

@@ -1,0 +1,45 @@
+P0b: T1 tracer images, from the local copy D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1raw
+
+cam1: 1001 frames read in 3 s
+  grey level (frame median) every 100th frame: 105 105 105 105 105 105 105 105 105 105 105
+  background (90th percentile, 1,001 frames): median 107.0
+    bg_every10_vs_all: |diff| median 0.00, 99th percentile 1.00, max 2.0; mean signed -0.02 counts
+    bg_every40_vs_all: |diff| median 0.00, 99th percentile 1.50, max 2.5; mean signed -0.11 counts
+    bg_first_vs_second_half: |diff| median 0.00, 99th percentile 2.00, max 4.0; mean signed -0.01 counts
+  noise of hp (negative tail): median 1.35 counts (1.33-1.36 over the 21 frames; MAD 1.54)
+  noise correlation between neighbouring pixels: 0.41 (horizontal), 0.39 (vertical); temporal noise (frame differences) 1.05 counts: the rest of hp's noise is a texture of faint, blurred particles, which moves with the flow (0.25-0.5 px per frame) and so cancels in consecutive frames' difference
+  flatness: level of hp in 64 px tiles (negative tail) -0.029 counts, scatter 0.202 over the tiles; before the high-pass (background - frame) the scatter is 0.549
+  objects per frame: 1491 above 4 sigma (1413-1566), 606 above 6 sigma
+  classes at 4 sigma: H 27 %, V 26 %, ellipse 21 %, round 19 %, cross 8 %
+    H: length (10/50/90/99 %) 5/10/18/29 px, thickness 2/3/6 px
+    V: length (10/50/90/99 %) 6/9/13/20 px, thickness 2/3/5 px
+  classes at 6 sigma: H 19 %, V 30 %, ellipse 18 %, round 26 %, cross 6 %
+    H: length (10/50/90/99 %) 5/9/17/24 px, thickness 2/3/5 px
+    V: length (10/50/90/99 %) 6/8/11/16 px, thickness 2/3/5 px
+  orientation (intensity moments): long H lines +0.30 deg (IQR -1.50..+2.12, n 3081); long V lines +0.22 deg from vertical (IQR -2.18..+2.65, n 3022)
+    H: length bin -> n, median peak, median summed signal (counts): 4-7: 1889, 8.0, 155; 7-10: 2139, 8.6, 219; 10-14: 2097, 9.6, 332; 14-20: 1492, 11.3, 522; 20-30: 594, 13.3, 922; 30-60: 81, 14.4, 1590
+    V: length bin -> n, median peak, median summed signal (counts): 4-7: 1113, 8.1, 171; 7-10: 4072, 9.5, 233; 10-14: 2401, 11.1, 372; 14-20: 525, 13.0, 636; 20-30: 86, 13.4, 996; 30-60: 10, 16.9, 1559
+  peak hp of the objects (counts): median 9.5, 90 % 14.5, 99 % 25.0, 99.9 % 36.7
+  (25 s)
+
+cam2: 1001 frames read in 3 s
+  grey level (frame median) every 100th frame: 146 146 146 146 146 146 146 146 146 146 146
+  background (90th percentile, 1,001 frames): median 149.0
+    bg_every10_vs_all: |diff| median 0.00, 99th percentile 1.00, max 2.0; mean signed -0.02 counts
+    bg_every40_vs_all: |diff| median 0.50, 99th percentile 1.50, max 3.0; mean signed -0.13 counts
+    bg_first_vs_second_half: |diff| median 0.00, 99th percentile 2.00, max 8.0; mean signed -0.10 counts
+  noise of hp (negative tail): median 1.48 counts (1.46-1.51 over the 21 frames; MAD 1.98)
+  noise correlation between neighbouring pixels: 0.51 (horizontal), 0.47 (vertical); temporal noise (frame differences) 1.05 counts: the rest of hp's noise is a texture of faint, blurred particles, which moves with the flow (0.25-0.5 px per frame) and so cancels in consecutive frames' difference
+  flatness: level of hp in 64 px tiles (negative tail) -0.022 counts, scatter 0.238 over the tiles; before the high-pass (background - frame) the scatter is 0.654
+  objects per frame: 2088 above 4 sigma (2030-2119), 993 above 6 sigma
+  classes at 4 sigma: H 27 %, V 29 %, ellipse 19 %, round 17 %, cross 8 %
+    H: length (10/50/90/99 %) 6/10/20/33 px, thickness 2/3/6 px
+    V: length (10/50/90/99 %) 6/9/13/21 px, thickness 2/3/5 px
+  classes at 6 sigma: H 20 %, V 35 %, ellipse 15 %, round 24 %, cross 6 %
+    H: length (10/50/90/99 %) 5/9/18/28 px, thickness 2/3/5 px
+    V: length (10/50/90/99 %) 5/8/11/17 px, thickness 2/3/4 px
+  orientation (intensity moments): long H lines -0.04 deg (IQR -1.80..+1.66, n 4859); long V lines +0.02 deg from vertical (IQR -2.06..+2.04, n 4878)
+    H: length bin -> n, median peak, median summed signal (counts): 4-7: 2631, 8.7, 161; 7-10: 2824, 9.6, 226; 10-14: 2865, 10.9, 343; 14-20: 2360, 12.5, 531; 20-30: 1021, 15.4, 955; 30-60: 204, 19.2, 2050
+    V: length bin -> n, median peak, median summed signal (counts): 4-7: 1652, 9.0, 169; 7-10: 6067, 10.8, 234; 10-14: 3839, 12.3, 375; 14-20: 842, 14.9, 696; 20-30: 182, 16.9, 1097; 30-60: 15, 21.3, 2034
+  peak hp of the objects (counts): median 11.1, 90 % 18.2, 99 % 32.6, 99.9 % 46.7
+  (25 s)

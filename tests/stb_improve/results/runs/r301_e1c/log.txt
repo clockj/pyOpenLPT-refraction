@@ -1,0 +1,87 @@
+[stbrun] pyopenlpt D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 56.68,1.11,1.09,0.00
+
+Camera 1 (a,b,c,alpha) = 38.45,1.06,0.99,0.00
+
+Camera 2 (a,b,c,alpha) = 44.61,1.02,0.96,0.00
+
+Camera 3 (a,b,c,alpha) = 51.69,1.03,0.99,0.00
+
+Load previous tracks at frame 300
+  Active short tracks: 11619
+  Active long tracks: 14565
+
+**************
+OpenLPT start!
+**************
+
+Convergence phase at frame 301
+ Prediction: 0.01 s. Done!
+ Shake prediction: 0.43 s.
+ START IPR...
+Full cameras
+Combination 0 cams=[0, 1, 2, 3]
+		2D detections per active camera: 36466  5109  15697  14151   (0.01 s)
+		Matched 294 objects. ( 2D tol: 2.00, t:0.08 s)	After shaking: 294 objects remain. (0.08 s)
+	LOOP=0: TOTAL OBJECTS = 294
+		2D detections per active camera: 36234  4870  15476  13909   (0.01 s)
+		Matched 1289 objects. ( 2D tol: 3.00, t:0.12 s)	After shaking: 1289 objects remain. (0.11 s)
+	LOOP=1: TOTAL OBJECTS = 1583
+Reduced cameras
+Combination 0 cams=[0, 1, 2]
+		2D detections per active camera: 35277  4087  14720   (0.01 s)
+		Matched 1795 objects. ( 2D tol: 2.00, t:0.06 s)	After shaking: 1795 objects remain. (0.13 s)
+	LOOP=0: TOTAL OBJECTS = 3378
+		2D detections per active camera: 33659  2512  12915   (0.01 s)
+		Matched 1239 objects. ( 2D tol: 3.00, t:0.05 s)	After shaking: 1239 objects remain. (0.12 s)
+	LOOP=1: TOTAL OBJECTS = 4617
+Combination 1 cams=[0, 1, 3]
+		2D detections per active camera: 32666  1750  12970   (0.01 s)
+		Matched 373 objects. ( 2D tol: 2.00, t:0.02 s)	After shaking: 373 objects remain. (0.11 s)
+	LOOP=0: TOTAL OBJECTS = 4990
+		2D detections per active camera: 32327  1443  12601   (0.01 s)
+		Matched 470 objects. ( 2D tol: 3.00, t:0.03 s)	After shaking: 470 objects remain. (0.11 s)
+	LOOP=1: TOTAL OBJECTS = 5460
+Combination 2 cams=[0, 2, 3]
+		2D detections per active camera: 31953  11782  12156   (0.01 s)
+		Matched 5218 objects. ( 2D tol: 2.00, t:0.10 s)	After shaking: 5216 objects remain. (0.20 s)
+	LOOP=0: TOTAL OBJECTS = 10676
+		2D detections per active camera: 26970  7466  7619   (0.01 s)
+		Matched 2832 objects. ( 2D tol: 3.00, t:0.06 s)	After shaking: 2830 objects remain. (0.14 s)
+	LOOP=1: TOTAL OBJECTS = 13506
+Combination 3 cams=[1, 2, 3]
+		2D detections per active camera: 1145  5719  5609   (0.01 s)
+		Matched 10 objects. ( 2D tol: 2.00, t:0.01 s)	After shaking: 10 objects remain. (0.08 s)
+	LOOP=0: TOTAL OBJECTS = 13516
+		2D detections per active camera: 1134  5708  5599   (0.01 s)
+		Matched 49 objects. ( 2D tol: 3.00, t:0.01 s)	After shaking: 49 objects remain. (0.07 s)
+	LOOP=1: TOTAL OBJECTS = 13565
+IPR FINISH! FOUND 13565 OBJECTS.
+ Remove overlap: 0.00 s.
+ Linking: 0.03 s. Done!
+ Pruning time: 0.00 s
+	No. of active short tracks: 11619 + 5844 - 5766 = 11697
+	No. of active long tracks: 14565 + 1731 - 1724 = 14572
+	No. of exited long tracks: 0 + 8 = 8
+	No. of exited short tracks(deleted): 0
+	No. of inactive Long tracks: 0 + 71 = 71
+	No. of fail shaking intensity/repeated: 4
+	No. of fail linear fit: 1712
+Total time for frame 301: 2.49
+
+Finish STB!
+Frame start: 0; Frame end: 301
+Number of initial phase frames: 4
+Output folder: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/r301_e1c/Results/
+Number of active short tracks: 11697
+Number of active long tracks: 14572
+Number of inactive long tracks: 71
+Number of exited tracks: 8
+  Saved all tracks to folder: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/r301_e1c/Results/ConvergeTrack/
+
+Total time for STB: 10.25s
+
+***************
+OpenLPT finish!
+***************

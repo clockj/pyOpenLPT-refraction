@@ -1,0 +1,7 @@
+true constants    : rms 0.10635 px | camera shift max    0.00 sigma (-) | unseen: stabiliser 0.119 px, re-triangulated 0.0037 px | L free 10.0010 +- 0.0019 mm, +0.5 sigma from the nominal 10.0
+n_water +0.002    : rms 0.11450 px | camera shift max   48.55 sigma (cam3.w2) | unseen: stabiliser 11.047 px, re-triangulated 0.0459 px | L free 9.9363 +- 0.0020 mm, -32.2 sigma from the nominal 10.0
+n_water -0.002    : rms 0.11502 px | camera shift max   48.72 sigma (cam3.w2) | unseen: stabiliser 11.223 px, re-triangulated 0.0461 px | L free 10.0657 +- 0.0020 mm, +32.8 sigma from the nominal 10.0
+R_outer +0.25 mm  : rms 0.10703 px | camera shift max   18.04 sigma (cam2.C3) | unseen: stabiliser 0.807 px, re-triangulated 0.0130 px | L free 10.0255 +- 0.0019 mm, +13.3 sigma from the nominal 10.0
+R_outer -0.25 mm  : rms 0.10693 px | camera shift max   17.94 sigma (cam2.C3) | unseen: stabiliser 0.879 px, re-triangulated 0.0136 px | L free 9.9764 +- 0.0019 mm, -12.3 sigma from the nominal 10.0
+L +0.01 mm        : rms 0.10644 px | camera shift max    7.23 sigma (cam2.logf) | unseen: stabiliser 0.943 px, re-triangulated 0.0066 px | L free 10.0010 +- 0.0019 mm, -4.7 sigma from the nominal 10.01
+L -0.01 mm        : rms 0.10648 px | camera shift max    7.24 sigma (cam2.logf) | unseen: stabiliser 0.918 px, re-triangulated 0.0061 px | L free 10.0010 +- 0.0019 mm, +5.7 sigma from the nominal 9.99

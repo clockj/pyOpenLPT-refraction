@@ -1,0 +1,40 @@
+D3 35Hz_r_b_1: which stored frame of the raw video is in each imgFile file (best: the largest |correlation|; imgFile is the raw frame inverted, so the match is negative; predicted: the GUI's chunked reading)
+
+camera 0: X:\Shijie Zhong\Bubble Shear Project\Raw_Data\20260727\35Hz_r_b_1\CamC1.cine
+  header: FirstImageNo 0, ImageCount 12605, TotalImageCount 12605, FirstMovieImage 0, 2048 x 1952, biCompression 256, RealBPP 10, 5000 fps
+  pycine: start_frame=0 gives the same frame as start_frame=1: True; start_frame=1 and 2 differ: True
+    file  best stored  predicted   correlation with stored frames file-2 .. file+2
+       0            0          0      ok   0:-0.083  1:-0.002  2:0.026
+       1            1          1      ok   0:-0.003  1:-0.084  2:-0.002  3:0.025
+       2            2          2      ok   0:0.024  1:-0.003  2:-0.084  3:-0.002  4:0.025
+     254          254        254      ok   252:0.024  253:0.001  254:-0.079  255:-0.001  256:0.023
+     255          255        255      ok   253:0.022  254:-0.001  255:-0.081  256:-0.001  257:0.023
+     256          255        255      ok   254:-0.001  255:-0.081  256:-0.001  257:0.023  258:0.041
+     257          256        256      ok   255:-0.001  256:-0.080  257:0.000  258:0.023  259:0.041
+     258          257        257      ok   256:-0.002  257:-0.081  258:-0.001  259:0.022  260:0.040
+     511          510        510      ok   509:-0.016  510:-0.093  511:-0.016  512:0.008  513:0.027
+     512          511        511      ok   510:-0.016  511:-0.092  512:-0.015  513:0.009  514:0.027
+     513          512        512      ok   511:-0.017  512:-0.093  513:-0.016  514:0.008  515:0.026
+   12603        12602      12602      ok   12601:-0.011  12602:-0.091  12603:-0.010  12604:0.013
+   12604        12603      12603      ok   12602:-0.013  12603:-0.092  12604:-0.012
+  last stored frame (12604) against the last file: -0.012
+
+camera 1: X:\Shijie Zhong\Bubble Shear Project\Raw_Data\20260727\35Hz_r_b_1\CamC2.cine
+  header: FirstImageNo 0, ImageCount 12605, TotalImageCount 12605, FirstMovieImage 0, 2048 x 1952, biCompression 256, RealBPP 10, 5000 fps
+  pycine: start_frame=0 gives the same frame as start_frame=1: True; start_frame=1 and 2 differ: True
+    file  best stored  predicted   correlation with stored frames file-2 .. file+2
+       0            0          0      ok   0:-0.201  1:-0.113  2:-0.062
+       1            1          1      ok   0:-0.109  1:-0.203  2:-0.115  3:-0.064
+       2            2          2      ok   0:-0.056  1:-0.111  2:-0.205  3:-0.117  4:-0.065
+     254          254        254      ok   252:-0.047  253:-0.097  254:-0.189  255:-0.103  256:-0.056
+     255          255        255      ok   253:-0.049  254:-0.099  255:-0.192  256:-0.107  257:-0.060
+     256          255        255      ok   254:-0.099  255:-0.192  256:-0.107  257:-0.060  258:-0.030
+     257          256        256      ok   255:-0.103  256:-0.195  257:-0.111  258:-0.064  259:-0.033
+     258          257        257      ok   256:-0.106  257:-0.198  258:-0.114  259:-0.067  260:-0.035
+     511          510        510      ok   509:-0.140  510:-0.222  511:-0.142  512:-0.092  513:-0.057
+     512          511        511      ok   510:-0.141  511:-0.222  512:-0.142  513:-0.092  514:-0.057
+     513          512        512      ok   511:-0.141  512:-0.223  513:-0.142  514:-0.092  515:-0.057
+   12603        12602      12602      ok   12601:-0.128  12602:-0.215  12603:-0.128  12604:-0.076
+   12604        12603      12603      ok   12602:-0.130  12603:-0.216  12604:-0.129
+  last stored frame (12604) against the last file: -0.129
+

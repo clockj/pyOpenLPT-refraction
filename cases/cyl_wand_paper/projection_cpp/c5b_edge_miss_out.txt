@@ -1,0 +1,14 @@
+c5b_edge_miss: started 2026-10-06 12:59:44; module projbench.cp311-win_amd64.pyd (SHA-256 01ab7737e3b8, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+point 226: X = (-0.0070189946124, 0.0777530753206, 0.128189353703) m; r_X 78.069245 mm, dphi 95.158273847 deg, dz 128.189354 mm
+  C++ search: 0 ray(s): 
+  Python reference: 0 ray(s): 
+  AFRT's ray: Lambda 0.0943223370240323, C_z 0.332159109211959, 1 - Lambda/Lmax 2.33e-15
+  AFRT: exit 1, landing miss 9.53e-10 m, angle to the images  rad; UNMATCHED
+point 475: X = (0.0138823825301, 0.0874502988626, -0.149196747124) m; r_X 88.545329 mm, dphi 80.979793909 deg, dz -149.196747 mm
+  C++ search: 0 ray(s): 
+  Python reference: 0 ray(s): 
+  recovered by the endpoint bracket: near, sin alpha 0.285714285714282, C_z -0.39499860608584, 1 - Lambda/Lmax 1.18e-14, landing miss 1.69e-10 m
+  AFRT's ray: Lambda 0.0918681719031099, C_z -0.394998606476076, 1 - Lambda/Lmax 1.33e-14
+  AFRT: exit 1, landing miss 4.13e-10 m, angle to the images 0.00e+00 rad
+C5b: 2 point(s) of 500 where our list lacks an image or AFRT's correct answer matches none
+c5b_edge_miss: done in 12.1 s

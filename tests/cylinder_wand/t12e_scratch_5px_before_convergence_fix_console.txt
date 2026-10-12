@@ -1,0 +1,13 @@
+T12e: T11b's ten rigs at 5.0 px from scratch with the new defaults
+  [  1/10    51 s] rig 1: OK   2 cams | max diff 6.7e-08 sigma | starts 6 | 45 s
+  [  2/10    56 s] rig 4: OK   2 cams | max diff 7.5e-09 sigma | starts 6 | 49 s
+  [  3/10    96 s] rig 6: OK   3 cams | max diff 1.3e-06 sigma | starts 6 | 89 s
+  [  4/10   112 s] rig 3: OK   3 cams | max diff 1.5e-06 sigma | starts 6 | 103 s
+  [  5/10   115 s] rig 9: OK   3 cams | max diff 3.5e-06 sigma | starts 6 | 106 s
+  [  6/10   128 s] rig 5: OK   4 cams | max diff 1.8e-07 sigma | starts 6 | 117 s
+  [  7/10   129 s] rig 0: OK   3 cams | max diff 9.3e-07 sigma | starts 6 | 118 s
+  [  8/10   140 s] rig 7: OK   3 cams | max diff 1.7e-05 sigma | starts 6 | 132 s
+  [  9/10   167 s] rig 8: OK   4 cams | max diff 4.1e-06 sigma | starts 6 | 154 s
+  [ 10/10   177 s] rig 2: OK   4 cams | max diff 8.2e-06 sigma | starts 6 | 164 s
+
+  PASS  10/10 at 5.0 px (T11b: 9/10); median 111 s per calibration (T11b: 39 s)

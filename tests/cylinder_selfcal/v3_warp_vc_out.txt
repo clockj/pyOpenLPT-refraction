@@ -1,0 +1,5 @@
+  cam1: the field's du RMS 0.002, dv RMS 0.290 px over the sensor (max |c| 1.04); covered 100 %
+  cam2: the field's du RMS 0.001, dv RMS 0.396 px over the sensor (max |c| 1.82); covered 89 %
+  cam1: noise in the 8-bit counts after the warp: median 7.281 (the 15 px frames' 7.515)
+  cam2: noise in the 8-bit counts after the warp: median 5.353 (the 15 px frames' 5.502)
+V3 warp vc: 502 frames into D:\Refraction\pyOpenLPT\tests\cylinder_selfcal\data\T1pre_s4_m15vc in 43 s

@@ -10,11 +10,129 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt
 import os
+import copy
 import multiprocessing
 import qtawesome as qta
 import numpy as np
 import re
 import cv2
+
+from modules import stb_config
+
+
+# Tube and sphere ports: their projects get the page's tube handling (Save keeps the object's settings the form does
+# not show; the view volume comes from the cameras' rays). Plate and pinhole projects keep theirs.
+CURVED_PORT_MODELS = ("PINCYL", "PINSPH")
+
+
+def camera_model_of(path):
+    """The model a camera file names on its first data line (PINHOLE, PINPLATE, PINCYL, ...), upper case; "" if the
+    file cannot be read."""
+    try:
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                s = line.strip()
+                if s and not s.startswith("#"):
+                    return s.split(",")[0].strip().upper()
+    except OSError:
+        pass
+    return ""
+
+
+def port_geometry(path):
+    """A tube or sphere camera file's port: (model, centre, unit axis, innermost radius); None for another camera or
+    a file that cannot be read."""
+    model = camera_model_of(path)
+    if model not in CURVED_PORT_MODELS:
+        return None
+    try:
+        with open(path, encoding="utf-8", errors="replace") as f:
+            lines = [ln.strip() for ln in f]
+    except OSError:
+        return None
+
+    def numbers(title):
+        for i, ln in enumerate(lines):
+            if ln.startswith("#") and title in ln:
+                nxt = next((x for x in lines[i + 1:] if x), "#")
+                try:
+                    return None if nxt.startswith("#") else [float(x) for x in nxt.replace(",", " ").split()]
+                except ValueError:
+                    return None
+        return None
+
+    centre, axis, radii = numbers("Port Center"), numbers("Port Axis"), numbers("Interface Radii")
+    if not centre or len(centre) < 3 or not radii:
+        return None
+    a = np.array((axis or [0.0, 0.0, 0.0])[:3], dtype=np.float64)
+    if model == "PINCYL":
+        n = np.linalg.norm(a)
+        if not n > 0:
+            return None
+        a = a / n
+    return model, np.array(centre[:3], dtype=np.float64), a, float(radii[-1])
+
+
+def chord_spans(P, D, port):
+    """Where rays P + t D (D unit) run inside the port's inner surface: arrays (t_in, t_out), nan where they miss."""
+    model, c, a, r = port
+    W = P - c
+    if model == "PINCYL":  # the distance from the axis
+        W = W - (W @ a)[:, None] * a
+        D = D - (D @ a)[:, None] * a
+    qa = np.einsum('ij,ij->i', D, D)
+    qb = 2.0 * np.einsum('ij,ij->i', W, D)
+    qc = np.einsum('ij,ij->i', W, W) - r * r
+    disc = qb * qb - 4.0 * qa * qc
+    with np.errstate(invalid='ignore', divide='ignore'):
+        root = np.sqrt(disc)
+        t_in = np.maximum((-qb - root) / (2.0 * qa), 0.0)
+        t_out = (-qb + root) / (2.0 * qa)
+    hit = (disc >= 0) & (qa > 0) & (t_out > t_in)
+    return np.where(hit, t_in, np.nan), np.where(hit, t_out, np.nan)
+
+
+def point_line_distance(X, P, D):
+    """The distance of points X from the lines P + t D (D unit), elementwise over the leading axes."""
+    V = X - P
+    return np.linalg.norm(V - np.sum(V * D, axis=-1, keepdims=True) * D, axis=-1)
+
+
+def port_rays(lpt, camera, port, W, H, n_u, n_v):
+    """A tube or sphere camera's lines of sight through n_u x n_v pixels (the sensor's edges included), cut to the
+    stretch inside the port's inner surface: (starts, unit directions, t_in, t_out, spacing) of the rays that enter,
+    the spacing being how far a ray's ends lie from its neighbours' lines at most. None if fewer than two enter."""
+    st = camera.lineOfSightBatchStatus([lpt.Pt2D(float(u), float(v)) for v in np.linspace(0.5, H - 0.5, n_v)
+                                        for u in np.linspace(0.5, W - 0.5, n_u)])
+    P = np.full((len(st), 3), np.nan)
+    D = np.full((len(st), 3), np.nan)
+    for i, (ok, line, _msg) in enumerate(st):
+        if ok:
+            P[i] = [line.pt[0], line.pt[1], line.pt[2]]
+            D[i] = [line.unit_vector[0], line.unit_vector[1], line.unit_vector[2]]
+    t_in, t_out = chord_spans(P, D, port)
+    Pg, Dg = P.reshape(n_v, n_u, 3), D.reshape(n_v, n_u, 3)
+    sep = []
+    for t in (t_in, t_out):
+        Eg = (P + t[:, None] * D).reshape(n_v, n_u, 3)
+        sep += [point_line_distance(Eg[:, :-1], Pg[:, 1:], Dg[:, 1:]).ravel(),
+                point_line_distance(Eg[:-1], Pg[1:], Dg[1:]).ravel()]
+    sep = np.concatenate(sep)
+    good = np.isfinite(t_in)
+    if good.sum() < 2 or not np.isfinite(sep).any():
+        return None
+    return P[good], D[good], t_in[good], t_out[good], float(np.nanmax(sep))
+
+
+def merge_unshown(shown, saved):
+    """The form's settings `shown`, with the settings of `saved` that it does not hold added, at every level."""
+    out = copy.deepcopy(shown)
+    for k, v in saved.items():
+        if k not in out:
+            out[k] = copy.deepcopy(v)
+        elif isinstance(out[k], dict) and isinstance(v, dict):
+            out[k] = merge_unshown(out[k], v)
+    return out
 
 
 class TrackingSettingsView(QWidget):
@@ -27,6 +145,7 @@ class TrackingSettingsView(QWidget):
         self.tri_err_3sigma_mm = None # Store for dynamic voxel conversion
         self.detected_cam_files = [] # Store detected camera filenames (e.g. cam0.txt or vsc_cam1.txt)
         self.last_project_path = None # Track changes to prevent overwriting manual paths
+        self._loaded_config = None # (project folder, config path, settings) the form was last filled from
         self._busy_tokens = {}
         self._setup_ui()
 
@@ -171,7 +290,8 @@ class TrackingSettingsView(QWidget):
         # Threads
         basic_grid.addWidget(QLabel("Number of Threads:"), 4, 0)
         self.n_threads_spin = QSpinBox()
-        self.n_threads_spin.setRange(1, 128)
+        self.n_threads_spin.setRange(0, 128)
+        self.n_threads_spin.setSpecialValueText("All")  # 0: as many threads as the machine has
         self.n_threads_spin.setValue(multiprocessing.cpu_count())
         basic_grid.addWidget(self.n_threads_spin, 4, 2)
         
@@ -198,7 +318,18 @@ class TrackingSettingsView(QWidget):
         output_layout.addWidget(output_browse)
         
         basic_grid.addLayout(output_layout, 6, 2)
-        
+
+        # Save interval: frames between saves of the tracks in the convergence phase
+        basic_grid.addWidget(QLabel("Save Interval (frames):"), 7, 0)
+        self.save_interval_spin = QSpinBox()
+        self.save_interval_spin.setRange(1, 100000)
+        self.save_interval_spin.setSingleStep(100)
+        self.save_interval_spin.setValue(500)
+        self.save_interval_spin.setToolTip(
+            "Frames between saves of the tracks in the convergence phase. Each save writes the lost and "
+            "exited tracks to disk and frees their memory; 200 suits long runs.")
+        basic_grid.addWidget(self.save_interval_spin, 7, 2)
+
         # Resume Settings
         resume_group = QGroupBox("Resume Settings")
         resume_layout = QGridLayout(resume_group)
@@ -544,8 +675,106 @@ class TrackingSettingsView(QWidget):
         pass
     
     def _load_config(self):
-        # TODO: Implement config loading
-        pass
+        """Fill the form from the project's saved config (config.json, else config.txt), so that Save keeps what was
+        saved.  Without a config the form keeps its values; a config that cannot be read is reported.  Returns the
+        path of the config read, or None."""
+        self._loaded_config = None
+        project_dir = self.project_path.text().strip()
+        if not project_dir or not os.path.isdir(project_dir):
+            return None
+        try:
+            return self._fill_from_config(project_dir)
+        except Exception as e:
+            name = os.path.basename(stb_config.find_config(project_dir) or "config")
+            reason = f"the setting {e} is missing" if isinstance(e, KeyError) else str(e)
+            QMessageBox.warning(self, "Tracking Config Not Loaded",
+                                f"{name} in this project cannot be read:\n{reason}\n\nThe form keeps the values it "
+                                f"shows; Save Configuration will replace the file.")
+            return None
+
+    def _fill_from_config(self, project_dir):
+        """_load_config's work; raises for a config that cannot be read or lacks a setting."""
+        config_path, cfg = stb_config.read_project(project_dir)
+        if cfg is None:
+            return None
+
+        def _folder(files):
+            return os.path.dirname(stb_config.resolve(config_path, files[0])).replace('\\', '/') if files else ""
+
+        # The camera folder first: choosing it re-estimates the tolerances and the view volume from the camera
+        # files, which the saved values below then replace.
+        cam_dir = _folder([c["file"] for c in cfg["cameras"]])
+        if cam_dir:
+            self.camera_path_display.setText(cam_dir)
+        self.detected_cam_files = [os.path.basename(c["file"]) for c in cfg["cameras"]]
+        img_dir = _folder(cfg["image_lists"])
+        if img_dir:
+            self.image_path_display.setText(img_dir if os.path.isdir(img_dir) else f"{img_dir} (Not Found)")
+        self.output_path.setText(stb_config.resolve(config_path, cfg["output_dir"]).replace('\\', '/'))
+
+        self._set_spin(self.n_cam_spin, len(cfg["cameras"]))
+        self._set_spin(self.frame_start_spin, cfg["frames"][0])
+        self._set_spin(self.frame_end_spin, cfg["frames"][1])
+        self._set_spin(self.fps_spin, cfg["fps"])
+        self._set_spin(self.n_threads_spin, cfg.get("threads", 0))
+        self._set_spin(self.voxel_spin, cfg["voxel_mm"])  # before the 3D tolerance, which it may re-derive
+        vv = cfg["view_volume_mm"]
+        for w, x in zip((self.vol_x_min, self.vol_x_max, self.vol_y_min, self.vol_y_max, self.vol_z_min,
+                         self.vol_z_max), (*vv["x"], *vv["y"], *vv["z"])):
+            self._set_spin(w, x)
+        self._set_spin(self.save_interval_spin, cfg.get("save_interval", 500))
+        lt = cfg.get("load_tracks", {})
+        self.resume_check.setChecked(bool(lt.get("enabled")))
+        self._set_spin(self.resume_frame_spin, lt.get("frame", cfg["frames"][0]))
+
+        obj = cfg["objects"][0]
+        idx = self.obj_type_combo.findText(obj["type"])
+        if idx >= 0:
+            self.obj_type_combo.setCurrentIndex(idx)
+        ip, sh, pf, ipr = obj["initial_phase"], obj["shake"], obj["predictive_field"], obj["ipr"]
+        self._set_spin(self.stb_initial_radius, ip["search_radius_vox"])
+        self._set_spin(self.stb_initial_frames, ip["frames"])
+        self._set_spin(self.stb_avg_spacing, obj["convergence_phase"]["avg_spacing_vox"])
+        self._set_spin(self.shake_width, sh["width_vox"])
+        self._set_spin(self.shake_loops, sh["loops"])
+        self._set_spin(self.shake_ghost, sh["ghost_threshold"])
+        for w, n in zip((self.pred_grid_x, self.pred_grid_y, self.pred_grid_z), pf["grid"]):
+            self._set_spin(w, n)
+        self._set_spin(self.pred_search_radius, pf["search_radius_vox"])
+        self._set_spin(self.ipr_loop_spin, ipr["loops"])
+        self._set_spin(self.ipr_reduce_spin, ipr["reduced_cameras"])
+        self._set_spin(self.ipr_reduced_spin, ipr["reduced_loops"])
+        self._set_spin(self.ipr_2d_tol, ipr["tol_2d_px"])
+        self._set_spin(self.ipr_3d_tol, ipr["tol_3d_vox"])
+        if "tracer" in obj:
+            self._set_spin(self.tracer_int_thresh, obj["tracer"]["intensity_threshold"])
+            self._set_spin(self.tracer_radius, obj["tracer"]["radius_px"])
+        if "bubble" in obj:
+            self._set_spin(self.bubble_min_rad, obj["bubble"]["radius_min_px"])
+            self._set_spin(self.bubble_max_rad, obj["bubble"]["radius_max_px"])
+            self._set_spin(self.bubble_sens, obj["bubble"]["sense"])
+
+        self._loaded_config = (os.path.abspath(project_dir), config_path, copy.deepcopy(cfg))
+        print(f"[TrackingSettings] Loaded the settings of {config_path}")
+        return config_path
+
+    @staticmethod
+    def _set_spin(widget, value):
+        """Set a spin box to a value from a config without changing it: the range widens to hold it, and a
+        QDoubleSpinBox shows as many decimals as it needs (up to 10)."""
+        if isinstance(widget, QDoubleSpinBox):
+            value = float(value)
+            decimals = widget.decimals()
+            while decimals < 10 and round(value, decimals) != value:
+                decimals += 1
+            widget.setDecimals(decimals)
+        else:
+            value = int(value)
+        if value < widget.minimum():
+            widget.setMinimum(value)
+        if value > widget.maximum():
+            widget.setMaximum(value)
+        widget.setValue(value)
     
     def _browse_output(self):
         dir_path = QFileDialog.getExistingDirectory(self, "Select Output Directory")
@@ -575,8 +804,9 @@ class TrackingSettingsView(QWidget):
                      self.project_path.setText(pre_path)
                      
     def _update_paths(self):
-        """Update derived Image and Camera paths based on Project Path."""
+        """Update derived Image and Camera paths based on Project Path, then load the project's saved config."""
         project_dir = self.project_path.text().strip()
+        self.last_project_path = project_dir  # showEvent then does not run this again (and reload) for the same project
         if not project_dir:
             self.image_path_display.setText("")
             self.camera_path_display.setText("")
@@ -652,6 +882,9 @@ class TrackingSettingsView(QWidget):
                 
         # 3. Frame Start (Reset to 0)
         self.frame_start_spin.setValue(0)
+
+        # 4. The project's saved settings replace these defaults
+        self._load_config()
         
     def _save_camera_params(self):
         """Auto-save camera parameters if available from Calibration module."""
@@ -728,7 +961,7 @@ class TrackingSettingsView(QWidget):
             calibrator.params_dirty = False # Clear dirty flag after successful save
             
     def _save_configuration(self):
-        """Save config.txt and [type]Config.txt to project directory."""
+        """Save config.json (the basic and the object settings, one file) to the project directory."""
         project_dir = self.project_path.text().strip()
         if not project_dir or not os.path.isdir(project_dir):
             QMessageBox.warning(self, "Invalid Path", "Please select a valid Project Directory first.")
@@ -766,124 +999,112 @@ class TrackingSettingsView(QWidget):
             return f"{base}/{tail}"
 
         obj_type = self.obj_type_combo.currentText()
-        stb_config_name = "tracerConfig.txt" if obj_type == "Tracer" else "bubbleConfig.txt"
-        stb_config_rel = stb_config_name
-        stb_config_path_abs = os.path.join(project_dir, stb_config_name).replace('\\', '/')
-        master_config_path_abs = os.path.join(project_dir, "config.txt").replace('\\', '/')
+        config_path_abs = os.path.join(project_dir, "config.json").replace('\\', '/')
+
+        n_cams = self.n_cam_spin.value()
+        cam_dir_rel = _to_rel(self.camera_path_display.text())
+        cameras = []
+        for i in range(n_cams):
+            # the detected file name (e.g. vsc_cam1.txt) if there is one
+            fname = self.detected_cam_files[i] if i < len(self.detected_cam_files) else f"cam{i}.txt"
+            cameras.append({"file": _join_rel(cam_dir_rel, fname), "max_intensity": 255})
+        img_dir_rel = _to_rel(self.image_path_display.text())
+        results_path_rel = _to_rel(self.output_path.text())
+
+        obj = {
+            "type": obj_type,
+            "initial_phase": {"search_radius_vox": self.stb_initial_radius.value(),
+                              "frames": self.stb_initial_frames.value()},
+            "convergence_phase": {"avg_spacing_vox": self.stb_avg_spacing.value()},
+            "shake": {"width_vox": self.shake_width.value(), "loops": self.shake_loops.value(),
+                      "ghost_threshold": self.shake_ghost.value()},
+            "predictive_field": {"grid": [self.pred_grid_x.value(), self.pred_grid_y.value(),
+                                          self.pred_grid_z.value()],
+                                 "search_radius_vox": self.pred_search_radius.value()},
+            "ipr": {"loops": self.ipr_loop_spin.value(), "reduced_cameras": self.ipr_reduce_spin.value(),
+                    "reduced_loops": self.ipr_reduced_spin.value(), "tol_2d_px": self.ipr_2d_tol.value(),
+                    "tol_3d_vox": self.ipr_3d_tol.value()},
+        }
+        if obj_type == "Tracer":
+            obj["tracer"] = {"intensity_threshold": self.tracer_int_thresh.value(),
+                             "radius_px": self.tracer_radius.value()}
+        else:
+            # whole pixels, as OpenLPT read them from the text config (std::stoi)
+            obj["bubble"] = {"radius_min_px": int(self.bubble_min_rad.value()),
+                             "radius_max_px": int(self.bubble_max_rad.value()),
+                             "sense": self.bubble_sens.value()}
+
+        cfg = {
+            "frames": [self.frame_start_spin.value(), self.frame_end_spin.value()],
+            "fps": self.fps_spin.value(),
+            "threads": self.n_threads_spin.value(),
+            "cameras": cameras,
+            "image_lists": [_join_rel(img_dir_rel, f"cam{i}ImageNames.txt") for i in range(n_cams)],
+            "view_volume_mm": {"x": [self.vol_x_min.value(), self.vol_x_max.value()],
+                               "y": [self.vol_y_min.value(), self.vol_y_max.value()],
+                               "z": [self.vol_z_min.value(), self.vol_z_max.value()]},
+            "voxel_mm": self.voxel_spin.value(),
+            "output_dir": results_path_rel,
+            "save_interval": self.save_interval_spin.value(),
+            "load_tracks": {"enabled": self.resume_check.isChecked(),
+                            "frame": self.resume_frame_spin.value(),
+                            "folder": _join_rel(results_path_rel, "ConvergeTrack") + "/"},
+            "objects": [obj],
+        }
+
+        # Keep from the config the form was filled from what the form does not show: the camera and image-list
+        # entries as written (if their folder and number are unchanged), the folder of the tracks to load (if the
+        # output folder is unchanged), further objects, and the settings without a field ("profile", comments).
+        loaded = self._loaded_config
+        if loaded and os.path.normcase(loaded[0]) == os.path.normcase(project_dir):
+            _, loaded_path, lcfg = loaded
+
+            def _abs_dir(p):
+                return os.path.normcase(os.path.normpath(p if os.path.isabs(p) else os.path.join(project_dir, p)))
+
+            def _in_dir(files, ui_text):
+                return bool(files) and _abs_dir(os.path.dirname(stb_config.resolve(loaded_path, files[0]))) == \
+                    _abs_dir(_clean_ui_path(ui_text))
+
+            if len(lcfg["cameras"]) == n_cams and _in_dir([c["file"] for c in lcfg["cameras"]],
+                                                          self.camera_path_display.text()):
+                cfg["cameras"] = copy.deepcopy(lcfg["cameras"])
+            if len(lcfg["image_lists"]) == n_cams and _in_dir(lcfg["image_lists"], self.image_path_display.text()):
+                cfg["image_lists"] = list(lcfg["image_lists"])
+            if lcfg.get("load_tracks", {}).get("folder") and _abs_dir(stb_config.resolve(
+                    loaded_path, lcfg["output_dir"])) == _abs_dir(_clean_ui_path(self.output_path.text())):
+                cfg["load_tracks"]["folder"] = lcfg["load_tracks"]["folder"]
+            cfg["objects"] += copy.deepcopy(lcfg["objects"][1:])
+            for k, v in lcfg.items():
+                if k not in cfg:
+                    cfg[k] = copy.deepcopy(v)
+            # A tube or sphere project also keeps the object's settings that the form does not show, at every level
+            # (the tracer's line detector, OTF table and depth cue). The form's values win; an object of another
+            # type is the form's alone. Plate and pinhole projects keep the object as the form builds it.
+            lobj = lcfg["objects"][0] if lcfg.get("objects") else None
+            if isinstance(lobj, dict) and lobj.get("type") == obj_type and \
+                    self._has_curved_port_camera(cfg["cameras"], config_path_abs):
+                cfg["objects"][0] = merge_unshown(obj, lobj)
 
         try:
-            # 1. Save Master config.txt
-            with open(master_config_path_abs, 'w') as f:
-                f.write("# Frame Range: [startID,endID]\n")
-                f.write(f"{self.frame_start_spin.value()},{self.frame_end_spin.value()}\n")
-                
-                f.write("# Frame Rate: [Hz]\n")
-                f.write(f"{self.fps_spin.value()}\n")
-                
-                f.write("# Number of Threads: (0: use as many as possible)\n")
-                f.write(f"{self.n_threads_spin.value()}\n")
-                
-                f.write("# Number of Cameras: \n")
-                n_cams = self.n_cam_spin.value()
-                f.write(f"{n_cams}\n")
-                
-                fwrite_cam_info = "# Camera File Path, Max Intensity\n"
-                f.write(fwrite_cam_info)
-                cam_dir_rel = _to_rel(self.camera_path_display.text())
-                for i in range(n_cams):
-                    if i < len(self.detected_cam_files):
-                        # Use actual detected filename (e.g. vsc_cam1.txt)
-                        fname = self.detected_cam_files[i]
-                        f.write(f"{_join_rel(cam_dir_rel, fname)},255\n")
-                    else:
-                        # Fallback if request n_cams > detected files
-                        f.write(f"{_join_rel(cam_dir_rel, f'cam{i}.txt')},255\n")
-                
-                f.write("# Image File Path\n")
-                img_dir_rel = _to_rel(self.image_path_display.text())
-                for i in range(n_cams):
-                    f.write(f"{_join_rel(img_dir_rel, f'cam{i}ImageNames.txt')}\n")
-                
-                f.write("# View Volume: (xmin,xmax,ymin,ymax,zmin,zmax)\n")
-                vol_str = f"{self.vol_x_min.value()},{self.vol_x_max.value()}," \
-                          f"{self.vol_y_min.value()},{self.vol_y_max.value()}," \
-                          f"{self.vol_z_min.value()},{self.vol_z_max.value()}"
-                f.write(f"{vol_str}\n")
-                
-                f.write("# Voxel to MM: e.g. use 1000^3 voxel, (xmax-xmin)/1000\n")
-                f.write(f"{self.voxel_spin.value()}\n")
-                
-                f.write("# Output Folder Path: \n")
-                f.write(f"{_to_rel(self.output_path.text())}\n")
-                
-                f.write("# Object Types: \n")
-                f.write(f"{obj_type}\n")
-                
-                f.write("# STB Config Files:\n")
-                f.write(f"{stb_config_rel}\n")
-                
-                f.write("# Flag to load previous track files, previous frameID\n")
-                resume_flag = 1 if self.resume_check.isChecked() else 0
-                f.write(f"{resume_flag},{self.resume_frame_spin.value()}\n")
-                
-                results_path_rel = _to_rel(self.output_path.text())
-                f.write("# Path to active long track files\n")
-                f.write(f"{_join_rel(results_path_rel, 'ConvergeTrack')}/\n")
-                f.write("# Path to active short track files\n")
-                f.write(f"{_join_rel(results_path_rel, 'ConvergeTrack')}/\n")
-
-            # 2. Save [type]Config.txt
-            with open(stb_config_path_abs, 'w') as f:
-                f.write("############################\n")
-                f.write("######### Tracking #########\n")
-                f.write("############################\n")
-                f.write("######### Initial Phase ############## \n")
-                f.write(f"{self.stb_initial_radius.value()} # Search radius for connecting tracks to objects\n")
-                f.write(f"{self.stb_initial_frames.value()} # Number of frames for initial phase\n")
-                f.write("######### Convergence Phase ############# \n")
-                f.write(f"{self.stb_avg_spacing.value()} # Avg Interparticle spacing. (vox) to identify neighbour tracks \n\n")
-
-                f.write("#########################\n")
-                f.write("######### Shake #########\n")
-                f.write("#########################\n")
-                f.write(f"{self.shake_width.value()} # shake width 0.25\n\n")
-
-                f.write("#################################\n")
-                f.write("######### Predict Field #########\n")
-                f.write("#################################\n")
-                f.write(f"{self.pred_grid_x.value()} # xgrid \n")
-                f.write(f"{self.pred_grid_y.value()} # ygrid\n")
-                f.write(f"{self.pred_grid_z.value()} # zgrid\n")
-                f.write(f"{self.pred_search_radius.value()} # searchRadius [voxel]\n\n")
-
-                f.write("#######################\n")
-                f.write("######### IPR #########\n")
-                f.write("#######################\n")
-                f.write(f"{self.ipr_loop_spin.value()}   # No. of IPR loop\n")
-                f.write(f"{self.shake_loops.value()}   # No. of Shake loop\n")
-                f.write(f"{self.shake_ghost.value()} # ghost threshold\n")
-                f.write(f"{self.ipr_2d_tol.value()}   # 2D tolerance [px]\n")
-                f.write(f"{self.ipr_3d_tol.value()}  # 3D tolerance [voxel]\n\n")
-
-                f.write(f"{self.ipr_reduce_spin.value()} # number of reduced camera\n")
-                f.write(f"{self.ipr_reduced_spin.value()} # no. of ipr loops for each reduced camera combination\n\n\n")
-
-                f.write("###############################\n")
-                f.write("######### Object Info #########\n")
-                f.write("###############################\n")
-                if obj_type == "Tracer":
-                    f.write(f"{self.tracer_int_thresh.value()} # 2D particle finder threshold\n")
-                    f.write(f"{self.tracer_radius.value()} # Particle radius [px], for calculating residue image and shaking\n")
-                else:
-                    f.write(f"{self.bubble_min_rad.value()}   # minimum bubble size to track\n")
-                    f.write(f"{self.bubble_max_rad.value()}  # maximum bubble size to track\n")
-                    f.write(f"{self.bubble_sens.value()} # sensitivity of identify circles\n")
-
-            QMessageBox.information(self, "Success", f"Configuration saved to:\n{master_config_path_abs}\n{stb_config_path_abs}")
-            print(f"[TrackingSettings] Saved config files to {project_dir}")
-
+            stb_config.write_json(cfg, config_path_abs, keep_unknown=True)
         except Exception as e:
             QMessageBox.critical(self, "Save Error", f"Failed to save configuration:\n{str(e)}")
+            return
+
+        msg = f"Configuration saved to:\n{config_path_abs}"
+        if os.path.exists(os.path.join(project_dir, "config.txt")):
+            msg += ("\n\nThe config.txt in this folder is no longer used: tracking reads config.json "
+                    "whenever both exist.")
+        QMessageBox.information(self, "Success", msg)
+        print(f"[TrackingSettings] Saved {config_path_abs}")
+
+    @staticmethod
+    def _has_curved_port_camera(cameras, config_path):
+        """Whether a camera of a config's list (its "file" relative to the config's folder) has a tube or sphere
+        port."""
+        return any(camera_model_of(stb_config.resolve(config_path, c["file"])) in CURVED_PORT_MODELS
+                   for c in cameras if isinstance(c, dict) and c.get("file"))
 
     def _update_object_tab(self, index):
         """Update Object tab content based on selected Object Type."""
@@ -1195,7 +1416,26 @@ class TrackingSettingsView(QWidget):
         Priority of initial center candidates:
         1) world origin [0,0,0]
         2) robust center from camera axes intersections
+
+        Tube and sphere rigs (every camera PINCYL or PINSPH) use their cameras' rays instead (_curved_port_common_box):
+        the grid search misses the narrow region a long lens sees, and takes a tube camera for a plain pinhole.
         """
+        models = [str(c.get('model', '')).strip().upper() for c in cams_data]
+        if len(models) >= 2 and all(m in CURVED_PORT_MODELS for m in models):
+            box = self._curved_port_common_box(cams_data)
+            if box is None:
+                print("[TrackingSettings] No region seen by every tube / sphere camera found; view volume unchanged.")
+                return
+            # as the grid search below sets it: outward to multiples of 5 mm, 1000 voxels across x
+            lo = np.floor(box[0] / 5.0) * 5.0
+            hi = np.ceil(box[1] / 5.0) * 5.0
+            for w, x in zip((self.vol_x_min, self.vol_y_min, self.vol_z_min, self.vol_x_max, self.vol_y_max,
+                             self.vol_z_max), (*lo, *hi)):
+                w.setValue(float(x))
+            self.voxel_spin.setValue(float(hi[0] - lo[0]) / 1000.0)
+            print(f"[TrackingSettings] Tube / sphere cameras: the region every camera sees spans "
+                  f"{np.round(box[0], 2)} to {np.round(box[1], 2)} mm")
+            return
 
         def get_center(cam):
             if 't_inv' in cam:
@@ -1339,6 +1579,84 @@ class TrackingSettingsView(QWidget):
 
             voxel_size = (x_max - x_min) / 1000.0
             self.voxel_spin.setValue(voxel_size)
+
+    def _curved_port_common_box(self, cams_data, spacing_mm=1.0):
+        """The box around the points every camera of a tube or sphere rig sees, from the cameras' rays alone.
+
+        Each camera's lines of sight through a grid of pixels (the sensor's edges included; dense enough that
+        neighbouring rays lie about spacing_mm apart, up to 129 x 81) are cut to the stretch inside the port's inner
+        surface. The closest approaches of the two most oblique cameras' rays that pass within the rays' spacing sample
+        the region both see. A sample counts for a further camera when one of its rays passes within that camera's
+        spacing; samples are tested from the outside in until each side's outermost one is found. Returns
+        (bbox_min, bbox_max), widened by the largest spacing, or None."""
+        try:
+            import pyopenlpt as lpt
+        except Exception:
+            return None
+        rays = []
+        for cam in cams_data:
+            path = cam.get('cam_file_path', '')
+            port = port_geometry(path)
+            H, W = cam.get('h'), cam.get('w')
+            if port is None or not H or not W:
+                return None
+            try:
+                camera = lpt.Camera(path)
+                r = port_rays(lpt, camera, port, W, H, 33, 21)
+                if r is not None and r[4] > spacing_mm:
+                    f = r[4] / spacing_mm
+                    r = port_rays(lpt, camera, port, W, H, min(129, int(np.ceil(32 * f)) + 1),
+                                  min(81, int(np.ceil(20 * f)) + 1))
+            except Exception:
+                return None
+            if r is None:
+                return None
+            rays.append(r)
+
+        # the base pair: the two cameras whose mean viewing directions differ most
+        mean_dir = [r[1].mean(axis=0) / np.linalg.norm(r[1].mean(axis=0)) for r in rays]
+        i0, i1 = min(((i, j) for i in range(len(rays)) for j in range(i + 1, len(rays))),
+                     key=lambda ij: abs(float(mean_dir[ij[0]] @ mean_dir[ij[1]])))
+        (P0, D0, a0, b0, s0), (P1, D1, a1, b1, s1) = rays[i0], rays[i1]
+        pts = []
+        for k in range(0, len(P0), 64):  # every pair of rays, its closest approach
+            p, d, a, b = P0[k:k + 64], D0[k:k + 64], a0[k:k + 64], b0[k:k + 64]
+            dot = d @ D1.T
+            W0 = p[:, None, :] - P1[None, :, :]
+            e0 = np.einsum('ik,ijk->ij', d, W0)
+            e1 = np.einsum('jk,ijk->ij', D1, W0)
+            den = 1.0 - dot * dot
+            with np.errstate(divide='ignore', invalid='ignore'):
+                s = (dot * e1 - e0) / den
+                t = (e1 - dot * e0) / den
+            X0 = p[:, None, :] + s[..., None] * d[:, None, :]
+            X1 = P1[None, :, :] + t[..., None] * D1[None, :, :]
+            near = ((den > 1e-12) & (np.linalg.norm(X0 - X1, axis=2) <= 0.75 * (s0 + s1))
+                    & (s >= a[:, None]) & (s <= b[:, None]) & (t >= a1[None, :]) & (t <= b1[None, :]))
+            pts.append(0.5 * (X0 + X1)[near])
+        pts = np.concatenate(pts)
+        others = [r for k, r in enumerate(rays) if k not in (i0, i1)]
+        if others and len(pts):
+            verdict = np.zeros(len(pts), dtype=np.int8)  # 0 untested, 1 seen by every further camera, -1 not
+            for ax in range(3):
+                for order in (np.argsort(pts[:, ax]), np.argsort(-pts[:, ax])):
+                    for k in range(0, len(order), 128):
+                        batch = order[k:k + 128]
+                        todo = batch[verdict[batch] == 0]
+                        if len(todo):
+                            seen = np.ones(len(todo), dtype=bool)
+                            for P, D, a, b, sp in others:
+                                V = pts[todo, None, :] - P[None, :, :]
+                                tt = np.clip(np.einsum('ijk,jk->ij', V, D), a[None, :], b[None, :])
+                                seen &= np.linalg.norm(V - tt[..., None] * D[None, :, :], axis=2).min(axis=1) <= sp
+                            verdict[todo] = np.where(seen, 1, -1)
+                        if (verdict[batch] == 1).any():
+                            break
+            pts = pts[verdict == 1]
+        if not len(pts):
+            return None
+        spacing = max(r[4] for r in rays)
+        return pts.min(axis=0) - spacing, pts.max(axis=0) + spacing
 
     def _on_voxel_scale_changed(self):
         """Update 3D tolerance in voxels if scale changes."""
@@ -1531,10 +1849,12 @@ class TrackingSettingsView(QWidget):
         if not project_dir or " (" in project_dir:
             project_dir = project_dir.split(" (")[0]
             
-        config_file = os.path.join(project_dir, "config.txt").replace('\\', '/')
-        if not os.path.exists(config_file):
+        config_file = stb_config.find_config(project_dir)
+        if config_file is None:
             QMessageBox.warning(self, "Error", "Config file not found. Please save configuration first.")
+            self._busy_end('validate_settings')
             return
+        config_file = config_file.replace('\\', '/')
 
         # Setup Progress Dialog
         progress = QProgressDialog("Verifying Settings...", "Cancel", 0, 0, self)
@@ -1607,7 +1927,14 @@ class TrackingSettingsView(QWidget):
             total_2d_count = 0
             per_camera_2d_counts = []
             for cam_id in range(num_cams):
-                obj2ds = obj_finder.findObject2D(image_list[cam_id], obj_cfg)
+                # as the tracking run detects (IPR): with the camera's index, which picks its settings (the line
+                # detector's noise); a module built before findObject2D took it detects without
+                try:
+                    obj2ds = obj_finder.findObject2D(image_list[cam_id], obj_cfg, cam_id)
+                except TypeError:
+                    print("[Validation] Warning: this pyopenlpt's findObject2D takes no camera index; rebuild it "
+                          "(build_local.py) to detect as the tracking run does.")
+                    obj2ds = obj_finder.findObject2D(image_list[cam_id], obj_cfg)
                 obj2d_list.append(obj2ds)
                 count = len(obj2ds)
                 per_camera_2d_counts.append(count)

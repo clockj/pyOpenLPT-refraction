@@ -1,0 +1,39 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "n": 50000,
+ "agree": 50000,
+ "disagree_examples": [],
+ "counts": {
+  "r > r_c": {
+   "ambiguous": 1019,
+   "one": 13910,
+   "none": 5306
+  },
+  "r < r_c": {
+   "one": 29762,
+   "none": 3
+  }
+ },
+ "images_per_point": {
+  "r > r_c": {
+   "2": 1019,
+   "1": 13910,
+   "0": 5306
+  },
+  "r < r_c": {
+   "1": 29762,
+   "0": 3
+  }
+ },
+ "provably_single": 29626,
+ "provably_single_but_not_one_image": 0,
+ "inside_rc_without_certificate": 139,
+ "pass": true
+}

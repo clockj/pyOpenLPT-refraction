@@ -1,0 +1,173 @@
+    LM   0: rms 4.993409 px, lambda 3.3e-04, ok
+    LM   1: rms 4.710575 px, lambda 1.1e-04, ok
+    LM   2: rms 4.374827 px, lambda 3.7e-05, ok
+    LM   3: rms 4.125780 px, lambda 1.2e-05, ok
+    LM   4: rms 4.071834 px, lambda 4.1e-06, ok
+    LM   5: rms 4.069159 px, lambda 1.6e-06, ok
+    LM   6: rms 4.068694 px, lambda 1.6e-06, ok
+    LM   7: rms 4.068178 px, lambda 5.3e-07, ok
+    LM   8: rms 4.067440 px, lambda 1.8e-07, ok
+    LM   9: rms 4.065923 px, lambda 1.0e-07, ok
+    LM  10: rms 4.063807 px, lambda 5.7e-08, ok
+    LM  11: rms 4.060854 px, lambda 3.1e-08, ok
+    LM  12: rms 4.057436 px, lambda 2.8e-08, ok
+    LM  13: rms 4.053418 px, lambda 2.2e-08, ok
+    LM  14: rms 4.050190 px, lambda 2.1e-08, ok
+    LM  15: rms 4.046850 px, lambda 1.8e-08, ok
+    LM  16: rms 4.044212 px, lambda 1.6e-08, ok
+    LM  17: rms 4.041671 px, lambda 1.4e-08, ok
+    LM  18: rms 4.039615 px, lambda 1.3e-08, ok
+    LM  19: rms 4.037708 px, lambda 1.1e-08, ok
+    LM  20: rms 4.036133 px, lambda 9.9e-09, ok
+    LM  21: rms 4.034708 px, lambda 8.7e-09, ok
+    LM  22: rms 4.033516 px, lambda 7.8e-09, ok
+    LM  23: rms 4.032458 px, lambda 6.8e-09, ok
+    LM  24: rms 4.031569 px, lambda 6.1e-09, ok
+    LM  25: rms 4.030793 px, lambda 5.4e-09, ok
+    LM  26: rms 4.030141 px, lambda 4.8e-09, ok
+    LM  27: rms 4.029581 px, lambda 4.2e-09, ok
+    LM  28: rms 4.029115 px, lambda 3.7e-09, ok
+    LM  29: rms 4.028722 px, lambda 3.3e-09, ok
+    LM  30: rms 4.028398 px, lambda 2.9e-09, ok
+    LM  31: rms 4.028131 px, lambda 2.5e-09, ok
+    LM  32: rms 4.027916 px, lambda 2.2e-09, ok
+    LM  33: rms 4.027743 px, lambda 1.9e-09, ok
+    LM  34: rms 4.027609 px, lambda 1.6e-09, ok
+    LM  35: rms 4.027505 px, lambda 1.3e-09, ok
+    LM  36: rms 4.027429 px, lambda 1.1e-09, ok
+    LM  37: rms 4.027373 px, lambda 8.9e-10, ok
+    LM  38: rms 4.027336 px, lambda 7.0e-10, ok
+    LM  39: rms 4.027312 px, lambda 5.2e-10, ok
+    LM  40: rms 4.027298 px, lambda 3.5e-10, ok
+    LM  41: rms 4.027291 px, lambda 2.1e-10, ok
+    LM  42: rms 4.027288 px, lambda 9.3e-11, ok
+    LM  43: rms 4.027288 px, lambda 3.1e-11, ok
+    LM  44: rms 4.027288 px, lambda 1.0e-11, ok
+    LM  45: rms 4.027288 px, lambda 3.5e-12, ok
+    LM  46: rms 4.027288 px, lambda 1.2e-12, ok
+    LM  47: rms 4.027288 px, lambda 3.9e-10, ok
+    LM  48: rms 4.027288 px, lambda 1.2e+14, stuck
+  round 0: rms 4.02729 px, 49 LM iterations, rejected 0, re-admitted 0
+  pinhole start, mirror True: rms 4.027 px, active 1200/1200
+  pass 0, window 1: score 703.8
+  pass 0, window 2: score 295.4
+  pass 1, window 1: score 169.1
+  pass 1, window 2: score 115.8
+  pass 2, window 1: score 102.6
+  pass 2, window 2: score 94.08
+    coarse round 0: rms 0.6771 px, nfev 40, step 1.5e-01
+    coarse round 1: rms 0.4856 px, nfev 40, step 1.8e-01
+    coarse round 2: rms 0.4354 px, nfev 40, step 8.6e-02
+    coarse round 3: rms 0.4096 px, nfev 40, step 2.9e-01
+    coarse round 0: rms 0.6785 px, nfev 40, step 1.3e-01
+    coarse round 1: rms 0.4803 px, nfev 40, step 1.7e-01
+    coarse round 2: rms 0.4334 px, nfev 40, step 9.5e-02
+    coarse round 3: rms 0.4072 px, nfev 40, step 2.5e-01
+    coarse round 0: rms 0.4863 px, nfev 40, step 2.4e-01
+    coarse round 1: rms 0.4858 px, nfev 40, step 2.9e-04
+    coarse round 2: rms 0.4857 px, nfev 40, step 4.7e-03
+    coarse round 3: rms 0.4857 px, nfev 24, step 3.1e-03
+    coarse round 0: rms 0.6846 px, nfev 40, step 1.5e-01
+    coarse round 1: rms 0.4722 px, nfev 40, step 1.8e-01
+    coarse round 2: rms 0.4210 px, nfev 40, step 8.8e-02
+    coarse round 3: rms 0.4020 px, nfev 40, step 1.8e-01
+    LM   0: rms 4.993409 px, lambda 3.3e-04, ok
+    LM   1: rms 4.710575 px, lambda 1.1e-04, ok
+    LM   2: rms 4.374827 px, lambda 3.7e-05, ok
+    LM   3: rms 4.125780 px, lambda 1.2e-05, ok
+    LM   4: rms 4.071834 px, lambda 4.1e-06, ok
+    LM   5: rms 4.069159 px, lambda 1.6e-06, ok
+    LM   6: rms 4.068694 px, lambda 1.6e-06, ok
+    LM   7: rms 4.068178 px, lambda 5.3e-07, ok
+    LM   8: rms 4.067440 px, lambda 1.8e-07, ok
+    LM   9: rms 4.065923 px, lambda 1.0e-07, ok
+    LM  10: rms 4.063807 px, lambda 5.7e-08, ok
+    LM  11: rms 4.060854 px, lambda 3.1e-08, ok
+    LM  12: rms 4.057436 px, lambda 2.8e-08, ok
+    LM  13: rms 4.053418 px, lambda 2.2e-08, ok
+    LM  14: rms 4.050190 px, lambda 2.1e-08, ok
+    LM  15: rms 4.046850 px, lambda 1.8e-08, ok
+    LM  16: rms 4.044212 px, lambda 1.6e-08, ok
+    LM  17: rms 4.041671 px, lambda 1.4e-08, ok
+    LM  18: rms 4.039615 px, lambda 1.3e-08, ok
+    LM  19: rms 4.037708 px, lambda 1.1e-08, ok
+    LM  20: rms 4.036133 px, lambda 9.9e-09, ok
+    LM  21: rms 4.034708 px, lambda 8.7e-09, ok
+    LM  22: rms 4.033516 px, lambda 7.8e-09, ok
+    LM  23: rms 4.032458 px, lambda 6.8e-09, ok
+    LM  24: rms 4.031569 px, lambda 6.1e-09, ok
+    LM  25: rms 4.030793 px, lambda 5.4e-09, ok
+    LM  26: rms 4.030141 px, lambda 4.8e-09, ok
+    LM  27: rms 4.029581 px, lambda 4.2e-09, ok
+    LM  28: rms 4.029115 px, lambda 3.7e-09, ok
+    LM  29: rms 4.028722 px, lambda 3.3e-09, ok
+    LM  30: rms 4.028398 px, lambda 2.9e-09, ok
+    LM  31: rms 4.028131 px, lambda 2.5e-09, ok
+    LM  32: rms 4.027916 px, lambda 2.2e-09, ok
+    LM  33: rms 4.027743 px, lambda 1.9e-09, ok
+    LM  34: rms 4.027609 px, lambda 1.6e-09, ok
+    LM  35: rms 4.027505 px, lambda 1.3e-09, ok
+    LM  36: rms 4.027429 px, lambda 1.1e-09, ok
+    LM  37: rms 4.027373 px, lambda 8.9e-10, ok
+    LM  38: rms 4.027336 px, lambda 7.0e-10, ok
+    LM  39: rms 4.027312 px, lambda 5.2e-10, ok
+    LM  40: rms 4.027298 px, lambda 3.5e-10, ok
+    LM  41: rms 4.027291 px, lambda 2.1e-10, ok
+    LM  42: rms 4.027288 px, lambda 9.3e-11, ok
+    LM  43: rms 4.027288 px, lambda 3.1e-11, ok
+    LM  44: rms 4.027288 px, lambda 1.0e-11, ok
+    LM  45: rms 4.027288 px, lambda 3.5e-12, ok
+    LM  46: rms 4.027288 px, lambda 1.2e-12, ok
+    LM  47: rms 4.027288 px, lambda 3.9e-10, ok
+    LM  48: rms 4.027288 px, lambda 1.2e+14, stuck
+  round 0: rms 4.02729 px, 49 LM iterations, rejected 0, re-admitted 0
+  pinhole start, mirror True: rms 4.027 px, active 1200/1200
+    window 1 candidate: 11.7 deg from the guess, d -269.0: quick 2.356, full 10.01
+    window 1 candidate: 15.8 deg from the guess, d -244.4: quick 2.843, full 12.17
+    window 1 candidate: 3.6 deg from the guess, d -1110.5: quick 2.12, full 12.21
+  pass 0, window 1: score 10.01
+    window 2 candidate: 0.2 deg from the guess, d 302.8: quick 0.005776, full 0.02092
+    window 2 candidate: 0.2 deg from the guess, d -61.7: quick 0.01558, full 0.05509
+    window 2 candidate: 0.5 deg from the guess, d -74.5: quick 0.281, full 0.09708
+  pass 0, window 2: score 0.02092
+    window 1 candidate: 4.1 deg from the guess, d -294.2: quick 8.656, full 28.85
+    window 1 candidate: 0.4 deg from the guess, d -318.2: quick 8.513, full 31.65
+    window 1 candidate: 1.6 deg from the guess, d -329.8: quick 8.676, full 34.78
+  pass 1, window 1: score 28.85
+    window 2 candidate: 20.4 deg from the guess, d 21.9: quick 37.3, full 142.6
+    window 2 candidate: 7.7 deg from the guess, d 262.4: quick 33.17, full 148.1
+    window 2 candidate: 6.3 deg from the guess, d 326.8: quick 36.77, full 157.1
+  pass 1, window 2: score 142.6
+    window 1 candidate: 1.0 deg from the guess, d -295.2: quick 13.79, full 47.92
+    window 1 candidate: 1.4 deg from the guess, d -313.7: quick 13.37, full 51.1
+    window 1 candidate: 4.7 deg from the guess, d -300.2: quick 13.39, full 57.94
+  pass 2, window 1: score 47.92
+    window 2 candidate: 5.8 deg from the guess, d -49.8: quick 17.42, full 68.5
+    window 2 candidate: 6.7 deg from the guess, d 41.6: quick 21.15, full 71.05
+    window 2 candidate: 3.2 deg from the guess, d 8.3: quick 19.96, full 73.65
+  pass 2, window 2: score 68.5
+    coarse round 0: rms 1.8613 px, nfev 40, step 5.4e-01
+    coarse round 1: rms 1.2477 px, nfev 40, step 8.0e-01
+    coarse round 2: rms 0.9023 px, nfev 40, step 2.0e-01
+    coarse round 3: rms 0.5078 px, nfev 40, step 3.2e-01
+    coarse round 0: rms 1.6386 px, nfev 40, step 5.9e-01
+    coarse round 1: rms 1.2255 px, nfev 40, step 7.3e-01
+    coarse round 2: rms 0.9174 px, nfev 40, step 1.8e-01
+    coarse round 3: rms 0.4977 px, nfev 40, step 9.4e-01
+    coarse round 0: rms 1.8063 px, nfev 40, step 6.4e-01
+    coarse round 1: rms 1.4702 px, nfev 40, step 9.1e-01
+    coarse round 2: rms 1.4675 px, nfev 40, step 7.2e-01
+    coarse round 3: rms 1.4675 px, nfev 38, step 5.7e-04
+    coarse round 0: rms 1.8341 px, nfev 40, step 6.0e-01
+    coarse round 1: rms 1.2371 px, nfev 40, step 8.0e-01
+    coarse round 2: rms 0.9067 px, nfev 40, step 1.9e-01
+    coarse round 3: rms 0.5106 px, nfev 40, step 3.1e-01
+  start 0: coarse rms 0.402 px -> stage 4 rms 0.34882 px, active 5240/5248
+  start 1: coarse rms 0.498 px -> stage 4 rms 0.37958 px, active 5204/5248
+  start 2: coarse rms 0.407 px -> stage 4 rms 0.34775 px, active 5236/5248
+  start 3: coarse rms 0.508 px -> stage 4 rms 0.37958 px, active 5204/5248
+  start 4: coarse rms 0.410 px -> stage 4 rms 0.34775 px, active 5236/5248
+  start 5: coarse rms 0.511 px -> stage 4 rms 0.37958 px, active 5204/5248
+  perturbed restarts: 4 draws at 2 sigma (0 left out), screened costs relative to the answer's -2.2e-13, -2.9e-13, -3.4e-13, +2.1e-14; none lower
+  scan of window 1's normal: 309 of 317 grid points fitted, 0 minima below the answer's; released: none (237 s)
+  scan of window 1: nothing better

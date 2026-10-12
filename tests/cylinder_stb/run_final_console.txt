@@ -1,0 +1,38 @@
+The cylinder STB tests on build p4c
+  F1: exit 0, 153 s
+      judged: pixels within 1e-6 px and no new failure: PASS
+      judged: pixels within 1e-6 px and no new failure: PASS
+  F1b: exit 0, 128 s
+      judged: PASS
+  F2: exit 0, 68 s
+      |pixel difference| 99th percentile 1.4e-10, max 4.26e-09 px: PASS
+      |pixel difference| 99th percentile 9.54e-10, max 4.25e-09 px: PASS
+      |pixel difference| 99th percentile 2.74e-10, max 4.26e-09 px: PASS
+  F3: exit 0, 63 s
+      cam1 path A: 80200 points (80000 with a hint), fast path 79652, fallbacks 175 (at most 0.00 mm from the junction); branches seen [0, 1]; max |fast - project()| 7.25e-08 px; max |pixel - the line's pixel| 7.45e-08 px; new failures 0: PASS
+      cam1 path B: 80200 points (80000 with a hint), fast path 79607, fallbacks 198 (at most 0.01 mm from the junction); branches seen [0, 1]; max |fast - project()| 9.98e-06 px; new failures 0: FAIL
+      cam2 path A: 80200 points (80000 with a hint), fast path 79635, fallbacks 185 (at most 0.00 mm from the junction); branches seen [0, 1]; max |fast - project()| 8.43e-08 px; max |pixel - the line's pixel| 6.83e-08 px; new failures 0: PASS
+      cam2 path B: 80200 points (80000 with a hint), fast path 79617, fallbacks 197 (at most 1.58 mm from the junction); branches seen [0, 1]; max |fast - project()| 1.96e-05 px; new failures 0: FAIL
+  F3b: exit 0, 0 s
+      judged (worst cases at the rounding scale of the grazing ray): PASS
+  F5: exit 0, 189 s
+  E1: exit 0, 108 s
+      E1 judged (>= 99.9 % within 0.25 px): PASS
+      E1 judged (>= 99.9 % within 0.25 px): PASS
+  E3: exit 0, 74 s
+      judged (every line built with the wide volume, build p4c): PASS
+  V1: exit 0, 28 s
+      judged: PASS
+  V2: exit 0, 3 s
+      judged (p123: no lower cost in the shadow; the shake ends at X0): PASS
+  V3: exit 0, 5 s
+      L = 5 px: removed (min / 5th percentile / median) today 0.592 / 0.598 / 0.611; from the OTF 0.988 / 0.991 / 0.993 (PASS)
+      L = 10 px: removed (min / 5th percentile / median) today 0.352 / 0.353 / 0.359; from the OTF 0.990 / 0.991 / 0.994 (PASS)
+      L = 20 px: removed (min / 5th percentile / median) today 0.176 / 0.177 / 0.180; from the OTF 0.991 / 0.992 / 0.994 (PASS)
+      L = 30 px: removed (min / 5th percentile / median) today 0.117 / 0.118 / 0.120; from the OTF 0.990 / 0.992 / 0.994 (PASS)
+      judged (>= 98 % removed for every particle with the OTF's regions): PASS
+  L5: exit 0, 149 s
+      judged (every detection paired, centres within 1e-3 px): FAIL
+  L5b: exit 0, 61 s
+  L6: exit 0, 9 s
+      18 checks: 16 PROVED, 2 SKIPPED

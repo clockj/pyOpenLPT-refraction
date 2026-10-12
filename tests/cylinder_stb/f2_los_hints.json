@@ -1,0 +1,58 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "n": 20000,
+ "levels": [
+  {
+   "sigma_px": 0.0,
+   "pairs": 40000,
+   "both_ok": 40000,
+   "slow_fail_fast_ok": 0,
+   "slow_ok_fast_fail": 0,
+   "both_fail": 0,
+   "fast_path": 40000,
+   "hint_failed": 0,
+   "branch_wrong": 0,
+   "max_dpx": 4.258149627998736e-09,
+   "tri_dist_mm_median": 3.901991415558753e-11,
+   "dpx_p99": 1.400851825454697e-10,
+   "pass": true
+  },
+  {
+   "sigma_px": 0.1,
+   "pairs": 40000,
+   "both_ok": 40000,
+   "slow_fail_fast_ok": 0,
+   "slow_ok_fast_fail": 0,
+   "both_fail": 0,
+   "fast_path": 40000,
+   "hint_failed": 0,
+   "branch_wrong": 0,
+   "max_dpx": 4.253024599165656e-09,
+   "tri_dist_mm_median": 0.003332300852968475,
+   "dpx_p99": 9.538102000996257e-10,
+   "pass": true
+  },
+  {
+   "sigma_px": 0.5,
+   "pairs": 40000,
+   "both_ok": 40000,
+   "slow_fail_fast_ok": 0,
+   "slow_ok_fast_fail": 0,
+   "both_fail": 0,
+   "fast_path": 40000,
+   "hint_failed": 0,
+   "branch_wrong": 0,
+   "max_dpx": 4.261437543536612e-09,
+   "tri_dist_mm_median": 0.01663204228979194,
+   "dpx_p99": 2.7395652548016566e-10,
+   "pass": true
+  }
+ ]
+}

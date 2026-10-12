@@ -1,0 +1,532 @@
+{
+ "T0": {
+  "seconds": 495.05860471725464,
+  "starts": [
+   {
+    "start": 0,
+    "rounds": 20,
+    "stage4_rms": 0.47262,
+    "active": 6072,
+    "n": 6076,
+    "seconds": 68.63717937469482,
+    "last_rounds": [
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     },
+     {
+      "rms": 0.47262,
+      "rejected": 8,
+      "readmitted": 0
+     },
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     }
+    ]
+   },
+   {
+    "start": 1,
+    "rounds": 20,
+    "stage4_rms": 0.47262,
+    "active": 6072,
+    "n": 6076,
+    "seconds": 63.27121138572693,
+    "last_rounds": [
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     },
+     {
+      "rms": 0.47262,
+      "rejected": 8,
+      "readmitted": 0
+     },
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     }
+    ]
+   },
+   {
+    "start": 2,
+    "rounds": 20,
+    "stage4_rms": 0.47262,
+    "active": 6072,
+    "n": 6076,
+    "seconds": 65.95362734794617,
+    "last_rounds": [
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     },
+     {
+      "rms": 0.47262,
+      "rejected": 8,
+      "readmitted": 0
+     },
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     }
+    ]
+   },
+   {
+    "start": 3,
+    "rounds": 20,
+    "stage4_rms": 0.47262,
+    "active": 6072,
+    "n": 6076,
+    "seconds": 65.7213876247406,
+    "last_rounds": [
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     },
+     {
+      "rms": 0.47262,
+      "rejected": 8,
+      "readmitted": 0
+     },
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     }
+    ]
+   },
+   {
+    "start": 4,
+    "rounds": 20,
+    "stage4_rms": 0.47262,
+    "active": 6072,
+    "n": 6076,
+    "seconds": 67.55974388122559,
+    "last_rounds": [
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     },
+     {
+      "rms": 0.47262,
+      "rejected": 8,
+      "readmitted": 0
+     },
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     }
+    ]
+   },
+   {
+    "start": 5,
+    "rounds": 20,
+    "stage4_rms": 0.47262,
+    "active": 6072,
+    "n": 6076,
+    "seconds": 64.97320318222046,
+    "last_rounds": [
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     },
+     {
+      "rms": 0.47262,
+      "rejected": 8,
+      "readmitted": 0
+     },
+     {
+      "rms": 0.46933,
+      "rejected": 0,
+      "readmitted": 8
+     }
+    ]
+   }
+  ],
+  "summary": {
+   "rms_px": 0.47261867401021107,
+   "sigma_px": 0.5467545038570045,
+   "frames": 1519,
+   "active": 6072,
+   "observations": 6076,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 23.229742718067538,
+   "wand_free_mean_um": 0.03210810737677899,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38528.003306277344,
+     "f_sigma_px": 296.7771332457772,
+     "distance_mm": 1006.6674379045797,
+     "distance_sigma_mm": 7.592708643176277,
+     "azimuth_deg": 0.0,
+     "azimuth_sigma_deg": 0.0,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.0024145609703272557,
+      0.04419865853608638,
+      -0.9990198438864618
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5028867993407324,
+     "n_active": 3036,
+     "n_total": 3038
+    },
+    {
+     "name": "cam2",
+     "f_px": 35544.70097549624,
+     "f_sigma_px": 418.8494523356689,
+     "distance_mm": 1028.9257812622807,
+     "distance_sigma_mm": 11.793269535034046,
+     "azimuth_deg": 60.79994386553848,
+     "azimuth_sigma_deg": 0.02692079115972512,
+     "height_rel_mm": 19.235218095740887,
+     "height_sigma_mm": 0.987361241448454,
+     "viewing_direction": [
+      -0.8741807780132962,
+      0.022696627619510194,
+      -0.48506992325516246
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.44027456103569534,
+     "n_active": 3036,
+     "n_total": 3038
+    }
+   ]
+  },
+  "delivered": {
+   "rms_px": 0.45335027637932807,
+   "sigma_px": 0.5538121629602664,
+   "frames": 1519,
+   "active": 5720,
+   "observations": 6076,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 22.0604121546247,
+   "wand_free_mean_um": 0.015197177899817692,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38678.17645152746,
+     "f_sigma_px": 307.63912210200374,
+     "distance_mm": 1010.1118638264029,
+     "distance_sigma_mm": 7.864330977014931,
+     "azimuth_deg": -2.0151777927107682e-16,
+     "azimuth_sigma_deg": 1.5689376302713638e-18,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.0024309093724529415,
+      0.04697927970347646,
+      -0.9988929061506878
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5123861188864678,
+     "n_active": 2860,
+     "n_total": 3038
+    },
+    {
+     "name": "cam2",
+     "f_px": 36022.37440094788,
+     "f_sigma_px": 459.993136927036,
+     "distance_mm": 1042.1286301260684,
+     "distance_sigma_mm": 12.944250826284538,
+     "azimuth_deg": 60.83459909675998,
+     "azimuth_sigma_deg": 0.02812039661349097,
+     "height_rel_mm": 20.32884236179704,
+     "height_sigma_mm": 1.0546669820189118,
+     "viewing_direction": [
+      -0.8745361803172925,
+      0.024166909380080974,
+      -0.4843577498162319
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.38537437818164394,
+     "n_active": 2860,
+     "n_total": 3038
+    }
+   ]
+  }
+ },
+ "T2": {
+  "seconds": 492.5197184085846,
+  "starts": [
+   {
+    "start": 0,
+    "rounds": 20,
+    "stage4_rms": 0.60202,
+    "active": 7860,
+    "n": 7864,
+    "seconds": 63.08397054672241,
+    "last_rounds": [
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60202,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     }
+    ]
+   },
+   {
+    "start": 1,
+    "rounds": 20,
+    "stage4_rms": 0.60202,
+    "active": 7860,
+    "n": 7864,
+    "seconds": 59.27327632904053,
+    "last_rounds": [
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60202,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     }
+    ]
+   },
+   {
+    "start": 2,
+    "rounds": 20,
+    "stage4_rms": 0.60202,
+    "active": 7860,
+    "n": 7864,
+    "seconds": 61.9403281211853,
+    "last_rounds": [
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60202,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     }
+    ]
+   },
+   {
+    "start": 3,
+    "rounds": 20,
+    "stage4_rms": 0.60202,
+    "active": 7860,
+    "n": 7864,
+    "seconds": 58.88210988044739,
+    "last_rounds": [
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60202,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     }
+    ]
+   },
+   {
+    "start": 4,
+    "rounds": 20,
+    "stage4_rms": 0.60202,
+    "active": 7860,
+    "n": 7864,
+    "seconds": 59.1084725856781,
+    "last_rounds": [
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60202,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     }
+    ]
+   },
+   {
+    "start": 5,
+    "rounds": 20,
+    "stage4_rms": 0.60202,
+    "active": 7860,
+    "n": 7864,
+    "seconds": 45.116143465042114,
+    "last_rounds": [
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60202,
+      "rejected": 4,
+      "readmitted": 4
+     },
+     {
+      "rms": 0.60172,
+      "rejected": 4,
+      "readmitted": 4
+     }
+    ]
+   }
+  ],
+  "summary": {
+   "rms_px": 0.6020166731786724,
+   "sigma_px": 0.6961534850068203,
+   "frames": 1966,
+   "active": 7860,
+   "observations": 7864,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 31.49095502605889,
+   "wand_free_mean_um": 0.048345615277553496,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38255.771386542976,
+     "f_sigma_px": 355.5930546567635,
+     "distance_mm": 1001.2648765473223,
+     "distance_sigma_mm": 9.116015979150584,
+     "azimuth_deg": 1.2706147018483557e-17,
+     "azimuth_sigma_deg": 1.1568311439561248e-19,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.004592463164707756,
+      0.02504479208701143,
+      -0.9996757812768113
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.627235679678579,
+     "n_active": 3930,
+     "n_total": 3932
+    },
+    {
+     "name": "cam2",
+     "f_px": 37306.185166827825,
+     "f_sigma_px": 521.2221642752138,
+     "distance_mm": 1082.1236181427169,
+     "distance_sigma_mm": 14.804439934663066,
+     "azimuth_deg": 60.66561165108686,
+     "azimuth_sigma_deg": 0.037759835488585185,
+     "height_rel_mm": 12.098539402467718,
+     "height_sigma_mm": 0.7459926170872438,
+     "viewing_direction": [
+      -0.8715276860175328,
+      0.010452678510580668,
+      -0.4902348763775179
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5756939740073573,
+     "n_active": 3930,
+     "n_total": 3932
+    }
+   ]
+  },
+  "delivered": {
+   "rms_px": 0.6005095822127547,
+   "sigma_px": 0.6947069257468402,
+   "frames": 1966,
+   "active": 7856,
+   "observations": 7864,
+   "wand_length_mm": 10.0,
+   "L_sigma_mm": null,
+   "wand_free_rms_um": 31.29022205497786,
+   "wand_free_mean_um": 0.04768316435775732,
+   "cameras": [
+    {
+     "name": "cam1",
+     "f_px": 38252.359881203,
+     "f_sigma_px": 354.7848579502368,
+     "distance_mm": 1001.2378350996995,
+     "distance_sigma_mm": 9.096092676292145,
+     "azimuth_deg": 0.0,
+     "azimuth_sigma_deg": 0.0,
+     "height_rel_mm": 0.0,
+     "height_sigma_mm": 0.0,
+     "viewing_direction": [
+      0.004597504374576127,
+      0.02492216347876433,
+      -0.9996788227831278
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.6258821828032088,
+     "n_active": 3928,
+     "n_total": 3932
+    },
+    {
+     "name": "cam2",
+     "f_px": 37409.28655742863,
+     "f_sigma_px": 523.402106985728,
+     "distance_mm": 1085.1217602139704,
+     "distance_sigma_mm": 14.867272790518555,
+     "azimuth_deg": 60.664984355896515,
+     "azimuth_sigma_deg": 0.03770005287159514,
+     "height_rel_mm": 12.036064149502463,
+     "height_sigma_mm": 0.7445384710883297,
+     "viewing_direction": [
+      -0.8715026725643084,
+      0.010368762321049106,
+      -0.4902811239291094
+     ],
+     "k1": 0.0,
+     "k1_sigma": null,
+     "rms_px": 0.5740165589146059,
+     "n_active": 3928,
+     "n_total": 3932
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,10 @@
+D6: wand length error (1516 frames, RMS 23.07 um) against the wand's direction
+  direction components (mean |e|): x (across) 0.75, y (axis) 0.37, z (towards cam1) 0.45
+  direction (stretch matrix): explains 0.1 % of the variance; residual RMS 23.06 um
+    stretch -0.013 % along (+0.521, +0.833, +0.188)
+    stretch -0.009 % along (+0.648, -0.529, +0.548)
+    stretch +0.013 % along (-0.556, +0.163, +0.815)
+  direction + position: explains 6.6 % of the variance; residual RMS 22.29 um
+    stretch -0.041 % along (-0.449, +0.485, +0.751)
+    stretch +0.002 % along (+0.842, -0.054, +0.537)
+    stretch +0.161 % along (-0.301, -0.873, +0.384)

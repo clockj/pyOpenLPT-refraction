@@ -300,6 +300,45 @@ def get_cine_frame_range(cine_path: str | Path) -> tuple[int, int]:
     return first_frame, last_frame
 
 
+def read_cine_frames(
+    cine_path: str | Path,
+    frame: int,
+    count: int = 1,
+    header: dict | None = None,
+) -> list[np.ndarray]:
+    """
+    Read ``count`` consecutive CINE frames, starting at ``frame``.
+
+    ``frame`` is in the camera's own numbering (FirstImageNo ... FirstImageNo + ImageCount - 1, as listed by
+    get_cine_frame_range).  It must not be handed to pycine's ``read_frames(start_frame=...)`` as it is: pycine
+    reads the stored frame at position ``start_frame - 1`` (counted from 1), takes 0 as 1, and takes a negative
+    position from the end of the file.  Passing the frame number made every chunk after the first start one frame
+    early (a copy of frame 255 at 256 for chunks of 256, and the last frame lost).  Here pycine gets the position
+    ``frame - FirstImageNo + 1``, which is always 1 or more.
+    """
+    read_frames, read_header = _import_pycine()
+    if header is None:
+        header = read_header(str(cine_path))
+    cine_header = header["cinefileheader"]
+    first_no = int(cine_header.FirstImageNo)
+    last_no = first_no + int(cine_header.ImageCount) - 1
+    frame = int(frame)
+    count = int(count)
+    if count < 1:
+        raise ValueError("count must be >= 1")
+    if frame < first_no or frame + count - 1 > last_no:
+        raise ValueError(
+            f"Requested CINE frames {frame}-{frame + count - 1} are outside available range {first_no}-{last_no}"
+        )
+    raw_images, _, _ = read_frames(str(cine_path), start_frame=frame - first_no + 1, count=count)
+    frames = [np.asarray(img) for img in raw_images]
+    if len(frames) != count:
+        raise ImagePreprocessingIOError(
+            f"Read {len(frames)} of {count} frames from {cine_path} starting at frame {frame}"
+        )
+    return frames
+
+
 def plan_cine_tasks(
     *,
     cam_idx: int,
@@ -351,15 +390,10 @@ def plan_cine_tasks(
 
 def read_cine_frame(cine_path: str | Path, frame_index: int) -> np.ndarray:
     """
-    Read one CINE frame as a numpy array.
+    Read one CINE frame (``frame_index`` in the camera's numbering) as a numpy array.
     """
-    read_frames, _ = _import_pycine()
     cine_path = _as_path(cine_path).expanduser().resolve()
-    raw_images, _, _ = read_frames(str(cine_path), start_frame=int(frame_index), count=1)
-    frames = list(raw_images)
-    if not frames:
-        raise ImagePreprocessingIOError(f"No frame data returned for {cine_path} frame {frame_index}")
-    return np.asarray(frames[0])
+    return read_cine_frames(cine_path, int(frame_index), count=1)[0]
 
 
 def load_task_image(task: PlannedFrameTask) -> np.ndarray:
@@ -441,8 +475,9 @@ def compute_mean_background_from_cine(
     """
     Compute a streaming mean background from CINE frames.
     """
-    read_frames, _ = _import_pycine()
+    _, read_header = _import_pycine()
     cine_path = _as_path(cine_path).expanduser().resolve()
+    header = read_header(str(cine_path))
     first_frame, last_frame = get_cine_frame_range(cine_path)
     stride = _normalize_stride(stride)
     count = _normalize_count(count)
@@ -462,7 +497,7 @@ def compute_mean_background_from_cine(
         while batch_start < total:
             batch_frames = frame_numbers[batch_start:batch_start + chunk_size]
             first = batch_frames[0]
-            raw_images, _, _ = read_frames(str(cine_path), start_frame=first, count=len(batch_frames))
+            raw_images = read_cine_frames(cine_path, first, count=len(batch_frames), header=header)
             for offset, raw in enumerate(raw_images):
                 gray = _to_gray_float32(np.asarray(raw))
                 if accumulator is None:
@@ -474,11 +509,7 @@ def compute_mean_background_from_cine(
             batch_start += len(batch_frames)
     else:
         for frame_index in frame_numbers:
-            raw_images, _, _ = read_frames(str(cine_path), start_frame=int(frame_index), count=1)
-            frames = list(raw_images)
-            if not frames:
-                raise ImagePreprocessingIOError(f"No frame data returned for {cine_path} frame {frame_index}")
-
+            frames = read_cine_frames(cine_path, int(frame_index), count=1, header=header)
             gray = _to_gray_float32(np.asarray(frames[0]))
             if accumulator is None:
                 accumulator = gray.astype(np.float64)

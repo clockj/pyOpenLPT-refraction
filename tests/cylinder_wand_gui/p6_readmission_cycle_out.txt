@@ -1,0 +1,23 @@
+P6: T0, 1519 frames, 6076 detections; first start; stage 3 rms 0.4082 px
+  |  round 0: rms 0.47422 px, 34 LM iterations, rejected 12, re-admitted 0
+  |  round 1: rms 0.46933 px, 31 LM iterations, rejected 0, re-admitted 8
+  |  round 2: rms 0.47262 px, 30 LM iterations, rejected 8, re-admitted 0
+  |  round 3: rms 0.46933 px, 30 LM iterations, rejected 0, re-admitted 8
+
+round 0: limit 2.763 (equal weights, d in px); rejected 12, re-admitted 0; frames with no active detection before the test: 0
+round 1: limit 2.739 (equal weights, d in px); rejected 0, re-admitted 8; frames with no active detection before the test: 3
+round 2: limit 2.749 (equal weights, d in px); rejected 8, re-admitted 0; frames with no active detection before the test: 1
+round 3: limit 2.739 (equal weights, d in px); rejected 0, re-admitted 8; frames with no active detection before the test: 3
+
+detections that change state in rounds 1 and 2: 8
+  frame  cam  end   in the fit: d / limit (smallest eigenvalue of I - P)   frame out: d / (0.8 limit), |r| px   frame stale then
+    272    0    A     1.10  (0.070)                                    0.73, 1.59               True
+    272    0    B     1.12  (0.073)                                    0.84, 1.84               True
+    272    1    A     1.10  (0.236)                                    0.77, 1.69               True
+    272    1    B     1.12  (0.233)                                    0.70, 1.53               True
+    284    0    A     1.11  (0.099)                                    0.72, 1.57               True
+    284    0    B     1.15  (0.103)                                    0.90, 1.98               True
+    284    1    A     1.11  (0.219)                                    0.77, 1.69               True
+    284    1    B     1.15  (0.215)                                    0.67, 1.46               True
+  frame 272: 4 detections; over the limit in the fit: cam 0 end A (d 3.03 px), cam 0 end B (d 3.08 px), cam 1 end A (d 3.03 px), cam 1 end B (d 3.08 px)
+  frame 284: 4 detections; over the limit in the fit: cam 0 end A (d 3.04 px), cam 0 end B (d 3.16 px), cam 1 end A (d 3.04 px), cam 1 end B (d 3.16 px)

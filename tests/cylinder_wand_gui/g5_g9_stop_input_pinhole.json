@@ -1,0 +1,45 @@
+{
+ "checks": [
+  {
+   "check": "Stop 3 s into the start search ends the run within 6 s; idle again; no camFile",
+   "ok": true,
+   "detail": "3.3 s after Stop; status 'Cylinder calibration stopped.'; camFiles none"
+  },
+  {
+   "check": "bad input, one camera: a message, no run",
+   "ok": true,
+   "detail": "The cylinder calibration needs at least two cameras; the wand points have 1."
+  },
+  {
+   "check": "bad input, 8 frames: a message, no run",
+   "ok": true,
+   "detail": "Only 8 frames show both balls in every camera; the calibration's start needs at least 12 (several hundred are "
+  },
+  {
+   "check": "bad input, a camera without a row in the camera table: a message, no run",
+   "ok": true,
+   "detail": "The camera table has no row for camera(s) [2]: set Num Cameras."
+  },
+  {
+   "check": "bad input, a wall thicker than the radius: a message, no run",
+   "ok": true,
+   "detail": "The wall (150 mm) is not thinner than the tube's outer radius (100.806 mm)."
+  },
+  {
+   "check": "bad input, k1+k2: a message, no run",
+   "ok": true,
+   "detail": "The cylinder model fits k1 at most: choose 'None' or 'Radial k1' as distortion."
+  },
+  {
+   "check": "the page is written and shown in the Report tab",
+   "ok": true,
+   "detail": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_wand_gui\\data\\g5_run\\pinhole\\calibration_report.html (222 kB); shown True"
+  },
+  {
+   "check": "its reprojection RMS and wand-length error are those of 0.1 px noise",
+   "ok": true,
+   "detail": "RMS 0.100 px; wand 43.0 um RMS over 300 frames; 3 residual panels"
+  }
+ ],
+ "seconds": 8.845296621322632
+}

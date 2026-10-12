@@ -1,0 +1,248 @@
+T13d: model-based correction of ellipse_rodmask's remaining bias (T13c's data sets and centres; lightings backlit, even)
+
+1. Calibrate on the measured centres (as T13c)
+  [  1/16    46 s] set 2 backlit: rms 0.0166 px
+  [  2/16    48 s] set 7 even: rms 0.0169 px
+  [  3/16    49 s] set 7 backlit: rms 0.0166 px
+  [  4/16    66 s] set 1 even: rms 0.0177 px
+  [  5/16    67 s] set 6 even: rms 0.0171 px
+  [  6/16    68 s] set 1 backlit: rms 0.0169 px
+  [  7/16    68 s] set 0 even: rms 0.0172 px
+  [  8/16    69 s] set 2 even: rms 0.0177 px
+  [  9/16    69 s] set 4 even: rms 0.0165 px
+  [ 10/16    69 s] set 0 backlit: rms 0.0163 px
+  [ 11/16    69 s] set 5 backlit: rms 0.0164 px
+  [ 12/16    70 s] set 3 even: rms 0.0177 px
+  [ 13/16    70 s] set 6 backlit: rms 0.0167 px
+  [ 14/16    71 s] set 3 backlit: rms 0.0166 px
+  [ 15/16    71 s] set 4 backlit: rms 0.0168 px
+  [ 16/16    72 s] set 5 even: rms 0.0171 px
+
+2. Predict each detection's error from the fitted calibration
+  [  1/192   187 s] set 1 backlit frames 50-: 140 predicted, 0 not
+  [  2/192   187 s] set 1 backlit frames 400-: 141 predicted, 0 not
+  [  3/192   189 s] set 0 backlit frames 50-: 142 predicted, 0 not
+  [  4/192   192 s] set 1 backlit frames 350-: 142 predicted, 0 not
+  [  5/192   192 s] set 1 backlit frames 500-: 140 predicted, 0 not
+  [  6/192   193 s] set 1 backlit frames 200-: 138 predicted, 0 not
+  [  7/192   194 s] set 0 backlit frames 450-: 144 predicted, 0 not
+  [  8/192   194 s] set 0 backlit frames 550-: 142 predicted, 0 not
+  [  9/192   194 s] set 0 backlit frames 250-: 140 predicted, 0 not
+  [ 10/192   194 s] set 1 backlit frames 0-: 139 predicted, 0 not
+  [ 11/192   194 s] set 0 backlit frames 300-: 142 predicted, 0 not
+  [ 12/192   195 s] set 2 backlit frames 200-: 142 predicted, 0 not
+  [ 13/192   195 s] set 0 backlit frames 500-: 144 predicted, 0 not
+  [ 14/192   196 s] set 0 backlit frames 200-: 140 predicted, 0 not
+  [ 15/192   197 s] set 0 backlit frames 150-: 146 predicted, 0 not
+  [ 16/192   198 s] set 2 backlit frames 0-: 144 predicted, 0 not
+  [ 17/192   198 s] set 0 backlit frames 400-: 146 predicted, 0 not
+  [ 18/192   198 s] set 1 backlit frames 450-: 144 predicted, 0 not
+  [ 19/192   198 s] set 1 backlit frames 100-: 147 predicted, 0 not
+  [ 20/192   199 s] set 1 backlit frames 300-: 146 predicted, 0 not
+  [ 21/192   200 s] set 2 backlit frames 50-: 145 predicted, 0 not
+  [ 22/192   200 s] set 0 backlit frames 0-: 146 predicted, 0 not
+  [ 23/192   200 s] set 2 backlit frames 250-: 147 predicted, 0 not
+  [ 24/192   201 s] set 0 backlit frames 100-: 143 predicted, 0 not
+  [ 25/192   201 s] set 1 backlit frames 550-: 142 predicted, 0 not
+  [ 26/192   202 s] set 1 backlit frames 150-: 144 predicted, 0 not
+  [ 27/192   202 s] set 2 backlit frames 100-: 142 predicted, 0 not
+  [ 28/192   203 s] set 0 backlit frames 350-: 149 predicted, 0 not
+  [ 29/192   204 s] set 2 backlit frames 150-: 147 predicted, 0 not
+  [ 30/192   206 s] set 1 backlit frames 250-: 147 predicted, 0 not
+  [ 31/192   385 s] set 2 backlit frames 350-: 143 predicted, 0 not
+  [ 32/192   386 s] set 2 backlit frames 300-: 144 predicted, 0 not
+  [ 33/192   387 s] set 2 backlit frames 550-: 143 predicted, 0 not
+  [ 34/192   387 s] set 3 backlit frames 0-: 144 predicted, 0 not
+  [ 35/192   388 s] set 4 backlit frames 400-: 140 predicted, 0 not
+  [ 36/192   389 s] set 3 backlit frames 400-: 140 predicted, 0 not
+  [ 37/192   390 s] set 4 backlit frames 150-: 141 predicted, 0 not
+  [ 38/192   391 s] set 3 backlit frames 100-: 145 predicted, 0 not
+  [ 39/192   391 s] set 2 backlit frames 450-: 144 predicted, 0 not
+  [ 40/192   392 s] set 3 backlit frames 300-: 142 predicted, 0 not
+  [ 41/192   392 s] set 3 backlit frames 150-: 145 predicted, 0 not
+  [ 42/192   393 s] set 2 backlit frames 400-: 146 predicted, 0 not
+  [ 43/192   393 s] set 4 backlit frames 200-: 144 predicted, 0 not
+  [ 44/192   394 s] set 4 backlit frames 50-: 142 predicted, 0 not
+  [ 45/192   395 s] set 3 backlit frames 500-: 147 predicted, 0 not
+  [ 46/192   396 s] set 3 backlit frames 350-: 147 predicted, 0 not
+  [ 47/192   397 s] set 4 backlit frames 350-: 143 predicted, 0 not
+  [ 48/192   397 s] set 3 backlit frames 550-: 144 predicted, 0 not
+  [ 49/192   398 s] set 3 backlit frames 50-: 144 predicted, 0 not
+  [ 50/192   398 s] set 3 backlit frames 250-: 146 predicted, 0 not
+  [ 51/192   400 s] set 4 backlit frames 100-: 143 predicted, 0 not
+  [ 52/192   400 s] set 4 backlit frames 0-: 145 predicted, 0 not
+  [ 53/192   400 s] set 4 backlit frames 500-: 143 predicted, 0 not
+  [ 54/192   403 s] set 3 backlit frames 450-: 147 predicted, 0 not
+  [ 55/192   403 s] set 4 backlit frames 450-: 145 predicted, 0 not
+  [ 56/192   403 s] set 4 backlit frames 250-: 144 predicted, 0 not
+  [ 57/192   404 s] set 3 backlit frames 200-: 150 predicted, 0 not
+  [ 58/192   404 s] set 2 backlit frames 500-: 145 predicted, 0 not
+  [ 59/192   410 s] set 4 backlit frames 300-: 145 predicted, 0 not
+  [ 60/192   415 s] set 4 backlit frames 550-: 147 predicted, 0 not
+  [ 61/192   573 s] set 5 backlit frames 50-: 138 predicted, 0 not
+  [ 62/192   579 s] set 5 backlit frames 0-: 142 predicted, 0 not
+  [ 63/192   581 s] set 6 backlit frames 0-: 142 predicted, 0 not
+  [ 64/192   585 s] set 5 backlit frames 350-: 145 predicted, 0 not
+  [ 65/192   587 s] set 5 backlit frames 150-: 143 predicted, 0 not
+  [ 66/192   587 s] set 5 backlit frames 100-: 145 predicted, 0 not
+  [ 67/192   591 s] set 6 backlit frames 100-: 145 predicted, 0 not
+  [ 68/192   592 s] set 5 backlit frames 300-: 147 predicted, 0 not
+  [ 69/192   592 s] set 5 backlit frames 500-: 142 predicted, 1 not
+  [ 70/192   592 s] set 6 backlit frames 250-: 140 predicted, 0 not
+  [ 71/192   593 s] set 5 backlit frames 250-: 144 predicted, 0 not
+  [ 72/192   594 s] set 6 backlit frames 300-: 141 predicted, 0 not
+  [ 73/192   594 s] set 5 backlit frames 550-: 142 predicted, 0 not
+  [ 74/192   594 s] set 5 backlit frames 450-: 146 predicted, 0 not
+  [ 75/192   594 s] set 5 backlit frames 400-: 147 predicted, 0 not
+  [ 76/192   596 s] set 6 backlit frames 400-: 145 predicted, 0 not
+  [ 77/192   597 s] set 6 backlit frames 200-: 143 predicted, 0 not
+  [ 78/192   597 s] set 6 backlit frames 50-: 145 predicted, 0 not
+  [ 79/192   598 s] set 5 backlit frames 200-: 144 predicted, 0 not
+  [ 80/192   598 s] set 6 backlit frames 350-: 141 predicted, 0 not
+  [ 81/192   599 s] set 7 backlit frames 150-: 144 predicted, 0 not
+  [ 82/192   602 s] set 6 backlit frames 150-: 145 predicted, 0 not
+  [ 83/192   604 s] set 6 backlit frames 500-: 142 predicted, 0 not
+  [ 84/192   604 s] set 6 backlit frames 550-: 140 predicted, 0 not
+  [ 85/192   604 s] set 7 backlit frames 0-: 144 predicted, 0 not
+  [ 86/192   605 s] set 6 backlit frames 450-: 146 predicted, 0 not
+  [ 87/192   606 s] set 7 backlit frames 50-: 146 predicted, 0 not
+  [ 88/192   608 s] set 7 backlit frames 100-: 145 predicted, 0 not
+  [ 89/192   608 s] set 7 backlit frames 200-: 145 predicted, 0 not
+  [ 90/192   617 s] set 7 backlit frames 250-: 141 predicted, 0 not
+  [ 91/192   764 s] set 7 backlit frames 300-: 142 predicted, 0 not
+  [ 92/192   772 s] set 1 even frames 50-: 129 predicted, 0 not
+  [ 93/192   777 s] set 0 even frames 300-: 134 predicted, 0 not
+  [ 94/192   777 s] set 0 even frames 200-: 132 predicted, 0 not
+  [ 95/192   777 s] set 0 even frames 50-: 138 predicted, 0 not
+  [ 96/192   777 s] set 7 backlit frames 450-: 141 predicted, 0 not
+  [ 97/192   778 s] set 7 backlit frames 400-: 144 predicted, 0 not
+  [ 98/192   781 s] set 7 backlit frames 350-: 145 predicted, 0 not
+  [ 99/192   782 s] set 1 even frames 0-: 136 predicted, 0 not
+  [100/192   783 s] set 0 even frames 550-: 130 predicted, 0 not
+  [101/192   783 s] set 1 even frames 400-: 137 predicted, 0 not
+  [102/192   784 s] set 7 backlit frames 500-: 145 predicted, 0 not
+  [103/192   785 s] set 0 even frames 450-: 144 predicted, 0 not
+  [104/192   785 s] set 1 even frames 200-: 135 predicted, 0 not
+  [105/192   786 s] set 0 even frames 250-: 136 predicted, 0 not
+  [106/192   786 s] set 0 even frames 0-: 142 predicted, 0 not
+  [107/192   787 s] set 0 even frames 150-: 141 predicted, 0 not
+  [108/192   789 s] set 7 backlit frames 550-: 147 predicted, 0 not
+  [109/192   790 s] set 0 even frames 400-: 143 predicted, 0 not
+  [110/192   790 s] set 0 even frames 100-: 142 predicted, 0 not
+  [111/192   791 s] set 0 even frames 500-: 140 predicted, 0 not
+  [112/192   791 s] set 1 even frames 350-: 135 predicted, 0 not
+  [113/192   792 s] set 1 even frames 100-: 142 predicted, 1 not
+  [114/192   793 s] set 1 even frames 150-: 136 predicted, 0 not
+  [115/192   794 s] set 1 even frames 500-: 132 predicted, 1 not
+  [116/192   795 s] set 1 even frames 300-: 138 predicted, 0 not
+  [117/192   796 s] set 0 even frames 350-: 143 predicted, 0 not
+  [118/192   798 s] set 1 even frames 450-: 139 predicted, 0 not
+  [119/192   800 s] set 1 even frames 250-: 137 predicted, 0 not
+  [120/192   813 s] set 1 even frames 550-: 136 predicted, 0 not
+  [121/192   958 s] set 2 even frames 0-: 137 predicted, 0 not
+  [122/192   964 s] set 2 even frames 200-: 133 predicted, 0 not
+  [123/192   972 s] set 2 even frames 50-: 141 predicted, 0 not
+  [124/192   973 s] set 2 even frames 250-: 143 predicted, 0 not
+  [125/192   975 s] set 2 even frames 550-: 139 predicted, 0 not
+  [126/192   977 s] set 2 even frames 350-: 140 predicted, 0 not
+  [127/192   977 s] set 3 even frames 0-: 140 predicted, 0 not
+  [128/192   979 s] set 3 even frames 100-: 137 predicted, 0 not
+  [129/192   980 s] set 2 even frames 300-: 141 predicted, 1 not
+  [130/192   980 s] set 2 even frames 150-: 142 predicted, 0 not
+  [131/192   982 s] set 2 even frames 100-: 141 predicted, 0 not
+  [132/192   983 s] set 3 even frames 400-: 137 predicted, 0 not
+  [133/192   984 s] set 3 even frames 150-: 140 predicted, 0 not
+  [134/192   984 s] set 3 even frames 50-: 138 predicted, 0 not
+  [135/192   985 s] set 3 even frames 500-: 133 predicted, 1 not
+  [136/192   985 s] set 4 even frames 150-: 135 predicted, 0 not
+  [137/192   986 s] set 2 even frames 450-: 142 predicted, 0 not
+  [138/192   986 s] set 2 even frames 400-: 141 predicted, 0 not
+  [139/192   986 s] set 3 even frames 550-: 138 predicted, 0 not
+  [140/192   986 s] set 3 even frames 300-: 136 predicted, 0 not
+  [141/192   989 s] set 4 even frames 0-: 138 predicted, 0 not
+  [142/192   989 s] set 3 even frames 450-: 140 predicted, 0 not
+  [143/192   991 s] set 4 even frames 50-: 139 predicted, 0 not
+  [144/192   992 s] set 3 even frames 350-: 143 predicted, 0 not
+  [145/192   992 s] set 2 even frames 500-: 143 predicted, 0 not
+  [146/192   995 s] set 3 even frames 200-: 145 predicted, 1 not
+  [147/192   996 s] set 3 even frames 250-: 144 predicted, 0 not
+  [148/192   997 s] set 4 even frames 200-: 144 predicted, 0 not
+  [149/192   998 s] set 4 even frames 100-: 140 predicted, 1 not
+  [150/192  1014 s] set 4 even frames 250-: 140 predicted, 0 not
+  [151/192  1154 s] set 4 even frames 400-: 131 predicted, 1 not
+  [152/192  1162 s] set 4 even frames 350-: 140 predicted, 1 not
+  [153/192  1163 s] set 4 even frames 300-: 144 predicted, 0 not
+  [154/192  1164 s] set 4 even frames 450-: 133 predicted, 0 not
+  [155/192  1165 s] set 5 even frames 50-: 131 predicted, 1 not
+  [156/192  1168 s] set 4 even frames 500-: 135 predicted, 1 not
+  [157/192  1172 s] set 6 even frames 0-: 136 predicted, 1 not
+  [158/192  1173 s] set 5 even frames 0-: 137 predicted, 1 not
+  [159/192  1176 s] set 5 even frames 150-: 137 predicted, 0 not
+  [160/192  1177 s] set 4 even frames 550-: 141 predicted, 0 not
+  [161/192  1179 s] set 5 even frames 400-: 142 predicted, 0 not
+  [162/192  1180 s] set 5 even frames 550-: 135 predicted, 0 not
+  [163/192  1182 s] set 5 even frames 350-: 142 predicted, 0 not
+  [164/192  1182 s] set 6 even frames 50-: 135 predicted, 0 not
+  [165/192  1184 s] set 5 even frames 100-: 144 predicted, 0 not
+  [166/192  1185 s] set 5 even frames 250-: 143 predicted, 0 not
+  [167/192  1187 s] set 6 even frames 250-: 139 predicted, 0 not
+  [168/192  1187 s] set 5 even frames 450-: 141 predicted, 1 not
+  [169/192  1188 s] set 5 even frames 500-: 138 predicted, 0 not
+  [170/192  1188 s] set 5 even frames 200-: 141 predicted, 0 not
+  [171/192  1189 s] set 6 even frames 100-: 142 predicted, 0 not
+  [172/192  1190 s] set 6 even frames 200-: 142 predicted, 1 not
+  [173/192  1190 s] set 5 even frames 300-: 145 predicted, 0 not
+  [174/192  1190 s] set 6 even frames 350-: 134 predicted, 1 not
+  [175/192  1191 s] set 6 even frames 400-: 137 predicted, 1 not
+  [176/192  1191 s] set 6 even frames 300-: 138 predicted, 1 not
+  [177/192  1192 s] set 6 even frames 150-: 142 predicted, 0 not
+  [178/192  1193 s] set 6 even frames 450-: 142 predicted, 0 not
+  [179/192  1197 s] set 6 even frames 500-: 142 predicted, 0 not
+  [180/192  1202 s] set 6 even frames 550-: 139 predicted, 0 not
+  [181/192  1252 s] set 7 even frames 150-: 133 predicted, 0 not
+  [182/192  1252 s] set 7 even frames 0-: 141 predicted, 0 not
+  [183/192  1254 s] set 7 even frames 200-: 138 predicted, 1 not
+  [184/192  1254 s] set 7 even frames 50-: 139 predicted, 1 not
+  [185/192  1254 s] set 7 even frames 450-: 130 predicted, 0 not
+  [186/192  1255 s] set 7 even frames 300-: 137 predicted, 0 not
+  [187/192  1255 s] set 7 even frames 100-: 141 predicted, 0 not
+  [188/192  1255 s] set 7 even frames 250-: 133 predicted, 0 not
+  [189/192  1256 s] set 7 even frames 350-: 137 predicted, 0 not
+  [190/192  1257 s] set 7 even frames 500-: 139 predicted, 0 not
+  [191/192  1257 s] set 7 even frames 400-: 141 predicted, 0 not
+  [192/192  1258 s] set 7 even frames 550-: 144 predicted, 0 not
+
+Predicted errors (the correction), over all detections:
+  backlit  13798 camera-frames predicted (1 not); predicted error RMS 0.0095 px; actual error RMS 0.0256 px; left after the correction 0.0246 px
+  even     13308 camera-frames predicted (19 not); predicted error RMS 0.0181 px; actual error RMS 0.0295 px; left after the correction 0.0257 px
+
+3. Calibrate again on the corrected centres, and measure
+  [  1/16    11 s] set 7 even: f -0.026, -0.001, +0.025 %, shape 0.12 um, z 1.76, rms 0.0163 px
+  [  2/16    11 s] set 3 even: f -0.050, -0.039, -0.067 %, shape 0.08 um, z 0.98, rms 0.0167 px
+  [  3/16    21 s] set 1 backlit: f +0.013, -0.057, -0.086 %, shape 0.08 um, z 1.66, rms 0.0164 px
+  [  4/16    22 s] set 1 even: f +0.106, +0.020, -0.084 %, shape 0.06 um, z 1.21, rms 0.0165 px
+  [  5/16    22 s] set 7 backlit: f -0.087, -0.084, -0.038 %, shape 0.05 um, z 1.61, rms 0.0163 px
+  [  6/16    22 s] set 6 backlit: f +0.045, +0.012, -0.002 %, shape 0.07 um, z 0.84, rms 0.0165 px
+  [  7/16    22 s] set 0 backlit: f -0.026, -0.008, -0.040 %, shape 0.07 um, z 0.96, rms 0.0161 px
+  [  8/16    22 s] set 0 even: f -0.026, -0.001, -0.051 %, shape 0.06 um, z 0.69, rms 0.0159 px
+  [  9/16    22 s] set 2 backlit: f -0.047, -0.035, -0.036 %, shape 0.08 um, z 0.97, rms 0.0163 px
+  [ 10/16    23 s] set 4 backlit: f +0.058, +0.007, -0.011 %, shape 0.10 um, z 1.30, rms 0.0165 px
+  [ 11/16    23 s] set 6 even: f -0.105, +0.007, +0.031 %, shape 0.06 um, z 1.06, rms 0.0158 px
+  [ 12/16    23 s] set 5 even: f -0.014, -0.011, -0.039 %, shape 0.09 um, z 1.09, rms 0.0163 px
+  [ 13/16    23 s] set 4 even: f +0.033, +0.014, -0.065 %, shape 0.13 um, z 1.71, rms 0.0161 px
+  [ 14/16    23 s] set 2 even: f -0.048, +0.066, +0.030 %, shape 0.17 um, z 1.49, rms 0.0164 px
+  [ 15/16    24 s] set 5 backlit: f -0.002, +0.028, +0.015 %, shape 0.08 um, z 1.06, rms 0.0163 px
+  [ 16/16    24 s] set 3 backlit: f +0.024, +0.040, +0.039 %, shape 0.06 um, z 1.06, rms 0.0165 px
+
+Results over the data sets (as T13c; the uncorrected rows are T13c's)
+  ideal                              f mean +0.003, -0.021, -0.019 % (t +0.1, -1.1, -0.9), RMS 0.060, 0.053, 0.057 % | held -0.00 um (t -0.0), RMS 0.50 | shape 0.07, tube 9.4 um | z 1.11 | fit 0.0212 px, rejected 0.0 %
+  ellipse_rodmask|backlit            f mean +0.048, +0.032, +0.042 % (t +3.1, +1.9, +2.7), RMS 0.063, 0.055, 0.059 % | held -0.01 um (t -0.2), RMS 0.64 | shape 0.13, tube 8.0 um | z 1.51 | fit 0.0166 px, rejected 1.6 %
+  ellipse_rodmask|backlit|corrected  f mean -0.003, -0.012, -0.020 % (t -0.2, -0.8, -1.5), RMS 0.046, 0.042, 0.041 % | held -0.01 um (t -0.3), RMS 0.63 | shape 0.08, tube 6.4 um | z 1.22 | fit 0.0164 px, rejected 1.4 %
+  ellipse_rodmask|even               f mean +0.055, +0.067, +0.031 % (t +1.9, +3.5, +1.8), RMS 0.094, 0.084, 0.054 % | held -0.05 um (t -2.1), RMS 0.67 | shape 0.12, tube 10.3 um | z 1.61 | fit 0.0172 px, rejected 1.8 %
+  ellipse_rodmask|even|corrected     f mean -0.016, +0.007, -0.028 % (t -0.7, +0.7, -1.6), RMS 0.061, 0.029, 0.053 % | held -0.03 um (t -1.7), RMS 0.64 | shape 0.10, tube 8.3 um | z 1.30 | fit 0.0163 px, rejected 1.4 %
+
+Criteria: |t| <= 3 for every camera's f and for the held-out wand length; z RMS <= 1.2
+  ellipse_rodmask|backlit|corrected  fail
+  ellipse_rodmask|even|corrected  fail
+
+done in 1372 s

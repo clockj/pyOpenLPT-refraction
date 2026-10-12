@@ -1,0 +1,13 @@
+T1-e: s3_final_c3k5 (146 frames logged) against s3_control_c3k5 (146 frames)
+  log entry 10: active long tracks final 179, control 5: control / final 0.028
+  log entry 20: active long tracks final 245, control 7: control / final 0.029
+  log entry 40: active long tracks final 315, control 19: control / final 0.060
+  log entry 60: active long tracks final 365, control 25: control / final 0.068
+  log entry 80: active long tracks final 397, control 35: control / final 0.088
+  log entry 146: active long tracks final 493, control 45: control / final 0.091
+  final, long tracks at frame 149 (>= 4 frames): 554; length 10/50/90 % [23.0, 116.0, 150.0]; speed [116.244, 210.937, 249.45] mm/s and second difference / step [0.076, 0.105, 0.249] (over 20 frames); position noise [3.439, 6.711, 17.147] um
+  control, long tracks at frame 149 (>= 4 frames): 71; length 10/50/90 % [13.0, 57.0, 119.0]; speed [104.416, 197.934, 269.039] mm/s and second difference / step [0.1, 0.27, 1.223] (over 20 frames); position noise [5.875, 14.406, 24.234] um
+  final's tracks at least as rough as the control's median ghost (0.270): 9.3 % (the control's own: 50 %)
+  swirl, final: 424 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.046, 0.134, 0.338]; above 0.3: 12.0 %
+  swirl, control: 52 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.147, 0.432, 0.896]; above 0.3: 73.1 %
+  ghosts among final's tracks, from the swirl (real tracks below 0.3): 16 %; from the counts (an upper bound): 9 %

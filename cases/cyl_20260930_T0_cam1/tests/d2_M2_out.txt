@@ -1,0 +1,3 @@
+D2 dot-fixed pattern, split test (C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\74efa7be-28da-436b-8bb5-57d697313b5f\scratchpad\state_M2.pkl, model M2)
+  even vs odd planes: 54 dots; correlation du +0.990, dv +0.995; rms of the pattern (0.694, 0.320) and (0.652, 0.316) px; rms of their difference (0.119, 0.087) px
+  z < 19 vs z > 19 (far vs near half): 54 dots; correlation du +0.710, dv +0.870; rms of the pattern (0.933, 0.345) and (0.598, 0.302) px; rms of their difference (0.666, 0.170) px

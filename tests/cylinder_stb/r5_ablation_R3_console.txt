@@ -1,0 +1,5 @@
+Phase 5: ablation on data/r5_lines; runs ['R3']
+  R3 (build p4dev): exit 0, wall 242 s, 6.02 s per frame
+    per frame: trackable 943, reconstructed 605, recall 0.601, ghosts 38 (6.3 %), duplicates 0; position RMS (x, y, z) 11.8, 12.2, 13.6 um
+    long tracks 793 (ghost tracks 42), mean length 28.3, purity 0.933 (>= 0.9: 91.8 %), track recall 0.599
+  R0 vs R1: 2 of 11 files identical; largest differences ConvergeTrack\ExitTrack_39.csv: rows [4284, 4343], WorldX 25, WorldY 19, WorldZ 42; ConvergeTrack\LongTrackActive_39.csv: rows [81210, 81729], WorldX 25, WorldY 20, WorldZ 39; ConvergeTrack\LongTrackInactive_39.csv: rows [2501, 2372], WorldX 23, WorldY 19, WorldZ 41; ConvergeTrack\ShortTrackActive_39.csv: rows [9864, 9931], WorldX 25, WorldY 20, WorldZ 43

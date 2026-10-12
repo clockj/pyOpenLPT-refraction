@@ -1,0 +1,3 @@
+S1: T1 preprocessed, every 4th frame (251 frames per camera: 0..1000), into D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1pre_s4 and X:\Shijie Zhong\Refraction\Processed\20261007\T1\images
+  cam1: gain 6; noise in the 8-bit counts median 8.06 (7.89-8.23); 31 s
+  cam2: gain 4; noise in the 8-bit counts median 5.92 (5.75-6.05); 62 s

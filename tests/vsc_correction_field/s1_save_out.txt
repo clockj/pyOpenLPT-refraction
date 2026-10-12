@@ -1,0 +1,9 @@
+S1: today's page D:\Refraction\pyOpenLPT\tests\vsc_correction_field\data\ref\tracking_settings_today_cffed7d.py, the change D:\Refraction\pyOpenLPT\gui\views\tracking_settings_view.py; pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd
+tube: 1 difference(s) today -> change; load 0.0 / 0.3 s (today / change); boxes ['Success']; kept 8 of 8 (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel), values as saved True, edits applied True, corrections kept True, other differences [], second Save identical True -> PASS
+tube, the tracer's threshold and radius edited: 1 difference(s) today -> change; load 0.0 / 0.3 s (today / change); boxes ['Success']; kept 8 of 8 (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel), values as saved True, edits applied True, corrections kept True, other differences [], second Save identical True -> PASS
+tube, the object's type changed to Bubble: byte-identical; load 0.0 / 0.3 s (today / change); boxes ['Success'] -> PASS
+sphere: 1 difference(s) today -> change; load 0.0 / 0.2 s (today / change); boxes ['Success']; kept 8 of 8 (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel), values as saved True, edits applied True, corrections kept True, other differences [], second Save identical True -> PASS
+plate (config.txt): byte-identical; load 5.4 / 5.5 s (today / change); boxes ['Success'] -> PASS
+plate (config.json with settings the form does not show): byte-identical; load 5.4 / 5.9 s (today / change); boxes ['Success'] -> PASS
+pinhole: byte-identical; load 0.0 / 0.0 s (today / change); boxes ['Success'] -> PASS
+S1: PASS

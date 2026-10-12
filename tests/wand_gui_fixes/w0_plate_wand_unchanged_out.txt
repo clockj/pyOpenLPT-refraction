@@ -1,0 +1,16 @@
+W0: plate_wand before (git HEAD, before_lib/plate_wand.py) and after B3's move
+1. The source
+  PASS  the new start_candidates is the old nested make_starts, moved (syntax trees)  (6 statements against 6)
+  PASS  start_candidates begins with `hints = hints or {}` (as calibrate does before)
+  PASS  calibrate keeps no use of multi/used/few/searches; its make_starts calls start_candidates  (left [], calls 1)
+  PASS  the rest of calibrate is unchanged (syntax trees, docstring included)  (35 statements against 35; make_starts was statement 8)
+2. The answers
+  rig A: 4 cameras, 1 window(s), 300 frames, seed 7
+  rig B: 4 cameras, 2 window(s), 300 frames, seed 1308
+  rig B, hints 5 deg: 4 cameras, 2 window(s), 300 frames, seed 1308, hints on the normals
+  PASS  rig A: identical answers (cameras, windows, L, frames, RMS, observations, weights, covariance, info)  (RMS 0.114750 px; f 3,925.65, 3,928.81, 3,937.33, 3,930.72; 11 s old, 11 s new)
+  PASS  rig B: identical answers (cameras, windows, L, frames, RMS, observations, weights, covariance, info)  (RMS 0.116304 px; f 4,315.08, 4,317.44, 3,972.97, 3,970.01; 40 s old, 39 s new)
+  PASS  rig B, hints 5 deg: identical answers (cameras, windows, L, frames, RMS, observations, weights, covariance, info)  (RMS 0.116304 px; f 4,315.08, 4,317.44, 3,972.97, 3,970.01; 112 s old, 113 s new)
+      info['hints'] keys: ['chosen', 'normals_off_deg', 'paths']
+
+7 of 7 checks passed; 113 s

@@ -1,0 +1,4 @@
+S1 identical outputs: s50_final3 vs g_s50_user_exe
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL

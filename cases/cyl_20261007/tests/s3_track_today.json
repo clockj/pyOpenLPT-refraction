@@ -1,0 +1,42 @@
+{
+ "info": {
+  "config": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\s3\\config_today.json",
+  "build": "head1007",
+  "exe": false,
+  "env": {},
+  "returncode": 0,
+  "wall_s": 1286.56,
+  "end": "2026-10-07T20:08:14",
+  "build_info": {
+   "name": "head1007",
+   "git_head": "d9b20b4",
+   "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+   "start": "2026-10-07T18:09:52"
+  }
+ },
+ "tracer": {
+  "intensity_threshold": 28,
+  "radius_px": 2.0
+ },
+ "frames": [
+  0,
+  60
+ ],
+ "frames_done": 61,
+ "seconds_per_frame_mean": 21.057049180327873,
+ "active_long_tracks_last": 1667,
+ "detections_first_ipr_loop": [
+  [
+   13479,
+   9184
+  ],
+  [
+   6225,
+   3441
+  ],
+  [
+   4442,
+   2070
+  ]
+ ]
+}

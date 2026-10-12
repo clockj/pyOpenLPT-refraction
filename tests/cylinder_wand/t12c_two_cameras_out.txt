@@ -1,0 +1,182 @@
+T12c: two-camera rigs, 4 cases x 40 data sets, each fitted with and without the weights
+  [  1/160    10 s] 45 deg, cam2 at 0.5 px   set  0: weights used True (separable True), sigma [0.1043, 0.5032], rel se [0.091, 0.021] | RMS z weighted 0.90 vs equal 1.43
+  [  2/160    10 s] 45 deg, cam2 at 0.5 px   set  9: weights used True (separable True), sigma [0.1004, 0.5133], rel se [0.09, 0.021] | RMS z weighted 0.84 vs equal 0.97
+  [  3/160    10 s] 45 deg, cam2 at 0.5 px   set 14: weights used True (separable True), sigma [0.0993, 0.5036], rel se [0.095, 0.02] | RMS z weighted 1.40 vs equal 2.48
+  [  4/160    11 s] 45 deg, cam2 at 0.5 px   set  7: weights used True (separable True), sigma [0.0999, 0.4912], rel se [0.094, 0.021] | RMS z weighted 0.90 vs equal 1.89
+  [  5/160    11 s] 45 deg, cam2 at 0.5 px   set  2: weights used True (separable True), sigma [0.0825, 0.5078], rel se [0.094, 0.02] | RMS z weighted 1.21 vs equal 1.32
+  [  6/160    11 s] 45 deg, cam2 at 0.5 px   set 12: weights used True (separable True), sigma [0.0877, 0.5045], rel se [0.09, 0.02] | RMS z weighted 0.73 vs equal 1.24
+  [  7/160    11 s] 45 deg, cam2 at 0.5 px   set  4: weights used True (separable True), sigma [0.1061, 0.4825], rel se [0.084, 0.021] | RMS z weighted 0.82 vs equal 0.90
+  [  8/160    11 s] 45 deg, cam2 at 0.5 px   set  1: weights used True (separable True), sigma [0.11, 0.5037], rel se [0.084, 0.021] | RMS z weighted 0.86 vs equal 1.09
+  [  9/160    11 s] 45 deg, cam2 at 0.5 px   set 15: weights used False (separable False), sigma [], rel se [0.106, 0.02] | RMS z weighted 1.42 vs equal 1.42
+  [ 10/160    12 s] 45 deg, cam2 at 0.5 px   set  8: weights used True (separable True), sigma [0.1076, 0.4842], rel se [0.093, 0.021] | RMS z weighted 0.59 vs equal 1.03
+  [ 11/160    12 s] 45 deg, cam2 at 0.5 px   set 13: weights used True (separable True), sigma [0.1083, 0.4901], rel se [0.078, 0.021] | RMS z weighted 0.81 vs equal 1.07
+  [ 12/160    13 s] 45 deg, cam2 at 0.5 px   set  3: weights used False (separable False), sigma [], rel se [0.103, 0.021] | RMS z weighted 1.19 vs equal 1.19
+  [ 13/160    13 s] 45 deg, cam2 at 0.5 px   set  6: weights used True (separable True), sigma [0.0995, 0.5021], rel se [0.089, 0.021] | RMS z weighted 1.09 vs equal 1.53
+  [ 14/160    13 s] 45 deg, cam2 at 0.5 px   set  5: weights used True (separable True), sigma [0.0853, 0.5], rel se [0.091, 0.02] | RMS z weighted 1.42 vs equal 2.03
+  [ 15/160    14 s] 45 deg, cam2 at 0.5 px   set 11: weights used True (separable True), sigma [0.093, 0.4881], rel se [0.091, 0.02] | RMS z weighted 1.60 vs equal 1.43
+  [ 16/160    14 s] 45 deg, cam2 at 0.5 px   set 10: weights used False (separable False), sigma [], rel se [0.105, 0.02] | RMS z weighted 2.21 vs equal 2.21
+  [ 17/160    18 s] 45 deg, cam2 at 0.5 px   set 16: weights used True (separable True), sigma [0.0968, 0.4951], rel se [0.09, 0.021] | RMS z weighted 0.51 vs equal 0.94
+  [ 18/160    19 s] 45 deg, cam2 at 0.5 px   set 17: weights used True (separable True), sigma [0.1013, 0.5163], rel se [0.083, 0.02] | RMS z weighted 0.61 vs equal 0.38
+  [ 19/160    19 s] 45 deg, cam2 at 0.5 px   set 19: weights used True (separable True), sigma [0.0888, 0.5052], rel se [0.096, 0.02] | RMS z weighted 1.24 vs equal 1.13
+  [ 20/160    20 s] 45 deg, cam2 at 0.5 px   set 24: weights used True (separable True), sigma [0.0817, 0.5156], rel se [0.097, 0.02] | RMS z weighted 1.04 vs equal 1.93
+  [ 21/160    20 s] 45 deg, cam2 at 0.5 px   set 18: weights used True (separable True), sigma [0.1275, 0.4928], rel se [0.078, 0.022] | RMS z weighted 0.83 vs equal 1.48
+  [ 22/160    20 s] 45 deg, cam2 at 0.5 px   set 23: weights used True (separable True), sigma [0.1156, 0.4882], rel se [0.084, 0.021] | RMS z weighted 1.08 vs equal 1.87
+  [ 23/160    20 s] 45 deg, cam2 at 0.5 px   set 26: weights used True (separable True), sigma [0.099, 0.5221], rel se [0.095, 0.021] | RMS z weighted 1.11 vs equal 1.34
+  [ 24/160    21 s] 45 deg, cam2 at 0.5 px   set 21: weights used True (separable True), sigma [0.0994, 0.5039], rel se [0.09, 0.021] | RMS z weighted 1.00 vs equal 1.26
+  [ 25/160    21 s] 45 deg, cam2 at 0.5 px   set 20: weights used True (separable True), sigma [0.1162, 0.4854], rel se [0.083, 0.021] | RMS z weighted 1.14 vs equal 1.99
+  [ 26/160    21 s] 45 deg, cam2 at 0.5 px   set 22: weights used False (separable False), sigma [], rel se [0.102, 0.021] | RMS z weighted 1.40 vs equal 1.40
+  [ 27/160    21 s] 45 deg, cam2 at 0.5 px   set 27: weights used True (separable True), sigma [0.0975, 0.5069], rel se [0.09, 0.021] | RMS z weighted 0.59 vs equal 0.97
+  [ 28/160    22 s] 45 deg, cam2 at 0.5 px   set 29: weights used True (separable True), sigma [0.1103, 0.4853], rel se [0.083, 0.021] | RMS z weighted 0.55 vs equal 0.54
+  [ 29/160    22 s] 45 deg, cam2 at 0.5 px   set 28: weights used True (separable True), sigma [0.0982, 0.5239], rel se [0.094, 0.02] | RMS z weighted 0.93 vs equal 1.79
+  [ 30/160    23 s] 45 deg, cam2 at 0.5 px   set 25: weights used True (separable True), sigma [0.1081, 0.4884], rel se [0.086, 0.021] | RMS z weighted 1.14 vs equal 1.32
+  [ 31/160    24 s] 45 deg, cam2 at 0.5 px   set 31: weights used True (separable True), sigma [0.1012, 0.4974], rel se [0.084, 0.021] | RMS z weighted 1.31 vs equal 1.25
+  [ 32/160    25 s] 45 deg, cam2 at 0.5 px   set 30: weights used True (separable True), sigma [0.1059, 0.4919], rel se [0.091, 0.021] | RMS z weighted 0.67 vs equal 0.55
+  [ 33/160    26 s] 45 deg, cam2 at 0.5 px   set 32: weights used True (separable True), sigma [0.0929, 0.5125], rel se [0.1, 0.02] | RMS z weighted 1.15 vs equal 1.30
+  [ 34/160    28 s] 45 deg, cam2 at 0.5 px   set 35: weights used True (separable True), sigma [0.0886, 0.5002], rel se [0.1, 0.02] | RMS z weighted 0.74 vs equal 1.34
+  [ 35/160    28 s] 45 deg, cam2 at 0.5 px   set 37: weights used True (separable True), sigma [0.0795, 0.5058], rel se [0.088, 0.02] | RMS z weighted 1.02 vs equal 1.45
+  [ 36/160    28 s] 45 deg, both 0.1 px      set  1: weights used True (separable True), sigma [0.096, 0.0998], rel se [0.041, 0.039] | RMS z weighted 0.92 vs equal 0.93
+  [ 37/160    29 s] 45 deg, cam2 at 0.5 px   set 33: weights used True (separable True), sigma [0.1004, 0.4944], rel se [0.08, 0.021] | RMS z weighted 1.06 vs equal 1.07
+  [ 38/160    29 s] 45 deg, both 0.1 px      set  5: weights used True (separable True), sigma [0.0985, 0.1011], rel se [0.042, 0.041] | RMS z weighted 0.87 vs equal 0.87
+  [ 39/160    29 s] 45 deg, both 0.1 px      set  0: weights used True (separable True), sigma [0.1028, 0.0982], rel se [0.04, 0.042] | RMS z weighted 1.97 vs equal 1.96
+  [ 40/160    29 s] 45 deg, both 0.1 px      set  4: weights used True (separable True), sigma [0.0998, 0.1002], rel se [0.04, 0.04] | RMS z weighted 0.89 vs equal 0.89
+  [ 41/160    29 s] 45 deg, both 0.1 px      set  2: weights used True (separable True), sigma [0.0986, 0.0943], rel se [0.04, 0.041] | RMS z weighted 0.96 vs equal 0.97
+  [ 42/160    30 s] 45 deg, both 0.1 px      set  3: weights used True (separable True), sigma [0.1034, 0.0917], rel se [0.038, 0.043] | RMS z weighted 1.12 vs equal 1.11
+  [ 43/160    30 s] 45 deg, cam2 at 0.5 px   set 34: weights used True (separable True), sigma [0.103, 0.4819], rel se [0.085, 0.021] | RMS z weighted 1.93 vs equal 2.22
+  [ 44/160    30 s] 45 deg, cam2 at 0.5 px   set 36: weights used True (separable True), sigma [0.1118, 0.5038], rel se [0.086, 0.021] | RMS z weighted 1.09 vs equal 2.00
+  [ 45/160    31 s] 45 deg, cam2 at 0.5 px   set 39: weights used True (separable True), sigma [0.0989, 0.4875], rel se [0.085, 0.021] | RMS z weighted 0.88 vs equal 1.25
+  [ 46/160    31 s] 45 deg, cam2 at 0.5 px   set 38: weights used False (separable False), sigma [], rel se [0.101, 0.02] | RMS z weighted 0.85 vs equal 0.85
+  [ 47/160    32 s] 45 deg, both 0.1 px      set  7: weights used True (separable True), sigma [0.0992, 0.0941], rel se [0.04, 0.043] | RMS z weighted 1.13 vs equal 1.14
+  [ 48/160    33 s] 45 deg, both 0.1 px      set  8: weights used True (separable True), sigma [0.0967, 0.099], rel se [0.04, 0.04] | RMS z weighted 1.32 vs equal 1.32
+  [ 49/160    34 s] 45 deg, both 0.1 px      set  6: weights used True (separable True), sigma [0.0914, 0.1022], rel se [0.043, 0.038] | RMS z weighted 1.23 vs equal 1.28
+  [ 50/160    35 s] 45 deg, both 0.1 px      set  9: weights used True (separable True), sigma [0.0995, 0.0951], rel se [0.038, 0.042] | RMS z weighted 0.76 vs equal 0.76
+  [ 51/160    35 s] 45 deg, both 0.1 px      set 14: weights used True (separable True), sigma [0.0956, 0.1007], rel se [0.043, 0.04] | RMS z weighted 1.09 vs equal 1.10
+  [ 52/160    35 s] 45 deg, both 0.1 px      set 10: weights used True (separable True), sigma [0.1065, 0.0934], rel se [0.038, 0.045] | RMS z weighted 2.04 vs equal 2.02
+  [ 53/160    36 s] 45 deg, both 0.1 px      set 18: weights used True (separable True), sigma [0.1027, 0.1038], rel se [0.041, 0.041] | RMS z weighted 1.05 vs equal 1.05
+  [ 54/160    36 s] 45 deg, both 0.1 px      set 16: weights used True (separable True), sigma [0.1024, 0.0985], rel se [0.04, 0.042] | RMS z weighted 1.02 vs equal 1.02
+  [ 55/160    36 s] 45 deg, both 0.1 px      set 12: weights used True (separable True), sigma [0.0988, 0.0969], rel se [0.04, 0.041] | RMS z weighted 1.15 vs equal 1.15
+  [ 56/160    37 s] 45 deg, both 0.1 px      set 13: weights used True (separable True), sigma [0.1013, 0.0951], rel se [0.039, 0.042] | RMS z weighted 0.35 vs equal 0.34
+  [ 57/160    37 s] 45 deg, both 0.1 px      set 11: weights used True (separable True), sigma [0.1026, 0.0975], rel se [0.04, 0.042] | RMS z weighted 1.38 vs equal 1.39
+  [ 58/160    37 s] 45 deg, both 0.1 px      set 17: weights used True (separable True), sigma [0.0998, 0.0978], rel se [0.041, 0.041] | RMS z weighted 0.61 vs equal 0.61
+  [ 59/160    38 s] 45 deg, both 0.1 px      set 19: weights used True (separable True), sigma [0.0964, 0.0982], rel se [0.041, 0.041] | RMS z weighted 0.71 vs equal 0.71
+  [ 60/160    38 s] 45 deg, both 0.1 px      set 15: weights used True (separable True), sigma [0.1007, 0.1017], rel se [0.04, 0.041] | RMS z weighted 0.67 vs equal 0.67
+  [ 61/160    38 s] 45 deg, both 0.1 px      set 20: weights used True (separable True), sigma [0.1023, 0.098], rel se [0.039, 0.042] | RMS z weighted 0.57 vs equal 0.57
+  [ 62/160    39 s] 45 deg, both 0.1 px      set 22: weights used True (separable True), sigma [0.0973, 0.1], rel se [0.041, 0.04] | RMS z weighted 0.70 vs equal 0.69
+  [ 63/160    40 s] 45 deg, both 0.1 px      set 21: weights used True (separable True), sigma [0.0948, 0.1063], rel se [0.044, 0.038] | RMS z weighted 0.68 vs equal 0.65
+  [ 64/160    41 s] 45 deg, both 0.1 px      set 23: weights used True (separable True), sigma [0.0986, 0.1027], rel se [0.042, 0.04] | RMS z weighted 0.47 vs equal 0.47
+  [ 65/160    41 s] 45 deg, both 0.1 px      set 25: weights used True (separable True), sigma [0.1019, 0.0976], rel se [0.039, 0.041] | RMS z weighted 0.52 vs equal 0.52
+  [ 66/160    42 s] 45 deg, both 0.1 px      set 27: weights used True (separable True), sigma [0.1067, 0.0996], rel se [0.039, 0.043] | RMS z weighted 0.77 vs equal 0.78
+  [ 67/160    42 s] 45 deg, both 0.1 px      set 24: weights used True (separable True), sigma [0.1029, 0.0949], rel se [0.039, 0.043] | RMS z weighted 1.61 vs equal 1.62
+  [ 68/160    43 s] 45 deg, both 0.1 px      set 28: weights used True (separable True), sigma [0.0985, 0.1008], rel se [0.042, 0.04] | RMS z weighted 0.92 vs equal 0.92
+  [ 69/160    43 s] 45 deg, both 0.1 px      set 29: weights used True (separable True), sigma [0.0999, 0.0941], rel se [0.039, 0.042] | RMS z weighted 0.96 vs equal 0.94
+  [ 70/160    43 s] 45 deg, both 0.1 px      set 26: weights used True (separable True), sigma [0.1025, 0.0998], rel se [0.04, 0.042] | RMS z weighted 0.86 vs equal 0.87
+  [ 71/160    44 s] 45 deg, both 0.1 px      set 31: weights used True (separable True), sigma [0.0994, 0.0993], rel se [0.041, 0.041] | RMS z weighted 0.31 vs equal 0.31
+  [ 72/160    45 s] 45 deg, both 0.1 px      set 32: weights used True (separable True), sigma [0.1024, 0.0977], rel se [0.04, 0.042] | RMS z weighted 1.02 vs equal 1.03
+  [ 73/160    45 s] 45 deg, both 0.1 px      set 33: weights used True (separable True), sigma [0.1033, 0.0935], rel se [0.039, 0.044] | RMS z weighted 0.86 vs equal 0.89
+  [ 74/160    45 s] 45 deg, both 0.1 px      set 37: weights used True (separable True), sigma [0.0987, 0.0996], rel se [0.041, 0.041] | RMS z weighted 0.81 vs equal 0.81
+  [ 75/160    46 s] 45 deg, both 0.1 px      set 36: weights used True (separable True), sigma [0.1061, 0.1022], rel se [0.041, 0.042] | RMS z weighted 0.86 vs equal 0.86
+  [ 76/160    46 s] 45 deg, both 0.1 px      set 30: weights used True (separable True), sigma [0.0953, 0.1025], rel se [0.043, 0.039] | RMS z weighted 0.76 vs equal 0.77
+  [ 77/160    47 s] 45 deg, both 0.1 px      set 38: weights used True (separable True), sigma [0.1007, 0.0924], rel se [0.039, 0.043] | RMS z weighted 1.17 vs equal 1.16
+  [ 78/160    47 s] 45 deg, both 0.1 px      set 34: weights used True (separable True), sigma [0.0949, 0.1016], rel se [0.043, 0.039] | RMS z weighted 0.51 vs equal 0.51
+  [ 79/160    48 s] 45 deg, both 0.1 px      set 35: weights used True (separable True), sigma [0.1009, 0.1022], rel se [0.042, 0.041] | RMS z weighted 0.72 vs equal 0.72
+  [ 80/160    49 s] 45 deg, both 0.1 px      set 39: weights used True (separable True), sigma [0.0961, 0.1046], rel se [0.044, 0.039] | RMS z weighted 1.03 vs equal 1.02
+  [ 81/160    50 s] 90 deg, cam2 at 0.5 px   set  2: weights used True (separable True), sigma [0.0989, 0.4985], rel se [0.077, 0.021] | RMS z weighted 0.72 vs equal 1.13
+  [ 82/160    50 s] 90 deg, cam2 at 0.5 px   set  3: weights used True (separable True), sigma [0.1064, 0.4843], rel se [0.073, 0.021] | RMS z weighted 1.50 vs equal 2.04
+  [ 83/160    52 s] 90 deg, cam2 at 0.5 px   set  1: weights used True (separable True), sigma [0.0949, 0.4959], rel se [0.08, 0.021] | RMS z weighted 0.71 vs equal 1.39
+  [ 84/160    52 s] 90 deg, cam2 at 0.5 px   set  7: weights used True (separable True), sigma [0.1068, 0.4969], rel se [0.073, 0.021] | RMS z weighted 0.94 vs equal 1.30
+  [ 85/160    52 s] 90 deg, cam2 at 0.5 px   set  0: weights used True (separable True), sigma [0.1006, 0.4944], rel se [0.079, 0.021] | RMS z weighted 0.80 vs equal 1.72
+  [ 86/160    53 s] 90 deg, cam2 at 0.5 px   set 10: weights used True (separable True), sigma [0.0955, 0.4953], rel se [0.077, 0.021] | RMS z weighted 1.19 vs equal 1.28
+  [ 87/160    53 s] 90 deg, cam2 at 0.5 px   set  8: weights used True (separable True), sigma [0.1075, 0.4792], rel se [0.076, 0.021] | RMS z weighted 1.04 vs equal 1.50
+  [ 88/160    53 s] 90 deg, cam2 at 0.5 px   set  9: weights used True (separable True), sigma [0.0914, 0.5021], rel se [0.075, 0.021] | RMS z weighted 1.00 vs equal 1.40
+  [ 89/160    54 s] 90 deg, cam2 at 0.5 px   set 11: weights used True (separable True), sigma [0.1124, 0.4848], rel se [0.073, 0.021] | RMS z weighted 1.10 vs equal 1.50
+  [ 90/160    56 s] 90 deg, cam2 at 0.5 px   set 15: weights used True (separable True), sigma [0.1151, 0.5053], rel se [0.069, 0.021] | RMS z weighted 0.86 vs equal 0.71
+  [ 91/160    56 s] 90 deg, cam2 at 0.5 px   set 12: weights used True (separable True), sigma [0.0916, 0.5018], rel se [0.078, 0.02] | RMS z weighted 0.82 vs equal 1.28
+  [ 92/160    56 s] 90 deg, cam2 at 0.5 px   set 13: weights used True (separable True), sigma [0.0931, 0.5104], rel se [0.085, 0.02] | RMS z weighted 1.23 vs equal 1.80
+  [ 93/160    57 s] 90 deg, cam2 at 0.5 px   set  6: weights used True (separable True), sigma [0.1114, 0.5023], rel se [0.076, 0.021] | RMS z weighted 1.10 vs equal 1.44
+  [ 94/160    57 s] 90 deg, cam2 at 0.5 px   set 14: weights used True (separable True), sigma [0.0869, 0.51], rel se [0.086, 0.02] | RMS z weighted 0.55 vs equal 0.99
+  [ 95/160    58 s] 90 deg, cam2 at 0.5 px   set 17: weights used True (separable True), sigma [0.1125, 0.5085], rel se [0.073, 0.021] | RMS z weighted 1.06 vs equal 1.71
+  [ 96/160    59 s] 90 deg, cam2 at 0.5 px   set 16: weights used True (separable True), sigma [0.1032, 0.4992], rel se [0.077, 0.021] | RMS z weighted 1.03 vs equal 1.69
+  [ 97/160    60 s] 90 deg, cam2 at 0.5 px   set 23: weights used True (separable True), sigma [0.097, 0.5018], rel se [0.074, 0.021] | RMS z weighted 0.84 vs equal 0.95
+  [ 98/160    61 s] 90 deg, cam2 at 0.5 px   set 18: weights used True (separable True), sigma [0.0808, 0.5185], rel se [0.088, 0.02] | RMS z weighted 0.98 vs equal 1.42
+  [ 99/160    61 s] 90 deg, cam2 at 0.5 px   set 20: weights used True (separable True), sigma [0.0824, 0.5104], rel se [0.084, 0.02] | RMS z weighted 0.91 vs equal 1.58
+  [100/160    62 s] 90 deg, cam2 at 0.5 px   set 19: weights used True (separable True), sigma [0.0975, 0.5012], rel se [0.081, 0.021] | RMS z weighted 1.06 vs equal 1.22
+  [101/160    62 s] 90 deg, cam2 at 0.5 px   set 21: weights used True (separable True), sigma [0.0975, 0.4899], rel se [0.082, 0.021] | RMS z weighted 0.86 vs equal 1.12
+  [102/160    63 s] 90 deg, cam2 at 0.5 px   set 24: weights used True (separable True), sigma [0.1009, 0.4842], rel se [0.074, 0.021] | RMS z weighted 1.57 vs equal 2.23
+  [103/160    63 s] 90 deg, cam2 at 0.5 px   set 22: weights used True (separable True), sigma [0.1033, 0.4965], rel se [0.077, 0.021] | RMS z weighted 1.07 vs equal 1.23
+  [104/160    64 s] 90 deg, cam2 at 0.5 px   set 28: weights used True (separable True), sigma [0.0917, 0.502], rel se [0.078, 0.021] | RMS z weighted 1.44 vs equal 1.80
+  [105/160    64 s] 90 deg, cam2 at 0.5 px   set 27: weights used True (separable True), sigma [0.0964, 0.4927], rel se [0.078, 0.021] | RMS z weighted 0.56 vs equal 0.57
+  [106/160    65 s] 90 deg, cam2 at 0.5 px   set 26: weights used True (separable True), sigma [0.0963, 0.4959], rel se [0.083, 0.021] | RMS z weighted 0.71 vs equal 1.05
+  [107/160    65 s] 90 deg, cam2 at 0.5 px   set  4: weights used True (separable True), sigma [0.0863, 0.5044], rel se [0.083, 0.02] | RMS z weighted 1.41 vs equal 0.98
+  [108/160    65 s] 90 deg, cam2 at 0.5 px   set  5: weights used True (separable True), sigma [0.0929, 0.4919], rel se [0.077, 0.021] | RMS z weighted 1.03 vs equal 1.01
+  [109/160    66 s] 90 deg, cam2 at 0.5 px   set 30: weights used True (separable True), sigma [0.095, 0.4972], rel se [0.084, 0.021] | RMS z weighted 1.19 vs equal 1.48
+  [110/160    67 s] 90 deg, cam2 at 0.5 px   set 29: weights used True (separable True), sigma [0.1156, 0.4847], rel se [0.075, 0.021] | RMS z weighted 1.08 vs equal 0.85
+  [111/160    69 s] 90 deg, cam2 at 0.5 px   set 33: weights used True (separable True), sigma [0.0847, 0.5019], rel se [0.086, 0.02] | RMS z weighted 0.45 vs equal 0.71
+  [112/160    70 s] 90 deg, cam2 at 0.5 px   set 35: weights used True (separable True), sigma [0.106, 0.4949], rel se [0.067, 0.021] | RMS z weighted 0.59 vs equal 1.38
+  [113/160    70 s] 90 deg, cam2 at 0.5 px   set 32: weights used True (separable True), sigma [0.1068, 0.4845], rel se [0.073, 0.021] | RMS z weighted 1.03 vs equal 1.06
+  [114/160    70 s] 90 deg, cam2 at 0.5 px   set 37: weights used True (separable True), sigma [0.0844, 0.513], rel se [0.09, 0.02] | RMS z weighted 1.08 vs equal 2.16
+  [115/160    71 s] 90 deg, both 0.1 px      set  2: weights used True (separable True), sigma [0.0952, 0.0953], rel se [0.038, 0.038] | RMS z weighted 0.60 vs equal 0.60
+  [116/160    71 s] 90 deg, cam2 at 0.5 px   set 38: weights used True (separable True), sigma [0.0986, 0.4981], rel se [0.072, 0.021] | RMS z weighted 1.39 vs equal 1.84
+  [117/160    72 s] 90 deg, cam2 at 0.5 px   set 39: weights used True (separable True), sigma [0.0953, 0.5028], rel se [0.083, 0.021] | RMS z weighted 0.39 vs equal 0.93
+  [118/160    72 s] 90 deg, both 0.1 px      set  1: weights used True (separable True), sigma [0.0926, 0.105], rel se [0.041, 0.036] | RMS z weighted 1.42 vs equal 1.40
+  [119/160    73 s] 90 deg, both 0.1 px      set  0: weights used True (separable True), sigma [0.1003, 0.1057], rel se [0.039, 0.036] | RMS z weighted 0.78 vs equal 0.78
+  [120/160    73 s] 90 deg, cam2 at 0.5 px   set 34: weights used True (separable True), sigma [0.0852, 0.4974], rel se [0.08, 0.02] | RMS z weighted 0.54 vs equal 1.06
+  [121/160    73 s] 90 deg, cam2 at 0.5 px   set 31: weights used True (separable True), sigma [0.0931, 0.4864], rel se [0.077, 0.021] | RMS z weighted 0.87 vs equal 1.53
+  [122/160    73 s] 90 deg, both 0.1 px      set  3: weights used True (separable True), sigma [0.0995, 0.1034], rel se [0.039, 0.037] | RMS z weighted 0.44 vs equal 0.42
+  [123/160    73 s] 90 deg, cam2 at 0.5 px   set 36: weights used True (separable True), sigma [0.0915, 0.4909], rel se [0.073, 0.021] | RMS z weighted 0.71 vs equal 1.47
+  [124/160    73 s] 90 deg, both 0.1 px      set  5: weights used True (separable True), sigma [0.0962, 0.1047], rel se [0.04, 0.037] | RMS z weighted 0.92 vs equal 0.96
+  [125/160    74 s] 90 deg, both 0.1 px      set  4: weights used True (separable True), sigma [0.0992, 0.0958], rel se [0.037, 0.038] | RMS z weighted 1.22 vs equal 1.23
+  [126/160    75 s] 90 deg, cam2 at 0.5 px   set 25: weights used True (separable True), sigma [0.0991, 0.4928], rel se [0.073, 0.021] | RMS z weighted 1.19 vs equal 1.33
+  [127/160    75 s] 90 deg, both 0.1 px      set  6: weights used True (separable True), sigma [0.101, 0.0962], rel se [0.037, 0.039] | RMS z weighted 0.76 vs equal 0.76
+  [128/160    76 s] 90 deg, both 0.1 px      set  7: weights used True (separable True), sigma [0.101, 0.0944], rel se [0.037, 0.04] | RMS z weighted 1.07 vs equal 1.05
+  [129/160    77 s] 90 deg, both 0.1 px      set  8: weights used True (separable True), sigma [0.1018, 0.0964], rel se [0.038, 0.04] | RMS z weighted 0.60 vs equal 0.60
+  [130/160    78 s] 90 deg, both 0.1 px      set 12: weights used True (separable True), sigma [0.1004, 0.1008], rel se [0.038, 0.037] | RMS z weighted 0.80 vs equal 0.80
+  [131/160    78 s] 90 deg, both 0.1 px      set  9: weights used True (separable True), sigma [0.1008, 0.1028], rel se [0.038, 0.038] | RMS z weighted 0.78 vs equal 0.78
+  [132/160    78 s] 90 deg, both 0.1 px      set 10: weights used True (separable True), sigma [0.0952, 0.0985], rel se [0.039, 0.037] | RMS z weighted 0.93 vs equal 0.94
+  [133/160    79 s] 90 deg, both 0.1 px      set 13: weights used True (separable True), sigma [0.0965, 0.1035], rel se [0.04, 0.037] | RMS z weighted 0.59 vs equal 0.59
+  [134/160    79 s] 90 deg, both 0.1 px      set 11: weights used True (separable True), sigma [0.0982, 0.1025], rel se [0.04, 0.038] | RMS z weighted 0.92 vs equal 0.91
+  [135/160    79 s] 90 deg, both 0.1 px      set 16: weights used True (separable True), sigma [0.097, 0.1067], rel se [0.04, 0.035] | RMS z weighted 0.42 vs equal 0.43
+  [136/160    79 s] 90 deg, both 0.1 px      set 15: weights used True (separable True), sigma [0.0963, 0.1], rel se [0.039, 0.037] | RMS z weighted 1.28 vs equal 1.29
+  [137/160    80 s] 90 deg, both 0.1 px      set 14: weights used True (separable True), sigma [0.0988, 0.0979], rel se [0.037, 0.037] | RMS z weighted 0.61 vs equal 0.61
+  [138/160    80 s] 90 deg, both 0.1 px      set 19: weights used True (separable True), sigma [0.1018, 0.1021], rel se [0.039, 0.039] | RMS z weighted 1.10 vs equal 1.10
+  [139/160    80 s] 90 deg, both 0.1 px      set 18: weights used True (separable True), sigma [0.099, 0.097], rel se [0.038, 0.038] | RMS z weighted 0.65 vs equal 0.64
+  [140/160    81 s] 90 deg, both 0.1 px      set 17: weights used True (separable True), sigma [0.0987, 0.1043], rel se [0.039, 0.037] | RMS z weighted 0.75 vs equal 0.76
+  [141/160    81 s] 90 deg, both 0.1 px      set 21: weights used True (separable True), sigma [0.0984, 0.0967], rel se [0.037, 0.038] | RMS z weighted 0.75 vs equal 0.76
+  [142/160    81 s] 90 deg, both 0.1 px      set 20: weights used True (separable True), sigma [0.1001, 0.1039], rel se [0.039, 0.038] | RMS z weighted 1.37 vs equal 1.34
+  [143/160    82 s] 90 deg, both 0.1 px      set 22: weights used True (separable True), sigma [0.0985, 0.097], rel se [0.037, 0.038] | RMS z weighted 0.65 vs equal 0.65
+  [144/160    83 s] 90 deg, both 0.1 px      set 23: weights used True (separable True), sigma [0.0987, 0.0981], rel se [0.038, 0.038] | RMS z weighted 1.28 vs equal 1.28
+  [145/160    83 s] 90 deg, both 0.1 px      set 24: weights used True (separable True), sigma [0.1023, 0.0948], rel se [0.036, 0.04] | RMS z weighted 1.09 vs equal 1.09
+  [146/160    84 s] 90 deg, both 0.1 px      set 25: weights used True (separable True), sigma [0.0953, 0.0947], rel se [0.038, 0.038] | RMS z weighted 1.07 vs equal 1.07
+  [147/160    85 s] 90 deg, both 0.1 px      set 26: weights used True (separable True), sigma [0.1014, 0.0972], rel se [0.037, 0.038] | RMS z weighted 1.05 vs equal 1.04
+  [148/160    85 s] 90 deg, both 0.1 px      set 29: weights used True (separable True), sigma [0.0997, 0.1005], rel se [0.038, 0.038] | RMS z weighted 0.50 vs equal 0.50
+  [149/160    85 s] 90 deg, both 0.1 px      set 27: weights used True (separable True), sigma [0.1045, 0.1001], rel se [0.037, 0.039] | RMS z weighted 1.03 vs equal 1.02
+  [150/160    86 s] 90 deg, both 0.1 px      set 31: weights used True (separable True), sigma [0.1015, 0.105], rel se [0.039, 0.037] | RMS z weighted 0.92 vs equal 0.92
+  [151/160    86 s] 90 deg, both 0.1 px      set 30: weights used True (separable True), sigma [0.0968, 0.0976], rel se [0.038, 0.037] | RMS z weighted 1.36 vs equal 1.36
+  [152/160    87 s] 90 deg, both 0.1 px      set 37: weights used True (separable True), sigma [0.1003, 0.0995], rel se [0.038, 0.038] | RMS z weighted 0.73 vs equal 0.74
+  [153/160    87 s] 90 deg, both 0.1 px      set 28: weights used True (separable True), sigma [0.1034, 0.0974], rel se [0.037, 0.04] | RMS z weighted 0.80 vs equal 0.80
+  [154/160    87 s] 90 deg, both 0.1 px      set 36: weights used True (separable True), sigma [0.1004, 0.1011], rel se [0.038, 0.038] | RMS z weighted 0.29 vs equal 0.29
+  [155/160    87 s] 90 deg, both 0.1 px      set 33: weights used True (separable True), sigma [0.0944, 0.1026], rel se [0.04, 0.037] | RMS z weighted 1.14 vs equal 1.17
+  [156/160    87 s] 90 deg, both 0.1 px      set 34: weights used True (separable True), sigma [0.0952, 0.1031], rel se [0.039, 0.036] | RMS z weighted 0.45 vs equal 0.45
+  [157/160    88 s] 90 deg, both 0.1 px      set 35: weights used True (separable True), sigma [0.102, 0.0953], rel se [0.037, 0.039] | RMS z weighted 0.71 vs equal 0.71
+  [158/160    88 s] 90 deg, both 0.1 px      set 38: weights used True (separable True), sigma [0.1002, 0.1005], rel se [0.038, 0.038] | RMS z weighted 0.89 vs equal 0.89
+  [159/160    88 s] 90 deg, both 0.1 px      set 32: weights used True (separable True), sigma [0.1022, 0.0968], rel se [0.038, 0.039] | RMS z weighted 1.38 vs equal 1.39
+  [160/160    88 s] 90 deg, both 0.1 px      set 39: weights used True (separable True), sigma [0.0995, 0.0955], rel se [0.037, 0.038] | RMS z weighted 1.03 vs equal 1.03
+
+== 45 deg, cam2 at 0.5 px ==
+  weights used in 35/40 (separable); median relative SE of the sigmas [0.09, 0.021]; sigma RMS error [10.3, 2.2] %
+  accuracy, weighted / equal weights (RMS z against the weighted bound): pooled 0.762, per camera 0.711, 0.805 (RMS z: weighted 1.10, equal 1.45); weighted fit's z std 1.04
+  PASS  {'never_worse': True, 'errors': True, 'pass': True}
+
+== 45 deg, both 0.1 px ==
+  weights used in 40/40 (separable); median relative SE of the sigmas [0.04, 0.041]; sigma RMS error [3.4, 3.7] %
+  accuracy, weighted / equal weights (RMS z against the weighted bound): pooled 0.999, per camera 1.000, 0.998 (RMS z: weighted 1.00, equal 1.00); weighted fit's z std 1.01
+  PASS  {'never_worse': True, 'errors': True, 'pass': True}
+
+== 90 deg, cam2 at 0.5 px ==
+  weights used in 40/40 (separable); median relative SE of the sigmas [0.077, 0.021]; sigma RMS error [9.3, 1.8] %
+  accuracy, weighted / equal weights (RMS z against the weighted bound): pooled 0.718, per camera 0.686, 0.746 (RMS z: weighted 1.01, equal 1.40); weighted fit's z std 1.01
+  PASS  {'never_worse': True, 'errors': True, 'pass': True}
+
+== 90 deg, both 0.1 px ==
+  weights used in 40/40 (separable); median relative SE of the sigmas [0.038, 0.038]; sigma RMS error [2.8, 3.6] %
+  accuracy, weighted / equal weights (RMS z against the weighted bound): pooled 0.999, per camera 0.999, 0.999 (RMS z: weighted 0.92, equal 0.93); weighted fit's z std 0.93
+  PASS  {'never_worse': True, 'errors': True, 'pass': True}
+time 88 s

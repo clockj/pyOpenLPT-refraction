@@ -1,0 +1,1 @@
+2 cameras: 23090 paired points of 840 particles; RMS gap library - re-rendered x/y/z +0.38/+0.16/+0.43 um; bootstrap SE 0.48/0.16/0.59 um; 95 % interval [-0.43, +1.45], [-0.10, +0.51], [-0.78, +1.57] um

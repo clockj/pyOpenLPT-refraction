@@ -1,0 +1,9 @@
+seed 1041: 6 cams, windows [0, 1, 2, 0, 1, 2], incidence [34, 35, 27, 40, 24, 36] deg, f [7516, 5499, 14779, 4708, 6258, 2252], h1 [956, 156, 592, 175, 386, 139] mm, cloud 76 mm, 570 frames
+  pinhole start: 1 kept, votes {False: 0, True: 6}, rms [3.551], 8.4 s
+  window 1 (cameras [0, 3]): guess 27.1 deg from the truth; best: [14.9 deg, d +1432.2 mm, score 1684] [21.3 deg, d +1420.5 mm, score 2290] [21.3 deg, d +1511.4 mm, score 2328]; 4.2 s
+  window 2 (cameras [1, 4]): guess 17.9 deg from the truth; best: [17.9 deg, d +140.3 mm, score 5865] [20.8 deg, d +218.2 mm, score 5874] [17.9 deg, d +232.8 mm, score 6447]; 4.1 s
+  window 3 (cameras [2, 5]): guess 3.8 deg from the truth; best: [3.2 deg, d -1332.4 mm, score 2207] [3.2 deg, d -1399.4 mm, score 2763] [11.4 deg, d -1276.9 mm, score 4225]; 4.1 s
+  bootstrap 251.2 s: 7 starts, coarse rms [0.108, 0.109, 0.112, 0.114, 0.139, 0.144, 0.156]
+  start 0: coarse rms 0.108 -> stage 4 rms 0.12647 (truth start 0.12587), active per camera [1140, 0, 1140, 1140, 0, 1140], max |z| 2.45e+06 (win2.delta), likelihood key -18931.2
+  start 1: coarse rms 0.109 -> stage 4 rms 0.12647 (truth start 0.12587), active per camera [1140, 0, 1140, 1140, 0, 1140], max |z| 1.80e+06 (win2.delta), likelihood key -18931.2
+  start 2: coarse rms 0.112 -> stage 4 rms 0.12648 (truth start 0.12587), active per camera [1140, 0, 1140, 1140, 0, 1140], max |z| 1.01e+06 (win2.delta), likelihood key -18930.8

@@ -1,0 +1,11 @@
+P0d survey: run 20261008/T0 (X:\Shijie Zhong\Refraction\Raw\20261008\T0), read-only
+Survey: every 50th image number (261), 735 camera-frames
+  cam1 settings: {'polarity': 'dark', 'min_r_px': 20.0, 'max_r_px': 70.0, 'open_px': 51, 'rod_mask_px': 28.0, 'guard_px': 3.0, 'workers': 16}
+  cam2 settings: {'polarity': 'dark', 'min_r_px': 20.0, 'max_r_px': 70.0, 'open_px': 51, 'rod_mask_px': 28.0, 'guard_px': 3.0, 'workers': 16}
+  cam3 settings: {'polarity': 'dark', 'min_r_px': 30.0, 'max_r_px': 105.0, 'open_px': 77, 'rod_mask_px': 42.0, 'guard_px': 3.0, 'workers': 16}
+  cam1: kept 166 of 261; rejected: 66 one ball, 24 no ball, 4 aspect, 1 edge RMS; median r (A, B) 31.3, 42.8 px; edge RMS median 0.18017586716929035, p90 0.3344608412673005; aspect median 1.3334025470740234, p5-p95 [1.252709911711109, 1.4142069529754477] (all two-ball pairs p5/50/95 [1.2471875524890632, 1.332822224921348, 1.415174352509583]); centres u [70.4425604237017, 1236.784161041902], v [44.21848638926152, 741.6859025428453]
+  cam2: kept 139 of 261; rejected: 92 one ball, 21 no ball, 8 aspect, 1 edge RMS; median r (A, B) 32.9, 44.4 px; edge RMS median 0.15623699040033823, p90 0.24862011883773447; aspect median 1.2297755475442185, p5-p95 [1.1666183446282743, 1.3177657042576114] (all two-ball pairs p5/50/95 [1.1608157629033746, 1.2273094558158606, 1.3180985675452288]); centres u [102.39142255509388, 1207.8521473721626], v [34.44580799943354, 747.7410524376918]
+  cam3: kept 144 of 213; rejected: 59 one ball, 10 no ball; median r (A, B) 49.3, 66.3 px; edge RMS median 0.1779392347869958, p90 0.2568998248998948; aspect median 1.2305104703656986, p5-p95 [1.1859341131631436, 1.3133074607535584] (all two-ball pairs p5/50/95 [1.1859341131631436, 1.2305104703656986, 1.3133074607535584]); centres u [474.29774277512064, 1986.3706492217148], v [125.40747396659754, 1545.2237787220588]
+  frames kept in >= 2 cameras: 145 of 261; in all 3: 72; per pair: {'12': 95, '13': 118, '23': 76}
+  over the whole recording (x 50): about 7250 frames in >= 2 cameras, 3600 in all 3
+  kept in all three, per 1000 image numbers: 0k 0 1k 0 2k 6 3k 10 4k 5 5k 10 6k 8 7k 8 8k 2 9k 6 10k 3 11k 6 12k 8 13k 0

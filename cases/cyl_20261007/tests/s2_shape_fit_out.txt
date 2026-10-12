@@ -1,0 +1,38 @@
+S2: T1's shape model; build p4c; cameras ['D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam1.txt', 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam2.txt']; view volume x [-1.7 24.4], y [-9.2 12.6], z [-30.3  15.8] mm (r <= 29.3); noise [8.06 5.92]; pairs within 8.0 px; signal band d <= 1.5 px, background 4.0 to 8.0 px
+  pairs read from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\s2\pairs_band.npz
+  pairs: 447560 fitting, 425903 held out (0 s)
+  fitting: signal band 88173, background band 220188 (k = 0.3750); estimated true pairs in the signal band 5602 +- 345 (6.4 % of it)
+  held out: signal band 83415, background band 209719 (k = 0.3750); estimated true pairs in the signal band 4770 +- 336 (5.7 % of it)
+  true pairs within d (of those within 3 px): 0.50 px 37 %, 0.75 px 52 %, 1.00 px 65 %, 1.25 px 74 %, 1.50 px 81 %, 2.00 px 90 %, 2.50 px 97 %; floor 26869 pairs per 0.25 px; true pairs within 3 px 12874 (252 per frame)
+  cam1 coarse grid (delta free): A 17.50 mm, z_f 1092 mm, sigma0 1.2 px, delta -75 mm: 2728 true pairs agree (355 s)
+  cam1 coarse grid (delta 0): A 20.00 mm, z_f 1167 mm, sigma0 1.2 px: 2728 true pairs agree
+  cam1 fine grid: model A: A 20.00 mm, z_f 1167.1 mm, sigma0 1.200 px (2728); model B: A 17.50 mm, z_f 1092.1 mm, sigma0 1.200 px, delta -75 mm (2728)
+  cam2 coarse grid (delta free): A 24.05 mm, z_f 1022 mm, sigma0 1.2 px, delta +200 mm: 3131 true pairs agree (323 s)
+  cam2 coarse grid (delta 0): A 15.70 mm, z_f 822 mm, sigma0 1.2 px: 3113 true pairs agree
+  cam2 fine grid: model A: A 15.25 mm, z_f 822.3 mm, sigma0 1.225 px (3147); model B: A 23.80 mm, z_f 1026.3 mm, sigma0 1.225 px, delta +204 mm (3158)
+  cam1, held out: model B keeps +12 +- 8 true pairs more than A -> A
+  cam2, held out: model B keeps +14 +- 15 true pairs more than A -> A
+  model A, held out: estimated true pairs 4770 +- 336; kept: cam1 49 +- 2 % of true, 10.4 % of random; cam2 60 +- 3 % of true, 12.8 % of random; joint 29 +- 1 % of true, 1.3 % of random
+    cam1 wh: |residual| of true pairs: 50 % <= 0.60, 68 % <= 0.94, 90 % <= 2.06 px (agreeing in the other camera: 0.56, 0.88, 2.14); bias -0.112 px; slope with depth -0.0211 +- 0.0033 px/mm (-0.88 px over the depths)
+    cam1 wv: |residual| of true pairs: 50 % <= 0.35, 68 % <= 0.50, 90 % <= 1.59 px (agreeing in the other camera: 0.32, 0.47, 0.87); bias +0.106 px; slope with depth +0.0150 +- 0.0042 px/mm (+0.66 px over the depths)
+    cam2 wh: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.42, 90 % <= 0.78 px (agreeing in the other camera: 0.34, 0.55, 1.26); bias +0.015 px; slope with depth -0.0176 +- 0.0060 px/mm (-0.65 px over the depths)
+    cam2 wv: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.43, 90 % <= 0.71 px (agreeing in the other camera: 0.29, 0.43, 0.73); bias -0.094 px; slope with depth +0.0103 +- 0.0055 px/mm (+0.37 px over the depths)
+  model B, held out: estimated true pairs 4770 +- 336; kept: cam1 49 +- 2 % of true, 10.4 % of random; cam2 60 +- 3 % of true, 12.8 % of random; joint 29 +- 1 % of true, 1.3 % of random
+    cam1 wh: |residual| of true pairs: 50 % <= 0.59, 68 % <= 0.93, 90 % <= 2.06 px (agreeing in the other camera: 0.55, 0.87, 2.26); bias -0.102 px; slope with depth -0.0216 +- 0.0033 px/mm (-0.90 px over the depths)
+    cam1 wv: |residual| of true pairs: 50 % <= 0.35, 68 % <= 0.50, 90 % <= 1.59 px (agreeing in the other camera: 0.33, 0.47, 0.88); bias +0.097 px; slope with depth +0.0154 +- 0.0041 px/mm (+0.68 px over the depths)
+    cam2 wh: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.42, 90 % <= 0.73 px (agreeing in the other camera: 0.34, 0.54, 1.22); bias +0.011 px; slope with depth -0.0183 +- 0.0060 px/mm (-0.67 px over the depths)
+    cam2 wv: |residual| of true pairs: 50 % <= 0.30, 68 % <= 0.43, 90 % <= 0.71 px (agreeing in the other camera: 0.29, 0.44, 0.73); bias -0.086 px; slope with depth +0.0096 +- 0.0055 px/mm (+0.35 px over the depths)
+  chosen: model A; judged (68 % of true pairs' residuals within 1.5 px, no trend with depth): FAIL (largest q68 0.94 px; trend yes)
+  shape_check tolerances, held out (joint: true kept / random kept):
+    tol_px 0.3: rel 0.10   6/ 0.1  rel 0.15  10/ 0.3  rel 0.20  16/ 0.6  rel 0.25  27/ 1.4  rel 0.30  40/ 2.7  rel 0.40  64/ 7.1
+    tol_px 0.4: rel 0.10  11/ 0.3  rel 0.15  16/ 0.5  rel 0.20  22/ 0.9  rel 0.25  31/ 1.6  rel 0.30  41/ 2.8  rel 0.40  64/ 7.1
+    tol_px 0.5: rel 0.10  20/ 0.7  rel 0.15  23/ 0.8  rel 0.20  29/ 1.3  rel 0.25  37/ 2.0  rel 0.30  46/ 3.1  rel 0.40  64/ 7.1
+    tol_px 0.6: rel 0.10  29/ 1.2  rel 0.15  31/ 1.3  rel 0.20  35/ 1.8  rel 0.25  43/ 2.5  rel 0.30  50/ 3.7  rel 0.40  66/ 7.4
+    tol_px 0.8: rel 0.10  46/ 3.1  rel 0.15  47/ 3.1  rel 0.20  49/ 3.3  rel 0.25  53/ 4.0  rel 0.30  59/ 5.2  rel 0.40  70/ 8.7
+    tol_px 1.0: rel 0.10  61/ 5.9  rel 0.15  61/ 5.9  rel 0.20  62/ 6.0  rel 0.25  64/ 6.4  rel 0.30  67/ 7.4  rel 0.40  75/10.8
+    tol_px 1.2: rel 0.10  70/ 9.5  rel 0.15  70/ 9.5  rel 0.20  70/ 9.6  rel 0.25  72/ 9.8  rel 0.30  74/10.4  rel 0.40  78/13.5
+    tol_px 1.5: rel 0.10  76/16.1  rel 0.15  76/16.1  rel 0.20  76/16.1  rel 0.25  77/16.2  rel 0.30  79/16.5  rel 0.40  81/18.8
+  recommended (largest true kept / sqrt(random kept)): tol_px 0.8, tol_rel 0.2: keeps 49 +- 2 % of true pairs and 3.3 % of random ones
+  amplitude, cam1: flux = 787.5 x (|b| + |c| + 2)^0.468 (by moments over 2517 signal and 2860 background pairs; b, c the box lengths)
+  amplitude, cam2: flux = 83.9 x (|b| + |c| + 2)^1.165 (by moments over 2517 signal and 2860 background pairs; b, c the box lengths)
+  written data/T1_shape.json and data/T1_otf_shape.txt (15 x 11 x 17 nodes); 807 s

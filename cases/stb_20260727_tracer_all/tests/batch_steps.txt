@@ -1,0 +1,8 @@
+B1 the batch's end-of-run steps on S1 (a copy), delivered to a local folder
+
+check_finished: problems [], 51 frames, frames [0, 50]
+deliver: returned True; DONE.json True
+delivered output files byte-identical to S1's: 11 of 11 []
+extra files present: ['log.txt', 'run_info.json', 'resources.csv', 'config_staging.json', 'camFile/cam0.txt']
+
+PASS

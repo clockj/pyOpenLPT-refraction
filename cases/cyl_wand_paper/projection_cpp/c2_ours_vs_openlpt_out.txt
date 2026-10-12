@@ -1,0 +1,9 @@
+c2_ours_vs_openlpt: started 2026-10-06 12:58:04; module projbench.cp311-win_amd64.pyd (SHA-256 01ab7737e3b8, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+reference: C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a41554c2-317f-4657-a430-107eb353b7ed\scratchpad\frozen_pyopenlpt\pyopenlpt.cp311-win_amd64.pyd
+ref uniform         : 500 points, images 0/1/2/3+ [56, 436, 8, 0]; same list 500; identical to the last bit 500
+ref far-branch-rich : 500 points, images 0/1/2/3+ [101, 366, 33, 0]; same list 500; identical to the last bit 500
+sph uniform         : 500 points, images 0/1/2/3+ [88, 395, 17, 0]; same list 500; identical to the last bit 500
+sph far-branch-rich : 500 points, images 0/1/2/3+ [111, 353, 36, 0]; same list 500; identical to the last bit 500
+largest difference: |dLambda| 0, |dC_z| 0, direction 0
+C2 PASS: 2000 of 2000 points have the same list of rays (2000 identical to the last bit)
+c2_ours_vs_openlpt: done in 0.4 s

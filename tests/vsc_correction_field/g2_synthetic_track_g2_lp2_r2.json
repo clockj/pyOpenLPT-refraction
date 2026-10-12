@@ -1,0 +1,18 @@
+{
+ "config": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\runs\\configs\\g2_lp2_r2.json",
+ "build": "vcf",
+ "exe": false,
+ "env": {
+  "OMP_NUM_THREADS": "12",
+  "PYTHONDONTWRITEBYTECODE": "1"
+ },
+ "returncode": 0,
+ "wall_s": 289.92,
+ "end": "2026-10-09T02:14:43",
+ "build_info": {
+  "name": "vcf",
+  "git_head": "cffed7d",
+  "git_diff_sha256": "a34d938e0ed8cf5a3bacc52e887e0252a1ce3359ea13b40d4c35502b99c6bf6e",
+  "start": "2026-10-08T22:35:05"
+ }
+}

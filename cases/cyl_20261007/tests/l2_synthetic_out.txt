@@ -1,0 +1,128 @@
+L2 synthetic: lines.detect (DET defaults) against the C++ finder on T1-like images
+  cam1: hp noise 1.35 counts (neighbour correlation 0.40) = white 0.91 + texture 0.99; gain 6 -> 8.1 counts in the 8-bit image
+  cam2: hp noise 1.48 counts (neighbour correlation 0.49) = white 0.86 + texture 1.21; gain 4 -> 5.9 counts in the 8-bit image
+
+Set A: isolated objects on a 64 px grid, 6 frames (cam1's noise and gain)
+  (ran in 35 s)
+    lines.detect: recall at SNR >= 5 99.9 %, all 94.6 %; duplicates 0.00 % per object (0.00 % of objects have one); false positives 106 (1400 detections, 1368 objects)
+      recall by SNR: 0-3: 83.6 % (n 61); 3-5: 85.2 % (n 426); 5-8: 99.7 % (n 326); 8-12: 100.0 % (n 189); 12-20: 100.0 % (n 174); 20-inf: 100.0 % (n 192)
+      H     n 532: along RMS 0.495 (bias +0.009), across RMS 0.129 (bias -0.008) px; at SNR >= 5 (n 363): along 0.278, across 0.082 px
+      V     n 466: along RMS 0.467 (bias +0.026), across RMS 0.156 (bias +0.007) px; at SNR >= 5 (n 312): along 0.297, across 0.094 px
+      other n 296: along RMS 0.267 (bias +0.003), across RMS 0.239 (bias -0.011) px; at SNR >= 5 (n 205): along 0.150, across 0.147 px
+      H: SNR 3: 75 %, dups 0, along 1.101, across 0.136; SNR 4: 96 %, dups 0, along 0.715, across 0.205; SNR 5: 100 %, dups 0, along 0.475, across 0.141; SNR 7: 100 %, dups 0, along 0.378, across 0.075; SNR 10: 100 %, dups 0, along 0.265, across 0.06; SNR 15: 100 %, dups 0, along 0.215, across 0.035; SNR 25: 100 %, dups 0, along 0.121, across 0.021
+      V: SNR 3: 75 %, dups 0, along 0.954, across 0.287; SNR 4: 94 %, dups 0, along 0.644, across 0.192; SNR 5: 100 %, dups 0, along 0.503, across 0.153; SNR 7: 100 %, dups 0, along 0.378, across 0.089; SNR 10: 100 %, dups 0, along 0.233, across 0.064; SNR 15: 100 %, dups 0, along 0.148, across 0.038; SNR 25: 100 %, dups 0, along 0.096, across 0.031
+      ellipse: SNR 3: 96 %, dups 0, along 0.309, across 0.601; SNR 4: 100 %, dups 0, along 0.319, across 0.349; SNR 5: 100 %, dups 0, along 0.308, across 0.329; SNR 7: 100 %, dups 0, along 0.185, across 0.144; SNR 10: 100 %, dups 0, along 0.112, across 0.132; SNR 15: 100 %, dups 0, along 0.09, across 0.117; SNR 25: 100 %, dups 0, along 0.069, across 0.049
+      round: SNR 3: 57 %, dups 0, along 0.561, across 0.455; SNR 4: 79 %, dups 0, along 0.339, across 0.351; SNR 5: 92 %, dups 0, along 0.313, across 0.27; SNR 7: 100 %, dups 0, along 0.171, across 0.159; SNR 10: 100 %, dups 0, along 0.131, across 0.121; SNR 15: 100 %, dups 0, along 0.073, across 0.09; SNR 25: 100 %, dups 0, along 0.063, across 0.062
+    C++ finder, 3 sigma: recall at SNR >= 5 100.0 %, all 99.1 %; duplicates 258.77 % per object (69.66 % of objects have one); false positives 10083 (14979 detections, 1368 objects)
+      recall by SNR: 0-3: 98.4 % (n 61); 3-5: 97.4 % (n 426); 5-8: 100.0 % (n 326); 8-12: 100.0 % (n 189); 12-20: 100.0 % (n 174); 20-inf: 100.0 % (n 192)
+      H     n 552: along RMS 1.029 (bias +0.025), across RMS 0.193 (bias -0.013) px; at SNR >= 5 (n 363): along 0.883, across 0.155 px
+      V     n 479: along RMS 0.902 (bias +0.050), across RMS 0.304 (bias +0.004) px; at SNR >= 5 (n 312): along 0.776, across 0.255 px
+      other n 325: along RMS 0.365 (bias +0.056), across RMS 0.350 (bias +0.023) px; at SNR >= 5 (n 206): along 0.302, across 0.307 px
+    C++ finder, 4 sigma: recall at SNR >= 5 100.0 %, all 93.5 %; duplicates 182.97 % per object (58.19 % of objects have one); false positives 301 (4083 detections, 1368 objects)
+      recall by SNR: 0-3: 72.1 % (n 61); 3-5: 83.1 % (n 426); 5-8: 100.0 % (n 326); 8-12: 100.0 % (n 189); 12-20: 100.0 % (n 174); 20-inf: 100.0 % (n 192)
+      H     n 527: along RMS 1.370 (bias -0.030), across RMS 0.209 (bias -0.014) px; at SNR >= 5 (n 363): along 0.883, across 0.155 px
+      V     n 460: along RMS 1.028 (bias +0.035), across RMS 0.333 (bias +0.006) px; at SNR >= 5 (n 312): along 0.776, across 0.255 px
+      other n 292: along RMS 0.368 (bias +0.048), across RMS 0.371 (bias +0.038) px; at SNR >= 5 (n 206): along 0.302, across 0.307 px
+    C++ finder, 5 sigma: recall at SNR >= 5 99.3 %, all 79.2 %; duplicates 133.63 % per object (46.71 % of objects have one); false positives 2 (2913 detections, 1368 objects)
+      recall by SNR: 0-3: 11.5 % (n 61); 3-5: 47.2 % (n 426); 5-8: 98.2 % (n 326); 8-12: 100.0 % (n 189); 12-20: 100.0 % (n 174); 20-inf: 100.0 % (n 192)
+      H     n 452: along RMS 1.207 (bias +0.078), across RMS 0.181 (bias -0.011) px; at SNR >= 5 (n 362): along 0.893, across 0.161 px
+      V     n 391: along RMS 1.034 (bias +0.043), across RMS 0.326 (bias -0.003) px; at SNR >= 5 (n 311): along 0.856, across 0.253 px
+      other n 240: along RMS 0.355 (bias +0.054), across RMS 0.356 (bias -0.005) px; at SNR >= 5 (n 202): along 0.320, across 0.317 px
+
+Set B, cam1: calibrating the astigmatic population to P0b
+    calibration 0: n 2236, flux 150, alpha 12.0, beta 6.0 -> 4 sigma 661 (T1 1491), 6 sigma 232 (606), H core 8 px (10), V core 6 px (9)
+    calibration 1: n 4650, flux 179, alpha 14.3, beta 8.3 -> 4 sigma 1330 (T1 1491), 6 sigma 451 (606), H core 10 px (10), V core 8 px (9)
+    calibration 2: n 5154, flux 222, alpha 14.3, beta 9.1 -> 4 sigma 1769 (T1 1491), 6 sigma 837 (606), H core 11 px (10), V core 9 px (9)
+    calibration 3: n 4419, flux 185, alpha 13.3, beta 9.1 -> 4 sigma 1298 (T1 1491), 6 sigma 436 (606), H core 9 px (10), V core 8 px (9)
+    calibration 4: n 5006, flux 233, alpha 14.5, beta 10.0 -> 4 sigma 1684 (T1 1491), 6 sigma 777 (606), H core 11 px (10), V core 10 px (9)
+    calibration 5: n 4487, flux 200, alpha 13.4, beta 9.2 -> 4 sigma 1412 (T1 1491), 6 sigma 533 (606), H core 10 px (10), V core 9 px (9)
+    calibration 6: n 4712, flux 219, alpha 13.4, beta 9.2 -> 4 sigma 1697 (T1 1491), 6 sigma 768 (606), H core 10 px (10), V core 9 px (9)
+    calibration 7: n 4194, flux 192, alpha 13.4, beta 9.2 -> 4 sigma 1290 (T1 1491), 6 sigma 459 (606), H core 9 px (10), V core 9 px (9)
+    calibration 8: n 4778, flux 225, alpha 14.6, beta 9.2 -> 4 sigma 1590 (T1 1491), 6 sigma 760 (606), H core 11 px (10), V core 9 px (9)
+    calibration 9: n 4509, flux 185, alpha 13.5, beta 9.2 -> 4 sigma 1301 (T1 1491), 6 sigma 424 (606), H core 10 px (10), V core 8 px (9)
+    calibration 10: n 5098, flux 242, alpha 13.5, beta 10.1 -> 4 sigma 1857 (T1 1491), 6 sigma 989 (606), H core 11 px (10), V core 10 px (9)
+    calibration 11: n 4184, flux 175, alpha 12.5, beta 9.3 -> 4 sigma 1120 (T1 1491), 6 sigma 346 (606), H core 9 px (10), V core 8 px (9)
+    calibration 12: n 5413, flux 243, alpha 13.6, beta 10.2 -> 4 sigma 1944 (T1 1491), 6 sigma 1028 (606), H core 11 px (10), V core 10 px (9)
+    calibration 13: n 4263, flux 177, alpha 12.6, beta 9.4 -> 4 sigma 1176 (T1 1491), 6 sigma 346 (606), H core 9 px (10), V core 8 px (9)
+  calibrated: 4487 objects per frame, flux median 200, alpha 13.4, beta 9.2 px (H lines up to 35 px long, V lines up to 24 px); P0b's analysis of it: {'n4': 1412, 'n6': 533, 'H_med': 10.0, 'V_med': 9.0, 'frac_H': 0.2528328611898017, 'frac_V': 0.26345609065155806}
+  (ran in 232 s; crowded objects 98 %)
+    lines.detect (default): recall at SNR >= 5 80.2 %, all 23.0 %; duplicates 0.00 % per object (0.00 % of objects have one); false positives 0 (4125 detections, 17948 objects)
+      recall by SNR: 0-3: 2.8 % (n 10553); 3-5: 29.5 % (n 4144); 5-8: 77.9 % (n 2791); 8-12: 94.2 % (n 429); 12-20: 100.0 % (n 31)
+      H     n 1453: along RMS 1.452 (bias -0.030), across RMS 0.471 (bias +0.006) px; at SNR >= 5 (n 780): along 1.056, across 0.303 px
+      V     n 1739: along RMS 0.907 (bias -0.040), across RMS 0.320 (bias -0.004) px; at SNR >= 5 (n 1320): along 0.785, across 0.234 px
+      other n 933: along RMS 0.791 (bias +0.036), across RMS 0.941 (bias +0.032) px; at SNR >= 5 (n 508): along 0.455, across 0.512 px
+      isolated (n 443): recall at SNR >= 5 87.1 %; errors at SNR >= 5: H along 0.346 (95 % 0.65), across 0.081 (95 % 0.15) px, n 34; V along 0.563 (95 % 0.57), across 0.130 (95 % 0.23) px, n 78; other along 0.218 (95 % 0.41), across 0.200 (95 % 0.39) px, n 30
+      crowded (n 17505): recall at SNR >= 5 79.9 %; errors at SNR >= 5: H along 1.077 (95 % 2.07), across 0.310 (95 % 0.58) px, n 746; V along 0.797 (95 % 1.69), across 0.239 (95 % 0.45) px, n 1242; other along 0.466 (95 % 1.03), across 0.525 (95 % 1.10) px, n 478
+      time per frame (median, s): filters_s 1.1, candidates_s 0.0, fit_s 8.1, second_pass_s 3.2, validate_s 7.6, final_fit_s 3.2, total_s 23.2
+    lines.detect (no second pass): recall at SNR >= 5 78.4 %, all 22.2 %; duplicates 0.00 % per object (0.00 % of objects have one); false positives 0 (3985 detections, 17948 objects)
+      recall by SNR: 0-3: 2.7 % (n 10553); 3-5: 27.8 % (n 4144); 5-8: 75.7 % (n 2791); 8-12: 93.9 % (n 429); 12-20: 100.0 % (n 31)
+      H     n 1376: along RMS 1.474 (bias -0.024), across RMS 0.473 (bias +0.003) px; at SNR >= 5 (n 748): along 1.062, across 0.308 px
+      V     n 1698: along RMS 0.918 (bias -0.047), across RMS 0.324 (bias +0.000) px; at SNR >= 5 (n 1294): along 0.786, across 0.239 px
+      other n 911: along RMS 0.799 (bias +0.035), across RMS 0.961 (bias +0.043) px; at SNR >= 5 (n 506): along 0.468, across 0.518 px
+      isolated (n 443): recall at SNR >= 5 87.1 %; errors at SNR >= 5: H along 0.346 (95 % 0.65), across 0.081 (95 % 0.15) px, n 34; V along 0.563 (95 % 0.57), across 0.130 (95 % 0.23) px, n 78; other along 0.218 (95 % 0.41), across 0.200 (95 % 0.39) px, n 30
+      crowded (n 17505): recall at SNR >= 5 77.9 %; errors at SNR >= 5: H along 1.085 (95 % 2.08), across 0.315 (95 % 0.60) px, n 714; V along 0.798 (95 % 1.69), across 0.245 (95 % 0.46) px, n 1216; other along 0.479 (95 % 1.15), across 0.532 (95 % 1.19) px, n 476
+      time per frame (median, s): filters_s 1.0, candidates_s 0.0, fit_s 8.1, second_pass_s 0.0, validate_s 7.2, final_fit_s 2.7, total_s 19.4
+    lines.detect (plain model (unclipped)): recall at SNR >= 5 80.3 %, all 23.1 %; duplicates 0.00 % per object (0.00 % of objects have one); false positives 0 (4139 detections, 17948 objects)
+      recall by SNR: 0-3: 2.8 % (n 10553); 3-5: 29.8 % (n 4144); 5-8: 78.0 % (n 2791); 8-12: 94.4 % (n 429); 12-20: 100.0 % (n 31)
+      H     n 1451: along RMS 1.460 (bias +0.003), across RMS 0.475 (bias +0.010) px; at SNR >= 5 (n 780): along 1.091, across 0.307 px
+      V     n 1748: along RMS 0.905 (bias -0.044), across RMS 0.328 (bias -0.005) px; at SNR >= 5 (n 1319): along 0.784, across 0.234 px
+      other n 940: along RMS 0.766 (bias +0.026), across RMS 0.961 (bias +0.022) px; at SNR >= 5 (n 513): along 0.461, across 0.532 px
+      isolated (n 443): recall at SNR >= 5 87.1 %; errors at SNR >= 5: H along 0.357 (95 % 0.64), across 0.079 (95 % 0.15) px, n 35; V along 0.606 (95 % 0.55), across 0.128 (95 % 0.22) px, n 76; other along 0.217 (95 % 0.42), across 0.200 (95 % 0.38) px, n 31
+      crowded (n 17505): recall at SNR >= 5 80.0 %; errors at SNR >= 5: H along 1.114 (95 % 2.17), across 0.314 (95 % 0.62) px, n 745; V along 0.793 (95 % 1.68), across 0.239 (95 % 0.45) px, n 1243; other along 0.472 (95 % 1.09), across 0.546 (95 % 1.19) px, n 482
+      time per frame (median, s): filters_s 1.0, candidates_s 0.0, fit_s 5.0, second_pass_s 2.4, validate_s 4.4, final_fit_s 1.9, total_s 14.7
+    C++ finder, 3 sigma: recall at SNR >= 5 99.8 %, all 99.1 %; duplicates 314.72 % per object (87.72 % of objects have one); false positives 2893 (77170 detections, 17948 objects)
+      recall by SNR: 0-3: 98.7 % (n 10553); 3-5: 99.8 % (n 4144); 5-8: 99.8 % (n 2791); 8-12: 99.3 % (n 429); 12-20: 100.0 % (n 31)
+      H     n 8472: along RMS 3.059 (bias -0.019), across RMS 1.094 (bias +0.006) px; at SNR >= 5 (n 1036): along 1.152, across 0.265 px
+      V     n 4168: along RMS 1.407 (bias +0.008), across RMS 0.604 (bias +0.016) px; at SNR >= 5 (n 1608): along 0.977, across 0.256 px
+      other n 5151: along RMS 1.807 (bias +0.002), across RMS 2.660 (bias +0.013) px; at SNR >= 5 (n 599): along 0.698, across 0.703 px
+    C++ finder, 4 sigma: recall at SNR >= 5 99.6 %, all 86.5 %; duplicates 118.29 % per object (51.77 % of objects have one); false positives 74 (36828 detections, 17948 objects)
+      recall by SNR: 0-3: 77.9 % (n 10553); 3-5: 98.2 % (n 4144); 5-8: 99.6 % (n 2791); 8-12: 99.3 % (n 429); 12-20: 100.0 % (n 31)
+      H     n 7317: along RMS 4.261 (bias -0.014), across RMS 1.463 (bias +0.005) px; at SNR >= 5 (n 1034): along 1.096, across 0.263 px
+      V     n 3905: along RMS 1.812 (bias +0.014), across RMS 0.724 (bias +0.019) px; at SNR >= 5 (n 1604): along 0.957, across 0.247 px
+      other n 4301: along RMS 2.445 (bias -0.057), across RMS 3.661 (bias -0.025) px; at SNR >= 5 (n 599): along 0.698, across 0.703 px
+    C++ finder, 5 sigma: recall at SNR >= 5 99.3 %, all 65.7 %; duplicates 49.86 % per object (27.30 % of objects have one); false positives 1 (20737 detections, 17948 objects)
+      recall by SNR: 0-3: 48.1 % (n 10553); 3-5: 84.1 % (n 4144); 5-8: 99.2 % (n 2791); 8-12: 99.3 % (n 429); 12-20: 100.0 % (n 31)
+      H     n 5406: along RMS 4.628 (bias -0.083), across RMS 1.582 (bias -0.013) px; at SNR >= 5 (n 1031): along 1.134, across 0.263 px
+      V     n 3259: along RMS 2.000 (bias +0.018), across RMS 0.765 (bias +0.004) px; at SNR >= 5 (n 1598): along 0.972, across 0.234 px
+      other n 3122: along RMS 2.615 (bias +0.001), across RMS 3.687 (bias +0.162) px; at SNR >= 5 (n 598): along 0.696, across 0.724 px
+
+Set B, cam2: calibrating the astigmatic population to P0b
+    calibration 0: n 3132, flux 150, alpha 12.0, beta 6.0 -> 4 sigma 780 (T1 2088), 6 sigma 219 (993), H core 8 px (10), V core 6 px (9)
+    calibration 1: n 7597, flux 282, alpha 14.3, beta 8.3 -> 4 sigma 2665 (T1 2088), 6 sigma 1850 (993), H core 12 px (10), V core 9 px (9)
+    calibration 2: n 6099, flux 179, alpha 12.4, beta 8.3 -> 4 sigma 1732 (T1 2088), 6 sigma 603 (993), H core 9 px (10), V core 8 px (9)
+    calibration 3: n 7217, flux 261, alpha 13.5, beta 9.1 -> 4 sigma 2459 (T1 2088), 6 sigma 1532 (993), H core 11 px (10), V core 10 px (9)
+    calibration 4: n 6229, flux 189, alpha 12.5, beta 8.4 -> 4 sigma 1856 (T1 2088), 6 sigma 694 (993), H core 10 px (10), V core 8 px (9)
+    calibration 5: n 6926, flux 252, alpha 12.5, beta 9.2 -> 4 sigma 2495 (T1 2088), 6 sigma 1474 (993), H core 11 px (10), V core 10 px (9)
+    calibration 6: n 5900, flux 194, alpha 11.6, beta 8.5 -> 4 sigma 1887 (T1 2088), 6 sigma 782 (993), H core 9 px (10), V core 8 px (9)
+    calibration 7: n 6463, flux 229, alpha 12.6, beta 9.3 -> 4 sigma 2229 (T1 2088), 6 sigma 1157 (993), H core 10 px (10), V core 9 px (9)
+    calibration 8: n 6094, flux 206, alpha 12.6, beta 9.3 -> 4 sigma 1903 (T1 2088), 6 sigma 780 (993), H core 10 px (10), V core 9 px (9)
+    calibration 9: n 6624, flux 246, alpha 12.6, beta 9.3 -> 4 sigma 2351 (T1 2088), 6 sigma 1373 (993), H core 11 px (10), V core 10 px (9)
+    calibration 10: n 5953, flux 192, alpha 11.7, beta 8.6 -> 4 sigma 1817 (T1 2088), 6 sigma 767 (993), H core 9 px (10), V core 8 px (9)
+    calibration 11: n 6747, flux 222, alpha 12.7, beta 9.4 -> 4 sigma 2181 (T1 2088), 6 sigma 1065 (993), H core 10 px (10), V core 9 px (9)
+    calibration 12: n 6488, flux 215, alpha 12.7, beta 9.4 -> 4 sigma 2119 (T1 2088), 6 sigma 938 (993), H core 10 px (10), V core 9 px (9)
+    calibration 13: n 6402, flux 234, alpha 12.7, beta 9.4 -> 4 sigma 2240 (T1 2088), 6 sigma 1144 (993), H core 10 px (10), V core 9 px (9)
+  calibrated: 6488 objects per frame, flux median 215, alpha 12.7, beta 9.4 px (H lines up to 33 px long, V lines up to 24 px); P0b's analysis of it: {'n4': 2119, 'n6': 938, 'H_med': 10.0, 'V_med': 9.0, 'frac_H': 0.24681453515809343, 'frac_V': 0.21142048135913166}
+  (ran in 68 s; crowded objects 99 %)
+    lines.detect (default): recall at SNR >= 5 51.4 %, all 12.7 %; duplicates 0.00 % per object (0.00 % of objects have one); false positives 0 (3304 detections, 25952 objects)
+      recall by SNR: 0-3: 2.1 % (n 15064); 3-5: 9.6 % (n 6233); 5-8: 45.2 % (n 4012); 8-12: 89.4 % (n 606); 12-20: 100.0 % (n 37)
+      H     n 1083: along RMS 1.573 (bias -0.013), across RMS 0.512 (bias +0.017) px; at SNR >= 5 (n 697): along 1.147, across 0.303 px
+      V     n 1427: along RMS 1.030 (bias +0.053), across RMS 0.362 (bias -0.002) px; at SNR >= 5 (n 1152): along 0.908, across 0.269 px
+      other n 794: along RMS 0.786 (bias +0.006), across RMS 0.999 (bias +0.030) px; at SNR >= 5 (n 545): along 0.594, across 0.621 px
+      isolated (n 175): recall at SNR >= 5 50.8 %; errors at SNR >= 5: H along 0.655 (95 % 1.18), across 0.154 (95 % 0.25) px, n 7; V along 0.318 (95 % 0.60), across 0.125 (95 % 0.27) px, n 19; other along 0.144 (95 % 0.22), across 0.123 (95 % 0.21) px, n 6
+      crowded (n 25777): recall at SNR >= 5 51.4 %; errors at SNR >= 5: H along 1.151 (95 % 2.34), across 0.305 (95 % 0.66) px, n 690; V along 0.915 (95 % 2.01), across 0.270 (95 % 0.55) px, n 1133; other along 0.597 (95 % 1.20), across 0.624 (95 % 1.32) px, n 539
+      time per frame (median, s): filters_s 0.9, candidates_s 0.0, fit_s 6.3, second_pass_s 2.6, validate_s 4.9, final_fit_s 2.1, total_s 16.7
+    C++ finder, 3 sigma: recall at SNR >= 5 99.0 %, all 98.9 %; duplicates 245.91 % per object (82.07 % of objects have one); false positives 1719 (91215 detections, 25952 objects)
+      recall by SNR: 0-3: 98.7 % (n 15064); 3-5: 99.4 % (n 6233); 5-8: 99.0 % (n 4012); 8-12: 99.0 % (n 606); 12-20: 100.0 % (n 37)
+      H     n 12248: along RMS 2.938 (bias +0.001), across RMS 1.111 (bias +0.004) px; at SNR >= 5 (n 1558): along 1.240, across 0.317 px
+      V     n 6435: along RMS 1.611 (bias +0.004), across RMS 0.674 (bias +0.011) px; at SNR >= 5 (n 2119): along 1.119, across 0.262 px
+      other n 6995: along RMS 1.760 (bias +0.028), across RMS 2.571 (bias -0.024) px; at SNR >= 5 (n 933): along 0.809, across 0.768 px
+    C++ finder, 4 sigma: recall at SNR >= 5 98.5 %, all 88.4 %; duplicates 92.56 % per object (46.64 % of objects have one); false positives 31 (46990 detections, 25952 objects)
+      recall by SNR: 0-3: 81.6 % (n 15064); 3-5: 97.1 % (n 6233); 5-8: 98.5 % (n 4012); 8-12: 98.8 % (n 606); 12-20: 100.0 % (n 37)
+      H     n 10866: along RMS 3.976 (bias +0.010), across RMS 1.535 (bias -0.003) px; at SNR >= 5 (n 1552): along 1.217, across 0.315 px
+      V     n 5935: along RMS 2.019 (bias -0.001), across RMS 0.851 (bias +0.004) px; at SNR >= 5 (n 2110): along 1.085, across 0.258 px
+      other n 6138: along RMS 2.362 (bias -0.025), across RMS 3.544 (bias -0.013) px; at SNR >= 5 (n 925): along 0.772, across 0.744 px
+    C++ finder, 5 sigma: recall at SNR >= 5 98.1 %, all 69.1 %; duplicates 36.31 % per object (22.56 % of objects have one); false positives 0 (27354 detections, 25952 objects)
+      recall by SNR: 0-3: 54.7 % (n 15064); 3-5: 82.2 % (n 6233); 5-8: 98.0 % (n 4012); 8-12: 98.7 % (n 606); 12-20: 100.0 % (n 37)
+      H     n 8295: along RMS 4.388 (bias -0.005), across RMS 1.662 (bias -0.003) px; at SNR >= 5 (n 1547): along 1.234, across 0.303 px
+      V     n 4910: along RMS 2.199 (bias +0.004), across RMS 0.879 (bias +0.028) px; at SNR >= 5 (n 2098): along 1.113, across 0.261 px
+      other n 4725: along RMS 2.510 (bias -0.086), across RMS 3.709 (bias -0.078) px; at SNR >= 5 (n 921): along 0.765, across 0.750 px

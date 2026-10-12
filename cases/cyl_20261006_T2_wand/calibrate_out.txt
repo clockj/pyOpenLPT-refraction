@@ -1,0 +1,48 @@
+S2: the delivered calibration
+  detections: X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\detection\detections_all.csv
+  cam1: kept 4427 of 12716 camera-frames; median r (sqrt(a b)) A 65.2 px, B 87.9 px; rejected: 6278 one ball, 2010 no ball, 1 edge RMS
+  cam2: kept 6280 of 12716 camera-frames; median r (sqrt(a b)) A 58.6 px, B 79.2 px; rejected: 4842 one ball, 1584 no ball, 9 edge RMS, 1 aspect
+  frames kept in both cameras: 1966 of 12716
+  written X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\wand_points.csv (the GUI's format; cam1, cam2 = the GUI's cameras 0, 1)
+  calibration: 1966 frames, wand 10.0 mm, tube radii (100.80625, 97.63125) mm, n (1.0, 1.49, 1.333), fit_k1 False, fit_L False, noise weights camera, n_final 6
+        0.0 s  Start search (stages 1-2)
+       16.2 s  Coarse fit (stage 3)
+       16.6 s  Final fit (stage 4)
+      145.4 s  Coarse fit (stage 3)
+      145.9 s  Final fit (stage 4)
+      275.2 s  Coarse fit (stage 3)
+      276.1 s  Final fit (stage 4)
+      402.5 s  Coarse fit (stage 3)
+      420.5 s  Final fit (stage 4)
+      546.0 s  Coarse fit (stage 3)
+      555.2 s  Final fit (stage 4)
+      685.8 s  Coarse fit (stage 3)
+      692.1 s  Final fit (stage 4)
+  done in 816 s; written to X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results
+  2 cameras, 1966 frames, 7856 of 7864 detections used.
+  Reprojection RMS 0.601 px; wand length (free triangulation) RMS error 31.3 um over 1964 frames.
+    cam1: f 38,252 px (765.0 mm) +- 0.93 %, 1001 mm from the axis, RMS 0.626 px
+    cam2: f 37,409 px (748.2 mm) +- 1.40 %, 1085 mm from the axis, RMS 0.574 px
+
+  | Cylinder wand calibration (PINCYL), 2 cameras
+  | tube: radii [100.80625, 97.63125] mm, n [1.0, 1.49, 1.333]; wand 10.0000 mm
+  | frames 1966, observations 7856 active of 7864; reprojection RMS 0.6005 px (2-D), sigma 0.6947 px per coordinate
+  | wand length, free triangulation: mean error +0.05 um, RMS 31.29 um over 1964 frames
+  | frame: tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height (slid +22.945 mm)
+  | 
+  | cam1: f 38252.4 px (765.047 mm) +- 0.927 %; distance from the axis 1001.24 mm +- 9.096; azimuth 0.000 deg; height -22.945 mm; reprojection RMS 0.6259 px (3928/3932 active); camFile camFile\cam1.txt
+  | cam2: f 37409.3 px (748.186 mm) +- 1.399 %; distance from the axis 1085.12 mm +- 14.867; azimuth 60.665 deg; height -10.908 mm; reprojection RMS 0.5740 px (3928/3932 active); camFile camFile\cam2.txt
+  | 
+  | Noise levels and weights (noise_weights='camera')
+  |   weights NOT applied: the data could not separate the groups' noise (largest relative standard error 2.8 %, limit 10 %): equal weights, as without the weighting
+  |   group          noise sigma  +- rel. SE    used / total  not used  residual RMS  outlier scale
+  |                         (px)                                         (px/coord.)           (px)
+  |   cam1                1.0773       2.8 %    3928 / 3932          4        0.4426              -   (estimate, not used)
+  |   cam2                     -       1.7 %    3928 / 3932          4        0.4059              -
+  |   pooled sigma 0.6947 px per coordinate (unweighted); 20 rounds
+  |   noise sigma: each group's own detection noise, estimated with what the fit absorbs accounted for.
+  |   residual RMS: what is left after the fit, usually a little below sigma; with equal weights a quiet camera
+  |     next to a noisy one also shows part of the noisy camera's error (the cameras share the wand positions).
+  |   not used: rejected as outliers, or dropped with their frame when an end was left in fewer than two cameras.
+  |   outlier scale: the robust scale each detection was judged against (rejected beyond 5 of it).
+  |   starts: 6 of 6 short-listed bootstrap starts carried through stages 3-4; stage-3 RMS 0.502, 0.502, 0.502, 0.502, 0.703, 0.502 px

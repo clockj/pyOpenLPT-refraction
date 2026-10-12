@@ -15,6 +15,7 @@ set(PY_SOURCES
   "${OPENLPT_PY_DIR}/pyConfig.cpp"
   "${OPENLPT_PY_DIR}/pyOpenLPT.cpp"
   "${OPENLPT_PY_DIR}/pyCamera.cpp"
+  "${OPENLPT_PY_DIR}/pyRefractCurved.cpp"
   "${OPENLPT_PY_DIR}/pyImageIO.cpp"
   "${OPENLPT_PY_DIR}/pyObjectInfo.cpp"
   "${OPENLPT_PY_DIR}/pyObjectFinder.cpp"
@@ -50,8 +51,9 @@ target_include_directories(${OPENLPT_PYMODULE_NAME} PRIVATE
 
 # Link against your existing C++ targets (adjust to your actual libs)
 target_link_libraries(${OPENLPT_PYMODULE_NAME} PRIVATE
-  STB 
+  STB
   Config
+  RefractCurved
   $<$<BOOL:${OpenMP_CXX_FOUND}>:OpenMP::OpenMP_CXX>
 )
 

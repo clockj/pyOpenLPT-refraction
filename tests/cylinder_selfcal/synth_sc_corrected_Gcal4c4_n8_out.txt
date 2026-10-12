@@ -1,0 +1,3 @@
+synth_sc corrected cal4 Gcal4_n8 Gcal4c4_n8 data/fields/cal4_r4.npz: build p4c, 10 processes
+  Gcal4c4_n8: Gcal4_n8's images moved by -c(uv) of data/fields/cal4_r4.npz: correction RMS per camera [1.17, 0.81, 0.893, 1.1] px
+  rendered Gcal4c4_n8: cameras [1, 2, 3, 4], 40 frames (160 images) in 22 s

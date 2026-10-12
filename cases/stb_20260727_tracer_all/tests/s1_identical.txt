@@ -1,0 +1,4 @@
+S1 identical: s1_10Hz_r_b_1_f0-50 (D:\Shijie Zhong\STB_staging\20260727\smoke\s1_10Hz_r_b_1_f0-50) against D:\Refraction\pyOpenLPT\tests\stb_improve\runs\s50_md
+log: 51 frames compared (0-50), 0 differ
+output files: 11, 11 byte-identical
+IDENTICAL

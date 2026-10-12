@@ -1,0 +1,16 @@
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 10936 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+calibrate: done in 3883 s; RMS 0.5859 px, sigma 0.5021 px, 85678 of 87488 detections active
+walls 93.516 deg apart
+  cam0: f 18933 +- 20 px (255.6 mm), 237.2 mm from its wall, 16.26 deg to its normal, k1 -0.384
+  cam1: f 19266 +- 19 px (260.1 mm), 255.4 mm from its wall, 3.92 deg to its normal, k1 0.378
+  cam2: f 21533 +- 15 px (290.7 mm), 249.1 mm from its wall, 4.56 deg to its normal, k1 -1.1
+  cam3: f 20961 +- 14 px (283.0 mm), 193.3 mm from its wall, 21.34 deg to its normal, k1 0.687
+  cams [0, 1]: baseline 241.1 mm, views 12.38 deg apart
+  cams [0, 2]: baseline 1861.4 mm, views 89.95 deg apart
+  cams [0, 3]: baseline 1857.3 mm, views 90.90 deg apart
+  cams [1, 2]: baseline 1878.6 mm, views 92.23 deg apart
+  cams [1, 3]: baseline 1839.1 mm, views 89.57 deg apart
+  cams [2, 3]: baseline 275.9 mm, views 16.78 deg apart
+residual along the wand (A, B), px: cam0: +0.060, -0.038; cam1: +0.010, -0.005; cam2: +0.023, +0.065; cam3: -0.032, -0.024
+warnings: noisy: the residuals are 0.50 px per coordinate on a rig with several windows. If your detections are that noisy: in the tests, answers pinned against a window came mostly at 1 px (6 of 8), and so did R4's o
+state saved to tests/states/t2_all.pkl

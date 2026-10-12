@@ -1,0 +1,37 @@
+p0_sympy_derivations.py: exit 0, 18 s
+    65 checks: 56 PROVED, 7 NUMERIC, 2 SKIPPED
+t0_fast_vs_cpp.py: exit 0, 39 s
+    PASS  rays agree to 1e-8 px (the C++ ray reprojected by the fast model)
+    PASS  same ok flags as the C++
+    PASS  single-image region: forward within 1e-6 px, every start 5 px off converged
+    PASS  single-image region: every crude pinhole start converged to the C++ image
+    PASS  beyond r_c: no false solution (a converged pixel is always one of the C++ images)
+t0b_cpp_direction_roundoff.py: exit 0, 0 s
+t1_derivatives.py: exit 0, 33 s
+    PASS  inside r_c: derivatives agree with central differences to 1e-6
+    PASS  beyond r_c: derivatives agree to 1e-6 at the better of the two steps
+t1b_ba_jacobian.py: exit 0, 1 s
+    PASS  bundle-adjustment Jacobian agrees with central differences to 1e-6 (worst 9.39e-08)
+t2_observability.py: exit 0, 23 s
+    GATE (gauge-free, re-triangulated): the reference rig adds 0.0077 px RMS on unseen points (limit 0.05): GO
+    literal reading, tube frame modulo the stabiliser: 0.620 px (FAILS the 0.05 px limit; dominated by the tube's position across the axis, see t2b); in the camera-1 gauge: 4.186 px (the unobservable slide)
+    f target: sigma(f)/f = 0.064 % (target 0.5 %): met
+t2b_error_modes.py: exit 0, 9 s
+t3_noiseless_recovery.py: exit 0, 11 s
+    PASS  noiseless recovery to 1e-6 px, 1e-6 deg, 1e-6 mm, 1e-8 in f
+t4_noisy_recovery.py: exit 0, 78 s
+    PASS  z mean within +-0.25 and std 0.8-1.2
+t5_from_scratch.py: exit 0, 1703 s
+    PASS  50/50 rigs reach the global minimum without hints (need 48/50)
+t5a_bootstrap_diagnostics.py: exit 0, 132 s
+t6_gauge_frame.py: exit 0, 8 s
+    PASS  rank_and_null_space
+    PASS  camera_order
+    PASS  input_frame
+t7_heldout.py: exit 0, 25 s
+    PASS  gauge-free and held-out errors within 0.8-1.2x the prediction (1.023, 1.014, 1.029, 1.012, 1.024)
+t8_robustness.py: exit 0, 115 s
+    PASS  robustness
+t9_tube_constants.py: exit 0, 124 s
+t10_export.py: exit 0, 24 s
+    PASS  camFiles reload exactly: 0.0e+00 px (limit 1e-9), fast model 9.2e-09 px (limit 1e-6), rays 0.0e+00 mm

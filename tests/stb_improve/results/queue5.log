@@ -1,0 +1,135 @@
+2026-10-06 10:32:04 queue5 begins
+2026-10-06 10:32:04 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_md --build md --frames 0 50 --force
+2026-10-06T10:32:04 s50_md: build md, frames 0-50
+2026-10-06T10:34:17 s50_md: exit 0, 51 frames, wall 2.2 min, frame time 2.43 s (frames 4-23) -> 2.41 s (last 20), peak private 820 MB
+2026-10-06 10:34:17 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py s50_md --build md --frames 0 50 --force
+2026-10-06 10:34:17 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g5_s50_user_exe --build user --exe --frames 0 50 --force
+2026-10-06T10:34:17 g5_s50_user_exe: build user, frames 0-50
+2026-10-06T10:36:33 g5_s50_user_exe: exit 0, 51 frames, wall 2.3 min, frame time 2.49 s (frames 4-23) -> 2.43 s (last 20), peak private 870 MB
+2026-10-06 10:36:33 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g5_s50_user_exe --build user --exe --frames 0 50 --force
+2026-10-06 10:36:33 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g5_s50_user_py --build user --frames 0 50 --force
+2026-10-06T10:36:33 g5_s50_user_py: build user, frames 0-50
+2026-10-06T10:38:47 g5_s50_user_py: exit 0, 51 frames, wall 2.2 min, frame time 2.46 s (frames 4-23) -> 2.42 s (last 20), peak private 827 MB
+2026-10-06 10:38:47 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/stbrun.py g5_s50_user_py --build user --frames 0 50 --force
+2026-10-06 10:38:47 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/g_gui_e2e.py e2e --frames 0 50 --name g5_e2e_gui
+[TrackingSettings] Coarse search center=origin, P0=[0. 0. 0.]
+[TrackingSettings] adaptive coarse iter=1: step=20.00mm, span=(102.7,97.9,1359.7), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=2: step=20.00mm, span=(133.5,127.2,1087.8), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=3: step=20.00mm, span=(173.5,143.6,870.2), rel_change=0.300
+[TrackingSettings] adaptive coarse iter=4: step=20.00mm, span=(188.5,162.1,696.2), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=5: step=20.00mm, span=(163.8,140.8,556.9), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=6: step=18.56mm, span=(176.6,154.7,445.5), rel_change=0.200
+[TrackingSettings] adaptive coarse iter=7: step=14.85mm, span=(155.7,136.8,356.4), rel_change=0.200
+[TrackingSettings] Saved D:/Refraction/pyOpenLPT/tests/stb_improve/runs/g5_e2e_gui/config.json
+{
+  "frames": [
+    0,
+    50
+  ],
+  "fps": 5000,
+  "threads": 26,
+  "cameras": [
+    {
+      "file": "../../data/camFile/cam0.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam1.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam2.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam3.txt",
+      "max_intensity": 255
+    }
+  ],
+  "image_lists": [
+    "../../data/imgLists/cam0ImageNames.txt",
+    "../../data/imgLists/cam1ImageNames.txt",
+    "../../data/imgLists/cam2ImageNames.txt",
+    "../../data/imgLists/cam3ImageNames.txt"
+  ],
+  "view_volume_mm": {
+    "x": [
+      -81.0,
+      54.0
+    ],
+    "y": [
+      -42.0,
+      59.0
+    ],
+    "z": [
+      -36.0,
+      52.5
+    ]
+  },
+  "voxel_mm": 0.129,
+  "output_dir": "Results",
+  "objects": [
+    {
+      "type": "Tracer",
+      "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+      },
+      "convergence_phase": {
+        "avg_spacing_vox": 30.0
+      },
+      "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+      },
+      "predictive_field": {
+        "grid": [
+          51,
+          51,
+          51
+        ],
+        "search_radius_vox": 25.0
+      },
+      "ipr": {
+        "loops": 2,
+        "reduced_cameras": 1,
+        "reduced_loops": 2,
+        "tol_2d_px": 2.0,
+        "tol_3d_vox": 1.0
+      },
+      "tracer": {
+        "intensity_threshold": 20,
+        "radius_px": 2.0
+      }
+    }
+  ],
+  "load_tracks": {
+    "enabled": false,
+    "frame": 0,
+    "folder": "Results/ConvergeTrack/"
+  },
+  "save_interval": 500
+}
+
+2026-10-06T10:41:09 g5_e2e_gui: exit 0, 51 frames, wall 2.3 min, frame time 2.49 s (frames 4-23) -> 2.50 s (last 20), peak private 935 MB; log window 133181 chars
+2026-10-06 10:41:09 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/g_gui_e2e.py e2e --frames 0 50 --name g5_e2e_gui
+2026-10-06 10:41:09 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_md g5_s50_user_exe --out g5_s50_exe_vs_md
+S1 identical outputs: s50_md vs g5_s50_user_exe
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL
+2026-10-06 10:41:09 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_md g5_s50_user_exe --out g5_s50_exe_vs_md
+2026-10-06 10:41:09 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_md g5_s50_user_py --out g5_s50_py_vs_md
+S1 identical outputs: s50_md vs g5_s50_user_py
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL
+2026-10-06 10:41:09 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_md g5_s50_user_py --out g5_s50_py_vs_md
+2026-10-06 10:41:09 start /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_md g5_e2e_gui --out g5_e2e_gui_vs_md
+S1 identical outputs: s50_md vs g5_e2e_gui
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL
+2026-10-06 10:41:10 exit 0 /c/Users/zcloc/.conda/envs/refract/python.exe tests/stb_improve/compare_runs.py identical s50_md g5_e2e_gui --out g5_e2e_gui_vs_md
+2026-10-06 10:41:10 queue5 ends

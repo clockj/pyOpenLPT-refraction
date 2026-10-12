@@ -1,0 +1,15 @@
+W3 Monte Carlo: 260 fits in 112 s wall
+rig A: 40 sets, 25 parameters: RMS error / CRB pooled 0.981 (range 0.77-1.15, furthest cam3.w3); z SD 0.977, mean +0.008; bias max 1.72 SE, 0 above 3; fit 7.8 s
+rig B: 40 sets, 28 parameters: RMS error / CRB pooled 0.993 (range 0.69-1.17, furthest cam4.C1); z SD 1.001, mean -0.007; bias max 1.83 SE, 0 above 3; fit 7.6 s
+rig C: 40 sets, 18 parameters: RMS error / CRB pooled 0.970 (range 0.84-1.14, furthest win1.b); z SD 0.978, mean -0.007; bias max 2.31 SE, 0 above 3; fit 5.4 s
+rig D: 40 sets, 18 parameters: RMS error / CRB pooled 0.992 (range 0.80-1.21, furthest cam3.w1); z SD 0.991, mean +0.004; bias max 2.39 SE, 0 above 3; fit 5.1 s
+rig E: 40 sets, 18 parameters: RMS error / CRB pooled 0.971 (range 0.82-1.08, furthest cam3.w1); z SD 0.971, mean -0.014; bias max 1.32 SE, 0 above 3; fit 5.6 s
+sweep on rig A (10 sets per level): pooled RMS error / CRB, z SD
+   0.02 px: efficiency 0.960, z SD 0.956, rejected per fit 0.0
+   0.05 px: efficiency 1.138, z SD 1.134, rejected per fit 0.0
+   0.10 px: efficiency 0.934, z SD 0.935, rejected per fit 0.0
+   0.20 px: efficiency 0.859, z SD 0.852, rejected per fit 0.1
+   0.50 px: efficiency 0.959, z SD 0.942, rejected per fit 0.0
+   1.00 px: efficiency 1.128, z SD 1.102, rejected per fit 0.1
+   2.00 px: efficiency 1.069, z SD 1.074, rejected per fit 0.0
+W3 Monte Carlo: PASS

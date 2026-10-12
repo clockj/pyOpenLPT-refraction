@@ -1,0 +1,13 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  PASS  the main window builds, with one Camera Calibration view  (1 views)
+  PASS  camera models  (['Pinhole', 'Pinhole+Refraction', 'Pinhole+Cylinder'])
+  PASS  detection modes  (['fast', 'reliable', 'ellipse'])
+  PASS  the rod settings show for 'ellipse' only
+  Pinhole: {'window_group': False, 'tube_group': False, 'k1k2': True, 'focal': True}
+  Pinhole+Refraction: {'window_group': True, 'tube_group': False, 'k1k2': True, 'focal': True}
+  Pinhole+Cylinder: {'window_group': False, 'tube_group': True, 'k1k2': False, 'focal': False}
+  PASS  each model shows its own panel; the cylinder model greys k1+k2 and the Focal column
+  PASS  the Focal column stays greyed when the camera count changes under the cylinder model
+
+6 of 6 checks passed; 2 s

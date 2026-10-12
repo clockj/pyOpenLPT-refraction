@@ -1,0 +1,49 @@
+== reference rig: 500 frames, 2998 observations
+stage 1: affine rank-3 residual 4.87 px RMS per image, metric upgrade |d|^2/L^2 - 1 RMS 0.0332, frames used 497
+stage 2a, mirror False: rotation vs truth 0.32, 90.41, 179.31 deg; |axis . view| 0.005, 0.006, 0.004; ratios 1.307, 1.300, 1.310
+stage 2a, mirror True: rotation vs truth 0.32, 0.53, 0.76 deg; |axis . view| 0.005, 0.006, 0.004; ratios 1.307, 1.300, 1.310
+stage 2b uses mirror True
+stage 2b at the true axis: camera 1: distance  1047.2 mm (true  1094.1), f    39519 px (true    41459, ratio 0.953), rotation error 0.32 deg
+stage 2b at the true axis: camera 2: distance  1008.0 mm (true  1094.1), f    38072 px (true    41459, ratio 0.918), rotation error 0.53 deg
+stage 2b at the true axis: camera 3: distance  1050.7 mm (true  1094.1), f    39695 px (true    41459, ratio 0.957), rotation error 0.76 deg
+    candidate mirror True p (+0.0, +0.0) mm: cost as placed 355, after a quick fit 15, after a short fit 2.2
+    candidate mirror True p (-15.9, +0.0) mm: cost as placed 3.77e+03, after a quick fit 498, after a short fit 632
+    candidate mirror True p (+0.0, -15.9) mm: cost as placed 3.6e+03, after a quick fit 509, after a short fit 589
+    candidate mirror True p (+15.9, +0.0) mm: cost as placed 4.59e+03, after a quick fit 694, after a short fit 2.2
+    candidate mirror True p (+0.0, +15.9) mm: cost as placed 4.11e+03, after a quick fit 795, after a short fit 2.2
+    candidate mirror True p (+15.9, -15.9) mm: cost as placed 4.21e+03, after a quick fit 909, after a short fit 395
+search: 98 candidates, best mirror True at p (+15.9, +0.0) mm (true (+0.3, +0.1)), 20.5 s
+    candidate mirror True p (+0.0, +0.0) mm: cost as placed 355, after a quick fit 15, after a short fit 2.2
+    candidate mirror True p (-15.9, +0.0) mm: cost as placed 3.77e+03, after a quick fit 498, after a short fit 632
+    candidate mirror True p (+0.0, -15.9) mm: cost as placed 3.6e+03, after a quick fit 509, after a short fit 589
+    candidate mirror True p (+15.9, +0.0) mm: cost as placed 4.59e+03, after a quick fit 694, after a short fit 2.2
+    candidate mirror True p (+0.0, +15.9) mm: cost as placed 4.11e+03, after a quick fit 795, after a short fit 2.2
+    candidate mirror True p (+15.9, -15.9) mm: cost as placed 4.21e+03, after a quick fit 909, after a short fit 395
+  start 0: stage 3 rms 0.099 px -> stage 4 rms 0.10964 px, active 2998/2998
+  start 1: stage 3 rms 0.099 px -> stage 4 rms 0.10964 px, active 2998/2998
+from scratch: rms 0.109644 px vs from the truth 0.109644 px; differences 2.3e-10 deg, 1.8e-07 mm, f 1.7e-10; total 23 s
+== irregular 4 cams, cloud off-axis: 500 frames, 4000 observations
+stage 1: affine rank-3 residual 8.12 px RMS per image, metric upgrade |d|^2/L^2 - 1 RMS 0.0088, frames used 499
+stage 2a, mirror False: rotation vs truth 0.09, 139.97, 42.05, 138.22 deg; |axis . view| 0.001, 0.044, 0.044, 0.021; ratios 1.326, 1.277, 1.276, 1.295
+stage 2a, mirror True: rotation vs truth 0.09, 1.26, 1.50, 1.30 deg; |axis . view| 0.001, 0.044, 0.044, 0.021; ratios 1.326, 1.277, 1.276, 1.295
+stage 2b uses mirror True
+stage 2b at the true axis: camera 1: distance  1272.4 mm (true  1094.1), f    48259 px (true    41459, ratio 1.164), rotation error 0.09 deg
+stage 2b at the true axis: camera 2: distance   803.8 mm (true   800.0), f    39510 px (true    39408, ratio 1.003), rotation error 1.26 deg
+stage 2b at the true axis: camera 3: distance  1226.3 mm (true  1200.0), f    37144 px (true    36377, ratio 1.021), rotation error 1.50 deg
+stage 2b at the true axis: camera 4: distance   633.6 mm (true   600.0), f    26409 px (true    25009, ratio 1.056), rotation error 1.30 deg
+    candidate mirror True p (+0.0, +0.0) mm: cost as placed 3.53e+04, after a quick fit 1.87e+03, after a short fit 421
+    candidate mirror True p (-17.9, +0.0) mm: cost as placed 3.47e+04, after a quick fit 2.02e+03, after a short fit 861
+    candidate mirror True p (+0.0, +17.9) mm: cost as placed 3.4e+04, after a quick fit 2.28e+03, after a short fit 1.23e+03
+    candidate mirror False p (+0.0, +0.0) mm: cost as placed 3.48e+04, after a quick fit 2.7e+03, after a short fit 9.11e+03
+    candidate mirror True p (+17.9, +17.9) mm: cost as placed 4.67e+04, after a quick fit 2.8e+03, after a short fit 1.21e+03
+    candidate mirror False p (+0.0, -17.9) mm: cost as placed 4.01e+04, after a quick fit 2.8e+03, after a short fit 9.79e+03
+search: 90 candidates, best mirror True at p (+0.0, +0.0) mm (true (-7.6, +6.2)), 30.1 s
+    candidate mirror True p (+0.0, +0.0) mm: cost as placed 3.53e+04, after a quick fit 1.87e+03, after a short fit 421
+    candidate mirror True p (-17.9, +0.0) mm: cost as placed 3.47e+04, after a quick fit 2.02e+03, after a short fit 861
+    candidate mirror True p (+0.0, +17.9) mm: cost as placed 3.4e+04, after a quick fit 2.28e+03, after a short fit 1.23e+03
+    candidate mirror False p (+0.0, +0.0) mm: cost as placed 3.48e+04, after a quick fit 2.7e+03, after a short fit 9.11e+03
+    candidate mirror True p (+17.9, +17.9) mm: cost as placed 4.67e+04, after a quick fit 2.8e+03, after a short fit 1.21e+03
+    candidate mirror False p (+0.0, -17.9) mm: cost as placed 4.01e+04, after a quick fit 2.8e+03, after a short fit 9.79e+03
+  start 0: stage 3 rms 0.104 px -> stage 4 rms 0.11721 px, active 4000/4000
+  start 1: stage 3 rms 0.104 px -> stage 4 rms 0.11721 px, active 4000/4000
+from scratch: rms 0.117213 px vs from the truth 0.117213 px; differences 1.8e-10 deg, 2.0e-07 mm, f 1.7e-10; total 52 s

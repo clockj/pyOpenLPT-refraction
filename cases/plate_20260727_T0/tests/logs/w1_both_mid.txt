@@ -1,0 +1,20 @@
+    LM   0: rms 2.144359 px, lambda 3.3e-04, ok
+    LM   1: rms 0.485292 px, lambda 1.1e-04, ok
+    LM   2: rms 0.444734 px, lambda 3.7e-05, ok
+    LM   3: rms 0.431007 px, lambda 1.2e-05, ok
+    LM   4: rms 0.428610 px, lambda 4.1e-06, ok
+    LM   5: rms 0.427223 px, lambda 1.4e-06, ok
+    LM   6: rms 0.424898 px, lambda 6.2e-07, ok
+    LM   7: rms 0.422175 px, lambda 2.1e-07, ok
+    LM   8: rms 0.420569 px, lambda 1.1e-07, ok
+    LM   9: rms 0.420113 px, lambda 3.7e-08, ok
+    LM  10: rms 0.420079 px, lambda 1.2e-08, ok
+    LM  11: rms 0.420062 px, lambda 4.1e-09, ok
+    LM  12: rms 0.420049 px, lambda 1.4e-09, ok
+    LM  13: rms 0.420046 px, lambda 4.6e-10, ok
+    LM  14: rms 0.420046 px, lambda 1.5e-10, ok
+    LM  15: rms 0.420046 px, lambda 5.1e-11, ok
+    LM  16: rms 0.420046 px, lambda 1.7e-11, ok
+    LM  17: rms 0.420046 px, lambda 1.1e-11, ok
+    LM  18: rms 0.420046 px, lambda 1.0e-03, ok
+w1 both_mid: shifts {0: -7.672686436941582, 1: 92.10628342449684}, RMS 0.4200 px, weighted cost 15392.86, 19 LM iterations, 14 s

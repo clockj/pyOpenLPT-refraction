@@ -1,0 +1,66 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "omega": 0.0023785308622671685,
+ "vy": 0.01518048828958389,
+ "runs": [
+  {
+   "rho": 0.01,
+   "sampled": 35834,
+   "kept": 1952,
+   "central": 424,
+   "seconds": 21.68234395980835,
+   "detections": [
+    321,
+    281
+   ],
+   "images_cam1": 857,
+   "images_cam2": 1224
+  },
+  {
+   "rho": 0.02,
+   "sampled": 71726,
+   "kept": 3939,
+   "central": 824,
+   "seconds": 8.540292978286743,
+   "detections": [
+    463,
+    85
+   ],
+   "images_cam1": 1667,
+   "images_cam2": 2544
+  },
+  {
+   "rho": 0.035,
+   "sampled": 125582,
+   "kept": 6875,
+   "central": 1516,
+   "seconds": 13.306361198425293,
+   "detections": [
+    524,
+    7
+   ],
+   "images_cam1": 2995,
+   "images_cam2": 4374
+  },
+  {
+   "rho": 0.05,
+   "sampled": 179446,
+   "kept": 9855,
+   "central": 2100,
+   "seconds": 18.253252744674683,
+   "detections": [
+    453,
+    1
+   ],
+   "images_cam1": 4337,
+   "images_cam2": 6198
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "corrupted": {
+  "planted_outliers": 50,
+  "swapped_detections": 8,
+  "missing": 300,
+  "outliers_left_active": 0,
+  "clean_observations_rejected": 230,
+  "frames_they_belong_to": 51,
+  "max_diff_from_clean_sigma": 0.7805495683029053,
+  "max_error_vs_truth_sigma": 1.4216721164213062,
+  "clean_fit_max_error_vs_truth_sigma": 1.6621912481666101,
+  "rms_px": 0.10350377642342297,
+  "clean_rms_px": 0.10754645392397083,
+  "seconds": 28.26332116127014,
+  "pass": true
+ },
+ "near_wall": {
+  "planted_frames": 30,
+  "other_near_wall_frames": 30,
+  "observations_with_second_image_within_guard": 15,
+  "left_active": 0,
+  "guard_dropped": 12,
+  "multi_image_observations": 22,
+  "max_error_vs_truth_sigma": 2.006383929276822,
+  "rms_px": 0.10649723161091203,
+  "seconds": 32.646995544433594,
+  "pass": true
+ },
+ "pass": true
+}

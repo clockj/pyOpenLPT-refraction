@@ -1,0 +1,10 @@
+{
+ "build": "vcf",
+ "returncode": 1,
+ "summary": "2 failed, 267 passed, 7 skipped in 1892.43s (0:31:32)",
+ "failed": [
+  "tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates",
+  "tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo"
+ ],
+ "module_line": "[l0] pyopenlpt D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\out\\pyopenlpt.cp311-win_amd64.pyd"
+}

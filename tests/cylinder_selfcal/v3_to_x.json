@@ -1,0 +1,16 @@
+{
+ "run": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\runs\\s3_final_m15vc2",
+ "control": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\runs\\s3_control_m15vc2",
+ "frames": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\data\\T1pre_s4_m15vc2",
+ "dst": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T1\\after_vsc",
+ "seconds": 40.26709222793579,
+ "frames_copied": 502,
+ "bytes": 363806562,
+ "track_files_sha256": {
+  "ExitTrack_250.csv": "7ec6009d768732c479d20cad2e294a8fdb759ac4d0157a4ea593c921e54336dc",
+  "LongTrackActive_250.csv": "62caf93aa67f76f55541cf707fe1b53ef6e490d0b137f77235a92384dc190dc3",
+  "LongTrackInactive_250.csv": "80d43dfb2a27dadb64c2314eda0f659a80c08a743144ffa827d3315a078301e4",
+  "ShortTrackActive_250.csv": "01e7fefa50deda4ec6cdf358871e320f148397aedba2cc29f30d92fbab006382"
+ },
+ "track_files_equal_local": true
+}

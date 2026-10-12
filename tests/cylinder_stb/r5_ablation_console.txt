@@ -1,0 +1,11 @@
+Phase 5: ablation on data/r5_lines; runs ['R1', 'R2', 'R0']
+  R1 (build p1): exit 0, wall 54 s, 1.31 s per frame
+    per frame: trackable 943, reconstructed 2607, recall 0.165, ghosts 2411 (92.5 %), duplicates 41; position RMS (x, y, z) 45.9, 38.5, 52.1 um
+    long tracks 3350 (ghost tracks 2861), mean length 26.4, purity 0.075 (>= 0.9: 5.1 %), track recall 0.156
+  R2 (build p123): exit 0, wall 91 s, 2.24 s per frame
+    per frame: trackable 943, reconstructed 2769, recall 0.183, ghosts 2537 (91.7 %), duplicates 59; position RMS (x, y, z) 48.2, 20.8, 52.8 um
+    long tracks 3843 (ghost tracks 3265), mean length 25.4, purity 0.089 (>= 0.9: 6.7 %), track recall 0.178
+  R0 (build head1007): exit 0, wall 947 s, 23.63 s per frame
+    per frame: trackable 943, reconstructed 2593, recall 0.162, ghosts 2398 (92.5 %), duplicates 41; position RMS (x, y, z) 45.2, 38.6, 52.2 um
+    long tracks 3316 (ghost tracks 2836), mean length 26.5, purity 0.074 (>= 0.9: 5.1 %), track recall 0.154
+  R0 vs R1: 2 of 11 files identical; largest differences ConvergeTrack\ExitTrack_39.csv: rows [4284, 4343], WorldX 25, WorldY 19, WorldZ 42; ConvergeTrack\LongTrackActive_39.csv: rows [81210, 81729], WorldX 25, WorldY 20, WorldZ 39; ConvergeTrack\LongTrackInactive_39.csv: rows [2501, 2372], WorldX 23, WorldY 19, WorldZ 41; ConvergeTrack\ShortTrackActive_39.csv: rows [9864, 9931], WorldX 25, WorldY 20, WorldZ 43

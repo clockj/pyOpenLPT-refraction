@@ -1,0 +1,75 @@
+{
+ "checks": [
+  {
+   "check": "it ran plate_wand_gui.child_precheck in a separate process, with no folder",
+   "ok": true,
+   "detail": "ProcessCalibWorker, target child_precheck, folder None, folder prompts 0"
+  },
+  {
+   "check": "the error table lists every frame and the 3D View shows the two windows",
+   "ok": true,
+   "detail": "300 rows, 300 frames in the payload, 300 frames; 2 planes"
+  },
+  {
+   "check": "a 'Check Complete' box with the RMS of stages 1-3; the status line says so",
+   "ok": true,
+   "detail": "RMS 0.120 px; status 'Flat-window check done: RMS 0.120 px (stages 1-3).'"
+  },
+  {
+   "check": "nothing written, nothing a result (no camFiles to export)",
+   "ok": true,
+   "detail": "files []; has result False"
+  },
+  {
+   "check": "the RMS is that of plate_wand_gui.precheck on the GUI's job (in this process)",
+   "ok": true,
+   "detail": "GUI 0.1203615519764593, here 0.1203615519764593; stage-3 RMS 0.120497 px"
+  },
+  {
+   "check": "Stop 2 s into the check ends it within 2 s, with no box",
+   "ok": true,
+   "detail": "0.13 s; status 'Flat-window calibration stopped.'; messages []"
+  },
+  {
+   "check": "with 'Use the previous calibrator', Precalibrate to Check runs the pinhole check (as before)",
+   "ok": true,
+   "detail": "CalibrationWorker, precalibrate True; messages [('info', 'Check Complete')]"
+  },
+  {
+   "check": "no text tells to tick the previous calibrator to align axis points",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "axis points loaded: the flat-window check's box says they are not applied",
+   "ok": true,
+   "detail": "Axis points are not applied to the flat-window model: its frame is plate_wand's (Z along window 1's normal, the origin at the wand's mean position). Only the Pinhole model applies them."
+  },
+  {
+   "check": "axis points loaded: the flat-window calibration's box says they are not applied, and tells nothing to tick",
+   "ok": true,
+   "detail": "Axis points are not applied to the flat-window model: its frame is plate_wand's (Z along window 1's normal, the origin at the wand's mean position). Only the Pinhole model applies them."
+  },
+  {
+   "check": "axis points loaded: the tube's check box says they are not applied to the tube model",
+   "ok": true,
+   "detail": "Axis points are not applied to the cylinder model: its frame is the tube's (Y along the axis, Z towards the first camera)."
+  },
+  {
+   "check": "the previous calibrator's box: says axis points were not applied when they are loaded, nothing otherwise",
+   "ok": true,
+   "detail": "Axis points were not applied: this calibrator does not align the world to them (only the Pinhole model does)."
+  }
+ ],
+ "seconds": 182.39219856262207,
+ "files": [
+  "results\\calibration_data.json",
+  "results\\calibration_report.html",
+  "results\\calibration_report.txt",
+  "results\\calibration_result.json",
+  "results\\camFile\\cam0.txt",
+  "results\\camFile\\cam1.txt",
+  "results\\camFile\\cam2.txt",
+  "results\\camFile\\cam3.txt"
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "run": "g_e2e_gui",
+ "argv": [
+  "e2e",
+  "--frames",
+  "0",
+  "300",
+  "--name",
+  "g_e2e_gui"
+ ],
+ "build": "user (GUI)",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build\\Release",
+ "how": "TrackingView._run_tracking: QProcess running build/Release/OpenLPT.exe config.json, offscreen Qt",
+ "config": "D:\\Refraction\\pyOpenLPT\\tests\\stb_improve\\runs\\g_e2e_gui\\config.json",
+ "start": "2026-10-05T22:45:55",
+ "end": "2026-10-05T22:59:08",
+ "wall_s": 792.6,
+ "returncode": 0,
+ "frames_done": 301,
+ "sum_frame_s": 752.0,
+ "peak_working_set_MB": 2558,
+ "peak_private_MB": 2342,
+ "log_window_chars": 789356,
+ "log_txt_bytes": 821811,
+ "messages": [
+  [
+   "information",
+   "Success",
+   "Configuration saved to:\nD:/Refraction/pyOpenLPT/tests/stb_improve/runs/g_e2e_gui/config.json"
+  ]
+ ]
+}

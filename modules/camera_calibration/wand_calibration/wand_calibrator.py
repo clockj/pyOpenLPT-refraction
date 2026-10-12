@@ -6,8 +6,29 @@ from scipy.optimize import OptimizeResult
 from pathlib import Path
 from PySide6.QtCore import QThread, Signal, QWaitCondition, QMutex
 import concurrent.futures
+import contextlib
+import itertools
 import multiprocessing
 import os
+
+
+@contextlib.contextmanager
+def _one_blas_thread_for_workers():
+    """Worker processes started inside this block load numpy with one BLAS thread.  Otherwise each detection worker
+    commits OpenBLAS's buffers for every core: 4.2 GB on a 32-core PC, so the pool of 25 asks for 105 GB and fails
+    with "The paging file is too small" (tests/cylinder_wand_gui P2; 0.33 GB with one thread).  The detection does
+    not use BLAS threads.  The variables are restored when the block ends."""
+    names = ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")
+    saved = {v: os.environ.get(v) for v in names}
+    os.environ.update({v: "1" for v in names})
+    try:
+        yield
+    finally:
+        for v, val in saved.items():
+            if val is None:
+                os.environ.pop(v, None)
+            else:
+                os.environ[v] = val
 
 
 # --- Robust Detection Constants ---
@@ -15,6 +36,8 @@ RANSAC_THRESH = 3.0
 RANSAC_ITERS = 500
 FAST_ANNULUS_LOW = 0.7
 FAST_ANNULUS_HIGH = 1.3
+FAST_RANSAC_SEED = 0      # the fast mode's RANSAC draws: the same for every circle, so an image's points do not depend
+                          # on the run or the process (they came from numpy's global random state)
 
 # --- Robust Detection Helpers ---
 def thin_by_angle(pts, cx, cy, r_init, nbin=360):
@@ -57,10 +80,11 @@ def refine_circle_with_edges(img_gray, cx_init, cy_init, r_init, exclusion_mask=
     best_score = -1.0
     best_model = None 
     
+    rng = np.random.default_rng(FAST_RANSAC_SEED)           # repeatable draws, numpy's global state left alone
     for _ in range(RANSAC_ITERS):
         if n_points < 3: break
         try:
-            sample_idx = np.random.choice(n_points, 3, replace=False)
+            sample_idx = rng.choice(n_points, 3, replace=False)
         except ValueError: break
         
         p1, p2, p3 = pts[sample_idx]
@@ -177,14 +201,85 @@ def detect_circles_robust(img_gray, min_r, max_r):
     results.sort(key=lambda x: x[3], reverse=True)
     return results
 
+def scale_detect_settings(min_radius, max_radius, detect_opts, scale):
+    """One camera's detection settings when the cameras' pixels differ (the camera table's Pixel column).
+
+    The Radius Range and the "ellipse" mode's opening and rod mask are given in the reference camera's pixels; a
+    camera whose pixels are `scale` times smaller (scale = reference pixel size / this camera's) sees the balls
+    `scale` times larger, so these lengths are multiplied by it.  The overlap guard stays as it is.  scale None or 1
+    returns the settings unchanged (the same objects)."""
+    if not scale or float(scale) == 1.0:
+        return min_radius, max_radius, detect_opts
+    s = float(scale)
+    opts = detect_opts
+    if detect_opts:
+        opts = dict(detect_opts)
+        if "open_px" in opts:
+            opts["open_px"] = int(round(float(opts["open_px"]) * s))
+        if "rod_mask_px" in opts:
+            opts["rod_mask_px"] = float(opts["rod_mask_px"]) * s
+    return float(min_radius) * s, float(max_radius) * s, opts
+
+
+def phantom_image_numbers(folder):
+    """(FirstImageNo, ImageCount) from the Phantom header (a .chd file, the Cine file header PCC writes beside the
+    images it saves) in `folder`, or None if there is none or it cannot be read.  FirstImageNo counts from the
+    trigger, which synchronised cameras share: the folder's first image is that image."""
+    import struct
+    try:
+        names = sorted(n for n in os.listdir(folder) if n.lower().endswith(".chd"))
+    except OSError:
+        return None
+    if not names:
+        return None
+    try:
+        with open(os.path.join(folder, names[0]), "rb") as fh:
+            head = fh.read(44)
+        if len(head) < 24 or head[:2] != b"CI":
+            return None
+        first_no, count = struct.unpack_from("<iI", head, 16)
+        return int(first_no), int(count)
+    except (OSError, struct.error):
+        return None
+
+
+def align_by_image_numbers(lists, firsts):
+    """Cut the cameras' image lists to the images every camera saved.
+
+    lists: {cam: [paths]}; firsts: {cam: the image number of the list's first file, or None}.  When every camera has
+    a number and they differ, returns ({cam: the cut list}, {"start", "end", "dropped": {cam: (at the start, at the
+    end)}}), so that the i-th images of all lists are the same instant; otherwise (the lists as given, None)."""
+    cams = [c for c in lists if lists[c]]
+    if len(cams) < 2 or any(firsts.get(c) is None for c in cams):
+        return dict(lists), None
+    if len({int(firsts[c]) for c in cams}) == 1:
+        return dict(lists), None
+    start = max(int(firsts[c]) for c in cams)
+    end = min(int(firsts[c]) + len(lists[c]) - 1 for c in cams)
+    if end < start:
+        return dict(lists), None
+    out, dropped = dict(lists), {}
+    for c in cams:
+        a = start - int(firsts[c])
+        b = end - int(firsts[c]) + 1
+        out[c] = list(lists[c][a:b])
+        dropped[c] = (a, len(lists[c]) - b)
+    return out, {"start": start, "end": end, "dropped": dropped}
+
+
 # --- Parallel Worker Function (Top-Level) ---
 def run_detection_task(args):
     """
     Worker function for parallel wand detection.
-    args: (frame_idx, cam_idx, img_path, wand_type, min_radius, max_radius, sensitivity)
+    args: (frame_idx, cam_idx, img_path, wand_type, min_radius, max_radius, sensitivity[, detect_mode[, detect_opts]])
+    detect_mode: "fast", "reliable" or "ellipse" (balls seen through a tube; curved_calibration/ball_ellipses.py).
+    detect_opts: settings of the "ellipse" mode, {"open_px", "rod_mask_px", "guard_px", "full"} (others ignore it).
     Returns: (frame_idx, cam_idx, points_array_or_None)
     """
-    if len(args) >= 8:
+    detect_opts = None
+    if len(args) >= 9:
+        f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode, detect_opts = args[:9]
+    elif len(args) >= 8:
         f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode = args
     else:
         f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity = args
@@ -206,7 +301,23 @@ def run_detection_task(args):
         # 3. Invert if dark
         if wand_type == "dark":
             img = cv2.bitwise_not(img)
-            
+
+        if str(detect_mode).lower() == "ellipse":
+            # Balls seen through a tube are ellipses: fit ellipses to their edges (tests/cylinder_wand T13).
+            # The image is bright-on-dark here (inverted above for dark wands).
+            try:
+                from ..curved_calibration import ball_ellipses
+            except ImportError:
+                from modules.camera_calibration.curved_calibration import ball_ellipses
+            opts = detect_opts or {}
+            rows = ball_ellipses.detect_wand_balls(
+                img, "bright", min_r_px=float(min_radius), max_r_px=float(max_radius),
+                open_px=int(opts.get("open_px", 25)), rod_mask_px=float(opts.get("rod_mask_px", 18.0)),
+                guard_px=float(opts.get("guard_px", 3.0)), full=bool(opts.get("full", False)))
+            if not rows:
+                return f_idx, c_idx, None
+            return f_idx, c_idx, np.array(rows, dtype=float)
+
         if str(detect_mode).lower() == "fast":
             # --- STRATEGY: Try Fast Robust DT First ---
             try:
@@ -254,7 +365,8 @@ def run_detection_task(args):
 class WandDetectionSingleFrameWorker(QThread):
     finished_signal = Signal(object) # Returns dict of results
 
-    def __init__(self, calibrator, image_paths_dict, wand_type, min_r, max_r, sensitivity, detect_mode="fast"):
+    def __init__(self, calibrator, image_paths_dict, wand_type, min_r, max_r, sensitivity, detect_mode="fast",
+                 detect_opts=None, cam_scales=None):
         super().__init__()
         self.calibrator = calibrator
         self.image_paths_dict = image_paths_dict
@@ -263,17 +375,21 @@ class WandDetectionSingleFrameWorker(QThread):
         self.max_r = max_r
         self.sensitivity = sensitivity
         self.detect_mode = detect_mode
+        self.detect_opts = detect_opts
+        self.cam_scales = cam_scales
 
     def run(self):
         # Run detection
         try:
             res = self.calibrator.detect_single_frame(
-                self.image_paths_dict, 
-                self.wand_type, 
-                self.min_r, 
-                self.max_r, 
+                self.image_paths_dict,
+                self.wand_type,
+                self.min_r,
+                self.max_r,
                 self.sensitivity,
-                self.detect_mode
+                self.detect_mode,
+                detect_opts=self.detect_opts,
+                cam_scales=self.cam_scales,
             )
             self.finished_signal.emit(res)
         except Exception as e:
@@ -284,7 +400,8 @@ class WandDetectionWorker(QThread):
     progress = Signal(int, int) # current, total
     finished_signal = Signal(bool, str) # success, msg
     
-    def __init__(self, calibrator, image_paths, wand_type, min_r, max_r, sens, autosave_path=None, resume=False, detect_mode="fast"):
+    def __init__(self, calibrator, image_paths, wand_type, min_r, max_r, sens, autosave_path=None, resume=False, detect_mode="fast",
+                 detect_opts=None, cam_scales=None):
         super().__init__()
         self.calibrator = calibrator
         self.image_paths = image_paths
@@ -293,6 +410,8 @@ class WandDetectionWorker(QThread):
         self.max_r = max_r
         self.sens = sens
         self.detect_mode = detect_mode
+        self.detect_opts = detect_opts
+        self.cam_scales = cam_scales
         self.autosave_path = autosave_path
         self.resume_flag = resume
         
@@ -313,7 +432,9 @@ class WandDetectionWorker(QThread):
             gen = self.calibrator.detect_wand_points_generator(
                 self.image_paths, self.wand_type, self.min_r, self.max_r, self.sens,
                 self.autosave_path, self.resume_flag, self.detect_mode,
-                stop_check=lambda: self._is_stopped
+                stop_check=lambda: self._is_stopped,
+                detect_opts=self.detect_opts,
+                cam_scales=self.cam_scales,
             )
             
             # First item yielded is (0, total_frames) for init
@@ -491,6 +612,7 @@ class WandCalibrator:
             
             # Per-camera reprojection error and triangulation error (3D residual)
             cam_errors = {}
+            proj_pts = {}
             tri_errors = []
             for cam_idx, uv_obs in obs.items():
                 if cam_idx not in self.final_params:
@@ -513,6 +635,7 @@ class WandCalibrator:
                 err_B = np.linalg.norm(proj_B.flatten()[:2] - np.array(uv_obs[1][:2]))
                 
                 cam_errors[cam_idx] = max(err_A, err_B)
+                proj_pts[cam_idx] = (proj_A.flatten()[:2], proj_B.flatten()[:2])
 
                 # 3D Triangulation Residual (distance to ray)
                 for pt3d, uv in [(pt3d_A, uv_obs[0]), (pt3d_B, uv_obs[1])]:
@@ -530,9 +653,10 @@ class WandCalibrator:
                     tri_errors.append(dist_3d)
             
             self.per_frame_errors[fid] = {
-                'cam_errors': cam_errors, 
+                'cam_errors': cam_errors,
                 'len_error': len_err,
-                'tri_errors': tri_errors # Actual 3D residuals in mm
+                'tri_errors': tri_errors, # Actual 3D residuals in mm
+                'proj_pts': proj_pts      # where the model puts the two balls: the frame overlay's red crosses
             }
         
         return self.per_frame_errors
@@ -648,12 +772,16 @@ class WandCalibrator:
         
         return (m_s, s_s), (m_l, s_l)
 
-    def detect_wand_points_generator(self, image_paths_dict, wand_type, min_radius, max_radius, sensitivity, autosave_path=None, resume=False, detect_mode="fast", stop_check=None):
+    def detect_wand_points_generator(self, image_paths_dict, wand_type, min_radius, max_radius, sensitivity, autosave_path=None, resume=False, detect_mode="fast", stop_check=None,
+                                     detect_opts=None, cam_scales=None):
         """
         Generator for detecting wand points. Yields (current_frame_idx, total_frames).
         Implements dual-radius logic and strict filtering.
         Supports Resume and Autosave.
         stop_check: Optional callable that returns True if stop was requested.
+        detect_opts: settings of the "ellipse" detect_mode (see run_detection_task).
+        cam_scales: {cam_idx: scale} for cameras whose pixels differ from the reference camera's
+        (scale_detect_settings); None or a missing camera: unscaled.
         """
         # Update Cameras Dict
         for c_idx, paths in image_paths_dict.items():
@@ -696,7 +824,8 @@ class WandCalibrator:
             for c_idx in cam_indices:
                 if f_idx < len(image_paths_dict[c_idx]):
                     img_path = str(image_paths_dict[c_idx][f_idx])
-                    all_tasks.append((f_idx, c_idx, img_path, wand_type, min_radius, max_radius, sensitivity, detect_mode))
+                    mn, mx, op = scale_detect_settings(min_radius, max_radius, detect_opts, (cam_scales or {}).get(c_idx))
+                    all_tasks.append((f_idx, c_idx, img_path, wand_type, mn, mx, sensitivity, detect_mode, op))
         
         total_tasks = len(all_tasks)
         print(f"Parallel Execution: {total_tasks} tasks to run (Skipped {num_frames * num_cams - total_tasks})")
@@ -709,43 +838,55 @@ class WandCalibrator:
             # Autosave trigger count (e.g. every 50 frames * num_cameras)
             autosave_interval = 50 * num_cams 
             
-            with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
-                futures = [executor.submit(run_detection_task, t) for t in all_tasks]
-                
-                for future in concurrent.futures.as_completed(futures):
-                    # Check for stop request BEFORE processing result
-                    if stop_check and stop_check():
-                        print("Stop requested. Cancelling remaining tasks...")
-                        executor.shutdown(wait=False, cancel_futures=True)
-                        # Autosave before exit
-                        if autosave_path:
+            with _one_blas_thread_for_workers(), \
+                    concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
+                # At most 2 tasks per worker in flight: a task is submitted only when a result has been read, so while
+                # the reader waits (Pause in the GUI) the workers stop once the tasks in flight are done.  (All the tasks
+                # were submitted at the start, and Pause only paused the progress bar.)
+                todo = iter(all_tasks)
+                pending = {executor.submit(run_detection_task, t) for t in itertools.islice(todo, 2 * max_workers)}
+
+                while pending:
+                    done, pending = concurrent.futures.wait(pending, return_when=concurrent.futures.FIRST_COMPLETED)
+                    for future in done:
+                        # Check for stop request BEFORE processing result
+                        if stop_check and stop_check():
+                            print("Stop requested. Cancelling remaining tasks...")
+                            executor.shutdown(wait=False, cancel_futures=True)
+                            # Autosave before exit
+                            if autosave_path:
+                                self.export_wand_data(autosave_path)
+                            yield len(self.wand_data_raw), num_frames # Final yield
+                            return # Exit generator early
+
+                        res_f_idx, res_c_idx, pts = future.result()
+
+                        # Store Result
+                        if pts is not None:
+                            if res_f_idx not in self.wand_data_raw:
+                                self.wand_data_raw[res_f_idx] = {}
+                            self.wand_data_raw[res_f_idx][res_c_idx] = pts
+                        else:
+                            # Ensure we mark as processed even if None found
+                            if res_f_idx not in self.wand_data_raw:
+                                self.wand_data_raw[res_f_idx] = {}
+
+                        tasks_done += 1
+
+                        # Yield progress periodically
+                        if tasks_done % num_cams == 0:
+                             # Yield valid update for progress bar
+                             yield len(self.wand_data_raw), num_frames
+
+                        # Autosave logic (Main Thread - Safe)
+                        if autosave_path and tasks_done % autosave_interval == 0:
+                            print(f"Autosaving at {tasks_done} tasks...")
                             self.export_wand_data(autosave_path)
-                        yield len(self.wand_data_raw), num_frames # Final yield
-                        return # Exit generator early
-                    
-                    res_f_idx, res_c_idx, pts = future.result()
-                    
-                    # Store Result
-                    if pts is not None:
-                        if res_f_idx not in self.wand_data_raw:
-                            self.wand_data_raw[res_f_idx] = {}
-                        self.wand_data_raw[res_f_idx][res_c_idx] = pts
-                    else:
-                        # Ensure we mark as processed even if None found
-                        if res_f_idx not in self.wand_data_raw:
-                            self.wand_data_raw[res_f_idx] = {}
 
-                    tasks_done += 1
-                    
-                    # Yield progress periodically
-                    if tasks_done % num_cams == 0:
-                         # Yield valid update for progress bar
-                         yield len(self.wand_data_raw), num_frames
-
-                    # Autosave logic (Main Thread - Safe)
-                    if autosave_path and tasks_done % autosave_interval == 0:
-                        print(f"Autosaving at {tasks_done} tasks...")
-                        self.export_wand_data(autosave_path)
+                        # the next task, once this result has been read
+                        nxt = next(todo, None)
+                        if nxt is not None:
+                            pending.add(executor.submit(run_detection_task, nxt))
             
         # Ensure we yield final 100% and autosave
         yield num_frames, num_frames
@@ -1089,19 +1230,22 @@ class WandCalibrator:
             return False, str(e)
 
 
-    def detect_single_frame(self, image_dict, wand_type="bright", min_radius=20, max_radius=200, sensitivity=0.85, detect_mode="fast"):
+    def detect_single_frame(self, image_dict, wand_type="bright", min_radius=20, max_radius=200, sensitivity=0.85, detect_mode="fast",
+                            detect_opts=None, cam_scales=None):
         """
         Run detection on a single frame dictionary {cam_idx: path}.
         Returns {cam_idx: points} for visualization.
         Parallelized using ProcessPoolExecutor.
+        cam_scales: {cam_idx: scale}, as in detect_wand_points_generator.
         """
         results = {}
-        
+
         # Prepare Tasks
         tasks = []
         for c_idx, path in image_dict.items():
             # Frame index is dummy 0 here
-            tasks.append((0, c_idx, str(path), wand_type, min_radius, max_radius, sensitivity, detect_mode))
+            mn, mx, op = scale_detect_settings(min_radius, max_radius, detect_opts, (cam_scales or {}).get(c_idx))
+            tasks.append((0, c_idx, str(path), wand_type, mn, mx, sensitivity, detect_mode, op))
             
         # Run Parallel
         try:
@@ -1109,7 +1253,8 @@ class WandCalibrator:
              # But using a persistent pool would be better? Creating pool has overhead (~50ms).
              # For 4 cores it is fine.
              max_workers = min(4, os.cpu_count() or 4)
-             with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
+             with _one_blas_thread_for_workers(), \
+                     concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
                 futures = [executor.submit(run_detection_task, t) for t in tasks]
                 
                 for future in concurrent.futures.as_completed(futures):
@@ -1119,8 +1264,9 @@ class WandCalibrator:
         except Exception as e:
             print(f"Parallel detection failed: {e}. Fallback to sequential.")
             # Fallback Sequential
-            for c_idx, path in image_dict.items():
-                _, _, pts = run_detection_task((0, c_idx, str(path), wand_type, min_radius, max_radius, sensitivity, detect_mode))
+            for t in tasks:
+                c_idx = t[1]
+                _, _, pts = run_detection_task(t)
                 if pts is not None:
                     results[c_idx] = pts
                     
@@ -1503,8 +1649,13 @@ class WandCalibrator:
         n_cam_params_total = num_cams * n_cam_params
         
         # Skip Stage 1-3 if using pre-optimized params from Phase 1 & 2
-        img_h, img_w = self.image_size
-        cx_c, cy_c = img_w/2.0, img_h/2.0
+        # Each camera's principal point is bounded around its own image centre, where its start puts it
+        # (_get_cam_setting): the cameras may differ in size.  cam_id_map is {camera id: internal index}.
+        cam_of = {i: cid for cid, i in cam_id_map.items()}
+        centres = []
+        for i in range(num_cams):
+            _f, w_i, h_i = self._get_cam_setting(cam_of[i])
+            centres.append((w_i / 2.0, h_i / 2.0))
         
         if skip_early_stages:
             print("    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...")
@@ -1520,10 +1671,10 @@ class WandCalibrator:
             margin = 50.0
             for i in range(num_cams):
                 base = i * n_cam_params
-                lb_s4[base+7] = cx_c - margin
-                ub_s4[base+7] = cx_c + margin
-                lb_s4[base+8] = cy_c - margin
-                ub_s4[base+8] = cy_c + margin
+                lb_s4[base+7] = centres[i][0] - margin
+                ub_s4[base+7] = centres[i][0] + margin
+                lb_s4[base+8] = centres[i][1] - margin
+                ub_s4[base+8] = centres[i][1] + margin
             
             # Setup kwargs for Stage 4
             kwargs_s4 = dict(
@@ -1585,10 +1736,10 @@ class WandCalibrator:
             
             for i in range(num_cams):
                 base = i * n_cam_params
-                lb_s2[base+7] = cx_c - 0.1
-                ub_s2[base+7] = cx_c + 0.1
-                lb_s2[base+8] = cy_c - 0.1
-                ub_s2[base+8] = cy_c + 0.1
+                lb_s2[base+7] = centres[i][0] - 0.1
+                ub_s2[base+7] = centres[i][0] + 0.1
+                lb_s2[base+8] = centres[i][1] - 0.1
+                ub_s2[base+8] = centres[i][1] + 0.1
                 
             kwargs_s2 = dict(
                 jac_sparsity=A_sparsity, verbose=0, method='trf', x_scale='jac', f_scale=1.0, 
@@ -1645,10 +1796,10 @@ class WandCalibrator:
             margin = 50.0
             for i in range(num_cams):
                 base = i * n_cam_params
-                lb_s4[base+7] = cx_c - margin
-                ub_s4[base+7] = cx_c + margin
-                lb_s4[base+8] = cy_c - margin
-                ub_s4[base+8] = cy_c + margin
+                lb_s4[base+7] = centres[i][0] - margin
+                ub_s4[base+7] = centres[i][0] + margin
+                lb_s4[base+8] = centres[i][1] - margin
+                ub_s4[base+8] = centres[i][1] + margin
                 
             kwargs_s4 = kwargs_s3.copy()
             kwargs_s4.update(dict(bounds=(lb_s4, ub_s4)))
@@ -3195,6 +3346,7 @@ class WandCalibrator:
 
     def _parse_results(self, params, cam_id_map):
         num_cams = len(cam_id_map)
+        cam_of = {i: cid for cid, i in cam_id_map.items()}     # cam_id_map is {camera id: internal index}
         n_cam_params = 11
         cam_params = params[:num_cams*n_cam_params].reshape((num_cams, n_cam_params))
         
@@ -3211,7 +3363,7 @@ class WandCalibrator:
             k1 = cp[9] if self.dist_coeff_num >= 1 else 0.0
             k2 = cp[10] if self.dist_coeff_num >= 2 else 0.0
             
-            c_idx = cam_id_map[i]
+            c_idx = cam_of[i]                                      # the camera's id
             
             R, _ = cv2.Rodrigues(rvec)
             if c_idx not in self.cameras:
@@ -3308,7 +3460,7 @@ class WandCalibrator:
             f.write("# Pose Calibration Error: \n")
             f.write(f"{tri_error_mean},{tri_error_std}\n")
             f.write("# Image Size: (n_row,n_col)\n")
-            f.write(f"{self.image_size[0]},{self.image_size[1]}\n") # H, W
+            f.write(f"{h},{w}\n") # H, W of this camera (self.image_size is the first camera's)
             
             f.write("# Camera Matrix: \n")
             f.write(f"{K_out[0,0]},{K_out[0,1]},{K_out[0,2]}\n")

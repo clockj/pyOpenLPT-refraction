@@ -1,0 +1,26 @@
+2026-10-10T17:39:07 renumbering starts: 24 folders of ['10Hz_r_b_1', '10Hz_r_b_2'], 16 at a time
+2026-10-10T18:05:45 10Hz_r_b_2 imgFile cam3: renumbered (12348 renames, 1595.7 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_2\\imgFile\\cam3\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:05:53 10Hz_r_b_2 imgFile cam0: renumbered (12348 renames, 1603.5 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_2\\imgFile\\cam0\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:00 10Hz_r_b_2 imgFile cam1: renumbered (12348 renames, 1610.0 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_2\\imgFile\\cam1\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:04 10Hz_r_b_1 imgFile_mask cam2: renumbered (12348 renames, 1616.7 s)
+2026-10-10T18:06:05 10Hz_r_b_1 imgFile_bb cam3: renumbered (12348 renames, 1617.3 s)
+2026-10-10T18:06:07 10Hz_r_b_1 imgFile_mask cam0: renumbered (12348 renames, 1619.3 s)
+2026-10-10T18:06:07 10Hz_r_b_2 imgFile cam2: renumbered (12348 renames, 1616.0 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_2\\imgFile\\cam2\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:13 10Hz_r_b_1 imgFile_mask cam3: renumbered (12348 renames, 1625.6 s)
+2026-10-10T18:06:19 10Hz_r_b_1 imgFile_mask cam1: renumbered (12348 renames, 1631.8 s)
+2026-10-10T18:06:24 10Hz_r_b_1 imgFile_bb cam0: renumbered (12348 renames, 1637.0 s)
+2026-10-10T18:06:28 10Hz_r_b_1 imgFile cam3: renumbered (12348 renames, 1637.3 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1\\imgFile\\cam3\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:30 10Hz_r_b_1 imgFile cam1: renumbered (12348 renames, 1639.8 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1\\imgFile\\cam1\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:31 10Hz_r_b_1 imgFile cam0: renumbered (12348 renames, 1640.4 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1\\imgFile\\cam0\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:32 10Hz_r_b_1 imgFile cam2: renumbered (12348 renames, 1641.6 s); last frame: {'written': 'X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1\\imgFile\\cam2\\img012604.tif', 'differs_from_12603': True}
+2026-10-10T18:06:32 10Hz_r_b_1 imgFile_bb cam2: renumbered (12348 renames, 1644.8 s)
+2026-10-10T18:06:33 10Hz_r_b_1 imgFile_bb cam1: renumbered (12348 renames, 1645.7 s)
+2026-10-10T18:20:02 10Hz_r_b_2 imgFile_bb cam0: renumbered (12348 renames, 857.3 s)
+2026-10-10T18:20:10 10Hz_r_b_2 imgFile_bb cam1: renumbered (12348 renames, 856.8 s)
+2026-10-10T18:20:15 10Hz_r_b_2 imgFile_bb cam3: renumbered (12348 renames, 850.4 s)
+2026-10-10T18:20:16 10Hz_r_b_2 imgFile_bb cam2: renumbered (12348 renames, 855.5 s)
+2026-10-10T18:20:16 10Hz_r_b_2 imgFile_mask cam2: renumbered (12348 renames, 849.2 s)
+2026-10-10T18:20:16 10Hz_r_b_2 imgFile_mask cam1: renumbered (12348 renames, 849.8 s)
+2026-10-10T18:20:18 10Hz_r_b_2 imgFile_mask cam0: renumbered (12348 renames, 853.1 s)
+2026-10-10T18:20:18 10Hz_r_b_2 imgFile_mask cam3: renumbered (12348 renames, 845.3 s)
+2026-10-10T18:20:18 renumbering ends: 24 of 24 folders done in 41.2 min

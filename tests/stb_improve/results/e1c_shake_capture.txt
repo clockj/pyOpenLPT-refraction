@@ -1,0 +1,38 @@
+E1c: module D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+loaded 14565 active long tracks at frame 300
+predictions in range and seen by >= 2 cameras: 14557 (left the volume: 8)
+reference shake: 14553 kept, 4 flagged ghost or repeated  [0.5 s]
+validation against r301_e1c: 14541 of 14553 kept particles found in the restart's tracks (the rest belonged to tracks of < 7 points that failed the linear-fit test and were not saved); max |difference| 8.5e-07 mm (saved to 1e-6 mm); particles flagged here but kept by the restart: 0 -> PASS
+shake's move from W's prediction (kept particles): median 0.0178, p90 0.0611, p99 0.1336 mm
+
+moved starts (all 14557 predictions moved by delta in random directions, shaken together; delta 0 repeats the reference):
+  delta mm  captured  flagged elsewhere  elsewhere: median  p90 mm  end - start: median  shift (captured): median  rescued
+  0.000000   100.00%    0.00%     0.00%                nan     nan                  nan                  0.000000        0
+  0.000001   100.00%    0.00%     0.00%                nan     nan                  nan                  0.000001        0
+  0.000010    99.88%    0.00%     0.12%             0.0323  0.0618               0.0381                  0.000006        0
+  0.000100    99.44%    0.00%     0.56%             0.0091  0.0621               0.0330                  0.000065        0
+  0.001000    95.98%    0.00%     4.02%             0.0123  0.0617               0.0380                  0.000994        0
+  0.002000    93.56%    0.01%     6.43%             0.0157  0.0642               0.0371                  0.001819        0
+  0.005000    87.62%    0.01%    12.38%             0.0174  0.0661               0.0393                  0.002050        0
+  0.010000    81.93%    0.01%    18.06%             0.0206  0.0739               0.0395                  0.002227        0
+  0.020000    74.85%    0.01%    25.14%             0.0277  0.0851               0.0416                  0.002300        0
+  0.032000    70.57%    0.02%    29.41%             0.0320  0.0938               0.0455                  0.002324        0
+  0.050000    65.61%    0.02%    34.37%             0.0370  0.1124               0.0564                  0.002329        0
+  0.075000    57.45%    0.02%    42.53%             0.0405  0.1289               0.0731                  0.002320        1
+  0.100000    49.78%    0.02%    50.20%             0.0464  0.1628               0.0896                  0.002314        1
+  0.150000    30.69%    0.06%    69.25%             0.0999  0.2319               0.1202                  0.002350        2
+  0.200000    11.38%    0.10%    88.52%             0.1863  0.2957               0.1261                  0.002499        1
+  the repeat (delta 0) gives the reference to the last bit: True
+  half the starts moved by 0.01 mm: elsewhere 18.14 % of the moved, 3.43 % of the unmoved
+  half the starts moved by 0.032 mm: elsewhere 28.67 % of the moved, 6.22 % of the unmoved
+  half the starts moved by 0.1 mm: elsewhere 48.39 % of the moved, 12.09 % of the unmoved
+
+W recomputed in Python from the CSV against the C++ predictions: max |diff| 0 mm
+other predictors as starts (the same 14557 particles):
+     start  |start - W|: median     p99  captured  flagged elsewhere  rescued
+        MD               0.0016  0.0239    93.06%    0.00%     6.94%        0
+     LIN-4               0.0095  0.0539    79.51%    0.00%    20.49%        0
+    QUAD-8               0.0128  0.0908    75.53%    0.02%    24.45%        0
+     KF-CV               0.0057  0.0333    82.82%    0.01%    17.17%        0
+     KF-CA               0.0102  0.0745    77.63%    0.01%    22.35%        0
+(total 27 s)

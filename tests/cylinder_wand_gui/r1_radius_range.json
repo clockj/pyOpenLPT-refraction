@@ -1,0 +1,58 @@
+{
+ "case": {
+  "range": [
+   40,
+   120
+  ],
+  "background_px": 301,
+  "two_blobs": {
+   "0": 376,
+   "1": 566
+  },
+  "paired": 159
+ },
+ "default": {
+  "range": [
+   20,
+   200
+  ],
+  "background_px": 501,
+  "two_blobs": {
+   "0": 350,
+   "1": 566
+  },
+  "paired": 151,
+  "vs_case": {
+   "common": 151,
+   "only_case": 8,
+   "only_this": 0,
+   "small_rms_px": 0.02154645927881622,
+   "small_max_px": 0.15750302984430306,
+   "large_rms_px": 0.03641931902273419,
+   "large_max_px": 0.47721566792225734,
+   "radius_mean_diff_px": -0.005941604921820865
+  }
+ },
+ "small": {
+  "range": [
+   20,
+   60
+  ],
+  "background_px": 151,
+  "two_blobs": {
+   "0": 192,
+   "1": 554
+  },
+  "paired": 108,
+  "vs_case": {
+   "common": 108,
+   "only_case": 51,
+   "only_this": 0,
+   "small_rms_px": 0.02114369385712419,
+   "small_max_px": 0.16857648338187284,
+   "large_rms_px": 0.013400852060131087,
+   "large_max_px": 0.1405246377296553,
+   "radius_mean_diff_px": 0.013452760656450307
+  }
+ }
+}

@@ -1,0 +1,59 @@
+{
+  "_comment": "Wand calibration of cam1 and cam2 through the water-filled acrylic tube, run 20261006/T2 (recorded about an hour after T0, same cameras and wand). Lengths in mm, image coordinates in px (u = column, v = row, pixel centres at integers). See 2026-10-06-plan.md.",
+  "case": "cyl_20261006_T2_wand",
+  "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261006\\T2",
+  "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261006\\T2\\Results",
+  "cameras": [
+    {"id": 1, "folder": "cam1", "gui_index": 0},
+    {"id": 2, "folder": "cam2", "gui_index": 1}
+  ],
+  "frames": {"pattern": "frame{frame:06d}.tif", "first": 0, "last": 12715},
+  "image": {"width": 1280, "height": 800, "pixel_mm": 0.020, "camera": "Phantom VEO 710L (from the .chd header; serials 29199 = cam1, 23752 = cam2, as in T0)"},
+  "wand": {
+    "_comment": "The wand of T0 (the user, 6 Oct): 10 mm long (centre to centre), balls 3 mm and 4 mm, rod about 2 mm. End A is the small ball.",
+    "length_mm": 10.0,
+    "ball_diameters_mm": [3.0, 4.0]
+  },
+  "tube": {
+    "_comment": "As in T0 (cases/cyl_20261006_T0_wand/config.json).",
+    "outer_diameter_in": 7.9375,
+    "wall_in": 0.125,
+    "radii_mm": [100.80625, 97.63125],
+    "n": [1.0, 1.49, 1.333],
+    "media": ["air", "acrylic", "water"]
+  },
+  "detect": {
+    "_comment": "T0's settings, unchanged: the same wand at the same magnification (P0: ball sizes within 1 % of T0's), and the opening scan still separates the balls at 91-101 px.",
+    "polarity": "dark",
+    "min_r_px": 40.0,
+    "max_r_px": 120.0,
+    "open_px": 95,
+    "rod_mask_px": 50.0,
+    "guard_px": 3.0,
+    "workers": 16,
+    "_workers": "16 processes: the file server (about 22 MB/s) limits the speed; T0 ran as fast with 16 as with 48."
+  },
+  "accept": {
+    "_comment": "T0's rules: a camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame is kept when every camera keeps it.",
+    "edge_rms_max_px": 1.0,
+    "aspect_range": [1.15, 1.45],
+    "size_tol": 0.10
+  },
+  "calibrate": {
+    "fit_k1": false,
+    "fit_L": false,
+    "noise_weights": "camera",
+    "n_final": 6
+  },
+  "reference_T0": {
+    "_comment": "Run T0 of the same day, for the cross-run tests.",
+    "case_dir": "..\\cyl_20261006_T0_wand",
+    "result_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261006\\T0\\Results"
+  },
+  "reference_20260930": {
+    "_comment": "cam1 in the dot-board case cyl_20260930_T0_cam1 (through the tube) and its focal check in air (5 Oct).",
+    "result_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20260930\\T0\\cam1",
+    "f_px": 41459,
+    "f_air_px": 41610
+  }
+}

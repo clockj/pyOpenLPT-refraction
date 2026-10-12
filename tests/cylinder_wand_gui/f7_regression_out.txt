@@ -1,0 +1,25 @@
+F7: regression after the four-round flip fix
+
+g3_gui_path (64 s, exit 0): 13 of 13 checks passed; 64 s
+  F6 (after the fixes of 6 Oct): 13 of 13 checks passed; 56 s
+  before the fixes of 6 Oct: 13 of 13 checks passed; 58 s
+
+g5_g9_stop_input_pinhole (9 s, exit 0): 8 of 8 checks passed; 9 s
+  F6 (after the fixes of 6 Oct): 8 of 8 checks passed; 9 s
+  before the fixes of 6 Oct: 8 of 8 checks passed; 9 s
+
+g6_gui_launch (6 s, exit 3221226505): 6 of 6 checks passed; 2 s
+  F6 (after the fixes of 6 Oct): 6 of 6 checks passed; 2 s
+  before the fixes of 6 Oct: 6 of 6 checks passed; 2 s
+
+g8_plate_gui (53 s, exit 0): 9 of 9 checks passed; 52 s
+  F6 (after the fixes of 6 Oct): 9 of 9 checks passed; 52 s
+  before the fixes of 6 Oct: 9 of 9 checks passed; 59 s
+
+g4_pages (15 s, exit 0): 16 of 16 checks passed; 14 s
+  F6 (after the fixes of 6 Oct): 16 of 16 checks passed; 16 s
+  before the fixes of 6 Oct: 16 of 16 checks passed; 13 s
+
+pytest (323 s, exit 1): 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 322.53s (0:05:22)
+  F6: 2 failed, 254 passed, 7 skipped, 7 deselected, 2 errors in 327.54s (0:05:27)
+  failures and errors now: FAILED tests/test_p1_round4_radius_frame_mismatch.py::TestRadiusEstimationFrameMismatch::test_radius_estimation_frame_mismatch_inflates; FAILED tests/test_refract_oracles.py::test_vendored_cylinder_oracle_matches_notes_repo; ERROR tests/test_p0_bootstrap_failure.py; ERROR tests/test_plane_pipeline.py

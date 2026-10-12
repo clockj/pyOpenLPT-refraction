@@ -1,0 +1,10 @@
+T1: detections X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv
+  10936 frames (numbers 0-12540; the recording has 12,605); cameras seeing both ends per frame: [0, 0, 0, 0, 10936] (0..4)
+  cam0: radius A 25.7 px (1-99 %: 24.9-26.4), B 34.4 (33.4-35.1); frames with r_A >= r_B: 0; A/B swapped by the tracks: 0 frames; motion between frames median 28.2 px (both ends)
+         table centre - image centroid (0-based), 12 balls on 6 frames: mean (-0.48, +0.09) px, SD (2.10, 2.81); balls darker than the background
+  cam1: radius A 26.3 px (1-99 %: 25.2-27.0), B 35.2 (33.8-36.0); frames with r_A >= r_B: 0; A/B swapped by the tracks: 0 frames; motion between frames median 28.2 px (both ends)
+         table centre - image centroid (0-based), 12 balls on 6 frames: mean (-0.84, +0.44) px, SD (2.17, 2.94); balls darker than the background
+  cam2: radius A 33.2 px (1-99 %: 31.8-34.7), B 44.3 (42.6-46.2); frames with r_A >= r_B: 0; A/B swapped by the tracks: 0 frames; motion between frames median 33.1 px (both ends)
+         table centre - image centroid (0-based), 12 balls on 6 frames: mean (+0.37, +0.04) px, SD (3.11, 3.20); balls darker than the background
+  cam3: radius A 33.2 px (1-99 %: 31.5-35.0), B 44.4 (42.4-46.6); frames with r_A >= r_B: 0; A/B swapped by the tracks: 10 frames (4489, 6506, 6507, 10165, 10167, 10169, 10240, 10241, 12539, 12540); motion between frames median 30.8 px (both ends)
+         table centre - image centroid (0-based), 12 balls on 6 frames: mean (+0.09, +0.23) px, SD (2.86, 3.39); balls darker than the background

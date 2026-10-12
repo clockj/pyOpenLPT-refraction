@@ -1,0 +1,16 @@
+F2: hints from lines of sight; build p1 (d9b20b4 + diff 434749e4033e); cameras D:\Refraction\pyOpenLPT\tests\cylinder_stb\data\cams_T2 at tol 1e-9
+
+  pixel noise 0.0 px: 40000 point-camera pairs; triangulated point 0.0000 mm from the true one (median)
+    hints made: 40000; fast path taken: 40000 (100.000 %); the hint's branch was not the image's: 0
+    both succeed 40000, slow fails/fast succeeds 0, slow succeeds/fast fails 0, both fail 0
+    |pixel difference| 99th percentile 1.4e-10, max 4.26e-09 px: PASS
+
+  pixel noise 0.1 px: 40000 point-camera pairs; triangulated point 0.0033 mm from the true one (median)
+    hints made: 40000; fast path taken: 40000 (100.000 %); the hint's branch was not the image's: 0
+    both succeed 40000, slow fails/fast succeeds 0, slow succeeds/fast fails 0, both fail 0
+    |pixel difference| 99th percentile 2.9e-08, max 1.26e-07 px: PASS
+
+  pixel noise 0.5 px: 40000 point-camera pairs; triangulated point 0.0166 mm from the true one (median)
+    hints made: 40000; fast path taken: 40000 (100.000 %); the hint's branch was not the image's: 0
+    both succeed 40000, slow fails/fast succeeds 0, slow succeeds/fast fails 0, both fail 0
+    |pixel difference| 99th percentile 5.28e-07, max 1.77e-06 px: FAIL

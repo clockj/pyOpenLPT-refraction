@@ -1,0 +1,6 @@
+== pytest tests/test_plate_wand.py -m 'not slow' (after the affine_factorization fix, 2026-10-03 18:56)
+.............                                                            [100%]
+13 passed, 4 deselected in 4.23s
+== pytest tests/test_cylinder_wand.py -m 'not slow'
+......                                                                   [100%]
+6 passed, 1 deselected in 2.86s

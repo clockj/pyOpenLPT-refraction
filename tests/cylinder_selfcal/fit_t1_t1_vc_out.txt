@@ -1,0 +1,19 @@
+fit t1_vc: 51 frames, 7895 points paired in both cameras within 3.0 px
+    lam 1000: held-out cauchy loss 0.8630 -> 0.8611, projected MAD 1.253 -> 1.223
+    lam 10000: held-out cauchy loss 0.8630 -> 0.8590, projected MAD 1.253 -> 1.217
+    lam 100000: held-out cauchy loss 0.8630 -> 0.8560, projected MAD 1.253 -> 1.214
+    lam 1e+06: held-out cauchy loss 0.8630 -> 0.8562, projected MAD 1.253 -> 1.225
+    lam 1e+07: held-out cauchy loss 0.8630 -> 0.8598, projected MAD 1.253 -> 1.240
+    round 1: lam 100000; noise model s_f 0.346 px, beta 0.0692 (from s_f 0.300, beta 0.0500; s_f held at >= 0.15)
+    lam 1000: held-out cauchy loss 0.6356 -> 0.6352, projected MAD 0.980 -> 0.961
+    lam 10000: held-out cauchy loss 0.6356 -> 0.6333, projected MAD 0.980 -> 0.952
+    lam 100000: held-out cauchy loss 0.6356 -> 0.6310, projected MAD 0.980 -> 0.948
+    lam 1e+06: held-out cauchy loss 0.6356 -> 0.6314, projected MAD 0.980 -> 0.958
+    lam 1e+07: held-out cauchy loss 0.6356 -> 0.6337, projected MAD 0.980 -> 0.967
+    round 2: lam 100000; noise model s_f 0.342 px, beta 0.0699 (from s_f 0.346, beta 0.0692; s_f held at >= 0.15)
+    fit: lam 100000, 3951 points (3951 projected rows), 8 iterations; projected RMS 1.555 -> 1.546 (noise units); 15.3 % of the points down-weighted
+    fit: lam 100000, 7895 points (7895 projected rows), 8 iterations; projected RMS 1.559 -> 1.550 (noise units); 15.6 % of the points down-weighted
+  held out (frames 5, 15, ...): projected MAD 0.979 -> 0.942
+  the field's offset across the curves at the points: RMS 0.082 px; the points' projected offset robust SD 0.582 -> 0.568 px
+  cam1: dv RMS over its covered pixels 0.138 px, du 0.001
+  cam2: dv RMS over its covered pixels 0.108 px, du 0.000

@@ -1,0 +1,18 @@
+{
+ "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\runs\\configs\\Gcal4c2_n8_r2_tol1.0.json",
+ "build": "p4c",
+ "exe": false,
+ "env": {
+  "OMP_NUM_THREADS": "12",
+  "PYTHONDONTWRITEBYTECODE": "1"
+ },
+ "returncode": 0,
+ "wall_s": 689.41,
+ "end": "2026-10-08T23:13:35",
+ "build_info": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06"
+ }
+}

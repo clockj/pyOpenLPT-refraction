@@ -3,6 +3,18 @@
 
 namespace fs = std::filesystem;
 
+namespace {
+// nanoflann adaptor over a vector of points (STB::checkRepeat)
+struct PointCloud3D {
+  const std::vector<Pt3D> &pts;
+  size_t kdtree_get_point_count() const { return pts.size(); }
+  double kdtree_get_pt(const size_t idx, int dim) const { return pts[idx][dim]; }
+  template <class BBOX> bool kdtree_get_bbox(BBOX &) const { return false; }
+};
+using KDTreePoints = nanoflann::KDTreeSingleIndexAdaptor<
+    nanoflann::L2_Simple_Adaptor<double, PointCloud3D>, PointCloud3D, 3>;
+} // namespace
+
 STB::STB(const BasicSetting &setting, const std::string &type,
          const std::string &obj_cfg_path)
     : _basic_setting(setting) {
@@ -66,7 +78,8 @@ void STB::processFrame(int frame_id, std::vector<Image> &img_list) {
   std::cout << std::endl;
 
   if (frame_id == _basic_setting._frame_end &&
-      frame_id % 500 != 0) // save at the end if not already saved
+      frame_id % _basic_setting._save_interval !=
+          0) // save at the end if not already saved
   {
     std::cout << "Finish STB!" << std::endl;
     std::cout << "Frame start: " << _basic_setting._frame_start
@@ -238,9 +251,12 @@ std::unique_ptr<Object3D> STB::predictNext(const Track &tr) const {
     return nullptr;
   }
 
-  // Polynomial order for LMS/Wiener-like predictor (cap at 5)
-  const int order = (n < 6) ? static_cast<int>(n) - 1 : 5;
-  const size_t start = n - 1 - static_cast<size_t>(order);
+  // Constant velocity from the mean step over the last m frames (m = 5, fewer
+  // for short tracks): p = y_last + (y_last - y_(last-m)) / m on each axis.
+  // It does not depend on where the world origin lies. The LMS fit it replaces
+  // tends to it far from the origin, but pushed predictions away from 0 near
+  // the coordinate planes (tests/stb_improve, report section 10).
+  const size_t m = (n < 6) ? n - 1 : 5;
 
   // Create a same-kind object seeded from the last one (copy type-specific
   // params)
@@ -250,67 +266,11 @@ std::unique_ptr<Object3D> STB::predictNext(const Track &tr) const {
   if (!obj3d)
     return nullptr;
 
-  std::vector<double> series(static_cast<size_t>(order) + 1);
-  std::vector<double> filter(static_cast<size_t>(order), 0.0);
-
-  for (int axis = 0; axis < 3; ++axis) {
-    // Collect the last (order+1) samples along this axis
-    for (int j = 0; j <= order; ++j) {
-      series[static_cast<size_t>(j)] =
-          list[start + static_cast<size_t>(j)]->_pt_center[axis];
-    }
-
-    // Numerical guard: shift if the target is too close to zero
-    bool shifted = false;
-    constexpr double kShift = 10.0;
-    if (std::fabs(series[static_cast<size_t>(order)]) < 1.0) {
-      shifted = true;
-      for (double &v : series)
-        v += kShift;
-    }
-
-    // LMS step size ≈ 1 / ||regressors||^2 (guard against zero)
-    double denom = 0.0;
-    for (int j = 0; j < order; ++j)
-      denom += series[static_cast<size_t>(j)] * series[static_cast<size_t>(j)];
-    const double step = (denom > 1e-12) ? (1.0 / denom) : 0.0;
-
-    std::fill(filter.begin(), filter.end(), 0.0);
-
-    // Fit coefficients to predict y_t from [y_{t-1}, ..., y_{t-order}]
-    double prediction = 0.0;
-    double error = series[static_cast<size_t>(order)] - prediction;
-
-    int iter = 0;
-    while (std::fabs(error) > SMALLNUMBER && iter < WIENER_MAX_ITER &&
-           step > 0.0) {
-      prediction = 0.0;
-      for (int j = 0; j < order; ++j) {
-        const size_t jj = static_cast<size_t>(j);
-        filter[jj] += step * series[jj] * error;
-        prediction += filter[jj] * series[jj];
-      }
-      error = series[static_cast<size_t>(order)] - prediction;
-      ++iter;
-    }
-
-    // One-step-ahead prediction
-    if (order >= 1 && step == 0.0) {
-      // Fallback: simple linear extrapolation
-      prediction = series[static_cast<size_t>(order)] +
-                   (series[static_cast<size_t>(order)] -
-                    series[static_cast<size_t>(order - 1)]);
-    } else {
-      prediction = 0.0;
-      for (int j = 0; j < order; ++j)
-        prediction +=
-            filter[static_cast<size_t>(j)] * series[static_cast<size_t>(j + 1)];
-    }
-
-    if (shifted)
-      prediction -= kShift;
-    obj3d->_pt_center[axis] = prediction; // base-class field
-  }
+  const Pt3D &last = list[n - 1]->_pt_center;
+  const Pt3D &first = list[n - 1 - m]->_pt_center;
+  for (int axis = 0; axis < 3; ++axis)
+    obj3d->_pt_center[axis] =
+        last[axis] + (last[axis] - first[axis]) / static_cast<double>(m);
 
   return obj3d;
 }
@@ -700,8 +660,8 @@ void STB::runConvPhase(int frame, std::vector<Image> &img_list) {
             << std::endl;
   std::cout << "\tNo. of fail linear fit: " << n_fail_lf << std::endl;
 
-  // save all data every 500 frames
-  if (frame % 500 == 0) {
+  // save all data every save_interval frames (config setting, default 500)
+  if (frame % _basic_setting._save_interval == 0) {
     saveTracksAll(_basic_setting._output_path + "ConvergeTrack/", frame);
     _long_track_inactive.clear();
     _exit_track.clear();
@@ -730,6 +690,13 @@ STB::checkRepeat(const std::vector<std::unique_ptr<Object3D>> &objs) const {
 
   const int ni_obj3d = static_cast<int>(n_obj3d);
 
+  // A k-d tree over the last points finds the candidates near each object; the
+  // same distance test as comparing every pair then decides, so the flags are
+  // the same.
+  PointCloud3D cloud{last_centers};
+  KDTreePoints tree(3, cloud, {10 /* max leaf */});
+  tree.buildIndex();
+
 #pragma omp parallel for if (!omp_in_parallel())
   for (int i = 0; i < ni_obj3d; ++i) {
     const Pt3D &p = objs[i]->_pt_center;
@@ -739,11 +706,20 @@ STB::checkRepeat(const std::vector<std::unique_ptr<Object3D>> &objs) const {
     if (const auto *bubble = dynamic_cast<const Bubble3D *>(objs[i].get())) {
       r_obj = bubble->_r3d;
     }
+    const double r = tol + r_obj;
 
-    for (const Pt3D &q : last_centers) {
-      Pt3D d = p - q;
+    // query a slightly larger radius (nanoflann compares squared distances),
+    // so rounding cannot drop a point the exact test accepts
+    const double r_query = r * (1.0 + 1e-9) + 1e-12;
+    std::vector<nanoflann::ResultItem<size_t, double>> hits;
+    nanoflann::RadiusResultSet<double, size_t> result_set(r_query * r_query,
+                                                          hits);
+    tree.findNeighbors(result_set, p.data(), nanoflann::SearchParameters());
+
+    for (const auto &h : hits) {
+      Pt3D d = p - last_centers[h.first];
       double dist = d.norm();
-      if (dist <= tol + r_obj) {
+      if (dist <= r) {
         flags[i] = ObjFlag::Repeated;
         break;
       }

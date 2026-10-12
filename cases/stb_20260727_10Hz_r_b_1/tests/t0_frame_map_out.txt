@@ -1,0 +1,40 @@
+== cameras (centre, water-side point, normal, thickness, n camera side first, proj_tol, proj_nmax)
+old cam0: C [  -4.51  -20.1  -690.4 ]  water [ -16.06   33.09 -156.57]  n [2.08e-03 8.00e-05 1.00e+00]  t 12.6984  idx [1.0, 1.49, 1.33]  tol 1e-06  nmax 50
+old cam1: C [  -8.42  115.37 -663.01]  water [ -16.06   33.09 -156.57]  n [2.08e-03 8.00e-05 1.00e+00]  t 12.6984  idx [1.0, 1.49, 1.33]  tol 1e-06  nmax 50
+old cam2: C [ 505.06 -115.51   -8.77]  water [105.15 -53.05  29.28]  n [-9.9932e-01  1.1000e-04  3.6980e-02]  t 12.6980  idx [1.0, 1.49, 1.33]  tol 1e-06  nmax 50
+old cam3: C [519.13  24.22 -12.77]  water [105.15 -53.05  29.28]  n [-9.9932e-01  1.1000e-04  3.6980e-02]  t 12.6980  idx [1.0, 1.49, 1.33]  tol 1e-06  nmax 50
+new cam0: C [    3.97     4.6  -1117.48]  water [  3.97   4.6  -46.45]  n [0. 0. 1.]  t 12.7000  idx [1.0, 1.49, 1.333]  tol 1e-12  nmax 1000
+new cam1: C [-6.20000e-01 -2.35720e+02 -1.08237e+03]  water [  -0.62 -235.72  -46.45]  n [0. 0. 1.]  t 12.7000  idx [1.0, 1.49, 1.333]  tol 1e-12  nmax 1000
+new cam2: C [-951.95  283.03   15.49]  water [-84.24 283.03  12.72]  n [ 0.99999  0.      -0.0032 ]  t 12.7000  idx [1.0, 1.49, 1.333]  tol 1e-12  nmax 1000
+new cam3: C [-1016.71     2.16    14.07]  water [-84.24   2.16  11.09]  n [ 0.99999  0.      -0.0032 ]  t 12.7000  idx [1.0, 1.49, 1.333]  tol 1e-12  nmax 1000
+
+== mapping: 9261 grid points of the old view volume, 9261 project in all four old cameras
+   triangulated 9261 points; distance to the four lines: median 0.1960, p95 0.7201, max 1.4259 mm
+   reprojection of the mapped points in the new cameras vs the old pixels (px), median / p95 / max:
+     cam0: 2.776 / 13.234 / 25.326
+     cam1: 2.805 / 12.119 / 28.725
+     cam2: 4.321 / 20.758 / 40.077
+     cam3: 4.298 / 15.849 / 28.524
+   similarity X_new = s R X_old + t: s = 1.22868, rotation 177.431 deg about [0.0076 0.0086 0.9999], t = [ 1.661 -1.5   21.262]
+   R = [[-0.99888, -0.04469, 0.01553], [0.04495, -0.99885, 0.01676], [0.01477, 0.01744, 0.99974]]
+   residual of the similarity: RMS 0.779, max 2.474 mm; affine: RMS 0.711, max 2.184 mm, singular values [1.2363 1.2327 1.2207]
+
+== the old view volume mapped into the new frame (bounding box, rounded out to 1 mm): [-81.0, 54.0, -42.0, 59.0, -36.0, 68.0]
+   sizes 135 x 101 x 104 mm (old 105 x 75 x 80)
+   wall 1: cam0 and cam1 planes differ by 0.00e+00 deg, -1.24e-19 mm
+   wall 1 (cams [0, 1]): normal [0. 0. 1.], water side n.X = -46.449 mm, far wall at n.X = 53.551 mm
+   wall 2: cam2 and cam3 planes differ by 0.00e+00 deg, -2.67e-15 mm
+   wall 2 (cams [2, 3]): normal [ 0.999995  0.       -0.003197], water side n.X = -84.278 mm, far wall at n.X = 65.722 mm
+   clipped to the water (1.0 mm from each wall): [-81.0, 54.0, -42.0, 59.0, -36.0, 52.5]  (faces moved: [False, False, False, False, False, True])
+   voxel size 0.105 x s = 0.12901 -> 0.129 mm (1047 voxels across x)
+
+== visibility (share of random points on the sensor)
+   old cams, old box: >=2 0.973, >=3 0.849, >=4 0.730, cam0 0.931, cam1 0.917, cam2 0.833, cam3 0.859
+   new cams, new box: >=2 0.955, >=3 0.770, >=4 0.644, cam0 0.891, cam1 0.865, cam2 0.799, cam3 0.796
+   new cams, mapped box (unclipped): >=2 0.950, >=3 0.724, >=4 0.598, cam0 0.894, cam1 0.866, cam2 0.741, cam3 0.747
+
+== camera centres: old mapped by the similarity vs new (mm)
+   cam0: mapped old [  -4.9    8.7 -827.3]  new [    4.      4.6 -1117.5]  |diff| 290.3
+   cam1: mapped old [  -7.  -157.2 -790.8]  new [-6.0000e-01 -2.3570e+02 -1.0824e+03]  |diff| 302.0
+   cam2: mapped old [-612.   168.    17.2]  new [-952.   283.    15.5]  |diff| 358.9
+   cam3: mapped old [-637.    -2.8   15.5]  new [-1016.7     2.2    14.1]  |diff| 379.7

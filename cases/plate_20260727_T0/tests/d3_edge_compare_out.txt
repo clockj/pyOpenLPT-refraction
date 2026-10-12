@@ -1,0 +1,17 @@
+D3: fits without and with the edge filter (697 border-cut detections dropped), judged on the frames neither used
+
+== t3k_s4 (no filter) against d3_edge_s4k (filter): 8749 unused frames
+  t3k_s4: RMS 0.2782 px; walls 90.136 deg; f 18762, 19150, 21485, 21941; to wall 1068.1, 1034.2, 770.3, 844.5 mm; k1 0.772, 0.850, 0.805, 1.085
+     every detection   : median 0.2158 px, inliers RMS 0.1890, outliers 525; |dL| median 0.0067 mm, p90 0.0169; clean mean L 9.9993, SD 0.0101
+     border-cut dropped: median 0.2137 px, inliers RMS 0.1836, outliers 462; |dL| median 0.0067 mm, p90 0.0171; clean mean L 9.9995, SD 0.0129
+  d3_edge_s4k: RMS 0.2723 px; walls 90.084 deg; f 18646, 19186, 21419, 21912; to wall 1065.5, 1040.6, 739.4, 818.1 mm; k1 0.723, 0.842, 0.810, 1.149
+     every detection   : median 0.2151 px, inliers RMS 0.1876, outliers 1424; |dL| median 0.0070 mm, p90 0.0181; clean mean L 9.9994, SD 0.0099
+     border-cut dropped: median 0.2138 px, inliers RMS 0.1839, outliers 1360; |dL| median 0.0069 mm, p90 0.0181; clean mean L 9.9994, SD 0.0104
+
+== t3k_s0 (no filter) against d3_edge_s0k (filter): 8748 unused frames
+  t3k_s0: RMS 0.2736 px; walls 90.134 deg; f 18727, 19132, 21491, 21945; to wall 1066.1, 1033.4, 774.1, 847.9 mm; k1 0.759, 0.840, 0.765, 1.049
+     every detection   : median 0.2150 px, inliers RMS 0.1890, outliers 553; |dL| median 0.0068 mm, p90 0.0171; clean mean L 9.9996, SD 0.0102
+     border-cut dropped: median 0.2128 px, inliers RMS 0.1836, outliers 489; |dL| median 0.0068 mm, p90 0.0173; clean mean L 9.9996, SD 0.0132
+  d3_edge_s0k: RMS 0.5766 px; walls 93.507 deg; f 18900, 19225, 21530, 20957; to wall 237.1, 254.9, 248.0, 192.4 mm; k1 -0.411, 0.368, -1.110, 0.738
+     every detection   : median 0.4127 px, inliers RMS 0.4524, outliers 1082; |dL| median 0.0197 mm, p90 0.0471; clean mean L 10.0014, SD 0.0278
+     border-cut dropped: median 0.4087 px, inliers RMS 0.4450, outliers 981; |dL| median 0.0200 mm, p90 0.0479; clean mean L 10.0014, SD 0.0341

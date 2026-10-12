@@ -1,0 +1,4 @@
+synth_sc cal4 : build p4c, 10 processes
+  error fields: RMS over the sensor [0.7, 0.7, 0.7, 0.7] px; cam1, cam2 positions equal the study's G-cal: [True, True]
+  rendered Gcal4_n8: cameras [1, 2, 3, 4], 40 frames (160 images) in 27 s
+  Gcal4_n8's cam1 and cam2 against the study's Gcal_n8 (frames 0, 8, ..., 32): max pixel difference 0

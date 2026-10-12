@@ -1,0 +1,149 @@
+{
+ "project": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\t1_gui",
+ "via": "service",
+ "ok": true,
+ "message": "Field VSC pass 1: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.724 -> 0.592 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px in the tracking settings. Rerun tracking with the corrected cameras, then VSC again for a second pass (two or three passes).",
+ "field_vsc": {
+  "cameras": [
+   {
+    "camera": 1,
+    "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\t1_gui\\camFile_VSC\\vsc_cam1_corr_p1.txt",
+    "pass": 1,
+    "points": 7616,
+    "covered_nodes": 16259,
+    "nodes": 16261,
+    "change_rms_px": 0.30013863825432135,
+    "change_max_px": 1.116578623751347,
+    "total_rms_px": 0.30013863825432135,
+    "total_max_px": 1.116578623751347,
+    "slope_bound": 0.0057452814951765695,
+    "previous": null
+   },
+   {
+    "camera": 2,
+    "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\t1_gui\\camFile_VSC\\vsc_cam2_corr_p1.txt",
+    "pass": 1,
+    "points": 7616,
+    "covered_nodes": 14459,
+    "nodes": 16261,
+    "change_rms_px": 0.400520574794268,
+    "change_max_px": 1.8146959133697338,
+    "total_rms_px": 0.400520574794268,
+    "total_max_px": 1.8146959133697338,
+    "slope_bound": 0.009725206189050437,
+    "previous": null
+   }
+  ],
+  "pass": 1,
+  "offset_before": {
+   "median": 0.06983842639509003,
+   "robust_sd": 0.7239167273494345
+  },
+  "offset_after": {
+   "median": -0.000636026039561581,
+   "robust_sd": 0.5921238473702574
+  },
+  "tol_2d_px": 1.5,
+  "message": "Field VSC pass 1: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.724 -> 0.592 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px in the tracking settings. Rerun tracking with the corrected cameras, then VSC again for a second pass (two or three passes).",
+  "tracks": 1172,
+  "frames": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30,
+   35,
+   40,
+   45,
+   50,
+   55,
+   60,
+   65,
+   70,
+   75,
+   80,
+   85,
+   90,
+   95,
+   100,
+   105,
+   110,
+   115,
+   120,
+   125,
+   130,
+   135,
+   140,
+   145,
+   150,
+   155,
+   160,
+   165,
+   170,
+   175,
+   180,
+   185,
+   190,
+   195,
+   200,
+   205,
+   210,
+   215,
+   220,
+   225,
+   230,
+   235,
+   240,
+   245,
+   250
+  ],
+  "stride": 5,
+  "points": 7616,
+  "points_per_camera": [
+   7616,
+   7616
+  ],
+  "seconds": 273.1
+ },
+ "fit": {
+  "lam": 10000.0,
+  "noise": [
+   0.3631344232887162,
+   0.07371043500358422
+  ],
+  "heldout": {
+   "points": 3781,
+   "loss_before": 0.6889679262741237,
+   "loss_after": 0.6216449812803438,
+   "mad_before": 1.1461378356682899,
+   "mad_after": 0.9497091165844215
+  }
+ },
+ "keys_ok": true,
+ "files_ok": true,
+ "backup": true,
+ "only_correction_changed": true,
+ "rest_unchanged": true,
+ "valid_points": 7616,
+ "tracks_for_gui": 1228,
+ "compare": {
+  "cam1": {
+   "rms_diff_px": 0.013496562397735655,
+   "max_diff_px": 0.10177134455338334,
+   "split_half_rms_px": 0.1763807561526549,
+   "field_rms_px": 0.2900932097891383,
+   "pass": true
+  },
+  "cam2": {
+   "rms_diff_px": 0.007913030428739195,
+   "max_diff_px": 0.03805840057949086,
+   "split_half_rms_px": 0.18832672303635636,
+   "field_rms_px": 0.39664697635128204,
+   "pass": true
+  },
+  "pass": true
+ },
+ "pass": true
+}

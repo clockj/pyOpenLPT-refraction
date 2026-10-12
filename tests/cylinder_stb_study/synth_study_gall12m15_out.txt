@@ -1,0 +1,3 @@
+synth_study gall12m15: build p4c
+  Gall12_m15: noise measured on frame 0 after a 15 px median [8.88, 8.58] (rendered at [8.06, 5.92])
+  rendered 1 sets (160 camera-frames) in 248 s

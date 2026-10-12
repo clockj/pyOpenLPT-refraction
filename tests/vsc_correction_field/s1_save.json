@@ -1,0 +1,476 @@
+{
+ "cases": [
+  {
+   "case": "tube",
+   "expect": "curved",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ]
+   ],
+   "load_s_today": 0.01,
+   "load_s_change": 0.26,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": false,
+   "diff_today_to_change": [
+    [
+     "objects",
+     [
+      {
+       "type": "Tracer",
+       "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+       },
+       "convergence_phase": {
+        "avg_spacing_vox": 30.0
+       },
+       "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+       },
+       "predictive_field": {
+        "grid": [
+         51,
+         51,
+         51
+        ],
+        "search_radius_vox": 25.0
+       },
+       "ipr": {
+        "loops": 3,
+        "reduced_cameras": 0,
+        "reduced_loops": 0,
+        "tol_2d_px": 1.0,
+        "tol_3d_vox": 2.0
+       },
+       "tracer": {
+        "intensity_threshold": 28,
+        "radius_px": 2.0
+       }
+      }
+     ],
+     [
+      {
+       "type": "Tracer",
+       "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+       },
+       "convergence_phase": {
+        "avg_spacing_vox": 30.0
+       },
+       "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+       },
+       "predictive_field": {
+        "grid": [
+         51,
+         51,
+         51
+        ],
+        "search_radius_vox": 25.0
+       },
+       "ipr": {
+        "loops": 3,
+        "reduced_cameras": 0,
+        "reduced_loops": 0,
+        "tol_2d_px": 1.0,
+        "tol_3d_vox": 2.0
+       },
+       "tracer": {
+        "intensity_threshold": 28,
+        "radius_px": 2.0,
+        "detector": "lines",
+        "lines": {
+         "noise": [
+          7.514877384110587,
+          5.502475966380505
+         ]
+        },
+        "otf_file": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\T1_otf_shape.txt",
+        "roi_from_otf": true,
+        "roi_sigma": 3.0,
+        "shape_check": true,
+        "shape_tol_px": 0.8,
+        "shape_tol_rel": 0.2
+       }
+      }
+     ]
+    ]
+   ],
+   "kept": [
+    "objects.0.tracer.detector",
+    "objects.0.tracer.lines",
+    "objects.0.tracer.otf_file",
+    "objects.0.tracer.roi_from_otf",
+    "objects.0.tracer.roi_sigma",
+    "objects.0.tracer.shape_check",
+    "objects.0.tracer.shape_tol_px",
+    "objects.0.tracer.shape_tol_rel"
+   ],
+   "values_as_saved": true,
+   "edits_applied": true,
+   "corrections_kept": true,
+   "other_differences": [],
+   "second_save_identical": true,
+   "pass": true
+  },
+  {
+   "case": "tube, the tracer's threshold and radius edited",
+   "expect": "curved",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ],
+    [
+     "tracer_int_thresh",
+     30
+    ],
+    [
+     "tracer_radius",
+     2.5
+    ]
+   ],
+   "load_s_today": 0.01,
+   "load_s_change": 0.26,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": false,
+   "diff_today_to_change": [
+    [
+     "objects",
+     [
+      {
+       "type": "Tracer",
+       "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+       },
+       "convergence_phase": {
+        "avg_spacing_vox": 30.0
+       },
+       "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+       },
+       "predictive_field": {
+        "grid": [
+         51,
+         51,
+         51
+        ],
+        "search_radius_vox": 25.0
+       },
+       "ipr": {
+        "loops": 3,
+        "reduced_cameras": 0,
+        "reduced_loops": 0,
+        "tol_2d_px": 1.0,
+        "tol_3d_vox": 2.0
+       },
+       "tracer": {
+        "intensity_threshold": 30,
+        "radius_px": 2.5
+       }
+      }
+     ],
+     [
+      {
+       "type": "Tracer",
+       "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+       },
+       "convergence_phase": {
+        "avg_spacing_vox": 30.0
+       },
+       "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+       },
+       "predictive_field": {
+        "grid": [
+         51,
+         51,
+         51
+        ],
+        "search_radius_vox": 25.0
+       },
+       "ipr": {
+        "loops": 3,
+        "reduced_cameras": 0,
+        "reduced_loops": 0,
+        "tol_2d_px": 1.0,
+        "tol_3d_vox": 2.0
+       },
+       "tracer": {
+        "intensity_threshold": 30,
+        "radius_px": 2.5,
+        "detector": "lines",
+        "lines": {
+         "noise": [
+          7.514877384110587,
+          5.502475966380505
+         ]
+        },
+        "otf_file": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\T1_otf_shape.txt",
+        "roi_from_otf": true,
+        "roi_sigma": 3.0,
+        "shape_check": true,
+        "shape_tol_px": 0.8,
+        "shape_tol_rel": 0.2
+       }
+      }
+     ]
+    ]
+   ],
+   "kept": [
+    "objects.0.tracer.detector",
+    "objects.0.tracer.lines",
+    "objects.0.tracer.otf_file",
+    "objects.0.tracer.roi_from_otf",
+    "objects.0.tracer.roi_sigma",
+    "objects.0.tracer.shape_check",
+    "objects.0.tracer.shape_tol_px",
+    "objects.0.tracer.shape_tol_rel"
+   ],
+   "values_as_saved": true,
+   "edits_applied": true,
+   "corrections_kept": true,
+   "other_differences": [],
+   "second_save_identical": true,
+   "pass": true
+  },
+  {
+   "case": "tube, the object's type changed to Bubble",
+   "expect": "same",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ],
+    [
+     "obj_type_combo",
+     "Bubble"
+    ]
+   ],
+   "load_s_today": 0.02,
+   "load_s_change": 0.3,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": true,
+   "diff_today_to_change": [],
+   "pass": true
+  },
+  {
+   "case": "sphere",
+   "expect": "curved",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ]
+   ],
+   "load_s_today": 0.01,
+   "load_s_change": 0.22,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": false,
+   "diff_today_to_change": [
+    [
+     "objects",
+     [
+      {
+       "type": "Tracer",
+       "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+       },
+       "convergence_phase": {
+        "avg_spacing_vox": 30.0
+       },
+       "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+       },
+       "predictive_field": {
+        "grid": [
+         51,
+         51,
+         51
+        ],
+        "search_radius_vox": 25.0
+       },
+       "ipr": {
+        "loops": 3,
+        "reduced_cameras": 0,
+        "reduced_loops": 0,
+        "tol_2d_px": 1.0,
+        "tol_3d_vox": 2.0
+       },
+       "tracer": {
+        "intensity_threshold": 28,
+        "radius_px": 2.0
+       }
+      }
+     ],
+     [
+      {
+       "type": "Tracer",
+       "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+       },
+       "convergence_phase": {
+        "avg_spacing_vox": 30.0
+       },
+       "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+       },
+       "predictive_field": {
+        "grid": [
+         51,
+         51,
+         51
+        ],
+        "search_radius_vox": 25.0
+       },
+       "ipr": {
+        "loops": 3,
+        "reduced_cameras": 0,
+        "reduced_loops": 0,
+        "tol_2d_px": 1.0,
+        "tol_3d_vox": 2.0
+       },
+       "tracer": {
+        "intensity_threshold": 28,
+        "radius_px": 2.0,
+        "detector": "lines",
+        "lines": {
+         "noise": [
+          7.514877384110587,
+          5.502475966380505
+         ]
+        },
+        "otf_file": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\T1_otf_shape.txt",
+        "roi_from_otf": true,
+        "roi_sigma": 3.0,
+        "shape_check": true,
+        "shape_tol_px": 0.8,
+        "shape_tol_rel": 0.2
+       }
+      }
+     ]
+    ]
+   ],
+   "kept": [
+    "objects.0.tracer.detector",
+    "objects.0.tracer.lines",
+    "objects.0.tracer.otf_file",
+    "objects.0.tracer.roi_from_otf",
+    "objects.0.tracer.roi_sigma",
+    "objects.0.tracer.shape_check",
+    "objects.0.tracer.shape_tol_px",
+    "objects.0.tracer.shape_tol_rel"
+   ],
+   "values_as_saved": true,
+   "edits_applied": true,
+   "corrections_kept": true,
+   "other_differences": [],
+   "second_save_identical": true,
+   "pass": true
+  },
+  {
+   "case": "plate (config.txt)",
+   "expect": "same",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ]
+   ],
+   "load_s_today": 5.43,
+   "load_s_change": 5.51,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": true,
+   "diff_today_to_change": [],
+   "pass": true
+  },
+  {
+   "case": "plate (config.json with settings the form does not show)",
+   "expect": "same",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ]
+   ],
+   "load_s_today": 5.41,
+   "load_s_change": 5.87,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": true,
+   "diff_today_to_change": [],
+   "pass": true
+  },
+  {
+   "case": "pinhole",
+   "expect": "same",
+   "edits": [
+    [
+     "ipr_2d_tol",
+     1.0
+    ]
+   ],
+   "load_s_today": 0.01,
+   "load_s_change": 0.01,
+   "boxes_today": [
+    "Success"
+   ],
+   "boxes_change": [
+    "Success"
+   ],
+   "identical_bytes": true,
+   "diff_today_to_change": [],
+   "pass": true
+  }
+ ],
+ "pass": true
+}

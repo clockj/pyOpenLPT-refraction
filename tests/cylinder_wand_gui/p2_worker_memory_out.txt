@@ -1,0 +1,4 @@
+P2: this PC: 63.7 GB RAM, commit limit 67.7 GB, 31.6 GB of it free now; 32 cores, so the GUI starts 25 detection workers
+  BLAS threads unset (all cores): one worker commits 4.22 GB; loaded: PySide6.QtWidgets, matplotlib, cv2, scipy, pyopenlpt
+  BLAS threads 1: one worker commits 0.33 GB; loaded: PySide6.QtWidgets, matplotlib, cv2, scipy, pyopenlpt
+  25 workers: 105 GB unset, 8.2 GB with one BLAS thread (limit 68 GB)

@@ -1,0 +1,648 @@
+<title>Wand Calibration 20261006/T0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (max 1080px) that follows the case's argument: verdict, data, detection, calibration,
+   the f-distance valley, what still holds, what was ruled out, what to change. Figures span the column; pairs wrap. */
+:root {
+  color-scheme: light;
+  --page: #f8f8f6; --surface: #ffffff; --surface-2: #f0efeb; --ink: #121211; --ink-2: #4f4e4a; --muted: #85837c;
+  --grid: #e3e2dc; --axis: #c3c2b7; --ring: rgba(18,18,17,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s7: #4a3aa7;
+  --q1: #b7d3f6; --q2: #86b6ef; --q3: #5598e7; --q4: #2a78d6; --q5: #1c5cab; --q6: #104281;
+  --tube: #6b6a65; --tube-fill: rgba(107,106,101,0.08); --pts: rgba(79,78,74,0.55);
+  --good: #0ca30c; --warning: #c98500; --critical: #d03b3b;
+  --good-bg: rgba(12,163,12,0.10); --warning-bg: rgba(250,178,25,0.16); --critical-bg: rgba(208,59,59,0.10);
+  --display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0f0f0e; --surface: #181817; --surface-2: #222220; --ink: #f4f3ef; --ink-2: #c3c2b7; --muted: #8e8c85;
+    --grid: #2b2b29; --axis: #3b3b38; --ring: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s7: #9085e9;
+    --q1: #184f95; --q2: #1c5cab; --q3: #256abf; --q4: #3987e5; --q5: #6da7ec; --q6: #9ec5f4;
+    --tube: #9a998f; --tube-fill: rgba(154,153,143,0.08); --pts: rgba(195,194,183,0.55);
+    --good: #3cc43c; --warning: #fab219; --critical: #e66767;
+    --good-bg: rgba(60,196,60,0.12); --warning-bg: rgba(250,178,25,0.14); --critical-bg: rgba(230,103,103,0.14);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0f0f0e; --surface: #181817; --surface-2: #222220; --ink: #f4f3ef; --ink-2: #c3c2b7; --muted: #8e8c85;
+  --grid: #2b2b29; --axis: #3b3b38; --ring: rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s7: #9085e9;
+  --q1: #184f95; --q2: #1c5cab; --q3: #256abf; --q4: #3987e5; --q5: #6da7ec; --q6: #9ec5f4;
+  --tube: #9a998f; --tube-fill: rgba(154,153,143,0.08); --pts: rgba(195,194,183,0.55);
+  --good: #3cc43c; --warning: #fab219; --critical: #e66767;
+  --good-bg: rgba(60,196,60,0.12); --warning-bg: rgba(250,178,25,0.14); --critical-bg: rgba(230,103,103,0.14);
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+main { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
+h2 { font-size: 22px; font-weight: 600; line-height: 1.25; }
+h3 { font-size: 16px; font-weight: 600; }
+p { margin: 0; max-width: 70ch; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.sub { color: var(--ink-2); }
+.mono { font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+header.top { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: flex-start; }
+header.top .titles { display: grid; gap: 6px; min-width: 0; }
+button.toggle { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--ring);
+  border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+button.toggle:hover { border-color: var(--axis); }
+button.toggle:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+.verdict { display: grid; gap: 10px; margin-top: 22px; }
+.state { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: baseline; padding: 12px 14px;
+  border-radius: 8px; }
+.state.good { background: var(--good-bg); }
+.state.critical { background: var(--critical-bg); }
+.pill { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; border: 1.5px solid currentColor; white-space: nowrap; }
+.state.good .pill { color: var(--good); }
+.state.critical .pill { color: var(--critical); }
+.state .what { font-weight: 600; }
+.state .why { grid-column: 2; color: var(--ink-2); font-size: 15px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 16px; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 10px 14px; display: grid; gap: 2px; }
+.tile .label { color: var(--ink-2); font-size: 14px; }
+.tile .value { font-family: var(--display); font-size: 26px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.tile .note { color: var(--muted); font-size: 13px; }
+section { margin-top: 44px; display: grid; gap: 14px; }
+section > header { display: grid; gap: 6px; border-top: 1px solid var(--grid); padding-top: 18px; }
+.lead { color: var(--ink-2); }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+figure { margin: 0; min-width: 0; display: grid; gap: 6px; }
+figure.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 12px; }
+figure svg { display: block; width: 100%; height: auto; }
+figure img { display: block; width: 100%; height: auto; border-radius: 4px; }
+figcaption { font-size: 14px; color: var(--ink-2); max-width: 75ch; }
+figcaption b { color: var(--ink); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--ink-2); }
+.legend .key { display: inline-flex; align-items: center; gap: 6px; }
+.legend .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.legend .ln { width: 18px; height: 0; border-top: 2px dashed var(--muted); display: inline-block; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--ink-2); font-weight: 600; font-size: 13px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.scan { text-align: center; font-family: var(--mono); font-size: 13px; padding: 4px 6px; }
+td.scan.k2 { background: var(--good-bg); color: var(--good); font-weight: 500; }
+td.scan.k3 { background: var(--warning-bg); }
+td.scan.k0 { background: var(--critical-bg); color: var(--critical); }
+th.pick, td.pick { outline: 2px solid var(--s1); outline-offset: -2px; }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 75ch; }
+ol.next { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 75ch; }
+ol.next li::marker { font-family: var(--mono); color: var(--muted); }
+.callout { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 6px; max-width: 80ch; }
+.callout h3 { font-size: 15px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; background: var(--surface-2); color: var(--ink);
+  border: 1px solid var(--ring); border-radius: 6px; padding: 6px 9px; font-size: 13px; line-height: 1.35;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25); max-width: 300px; }
+#tip .v { font-weight: 600; }
+#tip .k { color: var(--ink-2); }
+svg text { font-family: var(--body); }
+.ax { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.lb { fill: var(--ink-2); font-size: 12px; }
+.lb-strong { fill: var(--ink); font-size: 12px; font-weight: 600; }
+footer { margin-top: 48px; color: var(--muted); font-size: 13px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) { button.toggle { transition: border-color 0.15s; } }
+</style>
+
+<main id="app">
+  <header class="top">
+    <div class="titles">
+      <div class="eyebrow">Run 20261006 / T0 &middot; through the water-filled tube</div>
+      <h1>Wand Calibration 20261006/T0</h1>
+      <p class="sub">Two Phantom VEO 710L cameras (180 mm macro, 100 frames/s) look through the acrylic tube
+        (OD 7.9375 in, wall 0.125 in) at a 10 mm wand with 3 mm and 4 mm balls on a 2 mm rod. Calibrated with the
+        GUI's &ldquo;Pinhole+Cylinder&rdquo; model on {{frames_used}} of {{frames_total}} frames, 6 October 2026.</p>
+    </div>
+    <button class="toggle" type="button" id="theme-toggle">Light / dark</button>
+  </header>
+
+  <div class="verdict">
+    <div class="state good"><span class="pill">usable</span><span class="what">Inside the volume the wand covered</span>
+      <span class="why">Cameras fitted on one half of the recording predict the other half's wand lengths to
+        {{d8_mean_range}} on average; two-camera reprojection {{reproj_range}}.</span></div>
+    <div class="state critical"><span class="pill">not fixed</span><span class="what">f and the cameras' distances</span>
+      <span class="why">The halves and quarters of the recording give cam1 f from {{f1_min}} to {{f1_max}} px, each with
+        its distance in proportion. The fit's error bars (&plusmn;{{f1_sig_pct}} %) are far too small.</span></div>
+  </div>
+  <div class="tiles">
+    <div class="tile"><span class="label">Usable frames</span><span class="value">{{frames_used}}</span>
+      <span class="note">of {{frames_total}}: both balls whole and apart in both cameras</span></div>
+    <div class="tile"><span class="label">Reprojection RMS</span><span class="value">{{rms_px}} px</span>
+      <span class="note">{{det_used}} of {{det_total}} detections used</span></div>
+    <div class="tile"><span class="label">Wand length scatter</span><span class="value">{{wand_rms_um}} &micro;m</span>
+      <span class="note">RMS of a free triangulation; {{wand_rms_pct}} % of 10 mm</span></div>
+    <div class="tile"><span class="label">cam1 f across the recording</span><span class="value">{{f1_min_k}}&ndash;{{f1_max_k}}k</span>
+      <span class="note">px; the full fit gives {{f1_s2}} px</span></div>
+  </div>
+
+  <section id="recording">
+    <header><div class="eyebrow">The recording</div><h2>1,519 frames show the whole wand in both cameras</h2>
+      <p class="lead">The wand hangs on a string and swings through the cameras' small views (about 26 &times; 21 mm and
+        29 &times; 23 mm at the wand). Most frames lose a ball off the edge, or see the wand end-on so that its balls
+        overlap. The cameras are synchronised and expose for 100 &micro;s, so a ball smears by only about 0.2 px.</p></header>
+    <div class="figs">
+      <figure class="card"><img id="img-cam1" alt="cam1, frame {{example_frame}}, with the fitted ellipses of both balls"><figcaption><b>cam1</b>, frame {{example_frame}}: the fitted ellipses of ball A (3 mm) and ball B (4 mm).</figcaption></figure>
+      <figure class="card"><img id="img-cam2" alt="cam2, frame {{example_frame}}, with the fitted ellipses of both balls"><figcaption><b>cam2</b>, the same instant, 61&deg; around the tube.</figcaption></figure>
+    </div>
+    <figure class="card"><div class="legend" id="lg-usable"></div><svg id="ch-usable" viewBox="0 0 1000 230" role="img" aria-label="Usable frames along the recording"></svg>
+      <figcaption>Frames with both balls whole and apart, in bins of {{bin}} frames along the recording (100 frames = 1 s). The gaps are where the wand left one camera's view.</figcaption></figure>
+  </section>
+
+  <section id="detection">
+    <header><div class="eyebrow">Finding the balls</div><h2>The rod opening separates the balls; no rod mask fits this wand</h2>
+      <p class="lead">The detector (the GUI's &ldquo;ellipse&rdquo; mode) thresholds the dark wand, removes the rod with an
+        opening, then fits an ellipse to edge points along 96 rays from each ball's centre, leaving out the points in a strip
+        along the rod. This rod is about 75 % of the small ball's height in the image.</p></header>
+    <div class="figs">
+      <figure class="card"><img id="img-open" alt="The wand after the 95 px opening: two separate blobs"><figcaption><b>Rod opening, 95 px.</b> After the opening only the two balls remain (outlined); the rod and the string are gone. The opening only finds the balls: the centre comes from the edge fit.</figcaption></figure>
+      <figure class="card"><img id="img-mask" alt="Edge points of the small ball, kept and dropped by the rod mask"><figcaption><b>Rod mask, 50 px.</b> Edge points of the small ball (cam1, frame {{example_frame}}): {{mask_kept}} <span style="color:var(--good)">kept</span>, {{mask_dropped}} <span style="color:var(--critical)">dropped</span> in the strip along the rod (dashed), and {{mask_none}} rays that ran into the rod and found no edge. The rod covers nearly the ball's full height, so the fit rests on about two thirds of the outline: a narrower mask lets the rod's edges in, a wider one removes more of the outline.</figcaption></figure>
+    </div>
+    <figure class="card"><h3>How the opening was chosen</h3>
+      <div class="tablewrap"><table id="tb-scan"></table></div>
+      <figcaption>Blobs left after an opening of each size, on five frames per camera. <b>2</b>: the balls are separate. <b>1</b>: the rod survives (left) or the small ball is erased (right). The window that works in both cameras is 91&ndash;101 px; 95 px was used.</figcaption></figure>
+    <figure class="card"><div class="legend" id="lg-sens"></div><svg id="ch-sens" viewBox="0 0 1000 330" role="img" aria-label="How far the ball centres move when the rod settings change"></svg>
+      <figcaption>How far each ball's centre moves (RMS over 200 camera-frames) when the rod settings change from the 95 / 50 px used. The plan asked for less than 0.05 px (dashed). The small ball moves 0.6 px with a 10 px narrower mask and 2 px with a 10 px wider one: no single mask is right. The opening barely matters (95 &rarr; 101 px: {{open101_A}} px).</figcaption></figure>
+    <div class="callout"><h3>Measured rod and blur</h3>
+      <p>The rod is {{rod_w1}} px wide in cam1 and {{rod_w2}} px in cam2 at the detector's threshold (about 2.2 mm; you measured 2 mm), and wider when it is steep because the tube stretches the image 1.3&times; across its axis. The edges are blurred by &sigma; &asymp; {{blur}} px. The usual rule, half-width plus 2&sigma;, asks for a {{rule1}} px mask in cam1 and {{rule2}} px in cam2, up to {{rule_p90}} px for steep rods.</p></div>
+  </section>
+
+  <section id="calibration">
+    <header><div class="eyebrow">The calibration</div><h2>Two cameras 61&deg; apart, about 1 m from the tube</h2>
+      <p class="lead">Seen along the tube's axis. The fit puts cam1 {{d1}} mm and cam2 {{d2}} mm from the axis. Those two distances are exactly what this recording cannot pin down (next section).</p></header>
+    <div class="figs">
+      <figure class="card"><svg id="ch-rig" viewBox="0 0 520 520" role="img" aria-label="The rig seen along the tube's axis"></svg>
+        <figcaption>To scale. The tube (OD 201.6 mm) and the cameras' lines of sight through the centre of the wand's volume.</figcaption></figure>
+      <figure class="card"><svg id="ch-vol" viewBox="0 0 520 520" role="img" aria-label="The wand positions inside the tube"></svg>
+        <figcaption>The measurement volume seen along the axis: every 4th wand position (ball A small, ball B large). It spans about {{vol_x}} mm across and {{vol_z}} mm in depth, deep inside the tube.</figcaption></figure>
+    </div>
+    <div class="figs">
+      <figure class="card"><h3>cam1 residuals</h3><svg id="ch-res1" viewBox="0 0 640 430" role="img" aria-label="cam1 mean residual per image cell"></svg></figure>
+      <figure class="card"><h3>cam2 residuals</h3><svg id="ch-res2" viewBox="0 0 640 430" role="img" aria-label="cam2 mean residual per image cell"></svg></figure>
+    </div>
+    <p class="sub" style="font-size:14px">Mean residual in each image cell with 20 or more detections, the arrow drawn 500&times; (0.1 px = 50 px). The pattern changes from cell to cell rather than smoothly, so it is not a lens or tube error.</p>
+    <figure class="card"><h3>Reprojection errors in 2-D</h3><div class="legend" id="lg-err"></div>
+      <div class="figs">
+        <svg id="ch-err1" viewBox="0 0 450 470" role="img" aria-label="cam1 reprojection errors, du against dv"></svg>
+        <svg id="ch-err2" viewBox="0 0 450 470" role="img" aria-label="cam2 reprojection errors, du against dv"></svg>
+      </div>
+      <figcaption>{{err_caption}}</figcaption></figure>
+    <figure class="card"><svg id="ch-len" viewBox="0 0 1000 300" role="img" aria-label="Wand length error along the recording"></svg>
+      <figcaption>The wand length from a free two-camera triangulation, minus 10 mm, frame by frame ({{wand_rms_um}} &micro;m RMS). Neighbouring frames share their error (correlation {{d7_lag1}} after one frame, {{d7_lag10}} after ten): it follows the wand's fast pose changes, not random noise.</figcaption></figure>
+  </section>
+
+  <section id="valley">
+    <header><div class="eyebrow">The main finding</div><h2>The recording does not fix f: each part finds its own f with the distance in proportion</h2>
+      <p class="lead">Long lenses looking at a 30 mm volume from 1 m see almost no perspective: a camera farther away with a longer lens makes nearly the same image. Only the &plusmn;1.5 % change of magnification across the volume and the tube's refraction separate the two, and detection errors of a few tenths of a pixel swamp both.</p></header>
+    <figure class="card"><div class="legend" id="lg-valley"></div><svg id="ch-valley" viewBox="0 0 1000 560" role="img" aria-label="Focal length against distance from the axis for every calibration"></svg>
+      <figcaption>Every calibration of this recording: the full fit, its halves and quarters, the wand length free, k1 free, and the diagnosis with another centre estimator. Bars: the fit's own &plusmn;1&sigma;. All lie along a line through the origin (dashed: the full fit's f / distance), so f and the distance trade against each other. The 30 Sep dot-board calibration of cam1 (star) is the trustworthy f if the lens and focus are unchanged.</figcaption></figure>
+  </section>
+
+  <section id="agree">
+    <header><div class="eyebrow">What still holds</div><h2>Inside the wand's volume the cameras agree</h2>
+      <p class="lead">Each variant's cameras triangulate every kept frame, including the frames they were not fitted on. Despite f values from 30,000 to 41,000 px, the wand lengths they measure agree to about 0.1 % on average.</p></header>
+    <figure class="card"><div class="legend" id="lg-held"></div><svg id="ch-held" viewBox="0 0 1000 340" role="img" aria-label="Wand length error of each variant on its own and on held-out frames"></svg>
+      <figcaption>RMS error of the triangulated wand length on the frames each variant was fitted on, and on the others (held out). Hover for the mean error. Only q1, fitted on 184 frames, extrapolates poorly.</figcaption></figure>
+  </section>
+
+  <section id="ruled-out">
+    <header><div class="eyebrow">Diagnoses</div><h2>What was checked and ruled out</h2></header>
+    <div class="tablewrap"><table id="tb-ruled"></table></div>
+  </section>
+
+  <section id="next">
+    <header><div class="eyebrow">For the next recording</div><h2>What to change</h2></header>
+    <ol class="next">
+      <li><b>A wand with a thinner rod</b>: about 1 mm or less for 3&ndash;4 mm balls (at most a third of the small ball). The detector was built for rods about a quarter of the ball. Larger balls on the same rod also help.</li>
+      <li><b>An independent f for each camera</b>, from the dot board through the tube as on 30 Sep, held fixed in the wand calibration so that the wand only has to find the poses. The calibration cannot hold f yet; it is a small library option. A third camera would also help.</li>
+      <li><b>Move the wand through all the depth the cameras keep sharp, and across the whole image.</b> The change of magnification with depth is what separates f from distance.</li>
+      <li><b>Keep the whole wand in both views and never point it at a camera.</b> Only 14 % of these frames could be used.</li>
+      <li><b>Check the camera mounts.</b> Each camera's image jitters by 0.2&ndash;0.3 px horizontally from frame to frame on its own. The calibration absorbs it, but tracked positions will carry it.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <div>Case <span class="mono">pyOpenLPT/cases/cyl_20261006_T0_wand</span>: plan, report (2026-10-06-report.md), tests T0&ndash;T7 and diagnoses D1&ndash;D8. This page: <span class="mono">make_page.py</span>.</div>
+    <div>Results <span class="mono">X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results</span>: camFiles, the GUI's results page, wand_points.csv, every check's calibration.</div>
+  </footer>
+</main>
+<div id="tip" hidden></div>
+<script id="report-data" type="application/json">__REPORT_DATA__</script>
+<script>
+"use strict";
+(function () {
+  const D = JSON.parse(document.getElementById("report-data").textContent);
+  const THEME_KEY = "wand-20261006-theme";
+  function setTheme(t) {
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    else document.documentElement.removeAttribute("data-theme");
+  }
+  try { const t = localStorage.getItem(THEME_KEY); if (t) setTheme(t); } catch (e) { /* storage off */ }
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const nxt = cur === "dark" ? "light" : "dark";
+    setTheme(nxt);
+    try { localStorage.setItem(THEME_KEY, nxt); } catch (e) { /* storage off */ }
+    drawAll();
+  });
+
+  // ------------------------------------------------------------------ helpers
+  const NS = "http://www.w3.org/2000/svg";
+  function sv(parent, tag, attrs, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function h(tag, attrs, text) {
+    const e = document.createElement(tag);
+    for (const k in (attrs || {})) { if (k === "class") e.className = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const fmt = (x, d) => (typeof x === "number" && isFinite(x)) ?
+    x.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }) : "–";
+  const lin = (d0, d1, r0, r1) => x => r0 + (x - d0) * (r1 - r0) / (d1 - d0);
+  const logS = (d0, d1, r0, r1) => x => r0 + (Math.log10(x) - Math.log10(d0)) * (r1 - r0) / (Math.log10(d1) - Math.log10(d0));
+  function ticks(a, b, n) {
+    const span = b - a, step0 = span / Math.max(n, 1), mag = Math.pow(10, Math.floor(Math.log10(step0)));
+    const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => span / s <= n) || 10 * mag;
+    const out = [];
+    for (let v = Math.ceil(a / step) * step; v <= b + 1e-9 * step; v += step) out.push(Math.round(v / step) * step);
+    return out;
+  }
+  const tip = document.getElementById("tip");
+  function showTip(evt, rows) {
+    tip.textContent = "";
+    rows.forEach(r => {
+      const line = h("div");
+      if (r[0] !== null) line.appendChild(h("span", { class: "v" }, r[0]));
+      if (r[1]) line.appendChild(h("span", { class: "k" }, (r[0] !== null ? "  " : "") + r[1]));
+      tip.appendChild(line);
+    });
+    tip.hidden = false;
+    const w = tip.offsetWidth, hh = tip.offsetHeight;
+    let x = evt.clientX + 14, y = evt.clientY + 14;
+    if (x + w > innerWidth - 8) x = evt.clientX - w - 14;
+    if (y + hh > innerHeight - 8) y = evt.clientY - hh - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { tip.hidden = true; }
+  function hover(el, rows) {
+    el.addEventListener("pointerenter", e => showTip(e, rows));
+    el.addEventListener("pointermove", e => showTip(e, rows));
+    el.addEventListener("pointerleave", hideTip);
+  }
+  function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+  function legend(id, items) {
+    const box = document.getElementById(id);
+    box.textContent = "";
+    items.forEach(it => {
+      const k = h("span", { class: "key" });
+      if (!it.nosw) {
+        const sw = h("span", { class: it.line ? "ln" : "sw" });
+        if (!it.line) sw.style.background = it.color;
+        if (it.round) sw.style.borderRadius = "50%";
+        if (it.hollow) { sw.style.background = "transparent"; sw.style.border = "2px solid " + it.color; }
+        k.appendChild(sw);
+      }
+      k.appendChild(document.createTextNode(it.label));
+      box.appendChild(k);
+    });
+  }
+  function axisX(svg, x, y0, y1, vals, label, f) {
+    vals.forEach(v => {
+      sv(svg, "line", { x1: x(v), x2: x(v), y1: y0, y2: y1, stroke: css("--grid"), "stroke-width": 1 });
+      sv(svg, "text", { x: x(v), y: y1 + 15, "text-anchor": "middle", class: "ax" }, f ? f(v) : fmt(v, 0));
+    });
+    if (label) sv(svg, "text", { x: (x(vals[0]) + x(vals[vals.length - 1])) / 2, y: y1 + 32, "text-anchor": "middle", class: "lb" }, label);
+  }
+  function axisY(svg, y, x0, x1, vals, label, f) {
+    vals.forEach(v => {
+      sv(svg, "line", { x1: x0, x2: x1, y1: y(v), y2: y(v), stroke: css("--grid"), "stroke-width": 1 });
+      sv(svg, "text", { x: x0 - 6, y: y(v) + 4, "text-anchor": "end", class: "ax" }, f ? f(v) : fmt(v, 0));
+    });
+    if (label) {
+      const t = sv(svg, "text", { x: 14, y: (y(vals[0]) + y(vals[vals.length - 1])) / 2, "text-anchor": "middle", class: "lb" }, label);
+      t.setAttribute("transform", `rotate(-90 14 ${(y(vals[0]) + y(vals[vals.length - 1])) / 2})`);
+    }
+  }
+
+  // ------------------------------------------------------------------ images and tables (once)
+  document.getElementById("img-cam1").src = D.images.cam1;
+  document.getElementById("img-cam2").src = D.images.cam2;
+  document.getElementById("img-open").src = D.images.opened;
+  document.getElementById("img-mask").src = D.images.mask;
+
+  (function scanTable() {
+    const tb = document.getElementById("tb-scan");
+    const ks = D.scan.ks;
+    const tr0 = h("tr"); tr0.appendChild(h("th", {}, "frame, camera"));
+    ks.forEach(k => tr0.appendChild(h("th", { class: "num" + (k === 91 || k === 101 ? " pick" : "") }, k + " px")));
+    const thead = h("thead"); thead.appendChild(tr0); tb.appendChild(thead);
+    const tbody = h("tbody");
+    D.scan.rows.forEach(r => {
+      const tr = h("tr"); tr.appendChild(h("td", {}, `frame ${r.frame}, ${r.cam}`));
+      r.counts.forEach((c, i) => tr.appendChild(h("td", { class: "scan k" + Math.min(c, 3) + (ks[i] === 91 || ks[i] === 101 ? " pick" : "") }, String(c))));
+      tbody.appendChild(tr);
+    });
+    tb.appendChild(tbody);
+  })();
+
+  (function ruledTable() {
+    const tb = document.getElementById("tb-ruled");
+    const thead = h("thead"), tr0 = h("tr");
+    ["possible cause", "test", "evidence", "verdict"].forEach(t => tr0.appendChild(h("th", {}, t)));
+    thead.appendChild(tr0); tb.appendChild(thead);
+    const tbody = h("tbody");
+    D.ruled.forEach(r => {
+      const tr = h("tr");
+      tr.appendChild(h("td", {}, r[0])); tr.appendChild(h("td", { class: "mono" }, r[1]));
+      tr.appendChild(h("td", {}, r[2])); tr.appendChild(h("td", {}, r[3]));
+      tbody.appendChild(tr);
+    });
+    tb.appendChild(tbody);
+  })();
+
+  // ------------------------------------------------------------------ charts
+  function drawUsable() {
+    const svg = document.getElementById("ch-usable"); clear(svg);
+    const W = 1000, H = 230, L = 52, R = 12, T = 12, B = 44;
+    const u = D.usable, n = u.both.length, bw = (W - L - R) / n;
+    const x = lin(0, n * u.bin, L, W - R), y = lin(0, u.bin, H - B, T);
+    axisY(svg, y, L, W - R, ticks(0, u.bin, 4), "frames per bin");
+    axisX(svg, x, T, H - B, ticks(0, n * u.bin, 10), "frame");
+    u.both.forEach((v, i) => {
+      if (!v) return;
+      const r = sv(svg, "rect", { x: L + i * bw + 0.5, y: y(v), width: Math.max(bw - 1, 0.5), height: y(0) - y(v), fill: css("--ink-2"), rx: 1 });
+      hover(r, [[`${v} of ${u.bin}`, "usable in both"], [null, `frames ${i * u.bin}–${(i + 1) * u.bin - 1}`],
+        [null, `cam1 alone ${u.cam1[i]}, cam2 alone ${u.cam2[i]}`]]);
+    });
+    ["cam1", "cam2"].forEach((c, j) => {
+      const pts = u[c].map((v, i) => `${L + (i + 0.5) * bw},${y(v)}`).join(" ");
+      sv(svg, "polyline", { points: pts, fill: "none", stroke: css(j ? "--s2" : "--s1"), "stroke-width": 1.5, opacity: 0.9 });
+    });
+    legend("lg-usable", [{ color: css("--ink-2"), label: "usable in both cameras" },
+      { color: css("--s1"), label: "cam1 sees both balls" }, { color: css("--s2"), label: "cam2 sees both balls" }]);
+  }
+
+  function drawSens() {
+    const svg = document.getElementById("ch-sens"); clear(svg);
+    const W = 1000, H = 330, L = 150, R = 20, T = 24, B = 40;
+    const rows = D.sens.filter(r => !(r.open === 95 && r.mask === 50));
+    const lo = 0.005, hi = 5;
+    const x = logS(lo, hi, L, W - R), rh = (H - T - B) / rows.length;
+    [0.01, 0.1, 1].forEach(v => {
+      sv(svg, "line", { x1: x(v), x2: x(v), y1: T, y2: H - B, stroke: css("--grid") });
+      sv(svg, "text", { x: x(v), y: H - B + 15, "text-anchor": "middle", class: "ax" }, v + " px");
+    });
+    sv(svg, "text", { x: (L + W - R) / 2, y: H - 6, "text-anchor": "middle", class: "lb" }, "centre movement, RMS (log scale)");
+    sv(svg, "line", { x1: x(0.05), x2: x(0.05), y1: T, y2: H - B, stroke: css("--muted"), "stroke-dasharray": "4 3", "stroke-width": 1.5 });
+    sv(svg, "text", { x: x(0.05), y: T - 8, "text-anchor": "middle", class: "ax" }, "0.05 px goal");
+    rows.forEach((r, i) => {
+      const yc = T + i * rh + rh / 2;
+      sv(svg, "text", { x: L - 8, y: yc + 4, "text-anchor": "end", class: "lb" }, `opening ${r.open}, mask ${r.mask}`);
+      [["A_rms", "--s7", -1, "ball A (3 mm)"], ["B_rms", "--s4", 1, "ball B (4 mm)"]].forEach(([k, col, s, name]) => {
+        const v = Math.max(r[k], lo);
+        const yy = yc + s * 5.5 - 4.5;
+        const bar = sv(svg, "rect", { x: L, y: yy, width: Math.max(x(v) - L, 1), height: 9, fill: css(col), rx: 2 });
+        hover(bar, [[fmt(r[k], 3) + " px RMS", name], [null, `largest ${fmt(r[k.replace("rms", "max")], 2)} px`],
+          [null, `${r.lost} of 200 camera-frames lost`]]);
+      });
+      if (r.lost) sv(svg, "text", { x: W - R, y: yc + 4, "text-anchor": "end", class: "ax" }, `${r.lost} lost`);
+    });
+    legend("lg-sens", [{ color: css("--s7"), label: "ball A (3 mm)" }, { color: css("--s4"), label: "ball B (4 mm)" },
+      { line: true, label: "0.05 px goal" }]);
+  }
+
+  function drawRig() {
+    const svg = document.getElementById("ch-rig"); clear(svg);
+    const S = 520, cams = D.rig.cams, Rt = D.rig.radii;
+    const xs = cams.map(c => c.C[0]).concat([-Rt[0], Rt[0]]), zs = cams.map(c => c.C[2]).concat([-Rt[0], Rt[0]]);
+    const pad = 70, span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs));
+    const cx = (Math.max(...xs) + Math.min(...xs)) / 2, cz = (Math.max(...zs) + Math.min(...zs)) / 2;
+    const k = (S - 2 * pad) / span, X = v => S / 2 + (v - cx) * k, Z = v => S / 2 + (v - cz) * k;
+    sv(svg, "circle", { cx: X(0), cy: Z(0), r: Rt[0] * k, fill: css("--tube-fill"), stroke: css("--tube"), "stroke-width": 1.5 });
+    sv(svg, "circle", { cx: X(0), cy: Z(0), r: Rt[1] * k, fill: "none", stroke: css("--tube"), "stroke-width": 1 });
+    sv(svg, "text", { x: X(0), y: Z(-Rt[0]) - 8, "text-anchor": "middle", class: "lb" }, "tube, OD 201.6 mm");
+    const vc = D.rig.vol_centre;
+    cams.forEach((c, i) => {
+      const col = css(i ? "--s2" : "--s1");
+      sv(svg, "line", { x1: X(c.C[0]), y1: Z(c.C[2]), x2: X(vc[0]), y2: Z(vc[2]), stroke: col, "stroke-width": 1.5, "stroke-dasharray": "5 4" });
+      const g = sv(svg, "circle", { cx: X(c.C[0]), cy: Z(c.C[2]), r: 7, fill: col });
+      hover(g, [[c.name, ""], [null, `f ${fmt(c.f, 0)} px`], [null, `${fmt(c.D, 0)} mm from the axis`], [null, `azimuth ${fmt(c.az, 1)}°`]]);
+      sv(svg, "text", { x: X(c.C[0]) + (i ? -12 : 12), y: Z(c.C[2]) + 4, "text-anchor": i ? "end" : "start", class: "lb-strong" }, `${c.name}  ${fmt(c.D, 0)} mm`);
+    });
+    // scale bar
+    const sb = 200 * k;
+    sv(svg, "line", { x1: 20, x2: 20 + sb, y1: S - 20, y2: S - 20, stroke: css("--ink-2"), "stroke-width": 2 });
+    sv(svg, "text", { x: 20 + sb / 2, y: S - 28, "text-anchor": "middle", class: "ax" }, "200 mm");
+  }
+
+  function drawVol() {
+    const svg = document.getElementById("ch-vol"); clear(svg);
+    const S = 520, A = D.vol.A, B = D.vol.B;
+    const all = A.concat(B);
+    const xs = all.map(p => p[0]), zs = all.map(p => p[1]);
+    const cx = (Math.max(...xs) + Math.min(...xs)) / 2, cz = (Math.max(...zs) + Math.min(...zs)) / 2;
+    const span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs)) * 1.15;
+    const k = (S - 80) / span, X = v => S / 2 + (v - cx) * k, Z = v => S / 2 + 10 + (v - cz) * k;
+    ticks(cx - span / 2, cx + span / 2, 6).forEach(v => {
+      sv(svg, "line", { x1: X(v), x2: X(v), y1: 30, y2: S - 30, stroke: css("--grid") });
+      sv(svg, "text", { x: X(v), y: S - 14, "text-anchor": "middle", class: "ax" }, fmt(v, 0));
+    });
+    ticks(cz - span / 2, cz + span / 2, 6).forEach(v => {
+      if (Z(v) < 30 || Z(v) > S - 30) return;
+      sv(svg, "line", { x1: 40, x2: S - 10, y1: Z(v), y2: Z(v), stroke: css("--grid") });
+      sv(svg, "text", { x: 36, y: Z(v) + 4, "text-anchor": "end", class: "ax" }, fmt(v, 0));
+    });
+    sv(svg, "text", { x: S / 2, y: 16, "text-anchor": "middle", class: "lb" }, "X across (mm) · Z towards cam1 (mm, down)");
+    for (let i = 0; i < A.length; i++) sv(svg, "line", { x1: X(A[i][0]), y1: Z(A[i][1]), x2: X(B[i][0]), y2: Z(B[i][1]), stroke: css("--pts"), "stroke-width": 0.6 });
+    A.forEach(p => sv(svg, "circle", { cx: X(p[0]), cy: Z(p[1]), r: 1.6, fill: css("--s7") }));
+    B.forEach(p => sv(svg, "circle", { cx: X(p[0]), cy: Z(p[1]), r: 2.2, fill: css("--s4") }));
+    if (X(0) > 40 && X(0) < S - 10 && Z(0) > 30 && Z(0) < S - 30) {
+      sv(svg, "path", { d: `M${X(0) - 6},${Z(0)}h12M${X(0)},${Z(0) - 6}v12`, stroke: css("--ink"), "stroke-width": 1.5 });
+      sv(svg, "text", { x: X(0) + 8, y: Z(0) - 6, class: "lb" }, "tube axis");
+    }
+  }
+
+  function drawRes(id, cam) {
+    const svg = document.getElementById(id); clear(svg);
+    const W = 640, H = 430, s = 0.5, ox = 0, oy = 15;           // 1280 x 800 image at half scale
+    sv(svg, "rect", { x: ox, y: oy, width: 1280 * s, height: 800 * s, fill: "none", stroke: css("--axis") });
+    const cells = D.res[cam], mmax = Math.max(...cells.map(c => c.m));
+    cells.forEach(c => {
+      const x0 = ox + c.cx * s, y0 = oy + c.cy * s, x1 = x0 + 500 * c.du * s, y1 = y0 + 500 * c.dv * s;
+      const col = css("--q" + (2 + Math.min(4, Math.floor(4.999 * c.m / Math.max(mmax, 1e-9)))));
+      sv(svg, "circle", { cx: x0, cy: y0, r: 2, fill: col });
+      sv(svg, "line", { x1: x0, y1: y0, x2: x1, y2: y1, stroke: col, "stroke-width": 2, "stroke-linecap": "round" });
+      const hit = sv(svg, "circle", { cx: x0, cy: y0, r: 22, fill: "transparent" });
+      hover(hit, [[fmt(c.m, 3) + " px", "mean residual"], [null, `(${fmt(c.du, 3)}, ${fmt(c.dv, 3)}) px`],
+        [null, `${c.n} detections, ${fmt(c.z, 1)} standard errors`]]);
+    });
+    sv(svg, "text", { x: 4, y: 11, class: "ax" }, "image 1280 × 800 px");
+  }
+
+  // the reprojection errors in 2-D: counts per cell on a square-root scale in six steps of one ramp, shared by both
+  // cameras (the same colour means the same count); +dv is drawn downward, as in the image
+  const errStep = (n, mx) => Math.min(6, 1 + Math.floor(6 * Math.sqrt(n / mx) - 1e-9));
+  function drawErr(id, cam) {
+    const svg = document.getElementById(id); clear(svg);
+    const E = D.err, c = E.cams[cam], R = E.R, st = E.step, nb = Math.round(2 * R / st);
+    const L = 48, T = 96, S = 330, MG = 50, GAP = 6, cw = S / nb;
+    const x = lin(-R, R, L, L + S), y = lin(-R, R, T, T + S);
+    ticks(-R, R, 4).forEach(v => {
+      sv(svg, "line", { x1: x(v), x2: x(v), y1: T, y2: T + S, stroke: css("--grid") });
+      sv(svg, "line", { x1: L, x2: L + S, y1: y(v), y2: y(v), stroke: css("--grid") });
+      sv(svg, "text", { x: x(v), y: T + S + 15, "text-anchor": "middle", class: "ax" }, fmt(v, 0));
+      sv(svg, "text", { x: L - 6, y: y(v) + 4, "text-anchor": "end", class: "ax" }, fmt(v, 0));
+    });
+    sv(svg, "text", { x: L + S / 2, y: T + S + 33, "text-anchor": "middle", class: "lb" }, "du (px)");
+    const yl = sv(svg, "text", { x: 12, y: T + S / 2, "text-anchor": "middle", class: "lb" }, "dv (px, down)");
+    yl.setAttribute("transform", `rotate(-90 12 ${T + S / 2})`);
+    c.cells.forEach(([i, j, n]) => {
+      const r = sv(svg, "rect", { x: L + i * cw, y: T + j * cw, width: cw + 0.3, height: cw + 0.3, fill: css("--q" + errStep(n, E.max)) });
+      hover(r, [[`${n} detection${n > 1 ? "s" : ""}`, ""], [null, `du ${fmt(-R + i * st, 1)} to ${fmt(-R + (i + 1) * st, 1)} px`],
+        [null, `dv ${fmt(-R + j * st, 1)} to ${fmt(-R + (j + 1) * st, 1)} px`]]);
+    });
+    sv(svg, "line", { x1: x(0), x2: x(0), y1: T, y2: T + S, stroke: css("--axis"), "stroke-width": 1 });
+    sv(svg, "line", { x1: L, x2: L + S, y1: y(0), y2: y(0), stroke: css("--axis"), "stroke-width": 1 });
+    const rc = sv(svg, "circle", { cx: x(0), cy: y(0), r: c.rms * S / (2 * R), fill: "none", stroke: css("--muted"), "stroke-width": 2, "stroke-dasharray": "5 4" });
+    hover(rc, [[fmt(c.rms, 3) + " px", "RMS (2-D)"], [null, `du ${fmt(c.rms_u, 3)} px, dv ${fmt(c.rms_v, 3)} px`]]);
+    const mmax = Math.max(...c.mu, ...c.mv);
+    c.mu.forEach((n, i) => {
+      if (!n) return;
+      const hh = (MG - 4) * n / mmax;
+      const b = sv(svg, "rect", { x: L + i * cw + 0.5, y: T - GAP - hh, width: Math.max(cw - 1, 0.5), height: hh, fill: css("--ink-2"), rx: 1 });
+      hover(b, [[`${n} detections`, ""], [null, `du ${fmt(-R + i * st, 1)} to ${fmt(-R + (i + 1) * st, 1)} px`]]);
+    });
+    c.mv.forEach((n, j) => {
+      if (!n) return;
+      const ww = (MG - 4) * n / mmax;
+      const b = sv(svg, "rect", { x: L + S + GAP, y: T + j * cw + 0.5, width: ww, height: Math.max(cw - 1, 0.5), fill: css("--ink-2"), rx: 1 });
+      hover(b, [[`${n} detections`, ""], [null, `dv ${fmt(-R + j * st, 1)} to ${fmt(-R + (j + 1) * st, 1)} px`]]);
+    });
+    sv(svg, "text", { x: L, y: 16, class: "lb-strong" }, `${cam}: ${fmt(c.n, 0)} detections`);
+    sv(svg, "text", { x: L, y: 33, class: "lb" }, `RMS ${fmt(c.rms, 2)} px (du ${fmt(c.rms_u, 2)}, dv ${fmt(c.rms_v, 2)})`);
+  }
+  function errLegend() {
+    const mx = D.err.max, ranges = {};
+    for (let n = 1; n <= mx; n++) { const k = errStep(n, mx); if (!ranges[k]) ranges[k] = [n, n]; ranges[k][1] = n; }
+    const items = [{ nosw: true, label: "detections per 0.1 × 0.1 px cell:" }];
+    for (let k = 1; k <= 6; k++) if (ranges[k]) items.push({ color: css("--q" + k), label: ranges[k][0] === ranges[k][1] ? `${ranges[k][0]}` : `${ranges[k][0]}–${ranges[k][1]}` });
+    items.push({ line: true, label: "RMS (2-D)" }, { color: css("--ink-2"), label: "du (top), dv (right)" });
+    legend("lg-err", items);
+  }
+
+  function drawLen() {
+    const svg = document.getElementById("ch-len"); clear(svg);
+    const W = 1000, H = 300, L = 56, R = 12, T = 12, B = 42;
+    const f = D.len.frame, e = D.len.err;
+    const ymax = Math.max(60, Math.ceil(Math.max(...e.map(Math.abs)) / 20) * 20);
+    const x = lin(0, 10640, L, W - R), y = lin(-ymax, ymax, H - B, T);
+    axisY(svg, y, L, W - R, ticks(-ymax, ymax, 6), "µm");
+    axisX(svg, x, T, H - B, ticks(0, 10640, 10), "frame");
+    sv(svg, "line", { x1: L, x2: W - R, y1: y(0), y2: y(0), stroke: css("--axis"), "stroke-width": 1.5 });
+    const g = sv(svg, "g", {});
+    f.forEach((fr, i) => sv(g, "circle", { cx: x(fr), cy: y(e[i]), r: 1.7, fill: css("--pts") }));
+    const hit = sv(svg, "rect", { x: L, y: T, width: W - L - R, height: H - T - B, fill: "transparent" });
+    hit.addEventListener("pointermove", ev => {
+      const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+      const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+      let best = -1, bd = 1e9;
+      for (let i = 0; i < f.length; i++) { const d = Math.hypot(x(f[i]) - p.x, y(e[i]) - p.y); if (d < bd) { bd = d; best = i; } }
+      if (best >= 0 && bd < 14) showTip(ev, [[fmt(e[best], 1) + " µm", "length error"], [null, "frame " + f[best]]]); else hideTip();
+    });
+    hit.addEventListener("pointerleave", hideTip);
+  }
+
+  function drawValley() {
+    const svg = document.getElementById("ch-valley"); clear(svg);
+    const W = 1000, H = 560, L = 76, R = 24, T = 16, B = 48;
+    const V = D.valley, all = V.points.concat([V.board]);
+    const dmin = Math.min(...all.map(p => p.D - (p.sD || 0))), dmax = Math.max(...all.map(p => p.D + (p.sD || 0)));
+    const fmin = Math.min(...all.map(p => p.f - (p.sf || 0))), fmax = Math.max(...all.map(p => p.f + (p.sf || 0)));
+    const xa = Math.floor((dmin - 20) / 50) * 50, xb = Math.ceil((dmax + 20) / 50) * 50;
+    const ya = Math.floor((fmin - 1000) / 2000) * 2000, yb = Math.ceil((fmax + 1000) / 2000) * 2000;
+    const x = lin(xa, xb, L, W - R), y = lin(ya, yb, H - B, T);
+    axisY(svg, y, L, W - R, ticks(ya, yb, 8), "f (px)", v => fmt(v / 1000, 0) + "k");
+    axisX(svg, x, T, H - B, ticks(xa, xb, 9), "distance from the tube's axis (mm)");
+    ["cam1", "cam2"].forEach((cam, j) => {
+      const k = V.slope[cam], col = css(j ? "--s2" : "--s1");
+      sv(svg, "line", { x1: x(xa), y1: y(k * xa), x2: x(xb), y2: y(k * xb), stroke: col, "stroke-width": 1.2, "stroke-dasharray": "6 5", opacity: 0.7 });
+    });
+    const shape = (g, p, col) => {
+      const cx = x(p.D), cy = y(p.f), r = p.kind === "full" ? 7 : 5.5;
+      if (p.kind === "full") return sv(g, "rect", { x: cx - r, y: cy - r, width: 2 * r, height: 2 * r, fill: col, stroke: css("--surface"), "stroke-width": 2 });
+      if (p.kind === "part") return sv(g, "circle", { cx, cy, r, fill: css("--surface"), stroke: col, "stroke-width": 2 });
+      if (p.kind === "option") return sv(g, "path", { d: `M${cx},${cy - r - 1}L${cx + r + 1},${cy}L${cx},${cy + r + 1}L${cx - r - 1},${cy}Z`, fill: col, stroke: css("--surface"), "stroke-width": 1.5 });
+      return sv(g, "path", { d: `M${cx - r},${cy - r}L${cx + r},${cy + r}M${cx + r},${cy - r}L${cx - r},${cy + r}`, stroke: col, "stroke-width": 2.2 });
+    };
+    V.points.forEach(p => {
+      const col = css(p.cam === "cam1" ? "--s1" : "--s2"), g = sv(svg, "g", {});
+      if (p.sf) sv(g, "line", { x1: x(p.D), x2: x(p.D), y1: y(p.f - p.sf), y2: y(p.f + p.sf), stroke: col, "stroke-width": 1.2 });
+      if (p.sD) sv(g, "line", { x1: x(p.D - p.sD), x2: x(p.D + p.sD), y1: y(p.f), y2: y(p.f), stroke: col, "stroke-width": 1.2 });
+      shape(g, p, col);
+      const hit = sv(g, "circle", { cx: x(p.D), cy: y(p.f), r: 12, fill: "transparent" });
+      hover(hit, [[`${p.cam}, ${p.label}`, ""], [null, `f ${fmt(p.f, 0)} ± ${fmt(p.sf, 0)} px`],
+        [null, `distance ${fmt(p.D, 0)} ± ${fmt(p.sD, 1)} mm`], [null, p.note || ""]]);
+      if (p.kind === "full") sv(svg, "text", { x: x(p.D) + 11, y: y(p.f) + 4, class: "lb-strong" }, `${p.cam} full fit`);
+    });
+    const b = V.board, bc = css("--s1"), cx = x(b.D), cy = y(b.f);
+    const star = [];
+    for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? 4 : 10; star.push(`${cx + rr * Math.cos(a)},${cy + rr * Math.sin(a)}`); }
+    const st = sv(svg, "polygon", { points: star.join(" "), fill: bc, stroke: css("--surface"), "stroke-width": 1.5 });
+    hover(st, [["cam1, dot board 30 Sep", ""], [null, `f ${fmt(b.f, 0)} ± ${fmt(b.sf, 0)} px`], [null, `distance ${fmt(b.D, 0)} mm`]]);
+    sv(svg, "text", { x: cx - 13, y: cy + 4, "text-anchor": "end", class: "lb-strong" }, "cam1, dot board (30 Sep)");
+    legend("lg-valley", [{ color: css("--s1"), label: "cam1" }, { color: css("--s2"), label: "cam2" },
+      { nosw: true, label: "■ full fit" }, { color: css("--ink-2"), hollow: true, round: true, label: "halves and quarters" },
+      { nosw: true, label: "◆ wand length free, k1 free" }, { nosw: true, label: "✕ other centre estimator (D2)" },
+      { line: true, label: "same f / distance as the full fit" }]);
+  }
+
+  function drawHeld() {
+    const svg = document.getElementById("ch-held"); clear(svg);
+    const W = 1000, H = 340, L = 56, R = 12, T = 14, B = 52;
+    const rows = D.held, n = rows.length, gw = (W - L - R) / n, bw = Math.min(28, gw * 0.32);
+    const ymax = Math.ceil(Math.max(...rows.map(r => Math.max(r.own || 0, r.held || 0))) / 10) * 10 + 10;
+    const y = lin(0, ymax, H - B, T);
+    axisY(svg, y, L, W - R, ticks(0, ymax, 5), "µm RMS");
+    rows.forEach((r, i) => {
+      const xc = L + (i + 0.5) * gw;
+      [["own", css("--axis"), -1, "on its own frames"], ["held", css("--s3"), 1, "on held-out frames"]].forEach(([k, col, s, name]) => {
+        if (r[k] === null || r[k] === undefined) return;
+        const bx = xc + (s < 0 ? -bw - 1 : 1);
+        const bar = sv(svg, "rect", { x: bx, y: y(r[k]), width: bw, height: y(0) - y(r[k]), fill: col, rx: 3 });
+        hover(bar, [[fmt(r[k], 1) + " µm RMS", name], [null, k === "held" ? `mean ${fmt(r.held_mean, 1)} µm` : `mean ${fmt(r.own_mean, 1)} µm`],
+          [null, `${r.name}: cam1 f ${fmt(r.f1, 0)} px`]]);
+      });
+      sv(svg, "text", { x: xc, y: H - B + 16, "text-anchor": "middle", class: "lb" }, r.name);
+      sv(svg, "text", { x: xc, y: H - B + 31, "text-anchor": "middle", class: "ax" }, fmt(r.f1 / 1000, 1) + "k px");
+    });
+    legend("lg-held", [{ color: css("--axis"), label: "frames it was fitted on" }, { color: css("--s3"), label: "held-out frames" }]);
+  }
+
+  function drawAll() {
+    hideTip();
+    drawUsable(); drawSens(); drawRig(); drawVol(); drawRes("ch-res1", "cam1"); drawRes("ch-res2", "cam2");
+    drawErr("ch-err1", "cam1"); drawErr("ch-err2", "cam2"); errLegend();
+    drawLen(); drawValley(); drawHeld();
+  }
+  drawAll();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+  window.__reportReady = true;
+})();
+</script>

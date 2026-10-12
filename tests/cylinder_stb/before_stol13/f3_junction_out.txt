@@ -1,0 +1,5 @@
+F3: the near/far junction with chained hints; build p1 (d9b20b4 + diff 434749e4033e); cameras D:\Refraction\pyOpenLPT\tests\cylinder_stb\data\cams_T2 at tol 1e-9
+  cam1 path A: 80200 points (80000 with a hint), fast path 79652, fallbacks 175 (at most 0.00 mm from the junction); branches seen [0, 1]; max |fast - project()| 7.48e-08 px; max |pixel - the line's pixel| 7.45e-08 px; new failures 0: PASS
+  cam1 path B: 80200 points (80000 with a hint), fast path 79607, fallbacks 198 (at most 0.01 mm from the junction); branches seen [0, 1]; max |fast - project()| 9.98e-06 px; new failures 0: FAIL
+  cam2 path A: 80200 points (80000 with a hint), fast path 79635, fallbacks 185 (at most 0.00 mm from the junction); branches seen [0, 1]; max |fast - project()| 8.43e-08 px; max |pixel - the line's pixel| 6.83e-08 px; new failures 0: PASS
+  cam2 path B: 80200 points (80000 with a hint), fast path 79617, fallbacks 197 (at most 1.58 mm from the junction); branches seen [0, 1]; max |fast - project()| 1.96e-05 px; new failures 0: FAIL

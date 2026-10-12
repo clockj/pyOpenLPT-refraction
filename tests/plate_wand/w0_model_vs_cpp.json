@@ -1,0 +1,48 @@
+{
+ "groups": {
+  "no distortion": {
+   "cases": 2000,
+   "points": 2000,
+   "model_failed": 0,
+   "cpp_ray_failed": 0,
+   "tau_max": 5.601346615117464,
+   "proj_vs_cpp_px": 6.484416588067255e-11,
+   "proj_vs_pixel_px": 3.676996568752836e-09,
+   "ray_dir": 1.2477963466657954e-13,
+   "ray_origin_mm": 4.505740868695985e-09,
+   "ray_origin_rel": 5.642481697130696e-13,
+   "cpp_closure_px": 3.6794417560576645e-09
+  },
+  "with distortion": {
+   "cases": 400,
+   "points": 400,
+   "model_failed": 0,
+   "cpp_ray_failed": 0,
+   "tau_max": 3.086756202136072,
+   "proj_vs_cpp_px": 3.959975468288249e-11,
+   "proj_vs_pixel_px": 9.980087195039821e-06,
+   "ray_dir": 4.8231656162748044e-09,
+   "ray_origin_mm": 3.110865894530338e-05,
+   "ray_origin_rel": 8.04444507535895e-09,
+   "cpp_closure_px": 9.98008735027043e-06
+  }
+ },
+ "normal_line": {
+  "points": 800,
+  "worst_px": 2.6653652574293635e-07
+ },
+ "camera_side_points": {
+  "inside_plate": {
+   "count": 300,
+   "cpp_returned_pixel": 300,
+   "model_ok": 0
+  },
+  "camera_side": {
+   "count": 300,
+   "cpp_returned_pixel": 300,
+   "model_ok": 0
+  },
+  "cpp_equals_mirror_image_max_px": 8.190787542660117e-11
+ },
+ "pass": true
+}

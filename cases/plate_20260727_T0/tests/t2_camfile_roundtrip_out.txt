@@ -1,0 +1,9 @@
+X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\calib_plate_wand\camFile: 10936 frames, 87488 detections; 658 detections over 3 px (gross errors), 10842 frames without one
+  reprojection: inliers RMS 0.1890 px per coordinate (all: 21.785); Euclidean median 0.2153, p99 0.744, max 963.9 px
+    cam0: inliers RMS 0.1826 px/coord., Euclidean median 0.2075, p99 0.699 px, 161 outliers; inliers' mean offset (+0.000, -0.001) px
+    cam1: inliers RMS 0.1782 px/coord., Euclidean median 0.1995, p99 0.715 px, 161 outliers; inliers' mean offset (-0.000, -0.001) px
+    cam2: inliers RMS 0.1995 px/coord., Euclidean median 0.2339, p99 0.734 px, 166 outliers; inliers' mean offset (+0.001, -0.000) px
+    cam3: inliers RMS 0.1951 px/coord., Euclidean median 0.2207, p99 0.904 px, 170 outliers; inliers' mean offset (-0.001, +0.002) px
+  wand length, frames without a gross error: mean 9.9998 mm, SD 0.0101; |error| mean 0.0080, median 0.0066, p90 0.0166, p99 0.0270, max 0.049 mm
+  wand length, every frame: median 10.0001 mm; |error| mean 0.1048, p99 0.0345, max 29.39 mm; frames over 0.1 / 0.2 mm: 85 / 85
+{

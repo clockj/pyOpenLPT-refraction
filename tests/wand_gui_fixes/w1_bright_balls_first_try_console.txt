@@ -1,0 +1,92 @@
+W1: Wand Type 'Bright on Dark' on bright balls (B1)
+[ WARN:0@0.054] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.167] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.286] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.411] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.540] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.650] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.783] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.888] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@0.999] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.160] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.266] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+[ WARN:0@1.392] global grfmt_tiff.cpp:123 cv::TIFF_Warning TIFFFetchNormalTag: ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations
+  frames (1000, 2000, 3000, 4069, 5000, 8000) of T2, cameras 1 and 2: originals (dark balls) and inverted copies (bright balls)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  PASS  the mapping: 'Dark on Bright' -> dark, 'Bright on Dark' -> bright (the combo's only items)  ({'Dark on Bright': 'dark', 'Bright on Dark': 'bright'}; items ['Dark on Bright', 'Bright on Dark'])
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 0, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+    frame 1000: dark {1: array([[120.9427948 , 530.31896973,  48.12743378,   3.94030246],
+       [375.61410522, 567.09387207,  69.40032959,   1.94347281]])} | bright {1: array([[119.76636505, 530.2855835 ,  47.22386932,   4.11087316],
+       [378.25869751, 567.25463867,  68.1764679 ,   2.09879231]])}
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 1, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+    frame 2000: dark {1: array([[860.28448486, 194.77236938,  47.55522919,   3.81279771],
+       [492.08383179, 366.93649292,  60.55085754,   2.53298253]]), 0: array([[3.81768733e+02, 2.21997886e+02, 4.70768171e+01, 2.49326088e-01],
+       [3.24764836e+02, 2.21270826e+02, 5.10145293e+01, 2.41595001e-01],
+       [3.74730946e+02, 4.13290103e+02, 6.80605410e+01, 1.87822271e-01],
+       [4.39677889e+02, 4.12778223e+02, 7.11211466e+01, 2.29060588e-01]])} | bright {1: array([[861.88775635, 194.43066406,  46.31346893,   3.88104338],
+       [491.02389526, 367.13360596,  59.69060898,   2.80761255]]), 0: array([[3.81768733e+02, 2.21997886e+02, 4.70768171e+01, 2.49326088e-01],
+       [3.24764836e+02, 2.21270826e+02, 5.10145293e+01, 2.41595001e-01],
+       [3.74730946e+02, 4.13290103e+02, 6.80605410e+01, 1.87822271e-01],
+       [4.39677889e+02, 4.12778223e+02, 7.11211466e+01, 2.29060588e-01]])}
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 2, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+    frame 3000: dark {1: array([[249.93740845, 188.0111084 ,  42.30442047,   3.38947509],
+       [684.00567627, 267.71206665,  64.19696045,   1.47437214]]), 0: array([[6.31294197e+02, 2.21492450e+02, 6.26150987e+01, 2.45635399e-01],
+       [6.63041852e+02, 3.03909641e+02, 6.47361095e+01, 3.41551611e-01]])} | bright {1: array([[252.13264465, 188.03051758,  44.09161377,   3.37191055],
+       [685.63775635, 267.74472046,  63.18672562,   1.58888328]]), 0: array([[6.31294197e+02, 2.21492450e+02, 6.26150987e+01, 2.45635399e-01],
+       [6.63041852e+02, 3.03909641e+02, 6.47361095e+01, 3.41551611e-01]])}
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 3, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+    frame 4069: dark {0: array([[ 74.70983124, 523.6305542 ,  51.17830276,   4.42591517],
+       [603.53649902, 627.43774414,  68.66995239,   2.30457873]]), 1: array([[344.98129272, 464.58084106,  46.11669922,   2.41095161],
+       [683.54663086, 559.45800781,  64.02831268,   1.93685147]])} | bright {0: array([[ 77.51698303, 523.53570557,  53.36548615,   4.3671171 ],
+       [604.87927246, 627.32818604,  67.65999603,   2.06270119]]), 1: array([[349.31021118, 464.37588501,  49.05322266,   2.29745872],
+       [685.60247803, 559.6317749 ,  62.63086319,   1.79001564]])}
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 4, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+    frame 5000: dark {1: array([[1138.52880859,  240.27174377,   49.18968201,    5.3009945 ],
+       [ 671.59619141,  315.86727905,   64.8946228 ,    2.66792889]]), 0: array([[128.01817112, 272.19444323,  54.3160632 ,   0.35457932]])} | bright {1: array([[1137.87243652,  240.1946106 ,   49.69532013,    5.16495586],
+       [ 670.81829834,  315.96582031,   64.30541992,    2.51841487]]), 0: array([[128.01817112, 272.19444323,  54.3160632 ,   0.35457932]])}
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 5, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+    frame 8000: dark {1: array([[850.18225098, 160.70289612,  46.30469894,   2.92034457],
+       [649.69439697, 154.95094299,  64.04441833,   1.98097162]]), 0: array([[ 92.42862701, 183.09065247,  50.49357986,   5.10781437],
+       [490.97558594, 178.7568512 ,  69.20327759,   2.07439564]])} | bright {1: array([[849.70379639, 160.75080872,  46.65096283,   2.87816838],
+       [650.68023682, 155.05609131,  64.68698883,   1.84958691]]), 0: array([[ 92.5320282 , 183.11865234,  50.57744598,   4.61349847],
+       [490.84454346, 178.67912292,  69.28496552,   2.18879227]])}
+  FAIL  fast: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit  (0 of 6 frames; 10 of 12 images with both balls found)
+      the old mapping ('dark' on the bright-ball images) differs on 6 of 6 frames
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 0, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 1, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 2, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 3, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 4, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 5, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+  PASS  reliable: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit  (6 of 6 frames; 9 of 12 images with both balls found)
+      the old mapping ('dark' on the bright-ball images) differs on 6 of 6 frames
+Detecting frame 0, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 0, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 1, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 1, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 2, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 2, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 3, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 4, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 4, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 5, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 5, mode='bright', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+  PASS  ellipse: 'Bright on Dark' on the inverted frames = 'Dark on Bright' on the originals, to the bit  (6 of 6 frames; 7 of 12 images with both balls found)
+      the old mapping ('dark' on the bright-ball images) differs on 6 of 6 frames
+
+3 of 4 checks passed; 225 s
+exit 1

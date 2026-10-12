@@ -1,0 +1,10 @@
+W11: regression after the wand-tab fixes (B1-B10)
+
+g5_g9_stop_input_pinhole (9 s, exit 0): 8 of 8 checks passed; 9 s
+  F7 (git HEAD, the folder's outputs): 8 of 8 checks passed; 9 s
+  moved here: g5_g9_stop_input_pinhole.json, g5_g9_stop_input_pinhole_out.txt; folder restored byte for byte: True
+
+g6_gui_launch (2 s, exit 3221226505): 6 of 6 checks passed; 2 s
+  F7 (git HEAD, the folder's outputs): 6 of 6 checks passed; 2 s
+  moved here: g6_gui_launch.json, g6_gui_launch_out.txt; folder restored byte for byte: True
+exit 0

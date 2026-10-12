@@ -1,0 +1,98 @@
+Pre-plan sizing for the flat-window (PINPLATE) wand calibration plan: how far a camera behind a flat window is
+
+f = 3000 px, incidence 0 deg (camera 400 mm from the window along the normal; 585 points; C++ closure 6.9e-12 px)
+  pinhole:            rms 0.1693 px, max 0.6372 px; apparent f x1.3416, apparent distance x1.3382
+  pinhole + k1:       rms 0.0592 px, max 0.2343 px (k1 +5.197e-02)
+  pinhole + k1 + pp:  rms 0.0592 px, max 0.2343 px (cx 639.5, cy 399.5)
+  window moved -25% (-100 mm), camera refitted: rms 0.1938 px, max 0.5413 px (f +0.03 %, centre 25.6 mm, rotation 0.000 deg)
+  window moved -10% (-40 mm), camera refitted: rms 0.0775 px, max 0.2189 px (f +0.01 %, centre 10.2 mm, rotation 0.000 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 0.0290 px, max 0.0828 px (f -0.00 %, centre 3.8 mm, rotation 0.000 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 0.7918 px, max 1.9971 px (f +0.06 %, rotation 0.614 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 0.5656 px, max 1.4473 px (f +0.04 %, rotation 0.646 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 2.0334 px, max 5.2346 px (f +0.36 %, rotation 1.534 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 1.4744 px, max 3.7355 px (f +0.22 %, rotation 1.614 deg)
+
+f = 3000 px, incidence 15 deg (camera 386 mm from the window along the normal; 585 points; C++ closure 2.0e-11 px)
+  pinhole:            rms 5.0170 px, max 13.7303 px; apparent f x1.2919, apparent distance x1.2928
+  pinhole + k1:       rms 4.9845 px, max 12.4318 px (k1 -1.720e-01)
+  pinhole + k1 + pp:  rms 3.3452 px, max 7.6901 px (cx 335.0, cy 398.6)
+  window moved -25% (-97 mm), camera refitted: rms 1.4937 px, max 4.5104 px (f -1.15 %, centre 21.8 mm, rotation 0.154 deg)
+  window moved -10% (-39 mm), camera refitted: rms 0.5824 px, max 1.8093 px (f -0.58 %, centre 8.1 mm, rotation 0.065 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 0.2203 px, max 0.6975 px (f +0.26 %, centre 3.0 mm, rotation 0.026 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 1.1015 px, max 3.0440 px (f -0.88 %, rotation 0.588 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 0.9851 px, max 3.0579 px (f +0.02 %, rotation 0.601 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 2.5427 px, max 7.1050 px (f -2.00 %, rotation 1.489 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 2.5042 px, max 7.8142 px (f +0.13 %, rotation 1.501 deg)
+
+f = 3000 px, incidence 30 deg (camera 346 mm from the window along the normal; 585 points; C++ closure 6.2e-11 px)
+  pinhole:            rms 13.2322 px, max 37.4663 px; apparent f x1.1743, apparent distance x1.1897
+  pinhole + k1:       rms 12.8773 px, max 33.7005 px (k1 -7.404e-01)
+  pinhole + k1 + pp:  rms 5.6722 px, max 18.0799 px (cx 1416.8, cy 399.8)
+  window moved -25% (-87 mm), camera refitted: rms 3.9419 px, max 9.8342 px (f -2.13 %, centre 20.0 mm, rotation 0.686 deg)
+  window moved -10% (-35 mm), camera refitted: rms 1.4945 px, max 3.8058 px (f -1.29 %, centre 6.0 mm, rotation 0.285 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 0.6122 px, max 1.5644 px (f +0.68 %, centre 2.1 mm, rotation 0.124 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 2.0052 px, max 5.2862 px (f -1.59 %, rotation 0.469 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 1.7757 px, max 4.9830 px (f +0.00 %, rotation 0.484 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 4.6108 px, max 12.2978 px (f -3.74 %, rotation 1.248 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 4.4718 px, max 12.7049 px (f +0.02 %, rotation 1.205 deg)
+
+f = 3000 px, incidence 45 deg (camera 283 mm from the window along the normal; 585 points; C++ closure 8.2e-11 px)
+  pinhole:            rms 27.9216 px, max 76.7241 px; apparent f x1.0126, apparent distance x1.0507
+  pinhole + k1:       rms 26.6083 px, max 61.3804 px (k1 -1.451e+00)
+  pinhole + k1 + pp:  rms 24.1002 px, max 72.0733 px (cx -788.4, cy 400.2)
+  window moved -25% (-71 mm), camera refitted: rms 6.0819 px, max 11.3928 px (f -1.23 %, centre 22.0 mm, rotation 1.712 deg)
+  window moved -10% (-28 mm), camera refitted: rms 2.2659 px, max 4.2075 px (f -1.02 %, centre 6.1 mm, rotation 0.674 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 1.1151 px, max 2.0424 px (f +0.70 %, centre 2.4 mm, rotation 0.344 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 3.4851 px, max 8.3070 px (f -2.48 %, rotation 0.127 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 2.8406 px, max 7.3337 px (f -0.01 %, rotation 0.321 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 8.1408 px, max 19.9048 px (f -5.90 %, rotation 0.542 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 7.1271 px, max 18.6485 px (f -0.04 %, rotation 0.796 deg)
+
+f = 12000 px, incidence 0 deg (camera 400 mm from the window along the normal; 585 points; C++ closure 2.2e-11 px)
+  pinhole:            rms 0.0108 px, max 0.0407 px; apparent f x1.3335, apparent distance x1.3302
+  pinhole + k1:       rms 0.0038 px, max 0.0148 px (k1 +5.214e-02)
+  pinhole + k1 + pp:  rms 0.0038 px, max 0.0148 px (cx 639.5, cy 399.5)
+  window moved -25% (-100 mm), camera refitted: rms 0.0123 px, max 0.0356 px (f +0.00 %, centre 25.0 mm, rotation 0.000 deg)
+  window moved -10% (-40 mm), camera refitted: rms 0.0049 px, max 0.0143 px (f +0.00 %, centre 10.0 mm, rotation 0.000 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 0.0018 px, max 0.0054 px (f +0.00 %, centre 3.8 mm, rotation 0.000 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 0.2103 px, max 0.4978 px (f -0.03 %, rotation 0.667 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 0.1554 px, max 0.4005 px (f -0.01 %, rotation 0.667 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 0.6619 px, max 1.5309 px (f -0.19 %, rotation 1.672 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 0.5552 px, max 1.3296 px (f -0.08 %, rotation 1.673 deg)
+
+f = 12000 px, incidence 15 deg (camera 386 mm from the window along the normal; 585 points; C++ closure 1.4e-10 px)
+  pinhole:            rms 2.5103 px, max 5.2995 px; apparent f x1.3438, apparent distance x1.3544
+  pinhole + k1:       rms 2.4543 px, max 6.0443 px (k1 -2.749e+00)
+  pinhole + k1 + pp:  rms 0.6088 px, max 2.0513 px (cx 2168.9, cy 399.8)
+  window moved -25% (-97 mm), camera refitted: rms 1.0014 px, max 1.8129 px (f +0.17 %, centre 27.5 mm, rotation 0.005 deg)
+  window moved -10% (-39 mm), camera refitted: rms 0.4010 px, max 0.7401 px (f +0.02 %, centre 10.8 mm, rotation 0.002 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 0.1558 px, max 0.2924 px (f +0.01 %, centre 4.1 mm, rotation 0.001 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 0.7779 px, max 1.5516 px (f +0.33 %, rotation 0.697 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 0.8190 px, max 1.8992 px (f -0.03 %, rotation 0.684 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 1.6554 px, max 3.3425 px (f +0.62 %, rotation 1.723 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 2.0970 px, max 4.8403 px (f -0.23 %, rotation 1.715 deg)
+
+f = 12000 px, incidence 30 deg (camera 346 mm from the window along the normal; 585 points; C++ closure 2.4e-10 px)
+  pinhole:            rms 10.0642 px, max 19.6280 px; apparent f x1.3788, apparent distance x1.4408
+  pinhole + k1:       rms 9.7595 px, max 22.1017 px (k1 -1.320e+01)
+  pinhole + k1 + pp:  rms 1.7592 px, max 5.9096 px (cx 3865.1, cy 399.8)
+  window moved -25% (-87 mm), camera refitted: rms 3.6665 px, max 7.0623 px (f +3.62 %, centre 47.1 mm, rotation 0.035 deg)
+  window moved -10% (-35 mm), camera refitted: rms 1.4967 px, max 2.7086 px (f +0.89 %, centre 16.4 mm, rotation 0.017 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 0.6555 px, max 1.1903 px (f -0.15 %, centre 6.1 mm, rotation 0.009 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 1.9569 px, max 3.7695 px (f +1.36 %, rotation 0.812 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 1.8295 px, max 4.0662 px (f +0.02 %, rotation 0.739 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 4.3749 px, max 8.3632 px (f +2.60 %, rotation 1.978 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 4.6153 px, max 10.1970 px (f -0.81 %, rotation 1.853 deg)
+
+f = 12000 px, incidence 45 deg (camera 283 mm from the window along the normal; 585 points; C++ closure 3.5e-10 px)
+  pinhole:            rms 26.0516 px, max 50.0809 px; apparent f x1.4502, apparent distance x1.6442
+  pinhole + k1:       rms 25.0762 px, max 54.2200 px (k1 -3.986e+01)
+  pinhole + k1 + pp:  rms 9.1678 px, max 22.5163 px (cx -9400.0, cy 400.4)
+  window moved -25% (-71 mm), camera refitted: rms 6.7174 px, max 16.4797 px (f +15.40 %, centre 103.7 mm, rotation 0.110 deg)
+  window moved -10% (-28 mm), camera refitted: rms 2.9046 px, max 6.4150 px (f +4.28 %, centre 33.0 mm, rotation 0.059 deg)
+  window moved +15mm (+15 mm), camera refitted: rms 1.6242 px, max 3.0431 px (f -1.14 %, centre 12.4 mm, rotation 0.042 deg)
+  normal tilted 2 deg in plane, camera refitted: rms 4.3207 px, max 8.9148 px (f +5.09 %, rotation 1.054 deg)
+  normal tilted 2 deg out of plane, camera refitted: rms 3.4365 px, max 7.4943 px (f -0.38 %, rotation 0.852 deg)
+  normal tilted 5 deg in plane, camera refitted: rms 9.6250 px, max 19.0803 px (f +9.96 %, rotation 2.528 deg)
+  normal tilted 5 deg out of plane, camera refitted: rms 8.6391 px, max 18.8806 px (f -2.34 %, rotation 2.135 deg)
+

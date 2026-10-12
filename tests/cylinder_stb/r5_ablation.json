@@ -1,0 +1,314 @@
+{
+ "runs": {
+  "R1": {
+   "build": "p1",
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\r5_lines\\config_R1.json",
+    "build": "p1",
+    "exe": false,
+    "env": {},
+    "returncode": 0,
+    "wall_s": 54.0,
+    "end": "2026-10-07T19:00:38",
+    "build_info": {
+     "name": "p1",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "89d864c56ab326401177e41e6a745bdcf0fa16576c42d9c218072ae10cec4f35",
+     "start": "2026-10-07T18:22:55"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "trackable": 33946,
+    "reconstructed": 93856,
+    "matched": 5587,
+    "duplicates": 1485,
+    "ghosts": 86784,
+    "recall": 0.1645849290048901,
+    "ghost_share": 0.9246505284691442,
+    "pos_rms_mm": [
+     0.045904598782376106,
+     0.03854812523872142,
+     0.052110542864927924
+    ],
+    "long_tracks": 3350,
+    "long_track_mean_length": 26.400298507462686,
+    "long_track_purity_mean": 0.07475060995942635,
+    "long_track_purity_ge_0.9": 0.050746268656716415,
+    "long_tracks_ghost": 2861,
+    "track_recall": 0.1558357391150651,
+    "frame_time_s_mean": 1.308
+   }
+  },
+  "R2": {
+   "build": "p123",
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\r5_lines\\config_R2.json",
+    "build": "p123",
+    "exe": false,
+    "env": {},
+    "returncode": 0,
+    "wall_s": 70.54,
+    "end": "2026-10-07T20:54:44",
+    "build_info": {
+     "name": "p123",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "28c13622a40026ed88ea1adb21c12b9ea014714cdaceaa202842d9f023a3ebb3",
+     "start": "2026-10-07T18:43:11"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "trackable": 33946,
+    "reconstructed": 87603,
+    "matched": 5308,
+    "duplicates": 1682,
+    "ghosts": 80613,
+    "recall": 0.15636599304778176,
+    "ghost_share": 0.9202082120475327,
+    "pos_rms_mm": [
+     0.048275744615254954,
+     0.019177215179367914,
+     0.05210541959092656
+    ],
+    "long_tracks": 3337,
+    "long_track_mean_length": 25.54659874138448,
+    "long_track_purity_mean": 0.08347473458297398,
+    "long_track_purity_ge_0.9": 0.06173209469583458,
+    "long_tracks_ghost": 2877,
+    "track_recall": 0.15041536558062807,
+    "frame_time_s_mean": 1.73525
+   }
+  },
+  "R0": {
+   "build": "head1007",
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\r5_lines\\config_R0.json",
+    "build": "head1007",
+    "exe": false,
+    "env": {},
+    "returncode": 0,
+    "wall_s": 946.66,
+    "end": "2026-10-07T19:18:00",
+    "build_info": {
+     "name": "head1007",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+     "start": "2026-10-07T18:09:52"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "trackable": 33946,
+    "reconstructed": 93340,
+    "matched": 5515,
+    "duplicates": 1483,
+    "ghosts": 86342,
+    "recall": 0.16246391327402346,
+    "ghost_share": 0.9250267838011571,
+    "pos_rms_mm": [
+     0.04515507936184606,
+     0.038588446424331915,
+     0.052237145969153756
+    ],
+    "long_tracks": 3316,
+    "long_track_mean_length": 26.53558504221954,
+    "long_track_purity_mean": 0.07364464697913627,
+    "long_track_purity_ge_0.9": 0.050965018094089265,
+    "long_tracks_ghost": 2836,
+    "track_recall": 0.15403876745419195,
+    "frame_time_s_mean": 23.631
+   }
+  },
+  "R3": {
+   "build": "p4c",
+   "info": {
+    "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\r5_lines\\config_R3.json",
+    "build": "p4c",
+    "exe": false,
+    "env": {},
+    "returncode": 0,
+    "wall_s": 210.83,
+    "end": "2026-10-07T20:58:16",
+    "build_info": {
+     "name": "p4c",
+     "git_head": "d9b20b4",
+     "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+     "start": "2026-10-07T20:28:06"
+    }
+   },
+   "score": {
+    "frames_scored": 36,
+    "trackable": 33946,
+    "reconstructed": 28876,
+    "matched": 27020,
+    "duplicates": 16,
+    "ghosts": 1840,
+    "recall": 0.7959700701113533,
+    "ghost_share": 0.0637207369441751,
+    "pos_rms_mm": [
+     0.011426710149265256,
+     0.012182849235020245,
+     0.013468681059988788
+    ],
+    "long_tracks": 930,
+    "long_track_mean_length": 32.958064516129035,
+    "long_track_purity_mean": 0.9323432070799765,
+    "long_track_purity_ge_0.9": 0.9064516129032258,
+    "long_tracks_ghost": 38,
+    "track_recall": 0.7947917280386496,
+    "frame_time_s_mean": 5.247999999999999
+   }
+  }
+ },
+ "case": "r5_lines",
+ "R0_vs_R1": {
+  "only_a": [],
+  "only_b": [],
+  "files": {
+   "ConvergeTrack\\ExitTrack_39.csv": {
+    "identical": false,
+    "rows": [
+     4284,
+     4343
+    ],
+    "max_abs_diff": {
+     "TrackID": 3.0,
+     "FrameID": 33.0,
+     "WorldX": 25.38834,
+     "WorldY": 18.990012,
+     "WorldZ": 41.860575999999995,
+     "cam0_x(col)": 1275.2420450000002,
+     "cam0_y(row)": 729.142621,
+     "cam1_x(col)": 1277.752699,
+     "cam1_y(row)": 659.546555
+    }
+   },
+   "ConvergeTrack\\LongTrackActive_39.csv": {
+    "identical": false,
+    "rows": [
+     81210,
+     81729
+    ],
+    "max_abs_diff": {
+     "TrackID": 83.0,
+     "FrameID": 38.0,
+     "WorldX": 24.680155,
+     "WorldY": 20.093318,
+     "WorldZ": 39.498637,
+     "cam0_x(col)": 1245.77123,
+     "cam0_y(row)": 778.534858,
+     "cam1_x(col)": 1259.393591,
+     "cam1_y(row)": 705.106439
+    }
+   },
+   "ConvergeTrack\\LongTrackInactive_39.csv": {
+    "identical": false,
+    "rows": [
+     2501,
+     2372
+    ],
+    "max_abs_diff": {
+     "TrackID": 3.0,
+     "FrameID": 34.0,
+     "WorldX": 23.329720000000002,
+     "WorldY": 18.606011000000002,
+     "WorldZ": 40.962349,
+     "cam0_x(col)": 1168.694203,
+     "cam0_y(row)": 725.361999,
+     "cam1_x(col)": 1268.812928,
+     "cam1_y(row)": 654.421512
+    }
+   },
+   "ConvergeTrack\\ShortTrackActive_39.csv": {
+    "identical": false,
+    "rows": [
+     9864,
+     9931
+    ],
+    "max_abs_diff": {
+     "TrackID": 84.0,
+     "FrameID": 2.0,
+     "WorldX": 25.384604,
+     "WorldY": 20.240057999999998,
+     "WorldZ": 43.015143,
+     "cam0_x(col)": 1269.6414260000001,
+     "cam0_y(row)": 782.296558,
+     "cam1_x(col)": 1277.775449,
+     "cam1_y(row)": 704.829653
+    }
+   },
+   "InitialTrack\\ExitTrack_3.csv": "identical",
+   "InitialTrack\\LongTrackActive_3.csv": {
+    "identical": false,
+    "rows": [
+     4697,
+     4697
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 1.0000000000287557e-06,
+     "WorldY": 0.0,
+     "WorldZ": 1.0000000010279564e-06,
+     "cam0_x(col)": 2.3999999996249244e-05,
+     "cam0_y(row)": 1.9999999949504854e-06,
+     "cam1_x(col)": 1.2999999995599865e-05,
+     "cam1_y(row)": 2.0000000020559128e-06
+    }
+   },
+   "InitialTrack\\LongTrackInactive_3.csv": "identical",
+   "InitialTrack\\ShortTrackActive_3.csv": {
+    "identical": false,
+    "rows": [
+     14635,
+     14635
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 1.000000000139778e-06,
+     "WorldY": 0.0,
+     "WorldZ": 1.0000000010279564e-06,
+     "cam0_x(col)": 3.300000000194814e-05,
+     "cam0_y(row)": 4.00000001832268e-06,
+     "cam1_x(col)": 2.700000001709668e-05,
+     "cam1_y(row)": 3.999999989900971e-06
+    }
+   },
+   "PredField_1_2.csv": {
+    "identical": false,
+    "rows": [
+     132651,
+     132651
+    ],
+    "max_abs_diff": {
+     "0.00000000e+00": 9.440000000443538e-08
+    }
+   },
+   "PredField_2_3.csv": {
+    "identical": false,
+    "rows": [
+     132651,
+     132651
+    ],
+    "max_abs_diff": {
+     "0.00000000e+00": 6.84999999917002e-08
+    }
+   },
+   "PredField_3_4.csv": {
+    "identical": false,
+    "rows": [
+     132651,
+     132651
+    ],
+    "max_abs_diff": {
+     "0.00000000e+00": 9.410000000042995e-08
+    }
+   }
+  },
+  "identical_files": 2,
+  "compared_files": 11,
+  "all_identical": false
+ }
+}

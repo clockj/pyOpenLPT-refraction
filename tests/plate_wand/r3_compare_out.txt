@@ -1,0 +1,35 @@
+R3: W5 on the code with the perturbed restarts, against runs_v4/w5_from_scratch_v4.json
+  seed 1000 (0.1 px, groups): same -> same (rms 0.122195 -> 0.122195, truth-started 0.122195, max |z| 2.2e-06); smallest wand-end depth per window before the restarts 143, 165 mm; 68 s -> 78 s (restarts 8 s)
+  seed 1001 (0.1 px, one camera per window): DIFFERENT -> DIFFERENT (rms 0.087867 -> 0.087479, truth-started 0.085946, max |z| 4.9e+01); the restarts improved it; smallest wand-end depth per window before the restarts 52.3, 1.16e+03 mm; 134 s -> 157 s (restarts 18 s)
+  seed 1013 (0.1 px, groups): same -> same (rms 0.122132 -> 0.122132, truth-started 0.122132, max |z| 4.4e-07); smallest wand-end depth per window before the restarts 51.9, 100 mm; 87 s -> 110 s (restarts 18 s)
+  seed 1018 (0.1 px, groups): same -> same (rms 0.117371 -> 0.117371, truth-started 0.117371, max |z| 1.1e-05); smallest wand-end depth per window before the restarts 143, 58 mm; 95 s -> 111 s (restarts 6 s)
+  seed 1020 (0.1 px, groups): same -> same (rms 0.121830 -> 0.121830, truth-started 0.121830, max |z| 1.7e-06); smallest wand-end depth per window before the restarts 81.4, 90.6 mm; 316 s -> 288 s (restarts 6 s)
+  seed 1028 (0.1 px, groups): same -> same (rms 0.121856 -> 0.121856, truth-started 0.121856, max |z| 1.3e-06); smallest wand-end depth per window before the restarts 89.5, 290 mm; 208 s -> 215 s (restarts 8 s)
+  seed 1031 (0.1 px, groups): DIFFERENT -> DIFFERENT (rms 5.292115 -> 3.588919, truth-started 0.109215, max |z| 1.6e+03); the restarts improved it; smallest wand-end depth per window before the restarts 652, 80.5 mm; 175 s -> 220 s (restarts 30 s)
+  seed 1032 (0.1 px, groups): same -> same (rms 0.122075 -> 0.122075, truth-started 0.122075, max |z| 1.4e-04); smallest wand-end depth per window before the restarts 68.9, 32.4, 126 mm; 194 s -> 207 s (restarts 19 s)
+  seed 1033 (0.1 px, groups): same -> same (rms 0.108736 -> 0.108736, truth-started 0.108736, max |z| 9.5e-06); smallest wand-end depth per window before the restarts 231, 121 mm; 79 s -> 95 s (restarts 6 s)
+  seed 1034 (0.1 px, groups): DIFFERENT -> DIFFERENT (rms 1.841685 -> 0.178590, truth-started 0.117511, max |z| 1.4e+03); the restarts improved it; smallest wand-end depth per window before the restarts 3.41e-13, 152, 893 mm; 249 s -> 261 s (restarts 32 s)
+  seed 1039 (0.1 px, groups): same -> same (rms 0.121868 -> 0.121868, truth-started 0.121868, max |z| 9.2e-06); smallest wand-end depth per window before the restarts 231, 140, 137 mm; 121 s -> 130 s (restarts 5 s)
+  seed 1040 (0.1 px, groups): same -> same (rms 0.117513 -> 0.117513, truth-started 0.117513, max |z| 2.1e-06); smallest wand-end depth per window before the restarts 205, 203 mm; 84 s -> 91 s (restarts 3 s)
+  seed 1041 (0.1 px, groups): same -> same (rms 0.125869 -> 0.125869, truth-started 0.125869, max |z| 2.0e-05); smallest wand-end depth per window before the restarts 95.2, 221, 152 mm; 141 s -> 144 s (restarts 6 s)
+  seed 1045 (0.1 px, one camera per window): DIFFERENT -> DIFFERENT (rms 0.348817 -> 0.348817, truth-started 0.086151, max |z| 1.0e+03); smallest wand-end depth per window before the restarts 1.52e+03, 156 mm; 283 s -> 240 s (restarts 6 s)
+  seed 1047 (0.1 px, groups): same -> same (rms 0.122363 -> 0.122363, truth-started 0.122363, max |z| 1.9e-06); smallest wand-end depth per window before the restarts 142, 47.3 mm; 79 s -> 94 s (restarts 9 s)
+  seed 1048 (0.1 px, one camera per window): same -> same (rms 0.085694 -> 0.085694, truth-started 0.085694, max |z| 1.4e-07); smallest wand-end depth per window before the restarts 227, 126 mm; 105 s -> 107 s (restarts 2 s)
+  seed 2000 (1 px, groups): DIFFERENT -> same (rms 1.158848 -> 1.155353, truth-started 1.155353, max |z| 3.8e-07); the restarts improved it; smallest wand-end depth per window before the restarts 3.47e-12, 268 mm; 95 s -> 112 s (restarts 15 s)
+  seed 2002 (1 px, groups): equivalent -> equivalent (rms 1.257963 -> 1.257963, truth-started 1.258133, max |z| 6.3e-02); smallest wand-end depth per window before the restarts 47.7, 62.1, 50.9 mm; 354 s -> 290 s (restarts 4 s)
+  seed 2004 (1 px, one camera per window): equivalent -> equivalent (rms 0.863713 -> 0.860512, truth-started 0.860768, max |z| 2.6e-01); the restarts improved it; smallest wand-end depth per window before the restarts 1.87e-10, 13.5 mm; 97 s -> 110 s (restarts 17 s)
+  seed 2005 (1 px, one camera per window): equivalent -> equivalent (rms 0.864359 -> 0.852606, truth-started 0.852625, max |z| 6.1e-01); the restarts improved it; smallest wand-end depth per window before the restarts 52.4, 1.83e-11 mm; 135 s -> 149 s (restarts 22 s)
+  seed 2006 (1 px, groups): same -> same (rms 1.255401 -> 1.255401, truth-started 1.255401, max |z| 1.8e-05); smallest wand-end depth per window before the restarts 268, 36.8, 62.4 mm; 145 s -> 144 s (restarts 11 s)
+  seed 2007 (1 px, groups): same -> same (rms 1.229706 -> 1.229706, truth-started 1.229706, max |z| 7.2e-08); smallest wand-end depth per window before the restarts 127, 157 mm; 65 s -> 74 s (restarts 6 s)
+  seed 2008 (1 px, one camera per window): equivalent -> same (rms 0.877174 -> 0.877146, truth-started 0.877146, max |z| 5.9e-05); the restarts improved it; smallest wand-end depth per window before the restarts 286, 124 mm; 108 s -> 124 s (restarts 22 s)
+0.1 px: same minimum 46 -> 46 of 50; equivalent or better 46 -> 46
+    groups: same 11 -> 11 of 13; equivalent 11 -> 11
+    one camera per window: same 1 -> 1 of 3; equivalent 1 -> 1
+    one window: same 34 -> 34 of 34; equivalent 34 -> 34
+1 px: same minimum 5 -> 7 of 10; equivalent or better 9 -> 10
+    groups: same 2 -> 3 of 4; equivalent 3 -> 4
+    one camera per window: same 0 -> 1 of 3; equivalent 3 -> 3
+    one window: same 3 -> 3 of 3; equivalent 3 -> 3
+multi-window rigs (23): the restarts improved 7 ([1001, 1031, 1034, 2000, 2004, 2005, 2008]); misses before whose answer was pinned against a window [1034, 2000, 2004, 2005]; rigs reached before although pinned []
+  time: the restarts against the rest of the run, median 9 % (max 22 %, seed 2008); the whole run against the run before, median +10 % (wall times drift 10-20 % between runs); restarts median 8.1 s, max 32.0 s
+R3: 1. seed 2000 at the global minimum: PASS; 2. no rig worse: PASS; 3. one-window rigs unchanged: PASS; 4. median time increase <= 25 %: PASS

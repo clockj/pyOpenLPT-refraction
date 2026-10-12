@@ -1,0 +1,1224 @@
+{
+ "S2": {
+  "rms_px": 0.4693299263677001,
+  "sigma_px": 0.5435513644359202,
+  "frames": 1519,
+  "active": 6064,
+  "observations": 6076,
+  "wand_length_mm": 10.0,
+  "L_sigma_mm": null,
+  "wand_free_rms_um": 23.069617421238522,
+  "wand_free_mean_um": 0.031670761866293216,
+  "cameras": [
+   {
+    "name": "cam1",
+    "f_px": 38551.43696936687,
+    "f_sigma_px": 295.83218118980665,
+    "distance_mm": 1006.8149041666486,
+    "distance_sigma_mm": 7.563690394099318,
+    "azimuth_deg": 0.0,
+    "azimuth_sigma_deg": 0.0,
+    "height_rel_mm": 0.0,
+    "height_sigma_mm": 0.0,
+    "viewing_direction": [
+     0.0024879392719716546,
+     0.04650700496556016,
+     -0.9989148655652853
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.5002424931230383,
+    "n_active": 3032,
+    "n_total": 3038
+   },
+   {
+    "name": "cam2",
+    "f_px": 35812.03092337204,
+    "f_sigma_px": 424.60865652002053,
+    "distance_mm": 1036.0524588395663,
+    "distance_sigma_mm": 11.944895618752845,
+    "azimuth_deg": 60.82750887516394,
+    "azimuth_sigma_deg": 0.027138211567579916,
+    "height_rel_mm": 20.30881462387169,
+    "height_sigma_mm": 1.0102233787205996,
+    "viewing_direction": [
+     -0.8744915979902222,
+     0.023719612054567553,
+     -0.48446034414437494
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.43623228633684213,
+    "n_active": 3032,
+    "n_total": 3038
+   }
+  ]
+ },
+ "variants": {
+  "h1": {
+   "summary": {
+    "rms_px": 0.5242049720280482,
+    "sigma_px": 0.607473198649698,
+    "frames": 560,
+    "active": 2240,
+    "observations": 2240,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 26.979751028348737,
+    "wand_free_mean_um": 0.05926320900409327,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 36801.63458856288,
+      "f_sigma_px": 490.460523114947,
+      "distance_mm": 964.527375612241,
+      "distance_sigma_mm": 12.634887015947534,
+      "azimuth_deg": -3.2975266040993763e-18,
+      "azimuth_sigma_deg": 4.319615713180802e-20,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.005416192837047271,
+       0.03390492413947671,
+       -0.9994103866651849
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.590188724615228,
+      "n_active": 1120,
+      "n_total": 1120
+     },
+     {
+      "name": "cam2",
+      "f_px": 40100.23343593453,
+      "f_sigma_px": 1170.9579082064615,
+      "distance_mm": 1160.3092493818958,
+      "distance_sigma_mm": 33.114795662866534,
+      "azimuth_deg": 60.56681335148044,
+      "azimuth_sigma_deg": 0.05117974215848391,
+      "height_rel_mm": 5.410142220311883,
+      "height_sigma_mm": 1.6300513812144803,
+      "viewing_direction": [
+       -0.8702925950393932,
+       0.02215652607058868,
+       -0.49203646955493324
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.44861896386009376,
+      "n_active": 1120,
+      "n_total": 1120
+     }
+    ],
+    "seconds": 69.73114776611328,
+    "n_frames_given": 560,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 36801.63458856288,
+      "S2": 38551.43696936687,
+      "diff": -1749.802380803987,
+      "sigma_used": 391.1966836601109,
+      "z": -4.472947890131638
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 964.527375612241,
+      "S2": 1006.8149041666486,
+      "diff": -42.28752855440757,
+      "sigma_used": 10.120818026620638,
+      "z": -4.17827180008368
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.7418309912591304
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 40100.23343593453,
+      "S2": 35812.03092337204,
+      "diff": 4288.202512562493,
+      "sigma_used": 1091.2606982749426,
+      "z": 3.9295857711555584
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 1160.3092493818958,
+      "S2": 1036.0524588395663,
+      "diff": 124.25679054232955,
+      "sigma_used": 30.885419868450928,
+      "z": 4.023153678064656
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.56681335148044,
+      "S2": 60.82750887516394,
+      "diff": -0.260695523683502,
+      "sigma_used": 0.043392205294524575,
+      "z": -6.007888327270561
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 5.410142220311883,
+      "S2": 20.30881462387169,
+      "diff": -14.898672403559807,
+      "sigma_used": 1.279263940899442,
+      "z": -11.646284966872942
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.504310407991418
+     }
+    ],
+    "largest_abs_z": 11.646284966872942
+   }
+  },
+  "h2": {
+   "summary": {
+    "rms_px": 0.3710401301764632,
+    "sigma_px": 0.43318298116548176,
+    "frames": 959,
+    "active": 3796,
+    "observations": 3836,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 17.889145202027198,
+    "wand_free_mean_um": -0.036656964808330326,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 35228.65650063091,
+      "f_sigma_px": 347.7615294290267,
+      "distance_mm": 923.4082906419437,
+      "distance_sigma_mm": 8.699449557877621,
+      "azimuth_deg": 1.1021966213458806e-16,
+      "azimuth_sigma_deg": 1.0383818303814234e-18,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0004990655697162765,
+       0.030726977977710162,
+       -0.999527690340747
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.3699628807792404,
+      "n_active": 1898,
+      "n_total": 1918
+     },
+     {
+      "name": "cam2",
+      "f_px": 29994.441176194043,
+      "f_sigma_px": 410.96201173273045,
+      "distance_mm": 872.9719754116603,
+      "distance_sigma_mm": 11.615034380936697,
+      "azimuth_deg": 60.65258949416301,
+      "azimuth_sigma_deg": 0.04239952894873116,
+      "height_rel_mm": 17.537927626907127,
+      "height_sigma_mm": 2.667260458751073,
+      "viewing_direction": [
+       -0.873302056811346,
+       0.010246963041523694,
+       -0.4870713677865855
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.3721142610116671,
+      "n_active": 1898,
+      "n_total": 1918
+     }
+    ],
+    "seconds": 155.23497605323792,
+    "n_frames_given": 959,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 35228.65650063091,
+      "S2": 38551.43696936687,
+      "diff": -3322.7804687359603,
+      "sigma_used": 182.8152125051338,
+      "z": -18.175623479050742
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 923.4082906419437,
+      "S2": 1006.8149041666486,
+      "diff": -83.40661352470488,
+      "sigma_used": 4.297791320232619,
+      "z": -19.406855128599048
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.9119677148483449
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 29994.441176194043,
+      "S2": 35812.03092337204,
+      "diff": -5817.589747177997,
+      "sigma_used": 410.96201173273045,
+      "z": -14.156028005239259
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 872.9719754116603,
+      "S2": 1036.0524588395663,
+      "diff": -163.08048342790596,
+      "sigma_used": 11.615034380936697,
+      "z": -14.040464976630943
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.65258949416301,
+      "S2": 60.82750887516394,
+      "diff": -0.17491938100093307,
+      "sigma_used": 0.032576640833388015,
+      "z": -5.369472619830619
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 17.537927626907127,
+      "S2": 20.30881462387169,
+      "diff": -2.7708869969645633,
+      "sigma_used": 2.4685475648452306,
+      "z": -1.1224766483842445
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.7892433304620831
+     }
+    ],
+    "largest_abs_z": 19.406855128599048
+   }
+  },
+  "q1": {
+   "summary": {
+    "rms_px": 0.42669058217888306,
+    "sigma_px": 0.5005100262220363,
+    "frames": 184,
+    "active": 732,
+    "observations": 736,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 23.214301531035225,
+    "wand_free_mean_um": 0.061070680689307634,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 40241.96569107919,
+      "f_sigma_px": 1399.9780049009091,
+      "distance_mm": 1041.0381760367559,
+      "distance_sigma_mm": 34.791161810626264,
+      "azimuth_deg": 0.0,
+      "azimuth_sigma_deg": 0.0,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0049640482209890435,
+       0.04349516376661035,
+       -0.9990413049289666
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.4954431407412362,
+      "n_active": 366,
+      "n_total": 368
+     },
+     {
+      "name": "cam2",
+      "f_px": 36392.398890974284,
+      "f_sigma_px": 1689.8251830064974,
+      "distance_mm": 1039.3764813676878,
+      "distance_sigma_mm": 47.19500619500564,
+      "azimuth_deg": 61.12536636573983,
+      "azimuth_sigma_deg": 0.16156320571301425,
+      "height_rel_mm": -11.86574656514582,
+      "height_sigma_mm": 7.427613252295083,
+      "viewing_direction": [
+       -0.8777093832974195,
+       0.053959720566170266,
+       -0.4761455523556669
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.34447902713048867,
+      "n_active": 366,
+      "n_total": 368
+     }
+    ],
+    "seconds": 95.38203406333923,
+    "n_frames_given": 184,
+    "checks": [
+     "183 frames used"
+    ]
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 40241.96569107919,
+      "S2": 38551.43696936687,
+      "diff": 1690.5287217123187,
+      "sigma_used": 1368.3646205521434,
+      "z": 1.2354373215453203
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 1041.0381760367559,
+      "S2": 1006.8149041666486,
+      "diff": 34.22327187010728,
+      "sigma_used": 33.9590271909457,
+      "z": 1.0077812794128578
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.22351456754742982
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 36392.398890974284,
+      "S2": 35812.03092337204,
+      "diff": 580.3679676022439,
+      "sigma_used": 1635.608950186812,
+      "z": 0.35483296147037885
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 1039.3764813676878,
+      "S2": 1036.0524588395663,
+      "diff": 3.3240225281215316,
+      "sigma_used": 45.658384535632884,
+      "z": 0.07280201789722511
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 61.12536636573983,
+      "S2": 60.82750887516394,
+      "diff": 0.2978574905758862,
+      "sigma_used": 0.15926765808907667,
+      "z": 1.8701693372630477
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": -11.86574656514582,
+      "S2": 20.30881462387169,
+      "diff": -32.17456118901751,
+      "sigma_used": 7.358592756142704,
+      "z": -4.372379645844551
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 1.80644098428607
+     }
+    ],
+    "largest_abs_z": 4.372379645844551
+   }
+  },
+  "q2": {
+   "summary": {
+    "rms_px": 0.49072277971822814,
+    "sigma_px": 0.5696761524120386,
+    "frames": 376,
+    "active": 1504,
+    "observations": 1504,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 24.52300423258617,
+    "wand_free_mean_um": 0.01517748059294466,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 38249.297078358584,
+      "f_sigma_px": 643.9024300670488,
+      "distance_mm": 1005.5014625858518,
+      "distance_sigma_mm": 16.61524062019967,
+      "azimuth_deg": -4.048835475389179e-16,
+      "azimuth_sigma_deg": 6.690430412919252e-18,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0034494947708736297,
+       0.020723350343450082,
+       -0.9997792975133901
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.5293676921816525,
+      "n_active": 752,
+      "n_total": 752
+     },
+     {
+      "name": "cam2",
+      "f_px": 38822.79019897797,
+      "f_sigma_px": 1312.8536143781887,
+      "distance_mm": 1129.9567990019725,
+      "distance_sigma_mm": 37.36004644552615,
+      "azimuth_deg": 60.23864521921249,
+      "azimuth_sigma_deg": 0.05803219419611803,
+      "height_rel_mm": 7.628417019103809,
+      "height_sigma_mm": 1.7136775148771282,
+      "viewing_direction": [
+       -0.866679340227206,
+       0.010304767395213672,
+       -0.4987591933912254
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.44876223052195524,
+      "n_active": 752,
+      "n_total": 752
+     }
+    ],
+    "seconds": 91.36392641067505,
+    "n_frames_given": 376,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 38249.297078358584,
+      "S2": 38551.43696936687,
+      "diff": -302.1398910082862,
+      "sigma_used": 571.9210260330809,
+      "z": -0.5282895316928073
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 1005.5014625858518,
+      "S2": 1006.8149041666486,
+      "diff": -1.313441580796848,
+      "sigma_used": 14.79380980306773,
+      "z": -0.0887831869059507
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 1.4791920530304283
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 38822.79019897797,
+      "S2": 35812.03092337204,
+      "diff": 3010.759275605931,
+      "sigma_used": 1242.2930820036538,
+      "z": 2.4235499007609187
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 1129.9567990019725,
+      "S2": 1036.0524588395663,
+      "diff": 93.90434016240624,
+      "sigma_used": 35.39904714916731,
+      "z": 2.652736379222432
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.23864521921249,
+      "S2": 60.82750887516394,
+      "diff": -0.5888636559514495,
+      "sigma_used": 0.05129574091607632,
+      "z": -11.479776789166076
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 7.628417019103809,
+      "S2": 20.30881462387169,
+      "diff": -12.680397604767881,
+      "sigma_used": 1.3842468530149474,
+      "z": -9.160503111962614
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 1.2092844761466526
+     }
+    ],
+    "largest_abs_z": 11.479776789166076
+   }
+  },
+  "q3": {
+   "summary": {
+    "rms_px": 0.41562351907169764,
+    "sigma_px": 0.4839537192070925,
+    "frames": 241,
+    "active": 964,
+    "observations": 964,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 20.92655899747319,
+    "wand_free_mean_um": -0.027052184448028982,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 35373.069922964874,
+      "f_sigma_px": 615.7739302816191,
+      "distance_mm": 922.6478003598578,
+      "distance_sigma_mm": 15.812555142347557,
+      "azimuth_deg": 0.0,
+      "azimuth_sigma_deg": 0.0,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.007177644018849141,
+       0.053028910124992217,
+       -0.9985671815743248
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.49963462440036766,
+      "n_active": 482,
+      "n_total": 482
+     },
+     {
+      "name": "cam2",
+      "f_px": 35991.349529131265,
+      "f_sigma_px": 1743.2617243545944,
+      "distance_mm": 1039.0311853847272,
+      "distance_sigma_mm": 48.66475856524503,
+      "azimuth_deg": 60.97234307053099,
+      "azimuth_sigma_deg": 0.10369215764147617,
+      "height_rel_mm": 16.02370878693081,
+      "height_sigma_mm": 5.52984711154394,
+      "viewing_direction": [
+       -0.8750543201179833,
+       0.029839844475137295,
+       -0.48310404730715706
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.3095982256270007,
+      "n_active": 482,
+      "n_total": 482
+     }
+    ],
+    "seconds": 75.97938013076782,
+    "n_frames_given": 241,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 35373.069922964874,
+      "S2": 38551.43696936687,
+      "diff": -3178.367046401996,
+      "sigma_used": 540.0563431596315,
+      "z": -5.885250838471356
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 922.6478003598578,
+      "S2": 1006.8149041666486,
+      "diff": -84.1671038067908,
+      "sigma_used": 13.886233749724648,
+      "z": -6.061190191938096
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.46068731990728046
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 35991.349529131265,
+      "S2": 35812.03092337204,
+      "diff": 179.31860575922474,
+      "sigma_used": 1690.7598671626959,
+      "z": 0.10605799749679624
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 1039.0311853847272,
+      "S2": 1036.0524588395663,
+      "diff": 2.978726545160953,
+      "sigma_used": 47.176034115541,
+      "z": 0.06314067303465179
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.97234307053099,
+      "S2": 60.82750887516394,
+      "diff": 0.14483419536704645,
+      "sigma_used": 0.10007787482384914,
+      "z": 1.4472149375871002
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 16.02370878693081,
+      "S2": 20.30881462387169,
+      "diff": -4.285105836940879,
+      "sigma_used": 5.4367874523598205,
+      "z": -0.7881687254632223
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.3606157079816661
+     }
+    ],
+    "largest_abs_z": 6.061190191938096
+   }
+  },
+  "q4": {
+   "summary": {
+    "rms_px": 0.34263354836711396,
+    "sigma_px": 0.3972118989794647,
+    "frames": 718,
+    "active": 2868,
+    "observations": 2872,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 16.279232974661667,
+    "wand_free_mean_um": -0.019087497880337295,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 32776.0858982292,
+      "f_sigma_px": 432.7924880087908,
+      "distance_mm": 859.374172749934,
+      "distance_sigma_mm": 10.825925851642998,
+      "azimuth_deg": -5.921620234475469e-17,
+      "azimuth_sigma_deg": 7.459733328368772e-19,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0013492128267449624,
+       0.03308666990264987,
+       -0.9994515755650696
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.3172023291387053,
+      "n_active": 1434,
+      "n_total": 1436
+     },
+     {
+      "name": "cam2",
+      "f_px": 30318.23767901173,
+      "f_sigma_px": 417.0333073088058,
+      "distance_mm": 880.5529435034512,
+      "distance_sigma_mm": 11.790712092860412,
+      "azimuth_deg": 60.64356198072227,
+      "azimuth_sigma_deg": 0.052396067093881504,
+      "height_rel_mm": 21.922993389458693,
+      "height_sigma_mm": 2.9789333286396156,
+      "viewing_direction": [
+       -0.8734930539066031,
+       0.005005817337972816,
+       -0.4868108735121791
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.36630339791252187,
+      "n_active": 1434,
+      "n_total": 1436
+     }
+    ],
+    "seconds": 143.38917422294617,
+    "n_frames_given": 718,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 32776.0858982292,
+      "S2": 38551.43696936687,
+      "diff": -5775.351071137673,
+      "sigma_used": 315.8997598120656,
+      "z": -18.28222685124399
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 859.374172749934,
+      "S2": 1006.8149041666486,
+      "diff": -147.44073141671458,
+      "sigma_used": 7.745402388997093,
+      "z": -19.03590336715945
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.7723099151598289
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 30318.23767901173,
+      "S2": 35812.03092337204,
+      "diff": -5493.7932443603095,
+      "sigma_used": 417.0333073088058,
+      "z": -13.173511918778836
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 880.5529435034512,
+      "S2": 1036.0524588395663,
+      "diff": -155.4995153361151,
+      "sigma_used": 11.790712092860412,
+      "z": -13.188305685987718
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.64356198072227,
+      "S2": 60.82750887516394,
+      "diff": -0.1839468944416751,
+      "sigma_used": 0.044820367243250066,
+      "z": -4.104091638592664
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 21.922993389458693,
+      "S2": 20.30881462387169,
+      "diff": 1.6141787655870026,
+      "sigma_used": 2.8024083395476533,
+      "z": 0.5759969890210764
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 1.0821757648586414
+     }
+    ],
+    "largest_abs_z": 19.03590336715945
+   }
+  },
+  "fit_L": {
+   "summary": {
+    "rms_px": 0.46355063559935106,
+    "sigma_px": 0.5369175005554602,
+    "frames": 1519,
+    "active": 6064,
+    "observations": 6076,
+    "wand_length_mm": 11.072141938356664,
+    "L_sigma_mm": 0.0984004070902596,
+    "wand_free_rms_um": 25.650721551912298,
+    "wand_free_mean_um": 0.019926410989672592,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 31274.03976811895,
+      "f_sigma_px": 580.7118459723944,
+      "distance_mm": 907.2763710900417,
+      "distance_sigma_mm": 9.340080326703758,
+      "azimuth_deg": 0.0,
+      "azimuth_sigma_deg": 0.0,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0010217270969840463,
+       0.04385595373320282,
+       -0.9990373423430643
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.49466068746938713,
+      "n_active": 3032,
+      "n_total": 3038
+     },
+     {
+      "name": "cam2",
+      "f_px": 28427.000466066547,
+      "f_sigma_px": 592.2395380896189,
+      "distance_mm": 914.0778370677284,
+      "distance_sigma_mm": 11.951406382909344,
+      "azimuth_deg": 60.58428170358899,
+      "azimuth_sigma_deg": 0.03145415234262715,
+      "height_rel_mm": 18.20459594553271,
+      "height_sigma_mm": 0.8432289419735151,
+      "viewing_direction": [
+       -0.8721735386358247,
+       0.021356111205420997,
+       -0.4887302272395723
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.4301966850191178,
+      "n_active": 3032,
+      "n_total": 3038
+     }
+    ],
+    "seconds": 104.17909622192383,
+    "n_frames_given": 1519,
+    "checks": [
+     "The fitted wand length differs from the nominal by +1072.1 um"
+    ]
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 31274.03976811895,
+      "S2": 38551.43696936687,
+      "diff": -7277.397201247921,
+      "sigma_used": 580.7118459723944,
+      "z": -12.531855948386957
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 907.2763710900417,
+      "S2": 1006.8149041666486,
+      "diff": -99.53853307660688,
+      "sigma_used": 9.340080326703758,
+      "z": -10.657138867641343
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.17371923863425523
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 28427.000466066547,
+      "S2": 35812.03092337204,
+      "diff": -7385.030457305493,
+      "sigma_used": 592.2395380896189,
+      "z": -12.46966806898322
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 914.0778370677284,
+      "S2": 1036.0524588395663,
+      "diff": -121.97462177183786,
+      "sigma_used": 11.951406382909344,
+      "z": -10.205880200531299
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.58428170358899,
+      "S2": 60.82750887516394,
+      "diff": -0.24322717157495077,
+      "sigma_used": 0.03145415234262715,
+      "z": -7.73275238593302
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 18.20459594553271,
+      "S2": 20.30881462387169,
+      "diff": -2.104218678338981,
+      "sigma_used": 0.8432289419735151,
+      "z": -2.495429857298556
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.30956431986614713
+     }
+    ],
+    "largest_abs_z": 12.531855948386957
+   }
+  },
+  "fit_k1": {
+   "summary": {
+    "rms_px": 0.4492676126841436,
+    "sigma_px": 0.5207209014179741,
+    "frames": 1519,
+    "active": 6060,
+    "observations": 6076,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 21.658810470018384,
+    "wand_free_mean_um": 0.05883288604654271,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 39209.59278066891,
+      "f_sigma_px": 298.2065870034241,
+      "distance_mm": 1025.1844484075439,
+      "distance_sigma_mm": 7.6544095517711055,
+      "azimuth_deg": 0.0,
+      "azimuth_sigma_deg": 0.0,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0024248379828240374,
+       0.04719591713547032,
+       -0.9988827086132275
+      ],
+      "k1": 14.312505021291367,
+      "k1_sigma": 0.8737742654479916,
+      "rms_px": 0.4727627713711111,
+      "n_active": 3030,
+      "n_total": 3038
+     },
+     {
+      "name": "cam2",
+      "f_px": 36254.98159950446,
+      "f_sigma_px": 417.97220433100676,
+      "distance_mm": 1049.5276504182789,
+      "distance_sigma_mm": 11.770046951741227,
+      "azimuth_deg": 60.849102476942704,
+      "azimuth_sigma_deg": 0.026518024900789652,
+      "height_rel_mm": 22.149257518325577,
+      "height_sigma_mm": 1.0092677498426246,
+      "viewing_direction": [
+       -0.8747515021723282,
+       0.023111962408160748,
+       -0.48402029569109634
+      ],
+      "k1": 6.684307502546314,
+      "k1_sigma": 0.8155082112631048,
+      "rms_px": 0.42447395399403004,
+      "n_active": 3030,
+      "n_total": 3038
+     }
+    ],
+    "seconds": 138.9140167236328,
+    "n_frames_given": 1519,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 39209.59278066891,
+      "S2": 38551.43696936687,
+      "diff": 658.1558113020365,
+      "sigma_used": 298.2065870034241,
+      "z": 2.2070465240745314
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 1025.1844484075439,
+      "S2": 1006.8149041666486,
+      "diff": 18.369544240895266,
+      "sigma_used": 7.6544095517711055,
+      "z": 2.399864302615589
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.03967979237276691
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 36254.98159950446,
+      "S2": 35812.03092337204,
+      "diff": 442.9506761324228,
+      "sigma_used": 417.97220433100676,
+      "z": 1.0597610834945252
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 1049.5276504182789,
+      "S2": 1036.0524588395663,
+      "diff": 13.47519157871261,
+      "sigma_used": 11.770046951741227,
+      "z": 1.144871522939773
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.849102476942704,
+      "S2": 60.82750887516394,
+      "diff": 0.02159360177876124,
+      "sigma_used": 0.026518024900789652,
+      "z": 0.8142990233830811
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 22.149257518325577,
+      "S2": 20.30881462387169,
+      "diff": 1.8404428944538864,
+      "sigma_used": 1.0092677498426246,
+      "z": 1.8235427563606061
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.04549266676302822
+     }
+    ],
+    "largest_abs_z": 2.399864302615589
+   }
+  },
+  "thinned": {
+   "summary": {
+    "rms_px": 0.4689171532059717,
+    "sigma_px": 0.5430895203600389,
+    "frames": 1504,
+    "active": 6004,
+    "observations": 6016,
+    "wand_length_mm": 10.0,
+    "L_sigma_mm": null,
+    "wand_free_rms_um": 23.06609769354385,
+    "wand_free_mean_um": 0.03035897890237984,
+    "cameras": [
+     {
+      "name": "cam1",
+      "f_px": 38602.55622855786,
+      "f_sigma_px": 297.46796046373146,
+      "distance_mm": 1008.115414865559,
+      "distance_sigma_mm": 7.606122638880991,
+      "azimuth_deg": -2.019168605221764e-16,
+      "azimuth_sigma_deg": 1.523441047862872e-18,
+      "height_rel_mm": 0.0,
+      "height_sigma_mm": 0.0,
+      "viewing_direction": [
+       0.0024780483335991657,
+       0.0463741834739988,
+       -0.9989210651415722
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.5003379698669554,
+      "n_active": 3002,
+      "n_total": 3008
+     },
+     {
+      "name": "cam2",
+      "f_px": 35855.258140930295,
+      "f_sigma_px": 428.62443520429474,
+      "distance_mm": 1037.288614381437,
+      "distance_sigma_mm": 12.058885222197514,
+      "azimuth_deg": 60.83245132226126,
+      "azimuth_sigma_deg": 0.027320259235875447,
+      "height_rel_mm": 20.304354937260495,
+      "height_sigma_mm": 1.0130562914743018,
+      "viewing_direction": [
+       -0.8745392274259387,
+       0.02362542004185597,
+       -0.48437896240555584
+      ],
+      "k1": 0.0,
+      "k1_sigma": null,
+      "rms_px": 0.43523385558915223,
+      "n_active": 3002,
+      "n_total": 3008
+     }
+    ],
+    "seconds": 92.24073266983032,
+    "n_frames_given": 1504,
+    "checks": []
+   },
+   "comparison": {
+    "rows": [
+     {
+      "camera": "cam1",
+      "quantity": "f_px",
+      "variant": 38602.55622855786,
+      "S2": 38551.43696936687,
+      "diff": 51.119259190993034,
+      "sigma_used": 31.152978588467313,
+      "z": 1.6409108055535064
+     },
+     {
+      "camera": "cam1",
+      "quantity": "distance_mm",
+      "variant": 1008.115414865559,
+      "S2": 1006.8149041666486,
+      "diff": 1.3005106989104434,
+      "sigma_used": 0.8023024491472249,
+      "z": 1.6209731134346765
+     },
+     {
+      "camera": "cam1",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.007639445062889537
+     },
+     {
+      "camera": "cam2",
+      "quantity": "f_px",
+      "variant": 35855.258140930295,
+      "S2": 35812.03092337204,
+      "diff": 43.22721755825478,
+      "sigma_used": 58.53541887151651,
+      "z": 0.738479682756473
+     },
+     {
+      "camera": "cam2",
+      "quantity": "distance_mm",
+      "variant": 1037.288614381437,
+      "S2": 1036.0524588395663,
+      "diff": 1.2361555418706303,
+      "sigma_used": 1.6541407011595726,
+      "z": 0.7473097911224059
+     },
+     {
+      "camera": "cam2",
+      "quantity": "azimuth_deg",
+      "variant": 60.83245132226126,
+      "S2": 60.82750887516394,
+      "diff": 0.004942447097313618,
+      "sigma_used": 0.003148656479946545,
+      "z": 1.569700324183198
+     },
+     {
+      "camera": "cam2",
+      "quantity": "height_rel_mm",
+      "variant": 20.304354937260495,
+      "S2": 20.30881462387169,
+      "diff": -0.004459686611195224,
+      "sigma_used": 0.07570848553498725,
+      "z": -0.05890603384391124
+     },
+     {
+      "camera": "cam2",
+      "quantity": "viewing direction (deg)",
+      "diff": 0.007636408887104621
+     }
+    ],
+    "largest_abs_z": 1.6409108055535064
+   }
+  }
+ }
+}

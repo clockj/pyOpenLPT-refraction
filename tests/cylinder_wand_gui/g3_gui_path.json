@@ -1,0 +1,78 @@
+{
+ "checks": [
+  {
+   "check": "image sizes read from the first images",
+   "ok": true,
+   "detail": "[(1280, 800), (1280, 800), (1280, 800)]"
+  },
+  {
+   "check": "detection keeps every frame whose balls are apart in every camera",
+   "ok": true,
+   "detail": "177 such frames, 177 kept, missing []; balls within 3 px in some camera: [47, 136, 170]"
+  },
+  {
+   "check": "detected centres: ball A small, within 0.035 px RMS of the exact centres",
+   "ok": true,
+   "detail": "RMS 0.0268 px over 1062 balls; 0 camera-frames more than 1 px off or swapped"
+  },
+  {
+   "check": "the tube's defaults are the real tube",
+   "ok": true,
+   "detail": "OD 201.6125 mm, wall 3.175 mm, n 1.0, 1.49, 1.333"
+  },
+  {
+   "check": "the check (stages 1-3) ran and filled the error table",
+   "ok": true,
+   "detail": "177 rows"
+  },
+  {
+   "check": "f of every camera within 0.2 % of the truth",
+   "ok": true,
+   "detail": "cam0 41,452.5 px (-0.016 %, sigma 0.064 %), cam1 41,457.8 px (-0.003 %, sigma 0.059 %), cam2 41,468.3 px (+0.022 %, sigma 0.065 %)"
+  },
+  {
+   "check": "RMS under 0.1 px, at most 5 % of the detections rejected",
+   "ok": true,
+   "detail": "RMS 0.0168 px, 1039/1062 used"
+  },
+  {
+   "check": "files written",
+   "ok": true,
+   "detail": "['calibration_data.json', 'calibration_report.html', 'calibration_report.txt', 'calibration_result.json', 'camFile']; camFile ['cam0.txt', 'cam1.txt', 'cam2.txt']"
+  },
+  {
+   "check": "camFiles are PINCYL; C++ projections of the fitted ends = the overlay's crosses (0.01 px)",
+   "ok": true,
+   "detail": "models {'PINCYL'}; 186 points, largest difference 3.68e-03 px"
+  },
+  {
+   "check": "error table: one row per frame; overlay crosses for both balls in every camera",
+   "ok": true,
+   "detail": "177 rows, 177 frames"
+  },
+  {
+   "check": "3-D view shows the tube; the result is marked for the tracking settings",
+   "ok": true,
+   "detail": "tube surface True, _refr_has_result True, kind cylinder"
+  },
+  {
+   "check": "tracking settings' camera-folder hook copies the PINCYL files",
+   "ok": true,
+   "detail": "['cam0.txt', 'cam1.txt', 'cam2.txt'], byte-identical True"
+  },
+  {
+   "check": "points marked as found by 'fast': the result warns about the detector",
+   "ok": true,
+   "detail": "checks: [\"Balls detected with the 'fast' mode\", '176 frames used']"
+  }
+ ],
+ "seconds": 63.59094190597534,
+ "f_rel_err": [
+  -0.0001597268307415023,
+  -3.2209023432594464e-05,
+  0.00022216643784700452
+ ],
+ "rms_px": 0.016847332709675464,
+ "detect_rms_px": 0.026768685232121347,
+ "frames_kept": 177
+}

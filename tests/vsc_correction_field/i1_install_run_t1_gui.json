@@ -1,0 +1,8 @@
+{
+ "name": "t1_gui",
+ "exe": "D:\\Refraction\\pyOpenLPT\\build\\Release\\OpenLPT.exe",
+ "exe_sha256": "0784fae52c36a88893585be43dbb4cd0e98371045c08db459d4b63a25074a859",
+ "config": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\runs\\i1_t1_gui\\l0_t1.json",
+ "returncode": 0,
+ "wall_s": 521.0403301715851
+}

@@ -1,0 +1,20 @@
+D1: the line detector's settings on T1, frames i = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225] (raw 4 i); build p4c; pairs within 8.0 px, signal band <= 1.5 px, background 4.0-8.0 px (k = 0.375); depth cue T1's model, tolerances (0.8, 0.2)
+  base     : detections 1002 / 865 per frame; true pairs 190 +- 21 per frame (5.6 % of the 3401 signal-band pairs); with the depth cue 98 +- 5 (46.9 % of 209); true within 1 px 58 %; 517 s
+  sigma1.4 : detections 702 / 567 per frame; true pairs 126 +- 15 per frame (8.0 % of the 1583 signal-band pairs); with the depth cue 67 +- 4 (57.6 % of 117); true within 1 px 67 %; 459 s
+  k5       : detections 1361 / 1259 per frame; true pairs 348 +- 30 per frame (5.2 % of the 6722 signal-band pairs); with the depth cue 153 +- 7 (42.8 % of 357); true within 1 px 59 %; 705 s
+  k7       : detections 716 / 595 per frame; true pairs 130 +- 15 per frame (7.6 % of the 1699 signal-band pairs); with the depth cue 67 +- 4 (54.8 % of 122); true within 1 px 62 %; 381 s
+  deblend3 : detections 970 / 846 per frame; true pairs 186 +- 21 per frame (5.8 % of the 3228 signal-band pairs); with the depth cue 95 +- 5 (47.3 % of 200); true within 1 px 60 %; 587 s
+  nosecond : detections 977 / 843 per frame; true pairs 195 +- 21 per frame (6.0 % of the 3239 signal-band pairs); with the depth cue 95 +- 5 (47.4 % of 200); true within 1 px 57 %; 396 s
+  med15    : detections 1103 / 988 per frame; true pairs 282 +- 24 per frame (6.5 % of the 4321 signal-band pairs); with the depth cue 142 +- 6 (49.2 % of 288); true within 1 px 64 %; 594 s
+  med51    : detections 982 / 824 per frame; true pairs 179 +- 21 per frame (5.6 % of the 3175 signal-band pairs); with the depth cue 89 +- 5 (47.0 % of 189); true within 1 px 57 %; 593 s
+  against base:
+    sigma1.4 : true pairs -33.7 %, share +2.4 points; with the depth cue -31.2 %, share +10.7 points; qualifies: no (with the depth cue: no)
+    k5       : true pairs +82.8 %, share -0.4 points; with the depth cue +56.0 %, share -4.2 points; qualifies: no (with the depth cue: no)
+    k7       : true pairs -31.8 %, share +2.0 points; with the depth cue -31.9 %, share +7.8 points; qualifies: no (with the depth cue: no)
+    deblend3 : true pairs -1.9 %, share +0.2 points; with the depth cue -3.4 %, share +0.3 points; qualifies: no (with the depth cue: no)
+    nosecond : true pairs +2.7 %, share +0.4 points; with the depth cue -3.1 %, share +0.5 points; qualifies: no (with the depth cue: no)
+    med15    : true pairs +48.2 %, share +0.9 points; with the depth cue +44.8 %, share +2.3 points; qualifies: yes (with the depth cue: yes)
+    med51    : true pairs -5.8 %, share +0.0 points; with the depth cue -9.7 %, share +0.0 points; qualifies: no (with the depth cue: no)
+  best: ['med15'] together ({}, median 15 px)
+  best     : detections 1103 / 988 per frame; true pairs 282 +- 24 per frame (6.5 % of the 4321 signal-band pairs); with the depth cue 142 +- 6 (49.2 % of 288); true within 1 px 64 %; 573 s
+    best: true pairs +48.2 %, with the depth cue +44.8 %

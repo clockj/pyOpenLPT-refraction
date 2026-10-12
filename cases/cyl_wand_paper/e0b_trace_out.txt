@@ -1,0 +1,136 @@
+E0b-trace: tracing the 27 pairs of E0b through steps (3) and (4); extension C:\Users/zcloc/AppData/Local/Temp/claude/D--Refraction/a41554c2-317f-4657-a430-107eb353b7ed/scratchpad/frozen_pyopenlpt\pyopenlpt.cp311-win_amd64.pyd
+[ 0] r_X  10.64 mm, dphi  91.2655 deg | reference: far ray, 1 - Lam/Lmax 4.4e-12, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.013843775407885917, -0.013380510565159019)], C++ seeds [(0.013843775407885917, -0.013380510565159019)] (boxes 35, undecided 0)
+      step 4 far  from the py seed: Python ((0.013843775407885917, -0.013380510565159019), 0, np.float64(3.294853280497574e-11)), C++ (ok, Lam, C_z, residual, iters) (True, 0.013843775407885917, -0.013380510565159019, 3.294853280497574e-11, 0)
+      step 4 far  from the cpp seed: Python ((0.013843775407885917, -0.013380510565159019), 0, np.float64(3.294853280497574e-11)), C++ (ok, Lam, C_z, residual, iters) (True, 0.013843775407885917, -0.013380510565159019, 3.294853280497574e-11, 0)
+[ 1] r_X   6.61 mm, dphi  90.7128 deg | reference: far ray, 1 - Lam/Lmax 6.0e-12, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.0172027162746245, 0.014174544097187072)], C++ seeds [(0.0172027162746245, 0.014174544097187072)] (boxes 35, undecided 0)
+      step 4 far  from the py seed: Python ((0.0172027162746245, 0.014174544097187072), 0, np.float64(6.4388503864689904e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0172027162746245, 0.014174544097187072, 6.4388503864689904e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.0172027162746245, 0.014174544097187072), 0, np.float64(6.4388503864689904e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0172027162746245, 0.014174544097187072, 6.4388503864689904e-12, 0)
+[ 2] r_X  13.70 mm, dphi  90.0589 deg | reference: far ray, 1 - Lam/Lmax 5.6e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.07129128456323079, 0.04980609224311414)], C++ seeds [(0.07129128456323079, 0.04980609224311414)] (boxes 27, undecided 0)
+      step 4 far  from the py seed: Python ((0.07129128456323079, 0.04980609224311414), 0, np.float64(1.2641004480583986e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.07129128456323079, 0.04980609224311414, 1.2641004480583986e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.07129128456323079, 0.04980609224311414), 0, np.float64(1.2641004480583986e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.07129128456323079, 0.04980609224311414, 1.2641004480583986e-12, 0)
+[ 3] r_X  24.72 mm, dphi  91.9211 deg | reference: near ray, 1 - Lam/Lmax 7.8e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.0643520542733788), -0.0260868651748159), C++ seed (0.0643520542733788, -0.0260868651748159)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 23, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.0643520542733788), -0.0260868651748159), 0, np.float64(1.6222592550247318e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0643520542733788, -0.0260868651748159, 1.6222592550247318e-12, 0)
+      step 4 near from the cpp seed: Python ((0.0643520542733788, -0.0260868651748159), 0, np.float64(1.6222592550247318e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0643520542733788, -0.0260868651748159, 1.6222592550247318e-12, 0)
+[ 4] r_X  30.37 mm, dphi  94.3677 deg | reference: near ray, 1 - Lam/Lmax 9.5e-11, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.039537352399827856), -0.01742276797554536), C++ seed (0.039537352399827856, -0.01742276797554536)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 31, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.039537352399827856), -0.01742276797554536), 0, np.float64(1.6318058015977433e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.039537352399827856, -0.01742276797554536, 1.6318058015977433e-12, 0)
+      step 4 near from the cpp seed: Python ((0.039537352399827856, -0.01742276797554536), 0, np.float64(1.6318058015977433e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.039537352399827856, -0.01742276797554536, 1.6318058015977433e-12, 0)
+[ 5] r_X  19.77 mm, dphi  91.0981 deg | reference: near ray, 1 - Lam/Lmax 2.6e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.05144786295970517), -0.04632602799982512), C++ seed (0.05144786295970517, -0.04632602799982512)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 25, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.05144786295970517), -0.04632602799982512), 0, np.float64(1.0489466757969728e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.05144786295970517, -0.04632602799982512, 1.0489466757969728e-12, 0)
+      step 4 near from the cpp seed: Python ((0.05144786295970517, -0.04632602799982512), 0, np.float64(1.0489466757969728e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.05144786295970517, -0.04632602799982512, 1.0489466757969728e-12, 0)
+[ 6] r_X   8.93 mm, dphi  90.1633 deg | reference: far ray, 1 - Lam/Lmax 4.5e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.0464954772792, -0.029647262095691292)], C++ seeds [(0.0464954772792, -0.029647262095691292)] (boxes 23, undecided 0)
+      step 4 far  from the py seed: Python ((0.0464954772792, -0.029647262095691292), 0, np.float64(1.1706198686413766e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0464954772792, -0.029647262095691292, 1.1706198686413766e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.0464954772792, -0.029647262095691292), 0, np.float64(1.1706198686413766e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0464954772792, -0.029647262095691292, 1.1706198686413766e-12, 0)
+[ 7] r_X   9.16 mm, dphi  91.1691 deg | reference: near ray, 1 - Lam/Lmax 2.9e-12, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.011921028393542851), 0.004443986761036942), C++ seed (0.011921028393542851, 0.004443986761036942)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 31, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.011921028393542851), 0.004443986761036942), 0, np.float64(2.059352688377203e-11)), C++ (ok, Lam, C_z, residual, iters) (True, 0.011921028393542851, 0.004443986761036942, 2.059352688377203e-11, 0)
+      step 4 near from the cpp seed: Python ((0.011921028393542851, 0.004443986761036942), 0, np.float64(2.059352688377203e-11)), C++ (ok, Lam, C_z, residual, iters) (True, 0.011921028393542851, 0.004443986761036942, 2.059352688377203e-11, 0)
+[ 8] r_X  20.87 mm, dphi  91.9408 deg | reference: far ray, 1 - Lam/Lmax 1.2e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.05421915939279443, -0.08474728924859298)], C++ seeds [(0.05421915939279443, -0.08474728924859298)] (boxes 27, undecided 0)
+      step 4 far  from the py seed: Python ((0.05421915939279443, -0.08474728924859298), 0, np.float64(3.4519268841980146e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.05421915939279443, -0.08474728924859298, 3.4519268841980146e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.05421915939279443, -0.08474728924859298), 0, np.float64(3.4519268841980146e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.05421915939279443, -0.08474728924859298, 3.4519268841980146e-12, 0)
+[ 9] r_X   2.31 mm, dphi  90.0716 deg | reference: far ray, 1 - Lam/Lmax 4.7e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.011992184366571857, 0.11352896885054677)], C++ seeds [(0.011992184366571857, 0.11352896885054677)] (boxes 19, undecided 0)
+      step 4 far  from the py seed: Python ((0.011992184366571857, 0.11352896885054677), 0, np.float64(1.2845281717321036e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.011992184366571857, 0.11352896885054677, 1.2845281717321036e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.011992184366571857, 0.11352896885054677), 0, np.float64(1.2845281717321036e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.011992184366571857, 0.11352896885054677, 1.2845281717321036e-12, 0)
+[10] r_X  11.04 mm, dphi  91.2098 deg | reference: near ray, 1 - Lam/Lmax 2.2e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.028722335826313134), 0.0572709340579972), C++ seed (0.028722335826313134, 0.0572709340579972)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 23, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.028722335826313134), 0.0572709340579972), 0, np.float64(1.2545530865998513e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.028722335826313134, 0.0572709340579972, 1.2545530865998513e-12, 0)
+      step 4 near from the cpp seed: Python ((0.028722335826313134, 0.0572709340579972), 0, np.float64(1.2545530865998513e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.028722335826313134, 0.0572709340579972, 1.2545530865998513e-12, 0)
+[11] r_X  18.79 mm, dphi  92.4608 deg | reference: near ray, 1 - Lam/Lmax 1.2e-11, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.02446378330941811), -0.003859983737512895), C++ seed (0.02446378330941811, -0.003859983737512895)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 31, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.02446378330941811), -0.003859983737512895), 0, np.float64(6.658229753805112e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.02446378330941811, -0.003859983737512895, 6.658229753805112e-12, 0)
+      step 4 near from the cpp seed: Python ((0.02446378330941811, -0.003859983737512895), 0, np.float64(6.658229753805112e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.02446378330941811, -0.003859983737512895, 6.658229753805112e-12, 0)
+[12] r_X   3.35 mm, dphi  90.4126 deg | reference: far ray, 1 - Lam/Lmax 5.3e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.004362032682965167, -0.04457841184539001)], C++ seeds [(0.004362032682965167, -0.04457841184539001)] (boxes 23, undecided 0)
+      step 4 far  from the py seed: Python ((0.004362032682965167, -0.04457841184539001), 0, np.float64(1.748601289241e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.004362032682965167, -0.04457841184539001, 1.748601289241e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.004362032682965167, -0.04457841184539001), 0, np.float64(1.748601289241e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.004362032682965167, -0.04457841184539001, 1.748601289241e-12, 0)
+[13] r_X  37.91 mm, dphi  92.5405 deg | reference: far ray, 1 - Lam/Lmax 6.2e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.09868213201831705, 0.01588050066933478)], C++ seeds [(0.09868213201831705, 0.01588050066933478)] (boxes 31, undecided 0)
+      step 4 far  from the py seed: Python ((0.09868213201831705, 0.01588050066933478), 0, np.float64(2.645884500135607e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.09868213201831705, 0.01588050066933478, 2.645884500135607e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.09868213201831705, 0.01588050066933478), 0, np.float64(2.645884500135607e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.09868213201831705, 0.01588050066933478, 2.645884500135607e-12, 0)
+[14] r_X  15.74 mm, dphi  92.0675 deg | reference: far ray, 1 - Lam/Lmax 2.9e-12, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.02048528515165998, 0.008775798214190899)], C++ seeds [(0.02048528515165998, 0.008775798214190899)] (boxes 35, undecided 0)
+      step 4 far  from the py seed: Python ((0.02048528515165998, 0.008775798214190899), 0, np.float64(5.416533921798996e-11)), C++ (ok, Lam, C_z, residual, iters) (True, 0.02048528515165998, 0.008775798214190899, 5.416533921798996e-11, 0)
+      step 4 far  from the cpp seed: Python ((0.02048528515165998, 0.008775798214190899), 0, np.float64(5.416533921798996e-11)), C++ (ok, Lam, C_z, residual, iters) (True, 0.02048528515165998, 0.008775798214190899, 5.416533921798996e-11, 0)
+[15] r_X  17.05 mm, dphi  90.0955 deg | reference: far ray, 1 - Lam/Lmax 2.0e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.08877604605367406, -0.031163716257217665)], C++ seeds [(0.08877604605367406, -0.03116371625721766)] (boxes 27, undecided 0)
+      step 4 far  from the py seed: Python ((0.08877604605367406, -0.031163716257217665), 0, np.float64(2.1829250141413544e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.08877604605367406, -0.031163716257217665, 2.1829250141413544e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.08877604605367406, -0.03116371625721766), 0, np.float64(2.182925000058114e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.08877604605367406, -0.03116371625721766, 2.182925000058114e-12, 0)
+[16] r_X  33.00 mm, dphi  92.3757 deg | reference: far ray, 1 - Lam/Lmax 1.2e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.08590314214997981, 0.0285384998721195)], C++ seeds [(0.08590314214997981, 0.0285384998721195)] (boxes 31, undecided 0)
+      step 4 far  from the py seed: Python ((0.08590314214997981, 0.0285384998721195), 0, np.float64(2.869039350589061e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.08590314214997981, 0.0285384998721195, 2.869039350589061e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.08590314214997981, 0.0285384998721195), 0, np.float64(2.869039350589061e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.08590314214997981, 0.0285384998721195, 2.869039350589061e-12, 0)
+[17] r_X  19.76 mm, dphi  92.7625 deg | reference: far ray, 1 - Lam/Lmax 1.0e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.025695466060359634, -0.054632968986416126)], C++ seeds [(0.025695466060359634, -0.054632968986416126)] (boxes 31, undecided 0)
+      step 4 far  from the py seed: Python ((0.025695466060359634, -0.054632968986416126), 0, np.float64(9.89697438183642e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.025695466060359634, -0.054632968986416126, 9.89697438183642e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.025695466060359634, -0.054632968986416126), 0, np.float64(9.89697438183642e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.025695466060359634, -0.054632968986416126, 9.89697438183642e-12, 0)
+[18] r_X  27.59 mm, dphi  92.9622 deg | reference: near ray, 1 - Lam/Lmax 8.6e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.07178376343439982), -0.046510092251321536), C++ seed (0.07178376343439982, -0.046510092251321536)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 27, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.07178376343439982), -0.046510092251321536), 0, np.float64(1.0871303858015319e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.07178376343439982, -0.046510092251321536, 1.0871303858015319e-12, 0)
+      step 4 near from the cpp seed: Python ((0.07178376343439982, -0.046510092251321536), 0, np.float64(1.0871303858015319e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.07178376343439982, -0.046510092251321536, 1.0871303858015319e-12, 0)
+[19] r_X  12.19 mm, dphi  90.0984 deg | reference: far ray, 1 - Lam/Lmax 1.5e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.0630804066072934, -0.14866302017682967)], C++ seeds [(0.0630804066072934, -0.14866302017682967)] (boxes 27, undecided 0)
+      step 4 far  from the py seed: Python ((0.0630804066072934, -0.14866302017682967), 0, np.float64(2.5970499489846428e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0630804066072934, -0.14866302017682967, 2.5970499489846428e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.0630804066072934, -0.14866302017682967), 0, np.float64(2.5970499489846428e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0630804066072934, -0.14866302017682967, 2.5970499489846428e-12, 0)
+[20] r_X  30.17 mm, dphi  93.5091 deg | reference: near ray, 1 - Lam/Lmax 7.0e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.07853372785612756), -0.03112480698815403), C++ seed (0.07853372785612756, -0.03112480698815403)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 27, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.07853372785612756), -0.03112480698815403), 0, np.float64(4.00723898508204e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.07853372785612756, -0.03112480698815403, 4.00723898508204e-12, 0)
+      step 4 near from the cpp seed: Python ((0.07853372785612756, -0.03112480698815403), 0, np.float64(4.00723898508204e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.07853372785612756, -0.03112480698815403, 4.00723898508204e-12, 0)
+[21] r_X  31.24 mm, dphi  93.6632 deg | reference: near ray, 1 - Lam/Lmax 2.4e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.08132039763868731), -0.03037475876525348), C++ seed (0.08132039763868731, -0.03037475876525348)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 33, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.08132039763868731), -0.03037475876525348), 0, np.float64(1.60383493966288e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.08132039763868731, -0.03037475876525348, 1.60383493966288e-12, 0)
+      step 4 near from the cpp seed: Python ((0.08132039763868731, -0.03037475876525348), 0, np.float64(1.60383493966288e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.08132039763868731, -0.03037475876525348, 1.60383493966288e-12, 0)
+[22] r_X   2.03 mm, dphi  90.2184 deg | reference: near ray, 1 - Lam/Lmax 5.0e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.005270440986796025), -0.037994284083373284), C++ seed (0.005270440986796025, -0.037994284083373284)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 19, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.005270440986796025), -0.037994284083373284), 0, np.float64(1.2243539516352735e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.005270440986796025, -0.037994284083373284, 1.2243539516352735e-12, 0)
+      step 4 near from the cpp seed: Python ((0.005270440986796025, -0.037994284083373284), 0, np.float64(1.2243539516352735e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.005270440986796025, -0.037994284083373284, 1.2243539516352735e-12, 0)
+[23] r_X  16.20 mm, dphi  91.8206 deg | reference: far ray, 1 - Lam/Lmax 2.4e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.0421473649745422, -0.04625564325529943)], C++ seeds [(0.0421473649745422, -0.04625564325529943)] (boxes 27, undecided 0)
+      step 4 far  from the py seed: Python ((0.0421473649745422, -0.04625564325529943), 0, np.float64(2.1145319826626096e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0421473649745422, -0.04625564325529943, 2.1145319826626096e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.0421473649745422, -0.04625564325529943), 0, np.float64(2.1145319826626096e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.0421473649745422, -0.04625564325529943, 2.1145319826626096e-12, 0)
+[24] r_X  14.95 mm, dphi  91.6613 deg | reference: near ray, 1 - Lam/Lmax 3.9e-09, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.03891439111755668), -0.03083698060180695), C++ seed (0.03891439111755668, -0.03083698060180695)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 23, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.03891439111755668), -0.03083698060180695), 0, np.float64(1.834755591860145e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.03891439111755668, -0.03083698060180695, 1.834755591860145e-12, 0)
+      step 4 near from the cpp seed: Python ((0.03891439111755668, -0.03083698060180695), 0, np.float64(1.834755591860145e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.03891439111755668, -0.03083698060180695, 1.834755591860145e-12, 0)
+[25] r_X   7.82 mm, dphi  90.8640 deg | reference: near ray, 1 - Lam/Lmax 6.3e-12, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed (np.float64(0.02032955084967759), 0.05932158842591949), C++ seed (0.02032955084967759, 0.05932158842591949)
+      step 3 far:  Python seeds [], C++ seeds [] (boxes 31, undecided 0)
+      step 4 near from the py seed: Python ((np.float64(0.02032955084967759), 0.05932158842591949), 0, np.float64(9.269918166410207e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.02032955084967759, 0.05932158842591949, 9.269918166410207e-12, 0)
+      step 4 near from the cpp seed: Python ((0.02032955084967759, 0.05932158842591949), 0, np.float64(9.269918166410207e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.02032955084967759, 0.05932158842591949, 9.269918166410207e-12, 0)
+[26] r_X  14.71 mm, dphi  91.4954 deg | reference: far ray, 1 - Lam/Lmax 8.6e-10, k* 3 | end to end: C++ 1 ray(s), Python 1
+      step 3 near: Python seed None, C++ seed None
+      step 3 far:  Python seeds [(0.03829768046029229, 0.03169837014872612)], C++ seeds [(0.03829768046029229, 0.03169837014872612)] (boxes 27, undecided 0)
+      step 4 far  from the py seed: Python ((0.03829768046029229, 0.03169837014872612), 0, np.float64(1.5059065889352473e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.03829768046029229, 0.03169837014872612, 1.5059065889352473e-12, 0)
+      step 4 far  from the cpp seed: Python ((0.03829768046029229, 0.03169837014872612), 0, np.float64(1.5059065889352473e-12)), C++ (ok, Lam, C_z, residual, iters) (True, 0.03829768046029229, 0.03169837014872612, 1.5059065889352473e-12, 0)

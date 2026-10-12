@@ -1,0 +1,127 @@
+C1 config test, build dev (D:\Refraction\pyOpenLPT\build-stb\dev\out)
+text: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\config.txt
+json: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\config.json
+config.json:
+{
+  "frames": [
+    0,
+    20
+  ],
+  "fps": 5000,
+  "threads": 26,
+  "cameras": [
+    {
+      "file": "../../data/camFile/cam0.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam1.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam2.txt",
+      "max_intensity": 255
+    },
+    {
+      "file": "../../data/camFile/cam3.txt",
+      "max_intensity": 255
+    }
+  ],
+  "image_lists": [
+    "../../data/imgLists/cam0ImageNames.txt",
+    "../../data/imgLists/cam1ImageNames.txt",
+    "../../data/imgLists/cam2ImageNames.txt",
+    "../../data/imgLists/cam3ImageNames.txt"
+  ],
+  "view_volume_mm": {
+    "x": [
+      -81.0,
+      54.0
+    ],
+    "y": [
+      -42.0,
+      59.0
+    ],
+    "z": [
+      -36.0,
+      52.5
+    ]
+  },
+  "voxel_mm": 0.129,
+  "output_dir": "Results",
+  "objects": [
+    {
+      "type": "Tracer",
+      "initial_phase": {
+        "search_radius_vox": 10.0,
+        "frames": 4
+      },
+      "convergence_phase": {
+        "avg_spacing_vox": 30.0
+      },
+      "shake": {
+        "width_vox": 0.25,
+        "loops": 4,
+        "ghost_threshold": 0.01
+      },
+      "predictive_field": {
+        "grid": [
+          51,
+          51,
+          51
+        ],
+        "search_radius_vox": 25.0
+      },
+      "ipr": {
+        "loops": 2,
+        "reduced_cameras": 1,
+        "reduced_loops": 2,
+        "tol_2d_px": 2.0,
+        "tol_3d_vox": 1.0
+      },
+      "tracer": {
+        "intensity_threshold": 20,
+        "radius_px": 2.0
+      }
+    }
+  ],
+  "load_tracks": {
+    "enabled": false
+  },
+  "save_interval": 10
+}
+
+1. C++ settings: 24 groups compared; differing: ['_object_config_paths']
+   object config address: text ['D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/tracerConfig.txt'], json ['D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/config.json#0']
+   save_interval read: text 10, json 10
+2. Python read_text == read_json: True
+   round trips exact: text True, json True
+3. bad and edge-case files (C++ in a fresh process; Python module):
+   ok   missing voxel_mm: C++ @@ERR [1] Config Error: "voxel_mm" is missing | ctx: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/bad_missing.json |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:222 (fail)
+        Python: ConfigError: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\bad_missing.json: "voxel_mm" is missing
+   ok   fps as a string: C++ @@ERR [1] Config Error: "fps" must be an integer | ctx: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/bad_type.json |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:222 (fail)
+        Python: read
+   ok   missing ipr.tol_2d_px (read with the object): C++ @@ERR [1] Config Error: "objects[0].ipr.tol_2d_px" is missing | ctx: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/bad_obj.json |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:222 (fail)
+        Python: read
+   ok   unknown key: C++ @@OK | stderr: Warning: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/warn_unknown.json: unknown setting "voxel_size" is ignored
+        Python: read
+   ok   syntax error: C++ @@ERR [4] Config Error: invalid JSON: [json.exception.parse_error.101] parse error at line 1, column 1113: syntax error while parsing object key - unexpected '}'; expected string literal | ctx: D:/Refraction/pyOpenLPT/te
+        Python: ConfigError: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\bad_syntax.json: invalid JSON: Expecting property name enclosed in double quotes: line 1 column 1113 (char 1112)
+   ok   save_interval 0: C++ @@ERR [1] Config Error: "save_interval" must be a positive number of frames | ctx: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/bad_si0.json |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:222 (fail)
+        Python: read
+   ok   frames reversed: C++ @@ERR [1] Config Error: "frames" must be [start, end] with end >= start | ctx: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/bad_frames.json |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:222 (fail)
+        Python: read
+   ok   3 image lists for 4 cameras: C++ @@ERR [1] Config Error: "image_lists" must be an array of 4 paths, one per camera | ctx: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/c1_config/bad_imgs.json |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:222 (fail
+        Python: read
+   ok   comments allowed: C++ @@OK
+        Python: read
+   ok   text: save_interval = 0: C++ @@ERR [1] Config setting save_interval must be a positive integer, got: 0 | ctx: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\bad_si0.txt |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:74 (parse_positive_
+        Python: ConfigError: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\bad_si0.txt: save_interval must be a positive integer, got '0'
+   ok   text: save_interval = abc: C++ @@ERR [1] Config setting save_interval must be a positive integer, got: abc | ctx: D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\bad_si_abc.txt |  @ D:\Refraction\pyOpenLPT\src\srcSTB\Config.cpp:74 (parse_posi
+        Python: ConfigError: save_interval: expected an integer, got 'abc'
+   ok   text: unknown key: C++ @@OK | stderr: Warning: unknown setting in D:\Refraction\pyOpenLPT\tests\stb_improve\runs\c1_config\warn_unknown.txt: frobnicate
+        Python: read
+   ok   text: GUI-written (track-path lines, no save_interval): C++ @@OK
+        Python: read
+
+C1 PASSED

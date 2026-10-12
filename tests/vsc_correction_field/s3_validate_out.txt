@@ -1,0 +1,6 @@
+S3: today's page D:\Refraction\pyOpenLPT\tests\vsc_correction_field\data\ref\tracking_settings_today_cffed7d.py, the change D:\Refraction\pyOpenLPT\gui\views\tracking_settings_view.py; pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd
+today's page: Validate 1.1 s; 2-D counts [11554, 7641] (the tracking run on this frame: [1067, 985]); 3-D matches [6168]; config.json after: tracer settings kept 0 of 8 (lost: detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel), 2-D tolerance 1.0 px, corrections kept True
+  box 'Validation Result': Validation Successful! |  | Validated Frame: 0 | 3D Objects: 6168 | Average 2D Objects: 9597.5 | Per-camera 2D counts: Cam 0: 11554, Cam 1: 7641
+change's page: Validate 3.8 s; 2-D counts [1067, 985] (the tracking run on this frame: [1067, 985]); 3-D matches [636]; config.json after: tracer settings kept 8 of 8, 2-D tolerance 1.0 px, corrections kept True
+  box 'Validation Result': Validation Successful! |  | Validated Frame: 0 | 3D Objects: 636 | Average 2D Objects: 1026.0 | Per-camera 2D counts: Cam 0: 1067, Cam 1: 985
+S3: PASS

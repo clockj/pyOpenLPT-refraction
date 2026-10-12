@@ -1,0 +1,22 @@
+Flat-window wand calibration (PINPLATE), 4 cameras, 1 window(s)
+wand 25.0000 mm
+frames 300, observations 2400 active of 2400; reprojection RMS 0.1181 px (2-D), sigma 0.1011 px per coordinate
+wand length, free triangulation: mean error +0.08 um, RMS 30.82 um over 300 frames
+frames dropped: 0; frames with some detections rejected: 0
+frame: Z = window 1's normal (camera -> water); Y = n1 x n2 (two windows) or camera 1's image up in window 1's plane; origin = the wand's mean position
+gauge: camera 1's pose held during the fit (sigmas are in that gauge)
+
+window 1 (unnamed): normal (+0.000000, -0.000000, +1.000000) +- 0.0470 deg; camera-side surface n.X = -159.248 mm (+- 0.838 at the anchor); plates [12.7] mm, n [1.0, 1.49, 1.333]; cameras [1, 2, 3, 4]
+cam1: f 3935.56 px +- 0.119 %; 560.77 mm from its window +- 0.879, incidence 21.19 deg; reprojection RMS 0.1192 px (600/600 active); camFile camFile\cam1.txt
+cam2: f 3927.35 px +- 0.120 %; 559.26 mm from its window +- 0.881, incidence 21.23 deg; reprojection RMS 0.1158 px (600/600 active); camFile camFile\cam2.txt
+cam3: f 3927.95 px +- 0.120 %; 559.36 mm from its window +- 0.881, incidence 21.22 deg; reprojection RMS 0.1212 px (600/600 active); camFile camFile\cam3.txt
+cam4: f 3924.92 px +- 0.119 %; 558.77 mm from its window +- 0.877, incidence 21.24 deg; reprojection RMS 0.1162 px (600/600 active); camFile camFile\cam4.txt
+
+predicted calibration error on points like the wand's (300): re-triangulated 0.0095 px; a known point projected in the window's frame 1.2180 px, in camera 1's 2.0559 px
+
+Noise levels and weights (noise_weights='camera')
+  weights APPLIED: estimated from the residuals; each detection weighted by 1 / sigma^2 of its group
+  cam1: sigma 0.1014 px (+- 3.0 %), used 600/600, residual RMS 0.0843 px/coord.
+  cam2: sigma 0.0993 px (+- 3.0 %), used 600/600, residual RMS 0.0819 px/coord.
+  cam3: sigma 0.1026 px (+- 2.9 %), used 600/600, residual RMS 0.0857 px/coord.
+  cam4: sigma 0.0995 px (+- 3.0 %), used 600/600, residual RMS 0.0822 px/coord.

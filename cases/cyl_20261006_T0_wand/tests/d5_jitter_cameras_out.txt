@@ -1,0 +1,9 @@
+D5: jitter of the wand's midpoint (beyond a 7-frame quadratic) in both cameras, 904 frames
+  u: jitter RMS cam1 0.342 px (robust 0.316), cam2 0.244 (robust 0.180); correlation between the cameras +0.104 (core +0.066, slope cam2 on cam1 +0.039)
+  v: jitter RMS cam1 1.150 px (robust 0.475), cam2 1.035 (robust 0.410); correlation between the cameras +0.996 (core +0.978, slope cam2 on cam1 +0.873)
+  S2's residuals, cam1: RMS u 0.429 px, v 0.257 px
+    residual u against the same frame's jitter u: slope +0.000 (-1: the model does not follow the jump, the camera's own; 0: the wand moved)
+    residual v against the same frame's jitter v: slope -0.005 (-1: the model does not follow the jump, the camera's own; 0: the wand moved)
+  S2's residuals, cam2: RMS u 0.353 px, v 0.257 px
+    residual u against the same frame's jitter u: slope -0.000 (-1: the model does not follow the jump, the camera's own; 0: the wand moved)
+    residual v against the same frame's jitter v: slope -0.000 (-1: the model does not follow the jump, the camera's own; 0: the wand moved)

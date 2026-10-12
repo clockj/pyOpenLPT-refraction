@@ -1,0 +1,4 @@
+synth_sc gallm : build p4c, 10 processes
+  cam1: uv_allm - uv_model = the study's field at uv_model: max difference 4.55e-13 px
+  cam2: uv_allm - uv_model = the study's field at uv_model: max difference 2.27e-13 px
+  rendered Gallm0: cameras [1, 2], 80 frames (160 images) in 827 s

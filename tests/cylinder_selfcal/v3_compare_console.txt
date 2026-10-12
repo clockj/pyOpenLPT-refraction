@@ -1,0 +1,23 @@
+m15: s3_final_m15 / s3_control_m15; 251 frames, 16.3 s per frame; detections [1151.6, 987.2]
+  active long tracks at frame 100: 447 (control 222): ghosts by the counts 50 %, by the swirl 53 %; long tracks at 100 589: real 296 (counts), 278 (swirl); whole run 1228 long tracks, 112383 points
+  quality: 7653 of 22686 track points with both detections (34 %); robust SD du, dv cam1 0.230, 0.259, cam2 0.070, 0.740 px (RMS 0.71, 0.53, 0.35, 0.97); epipolar offset median +0.083, robust SD 0.947, RMS 1.226 px; widths |error| 68 % cam1 0.70/0.48, cam2 0.45/0.49 px; flow: length 10/50/90 % [24.5, 77.0, 186.5], speed 69.8 mm/s, roughness 0.551
+t10: s3_final_m15t10 / s3_control_m15t10; 251 frames, 13.8 s per frame; detections [1142.4, 984.3]
+  active long tracks at frame 100: 369 (control 169): ghosts by the counts 46 %, by the swirl 53 %; long tracks at 100 494: real 268 (counts), 230 (swirl); whole run 1046 long tracks, 96444 points
+  quality: 7203 of 19466 track points with both detections (37 %); robust SD du, dv cam1 0.222, 0.249, cam2 0.069, 0.696 px (RMS 0.70, 0.50, 0.34, 0.94); epipolar offset median +0.084, robust SD 0.896, RMS 1.186 px; widths |error| 68 % cam1 0.68/0.47, cam2 0.44/0.47 px; flow: length 10/50/90 % [23.400000000000006, 78.0, 185.0], speed 69.0 mm/s, roughness 0.541
+vc: s3_final_m15vc / s3_control_m15vc; 251 frames, 12.9 s per frame; detections [1149.4, 981.3]
+  active long tracks at frame 100: 428 (control 216): ghosts by the counts 50 %, by the swirl 56 %; long tracks at 100 578: real 286 (counts), 255 (swirl); whole run 1245 long tracks, 112992 points
+  quality: 7895 of 22789 track points with both detections (35 %); robust SD du, dv cam1 0.231, 0.226, cam2 0.070, 0.592 px (RMS 0.71, 0.52, 0.36, 0.90); epipolar offset median -0.011, robust SD 0.759, RMS 1.148 px; widths |error| 68 % cam1 0.71/0.46, cam2 0.44/0.47 px; flow: length 10/50/90 % [21.0, 74.5, 187.0], speed 70.3 mm/s, roughness 0.541
+vc10: s3_final_m15vc10 / s3_control_m15vc10; 251 frames, 12.7 s per frame; detections [1144.5, 978.8]
+  active long tracks at frame 100: 395 (control 172): ghosts by the counts 44 %, by the swirl 50 %; long tracks at 100 514: real 290 (counts), 256 (swirl); whole run 1118 long tracks, 101299 points
+  quality: 7697 of 20437 track points with both detections (38 %); robust SD du, dv cam1 0.223, 0.214, cam2 0.068, 0.577 px (RMS 0.70, 0.50, 0.35, 0.87); epipolar offset median -0.018, robust SD 0.740, RMS 1.112 px; widths |error| 68 % cam1 0.69/0.45, cam2 0.44/0.46 px; flow: length 10/50/90 % [22.0, 75.0, 186.39999999999998], speed 69.8 mm/s, roughness 0.540
+vc2: s3_final_m15vc2 / s3_control_m15vc2; 251 frames, 22.9 s per frame; detections [1144.2, 979.8]
+  active long tracks at frame 100: 414 (control 161): ghosts by the counts 39 %, by the swirl 48 %; long tracks at 100 538: real 329 (counts), 279 (swirl); whole run 1132 long tracks, 105885 points
+  quality: 7848 of 21367 track points with both detections (37 %); robust SD du, dv cam1 0.227, 0.216, cam2 0.068, 0.582 px (RMS 0.70, 0.51, 0.35, 0.88); epipolar offset median -0.019, robust SD 0.739, RMS 1.127 px; widths |error| 68 % cam1 0.68/0.45, cam2 0.44/0.47 px; flow: length 10/50/90 % [24.0, 80.0, 190.0], speed 69.9 mm/s, roughness 0.533
+  recurrence frames 0-100: t10's 494 tracks in m15: 435 (88 %); m15's 589 in t10: 436 (74 %)
+  recurrence whole run: t10's 1046 tracks in m15: 761 (73 %); m15's 1228 in t10: 747 (61 %)
+  recurrence frames 0-100: vc's 578 tracks in m15: 388 (67 %); m15's 589 in vc: 399 (68 %)
+  recurrence whole run: vc's 1245 tracks in m15: 653 (52 %); m15's 1228 in vc: 673 (55 %)
+  recurrence frames 0-100: vc10's 514 tracks in m15: 369 (72 %); m15's 589 in vc10: 369 (63 %)
+  recurrence whole run: vc10's 1118 tracks in m15: 641 (57 %); m15's 1228 in vc10: 647 (53 %)
+  recurrence frames 0-100: vc2's 538 tracks in m15: 371 (69 %); m15's 589 in vc2: 380 (65 %)
+  recurrence whole run: vc2's 1132 tracks in m15: 628 (55 %); m15's 1228 in vc2: 642 (52 %)

@@ -1,0 +1,17 @@
+Batch runs: quality of the long tracks at frame 200 (track_quality.py), read while the batch runs, just after a
+save (report section 12, end). Measures as in u_quality.txt.
+
+15Hz_r_b_1 (spacing 5, threshold 45), 12 Oct 2026 at 14:08, after its save at frame 600:
+    python tests/track_quality.py "D:\Shijie Zhong\STB_staging\20260727\15Hz_r_b_1\Results_tracer" 200 --max-save 600
+tracks         13474
+step_med       0.14581070024692872
+step_p90       0.18331797728210525
+lf_med         0.008756714615394531
+lf_p90         0.025513968370179753
+nb_radius_mm   8.0
+nb_coverage    0.9977734896838355
+nb_med         0.14313952240139816
+nb_p90         0.4719463589958337
+nb_over_half   0.08806902707527521
+frame          200
+files          ['ExitTrack_400.csv', 'LongTrackInactive_400.csv', 'ExitTrack_600.csv', 'LongTrackActive_600.csv', 'LongTrackInactive_600.csv']

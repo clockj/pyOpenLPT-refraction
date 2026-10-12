@@ -1,0 +1,12 @@
+pycine win-64: No match found for: pycine. Search: *pycine*
+pycine linux-64: No match found for: pycine. Search: *pycine*
+pycine osx-arm64: No match found for: pycine. Search: *pycine*
+pycine osx-64: No match found for: pycine. Search: *pycine*
+cma win-64: cma                            4.0.0    pyhecae5ae_0  conda-forge         
+cma linux-64: cma                            4.0.0    pyhecae5ae_0  conda-forge         
+cma osx-arm64: cma                            4.0.0    pyhecae5ae_0  conda-forge         
+cma osx-64: cma                            4.0.0    pyhecae5ae_0  conda-forge         
+qt6-webengine win-64: qt6-webengine                 6.11.2 pl5321h80dc20f_1  conda-forge         
+qt6-webengine linux-64: qt6-webengine                 6.11.2 pl5321ha9427ee_1  conda-forge         
+qt6-webengine osx-arm64: qt6-webengine                 6.11.2 pl5321hf9926ec_0  conda-forge         
+qt6-webengine osx-64: No match found for: qt6-webengine. Search: *qt6-webengine*

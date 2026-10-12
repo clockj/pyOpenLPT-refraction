@@ -1,0 +1,11 @@
+T1 checks on D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\runs\s3_final: 701 long tracks (last frame 250)
+  sample frames [20, 60, 100, 140, 180, 220]: 1496 long-track points with neighbours in time
+  T1-a cam1: 589 points; detection - track image: mean (-0.038, -0.035) px, RMS (0.479, 0.440) px
+  T1-c cam1: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.44 / 0.65 / 1.30 px (median +0.14); w_v 0.30 / 0.47 / 0.84 px (median -0.02)
+  T1-a cam2: 589 points; detection - track image: mean (+0.044, +0.041) px, RMS (0.255, 0.783) px
+  T1-c cam2: |measured - predicted RMS width|: w_h 50/68/90 % <= 0.31 / 0.46 / 0.88 px (median -0.00); w_v 0.29 / 0.44 / 0.96 px (median -0.03)
+  T1-a epipolar residual (cam2 detection - cam1's curve, v): mean +0.063 +- 0.042 px, RMS 1.024 px (589 pairs)
+  T1-b sync: residual against cam2's dv per step: slope -0.0959 +- 0.0972 (a time offset of +0.0959 steps = +0.383 raw frames); dv RMS 0.434 px per step
+  T1-d cam1: the tracks' image step (du, dv) median (+0.434, -0.206) px per step
+  T1-d cam2: the tracks' image step (du, dv) median (-1.391, -0.173) px per step
+  T1-d: 701 long tracks, length (10/50/90 %) [22.0, 76.0, 193.0] steps; speed (10/50/90 %) [0.031, 0.0673, 0.1047] mm per step, median 67.3 mm/s; mean velocity [0.0113, 0.0052, 0.0351] mm per step; second difference RMS / step RMS 0.531

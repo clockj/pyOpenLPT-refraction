@@ -1,0 +1,35 @@
+C2a: the board triangulated with the cameras of X:\Shijie Zhong\Refraction\Processed\20261007\T0 (f 48494 / 28306 px)
+
+  position 0: cam1's indices start here (the dot nearest the image centre is (0, 0))
+    dots: cam1 45, cam2 103; lattice maps scored: 1306
+    best map M [[1, 0], [0, 1]], t [-4, 0]: 45 pairs, median line distance 16.8 um
+      next: M [[1, 0], [0, 1]], t [11, 1]: 17 pairs, median 81.5 um (4.8 x the best)
+      next: M [[1, 0], [0, 1]], t [10, 1]: 22 pairs, median 141.3 um (8.4 x the best)
+      next: M [[1, 0], [0, 1]], t [-3, 0]: 45 pairs, median 189.7 um (11.3 x the best)
+    triangulated 45 dots: reprojection RMS cam1 0.347 px, cam2 0.412 px
+    plane: centre [11.13, 1.72, -0.79] mm, normal [0.0191, -0.0075, 0.9998] (1.89 deg from cam1's line of sight); flatness RMS 18.3 um, largest 43.9 um
+    lattice: pitch along i 3.01070 +- 0.00108 mm (+0.357 %), along j 3.01472 +- 0.00141 mm (+0.491 %); angle 90.061 deg; dots about the lattice RMS 26.1 um
+
+  position 1: cam1's indices carried from the previous position: 44 of 44 dots followed (gate 25 px) agree on the shift [-1, 0]
+    dots: cam1 44, cam2 94; lattice maps scored: 1186
+    best map M [[1, 0], [0, 1]], t [-2, 0]: 44 pairs, median line distance 18.0 um
+      next: M [[1, 0], [0, 1]], t [12, 1]: 13 pairs, median 151.1 um (8.4 x the best)
+      next: M [[1, 0], [0, 1]], t [-1, 0]: 44 pairs, median 189.8 um (10.5 x the best)
+      next: M [[1, 0], [0, 1]], t [-3, 0]: 40 pairs, median 219.7 um (12.2 x the best)
+    triangulated 44 dots: reprojection RMS cam1 0.344 px, cam2 0.408 px
+    plane: centre [10.95, 1.84, -3.32] mm, normal [0.0163, -0.0085, 0.9998] (1.72 deg from cam1's line of sight); flatness RMS 39.0 um, largest 103.2 um
+    lattice: pitch along i 3.01126 +- 0.00185 mm (+0.375 %), along j 3.01478 +- 0.00237 mm (+0.493 %); angle 90.060 deg; dots about the lattice RMS 43.3 um
+
+  position 2: cam1's indices carried from the previous position: 43 of 43 dots followed (gate 25 px) agree on the shift [-1, 0]
+    dots: cam1 44, cam2 85; lattice maps scored: 1060
+    best map M [[1, 0], [0, 1]], t [-1, 0]: 44 pairs, median line distance 14.9 um
+      next: M [[1, 0], [0, 1]], t [0, 0]: 44 pairs, median 190.2 um (12.8 x the best)
+      next: M [[1, 0], [0, 1]], t [-2, 0]: 39 pairs, median 220.9 um (14.9 x the best)
+      next: M [[-1, 0], [0, 1]], t [-6, 0]: 23 pairs, median 228.8 um (15.4 x the best)
+    triangulated 44 dots: reprojection RMS cam1 0.318 px, cam2 0.378 px
+    plane: centre [10.53, 1.97, -5.77] mm, normal [0.0122, -0.0081, 0.9999] (1.52 deg from cam1's line of sight); flatness RMS 47.1 um, largest 105.4 um
+    lattice: pitch along i 3.01277 +- 0.00218 mm (+0.426 %), along j 3.01508 +- 0.00277 mm (+0.503 %); angle 90.041 deg; dots about the lattice RMS 51.2 um
+
+  Between positions (mean over the dots triangulated at both):
+    0 -> 1: 44 dots; translation [0.0595, 0.0332, -2.538] mm, length 2.5389 mm (-20.03 % of 3.175), scatter over the dots [4.3, 2.5, 50.7] um; 2.46 deg from the board's normal, 1.02 deg from cam1's line of sight, away from cam1
+    1 -> 2: 43 dots; translation [0.0667, 0.0255, -2.4602] mm, length 2.4612 mm (-22.48 % of 3.175), scatter over the dots [4.7, 2.0, 65.8] um; 2.49 deg from the board's normal, 1.30 deg from cam1's line of sight, away from cam1

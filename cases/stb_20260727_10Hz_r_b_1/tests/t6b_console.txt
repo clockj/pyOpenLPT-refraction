@@ -1,0 +1,24 @@
+
+== new camFiles, positions in frame mm; saves [500]
+   tracks >= 7 points: 40685; lengths by file kind: {'exit': {'n': 2542, 'median': 262.0}, 'inactive': {'n': 24739, 'median': 69.0}, 'active': {'n': 13642, 'median': 149.0}}
+   speed (median per track), mm/frame: p10 0.0822, median 0.0994, p90 0.1212
+   position noise per axis (median over tracks), mm: x 0.0053, y 0.0064, z 0.0046
+   linear-fit residual of the points that passed: median 0.0054, p90 0.0184, p99 0.0377 mm (n 5412753)
+   last point of the inactive tracks: p10 0.0508, median 0.0567, p90 0.0719 mm; over 0.05 mm: 0.972; within 2x the limit: 0.997 (n 24739)
+
+== old camFiles, positions in frame mm; saves [500]
+   tracks >= 7 points: 21135; lengths by file kind: {'exit': {'n': 4156, 'median': 146.0}, 'inactive': {'n': 8864, 'median': 92.5}, 'active': {'n': 8236, 'median': 135.0}}
+   speed (median per track), mm/frame: p10 0.0656, median 0.0767, p90 0.0969
+   position noise per axis (median over tracks), mm: x 0.0043, y 0.0056, z 0.0046
+   linear-fit residual of the points that passed: median 0.0059, p90 0.0193, p99 0.0377 mm (n 3067845)
+   last point of the inactive tracks: p10 0.0505, median 0.0552, p90 0.0664 mm; over 0.05 mm: 0.955; within 2x the limit: 1.000 (n 8864)
+
+== old camFiles, positions in true (x s) mm; saves [500]
+   tracks >= 7 points: 21135; lengths by file kind: {'exit': {'n': 4156, 'median': 146.0}, 'inactive': {'n': 8864, 'median': 92.5}, 'active': {'n': 8236, 'median': 135.0}}
+   speed (median per track), mm/frame: p10 0.0805, median 0.0943, p90 0.1190
+   position noise per axis (median over tracks), mm: x 0.0053, y 0.0069, z 0.0056
+   linear-fit residual of the points that passed: median 0.0072, p90 0.0238, p99 0.0464 mm (n 3067845)
+   last point of the inactive tracks: p10 0.0621, median 0.0678, p90 0.0816 mm; over 0.05 mm: 0.955; within 2x the limit: 0.993 (n 8864)
+
+wrote D:\Refraction\pyOpenLPT\cases\stb_20260727_10Hz_r_b_1\tests\t6b_track_noise.json
+      D:\Refraction\pyOpenLPT\cases\stb_20260727_10Hz_r_b_1\tests\t6b_track_noise_out.txt

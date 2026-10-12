@@ -1,0 +1,13 @@
+G5: Stop and bad input (cylinder model)
+  PASS  Stop 3 s into the start search ends the run within 6 s; idle again; no camFile  (4.0 s after Stop; status 'Cylinder calibration stopped.'; camFiles none)
+  PASS  bad input, one camera: a message, no run  (The cylinder calibration needs at least two cameras; the wand points have 1.)
+  PASS  bad input, 8 frames: a message, no run  (Only 8 frames show both balls in every camera; the calibration's start needs at least 12 (several hundred are )
+  PASS  bad input, a camera without a row in the camera table: a message, no run  (The camera table has no row for camera(s) [2]: set Num Cameras.)
+  PASS  bad input, a wall thicker than the radius: a message, no run  (The wall (150 mm) is not thinner than the tube's outer radius (100.806 mm).)
+  PASS  bad input, k1+k2: a message, no run  (The cylinder model fits k1 at most: choose 'None' or 'Radial k1' as distortion.)
+
+G9: the pinhole calibration's results page
+  PASS  the page is written and shown in the Report tab  (D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g5_run\pinhole\calibration_report.html (222 kB); shown True)
+  PASS  its reprojection RMS and wand-length error are those of 0.1 px noise  (RMS 0.100 px; wand 43.0 um RMS over 300 frames; 3 residual panels)
+
+8 of 8 checks passed; 9 s

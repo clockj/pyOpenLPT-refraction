@@ -1,0 +1,32 @@
+# Frame Range: [startID,endID]
+0,300
+# Frame Rate: [Hz]
+5000
+# Number of Threads: (0: use as many as possible)
+26
+# Number of Cameras:
+4
+# Camera File Path, Max Intensity
+../../data/camFile/cam0.txt,255
+../../data/camFile/cam1.txt,255
+../../data/camFile/cam2.txt,255
+../../data/camFile/cam3.txt,255
+# Image File Path
+../../data/imgLists/cam0ImageNames.txt
+../../data/imgLists/cam1ImageNames.txt
+../../data/imgLists/cam2ImageNames.txt
+../../data/imgLists/cam3ImageNames.txt
+# View Volume: (xmin,xmax,ymin,ymax,zmin,zmax)
+-81.0,54.0,-42.0,59.0,-36.0,52.5
+# Voxel to MM: e.g. use 1000^3 voxel, (xmax-xmin)/1000
+0.129
+# Output Folder Path:
+Results
+# Object Types:
+Tracer
+# STB Config Files:
+tracerConfig.txt
+# Flag to load previous track files, previous frameID
+1,200
+# Folder of the tracks to load
+../r200_base/Results/ConvergeTrack/

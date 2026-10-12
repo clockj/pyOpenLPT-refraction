@@ -1,0 +1,8 @@
+T13b2: a guard against overlapping balls for ellipse_rodmask (pairs closer than 3 px are dropped)
+  T13b's frames: 22 crowded camera-frames (gap < 10 px; 17 overlap) and 150 uncrowded ones; best focus; four lightings; new noise
+  backlit   crowded 22 (overlapping 17): wrong centres for overlapping balls 0 without the guard, 0 with it; measured 2 -> 2 | uncrowded 150: measured 150, dropped by the guard 0
+  even      crowded 22 (overlapping 17): wrong centres for overlapping balls 3 without the guard, 0 with it; measured 8 -> 2 | uncrowded 150: measured 144, dropped by the guard 0
+  side      crowded 22 (overlapping 17): wrong centres for overlapping balls 2 without the guard, 0 with it; measured 7 -> 3 | uncrowded 150: measured 144, dropped by the guard 0
+  highlight crowded 22 (overlapping 17): wrong centres for overlapping balls 3 without the guard, 0 with it; measured 8 -> 2 | uncrowded 150: measured 144, dropped by the guard 0
+  PASS: no wrong centre for overlapping balls and no uncrowded pair dropped, in all four lightings
+done in 389 s

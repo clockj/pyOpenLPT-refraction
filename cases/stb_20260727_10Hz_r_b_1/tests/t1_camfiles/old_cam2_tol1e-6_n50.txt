@@ -1,0 +1,49 @@
+# Camera Model: (PINHOLE/POLYNOMIAL/PINPLATE)
+PINPLATE
+# Camera Calibration Error: 
+1.6375657,1.014641
+# Pose Calibration Error: 
+0.066824626,0.041649812
+# Image Size: (n_row,n_col)
+1952,2048
+# Camera Matrix: 
+1.33359330e+04,0.00000000e+00,1.02400000e+03
+0.00000000e+00,1.33359330e+04,9.76000000e+02
+0.00000000e+00,0.00000000e+00,1.00000000e+00
+# Distortion Coefficients: 
+0.00000000e+00,0.00000000e+00,0.00000000e+00,0.00000000e+00,0.00000000e+00
+# Rotation Vector: 
+1.81227074e-01,1.55777382e+00,1.65921950e-01
+# Rotation Matrix: 
+7.05167332e-03,9.01159874e-03,9.99934530e-01
+2.19430454e-01,9.75573355e-01,-1.03395044e-02
+-9.75602660e-01,2.19488998e-01,4.90200540e-03
+# Inverse of Rotation Matrix: 
+7.05167332e-03,2.19430454e-01,-9.75602660e-01
+9.01159874e-03,9.75573355e-01,2.19488998e-01
+9.99934530e-01,-1.03395044e-02,4.90200540e-03
+# Translation Vector: 
+6.24542781e+00,1.77066366e+00,5.18138570e+02
+# Inverse of Translation Vector: 
+5.05064788e+02,-1.15509409e+02,-8.76662921e+00
+# Reference Point of Refractive Plate: 
+1.05147245e+02,-5.30527615e+01,2.92833111e+01
+# Normal Vector of Refractive Plate: 
+-9.99315835e-01,1.13313901e-04,3.69844319e-02
+# Refractive Index Array: 
+1.33000000e+00,1.49000000e+00,1.00000000e+00
+# Width of the Refractive Plate: (same as other physical units)
+1.26980000e+01
+# Projection Tolerance: 
+9.9999999999999995e-07
+# Maximum Number of Iterations for Projection: 
+50
+# Optimization Rate: 
+1.00000000e-01
+# --- BEGIN_REFRACTION_META ---
+# VERSION=2
+# CAM_ID=2
+# WINDOW_ID=1
+# PLANE_PT_EXPORT=[105.1472,-53.0528,29.2833]
+# PLANE_N=[-0.999316,0.000113,0.036984]
+# --- END_REFRACTION_META ---

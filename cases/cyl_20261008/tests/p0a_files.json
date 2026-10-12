@@ -1,0 +1,222 @@
+{
+ "T0/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T0\\cam1",
+  "frames": 13001,
+  "first": "frame000000.tif",
+  "last": "frame013000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-08 14:50:46",
+  "time_last": "2026-10-08 14:55:48",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 168.0,
+  "header": {
+   "bytes": 270812,
+   "type": "CI",
+   "first_movie_image": -3749,
+   "total_image_count": 16832,
+   "first_image_no": 0,
+   "image_count": 13001,
+   "bitmap_size": [
+    1280,
+    800
+   ],
+   "bits": 8,
+   "serial": 29199,
+   "fps": 100,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T0/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T0\\cam2",
+  "frames": 13001,
+  "first": "frame000000.tif",
+  "last": "frame013000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-08 14:50:44",
+  "time_last": "2026-10-08 14:55:42",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 148.0,
+  "header": {
+   "bytes": 270812,
+   "type": "CI",
+   "first_movie_image": -3750,
+   "total_image_count": 16815,
+   "first_image_no": 0,
+   "image_count": 13001,
+   "bitmap_size": [
+    1280,
+    800
+   ],
+   "bits": 8,
+   "serial": 23752,
+   "fps": 100,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T0/cam3": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T0\\cam3",
+  "frames": 10605,
+  "first": "frame000000.tif",
+  "last": "frame010604.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-08 14:50:48",
+  "time_last": "2026-10-08 14:56:08",
+  "size": [
+   2048,
+   1952
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 159.0,
+  "header": {
+   "bytes": 222892,
+   "type": "CI",
+   "first_movie_image": 2396,
+   "total_image_count": 10734,
+   "first_image_no": 2396,
+   "image_count": 10605,
+   "bitmap_size": [
+    2048,
+    1952
+   ],
+   "bits": 8,
+   "serial": 29198,
+   "fps": 100,
+   "exposure_us": 100
+  },
+  "config_first_image": 2396,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T1/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T1\\cam1",
+  "frames": 1001,
+  "first": "frame000000.tif",
+  "last": "frame001000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-08 15:03:10",
+  "time_last": "2026-10-08 15:03:22",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 158.0,
+  "header": {
+   "bytes": 30812,
+   "type": "CI",
+   "first_movie_image": -48931,
+   "total_image_count": 49932,
+   "first_image_no": 0,
+   "image_count": 1001,
+   "bitmap_size": [
+    1280,
+    800
+   ],
+   "bits": 8,
+   "serial": 29199,
+   "fps": 4000,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T1/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T1\\cam2",
+  "frames": 1001,
+  "first": "frame000000.tif",
+  "last": "frame001000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-08 15:03:10",
+  "time_last": "2026-10-08 15:03:22",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 139.0,
+  "header": {
+   "bytes": 30812,
+   "type": "CI",
+   "first_movie_image": -48931,
+   "total_image_count": 49932,
+   "first_image_no": 0,
+   "image_count": 1001,
+   "bitmap_size": [
+    1280,
+    800
+   ],
+   "bits": 8,
+   "serial": 23752,
+   "fps": 4000,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T1/cam3": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261008\\T1\\cam3",
+  "frames": 1001,
+  "first": "frame000000.tif",
+  "last": "frame001000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-08 15:03:12",
+  "time_last": "2026-10-08 15:03:30",
+  "size": [
+   2048,
+   1952
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 146.0,
+  "header": {
+   "bytes": 30812,
+   "type": "CI",
+   "first_movie_image": -11604,
+   "total_image_count": 12605,
+   "first_image_no": 0,
+   "image_count": 1001,
+   "bitmap_size": [
+    2048,
+    1952
+   ],
+   "bits": 8,
+   "serial": 29198,
+   "fps": 4000,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T0_common_images": [
+  2396,
+  13000
+ ]
+}

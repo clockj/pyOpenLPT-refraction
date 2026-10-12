@@ -1,0 +1,15 @@
+L2 self-test of lines.py
+  PASS  profile vs quadrature: max |P - quadrature| = 3.34e-08 (quadrature error ~1e-7)
+  PASS  profile derivatives vs differences: d/dt 6.2e-09, d/dL 3.7e-09, d/ds 8.9e-09
+  PASS  L = 0 branch derivatives: d/dt 2.5e-12, d/ds 2.4e-11
+  PASS  continuity at L -> 0: |P(L = 1e-4) - P(L = 0)| = 1.5e-10
+  PASS  clip_expect vs Monte Carlo: max |E - MC| = 0.0018 (MC error ~0.003)
+  PASS  clip_expect derivative: max |d - difference| = 9.0e-11
+  PASS  render flux and centroid: max flux error 5.2e-07 (relative), max centroid error 1.8e-06 px
+  PASS  render line profile and disk: line (a = 15 px) vs semicircle * Gaussian: 1.6e-04 of the peak; disk (r = 4 px) vs 20x supersampling: 4.2e-04
+  (info) a = 15 px line, row through it, columns 86-115: 2.1 3.4 4.3 5.1 5.6 6.1 6.5 6.8 7.0 7.3 7.4 7.6 7.7 7.7 7.8 7.8 7.7 7.6 7.5 7.4 7.2 6.9 6.7 6.3 5.9 5.4 4.8 4.0 2.9 1.5
+  PASS  noise_left (float image): true 1.5: 0 % covered -> 1.489 (MAD 1.501), 5 % covered -> 1.505 (MAD 1.567), 10 % covered -> 1.556 (MAD 1.645), 15 % covered -> 1.542 (MAD 1.732)
+  PASS  estimate_noise_clipped (8-bit fallback): true 6.0: 0 % covered -> 6.05, 5 % covered -> 6.15, 10 % covered -> 6.16, 15 % covered -> 6.18
+  PASS  fit_objects recovers its model (noiseless): max |du|,|dv| 7.1e-15 px, model 8.0e-12 of the peak, RMS widths 2.9e-11; (Lx, sx | Ly, sy) fitted: 22.00, 1.10 | 0.05, 0.90; 0.05, 1.00 | 9.00, 1.20; 2.50, 1.30 | 2.00, 1.00
+
+all checks pass: True

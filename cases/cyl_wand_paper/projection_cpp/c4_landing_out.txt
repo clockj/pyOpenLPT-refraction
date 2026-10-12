@@ -1,0 +1,6 @@
+c4_landing: started 2026-10-06 12:45:34; module projbench.cp311-win_amd64.pyd (SHA-256 01ab7737e3b8, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+ref: 10000 rays (449 landing within 1e-9 m); C++ = _miss bitwise at 10000; finite in both 9725 (within 1e-14 m + 1e-12 relative of landing() at 9725), infinite in both 275; the same side of 1e-9 m at 10000; largest difference from landing() 5.8e-16 m
+pa: 10000 rays (476 landing within 1e-9 m); C++ = _miss bitwise at 10000; finite in both 9637 (within 1e-14 m + 1e-12 relative of landing() at 9637), infinite in both 363; the same side of 1e-9 m at 10000; largest difference from landing() 4.4e-16 m
+sph: 10000 rays (398 landing within 1e-9 m); C++ = _miss bitwise at 10000; finite in both 9737 (within 1e-14 m + 1e-12 relative of landing() at 9737), infinite in both 263; the same side of 1e-9 m at 10000; largest difference from landing() 2.3e-15 m
+C4 PASS
+c4_landing: done in 1.6 s

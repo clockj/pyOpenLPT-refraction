@@ -1,0 +1,40 @@
+base (31 px median, k 6; detector noise [8.06, 5.92]): 251 frames, 9.0 s per frame
+  detections per frame [1022.0, 852.6]; IPR objects per frame 187
+  active long tracks, final / control: frame 23 108 / 38 = 0.352; frame 43 146 / 57 = 0.390; frame 63 187 / 85 = 0.455; frame 83 207 / 107 = 0.517; frame 100 239 / 123 = 0.515
+  long tracks at frame 100 (>= 4 frames): final 313, control 166; swirl above 0.3: final 24.4 %, control 55.6 % (final at frame 250: 36.0 %)
+  ghost share: counts 51 %, swirl 44 %; real long tracks at frame 100: 152 (counts), 176 (swirl)
+  the whole run: 701 long tracks, 64011 points; length 10/50/90 % [22.0, 76.0, 193.0]
+  T1-a: RMS du, dv cam1 0.48, 0.44; cam2 0.26, 0.78 px; epipolar mean +0.063 +- 0.042, RMS 1.02 px (n 589)
+  T1-c: |width error| 68 % cam1 0.65 / 0.47, cam2 0.46 / 0.44 px (horizontal / vertical)
+  T1-d: 701 long tracks, length 10/50/90 % [22.0, 76.0, 193.0]; speed median 67.3 mm/s; second difference / step 0.531
+m15 (15 px median, k 6; detector noise [7.51, 5.5]): 251 frames, 16.3 s per frame
+  detections per frame [1151.6, 987.2]; IPR objects per frame 231
+  active long tracks, final / control: frame 23 187 / 80 = 0.428; frame 43 281 / 125 = 0.445; frame 63 344 / 174 = 0.506; frame 83 407 / 201 = 0.494; frame 100 447 / 222 = 0.497
+  long tracks at frame 100 (>= 4 frames): final 589, control 302; swirl above 0.3: final 26.9 %, control 50.9 % (final at frame 250: 41.3 %)
+  ghost share: counts 50 %, swirl 53 %; real long tracks at frame 100: 296 (counts), 278 (swirl)
+  the whole run: 1228 long tracks, 112383 points; length 10/50/90 % [24.0, 77.0, 186.29999999999995]
+  T1-a: RMS du, dv cam1 0.51, 0.44; cam2 0.24, 0.76 px; epipolar mean +0.069 +- 0.034, RMS 1.00 px (n 863)
+  T1-c: |width error| 68 % cam1 0.65 / 0.46, cam2 0.45 / 0.44 px (horizontal / vertical)
+  T1-d: 1228 long tracks, length 10/50/90 % [24.0, 77.0, 186.29999999999995]; speed median 69.8 mm/s; second difference / step 0.553
+m15k5 (15 px median, k 5; detector noise [7.51, 5.5], k 5.0): 251 frames, 16.6 s per frame
+  detections per frame [1524.4, 1438.8]; IPR objects per frame 363
+  active long tracks, final / control: frame 23 294 / 153 = 0.520; frame 43 453 / 223 = 0.492; frame 63 552 / 287 = 0.520; frame 83 617 / 321 = 0.520; frame 100 675 / 354 = 0.524
+  long tracks at frame 100 (>= 4 frames): final 878, control 501; swirl above 0.3: final 29.1 %, control 50.5 % (final at frame 250: 41.5 %)
+  ghost share: counts 52 %, swirl 58 %; real long tracks at frame 100: 418 (counts), 372 (swirl)
+  the whole run: 1818 long tracks, 166356 points; length 10/50/90 % [22.0, 78.0, 186.0]
+  T1-a: RMS du, dv cam1 0.55, 0.45; cam2 0.30, 0.78 px; epipolar mean +0.071 +- 0.032, RMS 1.01 px (n 973)
+  T1-c: |width error| 68 % cam1 0.70 / 0.48, cam2 0.45 / 0.48 px (horizontal / vertical)
+  T1-d: 1818 long tracks, length 10/50/90 % [22.0, 78.0, 186.0]; speed median 71.8 mm/s; second difference / step 0.562
+recurrence (a track of A recurs in B: at least half its points within 0.1 mm of B's at the same frame):
+  frames 0-100: base's 313 tracks in m15: 227 recur (73 %); swirl <= 0.3: 79 % of 183, > 0.3: 56 % of 59
+  frames 0-100: base's 313 tracks in m15k5: 209 recur (67 %); swirl <= 0.3: 68 % of 183, > 0.3: 63 % of 59
+  frames 0-100: m15's 589 tracks in base: 204 recur (35 %); swirl <= 0.3: 40 % of 334, > 0.3: 24 % of 123
+  frames 0-100: m15's 589 tracks in m15k5: 367 recur (62 %); swirl <= 0.3: 66 % of 334, > 0.3: 48 % of 123
+  frames 0-100: m15k5's 878 tracks in base: 177 recur (20 %); swirl <= 0.3: 22 % of 502, > 0.3: 13 % of 206
+  frames 0-100: m15k5's 878 tracks in m15: 340 recur (39 %); swirl <= 0.3: 40 % of 502, > 0.3: 26 % of 206
+  whole run: base's 701 tracks in m15: 404 recur (58 %)
+  whole run: base's 701 tracks in m15k5: 379 recur (54 %)
+  whole run: m15's 1228 tracks in base: 356 recur (29 %)
+  whole run: m15's 1228 tracks in m15k5: 642 recur (52 %)
+  whole run: m15k5's 1818 tracks in base: 323 recur (18 %)
+  whole run: m15k5's 1818 tracks in m15: 603 recur (33 %)

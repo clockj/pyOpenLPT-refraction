@@ -1,0 +1,50 @@
+{
+ "checks": [
+  {
+   "check": "distortion None: the Job of today's view = the new view's (new fields at their defaults)",
+   "ok": true,
+   "detail": "differing fields []; windows [{'name': 'window 0', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}, {'name': 'window 1', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}]; fit_k1 False"
+  },
+  {
+   "check": "distortion None: today's run = the new run, bit for bit (cameras, windows, RMS, detections used)",
+   "ok": true,
+   "detail": "differing []; RMS 0.116064 px; f [4326.3, 4323.0, 3971.8, 3983.3]"
+  },
+  {
+   "check": "Precalibrate: today's stages 1-3 = the new ones, bit for bit",
+   "ok": true,
+   "detail": "differing []; RMS 0.123430 px"
+  },
+  {
+   "check": "distortion Radial k1: the Job of today's view = the new view's (new fields at their defaults)",
+   "ok": true,
+   "detail": "differing fields []; windows [{'name': 'window 0', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}, {'name': 'window 1', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}]; fit_k1 True"
+  },
+  {
+   "check": "distortion Radial k1: today's run = the new run, bit for bit (cameras, windows, RMS, detections used)",
+   "ok": true,
+   "detail": "differing []; RMS 0.115980 px; f [4326.8, 4323.0, 3971.3, 3982.9]"
+  }
+ ],
+ "seconds": 210.34460759162903,
+ "None": {
+  "rms_px": 0.11606443568854706,
+  "f_px": [
+   4326.280443853546,
+   4322.956096782884,
+   3971.7700533490497,
+   3983.337074286753
+  ],
+  "differing": []
+ },
+ "Radial k1": {
+  "rms_px": 0.11597978644610497,
+  "f_px": [
+   4326.763283970554,
+   4323.039451735824,
+   3971.263908302527,
+   3982.9082656338205
+  ],
+  "differing": []
+ }
+}

@@ -1,0 +1,9 @@
+D2: 60 synthetic images of a wand in air (1280 x 800 px), radii 22-30 / 38-50 px, blur 1.5 px, noise 2
+  fast     : both balls in 60 of 60; centre error median/95%/max 0.072/0.214/0.294 px; radius error 0.60/0.64/0.65 px; extra points 0.0; 130 ms per image; second run: change median/95%/max 0.000/0.024/0.044 px
+  reliable : both balls in 60 of 60; centre error median/95%/max 0.157/0.339/0.445 px; radius error 0.53/0.65/0.72 px; extra points 0.0; 4233 ms per image
+  ellipse  : both balls in 60 of 60; centre error median/95%/max 0.019/0.046/0.061 px; radius error 0.56/0.58/0.59 px; extra points 0.0; 164 ms per image
+  T2 (12 images), fast     : points per image [0, 4, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2]; 144 ms per image; fast's second run: largest change 27.29 px
+  T2 (12 images), reliable : points per image [0, 4, 2, 3, 1, 2, 2, 2, 5, 5, 1, 2]; 4784 ms per image
+  T2 (12 images), ellipse  : points per image [0, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 1]; 258 ms per image
+
+0 of 0 checks passed; 401 s

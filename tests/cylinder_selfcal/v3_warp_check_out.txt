@@ -1,0 +1,1 @@
+V3 warp check: the pipeline without a warp on frames [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000] of both cameras against the case's 15 px frames: max pixel difference 0

@@ -1,0 +1,45 @@
+{
+ "run": "r200_base",
+ "argv": [
+  "r200_base",
+  "--build",
+  "base",
+  "--frames",
+  "0",
+  "200"
+ ],
+ "build": "base",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-py-baseline\\Release",
+ "build_info": {
+  "name": "base",
+  "mode": "py",
+  "config": "Release",
+  "src": "D:\\Refraction\\pyOpenLPT\\build-stb\\src-base",
+  "git_head": "14ad4b6",
+  "git_diff_stat": "",
+  "git_diff_sha256": "",
+  "untracked": [],
+  "defs": [],
+  "asan": false,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc",
+  "start": "2026-10-05T13:32:40",
+  "minutes": 0.6,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 370,
+  "products": [
+   "OpenLPT.exe",
+   "pyopenlpt.cp311-win_amd64.pyd"
+  ]
+ },
+ "asan_options": "",
+ "host": "HELLOWORLD",
+ "start": "2026-10-05T17:32:08",
+ "end": "2026-10-05T17:56:48",
+ "wall_s": 1480.2,
+ "returncode": 0,
+ "frames_done": 201,
+ "sum_frame_s": 1454.4,
+ "peak_working_set_MB": 1660,
+ "peak_private_MB": 1527
+}

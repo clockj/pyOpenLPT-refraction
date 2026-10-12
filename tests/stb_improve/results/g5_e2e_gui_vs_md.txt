@@ -1,0 +1,4 @@
+S1 identical outputs: s50_md vs g5_e2e_gui
+log: 51 frames compared (0-50), 0 differ
+Results/: 11 files, 11 byte-identical
+IDENTICAL

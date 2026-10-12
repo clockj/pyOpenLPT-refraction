@@ -1,0 +1,106 @@
+{
+  "_comment": "Run 20261007 through the water-filled acrylic tube: T0 = wand calibration, Planes = the 30 Sep dot board at three stage positions, T1 = tracers. Lengths in mm, image coordinates in px (u = column, v = row, pixel centres at integers). The top-level wand keys (raw_dir ... calibrate) are T0's, in the layout of the 6 Oct cases, so that their code is reused; the Planes and T1 have their own sections. See 2026-10-07-plan.md.",
+  "case": "cyl_20261007",
+  "raw_root": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007",
+  "out_root": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007",
+  "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\T0",
+  "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T0",
+  "cameras": [
+    {"id": 1, "folder": "cam1", "gui_index": 0},
+    {"id": 2, "folder": "cam2", "gui_index": 1}
+  ],
+  "frames": {"pattern": "frame{frame:06d}.tif", "first": 0, "last": 15000},
+  "image": {"width": 1280, "height": 800, "pixel_mm": 0.020, "camera": "Phantom VEO 710L (from the .chd headers; serials 29199 = cam1, 23752 = cam2, as on 6 Oct)"},
+  "same_camera_settings": "The user (7 Oct): focus and aperture were not changed between T0, the Planes and T1; the cameras share one calibration.",
+  "wand": {
+    "_comment": "The wand of 6 Oct: 10 mm long (centre to centre), balls 3 mm and 4 mm, rod about 2 mm. End A is the small ball.",
+    "length_mm": 10.0,
+    "ball_diameters_mm": [3.0, 4.0]
+  },
+  "tube": {
+    "_comment": "As on 6 Oct: OD 7.9375 in, wall 0.125 in.",
+    "outer_diameter_in": 7.9375,
+    "wall_in": 0.125,
+    "radii_mm": [100.80625, 97.63125],
+    "n": [1.0, 1.49, 1.333],
+    "media": ["air", "acrylic", "water"]
+  },
+  "detect": {
+    "_comment": "T2's settings (6 Oct), checked on this run by the survey P0d.",
+    "polarity": "dark",
+    "min_r_px": 40.0,
+    "max_r_px": 120.0,
+    "open_px": 95,
+    "rod_mask_px": 50.0,
+    "guard_px": 3.0,
+    "workers": 16,
+    "_workers": "16 processes: the file server (about 22 MB/s) limits the speed."
+  },
+  "accept": {
+    "_comment": "The 6 Oct rules: a camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame is kept when every camera keeps it.",
+    "edge_rms_max_px": 1.0,
+    "aspect_range": [1.15, 1.45],
+    "size_tol": 0.10
+  },
+  "calibrate": {
+    "_comment": "As on 6 Oct, but n_final 2 (the GUI's default) instead of the thorough search's 6. With 6, a start in a wrong minimum (cam1 f 10,995 px at 253 mm from the axis, cam2 7,709 px at 210 mm; RMS 1.38 px) kept 12,088 of 12,144 observations against 11,876 for the right one (RMS 0.600 px) and won calibrate's rule (most observations kept first): its larger residuals make its 5-sigma outlier limit wider. The first two starts both reach the 0.60 px minimum. That run is kept in wrong_minimum_nfinal6/ here and on X:.",
+    "fit_k1": false,
+    "fit_L": false,
+    "noise_weights": "camera",
+    "n_final": 2
+  },
+  "tracking_camfiles": {
+    "_comment": "C4: copies of the delivered camFiles for tracking, with the projection tolerance of the C++ default (the wand fit writes 1e-12, at which a few points in each camera's near/far junction plane get no image).",
+    "folder": "camFile_track",
+    "proj_tol": 1e-9
+  },
+  "reference_T2": {
+    "_comment": "Run T2 of 6 Oct, for the camera-move test C1-X.",
+    "case_dir": "..\\cyl_20261006_T2_wand",
+    "result_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261006\\T2\\Results"
+  },
+  "reference_20260930": {
+    "_comment": "cam1 in the dot-board case cyl_20260930_T0_cam1 (through the tube) and its focal check in air (5 Oct).",
+    "result_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20260930\\T0\\cam1",
+    "f_px": 41459,
+    "f_air_px": 41610
+  },
+  "planes": {
+    "_comment": "The 30 Sep dot board at three stage positions, one frame per camera each. README.txt: '0,1,2: Far from cam1'. The user (7 Oct): the stage moved about one full turn of its screw, about 0.125 in, between positions.",
+    "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\Planes",
+    "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\Planes",
+    "positions": ["0", "1", "2"],
+    "file": "frame000000.tif",
+    "step_mm_nominal": 3.175,
+    "direction": "away from cam1 as the index grows",
+    "pitch_mm": [3.0, 3.0],
+    "dot_diameter_mm": 1.5,
+    "dots": "dark on bright",
+    "detect": {
+      "_comment": "The 30 Sep case's detector settings (cases/cyl_20260930_T0_cam1/config.json), for both cameras unless detect_overrides says otherwise.",
+      "background_close_px": 101,
+      "background_sigma_px": 25.0,
+      "mask_dilate_px": 9,
+      "seg_fraction": 0.5,
+      "min_area_frac": 0.35,
+      "max_area_frac": 2.0,
+      "min_solidity": 0.85,
+      "border_margin_px": 3,
+      "rays": 96,
+      "ray_step_px": 0.25,
+      "edge_fraction": 0.5,
+      "smooth_sigma_px": 1.0
+    },
+    "detect_overrides": {}
+  },
+  "tracers": {
+    "_comment": "T1: 60 um polyamide tracer particles (the user, 7 Oct), backlit (dark particles on a bright background). Both cameras on one trigger at 4,000 frames/s, 100 us exposure (cam2's .chd; cam1's folder has none, the user: same settings, synchronised).",
+    "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261007\\T1",
+    "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261007\\T1",
+    "frames": {"pattern": "frame{frame:06d}.tif", "first": 0, "last": 1000},
+    "fps": 4000,
+    "exposure_us": 100,
+    "particle_diameter_um": 60,
+    "particle_material": "polyamide"
+  }
+}

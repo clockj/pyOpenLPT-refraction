@@ -1,0 +1,110 @@
+T13b: detectors on rendered wand images through the tube (cam1-like rig, 1280 x 800 px)
+  400 frames, 1164 camera-frames with both balls whole; 4 lightings x 2 focus settings; each image with and without noise; 6 detectors
+  [  1/16  1025 s] frames 175-199: 2820 detections
+  [  2/16  1070 s] frames 275-299: 2908 detections
+  [  3/16  1079 s] frames 50-74: 2988 detections
+  [  4/16  1094 s] frames 25-49: 3032 detections
+  [  5/16  1104 s] frames 125-149: 2912 detections
+  [  6/16  1105 s] frames 150-174: 2992 detections
+  [  7/16  1106 s] frames 200-224: 3004 detections
+  [  8/16  1118 s] frames 0-24: 3000 detections
+  [  9/16  1126 s] frames 325-349: 3028 detections
+  [ 10/16  1127 s] frames 350-374: 2992 detections
+  [ 11/16  1128 s] frames 375-399: 2952 detections
+  [ 12/16  1132 s] frames 75-99: 3032 detections
+  [ 13/16  1134 s] frames 100-124: 2960 detections
+  [ 14/16  1143 s] frames 225-249: 3032 detections
+  [ 15/16  1153 s] frames 250-274: 3072 detections
+  [ 16/16  1166 s] frames 300-324: 3004 detections
+  camera-frames: 1164; crowded (gap < 10 px): 22, of which overlapping: 17
+  time per image: pyopenlpt_fast 227 ms, pyopenlpt_reliable 820 ms, blob 5 ms, blob_open 17 ms, ellipse 263 ms, ellipse_rodmask 268 ms
+
+Focus best, lighting backlit (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        16/1142     0  1126     0  +0.9891, +0.0275  3.9533   4.817 |    +0.0445,   -0.0006  2.7263   2.770 |  1.4514 |           5.747   9.71   12.84
+  pyopenlpt_reliable     0/286      0   286     0   (none measured) | nearest: median 8.199, p90 12.14, max 14.37
+  blob                   0/1142     0     0  1142   (none measured) | nearest: median 19.721, p90 19.72, max 19.72
+  blob_open           1142/1142     0     0     0  +0.0001, -0.0003  0.4267   0.815 |    -0.0004,   -0.0011  0.4225   0.782 |  0.0929 |           0.406   0.59    0.82
+  ellipse             1142/1142     0     0     0  +0.0012, +0.0001  0.0725   0.239 |    +0.0011,   +0.0000  0.0708   0.233 |  0.0196 |           0.036   0.13    0.24
+  ellipse_rodmask     1142/1142     0     0     0  -0.0009, -0.0004  0.0263   0.137 |    -0.0003,   +0.0000  0.0101   0.091 |  0.0244 |           0.014   0.04    0.14
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 2/22 measured, 17/17 overlapping with a wrong centre; pyopenlpt_reliable: 0/6 measured, 5/5 overlapping with a wrong centre; blob: 0/22 measured, 0/17 overlapping with a wrong centre; blob_open: 1/22 measured, 0/17 overlapping with a wrong centre; ellipse: 2/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 2/22 measured, 0/17 overlapping with a wrong centre
+
+Focus best, lighting even (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        34/1142     0  1108     0  +0.0991, +0.1889  2.9284   4.990 |    -0.5564,   +0.1044  3.2171   4.968 |  3.0183 |           6.925  10.31   19.91
+  pyopenlpt_reliable     0/286      0   286     0   (none measured) | nearest: median 7.410, p90 11.63, max 14.26
+  blob                1142/1142     0     0     0  -0.0233, +0.0026  1.0265   3.205 |    -0.0228,   +0.0037  1.0263   3.159 |  0.0482 |           0.106   2.02    3.21
+  blob_open            927/1142     0   181    34  -0.0315, +0.0284  1.5582   4.997 |    -0.0311,   +0.0294  1.5510   4.962 |  0.1010 |           0.143   4.42   13.00
+  ellipse             1089/1142     0     9    44  +0.0014, +0.0013  0.1511   4.903 |    -0.0001,   +0.0014  0.1356   3.375 |  0.1384 |           0.015   0.08    9.40
+  ellipse_rodmask     1103/1142     0     0    39  +0.0004, -0.0002  0.0281   0.159 |    -0.0002,   +0.0002  0.0125   0.147 |  0.0255 |           0.015   0.05    0.16
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 3/22 measured, 17/17 overlapping with a wrong centre; pyopenlpt_reliable: 0/6 measured, 5/5 overlapping with a wrong centre; blob: 5/22 measured, 0/17 overlapping with a wrong centre; blob_open: 2/22 measured, 5/17 overlapping with a wrong centre; ellipse: 9/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 8/22 measured, 3/17 overlapping with a wrong centre
+
+Focus best, lighting side (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        33/1142     0  1109     0  +0.3917, -0.0929  3.0112   4.970 |    -0.2228,   -0.0781  3.1804   4.541 |  2.2088 |           6.974  10.36   18.24
+  pyopenlpt_reliable     0/286      0   286     0   (none measured) | nearest: median 7.622, p90 12.19, max 15.61
+  blob                1142/1142     0     0     0  +0.1736, -0.3069  1.0873   3.264 |    +0.1736,   -0.3071  1.0866   3.319 |  0.0487 |           0.461   2.05    3.26
+  blob_open            937/1142     0   174    31  +0.1328, -0.2774  1.6046   4.999 |    +0.1292,   -0.2742  1.6023   4.991 |  0.0946 |           0.479   4.42   13.36
+  ellipse             1092/1142     0    10    40  +0.0958, -0.1741  0.2302   1.244 |    +0.0973,   -0.1764  0.2324   1.243 |  0.0257 |           0.219   0.26   10.10
+  ellipse_rodmask     1107/1142     0     0    35  +0.0959, -0.1720  0.2164   0.466 |    +0.0978,   -0.1743  0.2183   0.411 |  0.0267 |           0.217   0.25    0.47
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 1/22 measured, 17/17 overlapping with a wrong centre; pyopenlpt_reliable: 0/6 measured, 5/5 overlapping with a wrong centre; blob: 5/22 measured, 0/17 overlapping with a wrong centre; blob_open: 2/22 measured, 5/17 overlapping with a wrong centre; ellipse: 8/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 8/22 measured, 2/17 overlapping with a wrong centre
+
+Focus best, lighting highlight (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        26/1142     0  1116     0  -1.2695, -0.0043  2.8038   4.739 |    -1.3577,   +0.0197  2.9360   4.979 |  0.5587 |           6.819  10.34   19.85
+  pyopenlpt_reliable     0/286      0   286     0   (none measured) | nearest: median 7.395, p90 11.68, max 14.39
+  blob                1142/1142     0     0     0  -0.0228, +0.0029  1.0288   3.156 |    -0.0236,   +0.0020  1.0277   3.146 |  0.0489 |           0.103   2.01    3.16
+  blob_open            926/1142     0   181    35  -0.0343, +0.0351  1.5511   4.922 |    -0.0349,   +0.0312  1.5423   4.963 |  0.1060 |           0.141   4.41   12.54
+  ellipse             1094/1142     0     9    39  +0.0338, +0.1460  0.2844   2.534 |    +0.0334,   +0.1505  0.2962   2.974 |  0.0801 |           0.228   0.39    9.95
+  ellipse_rodmask     1104/1142     0     0    38  +0.0280, +0.1369  0.3150   0.904 |    +0.0276,   +0.1408  0.3195   0.802 |  0.0410 |           0.246   0.53    0.90
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 2/22 measured, 17/17 overlapping with a wrong centre; pyopenlpt_reliable: 0/6 measured, 5/5 overlapping with a wrong centre; blob: 5/22 measured, 0/17 overlapping with a wrong centre; blob_open: 2/22 measured, 5/17 overlapping with a wrong centre; ellipse: 9/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 7/22 measured, 3/17 overlapping with a wrong centre
+
+Focus defocused, lighting backlit (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        52/1142     0  1090     0  +0.3393, +0.0587  2.9451   4.944 |    +0.9546,   +0.0274  3.0346   4.958 |  1.9805 |           5.244   9.20   11.70
+  pyopenlpt_reliable     0/0        0     0     0   (none measured) | nearest: median nan, p90 nan, max nan
+  blob                   0/1142     0     0  1142   (none measured) | nearest: median 19.864, p90 19.86, max 19.86
+  blob_open           1142/1142     0     0     0  -0.0000, -0.0021  0.7109   1.488 |    +0.0006,   +0.0012  0.7099   1.389 |  0.1175 |           0.665   0.95    1.49
+  ellipse             1142/1142     0     0     0  +0.0029, +0.0004  0.1808   0.621 |    +0.0035,   +0.0008  0.1771   0.587 |  0.0316 |           0.098   0.31    0.62
+  ellipse_rodmask     1142/1142     0     0     0  -0.0014, +0.0005  0.0429   0.289 |    -0.0006,   +0.0001  0.0147   0.085 |  0.0399 |           0.022   0.07    0.29
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 1/22 measured, 17/17 overlapping with a wrong centre; blob: 0/22 measured, 0/17 overlapping with a wrong centre; blob_open: 1/22 measured, 0/17 overlapping with a wrong centre; ellipse: 1/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 1/22 measured, 0/17 overlapping with a wrong centre
+
+Focus defocused, lighting even (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        47/1142     0  1095     0  -0.4675, -0.1582  3.2465   4.943 |    -0.6669,   -0.0927  3.2195   4.829 |  2.1164 |           6.106   9.81   19.36
+  pyopenlpt_reliable     0/0        0     0     0   (none measured) | nearest: median nan, p90 nan, max nan
+  blob                1142/1142     0     0     0  -0.0214, +0.0030  1.0279   3.085 |    -0.0215,   +0.0042  1.0271   3.040 |  0.0576 |           0.109   2.02    3.09
+  blob_open            960/1142     0   161    21  -0.0448, +0.0310  1.5136   4.981 |    -0.0416,   +0.0310  1.5083   4.995 |  0.1179 |           0.154   4.21   13.19
+  ellipse             1100/1142     0    13    29  -0.0039, -0.0003  0.1199   1.698 |    -0.0058,   +0.0005  0.1273   1.926 |  0.0750 |           0.028   0.19    9.73
+  ellipse_rodmask     1114/1142     0     0    28  -0.0006, +0.0006  0.0610   0.531 |    -0.0006,   +0.0008  0.0451   0.526 |  0.0411 |           0.023   0.08    0.59
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 0/22 measured, 16/17 overlapping with a wrong centre; blob: 3/22 measured, 0/17 overlapping with a wrong centre; blob_open: 2/22 measured, 3/17 overlapping with a wrong centre; ellipse: 8/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 8/22 measured, 2/17 overlapping with a wrong centre
+
+Focus defocused, lighting side (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        49/1142     0  1093     0  +0.0719, -0.2560  2.8970   4.916 |    +0.3055,   -0.1719  2.8450   4.881 |  2.1177 |           6.299   9.81   19.34
+  pyopenlpt_reliable     0/0        0     0     0   (none measured) | nearest: median nan, p90 nan, max nan
+  blob                1142/1142     0     0     0  +0.2138, -0.4774  1.1643   3.510 |    +0.2141,   -0.4782  1.1631   3.541 |  0.0566 |           0.650   2.08    3.51
+  blob_open            964/1142     0   156    22  +0.1810, -0.4494  1.5988   4.992 |    +0.1791,   -0.4452  1.5886   4.960 |  0.1140 |           0.671   4.18   12.94
+  ellipse             1100/1142     0    14    28  +0.1315, -0.2749  0.3590   2.827 |    +0.1341,   -0.2793  0.3569   2.691 |  0.0653 |           0.327   0.42    9.75
+  ellipse_rodmask     1119/1142     0     0    23  +0.1340, -0.2775  0.3423   0.865 |    +0.1360,   -0.2817  0.3435   0.863 |  0.0429 |           0.326   0.42    0.86
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 0/22 measured, 17/17 overlapping with a wrong centre; blob: 3/22 measured, 0/17 overlapping with a wrong centre; blob_open: 2/22 measured, 3/17 overlapping with a wrong centre; ellipse: 6/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 6/22 measured, 0/17 overlapping with a wrong centre
+
+Focus defocused, lighting highlight (uncrowded camera-frames; errors in px)
+  detector             measured  swap wrong  miss         bias u, v     RMS     max |  systematic: bias u, v     RMS     max |  random | nearest: median    p90     max
+  pyopenlpt_fast        58/1142     0  1084     0  +0.1039, -0.0866  3.2422   4.857 |    -0.1099,   -0.1095  3.1776   4.969 |  2.6206 |           6.045   9.90   18.48
+  pyopenlpt_reliable     0/0        0     0     0   (none measured) | nearest: median nan, p90 nan, max nan
+  blob                1142/1142     0     0     0  -0.0249, -0.0004  1.0305   3.157 |    -0.0240,   -0.0004  1.0292   3.084 |  0.0578 |           0.114   2.03    3.16
+  blob_open            958/1142     0   160    24  -0.0450, +0.0237  1.4960   4.965 |    -0.0417,   +0.0238  1.4916   4.907 |  0.1164 |           0.154   4.11   13.24
+  ellipse             1099/1142     0    13    30  +0.0385, +0.1694  0.3262   2.339 |    +0.0366,   +0.1729  0.3350   3.576 |  0.0796 |           0.250   0.47   10.48
+  ellipse_rodmask     1114/1142     0     0    28  +0.0373, +0.1622  0.3404   1.406 |    +0.0358,   +0.1648  0.3411   1.264 |  0.0536 |           0.275   0.54    1.41
+  crowded camera-frames (gap < 10 px): pyopenlpt_fast: 1/22 measured, 16/17 overlapping with a wrong centre; blob: 3/22 measured, 0/17 overlapping with a wrong centre; blob_open: 2/22 measured, 3/17 overlapping with a wrong centre; ellipse: 7/22 measured, 0/17 overlapping with a wrong centre; ellipse_rodmask: 7/22 measured, 1/17 overlapping with a wrong centre
+
+Criteria (best focus, lightings backlit and even): |bias| <= 0.02 px, RMS <= 0.05 px, no swap in an uncrowded frame, no wrong centre for overlapping balls
+  pyopenlpt_fast      fail
+  pyopenlpt_reliable  fail
+  blob                fail
+  blob_open           fail
+  ellipse             fail
+  ellipse_rodmask     fail
+
+done in 1169 s

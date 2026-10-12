@@ -1,0 +1,11 @@
+F1: the GUI's detection with the fixed library, the BLAS thread variables unset as when the GUI starts
+  PASS  a: the variables are 1 inside the block and restored after it  (inside {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}; after (one set to 7 before) {'OPENBLAS_NUM_THREADS': '7', 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None}; after (unset before) {'OPENBLAS_NUM_THREADS': None, 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None})
+  PASS  b: one worker started inside it commits <= 0.5 GB (P2: 4.22 GB without, 0.33 GB with one thread)  (0.33 GB; its variables {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'})
+
+c: the detection pool of 25 workers; committed memory before 36.9 GB of 67.7 GB
+   142 s; committed memory peaked 45.6 GB, 8.7 GB above the start
+  PASS  c: the detection completes
+  PASS  c: the committed memory rose by at most 25 x 0.5 GB  (8.7 GB (without the fix: about 106 GB))
+  PASS  c: the same 159 frames and centres as P3 (to the CSV's 3 decimals)  (159 frames paired; same rows True; largest centre difference 0.0e+00 px)
+
+5 of 5 checks passed; 143 s

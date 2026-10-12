@@ -1,0 +1,5 @@
+c3b_hypot: started 2026-10-06 12:42:25; module projbench.cp311-win_amd64.pyd (SHA-256 a8e54d4ff52e, as built; MSVC 194033812, /O2 /Ob2 /DNDEBUG); pyOpenLPT 7d84533; RefractCurved sources unchanged since the commit
+200000 random pairs: the re-implementation equals math.hypot at 200000; the C runtime's _hypot at 185799
+200000 random pairs of 3-D points: the re-implementation equals math.dist at 200000
+C3b PASS: the re-implementation is bitwise math.hypot and math.dist; the C runtime's hypot differs from Python's at 14201 of 200000 pairs
+c3b_hypot: done in 2.1 s

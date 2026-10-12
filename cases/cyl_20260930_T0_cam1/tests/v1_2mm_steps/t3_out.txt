@@ -1,0 +1,28 @@
+T3 synthetic end-to-end recovery; truth = the calibrated rig (model M2b), 1029 dots, noise sigma (0.204, 0.148) px
+
+seed 11: fit rms 0.2448 px, 0 outliers dropped, 40 s
+  errors: f +125.60 px (sigma 85.93); camera centre [-1.017 -0.934  3.248] mm (sigma [0.922 0.82  2.208]); rotation 0.08645 deg
+  axis at Y=0 [-0.3489  0.     -0.0071] mm (sigma X,Z [0.2828 0.0472]); tilt +0.0160 deg, lean -0.1606 deg (sigma [0.0114 0.141 ])
+  plane offsets: error rms 0.0237 mm, max 0.0579 mm; median sigma 0.0445 mm
+  board corrections: error rms (0.96, 0.87) um against true rms (21.9, 9.7) um
+  z-scores: f +1.46, C [-1.1  -1.14  1.47], axis X -1.23 Z -0.15 tilt +1.41 lean -1.14, dz max |z| 1.15
+  held-out (2244 fresh points, z = 1..37 between planes and -2, 40 beyond): rms 0.0401 px, max 0.1356 px (noise rms 0.252 px)
+
+seed 12: fit rms 0.2404 px, 0 outliers dropped, 40 s
+  errors: f -36.23 px (sigma 84.56); camera centre [ 1.193 -0.287 -0.996] mm (sigma [0.891 0.744 2.177]); rotation 0.07335 deg
+  axis at Y=0 [ 0.3642  0.     -0.0133] mm (sigma X,Z [0.2748 0.0467]); tilt +0.0041 deg, lean -0.0492 deg (sigma [0.0116 0.1283])
+  plane offsets: error rms 0.0246 mm, max 0.0514 mm; median sigma 0.0449 mm
+  board corrections: error rms (0.98, 0.70) um against true rms (21.9, 9.7) um
+  z-scores: f -0.43, C [ 1.34 -0.39 -0.46], axis X +1.33 Z -0.29 tilt +0.35 lean -0.38, dz max |z| 1.35
+  held-out (2244 fresh points, z = 1..37 between planes and -2, 40 beyond): rms 0.0284 px, max 0.0651 px (noise rms 0.252 px)
+
+seed 13: fit rms 0.2399 px, 0 outliers dropped, 40 s
+  errors: f +44.39 px (sigma 84.38); camera centre [-0.191  0.194  1.122] mm (sigma [0.898 0.779 2.17 ]); rotation 0.01797 deg
+  axis at Y=0 [-0.0722  0.     -0.0126] mm (sigma X,Z [0.2763 0.0463]); tilt -0.0028 deg, lean +0.0345 deg (sigma [0.0113 0.1341])
+  plane offsets: error rms 0.0242 mm, max 0.0475 mm; median sigma 0.0441 mm
+  board corrections: error rms (1.03, 0.95) um against true rms (21.9, 9.7) um
+  z-scores: f +0.53, C [-0.21  0.25  0.52], axis X -0.26 Z -0.27 tilt -0.25 lean +0.26, dz max |z| 1.36
+  held-out (2244 fresh points, z = 1..37 between planes and -2, 40 beyond): rms 0.0190 px, max 0.0369 px (noise rms 0.252 px)
+
+all z-scores: n 81, rms 0.68, max 1.47, beyond 3: 0
+RESULT: PASS

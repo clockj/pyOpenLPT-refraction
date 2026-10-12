@@ -1,0 +1,48 @@
+rig  0: media 3, D/Ro  8.23, f    4752.9, dist n | bp rays 2858 mism 0 o 4.7e-10 far 6.8e-10 mm ang 4.5e-12 eq 3.0e-10 px | lib-undist 0.0e+00 px | fw 1365 pts ok 1.000 max 9.6e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 926 starts, same 926 other 0 fail 0 false 0
+rig  1: media 3, D/Ro 10.18, f    5885.5, dist y | bp rays 1775 mism 0 o 1.8e-09 far 3.0e-09 mm ang 2.4e-11 eq 3.6e-10 px | lib-undist 9.8e-06 px | fw 1499 pts ok 1.000 max 1.2e-09 px it 5 | pinhole start ok 1.000 | beyond r_c: 1269 starts, same 1269 other 0 fail 0 false 0
+rig  2: media 4, D/Ro  3.70, f    6519.9, dist n | bp rays 3000 mism 0 o 2.2e-12 far 2.1e-12 mm ang 3.9e-15 eq 7.4e-11 px | lib-undist 0.0e+00 px | fw 1102 pts ok 1.000 max 1.8e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 0 starts, same 0 other 0 fail 0 false 0
+rig  3: media 3, D/Ro 10.60, f    8733.8, dist y | bp rays 3000 mism 0 o 6.2e-11 far 5.9e-11 mm ang 1.6e-13 eq 5.4e-10 px | lib-undist 9.9e-06 px | fw  896 pts ok 1.000 max 1.0e-09 px it 4 | pinhole start ok 1.000 | beyond r_c: 434 starts, same 434 other 0 fail 0 false 0
+rig  4: media 3, D/Ro  8.55, f    7512.7, dist n | bp rays 3000 mism 0 o 1.5e-11 far 9.9e-12 mm ang 4.3e-14 eq 1.5e-10 px | lib-undist 0.0e+00 px | fw  891 pts ok 1.000 max 6.3e-09 px it 4 | pinhole start ok 1.000 | beyond r_c: 417 starts, same 417 other 0 fail 0 false 0
+rig  5: media 3, D/Ro  3.74, f    5822.3, dist y | bp rays 3000 mism 0 o 2.3e-11 far 1.9e-11 mm ang 1.3e-13 eq 1.8e-10 px | lib-undist 9.8e-06 px | fw  978 pts ok 1.000 max 6.2e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 517 starts, same 517 other 0 fail 0 false 0
+rig  6: media 3, D/Ro  6.39, f    2204.0, dist n | bp rays 2328 mism 0 o 1.6e-10 far 2.3e-10 mm ang 1.5e-12 eq 9.0e-11 px | lib-undist 0.0e+00 px | fw 1499 pts ok 1.000 max 3.9e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 1224 starts, same 1224 other 0 fail 0 false 0
+rig  7: media 3, D/Ro  9.97, f   11647.2, dist y | bp rays 2909 mism 0 o 2.8e-10 far 4.3e-10 mm ang 3.8e-12 eq 3.8e-10 px | lib-undist 9.7e-06 px | fw 1431 pts ok 1.000 max 7.6e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 1027 starts, same 1027 other 0 fail 0 false 0
+rig  8: media 4, D/Ro  7.87, f    7141.0, dist n | bp rays 2347 mism 0 o 4.8e-11 far 5.6e-11 mm ang 3.5e-13 eq 1.2e-10 px | lib-undist 0.0e+00 px | fw 1461 pts ok 1.000 max 3.4e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 1095 starts, same 1094 other 1 fail 0 false 0
+rig  9: media 3, D/Ro  8.21, f    4531.0, dist y | bp rays 2885 mism 0 o 4.5e-10 far 6.3e-10 mm ang 4.1e-12 eq 3.0e-10 px | lib-undist 1.0e-05 px | fw 1077 pts ok 1.000 max 7.5e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 772 starts, same 772 other 0 fail 0 false 0
+rig 10: media 3, D/Ro  3.41, f    4091.5, dist n | bp rays 3000 mism 0 o 5.5e-11 far 7.4e-11 mm ang 4.1e-13 eq 1.2e-10 px | lib-undist 0.0e+00 px | fw 1329 pts ok 1.000 max 3.1e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 783 starts, same 783 other 0 fail 0 false 0
+rig 11: media 2, D/Ro  9.11, f   13074.1, dist y | bp rays 2983 mism 0 o 6.6e-10 far 9.3e-10 mm ang 4.9e-12 eq 1.0e-09 px | lib-undist 9.7e-06 px | fw 1219 pts ok 1.000 max 2.9e-09 px it 4 | pinhole start ok 1.000 | beyond r_c: 702 starts, same 702 other 0 fail 0 false 0
+rig 12: media 3, D/Ro 11.52, f   11166.7, dist n | bp rays 2853 mism 0 o 2.3e-09 far 3.6e-09 mm ang 2.3e-11 eq 8.9e-10 px | lib-undist 0.0e+00 px | fw  719 pts ok 1.000 max 2.6e-09 px it 5 | pinhole start ok 1.000 | beyond r_c: 513 starts, same 513 other 0 fail 0 false 0
+rig 13: media 3, D/Ro  8.51, f    3762.1, dist y | bp rays 2473 mism 0 o 7.9e-10 far 1.2e-09 mm ang 6.6e-12 eq 2.0e-10 px | lib-undist 9.7e-06 px | fw 1190 pts ok 1.000 max 4.6e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 779 starts, same 779 other 0 fail 0 false 0
+rig 14: media 4, D/Ro  6.28, f    6675.6, dist n | bp rays 2754 mism 0 o 1.0e-10 far 1.8e-10 mm ang 1.5e-12 eq 1.4e-10 px | lib-undist 0.0e+00 px | fw 1488 pts ok 1.000 max 3.4e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 1268 starts, same 1268 other 0 fail 0 false 0
+rig 15: media 3, D/Ro  3.95, f    5740.6, dist y | bp rays 2977 mism 0 o 3.2e-11 far 4.6e-11 mm ang 3.0e-13 eq 1.1e-10 px | lib-undist 1.0e-05 px | fw 1212 pts ok 1.000 max 2.5e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 689 starts, same 689 other 0 fail 0 false 0
+rig 16: media 2, D/Ro  9.86, f    5672.3, dist n | bp rays 2808 mism 0 o 7.6e-10 far 1.1e-09 mm ang 4.8e-12 eq 4.2e-10 px | lib-undist 0.0e+00 px | fw 1345 pts ok 1.000 max 3.6e-09 px it 5 | pinhole start ok 1.000 | beyond r_c: 868 starts, same 868 other 0 fail 0 false 0
+rig 17: media 4, D/Ro  6.93, f    3360.8, dist y | bp rays 2536 mism 0 o 5.8e-10 far 8.3e-10 mm ang 4.2e-12 eq 2.7e-10 px | lib-undist 9.8e-06 px | fw 1444 pts ok 1.000 max 6.5e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 1071 starts, same 1071 other 0 fail 0 false 0
+rig 18: media 3, D/Ro  8.93, f    9334.6, dist n | bp rays 2576 mism 0 o 1.5e-10 far 2.0e-10 mm ang 1.3e-12 eq 2.7e-10 px | lib-undist 0.0e+00 px | fw 1373 pts ok 1.000 max 7.5e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 952 starts, same 952 other 0 fail 0 false 0
+rig 19: media 3, D/Ro  7.20, f    5904.8, dist y | bp rays 2378 mism 0 o 4.8e-10 far 7.2e-10 mm ang 3.3e-12 eq 2.1e-10 px | lib-undist 9.8e-06 px | fw 1500 pts ok 1.000 max 7.5e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 1181 starts, same 1181 other 0 fail 0 false 0
+rig 20: media 2, D/Ro  7.52, f    6733.2, dist n | bp rays 2988 mism 0 o 8.8e-10 far 1.3e-09 mm ang 8.7e-12 eq 3.8e-10 px | lib-undist 0.0e+00 px | fw  796 pts ok 1.000 max 1.3e-09 px it 4 | pinhole start ok 1.000 | beyond r_c: 428 starts, same 428 other 0 fail 0 false 0
+rig 21: media 3, D/Ro  6.15, f    4720.5, dist y | bp rays 2302 mism 0 o 6.7e-10 far 9.8e-10 mm ang 6.4e-12 eq 2.0e-10 px | lib-undist 9.9e-06 px | fw 1499 pts ok 1.000 max 5.1e-10 px it 5 | pinhole start ok 1.000 | beyond r_c: 1198 starts, same 1198 other 0 fail 0 false 0
+rig 22: media 4, D/Ro  8.85, f    6219.6, dist n | bp rays 2986 mism 0 o 1.8e-10 far 2.1e-10 mm ang 1.4e-12 eq 2.8e-10 px | lib-undist 0.0e+00 px | fw 1190 pts ok 1.000 max 5.6e-10 px it 4 | pinhole start ok 1.000 | beyond r_c: 716 starts, same 716 other 0 fail 0 false 0
+rig 23: media 2, D/Ro  9.54, f   13894.2, dist y | bp rays 3000 mism 0 o 4.1e-11 far 2.6e-11 mm ang 2.7e-13 eq 5.7e-10 px | lib-undist 9.8e-06 px | fw 1218 pts ok 1.000 max 1.9e-09 px it 4 | pinhole start ok 1.000 | beyond r_c: 600 starts, same 600 other 0 fail 0 false 0
+
+worst over rigs: {
+ "bp_o": 2.3050687029734287e-09,
+ "bp_far": 3.561934846811241e-09,
+ "bp_ang": 2.3643495117466584e-11,
+ "bp_equiv_px": 1.0019562546005252e-09,
+ "bp_lib_vs_cppundist_px": 9.956922543156945e-06,
+ "fw_px": 6.342677568213753e-09,
+ "fw_ok_frac_min": 1.0,
+ "pinhole_start_ok_frac_min": 1.0,
+ "pinhole_start_max_px": 6.342569321779652e-09,
+ "ok_mismatch": 0,
+ "beyond_starts": 19429,
+ "beyond_same": 19428,
+ "beyond_other": 1,
+ "beyond_fail": 0,
+ "beyond_false": 0
+}
+  PASS  rays agree to 1e-8 px (the C++ ray reprojected by the fast model)
+  PASS  same ok flags as the C++
+  PASS  single-image region: forward within 1e-6 px, every start 5 px off converged
+  PASS  single-image region: every crude pinhole start converged to the C++ image
+  PASS  beyond r_c: no false solution (a converged pixel is always one of the C++ images)
+time 38.1 s

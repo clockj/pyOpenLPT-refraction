@@ -1,0 +1,41 @@
+{
+ "checks": [
+  {
+   "check": "every frame's entry has its cameras' projections, which give the table's errors (1e-9 px)",
+   "ok": true,
+   "detail": "300 frames, 300 rows, 0 missing, largest mismatch 0.0e+00 px"
+  },
+  {
+   "check": "showing a frame draws the red crosses at the projections (frames 0-4, all cameras)",
+   "ok": true,
+   "detail": "5 of 5 frames; 30 crosses"
+  },
+  {
+   "check": "each camFile's Image Size is its own camera's (rows,cols)",
+   "ok": true,
+   "detail": "{0: '800,1280', 1: '768,1024', 2: '800,1280'}"
+  }
+ ],
+ "seconds": 31.262844562530518,
+ "equal_image_size_lines": {
+  "0": "800,1280",
+  "1": "800,1280",
+  "2": "800,1280"
+ },
+ "mixed_image_size_lines": {
+  "0": "800,1280",
+  "1": "768,1024",
+  "2": "800,1280"
+ },
+ "mixed_before_fix": {
+  "0": "800,1280",
+  "1": "800,1280",
+  "2": "800,1280"
+ },
+ "f_px": {
+  "0": 2008.6696279567082,
+  "1": 2007.3797490705701,
+  "2": 2004.2421866085388
+ },
+ "b11_failure": "Calibration crashed: Initial guess is outside of provided bounds"
+}

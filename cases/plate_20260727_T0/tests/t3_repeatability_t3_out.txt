@@ -1,0 +1,34 @@
+T3 (t3): repeatability over frame subsets
+  fit   frames  RMS px  sigma px  kept     s    walls deg   f (px) cam0..cam3            distance to wall (mm) cam0..cam3     smallest depth below wall 1, 2 (mm)  warnings
+  s0     2188  0.6526  0.5593   17184  1039    94.122    18974  19103  21616  20794      230.3   235.5   309.1   232.3    1.09e+03, 802   noisy
+  s1     2187  0.3101  0.2648   17433  1079    90.108    18965  19452  21214  21699     1078.6  1049.3   714.9   793.4    9.19e-11, 161   pinned
+  s2     2187  0.3134  0.2676   17451   990    90.145    18981  19453  21228  21708     1079.4  1049.3   716.6   794.8    4.88e-11, 159   pinned
+  s3     2187  0.3130  0.2673   17435  1256    90.165    18974  19450  21213  21719     1078.7  1048.8   716.0   795.3    4.23e-13, 159   pinned
+  s4     2187  0.4101  0.3515   17153   647    90.211    18712  19025  21414  22019     1067.7  1029.8   746.5   829.9    -4.86, 132   pinned
+  h1     5468  0.3033  0.2588   43672  2726    90.099    19425  19906  21238  21756     1104.8  1074.0   800.7   872.1    7.38e-12, 60.6   weak_window, pinned
+  h2     5468  0.4216  0.3604   43325  2250    90.080    18279  18800  21352  22141     1038.1  1013.9   720.5   812.5    2.17e-12, 168   pinned
+  spread over the interleaved subsets (SD) against the fits' own sigma (median):
+    cam0 f_px                : mean  18921.34 px, SD  116.88, sigma   21.14, SD/sigma  5.53; range 18712.49-18981.33
+    cam0 distance_to_wall_mm : mean    906.93 mm, SD  378.30, sigma    5.72, SD/sigma 66.16; range 230.26-1079.38
+    cam1 f_px                : mean  19296.46 px, SD  214.05, sigma   21.49, SD/sigma  9.96; range 19025.05-19453.06
+    cam1 distance_to_wall_mm : mean    882.55 mm, SD  361.79, sigma    6.23, SD/sigma 58.12; range 235.54-1049.31
+    cam2 f_px                : mean  21336.83 px, SD  177.66, sigma   17.77, SD/sigma 10.00; range 21212.60-21615.96
+    cam2 distance_to_wall_mm : mean    640.62 mm, SD  185.82, sigma    3.72, SD/sigma 50.01; range 309.06-746.47
+    cam3 f_px                : mean  21587.94 px, SD  463.47, sigma   16.16, SD/sigma 28.68; range 20794.47-22018.76
+    cam3 distance_to_wall_mm : mean    689.15 mm, SD  255.84, sigma    3.14, SD/sigma 81.52; range 232.30-829.88
+    walls angle: mean 90.9503 deg, SD 1.7732
+    cams [0, 1]: baseline mean   244.07 mm, SD   2.00; views angle mean  12.480 deg, SD 0.047
+    cams [0, 2]: baseline mean  1587.76 mm, SD 151.17; views angle mean  90.618 deg, SD 0.386
+    cams [0, 3]: baseline mean  1600.60 mm, SD 136.80; views angle mean  90.633 deg, SD 0.130
+    cams [1, 2]: baseline mean  1618.80 mm, SD 137.60; views angle mean  93.907 deg, SD 1.006
+    cams [1, 3]: baseline mean  1589.68 mm, SD 126.75; views angle mean  90.313 deg, SD 0.499
+    cams [2, 3]: baseline mean   282.44 mm, SD   4.24; views angle mean  16.895 deg, SD 0.024
+  first half against second half (difference / combined sigma):
+    cam0 f_px                :  19425.03 ->  18278.89  (-51.02 sigma)
+    cam0 distance_to_wall_mm :   1104.77 ->   1038.12  (-11.28 sigma)
+    cam1 f_px                :  19906.40 ->  18799.61  (-48.17 sigma)
+    cam1 distance_to_wall_mm :   1073.99 ->   1013.91  (-9.35 sigma)
+    cam2 f_px                :  21238.22 ->  21351.56  (+5.95 sigma)
+    cam2 distance_to_wall_mm :    800.74 ->    720.55  (-19.04 sigma)
+    cam3 f_px                :  21755.61 ->  22140.75  (+20.31 sigma)
+    cam3 distance_to_wall_mm :    872.10 ->    812.47  (-16.06 sigma)

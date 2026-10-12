@@ -1,0 +1,19 @@
+  T1 (its tracking config as config.json): config.json, cameras ['PINCYL', 'PINCYL'] -> field VSC (as expected)
+  three cameras (cases/cyl_20261008/data/s2): config.json, cameras ['PINCYL', 'PINCYL', 'PINCYL'] -> field VSC (as expected)
+  synthetic tube (tests/cylinder_stb/data/v2): config.json, cameras ['PINCYL', 'PINCYL', 'PINCYL'] -> field VSC (as expected)
+  plate (tests/cylinder_stb/data/reg_plate, config.txt): config.txt, cameras ['PINPLATE', 'PINPLATE', 'PINPLATE', 'PINPLATE'] -> the parameter VSC (as expected)
+  plate, its config as config.json: config.json, cameras ['PINPLATE', 'PINPLATE', 'PINPLATE', 'PINPLATE'] -> the parameter VSC (as expected)
+  pinhole (tests/cylinder_stb/data/reg_pinhole, config.txt): config.txt, cameras ['PINHOLE', 'PINHOLE', 'PINHOLE', 'PINHOLE'] -> the parameter VSC (as expected)
+============================================================
+Volume Self-Calibration (VSC) Started
+============================================================
+Project: D:\Refraction\pyOpenLPT\tests\vsc_correction_field\data\dispatch\t1_text
+
+[Step 1] Cameras behind curved windows: fitting an image correction per camera
+  Found Particle radius: 2.0 px
+  Object type: Tracer
+  Object radius: 2.0 px
+
+Field VSC stopped: VSC for tube / sphere cameras writes each camera's correction into config.json, and this project has only config.txt: convert it first (python -m modules.stb_config convert config.txt writes config.json beside it, with every setting)
+  a tube project with only config.txt: field VSC; it says: VSC for tube / sphere cameras writes each camera's correction into config.json, and this project has only config.txt: convert it first (python -m modules.stb_config convert config.txt writes config.json beside it, with every setting) -> PASS
+G1 dispatch: PASS

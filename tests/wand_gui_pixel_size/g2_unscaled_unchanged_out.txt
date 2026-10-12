@@ -1,0 +1,9 @@
+HEAD's code: D:\Refraction\pyOpenLPT\tests\wand_gui_pixel_size\before_lib\wand_calibrator_head.py
+
+1. detect_single_frame: now (scales None / all 1) against HEAD
+  PASS  every camera-frame, both modes, both ways of 'no scaling': bitwise the same as HEAD  (72 comparisons; different: [])
+
+2. detect_wand_points_generator (ellipse): now against HEAD
+  PASS  the same raw balls in every camera-frame  (11 camera-frames with balls)
+
+2 of 2 checks passed; 264 s

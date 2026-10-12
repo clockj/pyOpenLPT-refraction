@@ -1,0 +1,4 @@
+G2: Gcal_n8_r2_tol1.0, Gcal_n8_r2_tol1.5, Gshape_nT1_r2; OMP_NUM_THREADS 16
+  Gcal_n8_r2_tol1.0: recall (central, seen by all) 0.571, >= 2 0.571; reconstructed 746 per frame, ghosts 144 (19.4 %), duplicates 0.2; position RMS 20.7, 9.8, 18.8 um; long tracks 897 (ghost 140), purity 0.788, track recall 0.569; 17.90 s per frame; exit 0, wall 717 s
+  Gcal_n8_r2_tol1.5: recall (central, seen by all) 0.581, >= 2 0.581; reconstructed 784 per frame, ghosts 172 (21.9 %), duplicates 0.2; position RMS 20.5, 10.2, 18.9 um; long tracks 933 (ghost 169), purity 0.761, track recall 0.579; 11.37 s per frame; exit 0, wall 456 s
+  Gshape_nT1_r2: recall (central, seen by all) 0.184, >= 2 0.184; reconstructed 266 per frame, ghosts 72 (27.2 %), duplicates 0.1; position RMS 25.0, 9.6, 21.1 um; long tracks 376 (ghost 90), purity 0.721, track recall 0.182; 12.34 s per frame; exit 0, wall 494 s

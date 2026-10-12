@@ -135,6 +135,11 @@ public:
   virtual double project2DInt(const Object3D &obj, int id_cam, int row,
                               int col) const = 0;
 
+  // the same for an image of the object centred elsewhere (another image of
+  // it in a multi-valued camera)
+  virtual double project2DIntAt(const Object3D &obj, int id_cam, int row,
+                                int col, const Pt2D &center) const = 0;
+
   // calculate the size of ROI, return (dx, dy)
   struct ROISize {
     double dx;
@@ -173,12 +178,21 @@ public:
 
   double project2DInt(const Object3D &obj, int id_cam, int row,
                       int col) const override;
+  double project2DIntAt(const Object3D &obj, int id_cam, int row, int col,
+                        const Pt2D &center) const override;
 
   ROISize calROISize(const Object3D &obj, int id_cam) const override;
 
   double calShakeResidue(const Object3D &obj_candidate,
                          std::vector<ROIInfo> &roi_info,
                          const std::vector<bool> &shake_cam) const override;
+
+  // every camera, except a multi-valued one (curved port) where the object's
+  // status is not ImageStatus::One (margin: the region's half-size; merge
+  // distance: twice its size)
+  std::vector<bool>
+  selectShakeCam(const Object3D &obj, const std::vector<ROIInfo> &roi_info,
+                 const std::vector<Image> &imgOrig) const override;
 };
 
 class BubbleShakeStrategy : public ShakeStrategy {
@@ -187,6 +201,8 @@ public:
 
   double project2DInt(const Object3D &obj, int id_cam, int row,
                       int col) const override;
+  double project2DIntAt(const Object3D &obj, int id_cam, int row, int col,
+                        const Pt2D &center) const override;
 
   ROISize calROISize(const Object3D &obj, int id_cam) const override;
 

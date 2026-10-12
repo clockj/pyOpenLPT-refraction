@@ -1,0 +1,351 @@
+{
+ "model": "PINCYL",
+ "frame": "tube frame: axis = Y through the origin, Z towards camera 1, origin at the wand's mean height",
+ "origin_shift_along_axis_mm": -0.3282603454304713,
+ "tube": {
+  "radii_mm": [
+   100.80625,
+   97.63125
+  ],
+  "n": [
+   1.0,
+   1.49,
+   1.333
+  ],
+  "fold_radius_mm": 75.6235933983496
+ },
+ "wand_length_mm": 10.0,
+ "fit_L": false,
+ "fit_k1": false,
+ "gauge": "camera 1's centre at X = 0, Y = 0 during the fit (sigmas are in that gauge)",
+ "rms_px": 0.40616351095217423,
+ "sigma_px": 0.4716830991158567,
+ "frames": 500,
+ "observations": 2000,
+ "active": 1996,
+ "cameras": [
+  {
+   "name": "cam1",
+   "camfile": "camFile\\cam1.txt",
+   "width": 3200,
+   "height": 2400,
+   "f_px": 41375.625289989664,
+   "f_mm": null,
+   "cx": 1599.5,
+   "cy": 1199.5,
+   "dist": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "R": [
+    [
+     0.9999999819734354,
+     0.0001872205853352637,
+     3.164775151885459e-05
+    ],
+    [
+     0.000187219878901468,
+     -0.9999999822251942,
+     2.232326310921976e-05
+    ],
+    [
+     3.165193033074097e-05,
+     -2.2317337618489226e-05,
+     -0.9999999992500461
+    ]
+   ],
+   "rvec": [
+    -3.1415703191337707,
+    -0.00029408276720243806,
+    -4.9715089147661706e-05
+   ],
+   "tvec": [
+    -0.03462006596886783,
+    0.30388385527762324,
+    1091.9767573439149
+   ],
+   "centre_mm": [
+    0.0,
+    0.3282603454304713,
+    1091.97675083695
+   ],
+   "distance_from_axis_mm": 1091.97675083695,
+   "azimuth_deg": 0.0,
+   "height_mm": 0.3282603454304713,
+   "viewing_direction": [
+    3.165193033074097e-05,
+    -2.2317337618489226e-05,
+    -0.9999999992500461
+   ],
+   "sigma": {
+    "rotation_deg": [
+     0.021979021699632666,
+     0.0041002700794459624,
+     0.008528904680891495
+    ],
+    "centre_mm": [
+     0.0,
+     0.0,
+     2.4178183354700464
+    ],
+    "f_rel": 0.0022550386502531634,
+    "f_px": 93.30363420731895,
+    "distance_mm": 2.4178183354700464,
+    "azimuth_deg": 0.0,
+    "height_mm": 0.0
+   },
+   "residuals": {
+    "n_active": 998,
+    "n_total": 1000,
+    "rms_px": 0.038458621919651166,
+    "mean_px": 0.028393618063656687,
+    "std_px": 0.025939700330070536,
+    "max_px": 0.20299336788231698
+   }
+  },
+  {
+   "name": "cam2",
+   "camfile": "camFile\\cam2.txt",
+   "width": 3200,
+   "height": 2400,
+   "f_px": 41461.12771950644,
+   "f_mm": null,
+   "cx": 1599.5,
+   "cy": 1199.5,
+   "dist": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "R": [
+    [
+     -6.416352086623444e-05,
+     1.2202158414765437e-05,
+     -0.999999997867074
+    ],
+    [
+     0.00038701490139373036,
+     -0.9999999250349803,
+     -1.2226989764917004e-05
+    ],
+    [
+     -0.9999999230512522,
+     -0.0003870156850949814,
+     6.415879363905754e-05
+    ]
+   ],
+   "rvec": [
+    -2.221182786327554,
+    -0.0004433954951363923,
+    2.221325304563707
+   ],
+   "tvec": [
+    -0.02280281160867617,
+    0.2948935914878935,
+    1094.2245765296575
+   ],
+   "centre_mm": [
+    1094.224376739122,
+    0.7183759217580874,
+    -0.09300333469948976
+   ],
+   "distance_from_axis_mm": 1094.2243806915199,
+   "azimuth_deg": 90.00486984082914,
+   "height_mm": 0.7183759217580874,
+   "viewing_direction": [
+    -0.9999999230512522,
+    -0.0003870156850949814,
+    6.415879363905754e-05
+   ],
+   "sigma": {
+    "rotation_deg": [
+     0.012995544303006413,
+     0.013356347970289258,
+     0.014999241819867405
+    ],
+    "centre_mm": [
+     4.117265622887604,
+     0.4923056520874831,
+     0.23156391146723285
+    ],
+    "f_rel": 0.00383095293780271,
+    "f_px": 158.83562904165657,
+    "distance_mm": 4.117272612029654,
+    "azimuth_deg": 0.012118641347252176,
+    "height_mm": 0.4923056520874831
+   },
+   "residuals": {
+    "n_active": 998,
+    "n_total": 1000,
+    "rms_px": 0.5731130164793287,
+    "mean_px": 0.49669171726376726,
+    "std_px": 0.28592982995764027,
+    "max_px": 1.5640817568939922
+   }
+  }
+ ],
+ "wand_length_free_triangulation": {
+  "frames": 499,
+  "mean_mm": -0.00035761753857015577,
+  "std_mm": 0.009971028634679337,
+  "rms_mm": 0.009977439668446423,
+  "abs_mean_mm": 0.0074964458071087965
+ },
+ "noise": {
+  "mode": "camera",
+  "given": false,
+  "weights_used": true,
+  "why": "estimated from the residuals; each detection weighted by 1 / sigma^2 of its group",
+  "groups": [
+   {
+    "group": "cam1",
+    "sigma_px": 0.09491290895091507,
+    "sigma_estimate_px": 0.09491289660015852,
+    "rel_se": 0.07976108960017173,
+    "n_total": 1000,
+    "n_used": 998,
+    "n_not_used": 2,
+    "residual_rms_px": 0.038458621919651166,
+    "residual_rms_px_per_coordinate": 0.027194352354474937,
+    "rejection_scale_px": 0.08976939270659985
+   },
+   {
+    "group": "cam2",
+    "sigma_px": 0.49586941571294485,
+    "sigma_estimate_px": 0.49586942364392955,
+    "rel_se": 0.020617094039810373,
+    "n_total": 1000,
+    "n_used": 998,
+    "n_not_used": 2,
+    "residual_rms_px": 0.5731130164793287,
+    "residual_rms_px_per_coordinate": 0.40525210033881087,
+    "rejection_scale_px": 0.4988936361011243
+   }
+  ],
+  "pooled_sigma_px": 0.4716830991158567,
+  "variance_factor": 1.011486486486519,
+  "rounds": 9,
+  "noisiest_over_quietest": 5.224467579740786,
+  "max_rel_se": 0.1,
+  "starts": {
+   "short_listed": 6,
+   "tried": 2,
+   "extra_starts": false,
+   "more_starts_px": 1.0,
+   "stage3_rms_px": [
+    0.29296799275377566,
+    0.29296798871465163
+   ],
+   "start_given": false
+  }
+ },
+ "info": {
+  "n_fail": 0,
+  "weighted_cost": 1497.0000000000482,
+  "robust_sigma_group_px": {
+   "0": 0.08976939270659985,
+   "1": 0.4988936361011243
+  },
+  "robust_sigma_px": 0.1690772596642534,
+  "multi_image_observations": 0,
+  "beyond_fold_observations": 0,
+  "guard_dropped": 0,
+  "rounds": 9,
+  "seconds": 3.566664695739746,
+  "noise_weights": {
+   "mode": "camera",
+   "given": false,
+   "estimated": true,
+   "used": true,
+   "fallback": false,
+   "converged": true,
+   "sigma_group_px": [
+    0.09491290895091507,
+    0.49586941571294485
+   ],
+   "groups": 2,
+   "pooled_groups": 0,
+   "counts": [
+    998,
+    998
+   ],
+   "max_rel_se": 0.1,
+   "rel_se": [
+    0.07976108960017173,
+    0.020617094039810373
+   ],
+   "rel_se_group": [
+    0.07976108960017173,
+    0.020617094039810373
+   ],
+   "sigma_px_separate": [
+    0.09491289660015852,
+    0.49586942364392955
+   ],
+   "separable": true,
+   "sigma_px": [
+    0.09491289660015852,
+    0.49586942364392955
+   ]
+  },
+  "variance_factor": 1.011486486486519,
+  "dof": 1480,
+  "cond_S": 225364187815098.75,
+  "stage3": {
+   "history": [
+    {
+     "outer": 0,
+     "rms_px": 0.29296799324202727,
+     "nfev": 26,
+     "step": 0.0034959233477031846
+    },
+    {
+     "outer": 1,
+     "rms_px": 0.2929679927537755,
+     "nfev": 18,
+     "step": 1.7609782085722422e-06
+    },
+    {
+     "outer": 2,
+     "rms_px": 0.29296799275377566,
+     "nfev": 19,
+     "step": 2.773213299903424e-15
+    }
+   ],
+   "rms_px": 0.29296799275377566
+  },
+  "bootstrap": {
+   "affine_rms_px": 2.497998871611411,
+   "affine_frames": 494,
+   "affine_length_rms_rel": 0.031776522288795746,
+   "candidates": 90,
+   "best": {
+    "mirror": true,
+    "p": [
+     0.0,
+     -31.95258908209516
+    ]
+   },
+   "seconds": 12.14049744606018
+  },
+  "starts_tried": 2,
+  "starts": {
+   "short_listed": 6,
+   "tried": 2,
+   "n_final": 2,
+   "more_starts_px": 1.0,
+   "extra_starts": false,
+   "stage3_rms_px": [
+    0.29296799275377566,
+    0.29296798871465163
+   ],
+   "start_given": false
+  },
+  "total_seconds": 19.886640787124634
+ }
+}

@@ -1,0 +1,56 @@
+{
+ "model": "A",
+ "cameras": [
+  {
+   "camfile": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam1.txt",
+   "f_px": 48494.25217145786,
+   "A_mm": 8.183049696601476,
+   "z_f_mm": 1196.3654586501686,
+   "sigma0_px": 1.2124055388083292,
+   "delta_mm": 0.0,
+   "flux_log_a": 4.768471179055138,
+   "flux_log_b": 1.063606204167314
+  },
+  {
+   "camfile": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\cams_T0\\cam2.txt",
+   "f_px": 28305.537659249578,
+   "A_mm": 10.68990238444424,
+   "z_f_mm": 829.3887275512496,
+   "sigma0_px": 1.0971345681806068,
+   "delta_mm": 0.0,
+   "flux_log_a": 4.36572417464517,
+   "flux_log_b": 1.127393874346676
+  }
+ ],
+ "fit_frames": [
+  0,
+  20,
+  40,
+  60,
+  80,
+  100,
+  120,
+  140,
+  160,
+  180,
+  200,
+  220,
+  240
+ ],
+ "test_frames": [
+  10,
+  30,
+  50,
+  70,
+  90,
+  110,
+  130,
+  150,
+  170,
+  190,
+  210,
+  230
+ ],
+ "tol_px": 1.2,
+ "agreement_rule": "RMS widths within max(0.5 px, 20 %) in both cameras"
+}

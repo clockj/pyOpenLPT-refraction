@@ -1,0 +1,53 @@
+{
+ "builds": {
+  "head1007": {
+   "build": {
+    "name": "head1007",
+    "git_head": "d9b20b4",
+    "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+    "start": "2026-10-07T18:09:52",
+    "defs": [],
+    "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\head1007\\out\\pyopenlpt.cp311-win_amd64.pyd"
+   },
+   "pairs": {
+    "cam1->cam2": {
+     "points": 5000,
+     "lines_built": 65,
+     "max_px": 24.232947741912206,
+     "median_px": 14.093626740512061
+    },
+    "cam2->cam1": {
+     "points": 5000,
+     "lines_built": 22,
+     "max_px": 26.614825744933125,
+     "median_px": 18.612739078959077
+    }
+   }
+  },
+  "p4c": {
+   "build": {
+    "name": "p4c",
+    "git_head": "d9b20b4",
+    "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+    "start": "2026-10-07T20:28:06",
+    "defs": [],
+    "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+   },
+   "pairs": {
+    "cam1->cam2": {
+     "points": 5000,
+     "lines_built": 5000,
+     "max_px": 0.04988492929870772,
+     "median_px": 0.014659506164182923
+    },
+    "cam2->cam1": {
+     "points": 5000,
+     "lines_built": 5000,
+     "max_px": 0.04993122440628624,
+     "median_px": 0.014601483510108756
+    }
+   }
+  }
+ },
+ "pass": true
+}

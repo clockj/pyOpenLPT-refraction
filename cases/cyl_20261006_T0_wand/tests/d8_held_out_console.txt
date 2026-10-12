@@ -1,0 +1,11 @@
+D8: every variant's cameras on all 1519 kept frames (free triangulation)
+   variant   f cam1   f cam2   length error RMS (um): held out / own   reprojection RMS (px): held out / own
+        S2    38551    35812      -   /   23.4 (mean    -   /   -0.0)           -   /  0.213
+        h1    36802    40100     25.7 /   27.0 (mean   -6.8 /   +0.1)         0.195 /  0.251
+        h2    35229    29994     36.4 /   19.3 (mean   +8.5 /   +0.6)         0.292 /  0.161
+        q1    40242    36392     75.4 /   24.6 (mean  -62.3 /   +0.7)         0.308 /  0.217
+        q2    38249    38823     30.7 /   24.5 (mean   -9.5 /   +0.0)         0.248 /  0.246
+        q3    35373    35991     30.9 /   20.9 (mean  +12.3 /   -0.0)         0.217 /  0.149
+        q4    32776    30318     37.9 /   16.5 (mean  +11.8 /   +0.1)         0.248 /  0.153
+    fit_k1    39210    36255      -   /   22.1 (mean    -   /   -0.0)           -   /  0.221
+     fit_L    31274    28427      -   /   26.0 (mean    -   /   -0.0)           -   /  0.198

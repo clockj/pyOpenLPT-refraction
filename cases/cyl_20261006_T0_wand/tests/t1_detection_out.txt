@@ -1,0 +1,19 @@
+T1: the detection check; 1519 frames kept in both cameras
+a. overlays written to X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\detection (t1_kept_cam*_*.png: 20 kept camera-frames per camera, both balls; t1_rejected_cam*.png: up to 10 rejected per camera)
+b. the rod settings on 100 frames kept in both cameras (200 camera-frames): centre shifts from S1 (opening 95, mask 50), px
+   opening  mask   lost   A: RMS    max     B: RMS    max    A-B distance: mean change  RMS change
+      91     40     20    2.9860 39.0729    0.1137  0.3244        -0.7105      2.8578
+      91     50     20    2.0758 27.8399    0.0103  0.1256        -0.1336      1.8524
+      91     60     20    3.0159 29.2504    0.1885  0.6373        -0.2119      2.8101
+      95     40      0    0.6249  3.1596    0.1156  0.4038        -0.4746      0.6612
+      95     50      0    0.0000  0.0000    0.0000  0.0000        +0.0000      0.0000
+      95     60      0    2.0412  9.4775    0.1810  0.6372        +0.0147      1.9191
+     101     40      0    0.6202  3.0598    0.1118  0.3274        -0.4697      0.6541
+     101     50      0    0.0628  0.5130    0.0079  0.1043        +0.0022      0.0608
+     101     60      0    1.9254  9.0548    0.1818  0.6370        +0.0773      1.8146
+c. cam1: 3357 consecutive kept pairs, 0 A/B swaps; frame-to-frame motion of a ball: median 23.36 px, 99th percentile 76.40 px, largest 103.46 px
+c. cam2: 4345 consecutive kept pairs, 0 A/B swaps; frame-to-frame motion of a ball: median 20.47 px, 99th percentile 60.75 px, largest 87.08 px
+d. cam1: 99 frames measured; rod width (half darkness) median 90.2 px, 90th percentile 112.8, largest 125.6; edge 10-90 % 14.9 px (blur sigma 5.8 px, 90th 8.8); T13's rule (half-width + 2 sigma): median 56.2 px, 90th percentile 72.6, largest 83.9
+   rod width by the rod's angle from the image rows: 0_30deg: 84.3 px (n 86), 30_60deg: 105.1 px (n 13)
+d. cam2: 100 frames measured; rod width (half darkness) median 81.4 px, 90th percentile 97.8, largest 113.7; edge 10-90 % 13.5 px (blur sigma 5.3 px, 90th 6.9); T13's rule (half-width + 2 sigma): median 50.4 px, 90th percentile 63.3, largest 79.8
+   rod width by the rod's angle from the image rows: 0_30deg: 75.6 px (n 75), 30_60deg: 93.3 px (n 23), 60_90deg: 96.3 px (n 2)

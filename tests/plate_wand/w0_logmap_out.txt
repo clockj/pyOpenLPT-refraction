@@ -1,0 +1,24 @@
+uniform angle in [0, pi]    : worst round-trip error 1.36e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+tiny angle 1e-12 .. 1e-6    : worst round-trip error 3.98e-20 rad over 2000 rotations; max |w| - pi = +0.0e+00
+exactly 0                   : worst round-trip error 0.00e+00 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 0e+00                  : worst round-trip error 1.30e-15 rad over 2000 rotations; max |w| - pi = +4.4e-16
+pi - 1e-12                  : worst round-trip error 1.35e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 1e-09                  : worst round-trip error 1.67e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 1e-07                  : worst round-trip error 1.59e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 1e-05                  : worst round-trip error 1.46e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 1e-03                  : worst round-trip error 1.37e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 5e-02                  : worst round-trip error 1.58e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 1e-01                  : worst round-trip error 1.30e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+pi - 2e-01                  : worst round-trip error 1.55e-15 rad over 2000 rotations; max |w| - pi = +0.0e+00
+look-at camera, azimuth   0.0 deg: |w| = 3.141592653589793, round trip 1.2e-16
+look-at camera, azimuth  45.0 deg: |w| = 3.141592653589793, round trip 2.8e-16
+look-at camera, azimuth  90.0 deg: |w| = 3.141592653589793, round trip 1.4e-16
+look-at camera, azimuth 135.0 deg: |w| = 3.141592653589793, round trip 2.0e-16
+look-at camera, azimuth 180.0 deg: |w| = 3.141592653589793, round trip 1.2e-16
+look-at camera, azimuth 225.0 deg: |w| = 3.141592653589793, round trip 7.7e-16
+look-at camera, azimuth 270.0 deg: |w| = 3.141592653589794, round trip 3.3e-16
+look-at camera, azimuth 315.0 deg: |w| = 3.141592653589793, round trip 2.0e-16
+
+worst round-trip error of the fixed log map: 1.67e-15 rad (criterion 1e-14)
+for comparison, cv2.Rodrigues on the same rotations: worst 2.00e-05 rad
+W0 log map: PASS

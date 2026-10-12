@@ -1,0 +1,29 @@
+V2 fit gallm_r2: gather gallm_r2 (40 frames, 2 cameras), case gallm, set Gallm, truth err_allm; 9098 track points seen by >= 2 cameras (2 cameras: 9098)
+    lam 1000: held-out cauchy loss 0.9494 -> 0.7319, projected MAD 1.531 -> 1.081
+    lam 10000: held-out cauchy loss 0.9494 -> 0.7439, projected MAD 1.531 -> 1.086
+    lam 100000: held-out cauchy loss 0.9494 -> 0.7736, projected MAD 1.531 -> 1.099
+    lam 1e+06: held-out cauchy loss 0.9494 -> 0.7968, projected MAD 1.531 -> 1.164
+    lam 1e+07: held-out cauchy loss 0.9494 -> 0.8477, projected MAD 1.531 -> 1.344
+    lam 1e+08: held-out cauchy loss 0.9494 -> 0.8977, projected MAD 1.531 -> 1.467
+    round 1: lam 1000; noise model s_f 0.150 px, beta 0.0716 (from s_f 0.300, beta 0.0500; s_f held at >= 0.15)
+    lam 1000: held-out cauchy loss 0.9709 -> 0.7291, projected MAD 1.424 -> 1.025
+    lam 10000: held-out cauchy loss 0.9709 -> 0.7421, projected MAD 1.424 -> 1.022
+    lam 100000: held-out cauchy loss 0.9709 -> 0.7736, projected MAD 1.424 -> 1.031
+    lam 1e+06: held-out cauchy loss 0.9709 -> 0.7980, projected MAD 1.424 -> 1.100
+    lam 1e+07: held-out cauchy loss 0.9709 -> 0.8562, projected MAD 1.424 -> 1.269
+    lam 1e+08: held-out cauchy loss 0.9709 -> 0.9147, projected MAD 1.424 -> 1.408
+    round 2: lam 1000; noise model s_f 0.150 px, beta 0.0740 (from s_f 0.150, beta 0.0716; s_f held at >= 0.15)
+    fit: lam 1000, 4522 points (4522 projected rows), 8 iterations; projected RMS 2.288 -> 1.948 (noise units); 16.6 % of the points down-weighted
+    fit: lam 1000, 9098 points (9098 projected rows), 8 iterations; projected RMS 2.263 -> 1.887 (noise units); 16.4 % of the points down-weighted
+    mixture fit (warm start): 310043 candidate pairs within +-3.0 px, 400 passes; true pairs 20976 (6.8 %), their spread 0.676 x the noise model; mean log-likelihood -1.517106
+  the truth at frame 20: 933 central particles in the view volume seen by >= 2 cameras
+  tracks field against the truth plus the detections' bias (observable RMS 0.440 px): 0.557 px, the fit's error 0.063 px (slope 0.96)
+  tracks field: the observable part: truth RMS 0.685 px, the fit's error 0.466 px (54 % explained); the fit = 0.58 x the truth
+    cam1: du true 0.347, fit 0.004, error 0.346 (corr 0.25); dv true 0.569, fit 0.522, error 0.478 (corr 0.6) px
+    cam2: du true 0.289, fit 0.002, error 0.288 (corr -0.16); dv true 0.436, fit 0.456, error 0.401 (corr 0.39) px
+    camera pairs, RMS offset across the curves before -> after: cams 1-2: 0.685 -> 0.466 px
+  truth_free field against the truth plus the detections' bias (observable RMS 0.440 px): 0.557 px, the fit's error 0.468 px (slope 0.81)
+  truth_free field: the observable part: truth RMS 0.685 px, the fit's error 0.545 px (37 % explained); the fit = 0.62 x the truth
+    cam1: du true 0.347, fit 0.000, error 0.347 (corr None); dv true 0.569, fit 0.732, error 0.620 (corr 0.55) px
+    cam2: du true 0.289, fit 0.000, error 0.289 (corr None); dv true 0.436, fit 0.523, error 0.503 (corr 0.23) px
+    camera pairs, RMS offset across the curves before -> after: cams 1-2: 0.685 -> 0.545 px

@@ -1,0 +1,4 @@
+S1b: cam3's 250 frames cropped to rows 360-1575 (1216 x 2048) into D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1pre_c3crop
+  cam3.txt: image 1952 x 2048 -> 1216 x 2048; principal point row 975.5 -> 615.5
+  check: 2000 of 2000 points projected by both; largest |pixel(full) - (pixel(crop) + r0)| 2.27e-13 px; 1142 of them on the cropped rows
+  PASS: the cropped camera maps every point to the full camera's pixel shifted by 360 rows; reports 1216 x 2048

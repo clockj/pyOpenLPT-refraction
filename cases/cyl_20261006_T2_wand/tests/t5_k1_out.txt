@@ -1,0 +1,16 @@
+T5: the calibration with k1 free, on S2's 1966 frames
+        0.0 s  Start search (stages 1-2)
+       25.3 s  Coarse fit (stage 3)
+       26.1 s  Final fit (stage 4)
+       93.6 s  Coarse fit (stage 3)
+      126.9 s  Final fit (stage 4)
+      181.8 s  Coarse fit (stage 3)
+      185.1 s  Final fit (stage 4)
+      239.3 s  Coarse fit (stage 3)
+  done in 252 s; written to X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\checks\fit_k1
+  reprojection RMS 0.6005 -> 0.5795 px (-3.5 %); detections used 7856 -> 7852 of 7864
+  wand length, free triangulation: RMS 31.29 -> 30.31 um, mean +0.05 -> +0.03 um
+  cam1: k1 +18.525 +- 0.954 (+19.4 sigma): +3.44 px at the side edge (640 px), +5.65 px at the corner; RMS 0.6259 -> 0.6012 px; f 38,252 -> 37,571 px; distance 1,001.2 -> 986.0 mm
+      residual cells (T2's binning): largest mean 0.765 -> 0.746 px; above 0.1 px 33 of 36 -> 36 of 36
+  cam2: k1 -2.899 +- 0.876 (-3.3 sigma): -0.56 px at the side edge (640 px), -0.91 px at the corner; RMS 0.5740 -> 0.5570 px; f 37,409 -> 36,930 px; distance 1,085.1 -> 1,071.9 mm
+      residual cells (T2's binning): largest mean 0.844 -> 0.809 px; above 0.1 px 28 of 34 -> 25 of 34

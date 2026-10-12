@@ -1,0 +1,43 @@
+1. candidates per frame on pure clipped noise (sigma 6, 1280 x 800), after the suppression
+   k 4.0: 658.7, k 4.5: 237.3, k 5.0: 69.3, k 5.5: 20.0, k 6.0: 6.3, k 6.5: 1.7, k 7.0: 0.7
+
+2. the templates' noise on T1 (cam1 frame 500) against white noise of the image's sigma
+   (   0,    0):   21.1 against  13.3 (x 1.6)
+   (   0,    5):   22.3 against   9.9 (x 2.2)
+   (   0,   12):   20.2 against   6.8 (x 3.0)
+   (   0,   24):   16.8 against   4.8 (x 3.5)
+   (   5,    0):   21.9 against   9.9 (x 2.2)
+   (   5,    5):   22.9 against   7.4 (x 3.1)
+   (   5,   12):   21.2 against   5.0 (x 4.2)
+   (   5,   24):   17.9 against   3.5 (x 5.1)
+   (  12,    0):   21.0 against   6.8 (x 3.1)
+   (  12,    5):   22.2 against   5.0 (x 4.4)
+   (  12,   12):   20.1 against   3.3 (x 6.1)
+   (  12,   24):   16.1 against   2.3 (x 7.0)
+   (  24,    0):   19.1 against   4.8 (x 4.0)
+   (  24,    5):   20.1 against   3.5 (x 5.7)
+   (  24,   12):   17.4 against   2.3 (x 7.6)
+   (  24,   24):   12.6 against   1.5 (x 8.2)
+   (  34,    0):   17.6 against   4.0 (x 4.3)
+   (  34,    5):   18.5 against   3.0 (x 6.3)
+   (  34,   12):   15.4 against   1.9 (x 8.1)
+   (  34,   24):   10.7 against   1.2 (x 8.6)
+   all 56 templates: ratio 1.6-8.6; templates with Lx >= 24 or Ly >= 24: 3.5-8.6
+
+3. bounds and suppression on T1 (cam1 frame 500)
+   DET: 1016 objects (H 266, V 473, ellipse 96, round 181); H Lx 10/50/90 % 6.6/12.4/19.6 px; V Ly 6.6/9.3/13.1 px; pinned at 8 px: 0 %
+   lengths bounded by the template: 1139 objects (H 324, V 474, ellipse 144, round 197); H Lx 10/50/90 % 7.2/8.0/8.0 px; V Ly 6.4/8.0/8.0 px; pinned at 8 px: 55 %
+   asymmetric suppression: 874 objects (H 227, V 407, ellipse 89, round 151); H Lx 10/50/90 % 6.7/12.2/21.0 px; V Ly 6.7/9.2/13.5 px; pinned at 8 px: 0 %
+
+4. the fit model on isolated objects (cam1's noise and texture, gain 6)
+   clipped model (DET): recall 96.1 %, duplicates 0, false positives 15; flux / true 1.036, RMS widths / true 1.018 (x), 1.010 (y); H along/across 0.641/0.057, V 0.406/0.092 px
+   plain model: recall 96.1 %, duplicates 0, false positives 15; flux / true 0.933, RMS widths / true 0.971 (x), 0.966 (y); H along/across 0.644/0.057, V 0.406/0.091 px
+
+5. a dense synthetic frame (1,500 objects, white noise 1.5 counts, gain 4)
+   DET: 1121 objects, recall at SNR >= 5 95.9 %, duplicates 0.20 %, false positives 0; at SNR >= 5 H along/across 0.821/0.150, V 0.261/0.094 px; 15.1 s
+   lengths bounded by the template: 1157 objects, recall at SNR >= 5 97.1 %, duplicates 0.40 %, false positives 0; at SNR >= 5 H along/across 0.950/0.156, V 0.242/0.094 px; 14.9 s
+   plain model: 1145 objects, recall at SNR >= 5 96.5 %, duplicates 0.27 %, false positives 0; at SNR >= 5 H along/across 0.870/0.149, V 0.259/0.093 px; 10.6 s
+
+6. zero pixels in L1's 8-bit frames (frame 500)
+   cam1: 46.7 % of the pixels are 0
+   cam2: 46.2 % of the pixels are 0

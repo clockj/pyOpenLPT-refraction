@@ -1,0 +1,10 @@
+pyopenlpt: D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+Launching OpenLPT GUI...
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+[App] Starting update check...
+[UpdateChecker] Checking for updates... Current version: 2.2.4
+Shortcut already exists at C:\Users\zcloc\OneDrive\Desktop\OpenLPT.lnk
+[UpdateChecker] Latest version on GitHub: 2.2.4
+[UpdateChecker] No update needed. Current: 2.2.4, Latest: 2.2.4
+[App] Update check complete. Available: False

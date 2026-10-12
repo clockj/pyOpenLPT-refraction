@@ -1,0 +1,30 @@
+{
+ "checks": [
+  {
+   "check": "ids 0, 1, 2 (W10's rig) calibrate",
+   "ok": true,
+   "detail": "Calibration Successful!"
+  }
+ ],
+ "seconds": 69.51328086853027,
+ "runs": {
+  "ids 0, 1, 2": {
+   "messages": [],
+   "final_params_cameras": [
+    0,
+    1,
+    2
+   ],
+   "status": "Calibration Successful!"
+  },
+  "ids 0, 2, 3": {
+   "messages": [],
+   "final_params_cameras": [
+    0,
+    2,
+    3
+   ],
+   "status": "Calibration Successful!"
+  }
+ }
+}

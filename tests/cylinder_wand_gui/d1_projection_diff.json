@@ -1,0 +1,21 @@
+{
+ "checks": [],
+ "seconds": 1.7967908382415771,
+ "projections": {
+  "cam0": {
+   "file_vs_json_cpp_px": 0.0,
+   "python_vs_cpp_px": 0.0027524784559318526,
+   "rounding_px": 0.0002874712725306698
+  },
+  "cam1": {
+   "file_vs_json_cpp_px": 0.0,
+   "python_vs_cpp_px": 6.6824130814848615e-09,
+   "rounding_px": 0.0003395833458821491
+  },
+  "cam2": {
+   "file_vs_json_cpp_px": 0.0,
+   "python_vs_cpp_px": 1.2613405106941754e-10,
+   "rounding_px": 0.0003032284741544582
+  }
+ }
+}

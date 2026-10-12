@@ -1,0 +1,18 @@
+
+== 2026-10-07 15:02: rerender_x_pages.py
+T0: X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\calibration_report.html
+  the page now: 384,835 bytes, written 2026-10-06 23:09; its report has error_pdf: False
+  the report built now equals the page's in every key but error_pdf: True
+T2: X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\calibration_report.html
+  the page now: 393,713 bytes, written 2026-10-06 18:04; its report has error_pdf: False
+  the report built now equals the page's in every key but error_pdf: True
+
+== 2026-10-07 15:02: rerender_x_pages.py --write
+T0: X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\calibration_report.html
+  the page now: 384,835 bytes, written 2026-10-06 23:09; its report has error_pdf: False
+  the report built now equals the page's in every key but error_pdf: True
+  written: 409,822 bytes; read back, its report is the one built: True
+T2: X:\Shijie Zhong\Refraction\Processed\20261006\T2\Results\calibration_report.html
+  the page now: 393,713 bytes, written 2026-10-06 18:04; its report has error_pdf: False
+  the report built now equals the page's in every key but error_pdf: True
+  written: 421,745 bytes; read back, its report is the one built: True

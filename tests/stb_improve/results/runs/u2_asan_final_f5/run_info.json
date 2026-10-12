@@ -1,0 +1,53 @@
+{
+ "run": "u2_asan_final_f5",
+ "argv": [
+  "u2_asan_final_f5",
+  "--build",
+  "asan-final",
+  "--exe",
+  "--frames",
+  "0",
+  "5",
+  "--asan-options",
+  "malloc_context_size=0"
+ ],
+ "build": "asan-final",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\asan-final\\out",
+ "build_info": {
+  "name": "asan-final",
+  "mode": "tests",
+  "config": "RelWithDebInfo",
+  "src": "D:\\Refraction\\pyOpenLPT",
+  "git_head": "14ad4b6",
+  "git_diff_stat": ".gitignore                           |  11 +\n cmake/openLPT.cmake                  |   2 +-\n inc/libMath/Matrix.h                 |  17 +-\n inc/libSTB/Config.h                  |  11 +\n inc/libSTB/StereoMatch.h             | 225 +++++++----\n src/pybind_OpenLPT/pyConfig.cpp      |   7 +-\n src/pybind_OpenLPT/pyStereoMatch.cpp |  82 ++--\n src/srcMath/Matrix.hpp               |  73 +++-\n src/srcSTB/Config.cpp                | 476 +++++++++++++++++++++-\n src/srcSTB/IPR.cpp                   |   6 +-\n src/srcSTB/STB.cpp                   |  43 +-\n src/srcSTB/StereoMatch.cpp           | 743 ++++++++++++++++++-----------------\n 12 files changed, 1192 insertions(+), 504 deletions(-)",
+  "git_diff_sha256": "",
+  "untracked": [
+   "inc/nlohmann/LICENSE.MIT",
+   "inc/nlohmann/json.hpp"
+  ],
+  "defs": [],
+  "asan": true,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc  /fsanitize=address",
+  "start": "2026-10-05T14:58:16",
+  "minutes": 0.6,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 369,
+  "products": [
+   "OpenLPT.exe",
+   "test_ImageIO.exe",
+   "test_Matrix.exe",
+   "test_myMATH.exe"
+  ]
+ },
+ "asan_options": "malloc_context_size=0",
+ "host": "HELLOWORLD",
+ "start": "2026-10-05T20:39:03",
+ "end": "2026-10-05T20:43:02",
+ "wall_s": 239.3,
+ "returncode": 0,
+ "frames_done": 6,
+ "sum_frame_s": 236.2,
+ "peak_working_set_MB": 2418,
+ "peak_private_MB": 2593
+}

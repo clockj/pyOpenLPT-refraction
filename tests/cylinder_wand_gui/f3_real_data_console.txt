@@ -1,0 +1,131 @@
+F3: T0:camera ...
+F3: T0:camera done in 72 s
+F3: T0:none ...
+F3: T0:none done in 55 s
+F3: T0:camera:noshare ...
+F3: T0:camera:noshare done in 198 s
+F3: T0:camera:n2 ...
+F3: T0:camera:n2 done in 44 s
+F3: T2:camera ...
+F3: T2:camera done in 158 s
+F3: T2:none ...
+F3: T2:none done in 114 s
+F3: T2:camera:noshare ...
+F3: T2:camera:noshare done in 295 s
+F3: T2:camera:n2 ...
+F3: T2:camera:n2 done in 55 s
+F3 / F5: the calibrations of 20261006/T0 and T2 with the fixed library (six starts)
+
+T0:camera: 72 s; final: {'rounds': 8, 'cycle': {'round': 7, 'repeats_round': 5, 'left_out': 8}, 'flipped': {'round': 4, 'kind': 'jumps', 'sigma_px': [[0.5595754489772428, 0.5635237577788639], [0.7815303408540127, 0.07815303408540127]]}, 'weights_used': False, 'stage4_shared': 5, 'why': 'the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.560, 0.564 px and 0.782, 0.078 px per group): equal weights, as without the weighting'}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.408               8     23.2      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      1        0.408  stage 4 shared with start 0
+      2        0.408  stage 4 shared with start 0
+      3        0.408  stage 4 shared with start 0
+      4        0.408  stage 4 shared with start 0
+      5        0.408  stage 4 shared with start 0
+  most rounds in a start: 8 (limit 20): PASS
+  result: RMS 0.4693 px, active 6064 of 6076, free wand length RMS 23.1 um
+  against delivered: RMS 0.4693 px, active 6064
+    cam1: f 38551 px (38551; -0.00 %, -0.00 sigma), distance 1006.8 mm (1006.8; -0.00 sigma)
+    cam2: f 35812 px (35812; +0.00 %, +0.00 sigma), distance 1036.1 mm (1036.1; +0.00 sigma)
+
+T0:camera:n2: 44 s; final: {'rounds': 8, 'cycle': {'round': 7, 'repeats_round': 5, 'left_out': 8}, 'flipped': {'round': 4, 'kind': 'jumps', 'sigma_px': [[0.5595754489772428, 0.5635237577788639], [0.7815303408540127, 0.07815303408540127]]}, 'weights_used': False, 'stage4_shared': 1, 'why': 'the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.560, 0.564 px and 0.782, 0.078 px per group): equal weights, as without the weighting'}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.408               8     23.3      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      1        0.408  stage 4 shared with start 0
+  most rounds in a start: 8 (limit 20): PASS
+  result: RMS 0.4693 px, active 6064 of 6076, free wand length RMS 23.1 um
+  against delivered: RMS 0.4693 px, active 6064
+    cam1: f 38551 px (38551; -0.00 %, -0.00 sigma), distance 1006.8 mm (1006.8; -0.00 sigma)
+    cam2: f 35812 px (35812; +0.00 %, +0.00 sigma), distance 1036.1 mm (1036.1; +0.00 sigma)
+
+T0:none: 55 s; final: {'rounds': 3, 'cycle': {'round': 2, 'repeats_round': 0, 'left_out': 8}, 'flipped': None, 'weights_used': False, 'stage4_shared': 5, 'why': "equal weights requested (noise_weights='none')"}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.408               3      6.2      0.46933   6064       F-a2: round 2: the active set repeats round 0's: the 8 detections that alternate are left out
+      1        0.408  stage 4 shared with start 0
+      2        0.408  stage 4 shared with start 0
+      3        0.408  stage 4 shared with start 0
+      4        0.408  stage 4 shared with start 0
+      5        0.408  stage 4 shared with start 0
+  most rounds in a start: 3 (limit 20): PASS
+  result: RMS 0.4693 px, active 6064 of 6076, free wand length RMS 23.1 um
+  against delivered: RMS 0.4693 px, active 6064
+    cam1: f 38551 px (38551; -0.00 %, -0.00 sigma), distance 1006.8 mm (1006.8; -0.00 sigma)
+    cam2: f 35812 px (35812; +0.00 %, +0.00 sigma), distance 1036.1 mm (1036.1; +0.00 sigma)
+  against P5 (before the fixes, equal weights): RMS 0.4726 px, active 6072
+    cam1: f 38551 px (38528; +0.06 %, +0.08 sigma), distance 1006.8 mm (1006.7; +0.02 sigma)
+    cam2: f 35812 px (35545; +0.75 %, +0.64 sigma), distance 1036.1 mm (1028.9; +0.60 sigma)
+
+T0:camera:noshare: 198 s; final: {'rounds': 8, 'cycle': {'round': 7, 'repeats_round': 5, 'left_out': 8}, 'flipped': {'round': 4, 'kind': 'jumps', 'sigma_px': [[0.55957546161699, 0.5635237585382454], [0.7815303355964018, 0.07815303355964019]]}, 'weights_used': False, 'stage4_shared': 0, 'why': 'the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.560, 0.564 px and 0.782, 0.078 px per group): equal weights, as without the weighting'}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.408               8     23.5      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      1        0.408               8     22.4      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      2        0.408               8     22.8      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      3        0.408               8     22.9      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      4        0.408               8     22.6      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+      5        0.408               8     22.6      0.46933   6064       F-a2: round 7: the active set repeats round 5's: the 8 detections that alternate are left out
+  most rounds in a start: 8 (limit 20): PASS
+  result: RMS 0.4693 px, active 6064 of 6076, free wand length RMS 23.1 um
+  against delivered: RMS 0.4693 px, active 6064
+    cam1: f 38551 px (38551; -0.00 %, -0.00 sigma), distance 1006.8 mm (1006.8; -0.00 sigma)
+    cam2: f 35812 px (35812; +0.00 %, +0.00 sigma), distance 1036.1 mm (1036.1; +0.00 sigma)
+
+T2:camera: 158 s; final: {'rounds': 9, 'cycle': {'round': 8, 'repeats_round': 6, 'left_out': 8}, 'flipped': {'round': 4, 'kind': 'jumps', 'sigma_px': [[0.5674205086718664, 0.8535299898618821], [1.0080923196949154, 0.10080923196949154]]}, 'weights_used': False, 'stage4_shared': 4, 'why': 'the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.567, 0.854 px and 1.008, 0.101 px per group): equal weights, as without the weighting'}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.502               9     32.3      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+      1        0.502  stage 4 shared with start 0
+      2        0.502  stage 4 shared with start 0
+      3        0.502  stage 4 shared with start 0
+      4        0.703              10     39.8      0.60051   7856       F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out
+      5        0.502  stage 4 shared with start 0
+  most rounds in a start: 10 (limit 20): PASS
+  result: RMS 0.6005 px, active 7856 of 7864, free wand length RMS 31.3 um
+  against delivered: RMS 0.6005 px, active 7856
+    cam1: f 38252 px (38252; +0.00 %, +0.00 sigma), distance 1001.2 mm (1001.2; +0.00 sigma)
+    cam2: f 37409 px (37409; -0.00 %, -0.00 sigma), distance 1085.1 mm (1085.1; -0.00 sigma)
+
+T2:camera:n2: 55 s; final: {'rounds': 9, 'cycle': {'round': 8, 'repeats_round': 6, 'left_out': 8}, 'flipped': {'round': 4, 'kind': 'jumps', 'sigma_px': [[0.5674205086718664, 0.8535299898618821], [1.0080923196949154, 0.10080923196949154]]}, 'weights_used': False, 'stage4_shared': 1, 'why': 'the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.567, 0.854 px and 1.008, 0.101 px per group): equal weights, as without the weighting'}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.502               9     31.9      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+      1        0.502  stage 4 shared with start 0
+  most rounds in a start: 9 (limit 20): PASS
+  result: RMS 0.6005 px, active 7856 of 7864, free wand length RMS 31.3 um
+  against delivered: RMS 0.6005 px, active 7856
+    cam1: f 38252 px (38252; +0.00 %, +0.00 sigma), distance 1001.2 mm (1001.2; +0.00 sigma)
+    cam2: f 37409 px (37409; -0.00 %, -0.00 sigma), distance 1085.1 mm (1085.1; -0.00 sigma)
+
+T2:none: 114 s; final: {'rounds': 6, 'cycle': {'round': 5, 'repeats_round': 3, 'left_out': 8}, 'flipped': None, 'weights_used': False, 'stage4_shared': 4, 'why': "equal weights requested (noise_weights='none')"}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.502               3      5.9      0.60051   7856       F-a2: round 2: the active set repeats round 0's: the 8 detections that alternate are left out
+      1        0.502  stage 4 shared with start 0
+      2        0.502  stage 4 shared with start 0
+      3        0.502  stage 4 shared with start 0
+      4        0.703               6     23.1      0.60051   7856       F-a2: round 5: the active set repeats round 3's: the 8 detections that alternate are left out
+      5        0.502  stage 4 shared with start 0
+  most rounds in a start: 6 (limit 20): PASS
+  result: RMS 0.6005 px, active 7856 of 7864, free wand length RMS 31.3 um
+  against delivered: RMS 0.6005 px, active 7856
+    cam1: f 38252 px (38252; +0.00 %, +0.00 sigma), distance 1001.2 mm (1001.2; +0.00 sigma)
+    cam2: f 37409 px (37409; -0.00 %, -0.00 sigma), distance 1085.1 mm (1085.1; -0.00 sigma)
+  against P5 (before the fixes, equal weights): RMS 0.6020 px, active 7860
+    cam1: f 38252 px (38256; -0.01 %, -0.01 sigma), distance 1001.2 mm (1001.3; -0.00 sigma)
+    cam2: f 37409 px (37306; +0.28 %, +0.20 sigma), distance 1085.1 mm (1082.1; +0.20 sigma)
+
+T2:camera:noshare: 295 s; final: {'rounds': 9, 'cycle': {'round': 8, 'repeats_round': 6, 'left_out': 8}, 'flipped': {'round': 4, 'kind': 'jumps', 'sigma_px': [[0.5674205145740779, 0.8535299888762934], [1.008092318992235, 0.1008092318992235]]}, 'weights_used': False, 'stage4_shared': 0, 'why': 'the estimated noise did not converge: it moved by more than 30 % in each of 4 rounds in a row (to round 4; the last two: 0.567, 0.854 px and 1.008, 0.101 px per group): equal weights, as without the weighting'}
+  start  stage-3 rms  stage-4 rounds  seconds  stage-4 rms  active       notes
+      0        0.502               9     31.8      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+      1        0.502               9     31.9      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+      2        0.502               9     31.4      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+      3        0.502               9     32.4      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+      4        0.703              10     39.7      0.60051   7856       F-a2: round 9: the active set repeats round 7's: the 8 detections that alternate are left out
+      5        0.502               9     31.6      0.60051   7856       F-a2: round 8: the active set repeats round 6's: the 8 detections that alternate are left out
+  most rounds in a start: 10 (limit 20): PASS
+  result: RMS 0.6005 px, active 7856 of 7864, free wand length RMS 31.3 um
+  against delivered: RMS 0.6005 px, active 7856
+    cam1: f 38252 px (38252; +0.00 %, +0.00 sigma), distance 1001.2 mm (1001.2; +0.00 sigma)
+    cam2: f 37409 px (37409; -0.00 %, -0.00 sigma), distance 1085.1 mm (1085.1; -0.00 sigma)
+
+F5 T0: shared 72 s, not shared 198 s; active 6064 / 6064; RMS 0.469330 / 0.469330 px; largest camera difference 0.0000 sigma: PASS
+
+F5 T2: shared 158 s, not shared 295 s; active 7856 / 7856; RMS 0.600510 / 0.600510 px; largest camera difference 0.0000 sigma: PASS

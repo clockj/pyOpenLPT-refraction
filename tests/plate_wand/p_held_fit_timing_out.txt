@@ -1,0 +1,4 @@
+One held fit (the weak window's normal turned 3 deg from the truth and held): seconds, all frames and 300
+seed 1001: 612 frames, 2448 observations; truth-started fit 1.2 s; held fit all frames 0.7 s (rms 0.097526, 51 iterations), 300 frames 0.4 s (rms 0.097774)
+seed 1034: 579 frames, 4632 observations; truth-started fit 1.9 s; held fit all frames 1.1 s (rms 0.261037, 36 iterations), 300 frames 0.9 s (rms 0.261408)
+seed 1045: 1312 frames, 5248 observations; truth-started fit 1.9 s; held fit all frames 1.4 s (rms 0.229619, 29 iterations), 300 frames 0.4 s (rms 0.231055)

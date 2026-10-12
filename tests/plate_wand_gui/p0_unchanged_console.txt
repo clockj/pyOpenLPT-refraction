@@ -1,0 +1,36 @@
+P0: today's view D:\Refraction\pyOpenLPT\tests\plate_wand_gui\data\ref\view_cffed7d.py and run D:\Refraction\pyOpenLPT\tests\plate_wand_gui\data\ref\plate_wand_gui_cffed7d.py; rig B, 150 frames
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 150 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 150 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=0...
+  PASS  distortion None: the Job of today's view = the new view's (new fields at their defaults)  (differing fields []; windows [{'name': 'window 0', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}, {'name': 'window 1', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}]; fit_k1 False)
+  PASS  distortion None: today's run = the new run, bit for bit (cameras, windows, RMS, detections used)  (differing []; RMS 0.116064 px; f [4326.3, 4323.0, 3971.8, 3983.3])
+  PASS  Precalibrate: today's stages 1-3 = the new ones, bit for bit  (differing []; RMS 0.123430 px)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 150 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+Using Camera Settings: image_size=(800,1280), init_focal=9000.0
+  Per-camera focal lengths: [(0, 9000.0), (1, 9000.0), (2, 9000.0), (3, 9000.0)]
+[Filter] UI: no frames marked for removal, using all 150 frames
+[Wand] distortion_params=1
+Running Wand Calibration with length 25.0mm, f0=9000.0px, dist_coeffs=1...
+  PASS  distortion Radial k1: the Job of today's view = the new view's (new fields at their defaults)  (differing fields []; windows [{'name': 'window 0', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}, {'name': 'window 1', 'thickness_mm': [12.7], 'n': [1.0, 1.49, 1.333]}]; fit_k1 True)
+  PASS  distortion Radial k1: today's run = the new run, bit for bit (cameras, windows, RMS, detections used)  (differing []; RMS 0.115980 px; f [4326.8, 4323.0, 3971.3, 3982.9])
+
+5 of 5 checks passed; 210 s

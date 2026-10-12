@@ -1,0 +1,27 @@
+
+=================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_p0_bootstrap_failure.py _____________
+ImportError while importing test module 'D:\Refraction\pyOpenLPT\tests\test_p0_bootstrap_failure.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\zcloc\.conda\envs\refract\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_p0_bootstrap_failure.py:51: in <module>
+    from scripts.case_013_bootstrap_debug_loop import (
+E   ModuleNotFoundError: No module named 'scripts.case_013_bootstrap_debug_loop'
+________________ ERROR collecting tests/test_plane_pipeline.py ________________
+ImportError while importing test module 'D:\Refraction\pyOpenLPT\tests\test_plane_pipeline.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\zcloc\.conda\envs\refract\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_plane_pipeline.py:19: in <module>
+    import scripts.case_026_plane_debug_loop as case_026_plane_debug_loop
+E   ModuleNotFoundError: No module named 'scripts.case_026_plane_debug_loop'
+=========================== short test summary info ===========================
+ERROR tests/test_p0_bootstrap_failure.py
+ERROR tests/test_plane_pipeline.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+6 skipped, 2 errors in 6.46s

@@ -1,0 +1,5 @@
+F1b: residuals behind F1's largest pixel differences; build p4c; cameras D:\Refraction\pyOpenLPT\tests\cylinder_stb\data\cams_T2 at tol 1e-9
+  400000 point-camera pairs; 0 more than 3e-7 px apart
+
+  explained (predicted within a factor 2): 0 of 0; largest residual of either ray 0 (the tolerance 1e-9)
+  judged: PASS

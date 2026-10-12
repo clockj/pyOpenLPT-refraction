@@ -1,0 +1,24 @@
+G2: the 'ellipse' detection mode in wand_calibrator.run_detection_task
+
+g2_backlit: 60 frames, backlit ('dark' wand), rendered in 0 s
+  camera-frames with both balls seen whole: 180; measured 177, not measured 3 (of which 0 dropped by the overlap guard in both codes); 91 ms per image
+  error against the exact centres: RMS 0.0265 px over 354 balls, mean (+0.0018, +0.0006) px, largest 0.121 px; more than 1 px off: 0
+  Radius Range up to 60 px instead of 40: the centres move by 0.0003 px RMS
+  PASS  g2_backlit (a): identical to T13's estimator and guard  (180/180 camera-frames identical)
+  PASS  g2_backlit (b): accuracy as T13 (RMS <= 0.035, |mean| <= 0.01, max < 0.25 px, none > 1 px)  (RMS 0.0265, mean (+0.0018, +0.0006), max 0.121, wrong 0)
+  PASS  g2_backlit (c): a wider background window moves the centres < 0.02 px RMS  (0.0003 px)
+
+g2_even: 60 frames, even ('bright' wand), rendered in 0 s
+  camera-frames with both balls seen whole: 172; measured 164, not measured 8 (of which 0 dropped by the overlap guard in both codes); 130 ms per image
+  error against the exact centres: RMS 0.0277 px over 328 balls, mean (+0.0002, -0.0012) px, largest 0.118 px; more than 1 px off: 0
+  Radius Range up to 60 px instead of 40: the centres move by 0.0000 px RMS
+  PASS  g2_even (a): identical to T13's estimator and guard  (172/172 camera-frames identical)
+  PASS  g2_even (b): accuracy as T13 (RMS <= 0.035, |mean| <= 0.01, max < 0.25 px, none > 1 px)  (RMS 0.0277, mean (+0.0002, -0.0012), max 0.118, wrong 0)
+  PASS  g2_even (c): a wider background window moves the centres < 0.02 px RMS  (0.0000 px)
+
+(d) 'fast' and 'reliable' against HEAD's run_detection_task
+  fast: 20 images in 10 s
+  reliable: 6 images in 82 s
+  PASS  (d) 'fast' and 'reliable' byte-identical to HEAD (8- and 9-argument tasks)  (52/52)
+
+7 of 7 checks passed; 208 s

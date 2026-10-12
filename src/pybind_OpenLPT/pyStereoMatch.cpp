@@ -19,15 +19,24 @@ namespace py = pybind11;
 // ---------- Debug friend access: requires FRIEND_DEBUG(StereoMatch) in header
 // ----------
 struct DebugAccess_StereoMatch {
+  // The private steps read the tables of lines of sight and image lines that
+  // match() builds; build them here when match() has not run yet.
+  static void ensureTables(const StereoMatch &m) {
+    if (m._los_tab.empty())
+      m.buildTables();
+  }
+
   // main pipeline
   static void buildMatch(const StereoMatch &m,
                          std::vector<int> &match_candidate_id,
                          std::vector<std::vector<int>> &build_candidates) {
+    ensureTables(m);
     m.buildMatch(match_candidate_id, build_candidates);
   }
   static bool checkMatch(const StereoMatch &m,
                          const std::vector<int> &candidate_ids,
                          double &out_e_check) {
+    ensureTables(m);
     return m.checkMatch(candidate_ids, out_e_check);
   }
 
@@ -41,37 +50,57 @@ struct DebugAccess_StereoMatch {
   static std::vector<std::unique_ptr<Object3D>>
   triangulateMatch(const StereoMatch &m,
                    const std::vector<std::vector<int>> &selected_matches) {
+    ensureTables(m);
     return m.triangulateMatch(selected_matches);
   }
 
   // helpers
-  static void enumerateCandidatesOnCam(const StereoMatch &m,
-                                       const std::vector<Line3D> &los3d,
-                                       int target_cam,
+  static void enumerateCandidatesOnCam(const StereoMatch &m, int target_cam,
                                        const std::vector<int> &chosen_cams,
+                                       const std::vector<int> &chosen_ids,
                                        const std::vector<Pt2D> &chosen_pts,
                                        std::vector<int> &out) {
-    m.enumerateCandidatesOnCam(los3d, target_cam, chosen_cams, chosen_pts, out);
+    ensureTables(m);
+    m.enumerateCandidatesOnCam(target_cam, chosen_cams, chosen_ids, chosen_pts,
+                               out);
   }
   static bool makeLine2DFromLOS3D(const StereoMatch &m, int cam_id,
                                   const Line3D &los, Line2D &out_line) {
     return m.makeLine2DFromLOS3D(cam_id, los, out_line);
   }
+  static bool makeCurve2DFromLOS3D(const StereoMatch &m, int cam_id,
+                                   const Line3D &los, Line2D &out_chord,
+                                   std::vector<Pt2D> &out_poly) {
+    return m.makeCurve2DFromLOS3D(cam_id, los, out_chord, out_poly);
+  }
+  // the image lines of a set of lines of sight on one camera (the search
+  // itself reads them from the tables)
   static bool buildLinesOnCam(const StereoMatch &m,
                               const std::vector<Line3D> &los3d, int cam_id,
                               std::vector<Line2D> &out) {
-    return m.buildLinesOnCam(los3d, cam_id, out);
+    out.clear();
+    for (const auto &L3 : los3d) {
+      Line2D line;
+      if (!m.makeLine2DFromLOS3D(cam_id, L3, line))
+        return false;
+      out.push_back(line);
+    }
+    return true;
   }
   static int
-  selectSecondCameraByLineLength(const StereoMatch &m, const Line3D &los_ref,
+  selectSecondCameraByLineLength(const StereoMatch &m, int ref_cam, int ref_id,
                                  const std::vector<int> &remaining_cams) {
-    return m.selectSecondCameraByLineLength(los_ref, remaining_cams);
+    ensureTables(m);
+    return m.selectSecondCameraByLineLength(ref_cam, ref_id, remaining_cams);
   }
   static int
   selectNextCameraByMaxPairAngle(const StereoMatch &m,
-                                 const std::vector<Line3D> &los3d,
+                                 const std::vector<int> &chosen_cams,
+                                 const std::vector<int> &chosen_ids,
                                  const std::vector<int> &remaining_cams) {
-    return m.selectNextCameraByMaxPairAngle(los3d, remaining_cams);
+    ensureTables(m);
+    return m.selectNextCameraByMaxPairAngle(chosen_cams, chosen_ids,
+                                            remaining_cams);
   }
   static double computeMinParallaxDeg(const StereoMatch &m,
                                       const std::vector<Line3D> &los3d) {
@@ -89,16 +118,17 @@ struct DebugAccess_StereoMatch {
     return m.TriangulationCheckWithTol(los3d, tol_3d_mm);
   }
   static bool checkBackProjection(const StereoMatch &m, int target_cam,
-                                  const Pt2D &q_t,
-                                  const std::vector<int> &chosen_cams,
+                                  int pid, const std::vector<int> &chosen_cams,
                                   const std::vector<Pt2D> &chosen_pts) {
-    return m.checkBackProjection(target_cam, q_t, chosen_cams, chosen_pts);
+    ensureTables(m);
+    return m.checkBackProjection(target_cam, pid, chosen_cams, chosen_pts);
   }
 
   // early checks
   static bool objectEarlyCheck(const StereoMatch &m,
                                const std::vector<int> &cams_used,
                                const std::vector<int> &ids_on_used) {
+    ensureTables(m);
     return m.objectEarlyCheck(cams_used, ids_on_used);
   }
   static bool tracerEarlyCheck(const StereoMatch &m,
@@ -109,6 +139,7 @@ struct DebugAccess_StereoMatch {
   static bool bubbleEarlyCheck(const StereoMatch &m,
                                const std::vector<int> &cams_in_path,
                                const std::vector<int> &ids_in_path) {
+    ensureTables(m);
     return m.bubbleEarlyCheck(cams_in_path, ids_in_path);
   }
 
@@ -241,17 +272,17 @@ void bind_StereoMatch(py::module_ &m) {
 
       .def(
           "enumerateCandidatesOnCam",
-          [](const StereoMatch &self, const std::vector<Line3D> &los3d,
-             int target_cam, const std::vector<int> &chosen_cams,
+          [](const StereoMatch &self, int target_cam,
+             const std::vector<int> &chosen_cams,
+             const std::vector<int> &chosen_ids,
              const std::vector<Pt2D> &chosen_pts) {
             std::vector<int> out;
             DebugAccess_StereoMatch::enumerateCandidatesOnCam(
-                self, los3d, target_cam, chosen_cams, chosen_pts, out);
+                self, target_cam, chosen_cams, chosen_ids, chosen_pts, out);
             return out;
           },
-          py::arg("los3d"), py::arg("target_cam"),
-          py::arg("chosen_cams") = std::vector<int>{},
-          py::arg("chosen_pts") = std::vector<Pt2D>{})
+          py::arg("target_cam"), py::arg("chosen_cams"), py::arg("chosen_ids"),
+          py::arg("chosen_pts"))
       .def(
           "buildLinesOnCam",
           [](const StereoMatch &self, const std::vector<Line3D> &los3d,
@@ -272,21 +303,35 @@ void bind_StereoMatch(py::module_ &m) {
           },
           py::arg("cam_id"), py::arg("los"))
       .def(
+          "makeCurve2DFromLOS3D",
+          [](const StereoMatch &self, int cam_id, const Line3D &los) {
+            Line2D chord;
+            std::vector<Pt2D> poly;
+            bool ok = DebugAccess_StereoMatch::makeCurve2DFromLOS3D(
+                self, cam_id, los, chord, poly);
+            return py::make_tuple(ok, chord, poly);
+          },
+          py::arg("cam_id"), py::arg("los"),
+          "The image of a line of sight on a camera whose line images curve: "
+          "(ok, chord, polyline vertices).")
+      .def(
           "selectSecondCameraByLineLength",
-          [](const StereoMatch &self, const Line3D &los_ref,
+          [](const StereoMatch &self, int ref_cam, int ref_id,
              const std::vector<int> &remaining_cams) {
             return DebugAccess_StereoMatch::selectSecondCameraByLineLength(
-                self, los_ref, remaining_cams);
+                self, ref_cam, ref_id, remaining_cams);
           },
-          py::arg("los_ref"), py::arg("remaining_cams"))
+          py::arg("ref_cam"), py::arg("ref_id"), py::arg("remaining_cams"))
       .def(
           "selectNextCameraByMaxPairAngle",
-          [](const StereoMatch &self, const std::vector<Line3D> &los3d,
+          [](const StereoMatch &self, const std::vector<int> &chosen_cams,
+             const std::vector<int> &chosen_ids,
              const std::vector<int> &remaining_cams) {
             return DebugAccess_StereoMatch::selectNextCameraByMaxPairAngle(
-                self, los3d, remaining_cams);
+                self, chosen_cams, chosen_ids, remaining_cams);
           },
-          py::arg("los3d"), py::arg("remaining_cams"))
+          py::arg("chosen_cams"), py::arg("chosen_ids"),
+          py::arg("remaining_cams"))
       .def(
           "computeMinParallaxDeg",
           [](const StereoMatch &self, const std::vector<Line3D> &los3d) {
@@ -312,13 +357,13 @@ void bind_StereoMatch(py::module_ &m) {
           py::arg("los3d"), py::arg("tol_3d_mm"))
       .def(
           "checkBackProjection",
-          [](const StereoMatch &self, int target_cam, const Pt2D &q_t,
+          [](const StereoMatch &self, int target_cam, int pid,
              const std::vector<int> &chosen_cams,
              const std::vector<Pt2D> &chosen_pts) {
             return DebugAccess_StereoMatch::checkBackProjection(
-                self, target_cam, q_t, chosen_cams, chosen_pts);
+                self, target_cam, pid, chosen_cams, chosen_pts);
           },
-          py::arg("target_cam"), py::arg("q_t"), py::arg("chosen_cams"),
+          py::arg("target_cam"), py::arg("pid"), py::arg("chosen_cams"),
           py::arg("chosen_pts"))
 
       // early checks
@@ -357,6 +402,9 @@ void bind_StereoMatch(py::module_ &m) {
             return vec[cam_id].get();
           },
           py::arg("cam_id"), py::return_value_policy::reference_internal);
+
+  m.def("dist2ToPolyline", &dist2ToPolyline, py::arg("q"), py::arg("poly"),
+        "Squared distance from a point to a polyline (NaN vertices break it).");
 
   // ===== IDMap =====
   py::class_<IDMap::RowSpan>(m, "RowSpan")

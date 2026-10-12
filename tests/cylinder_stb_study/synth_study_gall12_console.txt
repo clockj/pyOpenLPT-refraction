@@ -1,0 +1,5 @@
+synth_study gall12: build p4c
+D:\Refraction\pyOpenLPT\tests\cylinder_stb_study\synth_study.py:668: RuntimeWarning: All-NaN slice encountered
+  fac = np.nanmedian(a(f"flux_all_c{c}") / unit, axis=0)
+  rendered 1 sets (160 camera-frames) in 245 s
+exit 0

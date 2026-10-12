@@ -1,0 +1,7 @@
+R4b: seed 3111 at 1 px, 5 cameras on windows [0, 1, 0, 1, 0]; the answer without restarts: rms 1.245158 px, active 13730, smallest wand-end depth per window 56.5, 3.01e-10 mm; the fit from the truth: rms 1.231979 px, active 13730
+  one round of restarts (31 s): screened costs relative to the answer's -2.13e-02, -1.44e-02, -2.13e-02, -2.13e-02; the cheapest refitted: rms 1.231995 px, active 13728
+  calibrate's rule (within 1.5x of the best RMS, then the most observations kept) keeps the pinned answer
+  on the answer's own 13730 observations and weights: the answer's cost 21287.24, the restart's 20836.51 (-2.12e-02; n_fail 2); the 2 observations the restart rejected have residuals nan-nan px there
+  the proposed rule, on all 13730 usable observations with the answer's weights, each capped at 25 x 1.0354: the answer 21287.24 (0 at the cap), the restart 20888.28 (2 at the cap): -1.87e-02, the restart would be kept
+  the restart against the fit from the truth: rms 1.231995 vs 1.231979, active 13728 vs 13730, max |z| 0.70 (cam1.logf): not the same minimum
+done, 105 s

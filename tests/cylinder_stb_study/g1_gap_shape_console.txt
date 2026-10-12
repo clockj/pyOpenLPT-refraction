@@ -1,0 +1,14 @@
+G1: the gap table; frames [0, 4, 8, 12, 16, 20, 24, 28, 32, 36] of each synthetic set, T1 from D1's base; build p4c
+  T1 (D1's base):
+    estimated as on T1: detections 1002 / 865; true pairs 190 +- 21 per frame (5.6 % of the signal band); detections with a partner 19 / 22 %; true within 0.5 / 1 / 1.5 / 2 px 35, 58, 71, 88 %; depth cue keeps 52 % of true and 3.5 % of random pairs
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+  Gshape0_nT1:
+    estimated as on T1: detections 1077 / 1200; true pairs 417 +- 27 per frame (8.0 % of the signal band); detections with a partner 39 / 35 %; true within 0.5 / 1 / 1.5 / 2 px 67, 85, 93, 95 %; depth cue keeps 67 % of true and 3.1 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 68.0 / 48.9 % of 1054; false detections 122 / 222 per frame; centre error 50/90 % 0.24/1.46, 0.29/1.80 px
+      particles detected in both 374 per frame (374 inside the volume); detections with a partner 35 / 31 %; true pairs among the candidates 374 per frame, in the signal band 335 (6.4 % of it); true within 0.5 / 1 / 1.5 / 2 px 65, 81, 90, 95 %; depth cue keeps 75 % of true and 3.7 % of random pairs
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+  Gshape12_nT1:
+    estimated as on T1: detections 1070 / 1210; true pairs 398 +- 27 per frame (7.6 % of the signal band); detections with a partner 37 / 33 %; true within 0.5 / 1 / 1.5 / 2 px 66, 83, 92, 96 %; depth cue keeps 65 % of true and 3.0 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 67.5 / 49.5 % of 1054; false detections 118 / 218 per frame; centre error 50/90 % 0.24/1.40, 0.27/1.77 px
+      particles detected in both 379 per frame (379 inside the volume); detections with a partner 35 / 31 %; true pairs among the candidates 379 per frame, in the signal band 343 (6.5 % of it); true within 0.5 / 1 / 1.5 / 2 px 65, 81, 90, 97 %; depth cue keeps 64 % of true and 3.8 % of random pairs
+exit 0

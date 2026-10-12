@@ -24,6 +24,7 @@ void bind_OTF(py::module_& m)
         .def_readwrite("grid_x", &OTFParam::grid_x)
         .def_readwrite("grid_y", &OTFParam::grid_y)
         .def_readwrite("grid_z", &OTFParam::grid_z)
+        .def_readwrite("model", &OTFParam::model)
         // 注意：a,b,c,alpha 是 Matrix<double>，如果你之后把 Matrix<double> 映射成 Python 类型，再把下面四个也开放：
         // .def_readwrite("a", &OTFParam::a) ...
         ;
@@ -51,6 +52,21 @@ void bind_OTF(py::module_& m)
                  auto v = self.getOTFParam(cam_id, pt_world);
                  return py::make_tuple(v[0], v[1], v[2], v[3]); // a,b,c,alpha
              }, py::arg("cam_id"), py::arg("pt_world"))
+        .def("getOTFParamFull",
+             [](const OTF& self, int cam_id, const Pt3D& pt_world){
+                 return self.getOTFParam(cam_id, pt_world);
+             }, py::arg("cam_id"), py::arg("pt_world"),
+             "(a, b, c, cos(alpha), sin(alpha)[, sigma for the segment model]).")
+        .def_static("intensity", &OTF::intensity, py::arg("model"), py::arg("x"), py::arg("y"),
+                    py::arg("x0"), py::arg("y0"), py::arg("params"),
+                    "The image intensity at (x, y) of an image centred at (x0, y0) (getOTFParamFull's params).")
+        .def_static("halfExtent",
+             [](int model, const std::vector<double>& params, double k){
+                 double dx = 0.0, dy = 0.0;
+                 OTF::halfExtent(model, params, k, dx, dy);
+                 return py::make_tuple(dx, dy);
+             }, py::arg("model"), py::arg("params"), py::arg("k"),
+             "(half-width, half-height) of the image out to k sigma.")
         .def_readwrite("_param", &OTF::_param)
         .def_readwrite("_output_path", &OTF::_output_path);
 }

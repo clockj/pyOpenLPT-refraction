@@ -1,0 +1,9 @@
+G1: the gap table; frames [0, 4, 8, 12, 16, 20, 24, 28, 32, 36] of each synthetic set, T1 from D1's base; build p4c
+  T1 (D1's base):
+    estimated as on T1: detections 1002 / 865; true pairs 190 +- 21 per frame (5.6 % of the signal band); detections with a partner 19 / 22 %; true within 0.5 / 1 / 1.5 / 2 px 35, 58, 71, 88 %; depth cue keeps 52 % of true and 3.5 % of random pairs
+Loaded the OTF from D:\Refraction\pyOpenLPT\cases\cyl_20261007\data\T1_otf_shape.txt (model segment)
+  Gallm:
+    estimated as on T1: detections 899 / 1092; true pairs 380 +- 23 per frame (9.4 % of the signal band); detections with a partner 42 / 35 %; true within 0.5 / 1 / 1.5 / 2 px 45, 66, 80, 91 %; depth cue keeps 51 % of true and 3.8 % of random pairs
+    with the truth: detection recall (inside the volume, seen by both) 66.9 / 64.6 % of 926; false detections 76 / 73 per frame; centre error 50/90 % 0.37/1.41, 0.42/1.55 px
+      particles detected in both 408 per frame (408 inside the volume); detections with a partner 45 / 37 %; true pairs among the candidates 408 per frame, in the signal band 334 (8.3 % of it); true within 0.5 / 1 / 1.5 / 2 px 41, 66, 82, 91 %; depth cue keeps 54 % of true and 4.1 % of random pairs
+exit 0

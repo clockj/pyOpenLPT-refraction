@@ -1,0 +1,17 @@
+Phase B: stereo matching (frames 0-300 unless noted)
+
+[profile] totals of s50_b134 (510 matching rounds): refs 2.99e+06, built 2.95e+06, checked 2.93e+06, selected 7.27e+05, objects 7.27e+05, los 2.93e+07, proj 1.35e+08, tri 1.2e+08, enum 1.16e+08, strip_pts 1.82e+08, cands 1.16e+08, dfs 1.16e+08, t_tables 9.84, t_build_check 31.2, t_sort 0, t_prune 1.08, t_tri 0.92
+[profile] totals of s50_b2 (510 matching rounds): refs 2.34e+06, built 4.15e+06, checked 4.11e+06, selected 8.8e+05, objects 8.8e+05, los 2.72e+07, proj 1.18e+08, tri 9.84e+07, enum 9.15e+07, strip_pts 1.27e+08, cands 9.34e+07, dfs 9.34e+07, t_tables 7.28, t_build_check 23.6, t_sort 0.13, t_prune 1.75, t_tri 0.78
+[profile] totals of b300_b134 (3010 matching rounds): refs 1.66e+07, built 1.29e+07, checked 1.28e+07, selected 3.57e+06, objects 3.57e+06, los 1.6e+08, proj 7.31e+08, tri 6.11e+08, enum 5.98e+08, strip_pts 9.37e+08, cands 5.94e+08, dfs 5.94e+08, t_tables 54, t_build_check 165, t_sort 0, t_prune 6.02, t_tri 4.55
+[profile] totals of b300_b2 (3010 matching rounds): refs 1.29e+07, built 1.84e+07, checked 1.82e+07, selected 4.41e+06, objects 4.41e+06, los 1.46e+08, proj 6.33e+08, tri 4.81e+08, enum 4.53e+08, strip_pts 6.26e+08, cands 4.58e+08, dfs 4.58e+08, t_tables 41.1, t_build_check 123, t_sort 0.08, t_prune 7.42, t_tri 3.8
+
+run           match s/frame  f281-300  overlap s  IPR objects  4cam@2px  active long  fail lin.fit
+b300_base              7.04     13.95      0.556        11801       195        12588          1468
+b300_a1_9              3.98      8.39      0.123        11801       195        12588          1468
+b300_a1_3              4.58      8.89      0.116        11801       195        12588          1468
+b300_b134              0.77      0.70      0.001        11801       195        12588          1468
+b300_b2                0.64      0.57      0.002        14590       386        14509          1815
+b300_final             0.64      0.57      0.001        14590       386        14509          1815
+b300_final3            0.64      0.59      0.001        14590       386        14509          1815
+b300_final_si200           0.64      0.57      0.001        14590       386        14509          1815
+match: IPR matching time per frame (all rounds); overlap: STB::checkRepeat; IPR objects, 4cam@2px (matched in the 4-camera rounds at 2 px), fail lin.fit: means over frames 4-300; active long: mean over frames 281-300

@@ -1,0 +1,15 @@
+S1 detection: 10640 frames x 2 cameras = 21280 images, 48 workers
+  settings: {'_comment': "ball_ellipses.detect_wand_balls, the GUI's 'ellipse' mode. Rod settings sized for this wand on the P0 survey (tests/p0_survey_out.txt): opening inside the window 91-101 px common to both cameras; mask about the rod's half-width plus twice its blur (checked in T1).", 'polarity': 'dark', 'min_r_px': 40.0, 'max_r_px': 120.0, 'open_px': 95, 'rod_mask_px': 50.0, 'guard_px': 3.0, 'workers': 48, '_workers': '48 processes: reading the images from the network drive, not the computing, limits the speed (one stream reads about 1.5 files/s; parallel reads add up).'}
+  2000 / 21280 images, 111 s (18.1 images/s)
+  4000 / 21280 images, 197 s (20.3 images/s)
+  6000 / 21280 images, 286 s (21.0 images/s)
+  8000 / 21280 images, 382 s (21.0 images/s)
+  10000 / 21280 images, 539 s (18.5 images/s)
+  12000 / 21280 images, 686 s (17.5 images/s)
+  14000 / 21280 images, 828 s (16.9 images/s)
+  16000 / 21280 images, 916 s (17.5 images/s)
+  18000 / 21280 images, 1004 s (17.9 images/s)
+  20000 / 21280 images, 1101 s (18.2 images/s)
+  done in 1148 s (18.5 images/s); written X:\Shijie Zhong\Refraction\Processed\20261006\T0\Results\detection\detections_all.csv
+  cam1: 0 unreadable, 2280 0 balls, 4847 1 balls, 3513 2 balls, 0 more, 0 pairs dropped by the guard
+  cam2: 0 unreadable, 2025 0 balls, 4089 1 balls, 4526 2 balls, 0 more, 0 pairs dropped by the guard

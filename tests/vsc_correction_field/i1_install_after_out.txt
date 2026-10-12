@@ -1,0 +1,6 @@
+build\Release\OpenLPT.exe: 0784fae52c36a888..., 1437184 bytes, 2026-10-09 08:31:36 (changed; before 2026-10-06 10:31:25)
+build-py\Release\pyopenlpt.cp311-win_amd64.pyd: 985c59fd93096e38..., 2632192 bytes, 2026-10-09 08:31:33 (changed; before 2026-10-06 10:31:24)
+build console: finished; MSBuild summary (warnings, errors): none found
+  module D:\Refraction\pyOpenLPT\build-py\Release\pyopenlpt.cp311-win_amd64.pyd
+  api ['ImageCorrection', 'CorrectedCameraModel', 'loadCameraModel', 'detectLines']
+  camera ['setCorrection', 'clearCorrection', 'hasCorrection', 'correctionFile', 'cameraModel']

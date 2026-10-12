@@ -1,0 +1,52 @@
+rig  0: 3 cams, D 954, 1283, 1177 mm, half 14.3 | from scratch rms 0.10948 vs truth-start 0.10948 px, max diff 2.1e-10 sigma | affine 8.0 px | OK  | 36 s | 1/1
+rig  1: 2 cams, D 1052, 1372 mm, half 22.0 | from scratch rms 0.08551 vs truth-start 0.08551 px, max diff 1.1e-06 sigma | affine 2.8 px | OK  | 10 s | 2/2
+rig  2: 4 cams, D 707, 513, 410, 1140 mm, half 15.9 | from scratch rms 0.11799 vs truth-start 0.11799 px, max diff 8.2e-09 sigma | affine 6.6 px | OK  | 60 s | 3/3
+rig  3: 3 cams, D 1105, 791, 810 mm, half 17.5 | from scratch rms 0.10696 vs truth-start 0.10696 px, max diff 2.9e-07 sigma | affine 3.5 px | OK  | 22 s | 4/4
+rig  4: 2 cams, D 825, 685 mm, half 12.9 | from scratch rms 0.08581 vs truth-start 0.08581 px, max diff 4.9e-06 sigma | affine 1.5 px | OK  | 14 s | 5/5
+rig  5: 4 cams, D 983, 1130, 650, 525 mm, half 23.8 | from scratch rms 0.11674 vs truth-start 0.11674 px, max diff 2.1e-06 sigma | affine 13.5 px | OK  | 24 s | 6/6
+rig  6: 3 cams, D 1153, 579, 815 mm, half 18.1 | from scratch rms 0.10738 vs truth-start 0.10738 px, max diff 5.2e-07 sigma | affine 10.2 px | OK  | 19 s | 7/7
+rig  7: 3 cams, D 428, 622, 962 mm, half 12.7 | from scratch rms 0.10865 vs truth-start 0.10865 px, max diff 6.4e-10 sigma | affine 5.0 px | OK  | 49 s | 8/8
+rig  8: 4 cams, D 782, 624, 534, 845 mm, half 12.0 | from scratch rms 0.11811 vs truth-start 0.11811 px, max diff 2.2e-09 sigma | affine 3.9 px | OK  | 32 s | 9/9
+rig  9: 3 cams, D 533, 701, 1386 mm, half 17.0 | from scratch rms 0.10755 vs truth-start 0.10755 px, max diff 2.2e-08 sigma | affine 4.1 px | OK  | 24 s | 10/10
+rig 10: 3 cams, D 992, 589, 796 mm, half 23.7 | from scratch rms 0.10793 vs truth-start 0.10793 px, max diff 5.3e-07 sigma | affine 15.9 px | OK  | 22 s | 11/11
+rig 11: 2 cams, D 650, 1282 mm, half 24.9 | from scratch rms 0.08742 vs truth-start 0.08742 px, max diff 1.2e-06 sigma | affine 4.5 px | OK  | 13 s | 12/12
+rig 12: 3 cams, D 898, 461, 1356 mm, half 17.6 | from scratch rms 0.10802 vs truth-start 0.10802 px, max diff 1.5e-08 sigma | affine 8.0 px | OK  | 22 s | 13/13
+rig 13: 3 cams, D 558, 1005, 1107 mm, half 17.3 | from scratch rms 0.10681 vs truth-start 0.10681 px, max diff 4.6e-08 sigma | affine 8.6 px | OK  | 31 s | 14/14
+rig 14: 3 cams, D 1364, 884, 447 mm, half 21.1 | from scratch rms 0.10821 vs truth-start 0.10821 px, max diff 3.0e-07 sigma | affine 10.2 px | OK  | 23 s | 15/15
+rig 15: 4 cams, D 1258, 717, 612, 565 mm, half 17.0 | from scratch rms 0.11686 vs truth-start 0.11686 px, max diff 2.2e-07 sigma | affine 9.7 px | OK  | 24 s | 16/16
+rig 16: 4 cams, D 1357, 1229, 755, 729 mm, half 19.2 | from scratch rms 0.11901 vs truth-start 0.11901 px, max diff 5.8e-08 sigma | affine 14.8 px | OK  | 40 s | 17/17
+rig 17: 2 cams, D 1056, 1327 mm, half 18.9 | from scratch rms 0.08279 vs truth-start 0.08279 px, max diff 7.2e-09 sigma | affine 1.3 px | OK  | 20 s | 18/18
+rig 18: 3 cams, D 626, 1096, 608 mm, half 14.6 | from scratch rms 0.10704 vs truth-start 0.10704 px, max diff 2.3e-08 sigma | affine 5.3 px | OK  | 30 s | 19/19
+rig 19: 3 cams, D 903, 565, 691 mm, half 13.5 | from scratch rms 0.10741 vs truth-start 0.10741 px, max diff 9.5e-06 sigma | affine 3.3 px | OK  | 40 s | 20/20
+rig 20: 3 cams, D 1308, 1157, 1038 mm, half 18.1 | from scratch rms 0.10794 vs truth-start 0.10794 px, max diff 3.6e-05 sigma | affine 3.9 px | OK  | 24 s | 21/21
+rig 21: 3 cams, D 545, 476, 1294 mm, half 17.2 | from scratch rms 0.10589 vs truth-start 0.10589 px, max diff 1.7e-07 sigma | affine 4.2 px | OK  | 32 s | 22/22
+rig 22: 2 cams, D 1202, 736 mm, half 21.0 | from scratch rms 0.08629 vs truth-start 0.08629 px, max diff 2.5e-06 sigma | affine 3.0 px | OK  | 16 s | 23/23
+rig 23: 3 cams, D 848, 715, 1280 mm, half 20.4 | from scratch rms 0.10801 vs truth-start 0.10801 px, max diff 2.2e-08 sigma | affine 11.7 px | OK  | 14 s | 24/24
+rig 24: 2 cams, D 731, 1100 mm, half 22.7 | from scratch rms 0.08568 vs truth-start 0.08568 px, max diff 4.4e-07 sigma | affine 3.4 px | OK  | 10 s | 25/25
+rig 25: 4 cams, D 869, 870, 961, 1136 mm, half 13.4 | from scratch rms 0.11838 vs truth-start 0.11838 px, max diff 2.8e-05 sigma | affine 5.7 px | OK  | 56 s | 26/26
+rig 26: 2 cams, D 1323, 1131 mm, half 13.2 | from scratch rms 0.08537 vs truth-start 0.08537 px, max diff 3.0e-07 sigma | affine 1.3 px | OK  | 19 s | 27/27
+rig 27: 3 cams, D 1418, 1023, 678 mm, half 17.4 | from scratch rms 0.10931 vs truth-start 0.10931 px, max diff 1.5e-06 sigma | affine 7.4 px | OK  | 25 s | 28/28
+rig 28: 4 cams, D 1200, 1110, 693, 807 mm, half 14.4 | from scratch rms 0.11676 vs truth-start 0.11676 px, max diff 5.7e-06 sigma | affine 6.2 px | OK  | 59 s | 29/29
+rig 29: 3 cams, D 1253, 1124, 901 mm, half 19.4 | from scratch rms 0.10976 vs truth-start 0.10976 px, max diff 4.0e-09 sigma | affine 4.7 px | OK  | 14 s | 30/30
+rig 30: 4 cams, D 1103, 1012, 1424, 1170 mm, half 17.5 | from scratch rms 0.11535 vs truth-start 0.11535 px, max diff 2.3e-05 sigma | affine 9.2 px | OK  | 49 s | 31/31
+rig 31: 4 cams, D 540, 474, 879, 1110 mm, half 24.1 | from scratch rms 0.11457 vs truth-start 0.11457 px, max diff 9.9e-10 sigma | affine 16.3 px | OK  | 24 s | 32/32
+rig 32: 4 cams, D 883, 1291, 581, 1355 mm, half 16.8 | from scratch rms 0.11620 vs truth-start 0.11620 px, max diff 5.4e-07 sigma | affine 10.1 px | OK  | 44 s | 33/33
+rig 33: 4 cams, D 894, 930, 411, 1167 mm, half 17.8 | from scratch rms 0.11547 vs truth-start 0.11547 px, max diff 6.5e-09 sigma | affine 9.3 px | OK  | 37 s | 34/34
+rig 34: 2 cams, D 474, 1316 mm, half 20.5 | from scratch rms 0.08663 vs truth-start 0.08663 px, max diff 6.6e-08 sigma | affine 3.8 px | OK  | 9 s | 35/35
+rig 35: 4 cams, D 590, 866, 584, 1485 mm, half 15.6 | from scratch rms 0.11777 vs truth-start 0.11777 px, max diff 1.3e-05 sigma | affine 6.6 px | OK  | 30 s | 36/36
+rig 36: 3 cams, D 1366, 1439, 479 mm, half 17.9 | from scratch rms 0.10975 vs truth-start 0.10975 px, max diff 3.3e-06 sigma | affine 9.1 px | OK  | 22 s | 37/37
+rig 37: 3 cams, D 1289, 844, 588 mm, half 22.1 | from scratch rms 0.10726 vs truth-start 0.10784 px, max diff 2.4e-01 sigma | affine 5.9 px | FAIL  | hints: {'ok': True, 'max_diff_sigma': 9.239582826679526e-08, 'rms_diff_px': 1.1421419365831298e-14} | 36 s | 37/38
+rig 38: 3 cams, D 1004, 1369, 1340 mm, half 13.5 | from scratch rms 0.10887 vs truth-start 0.10887 px, max diff 4.5e-05 sigma | affine 5.5 px | OK  | 21 s | 38/39
+rig 39: 4 cams, D 523, 845, 1342, 415 mm, half 22.5 | from scratch rms 0.11792 vs truth-start 0.11792 px, max diff 2.7e-07 sigma | affine 16.0 px | OK  | 25 s | 39/40
+rig 40: 3 cams, D 682, 913, 969 mm, half 22.1 | from scratch rms 0.10576 vs truth-start 0.10576 px, max diff 6.1e-07 sigma | affine 11.6 px | OK  | 20 s | 40/41
+rig 41: 4 cams, D 1059, 1277, 953, 543 mm, half 23.3 | from scratch rms 0.11538 vs truth-start 0.11538 px, max diff 1.2e-08 sigma | affine 15.1 px | OK  | 28 s | 41/42
+rig 42: 3 cams, D 897, 1498, 979 mm, half 17.1 | from scratch rms 0.10926 vs truth-start 0.10926 px, max diff 3.6e-08 sigma | affine 9.6 px | OK  | 27 s | 42/43
+rig 43: 3 cams, D 687, 438, 400 mm, half 20.0 | from scratch rms 0.10622 vs truth-start 0.10622 px, max diff 1.9e-07 sigma | affine 10.1 px | OK  | 15 s | 43/44
+rig 44: 2 cams, D 969, 860 mm, half 22.8 | from scratch rms 0.08743 vs truth-start 0.08743 px, max diff 6.8e-07 sigma | affine 1.8 px | OK  | 15 s | 44/45
+rig 45: 2 cams, D 1469, 465 mm, half 22.1 | from scratch rms 0.08619 vs truth-start 0.08619 px, max diff 8.0e-06 sigma | affine 6.3 px | OK  | 19 s | 45/46
+rig 46: 3 cams, D 497, 809, 1317 mm, half 19.0 | from scratch rms 0.10621 vs truth-start 0.10621 px, max diff 1.6e-10 sigma | affine 8.8 px | OK  | 36 s | 46/47
+rig 47: 3 cams, D 1342, 736, 1384 mm, half 12.2 | from scratch rms 0.10829 vs truth-start 0.10829 px, max diff 2.3e-10 sigma | affine 2.8 px | OK  | 35 s | 47/48
+rig 48: 3 cams, D 775, 1134, 563 mm, half 13.2 | from scratch rms 0.10524 vs truth-start 0.10524 px, max diff 7.4e-06 sigma | affine 5.2 px | OK  | 43 s | 48/49
+rig 49: 4 cams, D 905, 846, 964, 754 mm, half 23.7 | from scratch rms 0.11733 vs truth-start 0.11733 px, max diff 1.5e-10 sigma | affine 19.4 px | OK  | 34 s | 49/50
+  PASS  49/50 rigs reach the global minimum without hints (need 48/50)
+time 1455 s

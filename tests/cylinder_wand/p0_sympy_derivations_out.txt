@@ -1,0 +1,67 @@
+PROVED     1.1 |A d|^2 = d^T (A^T A) d                     cancel; 40 samples
+PROVED     1.2 d^T Q d is linear in the 6 entries of symmetric Q (explicit form)  cancel; 40 samples
+PROVED     1.2b all second derivatives of d^T Q d in Q vanish (linear)  cancel; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (0,0)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (0,1)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (0,2)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (1,0)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (1,1)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (1,2)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (2,0)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (2,1)           expand; 40 samples
+PROVED     1.3a A adj(A) = det(A) I, entry (2,2)           expand; 40 samples
+PROVED     1.3b adj^T (A^T A) adj = det(A)^2 I, entry (0,0)  expand; 40 samples
+PROVED     1.3b adj^T (A^T A) adj = det(A)^2 I, entry (0,1)  expand; 40 samples
+PROVED     1.3b adj^T (A^T A) adj = det(A)^2 I, entry (0,2)  expand; 40 samples
+PROVED     1.3b adj^T (A^T A) adj = det(A)^2 I, entry (1,1)  expand; 40 samples
+PROVED     1.3b adj^T (A^T A) adj = det(A)^2 I, entry (1,2)  expand; 40 samples
+PROVED     1.3b adj^T (A^T A) adj = det(A)^2 I, entry (2,2)  expand; 40 samples
+PROVED     1.4a the mirror P = diag(1,1,-1) has det -1     cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (0,0)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (0,1)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (0,2)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (1,0)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (1,1)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (1,2)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (2,0)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (2,1)         cancel; 40 samples
+PROVED     1.4b (P A)^T (P A) = A^T A, entry (2,2)         cancel; 40 samples
+PROVED     2.1 g_u (-g_u^-1 g_t) + g_t = 0, row 0          cancel; 40 samples
+PROVED     2.1 g_u (-g_u^-1 g_t) + g_t = 0, row 1          cancel; 40 samples
+PROVED     2.2 -(S g_u)^-1 (S g_t) = -g_u^-1 g_t, row 0    cancel; 40 samples
+PROVED     2.2 -(S g_u)^-1 (S g_t) = -g_u^-1 g_t, row 1    cancel; 40 samples
+SKIPPED    2.0 the implicit function theorem itself (existence and smoothness of u*(theta))  a theorem, not algebra; it needs g_u invertible at the solution, which T1 tests on the cylinder model
+PROVED     2.3a pinhole (rational basis): implicit d(u,v)/dX = closed form, entry (0,0)  cancel; 40 samples
+PROVED     2.3a pinhole (rational basis): implicit d(u,v)/dX = closed form, entry (0,1)  cancel; 40 samples
+PROVED     2.3a pinhole (rational basis): implicit d(u,v)/dX = closed form, entry (0,2)  cancel; 40 samples
+PROVED     2.3b pinhole (rational basis): implicit d(u,v)/df = (x/z, y/z), row 0  cancel; 40 samples
+PROVED     2.3c pinhole (rational basis): implicit d(u,v)/d(cx,cy) = I, entry (0,0)  cancel; 40 samples
+PROVED     2.3c pinhole (rational basis): implicit d(u,v)/d(cx,cy) = I, entry (0,1)  cancel; 40 samples
+PROVED     2.3a pinhole (rational basis): implicit d(u,v)/dX = closed form, entry (1,0)  cancel; 40 samples
+PROVED     2.3a pinhole (rational basis): implicit d(u,v)/dX = closed form, entry (1,1)  cancel; 40 samples
+PROVED     2.3a pinhole (rational basis): implicit d(u,v)/dX = closed form, entry (1,2)  cancel; 40 samples
+PROVED     2.3b pinhole (rational basis): implicit d(u,v)/df = (x/z, y/z), row 1  cancel; 40 samples
+PROVED     2.3c pinhole (rational basis): implicit d(u,v)/d(cx,cy) = I, entry (1,0)  cancel; 40 samples
+PROVED     2.3c pinhole (rational basis): implicit d(u,v)/d(cx,cy) = I, entry (1,1)  cancel; 40 samples
+PROVED     2.3d E1 . d = 0 (rational basis perpendicular to the ray)  expand; 40 samples
+PROVED     2.3d E2 . d = 0                                 expand; 40 samples
+NUMERIC    2.3e e1 (normalised) = E1/|E1|, component 0     40 samples
+PROVED     2.3e e2 (normalised) = E2/|E2|, component 0     cancel; 40 samples
+NUMERIC    2.3e e1 (normalised) = E1/|E1|, component 1     40 samples
+NUMERIC    2.3e e2 (normalised) = E2/|E2|, component 1     40 samples
+NUMERIC    2.3e e1 (normalised) = E1/|E1|, component 2     40 samples
+NUMERIC    2.3e e2 (normalised) = E2/|E2|, component 2     40 samples
+PROVED     2.3f g_X row 0 = e1, component 0                cancel; 40 samples
+PROVED     2.3f g_X row 1 = e2, component 0                cancel; 40 samples
+PROVED     2.3f g_X row 0 = e1, component 1                cancel; 40 samples
+PROVED     2.3f g_X row 1 = e2, component 1                cancel; 40 samples
+PROVED     2.3f g_X row 0 = e1, component 2                cancel; 40 samples
+PROVED     2.3f g_X row 1 = e2, component 2                cancel; 40 samples
+PROVED     3.1 object at the centre of curvature images onto itself: s' = -rho solves n1/s + n2/s' = (n2-n1)/R  cancel; 40 samples
+PROVED     3.2 its lateral magnification is n1/n2          cancel; 40 samples
+PROVED     3.3 two concentric surfaces: total magnification n_obj/n_cam  cancel; 40 samples
+NUMERIC    3.4 C++ probe on cam1, across the axis at the axis point: 50.517/37.892 px/mm vs n_water = 1.333  computed 1.33318, quoted 1.333
+NUMERIC    3.5 along the axis: D/D_app (flat window) vs the probe's x1.0239  computed 1.02380, quoted 1.024
+SKIPPED    3.6 'along the axis the tube acts as a flat window' as a physical statement  physics (the cylinder's generator is straight), supported by 3.5 against the C++ model
+
+65 checks: 56 PROVED, 7 NUMERIC, 2 SKIPPED

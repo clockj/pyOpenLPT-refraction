@@ -1,0 +1,38 @@
+G3: the GUI path from images to PINCYL camFiles, offscreen
+  image set: D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g3_backlit (200 frames x 3 cameras, rendered or reused in 0 s)
+  PASS  image sizes read from the first images  ([(1280, 800), (1280, 800), (1280, 800)])
+  radius range (10, 60), mode ellipse, opts {'open_px': 25, 'rod_mask_px': 18.0, 'guard_px': 3.0, 'full': False}
+  Process All Frames: 13 s, 177 frames kept of 200
+  first criterion (every frame every camera sees whole): 177 of 180 kept; missing [47, 136, 170]
+  PASS  detection keeps every frame whose balls are apart in every camera  (177 such frames, 177 kept, missing []; balls within 3 px in some camera: [47, 136, 170])
+  PASS  detected centres: ball A small, within 0.035 px RMS of the exact centres  (RMS 0.0268 px over 1062 balls; 0 camera-frames more than 1 px off or swapped)
+  PASS  the tube's defaults are the real tube  (OD 201.6125 mm, wall 3.175 mm, n 1.0, 1.49, 1.333)
+  Precalibrate to Check: 19 s; message: info 'Check Complete'
+    Start and coarse fit (stages 1-3) on 177 frames: RMS 0.020 px.
+    This is only the start; run the calibration for the final answer.
+      cam0: f 41,475 px, 1095 mm from the axis, RMS 0.019 px
+      cam1: f 41,479 px, 1095 mm from the axis, RMS 0.023 px
+      cam2: f 41,457 px, 1094 mm from the axis, RMS 0.019 px
+  PASS  the check (stages 1-3) ran and filled the error table  (177 rows)
+  Run Calibration: 21 s; message: info 'Cylinder Calibration'
+    3 cameras, 177 frames, 1039 of 1062 detections used.
+    Reprojection RMS 0.017 px; wand length (free triangulation) RMS error 0.6 um over 176 frames.
+      cam0: f 41,452 px +- 0.06 %, 1094 mm from the axis, RMS 0.017 px
+      cam1: f 41,458 px +- 0.06 %, 1094 mm from the axis, RMS 0.017 px
+      cam2: f 41,468 px +- 0.07 %, 1094 mm from the axis, RMS 0.016 px
+    Note: 176 frames used
+    
+    Saved to:
+    D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g3_run\results
+  PASS  f of every camera within 0.2 % of the truth  (cam0 41,452.5 px (-0.016 %, sigma 0.064 %), cam1 41,457.8 px (-0.003 %, sigma 0.059 %), cam2 41,468.3 px (+0.022 %, sigma 0.065 %))
+  first criterion (every detection used): 1039 of 1062 used
+  PASS  RMS under 0.1 px, at most 5 % of the detections rejected  (RMS 0.0168 px, 1039/1062 used)
+  PASS  files written  (['calibration_data.json', 'calibration_report.html', 'calibration_report.txt', 'calibration_result.json', 'camFile']; camFile ['cam0.txt', 'cam1.txt', 'cam2.txt'])
+  first criterion (1e-6 px): largest difference 3.68e-03 px
+  PASS  camFiles are PINCYL; C++ projections of the fitted ends = the overlay's crosses (0.01 px)  (models {'PINCYL'}; 186 points, largest difference 3.68e-03 px)
+  PASS  error table: one row per frame; overlay crosses for both balls in every camera  (177 rows, 177 frames)
+  PASS  3-D view shows the tube; the result is marked for the tracking settings  (tube surface True, _refr_has_result True, kind cylinder)
+  PASS  tracking settings' camera-folder hook copies the PINCYL files  (['cam0.txt', 'cam1.txt', 'cam2.txt'], byte-identical True)
+  PASS  points marked as found by 'fast': the result warns about the detector  (checks: ["Balls detected with the 'fast' mode", '176 frames used'])
+
+13 of 13 checks passed; 64 s

@@ -1,0 +1,14 @@
+{
+ "clone": "C:\\Users\\zcloc\\AppData\\Local\\Temp\\claude\\D--Refraction\\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\\scratchpad\\oc",
+ "branch": "Refraction_new",
+ "installer_exit": 1,
+ "installer_minutes": 0.000634149710337321,
+ "complete": false,
+ "errors": [],
+ "env_prefix": "None",
+ "env_check": {
+  "pass": false,
+  "error": "environment OpenLPT_install_test not found"
+ },
+ "pass": false
+}

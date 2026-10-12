@@ -1,0 +1,21 @@
+D4 mechanism of the systematic residual (C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\74efa7be-28da-436b-8bb5-57d697313b5f\scratchpad\state_M2.pkl, model M2); L from 111.0 mm (z=0) to 62.3 mm (last plane)
+
+u residual: rms 0.7806 px
+  H0 a constant                        1 coefficients -> leaves 0.7806 px
+  H1 board error P(dot)               54 coefficients -> leaves 0.4097 px
+  H2 image-fixed H(u)                 23 coefficients -> leaves 0.3441 px
+  H3 wall deflection G(u) L           23 coefficients -> leaves 0.3356 px
+  H3b G(u) L + H(u)                   46 coefficients -> leaves 0.2667 px
+  H1+H2 P(dot) + H(u)                 77 coefficients -> leaves 0.1539 px
+  H1+H3 P(dot) + G(u) L               77 coefficients -> leaves 0.1465 px
+
+v residual: rms 0.3587 px
+  H0 a constant                        1 coefficients -> leaves 0.3587 px
+  H1 board error P(dot)               54 coefficients -> leaves 0.1629 px
+  H2 image-fixed H(v)                 13 coefficients -> leaves 0.2824 px
+  H3 wall deflection G(v) L           13 coefficients -> leaves 0.2842 px
+  H3b G(v) L + H(v)                   26 coefficients -> leaves 0.2641 px
+  H1+H2 P(dot) + H(v)                 67 coefficients -> leaves 0.1416 px
+  H1+H3 P(dot) + G(v) L               67 coefficients -> leaves 0.1321 px
+  H3 with G(u) instead                23 coefficients -> leaves 0.3148 px
+  H1+H3(u)                            77 coefficients -> leaves 0.1390 px

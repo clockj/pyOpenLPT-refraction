@@ -1,0 +1,25 @@
+P0a: the files of X:\Shijie Zhong\Refraction\Raw\20261008 (read-only)
+
+T0
+  T0\cam1: 13001 frames (frame000000.tif ... frame013000.tif), written 2026-10-08 14:50:46 ... 2026-10-08 14:55:48, [1280, 800] uint8, median grey (frame 0) 168.0
+      header: serial 29199, 100 frames/s, exposure 100 us, bitmap [1280, 800] x 8 bit; FirstMovieImage -3749, TotalImageCount 16832, FirstImageNo 0, ImageCount 13001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 13000
+  T0\cam2: 13001 frames (frame000000.tif ... frame013000.tif), written 2026-10-08 14:50:44 ... 2026-10-08 14:55:42, [1280, 800] uint8, median grey (frame 0) 148.0
+      header: serial 23752, 100 frames/s, exposure 100 us, bitmap [1280, 800] x 8 bit; FirstMovieImage -3750, TotalImageCount 16815, FirstImageNo 0, ImageCount 13001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 13000
+  T0\cam3: 10605 frames (frame000000.tif ... frame010604.tif), written 2026-10-08 14:50:48 ... 2026-10-08 14:56:08, [2048, 1952] uint8, median grey (frame 0) 159.0
+      header: serial 29198, 100 frames/s, exposure 100 us, bitmap [2048, 1952] x 8 bit; FirstMovieImage 2396, TotalImageCount 10734, FirstImageNo 2396, ImageCount 10605
+      config: size matches, first_image 2396 matches the header; image numbers 2396 ... 13000
+
+T1
+  T1\cam1: 1001 frames (frame000000.tif ... frame001000.tif), written 2026-10-08 15:03:10 ... 2026-10-08 15:03:22, [1280, 800] uint8, median grey (frame 0) 158.0
+      header: serial 29199, 4000 frames/s, exposure 100 us, bitmap [1280, 800] x 8 bit; FirstMovieImage -48931, TotalImageCount 49932, FirstImageNo 0, ImageCount 1001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 1000
+  T1\cam2: 1001 frames (frame000000.tif ... frame001000.tif), written 2026-10-08 15:03:10 ... 2026-10-08 15:03:22, [1280, 800] uint8, median grey (frame 0) 139.0
+      header: serial 23752, 4000 frames/s, exposure 100 us, bitmap [1280, 800] x 8 bit; FirstMovieImage -48931, TotalImageCount 49932, FirstImageNo 0, ImageCount 1001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 1000
+  T1\cam3: 1001 frames (frame000000.tif ... frame001000.tif), written 2026-10-08 15:03:12 ... 2026-10-08 15:03:30, [2048, 1952] uint8, median grey (frame 0) 146.0
+      header: serial 29198, 4000 frames/s, exposure 100 us, bitmap [2048, 1952] x 8 bit; FirstMovieImage -11604, TotalImageCount 12605, FirstImageNo 0, ImageCount 1001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 1000
+
+T0: image numbers saved by every camera: 2396 ... 13000 (10605 frames); by cams 1-2 only before 2396

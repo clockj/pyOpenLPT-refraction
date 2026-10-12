@@ -1,0 +1,146 @@
+[
+ {
+  "seed": 1001,
+  "noise_px": 0.1,
+  "rms_px": 0.08594493966326971,
+  "ref_rms_px": 0.08594602659743793,
+  "verdict": "equivalent",
+  "max_abs_z": 0.15467449371653155,
+  "scan": {
+   "windows": [
+    {
+     "window": 1,
+     "radius_deg": 30.0,
+     "step_deg": 3.0,
+     "points": 317,
+     "fitted": 315,
+     "minima": [
+      {
+       "deg": 15.0,
+       "cost_rel": -0.030925114584914648
+      }
+     ],
+     "released_rms_px": [
+      0.08603052793439736
+     ],
+     "seconds": 181.12666702270508,
+     "released": [
+      {
+       "rms_px": 0.08603052793439736,
+       "capped_rel": -0.03283418831991658,
+       "apart_chi2": 76.38628687697302
+      }
+     ],
+     "accepted": true,
+     "rms_px": 0.08594493966326971,
+     "capped_rel": -0.03475761888451978
+    }
+   ],
+   "improved": true,
+   "rms_before_px": 0.08747865959386122,
+   "rms_px": 0.08594493966326971,
+   "seconds": 191.2752034664154
+  },
+  "timing": {
+   "bootstrap": {
+    "total": 56.01661396026611
+   },
+   "stage4": 5.532730579376221,
+   "perturbed": 9.498897075653076,
+   "hint_paths": null,
+   "scan": 191.2752034664154,
+   "total": 262.3349680900574
+  },
+  "seconds": 263.402770280838
+ },
+ {
+  "seed": 1034,
+  "noise_px": 0.1,
+  "rms_px": 0.17859011939968955,
+  "ref_rms_px": 0.11751060124159259,
+  "verdict": "DIFFERENT",
+  "max_abs_z": 1379.2106389739452,
+  "scan": {
+   "windows": [
+    {
+     "window": 0,
+     "radius_deg": 30.0,
+     "step_deg": 3.0,
+     "points": 317,
+     "fitted": 317,
+     "minima": [],
+     "released_rms_px": [],
+     "seconds": 247.82549571990967,
+     "released": [],
+     "accepted": false
+    },
+    {
+     "window": 2,
+     "radius_deg": 30.0,
+     "step_deg": 3.0,
+     "points": 317,
+     "fitted": 305,
+     "minima": [],
+     "released_rms_px": [],
+     "seconds": 278.9058530330658,
+     "released": [],
+     "accepted": false
+    }
+   ],
+   "improved": false,
+   "rms_before_px": 0.17859011939968955,
+   "rms_px": 0.17859011939968955,
+   "seconds": 526.7483501434326
+  },
+  "timing": {
+   "bootstrap": {
+    "total": 81.25493335723877
+   },
+   "stage4": 49.42008399963379,
+   "perturbed": 29.651246547698975,
+   "hint_paths": null,
+   "scan": 526.7483501434326,
+   "total": 687.0951216220856
+  },
+  "seconds": 690.2548949718475
+ },
+ {
+  "seed": 1045,
+  "noise_px": 0.1,
+  "rms_px": 0.3488172763255675,
+  "ref_rms_px": 0.08615099445094065,
+  "verdict": "DIFFERENT",
+  "max_abs_z": 998.7711111102575,
+  "scan": {
+   "windows": [
+    {
+     "window": 0,
+     "radius_deg": 30.0,
+     "step_deg": 3.0,
+     "points": 317,
+     "fitted": 309,
+     "minima": [],
+     "released_rms_px": [],
+     "seconds": 236.816903591156,
+     "released": [],
+     "accepted": false
+    }
+   ],
+   "improved": false,
+   "rms_before_px": 0.3488172763255675,
+   "rms_px": 0.3488172763255675,
+   "seconds": 236.82990527153015
+  },
+  "timing": {
+   "bootstrap": {
+    "total": 56.943548917770386
+   },
+   "stage4": 105.29546594619751,
+   "perturbed": 5.99691367149353,
+   "hint_paths": null,
+   "scan": 236.82990527153015,
+   "total": 405.08886194229126
+  },
+  "seconds": 406.9113986492157
+ }
+]

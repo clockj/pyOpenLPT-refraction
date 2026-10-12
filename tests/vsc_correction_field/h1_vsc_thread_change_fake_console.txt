@@ -1,0 +1,17 @@
+[h1] change fake: D:\Refraction\pyOpenLPT\gui\views\tracking_view.py, pyopenlpt D:\Refraction\pyOpenLPT\build-stb\vcf\out\pyopenlpt.cp311-win_amd64.pyd, project D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\t1_g3
+[h1] round 1: idle again after 0.2 s; boxes ['VSC Failed']
+[h1] round 2: idle again after 0.2 s; boxes ['VSC Failed', 'VSC Failed']
+[h1] round 3: idle again after 0.2 s; boxes ['VSC Failed', 'VSC Failed', 'VSC Failed']
+[h1] round 4: idle again after 0.2 s; boxes ['VSC Failed', 'VSC Failed', 'VSC Failed', 'VSC Failed']
+[h1] round 5: idle again after 0.2 s; boxes ['VSC Failed', 'VSC Failed', 'VSC Failed', 'VSC Failed', 'VSC Failed']
+[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+a stand-in VSC service (H1)
+[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+a stand-in VSC service (H1)
+[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+a stand-in VSC service (H1)
+[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+a stand-in VSC service (H1)
+[h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+a stand-in VSC service (H1)
+[h1] done

@@ -1,0 +1,10 @@
+today's code, fake service, 1 round(s): exit 3221226505 (0xc0000409), 0 round(s) done, did NOT finish (5.1 s)
+change's code, fake service, 5 round(s): exit 0 (0x0), 5 round(s) done, finished (2.9 s)
+  [h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+  [h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+  [h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+  [h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+  [h1] box (warning) 'VSC Failed': Volume Self-Calibration failed:
+change's code, real service, 1 round(s): exit 0 (0x0), 1 round(s) done, finished (270.5 s)
+  [h1] box (information) 'VSC Complete': Field VSC pass 1: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.724 -> 0.592 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed n
+H1: PASS (today's code must crash, the change must pass every case)

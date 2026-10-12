@@ -1,0 +1,51 @@
+{
+ "checks": [
+  {
+   "check": "three cameras, calibration: the fixed code gives git HEAD's answer to the bit (control: the same twice)",
+   "ok": true,
+   "detail": "ok True/True/True; control 0 differences, against HEAD 0; f 2,008.67, 2,007.38, 2,004.24; 22 s old, 22 s new"
+  },
+  {
+   "check": "two cameras, calibration: the fixed code gives git HEAD's answer to the bit (control: the same twice)",
+   "ok": true,
+   "detail": "ok True/True/True; control 0 differences, against HEAD 0; f 2,008.95, 1,978.90; 10 s old, 10 s new"
+  },
+  {
+   "check": "three cameras, Precalibrate's check: the fixed code gives git HEAD's answer to the bit (control: the same twice)",
+   "ok": true,
+   "detail": "ok True/True/True; control 0 differences, against HEAD 0; f 2,000.00, 2,032.94, 2,000.00; 0 s old, 0 s new"
+  }
+ ],
+ "seconds": 96.87357258796692,
+ "cases": {
+  "three cameras, calibration": {
+   "differences": [],
+   "control_differences": [],
+   "f_px": [
+    2008.6696279567082,
+    2007.3797490705701,
+    2004.2421866085388
+   ],
+   "msg": "Calibration Optimized.\nReprojection RMS: 0.0706 px\n  - Cam 0: 0.0652 px\n  - Cam 1: 0.0811 px\n  - Cam 2: 0.0644 px\nWand Length RMS: 0.0428 mm\nTotal Frames: 300"
+  },
+  "two cameras, calibration": {
+   "differences": [],
+   "control_differences": [],
+   "f_px": [
+    2008.9533705039582,
+    1978.9005236092044
+   ],
+   "msg": "Calibration Optimized.\nReprojection RMS: 0.0530 px\n  - Cam 0: 0.0521 px\n  - Cam 1: 0.0538 px\nWand Length RMS: 0.0752 mm\nTotal Frames: 300"
+  },
+  "three cameras, Precalibrate's check": {
+   "differences": [],
+   "control_differences": [],
+   "f_px": [
+    2000.0,
+    2032.9414153288847,
+    2000.0
+   ],
+   "msg": "Calibration Optimized.\nReprojection RMS: 0.4049 px\n  - Cam 0: 0.3547 px\n  - Cam 1: 0.5286 px\n  - Cam 2: 0.2944 px\nWand Length RMS: 0.2199 mm\nTotal Frames: 300"
+  }
+ }
+}

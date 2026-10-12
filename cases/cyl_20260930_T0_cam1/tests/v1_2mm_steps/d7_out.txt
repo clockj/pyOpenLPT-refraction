@@ -1,0 +1,7 @@
+D7 spread of the predictions over the calibrated volume (1859 grid points, X 0..24, Y -9..6, z 0..48 mm); reference: the delivered camera (M2b, rms 0.2523 px)
+  reference: camera [ 6.2700e+01 -3.0000e-01  1.1056e+03] mm, axis X,Z [19.25 13.3 ] mm, view 2.80 deg from -Z, lean 0.06 deg
+  M2b, axis held at X_a = 15 mm    fit rms 0.2658 px: pixel difference rms 0.484 px, max 1.039 px; ray in water at the image centre turned by 0.024 deg; camera [4.8900e+01 6.0000e-01 1.1195e+03] mm, view 1.98 deg
+  M2b, axis held at X_a = 25 mm    fit rms 0.2786 px: pixel difference rms 1.162 px, max 2.587 px; ray in water at the image centre turned by 0.052 deg; camera [ 8.0800e+01 -7.0000e-01  1.0751e+03] mm, view 3.96 deg
+  M2 (no board corrections)        fit rms 0.8591 px: pixel difference rms 0.698 px, max 2.524 px; ray in water at the image centre turned by 0.025 deg; camera [   7.    13.2 1128.9] mm, view 0.95 deg
+  M2bw, PINCYL part only           fit rms nan px: pixel difference rms 0.794 px, max 2.129 px; ray in water at the image centre turned by 0.020 deg; camera [  32.3   17.2 1115.6] mm, view 1.51 deg
+  M2bw with its wall field         fit rms 0.2016 px: pixel difference rms 2.230 px, max 14.221 px; ray in water at the image centre turned by 0.018 deg; camera [  32.3   17.2 1115.6] mm, view 1.51 deg

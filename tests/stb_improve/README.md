@@ -1,0 +1,225 @@
+# STB speed and robustness improvements: summary and progress
+
+Last updated: 2026-10-06 (Phases A and B committed as `acd78d4`, A4b and G as `f2a3dbb`, the fixes of the issues
+noticed during A4b as `c3dd9e5`; Phase E done; E4, the origin-free predictor, tested, in the source and in your
+rebuilt exe and module; Phase E and E4 not committed).
+
+Start here to catch up. The plan is `2026-10-05-plan.md` (approved for Phases A and B on 5 Oct, Phase E on 6 Oct); the final report is
+`2026-10-05-report.md`. Every number below comes from a file in `results/`, written by the scripts named.
+
+**In short.** Tracking this case now takes a flat **2.5 s per frame** over 300 frames, where HEAD went from 6.4 to
+16.9 s: 6.8× faster by frame 300, 3.9× less frame time, at HEAD's memory, while finding more particles (B2: active
+long tracks +15 %). The slowdown was the matching search's allocations in an aging process; B3 removed it. Without
+B2 the outputs are identical to HEAD's. Every check passed (section 3).
+
+**The GUI** now runs this code: the desktop shortcut **OpenLPT (new)** starts this repo's GUI on the rebuilt
+`build/Release/OpenLPT.exe`. Choosing a project fills the settings form from its saved config. Save Configuration
+writes `config.json`, which has a Save Interval field (use 200 for long runs).
+
+**Track prediction (Phase E):** today's predictor is as good as any tried, Kalman filters included (report section
+10). Its origin-free form, the mean step, is now in the source: it no longer depends on where the calibration put
+the origin, and tracks slightly better (E4, section 11). Your exe and module were rebuilt with it, so the GUI uses
+it.
+
+## 1. Progress log (newest first)
+
+- **6 Oct: G5, the GUI on the new predictor** (report 11.4; `queue5.sh`).
+  - **Rebuild:** `build_local.py` rebuilt your `build/Release/OpenLPT.exe` and `build-py/Release` module with E4's
+    origin-free predictor; the builds before it are kept in `build-stb/user-2026-10-05/`.
+  - **Checks, frames 0–50, against the tested build:** the exe, the module, and the GUI's own Run path (form → Save →
+    Run Tracking) are all IDENTICAL, with 11 of 11 output files byte-identical. They differ from today's old
+    predictor from frame 4 on, as they should.
+  - **pytest:** 254 passed, the same 4 old failures. Speed unchanged (about 2.45 s per frame).
+- **6 Oct: E4, the origin-free predictor** (report section 11; `e4_mean_step.py`, 7 of 7 checks).
+  - **The change:** `STB::predictNext` predicts each axis with the mean step over the last 5 frames. It replaces the LMS
+    fit, which pushed predictions away from 0 near the coordinate planes. The change is in the source, not committed.
+  - **Port:** the new C++ prediction equals the formula to the last bit on 20,104 histories. Shifting a history by up
+    to 100 mm shifts the prediction exactly (4e-14 mm), where today's moved by up to 0.29 mm.
+  - **Tracking, frames 0–300, against today's:**
+    - tracked points +0.7 %, tracks of ≥ 100 frames +1.3 %, lost tracks −1.0 %, at the same 2.47 s per frame;
+    - a control with an offset of the same size in a random direction went the other way (−0.2 to −1.6 %).
+  - **Near the planes (1–3 mm):** the bias is gone (+0.0067 → 0.0000 mm), and 6 % fewer tracks are lost there
+    (2.0 standard errors).
+  - **pytest:** 254 passed, the same 4 old failures.
+  - **Your exe and module:** rebuilt with it on your OK (G5, above).
+- **6 Oct: Phase E, track prediction** (report section 10; `e1_sympy_check.py`, `e1a_port_check.py`,
+  `e1b_replay.py`, `e1c_shake_capture.py`, `e1d_synthetic.py`).
+  - **Answer:** on the saved tracks of B300, T4 and T5 (11.6 million scored points) no predictor is measurably better
+    than today's. The best line, parabola and Kalman filters have p99 one-step errors 0.3–21 % above today's. The
+    plan's rule for implementing one (30 % lower p99, or jumps caused by the predictor) is not met, so no code
+    changed.
+  - **Why:** the errors are the shake's, not the predictor's.
+    - Their tail is heavy: p99 0.12 mm against a median of 0.018 mm.
+    - A start 0.1 mm off still keeps 99.98 % of the particles from being flagged.
+    - The last point of a lost track lies 0.18 mm from a prediction that every predictor agreed on.
+  - **Kalman parameters,** from the data: q/r 0.56 (constant velocity) or 0.056 (constant acceleration), σ
+    0.011–0.013 mm, the same on all three runs.
+  - **One prediction step for all tracks** is what the code already does: 0.0001 s per frame.
+  - **Found on the way:**
+    - Today's predictor depends on where the world origin lies: up to 0.037 mm at 1–3 mm from a coordinate plane.
+    - The shake's result depends on its start: for a start 0.01 mm off, 18 % of the particles end 0.005 mm or more
+      elsewhere.
+    - Options for you: report section 10.6.
+  - **Checks:** the Python copy of the predictor equals the C++ to the last bit on 20,104 histories; E1c reproduces
+    STB's own frame 301 to 8.5e-7 mm; the Kalman code passes its self-tests on synthetic tracks; SymPy proves the
+    predictor's formulas (28 proved, 6 numbers recomputed, 1 skipped).
+- **6 Oct: the issues noticed during A4b are fixed** (report section 9; `f_noticed_fixes.py`, 15 of 15 checks).
+  - **The settings form loads the project's `config.json` (else `config.txt`)** when the project is chosen.
+    - Save changes only what the form shows: 31 of 31 GUI configs come back byte-identical, and 32 text
+      configs convert to the same C++ settings.
+    - Out-of-range values, `profile`, comments, unknown keys and further objects are kept.
+    - Threads 0 shows as "All".
+    - A bad config gives a warning, not a crash.
+  - **The GUI's `log.txt`** has plain CRLF line ends.
+  - **`tests/test_precalibrate_3d_view.py`** no longer leaves PySide6 mocks behind.
+  - **Regression checks:** A5–A7 30 of 30 again (their "before" code now pinned to `acd78d4`); pytest 254 passed,
+    the same 4 old failures.
+- **5 Oct, late night: A4b and G, the GUI on config.json and on the new build** (report section 8; `queue4.sh`,
+  `a4b_gui_config.py`, `g_gui_e2e.py`).
+  - **Which GUI:** your desktop shortcut runs openlpt 2.2.4 of 13 Jul (`bubble-visual-hull` env, from
+    `D:\Bubble_Reconstruct\OpenLPT_GUI`), the build of your slow run. Your choice: this repo's GUI with a new
+    shortcut, **OpenLPT (new)**; the old shortcut and env are unchanged.
+  - **The GUI's build:** `build_local.py` rebuilt `build/Release/OpenLPT.exe` and `build-py/Release` (24 Sep builds
+    kept in `build-stb/user-2026-09-24/`). They give byte-identical outputs to the tested final build (G-S50,
+    frames 0–50).
+  - **config.json:** Save Configuration writes `config.json`, with a new Save Interval field. Every reader (the
+    tracking view, post-processing, VSC) accepts `config.json` and `config.txt`, and VSC writes its tolerances and
+    cameras into `config.json`.
+  - **Checks:** A5 (31 forms: identical settings from HEAD's and the new writer), A6 (every reader), A7 (VSC's
+    writers): 30 of 30 passed. G-E2E: the GUI's own path (form → Save → Run Tracking → QProcess → new exe) on frames 0–300 gives outputs byte-identical to the benchmark `b300_final3` at the same speed (2.51 → 2.48 s per frame). G-log: the log window costs about 4 ms per frame even at a 5000-frame log. pytest: 254 passed, the same 4 old failures.
+- **5 Oct, night: done.** The final code (inline size 3, chosen over 9: same speed, 0.9 GB less memory) runs flat
+  at 2.49 → 2.48 s per frame; a restarted process is no faster (1.01, criterion < 1.2); index checks, AddressSanitizer
+  and the unit tests pass on it; `save_interval = 200` leaves tracking unchanged over 300 frames and saves 0.4 GB;
+  the whole pytest suite shows no regression (242 → 250 passed, the same 4 old failures). Report written.
+- **5 Oct, evening: the slowdown is found and removed** (`analyze.py p1`, `analyze.py b`, `results/p1_*`, `b_*`).
+  - **Where it was:** all the growth of the time per frame was IPR's stereo matching, and almost all of it one
+    round: the reduced camera set [0,2,3] (the heaviest, because camera 1, left out, has by far the fewest
+    detections). Its matching time grew 10× over 300 frames while its detections and its search work fell.
+  - **What it was:** the same work getting slower in an aging process. A1 (no heap for small matrices) made every
+    frame 1.65× faster but kept the growth (HEAD 6.4 → 16.9 s per frame over 300 frames, A1 3.8 → 10.3 s); the
+    search's own allocations (five vectors copied per step, a per-call `seen` array) kept it. With B1 and B3 the
+    search no longer allocates, and the time per frame stays flat: **2.65 → 2.58 s** (6.5× faster than HEAD at
+    frames 281–300, 3.8× less frame time over the 300 frames), with identical outputs.
+  - **Which change did it:** B3, the search without allocations. B1 alone (caching the lines of sight) starts
+    faster (3.20 s per frame) but grows like A1 (to 11.95 s at frames 281–300); with the same search work, its
+    search-and-check time in round [0,2,3] grows 0.34 → 4.28 s per round, B3's falls 0.112 → 0.074 s.
+  - **Restart tests:** a process restarted from frame 200 runs 1.9× (HEAD), 2.0× (A1, 9) and 2.2× (A1, 3) faster
+    than the aged one on frames 201–300, then slows down again; HEAD 5.9 → 11.5 s per frame within 100 frames.
+  - **B2** keeps the speed (2.57 → 2.56 s) and finds more: IPR objects +24 %, 4-camera matches at 2 px +98 %,
+    active long tracks +15 % (frames 281–300).
+  - S1 now also over 300 frames: HEAD, A1 and A1+B0/B1/B3/B4 identical in every frame and in all output files.
+- **5 Oct, Phases A and B coded and checked; benchmarks running.**
+  - Code: A1 (small matrices inside the object), A3 (`save_interval`), A4 (`config.json`), B0 (profile counters),
+    B1 (tables of lines of sight and image lines), B3 (no allocations in the search), B4 (k-d tree in
+    `checkRepeat`), B2 (image lines anchored in the view volume), and a fix of IPR's log line.
+  - Identical results (S1) for A1, A3, A4, B0, B1, B3 and B4; B2 changes results on purpose (more matches).
+  - B5 (pruning) is not needed: it takes 2.5 % of matching.
+
+## 2. What changed in the code
+
+| item | files | what it does | results |
+|---|---|---|---|
+| A1 | `inc/libMath/Matrix.h`, `src/srcMath/Matrix.hpp` | a `Matrix` with at most 3 elements (`OPENLPT_MATRIX_INLINE`, chosen over 9 on the final code: same speed, 0.9 GB less memory) keeps them inside the object: points and lines never touch the heap. `OPENLPT_MATRIX_CHECKS` (build option) checks every index. | identical |
+| A3 | `inc/libSTB/Config.h`, `src/srcSTB/Config.cpp`, `src/srcSTB/STB.cpp` | `save_interval = N` (config.txt, an optional line after the fixed ones; config.json key): frames between track saves, default 500. Each save frees the lost and exited tracks. | identical (default) |
+| A4 | `src/srcSTB/Config.cpp`, `inc/nlohmann/json.hpp`, `modules/stb_config.py` | `config.json`: one file with the basic and the object settings; errors name the key; unknown keys warn. The Python module reads, writes and converts both formats (`python -m modules.stb_config convert config.txt`). | identical |
+| B0 | `src/srcSTB/StereoMatch.cpp` | `profile = 1` prints one `[profile]` line per IPR round: lines of sight, projections, triangulations, candidates, and the time of each matching step. | identical |
+| B1 | `StereoMatch.h/.cpp` | each round first computes, in parallel, the line of sight of every 2-D observation and its image line on every other camera; the search reads these tables instead of recomputing them per candidate. | identical |
+| B3 | `StereoMatch.h/.cpp` | the depth-first search and the candidate enumeration reuse per-thread buffers (no `Frame` copies, no per-call `seen` array). | identical |
+| B4 | `src/srcSTB/STB.cpp` | `checkRepeat` finds the nearby track ends with a k-d tree instead of comparing every pair. | identical |
+| B2 | `src/srcSTB/StereoMatch.cpp` | an image line passes through the images of the points where the line of sight enters and leaves the view volume, not 1 and 2 mm past the window. | more matches |
+| log | `src/srcSTB/IPR.cpp` | the detections per camera are printed after IPR's parallel loop, in camera order (they were printed from inside it, in the threads' order and sometimes with interleaved digits). | log text only |
+| build | `cmake/openLPT.cmake` | `RefractCurved` added to the install export, so the non-Python configuration (C++ tests) configures again. | — |
+| A4b | `gui/views/tracking_settings_view.py`, `gui/views/tracking_view.py`, `modules/post_processing/processor.py`, `modules/vsc/vsc_service.py`, `modules/stb_config.py` | The GUI's Save writes `config.json` (plus a Save Interval field). Every reader of a project's config accepts both formats, preferring `config.json`. VSC writes its tolerances and cameras into `config.json` (keeping `config_backup.json`) and stops at step 1 on an unreadable config. Relative output folders are now resolved against the project. | identical settings (A5) |
+| G | `openlpt.py`, your `build/Release` and `build-py/Release`, desktop shortcut | `build_local.py` rebuilt the GUI's exe and module; in a checkout the GUI loads `build-py/<CONFIG>`'s module; **OpenLPT (new)** starts this repo's GUI with the refract env. | identical outputs (G-S50, G-E2E) |
+
+## 3. Results
+
+**Speed** (`analyze.py p1` → `results/p1_benchmarks.txt`, `p1_time_per_frame.png`; frames 0–300, 26 threads):
+
+| build | s per frame, frames 4–23 | frames 281–300 | frame time | peak memory | restarted at 200 vs aged |
+|---|---|---|---|---|---|
+| HEAD | 6.39 | 16.85 | 49.2 min | 2.25 GB | 1.86× faster |
+| A1 (inline 9 / 3) | 3.83 / 3.91 | 10.33 / 11.01 | 29.4 / 32.3 min | 2.63 / 2.18 GB | 2.0 / 2.2× faster |
+| A1 + B1 (caching only) | 3.20 | 11.95 | 31.8 min | 2.79 GB | — |
+| A1 + B0, B1, B3, B4 (identical outputs) | 2.65 | 2.58 | 13.1 min | 2.67 GB | — |
+| **final (inline 3)** | **2.49** | **2.48** | **12.5 min** | **2.28 GB** | **1.01 (no aging)** |
+
+**Correctness (all passed).**
+- **U1, `Matrix` storage** (`cpp/run_unit_tests.py` → `results/u1_*.txt`): 189 checks in each of 7 variants (inline
+  9 and 3, plain, index-checked and under AddressSanitizer, and the default); HEAD's heap storage passes the same
+  value checks. Every storage change (small ↔ large, `*=` across 9 elements, vector growth, moves of an
+  `Object3D`-like holder), and 16 threads at once.
+- **The repo's C++ tests:** only `test_Matrix`, `test_myMATH`, `test_ImageIO` still compile; the same result on HEAD
+  and on every new build, under AddressSanitizer too (`test_myMATH` stops at its test 12 everywhere).
+- **Index checks** on tracking, frames 0–10: no out-of-range index on HEAD, A1 and the final code (inline 9 and 3).
+- **AddressSanitizer** on tracking, frames 0–5: no report on HEAD, A1 and the final code (inline 9 and 3).
+- **S1, identical outputs** (`compare_runs.py identical` → `results/s1_*.txt`): HEAD run twice; HEAD against A1
+  (9 and 3), against A1 + B1, and against A1 + B0/B1/B3/B4, over frames 0–50 and 0–300: every logged counter of every
+  frame and all output files byte-identical. The final build against `b2` (the IPR log fix changes nothing else), and
+  the final code at inline 9 against 3, over 300 frames.
+- **C1, config** (`c1_config.py` → `results/c1_config.txt`): identical settings from `config.txt` and its converted
+  `config.json` (24 groups); 13 bad or edge-case files give clear errors or warnings; a run from each file gives
+  identical outputs.
+- **P2, save interval** (`results/p2_save_interval.txt`; report 4.1): saves where expected, each freeing the lost
+  tracks; over 300 frames at 200 the tracking is unchanged (active tracks byte-identical, the lost tracks of the two
+  saves add up exactly) and peak memory is 0.4 GB lower.
+- **pytest:** the subset `tests/test_stb_improve.py` 19 passed; the whole suite (`results/pytest_full_*.txt`) shows no
+  regression (HEAD's build 242 passed, the final 250; the same 4 failures from before on both). After A4b: the subset
+  23 passed, the whole suite 254 (`results/pytest_full_a4b.txt`), the same 4 old failures.
+- **A4b and G, the GUI** (report section 8):
+  - G-S50 (`results/g_s50_*`): your rebuilt exe and module against the final build, frames 0–50, identical.
+  - A5–A7 (`results/a4b_gui_config.txt`): 30 of 30 checks.
+    - A5: 31 forms give identical C++ and `stb_config` settings from HEAD's writer and the new one.
+    - A6: every reader gives the same values on text and JSON projects as HEAD on text.
+    - A7: VSC writes identical text files to HEAD's, and correct `config.json` updates.
+  - G-E2E (`results/g_e2e_*`): the GUI run of frames 0–300 is byte-identical to `b300_final3`, at 2.51 → 2.48 s per
+    frame.
+  - G-log (`results/g_log_window.txt`): about 4 ms per frame for the log window at the size of a 5000-frame log.
+
+**Phase E, track prediction** (report section 10): one-step errors on the test half of B300 / T4 / T5, median and
+p99: today's 0.0177 / 0.1215, 0.0167 / 0.1166, 0.0188 / 0.1170 mm; the best other predictor's p99 is 0.3–0.7 %
+higher (`results/e1b_replay.txt`). The shake keeps 99.98 % of the particles for a start 0.1 mm off
+(`results/e1c_shake_capture.txt`).
+
+**B2, the image lines** (M1, `m1_epipolar.py` → `results/m1_epipolar.txt`): with exact pixels, the share of
+4-camera particles whose lines all lie within 2 px rises from 35.9 % (HEAD) to 91.8 %, within 3 px from 54.4 % to
+100 %. In tracking (300 frames): IPR objects +24 %, 4-camera matches at 2 px +98 %, active long tracks +15 %, at the
+same speed.
+
+**Matching** (`analyze.py b` → `results/b_matching.txt`): matching time per frame 7.04 s (HEAD) → 0.64 s (final, with
+B2); `checkRepeat` 0.56 → 0.002 s. B1 cut the lines of sight per IPR round from 678,000 to 60,000 and the projections
+from 3.2 million to 275,000.
+
+## 4. How to rerun
+
+```sh
+python tests/stb_improve/prepare_data.py                 # local copies of frames 0-310 (once)
+python tests/stb_improve/build_variant.py NAME [--def OPENLPT_MATRIX_INLINE=3] [--asan] [--mode tests]
+python tests/stb_improve/cpp/run_unit_tests.py           # U1
+python tests/stb_improve/stbrun.py RUN --build NAME --frames 0 300 [--config-extra "profile = 1"]
+python tests/stb_improve/compare_runs.py identical RUN_A RUN_B
+python tests/stb_improve/c1_config.py --build NAME       # C1
+python tests/stb_improve/m1_epipolar.py --builds base b2 # M1
+python tests/stb_improve/analyze.py s1|p2|p1|b
+bash tests/stb_improve/queue1.sh                         # the runs of Phases A and B, in order
+bash tests/stb_improve/queue2.sh                         # the final code: B1 alone, inline 9 vs 3, save interval, restart, ASan
+bash tests/stb_improve/queue3.sh                         # the shipped configuration (inline 3): checks, ASan, unit tests
+bash tests/stb_improve/queue4.sh                         # G-S50: your build_local.py build against the final build
+python tests/stb_improve/a4b_gui_config.py               # A5-A7: the GUI's writer, the readers, VSC's writers (offscreen)
+python tests/stb_improve/g_gui_e2e.py e2e --frames 0 300 # G-E2E: form -> Save -> Run Tracking, then compare_runs with b300_final3
+python tests/stb_improve/g_gui_e2e.py log                # G-log: the log window's cost up to a 5000-frame log
+python tests/stb_improve/f_noticed_fixes.py              # F1-F3: the form loads configs, log.txt line ends, test isolation
+python tests/stb_improve/e1_sympy_check.py               # Phase E: SymPy checks of the predictor's formulas (plain python, needs D:/Refraction/code)
+python tests/stb_improve/e1a_port_check.py               # E1a: the Python predictors against the C++ predictNext
+python tests/stb_improve/e1b_replay.py                   # E1b + E2: the replay on B300, T4, T5 (T4/T5 read from X: once, cached in runs/e1_cache)
+python tests/stb_improve/stbrun.py r301_e1c --build user --frames 0 301 --load 300 --load-from b300_final3
+python tests/stb_improve/e1c_shake_capture.py            # E1c: the shake capture test on frame 301 (needs r301_e1c and e1b's results)
+python tests/stb_improve/e1d_synthetic.py                # E1d: synthetic tracks (needs e1b's results)
+python tests/stb_improve/build_variant.py md --def OPENLPT_MATRIX_INLINE=3   # E4: the working tree with the mean step
+python tests/stb_improve/e4_mean_step.py port md         # E4a: port and shift checks
+python tests/stb_improve/stbrun.py b300_md --build md --frames 0 300
+python tests/stb_improve/stbrun.py b300_wjit --build wjit --frames 0 300   # the control (build: patches/README.md)
+python tests/stb_improve/e4_mean_step.py compare         # E4b-d: against b300_final3
+bash tests/stb_improve/queue5.sh                         # G5: your rebuilt exe, module and GUI path against md (frames 0-50)
+```
+The python is the `refract` env's (`C:\Users\zcloc\.conda\envs\refract\python.exe`).

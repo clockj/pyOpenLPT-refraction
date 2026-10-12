@@ -1,0 +1,45 @@
+V0 on t1_m15: 51 frames (0..250), gate 3.0 px
+  gate 2 px: 6635 of 22686 long-track points paired in both cameras (29 %); RMS du, dv cam1 0.489, 0.403, cam2 0.244, 0.737 px
+  gate 3 px: 7653 of 22686 long-track points paired in both cameras (34 %); RMS du, dv cam1 0.709, 0.531, cam2 0.348, 0.969 px
+  gate 4 px: 8352 of 22686 long-track points paired in both cameras (37 %); RMS du, dv cam1 0.905, 0.673, cam2 0.441, 1.185 px
+  gate 6 px: 9284 of 22686 long-track points paired in both cameras (41 %); RMS du, dv cam1 1.229, 0.936, cam2 0.674, 1.601 px
+  using gate 3.0 px: 7653 points, 1078 tracks
+  the epipolar offset (cam2 detection - cam1's curve): median +0.083 px, RMS 1.226, robust SD 0.947; the projected residual of the same points: robust SD 0.726 (offset = 1.306 x projected; correlation 1.0000)
+  cam1 du: median -0.035, RMS 0.709, robust SD 0.230 px; by the box length along u: 0-2 px: 0.16 (n 2365); 2-5 px: 0.09 (n 1175); 5-10 px: 0.21 (n 1639); 10-20 px: 0.44 (n 2132); 20-60 px: 0.53 (n 342)
+  cam1 dv: median -0.010, RMS 0.531, robust SD 0.259 px; by the box length along v: 0-2 px: 0.23 (n 2572); 2-5 px: 0.17 (n 1908); 5-10 px: 0.36 (n 2800); 10-20 px: 1.02 (n 370)
+  cam2 du: median +0.026, RMS 0.348, robust SD 0.070 px; by the box length along u: 0-2 px: 0.07 (n 3755); 2-5 px: 0.05 (n 2761); 5-10 px: 0.19 (n 908); 10-20 px: 0.40 (n 221)
+  cam2 dv: median +0.067, RMS 0.969, robust SD 0.740 px; by the box length along v: 0-2 px: 1.09 (n 1121); 2-5 px: 0.90 (n 434); 5-10 px: 0.62 (n 4118); 10-20 px: 0.87 (n 1974)
+  map cam1_du: 40 cells (>= 30 points); cell medians about their mean -0.039: RMS 0.020 px, 0.000 with the medians' noise (0.035) taken off; halves: correlation -0.38 over 37 cells
+  map cam1_dv: 40 cells (>= 30 points); cell medians about their mean -0.012: RMS 0.053 px, 0.047 with the medians' noise (0.024) taken off; halves: correlation 0.44 over 37 cells
+  map cam2_du: 39 cells (>= 30 points); cell medians about their mean +0.027: RMS 0.009 px, 0.005 with the medians' noise (0.007) taken off; halves: correlation 0.43 over 32 cells
+  map cam2_dv: 39 cells (>= 30 points); cell medians about their mean +0.054: RMS 0.260 px, 0.252 with the medians' noise (0.063) taken off; halves: correlation 0.81 over 32 cells
+  map epi12_by_cam2: 39 cells (>= 30 points); cell medians about their mean +0.064: RMS 0.327 px, 0.318 with the medians' noise (0.078) taken off; halves: correlation 0.80 over 32 cells
+  map epi21_by_cam1: 40 cells (>= 30 points); cell medians about their mean -0.089: RMS 0.274 px, 0.254 with the medians' noise (0.103) taken off; halves: correlation 0.62 over 37 cells
+  truth-free (all 1104618 candidate pairs, no tracks): the peak of the signed offsets at +0.005 px (13191 pairs above a floor of 17012 per 0.25 px); per cam2 cell against the tracks' medians: correlation 0.06 over 35 cells, RMS difference 0.733 px; the truth-free cells' SD 0.631 px, the tracks' 0.433
+  6. the field (2 cameras, B-splines 10 x 6 intervals; bending weight by held-out loss, noise by the residuals)
+    lam 10000: held-out Huber loss 1.4509 -> 1.3116, projected MAD 1.565 -> 1.290
+    lam 100000: held-out Huber loss 1.4509 -> 1.3121, projected MAD 1.565 -> 1.294
+    lam 1e+06: held-out Huber loss 1.4509 -> 1.3329, projected MAD 1.565 -> 1.373
+    lam 1e+07: held-out Huber loss 1.4509 -> 1.3940, projected MAD 1.565 -> 1.507
+    lam 1e+08: held-out Huber loss 1.4509 -> 1.4278, projected MAD 1.565 -> 1.546
+    lam 1e+09: held-out Huber loss 1.4509 -> 1.4340, projected MAD 1.565 -> 1.556
+    round 1: lam 10000; noise model s_f 0.370 px, beta 0.0715 (from s_f 0.300, beta 0.0500)
+    lam 10000: held-out Huber loss 0.9577 -> 0.8672, projected MAD 1.170 -> 0.968
+    lam 100000: held-out Huber loss 0.9577 -> 0.8692, projected MAD 1.170 -> 0.982
+    lam 1e+06: held-out Huber loss 0.9577 -> 0.8867, projected MAD 1.170 -> 1.046
+    lam 1e+07: held-out Huber loss 0.9577 -> 0.9249, projected MAD 1.170 -> 1.139
+    lam 1e+08: held-out Huber loss 0.9577 -> 0.9425, projected MAD 1.170 -> 1.154
+    lam 1e+09: held-out Huber loss 0.9577 -> 0.9455, projected MAD 1.170 -> 1.155
+    round 2: lam 10000; noise model s_f 0.360 px, beta 0.0745 (from s_f 0.370, beta 0.0715)
+    fit: lam 10000, 3857 points (3857 projected rows), 8 iterations; projected RMS 1.597 -> 1.510 (noise units); 21.8 % of the points down-weighted
+    held out (frames 5, 15, ...): projected MAD 1.145 -> 0.960, Huber loss 0.9470 -> 0.8569
+    fit: lam 10000, 7653 points (7653 projected rows), 8 iterations; projected RMS 1.607 -> 1.518 (noise units); 22.2 % of the points down-weighted
+    fit: lam 10000, 3628 points (3628 projected rows), 8 iterations; projected RMS 1.485 -> 1.391 (noise units); 19.3 % of the points down-weighted
+    fit: lam 10000, 4025 points (4025 projected rows), 8 iterations; projected RMS 1.711 -> 1.605 (noise units); 24.2 % of the points down-weighted
+    the field's offset across the curves (at the points): RMS 0.279 px (0.274 about its mean +0.053); the halves' fields predict it alike: correlation 0.80 (on the second half's points) and 0.70 (first half's), RMS difference 0.196 px; the points' offset robust SD 0.726 -> 0.601 px after it
+    cam1: the field over its covered pixels (100 % of the sensor): du RMS 0.002, dv RMS 0.311 px (max |c| 1.36); its standard error at the data (median) du 0.360, dv 0.155 px
+    cam2: the field over its covered pixels (89 % of the sensor): du RMS 0.001, dv RMS 0.404 px (max |c| 1.95); its standard error at the data (median) du 0.361, dv 0.129 px
+    by cam1's z_tan - z_f (+5 to +36 mm): the projected offset's bin medians RMS 0.061 px before the field, 0.000 after (noise taken off); medians after -0.00, +0.03, -0.00, +0.02, -0.00, +0.02, +0.00, -0.04
+    by cam2's z_tan - z_f (-6 to +16 mm): the projected offset's bin medians RMS 0.023 px before the field, 0.000 after (noise taken off); medians after -0.02, +0.04, -0.00, +0.00, +0.01, -0.00, -0.02, -0.03
+  7. the image field's size (RMS of its offset about the mean) 0.274 px against the depth trend left after it 0.000 px: image position dominates
+V0 judged: regional medians' RMS (epipolar offset, noise taken off) 0.318 px >= 0.3; halves correlation 0.80 >= 0.7; the truth-free estimate's correlation 0.06 < 0.7; depth does not dominate

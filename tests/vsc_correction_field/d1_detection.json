@@ -1,0 +1,696 @@
+{
+ "runs": [
+  {
+   "run": "T1, 2 cameras",
+   "config": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261007\\data\\runs\\s3_final_m15\\config_final_m15.json",
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "log_counts": {
+    "0": [
+     1067,
+     985
+    ],
+    "1": [
+     1070,
+     989
+    ],
+    "2": [
+     1068,
+     979
+    ],
+    "3": [
+     1063,
+     989
+    ]
+   },
+   "per_frame": [
+    {
+     "frame": 0,
+     "log": [
+      1067,
+      985
+     ],
+     "run_call": [
+      1067,
+      985
+     ],
+     "validate_before": [
+      1047,
+      949
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "crops": [
+      {
+       "crops": 40,
+       "with_index_eq_configured_noise": 40,
+       "without_index_eq_configured_noise": 1,
+       "with_eq_without": 1
+      },
+      {
+       "crops": 40,
+       "with_index_eq_configured_noise": 40,
+       "without_index_eq_configured_noise": 3,
+       "with_eq_without": 3
+      }
+     ]
+    },
+    {
+     "frame": 1,
+     "log": [
+      1070,
+      989
+     ],
+     "run_call": [
+      1070,
+      989
+     ],
+     "validate_before": [
+      1047,
+      977
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "log": [
+      1068,
+      979
+     ],
+     "run_call": [
+      1068,
+      979
+     ],
+     "validate_before": [
+      1070,
+      950
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "log": [
+      1063,
+      989
+     ],
+     "run_call": [
+      1063,
+      989
+     ],
+     "validate_before": [
+      1045,
+      973
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    }
+   ],
+   "page_validate": {
+    "counts": [
+     1067,
+     985
+    ],
+    "boxes": [
+     "Camera Parameters Missing",
+     "Camera Parameters Missing",
+     "Success",
+     "Validation Result"
+    ]
+   }
+  },
+  {
+   "run": "20261008, 3 cameras",
+   "config": "D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261008\\data\\runs\\s3_final_c3\\config_final_c3.json",
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "log_counts": {
+    "0": [
+     433,
+     952,
+     3340
+    ],
+    "1": [
+     441,
+     933,
+     3402
+    ],
+    "2": [
+     465,
+     977,
+     3405
+    ],
+    "3": [
+     441,
+     925,
+     3390
+    ]
+   },
+   "per_frame": [
+    {
+     "frame": 0,
+     "log": [
+      433,
+      952,
+      3340
+     ],
+     "run_call": [
+      433,
+      952,
+      3340
+     ],
+     "validate_before": [
+      406,
+      998,
+      3741
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 1,
+     "log": [
+      441,
+      933,
+      3402
+     ],
+     "run_call": [
+      441,
+      933,
+      3402
+     ],
+     "validate_before": [
+      427,
+      965,
+      3844
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "log": [
+      465,
+      977,
+      3405
+     ],
+     "run_call": [
+      465,
+      977,
+      3405
+     ],
+     "validate_before": [
+      443,
+      1002,
+      3730
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "log": [
+      441,
+      925,
+      3390
+     ],
+     "run_call": [
+      441,
+      925,
+      3390
+     ],
+     "validate_before": [
+      414,
+      933,
+      3696
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    }
+   ],
+   "page_validate": {
+    "counts": [
+     433,
+     952,
+     3340
+    ],
+    "boxes": [
+     "Camera Parameters Missing",
+     "Camera Parameters Missing",
+     "Success",
+     "Validation Failed"
+    ]
+   }
+  },
+  {
+   "run": "synthetic, 3 cameras",
+   "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\runs\\Gcal4c3_n8_r3_tol1.0\\Gcal4c3_n8_r3_tol1.0.json",
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "log_counts": {
+    "0": [
+     1384,
+     1400,
+     781
+    ],
+    "1": [
+     1360,
+     1397,
+     773
+    ],
+    "2": [
+     1339,
+     1381,
+     799
+    ],
+    "3": [
+     1347,
+     1398,
+     801
+    ]
+   },
+   "per_frame": [
+    {
+     "frame": 0,
+     "log": [
+      1384,
+      1400,
+      781
+     ],
+     "run_call": [
+      1384,
+      1400,
+      781
+     ],
+     "validate_before": [
+      1379,
+      1388,
+      767
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 1,
+     "log": [
+      1360,
+      1397,
+      773
+     ],
+     "run_call": [
+      1360,
+      1397,
+      773
+     ],
+     "validate_before": [
+      1359,
+      1389,
+      756
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "log": [
+      1339,
+      1381,
+      799
+     ],
+     "run_call": [
+      1339,
+      1381,
+      799
+     ],
+     "validate_before": [
+      1336,
+      1385,
+      773
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "log": [
+      1347,
+      1398,
+      801
+     ],
+     "run_call": [
+      1347,
+      1398,
+      801
+     ],
+     "validate_before": [
+      1343,
+      1401,
+      785
+     ],
+     "field_now": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ],
+     "field_before": [
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      },
+      {
+       "identical": true
+      }
+     ]
+    }
+   ],
+   "page_validate": {
+    "counts": [
+     1384,
+     1400,
+     781
+    ],
+    "boxes": [
+     "Camera Parameters Missing",
+     "Camera Parameters Missing",
+     "Success",
+     "Success",
+     "Validation Result"
+    ]
+   }
+  },
+  {
+   "run": "plate 20260727, 4 cameras",
+   "config": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1\\stb_new_calib\\new_cams\\config.txt",
+   "frames": [
+    0,
+    1
+   ],
+   "log_counts": {
+    "0": [
+     6959,
+     19202,
+     44138,
+     19900
+    ],
+    "1": [
+     6911,
+     19950,
+     19239,
+     44223
+    ]
+   },
+   "per_frame": [
+    {
+     "frame": 0,
+     "log": [
+      6959,
+      19202,
+      44138,
+      19900
+     ],
+     "run_call": [
+      44138,
+      6959,
+      19900,
+      19202
+     ],
+     "validate_before": [
+      44138,
+      6959,
+      19900,
+      19202
+     ],
+     "field_now": [],
+     "field_before": [],
+     "crops": [
+      {
+       "crops": 40,
+       "with_index_eq_configured_noise": 0,
+       "without_index_eq_configured_noise": 0,
+       "with_eq_without": 40
+      },
+      {
+       "crops": 40,
+       "with_index_eq_configured_noise": 0,
+       "without_index_eq_configured_noise": 0,
+       "with_eq_without": 40
+      },
+      {
+       "crops": 40,
+       "with_index_eq_configured_noise": 0,
+       "without_index_eq_configured_noise": 0,
+       "with_eq_without": 40
+      },
+      {
+       "crops": 40,
+       "with_index_eq_configured_noise": 0,
+       "without_index_eq_configured_noise": 0,
+       "with_eq_without": 40
+      }
+     ]
+    },
+    {
+     "frame": 1,
+     "log": [
+      6911,
+      19950,
+      19239,
+      44223
+     ],
+     "run_call": [
+      44223,
+      6911,
+      19950,
+      19239
+     ],
+     "validate_before": [
+      44223,
+      6911,
+      19950,
+      19239
+     ],
+     "field_now": [],
+     "field_before": []
+    }
+   ]
+  }
+ ],
+ "pass": true
+}

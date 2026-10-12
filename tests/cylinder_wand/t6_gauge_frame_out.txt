@@ -1,0 +1,7 @@
+(a) with the gauge (scaled to unit diagonal): 19 parameters, rank 19, condition 8.34e+07
+    without it: 21 parameters, smallest singular values / largest 1.0e-08, 4.9e-15, 1.8e-16; null space vs the stabiliser: principal angles 2.1e-08, 7.3e-08 rad
+(b) cameras reordered [1, 2, 0]: after re-gauging, max differences 1.7e-08 deg, 7.0e-06 mm, f 6.5e-09, at most 9.1e-06 sigma; rms 0.107544 vs 0.107544 px
+(c) tube tilted 20 deg and offset in the world: pixels differ by at most 9.6e-09 px; calibrations differ by 1.1e-10 deg, 1.1e-08 mm, f 1.0e-11
+  PASS  rank_and_null_space
+  PASS  camera_order
+  PASS  input_frame

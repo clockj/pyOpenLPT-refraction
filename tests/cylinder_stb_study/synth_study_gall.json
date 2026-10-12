@@ -1,0 +1,21 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "omega": 0.0023785308622671685,
+ "vy": 0.01518048828958389,
+ "runs": [
+  {
+   "rho": 0.035,
+   "sampled": 125582,
+   "kept": 9701,
+   "central": 1667,
+   "seconds": 306.6899106502533
+  }
+ ]
+}

@@ -31,8 +31,26 @@ class Tracer2D : public Object2D {
 public:
   double _r_px = 2; // [px], for shaking
 
+  // The image's shape, from the line detector (tracer.detector "lines"; the
+  // cylinder STB plan, Phase 4): the box lengths along the image's axes (the
+  // segment model of OTF::intensity, before its Gaussian blur), the Gaussian's
+  // sigma along each axis, sqrt(sx sy) and the peak. The RMS widths
+  // sqrt(L^2 / 12 + s^2) are what is well determined (L and s trade against
+  // each other on short images). _has_shape is false for the peak finder.
+  bool _has_shape = false;
+  double _len_h_px = 0.0;
+  double _len_v_px = 0.0;
+  double _sigma_px = 0.0;
+  double _sigma_h_px = 0.0;
+  double _sigma_v_px = 0.0;
+  double _amp = 0.0;
+
   Tracer2D() = default;
-  Tracer2D(const Tracer2D &tracer) : Object2D(tracer), _r_px(tracer._r_px) {}
+  Tracer2D(const Tracer2D &tracer)
+      : Object2D(tracer), _r_px(tracer._r_px), _has_shape(tracer._has_shape),
+        _len_h_px(tracer._len_h_px), _len_v_px(tracer._len_v_px),
+        _sigma_px(tracer._sigma_px), _sigma_h_px(tracer._sigma_h_px),
+        _sigma_v_px(tracer._sigma_v_px), _amp(tracer._amp) {}
   Tracer2D(const Pt2D &pt_center) : Object2D(pt_center) {}
 
   ~Tracer2D() override = default;
@@ -63,6 +81,11 @@ public:
       _obj2d_list; // 2D projections of the object in different cameras, this
                    // can be specialized to different types of 2D objects
   bool _is_tracked = false;
+  // Per camera, the ray of this object's last image, for cameras that start
+  // their projection from one (Camera::usesProjectionHint: the cylindrical
+  // port); empty when no camera does. Copied with the object, so that a moved
+  // copy (a prediction, a shake's trial position) starts from it.
+  std::vector<ProjectionHint> _proj_hint;
 
   Object3D() = default;
 
@@ -77,6 +100,7 @@ public:
   void copyCommonFrom(const Object3D &src) {
     _pt_center = src._pt_center;
     _is_tracked = src._is_tracked;
+    _proj_hint = src._proj_hint;
   }
 
   // calculate the 2D information (_obj2d_list)
@@ -84,8 +108,17 @@ public:
       const std::vector<std::shared_ptr<Camera>> &camera_models);
 
   // to check whether the object is seen by more than 2 cameras;
+  // a multi-valued camera (curved port) counts only when the object's status
+  // there is ImageStatus::One (merge distance 4 x imageRadiusPx)
   bool isReconstructable(
       const std::vector<std::shared_ptr<Camera>> &camera_models);
+
+  // the half-size of the object's image in camera i [px] (for the image
+  // statuses); 2 px unless the type says otherwise
+  virtual double imageRadiusPx(int i) const {
+    (void)i;
+    return 2.0;
+  }
 
   // function to output the 3D object information
   // output: output stream to save the bubble information
@@ -127,6 +160,11 @@ public:
   void saveObject3D(std::ostream &out) const override;
 
   void loadObject3D(std::istream &in) override;
+
+  double imageRadiusPx(int i) const override {
+    (void)i;
+    return _r2d_px;
+  }
 
   ~Tracer3D() override = default;
 

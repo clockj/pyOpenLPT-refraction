@@ -1,0 +1,5 @@
+E4a: module D:\Refraction\pyOpenLPT\build-stb\md\out\pyopenlpt.cp311-win_amd64.pyd (build md: HEAD c3dd9e5 +  10 files changed, 534 insertions(+), 140 deletions(-))
+PASS  E4a-1 the md build's predictNext = the mean step: identical to the last bit: 20104 of 20104 histories (19933 sampled, 171 edge cases); max |diff| 0 mm
+    today's predictor against the mean step on the sampled histories: median 0.0012, p99 0.0210, max 0.2327 mm (edge cases: max 6.9921 mm, from the fallback branch and the 10 mm shift)
+PASS  E4a-2 shifting a history shifts the md prediction by the same amount: max |p(P + C) - C - p(P)| 4.26e-14 mm over C = 0.5, -0.5, 1, -1, 7.3, -7.3, 100, -100 mm and 2165 histories (1994 sampled, 171 edge cases); today's predictor moves by up to 0.2940 mm on the sampled ones (52.5 mm on the edge cases)
+E4a: 2 of 2 checks passed (1 s)

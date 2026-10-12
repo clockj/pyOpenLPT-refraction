@@ -1,0 +1,16 @@
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 2187 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+calibrate: done in 1254 s; RMS 0.2785 px, sigma 0.2379 px, 17433 of 17496 detections active
+walls 90.151 deg apart
+  cam0: f 18756 +- 19 px (253.2 mm), 1067.8 mm from its wall, 0.71 deg to its normal, k1 0.768
+  cam1: f 19172 +- 19 px (258.8 mm), 1035.5 mm from its wall, 12.80 deg to its normal, k1 0.841
+  cam2: f 21485 +- 17 px (290.0 mm), 767.9 mm from its wall, 18.19 deg to its normal, k1 0.765
+  cam3: f 21924 +- 15 px (296.0 mm), 841.5 mm from its wall, 1.33 deg to its normal, k1 1.05
+  cams [0, 1]: baseline 242.7 mm, views 12.50 deg apart
+  cams [0, 2]: baseline 1515.5 mm, views 90.79 deg apart
+  cams [0, 3]: baseline 1532.9 mm, views 90.57 deg apart
+  cams [1, 2]: baseline 1551.9 mm, views 94.30 deg apart
+  cams [1, 3]: baseline 1525.4 mm, views 90.48 deg apart
+  cams [2, 3]: baseline 286.7 mm, views 16.88 deg apart
+residual along the wand (A, B), px: cam0: +0.076, -0.037; cam1: -0.001, -0.003; cam2: -0.006, +0.041; cam3: -0.034, -0.001
+warnings: pinned: a wand end lies on window 1's water-side surface (4.4e-09 mm deep): the fit may be pinned against the window rather than at a minimum. 8 of the 14 wrong multi-window answers in the tests were, none of
+state saved to D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\tests\states\t3k_s1.pkl

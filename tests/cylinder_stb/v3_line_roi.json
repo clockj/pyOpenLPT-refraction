@@ -1,0 +1,66 @@
+{
+ "build": {
+  "name": "p4c",
+  "git_head": "d9b20b4",
+  "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+  "start": "2026-10-07T20:28:06",
+  "defs": [],
+  "module": "D:\\Refraction\\pyOpenLPT\\build-stb\\p4c\\out\\pyopenlpt.cp311-win_amd64.pyd"
+ },
+ "particles": 48,
+ "lengths": {
+  "5.0": {
+   "today": {
+    "removed_min": 0.591892565069057,
+    "removed_median": 0.6108958481967995,
+    "removed_p5": 0.5984834648212014
+   },
+   "otf": {
+    "removed_min": 0.9881181704535725,
+    "removed_median": 0.9925620286483334,
+    "removed_p5": 0.9907331506666163,
+    "pass": true
+   }
+  },
+  "10.0": {
+   "today": {
+    "removed_min": 0.35190007262219214,
+    "removed_median": 0.3587579077783696,
+    "removed_p5": 0.3527130099676008
+   },
+   "otf": {
+    "removed_min": 0.9903482790947045,
+    "removed_median": 0.9935328294719705,
+    "removed_p5": 0.9913895396619758,
+    "pass": true
+   }
+  },
+  "20.0": {
+   "today": {
+    "removed_min": 0.17584501010542963,
+    "removed_median": 0.17955376718012694,
+    "removed_p5": 0.17654987129109512
+   },
+   "otf": {
+    "removed_min": 0.9906357565495809,
+    "removed_median": 0.9940339223670954,
+    "removed_p5": 0.9915351723543762,
+    "pass": true
+   }
+  },
+  "30.0": {
+   "today": {
+    "removed_min": 0.11715434658139157,
+    "removed_median": 0.11970806836959297,
+    "removed_p5": 0.11770876715495074
+   },
+   "otf": {
+    "removed_min": 0.9904957998516618,
+    "removed_median": 0.9941828538577491,
+    "removed_p5": 0.9916869724623973,
+    "pass": true
+   }
+  }
+ },
+ "pass": true
+}

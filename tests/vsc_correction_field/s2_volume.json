@@ -1,0 +1,519 @@
+{
+ "tube": [
+  {
+   "rig": "T1, 2 cameras",
+   "cameras": [
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_t1_2\\camFile\\cam1.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_t1_2\\camFile\\cam2.txt"
+   ],
+   "today": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 1.5849,
+    "ipr_3d_tol": 100.0
+   },
+   "change": {
+    "vol_x_min": -5.0,
+    "vol_x_max": 25.0,
+    "vol_y_min": -10.0,
+    "vol_y_max": 15.0,
+    "vol_z_min": -35.0,
+    "vol_z_max": 20.0,
+    "voxel_spin": 0.03,
+    "ipr_2d_tol": 1.5849,
+    "ipr_3d_tol": 4.3165
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "today_changed_volume": false,
+   "seconds_today": 0.01,
+   "seconds_change": 0.13,
+   "h_mm": 1.0,
+   "raw_box": [
+    [
+     -1.681049377083923,
+     -9.93825810881774,
+     -31.044782705696356
+    ],
+    [
+     24.486720707865068,
+     12.874455552796102,
+     16.700371236510296
+    ]
+   ],
+   "reference_box": [
+    [
+     -0.681049377083923,
+     -7.938258108817742,
+     -29.044782705696356
+    ],
+    [
+     23.318950622916077,
+     11.061741891182258,
+     14.955217294303644
+    ]
+   ],
+   "reference_points": 14290,
+   "reference_grid": 111800,
+   "reference_complete": true,
+   "holds_reference": true,
+   "excess_mm": [
+    1.0,
+    1.9999999999999982,
+    2.0,
+    1.167770084948991,
+    1.8127136616138433,
+    1.7451539422066524
+   ],
+   "within_5mm": true,
+   "particles": "tracked points of s3_final_m15",
+   "n_particles": 112666,
+   "inside_change": 112666,
+   "inside_today": 112666,
+   "pass": true
+  },
+  {
+   "rig": "20261008, 3 cameras",
+   "cameras": [
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_20261008_3\\camFile\\cam1.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_20261008_3\\camFile\\cam2.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_20261008_3\\camFile\\cam3.txt"
+   ],
+   "today": {
+    "vol_x_min": -40.0,
+    "vol_x_max": 35.0,
+    "vol_y_min": -25.0,
+    "vol_y_max": 20.0,
+    "vol_z_min": -85.0,
+    "vol_z_max": 75.0,
+    "voxel_spin": 0.075,
+    "ipr_2d_tol": 1.685,
+    "ipr_3d_tol": 3.0264
+   },
+   "change": {
+    "vol_x_min": -35.0,
+    "vol_x_max": 25.0,
+    "vol_y_min": -25.0,
+    "vol_y_max": 20.0,
+    "vol_z_min": -60.0,
+    "vol_z_max": 70.0,
+    "voxel_spin": 0.06,
+    "ipr_2d_tol": 1.685,
+    "ipr_3d_tol": 3.783
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "today_changed_volume": true,
+   "seconds_today": 0.05,
+   "seconds_change": 2.08,
+   "h_mm": 2.0,
+   "raw_box": [
+    [
+     -30.185995285830618,
+     -24.7016389884056,
+     -59.242246012633466
+    ],
+    [
+     24.585969002496775,
+     19.864896517290262,
+     66.20059121810614
+    ]
+   ],
+   "reference_box": [
+    [
+     -26.185995285830614,
+     -22.7016389884056,
+     -57.24224601263347
+    ],
+    [
+     21.814004714169386,
+     17.2983610115944,
+     62.75775398736653
+    ]
+   ],
+   "reference_points": 15261,
+   "reference_grid": 80352,
+   "reference_complete": true,
+   "holds_reference": true,
+   "excess_mm": [
+    4.0000000000000036,
+    2.0,
+    1.999999999999993,
+    2.771964288327389,
+    2.5665355056958603,
+    3.442837230739613
+   ],
+   "within_5mm": true,
+   "particles": "tracked points of s3_final_c3",
+   "n_particles": 69868,
+   "inside_change": 69868,
+   "inside_today": 69868,
+   "pass": true
+  },
+  {
+   "rig": "synthetic, 2 cameras",
+   "cameras": [
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_2\\camFile\\cam1.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_2\\camFile\\cam2.txt"
+   ],
+   "today": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 1.5849,
+    "ipr_3d_tol": 100.0
+   },
+   "change": {
+    "vol_x_min": -5.0,
+    "vol_x_max": 25.0,
+    "vol_y_min": -10.0,
+    "vol_y_max": 15.0,
+    "vol_z_min": -35.0,
+    "vol_z_max": 20.0,
+    "voxel_spin": 0.03,
+    "ipr_2d_tol": 1.5849,
+    "ipr_3d_tol": 4.3165
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "today_changed_volume": false,
+   "seconds_today": 0.01,
+   "seconds_change": 0.13,
+   "h_mm": 1.0,
+   "raw_box": [
+    [
+     -1.681049377083923,
+     -9.93825810881774,
+     -31.044782705696356
+    ],
+    [
+     24.486720707865068,
+     12.874455552796102,
+     16.700371236510296
+    ]
+   ],
+   "reference_box": [
+    [
+     -0.681049377083923,
+     -7.938258108817742,
+     -29.044782705696356
+    ],
+    [
+     23.318950622916077,
+     11.061741891182258,
+     14.955217294303644
+    ]
+   ],
+   "reference_points": 14290,
+   "reference_grid": 111800,
+   "reference_complete": true,
+   "holds_reference": true,
+   "excess_mm": [
+    1.0,
+    1.9999999999999982,
+    2.0,
+    1.167770084948991,
+    1.8127136616138433,
+    1.7451539422066524
+   ],
+   "within_5mm": true,
+   "particles": "true particles seen by all 2 cameras (Gcal4_n8, every frame)",
+   "n_particles": 42122,
+   "inside_change": 42122,
+   "inside_today": 42122,
+   "pass": true
+  },
+  {
+   "rig": "synthetic, 3 cameras",
+   "cameras": [
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_3\\camFile\\cam1.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_3\\camFile\\cam2.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_3\\camFile\\cam3.txt"
+   ],
+   "today": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 1.0566,
+    "ipr_3d_tol": 86.3294
+   },
+   "change": {
+    "vol_x_min": -5.0,
+    "vol_x_max": 25.0,
+    "vol_y_min": -10.0,
+    "vol_y_max": 15.0,
+    "vol_z_min": -35.0,
+    "vol_z_max": 20.0,
+    "voxel_spin": 0.03,
+    "ipr_2d_tol": 1.0566,
+    "ipr_3d_tol": 2.8776
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "today_changed_volume": false,
+   "seconds_today": 0.0,
+   "seconds_change": 0.15,
+   "h_mm": 1.0,
+   "raw_box": [
+    [
+     -1.6786482990422107,
+     -9.870761329668293,
+     -31.044782705696356
+    ],
+    [
+     24.486720707865068,
+     12.561283606067233,
+     16.700371236510296
+    ]
+   ],
+   "reference_box": [
+    [
+     -0.6786482990422105,
+     -7.870761329668291,
+     -29.044782705696356
+    ],
+    [
+     23.32135170095779,
+     11.12923867033171,
+     14.955217294303644
+    ]
+   ],
+   "reference_points": 13369,
+   "reference_grid": 109005,
+   "reference_complete": true,
+   "holds_reference": true,
+   "excess_mm": [
+    1.0000000000000002,
+    2.0000000000000018,
+    2.0,
+    1.1653690069072766,
+    1.432044935735524,
+    1.7451539422066524
+   ],
+   "within_5mm": true,
+   "particles": "true particles seen by all 3 cameras (Gcal4_n8, every frame)",
+   "n_particles": 39308,
+   "inside_change": 39308,
+   "inside_today": 39308,
+   "pass": true
+  },
+  {
+   "rig": "synthetic, 4 cameras",
+   "cameras": [
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_4\\camFile\\cam1.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_4\\camFile\\cam2.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_4\\camFile\\cam3.txt",
+    "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\s2_synthetic_4\\camFile\\cam4.txt"
+   ],
+   "today": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 0.7924,
+    "ipr_3d_tol": 64.7471
+   },
+   "change": {
+    "vol_x_min": -5.0,
+    "vol_x_max": 25.0,
+    "vol_y_min": -10.0,
+    "vol_y_max": 15.0,
+    "vol_z_min": -35.0,
+    "vol_z_max": 20.0,
+    "voxel_spin": 0.03,
+    "ipr_2d_tol": 0.7924,
+    "ipr_3d_tol": 2.1582
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "today_changed_volume": false,
+   "seconds_today": 0.01,
+   "seconds_change": 0.23,
+   "h_mm": 1.0,
+   "raw_box": [
+    [
+     -1.6726739486444,
+     -9.870761329668293,
+     -30.998670065555125
+    ],
+    [
+     24.474944312706754,
+     12.553226321124827,
+     16.644114716921845
+    ]
+   ],
+   "reference_box": [
+    [
+     -0.6726739486444,
+     -7.870761329668291,
+     -28.998670065555125
+    ],
+    [
+     23.3273260513556,
+     11.12923867033171,
+     15.001329934444875
+    ]
+   ],
+   "reference_points": 11215,
+   "reference_grid": 109005,
+   "reference_complete": true,
+   "holds_reference": true,
+   "excess_mm": [
+    1.0,
+    2.0000000000000018,
+    2.0,
+    1.1476182613511554,
+    1.4239876507931175,
+    1.6427847824769692
+   ],
+   "within_5mm": true,
+   "particles": "true particles seen by all 4 cameras (Gcal4_n8, every frame)",
+   "n_particles": 32571,
+   "inside_change": 32571,
+   "inside_today": 32571,
+   "pass": true
+  }
+ ],
+ "same": [
+  {
+   "rig": "plate, 4 cameras (PINPLATE)",
+   "today": {
+    "vol_x_min": -75.0,
+    "vol_x_max": 50.0,
+    "vol_y_min": -40.0,
+    "vol_y_max": 55.0,
+    "vol_z_min": -35.0,
+    "vol_z_max": 65.0,
+    "voxel_spin": 0.125,
+    "ipr_2d_tol": 0.6371,
+    "ipr_3d_tol": 0.3112
+   },
+   "change": {
+    "vol_x_min": -75.0,
+    "vol_x_max": 50.0,
+    "vol_y_min": -40.0,
+    "vol_y_max": 55.0,
+    "vol_z_min": -35.0,
+    "vol_z_max": 65.0,
+    "voxel_spin": 0.125,
+    "ipr_2d_tol": 0.6371,
+    "ipr_3d_tol": 0.3112
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "equal": true,
+   "seconds_today": 1.78,
+   "seconds_change": 1.78
+  },
+  {
+   "rig": "pinhole, 2 cameras",
+   "today": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 1.5849,
+    "ipr_3d_tol": 100.0
+   },
+   "change": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 1.5849,
+    "ipr_3d_tol": 100.0
+   },
+   "defaults": {
+    "vol_x_min": -200.0,
+    "vol_x_max": 200.0,
+    "vol_y_min": -200.0,
+    "vol_y_max": 200.0,
+    "vol_z_min": -200.0,
+    "vol_z_max": 200.0,
+    "voxel_spin": 0.001,
+    "ipr_2d_tol": 2.0,
+    "ipr_3d_tol": 1.0
+   },
+   "equal": true,
+   "seconds_today": 0.01,
+   "seconds_change": 0.0
+  }
+ ],
+ "pass": true
+}

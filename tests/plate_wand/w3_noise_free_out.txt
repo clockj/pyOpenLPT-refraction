@@ -1,0 +1,11 @@
+rig A, start truth: rms 6.70e-13 px; errors: rotation 3.4e-16 rad, centre 1.7e-16 rel, f 4.4e-16, normal 1.5e-16 rad, offset 8.4e-16 rel; 1 LM iterations, 0.1 s; active 8000/8000
+rig A, start near : rms 6.60e-13 px; errors: rotation 3.2e-15 rad, centre 2.7e-15 rel, f 4.7e-15, normal 1.9e-15 rad, offset 1.6e-14 rel; 15 LM iterations, 0.7 s; active 8000/8000
+rig B, start truth: rms 9.66e-13 px; errors: rotation 1.3e-15 rad, centre 1.1e-15 rel, f 2.4e-15, normal 2.5e-15 rad, offset 6.3e-15 rel; 1 LM iterations, 0.1 s; active 8000/8000
+rig B, start near : rms 9.33e-13 px; errors: rotation 3.8e-15 rad, centre 7.2e-14 rel, f 1.6e-14, normal 5.1e-15 rad, offset 1.4e-13 rel; 16 LM iterations, 0.6 s; active 8000/8000
+rig C, start truth: rms 3.10e-13 px; errors: rotation 7.7e-16 rad, centre 1.3e-15 rel, f 3.1e-15, normal 1.7e-15 rad, offset 5.8e-15 rel; 1 LM iterations, 0.1 s; active 6000/6000
+rig C, start near : rms 3.09e-13 px; errors: rotation 8.4e-16 rad, centre 2.1e-15 rel, f 7.3e-15, normal 8.2e-15 rad, offset 2.1e-15 rel; 82 LM iterations, 2.9 s; active 6000/6000
+rig D, start truth: rms 6.89e-13 px; errors: rotation 1.6e-16 rad, centre 1.8e-16 rel, f 6.7e-16, normal 1.7e-15 rad, offset 2.7e-16 rel; 1 LM iterations, 0.1 s; active 6000/6000
+rig D, start near : rms 6.42e-13 px; errors: rotation 1.6e-15 rad, centre 1.8e-14 rel, f 1.5e-14, normal 4.5e-15 rad, offset 8.3e-15 rel; 15 LM iterations, 0.5 s; active 6000/6000
+rig E, start truth: rms 2.28e-12 px; errors: rotation 5.3e-17 rad, centre 1.2e-17 rel, f 5.6e-16, normal 5.7e-16 rad, offset 2.4e-16 rel; 1 LM iterations, 0.1 s; active 6000/6000
+rig E, start near : rms 2.39e-12 px; errors: rotation 1.7e-15 rad, centre 4.3e-14 rel, f 8.3e-14, normal 4.5e-15 rad, offset 3.3e-14 rel; 27 LM iterations, 1.2 s; active 6000/6000
+W3 noise-free: PASS

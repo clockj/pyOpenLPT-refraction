@@ -1,0 +1,19 @@
+lens terms none; constraints {"aim": [{"cams": [0, 1], "wall": 1, "mm": 75.0}]}
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 10936 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+start: the cameras and walls of tests\states\t2_all.pkl (RMS 0.2734 px there)
+calibrate: done in 401 s; RMS 0.3148 px, sigma 0.2687 px, 87228 of 87488 detections active
+constraints at the answer: {"priors": [{"kind": "aim", "cam": [0, 1], "wall": 1, "mean": 75.0, "sigma": 0.01, "value": 75.00342825157901, "residual_sigmas": 0.34282515790096113}]}
+walls 90.166 deg apart
+  cam0: f 18749 +- 10 px (253.1 mm), 1067.7 mm from its wall, 0.71 deg to its normal, k1 0.849
+  cam1: f 19136 +- 10 px (258.3 mm), 1034.1 mm from its wall, 12.77 deg to its normal, k1 0.945
+  cam2: f 21853 +- 8 px (295.0 mm), 859.3 mm from its wall, 17.15 deg to its normal, k1 0.894
+  cam3: f 22153 +- 8 px (299.1 mm), 925.2 mm from its wall, 0.40 deg to its normal, k1 1.17
+  cams [0, 1]: baseline 242.7 mm, views 12.50 deg apart
+  cams [0, 2]: baseline 1509.4 mm, views 90.78 deg apart
+  cams [0, 3]: baseline 1523.5 mm, views 90.56 deg apart
+  cams [1, 2]: baseline 1545.1 mm, views 94.24 deg apart
+  cams [1, 3]: baseline 1514.4 mm, views 90.42 deg apart
+  cams [2, 3]: baseline 290.3 mm, views 16.86 deg apart
+residual along the wand (A, B), px: cam0: +0.070, -0.037; cam1: -0.004, +0.002; cam2: -0.008, +0.028; cam3: -0.016, +0.014
+warnings: weak_window: window 2 is seen only by cam2 and cam3, which see the wand under 6.0 and 5.8 deg (a long lens or a far camera): its tilt shows only weakly, and the cost can have several minima. Every wrong answer in ; pinned: a wand end lies on window 1's water-side surface (1.8e-13 mm deep): the fit may be pinned against the window rather than at a minimum. 8 of the 14 wrong multi-window answers in the tests were, none of
+state saved to D:\Refraction\pyOpenLPT\cases\plate_20260727_T0\tests\states\w3_B.pkl

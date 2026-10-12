@@ -1,0 +1,268 @@
+{
+ "checks": [
+  {
+   "check": "the new start_candidates is the old nested make_starts, moved (syntax trees)",
+   "ok": true,
+   "detail": "6 statements against 6"
+  },
+  {
+   "check": "start_candidates begins with `hints = hints or {}` (as calibrate does before)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "calibrate keeps no use of multi/used/few/searches; its make_starts calls start_candidates",
+   "ok": true,
+   "detail": "left [], calls 1"
+  },
+  {
+   "check": "the rest of calibrate is unchanged (syntax trees, docstring included)",
+   "ok": true,
+   "detail": "35 statements against 35; make_starts was statement 8"
+  },
+  {
+   "check": "rig A: identical answers (cameras, windows, L, frames, RMS, observations, weights, covariance, info)",
+   "ok": true,
+   "detail": "RMS 0.114750 px; f 3,925.65, 3,928.81, 3,937.33, 3,930.72; 11 s old, 11 s new"
+  },
+  {
+   "check": "rig B: identical answers (cameras, windows, L, frames, RMS, observations, weights, covariance, info)",
+   "ok": true,
+   "detail": "RMS 0.116304 px; f 4,315.08, 4,317.44, 3,972.97, 3,970.01; 40 s old, 39 s new"
+  },
+  {
+   "check": "rig B, hints 5 deg: identical answers (cameras, windows, L, frames, RMS, observations, weights, covariance, info)",
+   "ok": true,
+   "detail": "RMS 0.116304 px; f 4,315.08, 4,317.44, 3,972.97, 3,970.01; 112 s old, 113 s new"
+  }
+ ],
+ "cases": {
+  "rig A": {
+   "differences": [],
+   "rms_px": 0.1147499758229197,
+   "f_px": [
+    3925.6533352609363,
+    3928.8104476784706,
+    3937.3251844720785,
+    3930.723337858202
+   ],
+   "seconds_old": 10.726803302764893,
+   "seconds_new": 10.707231283187866,
+   "info_keys": [
+    "bootstrap",
+    "cond_S",
+    "dof",
+    "h1_mm",
+    "lm_iterations",
+    "n_fail",
+    "noise_weights",
+    "output_frame",
+    "robust_sigma_group_px",
+    "robust_sigma_px",
+    "rounds",
+    "scan",
+    "sigmas_fit_frame",
+    "starts",
+    "variance_factor",
+    "weighted_cost"
+   ],
+   "hint_paths": null
+  },
+  "rig B": {
+   "differences": [],
+   "rms_px": 0.11630378915881875,
+   "f_px": [
+    4315.076940187688,
+    4317.4442870157445,
+    3972.967639665812,
+    3970.013353955919
+   ],
+   "seconds_old": 39.526813983917236,
+   "seconds_new": 39.47522473335266,
+   "info_keys": [
+    "bootstrap",
+    "cond_S",
+    "dof",
+    "h1_mm",
+    "lm_iterations",
+    "n_fail",
+    "noise_weights",
+    "output_frame",
+    "robust_sigma_group_px",
+    "robust_sigma_px",
+    "rounds",
+    "scan",
+    "sigmas_fit_frame",
+    "starts",
+    "variance_factor",
+    "weighted_cost"
+   ],
+   "hint_paths": null
+  },
+  "rig B, hints 5 deg": {
+   "differences": [],
+   "rms_px": 0.11630378915881875,
+   "f_px": [
+    4315.076940187688,
+    4317.4442870157445,
+    3972.967639665812,
+    3970.013353955919
+   ],
+   "seconds_old": 112.11912131309509,
+   "seconds_new": 112.73396372795105,
+   "info_keys": [
+    "bootstrap",
+    "cond_S",
+    "dof",
+    "h1_mm",
+    "hints",
+    "lm_iterations",
+    "n_fail",
+    "noise_weights",
+    "output_frame",
+    "robust_sigma_group_px",
+    "robust_sigma_px",
+    "rounds",
+    "scan",
+    "sigmas_fit_frame",
+    "starts",
+    "variance_factor",
+    "weighted_cost"
+   ],
+   "hint_paths": {
+    "held": {
+     "available": 2,
+     "tried": 2,
+     "stage4_rms_px": [
+      0.11630378919470614,
+      0.11630378914333149
+     ],
+     "stage4_answer_rms_px": 0.11630378919470614,
+     "bootstrap": {
+      "length": {
+       "method": "window groups",
+       "search": "length",
+       "groups": {
+        "0": {
+         "cameras": [
+          0,
+          1
+         ],
+         "rms_px": 0.0854279176057997,
+         "held": true
+        },
+        "1": {
+         "cameras": [
+          2,
+          3
+         ],
+         "rms_px": 0.08171425665630097,
+         "held": true,
+         "joined_on_frames": 300
+        }
+       },
+       "reference_window": 0,
+       "starts": 1
+      },
+      "fixed": {
+       "method": "window groups",
+       "search": "fixed",
+       "groups": {
+        "0": {
+         "cameras": [
+          0,
+          1
+         ],
+         "rms_px": 0.11438459020964482,
+         "held": true
+        },
+        "1": {
+         "cameras": [
+          2,
+          3
+         ],
+         "rms_px": 0.12332382976667136,
+         "held": true,
+         "joined_on_frames": 300
+        }
+       },
+       "reference_window": 0,
+       "starts": 1
+      }
+     },
+     "same_as": "default",
+     "rms_px": 0.11630378919470614,
+     "capped_rel": 9.325873406851315e-15,
+     "apart_chi2": 1.023250527506403e-10,
+     "replaces": false
+    },
+    "searched": {
+     "available": 2,
+     "tried": 2,
+     "stage4_rms_px": [
+      0.11630378916849858,
+      0.11630378914359292
+     ],
+     "stage4_answer_rms_px": 0.11630378916849858,
+     "bootstrap": {
+      "length": {
+       "method": "window groups",
+       "search": "length",
+       "groups": {
+        "0": {
+         "cameras": [
+          0,
+          1
+         ],
+         "rms_px": 0.0853120079950816,
+         "widened": true
+        },
+        "1": {
+         "cameras": [
+          2,
+          3
+         ],
+         "rms_px": 0.08168911348933683,
+         "widened": true,
+         "joined_on_frames": 300
+        }
+       },
+       "reference_window": 0,
+       "starts": 1
+      },
+      "fixed": {
+       "method": "window groups",
+       "search": "fixed",
+       "groups": {
+        "0": {
+         "cameras": [
+          0,
+          1
+         ],
+         "rms_px": 0.08531200799508226,
+         "widened": true
+        },
+        "1": {
+         "cameras": [
+          2,
+          3
+         ],
+         "rms_px": 0.08168911348933329,
+         "widened": true,
+         "joined_on_frames": 300
+        }
+       },
+       "reference_window": 0,
+       "starts": 1
+      }
+     },
+     "same_as": "default",
+     "rms_px": 0.11630378916849858,
+     "capped_rel": 3.907985046680551e-14,
+     "apart_chi2": 1.1380509253553148e-11,
+     "replaces": false
+    }
+   }
+  }
+ }
+}

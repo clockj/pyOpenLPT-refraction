@@ -1,0 +1,31 @@
+{
+ "checks": [
+  {
+   "check": "the Report tab exists and uses QtWebEngine",
+   "ok": true,
+   "detail": "web view: QWebEngineView"
+  },
+  {
+   "check": "the page loads and its script draws every figure",
+   "ok": false,
+   "detail": "loadFinished False, svg elements None, 212.8 s"
+  },
+  {
+   "check": "no JavaScript errors",
+   "ok": true,
+   "detail": "0 console messages, errors []"
+  },
+  {
+   "check": "inside the GUI the page is dark",
+   "ok": false,
+   "detail": "data-theme None"
+  },
+  {
+   "check": "the widget's image is not blank",
+   "ok": true,
+   "detail": "304 x 408 -> D:\\Refraction\\pyOpenLPT\\tests\\cylinder_wand_gui\\g4b_report_tab.png"
+  }
+ ],
+ "seconds": 220.7417917251587,
+ "console": []
+}

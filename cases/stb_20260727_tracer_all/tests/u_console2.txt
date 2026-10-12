@@ -1,0 +1,72 @@
+2026-10-11 01:58:34 queue starts (pid 31496, 12 threads)
+2026-10-11 01:58:34 U0 u0_35Hz_r_b_1: the crashed attempt is kept in D:\Shijie Zhong\STB_staging\20260727\smoke\u0_35Hz_r_b_1_crash0_20261011-015834
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 113.281,1.16262,0.821927,0
+
+Camera 1 (a,b,c,alpha) = 61.1232,1.15023,0.492593,0
+
+Camera 2 (a,b,c,alpha) = 83.9337,0.990286,0.61413,0
+
+Camera 3 (a,b,c,alpha) = 64.8174,1.04368,0.419542,0
+
+2026-10-11 01:58:40 U0 u0_35Hz_r_b_1: start (12 threads, frames 0-30, threshold 30, changes none; C++ reads {'frames': [0, 30], 'threshold': 30, 'convergence_phase.avg_spacing_vox': 30.0, 'shake.width_vox': 0.25})
+2026-10-11 02:05:55 U0 u0_35Hz_r_b_1: exit 0, 31 frames, median 12.4 s per frame, long tracks at the end 1861
+2026-10-11 02:05:55 U0: frames 0-30 of the new run against T3's log, every counter of every frame (timings left out): 31 of 31 identical -> PASS
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 113.281,1.16262,0.821927,0
+
+Camera 1 (a,b,c,alpha) = 61.1232,1.15023,0.492593,0
+
+Camera 2 (a,b,c,alpha) = 83.9337,0.990286,0.61413,0
+
+Camera 3 (a,b,c,alpha) = 64.8174,1.04368,0.419542,0
+
+2026-10-11 02:06:01 U1 u1_35Hz_r_b_1: start (12 threads, frames 0-250, threshold 30, changes {'convergence_phase.avg_spacing_vox': 10.0}; C++ reads {'frames': [0, 250], 'threshold': 30, 'convergence_phase.avg_spacing_vox': 10.0, 'shake.width_vox': 0.25})
+2026-10-11 02:57:49 U1 u1_35Hz_r_b_1: exit 0, 251 frames, median 11.3 s per frame, long tracks at the end 5705
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 113.281,1.16262,0.821927,0
+
+Camera 1 (a,b,c,alpha) = 61.1232,1.15023,0.492593,0
+
+Camera 2 (a,b,c,alpha) = 83.9337,0.990286,0.61413,0
+
+Camera 3 (a,b,c,alpha) = 64.8174,1.04368,0.419542,0
+
+2026-10-11 02:57:55 U2 u2_35Hz_r_b_1: start (12 threads, frames 0-250, threshold 30, changes {'convergence_phase.avg_spacing_vox': 5.0}; C++ reads {'frames': [0, 250], 'threshold': 30, 'convergence_phase.avg_spacing_vox': 5.0, 'shake.width_vox': 0.25})
+2026-10-11 03:49:28 U2 u2_35Hz_r_b_1: exit 0, 251 frames, median 11.3 s per frame, long tracks at the end 6578
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 113.281,1.16262,0.821927,0
+
+Camera 1 (a,b,c,alpha) = 61.1232,1.15023,0.492593,0
+
+Camera 2 (a,b,c,alpha) = 83.9337,0.990286,0.61413,0
+
+Camera 3 (a,b,c,alpha) = 64.8174,1.04368,0.419542,0
+
+2026-10-11 03:49:34 U3 u3_35Hz_r_b_1: start (12 threads, frames 0-250, threshold 30, changes {'shake.width_vox': 0.5}; C++ reads {'frames': [0, 250], 'threshold': 30, 'convergence_phase.avg_spacing_vox': 30.0, 'shake.width_vox': 0.5})
+2026-10-11 04:42:21 U3 u3_35Hz_r_b_1: exit 0, 251 frames, median 11.7 s per frame, long tracks at the end 4660
+2026-10-11 04:42:27 after U1-U3: {"U1": [false, 5705, ["long tracks at 250 5705 < 1.05 x 5473"]], "U2": [true, 6578, []], "U3": [false, 4660, ["long tracks at 250 4660 < 1.05 x 5473", "level-off 4811 not above 5901"]]}; baseline 5473; U4: not run
+2026-10-11 04:42:27 chosen: U2 {'convergence_phase.avg_spacing_vox': 5.0}
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 220.023,1.24451,0.818631,0
+
+Camera 1 (a,b,c,alpha) = 188.248,1.2636,0.661589,0
+
+Camera 2 (a,b,c,alpha) = 165.627,1.08094,0.578795,0
+
+Camera 3 (a,b,c,alpha) = 190.815,1.16015,0.561987,0
+
+2026-10-11 04:42:34 U5 u5_35Hz_r_b_2: start (12 threads, frames 0-250, threshold 80, changes {'convergence_phase.avg_spacing_vox': 5.0}; C++ reads {'frames': [0, 250], 'threshold': 80, 'convergence_phase.avg_spacing_vox': 5.0, 'shake.width_vox': 0.25})
+2026-10-11 05:28:21 U5 u5_35Hz_r_b_2: exit 0, 251 frames, median 9.3 s per frame, long tracks at the end 3150
+Estimating OTF...
+Camera 0 (a,b,c,alpha) = 56.6798,1.11169,1.0904,0
+
+Camera 1 (a,b,c,alpha) = 38.4499,1.06027,0.986362,0
+
+Camera 2 (a,b,c,alpha) = 44.6133,1.02321,0.964271,0
+
+Camera 3 (a,b,c,alpha) = 51.6881,1.03463,0.989149,0
+
+2026-10-11 05:28:26 U6 u6_10Hz_r_b_1: start (12 threads, frames 0-250, threshold 20, changes {'convergence_phase.avg_spacing_vox': 5.0}; C++ reads {'frames': [0, 250], 'threshold': 20, 'convergence_phase.avg_spacing_vox': 5.0, 'shake.width_vox': 0.25})
+2026-10-11 05:48:42 U6 u6_10Hz_r_b_1: exit 0, 251 frames, median 3.6 s per frame, long tracks at the end 18762
+2026-10-11 05:48:42 queue ends

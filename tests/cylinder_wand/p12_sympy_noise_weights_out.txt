@@ -1,0 +1,39 @@
+PROVED     1a: E|r_A|^2 = (n^T D_A n)(n^T Sigma n)         cancel; 40 samples
+PROVED     1b: split E|r_A|^2/E|r_B|^2 independent of sigma_A^2  cancel; 40 samples
+PROVED     1c: split independent of sigma_B^2              cancel; 40 samples
+PROVED     1d: residual projector rank (exact 4x3 example)  cancel; 40 samples
+PROVED     2a: frame residual projector rank 3 (8 - 5)     cancel; 40 samples
+PROVED     2b: split changes when the noise moves from A to B (frame, length constraint)  assumptions; 40 samples
+   frame example: split A/B = 0.7826 with A quiet (1:25), 1.0099 with A noisy (25:1)
+PROVED     3a: three cameras, one point: the split changes when the noise moves  assumptions; 40 samples
+   three-camera example: split A/B = 0.7215 with A quiet, 2.7319 with A noisy
+PROVED     4a (w = 1, 4, 9): R~ is symmetric (sum of squared entries of R~ - R~^T)  cancel; 40 samples
+PROVED     4b (w = 1, 4, 9): R~ is idempotent (sum of squared entries of R~^2 - R~)  cancel; 40 samples
+PROVED     4c (w = 1, 4, 9): E[q_1] = sum_h tau_h M_1h     cancel; 40 samples
+PROVED     4c (w = 1, 4, 9): E[q_2] = sum_h tau_h M_2h     cancel; 40 samples
+PROVED     4c (w = 1, 4, 9): E[q_3] = sum_h tau_h M_3h     cancel; 40 samples
+PROVED     4d (w = 1, 4, 9): Cov(q_1, q_1) = 2 M_11 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1, 4, 9): Cov(q_1, q_2) = 2 M_12 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1, 4, 9): Cov(q_1, q_3) = 2 M_13 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1, 4, 9): Cov(q_2, q_2) = 2 M_22 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1, 4, 9): Cov(q_2, q_3) = 2 M_23 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1, 4, 9): Cov(q_3, q_3) = 2 M_33 at tau = 1  cancel; 40 samples
+PROVED     4e (w = 1, 4, 9): sum_h M_1h = redundancy trace(D_1 R~)  cancel; 40 samples
+PROVED     4a (w = 1/4, 1, 16): R~ is symmetric (sum of squared entries of R~ - R~^T)  cancel; 40 samples
+PROVED     4b (w = 1/4, 1, 16): R~ is idempotent (sum of squared entries of R~^2 - R~)  cancel; 40 samples
+PROVED     4c (w = 1/4, 1, 16): E[q_1] = sum_h tau_h M_1h  cancel; 40 samples
+PROVED     4c (w = 1/4, 1, 16): E[q_2] = sum_h tau_h M_2h  cancel; 40 samples
+PROVED     4c (w = 1/4, 1, 16): E[q_3] = sum_h tau_h M_3h  cancel; 40 samples
+PROVED     4d (w = 1/4, 1, 16): Cov(q_1, q_1) = 2 M_11 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1/4, 1, 16): Cov(q_1, q_2) = 2 M_12 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1/4, 1, 16): Cov(q_1, q_3) = 2 M_13 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1/4, 1, 16): Cov(q_2, q_2) = 2 M_22 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1/4, 1, 16): Cov(q_2, q_3) = 2 M_23 at tau = 1  cancel; 40 samples
+PROVED     4d (w = 1/4, 1, 16): Cov(q_3, q_3) = 2 M_33 at tau = 1  cancel; 40 samples
+PROVED     4e (w = 1/4, 1, 16): sum_h M_1h = redundancy trace(D_1 R~)  cancel; 40 samples
+PROVED     4f (w = 1, 4, 9): Cov(r) = W^-1 - J U^-1 J^T (sum of squared entries of the difference)  cancel; 40 samples
+PROVED     4g (w = 1, 4, 9): block 1 = sigma_1^2 (I - w_1 J_1 U^-1 J_1^T) (sum of squared entries of the difference)  cancel; 40 samples
+PROVED     4f (w = 1/4, 1, 16): Cov(r) = W^-1 - J U^-1 J^T (sum of squared entries of the difference)  cancel; 40 samples
+PROVED     4g (w = 1/4, 1, 16): block 1 = sigma_1^2 (I - w_1 J_1 U^-1 J_1^T) (sum of squared entries of the difference)  cancel; 40 samples
+
+35 checks: 35 PROVED

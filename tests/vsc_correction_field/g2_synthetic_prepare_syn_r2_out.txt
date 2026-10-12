@@ -1,0 +1,1 @@
+D:\Refraction\pyOpenLPT\tests\vsc_correction_field\projects\syn_r2: 2 cameras from D:\Refraction\pyOpenLPT\tests\cylinder_stb_study\runs\Gcal_n8_r2_tol1.5; cameras ['D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\main\\camFile\\cam1.txt', 'D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb_study\\data\\main\\camFile\\cam2.txt']; tol_2d_px 1.5; noise {'noise': [8.0, 8.0]}

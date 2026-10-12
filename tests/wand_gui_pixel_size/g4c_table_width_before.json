@@ -1,0 +1,84 @@
+{
+ "checks": [
+  {
+   "check": "1700x1080: every column shows without a horizontal scroll bar",
+   "ok": false,
+   "detail": "columns 633 px in 346 px"
+  },
+  {
+   "check": "1500x900: every column shows without a horizontal scroll bar",
+   "ok": false,
+   "detail": "columns 633 px in 336 px"
+  },
+  {
+   "check": "1200x700: every column shows without a horizontal scroll bar",
+   "ok": false,
+   "detail": "columns 633 px in 336 px"
+  }
+ ],
+ "sizes": {
+  "1700x1080": {
+   "widths": [
+    37,
+    53,
+    162,
+    126,
+    126,
+    129
+   ],
+   "hints": [
+    36,
+    null,
+    139,
+    125,
+    125,
+    128
+   ],
+   "viewport": 346,
+   "sum": 633,
+   "hbar": true
+  },
+  "1500x900": {
+   "widths": [
+    37,
+    53,
+    162,
+    126,
+    126,
+    129
+   ],
+   "hints": [
+    36,
+    null,
+    139,
+    125,
+    125,
+    128
+   ],
+   "viewport": 336,
+   "sum": 633,
+   "hbar": true
+  },
+  "1200x700": {
+   "widths": [
+    37,
+    53,
+    162,
+    126,
+    126,
+    129
+   ],
+   "hints": [
+    36,
+    null,
+    139,
+    125,
+    125,
+    128
+   ],
+   "viewport": 336,
+   "sum": 633,
+   "hbar": true
+  }
+ }
+}

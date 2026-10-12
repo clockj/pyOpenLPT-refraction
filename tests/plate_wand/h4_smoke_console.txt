@@ -1,0 +1,8 @@
+H4 smoke test: the scan of weak windows' normals, W5 seeds 1001, 1034, 1045 at 0.1 px, no hints
+seed 1001: equivalent (rms 0.085945 against 0.085946, max |z| 1.5e-01); scan IMPROVED (191 s); total 263 s
+  window 2: 315 of 317 fitted, minima 15.0 deg -3.09e-02; released rms 0.08603 (capped -3.3e-02, apart 7.6e+01); accepted True; 181 s
+seed 1034: DIFFERENT (rms 0.178590 against 0.117511, max |z| 1.4e+03); scan no change (527 s); total 690 s
+  window 1: 317 of 317 fitted, minima ; released ; accepted False; 248 s
+  window 3: 305 of 317 fitted, minima ; released ; accepted False; 279 s
+seed 1045: DIFFERENT (rms 0.348817 against 0.086151, max |z| 1.0e+03); scan no change (237 s); total 407 s
+  window 1: 309 of 317 fitted, minima ; released ; accepted False; 237 s

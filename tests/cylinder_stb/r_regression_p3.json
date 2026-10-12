@@ -1,0 +1,119 @@
+{
+ "build": "p3",
+ "base": "head1007",
+ "frames": [
+  0,
+  50
+ ],
+ "results": {
+  "plate_module": {
+   "compare": {
+    "only_a": [],
+    "only_b": [],
+    "files": {
+     "ConvergeTrack\\ExitTrack_50.csv": "identical",
+     "ConvergeTrack\\LongTrackActive_50.csv": "identical",
+     "ConvergeTrack\\LongTrackInactive_50.csv": "identical",
+     "ConvergeTrack\\ShortTrackActive_50.csv": "identical",
+     "InitialTrack\\ExitTrack_3.csv": "identical",
+     "InitialTrack\\LongTrackActive_3.csv": "identical",
+     "InitialTrack\\LongTrackInactive_3.csv": "identical",
+     "InitialTrack\\ShortTrackActive_3.csv": "identical",
+     "PredField_1_2.csv": "identical",
+     "PredField_2_3.csv": "identical",
+     "PredField_3_4.csv": "identical"
+    },
+    "identical_files": 11,
+    "compared_files": 11,
+    "all_identical": true
+   },
+   "ok": true,
+   "wall_s": {
+    "head1007": 154.2,
+    "p3": 142.68
+   }
+  },
+  "plate_exe": {
+   "compare": {
+    "only_a": [],
+    "only_b": [],
+    "files": {
+     "ConvergeTrack\\ExitTrack_50.csv": "identical",
+     "ConvergeTrack\\LongTrackActive_50.csv": "identical",
+     "ConvergeTrack\\LongTrackInactive_50.csv": "identical",
+     "ConvergeTrack\\ShortTrackActive_50.csv": "identical",
+     "InitialTrack\\ExitTrack_3.csv": "identical",
+     "InitialTrack\\LongTrackActive_3.csv": "identical",
+     "InitialTrack\\LongTrackInactive_3.csv": "identical",
+     "InitialTrack\\ShortTrackActive_3.csv": "identical",
+     "PredField_1_2.csv": "identical",
+     "PredField_2_3.csv": "identical",
+     "PredField_3_4.csv": "identical"
+    },
+    "identical_files": 11,
+    "compared_files": 11,
+    "all_identical": true
+   },
+   "ok": true,
+   "wall_s": {
+    "head1007": 148.06,
+    "p3": 149.34
+   }
+  },
+  "pinhole_module": {
+   "compare": {
+    "only_a": [],
+    "only_b": [],
+    "files": {
+     "ConvergeTrack\\ExitTrack_50.csv": "identical",
+     "ConvergeTrack\\LongTrackActive_50.csv": "identical",
+     "ConvergeTrack\\LongTrackInactive_50.csv": "identical",
+     "ConvergeTrack\\ShortTrackActive_50.csv": "identical",
+     "InitialTrack\\ExitTrack_3.csv": "identical",
+     "InitialTrack\\LongTrackActive_3.csv": "identical",
+     "InitialTrack\\LongTrackInactive_3.csv": "identical",
+     "InitialTrack\\ShortTrackActive_3.csv": "identical",
+     "PredField_1_2.csv": "identical",
+     "PredField_2_3.csv": "identical",
+     "PredField_3_4.csv": "identical"
+    },
+    "identical_files": 11,
+    "compared_files": 11,
+    "all_identical": true
+   },
+   "ok": true,
+   "wall_s": {
+    "head1007": 142.09,
+    "p3": 134.55
+   }
+  },
+  "pinhole_exe": {
+   "compare": {
+    "only_a": [],
+    "only_b": [],
+    "files": {
+     "ConvergeTrack\\ExitTrack_50.csv": "identical",
+     "ConvergeTrack\\LongTrackActive_50.csv": "identical",
+     "ConvergeTrack\\LongTrackInactive_50.csv": "identical",
+     "ConvergeTrack\\ShortTrackActive_50.csv": "identical",
+     "InitialTrack\\ExitTrack_3.csv": "identical",
+     "InitialTrack\\LongTrackActive_3.csv": "identical",
+     "InitialTrack\\LongTrackInactive_3.csv": "identical",
+     "InitialTrack\\ShortTrackActive_3.csv": "identical",
+     "PredField_1_2.csv": "identical",
+     "PredField_2_3.csv": "identical",
+     "PredField_3_4.csv": "identical"
+    },
+    "identical_files": 11,
+    "compared_files": 11,
+    "all_identical": true
+   },
+   "ok": true,
+   "wall_s": {
+    "head1007": 139.55,
+    "p3": 135.6
+   }
+  }
+ },
+ "pass": true
+}

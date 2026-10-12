@@ -1,0 +1,114 @@
+{
+ "project": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\syn2_gui",
+ "via": "service",
+ "ok": true,
+ "message": "Field VSC pass 2: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.263 -> 0.223 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px, set in config.json (objects[0].ipr.tol_2d_px): a Save in the tracking settings would drop the tracer's settings that page does not show (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel). Rerun tracking; another pass helps while a pass still changes the field.",
+ "field_vsc": {
+  "cameras": [
+   {
+    "camera": 1,
+    "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\syn2_gui\\camFile_VSC\\vsc_cam1_corr_p2.txt",
+    "pass": 2,
+    "points": 21990,
+    "covered_nodes": 16256,
+    "nodes": 16261,
+    "change_rms_px": 0.3907091752180113,
+    "change_max_px": 1.7052173549431997,
+    "total_rms_px": 0.8684616289203727,
+    "total_max_px": 3.752271090117374,
+    "slope_bound": 0.024060035587992332,
+    "previous": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\syn2_gui\\camFile_VSC\\vsc_cam1_corr_p1.txt"
+   },
+   {
+    "camera": 2,
+    "file": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\syn2_gui\\camFile_VSC\\vsc_cam2_corr_p2.txt",
+    "pass": 2,
+    "points": 21990,
+    "covered_nodes": 14530,
+    "nodes": 16261,
+    "change_rms_px": 0.28688427770510516,
+    "change_max_px": 1.06882383765717,
+    "total_rms_px": 0.6906108180761216,
+    "total_max_px": 2.6819006728098134,
+    "slope_bound": 0.020402290412644474,
+    "previous": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\projects\\syn2_gui\\camFile_VSC\\vsc_cam2_corr_p1.txt"
+   }
+  ],
+  "pass": 2,
+  "offset_before": {
+   "median": 0.030999545962122323,
+   "robust_sd": 0.2625042764089248
+  },
+  "offset_after": {
+   "median": 0.0014641605732692957,
+   "robust_sd": 0.2225286273810777
+  },
+  "tol_2d_px": 1.5,
+  "message": "Field VSC pass 2: corrections written to camFile_VSC/ and set in config.json. The residual no 3-D move explains: robust SD 0.263 -> 0.223 px. The 2-D tolerance is left at 1.5 px. On the tube run T1 the correction paid at 1.0 px (two passes: +11 % real long tracks, a fifth fewer ghosts) and changed nothing at 1.5 px, so consider 1.0 px, set in config.json (objects[0].ipr.tol_2d_px): a Save in the tracking settings would drop the tracer's settings that page does not show (detector, lines, otf_file, roi_from_otf, roi_sigma, shape_check, shape_tol_px, shape_tol_rel). Rerun tracking; another pass helps while a pass still changes the field.",
+  "tracks": 882,
+  "frames": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39
+  ],
+  "stride": 1,
+  "points": 21990,
+  "points_per_camera": [
+   21990,
+   21990
+  ],
+  "seconds": 125.9
+ },
+ "fit": {
+  "lam": 100.0,
+  "noise": [
+   0.15,
+   0.03750803819014746
+  ],
+  "heldout": {
+   "points": 11070,
+   "loss_before": 0.8118244573622345,
+   "loss_after": 0.7444552283387785,
+   "mad_before": 0.9640370690221808,
+   "mad_after": 0.8231367065278004
+  }
+ },
+ "pass": true
+}

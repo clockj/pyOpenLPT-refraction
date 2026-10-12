@@ -1,0 +1,55 @@
+{
+ "checks": [
+  {
+   "check": "the main window builds, with one Camera Calibration view",
+   "ok": true,
+   "detail": "1 views"
+  },
+  {
+   "check": "camera models",
+   "ok": true,
+   "detail": "['Pinhole', 'Pinhole+Refraction', 'Pinhole+Cylinder']"
+  },
+  {
+   "check": "detection modes",
+   "ok": true,
+   "detail": "['fast', 'reliable', 'ellipse']"
+  },
+  {
+   "check": "the rod settings show for 'ellipse' only",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "each model shows its own panel; the cylinder model greys k1+k2 and the Focal column",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the Focal column stays greyed when the camera count changes under the cylinder model",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "seconds": 2.0474419593811035,
+ "states": {
+  "Pinhole": {
+   "window_group": false,
+   "tube_group": false,
+   "k1k2": true,
+   "focal": true
+  },
+  "Pinhole+Refraction": {
+   "window_group": true,
+   "tube_group": false,
+   "k1k2": true,
+   "focal": true
+  },
+  "Pinhole+Cylinder": {
+   "window_group": false,
+   "tube_group": true,
+   "k1k2": false,
+   "focal": false
+  }
+ }
+}

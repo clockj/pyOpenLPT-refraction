@@ -131,12 +131,19 @@ target_link_libraries(ImageIO
 
 openlpt_apply_warnings(ImageIO)
 
+# RefractCurved (cylindrical / spherical ports; depends on nothing but the STL)
+add_library(RefractCurved STATIC
+  "${PROJECT_SOURCE_DIR}/src/srcMath/RefractCurved.cpp"
+)
+openlpt_public_includes(RefractCurved)
+openlpt_apply_warnings(RefractCurved)
+
 # Camera
 add_library(Camera STATIC
   "${PROJECT_SOURCE_DIR}/src/srcMath/Camera.cpp"
 )
 openlpt_public_includes(Camera)
-target_link_libraries(Camera PUBLIC myMath Matrix)
+target_link_libraries(Camera PUBLIC myMath Matrix RefractCurved)
 openlpt_apply_warnings(Camera)
 
 # ---- Object modules --------------------------------------------------
@@ -178,7 +185,8 @@ target_link_libraries(BubbleRefImg PUBLIC
 openlpt_apply_warnings(BubbleRefImg)
 
 # ObjectFinder (.cpp) — depends privately on nanoflann to avoid exporting it
-add_library(ObjectFinder STATIC "${PROJECT_SOURCE_DIR}/src/srcObject/ObjectFinder.cpp")
+add_library(ObjectFinder STATIC "${PROJECT_SOURCE_DIR}/src/srcObject/ObjectFinder.cpp"
+                                "${PROJECT_SOURCE_DIR}/src/srcObject/LineFinder.cpp")
 openlpt_public_includes(ObjectFinder)
 target_link_libraries(ObjectFinder
   PUBLIC Matrix myMath CircleIdentifier
@@ -302,7 +310,7 @@ install(DIRECTORY "${PROJECT_SOURCE_DIR}/inc/" DESTINATION ${CMAKE_INSTALL_INCLU
 
 # Install our targets & archives
 install(TARGETS
-  Matrix myMath ImageIO Camera ObjectInfo
+  Matrix myMath ImageIO RefractCurved Camera ObjectInfo
   ObjectFinder CircleIdentifier BubbleResize BubbleRefImg
   StereoMatch OTF VSC Shake IPR PredField Track
   STB Config

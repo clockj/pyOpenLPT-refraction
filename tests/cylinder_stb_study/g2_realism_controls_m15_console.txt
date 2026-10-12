@@ -1,0 +1,4 @@
+G2: Gall12mn_r2_control, Gall12m15_r2_control, Gall12m15k5_r2_control; OMP_NUM_THREADS 12
+  Gall12mn_r2_control: exit 0, wall 598 s (scored by g3_control.py)
+  Gall12m15_r2_control: exit 0, wall 586 s (scored by g3_control.py)
+  Gall12m15k5_r2_control: exit 0, wall 606 s (scored by g3_control.py)

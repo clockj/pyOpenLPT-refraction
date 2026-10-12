@@ -1,0 +1,22 @@
+{
+  "built": "2026-10-06 12:42:57",
+  "python": "3.11.16",
+  "pybind11": "3.1.0",
+  "pyopenlpt_head": "7d845336136b813883189efa0b0e93dc8f65556b",
+  "module": "build\\Release\\projbench.cp311-win_amd64.pyd",
+  "module_sha256": "01ab7737e3b809479160bafea7d01e071c384b259ec557765231541b33121c47",
+  "sources": [
+    {
+      "path": "src/srcMath/RefractCurved.cpp",
+      "git_blob": "ef311b5f5b93919154852eb8bf07c4ac8112f38e",
+      "same_as_head": true,
+      "last_commit": "ce6ae77 2026-09-24 19:03:04 -0400"
+    },
+    {
+      "path": "inc/libMath/RefractCurved.h",
+      "git_blob": "6cf335b4b0ee6beb573d6ae1143b1ad152122b04",
+      "same_as_head": true,
+      "last_commit": "ce6ae77 2026-09-24 19:03:04 -0400"
+    }
+  ]
+}

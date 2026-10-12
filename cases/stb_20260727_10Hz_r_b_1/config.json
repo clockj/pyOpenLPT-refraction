@@ -1,0 +1,42 @@
+{
+  "_comment": "Tracking (STB) of run 20260727 / 10Hz_r_b_1 with the new flat-window calibration (2026-10-04-plan.md). Lengths in mm, image coordinates in px. Paths relative to case_dir unless absolute.",
+  "case": "stb_20260727_10Hz_r_b_1",
+  "case_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1",
+  "out_dir": "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\10Hz_r_b_1\\stb_new_calib",
+  "python": "C:\\Users\\zcloc\\.conda\\envs\\refract\\python.exe",
+  "old_config": "config.txt",
+  "tracer_config": "tracerConfig.txt",
+  "image_lists": [
+    "imgFile_mask\\cam0ImageNames.txt",
+    "imgFile_mask\\cam1ImageNames.txt",
+    "imgFile_mask\\cam2ImageNames.txt",
+    "imgFile_mask\\cam3ImageNames.txt"
+  ],
+  "camfiles": {
+    "_comment": "old: the GUI's calibration after VSC, used by the old run (config.txt); new: the delivered flat-window wand calibration (case plate_20260727_T0, W4c). Camera i is CSV/camFile camera i = image folder cam(i+1) = photo C(i+1).",
+    "old": [
+      "camFile_VSC\\vsc_cam0.txt",
+      "camFile_VSC\\vsc_cam1.txt",
+      "camFile_VSC\\vsc_cam2.txt",
+      "camFile_VSC\\vsc_cam3.txt"
+    ],
+    "new": [
+      "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref_centre\\camFile\\cam0.txt",
+      "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref_centre\\camFile\\cam1.txt",
+      "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref_centre\\camFile\\cam2.txt",
+      "X:\\Shijie Zhong\\Bubble Shear Project\\Processed\\20260727\\Results\\T0\\calib_plate_wand_ref_centre\\camFile\\cam3.txt"
+    ]
+  },
+  "old_view_volume": [-40.0, 65.0, -45.0, 30.0, -45.0, 35.0],
+  "old_voxel_to_mm": 0.105,
+  "channel": {
+    "_comment": "Inside widths across each camera wall (the user's channel, 15 x 10 cm inside, C1/C2 on the long side; held in the calibration). The near (camera-side) walls come from the new camFiles' plates: cams 0-1 wall_C1C2, cams 2-3 wall_C3C4.",
+    "inside_mm": [100.0, 150.0],
+    "wall_cams": [[0, 1], [2, 3]],
+    "margin_mm": 1.0
+  },
+  "threads": 26,
+  "frames": {"_comment": "T4 ran with frame range 0-1000 and was stopped after frame 504 (user's choice on 4 Oct: it had slowed to 32 s/frame); T5 runs 0-500, so the two compare over 0-500.", "t4": [0, 1000], "t4_stopped_after": 504, "t5": [0, 500]},
+  "ipr_probe_frames": [0, 1000, 2000, 3000, 3600, 4600],
+  "old_logs": ["log_0_1500.txt", "log.txt"]
+}

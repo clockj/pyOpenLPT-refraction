@@ -1,0 +1,109 @@
+S2: T1's shape model from three-camera matches; build p4c; cameras ['D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261008\\data\\cams_T0\\cam1.txt', 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261008\\data\\cams_T0\\cam2.txt', 'D:\\Refraction\\pyOpenLPT\\cases\\cyl_20261008\\data\\cams_T0\\cam3.txt']; view volume x [-32.6  27.5], y [-39.2  31.8], z [-71.  71.] mm (r <= 76.6); noise [10.22  5.89  5.37]; base pair cam1-cam2, third cam3 within 1.5 px; pairs within 8.0 px; signal band d <= 1.5 px, background 4.0 to 8.0 px
+  fitting frames (8 processes):
+    frame    0: detections 433 / 952 / 5203; base pairs within 8.0 px 6961 (1375 within 1.5); triplets 135 (71 within 1.5)
+    frame   80: detections 455 / 922 / 5161; base pairs within 8.0 px 7381 (1514 within 1.5); triplets 178 (79 within 1.5)
+    frame  160: detections 477 / 946 / 5323; base pairs within 8.0 px 7921 (1563 within 1.5); triplets 169 (71 within 1.5)
+    frame  240: detections 448 / 942 / 5268; base pairs within 8.0 px 7325 (1457 within 1.5); triplets 153 (82 within 1.5)
+    frame   10: detections 467 / 975 / 5282; base pairs within 8.0 px 7791 (1592 within 1.5); triplets 168 (72 within 1.5)
+    frame   90: detections 424 / 945 / 5167; base pairs within 8.0 px 6783 (1360 within 1.5); triplets 160 (74 within 1.5)
+    frame  170: detections 432 / 1001 / 5331; base pairs within 8.0 px 7429 (1449 within 1.5); triplets 169 (82 within 1.5)
+    frame   20: detections 449 / 891 / 5180; base pairs within 8.0 px 7048 (1418 within 1.5); triplets 134 (69 within 1.5)
+    frame  100: detections 477 / 930 / 5357; base pairs within 8.0 px 7595 (1521 within 1.5); triplets 190 (85 within 1.5)
+    frame  180: detections 454 / 961 / 5250; base pairs within 8.0 px 7443 (1502 within 1.5); triplets 179 (78 within 1.5)
+    frame   30: detections 487 / 906 / 5185; base pairs within 8.0 px 7718 (1570 within 1.5); triplets 164 (82 within 1.5)
+    frame  110: detections 448 / 930 / 5284; base pairs within 8.0 px 7059 (1436 within 1.5); triplets 165 (78 within 1.5)
+    frame  190: detections 439 / 957 / 5174; base pairs within 8.0 px 7137 (1420 within 1.5); triplets 154 (73 within 1.5)
+    frame   40: detections 427 / 919 / 5214; base pairs within 8.0 px 6982 (1383 within 1.5); triplets 144 (68 within 1.5)
+    frame  120: detections 470 / 927 / 5268; base pairs within 8.0 px 7458 (1534 within 1.5); triplets 163 (73 within 1.5)
+    frame  200: detections 497 / 994 / 5282; base pairs within 8.0 px 8500 (1694 within 1.5); triplets 184 (84 within 1.5)
+    frame   50: detections 465 / 960 / 5139; base pairs within 8.0 px 7768 (1525 within 1.5); triplets 154 (76 within 1.5)
+    frame  130: detections 457 / 1001 / 5334; base pairs within 8.0 px 7803 (1497 within 1.5); triplets 193 (90 within 1.5)
+    frame  210: detections 459 / 987 / 5237; base pairs within 8.0 px 7649 (1541 within 1.5); triplets 174 (88 within 1.5)
+    frame   60: detections 465 / 905 / 5250; base pairs within 8.0 px 7275 (1459 within 1.5); triplets 178 (80 within 1.5)
+    frame  140: detections 470 / 943 / 5259; base pairs within 8.0 px 7480 (1476 within 1.5); triplets 155 (78 within 1.5)
+    frame  220: detections 491 / 914 / 5139; base pairs within 8.0 px 7716 (1550 within 1.5); triplets 158 (86 within 1.5)
+    frame   70: detections 456 / 940 / 5290; base pairs within 8.0 px 7282 (1373 within 1.5); triplets 167 (69 within 1.5)
+    frame  150: detections 447 / 983 / 5264; base pairs within 8.0 px 7379 (1484 within 1.5); triplets 167 (84 within 1.5)
+    frame  230: detections 468 / 981 / 5264; base pairs within 8.0 px 7739 (1578 within 1.5); triplets 172 (72 within 1.5)
+  held-out frames:
+    frame    5: detections 455 / 906 / 5317; base pairs within 8.0 px 7103 (1425 within 1.5); triplets 155 (65 within 1.5)
+    frame   85: detections 430 / 928 / 5198; base pairs within 8.0 px 7032 (1473 within 1.5); triplets 151 (74 within 1.5)
+    frame  165: detections 435 / 1008 / 5325; base pairs within 8.0 px 7420 (1436 within 1.5); triplets 170 (75 within 1.5)
+    frame  245: detections 443 / 933 / 5241; base pairs within 8.0 px 7195 (1491 within 1.5); triplets 152 (89 within 1.5)
+    frame   15: detections 415 / 931 / 5300; base pairs within 8.0 px 6584 (1351 within 1.5); triplets 145 (69 within 1.5)
+    frame   95: detections 444 / 914 / 5246; base pairs within 8.0 px 7011 (1457 within 1.5); triplets 161 (72 within 1.5)
+    frame  175: detections 460 / 957 / 5268; base pairs within 8.0 px 7464 (1448 within 1.5); triplets 173 (81 within 1.5)
+    frame   25: detections 414 / 927 / 5205; base pairs within 8.0 px 6843 (1369 within 1.5); triplets 139 (53 within 1.5)
+    frame  105: detections 464 / 941 / 5271; base pairs within 8.0 px 7542 (1522 within 1.5); triplets 170 (76 within 1.5)
+    frame  185: detections 460 / 955 / 5232; base pairs within 8.0 px 7486 (1494 within 1.5); triplets 182 (76 within 1.5)
+    frame   35: detections 441 / 958 / 5296; base pairs within 8.0 px 7314 (1534 within 1.5); triplets 141 (68 within 1.5)
+    frame  115: detections 487 / 983 / 5118; base pairs within 8.0 px 8117 (1651 within 1.5); triplets 175 (68 within 1.5)
+    frame  195: detections 502 / 957 / 5208; base pairs within 8.0 px 8205 (1643 within 1.5); triplets 182 (80 within 1.5)
+    frame   45: detections 467 / 945 / 5217; base pairs within 8.0 px 7590 (1497 within 1.5); triplets 169 (83 within 1.5)
+    frame  125: detections 477 / 951 / 5376; base pairs within 8.0 px 7752 (1552 within 1.5); triplets 194 (86 within 1.5)
+    frame  205: detections 475 / 917 / 5257; base pairs within 8.0 px 7502 (1521 within 1.5); triplets 158 (82 within 1.5)
+    frame   55: detections 463 / 928 / 5229; base pairs within 8.0 px 7335 (1472 within 1.5); triplets 153 (75 within 1.5)
+    frame  135: detections 467 / 947 / 5300; base pairs within 8.0 px 7642 (1537 within 1.5); triplets 184 (85 within 1.5)
+    frame  215: detections 438 / 977 / 5238; base pairs within 8.0 px 7256 (1430 within 1.5); triplets 181 (84 within 1.5)
+    frame   65: detections 479 / 1006 / 5372; base pairs within 8.0 px 8199 (1648 within 1.5); triplets 196 (86 within 1.5)
+    frame  145: detections 446 / 946 / 5316; base pairs within 8.0 px 7149 (1411 within 1.5); triplets 159 (81 within 1.5)
+    frame  225: detections 478 / 954 / 5309; base pairs within 8.0 px 7702 (1545 within 1.5); triplets 152 (77 within 1.5)
+    frame   75: detections 443 / 979 / 5280; base pairs within 8.0 px 7415 (1419 within 1.5); triplets 164 (67 within 1.5)
+    frame  155: detections 474 / 986 / 5200; base pairs within 8.0 px 7985 (1614 within 1.5); triplets 202 (99 within 1.5)
+    frame  235: detections 444 / 954 / 5425; base pairs within 8.0 px 7362 (1462 within 1.5); triplets 153 (77 within 1.5)
+  focal depths in 9 s (0 triplets without)
+  per frame (medians): detections cam1 458, cam2 946, cam3 5262; base pairs within 8.0 px 7436 (within 1.5 px 1492); triplets 166 (within 1.5 px 78)
+  triplets: 4127 fitting, 4161 held out (1158 s)
+  fitting: signal band 1944, background band 1012 (k = 0.3750); estimated true triplets in the signal band 1564 +- 46 (80.5 % of it)
+  held out: signal band 1928, background band 1078 (k = 0.3750); estimated true triplets in the signal band 1524 +- 46 (79.0 % of it)
+  true triplets within d of the base pair's curve (of those within 3 px): 0.50 px 28 %, 0.75 px 43 %, 1.00 px 55 %, 1.25 px 67 %, 1.50 px 77 %, 2.00 px 89 %, 2.50 px 97 %; floor 130.6 per 0.25 px; within 3 px 4004 (80 per frame)
+  third camera's distance (signal band): median 0.96 px, 90 % 1.39 px
+  cam1 coarse grid (delta free): A 18.85 mm, z_f 943 mm, sigma0 1.2 px, delta +100 mm: 1170 true triplets agree (7 s)
+  cam1 coarse grid (delta 0): A 15.00 mm, z_f 843 mm, sigma0 1.2 px: 1168 true triplets agree
+  cam1 fine grid: model A: A 15.05 mm, z_f 842.3 mm, sigma0 1.200 px (1174); model B: A 19.00 mm, z_f 942.3 mm, sigma0 1.175 px, delta +100 mm (1173)
+  cam2 coarse grid (delta free): A 11.60 mm, z_f 890 mm, sigma0 1.0 px, delta -25 mm: 1328 true triplets agree (5 s)
+  cam2 coarse grid (delta 0): A 12.25 mm, z_f 915 mm, sigma0 1.0 px: 1328 true triplets agree
+  cam2 fine grid: model A: A 12.20 mm, z_f 915.8 mm, sigma0 1.050 px (1332); model B: A 11.10 mm, z_f 885.8 mm, sigma0 1.025 px, delta -29 mm (1332)
+  cam3 coarse grid (delta free): A 9.80 mm, z_f 1051 mm, sigma0 1.4 px, delta +200 mm: 1130 true triplets agree (5 s)
+  cam3 coarse grid (delta 0): A 6.40 mm, z_f 851 mm, sigma0 1.4 px: 1128 true triplets agree
+  cam3 fine grid: model A: A 6.60 mm, z_f 850.5 mm, sigma0 1.375 px (1132); model B: A 9.80 mm, z_f 1047.0 mm, sigma0 1.375 px, delta +196 mm (1132)
+  cam1, held out: model B keeps -2 +- 4 true triplets more than A -> A
+  cam2, held out: model B keeps -6 +- 8 true triplets more than A -> A
+  cam3, held out: model B keeps -1 +- 5 true triplets more than A -> A
+  model A (AAA), held out: estimated true triplets 1524 +- 46; kept: cam1 75 +- 2 % of true, 18.6 % of random; cam2 86 +- 2 % of true, 21.2 % of random; cam3 75 +- 2 % of true, 25.0 % of random; joint 50 +- 2 % of true, 3.1 % of random
+    cam1 wh: |residual| of true triplets: 50 % <= 0.22, 68 % <= 0.32, 90 % <= 0.56 px (agreeing in the other cameras: 0.23, 0.32, 0.53); bias -0.020 px; slope with depth +0.0014 +- 0.0010 px/mm (+0.08 px over the depths)
+    cam1 wv: |residual| of true triplets: 50 % <= 0.25, 68 % <= 0.37, 90 % <= 0.68 px (agreeing in the other cameras: 0.25, 0.37, 0.66); bias -0.016 px; slope with depth +0.0043 +- 0.0009 px/mm (+0.24 px over the depths)
+    cam2 wh: |residual| of true triplets: 50 % <= 0.19, 68 % <= 0.28, 90 % <= 0.53 px (agreeing in the other cameras: 0.17, 0.25, 0.47); bias -0.040 px; slope with depth +0.0018 +- 0.0010 px/mm (+0.09 px over the depths)
+    cam2 wv: |residual| of true triplets: 50 % <= 0.20, 68 % <= 0.28, 90 % <= 0.41 px (agreeing in the other cameras: 0.19, 0.27, 0.41); bias -0.086 px; slope with depth -0.0018 +- 0.0008 px/mm (-0.09 px over the depths)
+    cam3 wh: |residual| of true triplets: 50 % <= 0.23, 68 % <= 0.37, 90 % <= 0.66 px (agreeing in the other cameras: 0.23, 0.37, 0.69); bias +0.161 px; slope with depth -0.0002 +- 0.0010 px/mm (-0.01 px over the depths)
+    cam3 wv: |residual| of true triplets: 50 % <= 0.23, 68 % <= 0.31, 90 % <= 0.50 px (agreeing in the other cameras: 0.22, 0.30, 0.48); bias +0.012 px; slope with depth +0.0003 +- 0.0008 px/mm (+0.02 px over the depths)
+  model B (BBB), held out: estimated true triplets 1524 +- 46; kept: cam1 75 +- 2 % of true, 18.5 % of random; cam2 85 +- 2 % of true, 22.7 % of random; cam3 75 +- 2 % of true, 25.1 % of random; joint 49 +- 2 % of true, 3.2 % of random
+    cam1 wh: |residual| of true triplets: 50 % <= 0.22, 68 % <= 0.32, 90 % <= 0.56 px (agreeing in the other cameras: 0.22, 0.32, 0.54); bias +0.000 px; slope with depth +0.0008 +- 0.0010 px/mm (+0.05 px over the depths)
+    cam1 wv: |residual| of true triplets: 50 % <= 0.25, 68 % <= 0.37, 90 % <= 0.68 px (agreeing in the other cameras: 0.25, 0.37, 0.67); bias -0.015 px; slope with depth +0.0041 +- 0.0009 px/mm (+0.23 px over the depths)
+    cam2 wh: |residual| of true triplets: 50 % <= 0.19, 68 % <= 0.28, 90 % <= 0.54 px (agreeing in the other cameras: 0.17, 0.25, 0.46); bias -0.032 px; slope with depth +0.0009 +- 0.0010 px/mm (+0.04 px over the depths)
+    cam2 wv: |residual| of true triplets: 50 % <= 0.18, 68 % <= 0.25, 90 % <= 0.40 px (agreeing in the other cameras: 0.17, 0.23, 0.38); bias -0.007 px; slope with depth -0.0030 +- 0.0008 px/mm (-0.15 px over the depths)
+    cam3 wh: |residual| of true triplets: 50 % <= 0.24, 68 % <= 0.38, 90 % <= 0.68 px (agreeing in the other cameras: 0.23, 0.37, 0.70); bias +0.179 px; slope with depth +0.0007 +- 0.0010 px/mm (+0.03 px over the depths)
+    cam3 wv: |residual| of true triplets: 50 % <= 0.23, 68 % <= 0.31, 90 % <= 0.50 px (agreeing in the other cameras: 0.22, 0.31, 0.48); bias +0.004 px; slope with depth +0.0002 +- 0.0008 px/mm (+0.01 px over the depths)
+  model chosen (AAA), held out: estimated true triplets 1524 +- 46; kept: cam1 75 +- 2 % of true, 18.6 % of random; cam2 86 +- 2 % of true, 21.2 % of random; cam3 75 +- 2 % of true, 25.0 % of random; joint 50 +- 2 % of true, 3.1 % of random
+    cam1 wh: |residual| of true triplets: 50 % <= 0.22, 68 % <= 0.32, 90 % <= 0.56 px (agreeing in the other cameras: 0.23, 0.32, 0.53); bias -0.020 px; slope with depth +0.0014 +- 0.0010 px/mm (+0.08 px over the depths)
+    cam1 wv: |residual| of true triplets: 50 % <= 0.25, 68 % <= 0.37, 90 % <= 0.68 px (agreeing in the other cameras: 0.25, 0.37, 0.66); bias -0.016 px; slope with depth +0.0043 +- 0.0009 px/mm (+0.24 px over the depths)
+    cam2 wh: |residual| of true triplets: 50 % <= 0.19, 68 % <= 0.28, 90 % <= 0.53 px (agreeing in the other cameras: 0.17, 0.25, 0.47); bias -0.040 px; slope with depth +0.0018 +- 0.0010 px/mm (+0.09 px over the depths)
+    cam2 wv: |residual| of true triplets: 50 % <= 0.20, 68 % <= 0.28, 90 % <= 0.41 px (agreeing in the other cameras: 0.19, 0.27, 0.41); bias -0.086 px; slope with depth -0.0018 +- 0.0008 px/mm (-0.09 px over the depths)
+    cam3 wh: |residual| of true triplets: 50 % <= 0.23, 68 % <= 0.37, 90 % <= 0.66 px (agreeing in the other cameras: 0.23, 0.37, 0.69); bias +0.161 px; slope with depth -0.0002 +- 0.0010 px/mm (-0.01 px over the depths)
+    cam3 wv: |residual| of true triplets: 50 % <= 0.23, 68 % <= 0.31, 90 % <= 0.50 px (agreeing in the other cameras: 0.22, 0.30, 0.48); bias +0.012 px; slope with depth +0.0003 +- 0.0008 px/mm (+0.02 px over the depths)
+  chosen: AAA; judged (68 % of true triplets' residuals within 1.5 px, no trend with depth): FAIL (largest q68 0.37 px; trend yes)
+  shape_check tolerances, held out (all three cameras: true kept / random kept, %):
+    tol_px 0.3: rel 0.10  10/ 0.3  rel 0.15  12/ 0.4  rel 0.20  16/ 0.4  rel 0.25  26/ 0.6  rel 0.30  41/ 1.9  rel 0.40  68/ 7.3
+    tol_px 0.4: rel 0.10  28/ 1.0  rel 0.15  29/ 1.1  rel 0.20  33/ 1.2  rel 0.25  38/ 1.4  rel 0.30  46/ 2.1  rel 0.40  68/ 7.3
+    tol_px 0.5: rel 0.10  48/ 2.9  rel 0.15  48/ 2.9  rel 0.20  50/ 3.1  rel 0.25  53/ 3.2  rel 0.30  57/ 3.8  rel 0.40  69/ 7.5
+    tol_px 0.6: rel 0.10  62/ 5.9  rel 0.15  62/ 5.9  rel 0.20  62/ 6.0  rel 0.25  64/ 6.2  rel 0.30  67/ 6.8  rel 0.40  73/ 9.1
+    tol_px 0.8: rel 0.10  80/11.4  rel 0.15  80/11.4  rel 0.20  80/11.4  rel 0.25  80/11.4  rel 0.30  81/11.8  rel 0.40  84/13.5
+    tol_px 1.0: rel 0.10  89/18.4  rel 0.15  89/18.4  rel 0.20  89/18.4  rel 0.25  89/18.4  rel 0.30  89/18.6  rel 0.40  90/20.0
+    tol_px 1.2: rel 0.10  92/27.4  rel 0.15  92/27.4  rel 0.20  92/27.4  rel 0.25  92/27.4  rel 0.30  92/27.4  rel 0.40  93/28.0
+    tol_px 1.5: rel 0.10  97/40.0  rel 0.15  97/40.0  rel 0.20  97/40.0  rel 0.25  97/40.0  rel 0.30  97/40.0  rel 0.40  97/40.1
+  recommended (largest true kept / sqrt(random kept)): tol_px 0.3, tol_rel 0.25: keeps 26 +- 1 % of true triplets and 0.6 % of random ones
+  amplitude, cam1: flux = 934.5 x (|b| + |c| + 2)^0.323 (by moments over 766 signal and 38 background triplets; b, c the box lengths)
+  amplitude, cam2: flux = 954.3 x (|b| + |c| + 2)^0.075 (by moments over 766 signal and 38 background triplets; b, c the box lengths)
+  amplitude, cam3: flux = 1690.7 x (|b| + |c| + 2)^0.035 (by moments over 766 signal and 38 background triplets; b, c the box lengths)
+  the tube axis' image angle at the volume's centre: cam1 -10.68 deg, cam2 -0.50 deg, cam3 +0.68 deg (the OTF's alpha: 0 below 2 deg)
+  written data/T1_shape.json and data/T1_otf_shape.txt (15 x 11 x 17 nodes); 1180 s

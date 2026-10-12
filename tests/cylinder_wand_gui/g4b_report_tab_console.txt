@@ -1,0 +1,10 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  PASS  the Report tab exists and uses QtWebEngine  (web view: QWebEngineView)
+  PASS  the page loads and its script draws every figure  (loadFinished True, svg elements 7.0, 0.3 s)
+  PASS  no JavaScript errors  (0 console messages, errors [])
+  PASS  inside the GUI the page is dark  (data-theme 'dark')
+  PASS  the widget's image shows the page (more than a blank fill)  (1096 x 838, 66 distinct colours sampled -> D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\g4b_report_tab.png)
+  buttons enabled: browser True, folder True; label D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g3_run\results\calibration_report.html
+
+5 of 5 checks passed; 4 s

@@ -1,0 +1,4 @@
+T0b: B-spline basis: max |sum - 1| = 2.2e-16; max |vectorised - piecewise| = 1.0e-14
+  shift basis (20, 18): max |N'N - I|, |[1 z]' N| = 1.2e-14
+  Jacobian (2054, 185) (blocks rot+cen+logf+axdir+axpt+dz+zs+shift+board+wall): grouped vs brute force, max difference / max entry: all 1.0e-12, board block 1.0e-12, plane shifts 9.9e-13, plane offsets 0.0e+00
+RESULT: PASS

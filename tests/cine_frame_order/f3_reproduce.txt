@@ -1,0 +1,13 @@
+F3 the fixed conversion (cached background, recovered range/denoise) against the old imgFile files
+
+PASS  35Hz_r_b_1 camera 0: cache shift 1, invert True, background of every 20th frame (up to 2000)
+      recovered: range 0-255, denoise False (after 1 tries)
+      new 250 = old 250, new 251 = old 251, new 252 = old 252, new 253 = old 253, new 254 = old 254, new 255 = old 255, new 256 = old 257, new 257 = old 258, new 258 = old 259, new 259 = old 260, new 260 = old 261, new 261 = old 262, new 262 = old 263, new 12603 = old 12604, new 12604 (no old file) differs from new 12603: True
+PASS  35Hz_r_b_1 camera 1: cache shift 2, invert True, background of every 20th frame (up to 2000)
+      recovered: range 0-255, denoise False (after 1 tries)
+      new 250 = old 250, new 251 = old 251, new 252 = old 252, new 253 = old 253, new 254 = old 254, new 255 = old 255, new 256 = old 257, new 257 = old 258, new 258 = old 259, new 259 = old 260, new 260 = old 261, new 261 = old 262, new 262 = old 263, new 12603 = old 12604, new 12604 (no old file) differs from new 12603: True
+PASS  10Hz_r_b_1 camera 0: cache shift 3, invert True, background of every 20th frame (up to 2000)
+      recovered: range 0-255, denoise False (after 1 tries)
+      new 250 = old 250, new 251 = old 251, new 252 = old 252, new 253 = old 253, new 254 = old 254, new 255 = old 255, new 256 = old 257, new 257 = old 258, new 258 = old 259, new 259 = old 260, new 260 = old 261, new 261 = old 262, new 262 = old 263, new 12603 = old 12604, new 12604 (no old file) differs from new 12603: True
+
+PASS

@@ -1,0 +1,11 @@
+    coarse round 0: rms 0.0000 px, nfev 62, step 5.1e-02
+    coarse round 1: rms 0.0000 px, nfev 30, step 0.0e+00
+    LM   0: rms 0.000000 px, lambda 3.3e-04, ok
+  round 0: rms 0.00000 px, 1 LM iterations, rejected 0, re-admitted 0
+reference (3 cams 0/45/90): start max 2.82 deg / 31.9 mm / 0.050 f | after stage 3: 6.42e-10 deg, 3.98e-08 mm, f 3.51e-11 (rms 8.25e-09 px) | final: rms 1.18e-09 px, 6.33e-10 deg, 3.60e-08 mm, f 3.20e-11 | active 3000/3000 | 3 s | PASS
+    coarse round 0: rms 0.0000 px, nfev 85, step 5.1e-02
+    coarse round 1: rms 0.0000 px, nfev 30, step 0.0e+00
+    LM   0: rms 0.000000 px, lambda 3.3e-04, ok
+  round 0: rms 0.00000 px, 1 LM iterations, rejected 0, re-admitted 0
+irregular 4 cams: start max 2.45 deg / 37.9 mm / 0.050 f | after stage 3: 6.89e-11 deg, 2.27e-08 mm, f 1.89e-11 (rms 5.75e-10 px) | final: rms 7.36e-10 px, 6.93e-11 deg, 2.27e-08 mm, f 1.89e-11 | active 4000/4000 | 7 s | PASS
+  PASS  noiseless recovery to 1e-6 px, 1e-6 deg, 1e-6 mm, 1e-8 in f

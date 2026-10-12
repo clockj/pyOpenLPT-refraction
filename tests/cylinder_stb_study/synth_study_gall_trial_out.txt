@@ -1,0 +1,9 @@
+synth_study gall-trial: build p4c
+  rendered 1 sets (2 camera-frames) in 4 s
+  rho 0.01 per mm^3: sampled 35834, kept 1952 (424 central); images cam1 857, cam2 1224; detections [318, 468]; 7 s
+  rendered 1 sets (2 camera-frames) in 8 s
+  rho 0.02 per mm^3: sampled 71726, kept 3939 (824 central); images cam1 1667, cam2 2544; detections [507, 604]; 12 s
+  rendered 1 sets (2 camera-frames) in 15 s
+  rho 0.035 per mm^3: sampled 125582, kept 6875 (1516 central); images cam1 2995, cam2 4374; detections [713, 630]; 20 s
+  rendered 1 sets (2 camera-frames) in 20 s
+  rho 0.05 per mm^3: sampled 179446, kept 9855 (2100 central); images cam1 4337, cam2 6198; detections [801, 529]; 27 s

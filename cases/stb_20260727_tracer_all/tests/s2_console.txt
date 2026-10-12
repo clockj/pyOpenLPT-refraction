@@ -1,0 +1,3 @@
+C:\Users\zcloc\.conda\envs\refract\python.exe D:\Refraction\pyOpenLPT\cases\stb_20260727_tracer_all\run_stb.py D:\Shijie Zhong\STB_staging\20260727\smoke\s2_35Hz_r_b_2_f0-20\config.json --quiet
+2026-10-10T01:48:44 run D:\Shijie Zhong\STB_staging\20260727\smoke\s2_35Hz_r_b_2_f0-20\config.json
+          log D:\Shijie Zhong\STB_staging\20260727\smoke\s2_35Hz_r_b_2_f0-20\log.txt

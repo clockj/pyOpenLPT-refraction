@@ -1,0 +1,11 @@
+T1-e: s3_today (57 frames logged) against s3_control (97 frames)
+  log entry 10: active long tracks final 680, control 20: control / final 0.029
+  log entry 20: active long tracks final 974, control 38: control / final 0.039
+  log entry 40: active long tracks final 1406, control 57: control / final 0.041
+  log entry 57: active long tracks final 1667, control 86: control / final 0.052
+  final, long tracks at frame 100 (>= 4 frames): 2454; length 10/50/90 % [8.0, 25.0, 58.0]; speed [64.086, 99.705, 177.027] mm/s; second difference / step [0.533, 0.849, 1.33]
+  control, long tracks at frame 100 (>= 4 frames): 166; length 10/50/90 % [14.0, 40.5, 82.5]; speed [48.784, 69.181, 96.544] mm/s; second difference / step [0.261, 0.544, 0.83]
+  final's tracks at least as rough as the control's median ghost (0.544): 89.2 % (the control's own: 50 %)
+  swirl, final: 2125 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.278, 0.576, 0.846]; above 0.3: 87.2 %
+  swirl, control: 124 tracks with steps >= 8 mm from the axis; mean |v_r| / |v| per track 10/50/90 % [0.12, 0.332, 0.754]; above 0.3: 55.6 %
+  ghosts among final's tracks, from the swirl (real tracks below 0.3): 157 %; from the counts (an upper bound): 5 %

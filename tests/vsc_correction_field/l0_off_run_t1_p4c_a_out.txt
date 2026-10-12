@@ -1,0 +1,1 @@
+t1_p4c_a: D:\Refraction\pyOpenLPT\tests\vsc_correction_field\runs\configs\l0_t1.json with build p4c -> D:\Refraction\pyOpenLPT\tests\vsc_correction_field\runs\l0_t1_p4c_a: exit 0, 678 s

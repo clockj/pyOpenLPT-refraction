@@ -1,0 +1,138 @@
+H5a: W5's 60 cases and R4's 30 rigs at 0.5 and 1 px, without hints on the final code: the answers against the stored ones, and the report's warnings against the verdicts
+
+  W5 seed 1000 (0.1 px), 5 cams [3, 2]: same (rms 0.122195); warnings none; views 40.7, 21.2, 34.3, 21.7, 27.1 deg; sigma w1 0.017 deg/0.04 mm, w2 0.019 deg/0.51 mm; 85 s
+  W5 seed 1001 (0.1 px), 2 cams [1, 1]: equivalent (rms 0.085945 CHANGED from 0.087479); warnings ['weak_window']; views 6.2, 1.4 deg; sigma w1 0.126 deg/0.62 mm, w2 2.061 deg/463.10 mm; scan of window(s) [2]: IMPROVED (258 s); 438 s
+  W5 seed 1002 (0.1 px), 6 cams [6]: same (rms 0.126095); warnings none; views 11.8, 10.9, 3.4, 10.7, 12.2, 13.4 deg; sigma w1 0.013 deg/0.21 mm; 79 s
+  W5 seed 1003 (0.1 px), 6 cams [6]: same (rms 0.126093); warnings none; views 7.6, 11.4, 5.8, 4.7, 3.8, 2.3 deg; sigma w1 0.007 deg/0.13 mm; 93 s
+  W5 seed 1004 (0.1 px), 3 cams [3]: same (rms 0.108283); warnings none; views 5.1, 4.8, 1.8 deg; sigma w1 0.023 deg/0.41 mm; 27 s
+  W5 seed 1005 (0.1 px), 5 cams [5]: same (rms 0.120900); warnings none; views 24.1, 12.5, 22.8, 13.3, 32.0 deg; sigma w1 0.019 deg/0.18 mm; 51 s
+  W5 seed 1006 (0.1 px), 5 cams [5]: same (rms 0.122909); warnings none; views 7.2, 6.1, 8.0, 23.9, 7.3 deg; sigma w1 0.013 deg/0.94 mm; 45 s
+  W5 seed 1007 (0.1 px), 3 cams [3]: same (rms 0.106637); warnings none; views 7.8, 12.6, 21.9 deg; sigma w1 0.010 deg/0.72 mm; 18 s
+  W5 seed 1008 (0.1 px), 6 cams [6]: same (rms 0.125445); warnings none; views 10.1, 10.3, 4.8, 5.5, 7.0, 9.2 deg; sigma w1 0.028 deg/0.18 mm; 61 s
+  W5 seed 1009 (0.1 px), 2 cams [2]: same (rms 0.087563); warnings none; views 9.8, 4.0 deg; sigma w1 0.131 deg/0.70 mm; 38 s
+  W5 seed 1010 (0.1 px), 2 cams [2]: same (rms 0.085351); warnings none; views 8.9, 22.4 deg; sigma w1 0.048 deg/0.70 mm; 39 s
+  W5 seed 1011 (0.1 px), 6 cams [6]: same (rms 0.125733); warnings none; views 26.9, 21.4, 18.3, 11.8, 13.7, 4.8 deg; sigma w1 0.006 deg/0.04 mm; 81 s
+  W5 seed 1012 (0.1 px), 4 cams [4]: same (rms 0.117329); warnings none; views 19.4, 12.9, 7.8, 25.1 deg; sigma w1 0.013 deg/0.16 mm; 43 s
+  W5 seed 1013 (0.1 px), 5 cams [3, 2]: same (rms 0.122132); warnings none; views 2.8, 3.7, 9.6, 7.7, 4.0 deg; sigma w1 0.011 deg/0.85 mm, w2 0.010 deg/0.21 mm; 128 s
+  W5 seed 1014 (0.1 px), 4 cams [4]: same (rms 0.116963); warnings none; views 13.1, 10.3, 13.1, 16.6 deg; sigma w1 0.007 deg/0.25 mm; 43 s
+  W5 seed 1015 (0.1 px), 3 cams [3]: same (rms 0.106699); warnings none; views 9.5, 10.5, 5.0 deg; sigma w1 0.007 deg/0.21 mm; 31 s
+  W5 seed 1016 (0.1 px), 5 cams [5]: same (rms 0.123203); warnings none; views 4.6, 15.3, 4.6, 4.6, 12.5 deg; sigma w1 0.007 deg/0.87 mm; 66 s
+  W5 seed 1017 (0.1 px), 6 cams [6]: same (rms 0.126535); warnings none; views 9.1, 5.7, 7.6, 11.8, 2.6, 10.6 deg; sigma w1 0.009 deg/0.06 mm; 89 s
+  W5 seed 1018 (0.1 px), 4 cams [2, 2]: same (rms 0.117371); warnings none; views 8.0, 13.4, 6.3, 8.7 deg; sigma w1 0.089 deg/1.65 mm, w2 0.045 deg/1.01 mm; 119 s
+  W5 seed 1019 (0.1 px), 4 cams [4]: same (rms 0.116983); warnings none; views 3.8, 12.9, 16.6, 5.8 deg; sigma w1 0.012 deg/1.30 mm; 44 s
+  W5 seed 1020 (0.1 px), 5 cams [3, 2]: same (rms 0.121830); warnings ['weak_window']; views 3.0, 2.8, 3.6, 2.4, 9.2 deg; sigma w1 0.005 deg/0.88 mm, w2 0.013 deg/1.10 mm; scan of window(s) [2]: no change (331 s); 795 s
+  W5 seed 1021 (0.1 px), 4 cams [4]: same (rms 0.118267); warnings none; views 3.5, 2.5, 5.9, 4.8 deg; sigma w1 0.022 deg/0.89 mm; 55 s
+  W5 seed 1022 (0.1 px), 2 cams [2]: same (rms 0.088083); warnings none; views 39.5, 15.2 deg; sigma w1 0.017 deg/0.04 mm; 40 s
+  W5 seed 1023 (0.1 px), 5 cams [5]: same (rms 0.122077); warnings none; views 31.8, 6.2, 9.4, 25.1, 17.8 deg; sigma w1 0.005 deg/0.02 mm; 68 s
+  W5 seed 1024 (0.1 px), 5 cams [5]: same (rms 0.123537); warnings none; views 7.0, 4.1, 8.3, 4.9, 5.2 deg; sigma w1 0.007 deg/0.22 mm; 59 s
+  W5 seed 1025 (0.1 px), 6 cams [6]: same (rms 0.125706); warnings none; views 8.6, 19.1, 9.8, 33.0, 7.4, 10.4 deg; sigma w1 0.018 deg/0.93 mm; 45 s
+  W5 seed 1026 (0.1 px), 5 cams [5]: same (rms 0.122032); warnings none; views 8.3, 23.9, 23.4, 22.3, 15.5 deg; sigma w1 0.006 deg/0.33 mm; 47 s
+  W5 seed 1027 (0.1 px), 2 cams [2]: same (rms 0.084728); warnings none; views 13.6, 16.0 deg; sigma w1 0.101 deg/0.24 mm; 32 s
+  W5 seed 1028 (0.1 px), 5 cams [3, 2]: same (rms 0.121856); warnings none; views 8.6, 4.2, 4.7, 6.8, 4.1 deg; sigma w1 0.005 deg/0.22 mm, w2 0.033 deg/0.48 mm; 295 s
+  W5 seed 1029 (0.1 px), 6 cams [6]: same (rms 0.126156); warnings none; views 2.2, 10.4, 10.8, 2.1, 2.7, 8.9 deg; sigma w1 0.011 deg/2.87 mm; 95 s
+  W5 seed 1030 (0.1 px), 2 cams [2]: same (rms 0.088042); warnings none; views 2.3, 6.0 deg; sigma w1 0.053 deg/2.41 mm; 40 s
+  W5 seed 1031 (0.1 px), 3 cams [2, 1]: DIFFERENT (rms 3.588919); warnings ['pinned', 'noisy']; views 7.2, 9.3, 1.4 deg; sigma w1 1.814 deg/28.97 mm, w2 0.930 deg/20.48 mm; 280 s
+  W5 seed 1032 (0.1 px), 5 cams [2, 2, 1]: same (rms 0.122075); warnings ['weak_window', 'weak_window']; views 7.4, 3.0, 3.1, 2.9, 2.6 deg; sigma w1 0.038 deg/0.69 mm, w2 0.012 deg/0.39 mm, w3 0.166 deg/49.25 mm; scan of window(s) [2, 3]: no change (624 s); 942 s
+  W5 seed 1033 (0.1 px), 3 cams [2, 1]: same (rms 0.108736); warnings none; views 26.8, 33.1, 13.3 deg; sigma w1 0.030 deg/0.16 mm, w2 0.014 deg/0.15 mm; 101 s
+  W5 seed 1034 (0.1 px), 4 cams [2, 1, 1]: DIFFERENT (rms 0.178590); warnings ['weak_window', 'weak_window']; views 2.4, 14.7, 2.8, 1.9 deg; sigma w1 0.030 deg/2.92 mm, w2 0.120 deg/1.80 mm, w3 0.212 deg/7.47 mm; scan of window(s) [1, 3]: no change (624 s); 1029 s
+  W5 seed 1035 (0.1 px), 5 cams [5]: same (rms 0.121359); warnings none; views 23.7, 20.3, 3.7, 7.7, 20.2 deg; sigma w1 0.006 deg/0.07 mm; 60 s
+  W5 seed 1036 (0.1 px), 6 cams [6]: same (rms 0.125694); warnings none; views 2.6, 3.1, 10.4, 7.2, 2.7, 9.9 deg; sigma w1 0.004 deg/1.02 mm; 101 s
+  W5 seed 1037 (0.1 px), 3 cams [3]: same (rms 0.107379); warnings none; views 6.2, 7.4, 2.7 deg; sigma w1 0.015 deg/0.28 mm; 25 s
+  W5 seed 1038 (0.1 px), 6 cams [6]: same (rms 0.124959); warnings none; views 6.5, 5.5, 3.8, 2.8, 4.2, 2.9 deg; sigma w1 0.008 deg/0.17 mm; 78 s
+  W5 seed 1039 (0.1 px), 5 cams [2, 2, 1]: same (rms 0.121868); warnings none; views 8.0, 20.9, 9.8, 8.6, 5.2 deg; sigma w1 0.027 deg/0.61 mm, w2 0.023 deg/0.20 mm, w3 0.035 deg/0.98 mm; 146 s
+  W5 seed 1040 (0.1 px), 4 cams [2, 2]: same (rms 0.117513); warnings none; views 18.3, 17.3, 15.4, 9.0 deg; sigma w1 0.045 deg/0.60 mm, w2 0.038 deg/0.58 mm; 107 s
+  W5 seed 1041 (0.1 px), 6 cams [2, 2, 2]: same (rms 0.125869); warnings none; views 4.3, 14.2, 7.0, 16.7, 8.8, 17.4 deg; sigma w1 0.014 deg/2.23 mm, w2 0.022 deg/0.29 mm, w3 0.015 deg/2.25 mm; 170 s
+  W5 seed 1042 (0.1 px), 3 cams [3]: same (rms 0.107938); warnings none; views 10.0, 14.3, 8.3 deg; sigma w1 0.011 deg/0.13 mm; 30 s
+  W5 seed 1043 (0.1 px), 3 cams [3]: same (rms 0.108166); warnings none; views 7.7, 2.5, 6.2 deg; sigma w1 0.012 deg/0.25 mm; 24 s
+  W5 seed 1044 (0.1 px), 6 cams [6]: same (rms 0.125429); warnings none; views 9.6, 9.7, 9.8, 11.9, 16.8, 20.8 deg; sigma w1 0.008 deg/0.37 mm; 75 s
+  W5 seed 1045 (0.1 px), 2 cams [1, 1]: DIFFERENT (rms 0.348817); warnings ['weak_window']; views 2.8, 6.9 deg; sigma w1 0.461 deg/8.19 mm, w2 0.152 deg/6.76 mm; scan of window(s) [1]: no change (139 s); 578 s
+  W5 seed 1046 (0.1 px), 5 cams [5]: same (rms 0.122270); warnings none; views 11.0, 12.2, 11.5, 14.5, 12.5 deg; sigma w1 0.010 deg/0.92 mm; 49 s
+  W5 seed 1047 (0.1 px), 5 cams [3, 2]: same (rms 0.122363); warnings none; views 6.3, 5.2, 6.1, 8.4, 7.6 deg; sigma w1 0.017 deg/1.08 mm, w2 0.015 deg/1.23 mm; 121 s
+  W5 seed 1048 (0.1 px), 2 cams [1, 1]: same (rms 0.085694); warnings none; views 12.0, 15.3 deg; sigma w1 0.124 deg/2.89 mm, w2 0.058 deg/2.06 mm; 112 s
+  W5 seed 1049 (0.1 px), 5 cams [5]: same (rms 0.123166); warnings none; views 14.7, 22.6, 8.0, 25.1, 24.4 deg; sigma w1 0.010 deg/0.19 mm; 77 s
+  W5 seed 2000 (1 px), 4 cams [2, 2]: same (rms 1.155353); warnings ['noisy']; views 9.4, 17.6, 12.4, 8.0 deg; sigma w1 0.416 deg/18.55 mm, w2 0.458 deg/2.38 mm; 134 s
+  W5 seed 2001 (1 px), 3 cams [3]: same (rms 1.091226); warnings none; views 11.8, 3.1, 15.1 deg; sigma w1 0.167 deg/1.18 mm; 27 s
+  W5 seed 2002 (1 px), 6 cams [2, 2, 2]: equivalent (rms 1.257963); warnings ['noisy']; views 34.4, 15.2, 21.0, 41.2, 51.3, 20.6 deg; sigma w1 0.140 deg/2.91 mm, w2 0.120 deg/2.37 mm, w3 0.134 deg/6.06 mm; 621 s
+  W5 seed 2003 (1 px), 3 cams [3]: same (rms 1.065789); warnings none; views 6.0, 5.2, 2.9 deg; sigma w1 0.378 deg/5.56 mm; 51 s
+  W5 seed 2004 (1 px), 2 cams [1, 1]: equivalent (rms 0.860512); warnings ['pinned', 'noisy']; views 16.4, 10.6 deg; sigma w1 1.036 deg/9.13 mm, w2 2.114 deg/53.11 mm; 123 s
+  W5 seed 2005 (1 px), 2 cams [1, 1]: equivalent (rms 0.852606); warnings ['pinned', 'noisy']; views 8.6, 9.4 deg; sigma w1 1.538 deg/40.27 mm, w2 1.208 deg/158.69 mm; 235 s
+  W5 seed 2006 (1 px), 6 cams [2, 2, 2]: same (rms 1.255401); warnings ['noisy']; views 4.7, 10.5, 7.2, 8.7, 13.4, 8.8 deg; sigma w1 0.277 deg/7.09 mm, w2 0.160 deg/4.20 mm, w3 0.136 deg/15.66 mm; 238 s
+  W5 seed 2007 (1 px), 5 cams [3, 2]: same (rms 1.229706); warnings ['noisy']; views 4.8, 5.5, 10.4, 15.1, 20.4 deg; sigma w1 0.463 deg/23.19 mm, w2 0.461 deg/5.03 mm; 90 s
+  W5 seed 2008 (1 px), 2 cams [1, 1]: same (rms 0.877146); warnings ['pinned', 'noisy']; views 7.5, 28.2 deg; sigma w1 0.995 deg/609.01 mm, w2 0.230 deg/0.98 mm; 184 s
+  W5 seed 2009 (1 px), 5 cams [5]: same (rms 1.230510); warnings none; views 20.2, 19.1, 17.1, 19.5, 6.2 deg; sigma w1 0.205 deg/0.95 mm; 64 s
+
+  R4 seed 3008 (0.5 px), 5 cams [3, 2]: same (rms 0.609523); warnings ['weak_window']; views 12.2, 3.6, 3.4, 4.6, 3.2 deg; sigma w1 0.090 deg/4.44 mm, w2 0.777 deg/51.47 mm; scan of window(s) [2]: no change (583 s); 834 s
+  R4 seed 3016 (0.5 px), 5 cams [3, 2]: same (rms 0.618607); warnings ['noisy']; views 4.6, 4.6, 19.9, 16.0, 14.8 deg; sigma w1 0.044 deg/3.15 mm, w2 0.100 deg/2.91 mm; 137 s
+  R4 seed 3021 (0.5 px), 5 cams [3, 2]: same (rms 0.608996); warnings none; views 2.8, 11.5, 7.4, 3.5, 9.0 deg; sigma w1 0.215 deg/14.43 mm, w2 0.139 deg/8.29 mm; 98 s
+  R4 seed 3026 (0.5 px), 5 cams [3, 2]: same (rms 0.612211); warnings ['noisy']; views 4.3, 6.3, 2.3, 3.2, 6.1 deg; sigma w1 0.035 deg/1.50 mm, w2 0.074 deg/0.83 mm; 221 s
+  R4 seed 3029 (0.5 px), 4 cams [2, 2]: same (rms 0.588202); warnings ['weak_window', 'weak_window', 'noisy']; views 2.8, 2.8, 5.9, 1.9 deg; sigma w1 0.349 deg/10.41 mm, w2 0.165 deg/10.00 mm; scan of window(s) [1, 2]: no change (560 s); 728 s
+  R4 seed 3032 (0.5 px), 4 cams [2, 2]: same (rms 0.588573); warnings ['noisy']; views 5.5, 3.2, 10.0, 7.6 deg; sigma w1 0.344 deg/5.05 mm, w2 0.056 deg/1.12 mm; 169 s
+  R4 seed 3036 (0.5 px), 5 cams [3, 2]: same (rms 0.612054); warnings ['noisy']; views 1.9, 4.2, 2.0, 6.7, 2.1 deg; sigma w1 0.051 deg/15.34 mm, w2 0.105 deg/9.12 mm; 133 s
+  R4 seed 3044 (0.5 px), 5 cams [3, 2]: same (rms 0.611946); warnings ['weak_window', 'noisy']; views 9.1, 2.3, 5.2, 2.4, 2.2 deg; sigma w1 0.047 deg/0.83 mm, w2 0.163 deg/6.53 mm; scan of window(s) [2]: no change (516 s); 670 s
+  R4 seed 3054 (0.5 px), 5 cams [3, 2]: same (rms 0.616932); warnings ['weak_window', 'noisy']; views 1.8, 2.1, 2.4, 5.3, 9.6 deg; sigma w1 0.044 deg/18.70 mm, w2 0.063 deg/9.93 mm; scan of window(s) [2]: no change (573 s); 691 s
+  R4 seed 3067 (0.5 px), 4 cams [2, 2]: same (rms 0.586639); warnings ['noisy']; views 4.8, 2.9, 10.6, 7.0 deg; sigma w1 0.134 deg/6.76 mm, w2 0.112 deg/4.37 mm; 105 s
+  R4 seed 3069 (0.5 px), 4 cams [2, 2]: same (rms 0.589364); warnings ['noisy']; views 6.1, 13.5, 5.5, 10.7 deg; sigma w1 0.051 deg/3.83 mm, w2 0.144 deg/3.75 mm; 121 s
+  R4 seed 3070 (0.5 px), 4 cams [2, 2]: same (rms 0.579649); warnings ['weak_window', 'weak_window']; views 5.7, 4.3, 3.0, 3.9 deg; sigma w1 0.047 deg/2.17 mm, w2 0.499 deg/7.64 mm; scan of window(s) [1, 2]: no change (596 s); 733 s
+  R4 seed 3071 (0.5 px), 6 cams [3, 3]: same (rms 0.627394); warnings none; views 19.8, 8.3, 12.5, 10.5, 10.1, 16.6 deg; sigma w1 0.041 deg/0.34 mm, w2 0.038 deg/0.50 mm; 77 s
+  R4 seed 3074 (0.5 px), 6 cams [3, 3]: same (rms 0.629033); warnings ['noisy']; views 18.9, 16.3, 18.7, 23.4, 42.0, 17.1 deg; sigma w1 0.035 deg/1.01 mm, w2 0.036 deg/1.20 mm; 55 s
+  R4 seed 3078 (0.5 px), 4 cams [2, 2]: same (rms 0.579759); warnings none; views 9.4, 19.2, 6.0, 23.3 deg; sigma w1 0.216 deg/9.05 mm, w2 0.206 deg/1.48 mm; 105 s
+  R4 seed 3079 (0.5 px), 4 cams [2, 2]: same (rms 0.590571); warnings ['noisy']; views 9.9, 10.7, 17.5, 16.5 deg; sigma w1 0.255 deg/3.31 mm, w2 0.123 deg/0.87 mm; 141 s
+  R4 seed 3080 (0.5 px), 5 cams [3, 2]: same (rms 0.608412); warnings none; views 5.3, 6.8, 7.9, 20.3, 14.7 deg; sigma w1 0.070 deg/7.05 mm, w2 0.076 deg/2.35 mm; 107 s
+  R4 seed 3081 (0.5 px), 5 cams [3, 2]: same (rms 0.611353); warnings none; views 5.0, 6.2, 6.0, 16.4, 14.6 deg; sigma w1 0.050 deg/5.88 mm, w2 0.109 deg/3.16 mm; 102 s
+  R4 seed 3083 (0.5 px), 6 cams [2, 2, 2]: same (rms 0.623556); warnings none; views 10.8, 9.0, 10.4, 7.7, 7.9, 3.7 deg; sigma w1 0.183 deg/2.38 mm, w2 0.366 deg/1.35 mm, w3 0.163 deg/2.42 mm; 214 s
+  R4 seed 3084 (0.5 px), 5 cams [3, 2]: same (rms 0.616801); warnings ['noisy']; views 12.8, 14.7, 18.5, 13.8, 17.0 deg; sigma w1 0.045 deg/0.91 mm, w2 0.229 deg/2.23 mm; 115 s
+  R4 seed 3092 (0.5 px), 5 cams [3, 2]: same (rms 0.612881); warnings ['noisy']; views 5.5, 8.2, 4.4, 8.4, 7.6 deg; sigma w1 0.062 deg/1.07 mm, w2 0.034 deg/0.61 mm; 137 s
+  R4 seed 3096 (0.5 px), 4 cams [2, 2]: same (rms 0.583943); warnings none; views 9.8, 5.8, 7.1, 9.2 deg; sigma w1 0.103 deg/1.66 mm, w2 0.329 deg/3.73 mm; 129 s
+  R4 seed 3099 (0.5 px), 4 cams [2, 2]: same (rms 0.581032); warnings none; views 16.4, 27.6, 7.4, 23.5 deg; sigma w1 0.137 deg/6.28 mm, w2 0.067 deg/0.54 mm; 131 s
+  R4 seed 3100 (0.5 px), 6 cams [2, 2, 2]: same (rms 0.629219); warnings ['weak_window', 'weak_window', 'noisy']; views 13.3, 5.3, 4.2, 5.1, 3.3, 4.7 deg; sigma w1 0.095 deg/5.05 mm, w2 0.079 deg/2.96 mm, w3 0.178 deg/26.67 mm; scan of window(s) [2, 3]: no change (777 s); 1026 s
+  R4 seed 3101 (0.5 px), 6 cams [3, 3]: same (rms 0.629872); warnings ['noisy']; views 4.9, 10.8, 4.8, 15.2, 8.6, 2.6 deg; sigma w1 0.081 deg/1.33 mm, w2 0.033 deg/1.51 mm; 108 s
+  R4 seed 3108 (0.5 px), 4 cams [2, 2]: same (rms 0.586303); warnings ['weak_window', 'noisy']; views 5.3, 11.9, 3.7, 10.6 deg; sigma w1 0.075 deg/2.63 mm, w2 0.111 deg/1.75 mm; scan of window(s) [1]: no change (328 s); 450 s
+  R4 seed 3110 (0.5 px), 6 cams [2, 2, 2]: same (rms 0.627575); warnings ['weak_window']; views 4.1, 2.0, 4.0, 2.0, 8.8, 8.9 deg; sigma w1 0.655 deg/7.58 mm, w2 0.051 deg/0.57 mm, w3 0.187 deg/3.65 mm; scan of window(s) [1]: no change (529 s); 900 s
+  R4 seed 3111 (0.5 px), 5 cams [3, 2]: equivalent (rms 0.615991); warnings ['pinned', 'noisy']; views 8.1, 4.8, 14.6, 8.3, 23.3 deg; sigma w1 0.053 deg/1.74 mm, w2 0.316 deg/67.43 mm; 422 s
+  R4 seed 3123 (0.5 px), 5 cams [3, 2]: same (rms 0.614271); warnings ['noisy']; views 2.1, 5.8, 2.9, 6.3, 6.8 deg; sigma w1 0.107 deg/11.71 mm, w2 0.109 deg/3.56 mm; 111 s
+  R4 seed 3135 (0.5 px), 5 cams [3, 2]: same (rms 0.617053); warnings ['noisy']; views 11.5, 23.0, 20.4, 24.4, 6.8 deg; sigma w1 0.078 deg/1.17 mm, w2 0.033 deg/0.30 mm; 108 s
+  R4 seed 3008 (1 px), 5 cams [3, 2]: same (rms 1.219051); warnings ['weak_window', 'noisy']; views 12.2, 3.5, 3.4, 4.6, 3.2 deg; sigma w1 0.178 deg/8.92 mm, w2 1.572 deg/87.68 mm; scan of window(s) [2]: no change (614 s); 905 s
+  R4 seed 3016 (1 px), 5 cams [3, 2]: same (rms 1.237250); warnings ['noisy']; views 4.6, 4.5, 19.9, 16.0, 14.7 deg; sigma w1 0.088 deg/6.31 mm, w2 0.199 deg/5.80 mm; 153 s
+  R4 seed 3021 (1 px), 5 cams [3, 2]: same (rms 1.217980); warnings ['noisy']; views 2.8, 11.4, 7.4, 3.6, 9.0 deg; sigma w1 0.437 deg/27.67 mm, w2 0.269 deg/16.20 mm; 101 s
+  R4 seed 3026 (1 px), 5 cams [3, 2]: same (rms 1.224425); warnings ['noisy']; views 4.3, 6.2, 2.3, 3.2, 6.1 deg; sigma w1 0.069 deg/2.97 mm, w2 0.148 deg/1.67 mm; 151 s
+  R4 seed 3029 (1 px), 4 cams [2, 2]: same (rms 1.176395); warnings ['weak_window', 'weak_window', 'noisy']; views 2.8, 2.8, 5.9, 1.8 deg; sigma w1 0.693 deg/20.54 mm, w2 0.326 deg/20.47 mm; scan of window(s) [1, 2]: no change (583 s); 793 s
+  R4 seed 3032 (1 px), 4 cams [2, 2]: same (rms 1.177153); warnings ['noisy']; views 5.5, 3.2, 9.9, 7.6 deg; sigma w1 0.735 deg/10.10 mm, w2 0.114 deg/2.25 mm; 186 s
+  R4 seed 3036 (1 px), 5 cams [3, 2]: same (rms 1.224107); warnings ['noisy']; views 1.8, 4.3, 2.0, 6.7, 2.2 deg; sigma w1 0.101 deg/31.75 mm, w2 0.212 deg/18.73 mm; 137 s
+  R4 seed 3044 (1 px), 5 cams [3, 2]: same (rms 1.223894); warnings ['weak_window', 'noisy']; views 9.1, 2.4, 5.2, 2.5, 2.2 deg; sigma w1 0.095 deg/1.66 mm, w2 0.328 deg/12.74 mm; scan of window(s) [2]: no change (536 s); 715 s
+  R4 seed 3054 (1 px), 5 cams [3, 2]: same (rms 1.233859); warnings ['weak_window', 'noisy']; views 1.8, 2.1, 2.4, 5.3, 9.6 deg; sigma w1 0.089 deg/37.88 mm, w2 0.126 deg/20.13 mm; scan of window(s) [2]: no change (563 s); 710 s
+  R4 seed 3067 (1 px), 4 cams [2, 2]: same (rms 1.173275); warnings ['noisy']; views 4.8, 3.0, 10.6, 7.0 deg; sigma w1 0.268 deg/13.45 mm, w2 0.225 deg/8.69 mm; 110 s
+  R4 seed 3069 (1 px), 4 cams [2, 2]: same (rms 1.178717); warnings ['noisy']; views 6.1, 13.5, 5.5, 10.7 deg; sigma w1 0.101 deg/7.66 mm, w2 0.291 deg/7.43 mm; 108 s
+  R4 seed 3070 (1 px), 4 cams [2, 2]: same (rms 1.159307); warnings ['weak_window', 'weak_window', 'noisy']; views 5.7, 4.3, 3.0, 3.9 deg; sigma w1 0.095 deg/4.33 mm, w2 0.940 deg/15.81 mm; scan of window(s) [1, 2]: no change (670 s); 837 s
+  R4 seed 3071 (1 px), 6 cams [3, 3]: same (rms 1.254791); warnings ['noisy']; views 19.8, 8.4, 12.5, 10.5, 10.1, 16.6 deg; sigma w1 0.083 deg/0.68 mm, w2 0.075 deg/1.00 mm; 83 s
+  R4 seed 3074 (1 px), 6 cams [3, 3]: same (rms 1.258060); warnings ['noisy']; views 18.9, 16.3, 18.7, 23.5, 42.0, 17.1 deg; sigma w1 0.070 deg/2.03 mm, w2 0.073 deg/2.39 mm; 55 s
+  R4 seed 3078 (1 px), 4 cams [2, 2]: same (rms 1.159494); warnings ['noisy']; views 9.3, 19.3, 6.1, 23.3 deg; sigma w1 0.435 deg/18.05 mm, w2 0.414 deg/2.98 mm; 107 s
+  R4 seed 3079 (1 px), 4 cams [2, 2]: same (rms 1.181137); warnings ['noisy']; views 9.9, 10.7, 17.5, 16.5 deg; sigma w1 0.497 deg/6.66 mm, w2 0.244 deg/1.74 mm; 147 s
+  R4 seed 3080 (1 px), 5 cams [3, 2]: same (rms 1.216814); warnings ['noisy']; views 5.4, 6.8, 8.0, 20.3, 14.7 deg; sigma w1 0.141 deg/13.73 mm, w2 0.151 deg/4.59 mm; 125 s
+  R4 seed 3081 (1 px), 5 cams [3, 2]: same (rms 1.222704); warnings ['noisy']; views 5.1, 6.3, 6.0, 16.5, 14.6 deg; sigma w1 0.101 deg/11.63 mm, w2 0.220 deg/6.33 mm; 107 s
+  R4 seed 3083 (1 px), 6 cams [2, 2, 2]: same (rms 1.247113); warnings ['noisy']; views 10.9, 9.0, 10.4, 7.8, 8.0, 3.7 deg; sigma w1 0.367 deg/4.92 mm, w2 0.739 deg/2.66 mm, w3 0.327 deg/4.84 mm; 256 s
+  R4 seed 3084 (1 px), 5 cams [3, 2]: same (rms 1.233605); warnings ['noisy']; views 12.8, 14.7, 18.4, 13.8, 17.0 deg; sigma w1 0.089 deg/1.81 mm, w2 0.461 deg/4.67 mm; 117 s
+  R4 seed 3092 (1 px), 5 cams [3, 2]: same (rms 1.225762); warnings ['noisy']; views 5.5, 8.1, 4.3, 8.4, 7.6 deg; sigma w1 0.124 deg/2.13 mm, w2 0.068 deg/1.22 mm; 166 s
+  R4 seed 3096 (1 px), 4 cams [2, 2]: same (rms 1.167871); warnings ['noisy']; views 9.8, 5.8, 7.2, 9.2 deg; sigma w1 0.205 deg/3.31 mm, w2 0.660 deg/7.55 mm; 126 s
+  R4 seed 3099 (1 px), 4 cams [2, 2]: same (rms 1.162070); warnings ['noisy']; views 16.4, 27.6, 7.4, 23.5 deg; sigma w1 0.282 deg/12.78 mm, w2 0.135 deg/1.08 mm; 147 s
+  R4 seed 3100 (1 px), 6 cams [2, 2, 2]: same (rms 1.258435); warnings ['weak_window', 'weak_window', 'noisy']; views 13.3, 5.3, 4.2, 5.1, 3.3, 4.8 deg; sigma w1 0.186 deg/9.97 mm, w2 0.159 deg/5.94 mm, w3 0.381 deg/54.27 mm; scan of window(s) [2, 3]: no change (770 s); 1023 s
+  R4 seed 3101 (1 px), 6 cams [3, 3]: same (rms 1.259739); warnings ['noisy']; views 4.9, 10.8, 4.8, 15.1, 8.6, 2.6 deg; sigma w1 0.162 deg/2.64 mm, w2 0.065 deg/3.03 mm; 118 s
+  R4 seed 3108 (1 px), 4 cams [2, 2]: same (rms 1.172597); warnings ['weak_window', 'noisy']; views 5.4, 11.9, 3.8, 10.6 deg; sigma w1 0.151 deg/5.23 mm, w2 0.219 deg/3.49 mm; scan of window(s) [1]: no change (394 s); 522 s
+  R4 seed 3110 (1 px), 6 cams [2, 2, 2]: same (rms 1.255149 CHANGED from 1.266172); warnings ['weak_window', 'noisy']; views 4.2, 2.0, 4.0, 2.0, 8.8, 8.9 deg; sigma w1 1.172 deg/11.64 mm, w2 0.104 deg/1.14 mm, w3 0.340 deg/6.42 mm; scan of window(s) [1]: IMPROVED (561 s); 949 s
+  R4 seed 3111 (1 px), 5 cams [3, 2]: equivalent (rms 1.231995); warnings ['pinned', 'noisy']; views 8.1, 4.8, 14.6, 8.3, 23.3 deg; sigma w1 0.106 deg/3.47 mm, w2 0.626 deg/134.88 mm; 378 s
+  R4 seed 3123 (1 px), 5 cams [3, 2]: same (rms 1.228546); warnings ['noisy']; views 2.0, 5.8, 2.8, 6.3, 6.8 deg; sigma w1 0.214 deg/24.21 mm, w2 0.223 deg/7.32 mm; 100 s
+  R4 seed 3135 (1 px), 5 cams [3, 2]: same (rms 1.234099); warnings ['noisy']; views 11.5, 23.0, 20.4, 24.4, 6.8 deg; sigma w1 0.156 deg/2.34 mm, w2 0.067 deg/0.60 mm; 126 s
+
+answers unchanged from the stored ones: 118 of 120; changed or failed: [('W5', 1001, 0.1), ('R4', 3110, 1.0)]
+  of those, better: [('W5', 1001, 0.1), ('R4', 3110, 1.0)]; WORSE: []
+  the scan ran on 21 cases, improved 2; its time: median 563 s, max 777 s
+wrong answers 3, right 117; with any warning: wrong 3, right 62
+  weak_window: wrong 2/3 ['W5 1034 0.1', 'W5 1045 0.1'], right 19/117
+  pinned: wrong 1/3 ['W5 1031 0.1'], right 5/117 ['W5 2004 1', 'W5 2005 1', 'W5 2008 1', 'R4 3111 0.5', 'R4 3111 1']
+  hint_far: wrong 0/3 [], right 0/117 []
+  same_way: wrong 0/3 [], right 0/117 []
+  noisy: wrong 1/3 ['W5 1031 0.1'], right 56/117
+  few_frames: wrong 0/3 [], right 0/117 []
+  wand_length_fitted: wrong 0/3 [], right 0/117 []
+wall time 1055 s
+H5a: answers unchanged or better
+exit 0

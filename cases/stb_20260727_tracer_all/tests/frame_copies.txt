@@ -1,0 +1,11 @@
+D2 every chunk start (multiples of 256): is the frame a byte copy of the frame before it?
+
+35Hz_r_b_1: 12605 files (0-12604); 49 chunk starts checked in imgFile_mask/cam0; copies at [256]
+  frame 256: copy in 8/8 sequences (imgFile and imgFile_mask, cameras 0-3)
+  file-time jump at the chunk starts: 5 to 62 s
+35Hz_r_b_2: 12605 files (0-12604); 49 chunk starts checked in imgFile_mask/cam0; copies at [256]
+  frame 256: copy in 8/8 sequences (imgFile and imgFile_mask, cameras 0-3)
+  file-time jump at the chunk starts: 19 to 64 s
+10Hz_r_b_1: 12605 files (0-12604); 49 chunk starts checked in imgFile_mask/cam0; copies at [256]
+  frame 256: copy in 8/8 sequences (imgFile and imgFile_mask, cameras 0-3)
+  file-time jump at the chunk starts: 2 to 51 s

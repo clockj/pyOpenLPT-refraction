@@ -1,0 +1,9 @@
+{
+ "tag": "vc2",
+ "field": "data/fields/t1_vc2_total.npz",
+ "out_dir": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_selfcal\\data\\T1pre_s4_m15vc2",
+ "noise_median": {
+  "cam1": 7.269608017545062,
+  "cam2": 5.344272142892463
+ }
+}

@@ -1,0 +1,7 @@
+P2 save interval: p2_si20, frames 0-45 with save_interval = 20
+ConvergeTrack files: ['ExitTrack_20.csv', 'ExitTrack_40.csv', 'ExitTrack_45.csv', 'LongTrackActive_45.csv', 'LongTrackInactive_20.csv', 'LongTrackInactive_40.csv', 'LongTrackInactive_45.csv', 'ShortTrackActive_45.csv']
+files as expected (inactive and exit tracks at 20, 40, 45; active snapshots only at 45): True
+convergence frames that saved inside the frame: [20, 40] (the last frame saves after its timing; frame 3 writes InitialTrack/ at the end of the initial phase)
+inactive long tracks (before, after) at frames 20, 21, 40, 41: {20: (125, 132), 21: (0, 15), 40: (406, 434), 41: (0, 30)} -> 0 before frames 21 and 41 means the save freed them
+rows per file: {'ExitTrack_20.csv': 0, 'ExitTrack_40.csv': 19, 'ExitTrack_45.csv': 0, 'LongTrackActive_45.csv': 149412, 'LongTrackInactive_20.csv': 1607, 'LongTrackInactive_40.csv': 9318, 'LongTrackInactive_45.csv': 4055, 'ShortTrackActive_45.csv': 20338}
+P2 logic PASSED

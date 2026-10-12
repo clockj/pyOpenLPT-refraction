@@ -16,6 +16,7 @@ from .camera_io import (
     project_point
 )
 from .optimizer import VSCOptimizer
+from .. import stb_config
 
 
 class VSCService:
@@ -28,7 +29,7 @@ class VSCService:
     3. Sample 3D points uniformly from volume
     4. Find 2D correspondences with isolation check
     5. Run model-aware TRF optimization (ray-consistency for refraction)
-    6. Save optimized cameras and update config.txt
+    6. Save optimized cameras and update the project's config (config.json or config.txt)
     """
     
     def __init__(self, proj_dir: str, log_callback: Optional[Callable[[str], None]] = None):
@@ -111,7 +112,13 @@ class VSCService:
             self._log("Volume Self-Calibration (VSC) Started")
             self._log("=" * 60)
             self._log(f"Project: {self.proj_dir}")
-            
+
+            # Cameras behind curved windows (PINCYL, PINSPH): VSC fits each camera's image correction instead of
+            # its parameters (field_vsc.py)
+            from .field_vsc import is_field_project
+            if is_field_project(self.proj_dir):
+                return self._run_field_vsc()
+
             # Step 1: Load cameras
             self._log("\n[Step 1] Loading camera parameters...")
             success, msg = self._load_cameras()
@@ -220,51 +227,55 @@ class VSCService:
                 self.log_file.close()
                 self.log_file = None
     
+    def _run_field_vsc(self) -> Tuple[bool, str, Dict]:
+        """VSC for cameras behind curved windows: an image correction per camera, fitted from the run's long tracks
+        (field_vsc.FieldVSC), written to camFile_VSC/ and set as the cameras' "correction" in config.json. The
+        camera files and the tolerances are left as they are."""
+        from .field_vsc import FieldVSC
+        self._log("\n[Step 1] Cameras behind curved windows: fitting an image correction per camera")
+        self._load_object_config()
+        fvsc = FieldVSC(self.proj_dir, self._log, self.min_track_len, self.sample_points, self.min_valid_points,
+                        self.tolerance_mode, self.tolerance_value)
+        ok, msg, data = fvsc.run()
+        if ok:
+            data['tracks'] = self._load_tracks()        # for the tracking view's 3-D plot
+            self.tracks = data['tracks']
+            self._log("\n" + "=" * 60)
+            self._log("VSC Completed Successfully!")
+            self._log("=" * 60)
+        else:
+            self._log(f"\nField VSC stopped: {msg}")
+        return ok, msg, data
+
+    def _read_project_config(self, inline_objects=False):
+        """(path, settings) of the project's tracking config (config.json, else config.txt); (None, None) if there is
+        none or it cannot be read (logged)."""
+        try:
+            return stb_config.read_project(self.proj_dir, inline_objects)
+        except Exception as e:
+            self._log(f"  Warning: cannot read the tracking config: {e}")
+            return None, None
+
     def _load_cameras(self) -> Tuple[bool, str]:
-        """Load camera parameters from paths specified in config.txt."""
-        config_path = os.path.join(self.proj_dir, "config.txt")
-        
-        if not os.path.exists(config_path):
-            # Fallback to old behavior if no config.txt
+        """Load camera parameters from the camera files of the project's config (config.json or config.txt)."""
+        config_path = stb_config.find_config(self.proj_dir)
+
+        if config_path is None:
+            # Fallback to old behavior if there is no config
             cam_dir = os.path.join(self.proj_dir, "camFile")
             if not os.path.exists(cam_dir):
-                return False, f"config.txt not found and camFile directory not found: {cam_dir}"
+                return False, f"No tracking config (config.json or config.txt) and camFile directory not found: {cam_dir}"
             return self._load_cameras_from_dir(cam_dir)
-        
-        # Parse config.txt for camera file paths
-        # Format: "# Camera File Path, Max Intensity" followed by lines like:
-        # G:/path/to/cam0.txt,255
-        camera_paths = []
-        in_camera_section = False
-        
-        with open(config_path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                    
-                if '# Camera File Path' in line:
-                    in_camera_section = True
-                    continue
-                
-                if in_camera_section:
-                    # Check if line starts with '#' (new section header)
-                    if line.startswith('#'):
-                        in_camera_section = False
-                        continue
-                    
-                    # Parse camera path line: "path/to/cam.txt,intensity" or just "path/to/cam.txt"
-                    parts = line.split(',')
-                    if parts:
-                        cam_path = parts[0].strip()
-                        if cam_path.endswith('.txt'):
-                            # Handle relative vs absolute paths
-                            if not os.path.isabs(cam_path):
-                                cam_path = os.path.join(self.proj_dir, cam_path)
-                            camera_paths.append(cam_path)
-        
+        try:
+            cfg = stb_config.read(config_path, inline_objects=False)
+        except Exception as e:
+            # tracking cannot read it either; stop before VSC works on the wrong cameras
+            return False, f"Cannot read {os.path.basename(config_path)}: {e}"
+
+        camera_paths = [stb_config.resolve(config_path, cam["file"]) for cam in cfg["cameras"]]
+
         if not camera_paths:
-            self._log("  No camera paths found in config.txt, trying camFile directory...")
+            self._log("  No camera paths found in the config, trying camFile directory...")
             cam_dir = os.path.join(self.proj_dir, "camFile")
             if not os.path.exists(cam_dir):
                 return False, f"Camera directory not found: {cam_dir}"
@@ -502,85 +513,27 @@ class VSCService:
         return window_refraction
     
     def _load_object_config(self) -> Tuple[bool, str]:
-        """Load object configuration to get obj_radius."""
-        config_path = os.path.join(self.proj_dir, "config.txt")
-        if not os.path.exists(config_path):
-            self._log("  Warning: config.txt not found, using defaults")
+        """Load the object type and obj_radius from the project's config (config.json or config.txt)."""
+        config_path, cfg = self._read_project_config(inline_objects=True)
+        if cfg is None:
+            self._log("  Warning: no readable tracking config (config.json or config.txt), using defaults")
             return True, ""
-        
-        # Determine object type
-        with open(config_path, 'r') as f:
-            content = f.read().lower()
-            if 'bubble' in content:
-                self.obj_type = "Bubble"
-            else:
-                self.obj_type = "Tracer"
-        
-        # Load object-specific config
+
+        obj = cfg["objects"][0] if cfg["objects"] else {}
+        self.obj_type = "Bubble" if obj.get("type") == "Bubble" else "Tracer"
         if self.obj_type == "Tracer":
-            tracer_config = os.path.join(self.proj_dir, "tracerConfig.txt")
-            if os.path.exists(tracer_config):
-                self._load_tracer_config(tracer_config)
+            # the particle radius [px]
+            self.obj_radius = float(obj["tracer"]["radius_px"]) if "tracer" in obj else 5.0
+            self._log(f"  Found Particle radius: {self.obj_radius} px")
         else:
-            bubble_config = os.path.join(self.proj_dir, "bubbleConfig.txt")
-            if os.path.exists(bubble_config):
-                self._load_bubble_config(bubble_config)
-        
+            # the minimum bubble radius [px]
+            self.obj_radius = float(obj["bubble"]["radius_min_px"]) if "bubble" in obj else 10.0
+            self._log(f"  Found minimum bubble size: {self.obj_radius} px")
+
         self._log(f"  Object type: {self.obj_type}")
         self._log(f"  Object radius: {self.obj_radius} px")
         return True, ""
-    
-    def _load_tracer_config(self, path: str):
-        """Parse tracerConfig.txt for obj_radius.
-        Format: 'value # comment' - e.g. '2 # Particle radius [px]...'
-        """
-        with open(path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith('#'):
-                    continue
-                
-                # Format: "value # comment"
-                # Look for "Particle radius" in the comment part
-                if 'Particle radius' in line:
-                    # Extract the value before the # comment
-                    parts = line.split('#')
-                    if parts:
-                        try:
-                            self.obj_radius = float(parts[0].strip())
-                            self._log(f"  Found Particle radius: {self.obj_radius} px")
-                            return
-                        except ValueError:
-                            pass
-        
-        # Default tracer radius
-        self.obj_radius = 5.0
-    
-    def _load_bubble_config(self, path: str):
-        """Parse bubbleConfig.txt for minimum bubble size as obj_radius.
-        Format: 'value # comment' - e.g. '2 # minimum bubble size to track'
-        """
-        with open(path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith('#'):
-                    continue
-                
-                # Format: "value # comment"
-                # Look for "minimum bubble size" in the comment part
-                if 'minimum bubble size' in line.lower():
-                    parts = line.split('#')
-                    if parts:
-                        try:
-                            self.obj_radius = float(parts[0].strip())
-                            self._log(f"  Found minimum bubble size: {self.obj_radius} px")
-                            return
-                        except ValueError:
-                            pass
-        
-        # Default bubble radius
-        self.obj_radius = 10.0
-    
+
     def _load_tracks(self) -> Dict[int, List[Tuple]]:
         """
         Load tracks from ConvergeTrack CSV files.
@@ -588,21 +541,12 @@ class VSCService:
         Returns:
             dict: {track_id: [(frame_id, x, y, z, r3d_mm, cam_2d_dict), ...]}
         """
-        # Read Output Folder Path from config.txt
-        config_path = os.path.join(self.proj_dir, "config.txt")
+        # The output folder from the project's config (config.json or config.txt)
+        config_path, cfg = self._read_project_config()
         output_dir = os.path.join(self.proj_dir, "Results")  # Default fallback
-        
-        if os.path.exists(config_path):
-            with open(config_path, 'r') as f:
-                lines = f.readlines()
-                for i, line in enumerate(lines):
-                    if "Output Folder Path" in line:
-                        if i + 1 < len(lines):
-                            path_line = lines[i+1].strip()
-                            if path_line and not path_line.startswith('#'):
-                                output_dir = path_line
-                                break
-        
+        if cfg and cfg.get("output_dir"):
+            output_dir = stb_config.resolve(config_path, cfg["output_dir"])
+
         track_dir = os.path.join(output_dir, "ConvergeTrack")
         if not os.path.exists(track_dir):
             # Fallback to default location
@@ -794,7 +738,7 @@ class VSCService:
             self._log("  WARNING: pyopenlpt not available, using stored projections as fallback")
             return self._find_correspondences_fallback(sampled_points)
         
-        # Load ImageIO for each camera from config.txt paths
+        # Load ImageIO for each camera from the config's image lists
         img_loaders = self._load_image_loaders(lpt)
         
         if not img_loaders:
@@ -1085,9 +1029,9 @@ class VSCService:
         img_loaders = {}
         
         # Load basic settings to get image paths
-        config_path = os.path.join(self.proj_dir, "config.txt")
-        if not os.path.exists(config_path):
-            self._log(f"  Warning: config.txt not found")
+        config_path = stb_config.find_config(self.proj_dir)  # config.json, else config.txt
+        if config_path is None:
+            self._log(f"  Warning: no tracking config (config.json or config.txt) found")
             return img_loaders
         
         try:
@@ -1122,7 +1066,10 @@ class VSCService:
         import pyopenlpt as lpt
         
         # Load basic settings first
-        config_path = os.path.join(self.proj_dir, "config.txt")
+        config_path = stb_config.find_config(self.proj_dir)  # config.json, else config.txt
+        if config_path is None:
+            self._log("  Warning: no tracking config (config.json or config.txt) found")
+            return None
         settings = lpt.BasicSetting()
         settings.readConfig(config_path)
         
@@ -1132,13 +1079,16 @@ class VSCService:
             return None
         
         config_file = settings._object_config_paths[0]
-        
+        # config.json holds the object settings itself: their path is "config.json#<object index>"
+        base, sep, index = config_file.rpartition("#")
+        file_on_disk = base if sep and index.isdigit() else config_file
+
         if self.obj_type == "Tracer":
             obj_cfg = lpt.TracerConfig()
         else:
             obj_cfg = lpt.BubbleConfig()
-        
-        if os.path.exists(config_file):
+
+        if os.path.exists(file_on_disk):
             obj_cfg.readConfig(config_file, settings)
             return obj_cfg
         else:
@@ -1607,12 +1557,32 @@ class VSCService:
         except Exception as e:
             self._log(f"  Warning: Failed to patch REFRACTION_META for cam{cam_idx}: {e}")
     
+    def _backup_config_json(self, config_path):
+        """Copy config.json to config_backup.json once, before VSC first changes it (as config_backup.txt)."""
+        backup_path = os.path.join(self.proj_dir, "config_backup.json")
+        if not os.path.exists(backup_path):
+            shutil.copy(config_path, backup_path)
+            self._log(f"  Backup saved to config_backup.json")
+
     def _update_config(self):
-        """Update config.txt to use optimized camera files."""
-        config_path = os.path.join(self.proj_dir, "config.txt")
-        if not os.path.exists(config_path):
+        """Update the project's config (config.json or config.txt) to use the optimized camera files."""
+        config_path = stb_config.find_config(self.proj_dir)
+        if config_path is None:
             return
-        
+
+        if config_path.lower().endswith(".json"):
+            cfg = stb_config.read_json_raw(config_path)
+            for cam in cfg.get("cameras", []):
+                # Look for 'camX.txt' or 'vsc_camX.txt'
+                match = re.search(r'(?:vsc_)?cam(\d+)\.txt', str(cam.get("file", "")))
+                if match and int(match.group(1)) in self.cameras:
+                    # project-relative camera path for portability
+                    cam["file"] = f"camFile_VSC/vsc_cam{int(match.group(1))}.txt"
+            self._backup_config_json(config_path)
+            stb_config.write_json_raw(cfg, config_path)
+            self._log(f"  Updated config.json with optimized camera paths")
+            return
+
         # Backup original config
         backup_path = os.path.join(self.proj_dir, "config_backup.txt")
         if not os.path.exists(backup_path):
@@ -1672,20 +1642,31 @@ class VSCService:
 
     def _update_object_config(self, stats: dict):
         """
-        Update ObjectConfig (e.g. tracerConfig.txt) with new tolerances.
+        Update the object settings (in config.json, or in the object file that config.txt names, e.g.
+        tracerConfig.txt) with new tolerances.
         tolerance = Mean + 3 * Std
         """
-        config_path = os.path.join(self.proj_dir, "config.txt")
-        if not os.path.exists(config_path):
+        config_path = stb_config.find_config(self.proj_dir)
+        if config_path is None:
             return
-            
-        with open(config_path, 'r') as f:
-            lines = f.readlines()
-            
-        # Parse config.txt for Voxel to MM and Object Config path
-        voxel_to_mm = 1.0
-        obj_cfg_path = None
-        
+
+        cfg_json = None
+        if config_path.lower().endswith(".json"):
+            cfg_json = stb_config.read_json_raw(config_path)
+            voxel_to_mm = float(cfg_json.get("voxel_mm", 1.0))
+            obj_json = cfg_json["objects"][0] if cfg_json.get("objects") else {}
+            # inline object settings, or a text object file
+            obj_cfg_path = (stb_config.resolve(config_path, obj_json["config_file"])
+                            if "config_file" in obj_json else None)
+            lines = []
+        else:
+            with open(config_path, 'r') as f:
+                lines = f.readlines()
+
+            # Parse config.txt for Voxel to MM and Object Config path
+            voxel_to_mm = 1.0
+            obj_cfg_path = None
+
         for i, line in enumerate(lines):
             line = line.strip()
             # Find Voxel to MM factor
@@ -1716,11 +1697,12 @@ class VSCService:
                                  obj_cfg_path = os.path.join(self.proj_dir, sub_line)
                              break
         
-        if not obj_cfg_path or not os.path.exists(obj_cfg_path):
-            self._log(f"  Could not find Object Config file in config.txt")
+        inline = cfg_json is not None and obj_cfg_path is None
+        if not inline and (not obj_cfg_path or not os.path.exists(obj_cfg_path)):
+            self._log(f"  Could not find Object Config file in {os.path.basename(config_path)}")
             return
-            
-        self._log(f"  Found Object Config: {obj_cfg_path}")
+
+        self._log(f"  Found Object Config: {config_path if inline else obj_cfg_path}")
         self._log(f"  Voxel to MM factor: {voxel_to_mm}")
         
         # Calculate new tolerances
@@ -1735,7 +1717,17 @@ class VSCService:
         
         self._log(f"  New 2D Tolerance: {tol_2d_px:.4f} px")
         self._log(f"  New 3D Tolerance: {tol_3d_voxel:.4f} voxel (from {tol_3d_mm:.4f} mm)")
-        
+
+        if inline:
+            # the same 4 decimals as the text file gets
+            ipr = obj_json.setdefault("ipr", {})
+            ipr["tol_2d_px"] = round(tol_2d_px, 4)
+            ipr["tol_3d_vox"] = round(tol_3d_voxel, 4)
+            self._backup_config_json(config_path)
+            stb_config.write_json_raw(cfg_json, config_path)
+            self._log(f"  Updated config.json with new tolerances.")
+            return
+
         # Update Object Config
         # Backup first
         base, ext = os.path.splitext(obj_cfg_path)
@@ -1796,7 +1788,7 @@ def init_worker(proj_dir: str, params: Dict, cameras_indices: List[int]):
 
     try:
         # 1. Load Settings
-        config_path = os.path.join(proj_dir, "config.txt")
+        config_path = stb_config.find_config(proj_dir) or os.path.join(proj_dir, "config.txt")
         settings = lpt.BasicSetting()
         settings.readConfig(config_path)
         
@@ -1945,8 +1937,12 @@ def process_frame_task(frame_id: int, points: List[Tuple],
                             if r < n_row and c < n_col:
                                 roi_img[i, j] = full_img[r, c]
                     
-                    detections = finder.findObject2D(roi_img, obj_cfg)
-                    
+                    # the camera's index picks its settings, as in the tracking run (the line detector's noise)
+                    try:
+                        detections = finder.findObject2D(roi_img, obj_cfg, cam_idx)
+                    except TypeError:  # a module built before findObject2D took the camera's index
+                        detections = finder.findObject2D(roi_img, obj_cfg)
+
                     if len(detections) == 0:
                         all_valid = False
                         fail_reason = "no_detection"

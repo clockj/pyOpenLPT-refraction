@@ -1,0 +1,175 @@
+{
+ "summary": {
+  "rms_px": 0.7029600423314518,
+  "sigma_px": 0.7071875589213801,
+  "frames": 7212,
+  "active": 35654,
+  "observations": 35838,
+  "wand_length_mm": 10.0,
+  "L_sigma_mm": null,
+  "wand_free_rms_um": 60.537474086055774,
+  "wand_free_mean_um": -2.0596676893386534,
+  "cameras": [
+   {
+    "name": "cam1",
+    "f_px": 16330.69548376934,
+    "f_sigma_px": 40.331549481581696,
+    "f_mm": 326.61390967538676,
+    "distance_mm": 788.1810478338143,
+    "distance_sigma_mm": 1.8963896067102444,
+    "azimuth_deg": -5.165196503344094e-16,
+    "azimuth_sigma_deg": 1.2427633210007263e-18,
+    "height_rel_mm": 0.0,
+    "height_sigma_mm": 0.0,
+    "viewing_direction": [
+     -0.0023394250356107535,
+     -0.39202977414066936,
+     -0.9199495547461931
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.7422864990907853,
+    "n_active": 13891,
+    "n_total": 13962
+   },
+   {
+    "name": "cam2",
+    "f_px": 18257.504983523973,
+    "f_sigma_px": 51.49489140875909,
+    "f_mm": 365.15009967047945,
+    "distance_mm": 929.1633249139289,
+    "distance_sigma_mm": 2.5574633878978688,
+    "azimuth_deg": 42.25093949294734,
+    "azimuth_sigma_deg": 0.015016212771445428,
+    "height_rel_mm": -309.3256411572936,
+    "height_sigma_mm": 0.8302980353332646,
+    "viewing_direction": [
+     -0.671728162953858,
+     -0.01371048326135899,
+     -0.7406708430493092
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.5307544581417895,
+    "n_active": 10021,
+    "n_total": 10062
+   },
+   {
+    "name": "cam3",
+    "f_px": 25187.943064655025,
+    "f_sigma_px": 67.56346941615163,
+    "f_mm": 340.0372313728428,
+    "distance_mm": 871.0318619643692,
+    "distance_sigma_mm": 2.2543654706521523,
+    "azimuth_deg": -3.1248135903831624,
+    "azimuth_sigma_deg": 0.0037582846089364136,
+    "height_rel_mm": -298.7444856505269,
+    "height_sigma_mm": 0.7582498312468737,
+    "viewing_direction": [
+     0.04969328458667616,
+     -0.02759012011714786,
+     -0.9983833746306626
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.7798898027957506,
+    "n_active": 11742,
+    "n_total": 11814
+   }
+  ]
+ },
+ "selection": {
+  "cameras": {
+   "cam1": {
+    "camera_frames": 13001,
+    "kept": 7922,
+    "rejected": {
+     "edge RMS": 69,
+     "one ball": 3848,
+     "aspect": 68,
+     "no ball": 1076,
+     "size": 17,
+     "balls overlap (guard)": 1
+    },
+    "median_r_px": [
+     31.2303,
+     42.75357
+    ]
+   },
+   "cam2": {
+    "camera_frames": 13001,
+    "kept": 7439,
+    "rejected": {
+     "one ball": 4095,
+     "no ball": 1171,
+     "aspect": 288,
+     "edge RMS": 7,
+     "size": 1
+    },
+    "median_r_px": [
+     33.01714,
+     44.496105
+    ]
+   },
+   "cam3": {
+    "camera_frames": 10605,
+    "kept": 7050,
+    "rejected": {
+     "one ball": 3027,
+     "edge RMS": 22,
+     "aspect": 37,
+     "no ball": 469
+    },
+    "median_r_px": [
+     49.29318,
+     66.29679
+    ]
+   }
+  },
+  "frames_kept_in_min_cameras": 7212,
+  "frames_total": 13001,
+  "accept": {
+   "_comment": "The 6-7 Oct rules: a camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame enters the fit when at least min_cameras cameras keep it.",
+   "edge_rms_max_px": 1.0,
+   "aspect_range": [
+    1.15,
+    1.45
+   ],
+   "size_tol": 0.1,
+   "min_cameras": 2
+  },
+  "detect": {
+   "cam1": {
+    "polarity": "dark",
+    "min_r_px": 20.0,
+    "max_r_px": 70.0,
+    "open_px": 51,
+    "rod_mask_px": 28.0,
+    "guard_px": 3.0,
+    "workers": 16
+   },
+   "cam2": {
+    "polarity": "dark",
+    "min_r_px": 20.0,
+    "max_r_px": 70.0,
+    "open_px": 51,
+    "rod_mask_px": 28.0,
+    "guard_px": 3.0,
+    "workers": 16
+   },
+   "cam3": {
+    "polarity": "dark",
+    "min_r_px": 30.0,
+    "max_r_px": 105.0,
+    "open_px": 77,
+    "rod_mask_px": 42.0,
+    "guard_px": 3.0,
+    "workers": 16
+   }
+  },
+  "frames_kept_in_all_three": 3495
+ },
+ "seconds": 1165.1220676898956,
+ "checks": [],
+ "page": "X:\\Shijie Zhong\\Refraction\\Processed\\20261008\\T0\\calibration_report.html"
+}

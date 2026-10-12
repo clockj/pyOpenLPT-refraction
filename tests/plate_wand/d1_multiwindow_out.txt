@@ -1,0 +1,7 @@
+seed 1039: 5 cams, windows [0, 1, 2, 0, 1], incidence [28, 38, 43, 22, 13] deg, f [9108, 1908, 5220, 4829, 22443], h1 [5  pinhole start:   pinhole start: 1 kept, votes {False  pi  pinhole start: 1 kept, votes {False: 0, True: 5}, rms [3.976], 17.1 s
+  window 1 (cameras [0, 3]): guess 17.5 deg from the truth; best: [17.5 deg, d +129.5 mm, score 866.6] [17.5 deg, d -2.7 mm, score 871.2] [17.5 deg, d -134.9 mm, score 876.3]; 3.9 s
+  window 2 (cameras [1, 4]): guess 23.4 deg from the truth; best: [23.4 deg, d -1246.3 mm, score 3578] [23.4 deg, d -950.4 mm, score 4069] [19.8 deg, d -653.7 mm, score 4362]; 3.1 s
+  window 3 (cameras [2]): g  start 0: coarse rms 5.067 -> stage 4 rms 6.77191 (truth start 0.10921), active per camera [1193, 1170, 1192], max |z| 3.40e+03 (cam3.w3),   bootstrap  bootstrap 134.6  bootstrap 251.2 s: 7 starts, coarse rms [0.108, 0.109, 0.112, 0.114, 0.139, 0.144, 0.156]
+  start 0: coarse rms 0.108 -> stage 4 rms 0.12647 (truth start 0.12587), active per camera [1140, 0, 1140, 1140, 0, 1140], max |z| 2.45e+06 (win2.delta), likelihood key -18931.2
+  start 1: coarse rms 0.109 -> stage 4 rms 0.12647 (truth start 0.12587), active per camera [1140, 0, 1140, 1140, 0, 1140], max |z| 1.80e+06 (win2.delta), likelihood key -18931.2
+  start 2: coarse rms 0.112 -> stage 4 rms 0.12648 (truth start 0.12587), active per camera [1140, 0, 1140, 1140, 0, 1140], max |z| 1.01e+06 (win2.delta), likelihood key -18930.8

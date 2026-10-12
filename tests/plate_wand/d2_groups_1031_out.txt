@@ -1,0 +1,9 @@
+seed 1031: windows [0, 1, 0], incidence [6, 41, 45], h1 [593, 189, 982], f [13526, 6388, 31672]
+  group window 1 cams [0, 2]: start 0 coarse 3.210 -> rms 2.8682, active 2392/2392; normal err 21.952 deg, d err -531.03 mm; cams: rot 2.801 deg, centre 303.33 mm, f 26.73 %
+  group window 1 cams [0, 2]: start 1 coarse 3.208 -> rms 2.8635, active 2392/2392; normal err 22.384 deg, d err -529.08 mm; cams: rot 2.820 deg, centre 318.84 mm, f 23.29 %
+  group window 1 cams [0, 2]: start 2 coarse 4.296 -> rms 2.8670, active 2392/2392; normal err 21.877 deg, d err -531.39 mm; cams: rot 2.751 deg, centre 304.89 mm, f 26.42 %
+whole bootstrap_groups:
+  info: {'0': {'cameras': [0, 2], 'rms_px': 2.8634738064007386, 'bootstrap_seconds': {'pinhole': 0.19713616371154785, 'window_search': 4.294582366943359, 'coarse_fit': 1.2618985176086426, 'total': 5.75361704826355}}, 'single_cam2': {'window': 1, 'candidates': 460, 'scores': [277.37297821228674, 757.5544041311457, 803.9162726548725]}}
+  start 0: back-projection rms 3.995; normal errors [22.384, 34.585] deg; d err [-529.08, -447.52]; cam rot err [0.0, 14.575, 2.82], centre [0.0, 263.1, 318.8], f % [-23.29, 7.95, 8.22]
+  start 1: back-projection rms 4.282; normal errors [22.384, 53.149] deg; d err [-529.08, -500.18]; cam rot err [0.0, 26.474, 2.82], centre [0.0, 347.9, 318.8], f % [-23.29, 30.58, 8.22]
+  start 2: back-projection rms 5.121; normal errors [22.384, 36.495] deg; d err [-529.08, -374.2]; cam rot err [0.0, 17.106, 2.82], centre [0.0, 333.5, 318.8], f % [-23.29, 31.39, 8.22]

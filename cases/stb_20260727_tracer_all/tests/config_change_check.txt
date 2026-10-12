@@ -1,0 +1,102 @@
+2026-10-11T07:00:07 before rewriting (10Hz_r_b_2 now; the others for a look)
+  10Hz_r_b_2 staging: 1 setting(s) differ
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+  10Hz_r_b_2 X:: 1 setting(s) differ (and its _comment)
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+  10Hz_r_b_1 staging: 1 setting(s) differ
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+  10Hz_r_b_1 X:: 1 setting(s) differ (and its _comment)
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+  15Hz_r_b_1 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 45
+  15Hz_r_b_1 X:: no config yet
+  35Hz_r_b_2 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 71
+  35Hz_r_b_2 X:: no config yet
+
+2026-10-11T07:00:26 after rewriting 10Hz_r_b_2 (make_configs.py --stage --case --force 10Hz_r_b_2)
+  10Hz_r_b_2 staging: 0 setting(s) differ: none
+  10Hz_r_b_2 X:: 0 setting(s) differ: none
+
+2026-10-11T07:00:45 before writing the dense runs' configs
+  15Hz_r_b_1 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 45
+  15Hz_r_b_1 X:: no config yet
+  15Hz_r_b_2 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 54
+  15Hz_r_b_2 X:: no config yet
+  20Hz_r_b_1 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 42
+  20Hz_r_b_1 X:: no config yet
+  20Hz_r_b_2 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 39
+  20Hz_r_b_2 X:: no config yet
+  25Hz_r_b_1 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 51
+  25Hz_r_b_1 X:: no config yet
+  25Hz_r_b_2 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 67
+  25Hz_r_b_2 X:: no config yet
+  30Hz_r_b_1 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 65
+  30Hz_r_b_1 X:: no config yet
+  30Hz_r_b_2 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 34
+  30Hz_r_b_2 X:: no config yet
+  35Hz_r_b_1 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 30
+  35Hz_r_b_1 X:: no config yet
+  35Hz_r_b_2 staging: 3 setting(s) differ
+      frames[1]: 12604 -> 12603
+      objects[0].convergence_phase.avg_spacing_vox: 30.0 -> 5.0
+      objects[0].tracer.intensity_threshold: 20 -> 71
+  35Hz_r_b_2 X:: no config yet
+
+2026-10-11T07:03:26 after writing the dense runs' configs (make_configs.py --stage --force; --case)
+  15Hz_r_b_1 staging: 0 setting(s) differ: none
+  15Hz_r_b_1 X:: 0 setting(s) differ: none
+  15Hz_r_b_2 staging: 0 setting(s) differ: none
+  15Hz_r_b_2 X:: 0 setting(s) differ: none
+  20Hz_r_b_1 staging: 0 setting(s) differ: none
+  20Hz_r_b_1 X:: 0 setting(s) differ: none
+  20Hz_r_b_2 staging: 0 setting(s) differ: none
+  20Hz_r_b_2 X:: 0 setting(s) differ: none
+  25Hz_r_b_1 staging: 0 setting(s) differ: none
+  25Hz_r_b_1 X:: 0 setting(s) differ: none
+  25Hz_r_b_2 staging: 0 setting(s) differ: none
+  25Hz_r_b_2 X:: 0 setting(s) differ: none
+  30Hz_r_b_1 staging: 0 setting(s) differ: none
+  30Hz_r_b_1 X:: 0 setting(s) differ: none
+  30Hz_r_b_2 staging: 0 setting(s) differ: none
+  30Hz_r_b_2 X:: 0 setting(s) differ: none
+  35Hz_r_b_1 staging: 0 setting(s) differ: none
+  35Hz_r_b_1 X:: 0 setting(s) differ: none
+  35Hz_r_b_2 staging: 0 setting(s) differ: none
+  35Hz_r_b_2 X:: 0 setting(s) differ: none
+
+2026-10-11T07:56:35 after setting aside 10Hz_r_b_1's spacing-30 run and writing its new configs
+  10Hz_r_b_1 staging: 0 setting(s) differ: none
+  10Hz_r_b_1 X:: 0 setting(s) differ: none
+

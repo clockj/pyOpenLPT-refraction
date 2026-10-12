@@ -1,0 +1,33 @@
+{
+ "camfile": {
+  "files": 34,
+  "worst_px": 7.333682273407113e-12,
+  "worst_param": 6.661338147750939e-16,
+  "pass": true
+ },
+ "csv": {
+  "filtered_rows": 2396,
+  "max_diff_px": 4.999952807338559e-07,
+  "same_missing": true,
+  "gui_loader": {
+   "ok": true,
+   "message": "Loaded 300 valid frames.",
+   "frames": 300
+  },
+  "pass": true
+ },
+ "result": {
+  "files": [
+   "calibration_report.txt",
+   "calibration_result.json",
+   "camFile\\cam1.txt",
+   "camFile\\cam2.txt",
+   "camFile\\cam3.txt",
+   "camFile\\cam4.txt"
+  ],
+  "worst_px": 4.9528855267435495e-12,
+  "rms_px": 0.11811839497049494,
+  "pass": true
+ },
+ "pass": true
+}

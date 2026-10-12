@@ -1,0 +1,56 @@
+Square-on and angled cameras through one window: Cramer-Rao at 0.1 px, 1,000 frames (camera 1's pose held)
+square-on pair: incidence 0.0, 5.0 deg; f 4373, 4350 px
+  cam1 ( 0.0 deg): f 0.3136 %, distance to the window 9.954 mm (of 600)
+  cam2 ( 5.0 deg): f 0.3149 %, distance to the window 10.050 mm (of 598)
+  window normal 0.2492 deg; 3-D shape 47.06 um (calibration), triangulation noise 358.8 um (400 points); 25 mm wand 17.04 um (calibration)
+mixed 0 + 20: incidence 0.0, 20.0 deg; f 4373, 4316 px
+  cam1 ( 0.0 deg): f 0.1453 %, distance to the window 3.488 mm (of 600)
+  cam2 (20.0 deg): f 0.1616 %, distance to the window 4.003 mm (of 564)
+  window normal 0.1285 deg; 3-D shape 13.50 um (calibration), triangulation noise 93.8 um (400 points); 25 mm wand 5.15 um (calibration)
+mixed 0 + 35: incidence 0.0, 35.0 deg; f 4373, 4339 px
+  cam1 ( 0.0 deg): f 0.0926 %, distance to the window 2.088 mm (of 600)
+  cam2 (35.0 deg): f 0.1108 %, distance to the window 2.867 mm (of 491)
+  window normal 0.1101 deg; 3-D shape 8.60 um (calibration), triangulation noise 58.4 um (400 points); 25 mm wand 3.45 um (calibration)
+angled -10/+10: incidence 10.0, 10.0 deg; f 4332, 4332 px
+  cam1 (10.0 deg): f 0.1509 %, distance to the window 3.163 mm (of 591)
+  cam2 (10.0 deg): f 0.1509 %, distance to the window 3.168 mm (of 591)
+  window normal 0.0665 deg; 3-D shape 13.56 um (calibration), triangulation noise 92.8 um (400 points); 25 mm wand 4.96 um (calibration)
+angled -20/+20: incidence 20.0, 20.0 deg; f 4316, 4316 px
+  cam1 (20.0 deg): f 0.0958 %, distance to the window 1.357 mm (of 564)
+  cam2 (20.0 deg): f 0.0966 %, distance to the window 1.365 mm (of 564)
+  window normal 0.0363 deg; 3-D shape 7.61 um (calibration), triangulation noise 50.5 um (400 points); 25 mm wand 2.98 um (calibration)
+rig C: incidence 0.0, 5.0, 5.0 deg; f 4373, 4350, 4355 px
+  cam1 ( 0.0 deg): f 0.2025 %, distance to the window 4.439 mm (of 600)
+  cam2 ( 5.0 deg): f 0.2043 %, distance to the window 4.448 mm (of 598)
+  cam3 ( 5.0 deg): f 0.2038 %, distance to the window 4.445 mm (of 598)
+  window normal 0.1379 deg; 3-D shape 26.35 um (calibration), triangulation noise 198.0 um (400 points); 25 mm wand 9.79 um (calibration)
+rig C, cam3 at 20: incidence 0.0, 5.0, 20.0 deg; f 4373, 4350, 4316 px
+  cam1 ( 0.0 deg): f 0.1020 %, distance to the window 1.559 mm (of 600)
+  cam2 ( 5.0 deg): f 0.1031 %, distance to the window 1.498 mm (of 598)
+  cam3 (20.0 deg): f 0.1099 %, distance to the window 1.731 mm (of 564)
+  window normal 0.0622 deg; 3-D shape 10.07 um (calibration), triangulation noise 71.7 um (400 points); 25 mm wand 3.55 um (calibration)
+angled pair 20 + 25: incidence 20.0, 25.0 deg; f 4316, 4317 px
+  cam1 (20.0 deg): f 0.3454 %, distance to the window 6.933 mm (of 564)
+  cam2 (25.0 deg): f 0.3474 %, distance to the window 7.179 mm (of 544)
+  window normal 0.3289 deg; 3-D shape 46.30 um (calibration), triangulation noise 388.0 um (400 points); 25 mm wand 16.81 um (calibration)
+rig C moved to 20: incidence 20.0, 25.0, 18.0 deg; f 4316, 4317, 4319 px
+  cam1 (20.0 deg): f 0.1877 %, distance to the window 3.672 mm (of 564)
+  cam2 (25.0 deg): f 0.1910 %, distance to the window 3.812 mm (of 544)
+  cam3 (18.0 deg): f 0.1875 %, distance to the window 3.583 mm (of 571)
+  window normal 0.1802 deg; 3-D shape 25.00 um (calibration), triangulation noise 210.2 um (400 points); 25 mm wand 9.58 um (calibration)
+
+summary: sigma(f) per camera (%) | sigma(distance to window) per camera (mm) | normal (deg) | 3-D shape (um)
+  square-on pair       | 0.314 0.315            | 9.95 10.05        | 0.249 | 47.1
+  mixed 0 + 20         | 0.145 0.162            | 3.49 4.00         | 0.128 | 13.5
+  mixed 0 + 35         | 0.093 0.111            | 2.09 2.87         | 0.110 | 8.6
+  angled -10/+10       | 0.151 0.151            | 3.16 3.17         | 0.066 | 13.6
+  angled -20/+20       | 0.096 0.097            | 1.36 1.37         | 0.036 | 7.6
+  rig C                | 0.203 0.204 0.204      | 4.44 4.45 4.44    | 0.138 | 26.4
+  rig C, cam3 at 20    | 0.102 0.103 0.110      | 1.56 1.50 1.73    | 0.062 | 10.1
+  angled pair 20 + 25  | 0.345 0.347            | 6.93 7.18         | 0.329 | 46.3
+  rig C moved to 20    | 0.188 0.191 0.188      | 3.67 3.81 3.58    | 0.180 | 25.0
+
+mixed 0 + 20, from scratch: same minimum as the truth-started fit (rms 0.08488 vs 0.08488 px, max |z| 5.4e-08), 15 s; actual errors: f +0.108 %, +0.062 %; distance -1.75 mm, -2.84 mm
+mixed 0 + 35, from scratch: same minimum as the truth-started fit (rms 0.08361 vs 0.08361 px, max |z| 2.0e-07), 15 s; actual errors: f -0.013 %, +0.068 %; distance +1.17 mm, +2.32 mm
+rig C, cam3 at 20, from scratch: same minimum as the truth-started fit (rms 0.10742 vs 0.10742 px, max |z| 1.1e-06), 11 s; actual errors: f +0.010 %, -0.020 %, -0.049 %; distance -1.60 mm, -1.76 mm, -2.03 mm
+done (a sizing study: no pass/fail criterion)

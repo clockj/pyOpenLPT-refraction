@@ -1,0 +1,30 @@
+The wand's volume in calib_plate_wand: the first calibration, no channel (T2): 21872 wand ends of 10936 frames; channel 150 x 100 mm inside
+  from wall 1's water side (C1, C2's wall): min -0.0, 1 % 3.4, 5 % 8.8, median 30.1, 95 % 62.8, 99 % 71.5, max 84.7 mm
+  from the far wall across wall 1 (100 mm): min 15.3, 1 % 28.5, 5 % 37.2, median 69.9, 95 % 91.2, 99 % 96.6, max 100.0 mm
+  from wall 2's water side (C3, C4's wall): min 109.0, 1 % 119.5, 5 % 138.0, median 177.7, 95 % 213.6, 99 % 221.0, max 225.2 mm
+  from the far wall across wall 2 (150 mm): min -75.2, 1 % -71.0, 5 % -63.6, median -27.7, 95 % 12.0, 99 % 30.5, max 41.0 mm
+  height along the corner line, from the median (up = C2 -> C1): min -40.5, 1 % -30.8, 5 % -25.4, median -0.0, 95 % 37.0, 99 % 45.6, max 53.8 mm
+  1-99 % box: 68.1 (along wall 1's normal) x 101.5 (along wall 2's normal) x 76.5 (height) mm = 529 cm3; convex hull of every end 503 cm3
+  each camera to the volume's centre (the ends' median): C1 1110 mm, C2 1101 mm, C3 1011 mm, C4 1036 mm
+  heights of the cameras (up = C2 -> C1): C1 +9, C2 -231, C3 +309, C4 +32 mm; C3 above C4: True
+  where the cameras aim: C1 and C2 167.9 mm from wall 2's water side, C3 and C4 47.3 mm from wall 1's; walls 90.169 deg apart
+The wand's volume in calib_plate_wand_ref_centre: the channel held, principal point at the image centre (chosen) (ref): 21872 wand ends of 10936 frames; channel 150 x 100 mm inside
+  from wall 1's water side (C1, C2's wall): min 14.3, 1 % 17.7, 5 % 23.1, median 44.4, 95 % 77.1, 99 % 85.8, max 99.0 mm
+  from the far wall across wall 1 (100 mm): min 1.0, 1 % 14.2, 5 % 22.9, median 55.6, 95 % 76.9, 99 % 82.3, max 85.7 mm
+  from wall 2's water side (C3, C4's wall): min 16.4, 1 % 26.5, 5 % 45.1, median 84.8, 95 % 120.4, 99 % 128.0, max 131.8 mm
+  from the far wall across wall 2 (150 mm): min 18.2, 1 % 22.0, 5 % 29.6, median 65.2, 95 % 104.9, 99 % 123.5, max 133.6 mm
+  height along the corner line, from the median (up = C2 -> C1): min -39.8, 1 % -30.5, 5 % -25.0, median -0.0, 95 % 37.2, 99 % 45.8, max 53.5 mm
+  1-99 % box: 68.1 (along wall 1's normal) x 101.5 (along wall 2's normal) x 76.3 (height) mm = 528 cm3; convex hull of every end 503 cm3
+  each camera to the volume's centre (the ends' median): C1 1115 mm, C2 1105 mm, C3 994 mm, C4 1017 mm
+  heights of the cameras (up = C2 -> C1): C1 +7, C2 -234, C3 +285, C4 +4 mm; C3 above C4: True
+  where the cameras aim: C1 and C2 75.0 mm from wall 2's water side, C3 and C4 61.5 mm from wall 1's; walls 90.183 deg apart
+The wand's volume in calib_plate_wand_ref: the channel held, principal point fitted (ref_pp): 21872 wand ends of 10936 frames; channel 150 x 100 mm inside
+  from wall 1's water side (C1, C2's wall): min 1.5, 1 % 4.9, 5 % 10.3, median 31.6, 95 % 64.3, 99 % 73.0, max 86.1 mm
+  from the far wall across wall 1 (100 mm): min 13.9, 1 % 27.0, 5 % 35.7, median 68.4, 95 % 89.7, 99 % 95.1, max 98.5 mm
+  from wall 2's water side (C3, C4's wall): min 15.5, 1 % 25.7, 5 % 44.3, median 84.0, 95 % 119.6, 99 % 127.2, max 131.0 mm
+  from the far wall across wall 2 (150 mm): min 19.0, 1 % 22.8, 5 % 30.4, median 66.0, 95 % 105.7, 99 % 124.3, max 134.5 mm
+  height along the corner line, from the median (up = C2 -> C1): min -39.8, 1 % -30.5, 5 % -25.0, median -0.0, 95 % 37.2, 99 % 45.8, max 53.5 mm
+  1-99 % box: 68.1 (along wall 1's normal) x 101.5 (along wall 2's normal) x 76.3 (height) mm = 528 cm3; convex hull of every end 503 cm3
+  each camera to the volume's centre (the ends' median): C1 1120 mm, C2 1108 mm, C3 986 mm, C4 1008 mm
+  heights of the cameras (up = C2 -> C1): C1 +8, C2 -233, C3 +285, C4 +6 mm; C3 above C4: True
+  where the cameras aim: C1 and C2 75.0 mm from wall 2's water side, C3 and C4 47.1 mm from wall 1's; walls 90.176 deg apart

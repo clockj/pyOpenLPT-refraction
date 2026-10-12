@@ -1,0 +1,3 @@
+T1 after VSC -> X:\Shijie Zhong\Refraction\Processed\20261007\T1\after_vsc
+  502 frames (288 MB), the run's Results\, its control's config and log, 3 fields, 41 check files
+  copied in 40 s: 364 MB; the final track files equal the local run's: True

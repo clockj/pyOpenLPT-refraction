@@ -1,0 +1,11 @@
+S2b: S2's model A against the Planes' dot edges; cam1 A 20.00 mm, z_f 1167.1 mm, sigma0 1.20 px, delta +0 mm; cam2 A 15.25 mm, z_f 822.3 mm, sigma0 1.22 px, delta +0 mm
+  position 0, cam1: 45 dots, z_tan 1179.6 mm, z_sag 1154.5 mm; along u: measured 3.13, model 2.51 px (ratio 1.25, IQR [1.139, 1.685]); along v: measured 2.00, model 2.56 px (ratio 0.78, IQR [0.763, 0.802])
+  position 0, cam2: 103 dots, z_tan 808.9 mm, z_sag 794.6 mm; along u: measured 3.49, model 2.50 px (ratio 1.20, IQR [1.086, 1.305]); along v: measured 5.75, model 4.74 px (ratio 1.18, IQR [1.006, 1.288])
+  position 1, cam1: 44 dots, z_tan 1183.0 mm, z_sag 1156.4 mm; along u: measured 3.55, model 3.05 px (ratio 1.17, IQR [1.057, 1.461]); along v: measured 1.87, model 2.27 px (ratio 0.82, IQR [0.782, 0.862])
+  position 1, cam2: 94 dots, z_tan 813.0 mm, z_sag 797.3 mm; along u: measured 2.95, model 2.37 px (ratio 1.20, IQR [1.099, 1.337]); along v: measured 4.59, model 4.30 px (ratio 1.09, IQR [0.998, 1.251])
+  position 2, cam1: 44 dots, z_tan 1186.4 mm, z_sag 1158.2 mm; along u: measured 4.32, model 3.60 px (ratio 1.22, IQR [0.992, 1.537]); along v: measured 1.79, model 1.99 px (ratio 0.89, IQR [0.846, 0.949])
+  position 2, cam2: 85 dots, z_tan 815.1 mm, z_sag 798.9 mm; along u: measured 2.59, model 2.25 px (ratio 1.17, IQR [1.114, 1.335]); along v: measured 4.08, model 4.05 px (ratio 1.05, IQR [0.987, 1.206])
+  cam1 along u: slope with depth measured +0.1590, model +0.1585 px/mm over 8.3 mm of depth
+  cam1 along v: slope with depth measured -0.0586, model -0.1531 px/mm over 5.5 mm of depth
+  cam2 along u: slope with depth measured -0.0749, model -0.0877 px/mm over 58.4 mm of depth
+  cam2 along v: slope with depth measured -0.2573, model -0.1630 px/mm over 35.2 mm of depth

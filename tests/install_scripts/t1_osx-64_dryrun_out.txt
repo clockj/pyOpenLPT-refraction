@@ -1,0 +1,476 @@
+C:\ProgramData\anaconda3\Scripts\conda.exe create -n openlpt_t1_dryrun --dry-run --override-channels -c conda-forge python=3.11 --file D:\Refraction\pyOpenLPT\tests\install_scripts\t1_spec_osx-64.txt
+
+Channels:
+ - conda-forge
+Platform: osx-64
+Collecting package metadata (repodata.json): - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ done
+Solving environment: / - \ done
+
+## Package Plan ##
+
+  environment location: C:\Users\zcloc\.conda\envs\openlpt_t1_dryrun
+
+  added / updated specs:
+    - cmake[version='>=3.15']
+    - cxx-compiler
+    - llvm-openmp
+    - matplotlib[version='>=3.7.0']
+    - numba[version='>=0.60.0']
+    - numpy[version='>=2.2.0']
+    - opencv[version='>=4.8.0']
+    - pandas[version='>=2.2.2']
+    - pillow[version='>=10.0.0']
+    - pybind11[version='>=2.13']
+    - pyside6[version='>=6.6.0']
+    - python=3.11
+    - qtawesome[version='>=1.3.0']
+    - requests[version='>=2.31.0']
+    - scikit-learn[version='>=1.0.0']
+    - scipy[version='>=1.11.0']
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    _openmp_mutex-4.5          |       8_kmp_llvm           8 KB  conda-forge
+    aom-3.14.1                 | pl5321hf898372_2         3.0 MB  conda-forge
+    aws-c-auth-1.0.0           |       h87af9f7_2         118 KB  conda-forge
+    aws-c-cal-1.0.0            |       h704dcf7_1          48 KB  conda-forge
+    aws-c-common-1.0.2         |       had63097_0         253 KB  conda-forge
+    aws-c-compression-1.0.0    |       h704dcf7_1          21 KB  conda-forge
+    aws-c-http-1.0.0           |       h71a5ee5_1         193 KB  conda-forge
+    aws-c-io-1.0.0             |       h3af93c9_0         193 KB  conda-forge
+    aws-c-s3-1.0.0             |       he02826c_1         141 KB  conda-forge
+    aws-c-sdkutils-1.0.0       |       h704dcf7_1          62 KB  conda-forge
+    aws-checksums-1.0.0        |       h704dcf7_0          94 KB  conda-forge
+    backports.zstd-1.7.0       |  py311h6931d8d_1         240 KB  conda-forge
+    brotli-1.2.0               |       ha9642f3_4          20 KB  conda-forge
+    brotli-bin-1.2.0           |       h086410e_4          19 KB  conda-forge
+    brotli-python-1.2.0        |  py311hd084d1d_4         378 KB  conda-forge
+    bzip2-1.0.8                |      h374f1ed_10         130 KB  conda-forge
+    c-ares-1.34.8              |       had63097_2         201 KB  conda-forge
+    ca-certificates-2026.7.22  |       hbd8a1cb_0         129 KB  conda-forge
+    cairo-1.18.6               |       h5791faa_0         846 KB  conda-forge
+    cctools-1030.6.3           |llvm21_1_he201b2c_6          24 KB  conda-forge
+    cctools_impl_osx-64-1030.6.3|llvm21_1_hd9d6719_6         734 KB  conda-forge
+    charset-normalizer-3.5.2   |       hd77389f_0         187 KB  conda-forge
+    clang-21.1.8               |default_cfg_he3ef750_6          28 KB  conda-forge
+    clang-21-21.1.8            |default_h0a1f3f9_6         806 KB  conda-forge
+    clang-scan-deps-21.1.8     |default_h0a1f3f9_6         106 KB  conda-forge
+    clang_impl_osx-64-21.1.8   |default_ha1a018a_6          27 KB  conda-forge
+    clangxx-21.1.8             |default_cfg_he3ef750_6          28 KB  conda-forge
+    clangxx_impl_osx-64-21.1.8 |default_ha1a018a_6          27 KB  conda-forge
+    cmake-4.4.4                |       haddf760_0        20.9 MB  conda-forge
+    compiler-rt-21.1.8         |       h694c41f_2          16 KB  conda-forge
+    compiler-rt21-21.1.8       |       h8c1e6b9_2          97 KB  conda-forge
+    compiler-rt21_osx-64-21.1.8|       h8d5f570_2         9.8 MB  conda-forge
+    compiler-rt_osx-64-21.1.8  |       h694c41f_2          16 KB  conda-forge
+    contourpy-1.3.3            |  py311h9d13916_4         290 KB  conda-forge
+    cpython-3.11.17            |  py311hd8ed1ab_1          48 KB  conda-forge
+    cxx-compiler-2.0.0         |       h94bea0c_0           7 KB  conda-forge
+    cyrus-sasl-2.1.28          |       h7cc0300_1         194 KB  conda-forge
+    dbus-1.16.2                |       hebb0a2c_2         401 KB  conda-forge
+    double-conversion-3.4.0    |       hcc62823_0          66 KB  conda-forge
+    ffmpeg-9.0.2               | gpl_h50f6a28_103        11.1 MB  conda-forge
+    fontconfig-2.18.3          |       h7f3b9c9_1         258 KB  conda-forge
+    fonttools-4.66.1           |  py311hb660652_0         2.9 MB  conda-forge
+    freetype-2.14.3            |       h694c41f_2         171 KB  conda-forge
+    fribidi-1.0.17             |       hd115831_0          63 KB  conda-forge
+    gdk-pixbuf-2.44.8          |       ha3e70bd_2         542 KB  conda-forge
+    glslang-16.6.0             |       he9b0248_0         959 KB  conda-forge
+    gmp-6.3.0                  |       h65442b7_3         461 KB  conda-forge
+    graphite2-1.3.15           |       h2fb4741_1          89 KB  conda-forge
+    harfbuzz-14.6.0            |       h694c41f_1          11 KB  conda-forge
+    hdf5-2.2.0                 |nompi_ha76ad8a_101         4.1 MB  conda-forge
+    icu-78.3                   |  py313hbf1d544_2        13.6 MB  conda-forge
+    idna-3.20                  |     pyh5ded981_0         174 KB  conda-forge
+    imath-3.2.2                |       h6337977_0         154 KB  conda-forge
+    kiwisolver-1.5.1           |  py311h34f30e4_3          66 KB  conda-forge
+    krb5-1.22.2                |       h69064fd_2         1.1 MB  conda-forge
+    lame-4.0                   |       hf131caf_1         298 KB  conda-forge
+    lcms2-2.19.1               |       h4e6bd4b_3         221 KB  conda-forge
+    ld64-956.6                 |llvm21_1_h2eed689_6          21 KB  conda-forge
+    ld64_osx-64-956.6          |llvm21_1_hb373d2a_6        1020 KB  conda-forge
+    lerc-4.2.0                 |       h35c7297_0         213 KB  conda-forge
+    libabseil-20260526.0       | cxx17_h6e8c311_2         1.2 MB  conda-forge
+    libaec-1.1.5               |       he7c3a48_0          30 KB  conda-forge
+    libass-0.17.5              |       h979882d_1         152 KB  conda-forge
+    libavif16-1.4.2            |       h98589fb_4         146 KB  conda-forge
+    libblas-3.11.0             |11_he492b99_openblas          18 KB  conda-forge
+    libbrotlicommon-1.2.0      |       he0616a4_4          77 KB  conda-forge
+    libbrotlidec-1.2.0         |       h4a2f56c_4          31 KB  conda-forge
+    libbrotlienc-1.2.0         |       h3d41943_4         305 KB  conda-forge
+    libcblas-3.11.0            |11_h9b27e0a_openblas          18 KB  conda-forge
+    libclang-cpp21.1-21.1.8    |default_h0a1f3f9_6        13.8 MB  conda-forge
+    libclang-cpp23.1-23.1.2    |default_h6e863b9_0        17.1 MB  conda-forge
+    libclang13-23.1.2          |default_h3065a3b_0        10.8 MB  conda-forge
+    libcompiler-rt-21.1.8      |       h8c1e6b9_2         1.3 MB  conda-forge
+    libcurl-8.22.0             |       h5318221_0         429 KB  conda-forge
+    libcxx-23.1.3              |       h19cb2f5_0         560 KB  conda-forge
+    libcxx-devel-21.1.8        |       h7c275be_4          23 KB  conda-forge
+    libcxx-headers-21.1.8      |       h707e725_4         1.1 MB  conda-forge
+    libdav1d7-1.5.4            |       had63097_4         661 KB  conda-forge
+    libdeflate-1.25            |       h7ad9622_1          69 KB  conda-forge
+    libdovi-3.4.0              |       hee1dffb_1         370 KB  conda-forge
+    libedit-3.1.20260512       | pl5321hba2e2ab_0         113 KB  conda-forge
+    libev-4.33                 |       ha3d0635_3          40 KB  conda-forge
+    libexpat-2.8.5             |       h6e061ac_0          74 KB  conda-forge
+    libffi-3.7.0               |       h6b3a05b_1          59 KB  conda-forge
+    libfreetype-2.14.3         |       h694c41f_2           8 KB  conda-forge
+    libfreetype6-2.14.3        |       h8afe040_2         357 KB  conda-forge
+    libgcc-16.2.0              |       h13771c8_7         382 KB  conda-forge
+    libgfortran-16.2.0         |       h7e5c614_7          98 KB  conda-forge
+    libgfortran5-16.2.0        |       h2539e6c_7        1000 KB  conda-forge
+    libglib-2.90.0             |       h7e55108_0         4.4 MB  conda-forge
+    libharfbuzz-14.6.0         |       h2974713_1         1.1 MB  conda-forge
+    libharfbuzz-devel-14.6.0   |       h2974713_1         1.6 MB  conda-forge
+    libhwloc-2.15.0            |default_h714a4ab_1001         2.3 MB  conda-forge
+    libhwy-1.4.0               |       ha8ee8a1_2         980 KB  conda-forge
+    libiconv-1.18              |       h4ae439b_3         719 KB  conda-forge
+    libintl-0.25.1             |       h98e67c8_2          97 KB  conda-forge
+    libjpeg-turbo-3.2.0        |       ha1e9b39_1         600 KB  conda-forge
+    libjxl-0.12.0              |       h5564675_4         1.6 MB  conda-forge
+    liblapack-3.11.0           |11_h859234e_openblas          18 KB  conda-forge
+    liblapacke-3.11.0          |11_h94b3770_openblas          18 KB  conda-forge
+    libllvm21-21.1.8           |       hd11396f_1        30.1 MB  conda-forge
+    libllvm23-23.1.3           |       hd11396f_0        31.9 MB  conda-forge
+    liblzma-5.8.3              |       hbb4bfdb_1         102 KB  conda-forge
+    libnghttp2-1.68.1          |       h1e30255_1         585 KB  conda-forge
+    libntlm-1.8                |       h6e16a3a_0          33 KB  conda-forge
+    libogg-1.3.5               |       he3325bb_1         211 KB  conda-forge
+    libopenblas-0.3.34         |openmp_h5c7ac21_1         6.1 MB  conda-forge
+    libopencv-5.0.0            | qt6_h5a143e9_606        30.5 MB  conda-forge
+    libopenvino-2026.3.0       |       h710ead5_0         4.9 MB  conda-forge
+    libopenvino-auto-batch-plugin-2026.3.0|       h593af69_0         105 KB  conda-forge
+    libopenvino-auto-plugin-2026.3.0|       h593af69_0         212 KB  conda-forge
+    libopenvino-hetero-plugin-2026.3.0|       hf3ab291_0         197 KB  conda-forge
+    libopenvino-intel-cpu-plugin-2026.3.0|       h710ead5_0        11.9 MB  conda-forge
+    libopenvino-ir-frontend-2026.3.0|       hf3ab291_0         188 KB  conda-forge
+    libopenvino-onnx-frontend-2026.3.0|       h054e9f6_0         1.6 MB  conda-forge
+    libopenvino-paddle-frontend-2026.3.0|       h054e9f6_0         442 KB  conda-forge
+    libopenvino-pytorch-frontend-2026.3.0|       h1f77a30_0         862 KB  conda-forge
+    libopenvino-tensorflow-frontend-2026.3.0|       h39fa46c_0         953 KB  conda-forge
+    libopenvino-tensorflow-lite-frontend-2026.3.0|       h1f77a30_0         403 KB  conda-forge
+    libopus-1.6.1              |       had63097_1         338 KB  conda-forge
+    libplacebo-7.360.1         |       h1ed201f_1         533 KB  conda-forge
+    libpng-1.6.59              |       h4382c61_0         292 KB  conda-forge
+    libpq-18.4                 |       h5935a4f_0         2.4 MB  conda-forge
+    libprotobuf-7.35.1         |       h535088a_3         2.9 MB  conda-forge
+    libpsl-0.23.1              |       h7ff43d8_1          71 KB  conda-forge
+    libpython-3.11.17          |h31af0e7_1_cpython         1.8 MB  conda-forge
+    libraqm-0.11.0             |       h1888d0e_0          32 KB  conda-forge
+    librsvg-2.62.4             |       h43ae438_0         3.9 MB  conda-forge
+    libsigtool-0.1.3           |       h8c25ef7_1          38 KB  conda-forge
+    libsqlite-3.53.4           |     ha5db789_102         985 KB  conda-forge
+    libssh2-1.11.1             |       hd53bb72_1         280 KB  conda-forge
+    libtiff-4.7.2              |       h01c3a8c_1         400 KB  conda-forge
+    libusb-1.0.30              |       had63097_0          83 KB  conda-forge
+    libuv-1.52.1               |       ha3d0635_1         126 KB  conda-forge
+    libvorbis-1.3.7            |       ha059160_2         273 KB  conda-forge
+    libvpx-1.17.0              |       h6e061ac_0         1.3 MB  conda-forge
+    libvulkan-loader-1.4.357.0 |       h66869c8_2         184 KB  conda-forge
+    libwebp-base-1.6.0         |       hb276fe9_1         356 KB  conda-forge
+    libxcb-1.17.0              |       h2478c6c_1         318 KB  conda-forge
+    libxml2-2.15.4             |       hb56241c_0          40 KB  conda-forge
+    libxml2-16-2.15.4          |       h8376fb4_0         488 KB  conda-forge
+    libxslt-1.1.45             |       h31ee24d_1         221 KB  conda-forge
+    libzlib-1.3.2              |       hbb4bfdb_3          58 KB  conda-forge
+    llvm-openmp-23.1.3         |       h8c1e6b9_0         304 KB  conda-forge
+    llvm-tools-21.1.8          |       h8c1e6b9_1          86 KB  conda-forge
+    llvm-tools-21-21.1.8       |       h36529c3_1        18.4 MB  conda-forge
+    llvmlite-0.50.0            |  py311h2ac18a9_0        31.6 MB  conda-forge
+    matplotlib-3.11.2          |  py311h9895961_1          15 KB  conda-forge
+    matplotlib-base-3.11.2     |  py311h4f3de86_1         8.5 MB  conda-forge
+    mpg123-1.33.7              |       h8d168ca_1         388 KB  conda-forge
+    narwhals-2.27.0            |     pyh5ded981_0         296 KB  conda-forge
+    ncurses-6.6                |       hcc0dc9a_1         815 KB  conda-forge
+    numba-0.68.0               |  py311hbf78a6f_1         6.0 MB  conda-forge
+    numpy-2.4.6                |  py311h2c4eb96_0         8.2 MB  conda-forge
+    opencv-5.0.0               | qt6_ha029e6b_606          50 KB  conda-forge
+    openexr-3.4.15             |       ha5ed679_0        1004 KB  conda-forge
+    openh264-2.6.0             |       h29fea0d_2         653 KB  conda-forge
+    openjpeg-2.5.4             |       he4eae51_1         326 KB  conda-forge
+    openjph-0.31.0             |       h2c0e27e_0         274 KB  conda-forge
+    openldap-2.6.13            |       h2f5043c_0         759 KB  conda-forge
+    openssl-3.6.5              |       h332eb6d_0         2.7 MB  conda-forge
+    pandas-3.0.6               |np2py311h503cbda_0        14.0 MB  conda-forge
+    pango-1.58.2               |       hc5a6962_1         440 KB  conda-forge
+    pcre2-10.47                |       h31793e3_1         1.1 MB  conda-forge
+    pillow-12.3.0              |  py311h3bf5400_4         980 KB  conda-forge
+    pixman-0.46.4              |       h2fb4741_3         314 KB  conda-forge
+    pthread-stubs-0.4          |    hd115831_1004           9 KB  conda-forge
+    pugixml-1.15               |       h46091d4_0          95 KB  conda-forge
+    py-opencv-5.0.0            | qt6_hcaee9f3_606         3.2 MB  conda-forge
+    pybind11-global-3.1.0      |     pyh648e204_0         242 KB  conda-forge
+    pyparsing-3.3.3            |     pyh5ded981_0         111 KB  conda-forge
+    pyside6-6.11.1             |  py311h4f097fe_1        14.8 MB  conda-forge
+    pysocks-1.7.1              |     pyha55dd90_7          21 KB  conda-forge
+    python-3.11.17             |h6907cb8_1_cpython        13.2 MB  conda-forge
+    python-gil-3.11.17         |       hd8ed1ab_1          48 KB  conda-forge
+    qhull-2020.2               |       h3c5361c_5         516 KB  conda-forge
+    qt6-main-6.11.1            | pl5321h64d128d_1        49.0 MB  conda-forge
+    rav1e-0.8.1                |       h618d828_0         1.1 MB  conda-forge
+    readline-8.3               |       h000c2f7_1         312 KB  conda-forge
+    rhash-1.4.6                |       ha1e9b39_2         182 KB  conda-forge
+    s2n-1.7.7                  |       h6035f5b_0         290 KB  conda-forge
+    scikit-learn-1.9.1         |np2py311h0239a9e_1         9.3 MB  conda-forge
+    scipy-1.17.1               |  py311h556693a_1        14.8 MB  conda-forge
+    sdl2-2.32.56               |       h2fb4741_0         723 KB  conda-forge
+    sdl3-3.4.18                |       h2f783eb_0         1.7 MB  conda-forge
+    shaderc-2026.3             |       hace2177_1         112 KB  conda-forge
+    sigtool-codesign-0.1.3     |       h8c25ef7_1         121 KB  conda-forge
+    snappy-1.2.2               |       h3613d57_2          40 KB  conda-forge
+    spirv-tools-2026.4         |       hf9f308f_0         1.7 MB  conda-forge
+    svt-av1-4.2.0              |       h6e061ac_1         2.3 MB  conda-forge
+    tapi-1600.0.11.8           |       h44950e2_4         211 KB  conda-forge
+    tbb-2023.1.0               |       h56c72fe_2         162 KB  conda-forge
+    tk-8.6.13                  |       ha6c374e_4         3.3 MB  conda-forge
+    tornado-6.5.10             |  py311h5e2e7b6_0         896 KB  conda-forge
+    unicodedata2-18.0.0        |  py311h5e2e7b6_0         406 KB  conda-forge
+    x264-1!164.3095            |       hd115831_3         663 KB  conda-forge
+    x265-3.5                   |       h78a8136_4         1.7 MB  conda-forge
+    xorg-libxau-1.0.12         |       hd115831_2          17 KB  conda-forge
+    xorg-libxdmcp-1.1.5        |       hd115831_2          21 KB  conda-forge
+    zlib-ng-2.3.3              |       h646e873_1         121 KB  conda-forge
+    zstd-1.5.7                 |       hbc1a06c_7         516 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:       498.0 MB
+
+The following NEW packages will be INSTALLED:
+
+  _openmp_mutex      conda-forge/osx-64::_openmp_mutex-4.5-8_kmp_llvm 
+  _python_abi3_supp~ conda-forge/noarch::_python_abi3_support-1.0-hd8ed1ab_3 
+  aom                conda-forge/osx-64::aom-3.14.1-pl5321hf898372_2 
+  aws-c-auth         conda-forge/osx-64::aws-c-auth-1.0.0-h87af9f7_2 
+  aws-c-cal          conda-forge/osx-64::aws-c-cal-1.0.0-h704dcf7_1 
+  aws-c-common       conda-forge/osx-64::aws-c-common-1.0.2-had63097_0 
+  aws-c-compression  conda-forge/osx-64::aws-c-compression-1.0.0-h704dcf7_1 
+  aws-c-http         conda-forge/osx-64::aws-c-http-1.0.0-h71a5ee5_1 
+  aws-c-io           conda-forge/osx-64::aws-c-io-1.0.0-h3af93c9_0 
+  aws-c-s3           conda-forge/osx-64::aws-c-s3-1.0.0-he02826c_1 
+  aws-c-sdkutils     conda-forge/osx-64::aws-c-sdkutils-1.0.0-h704dcf7_1 
+  aws-checksums      conda-forge/osx-64::aws-checksums-1.0.0-h704dcf7_0 
+  backports.zstd     conda-forge/osx-64::backports.zstd-1.7.0-py311h6931d8d_1 
+  brotli             conda-forge/osx-64::brotli-1.2.0-ha9642f3_4 
+  brotli-bin         conda-forge/osx-64::brotli-bin-1.2.0-h086410e_4 
+  brotli-python      conda-forge/osx-64::brotli-python-1.2.0-py311hd084d1d_4 
+  bzip2              conda-forge/osx-64::bzip2-1.0.8-h374f1ed_10 
+  c-ares             conda-forge/osx-64::c-ares-1.34.8-had63097_2 
+  ca-certificates    conda-forge/noarch::ca-certificates-2026.7.22-hbd8a1cb_0 
+  cairo              conda-forge/osx-64::cairo-1.18.6-h5791faa_0 
+  cctools            conda-forge/osx-64::cctools-1030.6.3-llvm21_1_he201b2c_6 
+  cctools_impl_osx-~ conda-forge/osx-64::cctools_impl_osx-64-1030.6.3-llvm21_1_hd9d6719_6 
+  certifi            conda-forge/noarch::certifi-2026.7.22-pyhd8ed1ab_0 
+  charset-normalizer conda-forge/osx-64::charset-normalizer-3.5.2-hd77389f_0 
+  clang              conda-forge/osx-64::clang-21.1.8-default_cfg_he3ef750_6 
+  clang-21           conda-forge/osx-64::clang-21-21.1.8-default_h0a1f3f9_6 
+  clang-scan-deps    conda-forge/osx-64::clang-scan-deps-21.1.8-default_h0a1f3f9_6 
+  clang_impl_osx-64  conda-forge/osx-64::clang_impl_osx-64-21.1.8-default_ha1a018a_6 
+  clangxx            conda-forge/osx-64::clangxx-21.1.8-default_cfg_he3ef750_6 
+  clangxx_impl_osx-~ conda-forge/osx-64::clangxx_impl_osx-64-21.1.8-default_ha1a018a_6 
+  cloudpickle        conda-forge/noarch::cloudpickle-3.1.2-pyhcf101f3_1 
+  cmake              conda-forge/osx-64::cmake-4.4.4-haddf760_0 
+  compiler-rt        conda-forge/osx-64::compiler-rt-21.1.8-h694c41f_2 
+  compiler-rt21      conda-forge/osx-64::compiler-rt21-21.1.8-h8c1e6b9_2 
+  compiler-rt21_osx~ conda-forge/noarch::compiler-rt21_osx-64-21.1.8-h8d5f570_2 
+  compiler-rt_osx-64 conda-forge/noarch::compiler-rt_osx-64-21.1.8-h694c41f_2 
+  contourpy          conda-forge/osx-64::contourpy-1.3.3-py311h9d13916_4 
+  cpython            conda-forge/noarch::cpython-3.11.17-py311hd8ed1ab_1 
+  cxx-compiler       conda-forge/osx-64::cxx-compiler-2.0.0-h94bea0c_0 
+  cycler             conda-forge/noarch::cycler-0.12.1-pyhcf101f3_2 
+  cyrus-sasl         conda-forge/osx-64::cyrus-sasl-2.1.28-h7cc0300_1 
+  dbus               conda-forge/osx-64::dbus-1.16.2-hebb0a2c_2 
+  double-conversion  conda-forge/osx-64::double-conversion-3.4.0-hcc62823_0 
+  ffmpeg             conda-forge/osx-64::ffmpeg-9.0.2-gpl_h50f6a28_103 
+  font-ttf-dejavu-s~ conda-forge/noarch::font-ttf-dejavu-sans-mono-2.37-hab24e00_0 
+  font-ttf-inconsol~ conda-forge/noarch::font-ttf-inconsolata-3.000-h77eed37_0 
+  font-ttf-source-c~ conda-forge/noarch::font-ttf-source-code-pro-2.038-h77eed37_0 
+  font-ttf-ubuntu    conda-forge/noarch::font-ttf-ubuntu-0.83-h77eed37_3 
+  fontconfig         conda-forge/osx-64::fontconfig-2.18.3-h7f3b9c9_1 
+  fonts-conda-ecosy~ conda-forge/noarch::fonts-conda-ecosystem-1-0 
+  fonts-conda-forge  conda-forge/noarch::fonts-conda-forge-1-hc364b38_1 
+  fonttools          conda-forge/osx-64::fonttools-4.66.1-py311hb660652_0 
+  freetype           conda-forge/osx-64::freetype-2.14.3-h694c41f_2 
+  fribidi            conda-forge/osx-64::fribidi-1.0.17-hd115831_0 
+  gdk-pixbuf         conda-forge/osx-64::gdk-pixbuf-2.44.8-ha3e70bd_2 
+  glslang            conda-forge/osx-64::glslang-16.6.0-he9b0248_0 
+  gmp                conda-forge/osx-64::gmp-6.3.0-h65442b7_3 
+  graphite2          conda-forge/osx-64::graphite2-1.3.15-h2fb4741_1 
+  h2                 conda-forge/noarch::h2-4.4.1-pyhcf101f3_0 
+  harfbuzz           conda-forge/osx-64::harfbuzz-14.6.0-h694c41f_1 
+  hdf5               conda-forge/osx-64::hdf5-2.2.0-nompi_ha76ad8a_101 
+  hpack              conda-forge/noarch::hpack-4.2.0-pyhd8ed1ab_0 
+  hyperframe         conda-forge/noarch::hyperframe-6.1.0-pyhd8ed1ab_0 
+  icu                conda-forge/osx-64::icu-78.3-py313hbf1d544_2 
+  idna               conda-forge/noarch::idna-3.20-pyh5ded981_0 
+  imath              conda-forge/osx-64::imath-3.2.2-h6337977_0 
+  joblib             conda-forge/noarch::joblib-1.6.0-pyhcf101f3_0 
+  kiwisolver         conda-forge/osx-64::kiwisolver-1.5.1-py311h34f30e4_3 
+  krb5               conda-forge/osx-64::krb5-1.22.2-h69064fd_2 
+  lame               conda-forge/osx-64::lame-4.0-hf131caf_1 
+  lcms2              conda-forge/osx-64::lcms2-2.19.1-h4e6bd4b_3 
+  ld64               conda-forge/osx-64::ld64-956.6-llvm21_1_h2eed689_6 
+  ld64_osx-64        conda-forge/osx-64::ld64_osx-64-956.6-llvm21_1_hb373d2a_6 
+  lerc               conda-forge/osx-64::lerc-4.2.0-h35c7297_0 
+  libabseil          conda-forge/osx-64::libabseil-20260526.0-cxx17_h6e8c311_2 
+  libaec             conda-forge/osx-64::libaec-1.1.5-he7c3a48_0 
+  libass             conda-forge/osx-64::libass-0.17.5-h979882d_1 
+  libavif16          conda-forge/osx-64::libavif16-1.4.2-h98589fb_4 
+  libblas            conda-forge/osx-64::libblas-3.11.0-11_he492b99_openblas 
+  libbrotlicommon    conda-forge/osx-64::libbrotlicommon-1.2.0-he0616a4_4 
+  libbrotlidec       conda-forge/osx-64::libbrotlidec-1.2.0-h4a2f56c_4 
+  libbrotlienc       conda-forge/osx-64::libbrotlienc-1.2.0-h3d41943_4 
+  libcblas           conda-forge/osx-64::libcblas-3.11.0-11_h9b27e0a_openblas 
+  libclang-cpp21.1   conda-forge/osx-64::libclang-cpp21.1-21.1.8-default_h0a1f3f9_6 
+  libclang-cpp23.1   conda-forge/osx-64::libclang-cpp23.1-23.1.2-default_h6e863b9_0 
+  libclang13         conda-forge/osx-64::libclang13-23.1.2-default_h3065a3b_0 
+  libcompiler-rt     conda-forge/osx-64::libcompiler-rt-21.1.8-h8c1e6b9_2 
+  libcurl            conda-forge/osx-64::libcurl-8.22.0-h5318221_0 
+  libcxx             conda-forge/osx-64::libcxx-23.1.3-h19cb2f5_0 
+  libcxx-devel       conda-forge/osx-64::libcxx-devel-21.1.8-h7c275be_4 
+  libcxx-headers     conda-forge/noarch::libcxx-headers-21.1.8-h707e725_4 
+  libdav1d7          conda-forge/osx-64::libdav1d7-1.5.4-had63097_4 
+  libdeflate         conda-forge/osx-64::libdeflate-1.25-h7ad9622_1 
+  libdovi            conda-forge/osx-64::libdovi-3.4.0-hee1dffb_1 
+  libedit            conda-forge/osx-64::libedit-3.1.20260512-pl5321hba2e2ab_0 
+  libev              conda-forge/osx-64::libev-4.33-ha3d0635_3 
+  libexpat           conda-forge/osx-64::libexpat-2.8.5-h6e061ac_0 
+  libffi             conda-forge/osx-64::libffi-3.7.0-h6b3a05b_1 
+  libfreetype        conda-forge/osx-64::libfreetype-2.14.3-h694c41f_2 
+  libfreetype6       conda-forge/osx-64::libfreetype6-2.14.3-h8afe040_2 
+  libgcc             conda-forge/osx-64::libgcc-16.2.0-h13771c8_7 
+  libgfortran        conda-forge/osx-64::libgfortran-16.2.0-h7e5c614_7 
+  libgfortran5       conda-forge/osx-64::libgfortran5-16.2.0-h2539e6c_7 
+  libglib            conda-forge/osx-64::libglib-2.90.0-h7e55108_0 
+  libharfbuzz        conda-forge/osx-64::libharfbuzz-14.6.0-h2974713_1 
+  libharfbuzz-devel  conda-forge/osx-64::libharfbuzz-devel-14.6.0-h2974713_1 
+  libhwloc           conda-forge/osx-64::libhwloc-2.15.0-default_h714a4ab_1001 
+  libhwy             conda-forge/osx-64::libhwy-1.4.0-ha8ee8a1_2 
+  libiconv           conda-forge/osx-64::libiconv-1.18-h4ae439b_3 
+  libintl            conda-forge/osx-64::libintl-0.25.1-h98e67c8_2 
+  libjpeg-turbo      conda-forge/osx-64::libjpeg-turbo-3.2.0-ha1e9b39_1 
+  libjxl             conda-forge/osx-64::libjxl-0.12.0-h5564675_4 
+  liblapack          conda-forge/osx-64::liblapack-3.11.0-11_h859234e_openblas 
+  liblapacke         conda-forge/osx-64::liblapacke-3.11.0-11_h94b3770_openblas 
+  libllvm21          conda-forge/osx-64::libllvm21-21.1.8-hd11396f_1 
+  libllvm23          conda-forge/osx-64::libllvm23-23.1.3-hd11396f_0 
+  liblzma            conda-forge/osx-64::liblzma-5.8.3-hbb4bfdb_1 
+  libnghttp2         conda-forge/osx-64::libnghttp2-1.68.1-h1e30255_1 
+  libntlm            conda-forge/osx-64::libntlm-1.8-h6e16a3a_0 
+  libogg             conda-forge/osx-64::libogg-1.3.5-he3325bb_1 
+  libopenblas        conda-forge/osx-64::libopenblas-0.3.34-openmp_h5c7ac21_1 
+  libopencv          conda-forge/osx-64::libopencv-5.0.0-qt6_h5a143e9_606 
+  libopenvino        conda-forge/osx-64::libopenvino-2026.3.0-h710ead5_0 
+  libopenvino-auto-~ conda-forge/osx-64::libopenvino-auto-batch-plugin-2026.3.0-h593af69_0 
+  libopenvino-auto-~ conda-forge/osx-64::libopenvino-auto-plugin-2026.3.0-h593af69_0 
+  libopenvino-heter~ conda-forge/osx-64::libopenvino-hetero-plugin-2026.3.0-hf3ab291_0 
+  libopenvino-intel~ conda-forge/osx-64::libopenvino-intel-cpu-plugin-2026.3.0-h710ead5_0 
+  libopenvino-ir-fr~ conda-forge/osx-64::libopenvino-ir-frontend-2026.3.0-hf3ab291_0 
+  libopenvino-onnx-~ conda-forge/osx-64::libopenvino-onnx-frontend-2026.3.0-h054e9f6_0 
+  libopenvino-paddl~ conda-forge/osx-64::libopenvino-paddle-frontend-2026.3.0-h054e9f6_0 
+  libopenvino-pytor~ conda-forge/osx-64::libopenvino-pytorch-frontend-2026.3.0-h1f77a30_0 
+  libopenvino-tenso~ conda-forge/osx-64::libopenvino-tensorflow-frontend-2026.3.0-h39fa46c_0 
+  libopenvino-tenso~ conda-forge/osx-64::libopenvino-tensorflow-lite-frontend-2026.3.0-h1f77a30_0 
+  libopus            conda-forge/osx-64::libopus-1.6.1-had63097_1 
+  libplacebo         conda-forge/osx-64::libplacebo-7.360.1-h1ed201f_1 
+  libpng             conda-forge/osx-64::libpng-1.6.59-h4382c61_0 
+  libpq              conda-forge/osx-64::libpq-18.4-h5935a4f_0 
+  libprotobuf        conda-forge/osx-64::libprotobuf-7.35.1-h535088a_3 
+  libpsl             conda-forge/osx-64::libpsl-0.23.1-h7ff43d8_1 
+  libpython          conda-forge/osx-64::libpython-3.11.17-h31af0e7_1_cpython 
+  libraqm            conda-forge/osx-64::libraqm-0.11.0-h1888d0e_0 
+  librsvg            conda-forge/osx-64::librsvg-2.62.4-h43ae438_0 
+  libsigtool         conda-forge/osx-64::libsigtool-0.1.3-h8c25ef7_1 
+  libsqlite          conda-forge/osx-64::libsqlite-3.53.4-ha5db789_102 
+  libssh2            conda-forge/osx-64::libssh2-1.11.1-hd53bb72_1 
+  libtiff            conda-forge/osx-64::libtiff-4.7.2-h01c3a8c_1 
+  libusb             conda-forge/osx-64::libusb-1.0.30-had63097_0 
+  libuv              conda-forge/osx-64::libuv-1.52.1-ha3d0635_1 
+  libvorbis          conda-forge/osx-64::libvorbis-1.3.7-ha059160_2 
+  libvpx             conda-forge/osx-64::libvpx-1.17.0-h6e061ac_0 
+  libvulkan-loader   conda-forge/osx-64::libvulkan-loader-1.4.357.0-h66869c8_2 
+  libwebp-base       conda-forge/osx-64::libwebp-base-1.6.0-hb276fe9_1 
+  libxcb             conda-forge/osx-64::libxcb-1.17.0-h2478c6c_1 
+  libxml2            conda-forge/osx-64::libxml2-2.15.4-hb56241c_0 
+  libxml2-16         conda-forge/osx-64::libxml2-16-2.15.4-h8376fb4_0 
+  libxslt            conda-forge/osx-64::libxslt-1.1.45-h31ee24d_1 
+  libzlib            conda-forge/osx-64::libzlib-1.3.2-hbb4bfdb_3 
+  llvm-openmp        conda-forge/osx-64::llvm-openmp-23.1.3-h8c1e6b9_0 
+  llvm-tools         conda-forge/osx-64::llvm-tools-21.1.8-h8c1e6b9_1 
+  llvm-tools-21      conda-forge/osx-64::llvm-tools-21-21.1.8-h36529c3_1 
+  llvmlite           conda-forge/osx-64::llvmlite-0.50.0-py311h2ac18a9_0 
+  matplotlib         conda-forge/osx-64::matplotlib-3.11.2-py311h9895961_1 
+  matplotlib-base    conda-forge/osx-64::matplotlib-base-3.11.2-py311h4f3de86_1 
+  mpg123             conda-forge/osx-64::mpg123-1.33.7-h8d168ca_1 
+  munkres            conda-forge/noarch::munkres-1.1.4-pyhd8ed1ab_1 
+  narwhals           conda-forge/noarch::narwhals-2.27.0-pyh5ded981_0 
+  ncurses            conda-forge/osx-64::ncurses-6.6-hcc0dc9a_1 
+  numba              conda-forge/osx-64::numba-0.68.0-py311hbf78a6f_1 
+  numpy              conda-forge/osx-64::numpy-2.4.6-py311h2c4eb96_0 
+  opencv             conda-forge/osx-64::opencv-5.0.0-qt6_ha029e6b_606 
+  openexr            conda-forge/osx-64::openexr-3.4.15-ha5ed679_0 
+  openh264           conda-forge/osx-64::openh264-2.6.0-h29fea0d_2 
+  openjpeg           conda-forge/osx-64::openjpeg-2.5.4-he4eae51_1 
+  openjph            conda-forge/osx-64::openjph-0.31.0-h2c0e27e_0 
+  openldap           conda-forge/osx-64::openldap-2.6.13-h2f5043c_0 
+  openssl            conda-forge/osx-64::openssl-3.6.5-h332eb6d_0 
+  packaging          conda-forge/noarch::packaging-26.3-pyhc364b38_0 
+  pandas             conda-forge/osx-64::pandas-3.0.6-np2py311h503cbda_0 
+  pango              conda-forge/osx-64::pango-1.58.2-hc5a6962_1 
+  pcre2              conda-forge/osx-64::pcre2-10.47-h31793e3_1 
+  pillow             conda-forge/osx-64::pillow-12.3.0-py311h3bf5400_4 
+  pip                conda-forge/noarch::pip-26.2.1-pyh8b19718_0 
+  pixman             conda-forge/osx-64::pixman-0.46.4-h2fb4741_3 
+  pthread-stubs      conda-forge/osx-64::pthread-stubs-0.4-hd115831_1004 
+  pugixml            conda-forge/osx-64::pugixml-1.15-h46091d4_0 
+  py-opencv          conda-forge/osx-64::py-opencv-5.0.0-qt6_hcaee9f3_606 
+  pybind11           conda-forge/noarch::pybind11-3.1.0-pyh293190f_0 
+  pybind11-global    conda-forge/noarch::pybind11-global-3.1.0-pyh648e204_0 
+  pyparsing          conda-forge/noarch::pyparsing-3.3.3-pyh5ded981_0 
+  pyside6            conda-forge/osx-64::pyside6-6.11.1-py311h4f097fe_1 
+  pysocks            conda-forge/noarch::pysocks-1.7.1-pyha55dd90_7 
+  python             conda-forge/osx-64::python-3.11.17-h6907cb8_1_cpython 
+  python-dateutil    conda-forge/noarch::python-dateutil-2.9.0.post0-pyhe01879c_2 
+  python-gil         conda-forge/noarch::python-gil-3.11.17-hd8ed1ab_1 
+  python_abi         conda-forge/noarch::python_abi-3.11-9_cp311 
+  qhull              conda-forge/osx-64::qhull-2020.2-h3c5361c_5 
+  qt6-main           conda-forge/osx-64::qt6-main-6.11.1-pl5321h64d128d_1 
+  qtawesome          conda-forge/noarch::qtawesome-1.4.2-pyh9208f05_0 
+  qtpy               conda-forge/noarch::qtpy-2.4.3-pyhd8ed1ab_1 
+  rav1e              conda-forge/osx-64::rav1e-0.8.1-h618d828_0 
+  readline           conda-forge/osx-64::readline-8.3-h000c2f7_1 
+  requests           conda-forge/noarch::requests-2.34.2-pyhcf101f3_0 
+  rhash              conda-forge/osx-64::rhash-1.4.6-ha1e9b39_2 
+  s2n                conda-forge/osx-64::s2n-1.7.7-h6035f5b_0 
+  scikit-learn       conda-forge/osx-64::scikit-learn-1.9.1-np2py311h0239a9e_1 
+  scipy              conda-forge/osx-64::scipy-1.17.1-py311h556693a_1 
+  sdl2               conda-forge/osx-64::sdl2-2.32.56-h2fb4741_0 
+  sdl3               conda-forge/osx-64::sdl3-3.4.18-h2f783eb_0 
+  setuptools         conda-forge/noarch::setuptools-84.0.0-pyh332efcf_0 
+  shaderc            conda-forge/osx-64::shaderc-2026.3-hace2177_1 
+  sigtool-codesign   conda-forge/osx-64::sigtool-codesign-0.1.3-h8c25ef7_1 
+  six                conda-forge/noarch::six-1.17.0-pyhe01879c_1 
+  snappy             conda-forge/osx-64::snappy-1.2.2-h3613d57_2 
+  spirv-tools        conda-forge/osx-64::spirv-tools-2026.4-hf9f308f_0 
+  svt-av1            conda-forge/osx-64::svt-av1-4.2.0-h6e061ac_1 
+  tapi               conda-forge/osx-64::tapi-1600.0.11.8-h44950e2_4 
+  tbb                conda-forge/osx-64::tbb-2023.1.0-h56c72fe_2 
+  threadpoolctl      conda-forge/noarch::threadpoolctl-3.7.0-pyhc455866_0 
+  tk                 conda-forge/osx-64::tk-8.6.13-ha6c374e_4 
+  tornado            conda-forge/osx-64::tornado-6.5.10-py311h5e2e7b6_0 
+  tzdata             conda-forge/noarch::tzdata-2026c-h151e31d_0 
+  unicodedata2       conda-forge/osx-64::unicodedata2-18.0.0-py311h5e2e7b6_0 
+  urllib3            conda-forge/noarch::urllib3-2.8.0-pyhd8ed1ab_0 
+  wheel              conda-forge/noarch::wheel-0.48.0-pyhd8ed1ab_0 
+  x264               conda-forge/osx-64::x264-1!164.3095-hd115831_3 
+  x265               conda-forge/osx-64::x265-3.5-h78a8136_4 
+  xorg-libxau        conda-forge/osx-64::xorg-libxau-1.0.12-hd115831_2 
+  xorg-libxdmcp      conda-forge/osx-64::xorg-libxdmcp-1.1.5-hd115831_2 
+  zlib-ng            conda-forge/osx-64::zlib-ng-2.3.3-h646e873_1 
+  zstd               conda-forge/osx-64::zstd-1.5.7-hbc1a06c_7 
+
+
+
+DryRunExit: Dry run. Exiting.
+

@@ -1,0 +1,13 @@
+{
+ "name": "head1007",
+ "config": "Release",
+ "git_head": "d9b20b4",
+ "returncode": 0,
+ "errors": 0,
+ "warnings": 370,
+ "minutes": 0.6,
+ "products": [
+  "OpenLPT.exe",
+  "pyopenlpt.cp311-win_amd64.pyd"
+ ]
+}

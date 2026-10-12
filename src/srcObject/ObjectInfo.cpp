@@ -21,6 +21,24 @@ bool Object3D::isReconstructable(
             continue;
         }
 
+        // A multi-valued camera (curved port) where the object may have more
+        // than one image: by its status (Phase 2 of the cylinder STB plan).
+        if (camera_models[i]->multiValued() &&
+            !camera_models[i]->provablySingleImage(_pt_center))
+        {
+            const ImageStatus st = camera_models[i]->imageStatus(
+                _pt_center, 0.0, 4.0 * imageRadiusPx(i));
+            if (st != ImageStatus::One)
+            {
+                n_outrange ++;
+                if (n_cam - n_outrange < 2)
+                {
+                    return false;
+                }
+            }
+            continue;
+        }
+
         x = _obj2d_list[i]->_pt_center[0];
         y = _obj2d_list[i]->_pt_center[1];
 
@@ -54,7 +72,17 @@ void Object3D::projectObject2D(
             continue;
         }
 
-        auto proj_status = camera_models[i]->project(_pt_center);
+        // Cameras that take a hint start from the ray of the last image.
+        const Camera& cam = *camera_models[i];
+        StatusOr<Pt2D> proj_status = [&]() {
+            if (!cam.usesProjectionHint()) {
+                return cam.project(_pt_center);
+            }
+            if (_proj_hint.size() != static_cast<size_t>(n_cam)) {
+                _proj_hint.resize(n_cam);
+            }
+            return cam.projectWithHint(_pt_center, _proj_hint[i]);
+        }();
         if (proj_status) {
             obj2d->_pt_center = proj_status.value();
         } else {
@@ -187,7 +215,8 @@ bool extractPinholeData(const Camera& camera_model,
 {
     switch (camera_model.type()) {
     case CameraType::Pinhole: {
-        const auto* pinhole = dynamic_cast<const PinholeCamera*>(&camera_model);
+        // a corrected camera's parameters are its model's
+        const auto* pinhole = dynamic_cast<const PinholeCamera*>(&baseCamera(camera_model));
         if (!pinhole) {
             return false;
         }
@@ -198,7 +227,7 @@ bool extractPinholeData(const Camera& camera_model,
         return true;
     }
     case CameraType::RefractionPinhole: {
-        const auto* pinplate = dynamic_cast<const RefractionPinholeCamera*>(&camera_model);
+        const auto* pinplate = dynamic_cast<const RefractionPinholeCamera*>(&baseCamera(camera_model));
         if (!pinplate) {
             return false;
         }

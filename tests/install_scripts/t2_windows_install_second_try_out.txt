@@ -1,0 +1,6 @@
+T2: install_windows.bat into a new environment 'OpenLPT_install_test', on a clone in C:\Users\zcloc\AppData\Local\Temp\claude\D--Refraction\a348e4b0-2bd4-4d5f-bb53-468fe9f4a996\scratchpad\oc
+  clone (Refraction_new, depth 1, then checkout): exit 0, 21 s
+  copied in: requirements.txt, install_windows.bat, update_openlpt.bat, install_linux.sh, install_mac.command, README.md, CLAUDE.md
+  install_windows.bat: exit 1, 0.0 min; 'Installation Complete!' False; [Error] lines []
+
+T2 FAIL

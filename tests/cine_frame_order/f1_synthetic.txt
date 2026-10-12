@@ -1,0 +1,41 @@
+F1 .cine frame reading on synthetic videos (600 frames each), through the real pycine
+
+PASS  1 pycine start_frame 0, 1, 2 give stored frames: {"stored": [0, 0, 1], "expected": [0, 0, 1]}
+PASS  2 old GUI reading, FirstImageNo 0: file 256 = stored 255, file j = j - 1 after, last frame lost: {"files_255_258": [255, 255, 256, 257], "last_file": 598, "stored_599_in_files": false}
+PASS  2b old GUI reading, FirstImageNo -300 (shown, not required): {"files_0_3": [299, 300, 301, 302], "files_298_303": [597, 598, 599, 0, 1, 2]}
+PASS  3 read_cine_frames one at a time, FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 256, FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 128, FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 100, FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames out of range raises, FirstImageNo 0: {"problems": []}
+PASS  3 read_cine_frames one at a time, FirstImageNo 1: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 256, FirstImageNo 1: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 128, FirstImageNo 1: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 100, FirstImageNo 1: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames out of range raises, FirstImageNo 1: {"problems": []}
+PASS  3 read_cine_frames one at a time, FirstImageNo 5: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 256, FirstImageNo 5: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 128, FirstImageNo 5: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 100, FirstImageNo 5: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames out of range raises, FirstImageNo 5: {"problems": []}
+PASS  3 read_cine_frames one at a time, FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 256, FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 128, FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames chunks of 100, FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": []}
+PASS  3 read_cine_frames out of range raises, FirstImageNo -300: {"problems": []}
+PASS  4 GUI batch worker, FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": [], "worker": {"total": 600, "processed": 600, "failed": 0}}
+PASS  4 GUI batch worker, FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": [], "worker": {"total": 600, "processed": 600, "failed": 0}}
+PASS  5 GUI background average, every 20th frame, FirstImageNo 0: {"mean_of_stored": 290.0, "expected": 290.0, "count": 30}
+PASS  5 GUI background average, every 20th frame, FirstImageNo 5: {"mean_of_stored": 290.0, "expected": 290.0, "count": 30}
+PASS  6 command-line background, stride 1, FirstImageNo 0: {"mean_of_stored": 299.5, "expected": 299.5, "frames_averaged": 600}
+PASS  6 command-line background, stride 20, FirstImageNo 0: {"mean_of_stored": 290.0, "expected": 290.0, "frames_averaged": 30}
+PASS  6 command-line background, stride 1, FirstImageNo -300: {"mean_of_stored": 449.5, "expected": 449.5, "frames_averaged": 300}
+PASS  6 command-line background, stride 20, FirstImageNo -300: {"mean_of_stored": 440.0, "expected": 440.0, "frames_averaged": 15}
+PASS  7 command-line conversion, 1 worker(s), FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": [], "failures": []}
+PASS  7 command-line conversion, 4 worker(s), FirstImageNo 0: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": [], "failures": []}
+PASS  7 command-line conversion, 1 worker(s), FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": [], "failures": []}
+PASS  7 command-line conversion, 4 worker(s), FirstImageNo -300: {"ok": true, "n": 600, "n_wrong": 0, "first_wrong": [], "got_at_first_wrong": [], "failures": []}
+PASS  8 GUI preview, FirstImageNo 0: {"frames": [0, 1, 255, 256, 257, 599], "stored": [0, 1, 255, 256, 257, 599]}
+PASS  8 GUI preview, FirstImageNo -300: {"frames": [0, 1, 255, 256, 257, 599], "stored": [0, 1, 255, 256, 257, 599]}
+
+37 of 37 checks pass: PASS

@@ -1,0 +1,12 @@
+seed 1032: windows [0, 1, 2, 0, 1], incidence [21, 40, 5, 12, 34], h1 [423, 930, 1178, 1258, 1167], f [6061, 29101, 35622, 11367, 25035]
+  group window 1 cams [0, 3]: start 0 coarse 0.247 -> rms 0.0847, active 3200/3200; normal err 0.069 deg, d err +1.23 mm; cams: rot 0.011 deg, centre 6.73 mm, f 0.45 %
+  group window 1 cams [0, 3]: start 1 coarse 0.247 -> rms 0.0847, active 3200/3200; normal err 0.069 deg, d err +1.23 mm; cams: rot 0.011 deg, centre 6.73 mm, f 0.45 %
+  group window 1 cams [0, 3]: start 2 coarse 0.247 -> rms 0.0847, active 3200/3200; normal err 0.069 deg, d err +1.23 mm; cams: rot 0.011 deg, centre 6.73 mm, f 0.45 %
+  group window 2 cams [1, 4]: start 0 coarse 1.708 -> rms 1.2686, active 3200/3200; normal err 4.206 deg, d err +909.32 mm; cams: rot 2.150 deg, centre 1078.09 mm, f 118.43 %
+  group window 2 cams [1, 4]: start 1 coarse 1.839 -> rms 1.3453, active 3200/3200; normal err 4.260 deg, d err +954.10 mm; cams: rot 2.355 deg, centre 1059.47 mm, f 118.74 %
+  group window 2 cams [1, 4]: start 2 coarse 2.130 -> rms 1.6587, active 3200/3200; normal err 4.478 deg, d err +985.71 mm; cams: rot 2.485 deg, centre 889.49 mm, f 102.51 %
+whole bootstrap_groups:
+  info: {'0': {'cameras': [0, 3], 'rms_px': 0.08473473609288501, 'bootstrap_seconds': {'pinhole': 0.6878557205200195, 'window_search': 4.2311177253723145, 'coarse_fit': 1.4999003410339355, 'total': 6.4188737869262695}}, '1': {'cameras': [1, 4], 'rms_px': 1.2686498129544939, 'bootstrap_seconds': {'pinhole': 0.2732870578765869, 'window_search': 4.113041877746582, 'coarse_fit': 2.0783040523529053, 'total': 6.464632987976074}, 'joined_on_frames': 800}, 'single_cam3': {'window': 2, 'candidates': 460, 'scores': [0.011947033373140403, 0.33527668196097027, 2.2649379809944796]}}
+  start 0: back-projection rms 2.110; normal errors [0.069, 2.666, 8.189] deg; d err [1.23, 35.85, -1002.19]; cam rot err [0.0, 1.698, 1.983, 0.011, 0.512], centre [0.0, 1094.8, 34.8, 6.7, 1708.4], f % [-0.1, 85.85, -17.85, 0.45, 118.43]
+  start 1: back-projection rms 2.121; normal errors [0.069, 2.666, 8.189] deg; d err [1.23, 35.85, -1304.11]; cam rot err [0.0, 1.698, 1.997, 0.011, 0.512], centre [0.0, 1094.8, 127.7, 6.7, 1708.4], f % [-0.1, 85.85, -16.13, 0.45, 118.43]
+  start 2: back-projection rms 2.157; normal errors [0.069, 2.666, 4.688] deg; d err [1.23, 35.85, -1309.21]; cam rot err [0.0, 1.698, 0.795, 0.011, 0.512], centre [0.0, 1094.8, 237.3, 6.7, 1708.4], f % [-0.1, 85.85, -7.34, 0.45, 118.43]

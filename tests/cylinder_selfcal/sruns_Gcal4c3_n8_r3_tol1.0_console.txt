@@ -1,0 +1,2 @@
+synthetic runs ['Gcal4c3_n8_r3_tol1.0']: build p4c, OMP_NUM_THREADS 12
+  Gcal4c3_n8_r3_tol1.0: recall (central, seen by all) 0.869, >= n-1 0.779, >= 2 0.779; reconstructed 1116 per frame, ghosts 65 (5.9 %), duplicates 1.1; position RMS 19.7, 9.0, 19.3 um; long tracks 1262 (ghost 45), purity 0.937, track recall 0.778; 55.83 s per frame; exit 0, wall 2237 s

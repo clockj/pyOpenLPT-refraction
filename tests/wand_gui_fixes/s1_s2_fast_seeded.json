@@ -1,0 +1,96 @@
+{
+ "checks": [
+  {
+   "check": "D2: the same points with numpy's global seed 1 and 2, to the bit",
+   "ok": true,
+   "detail": "60 of 60"
+  },
+  {
+   "check": "D2: numpy's global random state unchanged by a call",
+   "ok": true,
+   "detail": "60 of 60"
+  },
+  {
+   "check": "D2: Test Detect's path (fresh worker processes) gives the same points, to the bit",
+   "ok": true,
+   "detail": "6 of 6 images"
+  },
+  {
+   "check": "T2: the same points with numpy's global seed 1 and 2, to the bit",
+   "ok": true,
+   "detail": "12 of 12"
+  },
+  {
+   "check": "T2: numpy's global random state unchanged by a call",
+   "ok": true,
+   "detail": "12 of 12"
+  },
+  {
+   "check": "T2: Test Detect's path (fresh worker processes) gives the same points, to the bit",
+   "ok": true,
+   "detail": "6 of 6 images"
+  },
+  {
+   "check": "D2: Process All Frames' path (the pool, two cameras of the same images) gives the same points, to the bit",
+   "ok": true,
+   "detail": "120 of 120"
+  },
+  {
+   "check": "D2: the seeded points differ from each unseeded run by no more than 1.5 x two unseeded runs do",
+   "ok": true,
+   "detail": "seeded against unseeded: 0.064, 0.042, 0.043, 0.064 px; between unseeded runs: 0.046, 0.044, 0.051, 0.043, 0.044, 0.044 px"
+  },
+  {
+   "check": "D2: the accuracy is as before (median, 95 %, largest centre error within the unseeded runs' range, give or take their spread); every ball found",
+   "ok": true,
+   "detail": "seeded 0.072 / 0.214 / 0.294 px (120 balls); unseeded 0.072 / 0.214 / 0.294; 0.071 / 0.214 / 0.294; 0.071 / 0.211 / 0.294; 0.070 / 0.211 / 0.294 px; spread 0.051 px"
+  }
+ ],
+ "seconds": 96.97782397270203,
+ "seeded_errors": [
+  0.07150996154930535,
+  0.21416881174241162,
+  0.293989758107812,
+  120
+ ],
+ "unseeded_errors": [
+  [
+   0.07161747247067393,
+   0.21416881174241162,
+   0.293989758107812,
+   120
+  ],
+  [
+   0.07107032157436083,
+   0.21416881174241162,
+   0.293989758107812,
+   120
+  ],
+  [
+   0.07107032157436083,
+   0.21139348026019703,
+   0.293989758107812,
+   120
+  ],
+  [
+   0.0701568241905591,
+   0.21096403261041355,
+   0.293989758107812,
+   120
+  ]
+ ],
+ "between_unseeded_px": [
+  0.04553927246885638,
+  0.04389837725571224,
+  0.051081211639804364,
+  0.04286428236672232,
+  0.04389837725571224,
+  0.04389837725571224
+ ],
+ "seeded_to_unseeded_px": [
+  0.06427458396418653,
+  0.041922900236050366,
+  0.04286428236672232,
+  0.06427458396418653
+ ]
+}

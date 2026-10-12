@@ -1,0 +1,53 @@
+W5: 600 frames x 2 cameras (1200 tasks), ellipse mode, 25 worker processes; pause 10 s once 50 frames are detected
+Generator starting: 600 frames. Resume=False, Autosave=None
+Detected Image Size: (800, 1280)
+Parallel Execution: 1200 tasks to run (Skipped 0)
+Parallel Execution: Using 25 processes (80% of 32 cores).
+Raw detection done. Calculating stats...
+Cam 0 PeakFilter: S[65.9±0.5] L[90.4±0.5] (Ranges: 65.2-66.4, 89.7-90.9)
+Cam 0 Final Stats: Small(m=65.9, s=0.5), Large(m=90.4, s=0.5)
+Cam 1 PeakFilter: S[59.2±0.5] L[79.3±0.5] (Ranges: 58.4-59.8, 78.2-80.5)
+Cam 1 Final Stats: Small(m=59.2, s=0.5), Large(m=79.3, s=0.5)
+  Pass1 Frame 2 rejected: Cam 0: No candidates (s:0, l:0), pts=1
+  Pass1 Frame 0 rejected: Camera 0 not in cam_data
+  Pass1 Frame 1 rejected: Cam 0: No candidates (s:0, l:1), pts=1
+Pass 1 Done. Valid Frames: 100 / 600
+Refinement Done. Valid Frames: 100 / 600
+  unpaused: 23.8 s, 1200 tasks, Detection completed.
+Generator starting: 600 frames. Resume=False, Autosave=None
+Detected Image Size: (800, 1280)
+Parallel Execution: 1200 tasks to run (Skipped 0)
+Parallel Execution: Using 25 processes (80% of 32 cores).
+Raw detection done. Calculating stats...
+Cam 0 PeakFilter: S[65.9±0.5] L[90.4±0.5] (Ranges: 65.2-66.4, 89.7-90.9)
+Cam 0 Final Stats: Small(m=65.9, s=0.5), Large(m=90.4, s=0.5)
+Cam 1 PeakFilter: S[59.2±0.5] L[79.3±0.5] (Ranges: 58.4-59.8, 78.2-80.5)
+Cam 1 Final Stats: Small(m=59.2, s=0.5), Large(m=79.3, s=0.5)
+  Pass1 Frame 0 rejected: Camera 0 not in cam_data
+Pass 1 Done. Valid Frames: 100 / 600
+Refinement Done. Valid Frames: 100 / 600
+  paused: 31.5 s, 1200 tasks, Detection completed.; 100 done before the pause; during it 26 started (the last 0.52 s after it began; 0 in its last 7 s) and 51 finished
+Generator starting: 600 frames. Resume=False, Autosave=None
+Detected Image Size: (800, 1280)
+Parallel Execution: 1200 tasks to run (Skipped 0)
+Parallel Execution: Using 25 processes (80% of 32 cores).
+Raw detection done. Calculating stats...
+Cam 0 PeakFilter: S[65.9±0.5] L[90.4±0.5] (Ranges: 65.2-66.4, 89.7-90.9)
+Cam 0 Final Stats: Small(m=65.9, s=0.5), Large(m=90.4, s=0.5)
+Cam 1 PeakFilter: S[59.2±0.5] L[79.3±0.5] (Ranges: 58.4-59.8, 78.2-80.5)
+Cam 1 Final Stats: Small(m=59.2, s=0.5), Large(m=79.3, s=0.5)
+  Pass1 Frame 0 rejected: Camera 0 not in cam_data
+  Pass1 Frame 4 rejected: Cam 0: No candidates (s:1, l:0), pts=1
+  Pass1 Frame 1 rejected: Cam 0: No candidates (s:0, l:1), pts=1
+Pass 1 Done. Valid Frames: 100 / 600
+Refinement Done. Valid Frames: 100 / 600
+  paused_before_fix: 23.1 s, 1200 tasks, Detection completed.; 100 done before the pause; during it 587 started (the last 9.98 s after it began; 427 in its last 7 s) and 588 finished
+  PASS  during the pause at most 2 x workers tasks start (those in flight), none in its last 7 s  (26 started (limit 50), 0 in the last 7 s)
+  PASS  the paused run completes with the unpaused run's raw detections and wand points, to the bit  (600 frames detected, 100 paired (unpaused: 600, 100))
+  PASS  before the fix, tasks kept starting through the pause (the bug, for the record)  (587 started during the pause, 427 in its last 7 s)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+  PASS  the end of a detection clears the frames deleted before (new points start with none deleted)  (deleted [], marks {}, filtered None; status 'Done: Detection completed. 100 of 600 frames paired (both balls in every camera).'; messages [('question', 'Export Data')])
+
+4 of 4 checks passed; 81 s
+exit 0

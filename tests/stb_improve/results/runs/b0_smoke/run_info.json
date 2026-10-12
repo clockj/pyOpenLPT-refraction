@@ -1,0 +1,50 @@
+{
+ "run": "b0_smoke",
+ "argv": [
+  "b0_smoke",
+  "--build",
+  "dev",
+  "--frames",
+  "0",
+  "5",
+  "--config-extra",
+  "profile = 1"
+ ],
+ "build": "dev",
+ "build_dir": "D:\\Refraction\\pyOpenLPT\\build-stb\\dev\\out",
+ "build_info": {
+  "name": "dev",
+  "mode": "py",
+  "config": "Release",
+  "src": "D:\\Refraction\\pyOpenLPT",
+  "git_head": "14ad4b6",
+  "git_diff_stat": ".gitignore                      |  11 +\n cmake/openLPT.cmake             |   2 +-\n inc/libMath/Matrix.h            |  17 +-\n inc/libSTB/Config.h             |  11 +\n inc/libSTB/StereoMatch.h        |  16 ++\n src/pybind_OpenLPT/pyConfig.cpp |   7 +-\n src/srcMath/Matrix.hpp          |  73 ++++--\n src/srcSTB/Config.cpp           | 476 +++++++++++++++++++++++++++++++++++++++-\n src/srcSTB/STB.cpp              |   7 +-\n src/srcSTB/StereoMatch.cpp      |  69 ++++++\n 10 files changed, 649 insertions(+), 40 deletions(-)",
+  "git_diff_sha256": "d091b384f36be6466b3626d6310dfc7ad508ae80b53b095d782b73d630d95774",
+  "untracked": [
+   "inc/nlohmann/LICENSE.MIT",
+   "inc/nlohmann/json.hpp"
+  ],
+  "defs": [],
+  "asan": false,
+  "cxx_flags": "/DWIN32 /D_WINDOWS /EHsc",
+  "start": "2026-10-05T14:16:45",
+  "minutes": 0.4,
+  "returncode": 0,
+  "errors": 0,
+  "warnings": 57,
+  "products": [
+   "OpenLPT.exe",
+   "pyopenlpt.cp311-win_amd64.pyd"
+  ]
+ },
+ "asan_options": "",
+ "host": "HELLOWORLD",
+ "start": "2026-10-05T14:17:21",
+ "end": "2026-10-05T14:17:51",
+ "wall_s": 30.2,
+ "returncode": 0,
+ "frames_done": 6,
+ "sum_frame_s": 28.9,
+ "peak_working_set_MB": 885,
+ "peak_private_MB": 396
+}

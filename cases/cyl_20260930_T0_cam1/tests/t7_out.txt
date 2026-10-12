@@ -1,0 +1,24 @@
+T7 error budget of model M1bx against the port constants and the stage scale (25 s)
+  nominal: fit rms 0.1958 px, held-out at the stage positions 0.3421 px, f 41459.1 px, camera [ 6.84500e+01 -5.50000e-01  1.10617e+03] mm, axis X,Z [20.87  13.076] mm, lean 0.016 deg
+  change             d fit rms held-out  d f (px)            d camera (mm)   d axis X,Z (mm)  d lean  board rms (um)  shift rms (um)
+  n_water +0.002       -0.0030   0.3404    -262.1      [-2.4   0.02 -6.57]   [-0.679 -0.384]  +0.005     [22.5  9.8]       [4.  3.2]
+  n_water -0.002       +0.0042   0.3444    +247.8      [ 2.39 -0.02  6.2 ]     [0.683 0.39 ]  -0.004     [22.9 10. ]       [4.  3.2]
+  n_acrylic +0.01      +0.0004   0.3423     +23.2      [ 0.3  -0.    0.59]   [ 0.087 -0.008]  -0.001     [22.7  9.9]       [4.  3.2]
+  n_acrylic -0.01      -0.0004   0.3418     -23.8      [-0.31  0.   -0.6 ]   [-0.088  0.008]  +0.001     [22.7  9.9]       [4.  3.2]
+  R_outer +0.25 mm     +0.0018   0.3431     +90.8      [ 1.35 -0.01  2.3 ]   [ 0.39  -0.031]  -0.003     [22.9  9.9]       [4.  3.2]
+  R_outer -0.25 mm     -0.0015   0.3412     -96.7      [-1.35  0.01 -2.45]   [-0.389  0.032]  +0.003     [22.5  9.8]       [4.  3.2]
+  wall +0.2 mm         +0.0005   0.3423     +26.4      [ 0.36 -0.    0.67]   [ 0.102 -0.009]  -0.001     [22.8  9.9]       [4.  3.2]
+  wall -0.2 mm         -0.0005   0.3418     -26.7      [-0.35  0.   -0.68]   [-0.101  0.009]  +0.001     [22.7  9.9]       [4.  3.2]
+  n_air 1.00027        +0.0007   0.3424     +44.7      [ 0.42 -0.    1.12]     [0.119 0.07 ]  -0.001     [22.7  9.9]       [4.  3.2]
+  stage steps +1 %     -0.0045   0.3397     -34.6      [-4.95  0.06 -0.35]   [-1.395  0.268]  +0.013     [22.1  9.7]       [4.  3.2]
+  stage steps -1 %     +0.0099   0.3478     -49.2      [ 4.88 -0.05 -1.82]   [ 1.403 -0.251]  -0.010     [23.4 10.1]       [4.  3.2]
+
+  n_water scan, planes fixed (fit rms, f, camera distance from the axis):
+    n_water 1.327: rms 0.2115 px, f  42166.7 px, camera-axis  1110.8 mm
+    n_water 1.330: rms 0.2026 px, f  41826.0 px, camera-axis  1102.8 mm
+    n_water 1.333: rms 0.1958 px, f  41459.1 px, camera-axis  1094.1 mm
+    n_water 1.336: rms 0.1919 px, f  41059.9 px, camera-axis  1084.6 mm
+    n_water 1.339: rms 0.1914 px, f  40623.3 px, camera-axis  1074.1 mm
+    n_water 1.342: rms 0.1947 px, f  40146.3 px, camera-axis  1062.5 mm
+    n_water 1.345: rms 0.2021 px, f  39630.4 px, camera-axis  1049.9 mm
+  minimum of a parabola through rms^2: n_water = 1.3376 (rms 0.1914 px); formal 1-sigma width 0.0005 (a lower bound: the residuals are not independent)

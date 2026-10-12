@@ -1,0 +1,32 @@
+D1 t3_s4: 2187 frames, fit_k1 False; the saved fit: RMS 0.4101 px, sigma 0.3515 px
+  free walls: weighted cost 2880.45 (17128 detections), RMS 0.4101 px; smallest depth below the walls -4.83, 132 mm
+  free walls on the 8749 unused frames: median 0.2429 px, inliers RMS 0.2188; wand |dL| median 0.0097 mm, mean L 10.1138, SD 0.0141
+  wall 1 moved by delta (mm, negative = towards its cameras) and held:
+    delta   dchi2    RMS px   cam0 to wall  cam1 to wall   f (px) of every camera     smallest depths (mm)   unused frames: |dL| median, mean L, inl. RMS
+     -80.0  -971.61  0.3338          987.7         974.8    18211  18929  21241  21767   62.72, 115.77   0.0096, 10.0969, 0.2284
+     -60.0 -1075.25  0.3246         1007.7         991.5    18371  19042  21226  21753   48.55, 117.74   0.0095, 10.0970, 0.2215
+     -45.0 -1136.81  0.3191         1022.7        1004.0    18494  19130  21215  21743   38.10, 119.26   0.0095, 10.0970, 0.2172
+     -30.0 -1184.98  0.3146         1037.7        1016.6    18618  19219  21204  21733   27.80, 120.82   0.0095, 10.0971, 0.2137
+     -20.0 -1209.88  0.3123         1047.7        1024.9    18702  19280  21197  21726   21.02, 121.87   0.0095, 10.0971, 0.2119
+     -10.0 -1229.15  0.3105         1057.7        1033.3    18787  19341  21190  21720   14.30, 122.95   0.0095, 10.0971, 0.2104
+      -5.0 -1236.71  0.3098         1062.7        1037.4    18830  19372  21186  21716   10.97, 123.49   0.0096, 10.0971, 0.2098
+      -2.0   (a wand end would lie in or before the wall: smallest depth -2.83 mm)
+      +0.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+      +2.0   (a wand end would lie in or before the wall: smallest depth -6.83 mm)
+      +5.0   (a wand end would lie in or before the wall: smallest depth -9.83 mm)
+     +10.0   (a wand end would lie in or before the wall: smallest depth -14.83 mm)
+     +20.0   (a wand end would lie in or before the wall: smallest depth -24.83 mm)
+     +40.0   (a wand end would lie in or before the wall: smallest depth -44.83 mm)
+  wall 2 moved by delta (mm, negative = towards its cameras) and held:
+    delta   dchi2    RMS px   cam2 to wall  cam3 to wall   f (px) of every camera     smallest depths (mm)   unused frames: |dL| median, mean L, inl. RMS
+     -40.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+     -20.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+     -10.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+      -5.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+      +0.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+      +5.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+     +10.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+     +20.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+     +40.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+     +80.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)
+    +120.0   (a wand end would lie in or before the wall: smallest depth -4.83 mm)

@@ -1,0 +1,33 @@
+{
+ "checks": [
+  {
+   "check": "a: the variables are 1 inside the block and restored after it",
+   "ok": true,
+   "detail": "inside {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}; after (one set to 7 before) {'OPENBLAS_NUM_THREADS': '7', 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None}; after (unset before) {'OPENBLAS_NUM_THREADS': None, 'OMP_NUM_THREADS': None, 'MKL_NUM_THREADS': None}"
+  },
+  {
+   "check": "b: one worker started inside it commits <= 0.5 GB (P2: 4.22 GB without, 0.33 GB with one thread)",
+   "ok": true,
+   "detail": "0.33 GB; its variables {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}"
+  },
+  {
+   "check": "c: the detection completes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "c: the committed memory rose by at most 25 x 0.5 GB",
+   "ok": true,
+   "detail": "8.7 GB (without the fix: about 106 GB)"
+  },
+  {
+   "check": "c: the same 159 frames and centres as P3 (to the CSV's 3 decimals)",
+   "ok": true,
+   "detail": "159 frames paired; same rows True; largest centre difference 0.0e+00 px"
+  }
+ ],
+ "seconds": 141.68156504631042,
+ "worker_gb": 0.3297615051269531,
+ "pool_workers": 25,
+ "commit_rise_gb": 8.708442687988281
+}

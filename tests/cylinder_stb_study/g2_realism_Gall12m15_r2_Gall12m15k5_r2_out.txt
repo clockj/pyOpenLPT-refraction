@@ -1,0 +1,3 @@
+G2: Gall12m15_r2, Gall12m15k5_r2; OMP_NUM_THREADS 10
+  Gall12m15_r2: recall (central, seen by all) 0.216, >= 2 0.216; reconstructed 118 per frame, ghosts 11 (9.7 %), duplicates 0.0; position RMS 17.0, 11.8, 15.0 um; long tracks 305 (ghost 28), purity 0.892, track recall 0.215; 25.35 s per frame; exit 0, wall 1017 s
+  Gall12m15k5_r2: recall (central, seen by all) 0.240, >= 2 0.240; reconstructed 132 per frame, ghosts 14 (10.5 %), duplicates 0.0; position RMS 17.8, 11.7, 15.0 um; long tracks 338 (ghost 32), purity 0.888, track recall 0.239; 37.70 s per frame; exit 0, wall 1509 s

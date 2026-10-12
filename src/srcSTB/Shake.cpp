@@ -252,6 +252,37 @@ void Shake::calResidueImage(const std::vector<std::unique_ptr<Object3D>> &objs,
             rr = 0.0; // IPR output: clamp negative to 0
         }
       }
+
+      // 4.2.2 A multi-valued camera (curved port) where the object may have
+      // other images: subtract them too, so that IPR does not find them again
+      // (the cylinder STB plan, Phase 2)
+      const Camera &cam_k = *_cam_list[k];
+      if (cam_k.multiValued() && !cam_k.provablySingleImage(obj->_pt_center)) {
+        auto all = cam_k.projectAll(obj->_pt_center);
+        if (all) {
+          for (const ImageRay &img : all.value()) {
+            if (img.is_ring)
+              continue;
+            const Pt2D q = img.pt_img_dist;
+            if (std::hypot(q[0] - cx, q[1] - cy) < 1e-6)
+              continue; // the image drawn above
+            const PixelRange roi2 = calROIBound(k, q[0], q[1], dx, dy);
+            for (int r = roi2.row_min; r < roi2.row_max; ++r) {
+              for (int c = roi2.col_min; c < roi2.col_max; ++c) {
+                const double p = _strategy->project2DIntAt(*obj, k, r, c, q);
+                if (p == 0.0)
+                  continue;
+                double &rr = res(r, c);
+                const double cand = orig(r, c) - p;
+                if (cand < rr)
+                  rr = cand;
+                if (output_ipr && rr < 0)
+                  rr = 0.0;
+              }
+            }
+          }
+        }
+      }
     } // end for each object
   } // end per-camera loop
 }
@@ -961,13 +992,56 @@ double TracerShakeStrategy::project2DInt(const Object3D &obj, int id_cam,
         id_cam, obj._pt_center);
   }
 
-  return gaussIntensity(col, row, obj._obj2d_list[id_cam]->_pt_center,
-                        cache.otf);
+  const int model = tr_cfg._otf._param.model;
+  if (model == 0)
+    return gaussIntensity(col, row, obj._obj2d_list[id_cam]->_pt_center,
+                          cache.otf);
+  const Pt2D &ctr = obj._obj2d_list[id_cam]->_pt_center;
+  return OTF::intensity(model, col, row, ctr[0], ctr[1], cache.otf);
+}
+
+double TracerShakeStrategy::project2DIntAt(const Object3D &obj, int id_cam,
+                                           int row, int col,
+                                           const Pt2D &center) const {
+  const auto &tr_cfg = static_cast<const TracerConfig &>(_obj_cfg);
+  const std::vector<double> otf = tr_cfg._otf.getOTFParam(id_cam, obj._pt_center);
+  return OTF::intensity(tr_cfg._otf._param.model, col, row, center[0], center[1],
+                        otf);
+}
+
+std::vector<bool>
+TracerShakeStrategy::selectShakeCam(const Object3D &obj,
+                                    const std::vector<ROIInfo> &roi_info,
+                                    const std::vector<Image> &imgOrig) const {
+  (void)roi_info;
+  (void)imgOrig;
+  const int n_cam = static_cast<int>(_cam_list.size());
+  std::vector<bool> shake_cam(n_cam, true);
+  for (int k = 0; k < n_cam; ++k) {
+    const Camera &cam = *_cam_list[k];
+    if (!cam.multiValued() || !cam.is_active ||
+        cam.provablySingleImage(obj._pt_center))
+      continue;
+    const ROISize sz = calROISize(obj, k);
+    const double half = std::max(sz.dx, sz.dy);
+    shake_cam[k] = cam.imageStatus(obj._pt_center, half, 4.0 * half) ==
+                   ImageStatus::One;
+  }
+  return shake_cam;
 }
 
 ShakeStrategy::ROISize TracerShakeStrategy::calROISize(const Object3D &obj,
                                                        int id_cam) const {
   ROISize roi_size;
+  const auto &tr_cfg = static_cast<const TracerConfig &>(_obj_cfg);
+  if (tr_cfg._roi_from_otf) {
+    // the OTF's extent at the object (tracer.roi_from_otf)
+    tr_cfg._otf.halfExtent(id_cam, obj._pt_center, tr_cfg._roi_sigma,
+                           roi_size.dx, roi_size.dy);
+    roi_size.dx = std::max(1.0, roi_size.dx);
+    roi_size.dy = std::max(1.0, roi_size.dy);
+    return roi_size;
+  }
   Object2D *obj2d = obj._obj2d_list[id_cam]
                         .get(); // must get the raw pointer from the unique_ptr
                                 // because unique_ptr cannot be casted directly
@@ -1014,11 +1088,34 @@ TracerShakeStrategy::calShakeResidue(const Object3D &obj_candidate,
     auto *tr = static_cast<Tracer2D *>(obj2d);
     Pt2D obj2d_center = tr->_pt_center;
     if (isInvalidProjectedCenter(obj2d_center)) {
+      if (!_cam_list[cam]->multiValued())
+        continue;
+      // A multi-valued camera chosen for this shake where the trial position
+      // has no image: it predicts nothing there, so it costs the measurement
+      // itself, rather than leaving the cost (cylinder STB plan, Phase 2).
+      double sse0 = 0.0;
+      std::size_t pix0 = 0;
+      for (int row = ROI_range.row_min; row < ROI_range.row_max; ++row)
+        for (int col = ROI_range.col_min; col < ROI_range.col_max; ++col) {
+          const double meas = ROI_info[cam].aug_img(row, col);
+          sse0 += meas * meas;
+          ++pix0;
+        }
+      if (pix0 > 0) {
+        cost_acc += sse0 / static_cast<double>(pix0);
+        ++cams_used;
+      }
       continue;
     }
-    double r_px = tr->_r_px;
-    int pred_row_min = std::floor(obj2d_center[1] - r_px),
-        pred_row_max = std::ceil(obj2d_center[1] + r_px + 1);
+    const auto &tr_cfg = static_cast<const TracerConfig &>(_obj_cfg);
+    double r_px = tr->_r_px, r_py = tr->_r_px;
+    if (tr_cfg._roi_from_otf) {
+      const ROISize sz = calROISize(obj_candidate, cam);
+      r_px = sz.dx;
+      r_py = sz.dy;
+    }
+    int pred_row_min = std::floor(obj2d_center[1] - r_py),
+        pred_row_max = std::ceil(obj2d_center[1] + r_py + 1);
     int pred_col_min = std::floor(obj2d_center[0] - r_px),
         pred_col_max = std::ceil(obj2d_center[0] + r_px + 1);
 
@@ -1076,6 +1173,17 @@ double BubbleShakeStrategy::project2DInt(const Object3D &obj, int id_cam,
   }
 
   return int_val;
+}
+
+double BubbleShakeStrategy::project2DIntAt(const Object3D &obj, int id_cam,
+                                           int row, int col,
+                                           const Pt2D &center) const {
+  Object2D *obj2d = obj._obj2d_list[id_cam].get();
+  auto *bb2d = static_cast<Bubble2D *>(obj2d);
+  const double r_px = bb2d->_r_px + 1; // +1 to include the edge pixels
+  const double dist = (center[0] - col) * (center[0] - col) +
+                      (center[1] - row) * (center[1] - row);
+  return dist < r_px * r_px ? _cam_list[id_cam]->max_intensity : 0.0;
 }
 
 ShakeStrategy::ROISize BubbleShakeStrategy::calROISize(const Object3D &obj,

@@ -1,0 +1,207 @@
+{
+ "case": "f5_spots",
+ "runs": {
+  "full": {
+   "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\f5_spots\\config.json",
+   "build": "p4c",
+   "exe": false,
+   "env": {
+    "OPENLPT_PROJECTION_HINTS": "0",
+    "OPENLPT_CURVED_LINES": "0"
+   },
+   "returncode": 0,
+   "wall_s": 89.41,
+   "end": "2026-10-07T21:25:04",
+   "build_info": {
+    "name": "p4c",
+    "git_head": "d9b20b4",
+    "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+    "start": "2026-10-07T20:28:06"
+   }
+  },
+  "hints": {
+   "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\f5_spots\\config.json",
+   "build": "p4c",
+   "exe": false,
+   "env": {
+    "OPENLPT_CURVED_LINES": "0"
+   },
+   "returncode": 0,
+   "wall_s": 7.63,
+   "end": "2026-10-07T21:25:11",
+   "build_info": {
+    "name": "p4c",
+    "git_head": "d9b20b4",
+    "git_diff_sha256": "a5bb41a79aa42420f2df92c02ff3f62ddbe405bccb9504384ac988db068a4bbd",
+    "start": "2026-10-07T20:28:06"
+   }
+  },
+  "base": {
+   "config": "D:\\Refraction\\pyOpenLPT\\tests\\cylinder_stb\\data\\f5_spots\\config.json",
+   "build": "head1007",
+   "exe": false,
+   "env": {},
+   "returncode": 0,
+   "wall_s": 89.99,
+   "end": "2026-10-07T21:26:41",
+   "build_info": {
+    "name": "head1007",
+    "git_head": "d9b20b4",
+    "git_diff_sha256": "9d3d4d2edb81330f4c261f22d947ccef75b608375c65213225c3b2973ccd0317",
+    "start": "2026-10-07T18:09:52"
+   }
+  }
+ },
+ "base_vs_full": {
+  "only_a": [],
+  "only_b": [],
+  "files": {
+   "ConvergeTrack\\ExitTrack_29.csv": "identical",
+   "ConvergeTrack\\LongTrackActive_29.csv": "identical",
+   "ConvergeTrack\\LongTrackInactive_29.csv": "identical",
+   "ConvergeTrack\\ShortTrackActive_29.csv": "identical",
+   "InitialTrack\\ExitTrack_3.csv": "identical",
+   "InitialTrack\\LongTrackActive_3.csv": "identical",
+   "InitialTrack\\LongTrackInactive_3.csv": "identical",
+   "InitialTrack\\ShortTrackActive_3.csv": "identical",
+   "PredField_1_2.csv": "identical",
+   "PredField_2_3.csv": "identical",
+   "PredField_3_4.csv": "identical"
+  },
+  "identical_files": 11,
+  "compared_files": 11,
+  "all_identical": true
+ },
+ "full_vs_hints": {
+  "only_a": [],
+  "only_b": [],
+  "files": {
+   "ConvergeTrack\\ExitTrack_29.csv": {
+    "identical": false,
+    "rows": [
+     540,
+     540
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 0.0,
+     "WorldY": 0.0,
+     "WorldZ": 0.0,
+     "cam0_x(col)": 1.00000000458067e-06,
+     "cam0_y(row)": 0.0,
+     "cam1_x(col)": 0.0,
+     "cam1_y(row)": 9.999999974752427e-07
+    }
+   },
+   "ConvergeTrack\\LongTrackActive_29.csv": {
+    "identical": false,
+    "rows": [
+     17834,
+     17834
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 1.0000000010279564e-06,
+     "WorldY": 1.0000000010279564e-06,
+     "WorldZ": 1.0000000010279564e-06,
+     "cam0_x(col)": 2.4000000053092663e-05,
+     "cam0_y(row)": 9.999999974752427e-06,
+     "cam1_x(col)": 1.100000000064938e-05,
+     "cam1_y(row)": 9.000000034120603e-06
+    }
+   },
+   "ConvergeTrack\\LongTrackInactive_29.csv": {
+    "identical": false,
+    "rows": [
+     2399,
+     2399
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 0.0,
+     "WorldY": 0.0,
+     "WorldZ": 0.0,
+     "cam0_x(col)": 2.999999992425728e-06,
+     "cam0_y(row)": 9.999999974752427e-07,
+     "cam1_x(col)": 1.0000001111620804e-06,
+     "cam1_y(row)": 1.0000000543186616e-06
+    }
+   },
+   "ConvergeTrack\\ShortTrackActive_29.csv": {
+    "identical": false,
+    "rows": [
+     484,
+     484
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 0.0,
+     "WorldY": 0.0,
+     "WorldZ": 0.0,
+     "cam0_x(col)": 9.999999974752427e-07,
+     "cam0_y(row)": 9.999999974752427e-07,
+     "cam1_x(col)": 9.999999974752427e-07,
+     "cam1_y(row)": 1.0000000010279564e-06
+    }
+   },
+   "InitialTrack\\ExitTrack_3.csv": "identical",
+   "InitialTrack\\LongTrackActive_3.csv": "identical",
+   "InitialTrack\\LongTrackInactive_3.csv": "identical",
+   "InitialTrack\\ShortTrackActive_3.csv": {
+    "identical": false,
+    "rows": [
+     2399,
+     2399
+    ],
+    "max_abs_diff": {
+     "TrackID": 0.0,
+     "FrameID": 0.0,
+     "WorldX": 0.0,
+     "WorldY": 0.0,
+     "WorldZ": 0.0,
+     "cam0_x(col)": 0.0,
+     "cam0_y(row)": 0.0,
+     "cam1_x(col)": 9.999999974752427e-07,
+     "cam1_y(row)": 0.0
+    }
+   },
+   "PredField_1_2.csv": {
+    "identical": false,
+    "rows": [
+     132651,
+     132651
+    ],
+    "max_abs_diff": {
+     "0.00000000e+00": 1.000000013351432e-10
+    }
+   },
+   "PredField_2_3.csv": {
+    "identical": false,
+    "rows": [
+     132651,
+     132651
+    ],
+    "max_abs_diff": {
+     "0.00000000e+00": 1.000000013351432e-10
+    }
+   },
+   "PredField_3_4.csv": {
+    "identical": false,
+    "rows": [
+     132651,
+     132651
+    ],
+    "max_abs_diff": {
+     "0.00000000e+00": 1.1000000042782343e-10
+    }
+   }
+  },
+  "identical_files": 3,
+  "compared_files": 11,
+  "all_identical": false
+ }
+}

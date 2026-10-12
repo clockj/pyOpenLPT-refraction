@@ -1,0 +1,60 @@
+{
+ "checks": [
+  {
+   "check": "a: one warning, no question",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "a: it says no frame was paired, of 1200",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "a: per camera counts as P4 (cam1 8 / 557 / 635, cam2 0 / 835 / 365)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "a: the rod and the Rod opening named, and the file's Raw rows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "a: the status line says 0 of 1200 frames paired",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "b: only the export question, with 159 of 1200 frames",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "c: no message; the status line says the file is not paired yet and names Resume",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "d: only the rescue question, naming the raw detections and Resume; no 'Detection complete'",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "e: only the 'Detection Failed' warning",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "f: a warning with the raw count, the causes and what to do; no 'Success'",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "g: 'Success ... Loaded 159 valid frames', as before the fix",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "seconds": 2.2406702041625977
+}

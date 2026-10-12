@@ -1,0 +1,23 @@
+G8: plate_wand behind the GUI's Pinhole+Refraction, offscreen
+  300 frames; media 1.0, 1.49, 1.333, 12.7 mm; legacy box False
+  Run Calibration: 41 s (finished True); message ('info', 'Flat-Window Calibration')
+    4 cameras, 2 windows, 300 frames, 2400 of 2400 detections used.
+    Reprojection RMS 0.116 px; wand length (free triangulation) RMS error 15.4 um over 300 frames.
+      cam0: f 4,315 px +- 0.10 %, window 1, 578 mm from it, RMS 0.113 px
+      cam1: f 4,317 px +- 0.10 %, window 1, 578 mm from it, RMS 0.120 px
+      cam2: f 3,973 px +- 0.10 %, window 2, 578 mm from it, RMS 0.118 px
+      cam3: f 3,970 px +- 0.10 %, window 2, 578 mm from it, RMS 0.114 px
+    
+    Saved to:
+    D:\Refraction\pyOpenLPT\tests\cylinder_wand_gui\data\g8_run\results
+  PASS  the calibration ran in a separate process (ProcessCalibWorker)
+  PASS  f of every camera within 0.5 % of the truth  (cam0 4,315.1 (-0.136 %), cam1 4,317.4 (-0.082 %), cam2 3,973.0 (-0.102 %), cam3 3,970.0 (-0.177 %))
+  PASS  every detection used  (2400/2400)
+  PASS  camFiles are PINPLATE, load in C++, and carry the GUI's window ids for VSC  (models {'PINPLATE'}, window ids [0, 0, 1, 1])
+  PASS  error table, 3-D windows, the result's kind and the page  (300 rows, 2 planes, kind plate_wand, page True)
+  PASS  tracking settings' hook copies the PINPLATE files  (['cam0.txt', 'cam1.txt', 'cam2.txt', 'cam3.txt'], byte-identical True)
+  PASS  Stop ends the process within 2 s  (0.06 s; status 'Flat-window calibration stopped.')
+  PASS  refit from the last result: the same f (1e-6), and faster  (3 s; largest change of f 5.8e-09)
+  PASS  'Use the previous calibrator' goes to the previous calibrator  (calls [(25.0, 0)])
+
+9 of 9 checks passed; 52 s

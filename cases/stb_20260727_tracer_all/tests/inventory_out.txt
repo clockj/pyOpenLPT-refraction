@@ -1,0 +1,64 @@
+I1 inventory of the runs (read only)
+
+10Hz_r_b_1: OK  frames [12605]  108 GB of images  lists: existing, match  holds: config.txt, tracerConfig.txt
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  2.21 p99    30 max  223 >20  2.45% peaks 40646  f6000: mean  2.15 p99    30 max  195 >20  2.40% peaks 40112
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  1.03 p99    14 max  122 >20  0.24% peaks  5639  f6000: mean  1.01 p99    14 max  121 >20  0.24% peaks  5432
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  1.60 p99    21 max  131 >20  1.10% peaks 17876  f6000: mean  1.57 p99    21 max  145 >20  1.09% peaks 17678
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  1.65 p99    24 max  157 >20  1.42% peaks 17775  f6000: mean  1.63 p99    24 max  156 >20  1.40% peaks 17393
+10Hz_r_b_2: OK  frames [12605]  122 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  2.36 p99    32 max  238 >20  2.68% peaks 43011  f6000: mean  2.39 p99    32 max  255 >20  2.71% peaks 43419
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  2.42 p99    30 max  231 >20  2.63% peaks 40389  f6000: mean  2.42 p99    30 max  233 >20  2.65% peaks 40654
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  1.85 p99    23 max  148 >20  1.36% peaks 20665  f6000: mean  1.83 p99    23 max  155 >20  1.37% peaks 20843
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  1.91 p99    26 max  169 >20  1.69% peaks 19584  f6000: mean  1.90 p99    26 max  167 >20  1.71% peaks 19823
+15Hz_r_b_1: OK  frames [12605]  149 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.78 p99   125 max  255 >20 16.30% peaks 154994  f6000: mean 10.83 p99   125 max  255 >20 16.37% peaks 155151
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.71 p99   115 max  255 >20 17.05% peaks 155214  f6000: mean 10.79 p99   115 max  255 >20 17.17% peaks 156384
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.69 p99    90 max  255 >20 14.29% peaks 134090  f6000: mean  8.60 p99    90 max  255 >20 14.12% peaks 132584
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.81 p99   100 max  255 >20 13.90% peaks 126710  f6000: mean  8.86 p99   100 max  255 >20 13.95% peaks 128073
+15Hz_r_b_2: OK  frames [12605]  146 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.96 p99   125 max  255 >20 16.55% peaks 157750  f6000: mean 10.91 p99   125 max  255 >20 16.43% peaks 155851
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 11.03 p99   116 max  255 >20 17.56% peaks 159353  f6000: mean 10.91 p99   115 max  255 >20 17.32% peaks 157792
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 13.22 p99   153 max  255 >20 20.10% peaks 203934  f6000: mean 13.23 p99   153 max  255 >20 20.08% peaks 203382
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.94 p99   102 max  255 >20 14.06% peaks 128708  f6000: mean  8.97 p99   102 max  255 >20 14.09% peaks 128016
+20Hz_r_b_1: OK  frames [12605]  151 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.28 p99   113 max  255 >20 16.05% peaks 151307  f6000: mean  9.69 p99   113 max  255 >20 14.94% peaks 141484
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.17 p99   101 max  255 >20 16.90% peaks 157165  f6000: mean  9.53 p99   100 max  255 >20 15.72% peaks 147090
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.10 p99    81 max  255 >20 13.53% peaks 130957  f6000: mean  7.69 p99    80 max  255 >20 12.76% peaks 123895
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.22 p99    91 max  255 >20 13.15% peaks 123471  f6000: mean  7.84 p99    90 max  255 >20 12.44% peaks 116978
+20Hz_r_b_2: OK  frames [12605]  147 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  9.14 p99   110 max  255 >20 14.03% peaks 132889  f6000: mean  9.00 p99   110 max  255 >20 13.75% peaks 129988
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.85 p99    98 max  255 >20 14.53% peaks 135376  f6000: mean  8.94 p99    99 max  255 >20 14.70% peaks 137337
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  6.97 p99    79 max  255 >20 11.46% peaks 108884  f6000: mean  6.98 p99    79 max  255 >20 11.47% peaks 109202
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  7.11 p99    89 max  255 >20 11.11% peaks 102311  f6000: mean  7.16 p99    89 max  255 >20 11.17% peaks 103825
+25Hz_r_b_1: OK  frames [12605]  147 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  9.57 p99   103 max  255 >20 15.28% peaks 143564  f6000: mean  9.56 p99   104 max  255 >20 15.23% peaks 143624
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  9.45 p99    90 max  255 >20 16.24% peaks 159285  f6000: mean  9.43 p99    91 max  255 >20 16.19% peaks 157896
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 11.90 p99   123 max  255 >20 19.62% peaks 212369  f6000: mean 11.84 p99   124 max  255 >20 19.48% peaks 211260
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  7.77 p99    83 max  255 >20 12.58% peaks 122138  f6000: mean  7.78 p99    83 max  255 >20 12.59% peaks 122592
+25Hz_r_b_2: OK  frames [12605]  143 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.34 p99   107 max  255 >20 16.49% peaks 153846  f6000: mean 10.05 p99   106 max  255 >20 15.95% peaks 149694
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 14.53 p99   155 max  255 >20 21.57% peaks 221864  f6000: mean 14.52 p99   155 max  255 >20 21.47% peaks 220512
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 12.47 p99   126 max  255 >20 20.56% peaks 221054  f6000: mean 12.42 p99   127 max  255 >20 20.39% peaks 219875
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 12.02 p99   134 max  255 >20 19.23% peaks 214527  f6000: mean 11.96 p99   133 max  255 >20 19.17% peaks 214432
+30Hz_r_b_1: OK  frames [12605]  142 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  9.10 p99    95 max  255 >20 14.81% peaks 141920  f6000: mean  9.33 p99    96 max  255 >20 15.19% peaks 145198
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 13.51 p99   139 max  255 >20 20.87% peaks 224726  f6000: mean 13.51 p99   139 max  255 >20 20.93% peaks 225420
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 11.46 p99   114 max  255 >20 19.46% peaks 220536  f6000: mean 11.55 p99   114 max  255 >20 19.60% peaks 220550
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 11.02 p99   122 max  255 >20 18.05% peaks 209669  f6000: mean 11.09 p99   122 max  255 >20 18.18% peaks 211807
+30Hz_r_b_2: OK  frames [12605]  145 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.08 p99    91 max  255 >20 13.17% peaks 128754  f6000: mean  8.54 p99    92 max  255 >20 13.91% peaks 135488
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  4.00 p99    40 max  251 >20  5.53% peaks 66275  f6000: mean  4.19 p99    41 max  253 >20  5.77% peaks 68226
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  6.94 p99    66 max  255 >20 11.76% peaks 127163  f6000: mean  6.83 p99    65 max  255 >20 11.62% peaks 125855
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  6.99 p99    74 max  255 >20 11.37% peaks 117401  f6000: mean  6.89 p99    74 max  255 >20 11.18% peaks 115184
+35Hz_r_b_1: OK  frames [12605]  144 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  8.31 p99    85 max  255 >20 14.01% peaks 143421  f6000: mean  8.32 p99    85 max  255 >20 13.95% peaks 142165
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  3.98 p99    37 max  255 >20  5.11% peaks 67961  f6000: mean  4.04 p99    38 max  255 >20  5.21% peaks 68178
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  6.42 p99    59 max  236 >20 10.92% peaks 128692  f6000: mean  6.49 p99    60 max  245 >20 11.05% peaks 128840
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean  3.25 p99    34 max  176 >20  3.59% peaks 37409  f6000: mean  3.29 p99    34 max  202 >20  3.63% peaks 37601
+35Hz_r_b_2: OK  frames [12605]  145 GB of images  lists: none  holds: -
+   cam0:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 13.99 p99   147 max  255 >20 21.34% peaks 226583  f6000: mean 13.94 p99   148 max  255 >20 21.16% peaks 225199
+   cam1:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 13.33 p99   125 max  255 >20 21.82% peaks 246265  f6000: mean 13.15 p99   125 max  255 >20 21.48% peaks 242995
+   cam2:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 11.46 p99   103 max  255 >20 20.32% peaks 242756  f6000: mean 11.54 p99   103 max  255 >20 20.53% peaks 243654
+   cam3:  12605 files 0-12604 contiguous True  uint8 1952x2048  f0: mean 10.92 p99   110 max  255 >20 18.72% peaks 228565  f6000: mean 10.96 p99   110 max  255 >20 18.81% peaks 229024
+
+ALL OK

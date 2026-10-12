@@ -1,0 +1,9 @@
+window 1700x1080: column widths [37, 53, 162, 126, 126, 129] (sum 633), widget hints [36, None, 139, 125, 125, 128], viewport 346 px, horizontal scroll bar shown
+  FAIL  1700x1080: every column shows without a horizontal scroll bar  (columns 633 px in 346 px)
+window 1500x900: column widths [37, 53, 162, 126, 126, 129] (sum 633), widget hints [36, None, 139, 125, 125, 128], viewport 336 px, horizontal scroll bar shown
+  FAIL  1500x900: every column shows without a horizontal scroll bar  (columns 633 px in 336 px)
+  picture: g4c_table_before.png
+window 1200x700: column widths [37, 53, 162, 126, 126, 129] (sum 633), widget hints [36, None, 139, 125, 125, 128], viewport 336 px, horizontal scroll bar shown
+  FAIL  1200x700: every column shows without a horizontal scroll bar  (columns 633 px in 336 px)
+
+0 of 3 checks passed

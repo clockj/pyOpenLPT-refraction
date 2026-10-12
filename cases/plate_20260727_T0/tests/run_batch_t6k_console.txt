@@ -1,0 +1,5 @@
+run_batch t6k: 4 jobs in parallel, 1633 s
+  t6k_nw1.33_s2: exit 0, 812 s  (--every 5 --offset 2 --fit-k1 --n-water 1.33)
+  t6k_t12.4_s2: exit 0, 859 s  (--every 5 --offset 2 --fit-k1 --thickness 12.4)
+  t6k_t13.0_s2: exit 0, 854 s  (--every 5 --offset 2 --fit-k1 --thickness 13.0)
+  t5k_hints_s2: exit 0, 1633 s  (--every 5 --offset 2 --fit-k1 --hints photo)

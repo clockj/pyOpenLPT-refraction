@@ -1,0 +1,8 @@
+{
+ "name": "t1c_vcf",
+ "exe": "D:\\Refraction\\pyOpenLPT\\build-stb\\vcf\\out\\OpenLPT.exe",
+ "exe_sha256": "480c2570128effcf95b6e124049cd22c353e3f1293d1e412f3276de8eeb15e68",
+ "config": "D:\\Refraction\\pyOpenLPT\\tests\\vsc_correction_field\\runs\\i1_t1c_vcf\\i1_t1c.json",
+ "returncode": 0,
+ "wall_s": 493.2443974018097
+}

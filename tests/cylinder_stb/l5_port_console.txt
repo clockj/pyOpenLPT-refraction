@@ -1,0 +1,20 @@
+L5: the C++ line detector against lines.detect; build p4b (d9b20b4 + diff e0c8cda15934); settings lines.DET
+  synthetic r5_lines cam1 frame 0: noise 7.00; Python 1203 objects in 19.4 s, C++ 1203 in 1.20 s; paired 1203, unpaired 0 / 0
+    largest differences: centre u 4.95e-02, v 1.13e-01 px; Lx 5.05e+00, Ly 1.71e+00; sx 9.13e-01, sy 1.30e-01; A 7.79e+01; score 1.96e-02; centres within 1e-3 px 96.67 %
+    noise estimate of the clipped image: C++ 7.8076, Python 7.8076 (true 7)
+  synthetic r5_lines cam2 frame 0: noise 7.00; Python 1548 objects in 25.0 s, C++ 1546 in 1.29 s; paired 1546, unpaired 2 / 0
+    largest differences: centre u 4.14e-01, v 2.99e-01 px; Lx 4.21e+00, Ly 4.52e+00; sx 5.42e-01, sy 6.26e-01; A 1.72e+02; score 1.18e-03; centres within 1e-3 px 95.47 %
+    unpaired scores: Python [22.35515022277832, 6.244674205780029], C++ []
+    noise estimate of the clipped image: C++ 7.5728, Python 7.5728 (true 7)
+  T1 cam1 frame 0: noise 8.06; Python 967 objects in 24.5 s, C++ 971 in 1.26 s; paired 966, unpaired 1 / 5
+    largest differences: centre u 1.43e-01, v 4.31e-01 px; Lx 1.33e+00, Ly 2.08e+00; sx 3.66e-01, sy 3.50e-01; A 4.21e+01; score 3.63e-04; centres within 1e-3 px 95.45 %
+    unpaired scores: Python [11.646105766296387], C++ [11.646105766296387, 11.614922523498535, 10.748682975769043, 9.999785423278809, 8.467902183532715]
+  T1 cam1 frame 500: noise 8.09; Python 1016 objects in 25.1 s, C++ 1016 in 1.28 s; paired 1012, unpaired 4 / 4
+    largest differences: centre u 2.55e-01, v 1.63e-01 px; Lx 6.38e+00, Ly 6.34e+00; sx 8.52e-01, sy 1.06e+00; A 1.00e+02; score 4.19e-04; centres within 1e-3 px 95.45 %
+    unpaired scores: Python [13.499149322509766, 11.296622276306152, 7.866197109222412, 6.933784008026123], C++ [13.499149322509766, 9.275524139404297, 9.165305137634277, 6.933784008026123]
+  T1 cam2 frame 0: noise 5.88; Python 840 objects in 20.3 s, C++ 840 in 1.19 s; paired 840, unpaired 0 / 0
+    largest differences: centre u 1.23e-01, v 1.99e-01 px; Lx 5.36e-01, Ly 4.84e+00; sx 1.24e-01, sy 6.73e-01; A 2.19e+01; score 1.91e-04; centres within 1e-3 px 97.62 %
+  T1 cam2 frame 500: noise 5.90; Python 870 objects in 20.3 s, C++ 871 in 1.20 s; paired 869, unpaired 1 / 2
+    largest differences: centre u 1.69e-01, v 8.99e-02 px; Lx 1.60e+00, Ly 2.05e+00; sx 4.00e-01, sy 5.60e-01; A 1.07e+02; score 3.43e-04; centres within 1e-3 px 97.35 %
+    unpaired scores: Python [7.677126884460449], C++ [7.0369791984558105, 6.969945907592773]
+  judged (every detection paired, centres within 1e-3 px): FAIL

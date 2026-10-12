@@ -1,0 +1,18 @@
+calibrate: all (X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\circle_results_table_new.csv), 10936 of 10936 frames; walls [[12.7], [12.7]] mm, n [[1.0, 1.49, 1.333], [1.0, 1.49, 1.333]]; L 10.0 mm; fit_k1 True; hints none
+start: the cameras and walls of tests/states/t3k_h1.pkl (RMS 0.2730 px there)
+calibrate: done in 293 s; RMS 0.2734 px, sigma 0.2333 px, 87242 of 87488 detections active
+walls 90.169 deg apart
+  cam0: f 18752 +- 8 px (253.1 mm), 1067.0 mm from its wall, 0.70 deg to its normal, k1 0.759
+  cam1: f 19146 +- 8 px (258.5 mm), 1033.6 mm from its wall, 12.80 deg to its normal, k1 0.84
+  cam2: f 21488 +- 7 px (290.1 mm), 771.7 mm from its wall, 18.10 deg to its normal, k1 0.782
+  cam3: f 21936 +- 7 px (296.1 mm), 845.3 mm from its wall, 1.24 deg to its normal, k1 1.06
+  cams [0, 1]: baseline 242.6 mm, views 12.50 deg apart
+  cams [0, 2]: baseline 1514.9 mm, views 90.79 deg apart
+  cams [0, 3]: baseline 1532.6 mm, views 90.57 deg apart
+  cams [1, 2]: baseline 1550.4 mm, views 94.29 deg apart
+  cams [1, 3]: baseline 1524.2 mm, views 90.48 deg apart
+  cams [2, 3]: baseline 286.8 mm, views 16.88 deg apart
+residual along the wand (A, B), px: cam0: +0.066, -0.034; cam1: -0.007, +0.006; cam2: +0.002, +0.046; cam3: -0.025, -0.001
+warnings: pinned: a wand end lies on window 1's water-side surface (-9.9e-14 mm deep): the fit may be pinned against the window rather than at a minimum. 8 of the 14 wrong multi-window answers in the tests were, none o
+state saved to tests/states/t2_all.pkl
+outputs written to X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\T0\calib_plate_wand

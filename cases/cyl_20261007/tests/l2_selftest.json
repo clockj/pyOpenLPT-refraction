@@ -1,0 +1,47 @@
+{
+ "profile vs quadrature": {
+  "pass": true,
+  "detail": "max |P - quadrature| = 3.34e-08 (quadrature error ~1e-7)"
+ },
+ "profile derivatives vs differences": {
+  "pass": true,
+  "detail": "d/dt 6.2e-09, d/dL 3.7e-09, d/ds 8.9e-09"
+ },
+ "L = 0 branch derivatives": {
+  "pass": true,
+  "detail": "d/dt 2.5e-12, d/ds 2.4e-11"
+ },
+ "continuity at L -> 0": {
+  "pass": true,
+  "detail": "|P(L = 1e-4) - P(L = 0)| = 1.5e-10"
+ },
+ "clip_expect vs Monte Carlo": {
+  "pass": true,
+  "detail": "max |E - MC| = 0.0018 (MC error ~0.003)"
+ },
+ "clip_expect derivative": {
+  "pass": true,
+  "detail": "max |d - difference| = 9.0e-11"
+ },
+ "render flux and centroid": {
+  "pass": true,
+  "detail": "max flux error 5.2e-07 (relative), max centroid error 1.8e-06 px"
+ },
+ "render line profile and disk": {
+  "pass": true,
+  "detail": "line (a = 15 px) vs semicircle * Gaussian: 1.6e-04 of the peak; disk (r = 4 px) vs 20x supersampling: 4.2e-04"
+ },
+ "noise_left (float image)": {
+  "pass": true,
+  "detail": "true 1.5: 0 % covered -> 1.489 (MAD 1.501), 5 % covered -> 1.505 (MAD 1.567), 10 % covered -> 1.556 (MAD 1.645), 15 % covered -> 1.542 (MAD 1.732)"
+ },
+ "estimate_noise_clipped (8-bit fallback)": {
+  "pass": true,
+  "detail": "true 6.0: 0 % covered -> 6.05, 5 % covered -> 6.15, 10 % covered -> 6.16, 15 % covered -> 6.18"
+ },
+ "fit_objects recovers its model (noiseless)": {
+  "pass": true,
+  "detail": "max |du|,|dv| 7.1e-15 px, model 8.0e-12 of the peak, RMS widths 2.9e-11; (Lx, sx | Ly, sy) fitted: 22.00, 1.10 | 0.05, 0.90; 0.05, 1.00 | 9.00, 1.20; 2.50, 1.30 | 2.00, 1.00"
+ },
+ "all_pass": true
+}

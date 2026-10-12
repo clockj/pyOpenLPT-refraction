@@ -1,0 +1,128 @@
+W10: 3 cameras of 1280 x 800 px, 300 frames (every detection on its sensor: True)
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=69.295
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=35.347
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=34.002
+[Phase 1] Auto-selected best pair: Cam 0 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0156 units. Scale Factor=642.4768
+
+=== PHASE 1: Optimizing Primary Pair (0, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 7.80e+02
+    [Pipeline-Stage 2] Refine All (f > 100)...
+    [Pipeline-Stage 2] Cost: 3.77e+02
+    [Pipeline-Stage 3] Triangulation Constraint...
+    [Pipeline-Stage 3] Cost: 3.31e+01
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.30e+01
+  Primary Optimization Done. Cost: 3.30e+01
+
+=== PHASE 2: Secondary Initialization (PnP) ===
+  Initialized Cam 1 via PnP (600 points).
+  Optimizing Cam 1...
+    Optimization failed: 'charmap' codec can't encode character '\u2192' in position 36: character maps to <undefined>
+
+=== PHASE 3: Triangulating All Points for Full BA ===
+  Initialized 300 frames. Mean Wand Length: 10.00 mm
+Full X0 initialized: 1833 params (3 cams, 600 points).
+Building Sparse Jacobian Structure...
+Sparse Jacobian: (3900, 1833) with 52200 entries
+Starting Optimization (4-Stage Pipeline)...
+Pre-Optimization RMS: 0.1497 px
+    [Pipeline] Skipping Stage 1-3 (using pre-optimized params)...
+    [Pipeline-Stage 4] Final Refinement...
+    [Pipeline-Stage 4] Cost: 3.58e+01
+Optimization Done.
+Aligning World Origin to Point Cloud Centroid...
+Coordinate Alignment Done.
+  Camera 0: Center = [ 5.38379448e+00  3.50410817e-01 -6.06803181e+02]
+  Camera 1: Center = [ 305.75109803    9.88574889 -523.47643219]
+  Camera 2: Center = [ 523.42814061   37.63361497 -302.26896272]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+Calibration Result: True, Calibration Optimized.
+Reprojection RMS: 0.0706 px
+  - Cam 0: 0.0652 px
+  - Cam 1: 0.0811 px
+  - Cam 2: 0.0644 px
+Wand Length RMS: 0.0428 mm
+Total Frames: 300
+Parameters saved to D:\Refraction\pyOpenLPT\tests\wand_gui_fixes\data\w9_run\equal\camFile
+  calibration and save: 28 s; messages [('info', 'Saved')]
+  fitted f: cam0 2,008.7 px, cam1 2,007.4 px, cam2 2,004.2 px
+  camFiles' Image Size: {0: '800,1280', 1: '800,1280', 2: '800,1280'}
+  PASS  every frame's entry has its cameras' projections, which give the table's errors (1e-9 px)  (300 frames, 300 rows, 0 missing, largest mismatch 0.0e+00 px)
+  PASS  showing a frame draws the red crosses at the projections (frames 0-4, all cameras)  (5 of 5 frames; 30 crosses)
+[calculate_per_frame_errors] Using ALL data: 300 frames
+      before the fix (git HEAD's calculate_per_frame_errors on the same result): 0 of 300 entries with projections
+
+W9: camera 1 of 1024 x 768 px
+Traceback (most recent call last):
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 452, in run
+    ret, msg, res = self.calibrator.calibrate_wand(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 2486, in calibrate_wand
+    cam_params, cam_id_map, best_pair, points_3d = self._initialize_system(wand_length_mm, initial_focal_len_px)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 2281, in _initialize_system
+    cam_params, cam_id_map, best_pair, points_3d = self._geometric_init_and_pnp(
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 2106, in _geometric_init_and_pnp
+    res_prim = self._run_optimization_pipeline(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Refraction\pyOpenLPT\modules\camera_calibration\wand_calibration\wand_calibrator.py", line 1677, in _run_optimization_pipeline
+    res2 = scipy.optimize.least_squares(self._residuals, X1, **kwargs_s2)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\scipy\_lib\_util.py", line 717, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zcloc\.conda\envs\refract\Lib\site-packages\scipy\optimize\_lsq\least_squares.py", line 901, in least_squares
+    raise ValueError("Initial guess is outside of provided bounds")
+ValueError: Initial guess is outside of provided bounds
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+Using Camera Settings: image_size=(800,1280), init_focal=2000.0
+  Per-camera focal lengths: [(0, 2000.0), (1, 2000.0), (2, 2000.0)]
+[Filter] UI: no frames marked for removal, using all 300 frames
+[Wand] distortion_params=0
+Running Wand Calibration with length 10.0mm, f0=2000.0px, dist_coeffs=0...
+[UI] Active cameras in wand data: 3 [0, 1, 2]
+Initializing calibration with Geometric Method (8-Point)...
+Active cameras for calibration: 3 [0, 1, 2]
+[Phase 1] Pair candidates ranked by median raw disparity:
+  Cam 1 <-> Cam 2: shared_count=600, median_disparity=134.622
+  Cam 0 <-> Cam 1: shared_count=600, median_disparity=127.040
+  Cam 0 <-> Cam 2: shared_count=600, median_disparity=72.629
+[Phase 1] Auto-selected best pair: Cam 1 <-> Cam 2 (600 points)
+  Geometry Init: Pose Recovered using 600 inliers from 600 points.
+  Geometry Init: Raw Median Length=0.0369 units. Scale Factor=271.2969
+
+=== PHASE 1: Optimizing Primary Pair (1, 2) for Initialization ===
+  Primary Pair shares 300 frames.
+  Running Primary Optimization Pipeline (4 Stages)...
+    [Pipeline-Stage 1] Locking Intrinsics...
+    [Pipeline-Stage 1] Cost: 2.59e+03
+    [Pipeline-Stage 2] Refine All (f > 100)...
+Calibration Result: False, Calibration crashed: Initial guess is outside of provided bounds
+  (B11, recorded) the GUI's pinhole calibration of this rig: FAILS: Calibration crashed: Initial guess is outside of provided bounds
+  Camera 0: Center = [-300.           80.         -519.61524227]
+  Camera 1: Center = [   0.   80. -600.]
+  Camera 2: Center = [ 300.           80.         -519.61524227]
+[calculate_per_frame_errors] Using ALL data: 300 frames
+  PASS  each camFile's Image Size is its own camera's (rows,cols)  ({0: '800,1280', 1: '768,1024', 2: '800,1280'})
+      before the fix (git HEAD's export_to_file on the same result): {0: '800,1280', 1: '800,1280', 2: '800,1280'}
+
+3 of 3 checks passed; 31 s
+exit 0

@@ -1,0 +1,58 @@
+{
+ "frames": [
+  20,
+  70,
+  120,
+  170,
+  220
+ ],
+ "k_background": 0.375,
+ "detectors": {
+  "lines_k6": {
+   "detections_median": [
+    456.0,
+    927.0,
+    5268.0
+   ],
+   "pairs_median": 7429.0,
+   "triplets_signal_median": 73.0,
+   "triplets_background_median": 41.0,
+   "true_triplets_per_frame": 61.175,
+   "true_triplets_per_frame_range": [
+    52.5,
+    73.625
+   ]
+  },
+  "lines_k5": {
+   "detections_median": [
+    819.0,
+    1590.0,
+    8954.0
+   ],
+   "pairs_median": 22073.0,
+   "triplets_signal_median": 160.0,
+   "triplets_background_median": 185.0,
+   "true_triplets_per_frame": 91.4,
+   "true_triplets_per_frame_range": [
+    78.875,
+    103.875
+   ]
+  },
+  "lines_k4": {
+   "detections_median": [
+    1549.0,
+    2849.0,
+    14556.0
+   ],
+   "pairs_median": 75104.0,
+   "triplets_signal_median": 534.0,
+   "triplets_background_median": 1020.0,
+   "true_triplets_per_frame": 147.0,
+   "true_triplets_per_frame_range": [
+    121.125,
+    174.875
+   ]
+  }
+ },
+ "better": "lines_k4"
+}

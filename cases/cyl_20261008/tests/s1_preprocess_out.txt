@@ -1,0 +1,4 @@
+S1: T1 preprocessed, every 1th frame of 0-249 (250 frames per camera), medians {'cam1': 15, 'cam2': 15, 'cam3': 23}, into D:\Refraction\pyOpenLPT\cases\cyl_20261008\data\T1pre
+  cam1: median 15 px; 1237 peaks on frames (0, 100, 200), 99.9 % 34.7 counts -> gain 6; noise in the 8-bit counts median 10.22 (10.00-10.55); saturated pixels at most 0.0000 %; 21 s
+  cam2: median 15 px; 5786 peaks on frames (0, 100, 200), 99.9 % 65.5 counts -> gain 3; noise in the 8-bit counts median 5.89 (5.77-6.04); saturated pixels at most 0.0001 %; 42 s
+  cam3: median 23 px; 12193 peaks on frames (0, 100, 200), 99.9 % 79.1 counts -> gain 2; noise in the 8-bit counts median 5.37 (5.33-5.47); saturated pixels at most 0.0000 %; 111 s

@@ -1,0 +1,117 @@
+{
+ "checks": [
+  {
+   "check": "cylinder: the page's numbers are the result's",
+   "ok": true,
+   "detail": "RMS 0.016847 px, 1039/1062, wand 0.5765 um"
+  },
+  {
+   "check": "cylinder: its lines of sight are physical (on the interfaces, Snell) within 1e-9",
+   "ok": true,
+   "detail": "15 lines; surfaces 2.2e-12 mm, Snell 3.8e-14"
+  },
+  {
+   "check": "cylinder dark 1200 px: loads, every figure drawn, theme applied",
+   "ok": true,
+   "detail": "svg 7, theme dark"
+  },
+  {
+   "check": "cylinder light 1200 px: loads, every figure drawn, theme applied",
+   "ok": true,
+   "detail": "svg 7, theme light"
+  },
+  {
+   "check": "cylinder dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "cylinder: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; non-file requests []"
+  },
+  {
+   "check": "plate: the page's numbers are the result's",
+   "ok": true,
+   "detail": "RMS 0.116304 px, 2400/2400, wand 15.4139 um"
+  },
+  {
+   "check": "plate: its lines of sight are physical (on the interfaces, Snell) within 1e-9",
+   "ok": true,
+   "detail": "20 lines; surfaces 2.8e-14 mm, Snell 1.0e-15"
+  },
+  {
+   "check": "plate dark 1200 px: loads, every figure drawn, theme applied",
+   "ok": true,
+   "detail": "svg 8, theme dark"
+  },
+  {
+   "check": "plate light 1200 px: loads, every figure drawn, theme applied",
+   "ok": true,
+   "detail": "svg 8, theme light"
+  },
+  {
+   "check": "plate dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "plate: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; non-file requests []"
+  },
+  {
+   "check": "pinhole dark 1200 px: loads, every figure drawn, theme applied",
+   "ok": true,
+   "detail": "svg 7, theme dark"
+  },
+  {
+   "check": "pinhole light 1200 px: loads, every figure drawn, theme applied",
+   "ok": true,
+   "detail": "svg 7, theme light"
+  },
+  {
+   "check": "pinhole dark 390 px: nothing overflows horizontally",
+   "ok": true,
+   "detail": "scrollWidth 375, window 390"
+  },
+  {
+   "check": "pinhole: no console error, no request but the local page",
+   "ok": true,
+   "detail": "0 console messages, errors []; non-file requests []"
+  }
+ ],
+ "seconds": 13.683412551879883,
+ "pages": {
+  "cylinder": {
+   "lines": 15,
+   "surface_mm": 2.2311041902867146e-12,
+   "snell": 3.821265142298657e-14,
+   "requests": [
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g3_run/results/calibration_report.html?theme=dark",
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g3_run/results/calibration_report.html?theme=light",
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g3_run/results/calibration_report.html?theme=dark"
+   ]
+  },
+  "plate": {
+   "lines": 20,
+   "surface_mm": 2.842170943040401e-14,
+   "snell": 1.0403714168482657e-15,
+   "requests": [
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g8_run/results/calibration_report.html?theme=dark",
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g8_run/results/calibration_report.html?theme=light",
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g8_run/results/calibration_report.html?theme=dark"
+   ]
+  },
+  "pinhole": {
+   "lines": 15,
+   "surface_mm": 0.0,
+   "snell": 0.0,
+   "requests": [
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g5_run/pinhole/calibration_report.html?theme=dark",
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g5_run/pinhole/calibration_report.html?theme=light",
+    "file:///D:/Refraction/pyOpenLPT/tests/cylinder_wand_gui/data/g5_run/pinhole/calibration_report.html?theme=dark"
+   ]
+  }
+ }
+}

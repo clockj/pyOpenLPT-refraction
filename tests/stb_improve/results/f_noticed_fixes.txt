@@ -1,0 +1,34 @@
+F1-F3: the fixes of the issues noticed during A4b, offscreen Qt
+
+F1a round trip: config.json saved by the GUI, opened by a fresh view, saved again
+  PASS  31 forms (Tracer, Bubble, resume on/off, output folders): byte-identical after load and save  (31/31)
+
+F1b text to JSON: a config.txt opened by the form and saved as config.json gives the same C++ settings
+  PASS  32 text configs (31 forms written before A4b and the benchmark's): the same C++ settings from the config.json the form writes, save interval and profile included  (32/32)
+  PASS  the benchmark's config: save_interval 200 and profile on survive the conversion  (200 True)
+
+F1c edits: two fields changed after loading; nothing else changes
+  PASS  2D tolerance 1.5 and threads 'All' (0) saved; every other setting as loaded
+  PASS  the threads field shows 'All' for 0  (All)
+
+F1d values the old form could not hold, and keys it has no field for
+  PASS  the form shows threads 0 ('All'), fps 20000, frame 150000, voxel 0.1234567, x min -81.125  ((0, 20000, 150000, 0.1234567, -81.125))
+  PASS  saved unchanged: those values, profile, the comment key, the unknown key and the second object
+
+F1e no config, a broken config, an incomplete config
+  PASS  no config: nothing reported, the form keeps its values (not marked as loaded)
+  PASS  broken config.json: one warning that names it, no crash, the form not marked as loaded  (config.json in this project cannot be read: D:/Refraction/pyOpenLPT/tests/stb_improve/runs/f1e_broken\config.j)
+  PASS  incomplete config.json: one warning that names it, no crash, the form not marked as loaded  (config.json in this project cannot be read: the setting 'ipr' is missing  The form keeps the values it shows; )
+
+F1f showing the view again does not reload over unsaved edits
+  PASS  the edit survives a show event  (3.25)
+
+F2 the GUI's log.txt line ends
+  PASS  '\r\n' becomes '\n', also split across two chunks; stdout and stderr kept apart  ('a\nb\nc\nd\n' 'e\nf\n')
+  PASS  a GUI run of frames 0-5: log.txt has 319 line ends, all CRLF, none CRCRLF; 6 frames parsed  (exit 0; LF 319, CRLF 319, CRCRLF 0)
+  PASS  the log window holds no '\r'  (False)
+
+F3 test isolation: does tests/test_precalibrate_3d_view.py leave mocks in sys.modules?
+  PASS  before the fix the check fails; after it, all pass  (before: 1 failed, 2 passed in 1.00s | after: 3 passed in 0.91s)
+
+15 of 15 checks passed

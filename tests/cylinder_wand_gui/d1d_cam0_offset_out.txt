@@ -1,0 +1,17 @@
+cam0: |R_file - R| 1.1e-15; |t_file - (-R C)| 0.0e+00 mm; K_file f 41452.478213093 vs 41452.478213093, cx 639.500000 vs 639.500000; |file rvec - rvec_of(R)| 3.6e-05
+    Python with fitted R        (0.0e+00 rad from the fitted R): |du| 2.75e-03, |dv| 1.34e-10 px against C++
+    Python with camFile matrix  (1.2e-16 rad from the fitted R): |du| 2.75e-03, |dv| 1.38e-10 px against C++
+    Python with exp(file rvec)  (3.6e-05 rad from the fitted R): |du| 2.91e-03, |dv| 1.51e+00 px against C++
+    Python with cv2(file rvec)  (3.6e-05 rad from the fitted R): |du| 2.91e-03, |dv| 1.51e+00 px against C++
+cam1: |R_file - R| 2.6e-15; |t_file - (-R C)| 0.0e+00 mm; K_file f 41457.765224866 vs 41457.765224866, cx 639.500000 vs 639.500000; |file rvec - rvec_of(R)| 3.6e-07
+    Python with fitted R        (0.0e+00 rad from the fitted R): |du| 6.68e-09, |dv| 8.73e-11 px against C++
+    Python with camFile matrix  (4.5e-16 rad from the fitted R): |du| 6.69e-09, |dv| 7.06e-11 px against C++
+    Python with exp(file rvec)  (3.6e-07 rad from the fitted R): |du| 5.02e-05, |dv| 1.40e-02 px against C++
+    Python with cv2(file rvec)  (3.6e-07 rad from the fitted R): |du| 5.02e-05, |dv| 1.40e-02 px against C++
+cam2: |R_file - R| 1.1e-15; |t_file - (-R C)| 0.0e+00 mm; K_file f 41468.311175087 vs 41468.311175087, cx 639.500000 vs 639.500000; |file rvec - rvec_of(R)| 1.1e-07
+    Python with fitted R        (0.0e+00 rad from the fitted R): |du| 1.18e-10, |dv| 7.83e-11 px against C++
+    Python with camFile matrix  (1.3e-15 rad from the fitted R): |du| 1.37e-10, |dv| 8.80e-11 px against C++
+    Python with exp(file rvec)  (1.1e-07 rad from the fitted R): |du| 2.79e-05, |dv| 3.24e-03 px against C++
+    Python with cv2(file rvec)  (1.1e-07 rad from the fitted R): |du| 2.79e-05, |dv| 3.24e-03 px against C++
+
+0 of 0 checks passed; 1 s
