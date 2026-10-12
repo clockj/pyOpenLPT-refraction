@@ -5,6 +5,12 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PyPI Downloads](https://static.pepy.tech/personalized-badge/openlpt?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/openlpt)
 
+> [!NOTE]
+> **This is pyOpenLPT-refraction** (https://github.com/clockj/pyOpenLPT-refraction), a branch of OpenLPT for cameras that look through
+> refractive windows: flat walls, tubes and spheres, with wand calibration through flat walls and tubes
+> ([see below](#calibration-through-refractive-windows)). It will be merged into the main OpenLPT repository,
+> https://github.com/JHU-NI-LAB/OpenLPT_GUI, later.
+
 **OpenLPT** is a powerful, user-friendly open-source software for **3D Lagrangian Particle Tracking (LPT)**, designed for experimental fluid dynamics and flow visualization. Developed by the **Ni Research Lab at Johns Hopkins University (JHU)**, it provides a comprehensive GUI-based workflow for high-precision particle tracking and reconstruction.
 
 ---
@@ -12,7 +18,7 @@
 ### 🚀 Key Capabilities
 *   **3D Particle Tracking**: Robust Lagrangian tracking (LPT) and Shake-the-Box (STB) methods.
 *   **Multi-Camera Calibration**: Easy-to-use tools for wand and plate calibration (intrinsic & extrinsic parameters).
-    *   *Note*: The current calibration implementation assumes no refraction. For experimental setups involving observation windows, it is critical that the cameras are oriented as close to the surface normal (orthogonal) as possible.
+    *   **New in this branch, calibration through refractive windows:** camera models for flat windows (`PINPLATE`), tubes (`PINCYL`) and spherical windows (`PINSPH`), and wand calibration through flat windows (*Pinhole+Refraction*) and tubes (*Pinhole+Cylinder*). The refraction is modelled exactly, so the cameras need not face the window squarely.
 *   **Cross-Platform**: Full support for **Windows**, **macOS**, and **Linux**.
 *   **Performance**: High-performance C++ core with Python Python bindings for flexibility and speed.
 
@@ -57,6 +63,42 @@ lpt.launch_gui()
 ## Demo
 
 https://github.com/user-attachments/assets/60579007-4f24-4989-8b36-3de2224c9797
+
+---
+
+## Calibration through refractive windows
+
+A camera that looks into water through a tank wall or a tube sees particles displaced, stretched, hidden or even
+doubled. This branch models the refraction exactly: the projection of a 3-D point returns every pixel at which it
+appears, or none, and the wand calibration fits the cameras through the window from images of a moving wand. Two real
+calibrations:
+
+### Through a water-filled tube
+
+![Three cameras calibrated through a water-filled acrylic tube: the setup, the calibrated rig, the tracked swirling flow and the wand-length error](assets/readme/cylinder_calibration.png)
+
+Run 2026-10-08: three high-speed cameras around an acrylic tube full of water (outer diameter 201.6 mm, wall
+3.2 mm), camera model `PINCYL` (*Pinhole+Cylinder* in the GUI).
+- The wand calibration used 7212 frames, with a reprojection RMS of 0.70 px.
+- The calibrated cameras rebuild the 10 mm wand to 61 µm RMS (0.61 %), frame by frame over 7175 frames.
+- With this calibration OpenLPT tracked a swirling flow through the wall: 411 tracks, 250 frames at 4000 fps.
+
+### Through two flat tank walls
+
+![Four cameras calibrated through two perpendicular walls of a water tank: the rig to scale and the channel's corner](assets/readme/plate_calibration.png)
+
+Run 2026-07-27: four cameras about 1 m from a corner of a water tank, looking through its two perpendicular 12.7 mm
+acrylic walls into a 150 × 100 mm channel, camera model `PINPLATE` (*Pinhole+Refraction* in the GUI).
+- The wand calibration used 10936 frames, with a median reprojection error of 0.22 px.
+- The calibrated cameras rebuild the 10 mm wand with a median error of 6.8 µm and an SD of 10.2 µm (0.10 %).
+
+**To use it:** in the GUI, **Calibration** → **Wand Calibration**, with the camera model *Pinhole+Refraction* (flat
+windows) or *Pinhole+Cylinder* (a tube). The [Wand Calibration User Guide](modules/camera_calibration/wand_calibration/WAND_CALIBRATION_USER_GUIDE.md)
+goes through it step by step. The figures are drawn from the two calibrations' saved results by
+`assets/readme/make_readme_figures.py`.
+
+**The method:** S. Zhong, S. Tan, X. Zhang, Y. Li and R. Ni, "A complete forward projection algorithm through
+cylindrical and spherical refractive windows" (preprint, 2026).
 
 ---
 

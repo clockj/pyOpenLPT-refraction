@@ -4,14 +4,16 @@ Your request (10 Oct 2026): "use the new calibrated cam file like what we use fo
 10Hz to 35Hz. save interval should be set to 200 frames; create a subfolder called Results_tracer inside each test
 case; use imgFile_mask as the images for tracking."
 
-**Status (11 Oct, 08:15):**
+**Status (12 Oct, 14:15):**
 - **Your choice of 11 Oct (report section 12):** every run links short tracks within 5 voxels instead of 30
   (20–32 % more long tracks in the tests), and the dense runs have their own finder thresholds.
-- **The queue:** `10Hz_r_b_2` (spacing 5) since 07:50, ending about 21:30; then `chain_batch.py` (pid 12988) starts
-  `10Hz_r_b_1` again (about 13.5 h) and the ten dense runs (about 30 h each), so until about 25 Oct.
+- **The queue:** both 10 Hz runs are tracked with spacing 5 and delivered. `chain_batch.py` started `run_all.py`
+  (pid 6780) at 23:28 on 11 Oct. `15Hz_r_b_1`, the first dense run, has tracked since 12:32 on 12 Oct and ends
+  about 22:00 on 13 Oct; at about 33 h per run the other nine take until about 26 Oct.
 - **10 Hz runs:**
-  - **On the renumbered images** (frames 0–12,603): `10Hz_r_b_1` was tracked with spacing 30 (18:22–07:50,
-    delivered at 07:54) and is kept as `10Hz_r_b_1\Results_tracer_spacing30` on X:.
+  - **On the renumbered images** (frames 0–12,603), with spacing 5, in `<run>\Results_tracer`: `10Hz_r_b_2`
+    (07:50–23:18 on 11 Oct, 60.0 GB) and `10Hz_r_b_1` (23:28–12:32, 36.1 GB). `10Hz_r_b_1`'s spacing-30 run
+    (18:22–07:50 on 10–11 Oct) is kept as `10Hz_r_b_1\Results_tracer_spacing30` on X:.
   - **R1:** frames 0–255 repeat the old run exactly, and the drop at frame 256 is gone.
   - **The run on the old images** is kept as `10Hz_r_b_1\Results_tracer_old_images` on X:.
   - **Settings check:** the batch's settings reproduce the tested run byte for byte (S1).
