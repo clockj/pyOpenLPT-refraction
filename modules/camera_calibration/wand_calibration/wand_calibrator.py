@@ -8,6 +8,7 @@ from PySide6.QtCore import QThread, Signal, QWaitCondition, QMutex
 import concurrent.futures
 import contextlib
 import itertools
+import json
 import multiprocessing
 import os
 
@@ -221,6 +222,83 @@ def scale_detect_settings(min_radius, max_radius, detect_opts, scale):
     return float(min_radius) * s, float(max_radius) * s, opts
 
 
+def camera_detect_settings(c_idx, min_radius, max_radius, sensitivity, detect_opts, cam_scales=None,
+                           cam_settings=None):
+    """One camera's (min_radius, max_radius, sensitivity, detect_opts).
+
+    With a row of its own in `cam_settings` (the wand tab's "Different settings for each camera": {cam_idx:
+    {"min_radius", "max_radius", "sensitivity", "open_px", "rod_mask_px"}}, in that camera's own pixels), these are
+    its values; a key the row lacks falls back to the shared value.  Without one: the shared values, scaled by the
+    camera's pixel size (scale_detect_settings), exactly as before."""
+    own = (cam_settings or {}).get(c_idx)
+    if not own:
+        mn, mx, op = scale_detect_settings(min_radius, max_radius, detect_opts, (cam_scales or {}).get(c_idx))
+        return mn, mx, sensitivity, op
+    opts = detect_opts
+    if detect_opts is not None:
+        opts = dict(detect_opts)
+        opts["open_px"] = int(own.get("open_px", opts.get("open_px", 25)))
+        opts["rod_mask_px"] = float(own.get("rod_mask_px", opts.get("rod_mask_px", 18.0)))
+    return (own.get("min_radius", min_radius), own.get("max_radius", max_radius),
+            own.get("sensitivity", sensitivity), opts)
+
+
+# ---- the detection record: how a wand-points file was detected, beside it (wand_points.csv ->
+# wand_points_detection.json), for the results page and for reproduction
+def detection_record_path(csv_path):
+    """The detection record of a wand-points file: wand_points.csv -> wand_points_detection.json."""
+    return os.path.splitext(str(csv_path))[0] + "_detection.json"
+
+
+def write_detection_record(csv_path, record):
+    """Write `record` ({"runs": [...]}) as the detection record of `csv_path`, e.g. beside an exported copy of the
+    points.  Returns the record with "file" (its path), or None if it could not be written."""
+    path = detection_record_path(csv_path)
+    rec = {k: v for k, v in record.items() if k != "file"}
+    rec["points"] = os.path.basename(str(csv_path))
+    try:
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(rec, fh, indent=1)
+        os.replace(tmp, path)
+    except OSError as e:
+        print(f"[Detection record] could not write {path}: {e}")
+        return None
+    return {**rec, "file": path}
+
+
+def load_detection_record(csv_path):
+    """The detection record of `csv_path`, with "file" (its path); None when there is none (points detected before
+    records were written, or by another program) or it cannot be read."""
+    path = detection_record_path(csv_path)
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding="utf-8") as fh:
+            rec = json.load(fh)
+    except (OSError, ValueError) as e:
+        print(f"[Detection record] could not read {path}: {e}")
+        return None
+    if not isinstance(rec, dict) or not rec.get("runs"):
+        return None
+    return {**rec, "file": path}
+
+
+def save_detection_record(csv_path, run, resume=False):
+    """Record one detection run of `csv_path`: a resume adds `run` to the runs already recorded (a file detected in
+    two goes keeps both); otherwise the record holds this run alone.  Returns the record with "file", or None."""
+    runs = []
+    if resume:
+        old = load_detection_record(csv_path)
+        if old:
+            runs = list(old["runs"])
+    record = {"about": "How the wand points of this file were detected (pyOpenLPT's wand tab): one entry per "
+                       "detection run, with the mode, the Wand Type, and each camera's settings as its detector "
+                       "got them (radii in px, in that camera's pixels) and its images.",
+              "runs": runs + [run]}
+    return write_detection_record(csv_path, record)
+
+
 def phantom_image_numbers(folder):
     """(FirstImageNo, ImageCount) from the Phantom header (a .chd file, the Cine file header PCC writes beside the
     images it saves) in `folder`, or None if there is none or it cannot be read.  FirstImageNo counts from the
@@ -366,7 +444,7 @@ class WandDetectionSingleFrameWorker(QThread):
     finished_signal = Signal(object) # Returns dict of results
 
     def __init__(self, calibrator, image_paths_dict, wand_type, min_r, max_r, sensitivity, detect_mode="fast",
-                 detect_opts=None, cam_scales=None):
+                 detect_opts=None, cam_scales=None, cam_settings=None):
         super().__init__()
         self.calibrator = calibrator
         self.image_paths_dict = image_paths_dict
@@ -377,6 +455,7 @@ class WandDetectionSingleFrameWorker(QThread):
         self.detect_mode = detect_mode
         self.detect_opts = detect_opts
         self.cam_scales = cam_scales
+        self.cam_settings = cam_settings
 
     def run(self):
         # Run detection
@@ -390,6 +469,7 @@ class WandDetectionSingleFrameWorker(QThread):
                 self.detect_mode,
                 detect_opts=self.detect_opts,
                 cam_scales=self.cam_scales,
+                cam_settings=self.cam_settings,
             )
             self.finished_signal.emit(res)
         except Exception as e:
@@ -401,7 +481,7 @@ class WandDetectionWorker(QThread):
     finished_signal = Signal(bool, str) # success, msg
     
     def __init__(self, calibrator, image_paths, wand_type, min_r, max_r, sens, autosave_path=None, resume=False, detect_mode="fast",
-                 detect_opts=None, cam_scales=None):
+                 detect_opts=None, cam_scales=None, cam_settings=None):
         super().__init__()
         self.calibrator = calibrator
         self.image_paths = image_paths
@@ -412,6 +492,7 @@ class WandDetectionWorker(QThread):
         self.detect_mode = detect_mode
         self.detect_opts = detect_opts
         self.cam_scales = cam_scales
+        self.cam_settings = cam_settings
         self.autosave_path = autosave_path
         self.resume_flag = resume
         
@@ -435,6 +516,7 @@ class WandDetectionWorker(QThread):
                 stop_check=lambda: self._is_stopped,
                 detect_opts=self.detect_opts,
                 cam_scales=self.cam_scales,
+                cam_settings=self.cam_settings,
             )
             
             # First item yielded is (0, total_frames) for init
@@ -773,7 +855,7 @@ class WandCalibrator:
         return (m_s, s_s), (m_l, s_l)
 
     def detect_wand_points_generator(self, image_paths_dict, wand_type, min_radius, max_radius, sensitivity, autosave_path=None, resume=False, detect_mode="fast", stop_check=None,
-                                     detect_opts=None, cam_scales=None):
+                                     detect_opts=None, cam_scales=None, cam_settings=None):
         """
         Generator for detecting wand points. Yields (current_frame_idx, total_frames).
         Implements dual-radius logic and strict filtering.
@@ -782,6 +864,8 @@ class WandCalibrator:
         detect_opts: settings of the "ellipse" detect_mode (see run_detection_task).
         cam_scales: {cam_idx: scale} for cameras whose pixels differ from the reference camera's
         (scale_detect_settings); None or a missing camera: unscaled.
+        cam_settings: {cam_idx: that camera's own settings} (camera_detect_settings); a camera with a row ignores the
+        shared settings and its scale.  None: every camera uses the shared settings.
         """
         # Update Cameras Dict
         for c_idx, paths in image_paths_dict.items():
@@ -824,8 +908,9 @@ class WandCalibrator:
             for c_idx in cam_indices:
                 if f_idx < len(image_paths_dict[c_idx]):
                     img_path = str(image_paths_dict[c_idx][f_idx])
-                    mn, mx, op = scale_detect_settings(min_radius, max_radius, detect_opts, (cam_scales or {}).get(c_idx))
-                    all_tasks.append((f_idx, c_idx, img_path, wand_type, mn, mx, sensitivity, detect_mode, op))
+                    mn, mx, sens, op = camera_detect_settings(c_idx, min_radius, max_radius, sensitivity, detect_opts,
+                                                              cam_scales, cam_settings)
+                    all_tasks.append((f_idx, c_idx, img_path, wand_type, mn, mx, sens, detect_mode, op))
         
         total_tasks = len(all_tasks)
         print(f"Parallel Execution: {total_tasks} tasks to run (Skipped {num_frames * num_cams - total_tasks})")
@@ -1231,12 +1316,12 @@ class WandCalibrator:
 
 
     def detect_single_frame(self, image_dict, wand_type="bright", min_radius=20, max_radius=200, sensitivity=0.85, detect_mode="fast",
-                            detect_opts=None, cam_scales=None):
+                            detect_opts=None, cam_scales=None, cam_settings=None):
         """
         Run detection on a single frame dictionary {cam_idx: path}.
         Returns {cam_idx: points} for visualization.
         Parallelized using ProcessPoolExecutor.
-        cam_scales: {cam_idx: scale}, as in detect_wand_points_generator.
+        cam_scales, cam_settings: as in detect_wand_points_generator.
         """
         results = {}
 
@@ -1244,8 +1329,9 @@ class WandCalibrator:
         tasks = []
         for c_idx, path in image_dict.items():
             # Frame index is dummy 0 here
-            mn, mx, op = scale_detect_settings(min_radius, max_radius, detect_opts, (cam_scales or {}).get(c_idx))
-            tasks.append((0, c_idx, str(path), wand_type, mn, mx, sensitivity, detect_mode, op))
+            mn, mx, sens, op = camera_detect_settings(c_idx, min_radius, max_radius, sensitivity, detect_opts,
+                                                      cam_scales, cam_settings)
+            tasks.append((0, c_idx, str(path), wand_type, mn, mx, sens, detect_mode, op))
             
         # Run Parallel
         try:

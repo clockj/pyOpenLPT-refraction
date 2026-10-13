@@ -1,0 +1,69 @@
+[Calibration3DViewer] Initialized successfully
+[Calibration3DViewer] Initialized successfully
+K: detection settings per camera; T2 frames 1000, 2000, 3000, 4069, 5000, 8000 (cameras 0 and 1); shared settings radius (40, 120), sensitivity 0.85, opening 95 px, mask 50 px
+
+K1: the box unticked (as before) and ticked with its rows as filled: the same detections
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast'
+Detecting frame 3, mode='dark', detect_mode='fast', each camera's own settings: cam 0: r 40-120, sens 0.85; cam 1: r 40-120, sens 0.85
+  PASS  K1 fast, no pixel sizes: ticking the box changes no detection  (points per camera {0: 2, 1: 2} and {0: 2, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 40-120, sens 0.85, opening 95, mask 50)
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='fast', per-camera scales cam 1: 1.0000, cam 2: 1.4815
+Detecting frame 3, mode='dark', detect_mode='fast', each camera's own settings: cam 0: r 40-120, sens 0.85; cam 1: r 59.2593-177.778, sens 0.85
+  PASS  K1 fast, pixel sizes 20 and 13.5 um: ticking the box changes no detection  (points per camera {0: 2, 1: 2} and {0: 2, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 59.2593-177.778, sens 0.85, opening 141, mask 74.0741)
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable'
+Detecting frame 3, mode='dark', detect_mode='reliable', each camera's own settings: cam 0: r 40-120, sens 0.85; cam 1: r 40-120, sens 0.85
+  PASS  K1 reliable, no pixel sizes: ticking the box changes no detection  (points per camera {0: 3, 1: 5} and {0: 3, 1: 5}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 40-120, sens 0.85, opening 95, mask 50)
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='reliable', per-camera scales cam 1: 1.0000, cam 2: 1.4815
+Detecting frame 3, mode='dark', detect_mode='reliable', each camera's own settings: cam 0: r 40-120, sens 0.85; cam 1: r 59.2593-177.778, sens 0.85
+  PASS  K1 reliable, pixel sizes 20 and 13.5 um: ticking the box changes no detection  (points per camera {0: 3, 1: 2} and {0: 3, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 59.2593-177.778, sens 0.85, opening 141, mask 74.0741)
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse'
+Detecting frame 3, mode='dark', detect_mode='ellipse', each camera's own settings: cam 0: r 40-120, opening 95, mask 50; cam 1: r 40-120, opening 95, mask 50
+  PASS  K1 ellipse, no pixel sizes: ticking the box changes no detection  (points per camera {0: 2, 1: 2} and {0: 2, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 40-120, sens 0.85, opening 95, mask 50)
+Detecting frame 3, mode='dark', radius=[40,120], sensitivity=0.85, detect_mode='ellipse', per-camera scales cam 1: 1.0000, cam 2: 1.4815
+Detecting frame 3, mode='dark', detect_mode='ellipse', each camera's own settings: cam 0: r 40-120, opening 95, mask 50; cam 1: r 59.2593-177.778, opening 141, mask 74.0741
+  PASS  K1 ellipse, pixel sizes 20 and 13.5 um: ticking the box changes no detection  (points per camera {0: 2} and {0: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 59.2593-177.778, sens 0.85, opening 141, mask 74.0741)
+
+K2: each camera its own values (ellipse): camera 1's row 5-20 px, below its balls
+  PASS  K2 the rows: camera 0 the shared settings, camera 1 its own; editing a row marks the table edited  ({"0": {"min_radius": 40.0, "max_radius": 120.0, "sensitivity": 0.85, "open_px": 95, "rod_mask_px": 50.0}, "1": {"min_radius": 5.0, "max_radius": 20.0, "sensitivity": 0.85, "open_px": 95, "rod_mask_px": 50.0}})
+Detecting frame 3, mode='dark', detect_mode='ellipse', each camera's own settings: cam 0: r 40-120, opening 95, mask 50; cam 1: r 5-20, opening 95, mask 50
+  PASS  K2 Test Detect: camera 1 finds neither of its balls, camera 0 its points of K1 to the bit  (camera 1: 0 points, 0 of its 2 balls; camera 0: 2 points)
+  PASS  K2 a row with R min above R max stops Test Detect with a warning  ([('warning', 'Detection settings', "R min must be below R max in the table of each camera's settings: camera 1.")])
+Detection record: D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\k2_shared_detection.json
+Generator starting: 6 frames. Resume=False, Autosave=D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\k2_shared.csv
+Detected Image Size: (800, 1280)
+Parallel Execution: 12 tasks to run (Skipped 0)
+Parallel Execution: Using 25 processes (80% of 32 cores).
+Raw detection done. Calculating stats...
+Cam 0: Not enough points (7) for stats.
+Cam 1: Peak finding failed. Falling back to Median Zoning.
+Cam 1 Final Stats: Small(m=61.9, s=7.6), Large(m=80.5, s=2.2)
+  Pass1 Frame 0 rejected: Camera 0 not in cam_data
+  Pass1 Frame 1 rejected: Camera 0 not in cam_stats
+  Pass1 Frame 3 rejected: Camera 0 not in cam_stats
+  Pass1 Frame 2 rejected: Camera 0 not in cam_stats
+  Pass1 Frame 4 rejected: Camera 0 not in cam_stats
+Pass 1 Done. Valid Frames: 0 / 6
+Refinement Done. Valid Frames: 0 / 6
+Each camera's own detection settings: cam 0: r 40-120, opening 95, mask 50; cam 1: r 5-20, opening 95, mask 50
+Detection record: D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\k2_per_camera_detection.json
+Generator starting: 6 frames. Resume=False, Autosave=D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\k2_per_camera.csv
+Detected Image Size: (800, 1280)
+Parallel Execution: 12 tasks to run (Skipped 0)
+Parallel Execution: Using 25 processes (80% of 32 cores).
+Raw detection done. Calculating stats...
+Cam 0: Not enough points (7) for stats.
+Cam 1: Not enough points (0) for stats.
+No valid stats for any camera.
+  PASS  K2 Process All Frames: camera 0's rows as with the shared settings, none of camera 1's balls  (shared: camera 0 7 and camera 1 11 detections; per camera: camera 0 7, camera 1 0, of them on camera 1's balls 0; messages ['Process Frames', 'No Wand Points'])
+
+K3: the panel
+  PASS  K3 the table follows Num Cameras 2 -> 3 -> 2: the rows kept, the new one from the shared settings  ({0: {'min_radius': 33.0, 'max_radius': 120.0, 'sensitivity': 0.85, 'open_px': 95, 'rod_mask_px': 50.0}, 1: {'min_radius': 5.0, 'max_radius': 20.0, 'sensitivity': 0.85, 'open_px': 95, 'rod_mask_px': 50.0}, 2: {'min_radius': 40.0, 'max_radius': 120.0, 'sensitivity': 0.85, 'open_px': 95, 'rod_mask_px': 50.0}})
+  PASS  K3 the columns follow the mode: Sens. unless ellipse (shown with the custom axis), Opening and Mask in ellipse only  (fast: Sens. True, Opening False, Mask False; fast + custom axis: Sens. True, Opening False, Mask False; reliable: Sens. True, Opening False, Mask False; reliable + custom axis: Sens. True, Opening False, Mask False; ellipse: Sens. False, Opening True, Mask True; ellipse + custom axis: Sens. True, Opening True, Mask True)
+  PASS  K3 the shared settings greyed while the box is ticked (the Sensitivity also in the ellipse mode)  (box on, reliable: radius, sensitivity, opening, mask enabled [False, False, False, False]; box on, ellipse: radius, sensitivity, opening, mask enabled [False, False, False, False]; box off, reliable: radius, sensitivity, opening, mask enabled [True, True, True, True]; box off, ellipse: radius, sensitivity, opening, mask enabled [True, False, True, True])
+  PASS  K3 1500 x 900, 4 cameras, box ticked, reliable: no horizontal scroll bar  (viewport 358 px, content minimum 336 px, table 338 px wide)
+  PASS  K3 1500 x 900, 4 cameras, box ticked, ellipse: no horizontal scroll bar  (viewport 358 px, content minimum 336 px, table 338 px wide)
+  PASS  K3 1200 x 700, 4 cameras, box ticked, reliable: no horizontal scroll bar  (viewport 358 px, content minimum 336 px, table 338 px wide)
+  PASS  K3 1200 x 700, 4 cameras, box ticked, ellipse: no horizontal scroll bar  (viewport 358 px, content minimum 336 px, table 338 px wide)
+  picture: k_per_camera_panel_reliable.png (368 x 1063)
+  picture: k_per_camera_panel_ellipse.png (368 x 1063)
+
+17 of 17 checks passed; 78 s

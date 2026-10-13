@@ -118,6 +118,7 @@ class Job:
     pixel_mm: Optional[object] = None      # pixel size (mm), one number or one per camera: only to print f in mm
     detect_mode: Optional[str] = None      # how the points were found ("ellipse", "fast", "reliable"; None: unknown)
     source: str = ""                       # where the points came from (for the report)
+    detection: Optional[Dict] = None       # the points' detection record (wand_calibrator.save_detection_record)
 
     @property
     def tube(self) -> cm.Tube:
@@ -137,7 +138,7 @@ class Job:
                 "n": [float(v) for v in self.n], "fit_k1": bool(self.fit_k1), "fit_L": bool(self.fit_L),
                 "noise_weights": self.noise_weights, "n_final": int(self.n_final),
                 "refit_from_last_result": self.start is not None, "pixel_mm": self.pixel_mm,
-                "detect_mode": self.detect_mode, "source": self.source,
+                "detect_mode": self.detect_mode, "source": self.source, "detection": self.detection,
                 "frame_ids": [int(f) for f in self.frame_ids], "cam_ids": [int(c) for c in self.cam_ids],
                 "sizes": [[int(w), int(h)] for (w, h) in self.sizes],
                 **({"fix_f": [int(c) for c in self.fix_f]} if self.fix_f else {})}

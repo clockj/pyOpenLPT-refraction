@@ -1,6 +1,6 @@
 # Flat-window wand calibration (PINPLATE): summary and progress
 
-Last updated: 2026-10-09.
+Last updated: 2026-10-13.
 
 Start here to catch up. This file gathers what the flat-window wand tests concluded, and what that means for a real
 experiment.
@@ -78,6 +78,18 @@ experiment.
   advice (`2026-10-02-plate-wand-report.md`, section 6).
 
 ## 1. Progress log
+
+**2026-10-13**
+- **The wand tab's detection can now be set per camera** ("Different settings for each camera": R min, R max,
+  Sensitivity, Rod opening, Rod mask, each in its camera's own pixels). This is for cameras that see the balls at
+  different sizes, behind any window.
+  - **Box off:** exactly as before.
+  - **Ticking:** fills the rows from the shared settings without changing a detection.
+  - **More:** `tests/wand_per_camera_detect/2026-10-13-report.md`, and the cylinder README's entry of 13 Oct.
+- **How the points were detected is now recorded** (`<points>_detection.json` beside them).
+  - **The flat-window calibration** saves it in `calibration_result.json` (`gui.settings.detection`).
+  - **The results page** lists it.
+  - **Report:** `tests/wand_per_camera_detect/2026-10-13-report-record.md`.
 
 **2026-10-09**
 - **The GUI's Pinhole+Refraction panel now takes the options the real case used** (`tests/plate_wand_gui/`,

@@ -69,6 +69,7 @@ class Job:
     constraints: Optional[Dict] = None     # plate_wand.calibrate's constraints (rig indices, mm)
     start_source: str = ""                 # where `start` came from: "last result" or a folder
     hints_source: str = ""                 # where `hints` came from
+    detection: Optional[Dict] = None       # the points' detection record (wand_calibrator.save_detection_record)
 
     @property
     def names(self) -> List[str]:
@@ -93,7 +94,7 @@ class Job:
                 "fit_lens": list(self.fit_lens), "constraints": self.constraints,
                 "hints": ({"source": self.hints_source or "given", **self.hints} if self.hints else None),
                 "pixel_mm": self.pixel_mm,
-                "detect_mode": self.detect_mode, "source": self.source,
+                "detect_mode": self.detect_mode, "source": self.source, "detection": self.detection,
                 "frame_ids": [int(f) for f in self.frame_ids], "cam_ids": [int(c) for c in self.cam_ids],
                 "sizes": [[int(w), int(h)] for (w, h) in self.sizes]}
 

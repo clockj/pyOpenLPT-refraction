@@ -1,6 +1,6 @@
 # Cylinder wand calibration (PINCYL): summary and progress
 
-Last updated: 2026-10-07.
+Last updated: 2026-10-13.
 
 Start here to catch up. This file gathers what all the wand tests so far concluded, and what that means for a real
 experiment.
@@ -31,8 +31,39 @@ experiment.
 - **Third real run (20261007/T0, 7 Oct, `cases/cyl_20261007`):** 0.600 px, f again undetermined (±12–16 % over the
   parts), the rig changed since 6 Oct. Two new things: a **hold-f option** (`fix_f`), and a **selection problem**
   with six starts, where a wrong minimum won (the entry of 7 Oct, late night).
+- **The GUI's detection (13 Oct):** each camera can now have its own Radius Range, Sensitivity, Rod opening and Rod
+  mask, for cameras that see the balls at different sizes. How the points were detected is recorded beside them
+  (`<points>_detection.json`), in `calibration_result.json` and on the results page.
 
 ## 1. Progress log
+
+**2026-10-13: detection settings per camera in the wand tab** (your question: "i still cannot set object parameters
+for each camera? for example, the wand opening, wand mask, radius range? i think that is important if my cameras have
+different resolutions?")
+- **Where:** `tests/wand_per_camera_detect/2026-10-13-plan.md` and `-report.md`.
+- **New:** a box, "Different settings for each camera", above Test Detect. Ticked, a table gives each camera its own
+  R min, R max, Sensitivity, Rod opening and Rod mask, in its own pixels.
+  - **Before,** the only per-camera handle was the Pixel (µm) column, which scales the shared values by the pixel
+    size. That is right only when the cameras differ in pixel size alone, not in magnification.
+  - **The Sensitivity** shows only where it is used (your question: the ellipse mode does not use it). Opening and
+    Mask show in the ellipse mode only.
+  - **Test Detect, Process All Frames and the axis points' Detect** all use the table.
+- **Nothing changes until a row is edited.**
+  - With the box off, the tasks are exactly as before.
+  - Ticking fills the rows from the shared settings and keeps their exact values: on six T2 frames, the same points
+    to the bit in all three modes, with and without pixel sizes.
+  - The circle finders' points can move by up to 0.5 px when a radius bound moves by 0.002 px, so the exact values
+    matter.
+- **Checked** in the GUI's window on T2 frames (17 of 17). With camera 1's row set below its balls, camera 1 finds
+  none and camera 0 is unchanged, in Test Detect and in Process All Frames. The panel still fits its width.
+- **Then (your OK: "record the detection settings on the results page and save it for reproduction"):** every
+  detection now writes a record beside its points, `wand_points.csv` → `wand_points_detection.json`.
+  - **It holds** the mode, the Wand Type, and each camera's settings as its detector got them, and its images.
+  - **Resume and Export:** a resume adds an entry, and Export Data copies the record beside the exported file.
+  - **Read back:** Load Wand Points reads it, so the "Detection mode unknown" note no longer appears for such files.
+  - **Into the results:** the calibration saves it in `calibration_result.json`, and the results page lists it:
+    Detection, per-camera rows, Images, and the record's path.
+  - **Checked:** 12 of 12 (`r_record.py`, 24 T2 frames); report `2026-10-13-report-record.md`.
 
 **2026-10-07 (late night): the third real run, 20261007/T0; a hold-f option; a selection problem** (the tracking
 case's plan, Phase C: `cases/cyl_20261007/2026-10-07-plan.md`; report `cases/cyl_20261007/2026-10-07-phaseC-report.md`)

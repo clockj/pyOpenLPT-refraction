@@ -107,6 +107,8 @@ an ellipse to each ball of frame 4069.*
    - Width and Height are filled in from the first image: check them.
 3. **Choose the Wand Type, the Detection Mode** (and, for "ellipse", the Rod opening and Rod mask) **and the Radius
    Range** (sections [3.2](#32-the-settings) to [3.4](#34-setting-rod-opening-and-rod-mask-ellipse-mode)).
+   Cameras that see the balls at different sizes (another lens, distance, binning or crop) get their own values with
+   **Different settings for each camera**.
 4. **Test on single frames.** Click a frame in the Frame List, then **Test Detect (Current Frame)**. Look at every
    Cam tab: each ball should carry exactly one circle (or ellipse).
    - Try several frames: the wand tilted, near the image edges, far and near.
@@ -115,6 +117,11 @@ an ellipse to each ball of frame 4069.*
 5. **Click Process All Frames / Resume.**
    - **Choose the file** for the results (`wand_points.csv`). It is also the autosave. Choosing an existing file
      offers to **resume** it.
+   - **The detection record** goes beside it: `wand_points_detection.json`. It holds how the points were found: the
+     mode, the Wand Type, and each camera's settings (as its detector got them) and images.
+     - A resume adds an entry to it, and Export Data copies it beside the exported file.
+     - **Load Wand Points** reads it back, and the results page lists it in its settings table. For reproduction,
+       keep it with the points.
    - **The progress dialog** has **Pause** and **Stop**.
      - **Pause** halts the detection once the images already started are done, and frees the processors; **Resume**
        (the same button) goes on.
@@ -131,16 +138,17 @@ an ellipse to each ball of frame 4069.*
 | **Num Cameras** | 4 | The number of cameras (1–16). Changing it keeps the cameras that remain (their folders, Focal, Width, Height and window); a camera added starts empty. Every camera row needs its images: a camera without images pairs no frame. |
 | **Wand Type** | Dark on Bright | Dark balls on a bright background (backlight), or bright balls on a dark background: choose the one that matches the images, and check it with Test Detect. |
 | **Radius Range** | 20–200 px | The balls' image radii, in pixels (the first camera's pixels when the table's Pixel column is set): set the minimum a little below the small ball's radius and the maximum a little above the large ball's. After a folder is loaded the maximum is limited to a quarter of the image's shorter side. In the ellipse mode it also sizes the background window (2.5 × the maximum, at least 101 px), which must be wider than a ball. Too small a maximum loses frames; the centres hardly move (0.01–0.04 px on a tube recording). |
-| **Sensitivity** | 0.85 | The C++ circle finder's sensitivity (0.50–1.00), used by "reliable", by "fast" when its own search finds fewer than two circles, and by the axis-point detection. Not used by "ellipse". Raise it when balls are missed, lower it when noise is found as circles. |
+| **Sensitivity** | 0.85 | The C++ circle finder's sensitivity (0.50–1.00), used by "reliable", by "fast" when its own search finds fewer than two circles, and by the axis-point detection. Not used by "ellipse" (greyed there, unless the Axis direction is Custom). Raise it when balls are missed, lower it when noise is found as circles. |
 | **Load** (camera table) | – | Loads all `.png .jpg .bmp .tif .tiff .jpeg` images of a folder, sorted by name. When every camera's folder holds a Phantom header (`.chd`) and the cameras saved different ranges of images, the lists are cut to the images every camera saved, so that the i-th frames are simultaneous; the status line says how many were dropped. |
 | **Cam ID** | 0, 1, … | The camera's number in the files (`cam0.txt`, CSV column Camera). The left tabs count from 1: Cam 1 is Cam ID 0. |
 | **Focal (px)** | 9000 | The focal length in pixels (lens focal length in mm divided by the pixel size in mm). **Only a start value, and only for the Pinhole model and the previous refraction calibrator**: plate_wand and the tube model find f from the wand and ignore it (the column is greyed for "Pinhole+Cylinder"). |
 | **Width, Height** | 1280, 800 | Each camera's image size in pixels (the cameras may differ), filled in from the first image of its folder. After loading points from a CSV file, set them by hand. The tube and window models put the principal point at the image centre; the Pinhole model starts it there. |
-| **Pixel (µm)** | empty | The sensor's pixel size, for cameras whose pixels differ (e.g. Phantom VEO 710L 20 µm and v2640 13.5 µm). Set it for every camera: the Radius Range, Rod opening and Rod mask are then in the first camera's pixels, and a camera with pixels p gets them multiplied by p₁ / p (Test Detect and Process Frames alike). The results page prints each camera's f in mm with it. Empty: not used, and the detection runs as before. |
+| **Pixel (µm)** | empty | The sensor's pixel size, for cameras whose pixels differ (e.g. Phantom VEO 710L 20 µm and v2640 13.5 µm). Set it for every camera: the Radius Range, Rod opening and Rod mask are then in the first camera's pixels, and a camera with pixels p gets them multiplied by p₁ / p (Test Detect and Process Frames alike). This holds while the settings are shared: with **Different settings for each camera** ticked, each camera's own values are used as they are. The results page prints each camera's f in mm with it. Empty: not used, and the detection runs as before. |
 | **Frame List** | – | All frames, numbered from 1. Click to preview; the selected frame is the one Test Detect uses. |
 | **Detection Mode** | fast | How each ball's centre is found: see [3.3](#33-choosing-the-detection-mode). |
 | **Rod opening** | 25 px | Ellipse mode only. Removes the rod before the balls are separated: a little **wider than the rod's image**, narrower than the small ball's. 0: none. See [3.4](#34-setting-rod-opening-and-rod-mask-ellipse-mode). |
 | **Rod mask** | 18.0 px | Ellipse mode only. Edge points within this distance of the line joining the balls, on the side facing the other ball, are left out of the ellipse fit (the rod pulls them): about the rod's half-width plus twice its edge blur. 0: none. |
+| **Different settings for each camera** | off | For cameras that see the balls at different sizes: another lens, focal length, distance, binning or crop. Ticked, a table gives each camera its own **R min** and **R max** (its Radius Range), **Sens.** (shown where the Sensitivity is used: not in the ellipse mode unless the Axis direction is Custom), **Opening** and **Mask** (ellipse mode only), all in that camera's own pixels; the shared settings above are faded and not used. Ticking fills the rows from the shared settings (times the Pixel factor when it is set), so nothing changes until a row is edited. Tune each camera with Test Detect and look at its Cam tab. Unticked: the shared settings again (the rows are kept). A row whose R min is not below its R max stops the detection with a warning. |
 | **Axis direction** | Default | At the bottom: Custom opens the axis-point tools ([section 4](#4-axis-points-optional-pinhole-model-only)). |
 
 The ellipse mode also drops a pair whose two ellipses come within 3 px of each other (fixed, not shown).
@@ -486,6 +494,11 @@ the page (the installers add QtWebEngine).
 | Pinhole+Refraction (plate_wand) | at the end of the run, in the folder chosen before it | `camFile/cam<id>.txt` (PINPLATE) | `calibration_result.json`, `calibration_report.txt`, `calibration_data.json`, `calibration_report.html` |
 | Previous refraction calibrator | at the end of the run | `camFile/cam<id>.txt` (PINPLATE) | `bundle_cache.json`, `bootstrap_cache.json`, `triangulation_report.json` |
 | Pinhole+Cylinder | at the end of the run, in the folder chosen before it | `camFile/cam<id>.txt` (PINCYL) | `calibration_result.json`, `calibration_report.txt`, `calibration_data.json`, `calibration_report.html` |
+
+**How the points were detected** is also recorded:
+- **beside the points:** `<points>_detection.json`, written by Process All Frames (section 3.1);
+- **in `calibration_result.json`:** under `gui.settings.detection`;
+- **on the results page:** its Detection, Images and Detection record rows.
 
 When the project's camera folder is set or updated in **Tracking Settings**, the latest calibration's camera files are
 copied there.

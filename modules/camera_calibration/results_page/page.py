@@ -86,6 +86,58 @@ def _fmt(v, d, unit=""):
     return f"{v:,.{d}f}{unit}"
 
 
+# ------------------------------------------------------------------ how the wand points were detected
+WAND_TYPES = {"dark": "Dark on Bright", "bright": "Bright on Dark"}
+
+
+def _num(v) -> str:
+    """A detection setting as the panel shows it: at most two decimals, no trailing zeros."""
+    return f"{float(v):.2f}".rstrip("0").rstrip(".")
+
+
+def _detection_rows(det: Optional[Dict], mode: Optional[str] = None) -> List[List[str]]:
+    """The settings table's rows on how the wand points were detected: from their detection record (the wand tab's
+    <points>_detection.json, wand_calibrator.save_detection_record; its last run), else the mode alone."""
+    runs = (det or {}).get("runs") or []
+    if not runs:
+        return [["Detection", str(mode or "unknown (points read from a file)")]]
+    run = runs[-1]
+    mode = run.get("mode") or mode
+    cams = run.get("cameras") or []
+    if run.get("per_camera"):
+        how = "each camera's own settings"
+    elif any(abs(float(c.get("scale", 1.0)) - 1.0) > 1e-12 for c in cams):
+        how = "shared settings, scaled by each camera's pixel size"
+    else:
+        how = "shared settings"
+    head = f"{mode} mode, {WAND_TYPES.get(run.get('wand_type'), run.get('wand_type') or '?')}; {how}"
+    if len(runs) > 1:
+        def key(r):
+            return (r.get("mode"), r.get("wand_type"), r.get("per_camera"),
+                    [{k: v for k, v in c.items() if k != "images"} for c in r.get("cameras") or []])
+        head += (f"; detected in {len(runs)} runs (resumed), "
+                 + ("all with these settings" if all(key(r) == key(run) for r in runs[:-1])
+                    else "with different settings: the last run's are shown, the record has every run's"))
+    rows = [["Detection", head]]
+    for c in cams:
+        parts = [f"radius {_num(c['min_radius'])}–{_num(c['max_radius'])} px"]
+        if mode != "ellipse":
+            parts.append(f"sensitivity {_num(c['sensitivity'])}")
+        if "open_px" in c:
+            parts += [f"Rod opening {int(c['open_px'])} px", f"Rod mask {_num(c['rod_mask_px'])} px"]
+        if abs(float(c.get("scale", 1.0)) - 1.0) > 1e-12:
+            parts.append(f"× {float(c['scale']):.4g} for its pixel size")
+        rows.append([f"Detection, cam{c['cam_id']}", "; ".join(parts)])
+    for c in cams:
+        im = c.get("images") or {}
+        if im:
+            rows.append([f"Images, cam{c['cam_id']}", f"{im.get('folder', '')}: {int(im.get('count', 0)):,} images, "
+                                                      f"{im.get('first', '')} to {im.get('last', '')}"])
+    if det.get("file"):
+        rows.append(["Detection record", str(det["file"])])
+    return rows
+
+
 # ------------------------------------------------------------------ the reprojection errors' distributions
 def _nice_up(x: float) -> float:
     """The smallest of 1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8 x 10^k not below x (x > 0)."""
@@ -254,7 +306,7 @@ def report_from_cylinder(result: Dict, data: Dict, folder: str = None) -> Dict:
                 ["Noise weights", str(gui.get("noise_weights", "camera"))],
                 ["Starts carried", str(gui.get("n_final", 2)) + (" (refit from the last result)"
                                                                   if gui.get("refit_from_last_result") else "")],
-                ["Detection", str(gui.get("detect_mode") or "unknown (points read from a file)")],
+                *_detection_rows(gui.get("detection"), gui.get("detect_mode")),
                 ["Points from", str(gui.get("source") or "-")],
                 ["Frame", result.get("frame", "")],
                 ["Run time", _fmt(result.get("gui", {}).get("seconds"), 0, " s")]]
@@ -436,7 +488,7 @@ def report_from_plate(result: Dict, data: Dict, folder: str = None) -> Dict:
                                                                   if gui.get("refit_from_last_result") else "")],
                 ["Window-normal hints", _hints_text(gui.get("hints"))],
                 ["Constraints", _constraints_text(gui.get("constraints"), result.get("info", {}).get("constraints"))],
-                ["Detection", str(gui.get("detect_mode") or "unknown (points read from a file)")],
+                *_detection_rows(gui.get("detection"), gui.get("detect_mode")),
                 ["Points from", str(gui.get("source") or "-")],
                 ["Frame", result.get("frame", "")],
                 ["Run time", _fmt(result.get("gui", {}).get("seconds"), 0, " s")]]
@@ -467,11 +519,13 @@ def report_from_plate(result: Dict, data: Dict, folder: str = None) -> Dict:
 
 # ------------------------------------------------------------------ the pinhole calibration
 def report_from_pinhole(final_params: Dict, wand_points: Dict, wand_length: float, per_frame_errors: Dict = None,
-                        folder: str = None, detect_mode: str = None, source: str = "") -> Dict:
+                        folder: str = None, detect_mode: str = None, source: str = "",
+                        detection: Dict = None) -> Dict:
     """The report of the GUI's pinhole wand calibration (WandCalibrator.final_params: {cam: {R, T, K, dist}}), with
     the wand points it used ({frame: {cam: [ball A, ball B]}}).  The wand ends are triangulated here (linear, from
     every camera, distortion removed), so the wand length errors are free ones; the residuals are those of these
-    points."""
+    points.  detection: the points' detection record (wand_calibrator.save_detection_record), listed in the settings
+    table."""
     import cv2
     cids = sorted(int(c) for c in final_params)
     P = {}
@@ -613,7 +667,7 @@ def report_from_pinhole(final_params: Dict, wand_points: Dict, wand_length: floa
                          "to lens distortion the model lacks."},
         "noise": None,
         "settings": [["Wand length", f"{float(wand_length):.4f} mm"],
-                     ["Detection", str(detect_mode or "unknown (points read from a file)")],
+                     *_detection_rows(detection, detect_mode),
                      ["Points from", str(source or "-")],
                      ["Wand ends", "triangulated for this page (linear, all cameras, distortion removed)"]],
         "files": [{"label": "camFile folder", "path": folder}] if folder else [],
