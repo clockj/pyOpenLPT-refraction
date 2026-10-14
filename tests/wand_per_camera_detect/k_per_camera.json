@@ -1,0 +1,89 @@
+{
+ "checks": [
+  {
+   "check": "K1 fast, no pixel sizes: ticking the box changes no detection",
+   "ok": true,
+   "detail": "points per camera {0: 2, 1: 2} and {0: 2, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 40-120, sens 0.85, opening 95, mask 50"
+  },
+  {
+   "check": "K1 fast, pixel sizes 20 and 13.5 um: ticking the box changes no detection",
+   "ok": true,
+   "detail": "points per camera {0: 2, 1: 2} and {0: 2, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 59.2593-177.778, sens 0.85, opening 141, mask 74.0741"
+  },
+  {
+   "check": "K1 reliable, no pixel sizes: ticking the box changes no detection",
+   "ok": true,
+   "detail": "points per camera {0: 3, 1: 5} and {0: 3, 1: 5}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 40-120, sens 0.85, opening 95, mask 50"
+  },
+  {
+   "check": "K1 reliable, pixel sizes 20 and 13.5 um: ticking the box changes no detection",
+   "ok": true,
+   "detail": "points per camera {0: 3, 1: 2} and {0: 3, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 59.2593-177.778, sens 0.85, opening 141, mask 74.0741"
+  },
+  {
+   "check": "K1 ellipse, no pixel sizes: ticking the box changes no detection",
+   "ok": true,
+   "detail": "points per camera {0: 2, 1: 2} and {0: 2, 1: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 40-120, sens 0.85, opening 95, mask 50"
+  },
+  {
+   "check": "K1 ellipse, pixel sizes 20 and 13.5 um: ticking the box changes no detection",
+   "ok": true,
+   "detail": "points per camera {0: 2} and {0: 2}; rows cam 0: r 40-120, sens 0.85, opening 95, mask 50; cam 1: r 59.2593-177.778, sens 0.85, opening 141, mask 74.0741"
+  },
+  {
+   "check": "K2 the rows: camera 0 the shared settings, camera 1 its own; editing a row marks the table edited",
+   "ok": true,
+   "detail": "{\"0\": {\"min_radius\": 40.0, \"max_radius\": 120.0, \"sensitivity\": 0.85, \"open_px\": 95, \"rod_mask_px\": 50.0}, \"1\": {\"min_radius\": 5.0, \"max_radius\": 20.0, \"sensitivity\": 0.85, \"open_px\": 95, \"rod_mask_px\": 50.0}}"
+  },
+  {
+   "check": "K2 Test Detect: camera 1 finds neither of its balls, camera 0 its points of K1 to the bit",
+   "ok": true,
+   "detail": "camera 1: 0 points, 0 of its 2 balls; camera 0: 2 points"
+  },
+  {
+   "check": "K2 a row with R min above R max stops Test Detect with a warning",
+   "ok": true,
+   "detail": "[('warning', 'Detection settings', \"R min must be below R max in the table of each camera's settings: camera 1.\")]"
+  },
+  {
+   "check": "K2 Process All Frames: camera 0's rows as with the shared settings, none of camera 1's balls",
+   "ok": true,
+   "detail": "shared: camera 0 7 and camera 1 11 detections; per camera: camera 0 7, camera 1 0, of them on camera 1's balls 0; messages ['Process Frames', 'No Wand Points']"
+  },
+  {
+   "check": "K3 the table follows Num Cameras 2 -> 3 -> 2: the rows kept, the new one from the shared settings",
+   "ok": true,
+   "detail": "{0: {'min_radius': 33.0, 'max_radius': 120.0, 'sensitivity': 0.85, 'open_px': 95, 'rod_mask_px': 50.0}, 1: {'min_radius': 5.0, 'max_radius': 20.0, 'sensitivity': 0.85, 'open_px': 95, 'rod_mask_px': 50.0}, 2: {'min_radius': 40.0, 'max_radius': 120.0, 'sensitivity': 0.85, 'open_px': 95, 'rod_mask_px': 50.0}}"
+  },
+  {
+   "check": "K3 the columns follow the mode: Sens. unless ellipse (shown with the custom axis), Opening and Mask in ellipse only",
+   "ok": true,
+   "detail": "fast: Sens. True, Opening False, Mask False; fast + custom axis: Sens. True, Opening False, Mask False; reliable: Sens. True, Opening False, Mask False; reliable + custom axis: Sens. True, Opening False, Mask False; ellipse: Sens. False, Opening True, Mask True; ellipse + custom axis: Sens. True, Opening True, Mask True"
+  },
+  {
+   "check": "K3 the shared settings greyed while the box is ticked (the Sensitivity also in the ellipse mode)",
+   "ok": true,
+   "detail": "box on, reliable: radius, sensitivity, opening, mask enabled [False, False, False, False]; box on, ellipse: radius, sensitivity, opening, mask enabled [False, False, False, False]; box off, reliable: radius, sensitivity, opening, mask enabled [True, True, True, True]; box off, ellipse: radius, sensitivity, opening, mask enabled [True, False, True, True]"
+  },
+  {
+   "check": "K3 1500 x 900, 4 cameras, box ticked, reliable: no horizontal scroll bar",
+   "ok": true,
+   "detail": "viewport 358 px, content minimum 336 px, table 338 px wide"
+  },
+  {
+   "check": "K3 1500 x 900, 4 cameras, box ticked, ellipse: no horizontal scroll bar",
+   "ok": true,
+   "detail": "viewport 358 px, content minimum 336 px, table 338 px wide"
+  },
+  {
+   "check": "K3 1200 x 700, 4 cameras, box ticked, reliable: no horizontal scroll bar",
+   "ok": true,
+   "detail": "viewport 358 px, content minimum 336 px, table 338 px wide"
+  },
+  {
+   "check": "K3 1200 x 700, 4 cameras, box ticked, ellipse: no horizontal scroll bar",
+   "ok": true,
+   "detail": "viewport 358 px, content minimum 336 px, table 338 px wide"
+  }
+ ]
+}

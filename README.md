@@ -98,7 +98,7 @@ goes through it step by step. The figures are drawn from the two calibrations' s
 `assets/readme/make_readme_figures.py`.
 
 **The method:** S. Zhong, S. Tan, X. Zhang, Y. Li and R. Ni, "A complete forward projection algorithm through
-cylindrical and spherical refractive windows" (preprint, 2026).
+cylindrical and spherical refractive windows", [arXiv:2610.17413](https://arxiv.org/abs/2610.17413) (2026).
 
 ---
 
@@ -316,6 +316,7 @@ If you use **OpenLPT** in your research, please cite our publications:
 
 - Tan, S., Salibindla, A., Masuk, A.U.M. and Ni, R., 2020. **Introducing OpenLPT: new method of removing ghost particles and high-concentration particle shadow tracking**. *Experiments in Fluids*, 61(2), p.47.
 - Tan, S., Zhong, S. and Ni, R., 2023. **3D Lagrangian tracking of polydispersed bubbles at high image densities**. *Experiments in Fluids*, 64(4), p.85.
+- Zhong, S., Tan, S., Zhang, X., Li, Y. and Ni, R., 2026. **A complete forward projection algorithm through cylindrical and spherical refractive windows**. *arXiv preprint* [arXiv:2610.17413](https://arxiv.org/abs/2610.17413).
 
 ## License
 

@@ -130,6 +130,12 @@ tests/install_scripts/t4_lf/
 !tests/wand_report_error_pdf/**
 tests/wand_report_error_pdf/**/__pycache__/
 tests/wand_report_error_pdf/data/
+# the wand tab's detection settings per camera of 13 Oct 2026: tests/wand_per_camera_detect/ (data/ holds the files
+# its Process All Frames runs write)
+!tests/wand_per_camera_detect/
+!tests/wand_per_camera_detect/**
+tests/wand_per_camera_detect/**/__pycache__/
+tests/wand_per_camera_detect/data/
 # tracking through the tube (7 Oct 2026): the library tests in tests/cylinder_stb/ and their pytest subset
 # (data/ and runs/ hold rendered images, local copies and run outputs, regenerable with its scripts)
 !tests/test_cylinder_stb.py

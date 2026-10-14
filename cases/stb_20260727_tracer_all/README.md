@@ -4,12 +4,13 @@ Your request (10 Oct 2026): "use the new calibrated cam file like what we use fo
 10Hz to 35Hz. save interval should be set to 200 frames; create a subfolder called Results_tracer inside each test
 case; use imgFile_mask as the images for tracking."
 
-**Status (12 Oct, 14:15):**
+**Status (13 Oct, 22:20):**
 - **Your choice of 11 Oct (report section 12):** every run links short tracks within 5 voxels instead of 30
   (20–32 % more long tracks in the tests), and the dense runs have their own finder thresholds.
-- **The queue:** both 10 Hz runs are tracked with spacing 5 and delivered. `chain_batch.py` started `run_all.py`
-  (pid 6780) at 23:28 on 11 Oct. `15Hz_r_b_1`, the first dense run, has tracked since 12:32 on 12 Oct and ends
-  about 22:00 on 13 Oct; at about 33 h per run the other nine take until about 26 Oct.
+- **The queue:** `chain_batch.py` started `run_all.py` (pid 6780) at 23:28 on 11 Oct. Both 10 Hz runs and
+  `15Hz_r_b_1`, the first dense run, are tracked with spacing 5 and delivered. `15Hz_r_b_1` took 33.6 h (12:32 on
+  12 Oct to 22:05 on 13 Oct, 24.2 GB), steady from start to end; `15Hz_r_b_2` has tracked since 22:05. At that
+  pace the nine runs left take until about 26 Oct.
 - **10 Hz runs:**
   - **On the renumbered images** (frames 0–12,603), with spacing 5, in `<run>\Results_tracer`: `10Hz_r_b_2`
     (07:50–23:18 on 11 Oct, 60.0 GB) and `10Hz_r_b_1` (23:28–12:32, 36.1 GB). `10Hz_r_b_1`'s spacing-30 run
@@ -17,7 +18,7 @@ case; use imgFile_mask as the images for tracking."
   - **R1:** frames 0–255 repeat the old run exactly, and the drop at frame 256 is gone.
   - **The run on the old images** is kept as `10Hz_r_b_1\Results_tracer_old_images` on X:.
   - **Settings check:** the batch's settings reproduce the tested run byte for byte (S1).
-- **15–35 Hz runs:** queued (above). Their images are 6–15 times denser, and their particles move 3.3 times faster.
+- **15–35 Hz runs:** tracking (above). Their images are 6–15 times denser, and their particles move 3.3 times faster.
   - **With the 10 Hz settings,** IPR finds about 390,000 mostly ghost particles per frame, 2.5 min per frame, and
     almost no tracks survive (S2).
   - **With a higher threshold** (T1, T3; report sections 8–9), they take 25–30 h per run. After 255 frames they keep
@@ -58,8 +59,7 @@ Every run is tracked as `10Hz_r_b_1\stb_new_calib\new_cams` was (case `stb_20260
 
 ## What is written where
 
-**In each run's folder on X:** (`X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\<run>\`; so far
-for the two 10 Hz runs)
+**In each run's folder on X:** (`X:\Shijie Zhong\Bubble Shear Project\Processed\20260727\Results\<run>\`)
 - `config.json`: the run's tracking settings, as the GUI's Save writes them. The GUI opens it with the project, and
   can run it again. In `10Hz_r_b_1` it takes over from the old `config.txt`, as after any GUI Save (the old file stays).
 - `imgFile_mask\cam0..3ImageNames.txt`: the image lists, as the GUI's preprocessing writes them. `10Hz_r_b_1` keeps
@@ -83,7 +83,7 @@ run is copied to `Results_tracer` on X:.
 | `run_all.py` | the batch: every run in turn, delivered to X:; resumes an interrupted run from its last save; `--status` |
 | `chain_batch.py` | starts the next batch when the running one has ended with every run delivered and every config checked |
 | `renumber/` | the renumbering of the images on X: (B2): `renumber.py` (`--check`, `--undo`), its logs, checks and summaries; `mock_check.py` (R0) and `rerun_identical.py` (R1) with their results |
-| `tests/` | the checks before the batch (I1, I2, I4, S1, S2, B1), the tests of the dense runs (T1–T4, I5), of the copied frame 256 (D1–D3) and the tuning tests (U0–U6), each with its results beside it |
+| `tests/` | the checks before the batch (I1, I2, I4, S1, S2, B1), the tests of the dense runs (T1–T4, I5), of the copied frame 256 (D1–D3) and the tuning tests (U0–U6), and the checks of the batch's runs (`batch_run_summary.py`; `track_quality.py` → `batch_quality.txt`), each with its results beside it |
 
 ## Running
 
@@ -105,6 +105,8 @@ Use the `refract` environment (`C:\Users\zcloc\.conda\envs\refract\python.exe`) 
     python tests/tune_tests.py run|summary        # U0-U6: tuning the tracking (beside the batch)
     python tests/step_tail.py                     # U1-U6: the fastest steps against the baselines
     python tests/config_change_check.py RUN ...   # a run's configs on disk against what make_configs.py writes
+    python tests/track_quality.py RUN_DIR F [--max-save S]   # the long tracks' quality at a save frame F
+    python tests/batch_run_summary.py RUN ...     # finished batch runs, whole, from their logs
     python chain_batch.py --after PID RUN ...     # the next batch after the running one ([--dry-run])
 
 After a reboot, `python run_all.py` with all twelve runs resumes the unfinished run from its last save and tracks

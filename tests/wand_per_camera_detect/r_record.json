@@ -1,0 +1,149 @@
+{
+ "checks": [
+  {
+   "check": "R1 each camera's own settings: the record beside the points holds them as the detection got them",
+   "ok": true,
+   "detail": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\r1_points_detection.json: {\"0\": {\"min_radius\": 40.0, \"max_radius\": 120.0, \"sensitivity\": 0.85, \"open_px\": 95, \"rod_mask_px\": 50.0}, \"1\": {\"min_radius\": 35.0, \"max_radius\": 125.0, \"sensitivity\": 0.85, \"open_px\": 90, \"rod_mask_px\": 48.0}}; images as loaded"
+  },
+  {
+   "check": "R1 shared settings with pixel sizes: camera 1's values are the shared ones times 20/13.5, to the bit",
+   "ok": true,
+   "detail": "camera 1: {\"min_radius\": 59.25925925925925, \"max_radius\": 177.77777777777777, \"open_px\": 141, \"rod_mask_px\": 74.07407407407408, \"scale\": 1.4814814814814814, \"pixel_um\": 13.5}"
+  },
+  {
+   "check": "R2 the resume keeps R1's run and adds its own (resumed, camera 1's R max 130 px)",
+   "ok": true,
+   "detail": "2 runs; questions ['Resume?', 'Export Data']"
+  },
+  {
+   "check": "R2 Export Data: the exported copy has the record beside it, the same runs",
+   "ok": true,
+   "detail": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\r2_export_detection.json"
+  },
+  {
+   "check": "R3 a file with a record: its mode and every run come back",
+   "ok": true,
+   "detail": "mode ellipse; 2 runs"
+  },
+  {
+   "check": "R3 a file without one: the mode stays unknown, as before",
+   "ok": true,
+   "detail": "mode None"
+  },
+  {
+   "check": "R4 the tube calibration's Job: detection = the record, detect_mode ellipse; in its settings",
+   "ok": true,
+   "detail": "source D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\r1_points.csv"
+  },
+  {
+   "check": "R4 the flat-window Job's settings carry it too",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "R5 cylinder: the Detection rows from the record (two runs with different settings, the last shown)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "R5 cylinder without a record: the settings rows as before (one Detection row)",
+   "ok": true,
+   "detail": "[['Detection', 'fast']]"
+  },
+  {
+   "check": "R5 flat windows and pinhole: the same rows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "R5 the page with the rows draws in QtWebEngine without a console error",
+   "ok": true,
+   "detail": "0 console messages"
+  }
+ ],
+ "record": {
+  "about": "How the wand points of this file were detected (pyOpenLPT's wand tab): one entry per detection run, with the mode, the Wand Type, and each camera's settings as its detector got them (radii in px, in that camera's pixels) and its images.",
+  "runs": [
+   {
+    "written": "2026-10-13 17:31:59",
+    "resumed": false,
+    "mode": "ellipse",
+    "wand_type": "dark",
+    "per_camera": true,
+    "cameras": [
+     {
+      "cam_id": 0,
+      "min_radius": 40.0,
+      "max_radius": 120.0,
+      "sensitivity": 0.85,
+      "open_px": 95,
+      "rod_mask_px": 50.0,
+      "guard_px": 3.0,
+      "images": {
+       "folder": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\frames\\cam1",
+       "first": "frame000500.png",
+       "last": "frame012000.png",
+       "count": 24
+      }
+     },
+     {
+      "cam_id": 1,
+      "min_radius": 35.0,
+      "max_radius": 125.0,
+      "sensitivity": 0.85,
+      "open_px": 90,
+      "rod_mask_px": 48.0,
+      "guard_px": 3.0,
+      "images": {
+       "folder": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\frames\\cam2",
+       "first": "frame000500.png",
+       "last": "frame012000.png",
+       "count": 24
+      }
+     }
+    ]
+   },
+   {
+    "written": "2026-10-13 17:32:10",
+    "resumed": true,
+    "mode": "ellipse",
+    "wand_type": "dark",
+    "per_camera": true,
+    "cameras": [
+     {
+      "cam_id": 0,
+      "min_radius": 40.0,
+      "max_radius": 120.0,
+      "sensitivity": 0.85,
+      "open_px": 95,
+      "rod_mask_px": 50.0,
+      "guard_px": 3.0,
+      "images": {
+       "folder": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\frames\\cam1",
+       "first": "frame000500.png",
+       "last": "frame012000.png",
+       "count": 24
+      }
+     },
+     {
+      "cam_id": 1,
+      "min_radius": 35.0,
+      "max_radius": 130.0,
+      "sensitivity": 0.85,
+      "open_px": 90,
+      "rod_mask_px": 48.0,
+      "guard_px": 3.0,
+      "images": {
+       "folder": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\frames\\cam2",
+       "first": "frame000500.png",
+       "last": "frame012000.png",
+       "count": 24
+      }
+     }
+    ]
+   }
+  ],
+  "points": "r1_points.csv",
+  "file": "D:\\Refraction\\pyOpenLPT\\tests\\wand_per_camera_detect\\data\\r1_points_detection.json"
+ }
+}

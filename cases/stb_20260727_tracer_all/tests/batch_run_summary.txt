@@ -1,0 +1,41 @@
+The batch's finished runs, whole (13 Oct 2026, 22:18); report section 12, end.
+
+10Hz_r_b_1: tracked 2026-10-11T23:27:52 to 2026-10-12T12:31:42, 12604 frames (0..12603); delivered 2026-10-12T12:38:15, 137 files, 36.1 GB
+  in all 13.06 h = 3.73 s per frame; STB's frame times 9.94 h = 2.84 s per frame, with 64 saves (median 46.1 s, together 0.81 h); outside them 0.89 s per frame
+  frames         frame time  particles  promoted  lost  exited  long tracks
+                 (no save)   found      ------ per frame -----  at the end
+      0-1999       2.58 s      11449       269    96    17.2        21472
+   2000-3999       2.62 s      11261       262   100    20.3        21071
+   4000-5999       2.63 s      11104       256    99    19.9        20708
+   6000-7999       2.62 s      11226       257    98    19.5        21377
+   8000-9999       2.62 s      11292       262   100    19.7        20469
+  10000-11999      2.65 s      11208       261    98    19.6        21815
+  12000-12603      2.64 s      11088       257    99    20.0        21525
+  active long tracks at the last frame: 21517
+
+10Hz_r_b_2: tracked 2026-10-11T07:49:52 to 2026-10-11T23:17:53, 12604 frames (0..12603); delivered 2026-10-11T23:26:45, 137 files, 60.0 GB
+  in all 15.47 h = 4.42 s per frame; STB's frame times 12.18 h = 3.48 s per frame, with 64 saves (median 92.8 s, together 1.60 h); outside them 0.94 s per frame
+  frames         frame time  particles  promoted  lost  exited  long tracks
+                 (no save)   found      ------ per frame -----  at the end
+      0-1999       3.00 s      13213       323    94    28.7        35515
+   2000-3999       3.03 s      12787       305    95    32.0        34573
+   4000-5999       3.03 s      12767       300    92    31.4        35150
+   6000-7999       3.04 s      12704       301    93    32.1        35849
+   8000-9999       3.06 s      12827       307    97    32.0        34934
+  10000-11999      3.06 s      12838       303    95    32.2        35597
+  12000-12603      3.06 s      12845       300    95    32.2        35480
+  active long tracks at the last frame: 35511
+
+15Hz_r_b_1: tracked 2026-10-12T12:31:42 to 2026-10-13T22:04:50, 12604 frames (0..12603); delivered 2026-10-13T22:08:38, 137 files, 24.2 GB
+  in all 33.55 h = 9.58 s per frame; STB's frame times 29.59 h = 8.45 s per frame, with 64 saves (median 32.1 s, together 0.56 h); outside them 1.13 s per frame
+  frames         frame time  particles  promoted  lost  exited  long tracks
+                 (no save)   found      ------ per frame -----  at the end
+      0-1999       8.22 s      77525      2615   193    23.1        13924
+   2000-3999       8.38 s      77805      2623   194    23.6        14236
+   4000-5999       8.40 s      77996      2620   192    23.5        14034
+   6000-7999       8.42 s      77922      2628   194    23.8        14067
+   8000-9999       8.45 s      77698      2620   195    24.1        13024
+  10000-11999      8.23 s      77735      2616   194    23.7        12906
+  12000-12603      7.98 s      77750      2627   193    22.9        13338
+  active long tracks at the last frame: 13356
+

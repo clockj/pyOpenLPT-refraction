@@ -1520,8 +1520,9 @@ class CameraCalibrationView(QWidget):
             pixel_header_item.setToolTip(
                 "Sensor pixel size, for cameras whose pixels differ (e.g. Phantom VEO 710L 20 µm, v2640 13.5 µm). "
                 "Set it for every camera: the Radius Range, Rod opening and Rod mask are then in the first camera's "
-                "pixels, and each other camera's are scaled by its pixel size. The results page prints f in mm with "
-                "it. Empty: not used.")
+                "pixels, and each other camera's are scaled by its pixel size (while the settings are shared: with "
+                "'Different settings for each camera' ticked, each camera's own values are used as they are). The "
+                "results page prints f in mm with it. Empty: not used.")
 
         header = self.wand_cam_table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
@@ -1640,6 +1641,49 @@ class CameraCalibrationView(QWidget):
         det_layout.addWidget(self.ellipse_opts_container)
         self.detect_mode_ellipse.toggled.connect(self.ellipse_opts_container.setVisible)
 
+        # Different settings for each camera: cameras that see the balls at different sizes (another lens, distance,
+        # binning or crop) get their own values; while the box is ticked the shared settings above are not used
+        self.wand_percam_check = QCheckBox("Different settings for each camera")
+        self.wand_percam_check.setStyleSheet("border: none;")
+        self.wand_percam_check.setToolTip(
+            "For cameras that see the balls at different sizes (another lens, distance, binning or crop): each camera "
+            "gets its own Radius Range, Sensitivity, Rod opening and Rod mask, in its own pixels. Ticking fills the "
+            "rows from the shared settings (times the Pixel column's factor when it is set), so nothing changes until "
+            "a row is edited; the shared settings are greyed meanwhile. Unticked: the shared settings, as before (the "
+            "rows are kept).")
+        det_layout.addWidget(self.wand_percam_check)
+        self.wand_percam_table = QTableWidget()
+        self.wand_percam_table.setColumnCount(6)
+        self.wand_percam_table.setHorizontalHeaderLabels(["Cam", "R min", "R max", "Sens.", "Opening", "Mask"])
+        for col, tip in ((1, "The smallest ball radius searched, in this camera's pixels."),
+                         (2, "The largest ball radius searched, in this camera's pixels (at most a quarter of its "
+                             "image's shorter side once its images are loaded)."),
+                         (3, "The circle finder's sensitivity (0.50-1.00): used by reliable, by fast when its own "
+                             "search finds fewer than two balls, and by the axis points' Detect; not by ellipse."),
+                         (4, "Ellipse mode: the Rod opening, in this camera's pixels."),
+                         (5, "Ellipse mode: the Rod mask, in this camera's pixels.")):
+            item = self.wand_percam_table.horizontalHeaderItem(col)
+            if item:
+                item.setToolTip(tip)
+        percam_header = self.wand_percam_table.horizontalHeader()
+        percam_header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        for col, w in ((1, 52), (2, 52), (3, 52), (4, 64), (5, 52)):
+            percam_header.setSectionResizeMode(col, QHeaderView.ResizeMode.Fixed)
+            percam_header.resizeSection(col, w)
+        percam_header.setStretchLastSection(True)
+        self.wand_percam_table.verticalHeader().setVisible(False)
+        self.wand_percam_table.setSelectionMode(QTableWidget.SelectionMode.NoSelection)
+        self.wand_percam_table.setShowGrid(True)
+        self.wand_percam_table.setStyleSheet("background-color: transparent; border: 1px solid #333;")
+        self.wand_percam_table.setMinimumHeight(130)
+        self._percam_edited = False                  # a row edited by hand: ticking the box again keeps the rows
+        self._percam_filling = False
+        self._percam_exact = {}                      # {(row, column): exact value} of the cells filled, not edited
+        self._update_wand_percam_table(self.wand_cam_table.rowCount())
+        det_layout.addWidget(self.wand_percam_table)
+        self.wand_percam_check.toggled.connect(self._on_wand_percam_toggled)
+        self.detect_mode_group.buttonToggled.connect(lambda _b, _on: self._refresh_wand_detect_state())
+
         # Actions
         self.btn_detect_single = QPushButton("Test Detect (Current Frame)")
         self.btn_detect_single.setStyleSheet(btn_style)
@@ -1710,7 +1754,10 @@ class CameraCalibrationView(QWidget):
         self.axis_custom_container.setVisible(False)
         det_layout.addWidget(self.axis_custom_container)
         self._update_axis_cam_table(int(self.wand_num_cams.value()))
-        
+        # the axis points' Detect uses the Sensitivity, even in the ellipse mode
+        self.axis_mode_custom.toggled.connect(lambda _on: self._refresh_wand_detect_state())
+        self._refresh_wand_detect_state()
+
         det_layout.addStretch()
         
         self.det_scroll.setWidget(det_content)
@@ -2127,7 +2174,11 @@ class CameraCalibrationView(QWidget):
             self.status_label.setText("Loaded no wand points (raw detections only).")
             return
         if success:
-            self._wand_detect_mode_used = None          # not known for points read from a file
+            # how the points were detected: from their detection record, when the GUI wrote one beside the file
+            from .wand_calibration.wand_calibrator import load_detection_record
+            self._wand_detect_record_used = load_detection_record(file_path)
+            runs = (self._wand_detect_record_used or {}).get("runs") or [{}]
+            self._wand_detect_mode_used = runs[-1].get("mode")    # None: not known (a file without a record)
             self._wand_points_source = file_path
             self._restore_deleted_frames(quiet=True)    # new points: no frame of the earlier ones stays deleted
             self.error_table.setRowCount(0)
@@ -3586,6 +3637,8 @@ class CameraCalibrationView(QWidget):
             self._update_refraction_cam_table(count)
 
         self._update_axis_cam_table(count)
+        if hasattr(self, 'wand_percam_table'):
+            self._update_wand_percam_table(count)      # the per-camera detection rows follow too
 
         if getattr(self, '_wand_images_all', None):
             self._align_wand_images()                  # the cameras that remain, aligned among themselves
@@ -3706,6 +3759,11 @@ class CameraCalibrationView(QWidget):
         if total_images == 0:
             QMessageBox.warning(self, "No Images", "Load axis images first.")
             return
+        cam_settings = self._wand_cam_settings()
+        problem = self._wand_cam_settings_problem(cam_settings)
+        if problem:
+            QMessageBox.warning(self, "Detection settings", problem)
+            return
 
         # Show progress dialog
         progress_dialog = QProgressDialog(
@@ -3732,6 +3790,7 @@ class CameraCalibrationView(QWidget):
                         sensitivity=sensitivity,
                         detect_mode="reliable",
                         cam_scales=self._wand_cam_scales(),
+                        cam_settings=cam_settings,
                     )
                     pts = res.get(cam_idx)
                     if pts is None:
@@ -4392,6 +4451,25 @@ class CameraCalibrationView(QWidget):
 
         self.radius_range.setRange(1, max_r)
 
+        # each camera's own radii (the per-camera table): at most a quarter of its own shorter side, once loaded
+        t = getattr(self, 'wand_percam_table', None)
+        if t is not None:
+            self._percam_filling = True                # a value clamped here is not an edit
+            try:
+                for row in range(t.rowCount()):
+                    lim = 2000.0
+                    width_spin = self.wand_cam_table.cellWidget(row, 3)
+                    height_spin = self.wand_cam_table.cellWidget(row, 4)
+                    if (getattr(self, 'wand_images', None) or {}).get(row) and width_spin is not None \
+                            and height_spin is not None:
+                        lim = float(max(1, min(int(width_spin.value()), int(height_spin.value())) // 4))
+                    for col in (1, 2):
+                        w = t.cellWidget(row, col)
+                        if w is not None:
+                            w.setMaximum(lim)
+            finally:
+                self._percam_filling = False
+
     def _wand_pixel_sizes(self):
         """{camera row: pixel size in um} of the camera table's Pixel column (0: not set)."""
         out = {}
@@ -4432,7 +4510,214 @@ class CameraCalibrationView(QWidget):
             return None
         return {"open_px": int(self.ellipse_open_spin.value()), "rod_mask_px": float(self.ellipse_mask_spin.value()),
                 "guard_px": 3.0, "full": bool(full)}
-    
+
+    # ---- detection settings per camera ("Different settings for each camera")
+    def _percam_spin(self, kind, value):
+        """A compact cell of the per-camera table: "r" a radius (px), "sens" the sensitivity, "open" the Rod opening
+        (px), "mask" the Rod mask (px)."""
+        if kind == "open":
+            w = QSpinBox()
+            w.setRange(0, 401)
+        else:
+            w = TrimmedDoubleSpinBox()
+            if kind == "sens":
+                w.setRange(0.5, 1.0)
+                w.setDecimals(2)
+                w.setSingleStep(0.01)
+            elif kind == "mask":
+                w.setRange(0.0, 400.0)
+                w.setDecimals(2)                       # (a value scaled by a pixel size keeps its digits)
+            else:
+                w.setRange(1.0, 2000.0)
+                w.setDecimals(2)
+        w.setValue(value)
+        w.setStyleSheet("background: #222; color: white; border: none; padding: 0px;")
+        w.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
+        return w
+
+    def _on_percam_edited(self, cell):
+        """A cell (row, column) edited by hand: the table is the user's now, and that cell's value is the shown one."""
+        if not self._percam_filling:
+            self._percam_edited = True
+            self._percam_exact.pop(cell, None)
+
+    def _shared_percam_values(self, row):
+        """[R min, R max, sensitivity, Rod opening, Rod mask] of camera `row` from the shared settings, times its
+        Pixel factor when the Pixel column is set: what the detection uses for it while the box is unticked."""
+        from .wand_calibration.wand_calibrator import camera_detect_settings
+        min_r, max_r = self.radius_range.value()
+        opts = {"open_px": int(self.ellipse_open_spin.value()), "rod_mask_px": float(self.ellipse_mask_spin.value())}
+        mn, mx, sens, op = camera_detect_settings(row, min_r, max_r, float(self.sensitivity_slider.value()), opts,
+                                                  self._wand_cam_scales(), None)
+        return [float(mn), float(mx), float(sens), int(op["open_px"]), float(op["rod_mask_px"])]
+
+    def _update_wand_percam_table(self, count):
+        """The per-camera table's rows: the cameras that remain keep their values, a new camera starts from the
+        shared settings."""
+        t = self.wand_percam_table
+        old = {}
+        for r in range(t.rowCount()):
+            cells = [t.cellWidget(r, k) for k in range(1, 6)]
+            if all(c is not None for c in cells):
+                old[r] = [c.value() for c in cells]
+        t.setRowCount(count)
+        self._percam_exact = {rk: v for rk, v in self._percam_exact.items() if rk[0] < count}
+        for r in range(count):
+            vals = old.get(r)
+            if vals is None:
+                vals = self._shared_percam_values(r)
+                self._percam_exact.update({(r, k): v for k, v in enumerate(vals)})
+            item = QTableWidgetItem(f"{r}")
+            item.setFlags(Qt.ItemFlag.NoItemFlags)
+            item.setForeground(Qt.GlobalColor.white)
+            t.setItem(r, 0, item)
+            for k, kind in enumerate(("r", "r", "sens", "open", "mask")):
+                w = self._percam_spin(kind, vals[k])
+                w.valueChanged.connect(lambda _v, cell=(r, k): self._on_percam_edited(cell))
+                t.setCellWidget(r, k + 1, w)
+        self._refresh_wand_radius_range_limit()
+
+    def _fill_wand_percam_rows(self):
+        """Every row from the shared settings (_shared_percam_values).  The cells show them to 0.01 px; their exact
+        values (scaled by a pixel size: 40 x 20/13.5 = 59.259... px) are kept for the detection until a cell is
+        edited, because the circle finders' points can move by tenths of a pixel when a radius bound moves by a
+        thousandth (tests/wand_per_camera_detect, report)."""
+        t = self.wand_percam_table
+        self._percam_filling = True
+        try:
+            for r in range(t.rowCount()):
+                for k, v in enumerate(self._shared_percam_values(r)):
+                    w = t.cellWidget(r, k + 1)
+                    if w is not None:
+                        w.setValue(v)
+                        self._percam_exact[(r, k)] = v
+        finally:
+            self._percam_filling = False
+
+    def _on_wand_percam_toggled(self, on):
+        if on and not self._percam_edited:
+            self._fill_wand_percam_rows()             # nothing changes until a row is edited
+        self._refresh_wand_detect_state()
+
+    def _refresh_wand_detect_state(self):
+        """Which detection settings are in use.  The shared ones are greyed while each camera has its own.  The
+        Sensitivity (shared slider and column) only where it is used: not by the ellipse mode, but by the custom axis
+        points' Detect.  Opening and Mask only in the ellipse mode."""
+        if not hasattr(self, 'wand_percam_table'):
+            return
+        per_cam = self.wand_percam_check.isChecked()
+        ellipse = self._get_wand_detect_mode() == "ellipse"
+        custom_axis = hasattr(self, 'axis_mode_custom') and self.axis_mode_custom.isChecked()
+        sens_used = (not ellipse) or custom_axis
+        self.radius_range.setEnabled(not per_cam)
+        self.sensitivity_slider.setEnabled(sens_used and not per_cam)
+        self.ellipse_open_spin.setEnabled(not per_cam)
+        self.ellipse_mask_spin.setEnabled(not per_cam)
+        for w in (self.radius_range, self.sensitivity_slider, self.ellipse_open_spin, self.ellipse_mask_spin):
+            self._dim_unused(w, not w.isEnabled())
+        self.wand_percam_table.setVisible(per_cam)
+        self.wand_percam_table.setColumnHidden(3, not sens_used)
+        self.wand_percam_table.setColumnHidden(4, not ellipse)
+        self.wand_percam_table.setColumnHidden(5, not ellipse)
+
+    @staticmethod
+    def _dim_unused(widget, dim):
+        """Fade a disabled setting and its form label: the sliders and the styled spin boxes draw no disabled look."""
+        from PySide6.QtWidgets import QGraphicsOpacityEffect
+        parent = widget.parentWidget()
+        layout = parent.layout() if parent is not None else None
+        label = layout.labelForField(widget) if isinstance(layout, QFormLayout) else None
+        for w in (widget, label):
+            if w is None:
+                continue
+            if dim and not isinstance(w.graphicsEffect(), QGraphicsOpacityEffect):
+                effect = QGraphicsOpacityEffect(w)
+                effect.setOpacity(0.35)
+                w.setGraphicsEffect(effect)
+            elif not dim and w.graphicsEffect() is not None:
+                w.setGraphicsEffect(None)
+
+    def _wand_cam_settings(self):
+        """{camera row: its own detection settings} while "Different settings for each camera" is ticked (the
+        detection then ignores the shared settings and the Pixel factor for it); None otherwise."""
+        if not hasattr(self, 'wand_percam_check') or not self.wand_percam_check.isChecked():
+            return None
+        t = self.wand_percam_table
+        out = {}
+        for r in range(t.rowCount()):
+            cells = [t.cellWidget(r, k) for k in range(1, 6)]
+            if any(c is None for c in cells):
+                continue
+            vals = []
+            for k, c in enumerate(cells):
+                v = c.value()
+                exact = self._percam_exact.get((r, k))         # a filled cell not edited since: its exact value
+                if exact is not None and abs(v - exact) <= 0.5 * 10.0 ** -(c.decimals() if hasattr(c, "decimals")
+                                                                           else 0) + 1e-12:
+                    v = exact
+                vals.append(v)
+            mn, mx, sens, op, mask = vals
+            out[r] = {"min_radius": float(mn), "max_radius": float(mx), "sensitivity": float(sens),
+                      "open_px": int(op), "rod_mask_px": float(mask)}
+        return out
+
+    @staticmethod
+    def _wand_cam_settings_problem(cam_settings):
+        """Why the per-camera settings cannot run (a radius range with R min not below R max), or None."""
+        bad = [r for r, s in sorted((cam_settings or {}).items()) if not s["min_radius"] < s["max_radius"]]
+        if not bad:
+            return None
+        return ("R min must be below R max in the table of each camera's settings: "
+                + ", ".join(f"camera {r}" for r in bad) + ".")
+
+    def _wand_detection_record(self, resumed=False):
+        """One run's entry of the detection record (wand_calibrator.save_detection_record): the mode, the Wand Type,
+        and for each camera with images its settings as its tasks get them (camera_detect_settings: the shared ones,
+        scaled by the Pixel factor, or its own row) and its images."""
+        import time as _time
+        from .wand_calibration.wand_calibrator import camera_detect_settings
+        min_r, max_r = self.radius_range.value()
+        sensitivity = float(self.sensitivity_slider.value())
+        opts = self._get_wand_detect_opts()
+        scales = self._wand_cam_scales()
+        own = self._wand_cam_settings()
+        pixels = self._wand_pixel_sizes()
+        cams = []
+        for c in sorted(self.wand_images):
+            files = self.wand_images.get(c) or []
+            if not files:
+                continue
+            mn, mx, sens, op = camera_detect_settings(c, min_r, max_r, sensitivity, opts, scales, own)
+            entry = {"cam_id": int(c), "min_radius": float(mn), "max_radius": float(mx), "sensitivity": float(sens)}
+            if op is not None:
+                entry.update({"open_px": int(op["open_px"]), "rod_mask_px": float(op["rod_mask_px"]),
+                              "guard_px": float(op.get("guard_px", 3.0))})
+            if not own and scales:
+                entry["scale"] = float(scales.get(c, 1.0))
+            if pixels.get(c):
+                entry["pixel_um"] = float(pixels[c])
+            entry["images"] = {"folder": os.path.dirname(str(files[0])), "first": os.path.basename(str(files[0])),
+                               "last": os.path.basename(str(files[-1])), "count": len(files)}
+            cams.append(entry)
+        return {"written": _time.strftime("%Y-%m-%d %H:%M:%S"), "resumed": bool(resumed),
+                "mode": self._get_wand_detect_mode(), "wand_type": self._wand_type(), "per_camera": bool(own),
+                "cameras": cams}
+
+    def _copy_detection_record(self, csv_path):
+        """Beside an exported copy of the points: the detection record of the points in memory, if there is one."""
+        rec = getattr(self, '_wand_detect_record_used', None)
+        if rec:
+            from .wand_calibration.wand_calibrator import write_detection_record
+            write_detection_record(csv_path, rec)
+
+    def _describe_cam_settings(self, cam_settings):
+        """One console line of the per-camera settings (those the current mode uses)."""
+        ellipse = self._get_wand_detect_mode() == "ellipse"
+        return "; ".join(
+            f"cam {r}: r {s['min_radius']:g}-{s['max_radius']:g}"
+            + (f", opening {s['open_px']}, mask {s['rod_mask_px']:g}" if ellipse else f", sens {s['sensitivity']:g}")
+            for r, s in sorted(cam_settings.items()))
+
     def populate_wand_table(self):
         """Populates the frame table with filenames and status."""
         # Find max length and reference cam
@@ -5407,20 +5692,30 @@ class CameraCalibrationView(QWidget):
         if not single_frame_dict:
             return
 
+        cam_settings = self._wand_cam_settings()
+        problem = self._wand_cam_settings_problem(cam_settings)
+        if problem:
+            QMessageBox.warning(self, "Detection settings", problem)
+            return
+
         self._busy_begin('wand_detect_single', 'Detecting single frame')
 
         cam_scales = self._wand_cam_scales()
-        print(
-            f"Detecting frame {idx}, mode='{wand_type}', radius=[{min_r},{max_r}], "
-            f"sensitivity={sensitivity}, detect_mode='{detect_mode}'"
-            + (", per-camera scales " + ", ".join(f"cam {c + 1}: {s:.4f}" for c, s in sorted(cam_scales.items()))
-               if cam_scales else "")
-        )
+        if cam_settings:
+            print(f"Detecting frame {idx}, mode='{wand_type}', detect_mode='{detect_mode}', each camera's own "
+                  f"settings: {self._describe_cam_settings(cam_settings)}")
+        else:
+            print(
+                f"Detecting frame {idx}, mode='{wand_type}', radius=[{min_r},{max_r}], "
+                f"sensitivity={sensitivity}, detect_mode='{detect_mode}'"
+                + (", per-camera scales " + ", ".join(f"cam {c + 1}: {s:.4f}" for c, s in sorted(cam_scales.items()))
+                   if cam_scales else "")
+            )
 
         # Worker Setup
         self._single_detect_worker = WandDetectionSingleFrameWorker(
             self.wand_calibrator, single_frame_dict, wand_type, min_r, max_r, sensitivity, detect_mode,
-            detect_opts=self._get_wand_detect_opts(full=True), cam_scales=cam_scales,
+            detect_opts=self._get_wand_detect_opts(full=True), cam_scales=cam_scales, cam_settings=cam_settings,
         )
         self._single_detect_worker.finished_signal.connect(self._on_single_detection_finished)
         
@@ -5537,6 +5832,11 @@ class CameraCalibrationView(QWidget):
         if count == 0:
             QMessageBox.warning(self, "No Images", "Please load images first.")
             return
+        cam_settings = self._wand_cam_settings()
+        problem = self._wand_cam_settings_problem(cam_settings)
+        if problem:
+            QMessageBox.warning(self, "Detection settings", problem)
+            return
 
         # 0. Info Popup (UX Improvement)
         QMessageBox.information(self, "Process Frames", 
@@ -5571,9 +5871,17 @@ class CameraCalibrationView(QWidget):
         detect_mode = self._get_wand_detect_mode()
 
         cam_scales = self._wand_cam_scales()
-        if cam_scales:
+        if cam_settings:
+            print("Each camera's own detection settings: " + self._describe_cam_settings(cam_settings))
+        elif cam_scales:
             print("Per-camera detection scales (pixel sizes): "
                   + ", ".join(f"cam {c + 1}: {s:.4f}" for c, s in sorted(cam_scales.items())))
+        # how these points are detected, beside their file (a resume adds its run): the results page lists it
+        from .wand_calibration.wand_calibrator import save_detection_record
+        self._wand_detect_record_used = save_detection_record(
+            autosave_path, self._wand_detection_record(resumed=resume), resume=resume)
+        if self._wand_detect_record_used:
+            print(f"Detection record: {self._wand_detect_record_used['file']}")
 
         # Start Worker
         self._proc_thread = WandDetectionWorker(
@@ -5585,6 +5893,7 @@ class CameraCalibrationView(QWidget):
             detect_mode=detect_mode,
             detect_opts=self._get_wand_detect_opts(),
             cam_scales=cam_scales,
+            cam_settings=cam_settings,
         )
         # remembered for the cylinder calibration's checks (through a tube only "ellipse" measures the centres)
         self._wand_detect_mode_used = detect_mode
@@ -5640,6 +5949,7 @@ class CameraCalibrationView(QWidget):
                     path, _ = QFileDialog.getSaveFileName(self, "Save Rescue Data", "wand_rescue.csv", "CSV Files (*.csv)")
                     if path:
                         self.wand_calibrator.export_wand_data(path)
+                        self._copy_detection_record(path)
             else:
                 QMessageBox.warning(self, "Detection Failed", msg)
             return # a failed detection is not complete: no "Export Data" question
@@ -5662,6 +5972,7 @@ class CameraCalibrationView(QWidget):
             if path:
                 success, msg = self.wand_calibrator.export_wand_data(path)
                 if success:
+                    self._copy_detection_record(path)
                     QMessageBox.information(self, "Export", "Data exported successfully.")
                 else:
                     QMessageBox.warning(self, "Export Failed", msg)
@@ -9174,7 +9485,8 @@ class CameraCalibrationView(QWidget):
                          n_final=6 if self.cyl_thorough_check.isChecked() else 2, start=start,
                          pixel_mm=self._wand_pixel_mm_for(cids, settings),
                          detect_mode=getattr(self, '_wand_detect_mode_used', None),
-                         source=str(getattr(self, '_wand_points_source', "") or ""))
+                         source=str(getattr(self, '_wand_points_source', "") or ""),
+                         detection=getattr(self, '_wand_detect_record_used', None))
             job.check()
         except ValueError as e:
             QMessageBox.warning(self, "Cylinder Calibration", str(e))
@@ -9451,7 +9763,8 @@ class CameraCalibrationView(QWidget):
                          n_final=6 if self.refr_thorough_check.isChecked() else 2, start=start,
                          pixel_mm=self._wand_pixel_mm_for(cids, settings),
                          detect_mode=getattr(self, '_wand_detect_mode_used', None),
-                         source=str(getattr(self, '_wand_points_source', "") or ""), window_ids=used)
+                         source=str(getattr(self, '_wand_points_source', "") or ""), window_ids=used,
+                         detection=getattr(self, '_wand_detect_record_used', None))
             job.check()
         except ValueError as e:
             QMessageBox.warning(self, "Flat-Window Calibration", str(e))
@@ -9590,7 +9903,8 @@ class CameraCalibrationView(QWidget):
                                                 _time.strftime("pinhole_%Y%m%d_%H%M%S"))
             report = rp.report_from_pinhole(wc.final_params, pts, float(self.wand_len_spin.value()),
                                             folder=folder, detect_mode=getattr(self, '_wand_detect_mode_used', None),
-                                            source=str(getattr(self, '_wand_points_source', "") or ""))
+                                            source=str(getattr(self, '_wand_points_source', "") or ""),
+                                            detection=getattr(self, '_wand_detect_record_used', None))
             path = rp.write_page(report, os.path.join(folder, "calibration_report.html"))
             if getattr(self, 'report_tab', None) is not None:
                 self.report_tab.show_page(path)

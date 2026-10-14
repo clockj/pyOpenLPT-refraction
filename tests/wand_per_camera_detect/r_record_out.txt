@@ -1,0 +1,33 @@
+R: the detection record; 24 T2 frames, 500 to 12000 every 500 (cameras 0 and 1), ellipse mode
+
+R1: Process All Frames writes the record beside the points
+  PASS  R1 each camera's own settings: the record beside the points holds them as the detection got them  (D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\r1_points_detection.json: {"0": {"min_radius": 40.0, "max_radius": 120.0, "sensitivity": 0.85, "open_px": 95, "rod_mask_px": 50.0}, "1": {"min_radius": 35.0, "max_radius": 125.0, "sensitivity": 0.85, "open_px": 90, "rod_mask_px": 48.0}}; images as loaded)
+    points: 3 frames paired; messages ['Process Frames', 'Export Data']
+  PASS  R1 shared settings with pixel sizes: camera 1's values are the shared ones times 20/13.5, to the bit  (camera 1: {"min_radius": 59.25925925925925, "max_radius": 177.77777777777777, "open_px": 141, "rod_mask_px": 74.07407407407408, "scale": 1.4814814814814814, "pixel_um": 13.5})
+
+R2: a resume adds its run; Export Data writes the record beside the copy
+  PASS  R2 the resume keeps R1's run and adds its own (resumed, camera 1's R max 130 px)  (2 runs; questions ['Resume?', 'Export Data'])
+  PASS  R2 Export Data: the exported copy has the record beside it, the same runs  (D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\r2_export_detection.json)
+
+R3: Load Wand Points reads the record back
+  PASS  R3 a file with a record: its mode and every run come back  (mode ellipse; 2 runs)
+  PASS  R3 a file without one: the mode stays unknown, as before  (mode None)
+
+R4: the calibration's Job carries the record
+  PASS  R4 the tube calibration's Job: detection = the record, detect_mode ellipse; in its settings  (source D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\r1_points.csv)
+  PASS  R4 the flat-window Job's settings carry it too
+
+R5: the results page's settings rows
+    Detection: ellipse mode, Dark on Bright; each camera's own settings; detected in 2 runs (resumed), with different settings: the last run's are shown, the record has every run's
+    Detection, cam0: radius 40–120 px; Rod opening 95 px; Rod mask 50 px
+    Detection, cam1: radius 35–130 px; Rod opening 90 px; Rod mask 48 px
+    Images, cam0: D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\frames\cam1: 24 images, frame000500.png to frame012000.png
+    Images, cam1: D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\frames\cam2: 24 images, frame000500.png to frame012000.png
+    Detection record: D:\Refraction\pyOpenLPT\tests\wand_per_camera_detect\data\r1_points_detection.json
+  PASS  R5 cylinder: the Detection rows from the record (two runs with different settings, the last shown)
+  PASS  R5 cylinder without a record: the settings rows as before (one Detection row)  ([['Detection', 'fast']])
+  PASS  R5 flat windows and pinhole: the same rows
+  PASS  R5 the page with the rows draws in QtWebEngine without a console error  (0 console messages)
+  picture: r_record_page_settings.png
+
+12 of 12 checks passed; 18 s
