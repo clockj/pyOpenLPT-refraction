@@ -1,0 +1,11 @@
+Loaded 0 raw, 47748 filtered points. 9139 valid frames ready for calibration.
+C1 (file check): X:\Shijie Zhong\Refraction\Processed\20261013\T0\wand_points.csv: the GUI's loader says: True, Loaded 9139 valid frames.
+  PASS: every kept frame loaded 9139 of 9139
+  PASS: cameras 0, 1 and 2 [0, 1, 2]
+  PASS: the same cameras missing (NaN) as in the selection 
+  PASS: labels Filtered_Small / Filtered_Large in every camera-frame 
+  PASS: the same frames, in order 
+  PASS: centres equal the selection's within 5.1e-5 px largest 5.00e-05 px
+  PASS: the GUI's reader finds the detection record X:\Shijie Zhong\Refraction\Processed\20261013\T0\wand_points_detection.json
+  PASS: the record: ellipse mode, Dark on Bright, each camera's own settings 
+  PASS: the record's settings per GUI camera equal config.json's cam0: 20-70 px, opening 51, mask 30; cam1: 20-70 px, opening 57, mask 30; cam2: 30-105 px, opening 85, mask 44

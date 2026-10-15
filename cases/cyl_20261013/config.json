@@ -1,0 +1,71 @@
+{
+  "_comment": "Run 20261013 through the water-filled acrylic tube (the same size as 6-8 Oct) with three cameras: T0 = wand calibration. Lengths in mm, image coordinates in px (u = column, v = row, pixel centres at integers). Frames are counted by image number, the Phantom's count from the common trigger (the .chd header's FirstImageNo): a camera's file frame{k}.tif holds image number k + first_image. A copy of cases/cyl_20261008/config.json with this run's paths and frames; the detector settings are chosen from the Phase 0 survey (tests/p0d_wand_survey_*).",
+  "case": "cyl_20261013",
+  "raw_root": "X:\\Shijie Zhong\\Refraction\\Raw\\20261013",
+  "out_root": "X:\\Shijie Zhong\\Refraction\\Processed\\20261013",
+  "raw_dir": "X:\\Shijie Zhong\\Refraction\\Raw\\20261013\\T0",
+  "out_dir": "X:\\Shijie Zhong\\Refraction\\Processed\\20261013\\T0",
+  "cameras": [
+    {"id": 1, "folder": "cam1", "gui_index": 0, "width": 1280, "height": 800, "pixel_mm": 0.020,
+     "model": "Phantom VEO 710L", "serial": 29199, "first_image": {"T0": 0}},
+    {"id": 2, "folder": "cam2", "gui_index": 1, "width": 1280, "height": 800, "pixel_mm": 0.020,
+     "model": "Phantom VEO 710L", "serial": 23752, "first_image": {"T0": 0}},
+    {"id": 3, "folder": "cam3", "gui_index": 2, "width": 2048, "height": 1952, "pixel_mm": 0.0135,
+     "model": "Phantom v2640", "serial": 29198, "first_image": {"T0": 0}}
+  ],
+  "_cameras": "Assumed the 8 Oct cameras (file sizes match: 1280 x 800 and 2048 x 1952, 8 bit); serials and FirstImageNo checked against the .chd headers by tests/p0a_files.py.",
+  "frames": {"pattern": "frame{frame:06d}.tif", "first": 0, "last": 12000},
+  "wand": {
+    "_comment": "Assumed the wand of 6-8 Oct (10 mm, balls 3 and 4 mm); to confirm with the user.",
+    "length_mm": 10.0,
+    "ball_diameters_mm": [3.0, 4.0]
+  },
+  "tube": {
+    "_comment": "As on 6-8 Oct (the user, 15 Oct: the same size cylinder): OD 7.9375 in, wall 0.125 in.",
+    "outer_diameter_in": 7.9375,
+    "wall_in": 0.125,
+    "radii_mm": [100.80625, 97.63125],
+    "n": [1.0, 1.49, 1.333],
+    "media": ["air", "acrylic", "water"]
+  },
+  "detect": {
+    "_comment": "Candidates from the opening scans (tests/p0d_wand_survey_scan*, 15 Oct). cam1: ball radii about 33 / 45 px (8 Oct: 31 / 43); openings 49-55 px separate the balls from the rod (49: 21 of 21 frames, 51: 19). Radius range as 8 Oct (the balls are 5-8 % larger). Rod mask: 8 Oct's 28 px x 1.06 (the rod's half-width plus its blur).",
+    "polarity": "dark",
+    "min_r_px": 20.0,
+    "max_r_px": 70.0,
+    "open_px": 51,
+    "rod_mask_px": 30.0,
+    "guard_px": 3.0,
+    "workers": 16
+  },
+  "detect_per_camera": {
+    "2": {
+      "_comment": "cam2: ball radii about 34 / 47 px; the openings that separate are larger than cam1's: 57 px best (18 of 21 frames), 51 px 13 of 21.",
+      "open_px": 57
+    },
+    "3": {
+      "_comment": "cam3 (v2640, 13.5 um pixels): ball radii about 48-53 / 70-72 px (1.49-1.58 x cams 1-2; pixel-size ratio 1.48); openings 85-89 px separate 21 of 23 frames (8 Oct's 77 px: 16). Rod mask: 8 Oct's 42 px x 1.06.",
+      "min_r_px": 30.0,
+      "max_r_px": 105.0,
+      "open_px": 85,
+      "rod_mask_px": 44.0
+    }
+  },
+  "accept": {
+    "_comment": "The 6-8 Oct rules: a camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame enters the fit when at least min_cameras cameras keep it. aspect_range's upper end raised from 1.45 to 1.60 (plan D2, approved 15 Oct): cam1's ball images are stretched more by the tube (median 1.38; the survey's 20 frames at 1.45-1.58 had good edge fits).",
+    "edge_rms_max_px": 1.0,
+    "aspect_range": [1.15, 1.60],
+    "size_tol": 0.10,
+    "min_cameras": 2
+  },
+  "calibrate": {
+    "fit_k1": false,
+    "fit_L": false,
+    "noise_weights": "camera",
+    "n_final": 2
+  },
+  "tracking_camfiles": {
+    "folder": "camFile_track",
+    "proj_tol": 1e-9
+  }
+}

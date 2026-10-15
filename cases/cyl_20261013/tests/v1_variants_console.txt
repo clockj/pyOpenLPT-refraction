@@ -1,0 +1,16 @@
+V1: 3 variants of C1 (RMS 0.9802 px, 9139 frames)
+  the fits ran in 4916 s
+  held-out comparison: 5050 frames kept by all three cameras under the 1.45 rule; library D:\Refraction\pyOpenLPT\build-stb\p4c\out\pyopenlpt.cp311-win_amd64.pyd
+  C1: 9139 frames, 47293/47748 used, RMS 0.9802 px (cam1 1.020, cam2 0.637, cam3 1.157); wand length RMS 72.0 um
+      f: cam1 16198 px (782 mm), cam2 19849 px (1003 mm), cam3 26130 px (897 mm)
+      held out: cam1 RMS 1.517 px, median 1.007, 95 % 2.901; cam2 RMS 2.695 px, median 1.877, 95 % 5.168; cam3 RMS 2.278 px, median 1.634, 95 % 4.245
+  a145: 8537 frames, 44049/44248 used, RMS 0.9343 px (cam1 0.954, cam2 0.668, cam3 1.098); wand length RMS 70.2 um; 1061 s
+      f: cam1 16217 px (783 mm), cam2 19886 px (1005 mm), cam3 26189 px (899 mm)
+      held out: cam1 RMS 1.512 px, median 1.003, 95 % 2.895; cam2 RMS 2.690 px, median 1.870, 95 % 5.151; cam3 RMS 2.269 px, median 1.623, 95 % 4.225
+  wball: 9139 frames, 47316/47748 used, RMS 1.0430 px (cam1 1.081, cam2 0.688, cam3 1.231); wand length RMS 71.8 um; 1398 s
+      f: cam1 16019 px (774 mm), cam2 19798 px (1001 mm), cam3 25836 px (887 mm)
+      held out: cam1 RMS 1.522 px, median 1.009, 95 % 2.934; cam2 RMS 2.736 px, median 1.891, 95 % 5.281; cam3 RMS 2.283 px, median 1.637, 95 % 4.258
+  k1: 9139 frames, 47253/47748 used, RMS 0.9583 px (cam1 1.022, cam2 0.638, cam3 1.106); wand length RMS 71.3 um; 4912 s
+      f: cam1 16244 px (784 mm), cam2 19857 px (1004 mm), cam3 26135 px (898 mm); k1: cam1 +2.181, cam2 +3.021, cam3 +3.245
+      held out: cam1 RMS 1.507 px, median 1.003, 95 % 2.883; cam2 RMS 2.684 px, median 1.867, 95 % 5.153; cam3 RMS 2.250 px, median 1.612, 95 % 4.177
+exit 0

@@ -1,0 +1,14 @@
+C1-T: f, distance and f / distance per camera (C1 first)
+  C1: cam1 f 16198 px (+0.0 %), 782 mm, f/d 20.707 px/mm (+0.00 %); cam2 f 19849 px (+0.0 %), 1003 mm, f/d 19.790 px/mm (+0.00 %); cam3 f 26130 px (+0.0 %), 897 mm, f/d 29.138 px/mm (+0.00 %)
+  h1: cam1 f 15565 px (-3.9 %), 754 mm, f/d 20.652 px/mm (-0.27 %); cam2 f 22844 px (+15.1 %), 1158 mm, f/d 19.723 px/mm (-0.34 %); cam3 f 23745 px (-9.1 %), 815 mm, f/d 29.134 px/mm (-0.01 %)
+  h2: cam1 f 15789 px (-2.5 %), 763 mm, f/d 20.685 px/mm (-0.10 %); cam2 f 20496 px (+3.3 %), 1035 mm, f/d 19.808 px/mm (+0.09 %); cam3 f 25543 px (-2.2 %), 878 mm, f/d 29.091 px/mm (-0.16 %)
+  q1: cam1 f 15102 px (-6.8 %), 731 mm, f/d 20.652 px/mm (-0.27 %); cam2 f 21917 px (+10.4 %), 1111 mm, f/d 19.727 px/mm (-0.32 %); cam3 f 22523 px (-13.8 %), 772 mm, f/d 29.173 px/mm (+0.12 %)
+  q2: cam1 f 15050 px (-7.1 %), 728 mm, f/d 20.662 px/mm (-0.22 %); cam2 f 23144 px (+16.6 %), 1173 mm, f/d 19.739 px/mm (-0.26 %); cam3 f 23397 px (-10.5 %), 804 mm, f/d 29.112 px/mm (-0.09 %)
+  q3: cam1 f 15419 px (-4.8 %), 747 mm, f/d 20.647 px/mm (-0.29 %); cam2 f 20899 px (+5.3 %), 1056 mm, f/d 19.796 px/mm (+0.03 %); cam3 f 24782 px (-5.2 %), 852 mm, f/d 29.072 px/mm (-0.22 %)
+  q4: cam1 f 16707 px (+3.1 %), 807 mm, f/d 20.714 px/mm (+0.04 %); cam2 f 21420 px (+7.9 %), 1080 mm, f/d 19.842 px/mm (+0.26 %); cam3 f 26822 px (+2.7 %), 921 mm, f/d 29.129 px/mm (-0.03 %)
+  p12: cam1 f 15834 px (-2.2 %), 771 mm, f/d 20.536 px/mm (-0.82 %); cam2 f 18180 px (-8.4 %), 919 mm, f/d 19.775 px/mm (-0.08 %)
+  p13: cam1 f 16649 px (+2.8 %), 806 mm, f/d 20.668 px/mm (-0.19 %); cam3 f 27155 px (+3.9 %), 934 mm, f/d 29.081 px/mm (-0.20 %)
+  p23: cam2 f 17951 px (-9.6 %), 909 mm, f/d 19.754 px/mm (-0.18 %); cam3 f 28035 px (+7.3 %), 963 mm, f/d 29.123 px/mm (-0.05 %)
+  cam1: over the parts f -7.1 to +3.1 % of C1's; f / distance -0.82 to +0.04 %
+  cam2: over the parts f -9.6 to +16.6 % of C1's; f / distance -0.34 to +0.26 %
+  cam3: over the parts f -13.8 to +7.3 % of C1's; f / distance -0.22 to +0.12 %

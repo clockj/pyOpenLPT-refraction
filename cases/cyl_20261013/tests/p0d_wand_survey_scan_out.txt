@@ -1,0 +1,36 @@
+P0d scan: case cyl_20261013, T0 (X:\Shijie Zhong\Refraction\Raw\20261013\T0), read-only
+Opening scan: image numbers [300, 1929, 3557, 5186, 6814, 8443, 10071, 11700]; blobs larger than 100 px^2 (cam3: 220) left after an opening of k px; the radii (sqrt(area/pi)) of the largest three
+  image   300 cam1: median grey 171, seg 0.343; 7:1 11:1 15:1 21:1 25:1 31:1 41:3 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 45.3, 31.8 px
+  image   300 cam2: median grey 153, seg 0.348; 7:1 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 47.0, 35.1 px
+  image   300 cam3: median grey 158, seg 0.257; 7:1 11:1 15:10 21:1 25:1 31:1 41:1 51:1 61:1 71:2 81:2 101:1; first 2 at k=71: r = 86.9, 52.2 px
+  image  1929 cam1: median grey 170, seg 0.299; 7:1 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 47.0, 34.5 px
+  image  1929 cam2: median grey 153, seg 0.278; 7:4 11:1 15:1 21:1 25:1 31:1 41:1 51:1 61:2 71:1 81:1 101:0; first 2 at k=61: r = 48.6, 35.6 px
+  image  1929 cam3: median grey 158, seg 0.229; 7:1 11:1 15:24 21:1 25:1 31:1 41:1 51:1 61:1 71:2 81:2 101:1; first 2 at k=71: r = 89.4, 54.7 px
+  image  3557 cam1: median grey 171, seg 0.274; 7:2 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=7: r = 68.8, 6.2 px
+  image  3557 cam2: median grey 153, seg 0.330; 7:3 11:1 15:1 21:1 25:1 31:1 41:1 51:1 61:2 71:1 81:1 101:0; first 2 at k=61: r = 47.9, 34.4 px
+  image  3557 cam3: median grey 158, seg 0.317; 7:1 11:18 15:1 21:1 25:1 31:1 41:1 51:1 61:1 71:2 81:2 101:1; first 2 at k=71: r = 72.0, 55.5 px
+  image  5186 cam1: median grey 171, seg 0.341; 7:10 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 51.5, 33.6 px
+  image  5186 cam2: median grey 154, seg 0.346; 7:1 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:2 71:1 81:0 101:0; first 2 at k=51: r = 47.4, 35.5 px
+  image  5186 cam3: median grey 158, seg 0.373; 7:1 11:18 15:3 21:1 25:1 31:1 41:1 51:1 61:1 71:1 81:2 101:1; first 2 at k=81: r = 70.3, 51.7 px
+  image  6814 cam1: median grey 171, seg 0.331; 7:1 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 45.4, 34.3 px
+  image  6814 cam2: median grey 153, seg 0.340; 7:1 11:1 15:1 21:1 25:1 31:1 41:1 51:1 61:2 71:1 81:1 101:0; first 2 at k=61: r = 47.2, 34.2 px
+  image  6814 cam3: median grey 158, seg 0.391; 7:1 11:7 15:1 21:1 25:1 31:1 41:1 51:1 61:1 71:3 81:2 101:1; first 2 at k=81: r = 67.5, 50.8 px
+  image  8443 cam1: median grey 171, seg 0.350; 7:5 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 44.8, 32.5 px
+  image  8443 cam2: median grey 153, seg 0.361; 7:2 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:2 71:1 81:1 101:0; first 2 at k=7: r = 77.6, 21.2 px
+  image  8443 cam3: median grey 158, seg 0.405; 7:1 11:9 15:1 21:1 25:1 31:1 41:1 51:1 61:1 71:2 81:2 101:1; first 2 at k=71: r = 70.8, 53.1 px
+  image 10071 cam1: median grey 171, seg 0.357; 7:1 11:1 15:1 21:1 25:1 31:1 41:1 51:2 61:1 71:1 81:0 101:0; first 2 at k=51: r = 44.3, 33.6 px
+  image 10071 cam2: median grey 153, seg 0.362; 7:2 11:1 15:1 21:1 25:1 31:1 41:1 51:1 61:2 71:1 81:1 101:0; first 2 at k=7: r = 69.2, 23.2 px
+  image 10071 cam3: median grey 158, seg 0.409; 7:1 11:12 15:1 21:1 25:1 31:1 41:1 51:1 61:1 71:2 81:2 101:1; first 2 at k=71: r = 71.6, 53.4 px
+  image 11700 cam1: median grey 171, seg 0.263; 7:5 11:1 15:1 21:1 25:1 31:1 41:1 51:1 61:1 71:1 81:1 101:0
+  image 11700 cam2: median grey 153, seg 0.345; 7:5 11:1 15:1 21:1 25:1 31:1 41:1 51:3 61:1 71:1 81:0 101:0
+  image 11700 cam3: median grey 158, seg 0.327; 7:1 11:8 15:1 21:1 25:1 31:1 41:1 51:1 61:1 71:1 81:1 101:1
+
+Per camera: the openings that leave exactly two blobs, and the balls' radii there
+  cam1: 7 of 8 frames separate; first separating opening up to 51 px, still two up to 51 px in every one; radii: small ball median 33.6 px, large 45.4 px, range 6.2-68.8 px
+  cam2: 7 of 8 frames separate; first separating opening up to 61 px, still two up to 51 px in every one; radii: small ball median 34.4 px, large 47.9 px, range 21.2-77.6 px
+  cam3: 7 of 8 frames separate; first separating opening up to 81 px, still two up to 81 px in every one; radii: small ball median 53.1 px, large 71.6 px, range 50.8-89.4 px
+  cam3 / cam1 r_small_median: 1.581
+  cam3 / cam1 r_large_median: 1.578
+  cam3 / cam2 r_small_median: 1.546
+  cam3 / cam2 r_large_median: 1.493
+  pixel-size ratio (20 / 13.5 um): 1.481

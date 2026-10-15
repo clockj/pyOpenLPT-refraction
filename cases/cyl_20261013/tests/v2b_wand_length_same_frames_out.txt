@@ -1,0 +1,4 @@
+V2b: the wand length's free-triangulation error (um); 5593 frames both fits used (all three cameras), 3451 frames only C1 used (two cameras)
+  C1, frames both used: n 5593, RMS 44.9, mean +0.5, median |e| 27.6, 95 % 89.3
+  all3, frames both used: n 5593, RMS 44.6, mean +2.8, median |e| 27.8, 95 % 88.3
+  C1, its two-camera frames: n 3451, RMS 101.7, mean +8.9, median |e| 51.6, 95 % 210.1

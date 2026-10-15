@@ -1,0 +1,11 @@
+V2: C1 refitted on the 5596 frames all three cameras keep (C1: 9139 frames in at least two)
+  held-out comparison on 5050 frames (V1's); two-camera frames: 3543 (C1 fitted them, all3 did not)
+  C1: 9139 frames, 47293/47748 used, RMS 0.9802 px (cam1 1.020, cam2 0.637, cam3 1.157); wand length RMS 72.0 um over its own frames
+      f: cam1 16198 px (782 mm), cam2 19849 px (1003 mm), cam3 26130 px (897 mm)
+      held out: cam1 RMS 1.517 px, median 1.007, 95 % 2.901; cam2 RMS 2.695 px, median 1.877, 95 % 5.168; cam3 RMS 2.278 px, median 1.634, 95 % 4.245
+      two-camera frames, wand length error: cams 12: n 65, RMS 52.7 um, mean +15.6, median |e| 37.1, 95 % 95.0; cams 13: n 1931, RMS 128.1 um, mean +10.3, median |e| 78.1, 95 % 262.2; cams 23: n 1547, RMS 60.0 um, mean +8.3, median |e| 37.1, 95 % 109.6; all: n 3543, RMS 102.8 um, mean +9.5, median |e| 53.4, 95 % 211.8
+  all3: 5596 frames, 33432/33576 used, RMS 0.9590 px (cam1 0.975, cam2 0.671, cam3 1.166); wand length RMS 44.6 um over its own frames; 533 s
+      f: cam1 16170 px (780 mm), cam2 19911 px (1006 mm), cam3 26398 px (906 mm)
+      held out: cam1 RMS 1.515 px, median 0.999, 95 % 2.909; cam2 RMS 2.676 px, median 1.847, 95 % 5.159; cam3 RMS 2.271 px, median 1.619, 95 % 4.244
+      two-camera frames, wand length error: cams 12: n 65, RMS 53.7 um, mean +18.1, median |e| 38.6, 95 % 98.1; cams 13: n 1931, RMS 128.2 um, mean +14.2, median |e| 76.3, 95 % 264.9; cams 23: n 1547, RMS 61.4 um, mean +15.5, median |e| 40.3, 95 % 115.0; all: n 3543, RMS 103.2 um, mean +14.8, median |e| 55.5, 95 % 212.0
+exit 0

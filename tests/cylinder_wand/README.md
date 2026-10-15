@@ -1,6 +1,6 @@
 # Cylinder wand calibration (PINCYL): summary and progress
 
-Last updated: 2026-10-13.
+Last updated: 2026-10-15.
 
 Start here to catch up. This file gathers what all the wand tests so far concluded, and what that means for a real
 experiment.
@@ -34,8 +34,61 @@ experiment.
 - **The GUI's detection (13 Oct):** each camera can now have its own Radius Range, Sensitivity, Rod opening and Rod
   mask, for cameras that see the balls at different sizes. How the points were detected is recorded beside them
   (`<points>_detection.json`), in `calibration_result.json` and on the results page.
+- **Run 20261013/T0 (15 Oct, `cases/cyl_20261013`):**
+  - **The fit:** three cameras, 0.980 px over 9,139 frames.
+  - **Between cameras:** they agree to 1.6–2.7 px, noisier than 8 Oct for reasons outside the settings.
+  - **The cameras moved since 8 Oct.**
+  - **The settings:** each camera needs its own rod opening (51, 57 and 85 px). The case report's section 3 says how
+    to choose every setting.
 
 ## 1. Progress log
+
+**2026-10-15: run 20261013/T0, three cameras through the same tube** (your question: "are we able to calibrate my new
+experimental results with the same size cylinder in ...\20261013\ subfolder T0? how to choose the parameters"; then
+"go ahead")
+- **Where:**
+  - the case: `cases/cyl_20261013/` (plan, report, scripts);
+  - the results: `X:\Shijie Zhong\Refraction\Processed\20261013\T0` (README). Use `camFile_track\` for T1–T20.
+- **The data:** 8 Oct's three cameras. All three saved images 0–12,000, so there is no offset this time.
+- **The settings:** ellipse mode, Dark on Bright, a row per camera:
+
+  | camera | radius range | opening | mask |
+  |---|---|---|---|
+  | cam1 | 20–70 px | 51 px | 30 px |
+  | cam2 | 20–70 px | 57 px | 30 px |
+  | cam3 | 30–105 px | 85 px | 44 px |
+
+  The rod opening's working window is narrow (the 2 mm rod is 2/3 of the 3 mm ball) and differs between cameras. The
+  report's section 3 gives the steps for choosing each setting.
+- **The fit:**
+  - 9,139 frames, 0.980 px (8 Oct: 0.703 px);
+  - each camera predicted from the other two misses by 1.6–2.7 px RMS (8 Oct: 1.1–2.2);
+  - the wand length's error has an RMS of 72 µm.
+- **Why it is noisier than 8 Oct:**
+  - **Both balls:** 30–50 % noisier in every camera.
+  - **Not the settings:** variant fits with 8 Oct's aspect limit, with weights per camera and ball, or with k1 predict
+    the cameras within 1 % as well.
+  - **cam3's ellipse fits are noisier** (edge RMS 0.25 against 0.18 px), which points to its focus or light.
+- **The cameras moved since 8 Oct:** 8 Oct's cameras miss today's balls by 29–72 px RMS (X1). Their layout and
+  f / distance are 8 Oct's to within a degree and 1 %.
+- **f is undetermined, as before:** the parts give −14 to +17 %, with f / distance within 0.8 %.
+- **Tracking:** matching through all three cameras needs about 2.5–3 px.
+- **Then (your question: "what if you only use the frames that all cameras can see for calibration? will that reduce
+  the error?"): no.**
+  - **The test:** a fit on the 5,596 frames all three cameras keep, the GUI's rule.
+  - **The result:** on the same frames the cameras agree within 1 % of the delivered fit's, and the wand length is
+    45 µm RMS for both.
+  - **Where the error is larger:** the two-camera frames give about 100 µm with either fit (cams 1–3: 128 µm). That
+    is the geometry of two cameras, not the calibration.
+  - **So:** the GUI's rule gives the same calibration (report section 9).
+- **Then ("so the main reason is that this experiment does not focus the wand points well, right?"): not mainly.**
+  The answer differs by camera (report section 10).
+  - **cam2:** its rise comes entirely from where the wand went (more stretched views). At the same stretch it is as
+    good as on 8 Oct.
+  - **cam3:** noisier at the same place, with rougher ellipse outlines: focus or lighting.
+  - **cam1:** noisier at the same place, but its outlines are as clean as before. Not plain blur; possibly
+    direction-dependent blur through the tube, or uneven backlight.
+  - **Depth of field:** not the cause.
 
 **2026-10-13: detection settings per camera in the wand tab** (your question: "i still cannot set object parameters
 for each camera? for example, the wand opening, wand mask, radius range? i think that is important if my cameras have
@@ -660,9 +713,15 @@ The output frame is the tube frame:
 - **Ball size and detection.**
   - Balls of 1–2 mm are plenty: 50–100 px wide images at cam1's magnification, with a shape offset of 0.002 px or
     less (section 3, item 9).
-  - **Fit ellipses, not circles.** pyOpenLPT's wand detector fits circles and fails on these 1.3 : 1 images
-    (T13). Use the plate case's ellipse fit with the rod's edge points left out and the overlap guard
-    (`t13_ellipse.py`, report section 5). Tell the balls apart by ellipse area.
+  - **Fit ellipses, not circles.** The circle finders fail on these 1.3 : 1 images (T13). The GUI's "ellipse"
+    detection mode fits ellipses: the plate case's estimator, with the rod's edge points left out and the overlap
+    guard. It tells the balls apart by size.
+  - **Choose its settings per camera** (`cases/cyl_20261013`'s report, section 3):
+    - R min ≈ 0.6 × the small ball's radius, R max ≈ 1.5 × the large ball's;
+    - the rod opening between the rod's width and the small ball's, found with Test Detect;
+    - the rod mask about 0.55–0.6 × the opening.
+  - **A thinner rod helps.** With a 2 mm rod on a 3 mm ball the opening's window is only a few pixels wide, and it
+    differs between cameras.
   - **Light the balls evenly** (backlit, or diffuse light on matte balls). One-sided light or a highlight biased f
     by 0.1–0.56 % even with the best detector (T13c).
   - Keep the volume near best focus, with a small aperture. The tube separates the horizontal and vertical foci.

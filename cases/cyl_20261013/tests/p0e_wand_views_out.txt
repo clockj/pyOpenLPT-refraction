@@ -1,0 +1,18 @@
+P0e: case cyl_20261013, T0 image 2185: the detector's settings drawn on each camera (read-only)
+  cam1 (1280 x 800): settings {'polarity': 'dark', 'min_r_px': 20.0, 'max_r_px': 70.0, 'open_px': 51, 'rod_mask_px': 30.0, 'guard_px': 3.0, 'workers': 16}
+      ball: u 82.32, v 440.53, r 32.17 px (a 38.00, b 27.23, aspect 1.395), edge RMS 0.202 px, dropped 0
+      ball: u 320.66, v 503.38, r 43.77 px (a 52.48, b 36.51, aspect 1.437), edge RMS 0.134 px, dropped 0
+  cam2 (1280 x 800): settings {'polarity': 'dark', 'min_r_px': 20.0, 'max_r_px': 70.0, 'open_px': 57, 'rod_mask_px': 30.0, 'guard_px': 3.0, 'workers': 16}
+      ball: u 477.52, v 464.55, r 33.24 px (a 38.72, b 28.54, aspect 1.357), edge RMS 0.103 px, dropped 0
+      ball: u 687.21, v 563.09, r 45.36 px (a 52.48, b 39.21, aspect 1.338), edge RMS 0.214 px, dropped 0
+  cam3 (2048 x 1952): settings {'polarity': 'dark', 'min_r_px': 30.0, 'max_r_px': 105.0, 'open_px': 85, 'rod_mask_px': 44.0, 'guard_px': 3.0, 'workers': 16}
+      ball: u 135.13, v 1046.63, r 50.72 px (a 59.67, b 43.12, aspect 1.384), edge RMS 0.233 px, dropped 0
+      ball: u 461.66, v 1198.41, r 66.45 px (a 75.30, b 58.64, aspect 1.284), edge RMS 0.420 px, dropped 0
+  figure: p0e_wand_views.png
+  failure frame cam1 image 659: 1 blobs after the 51 px opening; detector rows u 461.9 v 441.4 r 50.6
+  failure frame cam1 image 5746: 1 blobs after the 51 px opening; detector rows u 319.7 v 692.4 r 51.1
+  failure frame cam1 image 8289: 1 blobs after the 51 px opening; detector rows u 1027.0 v 506.5 r 49.7
+  failure frame cam2 image 150: 0 blobs after the 57 px opening; detector rows 
+  failure frame cam2 image 1167: 0 blobs after the 57 px opening; detector rows 
+  failure frame cam2 image 4220: 0 blobs after the 57 px opening; detector rows 
+  figure: p0e_failures.png (6 frames; dark mask orange, after the opening blue)

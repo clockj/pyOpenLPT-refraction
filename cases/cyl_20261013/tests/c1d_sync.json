@@ -1,0 +1,38 @@
+{
+ "cam1": {
+  "n": 12864,
+  "k_frames": 6.669412608932261e-05,
+  "k_se": 0.0004777134854394186,
+  "rms_before_px": 0.7256820387556918,
+  "rms_after_px": 0.7256516777887805,
+  "speed_median_px_per_frame": 10.345284857305975,
+  "rms_slow_third_px": 1.0736400389212561,
+  "rms_fast_third_px": 0.9713047544261028
+ },
+ "cam2": {
+  "n": 12834,
+  "k_frames": 0.0013983114818265899,
+  "k_se": 0.0002733989441813531,
+  "rms_before_px": 0.45129060212803684,
+  "rms_after_px": 0.45101911082251994,
+  "speed_median_px_per_frame": 10.30564691759589,
+  "rms_slow_third_px": 0.6501521923126552,
+  "rms_fast_third_px": 0.6233102538687961
+ },
+ "cam3": {
+  "n": 16432,
+  "k_frames": -0.0017406244473963455,
+  "k_se": 0.0003029845701313393,
+  "rms_before_px": 0.8217683902213496,
+  "rms_after_px": 0.8213544749692311,
+  "speed_median_px_per_frame": 15.466593135873756,
+  "rms_slow_third_px": 1.2154217058361412,
+  "rms_fast_third_px": 1.0969678675066583
+ },
+ "offset_cam1_minus_cam2_frames": -0.0013316173557372673,
+ "offset_cam1_minus_cam2_se": 0.0005504154402359696,
+ "offset_cam1_minus_cam3_frames": 0.001807318573485668,
+ "offset_cam1_minus_cam3_se": 0.0005656941080728613,
+ "offset_cam2_minus_cam3_frames": 0.0031389359292229354,
+ "offset_cam2_minus_cam3_se": 0.00040810125265324914
+}

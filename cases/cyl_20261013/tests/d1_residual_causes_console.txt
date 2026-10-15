@@ -1,0 +1,24 @@
+D1: X:\Shijie Zhong\Refraction\Processed\20261013\T0: RMS 0.9802 px, 47293 of 47748 detections used
+  cam1: 14949 used detections, RMS 1.020 px
+    camera-frames with a ball above aspect 1.45 (admitted by the 1.60 limit): 2100 detections in 1059 frames, RMS 1.226 px; the others 0.983 px
+    by the ball's aspect: [1.00, 1.20) n 71 RMS 1.962; [1.20, 1.25) n 228 RMS 1.392; [1.25, 1.30) n 770 RMS 1.058; [1.30, 1.35) n 2704 RMS 0.915; [1.35, 1.40) n 5434 RMS 0.910; [1.40, 1.45) n 4522 RMS 1.065; [1.45, 1.50) n 1005 RMS 1.286; [1.50, 1.60) n 215 RMS 1.416
+    by the gap between the ellipses (px): [3, 10) n 4 RMS 1.311; [10, 20) n 45 RMS 1.467; [20, 40) n 223 RMS 1.035; [40, 80) n 1360 RMS 0.939; [80, 160) n 11416 RMS 1.005; [160, 320) n 1901 RMS 1.147
+    by the fit's edge RMS (px): [0.00, 0.10) n 1910 RMS 1.106; [0.10, 0.20) n 7750 RMS 1.039; [0.20, 0.30) n 3320 RMS 0.947; [0.30, 0.50) n 1615 RMS 0.961; [0.50, 0.75) n 327 RMS 1.019; [0.75, 1.00) n 27 RMS 1.426
+    by the distance from the image's border (px): [25, 50) n 87 RMS 1.244; [50, 100) n 762 RMS 0.991; [100, 200) n 2811 RMS 0.993; [200, 400) n 11289 RMS 1.027
+  cam2: 14396 used detections, RMS 0.637 px
+    camera-frames with a ball above aspect 1.45 (admitted by the 1.60 limit): 10 detections in 5 frames, RMS 0.512 px; the others 0.637 px
+    by the ball's aspect: [1.00, 1.20) n 31 RMS 0.604; [1.20, 1.25) n 935 RMS 0.609; [1.25, 1.30) n 6308 RMS 0.632; [1.30, 1.35) n 5764 RMS 0.634; [1.35, 1.40) n 1253 RMS 0.666; [1.40, 1.45) n 100 RMS 0.923; [1.45, 1.50) n 4 RMS 0.677; [1.50, 1.60) n 1 RMS 0.276
+    by the gap between the ellipses (px): [3, 10) n 2 RMS 0.366; [10, 20) n 2 RMS 0.485; [20, 40) n 489 RMS 0.626; [40, 80) n 2887 RMS 0.655; [80, 160) n 8972 RMS 0.607; [160, 320) n 2044 RMS 0.735
+    by the fit's edge RMS (px): [0.00, 0.10) n 3067 RMS 0.656; [0.10, 0.20) n 8547 RMS 0.604; [0.20, 0.30) n 2274 RMS 0.652; [0.30, 0.50) n 452 RMS 0.853; [0.50, 0.75) n 45 RMS 1.375; [0.75, 1.00) n 11 RMS 1.402
+    by the distance from the image's border (px): [25, 50) n 77 RMS 1.061; [50, 100) n 739 RMS 0.857; [100, 200) n 3553 RMS 0.707; [200, 400) n 10027 RMS 0.585
+  cam3: 17948 used detections, RMS 1.157 px
+    camera-frames with a ball above aspect 1.45 (admitted by the 1.60 limit): 74 detections in 37 frames, RMS 1.469 px; the others 1.156 px
+    by the ball's aspect: [1.00, 1.20) n 386 RMS 1.061; [1.20, 1.25) n 3072 RMS 0.921; [1.25, 1.30) n 7185 RMS 1.086; [1.30, 1.35) n 5260 RMS 1.268; [1.35, 1.40) n 1770 RMS 1.396; [1.40, 1.45) n 238 RMS 1.476; [1.45, 1.50) n 37 RMS 1.623
+    by the gap between the ellipses (px): [10, 20) n 6 RMS 0.761; [20, 40) n 104 RMS 0.802; [40, 80) n 1046 RMS 0.979; [80, 160) n 5599 RMS 1.107; [160, 320) n 11193 RMS 1.199
+    by the fit's edge RMS (px): [0.00, 0.10) n 539 RMS 1.324; [0.10, 0.20) n 5942 RMS 1.196; [0.20, 0.30) n 5823 RMS 1.095; [0.30, 0.50) n 4368 RMS 1.132; [0.50, 0.75) n 1094 RMS 1.225; [0.75, 1.00) n 182 RMS 1.427
+    by the distance from the image's border (px): [50, 100) n 70 RMS 1.766; [100, 200) n 308 RMS 1.173; [200, 400) n 1512 RMS 1.097; [400, 1000000000) n 16058 RMS 1.159
+  frames with |wand length error| > 150 um: 422 of 9044
+    cam1 in those frames: 748 detections, RMS 1.141 px; gap median 114.4 px (all frames 134.9)
+    cam2 in those frames: 122 detections, RMS 1.307 px; gap median 76.2 px (all frames 122.6)
+    cam3 in those frames: 843 detections, RMS 1.344 px; gap median 145.0 px (all frames 183.5)
+    cameras that kept those frames: 2 cameras: 407, 3 cameras: 15

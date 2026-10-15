@@ -1,0 +1,175 @@
+{
+ "summary": {
+  "rms_px": 0.9802132475283445,
+  "sigma_px": 0.964248437194317,
+  "frames": 9139,
+  "active": 47293,
+  "observations": 47748,
+  "wand_length_mm": 10.0,
+  "L_sigma_mm": null,
+  "wand_free_rms_um": 71.99221746884278,
+  "wand_free_mean_um": 3.905074309892773,
+  "cameras": [
+   {
+    "name": "cam1",
+    "f_px": 16197.616824093631,
+    "f_sigma_px": 45.272534871631144,
+    "f_mm": 323.95233648187263,
+    "distance_mm": 782.225183028749,
+    "distance_sigma_mm": 2.151024529014372,
+    "azimuth_deg": 0.0,
+    "azimuth_sigma_deg": 0.0,
+    "height_rel_mm": 0.0,
+    "height_sigma_mm": 0.0,
+    "viewing_direction": [
+     -0.009866491394185191,
+     -0.3889890198960058,
+     -0.9211895541895363
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 1.0204483469709134,
+    "n_active": 14949,
+    "n_total": 15184
+   },
+   {
+    "name": "cam2",
+    "f_px": 19848.669406062276,
+    "f_sigma_px": 65.0641042569458,
+    "f_mm": 396.97338812124553,
+    "distance_mm": 1002.9480033051776,
+    "distance_sigma_mm": 3.250296322111413,
+    "azimuth_deg": 43.01832177687569,
+    "azimuth_sigma_deg": 0.01442947460631022,
+    "height_rel_mm": -312.14986728332127,
+    "height_sigma_mm": 0.9157315773185428,
+    "viewing_direction": [
+     -0.6838019740481851,
+     -0.007907400813767606,
+     -0.7296247893953266
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 0.636725225627977,
+    "n_active": 14396,
+    "n_total": 14416
+   },
+   {
+    "name": "cam3",
+    "f_px": 26129.64290362003,
+    "f_sigma_px": 79.26770125233014,
+    "f_mm": 352.7501791988704,
+    "distance_mm": 896.7659063987142,
+    "distance_sigma_mm": 2.654466628431189,
+    "azimuth_deg": -2.5902182716014237,
+    "azimuth_sigma_deg": 0.0034166225821274303,
+    "height_rel_mm": -292.37035546360454,
+    "height_sigma_mm": 0.8086194108404328,
+    "viewing_direction": [
+     0.03799407961127612,
+     -0.03196491344391777,
+     -0.9987665864570233
+    ],
+    "k1": 0.0,
+    "k1_sigma": null,
+    "rms_px": 1.1572616126227373,
+    "n_active": 17948,
+    "n_total": 18148
+   }
+  ]
+ },
+ "selection": {
+  "cameras": {
+   "cam1": {
+    "camera_frames": 12001,
+    "kept": 7653,
+    "rejected": {
+     "no ball": 648,
+     "one ball": 3606,
+     "aspect": 23,
+     "edge RMS": 26,
+     "size": 44,
+     "balls overlap (guard)": 1
+    },
+    "median_r_px": [
+     31.80101,
+     43.29355
+    ]
+   },
+   "cam2": {
+    "camera_frames": 12001,
+    "kept": 8436,
+    "rejected": {
+     "one ball": 2813,
+     "no ball": 718,
+     "edge RMS": 13,
+     "size": 21
+    },
+    "median_r_px": [
+     33.78467,
+     45.52527
+    ]
+   },
+   "cam3": {
+    "camera_frames": 12001,
+    "kept": 9720,
+    "rejected": {
+     "one ball": 1723,
+     "no ball": 471,
+     "edge RMS": 65,
+     "aspect": 12,
+     "size": 10
+    },
+    "median_r_px": [
+     49.786735,
+     67.04954000000001
+    ]
+   }
+  },
+  "frames_kept_in_min_cameras": 9139,
+  "frames_total": 12001,
+  "accept": {
+   "_comment": "The 6-8 Oct rules: a camera-frame is kept with two balls apart (the guard), both fits with an edge RMS at most edge_rms_max_px and an aspect ratio in aspect_range, and both sizes (sqrt(a b)) within size_tol of the camera's median for that ball. A frame enters the fit when at least min_cameras cameras keep it. aspect_range's upper end raised from 1.45 to 1.60 (plan D2, approved 15 Oct): cam1's ball images are stretched more by the tube (median 1.38; the survey's 20 frames at 1.45-1.58 had good edge fits).",
+   "edge_rms_max_px": 1.0,
+   "aspect_range": [
+    1.15,
+    1.6
+   ],
+   "size_tol": 0.1,
+   "min_cameras": 2
+  },
+  "detect": {
+   "cam1": {
+    "polarity": "dark",
+    "min_r_px": 20.0,
+    "max_r_px": 70.0,
+    "open_px": 51,
+    "rod_mask_px": 30.0,
+    "guard_px": 3.0,
+    "workers": 16
+   },
+   "cam2": {
+    "polarity": "dark",
+    "min_r_px": 20.0,
+    "max_r_px": 70.0,
+    "open_px": 57,
+    "rod_mask_px": 30.0,
+    "guard_px": 3.0,
+    "workers": 16
+   },
+   "cam3": {
+    "polarity": "dark",
+    "min_r_px": 30.0,
+    "max_r_px": 105.0,
+    "open_px": 85,
+    "rod_mask_px": 44.0,
+    "guard_px": 3.0,
+    "workers": 16
+   }
+  },
+  "frames_kept_in_all_three": 5596
+ },
+ "seconds": 854.3977134227753,
+ "checks": [],
+ "page": "X:\\Shijie Zhong\\Refraction\\Processed\\20261013\\T0\\calibration_report.html"
+}

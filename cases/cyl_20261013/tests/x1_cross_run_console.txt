@@ -1,0 +1,9 @@
+X1: today's 5050 frames kept by all three cameras (1.45 rule) through both calibrations; library D:\Refraction\pyOpenLPT\build-stb\p4c\out\pyopenlpt.cp311-win_amd64.pyd
+  13 Oct (C1) (X:\Shijie Zhong\Refraction\Processed\20261013\T0\camFile_track): triangulation error median 25.7 um
+    cam1: from all three: RMS 0.826 px, mean (du, dv) (-0.001, +0.006) px (SE 0.006); predicted from the other two: RMS 1.517 px, median 1.007, 95 % 2.901, failed 0
+    cam2: from all three: RMS 0.596 px, mean (du, dv) (+0.003, -0.031) px (SE 0.004); predicted from the other two: RMS 2.695 px, median 1.877, 95 % 5.168, failed 0
+    cam3: from all three: RMS 1.185 px, mean (du, dv) (-0.002, +0.038) px (SE 0.008); predicted from the other two: RMS 2.278 px, median 1.634, 95 % 4.245, failed 0
+  8 Oct (X:\Shijie Zhong\Refraction\Processed\20261008\T0\camFile_track): triangulation error median 1897.8 um
+    cam1: from all three: RMS 51.863 px, mean (du, dv) (-37.335, -33.364) px (SE 0.095); predicted from the other two: RMS 104.050 px, median 101.918, 95 % 129.137, failed 0
+    cam2: from all three: RMS 28.727 px, mean (du, dv) (-18.611, +19.937) px (SE 0.063); predicted from the other two: RMS 186.101 px, median 175.300, 95 % 282.548, failed 0
+    cam3: from all three: RMS 72.451 px, mean (du, dv) (+64.555, +30.384) px (SE 0.089); predicted from the other two: RMS 136.223 px, median 133.667, 95 % 168.286, failed 0

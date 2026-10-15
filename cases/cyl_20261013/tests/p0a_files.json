@@ -1,0 +1,114 @@
+{
+ "T0/cam1": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261013\\T0\\cam1",
+  "frames": 12001,
+  "first": "frame000000.tif",
+  "last": "frame012000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-13 14:02:28",
+  "time_last": "2026-10-13 14:06:10",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 171.0,
+  "header": {
+   "bytes": 250812,
+   "type": "CI",
+   "first_movie_image": -13676,
+   "total_image_count": 25677,
+   "first_image_no": 0,
+   "image_count": 12001,
+   "bitmap_size": [
+    1280,
+    800
+   ],
+   "bits": 8,
+   "serial": 29199,
+   "fps": 100,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T0/cam2": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261013\\T0\\cam2",
+  "frames": 12001,
+  "first": "frame000000.tif",
+  "last": "frame012000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-13 14:02:26",
+  "time_last": "2026-10-13 14:06:08",
+  "size": [
+   1280,
+   800
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 154.0,
+  "header": {
+   "bytes": 250812,
+   "type": "CI",
+   "first_movie_image": -13757,
+   "total_image_count": 25758,
+   "first_image_no": 0,
+   "image_count": 12001,
+   "bitmap_size": [
+    1280,
+    800
+   ],
+   "bits": 8,
+   "serial": 23752,
+   "fps": 100,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T0/cam3": {
+  "folder": "X:\\Shijie Zhong\\Refraction\\Raw\\20261013\\T0\\cam3",
+  "frames": 12001,
+  "first": "frame000000.tif",
+  "last": "frame012000.tif",
+  "other_files": [
+   "frame000000tif.chd"
+  ],
+  "time_first": "2026-10-13 14:02:28",
+  "time_last": "2026-10-13 14:07:52",
+  "size": [
+   2048,
+   1952
+  ],
+  "dtype": "uint8",
+  "median_grey_frame0": 158.0,
+  "header": {
+   "bytes": 250812,
+   "type": "CI",
+   "first_movie_image": -604,
+   "total_image_count": 12605,
+   "first_image_no": 0,
+   "image_count": 12001,
+   "bitmap_size": [
+    2048,
+    1952
+   ],
+   "bits": 8,
+   "serial": 29198,
+   "fps": 100,
+   "exposure_us": 100
+  },
+  "config_first_image": 0,
+  "config_size_ok": true,
+  "config_first_image_ok": true
+ },
+ "T0_common_images": [
+  0,
+  12000
+ ]
+}

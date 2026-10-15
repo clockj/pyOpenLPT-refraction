@@ -1,0 +1,14 @@
+P0a: the files of X:\Shijie Zhong\Refraction\Raw\20261013 (read-only)
+
+T0
+  T0\cam1: 12001 frames (frame000000.tif ... frame012000.tif), written 2026-10-13 14:02:28 ... 2026-10-13 14:06:10, [1280, 800] uint8, median grey (frame 0) 171.0
+      header: serial 29199, 100 frames/s, exposure 100 us, bitmap [1280, 800] x 8 bit; FirstMovieImage -13676, TotalImageCount 25677, FirstImageNo 0, ImageCount 12001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 12000
+  T0\cam2: 12001 frames (frame000000.tif ... frame012000.tif), written 2026-10-13 14:02:26 ... 2026-10-13 14:06:08, [1280, 800] uint8, median grey (frame 0) 154.0
+      header: serial 23752, 100 frames/s, exposure 100 us, bitmap [1280, 800] x 8 bit; FirstMovieImage -13757, TotalImageCount 25758, FirstImageNo 0, ImageCount 12001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 12000
+  T0\cam3: 12001 frames (frame000000.tif ... frame012000.tif), written 2026-10-13 14:02:28 ... 2026-10-13 14:07:52, [2048, 1952] uint8, median grey (frame 0) 158.0
+      header: serial 29198, 100 frames/s, exposure 100 us, bitmap [2048, 1952] x 8 bit; FirstMovieImage -604, TotalImageCount 12605, FirstImageNo 0, ImageCount 12001
+      config: size matches, first_image 0 matches the header; image numbers 0 ... 12000
+
+T0: image numbers saved by every camera: 0 ... 12000 (12001 frames); by cams 1-2 only before 0
